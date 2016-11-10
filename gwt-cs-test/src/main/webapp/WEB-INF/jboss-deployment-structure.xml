@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-deployment-structure>
+    <ear-subdeployments-isolated>false</ear-subdeployments-isolated>
+    <deployment>
+        <exclude-subsystems>
+            <subsystem name="resteasy" />
+        </exclude-subsystems>
+
+        <exclusions>
+            <module name="javaee.api" />
+            <module name="javax.ws.rs.api"/>
+            <module name="org.jboss.resteasy.resteasy-jaxrs" />
+        </exclusions>
+
+        <local-last value="true" />
+    </deployment>
+</jboss-deployment-structure>

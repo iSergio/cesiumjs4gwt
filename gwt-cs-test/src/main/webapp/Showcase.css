@@ -1,0 +1,104 @@
+.infopanel {
+    border: 1px black solid;
+    background-color: #FAE6B3;
+}
+
+.top {
+    background-color: #1F6B75;
+    color: white;
+    border: 0;
+    border-radius: 0;
+    width: 100%;
+}
+
+.brand {
+    color: white;
+    font-weight: bold;
+    font-size: 160%;
+    padding: 8px 0;
+}
+
+.brand a {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.brand:hover,
+.brand:focus {
+    color: #aae1e9;
+}
+
+.emptytextbox {
+    color: #cccccc;
+}
+
+.examplename {
+    font-weight: bold;
+}
+
+.examplepanel {
+    margin: 5px;
+    border: 1px #cccccc solid;
+    border-radius: 5px;
+    float: left;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.exampletags {
+    font-style: italic;
+    color: #aaaaaa;
+    font-size: small;
+}
+
+.examplepanel:hover {
+    background-color: #EEEEEE;
+    font-style: italic;
+    color: #aaaaaa;
+    font-size: small;
+}
+
+h1 {
+    color: #003A6B;
+    background-color: transparent;
+    font: 100% 'Lucida Grande', Verdana, Geneva, Lucida, Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding-top: 0.5em;
+}
+
+h1 {
+    font-size: 130%;
+    margin-bottom: 0.5em;
+    border-bottom: 1px solid #FCB100;
+}
+
+.gwt-DialogBox-closebutton {
+    font-weight: bold;
+    color: #dd0000;
+    padding: 2px;
+    margin-left: 2px;
+    cursor: pointer;
+}
+
+.gwt-DialogBox-closebutton:ACTIVE {
+    padding: 1px;
+    border: thin #dd0000 solid;
+}
+
+.gwt-DialogBox-closebutton:HOVER {
+    padding: 2px;
+    color: #ee0000;
+}
+
+.olControlAttribution {
+    bottom: 5px !important;
+}
+
+.olControlScale{
+    color: #000;
+    font-weight: bolder;
+}
+
+#api-links ul {
+    display: inline;
+}
