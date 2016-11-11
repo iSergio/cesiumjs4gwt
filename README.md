@@ -6,7 +6,7 @@ What was done:
 - [x] CesiumJS API like as native JavaScript. Based on CesiumJS source code
 - [x] Simple support Promise
 - [x] Simple support Callback functions.
-- [x] Full Cesium documentation in javadoc.
+- [x] Full Cesium documentation in javadoc. You can see they on official [CesiumJS](http://cesiumjs.org/refdoc.html) or on site [gwt-cs Documentation](http://sergeserver.noip.me/docs/gwt-cs)
 - [x] [Examples showcase](http://sergeserver.noip.me/gwt-cs-test/).
 
 ### Getting started
