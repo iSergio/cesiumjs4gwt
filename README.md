@@ -8,6 +8,7 @@ What was done:
 - [x] Simple support Callback functions.
 - [x] Full Cesium documentation in javadoc. You can see they on official [CesiumJS](http://cesiumjs.org/refdoc.html) or on site [gwt-cs Documentation](http://sergeserver.noip.me/docs/gwt-cs)
 - [x] [Examples showcase](http://sergeserver.noip.me/gwt-cs-test/).
+- [x] Integration with [gwt-olcs](https://github.com/iSergio/gwt-olcs)
 
 ### Getting started
 You not need include JavaScript of Cesium into main html file, injection realised in GWT code.
