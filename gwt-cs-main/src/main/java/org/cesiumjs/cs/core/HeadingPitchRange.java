@@ -63,6 +63,14 @@ public class HeadingPitchRange {
     /**
      * Duplicates a HeadingPitchRange instance.
      * @param hpr The HeadingPitchRange to duplicate.
+     * @return The modified result parameter or a new HeadingPitchRange instance if one was not provided.
+     * (Returns undefined if hpr is undefined)
+     */
+    public static native HeadingPitchRange clone(HeadingPitchRange hpr);
+
+    /**
+     * Duplicates a HeadingPitchRange instance.
+     * @param hpr The HeadingPitchRange to duplicate.
      * @param result The object onto which to store the result.
      * @return The modified result parameter or a new HeadingPitchRange instance if one was not provided.
      * (Returns undefined if hpr is undefined)

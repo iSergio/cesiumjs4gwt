@@ -17,6 +17,7 @@
 package org.cesiumjs.cs.core;
 
 import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
@@ -221,6 +222,7 @@ public class Math {
      * @return The acos of the value if the value is in the range [-1.0, 1.0], or the acos of -1.0 or 1.0, whichever is closer,
      * if the value is outside the range.
      */
+    @JsMethod
     public static native double acosClamped(double value);
 
     /**
@@ -229,6 +231,7 @@ public class Math {
      * @return The asin of the value if the value is in the range [-1.0, 1.0], or the asin of -1.0 or 1.0,
      * whichever is closer, if the value is outside the range.
      */
+    @JsMethod
     public static native double asinClamped(double value);
 
     /**
@@ -237,6 +240,7 @@ public class Math {
      * @param radius The radius of the circle.
      * @return The chord length.
      */
+    @JsMethod
     public static native double chordLength(double angle, double radius);
 
     /**
@@ -246,6 +250,7 @@ public class Math {
      * @param max The maximum value.
      * @return The value clamped so that min <= value <= max.
      */
+    @JsMethod
     public static native double clamp(double value, double min, double max);
 
     /**
@@ -258,6 +263,7 @@ public class Math {
      *     double latitude = Math.clampToLatitudeRange(Math.toRadians(108.0));
      * </code>
      */
+    @JsMethod
     public static native double clampToLatitudeRange(double angle);
 
     /**
@@ -269,6 +275,7 @@ public class Math {
      *     double longitude = Math.convertLongitudeRange(Math.toRadians(270.0));
      * </code>
      */
+    @JsMethod
     public static native double convertLongitudeRange(double angle);
 
     /**
@@ -281,6 +288,7 @@ public class Math {
      * @param value The number whose hyperbolic cosine is to be returned.
      * @return The hyperbolic cosine of value.
      */
+    @JsMethod
     public static native double cosh(double value);
 
     /**
@@ -299,6 +307,7 @@ public class Math {
      *     boolean d = Math.equalsEpsilon(3699175.1634344, 3699175.2, Math.EPSILON9); // false
      * </code>
      */
+    @JsMethod
     public static native boolean equalsEpsilon(double left, double right, double relativeEpsilon);
 
     /**
@@ -321,6 +330,7 @@ public class Math {
      * @param absoluteEpsilon Default: relativeEpsilon.	The maximum inclusive delta between left and right for the absolute tolerance test.
      * @return true if the values are equal within the epsilon; otherwise, false.
      */
+    @JsMethod
     public static native boolean equalsEpsilon(double left, double right, double relativeEpsilon, double absoluteEpsilon);
 
     /**
@@ -336,6 +346,7 @@ public class Math {
      * @return The factorial of the provided number or undefined if the number is less than 0.
      * @see <a href="http://en.wikipedia.org/wiki/Factorial">Factorial on Wikipedia</a>
      */
+    @JsMethod
     public static native double factorial(double n);
 
     /**
@@ -344,6 +355,7 @@ public class Math {
      * @return Scalar in the range [-1.0, 1.0].
      * @see #toSNorm(double)
      */
+    @JsMethod
     public static native double fromSNorm(double value);
 
     /**
@@ -353,6 +365,7 @@ public class Math {
      * @return Scalar in the range [-1.0, 1.0].
      * @see #toSNorm(double, double)
      */
+    @JsMethod
     public static native double fromSNorm(double value, double rangeMax);
 
     /**
@@ -368,6 +381,7 @@ public class Math {
      * @param minimumValue The number reset to after the maximum value has been exceeded.
      * @return The incremented number.
      */
+    @JsMethod
     public static native double incrementWrap(double n, double maximumValue, double minimumValue);
 
     /**
@@ -381,6 +395,7 @@ public class Math {
      * @param n The positive integer to test.
      * @return true if the number if a power of two; otherwise, false.
      */
+    @JsMethod
     public static native boolean isPowerOfTwo(double n);
 
     /**
@@ -394,6 +409,7 @@ public class Math {
      * @param time The time of interpolation generally in the range [0.0, 1.0].
      * @return The linearly interpolated value.
      */
+    @JsMethod
     public static native double lerp(double p, double q, double time);
 
     /**
@@ -402,6 +418,7 @@ public class Math {
      * @param base The base.
      * @return The result.
      */
+    @JsMethod
     public static native double logBase(double number, double base);
 
     /**
@@ -410,6 +427,7 @@ public class Math {
      * @param n The divisor.
      * @return The remainder.
      */
+    @JsMethod
     public static native double mod(double m, double n);
 
     /**
@@ -417,6 +435,7 @@ public class Math {
      * @param angle in radians
      * @return The angle in the range [-CesiumMath.PI, CesiumMath.PI].
      */
+    @JsMethod
     public static native double negativePiToPi(double angle);
 
     /**
@@ -429,6 +448,7 @@ public class Math {
      * @param n The positive integer to test.
      * @return The next power-of-two integer.
      */
+    @JsMethod
     public static native double nextPowerOfTwo(double n);
 
     /**
@@ -437,12 +457,14 @@ public class Math {
      * @see #setRandomNumberSeed(int)
      * @see <a href="http://en.wikipedia.org/wiki/Mersenne_twister">Mersenne twister on Wikipedia</a>
      */
+    @JsMethod
     public static native double nextRandomNumber();
 
     /**
      * Sets the seed used by the random number generator in {@link #nextRandomNumber()}.
      * @param seed An integer used as the seed.
      */
+    @JsMethod
     public static native void setRandomNumberSeed(int seed);
 
     /**
@@ -450,6 +472,7 @@ public class Math {
      * @param value The value to return the sign of.
      * @return The sign of value.
      */
+    @JsMethod
     public static native double sign(double value);
 
     /**
@@ -458,6 +481,7 @@ public class Math {
      * @param value The value to return the sign of.
      * @return The sign of value.
      */
+    @JsMethod
     public static native double signNotZero(double value);
 
     /**
@@ -469,6 +493,7 @@ public class Math {
      * @param value The number whose hyperbolic sine is to be returned.
      * @return The hyperbolic sine of value.
      */
+    @JsMethod
     public static native double sinh(double value);
 
     /**
@@ -476,6 +501,7 @@ public class Math {
      * @param radians The angle to convert in radians.
      * @return The corresponding angle in degrees.
      */
+    @JsMethod
     public static native double toDegrees(double radians);
 
     /**
@@ -483,6 +509,7 @@ public class Math {
      * @param degrees The angle to convert in degrees.
      * @return The corresponding angle in radians.
      */
+    @JsMethod
     public static native double toRadians(double degrees);
 
     /**
@@ -491,6 +518,7 @@ public class Math {
      * @return A SNORM value, where 0 maps to -1.0 and rangeMax maps to 1.0.
      * @see #fromSNorm(double, double)
      */
+    @JsMethod
     public static native double toSNorm(double value);
 
     /**
@@ -500,6 +528,7 @@ public class Math {
      * @return A SNORM value, where 0 maps to -1.0 and rangeMax maps to 1.0.
      * @see #fromSNorm(double, double)
      */
+    @JsMethod
     public static native double toSNorm(double value, double rangeMax);
 
     /**
@@ -507,5 +536,6 @@ public class Math {
      * @param angle in radians
      * @return The angle in the range [0, CesiumMath.TWO_PI].
      */
+    @JsMethod
     public static native double zeroToTwoPi(double angle);
 }
