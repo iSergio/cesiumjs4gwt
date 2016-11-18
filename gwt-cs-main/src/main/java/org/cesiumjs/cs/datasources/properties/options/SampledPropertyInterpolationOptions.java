@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package org.cesiumjs.cs.core.options;
+package org.cesiumjs.cs.datasources.properties.options;
 
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.InterpolationAlgorithm;
+import org.cesiumjs.cs.core.interpolation.InterpolationAlgorithm;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>

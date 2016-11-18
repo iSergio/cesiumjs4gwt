@@ -18,7 +18,9 @@ package org.cesiumjs.cs.datasources.properties;
 
 import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.*;
-import org.cesiumjs.cs.core.options.SampledPropertyInterpolationOptions;
+import org.cesiumjs.cs.core.interpolation.InterpolationAlgorithm;
+import org.cesiumjs.cs.core.interpolation.LinearApproximation;
+import org.cesiumjs.cs.datasources.properties.options.SampledPropertyInterpolationOptions;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -51,7 +53,7 @@ public class SampledPositionProperty extends PositionProperty {
     public ExtrapolationType forwardExtrapolationType;
     /**
      * Gets the interpolation algorithm to use when retrieving a value.
-     * Default: {@link org.cesiumjs.cs.core.LinearApproximation}
+     * Default: {@link LinearApproximation}
      */
     @JsProperty
     public InterpolationAlgorithm interpolationAlgorithm;
@@ -85,7 +87,7 @@ public class SampledPositionProperty extends PositionProperty {
      * @param numberOfDerivatives The number of derivatives that accompany each position; i.e. velocity, acceleration, etc...
      */
     @JsConstructor
-    public SampledPositionProperty(@JsOptional int referenceFrame, @JsOptional int numberOfDerivatives) {}
+    public SampledPositionProperty(int referenceFrame, int numberOfDerivatives) {}
 
     /**
      * Adds a new sample

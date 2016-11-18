@@ -21,10 +21,11 @@ import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.ExtrapolationType;
-import org.cesiumjs.cs.core.InterpolationAlgorithm;
+import org.cesiumjs.cs.core.interpolation.InterpolationAlgorithm;
 import org.cesiumjs.cs.core.JulianDate;
 import org.cesiumjs.cs.core.Packable;
-import org.cesiumjs.cs.core.options.SampledPropertyInterpolationOptions;
+import org.cesiumjs.cs.core.interpolation.LinearApproximation;
+import org.cesiumjs.cs.datasources.properties.options.SampledPropertyInterpolationOptions;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -62,7 +63,7 @@ public class SampledProperty<T extends Packable> extends Property<T> {
     public ExtrapolationType forwardExtrapolationType;
     /**
      * Gets the interpolation algorithm to use when retrieving a value.
-     * Default: {@link org.cesiumjs.cs.core.LinearApproximation}
+     * Default: {@link LinearApproximation}
      */
     @JsProperty
     public InterpolationAlgorithm interpolationAlgorithm;
