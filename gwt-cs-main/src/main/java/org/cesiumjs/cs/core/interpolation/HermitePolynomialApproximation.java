@@ -14,23 +14,32 @@
  * limitations under the License.
  */
 
-package org.cesiumjs.cs.core;
+package org.cesiumjs.cs.core.interpolation;
 
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
  * An {@link InterpolationAlgorithm} for performing Hermite interpolation.
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
-@JsType(isNative = true, namespace = "Cesium", name = "HermitePolynomialApproximation")
-public class HermitePolynomialApproximation implements InterpolationAlgorithm {
+@JsType(isNative = true)
+public class HermitePolynomialApproximation extends InterpolationAlgorithm {
+    /**
+     * Get instance if algorithm. In this moment i don't invented more
+     * @return Instance instance. See example.
+     */
+    @JsProperty(namespace = "Cesium", name = "HermitePolynomialApproximation")
+    public static native HermitePolynomialApproximation instance();
+
     /**
      * Given the desired degree, returns the number of data points required for interpolation.
      * @param degree The desired degree of interpolation.
      * @return The number of required data points needed for the desired degree of interpolation.
      */
-    @JsMethod
+    @JsMethod(namespace = "Cesium.HermitePolynomialApproximation")
     public static native int getRequiredDataPoints(double degree);
 
     /**
@@ -39,7 +48,7 @@ public class HermitePolynomialApproximation implements InterpolationAlgorithm {
      * @param inputOrder The order of the inputs (0 means just the data, 1 means the data and its derivative, etc).
      * @return The number of required data points needed for the desired degree of interpolation.
      */
-    @JsMethod
+    @JsMethod(namespace = "Cesium.HermitePolynomialApproximation")
     public static native int getRequiredDataPoints(double degree, int inputOrder);
 
     /**
@@ -54,7 +63,7 @@ public class HermitePolynomialApproximation implements InterpolationAlgorithm {
      * @param outputOrder The number of derivatives desired for output.
      * @return The array of interpolated values, or the result parameter if one was provided.
      */
-    @JsMethod
+    @JsMethod(namespace = "Cesium.HermitePolynomialApproximation")
     public static native double[] interpolate(double x, double[] xTable, double[] yTable, double yStride, int inputOrder, int outputOrder);
 
     /**
@@ -70,7 +79,7 @@ public class HermitePolynomialApproximation implements InterpolationAlgorithm {
      * @param result An existing array into which to store the result.
      * @return The array of interpolated values, or the result parameter if one was provided.
      */
-    @JsMethod
+    @JsMethod(namespace = "Cesium.HermitePolynomialApproximation")
     public static native double[] interpolate(double x, double[] xTable, double[] yTable, double yStride, int inputOrder, int outputOrder, double[] result);
 
     /**
@@ -83,7 +92,7 @@ public class HermitePolynomialApproximation implements InterpolationAlgorithm {
      * @param yStride The number of dependent variable values in yTable corresponding to each independent variable value in xTable.
      * @return The array of interpolated values, or the result parameter if one was provided.
      */
-    @JsMethod
+    @JsMethod(namespace = "Cesium.HermitePolynomialApproximation")
     public static native double[] interpolateOrderZero(double x, double[] xTable, double[] yTable, double yStride);
 
     /**
@@ -97,6 +106,6 @@ public class HermitePolynomialApproximation implements InterpolationAlgorithm {
      * @param result An existing array into which to store the result.
      * @return The array of interpolated values, or the result parameter if one was provided.
      */
-    @JsMethod
+    @JsMethod(namespace = "Cesium.HermitePolynomialApproximation")
     public static native double[] interpolateOrderZero(double x, double[] xTable, double[] yTable, double yStride, double[] result);
 }

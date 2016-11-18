@@ -14,23 +14,35 @@
  * limitations under the License.
  */
 
-package org.cesiumjs.cs.core;
+package org.cesiumjs.cs.core.interpolation;
 
-import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsType;
+import jsinterop.annotations.*;
 
 /**
  * An {@link InterpolationAlgorithm} for performing Lagrange interpolation.
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
-@JsType(isNative = true, namespace = "Cesium", name = "LagrangePolynomialApproximation")
-public class LagrangePolynomialApproximation implements InterpolationAlgorithm {
+@JsType(isNative = true)
+public class LagrangePolynomialApproximation extends InterpolationAlgorithm {
+    /**
+     * Get instance if algorithm. In this moment i don't invented more
+     * @return Instance instance. See example.
+     */
+    @JsProperty(namespace = "Cesium", name = "LagrangePolynomialApproximation")
+    public static native LagrangePolynomialApproximation instance();
+
+    /**
+     * An {@link InterpolationAlgorithm} for performing Lagrange interpolation.
+     */
+    @JsConstructor
+    private LagrangePolynomialApproximation() {}
+
     /**
      * Given the desired degree, returns the number of data points required for interpolation.
      * @param degree The desired degree of interpolation.
      * @return The number of required data points needed for the desired degree of interpolation.
      */
-    @JsMethod
+    @JsMethod(namespace = "Cesium.LagrangePolynomialApproximation")
     public static native int getRequiredDataPoints(double degree);
 
     /**
@@ -43,7 +55,7 @@ public class LagrangePolynomialApproximation implements InterpolationAlgorithm {
      * @param yStride The number of dependent variable values in yTable corresponding to each independent variable value in xTable.
      * @return The array of interpolated values, or the result parameter if one was provided.
      */
-    @JsMethod
+    @JsMethod(namespace = "Cesium.LagrangePolynomialApproximation")
     public static native double[] interpolateOrderZero(double x, double[] xTable, double[] yTable, double yStride);
 
     /**
@@ -57,6 +69,6 @@ public class LagrangePolynomialApproximation implements InterpolationAlgorithm {
      * @param result An existing array into which to store the result.
      * @return The array of interpolated values, or the result parameter if one was provided.
      */
-    @JsMethod
+    @JsMethod(namespace = "Cesium.LagrangePolynomialApproximation")
     public static native double[] interpolateOrderZero(double x, double[] xTable, double[] yTable, double yStride, double[] result);
 }

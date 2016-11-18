@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.cesiumjs.cs.core;
+package org.cesiumjs.cs.core.interpolation;
 
 import jsinterop.annotations.JsType;
 
@@ -22,5 +22,5 @@ import jsinterop.annotations.JsType;
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = "Cesium", name = "InterpolationAlgorithm")
-public interface InterpolationAlgorithm {
+public class InterpolationAlgorithm {
 }
