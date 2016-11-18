@@ -30,7 +30,7 @@ import org.cesiumjs.cs.Configuration;
  */
 public abstract class ViewerPanelAbstract extends SimplePanel {
     private Configuration _configuration;
-    private Viewer _viewer;
+    protected Viewer _viewer;
 
     public ViewerPanelAbstract(Configuration configuration) {
         _configuration = configuration;

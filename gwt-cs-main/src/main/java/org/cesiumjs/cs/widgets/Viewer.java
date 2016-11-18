@@ -222,9 +222,8 @@ public class Viewer {
     /**
      * Gets the Timeline widget.
      */
-    //TODO: Later
-//    @JsProperty(name = "timeline")
-//    public native Timeline timeline();
+    @JsProperty(name = "timeline")
+    public native Timeline timeline();
     /**
      * Gets or sets the Entity instance currently being tracked by the camera.
      */
@@ -407,6 +406,28 @@ public class Viewer {
      */
     @JsMethod
     public native Promise<Boolean, Void> zoomTo(Entity target);
+
+    /**
+     * Asynchronously sets the camera to view the provided entity, entities, or data source. If the data source is
+     * still in the process of loading or the visualization is otherwise still loading, this method waits for the data
+     * to be ready before performing the zoom.
+     * The offset is heading/pitch/range in the local east-north-up reference frame centered at the center of the bounding sphere.
+     * The heading and the pitch angles are defined in the local east-north-up reference frame. The heading is the
+     * angle from y axis and increasing towards the x axis. Pitch is the rotation from the xy-plane.
+     * Positive pitch angles are above the plane. Negative pitch angles are below the plane.
+     * The range is the distance from the center. If the range is zero, a range will be computed such that the whole bounding sphere is visible.
+     *
+     * In 2D, there must be a top down view. The camera will be placed above the target looking down.
+     * The height above the target will be the range. The heading will be determined from the offset.
+     * If the heading cannot be determined from the offset, the heading will be north.
+     * @param target The entity, array of entities, entity collection, data source or imagery layer to view.
+     *               You can also pass a promise that resolves to one of the previously mentioned types.
+     * @param offset The offset from the center of the entity in the local east-north-up reference frame.
+     * @return A Promise that resolves to true if the zoom was successful or false if the entity is not currently
+     * visualized in the scene or the zoom was cancelled.
+     */
+    @JsMethod
+    public native Promise<Boolean, Void> zoomTo(EntityCollection target, HeadingPitchRange offset);
 
     /**
      * Asynchronously sets the camera to view the provided entity, entities, or data source. If the data source is

@@ -116,16 +116,16 @@ public class EntityOptions {
      */
     @JsProperty
     public ModelGraphics model;
-//    /**
-//     * A path to associate with this entity.
-//     */
-//    @JsProperty
-//    public PathGraphics path;
-//    /**
-//     * A point to associate with this entity.
-//     */
-//    @JsProperty
-//    public PointGraphics point;
+    /**
+     * A path to associate with this entity.
+     */
+    @JsProperty
+    public PathGraphics path;
+    /**
+     * A point to associate with this entity.
+     */
+    @JsProperty
+    public PointGraphics point;
     /**
      * A polygon to associate with this entity.
      */
