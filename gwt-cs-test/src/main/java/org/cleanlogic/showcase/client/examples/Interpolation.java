@@ -17,6 +17,7 @@
 package org.cleanlogic.showcase.client.examples;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsDate;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ChangeEvent;
@@ -30,6 +31,7 @@ import org.cesiumjs.cs.core.Math;
 import org.cesiumjs.cs.core.interpolation.HermitePolynomialApproximation;
 import org.cesiumjs.cs.core.interpolation.LagrangePolynomialApproximation;
 import org.cesiumjs.cs.core.interpolation.LinearApproximation;
+import org.cesiumjs.cs.datasources.EntityCollection;
 import org.cesiumjs.cs.datasources.properties.options.SampledPropertyInterpolationOptions;
 import org.cesiumjs.cs.core.options.TimeIntervalOptions;
 import org.cesiumjs.cs.core.providers.CesiumTerrainProvider;
@@ -44,6 +46,7 @@ import org.cesiumjs.cs.datasources.graphics.options.PointGraphicsOptions;
 import org.cesiumjs.cs.datasources.options.EntityOptions;
 import org.cesiumjs.cs.datasources.properties.*;
 import org.cesiumjs.cs.datasources.properties.options.PolylineGlowMaterialPropertyOptions;
+import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.widgets.Viewer;
 import org.cesiumjs.cs.widgets.ViewerPanelAbstract;
 import org.cleanlogic.showcase.client.basic.AbstractExample;
@@ -149,7 +152,7 @@ public class Interpolation extends AbstractExample {
                 EntityOptions entityOptions = new EntityOptions();
                 entityOptions.position = new ConstantPositionProperty(position);
                 entityOptions.point = new PointGraphics(pointGraphicsOptions);
-                _csPanelAbstract.getViewer().entities().add(new Entity(entityOptions));
+                _csPanelAbstract.getViewer().entities().add(entityOptions);
             }
             return property;
         }
@@ -203,8 +206,9 @@ public class Interpolation extends AbstractExample {
             @Override
             public void onClick(ClickEvent clickEvent) {
                 Viewer viewer = csVPanel._csPanelAbstract.getViewer();
-                viewer.trackedEntity = null;
+                viewer.trackedEntity = (Entity)JsObject.undefined();
                 viewer.zoomTo(viewer.entities(), new HeadingPitchRange(0, Math.toRadians(-90), 0));
+
             }
         });
         Button viewSideBtn = new Button("View Side");
@@ -212,7 +216,7 @@ public class Interpolation extends AbstractExample {
             @Override
             public void onClick(ClickEvent clickEvent) {
                 Viewer viewer = csVPanel._csPanelAbstract.getViewer();
-                viewer.trackedEntity = null;
+                viewer.trackedEntity = (Entity)JsObject.undefined();
                 viewer.zoomTo(viewer.entities(), new HeadingPitchRange(Math.toRadians(-90), Math.toRadians(-15), 7500.0));
             }
         });
