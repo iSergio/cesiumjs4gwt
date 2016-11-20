@@ -17,6 +17,7 @@
 package org.cesiumjs.cs.js;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import org.cesiumjs.cs.datasources.Entity;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -46,5 +47,14 @@ public class JsObject extends JavaScriptObject {
 
     public final native String getString(String propertyName) /*-{
         return this[propertyName];
+    }-*/;
+
+    /**
+     * In JavaScript null not he same undefined. In example Interpolation, we set trackedEntity to null, and this method not worked
+     * To correct this help function below.
+     * @return undefined object
+     */
+    public static native Object undefined() /*-{
+        return undefined;
     }-*/;
 }

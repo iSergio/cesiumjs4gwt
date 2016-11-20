@@ -16,10 +16,7 @@
 
 package org.cesiumjs.cs.datasources;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.core.JulianDate;
 import org.cesiumjs.cs.core.TimeIntervalCollection;
@@ -174,6 +171,9 @@ public class Entity {
      */
     @JsProperty
     public WallGraphics wall;
+    /**
+     *
+     */
     @JsProperty
     public JsObject properties;
 

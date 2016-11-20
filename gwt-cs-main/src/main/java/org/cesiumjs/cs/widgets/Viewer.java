@@ -107,14 +107,12 @@ public class Viewer {
     /**
      * Gets the set of DataSource instances to be visualized.
      */
-    //TODO: Later
     @JsProperty(name = "dataSources")
     public native DataSourceCollection dataSources();
     /**
      * Gets the collection of entities not tied to a particular data source.
      * This is a shortcut to dataSourceDisplay.defaultDataSource.entities.
      */
-    //TODO: Later
     @JsProperty(name = "entities")
     public native EntityCollection entities();
     /**
@@ -227,7 +225,7 @@ public class Viewer {
     /**
      * Gets or sets the Entity instance currently being tracked by the camera.
      */
-    @JsProperty
+    @JsProperty(name = "trackedEntity")
     public Entity trackedEntity;
     /**
      * Gets or sets whether or not this widget should control the render loop. If set to true the widget will use
