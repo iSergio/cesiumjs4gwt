@@ -24,7 +24,7 @@ import org.cesiumjs.cs.core.JulianDate;
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = "Cesium", name = "CallbackProperty")
-public class CallbackProperty extends Property<Color> {
+public class CallbackProperty<T> extends Property<T> {
     @JsConstructor
     public CallbackProperty(Callback callback, boolean isConstant) {}
 
@@ -34,16 +34,16 @@ public class CallbackProperty extends Property<Color> {
      * @param isConstant true when the callback function returns the same value every time, false if the value will change.
      */
     @JsMethod
-    public native void setCallback(Callback callback, boolean isConstant);
+    public native void setCallback(Callback<T> callback, boolean isConstant);
 
     @JsFunction
-    public interface Callback {
+    public interface Callback<T> {
         /**
          * A function that returns the value of the property.
          * @param time The time for which to retrieve the value.
          * @param result The object to store the value into, if omitted, a new instance is created and returned.
          * @return The modified result parameter or a new instance if the result parameter was not supplied or is unsupported.
          */
-        Color function(@JsOptional JulianDate time, @JsOptional Color result);
+        T function(JulianDate time, T result);
     }
 }
