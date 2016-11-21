@@ -138,16 +138,16 @@ public class Picking extends AbstractExample {
         }
 
         private void makeProperty(final Entity entity, final Color color) {
-            Property<Color> colorProperty = new CallbackProperty(new CallbackProperty.Callback() {
+            Property<Color> colorProperty = new CallbackProperty<>(new CallbackProperty.Callback<Color>() {
                 @Override
-                public Color function(@JsOptional JulianDate time, @JsOptional Color result) {
+                public Color function(JulianDate time, Color result) {
                     if (_pickedEntities.contains(entity)) {
                         return _pickColor.clone(result);
                     }
                     return color.clone(result);
                 }
             }, false);
-            entity.polygon.material = new ColorMaterialProperty(colorProperty);
+                    entity.polygon.material = new ColorMaterialProperty(colorProperty);
         }
 
         private void drillDownPicking() {

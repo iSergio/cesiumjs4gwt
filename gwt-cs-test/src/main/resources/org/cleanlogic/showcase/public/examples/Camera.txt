@@ -14,6 +14,7 @@ import org.cesiumjs.cs.datasources.graphics.options.RectangleGraphicsOptions;
 import org.cesiumjs.cs.datasources.options.EntityOptions;
 import org.cesiumjs.cs.datasources.properties.ConstantProperty;
 import org.cesiumjs.cs.scene.DebugModelMatrixPrimitive;
+import org.cesiumjs.cs.scene.Primitive;
 import org.cesiumjs.cs.scene.Scene;
 import org.cesiumjs.cs.scene.SceneMode;
 import org.cesiumjs.cs.scene.options.CameraFlyToOptions;
