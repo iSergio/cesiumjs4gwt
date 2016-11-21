@@ -29,17 +29,17 @@ public class LabelStyle {
      * Fill the text of the label, but do not outline.
      */
     @JsProperty(name = "FILL")
-    public static native int FILL();
+    public static native Integer FILL();
     /**
      * Fill and outline the text of the label.
      */
     @JsProperty(name = "FILL_AND_OUTLINE")
-    public static native int FILL_AND_OUTLINE();
+    public static native Integer FILL_AND_OUTLINE();
     /**
      * Outline the text of the label, but do not fill.
      */
     @JsProperty(name = "OUTLINE")
-    public static native int OUTLINE();
+    public static native Integer OUTLINE();
 
     /**
      * Describes how to draw a label.

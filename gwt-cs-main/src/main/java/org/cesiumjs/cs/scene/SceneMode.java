@@ -28,25 +28,25 @@ public class SceneMode {
      * Columbus View mode. A 2.5D perspective view where the map is laid out flat and objects with non-zero height are drawn above it.
      */
     @JsProperty(name = "COLUMBUS_VIEW")
-    public static native int COLUMBUS_VIEW();
+    public static native Integer COLUMBUS_VIEW();
 
     /**
      * Morphing between mode, e.g., 3D to 2D.
      */
     @JsProperty(name = "MORPHING")
-    public static native int MORPHING();
+    public static native Integer MORPHING();
 
     /**
      * 2D mode. The map is viewed top-down with an orthographic projection.
      */
     @JsProperty(name = "SCENE2D")
-    public static native int SCENE2D();
+    public static native Integer SCENE2D();
 
     /**
      * 3D mode. A traditional 3D perspective view of the globe.
      */
     @JsProperty(name = "SCENE3D")
-    public static native int SCENE3D();
+    public static native Integer SCENE3D();
 
     /**
      * Returns the morph time for the given scene mode.

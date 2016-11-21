@@ -29,22 +29,22 @@ public class ShadowMode {
      * The object casts shadows only.
      */
     @JsProperty(name = "CAST_ONLY")
-    public static native int CAST_ONLY();
+    public static native Integer CAST_ONLY();
     /**
      * The object receives shadows only.
      */
     @JsProperty(name = "RECEIVE_ONLY")
-    public static native int RECEIVE_ONLY();
+    public static native Integer RECEIVE_ONLY();
     /**
      * The object casts and receives shadows.
      */
     @JsProperty(name = "ENABLED")
-    public static native int ENABLED();
+    public static native Integer ENABLED();
     /**
      * The object does not cast or receive shadows.
      */
     @JsProperty(name = "DISABLED")
-    public static native int DISABLED();
+    public static native Integer DISABLED();
 
     /**
      * Describes how the map will operate in 2D.

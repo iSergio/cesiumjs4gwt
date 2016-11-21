@@ -29,12 +29,12 @@ public class MapMode2D {
      * The 2D map can be scrolled infinitely in the horizontal direction.
      */
     @JsProperty(name = "INFINITE_SCROLL")
-    public static native int INFINITE_SCROLL();
+    public static native Integer INFINITE_SCROLL();
     /**
      * The 2D map can be rotated about the z axis.
      */
     @JsProperty(name = "ROTATE")
-    public static native int ROTATE();
+    public static native Integer ROTATE();
 
     /**
      * Describes how the map will operate in 2D.
