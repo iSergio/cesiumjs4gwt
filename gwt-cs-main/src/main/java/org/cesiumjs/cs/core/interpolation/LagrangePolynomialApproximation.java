@@ -23,7 +23,7 @@ import jsinterop.annotations.*;
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true)
-public class LagrangePolynomialApproximation extends InterpolationAlgorithm {
+public class LagrangePolynomialApproximation implements InterpolationAlgorithm {
     /**
      * Get instance if algorithm. In this moment i don't invented more
      * @return Instance instance. See example.

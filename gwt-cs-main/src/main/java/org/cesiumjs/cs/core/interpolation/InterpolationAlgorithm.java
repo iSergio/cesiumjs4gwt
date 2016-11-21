@@ -22,5 +22,5 @@ import jsinterop.annotations.JsType;
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = "Cesium", name = "InterpolationAlgorithm")
-public class InterpolationAlgorithm {
+public interface InterpolationAlgorithm {
 }

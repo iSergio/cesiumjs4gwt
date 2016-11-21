@@ -26,7 +26,7 @@ import jsinterop.annotations.JsType;
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true)
-public class HermitePolynomialApproximation extends InterpolationAlgorithm {
+public class HermitePolynomialApproximation implements InterpolationAlgorithm {
     /**
      * Get instance if algorithm. In this moment i don't invented more
      * @return Instance instance. See example.

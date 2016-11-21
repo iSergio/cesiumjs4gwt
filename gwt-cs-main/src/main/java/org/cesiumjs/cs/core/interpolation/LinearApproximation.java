@@ -23,7 +23,7 @@ import jsinterop.annotations.*;
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true)
-public class LinearApproximation extends InterpolationAlgorithm {
+public class LinearApproximation implements InterpolationAlgorithm {
     /**
      * Get instance if algorithm. In this moment i don't invented more
      * @return Instance instance. See example.
