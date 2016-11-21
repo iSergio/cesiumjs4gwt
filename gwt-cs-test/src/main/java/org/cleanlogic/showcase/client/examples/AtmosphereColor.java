@@ -38,7 +38,6 @@ import org.cleanlogic.showcase.client.examples.slider.SliderEvent;
 import org.cleanlogic.showcase.client.examples.slider.SliderListener;
 
 import javax.inject.Inject;
-import java.util.logging.Logger;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>

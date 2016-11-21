@@ -20,7 +20,6 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.logical.shared.AttachEvent;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
 import org.cesiumjs.cs.Configuration;
@@ -29,13 +28,11 @@ import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.core.Math;
 import org.cesiumjs.cs.core.Matrix4;
 import org.cesiumjs.cs.core.options.ColorRandomOptions;
-import org.cesiumjs.cs.datasources.DataSource;
 import org.cesiumjs.cs.datasources.Entity;
 import org.cesiumjs.cs.datasources.GeoJsonDataSource;
 import org.cesiumjs.cs.datasources.options.GeoJsonDataSourceOptions;
 import org.cesiumjs.cs.datasources.properties.ColorMaterialProperty;
 import org.cesiumjs.cs.datasources.properties.ConstantProperty;
-import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.promise.Fulfill;
 import org.cesiumjs.cs.promise.Promise;
 import org.cesiumjs.cs.promise.Reject;
@@ -46,7 +43,6 @@ import org.cleanlogic.showcase.client.components.store.ShowcaseExampleStore;
 
 import javax.inject.Inject;
 import java.util.HashMap;
-import java.util.logging.Logger;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>

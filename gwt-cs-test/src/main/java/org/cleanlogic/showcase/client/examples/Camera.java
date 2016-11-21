@@ -37,14 +37,12 @@ import org.cesiumjs.cs.scene.options.DebugModelMatrixPrimitiveOptions;
 import org.cesiumjs.cs.scene.options.ViewOptions;
 import org.cesiumjs.cs.widgets.Viewer;
 import org.cesiumjs.cs.widgets.ViewerPanelAbstract;
-import org.cesiumjs.cs.widgets.options.FlyToOptions;
 import org.cleanlogic.showcase.client.basic.AbstractExample;
 import org.cleanlogic.showcase.client.components.store.ShowcaseExampleStore;
 
 import javax.inject.Inject;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.logging.Logger;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>

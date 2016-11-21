@@ -20,7 +20,10 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
-import com.google.gwt.user.client.ui.*;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.IsWidget;
+import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.Widget;
 import org.cesiumjs.cs.Configuration;
 import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.core.Math;
@@ -100,7 +103,7 @@ public class Billboards extends AbstractExample {
             billboardGraphicsOptions.show = new ConstantProperty<>(true); // default
             billboardGraphicsOptions.pixelOffset = new ConstantProperty<>(new Cartesian2(0, -50)); // default: (0, 0)
             billboardGraphicsOptions.eyeOffset = new ConstantProperty<>(new Cartesian3(0, 0, 0)); // default
-            billboardGraphicsOptions.horizontalOrigin = new ConstantProperty<>(HorizontalOrigin.RIGHT());// default
+            billboardGraphicsOptions.horizontalOrigin = new ConstantProperty<>(HorizontalOrigin.CENTER());// default
             billboardGraphicsOptions.verticalOrigin = new ConstantProperty<>(VerticalOrigin.BOTTOM()); // default: CENTER
             billboardGraphicsOptions.scale = new ConstantProperty<>(2.0); // default: 1.0
             billboardGraphicsOptions.color = new ConstantProperty<>(Color.LIME()); // default: WHITE
@@ -108,10 +111,9 @@ public class Billboards extends AbstractExample {
             billboardGraphicsOptions.alignedAxis = new ConstantProperty<>(Cartesian3.ZERO()); // default
             billboardGraphicsOptions.width = new ConstantProperty<>(100); // default: undefined
             billboardGraphicsOptions.height = new ConstantProperty<>(25); // default: undefined
-            BillboardGraphics billboardGraphics = new BillboardGraphics(billboardGraphicsOptions);
             EntityOptions entityOptions = new EntityOptions();
             entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-75.59777, 40.03883));
-            entityOptions.billboard = billboardGraphics;
+            entityOptions.billboard = new BillboardGraphics(billboardGraphicsOptions);
             _csPanelAbstract.getViewer().entities().add(new Entity(entityOptions));
         }
 

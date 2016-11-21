@@ -17,14 +17,10 @@
 package org.cleanlogic.showcase.client.examples;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.ui.*;
-import jsinterop.annotations.JsOptional;
 import org.cesiumjs.cs.Configuration;
 import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.core.Math;
@@ -41,12 +37,10 @@ import org.cesiumjs.cs.datasources.graphics.options.ModelGraphicsOptions;
 import org.cesiumjs.cs.datasources.graphics.options.PolygonGraphicsOptions;
 import org.cesiumjs.cs.datasources.options.EntityOptions;
 import org.cesiumjs.cs.datasources.properties.*;
-import org.cesiumjs.cs.promise.Function;
 import org.cesiumjs.cs.scene.Camera;
 import org.cesiumjs.cs.scene.HorizontalOrigin;
 import org.cesiumjs.cs.scene.PerspectiveFrustum;
 import org.cesiumjs.cs.scene.Scene;
-import org.cesiumjs.cs.scene.options.LabelOptions;
 import org.cesiumjs.cs.widgets.Viewer;
 import org.cesiumjs.cs.widgets.ViewerPanelAbstract;
 import org.cleanlogic.showcase.client.basic.AbstractExample;
@@ -154,16 +148,16 @@ public class Picking extends AbstractExample {
         }
 
         private void makeProperty(final Entity entity, final Color color) {
-            Property<Color> colorProperty = new CallbackProperty(new CallbackProperty.Callback() {
+            Property<Color> colorProperty = new CallbackProperty<>(new CallbackProperty.Callback<Color>() {
                 @Override
-                public Color function(@JsOptional JulianDate time, @JsOptional Color result) {
+                public Color function(JulianDate time, Color result) {
                     if (_pickedEntities.contains(entity)) {
                         return _pickColor.clone(result);
                     }
                     return color.clone(result);
                 }
             }, false);
-            entity.polygon.material = new ColorMaterialProperty(colorProperty);
+                    entity.polygon.material = new ColorMaterialProperty(colorProperty);
         }
 
         private void drillDownPicking() {

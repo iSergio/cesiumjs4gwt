@@ -17,7 +17,6 @@
 package org.cleanlogic.showcase.client.examples;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsDate;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ChangeEvent;
@@ -31,8 +30,6 @@ import org.cesiumjs.cs.core.Math;
 import org.cesiumjs.cs.core.interpolation.HermitePolynomialApproximation;
 import org.cesiumjs.cs.core.interpolation.LagrangePolynomialApproximation;
 import org.cesiumjs.cs.core.interpolation.LinearApproximation;
-import org.cesiumjs.cs.datasources.EntityCollection;
-import org.cesiumjs.cs.datasources.properties.options.SampledPropertyInterpolationOptions;
 import org.cesiumjs.cs.core.options.TimeIntervalOptions;
 import org.cesiumjs.cs.core.providers.CesiumTerrainProvider;
 import org.cesiumjs.cs.core.providers.options.CesiumTerrainProviderOptions;
@@ -46,6 +43,7 @@ import org.cesiumjs.cs.datasources.graphics.options.PointGraphicsOptions;
 import org.cesiumjs.cs.datasources.options.EntityOptions;
 import org.cesiumjs.cs.datasources.properties.*;
 import org.cesiumjs.cs.datasources.properties.options.PolylineGlowMaterialPropertyOptions;
+import org.cesiumjs.cs.datasources.properties.options.SampledPropertyInterpolationOptions;
 import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.widgets.Viewer;
 import org.cesiumjs.cs.widgets.ViewerPanelAbstract;
@@ -53,7 +51,6 @@ import org.cleanlogic.showcase.client.basic.AbstractExample;
 import org.cleanlogic.showcase.client.components.store.ShowcaseExampleStore;
 
 import javax.inject.Inject;
-import java.util.logging.Logger;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
