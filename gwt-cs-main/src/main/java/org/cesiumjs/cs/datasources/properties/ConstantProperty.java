@@ -46,4 +46,11 @@ public class ConstantProperty<T> extends Property<T> {
      */
     @JsMethod
     public native void setValue(T value);
+
+    /**
+     * Gets the value of the property at the provided time.
+     * @return The modified result parameter or a new instance if the result parameter was not supplied.
+     */
+    @JsMethod
+    public native T getValue();
 }

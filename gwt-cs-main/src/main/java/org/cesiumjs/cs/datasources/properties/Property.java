@@ -17,7 +17,6 @@
 package org.cesiumjs.cs.datasources.properties;
 
 import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsOptional;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Event;
@@ -72,5 +71,5 @@ public class Property<T> {
      * @return The modified result parameter or a new instance if the result parameter was not supplied.
      */
     @JsMethod
-    public native T getValue(JulianDate time, @JsOptional T result);
+    public native T getValue(JulianDate time, T result);
 }
