@@ -1,0 +1,36 @@
+package org.cleanlogic.showcase.client.examples;
+
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.ui.HTML;
+import org.cesiumjs.cs.widgets.ViewerPanel;
+import org.cleanlogic.showcase.client.basic.AbstractExample;
+import org.cleanlogic.showcase.client.components.store.ShowcaseExampleStore;
+
+import javax.inject.Inject;
+
+/**
+ * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ */
+public class HelloWorldStatic extends AbstractExample {
+    @Inject
+    public HelloWorldStatic(ShowcaseExampleStore store) {
+        super("Hello World Static", "Simple Cesium hello world application", new String[]{"Showcase", "Cesium", "3d", "Viewer", "Static"}, store);
+    }
+
+    @Override
+    public void buildPanel() {
+        ViewerPanel viewerPanel = new ViewerPanel();
+
+        contentPanel.add(new HTML("<p>This example shows how create HelloWord as direct inject CesiumJS in HTML header</p>"));
+        contentPanel.add(viewerPanel);
+
+        initWidget(contentPanel);
+    }
+
+    @Override
+    public String[] getSourceCodeURLs() {
+        String[] sourceCodeURLs = new String[1];
+        sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "HelloWorldStatic.txt";
+        return sourceCodeURLs;
+    }
+}
