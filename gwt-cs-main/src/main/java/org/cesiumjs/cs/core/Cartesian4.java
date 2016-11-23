@@ -142,6 +142,7 @@ public class Cartesian4 implements Packable {
      * Creates a string representing this Cartesian in the format '(x, y, z, w)'.
      * @return A string representing the provided Cartesian in the format '(x, y, z, w)'.
      */
+    @Override
     @JsMethod
     public native String toString();
 
