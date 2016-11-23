@@ -19,8 +19,8 @@ package org.cesiumjs.cs.core.options;
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.geometry.Geometry;
 import org.cesiumjs.cs.core.Matrix4;
+import org.cesiumjs.cs.core.geometry.Geometry;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
