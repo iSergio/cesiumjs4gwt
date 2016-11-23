@@ -17,7 +17,8 @@
 package org.cesiumjs.cs.js;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import org.cesiumjs.cs.datasources.Entity;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -54,7 +55,6 @@ public class JsObject extends JavaScriptObject {
      * To correct this help function below.
      * @return undefined object
      */
-    public static native Object undefined() /*-{
-        return undefined;
-    }-*/;
+    @JsProperty(namespace = JsPackage.GLOBAL, name = "undefined")
+    public static native Object undefined();
 }
