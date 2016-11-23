@@ -17,7 +17,6 @@
 package org.cesiumjs.cs.widgets;
 
 import com.google.gwt.core.client.Callback;
-import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.logical.shared.AttachEvent;
 import com.google.gwt.user.client.Window;
@@ -43,9 +42,7 @@ public abstract class ViewerPanelAbstract extends SimplePanel {
     }
 
     protected void inject(final Element element) {
-        Document document = element.getOwnerDocument();
-
-        Cesium.initialize(_configuration.getPath(), document, new Callback<Void, Exception>() {
+        Cesium.initialize(_configuration.getPath(), element.getOwnerDocument(), new Callback<Void, Exception>() {
             @Override
             public void onFailure(Exception e) {
                 Window.alert("Error: Failed to inject Cesium scripts from " + _configuration.getPath());
