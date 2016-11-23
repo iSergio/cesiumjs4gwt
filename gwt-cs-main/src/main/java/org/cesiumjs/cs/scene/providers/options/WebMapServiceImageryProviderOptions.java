@@ -23,8 +23,8 @@ import org.cesiumjs.cs.core.Credit;
 import org.cesiumjs.cs.core.Ellipsoid;
 import org.cesiumjs.cs.core.Rectangle;
 import org.cesiumjs.cs.core.TilingScheme;
-import org.cesiumjs.cs.scene.GetFeatureInfoParameters;
 import org.cesiumjs.cs.scene.GetFeatureInfoFormat;
+import org.cesiumjs.cs.scene.GetFeatureInfoParameters;
 import org.cesiumjs.cs.scene.WebMapServiceParameters;
 
 /**
