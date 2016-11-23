@@ -16,8 +16,14 @@
 
 package org.cesiumjs.cs.datasources.properties;
 
-import jsinterop.annotations.*;
-import org.cesiumjs.cs.core.*;
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Cartesian3;
+import org.cesiumjs.cs.core.ExtrapolationType;
+import org.cesiumjs.cs.core.JulianDate;
+import org.cesiumjs.cs.core.ReferenceFrame;
 import org.cesiumjs.cs.core.interpolation.InterpolationAlgorithm;
 import org.cesiumjs.cs.core.interpolation.LinearApproximation;
 import org.cesiumjs.cs.datasources.properties.options.SampledPropertyInterpolationOptions;
