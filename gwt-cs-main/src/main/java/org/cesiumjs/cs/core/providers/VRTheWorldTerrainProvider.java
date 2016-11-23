@@ -95,6 +95,7 @@ public class VRTheWorldTerrainProvider implements TerrainProvider {
      * @param level The tile level for which to get the maximum geometric error.
      * @return The maximum geometric error.
      */
+    @Override
     @JsMethod
     public native double getLevelMaximumGeometricError(int level);
 
@@ -105,6 +106,7 @@ public class VRTheWorldTerrainProvider implements TerrainProvider {
      * @param level The level of the tile for which to request geometry.
      * @return Undefined if not supported by the terrain provider, otherwise true or false.
      */
+    @Override
     @JsMethod
     public native boolean getTileDataAvailable(int x, int y , int level);
 
@@ -119,6 +121,7 @@ public class VRTheWorldTerrainProvider implements TerrainProvider {
      * @return A promise for the requested geometry. If this method returns undefined instead of a promise,
      * it is an indication that too many requests are already pending and the request will be retried later.
      */
+    @Override
     @JsMethod
     public native Promise<TerrainData, Void> requestTileGeometry(int x, int y, int level, boolean throttleRequests);
 }

@@ -92,6 +92,7 @@ public class EllipsoidTerrainProvider implements TerrainProvider {
      * @param level The tile level for which to get the maximum geometric error.
      * @return The maximum geometric error.
      */
+    @Override
     @JsMethod
     public native double getLevelMaximumGeometricError(int level);
 
