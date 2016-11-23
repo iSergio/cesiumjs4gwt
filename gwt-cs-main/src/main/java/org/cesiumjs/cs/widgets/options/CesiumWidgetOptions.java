@@ -27,8 +27,8 @@ import org.cesiumjs.cs.core.SkyAtmosphere;
 import org.cesiumjs.cs.core.SkyBox;
 import org.cesiumjs.cs.core.projection.MapProjection;
 import org.cesiumjs.cs.core.providers.TerrainProvider;
-import org.cesiumjs.cs.scene.providers.ImageryProvider;
 import org.cesiumjs.cs.scene.SceneMode;
+import org.cesiumjs.cs.scene.providers.ImageryProvider;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>

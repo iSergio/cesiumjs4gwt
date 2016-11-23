@@ -28,10 +28,10 @@ import org.cesiumjs.cs.core.SkyBox;
 import org.cesiumjs.cs.core.projection.MapProjection;
 import org.cesiumjs.cs.core.providers.TerrainProvider;
 import org.cesiumjs.cs.datasources.DataSourceCollection;
-import org.cesiumjs.cs.scene.providers.ImageryProvider;
 import org.cesiumjs.cs.scene.MapMode2D;
 import org.cesiumjs.cs.scene.SceneMode;
 import org.cesiumjs.cs.scene.ShadowMode;
+import org.cesiumjs.cs.scene.providers.ImageryProvider;
 import org.cesiumjs.cs.widgets.baselayerpicker.ProviderViewModel;
 
 /**
