@@ -6,9 +6,10 @@
 package org.cleanlogic.showcase.client.config.provider;
 
 import com.google.gwt.user.client.ui.Anchor;
+
+import javax.inject.Provider;
 import java.util.ArrayList;
 import java.util.List;
-import javax.inject.Provider;
 
 /**
  *

@@ -17,11 +17,8 @@
 package org.cleanlogic.showcase.client.components;
 
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
-import com.google.gwt.user.client.ui.Anchor;
-import com.google.gwt.user.client.ui.HasHorizontalAlignment;
-import com.google.gwt.user.client.ui.HasVerticalAlignment;
-import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.*;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 

@@ -23,8 +23,6 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
 import org.cleanlogic.showcase.client.i18n.I18NMessages;
 
-import java.util.logging.Logger;
-
 /**
  * A clickable example panel.
  *

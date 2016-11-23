@@ -18,12 +18,8 @@ package org.cleanlogic.showcase.client.components.store;
 
 import org.cleanlogic.showcase.client.ExampleBean;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import javax.inject.Singleton;
+import java.util.*;
 
 /**
  *
