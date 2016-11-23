@@ -20,8 +20,6 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
-import java.io.Serializable;
-
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */

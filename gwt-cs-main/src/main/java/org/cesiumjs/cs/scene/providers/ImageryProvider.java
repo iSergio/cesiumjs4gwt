@@ -16,18 +16,7 @@
 
 package org.cesiumjs.cs.scene.providers;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.Credit;
-import org.cesiumjs.cs.core.Event;
-import org.cesiumjs.cs.core.Rectangle;
-import org.cesiumjs.cs.core.TilingScheme;
-import org.cesiumjs.cs.js.JsImage;
-import org.cesiumjs.cs.promise.Promise;
-import org.cesiumjs.cs.scene.ImageryLayerFeatureInfo;
-import org.cesiumjs.cs.scene.TileDiscardPolicy;
 
 /**
  * Provides imagery to be displayed on the surface of an ellipsoid.

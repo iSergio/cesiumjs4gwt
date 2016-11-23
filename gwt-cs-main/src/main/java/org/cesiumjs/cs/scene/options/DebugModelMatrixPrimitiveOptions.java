@@ -23,7 +23,6 @@ import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Cartesian2;
 import org.cesiumjs.cs.core.Matrix4;
 import org.cesiumjs.cs.core.PickedObject;
-import org.cesiumjs.cs.scene.Primitive;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
