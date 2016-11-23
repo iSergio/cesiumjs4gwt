@@ -17,9 +17,9 @@
 package org.cesiumjs.cs;
 
 import com.google.gwt.core.client.Callback;
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.ScriptInjector;
 import com.google.gwt.dom.client.Document;
+import jsinterop.annotations.JsType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,21 +34,28 @@ import java.util.logging.Logger;
 public class Initializer {
     private static final Logger LOGGER = Logger.getLogger(Initializer.class.getName());
     private final String _path;
-    private final Document _document;
+    /**
+     * This map used if you build multi window application (Tab, or two map panels or etc)
+     */
     private static Map<Document, Initializer> _initializerMap = new HashMap<>();
+    /**
+     * Map stored callback to send it
+     */
     private List<Callback<Void, Exception>> _callbacks = new ArrayList<>();
 
     public Initializer(String path, Document document, Callback<Void, Exception> callback) {
         _path = path;
-        _document = document;
         addCallback(callback);
         _initializerMap.put(document, this);
     }
 
+    /**
+     * Initialize Cesium by inject javascript
+     */
     public void initialize() {
         String path = _path + "Cesium.js";
 
-        ScriptInjector.fromUrl(path).setWindow(getWindow(_document)).setCallback(new Callback<Void, Exception>() {
+        ScriptInjector.fromUrl(path).setWindow(ScriptInjector.TOP_WINDOW).setCallback(new Callback<Void, Exception>() {
             @Override
             public void onFailure(Exception e) {
                 for (Callback<Void, Exception> callback : _callbacks) {
@@ -58,9 +65,7 @@ public class Initializer {
 
             @Override
             public void onSuccess(Void aVoid) {
-                createSetter(_document);
-
-                ScriptInjector.fromString("document.setGlobalInGWT(Cesium);").setWindow(getWindow(_document)).inject();
+                invokeCallback();
             }
         }).inject();
     }
@@ -75,26 +80,16 @@ public class Initializer {
         }
     }
 
-    public void addCallback(Callback<Void, Exception> callback) {
-        _callbacks.add(callback);
-    }
-
+    /**
+     * Function returns Initializer for request document
+     * @param document Document
+     * @return Initializer
+     */
     public static Initializer get(Document document) {
         return _initializerMap.get(document);
     }
 
-    private static native JavaScriptObject getWindow(Document document) /*-{
-        var win = document.parentWindow || document.defaultView;
-        return win
-    }-*/;
-
-    private native void createSetter(Document document) /*-{
-        var outerThis = this
-
-        document.setGlobalInGWT = function (toSet) {
-            Cesium = toSet;
-            outerThis.@org.cesiumjs.cs.Initializer::invokeCallback()();
-        }
-    }-*/;
-
+    public void addCallback(Callback<Void, Exception> callback) {
+        _callbacks.add(callback);
+    }
 }

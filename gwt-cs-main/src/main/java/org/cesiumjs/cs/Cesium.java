@@ -19,19 +19,19 @@ package org.cesiumjs.cs;
 import com.google.gwt.core.client.Callback;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.LinkElement;
-import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsIgnore;
+import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 public class Cesium {
-    public static native boolean isInitialized() /*-{
-        return Cesium.VERSION !== undefined;
-    }-*/;
+    @JsProperty(namespace = JsPackage.GLOBAL, name = "Cesium")
+    public static native boolean isInitialized();
 
     @JsProperty(namespace = "Cesium", name = "VERSION")
-    public static native String getVersion();
+    public static native String version();
 
     public static void initialize(String path, Document document, Callback<Void, Exception> callback) {
         Initializer initializer = Initializer.get(document);
