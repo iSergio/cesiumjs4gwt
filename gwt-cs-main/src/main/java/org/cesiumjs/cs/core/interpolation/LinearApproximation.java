@@ -16,7 +16,9 @@
 
 package org.cesiumjs.cs.core.interpolation;
 
-import jsinterop.annotations.*;
+import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 
 /**
  * An {@link InterpolationAlgorithm} for performing linear interpolation.
