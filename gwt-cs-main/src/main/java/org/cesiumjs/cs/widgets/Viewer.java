@@ -192,7 +192,7 @@ public class Viewer {
     /**
      * Get the scene's shadow map
      */
-    @JsProperty(name = "ShadowMap")
+    @JsProperty(name = "shadowMap")
     public native ShadowMap shadowMap();
     /**
      * Determines if shadows are cast by the sun.
@@ -216,7 +216,7 @@ public class Viewer {
      * Determines if the terrain casts or shadows from the sun.
      */
     @JsProperty
-    public int terrainShadows;
+    public Integer terrainShadows;
     /**
      * Gets the Timeline widget.
      */
