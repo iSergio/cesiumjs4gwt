@@ -16,20 +16,18 @@
 
 package org.cesiumjs.cs.datasources.options;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.TimeIntervalCollection;
 import org.cesiumjs.cs.datasources.Entity;
 import org.cesiumjs.cs.datasources.graphics.*;
 import org.cesiumjs.cs.datasources.properties.PositionProperty;
 import org.cesiumjs.cs.datasources.properties.Property;
+import org.cesiumjs.cs.js.JsObject;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+@JsType(isNative =  true, namespace = JsPackage.GLOBAL, name = "Object")
 public class EntityOptions {
     /**
      * A unique identifier for this object. If none is provided, a GUID is generated.
@@ -151,6 +149,11 @@ public class EntityOptions {
      */
     @JsProperty
     public WallGraphics wall;
+    /**
+     *
+     */
+    @JsProperty
+    public JsObject properties;
 
     @JsConstructor
     public EntityOptions() {}
