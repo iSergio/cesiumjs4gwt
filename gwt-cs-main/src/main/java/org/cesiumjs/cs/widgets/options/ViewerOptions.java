@@ -221,7 +221,7 @@ public class ViewerOptions {
      * Determines if the terrain casts or receives shadows from the sun.
      * Default: {@link ShadowMode#RECEIVE_ONLY()}
      */
-    public int terrainShadows;
+    public Integer terrainShadows;
     /**
      * Determines if the 2D map is rotatable or can be scrolled infinitely in the horizontal direction.
      * Default: {@link MapMode2D#INFINITE_SCROLL()}
