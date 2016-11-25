@@ -19,12 +19,17 @@ package org.cesiumjs.cs.js;
 import com.google.gwt.core.client.JavaScriptObject;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 public class JsObject extends JavaScriptObject {
     protected JsObject() {}
+
+    public static native JsObject create() /*-{
+        return {};
+    }-*/;
 
     public final native boolean isObject(String propertyName) /*-{
         return (typeof this[propertyName] === "object");
@@ -34,17 +39,29 @@ public class JsObject extends JavaScriptObject {
         return this[propertyName];
     }-*/;
 
-    public final native int getInt(String propertyName) /*-{
+    public final native Number getNumber(String propertyName) /*-{
         return this[propertyName];
     }-*/;
 
-    public final native double getDouble(String propertyName) /*-{
-        return this[propertyName];
+    public final native Number setNumber(String propertyName, Number propertyValue) /*-{
+        this[propertyName] = propertyValue;
     }-*/;
 
-    public final native float getFloat(String propertyName) /*-{
-        return this[propertyName];
-    }-*/;
+//    public final native int getInt(String propertyName) /*-{
+//        return this[propertyName];
+//    }-*/;
+//
+//    public final native void setInt(String propertyName, int propertyValue) /*-{
+//        this[propertyName] = propertyValue;
+//    }-*/;
+//
+//    public final native double getDouble(String propertyName) /*-{
+//        return this[propertyName];
+//    }-*/;
+//
+//    public final native float getFloat(String propertyName) /*-{
+//        return this[propertyName];
+//    }-*/;
 
     public final native String getString(String propertyName) /*-{
         return this[propertyName];
