@@ -144,7 +144,7 @@ public class GeoJSONAndTopoJSON extends AbstractExample {
 
                             entity.polygon.material = new ColorMaterialProperty(new ConstantProperty<>(color));
                             entity.polygon.outline = new ConstantProperty<>(false);
-                            entity.polygon.extrudedHeight = new ConstantProperty<>((double)entity.properties.getInt("Population") /50.);
+                            entity.polygon.extrudedHeight = new ConstantProperty<>((double)entity.properties.getNumber("Population") /50.);
                         }
                     }
                 }, new Reject<String>() {
