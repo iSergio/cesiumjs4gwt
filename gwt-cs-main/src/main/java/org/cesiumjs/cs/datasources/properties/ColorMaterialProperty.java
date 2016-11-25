@@ -45,4 +45,7 @@ public class ColorMaterialProperty extends MaterialProperty {
      */
     @JsConstructor
     public ColorMaterialProperty(Property color) {}
+
+    @JsConstructor
+    public ColorMaterialProperty(Color color) {}
 }
