@@ -233,6 +233,7 @@ public class Viewer {
      * If set to false, you must manually call the resize, render methods as part of a custom render loop.
      * If an error occurs during rendering, Scene's renderError event will be raised and this property will be set to false.
      * It must be set back to true to continue rendering after the error.
+     * Default: true
      */
     @JsProperty
     public boolean useDefaultRenderLoop;

@@ -36,7 +36,11 @@ public abstract class ViewerPanelAbstract extends SimplePanel {
         super.addAttachHandler(new AttachEvent.Handler() {
             @Override
             public void onAttachOrDetach(AttachEvent attachEvent) {
-                inject(getElement());
+                if (attachEvent.isAttached()) {
+                    inject(getElement());
+                } else {
+                    _viewer.destroy();
+                }
             }
         });
     }
