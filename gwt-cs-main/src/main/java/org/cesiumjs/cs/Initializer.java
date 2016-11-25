@@ -72,11 +72,15 @@ public class Initializer {
 
     public void invokeCallback() {
         for (Callback<Void, Exception> callback : _callbacks) {
-            try {
-                callback.onSuccess(null);
-            } catch (Throwable t) {
-                LOGGER.log(Level.SEVERE, "Error initialization a cesium: " + t.getLocalizedMessage(), t);
-            }
+            invokeCallback(callback);
+        }
+    }
+
+    public void invokeCallback(Callback<Void, Exception> callback) {
+        try {
+            callback.onSuccess(null);
+        } catch (Throwable t) {
+            LOGGER.log(Level.SEVERE, "Error initialization a cesium: " + t.getLocalizedMessage(), t);
         }
     }
 

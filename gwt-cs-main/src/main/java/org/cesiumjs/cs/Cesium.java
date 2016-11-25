@@ -37,7 +37,7 @@ public class Cesium {
         Initializer initializer = Initializer.get(document);
         if (initializer != null) {
             initializer.addCallback(callback);
-            initializer.invokeCallback();
+            initializer.invokeCallback(callback);
         } else {
             LinkElement linkElement = Document.get().createLinkElement();
             linkElement.setRel("stylesheet");
