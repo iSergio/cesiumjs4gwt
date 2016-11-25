@@ -53,12 +53,36 @@ public class JulianDate {
      * the International Atomic Time standard TimeStandard.TAI.
      * @param julianDayNumber The Julian Day Number representing the number of whole days. Fractional days will also be
      *                        handled correctly. Default: 0.
+     */
+    @JsConstructor
+    public JulianDate(double julianDayNumber) {}
+
+    /**
+     * Represents an astronomical Julian date, which is the number of days since noon on January 1, -4712 (4713 BC).
+     * For increased precision, this class stores the whole number part of the date and the seconds part of the date in
+     * separate components. In order to be safe for arithmetic and represent leap seconds, the date is always stored in
+     * the International Atomic Time standard TimeStandard.TAI.
+     * @param julianDayNumber The Julian Day Number representing the number of whole days. Fractional days will also be
+     *                        handled correctly. Default: 0.
+     * @param secondsOfDay The number of seconds into the current Julian Day Number. Fractional seconds,
+     *                     negative seconds and seconds greater than a day will be handled correctly. Default: 0.
+     */
+    @JsConstructor
+    public JulianDate(double julianDayNumber, double secondsOfDay) {}
+
+    /**
+     * Represents an astronomical Julian date, which is the number of days since noon on January 1, -4712 (4713 BC).
+     * For increased precision, this class stores the whole number part of the date and the seconds part of the date in
+     * separate components. In order to be safe for arithmetic and represent leap seconds, the date is always stored in
+     * the International Atomic Time standard TimeStandard.TAI.
+     * @param julianDayNumber The Julian Day Number representing the number of whole days. Fractional days will also be
+     *                        handled correctly. Default: 0.
      * @param secondsOfDay The number of seconds into the current Julian Day Number. Fractional seconds,
      *                     negative seconds and seconds greater than a day will be handled correctly. Default: 0.
      * @param timeStandard The time standard in which the first two parameters are defined. Default: UTC.
      */
     @JsConstructor
-    public JulianDate(int julianDayNumber, int secondsOfDay, TimeStandard timeStandard) {}
+    public JulianDate(double julianDayNumber, double secondsOfDay, TimeStandard timeStandard) {}
 
     /**
      * Adds the provided number of days to the provided date instance.
