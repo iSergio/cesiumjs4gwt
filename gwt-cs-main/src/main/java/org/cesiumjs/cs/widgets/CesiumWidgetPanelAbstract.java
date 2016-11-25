@@ -36,7 +36,11 @@ public abstract class CesiumWidgetPanelAbstract extends SimplePanel {
         super.addAttachHandler(new AttachEvent.Handler() {
             @Override
             public void onAttachOrDetach(AttachEvent attachEvent) {
-                inject(getElement());
+                if (attachEvent.isAttached()) {
+                    inject(getElement());
+                } else {
+                    _widget.destroy();
+                }
             }
         });
     }
