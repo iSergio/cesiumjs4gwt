@@ -102,7 +102,7 @@ public class AtmosphereColor extends AbstractExample {
         Label hueShiftLbl = new Label("hueShift");
         _hueShiftSlider = new Slider("hueShift", -100, 100, 0);
         _hueShiftSlider.setStep(1);
-        _hueShiftSlider.setWidth("250px");
+        _hueShiftSlider.setWidth("150px");
         _hueShiftSlider.addListener(new MSliderListener());
         _hueShiftTBox = new TextBox();
         _hueShiftTBox.addChangeHandler(new MChangeHandler());
@@ -119,7 +119,7 @@ public class AtmosphereColor extends AbstractExample {
         Label saturationShiftLbl = new Label("saturationShift");
         _saturationShiftSlider = new Slider("saturationShift", -100, 100, 0);
         _saturationShiftSlider.setStep(1);
-        _saturationShiftSlider.setWidth("250px");
+        _saturationShiftSlider.setWidth("150px");
         _saturationShiftSlider.addListener(new MSliderListener());
         _saturationShiftTBox = new TextBox();
         _saturationShiftTBox.addChangeHandler(new MChangeHandler());
@@ -136,7 +136,7 @@ public class AtmosphereColor extends AbstractExample {
         Label brightnessShiftLbl = new Label("brightnessShift");
         _brightnessShiftSlider = new Slider("brightnessShift", -100, 100, 0);
         _brightnessShiftSlider.setStep(1);
-        _brightnessShiftSlider.setWidth("250px");
+        _brightnessShiftSlider.setWidth("150px");
         _brightnessShiftSlider.addListener(new MSliderListener());
         _brightnessShiftTBox = new TextBox();
         _brightnessShiftTBox.addChangeHandler(new MChangeHandler());
@@ -146,33 +146,39 @@ public class AtmosphereColor extends AbstractExample {
         brightnessShiftHPanel.add(_brightnessShiftSlider);
         brightnessShiftHPanel.add(_brightnessShiftTBox);
 
-        ToggleButton lightingTBtn = new ToggleButton("Toggle Lighting");
-        lightingTBtn.setWidth("100px");
-        lightingTBtn.setValue(true);
-        lightingTBtn.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
+        CheckBox lightingCBox = new CheckBox("Toggle Lighting");
+        lightingCBox.setWidth("100px");
+        lightingCBox.setValue(true);
+        lightingCBox.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
             @Override
             public void onValueChange(ValueChangeEvent<Boolean> valueChangeEvent) {
                 _csVPanel.getViewer().scene().globe.enableLighting = !_csVPanel.getViewer().scene().globe.enableLighting;
             }
         });
 
-        ToggleButton fogTBtn = new ToggleButton("Toggle Fog");
-        fogTBtn.setWidth("100px");
-        fogTBtn.setValue(true);
-        fogTBtn.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
+        CheckBox fogCBox = new CheckBox("Toggle Fog");
+        fogCBox.setWidth("100px");
+        fogCBox.setValue(true);
+        fogCBox.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
             @Override
             public void onValueChange(ValueChangeEvent<Boolean> valueChangeEvent) {
                 _csVPanel.getViewer().scene().fog.enabled = !_csVPanel.getViewer().scene().fog.enabled;
             }
         });
 
+        VerticalPanel vPanel = new VerticalPanel();
+        vPanel.add(hueShiftHPanel);
+        vPanel.add(saturationShiftHPanel);
+        vPanel.add(brightnessShiftHPanel);
+        vPanel.add(lightingCBox);
+        vPanel.add(fogCBox);
+
+        AbsolutePanel aPanel = new AbsolutePanel();
+        aPanel.add(_csVPanel);
+        aPanel.add(vPanel, 20, 20);
+
         contentPanel.add(new HTML("<p>This example shows simple Cesium application</p>"));
-        contentPanel.add(hueShiftHPanel);
-        contentPanel.add(saturationShiftHPanel);
-        contentPanel.add(brightnessShiftHPanel);
-        contentPanel.add(lightingTBtn);
-        contentPanel.add(fogTBtn);
-        contentPanel.add(_csVPanel);
+        contentPanel.add(aPanel);
 
         initWidget(contentPanel);
     }

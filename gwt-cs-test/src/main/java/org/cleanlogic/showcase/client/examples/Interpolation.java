@@ -164,9 +164,6 @@ public class Interpolation extends AbstractExample {
     public void buildPanel() {
         final ViewerPanel csVPanel = new ViewerPanel();
 
-        HorizontalPanel btnHPanel = new HorizontalPanel();
-        btnHPanel.setSpacing(5);
-
         ListBox interpolationsLBox = new ListBox();
         interpolationsLBox.addItem("Interpolation: Linear Approximation", "0");
         interpolationsLBox.addItem("Interpolation: Lagrange Polynomial Approximation", "1");
@@ -226,14 +223,21 @@ public class Interpolation extends AbstractExample {
             }
         });
 
+        HorizontalPanel btnHPanel = new HorizontalPanel();
+        btnHPanel.setSpacing(5);
+        btnHPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
+
         btnHPanel.add(interpolationsLBox);
         btnHPanel.add(viewTopDownBtn);
         btnHPanel.add(viewSideBtn);
         btnHPanel.add(viewAircraftBtn);
 
+        AbsolutePanel aPanel = new AbsolutePanel();
+        aPanel.add(csVPanel);
+        aPanel.add(btnHPanel, 20, 20);
+
         contentPanel.add(new HTML("<p>This example shows simple Cesium application</p>"));
-        contentPanel.add(btnHPanel);
-        contentPanel.add(csVPanel);
+        contentPanel.add(aPanel);
 
         initWidget(contentPanel);
     }

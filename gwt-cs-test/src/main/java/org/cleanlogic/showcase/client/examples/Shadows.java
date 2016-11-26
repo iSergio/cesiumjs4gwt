@@ -257,12 +257,6 @@ public class Shadows extends AbstractExample {
     public void buildPanel() {
         final ViewerPanel csVPanel = new ViewerPanel();
 
-        HorizontalPanel hPanel = new HorizontalPanel();
-        hPanel.setSpacing(5);
-        hPanel.setSize("100%", "100%");
-
-        VerticalPanel vPanel = new VerticalPanel();
-
         ListBox locationLBox = new ListBox();
         for (int i = 0; i < locations.size(); i++) {
             Location location = locations.get(i);
@@ -363,6 +357,8 @@ public class Shadows extends AbstractExample {
             }
         });
 
+        VerticalPanel vPanel = new VerticalPanel();
+
         vPanel.add(locationLBox);
         vPanel.add(entitiList);
         vPanel.add(shadowsCBox);
@@ -371,11 +367,17 @@ public class Shadows extends AbstractExample {
         vPanel.add(softShadowsCBox);
         vPanel.add(sizeLBox);
 
-        hPanel.add(vPanel);
-        hPanel.add(csVPanel);
+        FlowPanel fPanel = new FlowPanel();
+
+        AbsolutePanel aPanel = new AbsolutePanel();
+
+        aPanel.add(csVPanel);
+        aPanel.add(vPanel, 20, 20);
+
+        fPanel.add(aPanel);
 
         contentPanel.add(new HTML("<p>Cesium shadows example (configure shadows, terrain shadows)</p>"));
-        contentPanel.add(hPanel);
+        contentPanel.add(fPanel);
 
         initWidget(contentPanel);
     }

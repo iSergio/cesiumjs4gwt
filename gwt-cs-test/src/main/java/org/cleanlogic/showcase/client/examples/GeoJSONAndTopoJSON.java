@@ -90,9 +90,6 @@ public class GeoJSONAndTopoJSON extends AbstractExample {
     @Override
     public void buildPanel() {
         final ViewerPanel csVPanel = new ViewerPanel();
-        HorizontalPanel hPanel = new HorizontalPanel();
-        hPanel.setSpacing(5);
-        hPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 
         Button defaultStylingBtn = new Button("Default styling");
         defaultStylingBtn.addClickHandler(new ClickHandler() {
@@ -156,13 +153,20 @@ public class GeoJSONAndTopoJSON extends AbstractExample {
             }
         });
 
+        HorizontalPanel hPanel = new HorizontalPanel();
+        hPanel.setSpacing(5);
+        hPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+
         hPanel.add(defaultStylingBtn);
         hPanel.add(basicStylingBtn);
         hPanel.add(customStylingBtn);
 
+        AbsolutePanel aPanel = new AbsolutePanel();
+        aPanel.add(csVPanel);
+        aPanel.add(hPanel, 20, 20);
+
         contentPanel.add(new HTML("<p>This example shows simple Cesium application</p>"));
-        contentPanel.add(hPanel);
-        contentPanel.add(csVPanel);
+        contentPanel.add(aPanel);
 
         initWidget(contentPanel);
     }

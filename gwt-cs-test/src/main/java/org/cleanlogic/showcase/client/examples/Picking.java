@@ -272,8 +272,6 @@ public class Picking extends AbstractExample {
     public void buildPanel() {
         _csVPanel = new ViewerPanel();
 
-        HorizontalPanel hPanel = new HorizontalPanel();
-
         _showPosOnMouseOverTBtn = new ToggleButton("Show Cartographic Position on Mouse Over");
         _showPosOnMouseOverTBtn.setValue(true);
         _showPosOnMouseOverTBtn.addValueChangeHandler(new MValueChangeHandler());
@@ -287,14 +285,18 @@ public class Picking extends AbstractExample {
         _pickPositionTBtn = new ToggleButton("Pick position");
         _pickPositionTBtn.addValueChangeHandler(new MValueChangeHandler());
 
+        HorizontalPanel hPanel = new HorizontalPanel();
         hPanel.add(_showPosOnMouseOverTBtn);
         hPanel.add(_pickEntityTBtn);
         hPanel.add(_drillDownPickingTBtn);
         hPanel.add(_pickPositionTBtn);
 
+        AbsolutePanel aPanel = new AbsolutePanel();
+        aPanel.add(_csVPanel);
+        aPanel.add(hPanel, 20, 20);
+
         contentPanel.add(new HTML("<p>This example shows simple Cesium application</p>"));
-        contentPanel.add(hPanel);
-        contentPanel.add(_csVPanel);
+        contentPanel.add(aPanel);
 
         initWidget(contentPanel);
     }

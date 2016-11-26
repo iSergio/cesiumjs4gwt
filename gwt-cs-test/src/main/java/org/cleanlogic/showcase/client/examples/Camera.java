@@ -305,11 +305,14 @@ public class Camera extends AbstractExample {
             }
         });
 
+        AbsolutePanel aPanel = new AbsolutePanel();
+        aPanel.add(csVPanel);
+        aPanel.add(lBox, 20, 20);
+
         contentPanel.add(new HTML("<p>This example shows simple Cesium application</p>"));
         contentPanel.add(_eventsLbl);
         contentPanel.add(_changesLbl);
-        contentPanel.add(lBox);
-        contentPanel.add(csVPanel);
+        contentPanel.add(aPanel);
 
         initWidget(contentPanel);
     }

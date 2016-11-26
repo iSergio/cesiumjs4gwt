@@ -20,10 +20,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.*;
 import org.cesiumjs.cs.Configuration;
 import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.core.Math;
@@ -337,9 +334,13 @@ public class Billboards extends AbstractExample {
             }
         });
 
+        AbsolutePanel aPanel = new AbsolutePanel();
+        aPanel.add(csVPanel);
+        aPanel.add(billboardsLBox, 20, 20);
+
         contentPanel.add(new HTML("<p>This example shows billboards on Cesium/p>"));
         contentPanel.add(billboardsLBox);
-        contentPanel.add(csVPanel);
+        contentPanel.add(aPanel);
 
         initWidget(contentPanel);
     }

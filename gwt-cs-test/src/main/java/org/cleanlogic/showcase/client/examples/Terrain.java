@@ -149,12 +149,6 @@ public class Terrain extends AbstractExample {
     public void buildPanel() {
         final ViewerPanel csVPanel = new ViewerPanel();
 
-        HorizontalPanel hPanel = new HorizontalPanel();
-        hPanel.setSpacing(5);
-        hPanel.setSize("100%", "100%");
-
-        VerticalPanel vPanel = new VerticalPanel();
-
         ListBox terrainsLBox = new ListBox();
         terrainsLBox.setWidth("130px");
         terrainsLBox.addItem("CesiumTerrainProvider - STK World Terrain", "0");
@@ -295,17 +289,19 @@ public class Terrain extends AbstractExample {
             }
         });
 
+        VerticalPanel vPanel = new VerticalPanel();
         vPanel.add(targetsLBox);
         vPanel.add(terrainsLBox);
         vPanel.add(lightingTBtn);
         vPanel.add(fogTBtn);
         vPanel.add(sampleBtn);
 
-        hPanel.add(vPanel);
-        hPanel.add(csVPanel);
+        AbsolutePanel aPanel = new AbsolutePanel();
+        aPanel.add(csVPanel);
+        aPanel.add(vPanel, 20, 20);
 
         contentPanel.add(new HTML("<p>This example shows simple Cesium application</p>"));
-        contentPanel.add(hPanel);
+        contentPanel.add(aPanel);
 
         initWidget(contentPanel);
     }
