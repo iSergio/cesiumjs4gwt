@@ -174,11 +174,11 @@ public class Entity {
      */
     @JsProperty
     public WallGraphics wall;
-    /**
-     *
-     */
-    @JsProperty
-    public JsObject properties;
+//    /**
+//     *
+//     */
+//    @JsProperty
+//    public JsObject properties;
 
     /**
      * Entity instances aggregate multiple forms of visualization into a single high-level object.

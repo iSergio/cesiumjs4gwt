@@ -27,7 +27,7 @@ import org.cesiumjs.cs.js.JsObject;
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
-@JsType(isNative =  true, namespace = JsPackage.GLOBAL, name = "Object")
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class EntityOptions {
     /**
      * A unique identifier for this object. If none is provided, a GUID is generated.
