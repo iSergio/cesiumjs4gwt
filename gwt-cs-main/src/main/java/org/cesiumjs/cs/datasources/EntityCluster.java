@@ -80,6 +80,6 @@ public class EntityCluster {
          * @param cluster An object containing billboard, label, and point properties. The values are the same as billboard,
          *                label and point entities, but must be the values of the ConstantProperty.
          */
-        void function(Entity[] clusteredEntities, JsObject cluster);
+        void function(Entity[] clusteredEntities, EntityClusterObject cluster);
     }
 }
