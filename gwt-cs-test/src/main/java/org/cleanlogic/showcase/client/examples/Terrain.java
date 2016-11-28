@@ -25,6 +25,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.ui.*;
+import org.cesiumjs.cs.Cesium;
 import org.cesiumjs.cs.Configuration;
 import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.core.Math;
@@ -279,7 +280,7 @@ public class Terrain extends AbstractExample {
                     }
                 }
 
-                Promise<Cartographic[], Void> promise = Utils.sampleTerrain(csVPanel.getViewer().terrainProvider, 9, _terrainSamplePositions.toArray(new Cartographic[_terrainSamplePositions.size()]));
+                Promise<Cartographic[], Void> promise = Cesium.sampleTerrain(csVPanel.getViewer().terrainProvider, 9, _terrainSamplePositions.toArray(new Cartographic[_terrainSamplePositions.size()]));
                 promise.then(new Fulfill<Cartographic[]>() {
                     @Override
                     public void onFulfilled(Cartographic[] value) {
