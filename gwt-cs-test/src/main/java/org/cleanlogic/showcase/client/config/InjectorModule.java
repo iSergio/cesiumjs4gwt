@@ -56,5 +56,6 @@ public class InjectorModule extends AbstractGinModule {
         bind(GeoJSONAndTopoJSON.class).asEagerSingleton();
         bind(Interpolation.class).asEagerSingleton();
         bind(Shadows.class).asEagerSingleton();
+        bind(Clustering.class).asEagerSingleton();
     }
 }
