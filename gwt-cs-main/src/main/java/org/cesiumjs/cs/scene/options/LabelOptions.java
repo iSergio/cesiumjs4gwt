@@ -16,6 +16,7 @@
 
 package org.cesiumjs.cs.scene.options;
 
+import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -68,6 +69,7 @@ public class LabelOptions {
      * Gets or sets the style of this label.
      * @see LabelStyle
      */
+    @JsProperty
     public int style;
     /**
      * Gets or sets the pixel offset in screen space from the origin of this label.
@@ -112,4 +114,7 @@ public class LabelOptions {
      */
     @JsProperty
     public double scale;
+
+    @JsConstructor
+    public LabelOptions() {}
 }
