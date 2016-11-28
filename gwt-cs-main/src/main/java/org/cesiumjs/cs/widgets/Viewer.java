@@ -16,7 +16,7 @@
 
 package org.cesiumjs.cs.widgets;
 
-import com.google.gwt.canvas.client.Canvas;
+import com.google.gwt.dom.client.CanvasElement;
 import com.google.gwt.dom.client.Element;
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
@@ -77,7 +77,7 @@ public class Viewer {
      * Gets the canvas.
      */
     @JsProperty(name = "canvas")
-    public native Canvas canvas();
+    public native CanvasElement canvas();
     /**
      * Gets the Cesium logo element.
      */
