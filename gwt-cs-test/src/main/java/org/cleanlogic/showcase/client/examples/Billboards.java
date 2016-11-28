@@ -298,7 +298,7 @@ public class Billboards extends AbstractExample {
 
     @Inject
     public Billboards(ShowcaseExampleStore store) {
-        super("Billboards", "Cesium billboards", new String[]{"Showcase", "Cesium", "3d", "Billboards"}, store);
+        super("Billboards", "Cesium billboards", new String[]{"Showcase", "Cesium", "3d", "Billboards", "Promise"}, store);
     }
 
     @Override
@@ -339,7 +339,7 @@ public class Billboards extends AbstractExample {
         aPanel.add(csVPanel);
         aPanel.add(billboardsLBox, 20, 20);
 
-        contentPanel.add(new HTML("<p>This example shows billboards on Cesium/p>"));
+        contentPanel.add(new HTML("<p>This example shows billboards on Cesium</p>"));
         contentPanel.add(billboardsLBox);
         contentPanel.add(aPanel);
 

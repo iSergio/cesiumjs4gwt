@@ -143,7 +143,7 @@ public class Terrain extends AbstractExample {
 
     @Inject
     public Terrain(ShowcaseExampleStore store) {
-        super("Terrain", "Multiple versions of terrain", new String[]{"Showcase", "Cesium", "3d", "Terrain", "CesiumTerrain", "GeoserverTerrain"}, store);
+        super("Terrain", "Multiple types of terrain", new String[]{"Showcase", "Cesium", "3d", "Terrain", "CesiumTerrain", "GeoserverTerrain", "Promise"}, store);
     }
 
     @Override
@@ -301,7 +301,7 @@ public class Terrain extends AbstractExample {
         aPanel.add(csVPanel);
         aPanel.add(vPanel, 20, 20);
 
-        contentPanel.add(new HTML("<p>This example shows simple Cesium application</p>"));
+        contentPanel.add(new HTML("<p>This example shows multiple types of terrain</p>"));
         contentPanel.add(aPanel);
 
         initWidget(contentPanel);
