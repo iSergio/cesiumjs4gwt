@@ -22,7 +22,6 @@ import jsinterop.annotations.JsFunction;
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsFunction
-//@FunctionalInterface
 public interface Fulfill<V> {
     void onFulfilled(V value);
 }

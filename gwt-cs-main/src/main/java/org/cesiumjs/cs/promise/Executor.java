@@ -22,7 +22,6 @@ import jsinterop.annotations.JsFunction;
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsFunction
-//@FunctionalInterface
 public interface Executor<V, E> {
     void function(Fulfill<V> fulfill, Reject<E> reject);
 }

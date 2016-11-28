@@ -16,9 +16,12 @@
 
 package org.cesiumjs.cs.promise;
 
+import jsinterop.annotations.JsFunction;
+
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
+@JsFunction
 public interface Reject<E> {
     void onRejected(E value);
 }
