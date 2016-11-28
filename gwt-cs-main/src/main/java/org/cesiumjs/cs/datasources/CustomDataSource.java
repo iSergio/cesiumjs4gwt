@@ -16,10 +16,9 @@
 
 package org.cesiumjs.cs.datasources;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.Event;
+import org.cesiumjs.cs.core.JulianDate;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -108,4 +107,9 @@ public class CustomDataSource implements DataSource {
      */
     @JsConstructor
     public CustomDataSource(String name) {}
+
+    @Override
+    @JsMethod
+    @JsIgnore
+    public native boolean update(JulianDate time);
 }

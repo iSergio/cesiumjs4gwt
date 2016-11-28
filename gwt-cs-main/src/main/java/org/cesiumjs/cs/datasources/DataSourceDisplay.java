@@ -29,7 +29,7 @@ import org.cesiumjs.cs.scene.Scene;
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = "Cesium", name = "DataSourceDisplay")
-public class DataSourceDisplay {
+public class DataSourceDisplay implements DataSource {
     /**
      * Gets or sets the default function which creates an array of visualizers used for visualization.
      * By default, this function uses all standard visualizers.
@@ -90,6 +90,7 @@ public class DataSourceDisplay {
      * @param time The simulation time.
      * @return True if all data sources are ready to be displayed, false otherwise.
      */
+    @Override
     public native boolean update(JulianDate time);
 
     @JsFunction
