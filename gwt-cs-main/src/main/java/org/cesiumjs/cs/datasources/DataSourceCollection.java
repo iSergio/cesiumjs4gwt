@@ -53,7 +53,7 @@ public class DataSourceCollection<T extends DataSource> {
      *                   the data source will not actually be added to the collection until the promise resolves successfully.
      */
     @JsMethod
-    public native void add(Promise<T, Void> dataSource);
+    public native Promise<T, Void> add(Promise<T, Void> dataSource);
 
     /**
      * Adds a data source to the collection.
@@ -61,7 +61,7 @@ public class DataSourceCollection<T extends DataSource> {
      *                   the data source will not actually be added to the collection until the promise resolves successfully.
      */
     @JsMethod
-    public native void add(T dataSource);
+    public native Promise<T, Void> add(T dataSource);
 
     /**
      * Checks to see if the collection contains a given data source.
