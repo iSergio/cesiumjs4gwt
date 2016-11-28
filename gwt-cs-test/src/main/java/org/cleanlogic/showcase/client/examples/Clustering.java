@@ -30,6 +30,7 @@ import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.core.PinBuilder;
 import org.cesiumjs.cs.datasources.Entity;
 import org.cesiumjs.cs.datasources.EntityCluster;
+import org.cesiumjs.cs.datasources.EntityClusterObject;
 import org.cesiumjs.cs.datasources.KmlDataSource;
 import org.cesiumjs.cs.datasources.options.KmlDataSourceOptions;
 import org.cesiumjs.cs.js.JsObject;
@@ -124,28 +125,27 @@ public class Clustering extends AbstractExample {
             } else {
                 removeListener = dataSource.clustering.clusterEvent.addEventListener(new EntityCluster.newClusterCallback() {
                     @Override
-                    public void function(Entity[] clusteredEntities, JsObject cluster) {
-                        cluster.getObject("label").setBoolean("show", false);
-                        cluster.getObject("billboard").setBoolean("show", true);
-                        cluster.getObject("billboard").setNumber("verticalOrigin", VerticalOrigin.BOTTOM());
-
+                    public void function(Entity[] clusteredEntities, EntityClusterObject cluster) {
+                        cluster.label.show = false;
+                        cluster.billboard.show = true;
+                        cluster.billboard.verticalOrigin = VerticalOrigin.BOTTOM();
                         if (clusteredEntities.length >= 50) {
-                            cluster.getObject("billboard").setObject("image", pin50);
+                            cluster.billboard.image = pin50;
                         }
                         else if (clusteredEntities.length >= 40) {
-                            cluster.getObject("billboard").setObject("image", pin40);
+                            cluster.billboard.image = pin40;
                         }
                         else if (clusteredEntities.length >= 30) {
-                            cluster.getObject("billboard").setObject("image", pin30);
+                            cluster.billboard.image = pin30;
                         }
                         else if (clusteredEntities.length >= 20) {
-                            cluster.getObject("billboard").setObject("image", pin20);
+                            cluster.billboard.image = pin20;
                         }
                         else if (clusteredEntities.length >= 10) {
-                            cluster.getObject("billboard").setObject("image", pin10);
+                            cluster.billboard.image = pin10;
                         }
                         else {
-                            cluster.getObject("billboard").setObject("image", singleDigitPins[clusteredEntities.length - 2]);
+                            cluster.billboard.image = singleDigitPins[clusteredEntities.length - 2];
                         }
                     }
                 });
