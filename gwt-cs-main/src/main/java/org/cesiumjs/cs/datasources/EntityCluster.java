@@ -16,12 +16,10 @@
 
 package org.cesiumjs.cs.datasources;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.datasources.options.EntityClusterOptions;
+import org.cesiumjs.cs.js.JsObject;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -73,17 +71,15 @@ public class EntityCluster {
     @JsMethod
     public native void destroy();
 
-    //TODO: newClusterCallback
-//    newClusterCallback(clusteredEntities, cluster) DataSources/EntityCluster.js 791
-//
-//    A event listener function used to style clusters.
-//    Name	Type	Description
-//    clusteredEntities	Array.<Entity>	An array of the entities contained in the cluster.
-//    cluster	Object	An object containing billboard, label, and point properties. The values are the same as billboard, label and point entities, but must be the values of the ConstantProperty.
-//            Example:
-//// The default cluster values.
-//            dataSource.clustering.clusterEvent.addEventListener(function(entities, cluster) {
-//        cluster.label.show = true;
-//        cluster.label.text = entities.length.toLocaleString();
-//    });
+    //TODO: Example
+    @JsFunction
+    public interface newClusterCallback {
+        /**
+         * A event listener function used to style clusters.
+         * @param clusteredEntities An array of the entities contained in the cluster.
+         * @param cluster An object containing billboard, label, and point properties. The values are the same as billboard,
+         *                label and point entities, but must be the values of the ConstantProperty.
+         */
+        void function(Entity[] clusteredEntities, JsObject cluster);
+    }
 }
