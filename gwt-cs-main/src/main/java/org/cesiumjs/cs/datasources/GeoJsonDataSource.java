@@ -17,12 +17,10 @@
 package org.cesiumjs.cs.datasources;
 
 import com.google.gwt.json.client.JSONObject;
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsFunction;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.core.Event;
+import org.cesiumjs.cs.core.JulianDate;
 import org.cesiumjs.cs.datasources.options.GeoJsonDataSourceOptions;
 import org.cesiumjs.cs.promise.Promise;
 
@@ -185,6 +183,11 @@ public class GeoJsonDataSource implements DataSource {
      * @return A promise that will resolve when the data is loaded.
      */
     public static native Promise<GeoJsonDataSource, String> load(String data, GeoJsonDataSourceOptions options);
+
+    @Override
+    @JsMethod
+    @JsIgnore
+    public native boolean update(JulianDate time);
 
     /**
      * This callback is displayed as part of the GeoJsonDataSource class.
