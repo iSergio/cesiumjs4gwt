@@ -16,7 +16,7 @@
 
 package org.cesiumjs.cs.widgets;
 
-import com.google.gwt.canvas.client.Canvas;
+import com.google.gwt.dom.client.CanvasElement;
 import com.google.gwt.dom.client.Element;
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
@@ -43,7 +43,7 @@ public class CesiumWidget {
      * Gets the canvas.
      */
     @JsProperty
-    public Canvas canvas;
+    public CanvasElement canvas;
     /**
      * Gets the clock.
      */
