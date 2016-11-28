@@ -21,6 +21,7 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.user.client.ui.*;
+import org.cesiumjs.cs.Cesium;
 import org.cesiumjs.cs.Configuration;
 import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.core.Math;
@@ -190,11 +191,11 @@ public class Billboards extends AbstractExample {
         }
 
         private void offsetByDistance() {
-            Utils.loadImage(GWT.getModuleBaseURL() + "images/Cesium_Logo_overlay.png").then(
+            Cesium.loadImage(GWT.getModuleBaseURL() + "images/Cesium_Logo_overlay.png").then(
                     new Fulfill<JsImage>() {
                         @Override
                         public void onFulfilled(final JsImage logoImg) {
-                            Utils.loadImage(GWT.getModuleBaseURL() + "images/facility.gif").then(
+                            Cesium.loadImage(GWT.getModuleBaseURL() + "images/facility.gif").then(
                                     new Fulfill<JsImage>() {
                                         @Override
                                         public void onFulfilled(JsImage facilityImg) {
