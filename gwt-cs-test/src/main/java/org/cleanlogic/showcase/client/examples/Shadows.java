@@ -132,17 +132,15 @@ public class Shadows extends AbstractExample {
                         modelGraphicsOptions.uri = new ConstantProperty<>(GWT.getModuleBaseURL() + "SampleData/models/CesiumAir/Cesium_Air.glb");
                         EntityOptions entityOptions = new EntityOptions();
                         entityOptions.name = "Cesium Air";
-                        entityOptions.properties = JsObject.create();
-                        entityOptions.properties.setNumber("height", 20.0);
                         entityOptions.model = new ModelGraphics(modelGraphicsOptions);
+                        ((JsObject) (Object) entityOptions).setNumber("height", 20.0);
                         cesiumAir = _viewer.entities().add(entityOptions);
 
                         modelGraphicsOptions = new ModelGraphicsOptions();
                         modelGraphicsOptions.uri = new ConstantProperty<>(GWT.getModuleBaseURL() + "SampleData/models/CesiumGround/Cesium_Ground.glb");
                         entityOptions = new EntityOptions();
                         entityOptions.name = "Ground Vehicle";
-                        entityOptions.properties = JsObject.create();
-                        entityOptions.properties.setNumber("height", 0.0);
+                        ((JsObject) (Object) entityOptions).setNumber("height", 0.0);
                         entityOptions.model = new ModelGraphics(modelGraphicsOptions);
                         groundVehicle = _viewer.entities().add(entityOptions);
 
@@ -151,7 +149,7 @@ public class Shadows extends AbstractExample {
                         entityOptions = new EntityOptions();
                         entityOptions.name = "Cesium Man";
                         entityOptions.properties = JsObject.create();
-                        entityOptions.properties.setNumber("height", 0.0);
+                        ((JsObject) (Object) entityOptions).setNumber("height", 0.0);
                         entityOptions.model = new ModelGraphics(modelGraphicsOptions);
                         cesiumMan = _viewer.entities().add(entityOptions);
 
@@ -159,8 +157,7 @@ public class Shadows extends AbstractExample {
                         modelGraphicsOptions.uri = new ConstantProperty<>(GWT.getModuleBaseURL() + "SampleData/models/WoodTower/Wood_Tower.gltf");
                         entityOptions = new EntityOptions();
                         entityOptions.name = "Wood Tower";
-                        entityOptions.properties = JsObject.create();
-                        entityOptions.properties.setNumber("height", 0.0);
+                        ((JsObject) (Object) entityOptions).setNumber("height", 0.0);
                         entityOptions.model = new ModelGraphics(modelGraphicsOptions);
                         woodTower = _viewer.entities().add(entityOptions);
 
@@ -168,8 +165,7 @@ public class Shadows extends AbstractExample {
                         modelGraphicsOptions.uri = new ConstantProperty<>(GWT.getModuleBaseURL() + "SampleData/models/ShadowTester/Shadow_Tester_4.gltf");
                         entityOptions = new EntityOptions();
                         entityOptions.name = "Simple City";
-                        entityOptions.properties = JsObject.create();
-                        entityOptions.properties.setNumber("height", 0.0);
+                        ((JsObject) (Object) entityOptions).setNumber("height", 0.0);
                         entityOptions.model = new ModelGraphics(modelGraphicsOptions);
                         simpleCity = _viewer.entities().add(entityOptions);
 
@@ -179,8 +175,7 @@ public class Shadows extends AbstractExample {
                         boxGraphicsOptions.shadows = new ConstantProperty<>(ShadowMode.ENABLED());
                         entityOptions = new EntityOptions();
                         entityOptions.name = "Box";
-                        entityOptions.properties = JsObject.create();
-                        entityOptions.properties.setNumber("height", 10.0);
+                        ((JsObject) (Object) entityOptions).setNumber("height", 10.0);
                         entityOptions.box = new BoxGraphics(boxGraphicsOptions);
                         boxEntity = _viewer.entities().add(entityOptions);
 
@@ -198,8 +193,7 @@ public class Shadows extends AbstractExample {
                         boxGraphicsOptions.shadows = new ConstantProperty<>(ShadowMode.ENABLED());
                         entityOptions = new EntityOptions();
                         entityOptions.name = "Checkered Box";
-                        entityOptions.properties = JsObject.create();
-                        entityOptions.properties.setNumber("height", 10.0);
+                        ((JsObject) (Object) entityOptions).setNumber("height", 10.0);
                         entityOptions.box = new BoxGraphics(boxGraphicsOptions);
                         checkerEntity = _viewer.entities().add(entityOptions);
 
@@ -211,8 +205,7 @@ public class Shadows extends AbstractExample {
                         ellipsoidGraphicsOptions.shadows = new ConstantProperty<>(ShadowMode.ENABLED());
                         entityOptions = new EntityOptions();
                         entityOptions.name = "Sphere";
-                        entityOptions.properties = JsObject.create();
-                        entityOptions.properties.setNumber("height", 20.0);
+                        ((JsObject) (Object) entityOptions).setNumber("height", 20.0);
                         entityOptions.ellipsoid = new EllipsoidGraphics(ellipsoidGraphicsOptions);
                         sphereEntity = _viewer.entities().add(entityOptions);
 
@@ -241,7 +234,7 @@ public class Shadows extends AbstractExample {
 
             for (int i = 0; i < _csPanelAbstract.getViewer().entities().values().length; ++i) {
                 Entity entity = _csPanelAbstract.getViewer().entities().values()[i];
-                entity.position = new ConstantPositionProperty(Cartesian3.fromRadians(lon, lat, height + entity.properties.getNumber("height").doubleValue()));
+                entity.position = new ConstantPositionProperty(Cartesian3.fromRadians(lon, lat, height + ((JsObject) (Object) entity).getNumber("height").doubleValue()));
             }
             _csPanelAbstract.getViewer().clock().currentTime = new JulianDate(location.date);
             _csPanelAbstract.getViewer().clock().multiplier = 1.0;
