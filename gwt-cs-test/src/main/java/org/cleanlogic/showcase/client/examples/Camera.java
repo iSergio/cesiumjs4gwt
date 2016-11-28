@@ -71,8 +71,8 @@ public class Camera extends AbstractExample {
                 _csPanelAbstract = new ViewerPanelAbstract(csConfiguration) {
                     @Override
                     public Viewer createViewer(Element element) {
-                        Viewer csViewer = new Viewer(element);
-                        return csViewer;
+                        _viewer = new Viewer(element);
+                        return _viewer;
                     }
                 };
             }
