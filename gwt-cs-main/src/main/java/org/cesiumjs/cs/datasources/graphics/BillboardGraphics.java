@@ -165,7 +165,7 @@ public class BillboardGraphics {
      * Default: {@link VerticalOrigin#CENTER()}
      */
     @JsProperty
-    public Property erticalOrigin;
+    public Property verticalOrigin;
     /**
      * Gets or sets the numeric Property specifying the billboard's width in pixels. When undefined, the native width is used.
      */
