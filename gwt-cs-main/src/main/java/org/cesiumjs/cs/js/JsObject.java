@@ -43,25 +43,25 @@ public class JsObject extends JavaScriptObject {
         return this[propertyName];
     }-*/;
 
-    public final native Number setNumber(String propertyName, Number propertyValue) /*-{
+    public final native void setNumber(String propertyName, Number propertyValue) /*-{
         this[propertyName] = propertyValue;
     }-*/;
 
-//    public final native int getInt(String propertyName) /*-{
-//        return this[propertyName];
-//    }-*/;
-//
-//    public final native void setInt(String propertyName, int propertyValue) /*-{
-//        this[propertyName] = propertyValue;
-//    }-*/;
-//
-//    public final native double getDouble(String propertyName) /*-{
-//        return this[propertyName];
-//    }-*/;
-//
-//    public final native float getFloat(String propertyName) /*-{
-//        return this[propertyName];
-//    }-*/;
+    public final native Boolean getBoolean(String propertyName) /*-{
+        return this[propertyName];
+    }-*/;
+
+    public final native void setBoolean(String propertyName, Boolean propertyValue) /*-{
+        this[propertyName] = propertyValue;
+    }-*/;
+
+    public final native void setObject(String propertyName, Object propertyValue) /*-{
+        this[propertyName] = propertyValue;
+    }-*/;
+
+    public final native void setString(String propertyName, String propertyValue) /*-{
+        this[propertyName] = propertyValue;
+    }-*/;
 
     public final native String getString(String propertyName) /*-{
         return this[propertyName];
