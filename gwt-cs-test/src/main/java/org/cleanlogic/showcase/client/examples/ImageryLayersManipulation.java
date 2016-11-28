@@ -22,10 +22,10 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.user.client.ui.*;
+import org.cesiumjs.cs.Cesium;
 import org.cesiumjs.cs.Configuration;
 import org.cesiumjs.cs.core.Credit;
 import org.cesiumjs.cs.core.Rectangle;
-import org.cesiumjs.cs.core.Utils;
 import org.cesiumjs.cs.scene.ImageryLayer;
 import org.cesiumjs.cs.scene.ImageryLayerCollection;
 import org.cesiumjs.cs.scene.WebMapServiceParameters;
@@ -105,21 +105,21 @@ public class ImageryLayersManipulation extends AbstractExample {
             arcGisMapServerImageryProviderOptions.url = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer";
             addBaseLayerOption("ArcGIS World Street Maps", new ArcGisMapServerImageryProvider(arcGisMapServerImageryProviderOptions));
 
-            addBaseLayerOption("OpenStreetMaps", Utils.createOpenStreetMapImageryProvider());
+            addBaseLayerOption("OpenStreetMaps", Cesium.createOpenStreetMapImageryProvider());
 
             OpenStreetMapImageryProviderOptions openStreetMapImageryProviderOptions = new OpenStreetMapImageryProviderOptions();
             openStreetMapImageryProviderOptions.url = "https://otile1-s.mqcdn.com/tiles/1.0.0/osm/";
-            addBaseLayerOption("MapQuest OpenStreetMaps", Utils.createOpenStreetMapImageryProvider(openStreetMapImageryProviderOptions));
+            addBaseLayerOption("MapQuest OpenStreetMaps", Cesium.createOpenStreetMapImageryProvider(openStreetMapImageryProviderOptions));
 
             openStreetMapImageryProviderOptions = new OpenStreetMapImageryProviderOptions();
             openStreetMapImageryProviderOptions.url = "https://stamen-tiles.a.ssl.fastly.net/watercolor/";
             openStreetMapImageryProviderOptions.fileExtension = "jpg";
             openStreetMapImageryProviderOptions.credit = new Credit("Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under CC BY SA.");
-            addBaseLayerOption("Stamen Maps", Utils.createOpenStreetMapImageryProvider(openStreetMapImageryProviderOptions));
+            addBaseLayerOption("Stamen Maps", Cesium.createOpenStreetMapImageryProvider(openStreetMapImageryProviderOptions));
 
             TileMapServiceImageryProviderOptions tileMapServiceImageryProviderOptions = new TileMapServiceImageryProviderOptions();
             tileMapServiceImageryProviderOptions.url = GWT.getModuleBaseURL() + "JavaScript/Cesium/Assets/Textures/NaturalEarthII";
-            addBaseLayerOption("Natural Earth II (local)", Utils.createTileMapServiceImageryProvider(tileMapServiceImageryProviderOptions));
+            addBaseLayerOption("Natural Earth II (local)", Cesium.createTileMapServiceImageryProvider(tileMapServiceImageryProviderOptions));
 
             WebMapTileServiceImageryProviderOptions webMapTileServiceImageryProviderOptions = new WebMapTileServiceImageryProviderOptions();
             webMapTileServiceImageryProviderOptions.url = "http://basemap.nationalmap.gov/arcgis/rest/services/USGSShadedReliefOnly/MapServer/WMTS";
@@ -154,7 +154,7 @@ public class ImageryLayersManipulation extends AbstractExample {
 
             tileMapServiceImageryProviderOptions = new TileMapServiceImageryProviderOptions();
             tileMapServiceImageryProviderOptions.url = GWT.getModuleBaseURL() + "images/cesium_maptiler/Cesium_Logo_Color";
-            addAdditionalLayerOption("TileMapService Image", Utils.createTileMapServiceImageryProvider(tileMapServiceImageryProviderOptions), 0.2f, true);
+            addAdditionalLayerOption("TileMapService Image", Cesium.createTileMapServiceImageryProvider(tileMapServiceImageryProviderOptions), 0.2f, true);
 
             SingleTileImageryProviderOptions singleTileImageryProviderOptions = new SingleTileImageryProviderOptions();
             singleTileImageryProviderOptions.url = GWT.getModuleBaseURL() + "images/Cesium_Logo_overlay.png";
