@@ -28,17 +28,17 @@ public class HeightReference {
      * The position is absolute.
      */
     @JsProperty(name = "NONE")
-    public static native  int NONE();
+    public static native Number NONE();
     /**
      * The position is clamped to the terrain.
      */
     @JsProperty(name = "CLAMP_TO_GROUND")
-    public static native int CLAMP_TO_GROUND();
+    public static native Number CLAMP_TO_GROUND();
     /**
      * The position height is the height above the terrain.
      */
     @JsProperty(name = "RELATIVE_TO_GROUND")
-    public static native int RELATIVE_TO_GROUND();
+    public static native Number RELATIVE_TO_GROUND();
 
 
 }

@@ -23,6 +23,7 @@ import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.datasources.graphics.options.ModelGraphicsOptions;
 import org.cesiumjs.cs.datasources.properties.Property;
+import org.cesiumjs.cs.scene.HeightReference;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -87,7 +88,7 @@ public class ModelGraphics {
     public Property shadows;
     /**
      * A Property specifying what the height is relative to.
-     * Default: {@link HeightReference.NONE}
+     * Default: {@link HeightReference#NONE()}
      */
     @JsProperty
     public Property heightReference;

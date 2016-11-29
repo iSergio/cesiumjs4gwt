@@ -32,6 +32,7 @@ import org.cesiumjs.cs.datasources.graphics.options.ModelGraphicsOptions;
 import org.cesiumjs.cs.datasources.options.EntityOptions;
 import org.cesiumjs.cs.datasources.properties.ConstantPositionProperty;
 import org.cesiumjs.cs.datasources.properties.ConstantProperty;
+import org.cesiumjs.cs.scene.HeightReference;
 import org.cesiumjs.cs.widgets.Viewer;
 import org.cesiumjs.cs.widgets.ViewerPanelAbstract;
 import org.cesiumjs.cs.widgets.options.ViewerOptions;
@@ -83,10 +84,7 @@ public class Models3D extends AbstractExample {
                         entityOptions.position = new ConstantPositionProperty(position);
                         entityOptions.orientation = new ConstantProperty<>(orientation);
                         entityOptions.model = modelGraphics;
-                        Entity entity = csViewer.entities().add(new Entity(entityOptions));
-                        csViewer.trackedEntity = entity;
-
-                        Logger.getLogger("").info(GWT.getModuleBaseURL() + "SampleData/models/CesiumAir/Cesium_Air.glb");
+                        csViewer.trackedEntity = csViewer.entities().add(entityOptions);
 
                         return csViewer;
                     }
@@ -118,8 +116,7 @@ public class Models3D extends AbstractExample {
             entityOptions.position = new ConstantPositionProperty(position);
             entityOptions.orientation = new ConstantProperty<>(orientation);
             entityOptions.model = modelGraphics;
-            Entity entity = _csPanelAbstract.getViewer().entities().add(new Entity(entityOptions));
-            _csPanelAbstract.getViewer().trackedEntity = entity;
+            _csPanelAbstract.getViewer().trackedEntity = _csPanelAbstract.getViewer().entities().add(entityOptions);;
         }
     }
 
