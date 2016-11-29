@@ -19,52 +19,88 @@ package org.cesiumjs.cs.js;
 import com.google.gwt.core.client.JavaScriptObject;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
-public class JsObject extends JavaScriptObject {
-    protected JsObject() {}
+public class JsObject extends Object {
+    public static <O> O $(O base, Object ...propertyValues) {
+        String propertyName = null;
 
-    public static native JsObject create() /*-{
-        return {};
+        for (Object propertyValue : propertyValues) {
+            if (propertyName == null) {
+                propertyName = (String) propertyValue;
+            } else {
+                if (propertyValue instanceof Number) {
+                    setProperty(base, propertyName, (Number) propertyValue);
+                }
+                else if (propertyValue instanceof Boolean) {
+                    setProperty(base, propertyName, (Boolean) propertyValue);
+                }
+                else {
+                    setProperty(base, propertyName, propertyValue);
+                }
+
+                propertyName = null;
+            }
+        }
+        return base;
+    }
+
+    public static native void setProperty(Object target, String name, Number value) /*-{
+        target[name] = value;
     }-*/;
 
-    public final native boolean isObject(String propertyName) /*-{
-        return (typeof this[propertyName] === "object");
+    public static native void setProperty(Object target, String name, Boolean value) /*-{
+        target[name] = value;
     }-*/;
 
-    public final native JsObject getObject(String propertyName) /*-{
-        return this[propertyName];
+    public static native void setProperty(Object target, String name, String value) /*-{
+        target[name] = value;
     }-*/;
 
-    public final native Number getNumber(String propertyName) /*-{
-        return this[propertyName];
+    public static native void setProperty(Object target, String name, Object value) /*-{
+        target[name] = value;
     }-*/;
 
-    public final native void setNumber(String propertyName, Number propertyValue) /*-{
-        this[propertyName] = propertyValue;
+    public native void setProperty(String name, Number value) /*-{
+        this[name] = value;
     }-*/;
 
-    public final native Boolean getBoolean(String propertyName) /*-{
-        return this[propertyName];
+    public native void setProperty(String name, Boolean value) /*-{
+        this[name] = value;
     }-*/;
 
-    public final native void setBoolean(String propertyName, Boolean propertyValue) /*-{
-        this[propertyName] = propertyValue;
+    public native void setProperty(String name, String value) /*-{
+        this[name] = value;
     }-*/;
 
-    public final native void setObject(String propertyName, Object propertyValue) /*-{
-        this[propertyName] = propertyValue;
+    public native void setProperty(String name, Object value) /*-{
+        this[name] = value;
     }-*/;
 
-    public final native void setString(String propertyName, String propertyValue) /*-{
-        this[propertyName] = propertyValue;
+    public static native Number getNumber(Object target, String name) /*-{
+        return target[name];
     }-*/;
 
-    public final native String getString(String propertyName) /*-{
-        return this[propertyName];
+    public static native Object getObject(Object target, String name) /*-{
+        return target[name];
+    }-*/;
+
+    public static native String getString(Object target, String name) /*-{
+        return target[name];
+    }-*/;
+
+    public native Number getNumber(String name) /*-{
+        return this[name];
+    }-*/;
+
+    public native Object getObject(String name) /*-{
+        return this[name];
+    }-*/;
+
+    public native String getString(String name) /*-{
+        return this[name];
     }-*/;
 
     /**
