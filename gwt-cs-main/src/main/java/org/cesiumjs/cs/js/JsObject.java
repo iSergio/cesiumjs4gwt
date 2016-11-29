@@ -23,7 +23,9 @@ import jsinterop.annotations.JsProperty;
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
-public class JsObject extends Object {
+public class JsObject extends JavaScriptObject {
+    protected JsObject() {}
+
     public static <O> O $(O base, Object ...propertyValues) {
         String propertyName = null;
 
@@ -47,59 +49,59 @@ public class JsObject extends Object {
         return base;
     }
 
-    public static native void setProperty(Object target, String name, Number value) /*-{
+    public final static native void setProperty(Object target, String name, Number value) /*-{
         target[name] = value;
     }-*/;
 
-    public static native void setProperty(Object target, String name, Boolean value) /*-{
+    public final static native void setProperty(Object target, String name, Boolean value) /*-{
         target[name] = value;
     }-*/;
 
-    public static native void setProperty(Object target, String name, String value) /*-{
+    public final static native void setProperty(Object target, String name, String value) /*-{
         target[name] = value;
     }-*/;
 
-    public static native void setProperty(Object target, String name, Object value) /*-{
+    public final static native void setProperty(Object target, String name, Object value) /*-{
         target[name] = value;
     }-*/;
 
-    public native void setProperty(String name, Number value) /*-{
+    public final native void setProperty(String name, Number value) /*-{
         this[name] = value;
     }-*/;
 
-    public native void setProperty(String name, Boolean value) /*-{
+    public final native void setProperty(String name, Boolean value) /*-{
         this[name] = value;
     }-*/;
 
-    public native void setProperty(String name, String value) /*-{
+    public final native void setProperty(String name, String value) /*-{
         this[name] = value;
     }-*/;
 
-    public native void setProperty(String name, Object value) /*-{
+    public final native void setProperty(String name, Object value) /*-{
         this[name] = value;
     }-*/;
 
-    public static native Number getNumber(Object target, String name) /*-{
+    public final static native Number getNumber(Object target, String name) /*-{
         return target[name];
     }-*/;
 
-    public static native Object getObject(Object target, String name) /*-{
+    public final static native JsObject getObject(Object target, String name) /*-{
         return target[name];
     }-*/;
 
-    public static native String getString(Object target, String name) /*-{
+    public final static native String getString(Object target, String name) /*-{
         return target[name];
     }-*/;
 
-    public native Number getNumber(String name) /*-{
+    public final native Number getNumber(String name) /*-{
         return this[name];
     }-*/;
 
-    public native Object getObject(String name) /*-{
+    public final native Object getObject(String name) /*-{
         return this[name];
     }-*/;
 
-    public native String getString(String name) /*-{
+    public final native String getString(String name) /*-{
         return this[name];
     }-*/;
 
