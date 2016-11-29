@@ -22,7 +22,6 @@ import org.cleanlogic.showcase.client.examples.slider.SliderEvent;
 import org.cleanlogic.showcase.client.examples.slider.SliderListener;
 
 import javax.inject.Inject;
-import java.util.logging.Logger;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -84,16 +83,14 @@ public class AtmosphereColor extends AbstractExample {
         hueShiftHPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
         hueShiftHPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
         hueShiftHPanel.setSpacing(10);
-        Label hueShiftLbl = new Label("hueShift");
         _hueShiftSlider = new Slider("hueShift", -100, 100, 0);
         _hueShiftSlider.setStep(1);
-        _hueShiftSlider.setWidth("250px");
+        _hueShiftSlider.setWidth("150px");
         _hueShiftSlider.addListener(new MSliderListener());
         _hueShiftTBox = new TextBox();
         _hueShiftTBox.addChangeHandler(new MChangeHandler());
         _hueShiftTBox.setText("0");
         _hueShiftTBox.setSize("30px", "12px");
-        hueShiftHPanel.add(hueShiftLbl);
         hueShiftHPanel.add(_hueShiftSlider);
         hueShiftHPanel.add(_hueShiftTBox);
 
@@ -101,16 +98,14 @@ public class AtmosphereColor extends AbstractExample {
         saturationShiftHPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
         saturationShiftHPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
         saturationShiftHPanel.setSpacing(10);
-        Label saturationShiftLbl = new Label("saturationShift");
         _saturationShiftSlider = new Slider("saturationShift", -100, 100, 0);
         _saturationShiftSlider.setStep(1);
-        _saturationShiftSlider.setWidth("250px");
+        _saturationShiftSlider.setWidth("150px");
         _saturationShiftSlider.addListener(new MSliderListener());
         _saturationShiftTBox = new TextBox();
         _saturationShiftTBox.addChangeHandler(new MChangeHandler());
         _saturationShiftTBox.setText("0");
         _saturationShiftTBox.setSize("30px", "12px");
-        saturationShiftHPanel.add(saturationShiftLbl);
         saturationShiftHPanel.add(_saturationShiftSlider);
         saturationShiftHPanel.add(_saturationShiftTBox);
 
@@ -118,46 +113,55 @@ public class AtmosphereColor extends AbstractExample {
         brightnessShiftHPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
         brightnessShiftHPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
         brightnessShiftHPanel.setSpacing(10);
-        Label brightnessShiftLbl = new Label("brightnessShift");
         _brightnessShiftSlider = new Slider("brightnessShift", -100, 100, 0);
         _brightnessShiftSlider.setStep(1);
-        _brightnessShiftSlider.setWidth("250px");
+        _brightnessShiftSlider.setWidth("150px");
         _brightnessShiftSlider.addListener(new MSliderListener());
         _brightnessShiftTBox = new TextBox();
         _brightnessShiftTBox.addChangeHandler(new MChangeHandler());
         _brightnessShiftTBox.setText("0");
         _brightnessShiftTBox.setSize("30px", "12px");
-        brightnessShiftHPanel.add(brightnessShiftLbl);
         brightnessShiftHPanel.add(_brightnessShiftSlider);
         brightnessShiftHPanel.add(_brightnessShiftTBox);
 
-        ToggleButton lightingTBtn = new ToggleButton("Toggle Lighting");
-        lightingTBtn.setWidth("100px");
-        lightingTBtn.setValue(true);
-        lightingTBtn.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
+        CheckBox lightingCBox = new CheckBox();
+        lightingCBox.setWidth("100px");
+        lightingCBox.setValue(true);
+        lightingCBox.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
             @Override
             public void onValueChange(ValueChangeEvent<Boolean> valueChangeEvent) {
                 _csVPanel.getViewer().scene().globe.enableLighting = !_csVPanel.getViewer().scene().globe.enableLighting;
             }
         });
 
-        ToggleButton fogTBtn = new ToggleButton("Toggle Fog");
-        fogTBtn.setWidth("100px");
-        fogTBtn.setValue(true);
-        fogTBtn.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
+        CheckBox fogCBox = new CheckBox();
+        fogCBox.setWidth("100px");
+        fogCBox.setValue(true);
+        fogCBox.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
             @Override
             public void onValueChange(ValueChangeEvent<Boolean> valueChangeEvent) {
                 _csVPanel.getViewer().scene().fog.enabled = !_csVPanel.getViewer().scene().fog.enabled;
             }
         });
 
+        FlexTable flexTable = new FlexTable();
+        flexTable.setHTML(1, 0, "<font color=\"white\">hueShift</font>");
+        flexTable.setWidget(1, 1, hueShiftHPanel);
+        flexTable.setHTML(2, 0, "<font color=\"white\">saturationShift</font>");
+        flexTable.setWidget(2, 1, saturationShiftHPanel);
+        flexTable.setHTML(3, 0, "<font color=\"white\">brightnessShift</font>");
+        flexTable.setWidget(3, 1, brightnessShiftHPanel);
+        flexTable.setHTML(4, 0, "<font color=\"white\">Toggle Lighting</font>");
+        flexTable.setWidget(4, 1, lightingCBox);
+        flexTable.setHTML(5, 0, "<font color=\"white\">Toggle Fog</font>");
+        flexTable.setWidget(5, 1, fogCBox);
+
+        AbsolutePanel aPanel = new AbsolutePanel();
+        aPanel.add(_csVPanel);
+        aPanel.add(flexTable, 20, 20);
+
         contentPanel.add(new HTML("<p>This example shows simple Cesium application</p>"));
-        contentPanel.add(hueShiftHPanel);
-        contentPanel.add(saturationShiftHPanel);
-        contentPanel.add(brightnessShiftHPanel);
-        contentPanel.add(lightingTBtn);
-        contentPanel.add(fogTBtn);
-        contentPanel.add(_csVPanel);
+        contentPanel.add(aPanel);
 
         initWidget(contentPanel);
     }
