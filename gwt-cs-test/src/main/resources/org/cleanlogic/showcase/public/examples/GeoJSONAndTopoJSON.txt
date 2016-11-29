@@ -17,6 +17,7 @@ import org.cesiumjs.cs.datasources.GeoJsonDataSource;
 import org.cesiumjs.cs.datasources.options.GeoJsonDataSourceOptions;
 import org.cesiumjs.cs.datasources.properties.ColorMaterialProperty;
 import org.cesiumjs.cs.datasources.properties.ConstantProperty;
+import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.promise.Fulfill;
 import org.cesiumjs.cs.promise.Promise;
 import org.cesiumjs.cs.promise.Reject;
@@ -125,7 +126,7 @@ public class GeoJSONAndTopoJSON extends AbstractExample {
 
                             entity.polygon.material = new ColorMaterialProperty(new ConstantProperty<>(color));
                             entity.polygon.outline = new ConstantProperty<>(false);
-                            entity.polygon.extrudedHeight = new ConstantProperty<>((double)entity.properties.getNumber("Population") /50.);
+                            entity.polygon.extrudedHeight = new ConstantProperty<>(JsObject.getObject(entity, "properties").getNumber("Population").doubleValue() / 50.);
                         }
                     }
                 }, new Reject<String>() {
