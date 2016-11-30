@@ -29,18 +29,18 @@ public class ClockRange {
      * When {@link Clock#startTime or {@link Clock#stopTime} is reached, {@link Clock#tick} will not advance {@link Clock#currentTime} any further.
      */
     @JsProperty(name = "CLAMPED")
-    public static native Number CLAMPED();
+    public static native Integer CLAMPED();
     /**
      * When {@link Clock#stopTime} is reached, {@link Clock#tick} will advance {@link Clock#currentTime} to the opposite end of the interval.
      * When time is moving backwards, {@link Clock#tick} will not advance past {@link Clock#startTime}
      */
     @JsProperty(name = "LOOP_STOP")
-    public static native Number LOOP_STOP();
+    public static native Integer LOOP_STOP();
     /**
      * {@link Clock#tick} will always advances the clock in its current direction.
      */
     @JsProperty(name = "UNBOUNDED")
-    public static native Number UNBOUNDED();
+    public static native Integer UNBOUNDED();
 
     @JsConstructor
     private ClockRange() {}

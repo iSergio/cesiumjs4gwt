@@ -96,7 +96,7 @@ public class Interpolation extends AbstractExample {
                         _viewer.clock().stopTime = _stop.clone();
                         _viewer.clock().currentTime = _start.clone();
                         _viewer.clock().clockRange = ClockRange.LOOP_STOP();
-                        _viewer.clock().multiplier = 10.;
+                        _viewer.clock().multiplier = 10;
 
                         _viewer.timeline().zoomTo(_start, _stop);
 

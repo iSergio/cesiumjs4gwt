@@ -40,7 +40,7 @@ public class Clock {
      * Default: {@link ClockRange#UNBOUNDED()}
      */
     @JsProperty
-    public Number clockRange;
+    public Integer clockRange;
     /**
      * Determines if calls to {@link Clock#tick()} are frame dependent or system clock dependent.
      * Changing this property to {@link ClockStep#SYSTEM_CLOCK()} LOCK will set {@link Clock#multiplier} to 1.0,
@@ -48,7 +48,7 @@ public class Clock {
      * Default: {@link ClockStep#SYSTEM_CLOCK_MULTIPLIER()}
      */
     @JsProperty
-    public Number clockStep;
+    public Integer clockStep;
     /**
      * The current time. Changing this property will change {@link Clock#clockStep} from {@link ClockStep#SYSTEM_CLOCK()} to {@link ClockStep#SYSTEM_CLOCK_MULTIPLIER()}.
      */
@@ -62,7 +62,7 @@ public class Clock {
      * {@link ClockStep#SYSTEM_CLOCK_MULTIPLIER()}.
      * Default: 1.0.
      */
-    public Number multiplier;
+    public double multiplier;
     /**
      * Indicates whether {@link Clock#tick} should attempt to advance time. The clock will only advance time when both
      * {@link Clock#canAnimate} and {@link Clock#shouldAnimate} are true. Changing this property will change {@link Clock#clockStep} from
