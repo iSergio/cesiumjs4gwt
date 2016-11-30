@@ -47,7 +47,7 @@ public class ReferenceProperty extends Property {
      * Gets the reference frame that the position is defined in. This property is only valid if the referenced property is a PositionProperty.
      */
     @JsProperty(name = "referenceFrame")
-    public native int referenceFrame();
+    public native Integer referenceFrame();
     /**
      * Gets the resolved instance of the underlying referenced property.
      */
@@ -132,7 +132,7 @@ public class ReferenceProperty extends Property {
      * @return The modified result parameter or a new instance if the result parameter was not supplied.
      */
     @JsMethod
-    public native Cartesian3 getValueInReferenceFrame(JulianDate time, int referenceFrame);
+    public native Cartesian3 getValueInReferenceFrame(JulianDate time, Integer referenceFrame);
 
     /**
      * Gets the value of the property at the provided time and in the provided reference frame.
@@ -143,5 +143,5 @@ public class ReferenceProperty extends Property {
      * @return The modified result parameter or a new instance if the result parameter was not supplied.
      */
     @JsMethod
-    public native Cartesian3 getValueInReferenceFrame(JulianDate time, int referenceFrame, Cartesian3 result);
+    public native Cartesian3 getValueInReferenceFrame(JulianDate time, Integer referenceFrame, Cartesian3 result);
 }

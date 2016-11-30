@@ -31,7 +31,7 @@ public class PositionProperty extends Property<Cartesian3> {
      * Gets the reference frame that the position is defined in.
      * @see org.cesiumjs.cs.core.ReferenceFrame
      */
-    public int referenceFrame;
+    public Integer referenceFrame;
 
     /**
      * The interface for all Property objects that define a world location as a Cartesian3 with an associated ReferenceFrame.
@@ -50,7 +50,7 @@ public class PositionProperty extends Property<Cartesian3> {
      * @param referenceFrame {@link org.cesiumjs.cs.core.ReferenceFrame} The desired referenceFrame of the result.
      * @return The modified result parameter or a new instance if the result parameter was not supplied.
      */
-    public native Cartesian3 getValueInReferenceFrame(JulianDate time, int referenceFrame);
+    public native Cartesian3 getValueInReferenceFrame(JulianDate time, Integer referenceFrame);
 
     /**
      * Gets the value of the property at the provided time and in the provided reference frame.
@@ -59,5 +59,5 @@ public class PositionProperty extends Property<Cartesian3> {
      * @param result The object to store the value into, if omitted, a new instance is created and returned.
      * @return The modified result parameter or a new instance if the result parameter was not supplied.
      */
-    public native Cartesian3 getValueInReferenceFrame(JulianDate time, int referenceFrame, @JsOptional Cartesian3 result);
+    public native Cartesian3 getValueInReferenceFrame(JulianDate time, Integer referenceFrame, Cartesian3 result);
 }

@@ -43,7 +43,7 @@ public class CompositePositionProperty extends PositionProperty {
      * @param referenceFrame {@link org.cesiumjs.cs.core.ReferenceFrame} The reference frame in which the position is defined.
      */
     @JsConstructor
-    public CompositePositionProperty(int referenceFrame) {}
+    public CompositePositionProperty(Integer referenceFrame) {}
 
     /**
      * Gets the value of the property at the provided time and in the provided reference frame.
@@ -52,7 +52,7 @@ public class CompositePositionProperty extends PositionProperty {
      * @return The modified result parameter or a new instance if the result parameter was not supplied.
      */
     @JsMethod
-    public native Cartesian3 getValueInReferenceFrame(JulianDate time, int referenceFrame);
+    public native Cartesian3 getValueInReferenceFrame(JulianDate time, Integer referenceFrame);
 
     /**
      * Gets the value of the property at the provided time and in the provided reference frame.
@@ -62,5 +62,5 @@ public class CompositePositionProperty extends PositionProperty {
      * @return The modified result parameter or a new instance if the result parameter was not supplied.
      */
     @JsMethod
-    public native Cartesian3 getValueInReferenceFrame(JulianDate time, int referenceFrame, @JsOptional Cartesian3 result);
+    public native Cartesian3 getValueInReferenceFrame(JulianDate time, Integer referenceFrame, Cartesian3 result);
 }

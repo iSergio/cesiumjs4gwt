@@ -79,7 +79,7 @@ public class SampledPositionProperty extends PositionProperty {
      * Gets the reference frame in which the position is defined.
      * Default: {@link ReferenceFrame#FIXED()}
      */
-    public int referenceFrame;
+    public Integer referenceFrame;
 
     /**
      * A {@link SampledProperty} which is also a {@link PositionProperty}.
@@ -93,7 +93,7 @@ public class SampledPositionProperty extends PositionProperty {
      * @param numberOfDerivatives The number of derivatives that accompany each position; i.e. velocity, acceleration, etc...
      */
     @JsConstructor
-    public SampledPositionProperty(int referenceFrame, int numberOfDerivatives) {}
+    public SampledPositionProperty(Integer referenceFrame, int numberOfDerivatives) {}
 
     /**
      * Adds a new sample

@@ -29,12 +29,12 @@ public class ReferenceFrame {
      * The fixed frame.
      */
     @JsProperty(name = "FIXED")
-    public static native int FIXED();
+    public static native Integer FIXED();
     /**
      * The inertial frame.
      */
     @JsProperty(name = "INTERNAL")
-    public static native int INERTIAL();
+    public static native Integer INERTIAL();
 
     /**
      * Constants for identifying well-known reference frames.

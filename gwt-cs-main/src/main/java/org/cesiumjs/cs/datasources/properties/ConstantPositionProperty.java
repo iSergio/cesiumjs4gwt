@@ -33,7 +33,7 @@ public class ConstantPositionProperty extends PositionProperty {
      * Default: {@link ReferenceFrame#FIXED()};
      */
     @JsProperty
-    public int referenceFrame;
+    public Integer referenceFrame;
 
     /**
      * A {@link PositionProperty} whose value does not change in respect to the {@link org.cesiumjs.cs.core.ReferenceFrame} in which is it defined.
@@ -54,7 +54,7 @@ public class ConstantPositionProperty extends PositionProperty {
      * @param referenceFrame {@link org.cesiumjs.cs.core.ReferenceFrame}. Default: {@link ReferenceFrame#FIXED()}
      */
     @JsConstructor
-    public ConstantPositionProperty(Cartesian3 value, int referenceFrame) {}
+    public ConstantPositionProperty(Cartesian3 value, Integer referenceFrame) {}
 
     /**
      * Sets the value of the property.
@@ -69,5 +69,5 @@ public class ConstantPositionProperty extends PositionProperty {
      * @param referenceFrame {@link ReferenceFrame} The reference frame in which the position is defined. Default: this.referenceFrame
      */
     @JsMethod
-    public native void setValue(Cartesian3 value, int referenceFrame);
+    public native void setValue(Cartesian3 value, Integer referenceFrame);
 }
