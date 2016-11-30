@@ -28,39 +28,39 @@ public class PrimitiveType {
      * and the last vertex implicitly connects to the first.
      */
     @JsProperty(name = "LINE_LOOP")
-    public static native int LINE_LOOP();
+    public static native Integer LINE_LOOP();
     /**
      * Line strip primitive where each vertex (or index) after the first connects a line to the previous vertex.
      */
     @JsProperty(name = "LINE_STRIP")
-    public static native int LINE_STRIP();
+    public static native Integer LINE_STRIP();
     /**
      * Lines primitive where each two vertices (or indices) is a line segment. Line segments are not necessarily connected.
      */
     @JsProperty(name = "LINES")
-    public static native int LINES();
+    public static native Integer LINES();
     /**
      * Points primitive where each vertex (or index) is a separate point.
      */
     @JsProperty(name = "POINTS")
-    public static native int POINTS();
+    public static native Integer POINTS();
     /**
      * Triangle fan primitive where each vertex (or index) after the first two connect to the previous vertex and the
      * first vertex forming a triangle. For example, this can be used to model a cone or circle.
      */
     @JsProperty(name = "TRIANGLE_FAN")
-    public static native int TRIANGLE_FAN();
+    public static native Integer TRIANGLE_FAN();
     /**
      * Triangle strip primitive where each vertex (or index) after the first two connect to the previous two
      * vertices forming a triangle. For example, this can be used to model a wall.
      */
     @JsProperty(name = "TRIANGLE_STRIP")
-    public static native int TRIANGLE_STRIP();
+    public static native Integer TRIANGLE_STRIP();
     /**
      * Triangles primitive where each three vertices (or indices) is a triangle. Triangles do not necessarily share edges.
      */
     @JsProperty(name = "TRIANGLES")
-    public static native int TRIANGLES();
+    public static native Integer TRIANGLES();
 
     /**
      * The type of a geometric primitive, i.e., points, lines, and triangles.

@@ -40,7 +40,7 @@ public class GeometryOptions {
      * Default: PrimitiveType.TRIANGLES
      */
     @JsProperty
-    public int primitiveType;
+    public Integer primitiveType;
     /**
      * Optional index data that determines the primitives in the geometry.
      */
