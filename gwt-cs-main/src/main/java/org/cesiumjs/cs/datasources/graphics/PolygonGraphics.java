@@ -26,6 +26,7 @@ import org.cesiumjs.cs.core.Math;
 import org.cesiumjs.cs.datasources.graphics.options.PolygonGraphicsOptions;
 import org.cesiumjs.cs.datasources.properties.MaterialProperty;
 import org.cesiumjs.cs.datasources.properties.Property;
+import org.cesiumjs.cs.scene.enums.ShadowMode;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -120,7 +121,7 @@ public class PolygonGraphics {
     boolean closeBottom;
     /**
      * An enum Property specifying whether the polygon casts or receives shadows from each light source.
-     * Default: {@link org.cesiumjs.cs.scene.ShadowMode#DISABLED()}
+     * Default: {@link ShadowMode#DISABLED()}
      */
     @JsProperty
     public Property shadows;

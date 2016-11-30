@@ -22,6 +22,7 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Math;
 import org.cesiumjs.cs.datasources.properties.Property;
+import org.cesiumjs.cs.scene.enums.ShadowMode;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -65,7 +66,7 @@ public class PolylineGraphicsOptions {
     public Property granularity;
     /**
      * An enum Property specifying whether the polyline casts or receives shadows from each light source.
-     * Default: {@link org.cesiumjs.cs.scene.ShadowMode#DISABLED()}
+     * Default: {@link ShadowMode#DISABLED()}
      */
     @JsProperty
     public Property shadows;

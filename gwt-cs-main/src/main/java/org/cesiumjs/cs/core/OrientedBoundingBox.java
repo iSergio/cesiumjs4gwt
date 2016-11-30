@@ -18,6 +18,7 @@ package org.cesiumjs.cs.core;
 
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.enums.Intersect;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>

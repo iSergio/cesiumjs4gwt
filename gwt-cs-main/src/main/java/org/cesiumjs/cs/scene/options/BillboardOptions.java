@@ -21,7 +21,7 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.*;
-import org.cesiumjs.cs.scene.HeightReference;
+import org.cesiumjs.cs.scene.enums.HeightReference;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>

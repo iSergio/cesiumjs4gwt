@@ -23,9 +23,9 @@ import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Cartesian2;
 import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.Color;
-import org.cesiumjs.cs.scene.HorizontalOrigin;
-import org.cesiumjs.cs.scene.LabelStyle;
-import org.cesiumjs.cs.scene.VerticalOrigin;
+import org.cesiumjs.cs.scene.enums.HorizontalOrigin;
+import org.cesiumjs.cs.scene.enums.LabelStyle;
+import org.cesiumjs.cs.scene.enums.VerticalOrigin;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>

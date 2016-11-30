@@ -26,13 +26,11 @@ import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.Math;
 import org.cesiumjs.cs.core.Quaternion;
 import org.cesiumjs.cs.core.Transforms;
-import org.cesiumjs.cs.datasources.Entity;
 import org.cesiumjs.cs.datasources.graphics.ModelGraphics;
 import org.cesiumjs.cs.datasources.graphics.options.ModelGraphicsOptions;
 import org.cesiumjs.cs.datasources.options.EntityOptions;
 import org.cesiumjs.cs.datasources.properties.ConstantPositionProperty;
 import org.cesiumjs.cs.datasources.properties.ConstantProperty;
-import org.cesiumjs.cs.scene.HeightReference;
 import org.cesiumjs.cs.widgets.Viewer;
 import org.cesiumjs.cs.widgets.ViewerPanelAbstract;
 import org.cesiumjs.cs.widgets.options.ViewerOptions;
@@ -40,7 +38,6 @@ import org.cleanlogic.showcase.client.basic.AbstractExample;
 import org.cleanlogic.showcase.client.components.store.ShowcaseExampleStore;
 
 import javax.inject.Inject;
-import java.util.logging.Logger;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>

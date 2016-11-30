@@ -20,7 +20,7 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.ExtrapolationType;
+import org.cesiumjs.cs.core.enums.ExtrapolationType;
 import org.cesiumjs.cs.core.JulianDate;
 import org.cesiumjs.cs.core.Packable;
 import org.cesiumjs.cs.core.interpolation.InterpolationAlgorithm;

@@ -20,6 +20,7 @@ import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.JulianDate;
 import org.cesiumjs.cs.core.TimeIntervalCollection;
+import org.cesiumjs.cs.core.enums.ReferenceFrame;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -40,7 +41,7 @@ public class CompositePositionProperty extends PositionProperty {
 
     /**
      * A {@link CompositeProperty} which is also a {@link PositionProperty}.
-     * @param referenceFrame {@link org.cesiumjs.cs.core.ReferenceFrame} The reference frame in which the position is defined.
+     * @param referenceFrame {@link ReferenceFrame} The reference frame in which the position is defined.
      */
     @JsConstructor
     public CompositePositionProperty(Integer referenceFrame) {}
@@ -48,7 +49,7 @@ public class CompositePositionProperty extends PositionProperty {
     /**
      * Gets the value of the property at the provided time and in the provided reference frame.
      * @param time The time for which to retrieve the value.
-     * @param referenceFrame {@link org.cesiumjs.cs.core.ReferenceFrame} The desired referenceFrame of the result.
+     * @param referenceFrame {@link ReferenceFrame} The desired referenceFrame of the result.
      * @return The modified result parameter or a new instance if the result parameter was not supplied.
      */
     @JsMethod
@@ -57,7 +58,7 @@ public class CompositePositionProperty extends PositionProperty {
     /**
      * Gets the value of the property at the provided time and in the provided reference frame.
      * @param time The time for which to retrieve the value.
-     * @param referenceFrame {@link org.cesiumjs.cs.core.ReferenceFrame} The desired referenceFrame of the result.
+     * @param referenceFrame {@link ReferenceFrame} The desired referenceFrame of the result.
      * @param result The object to store the value into, if omitted, a new instance is created and returned.
      * @return The modified result parameter or a new instance if the result parameter was not supplied.
      */

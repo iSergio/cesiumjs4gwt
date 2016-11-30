@@ -24,7 +24,8 @@ import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.datasources.graphics.options.LabelGraphicsOptions;
 import org.cesiumjs.cs.datasources.properties.Property;
-import org.cesiumjs.cs.scene.VerticalOrigin;
+import org.cesiumjs.cs.scene.enums.VerticalOrigin;
+import org.cesiumjs.cs.scene.enums.LabelStyle;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -49,7 +50,7 @@ public class LabelGraphics {
     public Property font;
     /**
      * A Property specifying the LabelStyle.
-     * Default: {@link org.cesiumjs.cs.scene.LabelStyle#FILL()}
+     * Default: {@link LabelStyle#FILL()}
      */
     @JsProperty
     public Property style;
@@ -85,7 +86,7 @@ public class LabelGraphics {
     public Property scale;
     /**
      * A Property specifying the HorizontalOrigin.
-     * Default: {@link org.cesiumjs.cs.scene.VerticalOrigin#CENTER()}
+     * Default: {@link VerticalOrigin#CENTER()}
      */
     @JsProperty
     public Property horizontalOrigin;

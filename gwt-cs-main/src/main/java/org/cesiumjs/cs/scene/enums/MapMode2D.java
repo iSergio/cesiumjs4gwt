@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.cesiumjs.cs.core;
+package org.cesiumjs.cs.scene.enums;
 
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
@@ -23,22 +23,22 @@ import jsinterop.annotations.JsType;
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
-@JsType(isNative = true, namespace = "Cesium", name = "ReferenceFrame")
-public class ReferenceFrame {
+@JsType(isNative = true, namespace = "Cesium", name = "MapMode2D")
+public class MapMode2D {
     /**
-     * The fixed frame.
+     * The 2D map can be scrolled infinitely in the horizontal direction.
      */
-    @JsProperty(name = "FIXED")
-    public static native Integer FIXED();
+    @JsProperty(name = "INFINITE_SCROLL")
+    public static native Integer INFINITE_SCROLL();
     /**
-     * The inertial frame.
+     * The 2D map can be rotated about the z axis.
      */
-    @JsProperty(name = "INTERNAL")
-    public static native Integer INERTIAL();
+    @JsProperty(name = "ROTATE")
+    public static native Integer ROTATE();
 
     /**
-     * Constants for identifying well-known reference frames.
+     * Describes how the map will operate in 2D.
      */
     @JsConstructor
-    private ReferenceFrame() {}
+    private MapMode2D() {}
 }

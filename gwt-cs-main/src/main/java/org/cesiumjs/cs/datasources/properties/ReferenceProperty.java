@@ -23,7 +23,7 @@ import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.core.JulianDate;
-import org.cesiumjs.cs.core.ReferenceFrame;
+import org.cesiumjs.cs.core.enums.ReferenceFrame;
 import org.cesiumjs.cs.datasources.EntityCollection;
 
 /**

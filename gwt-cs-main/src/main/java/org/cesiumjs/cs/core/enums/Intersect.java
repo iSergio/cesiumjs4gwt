@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.cesiumjs.cs.core;
+package org.cesiumjs.cs.core.enums;
 
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsIgnore;

@@ -26,7 +26,7 @@ import org.cesiumjs.cs.core.Math;
 import org.cesiumjs.cs.datasources.graphics.options.EllipseGraphicsOptions;
 import org.cesiumjs.cs.datasources.properties.MaterialProperty;
 import org.cesiumjs.cs.datasources.properties.Property;
-import org.cesiumjs.cs.scene.ShadowMode;
+import org.cesiumjs.cs.scene.enums.ShadowMode;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>

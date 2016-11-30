@@ -14,38 +14,35 @@
  * limitations under the License.
  */
 
-package org.cesiumjs.cs.scene;
+package org.cesiumjs.cs.core.enums;
 
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
+ * Constants to determine how an interpolated value is extrapolated when querying outside the bounds of available data.
+ * @see org.cesiumjs.cs.datasources.properties.SampledProperty
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
-@JsType(isNative = true, namespace = "Cesium", name = "HorizontalOrigin")
-public class HorizontalOrigin {
+@JsType(isNative = true, namespace = "Cesium", name = "ExtrapolationType")
+public class ExtrapolationType {
     /**
-     * The origin is at the horizontal center of the object.
+     * The value is extrapolated.
      */
-    @JsProperty(name = "CENTER")
-    public static native Integer CENTER();
+    @JsProperty(name = "EXTRAPOLATE")
+    public static native Integer EXTRAPOLATE();
     /**
-     * The origin is on the left side of the object.
+     * The first or last value is used when outside the range of sample data.
      */
-    @JsProperty(name = "LEFT")
-    public static native Integer LEFT();
+    @JsProperty(name = "HOLD")
+    public static native Integer HOLD();
     /**
-     * The origin is on the right side of the object.
+     * No extrapolation occurs.
      */
-    @JsProperty(name = "RIGHT")
-    public static native Integer RIGHT();
+    @JsProperty(name = "NONE")
+    public static native Integer NONE();
 
-    /**
-     * The horizontal location of an origin relative to an object, e.g., a {@link Billboard}. For example, the horizontal
-     * origin is used to display a billboard to the left or right (in screen space) of the actual position.
-     * @see Billboard#horizontalOrigin
-     */
     @JsConstructor
-    private HorizontalOrigin() {}
+    private ExtrapolationType() {}
 }

@@ -14,35 +14,41 @@
  * limitations under the License.
  */
 
-package org.cesiumjs.cs.core;
+package org.cesiumjs.cs.scene.enums;
 
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * Constants to determine how an interpolated value is extrapolated when querying outside the bounds of available data.
- * @see org.cesiumjs.cs.datasources.properties.SampledProperty
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
-@JsType(isNative = true, namespace = "Cesium", name = "ExtrapolationType")
-public class ExtrapolationType {
+@JsType(isNative = true, namespace = "Cesium", name = "ShadowMode")
+public class ShadowMode {
     /**
-     * The value is extrapolated.
+     * The object casts shadows only.
      */
-    @JsProperty(name = "EXTRAPOLATE")
-    public static native Integer EXTRAPOLATE();
+    @JsProperty(name = "CAST_ONLY")
+    public static native Integer CAST_ONLY();
     /**
-     * The first or last value is used when outside the range of sample data.
+     * The object receives shadows only.
      */
-    @JsProperty(name = "HOLD")
-    public static native Integer HOLD();
+    @JsProperty(name = "RECEIVE_ONLY")
+    public static native Integer RECEIVE_ONLY();
     /**
-     * No extrapolation occurs.
+     * The object casts and receives shadows.
      */
-    @JsProperty(name = "NONE")
-    public static native Integer NONE();
+    @JsProperty(name = "ENABLED")
+    public static native Integer ENABLED();
+    /**
+     * The object does not cast or receive shadows.
+     */
+    @JsProperty(name = "DISABLED")
+    public static native Integer DISABLED();
 
+    /**
+     * Describes how the map will operate in 2D.
+     */
     @JsConstructor
-    private ExtrapolationType() {}
+    private ShadowMode() {}
 }

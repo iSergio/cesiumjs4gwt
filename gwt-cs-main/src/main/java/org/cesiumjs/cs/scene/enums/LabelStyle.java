@@ -14,41 +14,38 @@
  * limitations under the License.
  */
 
-package org.cesiumjs.cs.scene;
+package org.cesiumjs.cs.scene.enums;
 
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.scene.Label;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
-@JsType(isNative = true, namespace = "Cesium", name = "ShadowMode")
-public class ShadowMode {
+@JsType(isNative = true, namespace = "Cesium", name = "LabelStyle")
+public class LabelStyle {
     /**
-     * The object casts shadows only.
+     * Fill the text of the label, but do not outline.
      */
-    @JsProperty(name = "CAST_ONLY")
-    public static native Integer CAST_ONLY();
+    @JsProperty(name = "FILL")
+    public static native Integer FILL();
     /**
-     * The object receives shadows only.
+     * Fill and outline the text of the label.
      */
-    @JsProperty(name = "RECEIVE_ONLY")
-    public static native Integer RECEIVE_ONLY();
+    @JsProperty(name = "FILL_AND_OUTLINE")
+    public static native Integer FILL_AND_OUTLINE();
     /**
-     * The object casts and receives shadows.
+     * Outline the text of the label, but do not fill.
      */
-    @JsProperty(name = "ENABLED")
-    public static native Integer ENABLED();
-    /**
-     * The object does not cast or receive shadows.
-     */
-    @JsProperty(name = "DISABLED")
-    public static native Integer DISABLED();
+    @JsProperty(name = "OUTLINE")
+    public static native Integer OUTLINE();
 
     /**
-     * Describes how the map will operate in 2D.
+     * Describes how to draw a label.
+     * @see Label#style
      */
     @JsConstructor
-    private ShadowMode() {}
+    private LabelStyle() {}
 }

@@ -21,7 +21,7 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.BoundingSphere;
 import org.cesiumjs.cs.core.Cartesian4;
-import org.cesiumjs.cs.core.Intersect;
+import org.cesiumjs.cs.core.enums.Intersect;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -70,7 +70,7 @@ public class CullingVolume {
      * Determines whether a bounding volume intersects the culling volume.
      * @param boundingVolume The bounding volume whose intersection with the culling volume is to be tested.
      * @return {@link Intersect#OUTSIDE(), {@link Intersect#INTERSECTING()}, or {@link Intersect#INSIDE()}.
-     * @see org.cesiumjs.cs.core.Intersect
+     * @see org.cesiumjs.cs.core.enums.Intersect
      */
     public native int computeVisibility(Object boundingVolume);
 }

@@ -14,36 +14,31 @@
  * limitations under the License.
  */
 
-package org.cesiumjs.cs.core;
+package org.cesiumjs.cs.scene.enums;
 
-import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
-@JsType(isNative = true, namespace = "Cesium", name = "KeyboardEventModifier")
-public class KeyboardEventModifier {
+@JsType(isNative = true, namespace = "Cesium", name = "HeightReference")
+public class HeightReference {
     /**
-     * Represents the alt key being held down.
+     * The position is absolute.
      */
-    @JsProperty(name = "ALT")
-    public static native Integer ALT();
+    @JsProperty(name = "NONE")
+    public static native Integer NONE();
     /**
-     * Represents the control key being held down.
+     * The position is clamped to the terrain.
      */
-    @JsProperty(name = "CTRL")
-    public static native Integer CTRL();
+    @JsProperty(name = "CLAMP_TO_GROUND")
+    public static native Integer CLAMP_TO_GROUND();
     /**
-     * Represents the shift key being held down.
+     * The position height is the height above the terrain.
      */
-    @JsProperty(name = "SHIFT")
-    public static native Integer SHIFT();
+    @JsProperty(name = "RELATIVE_TO_GROUND")
+    public static native Integer RELATIVE_TO_GROUND();
 
-    /**
-     * This enumerated type is for representing keyboard modifiers. These are keys that are held down in addition to other event types.
-     */
-    @JsConstructor
-    private KeyboardEventModifier() {}
+
 }

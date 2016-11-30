@@ -23,7 +23,7 @@ import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Matrix4;
 import org.cesiumjs.cs.core.geometry.GeometryInstance;
 import org.cesiumjs.cs.scene.Appearance;
-import org.cesiumjs.cs.scene.ShadowMode;
+import org.cesiumjs.cs.scene.enums.ShadowMode;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>

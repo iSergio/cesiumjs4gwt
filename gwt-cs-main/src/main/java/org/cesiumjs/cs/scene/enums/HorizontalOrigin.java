@@ -14,38 +14,39 @@
  * limitations under the License.
  */
 
-package org.cesiumjs.cs.scene;
+package org.cesiumjs.cs.scene.enums;
 
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.scene.Billboard;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
-@JsType(isNative = true, namespace = "Cesium", name = "VerticalOrigin")
-public class VerticalOrigin {
+@JsType(isNative = true, namespace = "Cesium", name = "HorizontalOrigin")
+public class HorizontalOrigin {
     /**
-     * The origin is at the vertical center of the object.
+     * The origin is at the horizontal center of the object.
      */
     @JsProperty(name = "CENTER")
     public static native Integer CENTER();
     /**
-     * The origin is at the bottom of the object.
+     * The origin is on the left side of the object.
      */
-    @JsProperty(name = "BOTTOM")
-    public static native Integer BOTTOM();
+    @JsProperty(name = "LEFT")
+    public static native Integer LEFT();
     /**
-     * The origin is at the top of the object.
+     * The origin is on the right side of the object.
      */
-    @JsProperty(name = "TOP")
-    public static native Integer TOP();
+    @JsProperty(name = "RIGHT")
+    public static native Integer RIGHT();
 
     /**
-     * The vertical location of an origin relative to an object, e.g., a {@link org.cesiumjs.cs.datasources.graphics.BillboardGraphics}. For example, the vertical
-     * origin is used to display a billboard above or below (in screen space) of the actual position.
-     * @see: Billboard#verticalOrigin
+     * The horizontal location of an origin relative to an object, e.g., a {@link Billboard}. For example, the horizontal
+     * origin is used to display a billboard to the left or right (in screen space) of the actual position.
+     * @see Billboard#horizontalOrigin
      */
     @JsConstructor
-    private VerticalOrigin() {}
+    private HorizontalOrigin() {}
 }

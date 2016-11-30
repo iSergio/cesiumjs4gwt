@@ -21,7 +21,7 @@ import com.google.gwt.dom.client.Element;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.projection.MapProjection;
-import org.cesiumjs.cs.scene.MapMode2D;
+import org.cesiumjs.cs.scene.enums.MapMode2D;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>

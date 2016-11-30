@@ -27,6 +27,7 @@ import com.google.gwt.user.client.ui.*;
 import org.cesiumjs.cs.Configuration;
 import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.core.Math;
+import org.cesiumjs.cs.core.enums.ClockRange;
 import org.cesiumjs.cs.core.interpolation.HermitePolynomialApproximation;
 import org.cesiumjs.cs.core.interpolation.LagrangePolynomialApproximation;
 import org.cesiumjs.cs.core.interpolation.LinearApproximation;

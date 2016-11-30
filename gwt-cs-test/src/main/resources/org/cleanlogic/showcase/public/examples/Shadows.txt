@@ -29,7 +29,7 @@ import org.cesiumjs.cs.datasources.properties.ConstantProperty;
 import org.cesiumjs.cs.datasources.properties.options.CheckerboardMaterialPropertyOptions;
 import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.scene.ShadowMap;
-import org.cesiumjs.cs.scene.ShadowMode;
+import org.cesiumjs.cs.scene.enums.ShadowMode;
 import org.cesiumjs.cs.widgets.Viewer;
 import org.cesiumjs.cs.widgets.ViewerPanelAbstract;
 import org.cesiumjs.cs.widgets.options.ViewerOptions;

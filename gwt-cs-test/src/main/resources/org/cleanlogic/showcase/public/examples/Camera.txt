@@ -16,7 +16,7 @@ import org.cesiumjs.cs.datasources.properties.ConstantProperty;
 import org.cesiumjs.cs.scene.DebugModelMatrixPrimitive;
 import org.cesiumjs.cs.scene.Primitive;
 import org.cesiumjs.cs.scene.Scene;
-import org.cesiumjs.cs.scene.SceneMode;
+import org.cesiumjs.cs.scene.enums.SceneMode;
 import org.cesiumjs.cs.scene.options.CameraFlyToOptions;
 import org.cesiumjs.cs.scene.options.DebugModelMatrixPrimitiveOptions;
 import org.cesiumjs.cs.scene.options.ViewOptions;

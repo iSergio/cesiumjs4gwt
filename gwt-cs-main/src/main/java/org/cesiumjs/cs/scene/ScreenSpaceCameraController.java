@@ -19,6 +19,7 @@ package org.cesiumjs.cs.scene;
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.scene.enums.CameraEventType;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>

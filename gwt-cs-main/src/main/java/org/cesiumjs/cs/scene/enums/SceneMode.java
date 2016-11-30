@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.cesiumjs.cs.scene;
+package org.cesiumjs.cs.scene.enums;
 
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;

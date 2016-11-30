@@ -26,9 +26,9 @@ import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.datasources.graphics.options.BillboardGraphicsOptions;
 import org.cesiumjs.cs.datasources.properties.Property;
-import org.cesiumjs.cs.scene.HeightReference;
-import org.cesiumjs.cs.scene.HorizontalOrigin;
-import org.cesiumjs.cs.scene.VerticalOrigin;
+import org.cesiumjs.cs.scene.enums.HeightReference;
+import org.cesiumjs.cs.scene.enums.HorizontalOrigin;
+import org.cesiumjs.cs.scene.enums.VerticalOrigin;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>

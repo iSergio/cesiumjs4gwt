@@ -22,6 +22,7 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.BoundingSphere;
+import org.cesiumjs.cs.core.enums.PrimitiveType;
 import org.cesiumjs.cs.core.geometry.GeometryAttributes;
 
 /**
@@ -35,7 +36,7 @@ public class GeometryOptions {
     @JsProperty
     public GeometryAttributes attributes;
     /**
-     * {@link org.cesiumjs.cs.core.PrimitiveType}
+     * {@link PrimitiveType}
      * The type of primitives in the geometry.
      * Default: PrimitiveType.TRIANGLES
      */

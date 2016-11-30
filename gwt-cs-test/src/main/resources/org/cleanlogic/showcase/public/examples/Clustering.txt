@@ -19,7 +19,7 @@ import org.cesiumjs.cs.datasources.options.KmlDataSourceOptions;
 import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.promise.Fulfill;
 import org.cesiumjs.cs.promise.Promise;
-import org.cesiumjs.cs.scene.VerticalOrigin;
+import org.cesiumjs.cs.scene.enums.VerticalOrigin;
 import org.cesiumjs.cs.widgets.Viewer;
 import org.cesiumjs.cs.widgets.ViewerPanelAbstract;
 import org.cleanlogic.showcase.client.basic.AbstractExample;

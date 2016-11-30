@@ -20,6 +20,8 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.enums.ClockRange;
+import org.cesiumjs.cs.core.enums.ClockStep;
 import org.cesiumjs.cs.core.options.ClockOptions;
 
 /**

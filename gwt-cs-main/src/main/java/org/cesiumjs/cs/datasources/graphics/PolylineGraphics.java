@@ -24,6 +24,7 @@ import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.core.Math;
 import org.cesiumjs.cs.datasources.graphics.options.PolylineGraphicsOptions;
 import org.cesiumjs.cs.datasources.properties.Property;
+import org.cesiumjs.cs.scene.enums.ShadowMode;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -72,7 +73,7 @@ public class PolylineGraphics {
     public Property granularity;
     /**
      * An enum Property specifying whether the polyline casts or receives shadows from each light source.
-     * Default: {@link org.cesiumjs.cs.scene.ShadowMode#DISABLED()}
+     * Default: {@link ShadowMode#DISABLED()}
      */
     @JsProperty
     public Property shadows;
@@ -104,7 +105,7 @@ public class PolylineGraphics {
      * @param result The object onto which to store the result.
      * @return The modified result parameter or a new instance if one was not provided.
      */
-    public native PolylineGraphics clone(@JsOptional PolylineGraphics result);
+    public native PolylineGraphics clone(PolylineGraphics result);
 
     /**
      * Assigns each unassigned property on this object to the value of the same property on the provided source object.

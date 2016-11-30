@@ -25,7 +25,7 @@ import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.datasources.graphics.options.CylinderGraphicsOptions;
 import org.cesiumjs.cs.datasources.properties.MaterialProperty;
 import org.cesiumjs.cs.datasources.properties.Property;
-import org.cesiumjs.cs.scene.ShadowMode;
+import org.cesiumjs.cs.scene.enums.ShadowMode;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>

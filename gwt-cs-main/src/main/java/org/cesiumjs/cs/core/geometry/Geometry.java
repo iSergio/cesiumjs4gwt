@@ -21,7 +21,7 @@ import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.BoundingSphere;
-import org.cesiumjs.cs.core.PrimitiveType;
+import org.cesiumjs.cs.core.enums.PrimitiveType;
 import org.cesiumjs.cs.core.options.GeometryOptions;
 
 import java.util.Arrays;

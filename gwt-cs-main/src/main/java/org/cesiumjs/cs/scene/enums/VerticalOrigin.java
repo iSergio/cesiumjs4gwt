@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.cesiumjs.cs.scene;
+package org.cesiumjs.cs.scene.enums;
 
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
@@ -23,28 +23,29 @@ import jsinterop.annotations.JsType;
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
-@JsType(isNative = true, namespace = "Cesium", name = "LabelStyle")
-public class LabelStyle {
+@JsType(isNative = true, namespace = "Cesium", name = "VerticalOrigin")
+public class VerticalOrigin {
     /**
-     * Fill the text of the label, but do not outline.
+     * The origin is at the vertical center of the object.
      */
-    @JsProperty(name = "FILL")
-    public static native Integer FILL();
+    @JsProperty(name = "CENTER")
+    public static native Integer CENTER();
     /**
-     * Fill and outline the text of the label.
+     * The origin is at the bottom of the object.
      */
-    @JsProperty(name = "FILL_AND_OUTLINE")
-    public static native Integer FILL_AND_OUTLINE();
+    @JsProperty(name = "BOTTOM")
+    public static native Integer BOTTOM();
     /**
-     * Outline the text of the label, but do not fill.
+     * The origin is at the top of the object.
      */
-    @JsProperty(name = "OUTLINE")
-    public static native Integer OUTLINE();
+    @JsProperty(name = "TOP")
+    public static native Integer TOP();
 
     /**
-     * Describes how to draw a label.
-     * @see Label#style
+     * The vertical location of an origin relative to an object, e.g., a {@link org.cesiumjs.cs.datasources.graphics.BillboardGraphics}. For example, the vertical
+     * origin is used to display a billboard above or below (in screen space) of the actual position.
+     * @see: Billboard#verticalOrigin
      */
     @JsConstructor
-    private LabelStyle() {}
+    private VerticalOrigin() {}
 }

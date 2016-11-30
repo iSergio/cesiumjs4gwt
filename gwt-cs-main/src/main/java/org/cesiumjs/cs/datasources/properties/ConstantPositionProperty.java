@@ -21,7 +21,7 @@ import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Cartesian3;
-import org.cesiumjs.cs.core.ReferenceFrame;
+import org.cesiumjs.cs.core.enums.ReferenceFrame;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -36,22 +36,22 @@ public class ConstantPositionProperty extends PositionProperty {
     public Integer referenceFrame;
 
     /**
-     * A {@link PositionProperty} whose value does not change in respect to the {@link org.cesiumjs.cs.core.ReferenceFrame} in which is it defined.
+     * A {@link PositionProperty} whose value does not change in respect to the {@link ReferenceFrame} in which is it defined.
      */
     @JsConstructor
     public ConstantPositionProperty() {}
 
     /**
-     * A {@link PositionProperty} whose value does not change in respect to the {@link org.cesiumjs.cs.core.ReferenceFrame} in which is it defined.
+     * A {@link PositionProperty} whose value does not change in respect to the {@link ReferenceFrame} in which is it defined.
      * @param value The property value.
      */
     @JsConstructor
     public ConstantPositionProperty(Cartesian3 value) {}
 
     /**
-     * A {@link PositionProperty} whose value does not change in respect to the {@link org.cesiumjs.cs.core.ReferenceFrame} in which is it defined.
+     * A {@link PositionProperty} whose value does not change in respect to the {@link ReferenceFrame} in which is it defined.
      * @param value The property value.
-     * @param referenceFrame {@link org.cesiumjs.cs.core.ReferenceFrame}. Default: {@link ReferenceFrame#FIXED()}
+     * @param referenceFrame {@link ReferenceFrame}. Default: {@link ReferenceFrame#FIXED()}
      */
     @JsConstructor
     public ConstantPositionProperty(Cartesian3 value, Integer referenceFrame) {}

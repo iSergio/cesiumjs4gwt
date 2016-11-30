@@ -17,10 +17,10 @@
 package org.cesiumjs.cs.datasources.properties;
 
 import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsOptional;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.JulianDate;
+import org.cesiumjs.cs.core.enums.ReferenceFrame;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -29,7 +29,7 @@ import org.cesiumjs.cs.core.JulianDate;
 public class PositionProperty extends Property<Cartesian3> {
     /**
      * Gets the reference frame that the position is defined in.
-     * @see org.cesiumjs.cs.core.ReferenceFrame
+     * @see ReferenceFrame
      */
     public Integer referenceFrame;
 
@@ -47,7 +47,7 @@ public class PositionProperty extends Property<Cartesian3> {
     /**
      * Gets the value of the property at the provided time and in the provided reference frame.
      * @param time The time for which to retrieve the value.
-     * @param referenceFrame {@link org.cesiumjs.cs.core.ReferenceFrame} The desired referenceFrame of the result.
+     * @param referenceFrame {@link ReferenceFrame} The desired referenceFrame of the result.
      * @return The modified result parameter or a new instance if the result parameter was not supplied.
      */
     public native Cartesian3 getValueInReferenceFrame(JulianDate time, Integer referenceFrame);
@@ -55,7 +55,7 @@ public class PositionProperty extends Property<Cartesian3> {
     /**
      * Gets the value of the property at the provided time and in the provided reference frame.
      * @param time The time for which to retrieve the value.
-     * @param referenceFrame {@link org.cesiumjs.cs.core.ReferenceFrame} The desired referenceFrame of the result.
+     * @param referenceFrame {@link ReferenceFrame} The desired referenceFrame of the result.
      * @param result The object to store the value into, if omitted, a new instance is created and returned.
      * @return The modified result parameter or a new instance if the result parameter was not supplied.
      */

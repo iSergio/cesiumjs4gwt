@@ -24,6 +24,7 @@ import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.js.JsImage;
 import org.cesiumjs.cs.promise.Promise;
+import org.cesiumjs.cs.scene.enums.HeightReference;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
