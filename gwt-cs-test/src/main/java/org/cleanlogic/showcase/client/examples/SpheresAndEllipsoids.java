@@ -58,7 +58,7 @@ public class SpheresAndEllipsoids extends AbstractExample {
                 _csPanelAbstract = new ViewerPanelAbstract(csConfiguration) {
                     @Override
                     public Viewer createViewer(Element element) {
-                        Viewer csViewer = new Viewer(element);
+                        _viewer = new Viewer(element);
 
                         EllipsoidGraphicsOptions ellipsoidGraphicsOptions = new EllipsoidGraphicsOptions();
                         ellipsoidGraphicsOptions.radii = new ConstantProperty<>(new Cartesian3(200000.0, 200000.0, 300000.0));
@@ -67,7 +67,7 @@ public class SpheresAndEllipsoids extends AbstractExample {
                         entityOptions.name = "Blue ellipsoid";
                         entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-114.0, 40.0, 300000.0));
                         entityOptions.ellipsoid = new EllipsoidGraphics(ellipsoidGraphicsOptions);
-                        Entity blueEllpsoid = csViewer.entities().add(new Entity(entityOptions));
+                        Entity blueEllpsoid = _viewer.entities().add(entityOptions);
 
                         ellipsoidGraphicsOptions = new EllipsoidGraphicsOptions();
                         ellipsoidGraphicsOptions.radii = new ConstantProperty<>(new Cartesian3(300000.0, 300000.0, 300000.0));
@@ -78,7 +78,7 @@ public class SpheresAndEllipsoids extends AbstractExample {
                         entityOptions.name = "Red sphere with black outline";
                         entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-107.0, 40.0, 300000.0));
                         entityOptions.ellipsoid = new EllipsoidGraphics(ellipsoidGraphicsOptions);
-                        Entity redSphere = csViewer.entities().add(new Entity(entityOptions));
+                        Entity redSphere = _viewer.entities().add(entityOptions);
 
                         ellipsoidGraphicsOptions = new EllipsoidGraphicsOptions();
                         ellipsoidGraphicsOptions.radii = new ConstantProperty<>(new Cartesian3(200000.0, 200000.0, 300000.0));
@@ -91,11 +91,11 @@ public class SpheresAndEllipsoids extends AbstractExample {
                         entityOptions.name = "Yellow ellipsoid outline";
                         entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-100.0, 40.0, 300000.0));
                         entityOptions.ellipsoid = new EllipsoidGraphics(ellipsoidGraphicsOptions);
-                        Entity outlineOnly = csViewer.entities().add(new Entity(entityOptions));
+                        Entity outlineOnly = _viewer.entities().add(entityOptions);
 
-                        csViewer.zoomTo(csViewer.entities());
+                        _viewer.zoomTo(_viewer.entities());
 
-                        return csViewer;
+                        return _viewer;
                     }
                 };
             }

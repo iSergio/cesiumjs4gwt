@@ -63,7 +63,7 @@ public class Models3D extends AbstractExample {
                         csViewerOptions.infoBox = false;
                         csViewerOptions.selectionIndicator = false;
                         csViewerOptions.shadows = false;
-                        Viewer csViewer = new Viewer(element, csViewerOptions);
+                        _viewer = new Viewer(element, csViewerOptions);
 
                         ModelGraphicsOptions modelGraphicsOptions = new ModelGraphicsOptions();
                         modelGraphicsOptions.uri = new ConstantProperty<>(GWT.getModuleBaseURL() + "SampleData/models/CesiumAir/Cesium_Air.glb");
@@ -81,9 +81,9 @@ public class Models3D extends AbstractExample {
                         entityOptions.position = new ConstantPositionProperty(position);
                         entityOptions.orientation = new ConstantProperty<>(orientation);
                         entityOptions.model = modelGraphics;
-                        csViewer.trackedEntity = csViewer.entities().add(entityOptions);
+                        _viewer.trackedEntity = _viewer.entities().add(entityOptions);
 
-                        return csViewer;
+                        return _viewer;
                     }
                 };
             }
