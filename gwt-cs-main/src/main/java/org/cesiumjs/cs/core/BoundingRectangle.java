@@ -158,10 +158,10 @@ public class BoundingRectangle {
      * Determines if two rectangles intersect.
      * @param left A rectangle to check for intersection.
      * @param right The other rectangle to check for intersection.
-     * @return {@link Intersect#INTERSECTING()} if the rectangles intersect, Intersect.OUTSIDE otherwise.
+     * @return {@link Intersect#INTERSECTING()} if the rectangles intersect, {@link Intersect#OUTSIDE()}  otherwise.
      */
     @JsMethod
-    public static native Intersect intersect(BoundingRectangle left, BoundingRectangle right);
+    public static native Integer intersect(BoundingRectangle left, BoundingRectangle right);
 
     /**
      * Stores the provided instance into the provided array.
@@ -246,8 +246,8 @@ public class BoundingRectangle {
     /**
      * Determines if this rectangle intersects with another.
      * @param right A rectangle to check for intersection.
-     * @return {@link Intersect#INTERSECTING()} if the rectangles intersect, Intersect.OUTSIDE otherwise.
+     * @return {@link Intersect#INTERSECTING()} if the rectangles intersect, {@link Intersect#OUTSIDE()} otherwise}.
      */
     @JsMethod
-    public native Intersect intersect(BoundingRectangle right);
+    public native Integer intersect(BoundingRectangle right);
 }

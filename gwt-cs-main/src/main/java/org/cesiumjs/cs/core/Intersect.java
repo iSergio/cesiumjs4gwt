@@ -17,6 +17,7 @@
 package org.cesiumjs.cs.core;
 
 import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsIgnore;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
@@ -29,17 +30,17 @@ public class Intersect {
      * Represents that an object is fully within the frustum.
      */
     @JsProperty(name = "INSIDE")
-    public static native int INSIDE();
+    public static native Integer INSIDE();
     /**
      * Represents that an object intersects one of the frustum's planes.
      */
     @JsProperty(name = "INTERSECTING")
-    public static native int INTERSECTING();
+    public static native Integer INTERSECTING();
     /**
      * Represents that an object is not contained within the frustum.
      */
     @JsProperty(name = "OUTSIDE")
-    public static native int OUTSIDE();
+    public static native Integer OUTSIDE();
 
     /**
      * This enumerated type is used in determining where, relative to the frustum, an object is located.

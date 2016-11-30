@@ -432,7 +432,7 @@ public class BoundingSphere {
      * {@link Intersect#INTERSECTING()} if the sphere intersects the plane.
      */
     @JsMethod
-    public static native Intersect intersectPlane(BoundingSphere sphere, Plane plane);
+    public static native Integer intersectPlane(BoundingSphere sphere, Plane plane);
 
     /**
      * Determines whether or not a sphere is hidden from view by the occluder.
@@ -643,7 +643,7 @@ public class BoundingSphere {
      * if the entire sphere is on the opposite side, and {@link Intersect#INTERSECTING()} if the sphere intersects the plane.
      */
     @JsMethod
-    public native Intersect intersectPlane(Plane plane);
+    public native Integer intersectPlane(Plane plane);
 
     /**
      * Determines whether or not a sphere is hidden from view by the occluder.

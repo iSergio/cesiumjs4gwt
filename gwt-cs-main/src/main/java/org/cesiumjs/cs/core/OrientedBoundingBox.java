@@ -179,9 +179,9 @@ public class OrientedBoundingBox {
      * @param box The oriented bounding box to test.
      * @param plane The plane to test against.
      * @return Intersect.INSIDE if the entire box is on the side of the plane the normal is pointing, Intersect.OUTSIDE
-     * if the entire box is on the opposite side, and Intersect.INTERSECTING if the box intersects the plane.
+     * if the entire box is on the opposite side, and {@link Intersect#INTERSECTING()}  if the box intersects the plane.
      */
-    public static native Intersect intersectPlane(OrientedBoundingBox box, Plane plane);
+    public static native Integer intersectPlane(OrientedBoundingBox box, Plane plane);
 
     /**
      * Determines whether or not a bounding box is hidden from view by the occluder.
@@ -237,9 +237,9 @@ public class OrientedBoundingBox {
      * Determines which side of a plane the oriented bounding box is located.
      * @param plane The plane to test against.
      * @return Intersect.INSIDE if the entire box is on the side of the plane the normal is pointing, Intersect.OUTSIDE
-     * if the entire box is on the opposite side, and Intersect.INTERSECTING if the box intersects the plane.
+     * if the entire box is on the opposite side, and {@link Intersect#INTERSECTING()} if the box intersects the plane.
      */
-    public native Intersect intersectPlane(Plane plane);
+    public native Integer intersectPlane(Plane plane);
 
     /**
      * Determines whether or not a bounding box is hidden from view by the occluder.
