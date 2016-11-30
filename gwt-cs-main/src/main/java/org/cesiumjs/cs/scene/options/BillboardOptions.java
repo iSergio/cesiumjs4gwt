@@ -67,7 +67,7 @@ public class BillboardOptions {
      * Gets or sets a height for the billboard. If undefined, the image height will be used.
      */
     @JsProperty
-    public double height;
+    public Number height;
     /**
      * Gets or sets the height reference of this billboard.
      * Default: {@link HeightReference#NONE()}
@@ -124,7 +124,7 @@ public class BillboardOptions {
      * Gets or sets the rotation angle in radians.
      */
     @JsProperty
-    public double rotation;
+    public Number rotation;
 
     /**
      * Gets or sets the uniform scale that is multiplied with the billboard's image size in pixels. A scale of 1.0 does
@@ -132,7 +132,7 @@ public class BillboardOptions {
      * less than 1.0 shrinks the billboard.
      */
     @JsProperty
-    public double scale;
+    public Number scale;
     /**
      * Gets or sets near and far scaling properties of a Billboard based on the billboard's distance from the camera.
      * A billboard's scale will interpolate between the {@link NearFarScalar#nearValue} and {@link NearFarScalar#farValue} while
