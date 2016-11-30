@@ -51,26 +51,28 @@ public class Scene {
      */
     @JsProperty
     public boolean completeMorphOnUserInput;
-    // TODO: later
-//    debugCommandFilter : function Scene/Scene.js 446
-//    This property is for debugging only; it is not for production use.
-//    A function that determines what commands are executed. As shown in the examples below, the function receives the command's owner as an argument, and returns a boolean indicating if the command should be executed.
-//
-//    The default is undefined, indicating that all commands are executed.
-//
-//    Default Value:  undefined
-//    Example:
-// Do not execute any commands.
-//    scene.debugCommandFilter = function(command) {
-//        return false;
-//    };
-//
-//    // Execute only the billboard's commands.  That is, only draw the billboard.
-//    var billboards = new Cesium.BillboardCollection();
-//    scene.debugCommandFilter = function(command) {
-//        return command.owner === billboards;
-//    };
-
+    /**
+     * This property is for debugging only; it is not for production use.
+     * A function that determines what commands are executed. As shown in the examples below, the function receives the command's owner as an argument, and returns a boolean indicating if the command should be executed.
+     *
+     * The default is undefined, indicating that all commands are executed.
+     *
+     * <pre>
+     *     Example:
+     *     {@code
+     *     _viewer.scene().debugCommandFilter = new Scene.DebugCommandFilter() {
+     *         @Override
+     *         public boolean function(Object object) {
+     *             return ((JsObject)object).getObject("owner") == _viewer.scene().skyAtmosphere;
+     *         }
+     *     };
+     *     }
+     * </pre>
+     *
+     * Default: undefined
+     */
+    @JsProperty
+    public DebugCommandFilter debugCommandFilter;
     /**
      * This property is for debugging only; it is not for production use.
      * When Scene.debugShowFrustums is true, this contains properties with statistics about the number of command
@@ -287,9 +289,8 @@ public class Scene {
     /**
      * Gets the controller for camera input handling.
      */
-    // TODO: later
-//    @JsProperty(name = "screenSpaceCameraController")
-//    public native ScreenSpaceCameraController screenSpaceCameraController();
+    @JsProperty(name = "screenSpaceCameraController")
+    public native ScreenSpaceCameraController screenSpaceCameraController();
     /**
      * The shadow map in the scene. When enabled, models, primitives, and the globe may cast and receive shadows.
      * By default the light source of the shadow map is the sun.
@@ -490,5 +491,10 @@ public class Scene {
     @JsFunction
     public interface Listener {
         void function(Scene scene, JulianDate time);
+    }
+
+    @JsFunction
+    public interface DebugCommandFilter {
+        boolean function(Object object);
     }
 }
