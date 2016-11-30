@@ -26,21 +26,21 @@ import jsinterop.annotations.JsType;
 @JsType(isNative = true, namespace = "Cesium", name = "ClockRange")
 public class ClockRange {
     /**
-     * When Clock#startTime or Clock#stopTime is reached, Clock#tick will not advance Clock#currentTime any further.
+     * When {@link Clock#startTime or {@link Clock#stopTime} is reached, {@link Clock#tick} will not advance {@link Clock#currentTime} any further.
      */
     @JsProperty(name = "CLAMPED")
-    public static native int CLAMPED();
+    public static native Number CLAMPED();
     /**
-     * When Clock#stopTime is reached, Clock#tick will advance Clock#currentTime to the opposite end of the interval.
-     * When time is moving backwards, Clock#tick will not advance past Clock#startTime
+     * When {@link Clock#stopTime} is reached, {@link Clock#tick} will advance {@link Clock#currentTime} to the opposite end of the interval.
+     * When time is moving backwards, {@link Clock#tick} will not advance past {@link Clock#startTime}
      */
     @JsProperty(name = "LOOP_STOP")
-    public static native int LOOP_STOP();
+    public static native Number LOOP_STOP();
     /**
-     * Clock#tick will always advances the clock in its current direction.
+     * {@link Clock#tick} will always advances the clock in its current direction.
      */
     @JsProperty(name = "UNBOUNDED")
-    public static native int UNBOUNDED();
+    public static native Number UNBOUNDED();
 
     @JsConstructor
     private ClockRange() {}

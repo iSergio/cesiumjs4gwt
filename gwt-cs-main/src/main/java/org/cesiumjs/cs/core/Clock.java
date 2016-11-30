@@ -29,45 +29,45 @@ import org.cesiumjs.cs.core.options.ClockOptions;
 @JsType(isNative = true, namespace = "Cesium", name = "Clock")
 public class Clock {
     /**
-     * Indicates whether Clock#tick can advance time. This could be false if data is being buffered, for example.
-     * The clock will only advance time when both Clock#canAnimate and Clock#shouldAnimate are true.
-     * Default Value:  true.
+     * Indicates whether {@link Clock#tick} can advance time. This could be false if data is being buffered, for example.
+     * The clock will only advance time when both {@link Clock#canAnimate} and {@link Clock#shouldAnimate} are true.
+     * Default: true.
      */
     @JsProperty
     public boolean canAnimate;
     /**
-     * Determines how the clock should behave when Clock#startTime or Clock#stopTime is reached.
-     * Default Value:  ClockRange.UNBOUNDED
+     * Determines how the clock should behave when {@link Clock#startTime} or {@link Clock#stopTime} is reached.
+     * Default: {@link ClockRange#UNBOUNDED()}
      */
     @JsProperty
-    public int clockRange;
+    public Number clockRange;
     /**
-     * Determines if calls to Clock#tick are frame dependent or system clock dependent.
-     * Changing this property to ClockStep.SYSTEM_CLOCK will set Clock#multiplier to 1.0,
-     * Clock#shouldAnimate to true, and Clock#currentTime to the current system clock time.
-     * Default Value:  ClockStep.SYSTEM_CLOCK_MULTIPLIER
+     * Determines if calls to {@link Clock#tick()} are frame dependent or system clock dependent.
+     * Changing this property to {@link ClockStep#SYSTEM_CLOCK()} LOCK will set {@link Clock#multiplier} to 1.0,
+     * {@link Clock#shouldAnimate} to true, and {@link Clock#currentTime} to the current system clock time.
+     * Default: {@link ClockStep#SYSTEM_CLOCK_MULTIPLIER()}
      */
     @JsProperty
-    public int clockStep;
+    public Number clockStep;
     /**
-     * The current time. Changing this property will change Clock#clockStep from ClockStep.SYSTEM_CLOCK to ClockStep.SYSTEM_CLOCK_MULTIPLIER.
+     * The current time. Changing this property will change {@link Clock#clockStep} from {@link ClockStep#SYSTEM_CLOCK()} to {@link ClockStep#SYSTEM_CLOCK_MULTIPLIER()}.
      */
     @JsProperty
     public JulianDate currentTime;
     /**
-     * Gets or sets how much time advances when Clock#tick is called. Negative values allow for advancing backwards.
-     * If Clock#clockStep is set to ClockStep.TICK_DEPENDENT, this is the number of seconds to advance.
-     * If Clock#clockStep is set to ClockStep.SYSTEM_CLOCK_MULTIPLIER, this value is multiplied by the elapsed system
-     * time since the last call to Clock#tick. Changing this property will change Clock#clockStep from ClockStep.SYSTEM_CLOCK to
-     * ClockStep.SYSTEM_CLOCK_MULTIPLIER.
-     * Default Value:  1.0.
+     * Gets or sets how much time advances when {@link Clock#tick} is called. Negative values allow for advancing backwards.
+     * If {@link Clock#clockStep} is set to {@link ClockStep#TICK_DEPENDENT()}, this is the number of seconds to advance.
+     * If {@link Clock#clockStep} is set to {@link ClockStep#SYSTEM_CLOCK_MULTIPLIER()}, this value is multiplied by the elapsed system
+     * time since the last call to {@link Clock#tick}. Changing this property will change {@link Clock#clockStep} from {@link ClockStep#SYSTEM_CLOCK()} to
+     * {@link ClockStep#SYSTEM_CLOCK_MULTIPLIER()}.
+     * Default: 1.0.
      */
-    public double multiplier;
+    public Number multiplier;
     /**
-     * Indicates whether Clock#tick should attempt to advance time. The clock will only advance time when both
-     * Clock#canAnimate and Clock#shouldAnimate are true. Changing this property will change Clock#clockStep from
-     * ClockStep.SYSTEM_CLOCK to ClockStep.SYSTEM_CLOCK_MULTIPLIER.
-     * Default Value:  true.
+     * Indicates whether {@link Clock#tick} should attempt to advance time. The clock will only advance time when both
+     * {@link Clock#canAnimate} and {@link Clock#shouldAnimate} are true. Changing this property will change {@link Clock#clockStep} from
+     * {@link ClockStep#SYSTEM_CLOCK() to {@link ClockStep#SYSTEM_CLOCK_MULTIPLIER()}.
+     * Default: true.
      */
     @JsProperty
     public boolean shouldAnimate;
@@ -82,7 +82,7 @@ public class Clock {
     @JsProperty
     public JulianDate stopTime;
     /**
-     * An Event that is fired whenever Clock#tick is called.
+     * An Event that is fired whenever {@link Clock#tick} is called.
      */
     @JsProperty
     public Event onTick;
@@ -117,8 +117,8 @@ public class Clock {
 
     /**
      * Advances the clock from the current time based on the current configuration options. tick should be called every
-     * frame, regardless of whether animation is taking place or not. To control animation, use the Clock#shouldAnimate property.
-     * @return The new value of the Clock#currentTime property.
+     * frame, regardless of whether animation is taking place or not. To control animation, use the {@link Clock#shouldAnimate} property.
+     * @return The new value of the {@link Clock#currentTime} property.
      */
     @JsMethod
     public native JulianDate tick();

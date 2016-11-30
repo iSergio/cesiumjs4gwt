@@ -21,7 +21,7 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * Constants to determine how much time advances with each call to Clock#tick.
+ * Constants to determine how much time advances with each call to {@link Clock#tick}.
  * @see Clock
  * @see ClockRange
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -29,23 +29,23 @@ import jsinterop.annotations.JsType;
 @JsType(isNative = true, namespace = "Cesium", name = "ClockStep")
 public class ClockStep {
     /**
-     * Clock#tick sets the clock to the current system time; ignoring all other settings.
+     * {@link Clock#tick} sets the clock to the current system time; ignoring all other settings.
      */
     @JsProperty(name = "SYSTEM_CLOCK")
-    public static native int SYSTEM_CLOCK();
+    public static native Number SYSTEM_CLOCK();
     /**
-     * Clock#tick advances the current time by the amount of system time elapsed since the previous call multiplied by Clock#multiplier.
+     * {@link Clock#tick} advances the current time by the amount of system time elapsed since the previous call multiplied by {@link Clock#multiplier}.
      */
     @JsProperty(name = "SYSTEM_CLOCK_MULTIPLIER")
-    public static native int SYSTEM_CLOCK_MULTIPLIER();
+    public static native Number SYSTEM_CLOCK_MULTIPLIER();
     /**
-     * Clock#tick advances the current time by a fixed step, which is the number of seconds specified by Clock#multiplier.
+     * {@link Clock#tick} advances the current time by a fixed step, which is the number of seconds specified by {@link Clock#multiplier}.
      */
     @JsProperty(name = "TICK_DEPENDENT")
-    public static native int TICK_DEPENDENT();
+    public static native Number TICK_DEPENDENT();
 
     /**
-     * Constants to determine how much time advances with each call to Clock#tick.
+     * Constants to determine how much time advances with each call to {@link Clock#tick}.
      * @see Clock
      * @see ClockRange
      */
