@@ -60,7 +60,7 @@ public class CZML extends AbstractExample {
 
     @Override
     public void buildPanel() {
-        ViewerPanel csVPanel = new ViewerPanel();
+        final ViewerPanel csVPanel = new ViewerPanel();
 
         Button satellitesBtn = new Button("Satellites");
         satellitesBtn.addClickHandler(new ClickHandler() {
