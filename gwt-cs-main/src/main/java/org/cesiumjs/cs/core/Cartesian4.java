@@ -31,33 +31,33 @@ import jsinterop.annotations.JsType;
 public class Cartesian4 implements Packable {
     /**
      * The X component.
-     * Default Value:  0.0
+     * Default: 0.0
      */
     @JsProperty
-    public double x;
+    public Number x;
     /**
      * The Y component.
-     * Default Value:  0.0
+     * Default: 0.0
      */
     @JsProperty
-    public double y;
+    public Number y;
     /**
      * The Z component.
-     * Default Value: 0.0
+     * Default: 0.0
      */
     @JsProperty
-    public double z;
+    public Number z;
     /**
      * The W component
-     * Default Value: 0.0
+     * Default: 0.0
      */
     @JsProperty
-    public double w;
+    public Number w;
     /**
      * The number of elements used to pack the object into an array.
      */
     @JsProperty
-    public static int packedLength;
+    public static Number packedLength;
     /**
      * An immutable Cartesian4 instance initialized to (1.0, 0.0, 0.0, 0.0).
      */
@@ -94,15 +94,15 @@ public class Cartesian4 implements Packable {
 
     /**
      * A 3D Cartesian point.
-     * @param x The X component. Default Value: 0.0
-     * @param y The Y component. Default Value: 0.0
-     * @param z The Z component. Default Value: 0.0
-     * @param w The W component. Default Value: 0.0
+     * @param x The X component. Default: 0.0
+     * @param y The Y component. Default: 0.0
+     * @param z The Z component. Default: 0.0
+     * @param w The W component. Default: 0.0
      * @see Cartesian2
      * @see Cartesian3
      */
     @JsConstructor
-    public Cartesian4(double x, double y, double z, double w) {}
+    public Cartesian4(Number x, Number y, Number z, Number w) {}
 
     /**
      * Duplicates this Cartesian4 instance.
@@ -136,7 +136,7 @@ public class Cartesian4 implements Packable {
      * @return true if they are within the provided epsilon, false otherwise.
      */
     @JsMethod
-    public native boolean equalsEpsilon(Cartesian4 right, double relativeEpsilon, double absoluteEpsilon);
+    public native boolean equalsEpsilon(Cartesian4 right, Number relativeEpsilon, Number absoluteEpsilon);
 
     /**
      * Creates a string representing this Cartesian in the format '(x, y, z, w)'.
@@ -193,7 +193,7 @@ public class Cartesian4 implements Packable {
 
     /**
      * Computes the squared distance between two points. Comparing squared distances using this function is more efficient
-     * than comparing distances using Cartesian4#distance.
+     * than comparing distances using {@link Cartesian4#distance}.
      * <pre>
      *     Example:
      *     {@code
@@ -216,7 +216,7 @@ public class Cartesian4 implements Packable {
      * @return  The modified result parameter.
      */
     @JsMethod
-    public static native Cartesian4 divideByScalar(Cartesian4 cartesian, double scalar, Cartesian4 result);
+    public static native Cartesian4 divideByScalar(Cartesian4 cartesian, Number scalar, Cartesian4 result);
 
     /**
      * Computes the dot (scalar) product of two Cartesians.
@@ -225,7 +225,7 @@ public class Cartesian4 implements Packable {
      * @return The dot product.
      */
     @JsMethod
-    public static native double dot(Cartesian4 left, Cartesian4 right);
+    public static native Number dot(Cartesian4 left, Cartesian4 right);
 
     /**
      * Compares the provided Cartesians componentwise and returns true if they are equal, false otherwise.
@@ -245,7 +245,7 @@ public class Cartesian4 implements Packable {
      * @return true if left and right are within the provided epsilon, false otherwise.
      */
     @JsMethod
-    public static native boolean equalsEpsilon(Cartesian4 left, Cartesian4 right, double relativeEpsilon, double absoluteEpsilon);
+    public static native boolean equalsEpsilon(Cartesian4 left, Cartesian4 right, Number relativeEpsilon, Number absoluteEpsilon);
 
     /**
      * Creates a Cartesian4 from two consecutive elements in an array.
@@ -265,7 +265,7 @@ public class Cartesian4 implements Packable {
      * @return The modified result parameter or a new Cartesian4 instance if one was not provided.
      */
     @JsMethod
-    public static native Cartesian4 fromArray(double[] array, Cartesian4 result);
+    public static native Cartesian4 fromArray(Number[] array, Cartesian4 result);
 
     /**
      * Creates a Cartesian4 from two consecutive elements in an array.
@@ -284,7 +284,7 @@ public class Cartesian4 implements Packable {
      * @return The modified result parameter or a new Cartesian4 instance if one was not provided.
      */
     @JsMethod
-    public static native Cartesian4 fromArray(double[] array);
+    public static native Cartesian4 fromArray(Number[] array);
 
     /**
      * Creates a Cartesian4 from two consecutive elements in an array.
@@ -305,7 +305,7 @@ public class Cartesian4 implements Packable {
      * @return The modified result parameter or a new Cartesian4 instance if one was not provided.
      */
     @JsMethod
-    public static native Cartesian4 fromArray(double[] array, int startingIndex, Cartesian4 result);
+    public static native Cartesian4 fromArray(Number[] array, int startingIndex, Cartesian4 result);
 
     /**
      * Creates a Cartesian4 from two consecutive elements in an array.
@@ -325,7 +325,7 @@ public class Cartesian4 implements Packable {
      * @return The modified result parameter or a new Cartesian4 instance if one was not provided.
      */
     @JsMethod
-    public static native Cartesian4 fromArray(double[] array, int startingIndex);
+    public static native Cartesian4 fromArray(Number[] array, int startingIndex);
 
     /**
      * Creates a Cartesian4 instance from a Color. red, green, blue, and alpha map to x, y, z, and w, respectively.
@@ -353,7 +353,7 @@ public class Cartesian4 implements Packable {
      * @return The modified result parameter or a new Cartesian4 instance if one was not provided.
      */
     @JsMethod
-    public static native Cartesian4 fromElements(double x, double y, double z, double w);
+    public static native Cartesian4 fromElements(Number x, Number y, Number z, Number w);
 
     /**
      * Creates a Cartesian4 instance from x and y coordinates.
@@ -365,7 +365,7 @@ public class Cartesian4 implements Packable {
      * @return The modified result parameter or a new Cartesian4 instance if one was not provided.
      */
     @JsMethod
-    public static native Cartesian4 fromElements(double x, double y, double z, double w, Cartesian4 result);
+    public static native Cartesian4 fromElements(Number x, Number y, Number z, Number w, Cartesian4 result);
 
     /**
      * Computes the linear interpolation or extrapolation at t using the provided cartesians.
@@ -375,7 +375,7 @@ public class Cartesian4 implements Packable {
      * @return The modified result parameter.
      */
     @JsMethod
-    public static native Cartesian4 lerp(Cartesian4 start, Cartesian4 end, double t);
+    public static native Cartesian4 lerp(Cartesian4 start, Cartesian4 end, Number t);
 
     /**
      * Computes the linear interpolation or extrapolation at t using the provided cartesians.
@@ -386,7 +386,7 @@ public class Cartesian4 implements Packable {
      * @return The modified result parameter.
      */
     @JsMethod
-    public static native Cartesian4 lerp(Cartesian4 start, Cartesian4 end, double t, Cartesian4 result);
+    public static native Cartesian4 lerp(Cartesian4 start, Cartesian4 end, Number t, Cartesian4 result);
 
     /**
      * Computes the Cartesian's magnitude (length).
@@ -394,7 +394,7 @@ public class Cartesian4 implements Packable {
      * @return The magnitude.
      */
     @JsMethod
-    public static native double magnitude(Cartesian4 cartesian);
+    public static native Number magnitude(Cartesian4 cartesian);
 
     /**
      * Computes the provided Cartesian's squared magnitude.
@@ -402,7 +402,7 @@ public class Cartesian4 implements Packable {
      * @return The squared magnitude.
      */
     @JsMethod
-    public static native double magnitudeSquared(Cartesian4 cartesian);
+    public static native Number magnitudeSquared(Cartesian4 cartesian);
 
     /**
      * Compares two Cartesians and computes a Cartesian which contains the maximum components of the supplied Cartesians.
@@ -429,7 +429,7 @@ public class Cartesian4 implements Packable {
      * @return The value of the maximum component.
      */
     @JsMethod
-    public static native double maximumComponent(Cartesian4 cartesian);
+    public static native Number maximumComponent(Cartesian4 cartesian);
 
     /**
      * Compares two Cartesians and computes a Cartesian which contains the minimum components of the supplied Cartesians.
@@ -482,7 +482,7 @@ public class Cartesian4 implements Packable {
      * @return The modified result parameter.
      */
     @JsMethod
-    public static native Cartesian4 multiplyByScalar(Cartesian4 cartesian, double scalar);
+    public static native Cartesian4 multiplyByScalar(Cartesian4 cartesian, Number scalar);
 
     /**
      * Multiplies the provided Cartesian componentwise by the provided scalar.
@@ -492,7 +492,7 @@ public class Cartesian4 implements Packable {
      * @return The modified result parameter.
      */
     @JsMethod
-    public static native Cartesian4 multiplyByScalar(Cartesian4 cartesian, double scalar, Cartesian4 result);
+    public static native Cartesian4 multiplyByScalar(Cartesian4 cartesian, Number scalar, Cartesian4 result);
 
     /**
      * Computes the componentwise product of two Cartesians.
@@ -553,7 +553,7 @@ public class Cartesian4 implements Packable {
      * @return The array that was packed into
      */
     @JsMethod
-    public static native double[] pack(Cartesian4 value);
+    public static native Number[] pack(Cartesian4 value);
 
     /**
      * Stores the provided instance into the provided array.
@@ -563,7 +563,7 @@ public class Cartesian4 implements Packable {
      * @return The array that was packed into
      */
     @JsMethod
-    public static native double[] pack(Cartesian4 value, double[] array, int startingIndex);
+    public static native Number[] pack(Cartesian4 value, Number[] array, Number startingIndex);
 
     /**
      * Flattens an array of Cartesian4s into and array of components.
@@ -571,7 +571,7 @@ public class Cartesian4 implements Packable {
      * @return The packed array.
      */
     @JsMethod
-    public static native double[] packArray(Cartesian4[] array);
+    public static native Number[] packArray(Cartesian4[] array);
 
     /**
      * Flattens an array of Cartesian4s into and array of components.
@@ -580,7 +580,7 @@ public class Cartesian4 implements Packable {
      * @return The packed array.
      */
     @JsMethod
-    public static native double[] packArray(Cartesian4[] array, double[] result);
+    public static native Number[] packArray(Cartesian4[] array, Number[] result);
 
     /**
      * Computes the componentwise difference of two Cartesians.
@@ -607,7 +607,7 @@ public class Cartesian4 implements Packable {
      * @return The modified result parameter or a new Cartesian4 instance if one was not provided.
      */
     @JsMethod
-    public static native Cartesian4 unpack(double[] array);
+    public static native Cartesian4 unpack(Number[] array);
 
     /**
      * Retrieves an instance from a packed array.
@@ -617,7 +617,7 @@ public class Cartesian4 implements Packable {
      * @return The modified result parameter or a new Cartesian4 instance if one was not provided.
      */
     @JsMethod
-    public static native Cartesian4 unpack(double[] array, int startingIndex, Cartesian4 result);
+    public static native Cartesian4 unpack(Number[] array, Number startingIndex, Cartesian4 result);
 
     /**
      * Unpacks an array of cartesian components into and array of Cartesian4s.
