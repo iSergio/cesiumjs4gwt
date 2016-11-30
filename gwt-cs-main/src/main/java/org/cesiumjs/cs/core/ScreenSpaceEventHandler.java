@@ -60,7 +60,7 @@ public class ScreenSpaceEventHandler {
      * @see #setInputAction
      * @see #removeInputAction
      */
-    public native Function getInputAction(int type);
+    public native Function getInputAction(Integer type);
 
     /**
      * Returns the function to be executed on an input event.
@@ -70,7 +70,7 @@ public class ScreenSpaceEventHandler {
      * @see #setInputAction
      * @see #removeInputAction
      */
-    public native Function getInputAction(int type, int modifier);
+    public native Function getInputAction(Integer type, Integer modifier);
 
     /**
      * Returns true if this object was destroyed; otherwise, false.
@@ -85,44 +85,37 @@ public class ScreenSpaceEventHandler {
     /**
      * Removes the function to be executed on an input event.
      * @param type The {@link ScreenSpaceEventType} of input event.
-     * @see  #getInputAction(int)
-     * @see  #getInputAction(int, int)
-     * @see #setInputAction()
+     * @see #setInputAction
      */
-    public native void removeInputAction(int type);
+    public native void removeInputAction(Integer type);
 
     /**
      * Removes the function to be executed on an input event.
      * @param type The {@link ScreenSpaceEventType} of input event.
      * @param modifier A {@link KeyboardEventModifier} key that is held when a type event occurs.
-     * @see  #getInputAction(int)
-     * @see  #getInputAction(int, int)
-     * @see #setInputAction()
+     * @see  #getInputAction
+     * @see #setInputAction
      */
-    public native void removeInputAction(int type, int modifier);
+    public native void removeInputAction(Integer type, Integer modifier);
 
     /**
      * Set a function to be executed on an input event.
      * @param action Function to be executed when the input event occurs.
      * @param type The {@link ScreenSpaceEventType} of input event.
-     * @see #getInputAction(int)
-     * @see #getInputAction(int, int)
-     * @see #removeInputAction(int)
-     * @see #removeInputAction(int, int)
+     * @see #getInputAction
+     * @see #removeInputAction
      */
-    public native void setInputAction(Listener action, int type);
+    public native void setInputAction(Listener action, Integer type);
 
     /**
      * Set a function to be executed on an input event.
      * @param action Function to be executed when the input event occurs.
      * @param type The {@link ScreenSpaceEventType} of input event.
      * @param modifier A {@link KeyboardEventModifier} key that is held when a type event occurs.
-     * @see #getInputAction(int)
-     * @see #getInputAction(int, int)
-     * @see #removeInputAction(int)
-     * @see #removeInputAction(int, int)
+     * @see #getInputAction
+     * @see #removeInputAction
      */
-    public native void setInputAction(Listener action, int type, int modifier);
+    public native void setInputAction(Listener action, Integer type, Integer modifier);
 
     @JsFunction
     public interface Listener<T> {
