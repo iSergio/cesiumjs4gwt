@@ -88,7 +88,7 @@ public class GeometryAndAppearances extends AbstractExample {
                         polygonGraphicsOptions.hierarchy = new ConstantProperty<>(
                                 new PolygonHierarchy(
                                         Cartesian3.fromDegreesArray(
-                                                new double[] {
+                                                new Number[] {
                                                         -107.0, 27.0,
                                                         -107.0, 22.0,
                                                         -102.0, 23.0,
@@ -170,7 +170,7 @@ public class GeometryAndAppearances extends AbstractExample {
                         polygonGraphicsOptions.hierarchy = new ConstantProperty<>(
                                 new PolygonHierarchy(
                                         Cartesian3.fromDegreesArray(
-                                                new double[] {
+                                                new Number[] {
                                                         -118.0, 30.0,
                                                         -115.0, 30.0,
                                                         -117.1, 31.1,
@@ -250,7 +250,7 @@ public class GeometryAndAppearances extends AbstractExample {
 
                         WallGraphicsOptions wallGraphicsOptions = new WallGraphicsOptions();
                         wallGraphicsOptions.positions = new ConstantProperty<>(
-                        Cartesian3.fromDegreesArray(new double[] {-95.0, 50.0, -85.0, 50.0, -75.0, 50.0}));
+                        Cartesian3.fromDegreesArray(new Number[] {-95.0, 50.0, -85.0, 50.0, -75.0, 50.0}));
                         wallGraphicsOptions.maximumHeights = new ConstantProperty<>(new double[] {500000, 1000000, 500000});
                         wallGraphicsOptions.minimumHeights = new ConstantProperty<>(new double[] {0, 500000, 0});
                         wallGraphicsOptions.outline = new ConstantProperty<>(true);
@@ -273,14 +273,14 @@ public class GeometryAndAppearances extends AbstractExample {
 
                         polygonGraphicsOptions = new PolygonGraphicsOptions();
                         PolygonHierarchy polygonHierarchy = new PolygonHierarchy(
-                                Cartesian3.fromDegreesArray(new double[] {-109.0, 30.0, -95.0, 30.0, -95.0, 40.0, -109.0, 40.0}),
+                                Cartesian3.fromDegreesArray(new Number[] {-109.0, 30.0, -95.0, 30.0, -95.0, 40.0, -109.0, 40.0}),
                                 new PolygonHierarchy[] {new PolygonHierarchy(
-                                        Cartesian3.fromDegreesArray(new double[] {-107.0, 31.0, -107.0, 39.0, -97.0, 39.0, -97.0, 31.0}),
+                                        Cartesian3.fromDegreesArray(new Number[] {-107.0, 31.0, -107.0, 39.0, -97.0, 39.0, -97.0, 31.0}),
                                         new PolygonHierarchy[] {new PolygonHierarchy(
-                                                Cartesian3.fromDegreesArray(new double[] {-105.0, 33.0, -99.0, 33.0, -99.0, 37.0, -105.0, 37.0}),
+                                                Cartesian3.fromDegreesArray(new Number[] {-105.0, 33.0, -99.0, 33.0, -99.0, 37.0, -105.0, 37.0}),
                                                 new PolygonHierarchy[]{
                                                         new PolygonHierarchy(
-                                                                Cartesian3.fromDegreesArray(new double[]{-103.0, 34.0, -101.0, 34.0, -101.0, 36.0, -103.0, 36.0})
+                                                                Cartesian3.fromDegreesArray(new Number[]{-103.0, 34.0, -101.0, 34.0, -101.0, 36.0, -103.0, 36.0})
                                                         )
                                                 }
                                         )}
@@ -343,7 +343,7 @@ public class GeometryAndAppearances extends AbstractExample {
                         csViewer.entities().add(new Entity(entityOptions));
 
                         polygonGraphicsOptions = new PolygonGraphicsOptions();
-                        polygonGraphicsOptions.hierarchy = new ConstantProperty<>(new PolygonHierarchy(Cartesian3.fromDegreesArray(new double[] {-113.0, 30.0, -110.0, 30.0, -110.0, 33.0, -111.5, 31.0, -113.0, 33.0})));
+                        polygonGraphicsOptions.hierarchy = new ConstantProperty<>(new PolygonHierarchy(Cartesian3.fromDegreesArray(new Number[] {-113.0, 30.0, -110.0, 30.0, -110.0, 33.0, -111.5, 31.0, -113.0, 33.0})));
                         polygonGraphicsOptions.extrudedHeight = new ConstantProperty<>(300000.0);
                         colorRandomOptions = new ColorRandomOptions();
                         colorRandomOptions.alpha = 1.0f;
@@ -451,7 +451,7 @@ public class GeometryAndAppearances extends AbstractExample {
                         wallGraphicsOptions = new WallGraphicsOptions();
                         wallGraphicsOptions.positions = new ConstantProperty<>(
                                 Cartesian3.fromDegreesArrayHeights(
-                                        new double[] {
+                                        new Number[] {
                                                 -90.0, 43.0, 100000.0,
                                                 -87.5, 45.0, 100000.0,
                                                 -85.0, 43.0, 100000.0,
@@ -466,7 +466,7 @@ public class GeometryAndAppearances extends AbstractExample {
                         csViewer.entities().add(new Entity(entityOptions));
 
                         CorridorGraphicsOptions corridorGraphicsOptions = new CorridorGraphicsOptions();
-                        corridorGraphicsOptions.positions = new ConstantProperty<>(Cartesian3.fromDegreesArray(new double[] {-120.0, 45.0, -125.0, 50.0, -125.0, 55.0}));
+                        corridorGraphicsOptions.positions = new ConstantProperty<>(Cartesian3.fromDegreesArray(new Number[] {-120.0, 45.0, -125.0, 50.0, -125.0, 55.0}));
                         corridorGraphicsOptions.width = new ConstantProperty<>(100000);
                         colorRandomOptions = new ColorRandomOptions();
                         colorRandomOptions.alpha = 1.0f;
@@ -477,7 +477,7 @@ public class GeometryAndAppearances extends AbstractExample {
                         csViewer.entities().add(new Entity(entityOptions));
 
                         corridorGraphicsOptions = new CorridorGraphicsOptions();
-                        corridorGraphicsOptions.positions = new ConstantProperty<>(Cartesian3.fromDegreesArray(new double[] {-120.0, 45.0, -125.0, 50.0, -125.0, 55.0}));
+                        corridorGraphicsOptions.positions = new ConstantProperty<>(Cartesian3.fromDegreesArray(new Number[] {-120.0, 45.0, -125.0, 50.0, -125.0, 55.0}));
                         corridorGraphicsOptions.width = new ConstantProperty<>(100000);
                         corridorGraphicsOptions.height = new ConstantProperty<>(300000);
                         corridorGraphicsOptions.extrudedHeight = new ConstantProperty<>(400000);
@@ -490,7 +490,7 @@ public class GeometryAndAppearances extends AbstractExample {
                         csViewer.entities().add(new Entity(entityOptions));
 
                         corridorGraphicsOptions = new CorridorGraphicsOptions();
-                        corridorGraphicsOptions.positions = new ConstantProperty<>(Cartesian3.fromDegreesArray(new double[] {-120.0, 45.0, -125.0, 50.0, -125.0, 55.0}));
+                        corridorGraphicsOptions.positions = new ConstantProperty<>(Cartesian3.fromDegreesArray(new Number[] {-120.0, 45.0, -125.0, 50.0, -125.0, 55.0}));
                         corridorGraphicsOptions.width = new ConstantProperty<>(100000);
                         corridorGraphicsOptions.height = new ConstantProperty<>(700000.0);
                         corridorGraphicsOptions.outline = new ConstantProperty<>(true);
@@ -507,7 +507,7 @@ public class GeometryAndAppearances extends AbstractExample {
                         PolylineVolumeGraphicsOptions polylineVolumeGraphicsOptions = new PolylineVolumeGraphicsOptions();
                         polylineVolumeGraphicsOptions.positions = new ConstantProperty<>(
                                 Cartesian3.fromDegreesArrayHeights(
-                                        new double[] {
+                                        new Number[] {
                                                 -102.0, 15.0, 100000.0,
                                                 -105.0, 20.0, 200000.0,
                                                 -110.0, 20.0, 100000.0}));
@@ -526,7 +526,7 @@ public class GeometryAndAppearances extends AbstractExample {
                         polylineVolumeGraphicsOptions = new PolylineVolumeGraphicsOptions();
                         polylineVolumeGraphicsOptions.positions = new ConstantProperty<>(
                                 Cartesian3.fromDegreesArray(
-                                        new double[] {
+                                        new Number[] {
                                                 -102.0, 15.0,
                                                 -105.0, 20.0,
                                                 -110.0, 20.0}));
@@ -542,7 +542,7 @@ public class GeometryAndAppearances extends AbstractExample {
                         polylineVolumeGraphicsOptions = new PolylineVolumeGraphicsOptions();
                         polylineVolumeGraphicsOptions.positions = new ConstantProperty<>(
                                 Cartesian3.fromDegreesArray(
-                                        new double[] {
+                                        new Number[] {
                                                 -104.0, 13.0,
                                                 -107.0, 18.0,
                                                 -112.0, 18.0}));

@@ -186,7 +186,7 @@ public class PickingStatic extends AbstractExample {
         _pickColor = Color.YELLOW().withAlpha(0.5f);
 
         PolygonGraphicsOptions polygonGraphicsOptions = new PolygonGraphicsOptions();
-        polygonGraphicsOptions.hierarchy = new ConstantProperty<>(new PolygonHierarchy(Cartesian3.fromDegreesArray(new double[] {-70.0, 30.0, -60.0, 30.0, -60.0, 40.0, -70.0, 40.0})));
+        polygonGraphicsOptions.hierarchy = new ConstantProperty<>(new PolygonHierarchy(Cartesian3.fromDegreesArray(new Number[] {-70.0, 30.0, -60.0, 30.0, -60.0, 40.0, -70.0, 40.0})));
         polygonGraphicsOptions.height = new ConstantProperty<>(0);
         EntityOptions entityOptions = new EntityOptions();
         entityOptions.polygon = new PolygonGraphics(polygonGraphicsOptions);
@@ -194,7 +194,7 @@ public class PickingStatic extends AbstractExample {
         makeProperty(red, Color.RED().withAlpha(0.5f));
 
         polygonGraphicsOptions = new PolygonGraphicsOptions();
-        polygonGraphicsOptions.hierarchy = new ConstantProperty<>(new PolygonHierarchy(Cartesian3.fromDegreesArray(new double[] {-75.0, 34.0, -63.0, 34.0, -63.0, 40.0, -75.0, 40.0})));
+        polygonGraphicsOptions.hierarchy = new ConstantProperty<>(new PolygonHierarchy(Cartesian3.fromDegreesArray(new Number[] {-75.0, 34.0, -63.0, 34.0, -63.0, 40.0, -75.0, 40.0})));
         polygonGraphicsOptions.height = new ConstantProperty<>(0);
         entityOptions = new EntityOptions();
         entityOptions.polygon = new PolygonGraphics(polygonGraphicsOptions);
@@ -202,7 +202,7 @@ public class PickingStatic extends AbstractExample {
         makeProperty(blue, Color.BLUE().withAlpha(0.5f));
 
         polygonGraphicsOptions = new PolygonGraphicsOptions();
-        polygonGraphicsOptions.hierarchy = new ConstantProperty<>(new PolygonHierarchy(Cartesian3.fromDegreesArray(new double[] {-67.0, 36.0, -55.0, 36.0, -55.0, 30.0, -67.0, 30.0})));
+        polygonGraphicsOptions.hierarchy = new ConstantProperty<>(new PolygonHierarchy(Cartesian3.fromDegreesArray(new Number[] {-67.0, 36.0, -55.0, 36.0, -55.0, 30.0, -67.0, 30.0})));
         polygonGraphicsOptions.height = new ConstantProperty<>(0);
         entityOptions = new EntityOptions();
         entityOptions.polygon = new PolygonGraphics(polygonGraphicsOptions);
@@ -264,7 +264,7 @@ public class PickingStatic extends AbstractExample {
                         labelEntity.label.text = new ConstantProperty<>("(" + lon + ", " + lat + ", " + height + ")");
 
                         Camera camera = scene.camera();
-                        labelEntity.label.eyeOffset = new ConstantProperty<>(new Cartesian3(0.0, 0.0, ((PerspectiveFrustum)camera.frustum).near * 1.5 - Cartesian3.distance(cartesian, camera.position)));
+                        labelEntity.label.eyeOffset = new ConstantProperty<>(new Cartesian3(0.0, 0.0, ((PerspectiveFrustum)camera.frustum).near * 1.5 - (double)Cartesian3.distance(cartesian, camera.position)));
 
                         foundPosition = true;
                     }
