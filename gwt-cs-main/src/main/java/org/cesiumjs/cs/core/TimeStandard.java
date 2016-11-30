@@ -16,6 +16,7 @@
 
 package org.cesiumjs.cs.core;
 
+import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
@@ -32,7 +33,7 @@ public class TimeStandard {
      * @return UTC standard
      */
     @JsProperty(name = "UTC")
-    public static native int UTC();
+    public static native Integer UTC();
 
     /**
      * Represents the International Atomic Time (TAI) time standard. TAI is the principal time standard to which the
@@ -40,5 +41,8 @@ public class TimeStandard {
      * @return TAI standard
      */
     @JsProperty(name = "TAI")
-    public static native int TAI();
+    public static native Integer TAI();
+
+    @JsConstructor
+    private TimeStandard() {}
 }

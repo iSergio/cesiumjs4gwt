@@ -79,10 +79,10 @@ public class JulianDate {
      *                        handled correctly. Default: 0.
      * @param secondsOfDay The number of seconds into the current Julian Day Number. Fractional seconds,
      *                     negative seconds and seconds greater than a day will be handled correctly. Default: 0.
-     * @param timeStandard The time standard in which the first two parameters are defined. Default: UTC.
+     * @param timeStandard The time standard in which the first two parameters are defined. Default: {@link TimeStandard#UTC()}.
      */
     @JsConstructor
-    public JulianDate(double julianDayNumber, double secondsOfDay, TimeStandard timeStandard) {}
+    public JulianDate(double julianDayNumber, double secondsOfDay, Integer timeStandard) {}
 
     /**
      * Adds the provided number of days to the provided date instance.
