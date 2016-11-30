@@ -20,6 +20,7 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Color;
+import org.cesiumjs.cs.datasources.StripeOrientation;
 import org.cesiumjs.cs.datasources.properties.options.StripeMaterialPropertyOptions;
 
 /**
@@ -32,13 +33,13 @@ public class StripeMaterialProperty extends MaterialProperty {
      * Default: {@link Color#WHITE()}
      */
     @JsProperty
-    public Color evenColor;
+    public Property evenColor;
     /**
      * Gets or sets the Property specifying the second Color.
      * Default: {@link Color#BLACK()}
      */
     @JsProperty
-    public Color oddColor;
+    public Property oddColor;
     /**
      * Gets or sets the numeric Property specifying the point into the pattern to begin drawing; with 0.0 being the
      * beginning of the even color, 1.0 the beginning of the odd color, 2.0 being the even color again,
@@ -46,19 +47,19 @@ public class StripeMaterialProperty extends MaterialProperty {
      * Default: 0.0
      */
     @JsProperty
-    public double offset;
+    public Property offset;
     /**
      * Gets or sets the Property specifying the StripeOrientation/
-     * Default: {@link StripeOrientation#HORIZONTAL}
+     * Default: {@link StripeOrientation#HORIZONTAL()}
      */
     @JsProperty
-    public int orientation;
+    public Property orientation;
     /**
      * Gets or sets the numeric Property specifying how many times the stripes repeat.
      * Default: 1.0
      */
     @JsProperty
-    public double repeat;
+    public Property repeat;
 
     /**
      * A {@link MaterialProperty} that maps to stripe {@link org.cesiumjs.cs.scene.Material} uniforms.
