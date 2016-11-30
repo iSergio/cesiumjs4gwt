@@ -22,7 +22,6 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.scene.HeightReference;
-import org.cesiumjs.cs.scene.HorizontalOrigin;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -74,12 +73,12 @@ public class BillboardOptions {
      * Default: {@link HeightReference#NONE()}
      */
     @JsProperty
-    public HeightReference heightReference;
+    public Number heightReference;
     /**
      * Gets or sets the horizontal origin of this billboard, which determines if the billboard is to the left, center, or right of its position.
      */
     @JsProperty
-    public HorizontalOrigin horizontalOrigin;
+    public Number horizontalOrigin;
     /**
      * Gets or sets the user-defined object returned when the billboard is picked.
      */
@@ -103,8 +102,8 @@ public class BillboardOptions {
     public Cartesian2 pixelOffset;
     /**
      * Gets or sets near and far pixel offset scaling properties of a Billboard based on the billboard's distance from the camera.
-     * A billboard's pixel offset will be scaled between the NearFarScalar#nearValue and NearFarScalar#farValue while
-     * the camera distance falls within the upper and lower bounds of the specified NearFarScalar#near and NearFarScalar#far.
+     * A billboard's pixel offset will be scaled between the {@link NearFarScalar#nearValue} and {@link NearFarScalar#farValue} while
+     * the camera distance falls within the upper and lower bounds of the specified {@link NearFarScalar#near} and {@link NearFarScalar#far}.
      * Outside of these ranges the billboard's pixel offset scale remains clamped to the nearest bound. If undefined,
      * pixelOffsetScaleByDistance will be disabled.
      */
@@ -136,8 +135,8 @@ public class BillboardOptions {
     public double scale;
     /**
      * Gets or sets near and far scaling properties of a Billboard based on the billboard's distance from the camera.
-     * A billboard's scale will interpolate between the NearFarScalar#nearValue and NearFarScalar#farValue while
-     * the camera distance falls within the upper and lower bounds of the specified NearFarScalar#near and NearFarScalar#far.
+     * A billboard's scale will interpolate between the {@link NearFarScalar#nearValue} and {@link NearFarScalar#farValue} while
+     * the camera distance falls within the upper and lower bounds of the specified {@link NearFarScalar#near} and {@link NearFarScalar#far}.
      * Outside of these ranges the billboard's scale remains clamped to the nearest bound. If undefined, scaleByDistance will be disabled.
      */
     @JsProperty
@@ -155,9 +154,9 @@ public class BillboardOptions {
     public boolean sizeInMeters;
     /**
      * Gets or sets near and far translucency properties of a Billboard based on the billboard's distance from the camera.
-     * A billboard's translucency will interpolate between the NearFarScalar#nearValue and NearFarScalar#farValue
-     * while the camera distance falls within the upper and lower bounds of the specified NearFarScalar#near and
-     * NearFarScalar#far. Outside of these ranges the billboard's translucency remains clamped to the nearest bound.
+     * A billboard's translucency will interpolate between the {@link NearFarScalar#nearValue} and {@link NearFarScalar#farValue}
+     * while the camera distance falls within the upper and lower bounds of the specified {@link NearFarScalar#near} and
+     * {@link NearFarScalar#far}. Outside of these ranges the billboard's translucency remains clamped to the nearest bound.
      * If undefined, translucencyByDistance will be disabled.
      */
     @JsProperty

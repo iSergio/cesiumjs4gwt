@@ -75,12 +75,12 @@ public class Billboard {
      * Default: {@link HeightReference#NONE()}
      */
     @JsProperty
-    public HeightReference heightReference;
+    public Number heightReference;
     /**
      * Gets or sets the horizontal origin of this billboard, which determines if the billboard is to the left, center, or right of its position.
      */
     @JsProperty
-    public HorizontalOrigin horizontalOrigin;
+    public Number horizontalOrigin;
     /**
      * Gets or sets the user-defined object returned when the billboard is picked.
      */
@@ -104,8 +104,8 @@ public class Billboard {
     public Cartesian2 pixelOffset;
     /**
      * Gets or sets near and far pixel offset scaling properties of a Billboard based on the billboard's distance from the camera.
-     * A billboard's pixel offset will be scaled between the NearFarScalar#nearValue and NearFarScalar#farValue while
-     * the camera distance falls within the upper and lower bounds of the specified NearFarScalar#near and NearFarScalar#far.
+     * A billboard's pixel offset will be scaled between the {@link NearFarScalar#nearValue} and {@link NearFarScalar#farValue} while
+     * the camera distance falls within the upper and lower bounds of the specified {@link NearFarScalar#near} and {@link NearFarScalar#far}.
      * Outside of these ranges the billboard's pixel offset scale remains clamped to the nearest bound. If undefined,
      * pixelOffsetScaleByDistance will be disabled.
      */
@@ -137,8 +137,8 @@ public class Billboard {
     public double scale;
     /**
      * Gets or sets near and far scaling properties of a Billboard based on the billboard's distance from the camera.
-     * A billboard's scale will interpolate between the NearFarScalar#nearValue and NearFarScalar#farValue while
-     * the camera distance falls within the upper and lower bounds of the specified NearFarScalar#near and NearFarScalar#far.
+     * A billboard's scale will interpolate between the {@link NearFarScalar#nearValue} and {@link NearFarScalar#farValue} while
+     * the camera distance falls within the upper and lower bounds of the specified {@link NearFarScalar#near} and {@link NearFarScalar#far}.
      * Outside of these ranges the billboard's scale remains clamped to the nearest bound. If undefined, scaleByDistance will be disabled.
      */
     @JsProperty
@@ -156,9 +156,9 @@ public class Billboard {
     public boolean sizeInMeters;
     /**
      * Gets or sets near and far translucency properties of a Billboard based on the billboard's distance from the camera.
-     * A billboard's translucency will interpolate between the NearFarScalar#nearValue and NearFarScalar#farValue
-     * while the camera distance falls within the upper and lower bounds of the specified NearFarScalar#near and
-     * NearFarScalar#far. Outside of these ranges the billboard's translucency remains clamped to the nearest bound.
+     * A billboard's translucency will interpolate between the {@link NearFarScalar#nearValue} and {@link NearFarScalar#farValue}
+     * while the camera distance falls within the upper and lower bounds of the specified {@link NearFarScalar#near} and
+     * {@link NearFarScalar#far}. Outside of these ranges the billboard's translucency remains clamped to the nearest bound.
      * If undefined, translucencyByDistance will be disabled.
      */
     @JsProperty
@@ -180,7 +180,7 @@ public class Billboard {
      * A billboard is created and its initial properties are set by calling {@link BillboardCollection#add}.
      * Performance:
      * Reading a property, e.g., Billboard#show, is constant time. Assigning to a property is constant
-     * time but results in CPU to GPU traffic when BillboardCollection#update is called.
+     * time but results in CPU to GPU traffic when {@link BillboardCollection#update} is called.
      * The per-billboard traffic is the same regardless of how many properties were updated.
      * If most billboards in a collection need to be updated, it may be more efficient to clear the collection
      * with BillboardCollection#removeAll and add new billboards instead of modifying each one.
@@ -225,7 +225,7 @@ public class Billboard {
      * This function is useful for dynamically creating textures that are shared across many billboards. Only the first
      * billboard will actually call the function and create the texture, while subsequent billboards created with the same id will simply re-use the existing texture.
      *
-     * To load an image from a URL, setting the Billboard#image property is more convenient.
+     * To load an image from a URL, setting the {@link Billboard#image} property is more convenient.
      * @param id The id of the image. This can be any string that uniquely identifies the image.
      * @param image The image to load. This parameter can either be a loaded Image or Canvas, a URL which will be
      *              loaded as an Image automatically, or a function which will be called to create the image if it hasn't been loaded already.
@@ -238,7 +238,7 @@ public class Billboard {
      * This function is useful for dynamically creating textures that are shared across many billboards. Only the first
      * billboard will actually call the function and create the texture, while subsequent billboards created with the same id will simply re-use the existing texture.
      *
-     * To load an image from a URL, setting the Billboard#image property is more convenient.
+     * To load an image from a URL, setting the {@link Billboard#image} property is more convenient.
      * @param id The id of the image. This can be any string that uniquely identifies the image.
      * @param image The image to load. This parameter can either be a loaded Image or Canvas, a URL which will be
      *              loaded as an Image automatically, or a function which will be called to create the image if it hasn't been loaded already.
@@ -251,7 +251,7 @@ public class Billboard {
      * This function is useful for dynamically creating textures that are shared across many billboards. Only the first
      * billboard will actually call the function and create the texture, while subsequent billboards created with the same id will simply re-use the existing texture.
      *
-     * To load an image from a URL, setting the Billboard#image property is more convenient.
+     * To load an image from a URL, setting the {@link Billboard#image} property is more convenient.
      * @param id The id of the image. This can be any string that uniquely identifies the image.
      * @param image The image to load. This parameter can either be a loaded Image or Canvas, a URL which will be
      *              loaded as an Image automatically, or a function which will be called to create the image if it hasn't been loaded already.
@@ -264,7 +264,7 @@ public class Billboard {
      * This function is useful for dynamically creating textures that are shared across many billboards. Only the first
      * billboard will actually call the function and create the texture, while subsequent billboards created with the same id will simply re-use the existing texture.
      *
-     * To load an image from a URL, setting the Billboard#image property is more convenient.
+     * To load an image from a URL, setting the {@link Billboard#image} property is more convenient.
      * @param id The id of the image. This can be any string that uniquely identifies the image.
      * @param image The image to load. This parameter can either be a loaded Image or Canvas, a URL which will be
      *              loaded as an Image automatically, or a function which will be called to create the image if it hasn't been loaded already.
