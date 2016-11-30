@@ -41,10 +41,10 @@ public class SampledPositionProperty extends PositionProperty {
     public double backwardExtrapolationDuration;
     /**
      * Gets or sets the type of extrapolation to perform when a value is requested at a time before any available samples.
-     * Default: ExtrapolationType.NONE
+     * Default: {@link ExtrapolationType#NONE()}
      */
     @JsProperty
-    public ExtrapolationType backwardExtrapolationType;
+    public Integer backwardExtrapolationType;
     /**
      * Gets or sets the amount of time to extrapolate forward before the property becomes undefined. A value of 0 will extrapolate forever.
      * Default: 0
@@ -53,10 +53,10 @@ public class SampledPositionProperty extends PositionProperty {
     public double forwardExtrapolationDuration;
     /**
      * Gets or sets the type of extrapolation to perform when a value is requested at a time after any available samples.
-     * Default: ExtrapolationType.NONE
+     * Default: {@link ExtrapolationType#NONE()}
      */
     @JsProperty
-    public ExtrapolationType forwardExtrapolationType;
+    public Integer forwardExtrapolationType;
     /**
      * Gets the interpolation algorithm to use when retrieving a value.
      * Default: {@link LinearApproximation}
