@@ -29,17 +29,17 @@ public class VerticalOrigin {
      * The origin is at the vertical center of the object.
      */
     @JsProperty(name = "CENTER")
-    public static native Number CENTER();
+    public static native Integer CENTER();
     /**
      * The origin is at the bottom of the object.
      */
     @JsProperty(name = "BOTTOM")
-    public static native Number BOTTOM();
+    public static native Integer BOTTOM();
     /**
      * The origin is at the top of the object.
      */
     @JsProperty(name = "TOP")
-    public static native Number TOP();
+    public static native Integer TOP();
 
     /**
      * The vertical location of an origin relative to an object, e.g., a {@link org.cesiumjs.cs.datasources.graphics.BillboardGraphics}. For example, the vertical

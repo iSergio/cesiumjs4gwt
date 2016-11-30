@@ -73,12 +73,12 @@ public class BillboardOptions {
      * Default: {@link HeightReference#NONE()}
      */
     @JsProperty
-    public Number heightReference;
+    public Integer heightReference;
     /**
      * Gets or sets the horizontal origin of this billboard, which determines if the billboard is to the left, center, or right of its position.
      */
     @JsProperty
-    public Number horizontalOrigin;
+    public Integer horizontalOrigin;
     /**
      * Gets or sets the user-defined object returned when the billboard is picked.
      */
@@ -166,7 +166,7 @@ public class BillboardOptions {
      * or at the center of its position.
      */
     @JsProperty
-    public Number verticalOrigin;
+    public Integer verticalOrigin;
     /**
      * Gets or sets a width for the billboard. If undefined, the image width will be used.
      */

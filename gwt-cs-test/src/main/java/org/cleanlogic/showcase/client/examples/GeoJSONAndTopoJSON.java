@@ -65,11 +65,11 @@ public class GeoJSONAndTopoJSON extends AbstractExample {
                 _csPanelAbstract = new ViewerPanelAbstract(csConfiguration) {
                     @Override
                     public Viewer createViewer(Element element) {
-                        Viewer csViewer = new Viewer(element);
-                        csViewer.dataSources().removeAll();
-                        csViewer.camera.lookAt(Cartesian3.fromDegrees(-98.0, 40.0), new Cartesian3(0.0, -4790000.0, 3930000.0));
-                        csViewer.camera.lookAtTransform(Matrix4.IDENTITY());
-                        return csViewer;
+                        _viewer = new Viewer(element);
+                        _viewer.dataSources().removeAll();
+                        _viewer.camera.lookAt(Cartesian3.fromDegrees(-98.0, 40.0), new Cartesian3(0.0, -4790000.0, 3930000.0));
+                        _viewer.camera.lookAtTransform(Matrix4.IDENTITY());
+                        return _viewer;
                     }
                 };
             }

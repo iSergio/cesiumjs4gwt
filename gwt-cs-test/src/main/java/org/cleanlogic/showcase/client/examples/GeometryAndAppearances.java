@@ -64,7 +64,7 @@ public class GeometryAndAppearances extends AbstractExample {
                     public Viewer createViewer(Element element) {
                         Math.setRandomNumberSeed(1234);
 
-                        Viewer csViewer = new Viewer(element);
+                        _viewer = new Viewer(element);
 
                         StripeMaterialPropertyOptions stripeMaterialPropertyOptions = new StripeMaterialPropertyOptions();
                         stripeMaterialPropertyOptions.evenColor = new ConstantProperty<>(Color.WHITE().withAlpha(0.5f));
@@ -82,13 +82,13 @@ public class GeometryAndAppearances extends AbstractExample {
                         RectangleGraphics rectangleGraphics = new RectangleGraphics(rectangleGraphicsOptions);
                         EntityOptions entityOptions = new EntityOptions();
                         entityOptions.rectangle = rectangleGraphics;
-                        csViewer.entities().add(new Entity(entityOptions));
+                        _viewer.entities().add(new Entity(entityOptions));
 
                         PolygonGraphicsOptions polygonGraphicsOptions = new PolygonGraphicsOptions();
                         polygonGraphicsOptions.hierarchy = new ConstantProperty<>(
                                 new PolygonHierarchy(
                                         Cartesian3.fromDegreesArray(
-                                                new Number[] {
+                                                new double[] {
                                                         -107.0, 27.0,
                                                         -107.0, 22.0,
                                                         -102.0, 23.0,
@@ -101,7 +101,7 @@ public class GeometryAndAppearances extends AbstractExample {
                         PolygonGraphics polygonGraphics = new PolygonGraphics(polygonGraphicsOptions);
                         entityOptions = new EntityOptions();
                         entityOptions.polygon = polygonGraphics;
-                        csViewer.entities().add(new Entity(entityOptions));
+                        _viewer.entities().add(new Entity(entityOptions));
 
                         EllipseGraphicsOptions ellipseGraphicsOptions = new EllipseGraphicsOptions();
                         ellipseGraphicsOptions.semiMinorAxis = new ConstantProperty<>(300000.0);
@@ -116,7 +116,7 @@ public class GeometryAndAppearances extends AbstractExample {
                         entityOptions = new EntityOptions();
                         entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-80.0, 25.0));
                         entityOptions.ellipse = ellipseGraphics;
-                        csViewer.entities().add(new Entity(entityOptions));
+                        _viewer.entities().add(new Entity(entityOptions));
 
                         ellipseGraphicsOptions = new EllipseGraphicsOptions();
                         ellipseGraphicsOptions.semiMinorAxis = new ConstantProperty<>(250000.0);
@@ -131,7 +131,7 @@ public class GeometryAndAppearances extends AbstractExample {
                         entityOptions = new EntityOptions();
                         entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-72.0, 25.0));
                         entityOptions.ellipse = ellipseGraphics;
-                        csViewer.entities().add(new Entity(entityOptions));
+                        _viewer.entities().add(new Entity(entityOptions));
 
                         rectangleGraphicsOptions = new RectangleGraphicsOptions();
                         rectangleGraphicsOptions.coordinates = new ConstantProperty<>(Rectangle.fromDegrees(-118.0, 38.0, -116.0, 40.0));
@@ -146,7 +146,7 @@ public class GeometryAndAppearances extends AbstractExample {
                         rectangleGraphics = new RectangleGraphics(rectangleGraphicsOptions);
                         entityOptions = new EntityOptions();
                         entityOptions.rectangle = rectangleGraphics;
-                        csViewer.entities().add(new Entity(entityOptions));
+                        _viewer.entities().add(new Entity(entityOptions));
 
                         ellipseGraphicsOptions = new EllipseGraphicsOptions();
                         ellipseGraphicsOptions.semiMinorAxis = new ConstantProperty<>(100000.0);
@@ -164,13 +164,13 @@ public class GeometryAndAppearances extends AbstractExample {
                         entityOptions = new EntityOptions();
                         entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-117.0, 35.0));
                         entityOptions.ellipse = ellipseGraphics;
-                        csViewer.entities().add(new Entity(entityOptions));
+                        _viewer.entities().add(new Entity(entityOptions));
 
                         polygonGraphicsOptions = new PolygonGraphicsOptions();
                         polygonGraphicsOptions.hierarchy = new ConstantProperty<>(
                                 new PolygonHierarchy(
                                         Cartesian3.fromDegreesArray(
-                                                new Number[] {
+                                                new double[] {
                                                         -118.0, 30.0,
                                                         -115.0, 30.0,
                                                         -117.1, 31.1,
@@ -186,7 +186,7 @@ public class GeometryAndAppearances extends AbstractExample {
                         polygonGraphics = new PolygonGraphics(polygonGraphicsOptions);
                         entityOptions = new EntityOptions();
                         entityOptions.polygon = polygonGraphics;
-                        csViewer.entities().add(new Entity(entityOptions));
+                        _viewer.entities().add(new Entity(entityOptions));
 
                         CylinderGraphicsOptions cylinderGraphicsOptions = new CylinderGraphicsOptions();
                         cylinderGraphicsOptions.length = new ConstantProperty<>(200000.0);
@@ -202,7 +202,7 @@ public class GeometryAndAppearances extends AbstractExample {
                         entityOptions = new EntityOptions();
                         entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-70.0, 45.0, 100000.0));
                         entityOptions.cylinder = cylinderGraphics;
-                        csViewer.entities().add(new Entity(entityOptions));
+                        _viewer.entities().add(new Entity(entityOptions));
 
                         for (int i = 0; i < 5; ++i) {
                             double height = 100000.0 + (200000.0 * i);
@@ -217,7 +217,7 @@ public class GeometryAndAppearances extends AbstractExample {
                             entityOptions = new EntityOptions();
                             entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-106.0, 45.0, height));
                             entityOptions.box = boxGraphics;
-                            csViewer.entities().add(new Entity(entityOptions));
+                            _viewer.entities().add(new Entity(entityOptions));
 
                             EllipsoidGraphicsOptions ellipsoidGraphicsOptions = new EllipsoidGraphicsOptions();
                             ellipsoidGraphicsOptions.radii = new ConstantPositionProperty(new Cartesian3(45000.0, 45000.0, 90000.0));
@@ -231,7 +231,7 @@ public class GeometryAndAppearances extends AbstractExample {
                             entityOptions = new EntityOptions();
                             entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-102.0, 45.0, height));
                             entityOptions.ellipsoid = ellipsoidGraphics;
-                            csViewer.entities().add(new Entity(entityOptions));
+                            _viewer.entities().add(new Entity(entityOptions));
 
                             ellipsoidGraphicsOptions = new EllipsoidGraphicsOptions();
                             ellipsoidGraphicsOptions.radii = new ConstantPositionProperty(new Cartesian3(67500.0, 67500.0, 67500.0));
@@ -245,12 +245,12 @@ public class GeometryAndAppearances extends AbstractExample {
                             entityOptions = new EntityOptions();
                             entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-98.0, 45.0, height));
                             entityOptions.ellipsoid = ellipsoidGraphics;
-                            csViewer.entities().add(new Entity(entityOptions));
+                            _viewer.entities().add(new Entity(entityOptions));
                         }
 
                         WallGraphicsOptions wallGraphicsOptions = new WallGraphicsOptions();
                         wallGraphicsOptions.positions = new ConstantProperty<>(
-                        Cartesian3.fromDegreesArray(new Number[] {-95.0, 50.0, -85.0, 50.0, -75.0, 50.0}));
+                        Cartesian3.fromDegreesArray(new double[] {-95.0, 50.0, -85.0, 50.0, -75.0, 50.0}));
                         wallGraphicsOptions.maximumHeights = new ConstantProperty<>(new double[] {500000, 1000000, 500000});
                         wallGraphicsOptions.minimumHeights = new ConstantProperty<>(new double[] {0, 500000, 0});
                         wallGraphicsOptions.outline = new ConstantProperty<>(true);
@@ -262,25 +262,25 @@ public class GeometryAndAppearances extends AbstractExample {
                         WallGraphics wallGraphics = new WallGraphics(wallGraphicsOptions);
                         entityOptions = new EntityOptions();
                         entityOptions.wall = wallGraphics;
-                        csViewer.entities().add(new Entity(entityOptions));
+                        _viewer.entities().add(new Entity(entityOptions));
 
                         rectangleGraphicsOptions = new RectangleGraphicsOptions();
                         rectangleGraphicsOptions.coordinates = new ConstantProperty<>(Rectangle.fromDegrees(-92.0, 30.0, -85.0, 40.0));
                         rectangleGraphicsOptions.material = stripeMaterialProperty;
                         entityOptions = new EntityOptions();
                         entityOptions.rectangle = rectangleGraphics;
-                        csViewer.entities().add(new Entity(entityOptions));
+                        _viewer.entities().add(new Entity(entityOptions));
 
                         polygonGraphicsOptions = new PolygonGraphicsOptions();
                         PolygonHierarchy polygonHierarchy = new PolygonHierarchy(
-                                Cartesian3.fromDegreesArray(new Number[] {-109.0, 30.0, -95.0, 30.0, -95.0, 40.0, -109.0, 40.0}),
+                                Cartesian3.fromDegreesArray(new double[] {-109.0, 30.0, -95.0, 30.0, -95.0, 40.0, -109.0, 40.0}),
                                 new PolygonHierarchy[] {new PolygonHierarchy(
-                                        Cartesian3.fromDegreesArray(new Number[] {-107.0, 31.0, -107.0, 39.0, -97.0, 39.0, -97.0, 31.0}),
+                                        Cartesian3.fromDegreesArray(new double[] {-107.0, 31.0, -107.0, 39.0, -97.0, 39.0, -97.0, 31.0}),
                                         new PolygonHierarchy[] {new PolygonHierarchy(
-                                                Cartesian3.fromDegreesArray(new Number[] {-105.0, 33.0, -99.0, 33.0, -99.0, 37.0, -105.0, 37.0}),
+                                                Cartesian3.fromDegreesArray(new double[] {-105.0, 33.0, -99.0, 33.0, -99.0, 37.0, -105.0, 37.0}),
                                                 new PolygonHierarchy[]{
                                                         new PolygonHierarchy(
-                                                                Cartesian3.fromDegreesArray(new Number[]{-103.0, 34.0, -101.0, 34.0, -101.0, 36.0, -103.0, 36.0})
+                                                                Cartesian3.fromDegreesArray(new double[]{-103.0, 34.0, -101.0, 34.0, -101.0, 36.0, -103.0, 36.0})
                                                         )
                                                 }
                                         )}
@@ -290,7 +290,7 @@ public class GeometryAndAppearances extends AbstractExample {
                         polygonGraphics = new PolygonGraphics(polygonGraphicsOptions);
                         entityOptions = new EntityOptions();
                         entityOptions.polygon = polygonGraphics;
-                        csViewer.entities().add(new Entity(entityOptions));
+                        _viewer.entities().add(new Entity(entityOptions));
 
                         ellipseGraphicsOptions = new EllipseGraphicsOptions();
                         ellipseGraphicsOptions.semiMinorAxis = new ConstantProperty<>(200000.0);
@@ -301,7 +301,7 @@ public class GeometryAndAppearances extends AbstractExample {
                         entityOptions = new EntityOptions();
                         entityOptions.ellipse = ellipseGraphics;
                         entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-80.0, 35.0));
-                        csViewer.entities().add(new Entity(entityOptions));
+                        _viewer.entities().add(new Entity(entityOptions));
 
                         ellipseGraphicsOptions = new EllipseGraphicsOptions();
                         ellipseGraphicsOptions.semiMinorAxis = new ConstantProperty<>(200000.0);
@@ -312,7 +312,7 @@ public class GeometryAndAppearances extends AbstractExample {
                         entityOptions = new EntityOptions();
                         entityOptions.ellipse = ellipseGraphics;
                         entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-72.0, 35.0));
-                        csViewer.entities().add(new Entity(entityOptions));
+                        _viewer.entities().add(new Entity(entityOptions));
 
                         rectangleGraphicsOptions = new RectangleGraphicsOptions();
                         rectangleGraphicsOptions.coordinates = new ConstantProperty<>(Rectangle.fromDegrees(-110.0, 38.0, -107.0, 40.0));
@@ -325,7 +325,7 @@ public class GeometryAndAppearances extends AbstractExample {
                         rectangleGraphics = new RectangleGraphics(rectangleGraphicsOptions);
                         entityOptions = new EntityOptions();
                         entityOptions.rectangle = rectangleGraphics;
-                        csViewer.entities().add(new Entity(entityOptions));
+                        _viewer.entities().add(new Entity(entityOptions));
 
                         ellipseGraphicsOptions = new EllipseGraphicsOptions();
                         ellipseGraphicsOptions.semiMinorAxis = new ConstantProperty<>(100000.0);
@@ -340,10 +340,10 @@ public class GeometryAndAppearances extends AbstractExample {
                         entityOptions = new EntityOptions();
                         entityOptions.ellipse = ellipseGraphics;
                         entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-110.0, 35.0));
-                        csViewer.entities().add(new Entity(entityOptions));
+                        _viewer.entities().add(new Entity(entityOptions));
 
                         polygonGraphicsOptions = new PolygonGraphicsOptions();
-                        polygonGraphicsOptions.hierarchy = new ConstantProperty<>(new PolygonHierarchy(Cartesian3.fromDegreesArray(new Number[] {-113.0, 30.0, -110.0, 30.0, -110.0, 33.0, -111.5, 31.0, -113.0, 33.0})));
+                        polygonGraphicsOptions.hierarchy = new ConstantProperty<>(new PolygonHierarchy(Cartesian3.fromDegreesArray(new double[] {-113.0, 30.0, -110.0, 30.0, -110.0, 33.0, -111.5, 31.0, -113.0, 33.0})));
                         polygonGraphicsOptions.extrudedHeight = new ConstantProperty<>(300000.0);
                         colorRandomOptions = new ColorRandomOptions();
                         colorRandomOptions.alpha = 1.0f;
@@ -351,7 +351,7 @@ public class GeometryAndAppearances extends AbstractExample {
                         polygonGraphics = new PolygonGraphics(polygonGraphicsOptions);
                         entityOptions = new EntityOptions();
                         entityOptions.polygon = polygonGraphics;
-                        csViewer.entities().add(new Entity(entityOptions));
+                        _viewer.entities().add(new Entity(entityOptions));
 
                         cylinderGraphicsOptions = new CylinderGraphicsOptions();
                         cylinderGraphicsOptions.length = new ConstantProperty<>(400000.0);
@@ -363,7 +363,7 @@ public class GeometryAndAppearances extends AbstractExample {
                         cylinderGraphics = new CylinderGraphics(cylinderGraphicsOptions);
                         entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-70.0, 40.0, 200000.0));
                         entityOptions.cylinder = cylinderGraphics;
-                        csViewer.entities().add(new Entity(entityOptions));
+                        _viewer.entities().add(new Entity(entityOptions));
 
                         for (int i = 0; i < 5; ++i) {
                             double height = 200000.0 * i;
@@ -378,7 +378,7 @@ public class GeometryAndAppearances extends AbstractExample {
                             entityOptions = new EntityOptions();
                             entityOptions.ellipse = ellipseGraphics;
                             entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-65.0, 35.0));
-                            csViewer.entities().add(new Entity(entityOptions));
+                            _viewer.entities().add(new Entity(entityOptions));
 
                             rectangleGraphicsOptions = new RectangleGraphicsOptions();
                             rectangleGraphicsOptions.coordinates = new ConstantProperty<>(Rectangle.fromDegrees(-67.0, 27.0, -63.0, 32.0));
@@ -389,7 +389,7 @@ public class GeometryAndAppearances extends AbstractExample {
                             rectangleGraphics = new RectangleGraphics(rectangleGraphicsOptions);
                             entityOptions = new EntityOptions();
                             entityOptions.rectangle = rectangleGraphics;
-                            csViewer.entities().add(new Entity(entityOptions));
+                            _viewer.entities().add(new Entity(entityOptions));
                         }
 
                         for (int i = 0; i < 5; ++i) {
@@ -403,7 +403,7 @@ public class GeometryAndAppearances extends AbstractExample {
                             entityOptions = new EntityOptions();
                             entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-108.0, 45.0, height));
                             entityOptions.box = boxGraphics;
-                            csViewer.entities().add(new Entity(entityOptions));
+                            _viewer.entities().add(new Entity(entityOptions));
 
                             EllipsoidGraphicsOptions ellipsoidGraphicsOptions = new EllipsoidGraphicsOptions();
                             ellipsoidGraphicsOptions.radii = new ConstantPositionProperty(new Cartesian3(45000.0, 45000.0, 90000.0));
@@ -414,7 +414,7 @@ public class GeometryAndAppearances extends AbstractExample {
                             entityOptions = new EntityOptions();
                             entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-104.0, 45.0, height));
                             entityOptions.ellipsoid = ellipsoidGraphics;
-                            csViewer.entities().add(new Entity(entityOptions));
+                            _viewer.entities().add(new Entity(entityOptions));
 
                             ellipsoidGraphicsOptions = new EllipsoidGraphicsOptions();
                             ellipsoidGraphicsOptions.radii = new ConstantPositionProperty(new Cartesian3(67500.0, 67500.0, 67500.0));
@@ -425,7 +425,7 @@ public class GeometryAndAppearances extends AbstractExample {
                             entityOptions = new EntityOptions();
                             entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-100.0, 45.0, height));
                             entityOptions.ellipsoid = ellipsoidGraphics;
-                            csViewer.entities().add(new Entity(entityOptions));
+                            _viewer.entities().add(new Entity(entityOptions));
                         }
 
                         Cartesian3[] positions = new Cartesian3[40];
@@ -442,7 +442,7 @@ public class GeometryAndAppearances extends AbstractExample {
                         PolylineGraphics polylineGraphics = new PolylineGraphics(polylineGraphicsOptions);
                         entityOptions = new EntityOptions();
                         entityOptions.polyline = polylineGraphics;
-                        csViewer.entities().add(new Entity(entityOptions));
+                        _viewer.entities().add(new Entity(entityOptions));
 
                         positions = new Cartesian3[40];
                         for (int i = 0; i < 40; ++i) {
@@ -451,7 +451,7 @@ public class GeometryAndAppearances extends AbstractExample {
                         wallGraphicsOptions = new WallGraphicsOptions();
                         wallGraphicsOptions.positions = new ConstantProperty<>(
                                 Cartesian3.fromDegreesArrayHeights(
-                                        new Number[] {
+                                        new double[] {
                                                 -90.0, 43.0, 100000.0,
                                                 -87.5, 45.0, 100000.0,
                                                 -85.0, 43.0, 100000.0,
@@ -463,10 +463,10 @@ public class GeometryAndAppearances extends AbstractExample {
                         wallGraphics = new WallGraphics(wallGraphicsOptions);
                         entityOptions = new EntityOptions();
                         entityOptions.wall = wallGraphics;
-                        csViewer.entities().add(new Entity(entityOptions));
+                        _viewer.entities().add(new Entity(entityOptions));
 
                         CorridorGraphicsOptions corridorGraphicsOptions = new CorridorGraphicsOptions();
-                        corridorGraphicsOptions.positions = new ConstantProperty<>(Cartesian3.fromDegreesArray(new Number[] {-120.0, 45.0, -125.0, 50.0, -125.0, 55.0}));
+                        corridorGraphicsOptions.positions = new ConstantProperty<>(Cartesian3.fromDegreesArray(new double[] {-120.0, 45.0, -125.0, 50.0, -125.0, 55.0}));
                         corridorGraphicsOptions.width = new ConstantProperty<>(100000);
                         colorRandomOptions = new ColorRandomOptions();
                         colorRandomOptions.alpha = 1.0f;
@@ -474,10 +474,10 @@ public class GeometryAndAppearances extends AbstractExample {
                         CorridorGraphics corridorGraphics = new CorridorGraphics(corridorGraphicsOptions);
                         entityOptions = new EntityOptions();
                         entityOptions.corridor = corridorGraphics;
-                        csViewer.entities().add(new Entity(entityOptions));
+                        _viewer.entities().add(new Entity(entityOptions));
 
                         corridorGraphicsOptions = new CorridorGraphicsOptions();
-                        corridorGraphicsOptions.positions = new ConstantProperty<>(Cartesian3.fromDegreesArray(new Number[] {-120.0, 45.0, -125.0, 50.0, -125.0, 55.0}));
+                        corridorGraphicsOptions.positions = new ConstantProperty<>(Cartesian3.fromDegreesArray(new double[] {-120.0, 45.0, -125.0, 50.0, -125.0, 55.0}));
                         corridorGraphicsOptions.width = new ConstantProperty<>(100000);
                         corridorGraphicsOptions.height = new ConstantProperty<>(300000);
                         corridorGraphicsOptions.extrudedHeight = new ConstantProperty<>(400000);
@@ -487,10 +487,10 @@ public class GeometryAndAppearances extends AbstractExample {
                         corridorGraphics = new CorridorGraphics(corridorGraphicsOptions);
                         entityOptions = new EntityOptions();
                         entityOptions.corridor = corridorGraphics;
-                        csViewer.entities().add(new Entity(entityOptions));
+                        _viewer.entities().add(new Entity(entityOptions));
 
                         corridorGraphicsOptions = new CorridorGraphicsOptions();
-                        corridorGraphicsOptions.positions = new ConstantProperty<>(Cartesian3.fromDegreesArray(new Number[] {-120.0, 45.0, -125.0, 50.0, -125.0, 55.0}));
+                        corridorGraphicsOptions.positions = new ConstantProperty<>(Cartesian3.fromDegreesArray(new double[] {-120.0, 45.0, -125.0, 50.0, -125.0, 55.0}));
                         corridorGraphicsOptions.width = new ConstantProperty<>(100000);
                         corridorGraphicsOptions.height = new ConstantProperty<>(700000.0);
                         corridorGraphicsOptions.outline = new ConstantProperty<>(true);
@@ -502,12 +502,12 @@ public class GeometryAndAppearances extends AbstractExample {
                         corridorGraphics = new CorridorGraphics(corridorGraphicsOptions);
                         entityOptions = new EntityOptions();
                         entityOptions.corridor = corridorGraphics;
-                        csViewer.entities().add(new Entity(entityOptions));
+                        _viewer.entities().add(new Entity(entityOptions));
 
                         PolylineVolumeGraphicsOptions polylineVolumeGraphicsOptions = new PolylineVolumeGraphicsOptions();
                         polylineVolumeGraphicsOptions.positions = new ConstantProperty<>(
                                 Cartesian3.fromDegreesArrayHeights(
-                                        new Number[] {
+                                        new double[] {
                                                 -102.0, 15.0, 100000.0,
                                                 -105.0, 20.0, 200000.0,
                                                 -110.0, 20.0, 100000.0}));
@@ -521,12 +521,12 @@ public class GeometryAndAppearances extends AbstractExample {
                         PolylineVolumeGraphics polylineVolumeGraphics = new PolylineVolumeGraphics(polylineVolumeGraphicsOptions);
                         entityOptions = new EntityOptions();
                         entityOptions.polylineVolume = polylineVolumeGraphics;
-                        csViewer.entities().add(new Entity(entityOptions));
+                        _viewer.entities().add(new Entity(entityOptions));
 
                         polylineVolumeGraphicsOptions = new PolylineVolumeGraphicsOptions();
                         polylineVolumeGraphicsOptions.positions = new ConstantProperty<>(
                                 Cartesian3.fromDegreesArray(
-                                        new Number[] {
+                                        new double[] {
                                                 -102.0, 15.0,
                                                 -105.0, 20.0,
                                                 -110.0, 20.0}));
@@ -537,12 +537,12 @@ public class GeometryAndAppearances extends AbstractExample {
                         polylineVolumeGraphics = new PolylineVolumeGraphics(polylineVolumeGraphicsOptions);
                         entityOptions = new EntityOptions();
                         entityOptions.polylineVolume = polylineVolumeGraphics;
-                        csViewer.entities().add(new Entity(entityOptions));
+                        _viewer.entities().add(new Entity(entityOptions));
 
                         polylineVolumeGraphicsOptions = new PolylineVolumeGraphicsOptions();
                         polylineVolumeGraphicsOptions.positions = new ConstantProperty<>(
                                 Cartesian3.fromDegreesArray(
-                                        new Number[] {
+                                        new double[] {
                                                 -104.0, 13.0,
                                                 -107.0, 18.0,
                                                 -112.0, 18.0}));
@@ -551,9 +551,9 @@ public class GeometryAndAppearances extends AbstractExample {
                         polylineVolumeGraphics = new PolylineVolumeGraphics(polylineVolumeGraphicsOptions);
                         entityOptions = new EntityOptions();
                         entityOptions.polylineVolume = polylineVolumeGraphics;
-                        csViewer.entities().add(new Entity(entityOptions));
+                        _viewer.entities().add(new Entity(entityOptions));
 
-                        return csViewer;
+                        return _viewer;
                     }
                 };
             }

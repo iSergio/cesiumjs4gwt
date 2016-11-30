@@ -29,17 +29,17 @@ public class HorizontalOrigin {
      * The origin is at the horizontal center of the object.
      */
     @JsProperty(name = "CENTER")
-    public static native Number CENTER();
+    public static native Integer CENTER();
     /**
      * The origin is on the left side of the object.
      */
     @JsProperty(name = "LEFT")
-    public static native Number LEFT();
+    public static native Integer LEFT();
     /**
      * The origin is on the right side of the object.
      */
     @JsProperty(name = "RIGHT")
-    public static native Number RIGHT();
+    public static native Integer RIGHT();
 
     /**
      * The horizontal location of an origin relative to an object, e.g., a {@link Billboard}. For example, the horizontal

@@ -65,7 +65,7 @@ public class Billboards extends AbstractExample {
                 _csPanelAbstract = new ViewerPanelAbstract(csConfiguration) {
                     @Override
                     public Viewer createViewer(Element element) {
-                        Viewer csViewer = new Viewer(element);
+                        _viewer = new Viewer(element);
 
                         BillboardGraphicsOptions billboardGraphicsOptions = new BillboardGraphicsOptions();
                         billboardGraphicsOptions.image = new ConstantProperty<>(GWT.getModuleBaseURL() + "images/Cesium_Logo_overlay.png");
@@ -73,8 +73,8 @@ public class Billboards extends AbstractExample {
                         EntityOptions entityOptions = new EntityOptions();
                         entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-75.5977, 40.03883));
                         entityOptions.billboard = billboardGraphics;
-                        csViewer.entities().add(new Entity(entityOptions));
-                        return csViewer;
+                        _viewer.entities().add(entityOptions);
+                        return _viewer;
                     }
                 };
             }
@@ -340,7 +340,6 @@ public class Billboards extends AbstractExample {
         aPanel.add(billboardsLBox, 20, 20);
 
         contentPanel.add(new HTML("<p>This example shows billboards on Cesium</p>"));
-        contentPanel.add(billboardsLBox);
         contentPanel.add(aPanel);
 
         initWidget(contentPanel);

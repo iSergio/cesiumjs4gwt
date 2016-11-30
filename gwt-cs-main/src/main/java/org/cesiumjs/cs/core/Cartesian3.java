@@ -28,27 +28,27 @@ import jsinterop.annotations.*;
 public class Cartesian3 implements Packable {
     /**
      * The X component.
-     * Default: 0.0
+     * Default Value:  0.0
      */
     @JsProperty
-    public Number x;
+    public double x;
     /**
      * The Y component.
-     * Default: 0.0
+     * Default Value:  0.0
      */
     @JsProperty
-    public Number y;
+    public double y;
     /**
      * The Z component.
      * Default Value: 0.0
      */
     @JsProperty
-    public Number z;
+    public double z;
     /**
      * The number of elements used to pack the object into an array.
      */
     @JsProperty
-    public static Number packedLength;
+    public static int packedLength;
     /**
      * An immutable Cartesian3 instance initialized to (1.0, 0.0, 0.0).
      */
@@ -87,7 +87,7 @@ public class Cartesian3 implements Packable {
      * @see Cartesian4
      */
     @JsConstructor
-    public Cartesian3(Number x, Number y, Number z) {}
+    public Cartesian3(double x, double y, double z) {}
 
     /**
      * Duplicates this Cartesian3 instance.
@@ -121,7 +121,7 @@ public class Cartesian3 implements Packable {
      * @return true if they are within the provided epsilon, false otherwise.
      */
     @JsMethod
-    public native boolean equalsEpsilon(Cartesian3 right, Number relativeEpsilon, Number absoluteEpsilon);
+    public native boolean equalsEpsilon(Cartesian3 right, double relativeEpsilon, double absoluteEpsilon);
 
     /**
      * Creates a string representing this Cartesian in the format '(x, y, z)'.
@@ -156,7 +156,7 @@ public class Cartesian3 implements Packable {
      * @return The angle between the Cartesians.
      */
     @JsMethod
-    public static native Number angleBetween(Cartesian3 left, Cartesian3 right);
+    public static native double angleBetween(Cartesian3 left, Cartesian3 right);
 
     /**
      * Duplicates a Cartesian3 instance.
@@ -166,7 +166,7 @@ public class Cartesian3 implements Packable {
      * (Returns undefined if cartesian is undefined)
      */
     @JsMethod
-    public static native Cartesian3 clone(Cartesian3 cartesian, Cartesian3 result);
+    public static native Cartesian3 clone(Cartesian3 cartesian, @JsOptional Cartesian3 result);
 
     /**
      * Computes the cross (outer) product of two Cartesians.
@@ -192,11 +192,11 @@ public class Cartesian3 implements Packable {
      * @return The distance between two points.
      */
     @JsMethod
-    public static native Number distance(Cartesian3 left, Cartesian3 right);
+    public static native double distance(Cartesian3 left, Cartesian3 right);
 
     /**
      * Computes the squared distance between two points. Comparing squared distances using this function is more efficient
-     * than comparing distances using {@link Cartesian3#distance}.
+     * than comparing distances using Cartesian3#distance.
      * <pre>
      *     Example:
      *     {@code
@@ -209,7 +209,7 @@ public class Cartesian3 implements Packable {
      * @return The distance between two points.
      */
     @JsMethod
-    public static native Number distanceSquared(Cartesian3 left, Cartesian3 right);
+    public static native double distanceSquared(Cartesian3 left, Cartesian3 right);
 
     /**
      * Divides the provided Cartesian componentwise by the provided scalar.
@@ -218,7 +218,7 @@ public class Cartesian3 implements Packable {
      * @param result The object onto which to store the result.
      * @return  The modified result parameter.
      */
-    public static native Cartesian3 divideByScalar(Cartesian3 cartesian, Number scalar, Cartesian3 result);
+    public static native Cartesian3 divideByScalar(Cartesian3 cartesian, double scalar, Cartesian3 result);
 
     /**
      * Computes the dot (scalar) product of two Cartesians.
@@ -227,7 +227,7 @@ public class Cartesian3 implements Packable {
      * @return The dot product.
      */
     @JsMethod
-    public static native Number dot(Cartesian3 left, Cartesian3 right);
+    public static native double dot(Cartesian3 left, Cartesian3 right);
 
     /**
      * Compares the provided Cartesians componentwise and returns true if they are equal, false otherwise.
@@ -247,7 +247,7 @@ public class Cartesian3 implements Packable {
      * @return true if left and right are within the provided epsilon, false otherwise.
      */
     @JsMethod
-    public static native boolean equalsEpsilon(Cartesian3 left, Cartesian3 right, Number relativeEpsilon, Number absoluteEpsilon);
+    public static native boolean equalsEpsilon(Cartesian3 left, Cartesian3 right, double relativeEpsilon, double absoluteEpsilon);
 
     /**
      * Creates a Cartesian3 from two consecutive elements in an array.
@@ -281,7 +281,7 @@ public class Cartesian3 implements Packable {
      * @return The modified result parameter or a new Cartesian3 instance if one was not provided.
      */
     @JsMethod
-    public static native Cartesian3 fromArray(Number[] array, Cartesian3 result);
+    public static native Cartesian3 fromArray(double[] array, Cartesian3 result);
 
     /**
      * Creates a Cartesian3 from two consecutive elements in an array.
@@ -302,7 +302,7 @@ public class Cartesian3 implements Packable {
      * @return The modified result parameter or a new Cartesian3 instance if one was not provided.
      */
     @JsMethod
-    public static native Cartesian3 fromArray(JsArrayNumber array, Number startingIndex, Cartesian3 result);
+    public static native Cartesian3 fromArray(JsArrayNumber array, int startingIndex, Cartesian3 result);
 
     /**
      * Creates a Cartesian3 from two consecutive elements in an array.
@@ -319,7 +319,7 @@ public class Cartesian3 implements Packable {
      * @return The modified result parameter or a new Cartesian3 instance if one was not provided.
      */
     @JsMethod
-    public static native Cartesian3 fromArray(Number[] array, Number startingIndex, Cartesian3 result);
+    public static native Cartesian3 fromArray(double[] array, int startingIndex, Cartesian3 result);
 
     /**
      * Creates a Cartesian3 instance from an existing Cartesian4. This simply takes the x and y properties of the Cartesian4 and drops z and w.
@@ -341,7 +341,7 @@ public class Cartesian3 implements Packable {
      * @return The position
      */
     @JsMethod
-    public static native Cartesian3 fromDegrees(Number longitude, Number latitude);
+    public static native Cartesian3 fromDegrees(double longitude, double latitude);
 
     /**
      * Returns a Cartesian3 position from longitude and latitude values given in degrees.
@@ -355,7 +355,7 @@ public class Cartesian3 implements Packable {
      * @return The position
      */
     @JsMethod
-    public static native Cartesian3 fromDegrees(Number longitude, Number latitude, Number height);
+    public static native Cartesian3 fromDegrees(double longitude, double latitude, double height);
 
     /**
      * Returns a Cartesian3 position from longitude and latitude values given in degrees.
@@ -371,7 +371,7 @@ public class Cartesian3 implements Packable {
      * @return The position
      */
     @JsMethod
-    public static native Cartesian3 fromDegrees(Number longitude, Number latitude, Number height, Ellipsoid ellipsoid, Cartesian3 result);
+    public static native Cartesian3 fromDegrees(double longitude, double latitude, double height, Ellipsoid ellipsoid, Cartesian3 result);
 
     /**
      * Returns an array of Cartesian3 positions given an array of longitude and latitude values given in degrees.
@@ -385,7 +385,7 @@ public class Cartesian3 implements Packable {
      * @return The array of positions.
      */
     @JsMethod
-    public static native Cartesian3[] fromDegreesArray(Number[] coordinates);
+    public static native Cartesian3[] fromDegreesArray(double[] coordinates);
 
     /**
      * Returns an array of Cartesian3 positions given an array of longitude and latitude values given in degrees.
@@ -401,7 +401,7 @@ public class Cartesian3 implements Packable {
      * @return The array of positions.
      */
     @JsMethod
-    public static native Cartesian3[] fromDegreesArray(Number[] coordinates, Ellipsoid ellipsoid, Cartesian3[] result);
+    public static native Cartesian3[] fromDegreesArray(double[] coordinates, Ellipsoid ellipsoid, Cartesian3[] result);
 
     /**
      * Returns an array of Cartesian3 positions given an array of longitude, latitude and height values where longitude and latitude are given in degrees.
@@ -416,7 +416,7 @@ public class Cartesian3 implements Packable {
      * @return The array of positions.
      */
     @JsMethod
-    public static native Cartesian3[] fromDegreesArrayHeights(Number[] coordinates);
+    public static native Cartesian3[] fromDegreesArrayHeights(double[] coordinates);
 
     /**
      * Returns an array of Cartesian3 positions given an array of longitude, latitude and height values where longitude and latitude are given in degrees.
@@ -433,7 +433,7 @@ public class Cartesian3 implements Packable {
      * @return The array of positions.
      */
     @JsMethod
-    public static native Cartesian3[] fromDegreesArrayHeights(Number[] coordinates, Ellipsoid ellipsoid, Cartesian3[] result);
+    public static native Cartesian3[] fromDegreesArrayHeights(double[] coordinates, Ellipsoid ellipsoid, Cartesian3[] result);
 
     /**
      * Creates a Cartesian3 instance from x and y coordinates.
@@ -444,7 +444,7 @@ public class Cartesian3 implements Packable {
      * @return The modified result parameter or a new Cartesian3 instance if one was not provided.
      */
     @JsMethod
-    public static native Cartesian3 fromElements(Number x, Number y, Number z, Cartesian3 result);
+    public static native Cartesian3 fromElements(double x, double y, double z, Cartesian3 result);
 
     /**
      * Returns a Cartesian3 position from longitude and latitude values given in radians.
@@ -458,7 +458,7 @@ public class Cartesian3 implements Packable {
      * @return The position.
      */
     @JsMethod
-    public static native Cartesian3 fromRadians(Number longitude, Number latitude);
+    public static native Cartesian3 fromRadians(double longitude, double latitude);
 
     /**
      * Returns a Cartesian3 position from longitude and latitude values given in radians.
@@ -473,7 +473,7 @@ public class Cartesian3 implements Packable {
      * @return The position.
      */
     @JsMethod
-    public static native Cartesian3 fromRadians(Number longitude, Number latitude, Number height);
+    public static native Cartesian3 fromRadians(double longitude, double latitude, double height);
 
     /**
      * Returns a Cartesian3 position from longitude and latitude values given in radians.
@@ -490,7 +490,7 @@ public class Cartesian3 implements Packable {
      * @return The position.
      */
     @JsMethod
-    public static native Cartesian3 fromRadians(Number longitude, Number latitude, Number height, Ellipsoid ellipsoid, Cartesian3 result);
+    public static native Cartesian3 fromRadians(double longitude, double latitude, double height, Ellipsoid ellipsoid, Cartesian3 result);
 
     /**
      * Returns an array of Cartesian3 positions given an array of longitude and latitude values given in radians.
@@ -504,7 +504,7 @@ public class Cartesian3 implements Packable {
      * @return The array of positions.
      */
     @JsMethod
-    public static native Cartesian3[] fromRadiansArray(Number[] coordinates);
+    public static native Cartesian3[] fromRadiansArray(double[] coordinates);
 
     /**
      * Returns an array of Cartesian3 positions given an array of longitude and latitude values given in radians.
@@ -520,7 +520,7 @@ public class Cartesian3 implements Packable {
      * @return The array of positions.
      */
     @JsMethod
-    public static native Cartesian3[] fromRadiansArray(Number[] coordinates, Ellipsoid ellipsoid, Cartesian3[] result);
+    public static native Cartesian3[] fromRadiansArray(double[] coordinates, Ellipsoid ellipsoid, Cartesian3[] result);
 
     /**
      * Returns an array of Cartesian3 positions given an array of longitude, latitude and height values where longitude and latitude are given in radians.
@@ -534,7 +534,7 @@ public class Cartesian3 implements Packable {
      * @return The array of positions.
      */
     @JsMethod
-    public static native Cartesian3[] fromRadiansArrayHeights(Number[] coordinates);
+    public static native Cartesian3[] fromRadiansArrayHeights(double[] coordinates);
 
     /**
      * Returns an array of Cartesian3 positions given an array of longitude, latitude and height values where longitude and latitude are given in radians.
@@ -544,7 +544,7 @@ public class Cartesian3 implements Packable {
      * @return The array of positions.
      */
     @JsMethod
-    public static native Cartesian3[] fromRadiansArrayHeights(Number[] coordinates, Ellipsoid ellipsoid, Cartesian3[] result);
+    public static native Cartesian3[] fromRadiansArrayHeights(double[] coordinates, Ellipsoid ellipsoid, Cartesian3[] result);
 
     /**
      * Converts the provided Spherical into Cartesian3 coordinates.
@@ -564,7 +564,7 @@ public class Cartesian3 implements Packable {
      * @return The modified result parameter.
      */
     @JsMethod
-    public static native Cartesian3 lerp(Cartesian3 start, Cartesian3 end, Number t, Cartesian3 result);
+    public static native Cartesian3 lerp(Cartesian3 start, Cartesian3 end, double t, Cartesian3 result);
 
     /**
      * Computes the Cartesian's magnitude (length).
@@ -572,7 +572,7 @@ public class Cartesian3 implements Packable {
      * @return The magnitude.
      */
     @JsMethod
-    public static native Number magnitude(Cartesian3 cartesian);
+    public static native double magnitude(Cartesian3 cartesian);
 
     /**
      * Computes the provided Cartesian's squared magnitude.
@@ -580,7 +580,7 @@ public class Cartesian3 implements Packable {
      * @return The squared magnitude.
      */
     @JsMethod
-    public static native Number magnitudeSquared(Cartesian3 cartesian);
+    public static native double magnitudeSquared(Cartesian3 cartesian);
 
     /**
      * Compares two Cartesians and computes a Cartesian which contains the maximum components of the supplied Cartesians.
@@ -598,7 +598,7 @@ public class Cartesian3 implements Packable {
      * @return The value of the maximum component.
      */
     @JsMethod
-    public static native Number maximumComponent(Cartesian3 cartesian);
+    public static native double maximumComponent(Cartesian3 cartesian);
 
     /**
      * Compares two Cartesians and computes a Cartesian which contains the minimum components of the supplied Cartesians.
@@ -616,7 +616,7 @@ public class Cartesian3 implements Packable {
      * @return The value of the minimum component.
      */
     @JsMethod
-    public static native Number minimumComponent(Cartesian3 cartesian);
+    public static native double minimumComponent(Cartesian3 cartesian);
 
     /**
      * Returns the axis that is most orthogonal to the provided Cartesian.
@@ -635,7 +635,7 @@ public class Cartesian3 implements Packable {
      * @return The modified result parameter.
      */
     @JsMethod
-    public static native Cartesian3 multiplyByScalar(Cartesian3 cartesian, Number scalar, Cartesian3 result);
+    public static native Cartesian3 multiplyByScalar(Cartesian3 cartesian, double scalar, Cartesian3 result);
 
     /**
      * Computes the componentwise product of two Cartesians.
@@ -673,7 +673,7 @@ public class Cartesian3 implements Packable {
      * @return The array that was packed into
      */
     @JsMethod
-    public static native JsArrayNumber pack(Cartesian3 value, JsArrayNumber array, Number startingIndex);
+    public static native JsArrayNumber pack(Cartesian3 value, JsArrayNumber array, int startingIndex);
 
     /**
      * Flattens an array of Cartesian3s into and array of components.
@@ -709,7 +709,7 @@ public class Cartesian3 implements Packable {
      * @return The modified result parameter or a new Cartesian3 instance if one was not provided.
      */
     @JsMethod
-    public static native Cartesian3 unpack(JsArrayNumber array, Number startingIndex, Cartesian3 result);
+    public static native Cartesian3 unpack(JsArrayNumber array, int startingIndex, Cartesian3 result);
 
     /**
      * Unpacks an array of cartesian components into and array of Cartesian3s.

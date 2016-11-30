@@ -68,13 +68,13 @@ public class AtmosphereColor extends AbstractExample {
                 _csPanelAbstract = new ViewerPanelAbstract(csConfiguration) {
                     @Override
                     public Viewer createViewer(Element element) {
-                        Viewer csViewer = new Viewer(element);
-                        Camera camera = csViewer.camera;
+                        _viewer = new Viewer(element);
+                        Camera camera = _viewer.camera;
                         ViewOptions viewOptions = new ViewOptions();
                         viewOptions.destinationPos = Cartesian3.fromDegrees(-75.5847, 40.0397, 1000.0);
                         viewOptions.orientation = new HeadingPitchRoll(-Math.PI_OVER_TWO(), 0.2, 0.0);
                         camera.setView(viewOptions);
-                        return csViewer;
+                        return _viewer;
                     }
                 };
             }
