@@ -72,6 +72,17 @@ public class Event<T> {
     @JsMethod
     public native boolean removeEventListener(T listener, Object scope);
 
+    /**
+     * Universal callback listener, supports array params
+     */
+    @JsFunction
+    public interface Listener {
+        void function(Object ...o);
+    }
+
+    /**
+     * A function that removes a listener.
+     */
     @JsFunction
     public interface RemoveCallback {
         void function();
