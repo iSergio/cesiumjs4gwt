@@ -58,5 +58,6 @@ public class InjectorModule extends AbstractGinModule {
         bind(Shadows.class).asEagerSingleton();
         bind(Clustering.class).asEagerSingleton();
         bind(CZML.class).asEagerSingleton();
+        bind(CameraTutorial.class).asEagerSingleton();
     }
 }
