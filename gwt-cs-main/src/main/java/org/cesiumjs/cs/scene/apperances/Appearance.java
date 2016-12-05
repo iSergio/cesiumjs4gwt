@@ -14,15 +14,24 @@
  * limitations under the License.
  */
 
-package org.cesiumjs.cs.scene;
+package org.cesiumjs.cs.scene.apperances;
 
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.scene.options.AppearanceOptions;
+import org.cesiumjs.cs.scene.Material;
+import org.cesiumjs.cs.scene.apperances.options.AppearanceOptions;
 
 /**
+ * An appearance defines the full GLSL vertex and fragment shaders and the render state used to draw a Primitive.
+ * All appearances implement this base Appearance interface.
+ * @see MaterialAppearance
+ * @see EllipsoidSurfaceAppearance
+ * @see PerInstanceColorAppearance
+ * @see DebugAppearance
+ * @see PolylineColorAppearance
+ * @see PolylineMaterialAppearance
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = "Cesium", name = "Appearance")
@@ -33,27 +42,23 @@ public class Appearance {
      */
     @JsProperty(name = "closed")
     public native boolean closed();
-
-
     /**
      * The GLSL source code for the fragment shader. The full fragment shader source is built procedurally taking into
      * account the {@link #material}. Use {@link Appearance#getFragmentShaderSource()} to get the full source.
      */
     @JsProperty(name = "fragmentShaderSource")
     public native String fragmentShaderSource();
-
     /**
      * The material used to determine the fragment color. Unlike other Appearance properties, this is not read-only,
      * so an appearance's material can change on the fly.
-     * @see Fabric
      */
     @JsProperty
     public Material material;
     /**
      * The WebGL fixed-function state to use when rendering the geometry.
      */
-    @JsProperty
-    public Object renderState;
+    @JsProperty(name = "renderState")
+    public native Object renderState();
     /**
      * When true, the geometry is expected to appear translucent.
      * Default: true
@@ -63,12 +68,18 @@ public class Appearance {
     /**
      * The GLSL source code for the vertex shader.
      */
-    @JsProperty
-    public String vertexShaderSource;
+    @JsProperty(name = "vertexShaderSource")
+    public native String vertexShaderSource();
 
     /**
      * An appearance defines the full GLSL vertex and fragment shaders and the render state used to draw a Primitive.
      * All appearances implement this base Appearance interface.
+     * @see MaterialAppearance
+     * @see EllipsoidSurfaceAppearance
+     * @see PerInstanceColorAppearance
+     * @see DebugAppearance
+     * @see PolylineColorAppearance
+     * @see PolylineMaterialAppearance
      */
     @JsConstructor
     public Appearance() {}
@@ -76,7 +87,13 @@ public class Appearance {
     /**
      * An appearance defines the full GLSL vertex and fragment shaders and the render state used to draw a Primitive.
      * All appearances implement this base Appearance interface.
-     * @param options Options
+     * @see MaterialAppearance
+     * @see EllipsoidSurfaceAppearance
+     * @see PerInstanceColorAppearance
+     * @see DebugAppearance
+     * @see PolylineColorAppearance
+     * @see PolylineMaterialAppearance
+     * @param options {@link AppearanceOptions}
      */
     @JsConstructor
     public Appearance(AppearanceOptions options) {}

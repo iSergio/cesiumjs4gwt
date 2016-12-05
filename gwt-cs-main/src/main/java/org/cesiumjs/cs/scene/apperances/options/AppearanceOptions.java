@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.cesiumjs.cs.scene.options;
+package org.cesiumjs.cs.scene.apperances.options;
 
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
@@ -55,12 +55,11 @@ public class AppearanceOptions {
      */
     @JsProperty
     public String fragmentShaderSource;
-    //TODO:
-//    /**
-//     * Optional render state to override the default render state.
-//     */
-//    @JsProperty
-//    public RenderState renderState;
+    /**
+     * Optional render state to override the default render state.
+     */
+    @JsProperty
+    public Object renderState;
 
     /**
      * Options for Apperance
