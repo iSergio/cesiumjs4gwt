@@ -60,5 +60,6 @@ public class InjectorModule extends AbstractGinModule {
         bind(CZML.class).asEagerSingleton();
         bind(CameraTutorial.class).asEagerSingleton();
         bind(CesiumInspector.class).asEagerSingleton();
+        bind(Cardboard.class).asEagerSingleton();
     }
 }
