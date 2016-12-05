@@ -98,6 +98,7 @@ public class CesiumInspector extends AbstractExample {
                         primitiveOptions.geometryInstances = new GeometryInstance[] {new GeometryInstance(geometryInstanceOptions)};
                         PerInstanceColorAppearanceOptions perInstanceColorAppearanceOptions = new PerInstanceColorAppearanceOptions();
                         perInstanceColorAppearanceOptions.closed = true;
+                        primitiveOptions.appearance = new PerInstanceColorAppearance(perInstanceColorAppearanceOptions);
                         scene.primitives().add(new Primitive(primitiveOptions));
 
                         primitiveOptions = new PrimitiveOptions();
