@@ -32,7 +32,7 @@ import org.cesiumjs.cs.scene.enums.MapMode2D;
 import org.cesiumjs.cs.scene.enums.SceneMode;
 import org.cesiumjs.cs.scene.enums.ShadowMode;
 import org.cesiumjs.cs.scene.providers.ImageryProvider;
-import org.cesiumjs.cs.widgets.baselayerpicker.ProviderViewModel;
+import org.cesiumjs.cs.widgets.ProviderViewModel;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>

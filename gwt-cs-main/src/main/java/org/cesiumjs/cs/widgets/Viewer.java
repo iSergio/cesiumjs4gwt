@@ -18,10 +18,7 @@ package org.cesiumjs.cs.widgets;
 
 import com.google.gwt.dom.client.CanvasElement;
 import com.google.gwt.dom.client.Element;
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.Clock;
 import org.cesiumjs.cs.core.HeadingPitchRange;
 import org.cesiumjs.cs.core.providers.TerrainProvider;
@@ -290,7 +287,7 @@ public class Viewer {
      * @param mixin The Viewer mixin to add to this instance.
      */
     @JsMethod
-    public native void extend(ViewerMixin mixin);
+    public native void extend(Object mixin);
 
     /**
      * Extends the base viewer functionality with the provided mixin. A mixin may add additional properties, functions,
@@ -299,7 +296,7 @@ public class Viewer {
      * @param options The options object to be passed to the mixin function.
      */
     @JsMethod
-    public native void extend(ViewerMixin mixin, Object options);
+    public native void extend(Object mixin, Object options);
 
     /**
      * Flies the camera to the provided entity, entities, or data source. If the data source is still in the process of
@@ -453,13 +450,12 @@ public class Viewer {
     /**
      * A function that augments a Viewer instance with additional functionality.
      */
+    @JsFunction
     public interface ViewerMixin {
         /**
          * A function that augments a Viewer instance with additional functionality.
          * @param viewer The viewer instance.
          * @param object Options object to be passed to the mixin function.
-         * @see #extend(ViewerMixin)
-         * @see #extend(ViewerMixin, Object)
          */
         void function(Viewer viewer, Object object);
     }
