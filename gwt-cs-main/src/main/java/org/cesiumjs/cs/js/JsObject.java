@@ -50,18 +50,30 @@ public class JsObject extends JavaScriptObject {
     }
 
     public final static native void setProperty(Object target, String name, Number value) /*-{
+        if (target === undefined) {
+            target = {};
+        }
         target[name] = value;
     }-*/;
 
     public final static native void setProperty(Object target, String name, Boolean value) /*-{
+        if (target === undefined) {
+            target = {};
+        }
         target[name] = value;
     }-*/;
 
     public final static native void setProperty(Object target, String name, String value) /*-{
+        if (target === undefined) {
+            target = {};
+        }
         target[name] = value;
     }-*/;
 
     public final static native void setProperty(Object target, String name, Object value) /*-{
+        if (target === undefined) {
+            target = {};
+        }
         target[name] = value;
     }-*/;
 
