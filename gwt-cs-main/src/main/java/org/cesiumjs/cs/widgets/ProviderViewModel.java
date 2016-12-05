@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.cesiumjs.cs.widgets.baselayerpicker;
+package org.cesiumjs.cs.widgets;
 
 import jsinterop.annotations.JsType;
 
