@@ -63,7 +63,7 @@ public class CesiumInspector extends AbstractExample {
         public Widget asWidget() {
             if (_csPanelAbstract == null) {
                 final Configuration csConfiguration = new Configuration();
-                csConfiguration.setPath(GWT.getModuleBaseURL() + "JavaScript/CesiumUnminified");
+                csConfiguration.setPath(GWT.getModuleBaseURL() + "JavaScript/Cesium");
                 _csPanelAbstract = new ViewerPanelAbstract(csConfiguration) {
                     @Override
                     public Viewer createViewer(Element element) {
@@ -98,7 +98,6 @@ public class CesiumInspector extends AbstractExample {
                         primitiveOptions.geometryInstances = new GeometryInstance[] {new GeometryInstance(geometryInstanceOptions)};
                         PerInstanceColorAppearanceOptions perInstanceColorAppearanceOptions = new PerInstanceColorAppearanceOptions();
                         perInstanceColorAppearanceOptions.closed = true;
-                        LOGGER.info(primitiveOptions.appearance.getFragmentShaderSource());
                         scene.primitives().add(new Primitive(primitiveOptions));
 
                         primitiveOptions = new PrimitiveOptions();
