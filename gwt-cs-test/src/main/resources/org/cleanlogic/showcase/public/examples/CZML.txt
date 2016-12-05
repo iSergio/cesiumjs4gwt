@@ -55,7 +55,7 @@ public class CZML extends AbstractExample {
 
     @Inject
     public CZML(ShowcaseExampleStore store) {
-        super("CZML", "CZML document load example", new String[]{"Showcase", "Cesium", "3d", "Viewer", "CZML"}, store);
+        super("CZML", "A simple CZML example showing four satellites in orbit around the Earth, and some ground objects", new String[]{"Showcase", "Cesium", "3d", "Viewer", "CZML"}, store);
     }
 
     @Override
@@ -94,7 +94,7 @@ public class CZML extends AbstractExample {
         aPanel.add(csVPanel);
         aPanel.add(hPanel, 20, 20);
 
-        contentPanel.add(new HTML("<p>This example shows CZML document load example application</p>"));
+        contentPanel.add(new HTML("<p>A simple CZML example showing four satellites in orbit around the Earth, and some ground objects.</p>"));
         contentPanel.add(aPanel);
 
         initWidget(contentPanel);

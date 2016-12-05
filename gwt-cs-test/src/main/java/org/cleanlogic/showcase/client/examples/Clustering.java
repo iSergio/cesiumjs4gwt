@@ -159,7 +159,7 @@ public class Clustering extends AbstractExample {
 
     @Inject
     public Clustering(ShowcaseExampleStore store) {
-        super("Clustering", "Clustering Cesium application", new String[]{"Showcase", "Cesium", "3d", "Viewer", "Clustering", "Promise", "KML"}, store);
+        super("Clustering", "Cluster labels, billboards and points", new String[]{"Showcase", "Cesium", "3d", "Viewer", "Clustering", "Promise", "KML"}, store);
     }
 
     @Override
@@ -231,7 +231,7 @@ public class Clustering extends AbstractExample {
         aPanel.add(flexTable, 20, 20);
 
 
-        contentPanel.add(new HTML("<p>This example shows Clustering Cesium application</p>"));
+        contentPanel.add(new HTML("<p>Cluster labels, billboards and points.</p>"));
         contentPanel.add(aPanel);
 
         initWidget(contentPanel);

@@ -60,14 +60,14 @@ public class CZMLPolygonIntervalsAvailability extends AbstractExample {
 
     @Inject
     public CZMLPolygonIntervalsAvailability(ShowcaseExampleStore store) {
-        super("CZML Polygon - Intervals,Availability", "CZML Polygon - Intervals,Availability", new String[]{"Showcase", "Cesium", "3d", "CZML", "Polygon", "Interva;s"}, store);
+        super("CZML Polygon - Intervals,Availability", "CZML Dynamic Polygon - Intervals and Availability", new String[]{"Showcase", "Cesium", "3d", "CZML", "Polygon", "Interva;s"}, store);
     }
 
     @Override
     public void buildPanel() {
         ViewerPanel csVPanel = new ViewerPanel();
 
-        contentPanel.add(new HTML("<p>CZML Polygon - Intervals,Availability</p>"));
+        contentPanel.add(new HTML("<p>CZML Dynamic Polygon - Intervals and Availability.</p>"));
         contentPanel.add(csVPanel);
 
         initWidget(contentPanel);

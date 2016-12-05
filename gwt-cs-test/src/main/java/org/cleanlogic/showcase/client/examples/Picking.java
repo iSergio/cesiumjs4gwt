@@ -266,7 +266,7 @@ public class Picking extends AbstractExample {
 
     @Inject
     public Picking(ShowcaseExampleStore store) {
-        super("Picking", "Simple Cesium hello world application", new String[]{"Showcase", "Cesium", "3d", "Viewer"}, store);
+        super("Picking", "Use the mouse to select and manipulate objects in the scene", new String[]{"Showcase", "Cesium", "3d", "Viewer"}, store);
     }
 
     @Override
@@ -296,7 +296,7 @@ public class Picking extends AbstractExample {
         aPanel.add(_csVPanel);
         aPanel.add(hPanel, 20, 20);
 
-        contentPanel.add(new HTML("<p>This example shows simple Cesium application</p>"));
+        contentPanel.add(new HTML("<p>Use the mouse to select and manipulate objects in the scene.</p>"));
         contentPanel.add(aPanel);
 
         initWidget(contentPanel);

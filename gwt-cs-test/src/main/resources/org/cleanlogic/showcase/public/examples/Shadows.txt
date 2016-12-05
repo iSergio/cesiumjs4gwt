@@ -226,7 +226,7 @@ public class Shadows extends AbstractExample {
 
     @Inject
     public Shadows(ShowcaseExampleStore store) {
-        super("Shadows", "Cesium shadows example (configure shadows, terrain shadows)", new String[]{"Showcase", "Cesium", "3d", "Shadows", "Models"}, store);
+        super("Shadows", "Shadow maps", new String[]{"Showcase", "Cesium", "3d", "Shadows", "Models"}, store);
     }
 
     @Override
@@ -352,7 +352,7 @@ public class Shadows extends AbstractExample {
 
         fPanel.add(aPanel);
 
-        contentPanel.add(new HTML("<p>Cesium shadows example (configure shadows, terrain shadows)</p>"));
+        contentPanel.add(new HTML("<p>Shadow maps.</p>"));
         contentPanel.add(fPanel);
 
         initWidget(contentPanel);

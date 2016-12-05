@@ -200,7 +200,7 @@ public class ImageryLayersManipulation extends AbstractExample {
 
     @Inject
     public ImageryLayersManipulation(ShowcaseExampleStore store) {
-        super("Imagery Layers Manipulation", "Simple Cesium hello world application", new String[]{"Showcase", "Cesium", "3d", "Viewer"}, store);
+        super("Imagery Layers Manipulation", "Layer imagery from multiple sources, including WMS servers, Bing Maps, ArcGIS Online, OpenStreetMaps, and more, and adjust the alpha of each independently", new String[]{"Showcase", "Cesium", "3d", "Viewer"}, store);
     }
 
     @Override
@@ -261,7 +261,7 @@ public class ImageryLayersManipulation extends AbstractExample {
         };
         csVPanel.addCallback(cesiumCreated);
 
-        contentPanel.add(new HTML("<p>This example shows simple Cesium application</p>"));
+        contentPanel.add(new HTML("<p>Layer imagery from multiple sources, including WMS servers, Bing Maps, ArcGIS Online, OpenStreetMaps, and more, and adjust the alpha of each independently.</p>"));
         contentPanel.add(baseLayersHPanel);
         contentPanel.add(csVPanel);
 

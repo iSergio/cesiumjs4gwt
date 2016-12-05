@@ -85,7 +85,7 @@ public class GeoJSONAndTopoJSON extends AbstractExample {
 
     @Inject
     public GeoJSONAndTopoJSON(ShowcaseExampleStore store) {
-        super("GeoJSON and TopoJSON", "Cesium GeoJSON and TopoJSON load application", new String[]{"Showcase", "Cesium", "3d", "Viewer", "GeoJSON", "TopoJSON", "JSON", "Promise"}, store);
+        super("GeoJSON and TopoJSON", "Load GeoJSON or TopoJSON data and apply custom styling", new String[]{"Showcase", "Cesium", "3d", "Viewer", "GeoJSON", "TopoJSON", "JSON", "Promise"}, store);
     }
 
     @Override
@@ -166,7 +166,7 @@ public class GeoJSONAndTopoJSON extends AbstractExample {
         aPanel.add(csVPanel);
         aPanel.add(hPanel, 20, 20);
 
-        contentPanel.add(new HTML("<p>This example shows how load GeoJSON and TopoJSON</p>"));
+        contentPanel.add(new HTML("<p>Load GeoJSON or TopoJSON data and apply custom styling.</p>"));
         contentPanel.add(aPanel);
 
         initWidget(contentPanel);

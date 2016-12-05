@@ -105,14 +105,14 @@ public class SpheresAndEllipsoids extends AbstractExample {
 
     @Inject
     public SpheresAndEllipsoids(ShowcaseExampleStore store) {
-        super("Spheres and Ellipsoids", "Example draw spheres and ellipsoids", new String[]{"Showcase", "Cesium", "3d", "Ellipsoid", "Spheres"}, store);
+        super("Spheres and Ellipsoids", "Draw spheres and ellipsoids", new String[]{"Showcase", "Cesium", "3d", "Ellipsoid", "Spheres"}, store);
     }
 
     @Override
     public void buildPanel() {
         ViewerPanel csVPanel = new ViewerPanel();
 
-        contentPanel.add(new HTML("<p>Example draw spheres and ellipsoids</p>"));
+        contentPanel.add(new HTML("<p>Draw spheres and ellipsoids.</p>"));
         contentPanel.add(csVPanel);
 
         initWidget(contentPanel);

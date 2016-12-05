@@ -583,14 +583,14 @@ public class GeometryAndAppearances extends AbstractExample {
 
     @Inject
     public GeometryAndAppearances(ShowcaseExampleStore store) {
-        super("Geometry and Appearances", "Cesium geometry and appearances showcase", new String[]{"Showcase", "cesium", "3d", "graphics", "materials"}, store);
+        super("Geometry and Appearances", "Demonstrates the wide variety of available geometry and appearances", new String[]{"Showcase", "cesium", "3d", "graphics", "materials"}, store);
     }
 
     @Override
     public void buildPanel() {
         ViewerPanel csVPanel = new ViewerPanel();
 
-        contentPanel.add(new HTML("<p>This example shows geometry and appearances of Cesium</p>"));
+        contentPanel.add(new HTML("<p>Demonstrates the wide variety of available geometry and appearances.</p>"));
         contentPanel.add(csVPanel);
 
         initWidget(contentPanel);

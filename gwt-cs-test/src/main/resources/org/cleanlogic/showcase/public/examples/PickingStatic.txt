@@ -9,6 +9,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.ToggleButton;
 import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.core.Math;
+import org.cesiumjs.cs.core.enums.ScreenSpaceEventType;
 import org.cesiumjs.cs.core.events.MouseMoveEvent;
 import org.cesiumjs.cs.datasources.Entity;
 import org.cesiumjs.cs.datasources.EntityCollection;
@@ -54,7 +55,7 @@ public class PickingStatic extends AbstractExample {
 
     @Inject
     public PickingStatic(ShowcaseExampleStore store) {
-        super("Picking Static", "Picking object Cesium example in direct inject CesiumJS into HTML header", new String[]{"Showcase", "Cesium", "3d", "Picking", "Static"}, store);
+        super("Picking Static", "Use the mouse to select and manipulate objects in the scene static", new String[]{"Showcase", "Cesium", "3d", "Picking", "Static"}, store);
     }
 
     @Override
@@ -87,7 +88,7 @@ public class PickingStatic extends AbstractExample {
         hPanel.add(_drillDownPickingTBtn);
         hPanel.add(_pickPositionTBtn);
 
-        contentPanel.add(new HTML("<p>This example Show Cartographic Position on Mouse Over in direct inject CesiumJS into HTML header</p>"));
+        contentPanel.add(new HTML("<p>Use the mouse to select and manipulate objects in the scene. Static.</p>"));
         contentPanel.add(hPanel);
         contentPanel.add(_csVPanel);
 
@@ -248,7 +249,7 @@ public class PickingStatic extends AbstractExample {
                         labelEntity.label.text = new ConstantProperty<>("(" + lon + ", " + lat + ", " + height + ")");
 
                         Camera camera = scene.camera();
-                        labelEntity.label.eyeOffset = new ConstantProperty<>(new Cartesian3(0.0, 0.0, ((PerspectiveFrustum)camera.frustum).near * 1.5 - Cartesian3.distance(cartesian, camera.position)));
+                        labelEntity.label.eyeOffset = new ConstantProperty<>(new Cartesian3(0.0, 0.0, ((PerspectiveFrustum)camera.frustum).near * 1.5 - (double)Cartesian3.distance(cartesian, camera.position)));
 
                         foundPosition = true;
                     }

@@ -1,17 +1,14 @@
 package org.cleanlogic.showcase.client.examples;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.ui.*;
-import jsinterop.annotations.JsOptional;
 import org.cesiumjs.cs.Configuration;
 import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.core.Math;
+import org.cesiumjs.cs.core.enums.ScreenSpaceEventType;
 import org.cesiumjs.cs.core.events.MouseMoveEvent;
 import org.cesiumjs.cs.datasources.Entity;
 import org.cesiumjs.cs.datasources.EntityCollection;
@@ -25,12 +22,10 @@ import org.cesiumjs.cs.datasources.graphics.options.ModelGraphicsOptions;
 import org.cesiumjs.cs.datasources.graphics.options.PolygonGraphicsOptions;
 import org.cesiumjs.cs.datasources.options.EntityOptions;
 import org.cesiumjs.cs.datasources.properties.*;
-import org.cesiumjs.cs.promise.Function;
 import org.cesiumjs.cs.scene.Camera;
 import org.cesiumjs.cs.scene.enums.HorizontalOrigin;
 import org.cesiumjs.cs.scene.PerspectiveFrustum;
 import org.cesiumjs.cs.scene.Scene;
-import org.cesiumjs.cs.scene.options.LabelOptions;
 import org.cesiumjs.cs.widgets.Viewer;
 import org.cesiumjs.cs.widgets.ViewerPanelAbstract;
 import org.cleanlogic.showcase.client.basic.AbstractExample;
@@ -233,7 +228,7 @@ public class Picking extends AbstractExample {
                             labelEntity.label.text = new ConstantProperty<>("(" + lon + ", " + lat + ", " + height + ")");
 
                             Camera camera = scene.camera();
-                            labelEntity.label.eyeOffset = new ConstantProperty<>(new Cartesian3(0.0, 0.0, ((PerspectiveFrustum)camera.frustum).near * 1.5 - Cartesian3.distance(cartesian, camera.position)));
+                            labelEntity.label.eyeOffset = new ConstantProperty<>(new Cartesian3(0.0, 0.0, ((PerspectiveFrustum)camera.frustum).near * 1.5 - (double)Cartesian3.distance(cartesian, camera.position)));
 
                             foundPosition = true;
                         }
@@ -255,14 +250,12 @@ public class Picking extends AbstractExample {
 
     @Inject
     public Picking(ShowcaseExampleStore store) {
-        super("Picking", "Simple Cesium hello world application", new String[]{"Showcase", "Cesium", "3d", "Viewer"}, store);
+        super("Picking", "Use the mouse to select and manipulate objects in the scene", new String[]{"Showcase", "Cesium", "3d", "Viewer"}, store);
     }
 
     @Override
     public void buildPanel() {
         _csVPanel = new ViewerPanel();
-
-        HorizontalPanel hPanel = new HorizontalPanel();
 
         _showPosOnMouseOverTBtn = new ToggleButton("Show Cartographic Position on Mouse Over");
         _showPosOnMouseOverTBtn.setValue(true);
@@ -277,14 +270,18 @@ public class Picking extends AbstractExample {
         _pickPositionTBtn = new ToggleButton("Pick position");
         _pickPositionTBtn.addValueChangeHandler(new MValueChangeHandler());
 
+        HorizontalPanel hPanel = new HorizontalPanel();
         hPanel.add(_showPosOnMouseOverTBtn);
         hPanel.add(_pickEntityTBtn);
         hPanel.add(_drillDownPickingTBtn);
         hPanel.add(_pickPositionTBtn);
 
-        contentPanel.add(new HTML("<p>This example shows simple Cesium application</p>"));
-        contentPanel.add(hPanel);
-        contentPanel.add(_csVPanel);
+        AbsolutePanel aPanel = new AbsolutePanel();
+        aPanel.add(_csVPanel);
+        aPanel.add(hPanel, 20, 20);
+
+        contentPanel.add(new HTML("<p>Use the mouse to select and manipulate objects in the scene.</p>"));
+        contentPanel.add(aPanel);
 
         initWidget(contentPanel);
     }

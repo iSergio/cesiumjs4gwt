@@ -14,7 +14,6 @@ import org.cesiumjs.cs.datasources.graphics.options.RectangleGraphicsOptions;
 import org.cesiumjs.cs.datasources.options.EntityOptions;
 import org.cesiumjs.cs.datasources.properties.ConstantProperty;
 import org.cesiumjs.cs.scene.DebugModelMatrixPrimitive;
-import org.cesiumjs.cs.scene.Primitive;
 import org.cesiumjs.cs.scene.Scene;
 import org.cesiumjs.cs.scene.enums.SceneMode;
 import org.cesiumjs.cs.scene.options.CameraFlyToOptions;
@@ -22,14 +21,12 @@ import org.cesiumjs.cs.scene.options.DebugModelMatrixPrimitiveOptions;
 import org.cesiumjs.cs.scene.options.ViewOptions;
 import org.cesiumjs.cs.widgets.Viewer;
 import org.cesiumjs.cs.widgets.ViewerPanelAbstract;
-import org.cesiumjs.cs.widgets.options.FlyToOptions;
 import org.cleanlogic.showcase.client.basic.AbstractExample;
 import org.cleanlogic.showcase.client.components.store.ShowcaseExampleStore;
 
 import javax.inject.Inject;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.logging.Logger;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -58,8 +55,8 @@ public class Camera extends AbstractExample {
                 _csPanelAbstract = new ViewerPanelAbstract(csConfiguration) {
                     @Override
                     public Viewer createViewer(Element element) {
-                        Viewer csViewer = new Viewer(element);
-                        return csViewer;
+                        _viewer = new Viewer(element);
+                        return _viewer;
                     }
                 };
             }
@@ -243,7 +240,7 @@ public class Camera extends AbstractExample {
 
     @Inject
     public Camera(ShowcaseExampleStore store) {
-        super("Camera", "Camera control application", new String[]{"Showcase", "Cesium", "3d", "flyTo"}, store);
+        super("Camera", "Fly to a specified location or view a geographic rectangle", new String[]{"Showcase", "Cesium", "3d", "flyTo"}, store);
     }
 
     @Override
@@ -292,11 +289,14 @@ public class Camera extends AbstractExample {
             }
         });
 
-        contentPanel.add(new HTML("<p>This example shows simple Cesium application</p>"));
+        AbsolutePanel aPanel = new AbsolutePanel();
+        aPanel.add(csVPanel);
+        aPanel.add(lBox, 20, 20);
+
+        contentPanel.add(new HTML("<p>Fly to a specified location or view a geographic rectangle.</p>"));
         contentPanel.add(_eventsLbl);
         contentPanel.add(_changesLbl);
-        contentPanel.add(lBox);
-        contentPanel.add(csVPanel);
+        contentPanel.add(aPanel);
 
         initWidget(contentPanel);
     }

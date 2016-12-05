@@ -52,13 +52,13 @@ public class AtmosphereColor extends AbstractExample {
                 _csPanelAbstract = new ViewerPanelAbstract(csConfiguration) {
                     @Override
                     public Viewer createViewer(Element element) {
-                        Viewer csViewer = new Viewer(element);
-                        Camera camera = csViewer.camera;
+                        _viewer = new Viewer(element);
+                        Camera camera = _viewer.camera;
                         ViewOptions viewOptions = new ViewOptions();
                         viewOptions.destinationPos = Cartesian3.fromDegrees(-75.5847, 40.0397, 1000.0);
                         viewOptions.orientation = new HeadingPitchRoll(-Math.PI_OVER_TWO(), 0.2, 0.0);
                         camera.setView(viewOptions);
-                        return csViewer;
+                        return _viewer;
                     }
                 };
             }
@@ -72,7 +72,7 @@ public class AtmosphereColor extends AbstractExample {
 
     @Inject
     public AtmosphereColor(ShowcaseExampleStore store) {
-        super("Atmosphere Color", "Atmosphere configuration example", new String[]{"Showcase", "Cesium", "3d", "atmosphere", "fog", "lighting", "hue", "saturation", "brightness"}, store);
+        super("Atmosphere Color", "Adjust hue, saturation, and brightness of the sky/atmosphere", new String[]{"Showcase", "Cesium", "3d", "atmosphere", "fog", "lighting", "hue", "saturation", "brightness"}, store);
     }
 
     @Override
@@ -160,7 +160,7 @@ public class AtmosphereColor extends AbstractExample {
         aPanel.add(_csVPanel);
         aPanel.add(flexTable, 20, 20);
 
-        contentPanel.add(new HTML("<p>This example shows simple Cesium application</p>"));
+        contentPanel.add(new HTML("<p>Adjust hue, saturation, and brightness of the sky/atmosphere.</p>"));
         contentPanel.add(aPanel);
 
         initWidget(contentPanel);

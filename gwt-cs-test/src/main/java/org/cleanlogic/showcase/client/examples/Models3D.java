@@ -119,7 +119,7 @@ public class Models3D extends AbstractExample {
 
     @Inject
     public Models3D(ShowcaseExampleStore store) {
-        super("3D Models", "Cesium GLTF models integration", new String[]{"Showcase", "Cesium", "3d", "gltf", "glb", "models"}, store);
+        super("3D Models", "Create 3D models using glTF", new String[]{"Showcase", "Cesium", "3d", "gltf", "glb", "models"}, store);
     }
 
     @Override
@@ -151,7 +151,7 @@ public class Models3D extends AbstractExample {
         aPanel.add(csVPanel);
         aPanel.add(modelsLBox, 20, 20);
 
-        contentPanel.add(new HTML("<p>Cesium GLTF models integration</p>"));
+        contentPanel.add(new HTML("<p>Create 3D models using glTF.</p>"));
         contentPanel.add(aPanel);
 
         initWidget(contentPanel);

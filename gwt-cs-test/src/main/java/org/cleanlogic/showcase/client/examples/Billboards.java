@@ -298,7 +298,7 @@ public class Billboards extends AbstractExample {
 
     @Inject
     public Billboards(ShowcaseExampleStore store) {
-        super("Billboards", "Cesium billboards", new String[]{"Showcase", "Cesium", "3d", "Billboards", "Promise"}, store);
+        super("Billboards", "Add billboard images and markers to the scene", new String[]{"Showcase", "Cesium", "3d", "Billboards", "Promise"}, store);
     }
 
     @Override
@@ -339,7 +339,7 @@ public class Billboards extends AbstractExample {
         aPanel.add(csVPanel);
         aPanel.add(billboardsLBox, 20, 20);
 
-        contentPanel.add(new HTML("<p>This example shows billboards on Cesium</p>"));
+        contentPanel.add(new HTML("<p>Add billboard images and markers to the scene.</p>"));
         contentPanel.add(aPanel);
 
         initWidget(contentPanel);

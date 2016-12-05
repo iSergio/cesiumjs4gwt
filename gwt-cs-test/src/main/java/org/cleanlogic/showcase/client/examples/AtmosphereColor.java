@@ -88,7 +88,7 @@ public class AtmosphereColor extends AbstractExample {
 
     @Inject
     public AtmosphereColor(ShowcaseExampleStore store) {
-        super("Atmosphere Color", "Atmosphere configuration example", new String[]{"Showcase", "Cesium", "3d", "atmosphere", "fog", "lighting", "hue", "saturation", "brightness"}, store);
+        super("Atmosphere Color", "Adjust hue, saturation, and brightness of the sky/atmosphere", new String[]{"Showcase", "Cesium", "3d", "atmosphere", "fog", "lighting", "hue", "saturation", "brightness"}, store);
     }
 
     @Override
@@ -176,7 +176,7 @@ public class AtmosphereColor extends AbstractExample {
         aPanel.add(_csVPanel);
         aPanel.add(flexTable, 20, 20);
 
-        contentPanel.add(new HTML("<p>This example shows simple Cesium application</p>"));
+        contentPanel.add(new HTML("<p>Adjust hue, saturation, and brightness of the sky/atmosphere.</p>"));
         contentPanel.add(aPanel);
 
         initWidget(contentPanel);

@@ -60,14 +60,14 @@ public class HelloWorld extends AbstractExample {
 
     @Inject
     public HelloWorld(ShowcaseExampleStore store) {
-        super("Hello World", "Simple Cesium hello world application", new String[]{"Showcase", "Cesium", "3d", "Viewer"}, store);
+        super("Hello World", "Use Viewer to start building new applications or easily embed Cesium into existing applications", new String[]{"Showcase", "Cesium", "3d", "Viewer"}, store);
     }
 
     @Override
     public void buildPanel() {
         ViewerPanel csVPanel = new ViewerPanel();
 
-        contentPanel.add(new HTML("<p>This example shows simple Cesium application</p>"));
+        contentPanel.add(new HTML("<p>Use Viewer to start building new applications or easily embed Cesium into existing applications.</p>"));
         contentPanel.add(csVPanel);
 
         initWidget(contentPanel);

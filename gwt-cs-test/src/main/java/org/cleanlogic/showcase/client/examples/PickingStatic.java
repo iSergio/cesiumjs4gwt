@@ -71,7 +71,7 @@ public class PickingStatic extends AbstractExample {
 
     @Inject
     public PickingStatic(ShowcaseExampleStore store) {
-        super("Picking Static", "Picking object Cesium example in direct inject CesiumJS into HTML header", new String[]{"Showcase", "Cesium", "3d", "Picking", "Static"}, store);
+        super("Picking Static", "Use the mouse to select and manipulate objects in the scene static", new String[]{"Showcase", "Cesium", "3d", "Picking", "Static"}, store);
     }
 
     @Override
@@ -104,7 +104,7 @@ public class PickingStatic extends AbstractExample {
         hPanel.add(_drillDownPickingTBtn);
         hPanel.add(_pickPositionTBtn);
 
-        contentPanel.add(new HTML("<p>This example Show Cartographic Position on Mouse Over in direct inject CesiumJS into HTML header</p>"));
+        contentPanel.add(new HTML("<p>Use the mouse to select and manipulate objects in the scene. Static.</p>"));
         contentPanel.add(hPanel);
         contentPanel.add(_csVPanel);
 

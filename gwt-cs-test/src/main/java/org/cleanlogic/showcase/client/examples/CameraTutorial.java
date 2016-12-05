@@ -224,7 +224,7 @@ public class CameraTutorial extends AbstractExample {
 
     @Inject
     public CameraTutorial(ShowcaseExampleStore store) {
-        super("Camera Tutorial", "Camera Tutorial", new String[]{"Showcase", "Cesium", "3d", "Viewer", "Camera"}, store);
+        super("Camera Tutorial", "Use the camera to control the view, and create custom event handlers for input", new String[]{"Showcase", "Cesium", "3d", "Viewer", "Camera"}, store);
     }
 
     @Override
@@ -245,7 +245,7 @@ public class CameraTutorial extends AbstractExample {
         aPanel.add(csVPanel);
         aPanel.add(html, 20, 20);
 
-        contentPanel.add(new HTML("<p>This example shows how control camera from keyboard</p>"));
+        contentPanel.add(new HTML("<p>Use the camera to control the view, and create custom event handlers for input.</p>"));
         contentPanel.add(aPanel);
 
         initWidget(contentPanel);

@@ -30,14 +30,14 @@ import javax.inject.Inject;
 public class HelloWorldStatic extends AbstractExample {
     @Inject
     public HelloWorldStatic(ShowcaseExampleStore store) {
-        super("Hello World Static", "Simple Cesium hello world application", new String[]{"Showcase", "Cesium", "3d", "Viewer", "Static"}, store);
+        super("Hello World Static", "Use Viewer to start building new applications or easily embed Cesium into existing applications Static", new String[]{"Showcase", "Cesium", "3d", "Viewer", "Static"}, store);
     }
 
     @Override
     public void buildPanel() {
         ViewerPanel viewerPanel = new ViewerPanel();
 
-        contentPanel.add(new HTML("<p>This example shows how create HelloWord as direct inject CesiumJS in HTML header</p>"));
+        contentPanel.add(new HTML("<p>Use Viewer to start building new applications or easily embed Cesium into existing applications. Static.</p>"));
         contentPanel.add(viewerPanel);
 
         initWidget(contentPanel);

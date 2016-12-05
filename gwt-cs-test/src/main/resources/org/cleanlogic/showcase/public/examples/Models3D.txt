@@ -4,14 +4,12 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.*;
 import org.cesiumjs.cs.Configuration;
-import org.cesiumjs.cs.core.*;
+import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.Math;
-import org.cesiumjs.cs.datasources.Entity;
+import org.cesiumjs.cs.core.Quaternion;
+import org.cesiumjs.cs.core.Transforms;
 import org.cesiumjs.cs.datasources.graphics.ModelGraphics;
 import org.cesiumjs.cs.datasources.graphics.options.ModelGraphicsOptions;
 import org.cesiumjs.cs.datasources.options.EntityOptions;
@@ -24,7 +22,6 @@ import org.cleanlogic.showcase.client.basic.AbstractExample;
 import org.cleanlogic.showcase.client.components.store.ShowcaseExampleStore;
 
 import javax.inject.Inject;
-import java.util.logging.Logger;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -50,7 +47,7 @@ public class Models3D extends AbstractExample {
                         csViewerOptions.infoBox = false;
                         csViewerOptions.selectionIndicator = false;
                         csViewerOptions.shadows = false;
-                        Viewer csViewer = new Viewer(element, csViewerOptions);
+                        _viewer = new Viewer(element, csViewerOptions);
 
                         ModelGraphicsOptions modelGraphicsOptions = new ModelGraphicsOptions();
                         modelGraphicsOptions.uri = new ConstantProperty<>(GWT.getModuleBaseURL() + "SampleData/models/CesiumAir/Cesium_Air.glb");
@@ -68,12 +65,9 @@ public class Models3D extends AbstractExample {
                         entityOptions.position = new ConstantPositionProperty(position);
                         entityOptions.orientation = new ConstantProperty<>(orientation);
                         entityOptions.model = modelGraphics;
-                        Entity entity = csViewer.entities().add(new Entity(entityOptions));
-                        csViewer.trackedEntity = entity;
+                        _viewer.trackedEntity = _viewer.entities().add(entityOptions);
 
-                        Logger.getLogger("").info(GWT.getModuleBaseURL() + "SampleData/models/CesiumAir/Cesium_Air.glb");
-
-                        return csViewer;
+                        return _viewer;
                     }
                 };
             }
@@ -103,14 +97,13 @@ public class Models3D extends AbstractExample {
             entityOptions.position = new ConstantPositionProperty(position);
             entityOptions.orientation = new ConstantProperty<>(orientation);
             entityOptions.model = modelGraphics;
-            Entity entity = _csPanelAbstract.getViewer().entities().add(new Entity(entityOptions));
-            _csPanelAbstract.getViewer().trackedEntity = entity;
+            _csPanelAbstract.getViewer().trackedEntity = _csPanelAbstract.getViewer().entities().add(entityOptions);;
         }
     }
 
     @Inject
     public Models3D(ShowcaseExampleStore store) {
-        super("3D Models", "Cesium GLTF models integration", new String[]{"Showcase", "Cesium", "3d", "gltf", "glb", "models"}, store);
+        super("3D Models", "Create 3D models using glTF", new String[]{"Showcase", "Cesium", "3d", "gltf", "glb", "models"}, store);
     }
 
     @Override
@@ -138,9 +131,12 @@ public class Models3D extends AbstractExample {
             }
         });
 
-        contentPanel.add(new HTML("<p>Cesium GLTF models integration</p>"));
-        contentPanel.add(modelsLBox);
-        contentPanel.add(csVPanel);
+        AbsolutePanel aPanel = new AbsolutePanel();
+        aPanel.add(csVPanel);
+        aPanel.add(modelsLBox, 20, 20);
+
+        contentPanel.add(new HTML("<p>Create 3D models using glTF.</p>"));
+        contentPanel.add(aPanel);
 
         initWidget(contentPanel);
     }

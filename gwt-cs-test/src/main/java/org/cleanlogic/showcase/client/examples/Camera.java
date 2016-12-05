@@ -256,7 +256,7 @@ public class Camera extends AbstractExample {
 
     @Inject
     public Camera(ShowcaseExampleStore store) {
-        super("Camera", "Camera control application", new String[]{"Showcase", "Cesium", "3d", "flyTo"}, store);
+        super("Camera", "Fly to a specified location or view a geographic rectangle", new String[]{"Showcase", "Cesium", "3d", "flyTo"}, store);
     }
 
     @Override
@@ -309,7 +309,7 @@ public class Camera extends AbstractExample {
         aPanel.add(csVPanel);
         aPanel.add(lBox, 20, 20);
 
-        contentPanel.add(new HTML("<p>This example shows simple Cesium application</p>"));
+        contentPanel.add(new HTML("<p>Fly to a specified location or view a geographic rectangle.</p>"));
         contentPanel.add(_eventsLbl);
         contentPanel.add(_changesLbl);
         contentPanel.add(aPanel);

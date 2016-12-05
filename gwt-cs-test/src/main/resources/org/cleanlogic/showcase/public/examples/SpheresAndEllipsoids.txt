@@ -8,7 +8,6 @@ import com.google.gwt.user.client.ui.Widget;
 import org.cesiumjs.cs.Configuration;
 import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.Color;
-import org.cesiumjs.cs.core.Ellipsoid;
 import org.cesiumjs.cs.datasources.Entity;
 import org.cesiumjs.cs.datasources.graphics.EllipsoidGraphics;
 import org.cesiumjs.cs.datasources.graphics.options.EllipsoidGraphicsOptions;
@@ -16,7 +15,6 @@ import org.cesiumjs.cs.datasources.options.EntityOptions;
 import org.cesiumjs.cs.datasources.properties.ColorMaterialProperty;
 import org.cesiumjs.cs.datasources.properties.ConstantPositionProperty;
 import org.cesiumjs.cs.datasources.properties.ConstantProperty;
-import org.cesiumjs.cs.datasources.properties.PositionProperty;
 import org.cesiumjs.cs.widgets.Viewer;
 import org.cesiumjs.cs.widgets.ViewerPanelAbstract;
 import org.cleanlogic.showcase.client.basic.AbstractExample;
@@ -44,7 +42,7 @@ public class SpheresAndEllipsoids extends AbstractExample {
                 _csPanelAbstract = new ViewerPanelAbstract(csConfiguration) {
                     @Override
                     public Viewer createViewer(Element element) {
-                        Viewer csViewer = new Viewer(element);
+                        _viewer = new Viewer(element);
 
                         EllipsoidGraphicsOptions ellipsoidGraphicsOptions = new EllipsoidGraphicsOptions();
                         ellipsoidGraphicsOptions.radii = new ConstantProperty<>(new Cartesian3(200000.0, 200000.0, 300000.0));
@@ -53,7 +51,7 @@ public class SpheresAndEllipsoids extends AbstractExample {
                         entityOptions.name = "Blue ellipsoid";
                         entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-114.0, 40.0, 300000.0));
                         entityOptions.ellipsoid = new EllipsoidGraphics(ellipsoidGraphicsOptions);
-                        Entity blueEllpsoid = csViewer.entities().add(new Entity(entityOptions));
+                        Entity blueEllpsoid = _viewer.entities().add(entityOptions);
 
                         ellipsoidGraphicsOptions = new EllipsoidGraphicsOptions();
                         ellipsoidGraphicsOptions.radii = new ConstantProperty<>(new Cartesian3(300000.0, 300000.0, 300000.0));
@@ -64,7 +62,7 @@ public class SpheresAndEllipsoids extends AbstractExample {
                         entityOptions.name = "Red sphere with black outline";
                         entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-107.0, 40.0, 300000.0));
                         entityOptions.ellipsoid = new EllipsoidGraphics(ellipsoidGraphicsOptions);
-                        Entity redSphere = csViewer.entities().add(new Entity(entityOptions));
+                        Entity redSphere = _viewer.entities().add(entityOptions);
 
                         ellipsoidGraphicsOptions = new EllipsoidGraphicsOptions();
                         ellipsoidGraphicsOptions.radii = new ConstantProperty<>(new Cartesian3(200000.0, 200000.0, 300000.0));
@@ -77,11 +75,11 @@ public class SpheresAndEllipsoids extends AbstractExample {
                         entityOptions.name = "Yellow ellipsoid outline";
                         entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-100.0, 40.0, 300000.0));
                         entityOptions.ellipsoid = new EllipsoidGraphics(ellipsoidGraphicsOptions);
-                        Entity outlineOnly = csViewer.entities().add(new Entity(entityOptions));
+                        Entity outlineOnly = _viewer.entities().add(entityOptions);
 
-                        csViewer.zoomTo(csViewer.entities());
+                        _viewer.zoomTo(_viewer.entities());
 
-                        return csViewer;
+                        return _viewer;
                     }
                 };
             }
@@ -91,14 +89,14 @@ public class SpheresAndEllipsoids extends AbstractExample {
 
     @Inject
     public SpheresAndEllipsoids(ShowcaseExampleStore store) {
-        super("Spheres and Ellipsoids", "Example draw spheres and ellipsoids", new String[]{"Showcase", "Cesium", "3d", "Ellipsoid", "Spheres"}, store);
+        super("Spheres and Ellipsoids", "Draw spheres and ellipsoids", new String[]{"Showcase", "Cesium", "3d", "Ellipsoid", "Spheres"}, store);
     }
 
     @Override
     public void buildPanel() {
         ViewerPanel csVPanel = new ViewerPanel();
 
-        contentPanel.add(new HTML("<p>Example draw spheres and ellipsoids</p>"));
+        contentPanel.add(new HTML("<p>Draw spheres and ellipsoids.</p>"));
         contentPanel.add(csVPanel);
 
         initWidget(contentPanel);

@@ -49,11 +49,11 @@ public class GeoJSONAndTopoJSON extends AbstractExample {
                 _csPanelAbstract = new ViewerPanelAbstract(csConfiguration) {
                     @Override
                     public Viewer createViewer(Element element) {
-                        Viewer csViewer = new Viewer(element);
-                        csViewer.dataSources().removeAll();
-                        csViewer.camera.lookAt(Cartesian3.fromDegrees(-98.0, 40.0), new Cartesian3(0.0, -4790000.0, 3930000.0));
-                        csViewer.camera.lookAtTransform(Matrix4.IDENTITY());
-                        return csViewer;
+                        _viewer = new Viewer(element);
+                        _viewer.dataSources().removeAll();
+                        _viewer.camera.lookAt(Cartesian3.fromDegrees(-98.0, 40.0), new Cartesian3(0.0, -4790000.0, 3930000.0));
+                        _viewer.camera.lookAtTransform(Matrix4.IDENTITY());
+                        return _viewer;
                     }
                 };
             }
@@ -69,7 +69,7 @@ public class GeoJSONAndTopoJSON extends AbstractExample {
 
     @Inject
     public GeoJSONAndTopoJSON(ShowcaseExampleStore store) {
-        super("GeoJSON and TopoJSON", "Cesium GeoJSON and TopoJSON load application", new String[]{"Showcase", "Cesium", "3d", "Viewer", "GeoJSON", "TopoJSON", "JSON", "Promise"}, store);
+        super("GeoJSON and TopoJSON", "Load GeoJSON or TopoJSON data and apply custom styling", new String[]{"Showcase", "Cesium", "3d", "Viewer", "GeoJSON", "TopoJSON", "JSON", "Promise"}, store);
     }
 
     @Override
@@ -150,7 +150,7 @@ public class GeoJSONAndTopoJSON extends AbstractExample {
         aPanel.add(csVPanel);
         aPanel.add(hPanel, 20, 20);
 
-        contentPanel.add(new HTML("<p>This example shows how load GeoJSON and TopoJSON</p>"));
+        contentPanel.add(new HTML("<p>Load GeoJSON or TopoJSON data and apply custom styling.</p>"));
         contentPanel.add(aPanel);
 
         initWidget(contentPanel);
