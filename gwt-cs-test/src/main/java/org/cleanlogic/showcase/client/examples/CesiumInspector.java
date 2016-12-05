@@ -63,7 +63,7 @@ public class CesiumInspector extends AbstractExample {
         public Widget asWidget() {
             if (_csPanelAbstract == null) {
                 final Configuration csConfiguration = new Configuration();
-                csConfiguration.setPath(GWT.getModuleBaseURL() + "JavaScript/Cesium");
+                csConfiguration.setPath(GWT.getModuleBaseURL() + "JavaScript/CesiumUnminified");
                 _csPanelAbstract = new ViewerPanelAbstract(csConfiguration) {
                     @Override
                     public Viewer createViewer(Element element) {
