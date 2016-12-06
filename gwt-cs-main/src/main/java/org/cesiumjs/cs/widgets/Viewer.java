@@ -22,10 +22,7 @@ import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.Clock;
 import org.cesiumjs.cs.core.HeadingPitchRange;
 import org.cesiumjs.cs.core.providers.TerrainProvider;
-import org.cesiumjs.cs.datasources.DataSourceCollection;
-import org.cesiumjs.cs.datasources.DataSourceDisplay;
-import org.cesiumjs.cs.datasources.Entity;
-import org.cesiumjs.cs.datasources.EntityCollection;
+import org.cesiumjs.cs.datasources.*;
 import org.cesiumjs.cs.promise.Promise;
 import org.cesiumjs.cs.scene.Camera;
 import org.cesiumjs.cs.scene.ImageryLayerCollection;
@@ -402,6 +399,12 @@ public class Viewer {
      */
     @JsMethod
     public native Promise<Boolean, Void> zoomTo(Entity target);
+
+    @JsMethod
+    public native Promise<Boolean, Void> zoomTo(Promise<DataSource, String> target);
+
+    @JsMethod
+    public native Promise<Boolean, Void> zoomTo(DataSource target);
 
     /**
      * Asynchronously sets the camera to view the provided entity, entities, or data source. If the data source is

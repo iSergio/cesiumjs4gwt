@@ -159,6 +159,7 @@ public class GeoJsonDataSource implements DataSource {
      * @param data A url, GeoJSON object, or TopoJSON object to be loaded.
      * @return A promise that will resolve when the data is loaded.
      */
+    @JsMethod
     public static native Promise<GeoJsonDataSource, String> load(JSONObject data);
 
     /**
@@ -166,6 +167,7 @@ public class GeoJsonDataSource implements DataSource {
      * @param data A url, GeoJSON object, or TopoJSON object to be loaded.
      * @return A promise that will resolve when the data is loaded.
      */
+    @JsMethod
     public static native Promise<GeoJsonDataSource, String> load(String data);
 
     /**
@@ -174,6 +176,7 @@ public class GeoJsonDataSource implements DataSource {
      * @param options Options
      * @return A promise that will resolve when the data is loaded.
      */
+    @JsMethod
     public static native Promise<GeoJsonDataSource, String> load(JSONObject data, GeoJsonDataSourceOptions options);
 
     /**
@@ -182,6 +185,7 @@ public class GeoJsonDataSource implements DataSource {
      * @param options Options
      * @return A promise that will resolve when the data is loaded.
      */
+    @JsMethod
     public static native Promise<GeoJsonDataSource, String> load(String data, GeoJsonDataSourceOptions options);
 
     @Override

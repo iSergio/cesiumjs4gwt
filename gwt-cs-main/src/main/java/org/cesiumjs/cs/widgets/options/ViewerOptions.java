@@ -182,7 +182,7 @@ public class ViewerOptions {
      * 	SceneMode	SceneMode.SCENE3D	optional The initial scene mode.
      * 	Default: {@link SceneMode#SCENE3D()}
      */
-    public SceneMode sceneMode;
+    public Integer sceneMode;
     /**
      * The map projection to use in 2D and Columbus View modes.
      * Default: new GeographicProjection()
