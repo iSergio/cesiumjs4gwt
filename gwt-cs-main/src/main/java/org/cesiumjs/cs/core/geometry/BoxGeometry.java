@@ -19,6 +19,7 @@ package org.cesiumjs.cs.core.geometry;
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.AxisAlignedBoundingBox;
 import org.cesiumjs.cs.core.Packable;
 import org.cesiumjs.cs.core.geometry.options.BoxGeometryOptions;
 
@@ -50,15 +51,14 @@ public class BoxGeometry implements Packable {
     @JsMethod
     public static native Geometry createGeometry(BoxGeometry boxGeometry);
 
-    //TODO: AxisAlignedBoundingBox
-//    /**
-//     * Creates a cube from the dimensions of an AxisAlignedBoundingBox.
-//     * @param boundingBox A description of the AxisAlignedBoundingBox.
-//     * @return
-//     * @see BoxGeometry#createGeometry
-//     */
-//    @JsMethod
-//    public static native BoxGeometry fromAxisAlignedBoundingBox(AxisAlignedBoundingBox boundingBox);
+    /**
+     * Creates a cube from the dimensions of an AxisAlignedBoundingBox.
+     * @param boundingBox A description of the AxisAlignedBoundingBox.
+     * @return box geometry
+     * @see BoxGeometry#createGeometry
+     */
+    @JsMethod
+    public static native BoxGeometry fromAxisAlignedBoundingBox(AxisAlignedBoundingBox boundingBox);
 
     /**
      * Creates a cube centered at the origin given its dimensions.
