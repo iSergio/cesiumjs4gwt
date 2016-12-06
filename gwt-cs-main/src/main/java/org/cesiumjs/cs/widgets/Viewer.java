@@ -21,6 +21,7 @@ import com.google.gwt.dom.client.Element;
 import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.Clock;
 import org.cesiumjs.cs.core.HeadingPitchRange;
+import org.cesiumjs.cs.core.ScreenSpaceEventHandler;
 import org.cesiumjs.cs.core.providers.TerrainProvider;
 import org.cesiumjs.cs.datasources.*;
 import org.cesiumjs.cs.promise.Promise;
@@ -168,15 +169,13 @@ public class Viewer {
     /**
      * Gets the screen space event handler.
      */
-    //TODO: Later
-//    @JsProperty(name = "screenSpaceEventHandler")
-//    public native ScreenSpaceEventHandler screenSpaceEventHandler();
+    @JsProperty(name = "screenSpaceEventHandler")
+    public native ScreenSpaceEventHandler screenSpaceEventHandler();
     /**
      * Gets or sets the object instance for which to display a selection indicator.
      */
-    //TODO: Later
-//    @JsProperty
-//    public Entity selectedEntity;
+    @JsProperty
+    public Entity selectedEntity;
     /**
      * Gets the selection indicator.
      */
