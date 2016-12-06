@@ -31,7 +31,7 @@ public class BoxGeometry implements Packable {
     /**
      * The number of elements used to pack the object into an array.
      */
-    public static native Integer packedLength();
+    public static Integer packedLength;
 
     /**
      * Describes a cube centered at the origin.

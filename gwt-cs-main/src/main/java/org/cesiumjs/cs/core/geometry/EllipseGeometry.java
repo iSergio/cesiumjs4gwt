@@ -36,12 +36,6 @@ public class EllipseGeometry {
 
     /**
      * A description of an ellipse on an ellipsoid. Ellipse geometry can be rendered with both {@link Primitive} and {@link GroundPrimitive}.
-     */
-    @JsConstructor
-    public EllipseGeometry() {}
-
-    /**
-     * A description of an ellipse on an ellipsoid. Ellipse geometry can be rendered with both {@link Primitive} and {@link GroundPrimitive}.
      * @param options {@link EllipseGeometryOptions}
      */
     @JsConstructor
@@ -61,6 +55,7 @@ public class EllipseGeometry {
      * @param array The array to pack into.
      * @return The array that was packed into
      */
+    @JsMethod
     public static native double[] pack(EllipseGeometry value, double[] array);
 
     /**
