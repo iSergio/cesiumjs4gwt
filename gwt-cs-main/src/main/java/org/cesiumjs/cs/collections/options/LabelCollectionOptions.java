@@ -14,38 +14,41 @@
  * limitations under the License.
  */
 
-package org.cesiumjs.cs.core.options;
+package org.cesiumjs.cs.collections.options;
 
+import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.JulianDate;
+import org.cesiumjs.cs.core.Matrix4;
+import org.cesiumjs.cs.scene.Scene;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-public class TimeIntervalFindOptions {
+public class LabelCollectionOptions {
     /**
-     * The start time of the interval.
+     * The 4x4 transformation matrix that transforms each label from model to world coordinates.
+     * Default: {@link Matrix4#IDENTITY()}
      */
     @JsProperty
-    public JulianDate start;
+    public Matrix4 modelMatrix;
     /**
-     * The stop time of the interval.
+     * For debugging only. Determines if this primitive's commands' bounding spheres are shown.
+     * Default: false
      */
     @JsProperty
-    public JulianDate stop;
+    public boolean debugShowBoundingVolume;
     /**
-     * if options.start is included in the interval, false otherwise.
-     * Default: true
+     * Must be passed in for labels that use the height reference property or will be depth tested against the globe.
      */
     @JsProperty
-    public boolean isStartIncluded;
+    public Scene scene;
+
     /**
-     * if options.stop is included in the interval, false otherwise.
-     * Default: true
+     * Options for LabelCollection
      */
-    @JsProperty
-    public boolean isStopIncluded;
+    @JsConstructor
+    public LabelCollectionOptions() {}
 }

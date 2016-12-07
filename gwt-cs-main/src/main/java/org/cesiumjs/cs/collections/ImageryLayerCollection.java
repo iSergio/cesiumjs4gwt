@@ -14,20 +14,25 @@
  * limitations under the License.
  */
 
-package org.cesiumjs.cs.scene;
+package org.cesiumjs.cs.collections;
 
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Event;
+import org.cesiumjs.cs.core.Ray;
+import org.cesiumjs.cs.promise.Promise;
+import org.cesiumjs.cs.scene.ImageryLayer;
+import org.cesiumjs.cs.scene.ImageryLayerFeatureInfo;
+import org.cesiumjs.cs.scene.Scene;
 import org.cesiumjs.cs.scene.providers.ImageryProvider;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = "Cesium", name = "ImageryLayerCollection")
-public class ImageryLayerCollection {
+public class ImageryLayerCollection extends Collection<ImageryLayer> {
     /**
      * An event that is raised when a layer is added to the collection.
      * Event handlers are passed the layer that was added and the index at which it was added.
@@ -57,24 +62,12 @@ public class ImageryLayerCollection {
      */
     @JsProperty
     public Event layerShownOrHidden;
-    /**
-     * Gets the number of layers in this collection.
-     */
-    @JsProperty
-    public int length;
 
     /**
      * An ordered collection of imagery layers.
      */
     @JsConstructor
     public ImageryLayerCollection() {}
-
-    /**
-     * Adds a layer to the collection.
-     * @param layer the layer to add.
-     */
-    @JsMethod
-    public native void add(ImageryLayer layer);
 
     /**
      * Adds a layer to the collection.
@@ -102,50 +95,12 @@ public class ImageryLayerCollection {
     public native ImageryLayer addImageryProvider(ImageryProvider imageryProvider, int index);
 
     /**
-     * Checks to see if the collection contains a given layer.
-     * @param layer the layer to check for.
-     * @return  true if the collection contains the layer, false otherwise.
-     */
-    @JsMethod
-    public native boolean contains(ImageryLayer layer);
-
-    /**
-     * Destroys the WebGL resources held by all layers in this collection. Explicitly destroying this object allows for
-     * deterministic release of WebGL resources, instead of relying on the garbage collector.
-     *
-     * Once this object is destroyed, it should not be used; calling any function other than isDestroyed will result in a
-     * DeveloperError exception. Therefore, assign the return value (undefined) to the object as done in the example.
-     * @see #isDestroyed()
-     */
-    @JsMethod
-    public native void destroy();
-
-    /**
-     * Gets a layer by index from the collection.
-     * @param index the index to retrieve.
-     * @return The imagery layer at the given index.
-     */
-    @JsMethod
-    public native ImageryLayer get(int index);
-
-    /**
      * Determines the index of a given layer in the collection.
      * @param layer The layer to find the index of.
      * @return The index of the layer in the collection, or -1 if the layer does not exist in the collection.
      */
     @JsMethod
     public native int indexOf(ImageryLayer layer);
-
-    /**
-     * Returns true if this object was destroyed; otherwise, false.
-     *
-     * If this object was destroyed, it should not be used; calling any function other than isDestroyed will result in a
-     * DeveloperError exception.
-     * @return true if this object was destroyed; otherwise, false.
-     * @see #destroy()
-     */
-    @JsMethod
-    public native boolean isDestroyed();
 
     /**
      * Lowers a layer down one position in the collection.
@@ -169,9 +124,8 @@ public class ImageryLayerCollection {
      * @param scene The scene.
      * @return A promise that resolves to an array of features intersected by the pick ray. If it can be quickly determined that no features are intersected (for example, because no active imagery providers support ImageryProvider#pickFeatures or because the pick ray does not intersect the surface), this function will return undefined.
      */
-    // TODO: Promise
-//    @JsMethod
-//    public native Promise<ImageryLayerFeatureInfo[]> pickImageryLayerFeatures(Ray ray, Scene scene);
+    @JsMethod
+    public native Promise<ImageryLayerFeatureInfo[], Void> pickImageryLayerFeatures(Ray ray, Scene scene);
 
     /**
      * Raises a layer up one position in the collection.
@@ -190,25 +144,11 @@ public class ImageryLayerCollection {
     /**
      * Removes a layer from this collection, if present.
      * @param layer The layer to remove.
-     * @return true if the layer was in the collection and was removed, false if the layer was not in the collection.
-     */
-    @JsMethod
-    public native boolean remove(ImageryLayer layer);
-
-    /**
-     * Removes a layer from this collection, if present.
-     * @param layer The layer to remove.
      * @param destroy whether to destroy the layers in addition to removing them. Default: true
      * @return true if the layer was in the collection and was removed, false if the layer was not in the collection.
      */
     @JsMethod
     public native boolean remove(ImageryLayer layer, boolean destroy);
-
-    /**
-     * Removes all layers from this collection.
-     */
-    @JsMethod
-    public native void removeAll();
 
     /**
      * Removes all layers from this collection.

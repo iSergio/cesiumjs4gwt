@@ -14,13 +14,16 @@
  * limitations under the License.
  */
 
-package org.cesiumjs.cs.core;
+package org.cesiumjs.cs.collections;
 
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.options.TimeIntervalFindOptions;
+import org.cesiumjs.cs.core.Event;
+import org.cesiumjs.cs.core.JulianDate;
+import org.cesiumjs.cs.core.TimeInterval;
+import org.cesiumjs.cs.core.options.TimeIntervalOptions;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -85,16 +88,15 @@ public class TimeIntervalCollection {
     @JsMethod
     public native void addInterval(TimeInterval interval);
 
-    //TODO:TimeInterval~DataComparer
-//    /**
-//     * Adds an interval to the collection, merging intervals that contain the same data and splitting intervals of
-//     * different data as needed in order to maintain a non-overlapping collection. The data in the new interval takes
-//     * precedence over any existing intervals in the collection.
-//     * @param interval The interval to add.
-//     * @param dataComparer A function which compares the data of the two intervals. If omitted, reference equality is used.
-//     */
-//    @JsMethod
-//    public native void addInterval(TimeInterval interval, TimeIntervalDataComparer dataComparer);
+    /**
+     * Adds an interval to the collection, merging intervals that contain the same data and splitting intervals of
+     * different data as needed in order to maintain a non-overlapping collection. The data in the new interval takes
+     * precedence over any existing intervals in the collection.
+     * @param interval The interval to add.
+     * @param dataComparer A function which compares the data of the two intervals. If omitted, reference equality is used.
+     */
+    @JsMethod
+    public native void addInterval(TimeInterval interval, TimeInterval.DataComparer dataComparer);
 
     /**
      * Checks if the specified date is inside this collection.
@@ -112,14 +114,13 @@ public class TimeIntervalCollection {
     @JsMethod
     public native boolean equals(TimeIntervalCollection right);
 
-    //TODO:TimeInterval~DataComparer
-//    /**
-//     * Compares this instance against the provided instance componentwise and returns true if they are equal, false otherwise.
-//     * @param right The right hand side collection.
-//     * @param dataComparer A function which compares the data of the two intervals. If omitted, reference equality is used.
-//     * @return true if they are equal, false otherwise.
-//     */
-//    public native boolean equals(TimeIntervalCollection right, TimeIntervalDataComparer dataComparer);
+    /**
+     * Compares this instance against the provided instance componentwise and returns true if they are equal, false otherwise.
+     * @param right The right hand side collection.
+     * @param dataComparer A function which compares the data of the two intervals. If omitted, reference equality is used.
+     * @return true if they are equal, false otherwise.
+     */
+    public native boolean equals(TimeIntervalCollection right, TimeInterval.DataComparer dataComparer);
 
     /**
      * Finds and returns the data for the interval that contains the specified date.
@@ -140,11 +141,11 @@ public class TimeIntervalCollection {
     /**
      * Returns the first interval in the collection that matches the specified parameters.
      * All parameters are optional and undefined parameters are treated as a don't care condition.
-     * @param options Options
+     * @param options {@link TimeIntervalOptions}
      * @return The first interval in the collection that matches the specified parameters.
      */
     @JsMethod
-    public native TimeInterval findInterval(TimeIntervalFindOptions options);
+    public native TimeInterval findInterval(TimeIntervalOptions options);
 
     /**
      * The date to search for.
@@ -180,16 +181,24 @@ public class TimeIntervalCollection {
     @JsMethod
     public native TimeIntervalCollection intersect(TimeIntervalCollection other);
 
-    //TODO: TimeInterval~DataComparer and TimeInterval~MergeCallback
-//    /**
-//     * Creates a new instance that is the intersection of this collection and the provided collection.
-//     * @param other The collection to intersect with.
-//     * @param dataComparer A function which compares the data of the two intervals. If omitted, reference equality is used.
-//     * @param mergeCallback A function which merges the data of the two intervals. If omitted, the data from the left interval will be used.
-//     * @return A new TimeIntervalCollection which is the intersection of this collection and the provided collection.
-//     */
-//    @JsMethod
-//    public native TimeIntervalCollection intersect(TimeIntervalCollection other, TimeIntervalDataComparer dataComparer, TimeIntervalMergeCallback mergeCallback);
+    /**
+     * Creates a new instance that is the intersection of this collection and the provided collection.
+     * @param other The collection to intersect with.
+     * @param dataComparer A function which compares the data of the two intervals. If omitted, reference equality is used.
+     * @return A new TimeIntervalCollection which is the intersection of this collection and the provided collection.
+     */
+    @JsMethod
+    public native TimeIntervalCollection intersect(TimeIntervalCollection other, TimeInterval.DataComparer dataComparer);
+
+    /**
+     * Creates a new instance that is the intersection of this collection and the provided collection.
+     * @param other The collection to intersect with.
+     * @param dataComparer A function which compares the data of the two intervals. If omitted, reference equality is used.
+     * @param mergeCallback A function which merges the data of the two intervals. If omitted, the data from the left interval will be used.
+     * @return A new TimeIntervalCollection which is the intersection of this collection and the provided collection.
+     */
+    @JsMethod
+    public native TimeIntervalCollection intersect(TimeIntervalCollection other, TimeInterval.DataComparer dataComparer, TimeInterval.MergeCallback mergeCallback);
 
     /**
      * Removes all intervals from the collection.

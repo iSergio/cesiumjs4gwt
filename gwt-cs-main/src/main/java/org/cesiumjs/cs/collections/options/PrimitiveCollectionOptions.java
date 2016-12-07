@@ -14,41 +14,27 @@
  * limitations under the License.
  */
 
-package org.cesiumjs.cs.scene.options;
+package org.cesiumjs.cs.collections.options;
 
-import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.Matrix4;
-import org.cesiumjs.cs.scene.Scene;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-public class LabelCollectionOptions {
+public class PrimitiveCollectionOptions {
     /**
-     * The 4x4 transformation matrix that transforms each label from model to world coordinates.
-     * Default: {@link Matrix4#IDENTITY()}
+     * Determines if the primitives in the collection will be shown.
+     * Default: true
      */
     @JsProperty
-    public Matrix4 modelMatrix;
+    public boolean show;
     /**
-     * For debugging only. Determines if this primitive's commands' bounding spheres are shown.
-     * Default: false
+     * Determines if primitives in the collection are destroyed when they are removed.
+     * Default: true
      */
     @JsProperty
-    public boolean debugShowBoundingVolume;
-    /**
-     * Must be passed in for labels that use the height reference property or will be depth tested against the globe.
-     */
-    @JsProperty
-    public Scene scene;
-
-    /**
-     * Options for LabelCollection
-     */
-    @JsConstructor
-    public LabelCollectionOptions() {}
+    public boolean destroyPrimitives;
 }

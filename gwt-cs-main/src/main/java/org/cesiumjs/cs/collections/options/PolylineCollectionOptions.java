@@ -14,27 +14,36 @@
  * limitations under the License.
  */
 
-package org.cesiumjs.cs.scene.options;
+package org.cesiumjs.cs.collections.options;
 
+import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Matrix4;
+import org.cesiumjs.cs.collections.PolylineCollection;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-public class PrimitiveCollectionOptions {
+public class PolylineCollectionOptions {
     /**
-     * Determines if the primitives in the collection will be shown.
-     * Default: true
+     * The 4x4 transformation matrix that transforms each polyline from model to world coordinates.
+     * Default: {@link org.cesiumjs.cs.core.Matrix4#IDENTITY()}
      */
     @JsProperty
-    public boolean show;
+    public Matrix4 modelMatrix;
     /**
-     * Determines if primitives in the collection are destroyed when they are removed.
-     * Default: true
+     * For debugging only. Determines if this primitive's commands' bounding spheres are shown.
+     * Default: false
      */
     @JsProperty
-    public boolean destroyPrimitives;
+    public boolean debugShowBoundingVolume;
+
+    /**
+     * Options for {@link PolylineCollection}
+     */
+    @JsConstructor
+    public PolylineCollectionOptions() {}
 }

@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-package org.cesiumjs.cs.scene;
+package org.cesiumjs.cs.collections;
 
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.Matrix4;
 import org.cesiumjs.cs.core.Transforms;
-import org.cesiumjs.cs.scene.options.BillboardCollectionOptions;
+import org.cesiumjs.cs.scene.Billboard;
+import org.cesiumjs.cs.collections.options.BillboardCollectionOptions;
 import org.cesiumjs.cs.scene.options.BillboardOptions;
 
 /**
@@ -31,7 +31,7 @@ import org.cesiumjs.cs.scene.options.BillboardOptions;
  */
 //TODO: Examples
 @JsType(isNative = true, namespace = "Cesium", name = "BillboardCollection")
-public class BillboardCollection {
+public class BillboardCollection extends Collection<Billboard> {
     /**
      * This property is for debugging only; it is not for production use nor is it optimized.
      * Draws the bounding sphere for each draw command in the primitive.
@@ -39,12 +39,6 @@ public class BillboardCollection {
      */
     @JsProperty
     public Boolean debugShowBoundingVolume;
-    /**
-     * Returns the number of billboards in this collection.
-     * This is commonly used with BillboardCollection#get to iterate over all the billboards in the collection.
-     */
-    @JsProperty
-    public Number length;
     /**
      * The 4x4 transformation matrix that transforms each billboard in this collection from model to world coordinates. When this is the identity matrix, the billboards are drawn in world coordinates, i.e., Earth's WGS84 coordinates. Local reference frames can be used by providing a different transformation matrix, like that returned by Transforms.eastNorthUpToFixedFrame.
      * Default: {@link Matrix4#IDENTITY()}
@@ -104,80 +98,4 @@ public class BillboardCollection {
      */
     @JsMethod
     public native Billboard add(BillboardOptions billboard);
-
-    /**
-     * Check whether this collection contains a given billboard.
-     * @param billboard The billboard to check for.
-     * @return true if this collection contains the billboard, false otherwise.
-     * @see BillboardCollection#get
-     */
-    @JsMethod
-    public native Boolean contains(Billboard billboard);
-
-    /**
-     * Destroys the WebGL resources held by this object. Destroying an object allows for deterministic release of WebGL
-     * resources, instead of relying on the garbage collector to destroy this object.
-     * @see BillboardCollection#isDestroyed
-     */
-    @JsMethod
-    public native void destroy();
-
-    /**
-     * Returns the billboard in the collection at the specified index. Indices are zero-based and increase as billboards are added.
-     * Removing a billboard shifts all billboards after it to the left, changing their indices.
-     * This function is commonly used with BillboardCollection#length to iterate over all the billboards in the collection.
-     *
-     * Performance:
-     * Expected constant time. If billboards were removed from the collection and BillboardCollection#update was not
-     * called, an implicit O(n) operation is performed.
-     * @param index The zero-based index of the billboard.
-     * @return The billboard at the specified index.
-     * @see BillboardCollection#length
-     */
-    @JsMethod
-    public native Billboard get(Number index);
-
-    /**
-     * Returns true if this object was destroyed; otherwise, false.
-     *
-     * If this object was destroyed, it should not be used; calling any function other than isDestroyed will result in a DeveloperError exception.
-     * @return true if this object was destroyed; otherwise, false.
-     * @see BillboardCollection#destroy
-     */
-    @JsMethod
-    public native boolean isDestroyed();
-
-    /**
-     * Removes a billboard from the collection.
-     *
-     * Performance:
-     * Calling remove is expected constant time. However, the collection's vertex buffer is rewritten - an O(n)
-     * operation that also incurs CPU to GPU overhead. For best performance, remove as many billboards as
-     * possible before calling update. If you intend to temporarily hide a billboard, it is usually more efficient to
-     * call Billboard#show instead of removing and re-adding the billboard.
-     * @param billboard The billboard to remove.
-     * @return true if the billboard was removed; false if the billboard was not found in the collection.
-     * @see BillboardCollection#add
-     * @see BillboardCollection#removeAll
-     * @see Billboard#show
-     */
-    @JsMethod
-    public native Boolean remove(Billboard billboard);
-
-    /**
-     * Removes all billboards from the collection.
-     * Performance:
-     * O(n). It is more efficient to remove all the billboards from a collection and then add new ones than to create a new collection entirely.
-     * @see BillboardCollection#add
-     * @see BillboardCollection#remove
-     */
-    @JsMethod
-    public native void removeAll();
-
-    /**
-     * Called when Viewer or CesiumWidget render the scene to get the draw commands needed to render this primitive.
-     * Do not call this function directly. This is documented just to list the exceptions that may be propagated when the scene is rendered:
-     */
-    @JsMethod
-    public native void update();
 }

@@ -14,24 +14,22 @@
  * limitations under the License.
  */
 
-package org.cesiumjs.cs.scene.options;
+package org.cesiumjs.cs.collections.options;
 
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Matrix4;
-import org.cesiumjs.cs.scene.BillboardCollection;
-import org.cesiumjs.cs.scene.Scene;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-public class BillboardCollectionOptions {
+public class PointPrimitiveCollectionOptions {
     /**
-     * The 4x4 transformation matrix that transforms each billboard from model to world coordinates.
-     * Default: {@link org.cesiumjs.cs.core.Matrix4#IDENTITY()}
+     * The 4x4 transformation matrix that transforms each point from model to world coordinates.
+     * Default: {@link Matrix4#IDENTITY()}
      */
     @JsProperty
     public Matrix4 modelMatrix;
@@ -40,22 +38,11 @@ public class BillboardCollectionOptions {
      * Default: false
      */
     @JsProperty
-    public Boolean debugShowBoundingVolume;
-    /**
-     * Must be passed in for billboards that use the height reference property or will be depth tested against the globe.
-     */
-    @JsProperty
-    public Scene scene;
+    public boolean debugShowBoundingVolume;
 
     /**
-     * Options for {@link BillboardCollection}
+     * Options for {@link org.cesiumjs.cs.collections.PointPrimitiveCollection}
      */
     @JsConstructor
-    public BillboardCollectionOptions() {}
-
-    /**
-     * Options for {@link BillboardCollection}
-     */
-    @JsConstructor
-    public BillboardCollectionOptions(Matrix4 modelMatrix, Boolean debugShowBoundingVolume, Scene scene) {}
+    public PointPrimitiveCollectionOptions() {}
 }
