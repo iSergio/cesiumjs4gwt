@@ -15,7 +15,7 @@ import org.cesiumjs.cs.core.Math;
 import org.cesiumjs.cs.core.interpolation.HermitePolynomialApproximation;
 import org.cesiumjs.cs.core.interpolation.LagrangePolynomialApproximation;
 import org.cesiumjs.cs.core.interpolation.LinearApproximation;
-import org.cesiumjs.cs.datasources.EntityCollection;
+import org.cesiumjs.cs.collections.EntityCollection;
 import org.cesiumjs.cs.datasources.properties.options.SampledPropertyInterpolationOptions;
 import org.cesiumjs.cs.core.options.TimeIntervalOptions;
 import org.cesiumjs.cs.core.providers.CesiumTerrainProvider;

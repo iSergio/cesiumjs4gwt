@@ -12,7 +12,7 @@ import org.cesiumjs.cs.core.Math;
 import org.cesiumjs.cs.core.enums.ScreenSpaceEventType;
 import org.cesiumjs.cs.core.events.MouseMoveEvent;
 import org.cesiumjs.cs.datasources.Entity;
-import org.cesiumjs.cs.datasources.EntityCollection;
+import org.cesiumjs.cs.collections.EntityCollection;
 import org.cesiumjs.cs.datasources.graphics.BillboardGraphics;
 import org.cesiumjs.cs.datasources.graphics.LabelGraphics;
 import org.cesiumjs.cs.datasources.graphics.ModelGraphics;

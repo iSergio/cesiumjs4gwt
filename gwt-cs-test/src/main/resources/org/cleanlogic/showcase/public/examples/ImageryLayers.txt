@@ -11,7 +11,7 @@ import org.cesiumjs.cs.core.Credit;
 import org.cesiumjs.cs.core.Rectangle;
 import org.cesiumjs.cs.core.providers.options.ArcGisImageServerTerrainProviderOptions;
 import org.cesiumjs.cs.scene.ImageryLayer;
-import org.cesiumjs.cs.scene.ImageryLayerCollection;
+import org.cesiumjs.cs.collections.ImageryLayerCollection;
 import org.cesiumjs.cs.scene.providers.ArcGisMapServerImageryProvider;
 import org.cesiumjs.cs.scene.providers.SingleTileImageryProvider;
 import org.cesiumjs.cs.scene.providers.options.ArcGisMapServerImageryProviderOptions;
