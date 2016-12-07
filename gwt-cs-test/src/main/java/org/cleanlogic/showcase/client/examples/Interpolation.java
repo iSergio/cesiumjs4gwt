@@ -25,6 +25,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.*;
 import org.cesiumjs.cs.Configuration;
+import org.cesiumjs.cs.collections.TimeIntervalCollection;
 import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.core.Math;
 import org.cesiumjs.cs.core.enums.ClockRange;

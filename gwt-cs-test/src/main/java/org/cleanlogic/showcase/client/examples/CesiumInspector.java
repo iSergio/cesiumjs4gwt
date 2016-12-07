@@ -32,7 +32,7 @@ import org.cesiumjs.cs.core.options.GeometryInstanceOptions;
 import org.cesiumjs.cs.core.providers.CesiumTerrainProvider;
 import org.cesiumjs.cs.core.providers.options.CesiumTerrainProviderOptions;
 import org.cesiumjs.cs.js.JsObject;
-import org.cesiumjs.cs.scene.BillboardCollection;
+import org.cesiumjs.cs.collections.BillboardCollection;
 import org.cesiumjs.cs.scene.apperances.PerInstanceColorAppearance;
 import org.cesiumjs.cs.scene.Primitive;
 import org.cesiumjs.cs.scene.Scene;

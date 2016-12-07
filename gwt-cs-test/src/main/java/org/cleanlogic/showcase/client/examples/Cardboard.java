@@ -24,6 +24,7 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import org.cesiumjs.cs.Cesium;
 import org.cesiumjs.cs.Configuration;
+import org.cesiumjs.cs.collections.TimeIntervalCollection;
 import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.core.Math;
 import org.cesiumjs.cs.core.enums.ClockRange;
@@ -46,7 +47,6 @@ import org.cleanlogic.showcase.client.basic.AbstractExample;
 import org.cleanlogic.showcase.client.components.store.ShowcaseExampleStore;
 
 import javax.inject.Inject;
-import java.util.Date;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>

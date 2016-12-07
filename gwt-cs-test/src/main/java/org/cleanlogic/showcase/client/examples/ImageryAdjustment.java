@@ -88,7 +88,7 @@ public class ImageryAdjustment extends AbstractExample {
         private final class UpdateViewModel implements Event.Listener {
             @Override
             public void function(Object... o) {
-                if (_csPanelAbstract.getViewer().imageryLayers().length > 0) {
+                if (_csPanelAbstract.getViewer().imageryLayers().length() > 0) {
                     ImageryLayer layer = _csPanelAbstract.getViewer().imageryLayers().get(0);
                     brightness = layer.brightness;
                     contrast = layer.contrast;

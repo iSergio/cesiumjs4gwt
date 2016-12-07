@@ -27,7 +27,7 @@ import org.cesiumjs.cs.Configuration;
 import org.cesiumjs.cs.core.Credit;
 import org.cesiumjs.cs.core.Rectangle;
 import org.cesiumjs.cs.scene.ImageryLayer;
-import org.cesiumjs.cs.scene.ImageryLayerCollection;
+import org.cesiumjs.cs.collections.ImageryLayerCollection;
 import org.cesiumjs.cs.scene.WebMapServiceParameters;
 import org.cesiumjs.cs.scene.providers.*;
 import org.cesiumjs.cs.scene.providers.options.*;
@@ -186,7 +186,7 @@ public class ImageryLayersManipulation extends AbstractExample {
         }
 
         private void updateLayerList() {
-            int numLayers = imageryLayers.length;
+            int numLayers = imageryLayers.length();
             layers.clear();
             for (int i = numLayers - 1; i >= 0; --i) {
                 layers.add(imageryLayers.get(i));
