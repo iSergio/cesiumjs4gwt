@@ -19,7 +19,7 @@ package org.cesiumjs.cs.datasources.properties;
 import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.JulianDate;
-import org.cesiumjs.cs.core.TimeIntervalCollection;
+import org.cesiumjs.cs.collections.TimeIntervalCollection;
 import org.cesiumjs.cs.core.enums.ReferenceFrame;
 
 /**

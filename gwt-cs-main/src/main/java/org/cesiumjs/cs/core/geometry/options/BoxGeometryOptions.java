@@ -43,7 +43,7 @@ public class BoxGeometryOptions {
      * Default: {@link VertexFormat#DEFAULT()}
      */
     @JsProperty
-    public Integer vertexFormat;
+    public VertexFormat vertexFormat;
     /**
      * The width, depth, and height of the box stored in the x, y, and z coordinates of the Cartesian3, respectively.
      */

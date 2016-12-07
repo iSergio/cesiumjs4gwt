@@ -20,7 +20,7 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.TimeIntervalCollection;
+import org.cesiumjs.cs.collections.TimeIntervalCollection;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -35,7 +35,7 @@ public class CompositeProperty extends Property<TimeIntervalCollection> {
     public TimeIntervalCollection intervals;
 
     /**
-     * A Property which is defined by a {@link org.cesiumjs.cs.core.TimeIntervalCollection},
+     * A Property which is defined by a {@link TimeIntervalCollection},
      * where the data property of each {@link org.cesiumjs.cs.core.TimeInterval} is another Property
      * instance which is evaluated at the provided time.
      */

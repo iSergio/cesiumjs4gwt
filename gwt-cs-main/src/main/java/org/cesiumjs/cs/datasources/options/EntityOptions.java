@@ -17,7 +17,7 @@
 package org.cesiumjs.cs.datasources.options;
 
 import jsinterop.annotations.*;
-import org.cesiumjs.cs.core.TimeIntervalCollection;
+import org.cesiumjs.cs.collections.TimeIntervalCollection;
 import org.cesiumjs.cs.datasources.Entity;
 import org.cesiumjs.cs.datasources.graphics.*;
 import org.cesiumjs.cs.datasources.properties.PositionProperty;

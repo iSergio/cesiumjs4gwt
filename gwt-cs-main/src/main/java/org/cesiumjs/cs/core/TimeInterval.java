@@ -17,6 +17,7 @@
 package org.cesiumjs.cs.core;
 
 import jsinterop.annotations.*;
+import org.cesiumjs.cs.collections.TimeIntervalCollection;
 import org.cesiumjs.cs.core.options.TimeIntervalIso8601Options;
 import org.cesiumjs.cs.core.options.TimeIntervalOptions;
 

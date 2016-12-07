@@ -18,6 +18,7 @@ package org.cesiumjs.cs.datasources;
 
 import com.google.gwt.json.client.JSONObject;
 import jsinterop.annotations.*;
+import org.cesiumjs.cs.collections.EntityCollection;
 import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.core.JulianDate;

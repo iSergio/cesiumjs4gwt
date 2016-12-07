@@ -20,6 +20,7 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.collections.DataSourceCollection;
 import org.cesiumjs.cs.core.JulianDate;
 import org.cesiumjs.cs.datasources.options.DataSourceDisplayOptions;
 import org.cesiumjs.cs.datasources.visualizer.Visualizer;

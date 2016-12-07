@@ -21,7 +21,7 @@ import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.JulianDate;
 import org.cesiumjs.cs.datasources.EntityCluster;
-import org.cesiumjs.cs.datasources.EntityCollection;
+import org.cesiumjs.cs.collections.EntityCollection;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>

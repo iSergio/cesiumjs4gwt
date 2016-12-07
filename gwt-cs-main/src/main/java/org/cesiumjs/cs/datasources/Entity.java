@@ -20,14 +20,14 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.collections.EntityCollection;
 import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.core.JulianDate;
-import org.cesiumjs.cs.core.TimeIntervalCollection;
+import org.cesiumjs.cs.collections.TimeIntervalCollection;
 import org.cesiumjs.cs.datasources.graphics.*;
 import org.cesiumjs.cs.datasources.options.EntityOptions;
 import org.cesiumjs.cs.datasources.properties.PositionProperty;
 import org.cesiumjs.cs.datasources.properties.Property;
-import org.cesiumjs.cs.js.JsObject;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>

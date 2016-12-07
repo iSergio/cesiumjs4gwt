@@ -21,6 +21,7 @@ import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.*;
+import org.cesiumjs.cs.collections.LabelCollection;
 import org.cesiumjs.cs.scene.enums.HeightReference;
 import org.cesiumjs.cs.scene.enums.HorizontalOrigin;
 import org.cesiumjs.cs.scene.enums.LabelStyle;

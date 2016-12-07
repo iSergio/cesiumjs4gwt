@@ -27,7 +27,7 @@ import org.cesiumjs.cs.core.SkyAtmosphere;
 import org.cesiumjs.cs.core.SkyBox;
 import org.cesiumjs.cs.core.projection.MapProjection;
 import org.cesiumjs.cs.core.providers.TerrainProvider;
-import org.cesiumjs.cs.datasources.DataSourceCollection;
+import org.cesiumjs.cs.collections.DataSourceCollection;
 import org.cesiumjs.cs.scene.enums.MapMode2D;
 import org.cesiumjs.cs.scene.enums.SceneMode;
 import org.cesiumjs.cs.scene.enums.ShadowMode;

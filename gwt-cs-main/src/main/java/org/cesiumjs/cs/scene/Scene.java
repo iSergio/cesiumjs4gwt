@@ -21,6 +21,8 @@ import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.core.projection.MapProjection;
 import org.cesiumjs.cs.core.providers.TerrainProvider;
+import org.cesiumjs.cs.collections.ImageryLayerCollection;
+import org.cesiumjs.cs.collections.PrimitiveCollection;
 import org.cesiumjs.cs.scene.enums.SceneMode;
 import org.cesiumjs.cs.scene.options.SceneOptions;
 

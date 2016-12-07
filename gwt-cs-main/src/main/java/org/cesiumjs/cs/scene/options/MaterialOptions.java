@@ -16,10 +16,12 @@
 
 package org.cesiumjs.cs.scene.options;
 
+import com.google.gwt.json.client.JSONObject;
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.js.JsObject;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -42,7 +44,7 @@ public class MaterialOptions {
      * The fabric JSON used to generate the material.
      */
     @JsProperty
-    public Object fabric;
+    public JsObject fabric;
 
     @JsConstructor
     public MaterialOptions() {}

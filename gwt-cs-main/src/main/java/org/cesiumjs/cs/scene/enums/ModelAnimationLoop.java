@@ -14,27 +14,33 @@
  * limitations under the License.
  */
 
-package org.cesiumjs.cs.datasources.properties;
+package org.cesiumjs.cs.scene.enums;
 
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.collections.TimeIntervalCollection;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
-@JsType(isNative = true, namespace = "Cesium", name = "CompositeMaterialProperty")
-public class CompositeMaterialProperty extends MaterialProperty {
+@JsType(isNative = true, namespace = "Cesium", name = "ModelAnimationLoop")
+public class ModelAnimationLoop {
     /**
-     * Gets the interval collection.
+     * Loop the animation. First, playing it forward, then in reverse, then forward, and so on.
      */
-    @JsProperty
-    public TimeIntervalCollection intervals;
+    @JsProperty(name = "MIRRORED_REPEAT")
+    public static native Integer MIRRORED_REPEAT();
+    /**
+     * Play the animation once; do not loop it.
+     */
+    @JsProperty(name = "NONE")
+    public static native Integer NONE();
+    /**
+     * Loop the animation playing it from the start immediately after it stops.
+     */
+    @JsProperty(name = "REPEAT")
+    public static native Integer REPEAT();
 
-    /**
-     * A {@link CompositeProperty} which is also a {@link MaterialProperty}.
-     */
     @JsConstructor
-    public CompositeMaterialProperty() {}
+    private ModelAnimationLoop() {}
 }

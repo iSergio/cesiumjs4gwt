@@ -19,6 +19,7 @@ package org.cesiumjs.cs.scene.apperances;
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.VertexFormat;
 import org.cesiumjs.cs.scene.apperances.options.PerInstanceColorAppearanceOptions;
 
 /**
@@ -31,19 +32,12 @@ public class PerInstanceColorAppearance extends Appearance {
      * is false. This requires only a position attribute.
      */
     @JsProperty(name = "FLAT_VERTEX_FORMAT")
-    public static native Integer FLAT_VERTEX_FORMAT();
+    public static native VertexFormat FLAT_VERTEX_FORMAT();
     /**
      * The VertexFormat that all PerInstanceColorAppearance instances are compatible with. This requires only position and st attributes.
      */
     @JsProperty(name = "VERTEX_FORMAT")
-    public static native Integer VERTEX_FORMAT();
-//    /**
-//     * When true, the geometry is expected to be closed so PerInstanceColorAppearance#renderState has backface culling enabled.
-//     * If the viewer enters the geometry, it will not be visible.
-//     * Default: false
-//     */
-//    @JsProperty(name = "closed")
-//    public native boolean closed();
+    public static native VertexFormat VERTEX_FORMAT();
     /**
      * When true, the fragment shader flips the surface normal as needed to ensure that the normal faces the viewer to
      * avoid dark spots. This is useful when both sides of a geometry should be shaded like WallGeometry.

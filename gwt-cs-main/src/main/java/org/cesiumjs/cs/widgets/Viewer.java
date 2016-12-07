@@ -19,6 +19,8 @@ package org.cesiumjs.cs.widgets;
 import com.google.gwt.dom.client.CanvasElement;
 import com.google.gwt.dom.client.Element;
 import jsinterop.annotations.*;
+import org.cesiumjs.cs.collections.DataSourceCollection;
+import org.cesiumjs.cs.collections.EntityCollection;
 import org.cesiumjs.cs.core.Clock;
 import org.cesiumjs.cs.core.HeadingPitchRange;
 import org.cesiumjs.cs.core.ScreenSpaceEventHandler;
@@ -26,7 +28,7 @@ import org.cesiumjs.cs.core.providers.TerrainProvider;
 import org.cesiumjs.cs.datasources.*;
 import org.cesiumjs.cs.promise.Promise;
 import org.cesiumjs.cs.scene.Camera;
-import org.cesiumjs.cs.scene.ImageryLayerCollection;
+import org.cesiumjs.cs.collections.ImageryLayerCollection;
 import org.cesiumjs.cs.scene.Scene;
 import org.cesiumjs.cs.scene.ShadowMap;
 import org.cesiumjs.cs.widgets.options.FlyToOptions;
@@ -266,7 +268,7 @@ public class Viewer {
      * A base widget for building applications. It composites all of the standard Cesium widgets into one reusable package.
      * The widget can always be extended by using mixins, which add functionality useful for a variety of applications.
      * @param element The DOM element or ID that will contain the widget.
-     * @param options
+     * @param options {@link ViewerOptions}
      */
     @JsConstructor
     public Viewer(String element, ViewerOptions options) {}

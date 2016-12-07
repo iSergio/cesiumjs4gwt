@@ -39,7 +39,7 @@ public class RectangleGeometryOptions {
      * Default {@link org.cesiumjs.cs.core.VertexFormat#DEFAULT()}
      */
     @JsProperty
-    public Integer vertexFormat;
+    public VertexFormat vertexFormat;
     /**
      * The ellipsoid on which the rectangle lies.
      * Default: {@link Ellipsoid#WGS84()}

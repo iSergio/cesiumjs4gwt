@@ -24,7 +24,7 @@ import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.core.JulianDate;
 import org.cesiumjs.cs.core.enums.ReferenceFrame;
-import org.cesiumjs.cs.datasources.EntityCollection;
+import org.cesiumjs.cs.collections.EntityCollection;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>

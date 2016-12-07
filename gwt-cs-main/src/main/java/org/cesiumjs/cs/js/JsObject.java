@@ -26,6 +26,10 @@ import jsinterop.annotations.JsProperty;
 public class JsObject extends JavaScriptObject {
     protected JsObject() {}
 
+    public static native JsObject create() /*-{
+        return {};
+    }-*/;
+
     public static <O> O $(O base, Object ...propertyValues) {
         String propertyName = null;
 

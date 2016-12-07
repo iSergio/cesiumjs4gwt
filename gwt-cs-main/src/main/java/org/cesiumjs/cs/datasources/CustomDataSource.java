@@ -17,6 +17,7 @@
 package org.cesiumjs.cs.datasources;
 
 import jsinterop.annotations.*;
+import org.cesiumjs.cs.collections.EntityCollection;
 import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.core.JulianDate;
 
