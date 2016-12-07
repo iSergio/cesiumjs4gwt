@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 
-package org.cesiumjs.cs.core.geometry;
+package org.cesiumjs.cs.core;
 
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.ComponentDatatype;
-import org.cesiumjs.cs.core.geometry.options.GeometryInstanceAttributeOptions;
+import org.cesiumjs.cs.core.options.GeometryInstanceAttributeOptions;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>

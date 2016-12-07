@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-package org.cesiumjs.cs.core.geometry.options;
+package org.cesiumjs.cs.core.options;
 
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.ComponentDatatype;
+import org.cesiumjs.cs.core.GeometryInstanceAttribute;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -50,7 +51,7 @@ public class GeometryInstanceAttributeOptions {
     public double[] value;
 
     /**
-     * Options for {@link org.cesiumjs.cs.core.geometry.GeometryInstanceAttribute}
+     * Options for {@link GeometryInstanceAttribute}
      */
     @JsConstructor
     public GeometryInstanceAttributeOptions() {}
