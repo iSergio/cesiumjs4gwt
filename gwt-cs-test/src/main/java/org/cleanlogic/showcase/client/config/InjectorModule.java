@@ -65,5 +65,6 @@ public class InjectorModule extends AbstractGinModule {
         bind(ImageryAdjustment.class).asEagerSingleton();
         bind(ImageryLayers.class).asEagerSingleton();
         bind(KML.class).asEagerSingleton();
+        bind(Materials.class).asEagerSingleton();
     }
 }
