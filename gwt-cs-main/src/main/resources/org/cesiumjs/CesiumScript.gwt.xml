@@ -15,4 +15,5 @@
   -->
 <module>
     <script src="js/Cesium/Cesium.js" />
+    <script src="js/GeoserverTerrainProvider.js" />
 </module>
