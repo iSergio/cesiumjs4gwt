@@ -10,7 +10,7 @@
     <inherits name='com.google.gwt.user.theme.clean.Clean'/>
 
     <!-- Other module inherits -->
-    <inherits name="org.cesiumjs.cesiumjs"/>
+    <inherits name="org.cesiumjs.CesiumUnminified"/>
 
     <!-- Specify the app entry point class. -->
     <entry-point class='org.cleanlogic.showcase.client.Showcase'/>
@@ -20,6 +20,6 @@
     <source path='shared'/>
 
     <!-- Logging options -->
-    <!--<set-property name="gwt.logging.logLevel" value="INFO"/>-->
-    <!--<set-property name="gwt.logging.enabled" value="TRUE"/>-->
+    <set-property name="gwt.logging.logLevel" value="INFO"/>
+    <set-property name="gwt.logging.enabled" value="TRUE"/>
 </module>
