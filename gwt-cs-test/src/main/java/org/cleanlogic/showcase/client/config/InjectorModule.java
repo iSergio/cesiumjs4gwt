@@ -43,13 +43,11 @@ public class InjectorModule extends AbstractGinModule {
 
         bind(GeometryAndAppearances.class).asEagerSingleton();
         bind(HelloWorld.class).asEagerSingleton();
-        bind(HelloWorldStatic.class).asEagerSingleton();
         bind(Billboards.class).asEagerSingleton();
         bind(Models3D.class).asEagerSingleton();
         bind(AtmosphereColor.class).asEagerSingleton();
         bind(Terrain.class).asEagerSingleton();
         bind(Picking.class).asEagerSingleton();
-        bind(PickingStatic.class).asEagerSingleton();
         bind(Camera.class).asEagerSingleton();
         bind(ImageryLayersManipulation.class).asEagerSingleton();
         bind(SpheresAndEllipsoids.class).asEagerSingleton();
