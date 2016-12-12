@@ -22,10 +22,10 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.collections.ImageryLayerCollection;
 import org.cesiumjs.cs.core.Clock;
 import org.cesiumjs.cs.core.providers.TerrainProvider;
 import org.cesiumjs.cs.scene.Camera;
-import org.cesiumjs.cs.collections.ImageryLayerCollection;
 import org.cesiumjs.cs.scene.Scene;
 import org.cesiumjs.cs.widgets.options.CesiumWidgetOptions;
 

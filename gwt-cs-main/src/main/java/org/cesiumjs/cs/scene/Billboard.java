@@ -21,10 +21,10 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.collections.BillboardCollection;
 import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.js.JsImage;
 import org.cesiumjs.cs.promise.Promise;
-import org.cesiumjs.cs.collections.BillboardCollection;
 import org.cesiumjs.cs.scene.enums.HeightReference;
 
 /**

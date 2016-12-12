@@ -20,10 +20,10 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.collections.options.PolylineCollectionOptions;
 import org.cesiumjs.cs.core.Matrix4;
 import org.cesiumjs.cs.core.Transforms;
 import org.cesiumjs.cs.scene.Polyline;
-import org.cesiumjs.cs.collections.options.PolylineCollectionOptions;
 import org.cesiumjs.cs.scene.options.PolylineOptions;
 
 //TODO: Example

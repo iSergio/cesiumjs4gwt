@@ -20,8 +20,8 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.Matrix4;
 import org.cesiumjs.cs.collections.PolylineCollection;
+import org.cesiumjs.cs.core.Matrix4;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>

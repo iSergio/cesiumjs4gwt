@@ -22,8 +22,8 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.datasources.properties.Property;
-import org.cesiumjs.cs.scene.enums.VerticalOrigin;
 import org.cesiumjs.cs.scene.enums.LabelStyle;
+import org.cesiumjs.cs.scene.enums.VerticalOrigin;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>

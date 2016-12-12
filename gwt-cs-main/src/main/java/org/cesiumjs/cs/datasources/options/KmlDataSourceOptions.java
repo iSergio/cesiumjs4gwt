@@ -58,5 +58,5 @@ public class KmlDataSourceOptions {
      * @param canvas The canvas that is used for sending viewer properties to network links.
      */
     @JsConstructor
-    public KmlDataSourceOptions(Camera camera, CanvasElement canvas) {}
+    public KmlDataSourceOptions() {}//Camera camera, CanvasElement canvas) {}
 }

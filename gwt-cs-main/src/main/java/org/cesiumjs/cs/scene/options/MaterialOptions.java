@@ -16,7 +16,6 @@
 
 package org.cesiumjs.cs.scene.options;
 
-import com.google.gwt.json.client.JSONObject;
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;

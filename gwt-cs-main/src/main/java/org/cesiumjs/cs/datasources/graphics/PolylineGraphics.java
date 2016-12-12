@@ -17,7 +17,6 @@
 package org.cesiumjs.cs.datasources.graphics;
 
 import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsOptional;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Event;

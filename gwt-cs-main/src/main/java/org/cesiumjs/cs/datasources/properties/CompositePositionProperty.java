@@ -16,10 +16,13 @@
 
 package org.cesiumjs.cs.datasources.properties;
 
-import jsinterop.annotations.*;
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.collections.TimeIntervalCollection;
 import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.JulianDate;
-import org.cesiumjs.cs.collections.TimeIntervalCollection;
 import org.cesiumjs.cs.core.enums.ReferenceFrame;
 
 /**

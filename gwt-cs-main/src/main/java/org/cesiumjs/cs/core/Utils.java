@@ -20,12 +20,6 @@ import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.providers.TerrainProvider;
-import org.cesiumjs.cs.js.JsImage;
-import org.cesiumjs.cs.promise.Promise;
-import org.cesiumjs.cs.scene.providers.UrlTemplateImageryProvider;
-import org.cesiumjs.cs.scene.providers.options.OpenStreetMapImageryProviderOptions;
-import org.cesiumjs.cs.scene.providers.options.TileMapServiceImageryProviderOptions;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>

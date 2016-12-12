@@ -17,7 +17,6 @@
 package org.cesiumjs.cs.core.enums;
 
 import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsIgnore;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 

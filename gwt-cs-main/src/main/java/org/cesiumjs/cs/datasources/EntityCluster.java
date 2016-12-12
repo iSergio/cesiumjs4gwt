@@ -19,7 +19,6 @@ package org.cesiumjs.cs.datasources;
 import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.datasources.options.EntityClusterOptions;
-import org.cesiumjs.cs.js.JsObject;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>

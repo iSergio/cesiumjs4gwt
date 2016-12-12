@@ -19,8 +19,8 @@ package org.cesiumjs.cs.datasources.visualizer;
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.JulianDate;
 import org.cesiumjs.cs.collections.EntityCollection;
+import org.cesiumjs.cs.core.JulianDate;
 import org.cesiumjs.cs.datasources.updater.GeometryUpdater;
 import org.cesiumjs.cs.scene.Scene;
 

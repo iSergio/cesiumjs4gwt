@@ -20,9 +20,9 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.collections.options.PrimitiveCollectionOptions;
 import org.cesiumjs.cs.scene.Primitive;
 import org.cesiumjs.cs.scene.Scene;
-import org.cesiumjs.cs.collections.options.PrimitiveCollectionOptions;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>

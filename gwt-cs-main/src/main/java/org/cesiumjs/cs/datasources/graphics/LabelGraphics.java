@@ -24,8 +24,8 @@ import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.datasources.graphics.options.LabelGraphicsOptions;
 import org.cesiumjs.cs.datasources.properties.Property;
-import org.cesiumjs.cs.scene.enums.VerticalOrigin;
 import org.cesiumjs.cs.scene.enums.LabelStyle;
+import org.cesiumjs.cs.scene.enums.VerticalOrigin;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>

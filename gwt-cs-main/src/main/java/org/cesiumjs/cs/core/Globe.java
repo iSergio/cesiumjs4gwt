@@ -20,8 +20,8 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.providers.TerrainProvider;
 import org.cesiumjs.cs.collections.ImageryLayerCollection;
+import org.cesiumjs.cs.core.providers.TerrainProvider;
 import org.cesiumjs.cs.scene.Scene;
 
 /**

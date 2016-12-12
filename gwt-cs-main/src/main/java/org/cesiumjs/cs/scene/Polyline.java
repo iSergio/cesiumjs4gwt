@@ -19,9 +19,9 @@ package org.cesiumjs.cs.scene;
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.collections.PolylineCollection;
 import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.DistanceDisplayCondition;
-import org.cesiumjs.cs.collections.PolylineCollection;
 import org.cesiumjs.cs.scene.options.PolylineOptions;
 
 /**
