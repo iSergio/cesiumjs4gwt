@@ -88,7 +88,7 @@
                     <hostedWebapp>${webappDirectory}</hostedWebapp>
 
                     <runTarget>Showcase.html</runTarget>
-                    <module>org.cleanlogic.showcase.showcase</module>
+                    <module>org.cleanlogic.showcase.Showcase</module>
                 </configuration>
                 <executions>
                     <execution>
