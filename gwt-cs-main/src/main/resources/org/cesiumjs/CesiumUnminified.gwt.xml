@@ -14,10 +14,8 @@
   ~ limitations under the License.
   -->
 
+<!-- If you inherits this script, you NOT need add Cesium.js and css files into you HTML Header-->
 <module>
-    <inherits name="com.google.gwt.user.User" />
-    <inherits name="com.google.gwt.json.JSON" />
-    <inherits name="com.google.gwt.resources.Resources" />
-
-    <source path=""/>
+    <inherits name="org.cesiumjs.CesiumNoScript" />
+    <inherits name="org.cesiumjs.CesiumUnminifiedScript" />
 </module>
