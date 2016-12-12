@@ -16,25 +16,36 @@
 
 package org.cesiumjs.cs.widgets;
 
-import com.google.gwt.event.logical.shared.AttachEvent;
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.LinkElement;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
+import org.cesiumjs.cs.Cesium;
+import org.cesiumjs.cs.js.JsObject;
+import org.cesiumjs.cs.widgets.options.ViewerOptions;
 
 /**
- * This class uses if You inject Cesium.js in HTML main file through <script></script>
- * See static examples
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 public class ViewerPanel extends SimplePanel {
     private Viewer _viewer;
 
     public ViewerPanel() {
+        this((ViewerOptions) JsObject.undefined());
+    }
+
+    public ViewerPanel(ViewerOptions options) {
         super();
-        super.addAttachHandler(new AttachEvent.Handler() {
-            @Override
-            public void onAttachOrDetach(AttachEvent attachEvent) {
-                _viewer = new Viewer(getElement());
-            }
-        });
+        Element element = getElement();
+        RootPanel.getBodyElement().appendChild(element);
+        _viewer = new Viewer(element, options);
+        if (Cesium.path() != null && !Cesium.path().isEmpty()) {
+            LinkElement linkElement = Document.get().createLinkElement();
+            linkElement.setRel("stylesheet");
+            linkElement.setHref(Cesium.path() + "Cesium/Widgets/widgets.css");
+            element.getOwnerDocument().getElementsByTagName("head").getItem(0).appendChild(linkElement);
+        }
     }
 
     public Viewer getViewer() {

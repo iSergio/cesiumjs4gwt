@@ -16,24 +16,27 @@
 
 package org.cesiumjs.cs.widgets;
 
-import com.google.gwt.event.logical.shared.AttachEvent;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
+import org.cesiumjs.cs.js.JsObject;
+import org.cesiumjs.cs.widgets.options.CesiumWidgetOptions;
 
 /**
- * This class uses if You inject Cesium.js in HTML main file through <script></script>
- * See static examples
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 public class CesiumWidgetPanel extends SimplePanel {
     private CesiumWidget _cesiumWidget;
+
     public CesiumWidgetPanel() {
+        this((CesiumWidgetOptions) JsObject.undefined());
+    }
+
+    public CesiumWidgetPanel(CesiumWidgetOptions options) {
         super();
-        super.addAttachHandler(new AttachEvent.Handler() {
-            @Override
-            public void onAttachOrDetach(AttachEvent attachEvent) {
-                _cesiumWidget = new CesiumWidget(getElement());
-            }
-        });
+        Element element = getElement();
+        RootPanel.getBodyElement().appendChild(element);
+        _cesiumWidget = new CesiumWidget(element, options);
     }
 
     public CesiumWidget getCesiumWidget() {
