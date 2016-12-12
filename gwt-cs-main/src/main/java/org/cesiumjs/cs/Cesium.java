@@ -16,10 +16,9 @@
 
 package org.cesiumjs.cs;
 
-import com.google.gwt.core.client.Callback;
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.LinkElement;
-import jsinterop.annotations.*;
+import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
 import org.cesiumjs.cs.core.Cartographic;
 import org.cesiumjs.cs.core.Ellipsoid;
 import org.cesiumjs.cs.core.providers.TerrainProvider;
@@ -38,6 +37,13 @@ public class Cesium {
 
     @JsProperty(namespace = "Cesium", name = "VERSION")
     public static native String version();
+
+    @JsProperty(namespace = JsPackage.GLOBAL, name = "CesiumPath")
+    public static native String path();
+
+    public static native void log(Object object) /*-{
+        console.log(object);
+    }-*/;
 
     @JsMethod(namespace = "Cesium")
     public static native boolean defined(Object object);
@@ -105,19 +111,4 @@ public class Cesium {
      */
     @JsMethod(namespace = "Cesium", name = "createTileMapServiceImageryProvider")
     public static native UrlTemplateImageryProvider createTileMapServiceImageryProvider(TileMapServiceImageryProviderOptions options);
-
-    public static void initialize(String path, Document document, Callback<Void, Exception> callback) {
-        Initializer initializer = Initializer.get(document);
-        if (initializer != null) {
-            initializer.addCallback(callback);
-            initializer.invokeCallback(callback);
-        } else {
-            LinkElement linkElement = Document.get().createLinkElement();
-            linkElement.setRel("stylesheet");
-            linkElement.setHref(path + "Widgets/widgets.css");
-            document.getElementsByTagName("head").getItem(0).appendChild(linkElement);
-
-            new Initializer(path, document, callback).initialize();
-        }
-    }
 }
