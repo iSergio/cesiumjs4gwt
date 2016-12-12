@@ -18,11 +18,11 @@ package org.cesiumjs.cs.scene;
 
 import com.google.gwt.dom.client.CanvasElement;
 import jsinterop.annotations.*;
+import org.cesiumjs.cs.collections.ImageryLayerCollection;
+import org.cesiumjs.cs.collections.PrimitiveCollection;
 import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.core.projection.MapProjection;
 import org.cesiumjs.cs.core.providers.TerrainProvider;
-import org.cesiumjs.cs.collections.ImageryLayerCollection;
-import org.cesiumjs.cs.collections.PrimitiveCollection;
 import org.cesiumjs.cs.scene.enums.SceneMode;
 import org.cesiumjs.cs.scene.options.SceneOptions;
 
@@ -208,7 +208,7 @@ public class Scene {
      * Default: {@link SceneMode#SCENE3D()}
      */
     @JsProperty
-    public int mode;
+    public Integer mode;
     /**
      * The Moon
      * Default:  undefined
