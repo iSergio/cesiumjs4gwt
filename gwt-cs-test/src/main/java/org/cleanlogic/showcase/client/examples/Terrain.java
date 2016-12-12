@@ -17,7 +17,6 @@
 package org.cleanlogic.showcase.client.examples;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -26,7 +25,6 @@ import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.ui.*;
 import org.cesiumjs.cs.Cesium;
-import org.cesiumjs.cs.Configuration;
 import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.core.Math;
 import org.cesiumjs.cs.core.providers.CesiumTerrainProvider;
@@ -48,8 +46,7 @@ import org.cesiumjs.cs.promise.Fulfill;
 import org.cesiumjs.cs.promise.Promise;
 import org.cesiumjs.cs.scene.enums.HorizontalOrigin;
 import org.cesiumjs.cs.scene.enums.VerticalOrigin;
-import org.cesiumjs.cs.widgets.Viewer;
-import org.cesiumjs.cs.widgets.ViewerPanelAbstract;
+import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cleanlogic.showcase.client.basic.AbstractExample;
 import org.cleanlogic.showcase.client.components.store.ShowcaseExampleStore;
 
@@ -63,83 +60,9 @@ import java.util.List;
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 public class Terrain extends AbstractExample {
-    private List<Cartographic> _terrainSamplePositions;
-
-    private class ViewerPanel implements IsWidget {
-        private ViewerPanelAbstract _csPanelAbstract;
-        public CesiumTerrainProvider cesiumTerrainProviderMeshes;
-        private ViewerPanel() {
-            super();
-            asWidget();
-        }
-
-        @Override
-        public Widget asWidget() {
-            if (_csPanelAbstract == null) {
-                final Configuration csConfiguration = new Configuration();
-                csConfiguration.setPath(GWT.getModuleBaseURL() + "JavaScript/Cesium");
-                _csPanelAbstract = new ViewerPanelAbstract(csConfiguration) {
-                    @Override
-                    public Viewer createViewer(Element element) {
-                        Viewer csViewer = new Viewer(element);
-
-                        CesiumTerrainProviderOptions cesiumTerrainProviderOptions = new CesiumTerrainProviderOptions();
-                        cesiumTerrainProviderOptions.url = "https://assets.agi.com/stk-terrain/world";
-                        cesiumTerrainProviderOptions.requestWaterMask = true;
-                        cesiumTerrainProviderOptions.requestVertexNormals = true;
-                        cesiumTerrainProviderMeshes = new CesiumTerrainProvider(cesiumTerrainProviderOptions);
-                        csViewer.terrainProvider = cesiumTerrainProviderMeshes;
-
-                        Cartesian3 target = new Cartesian3(300770.50872389384, 5634912.131394585, 2978152.2865545116);
-                        Cartesian3 offset = new Cartesian3(6344.974098678562, -793.3419798081741, 2499.9508860763162);
-                        csViewer.camera.lookAt(target, offset);
-                        csViewer.camera.lookAtTransform(Matrix4.IDENTITY());
-
-                        return csViewer;
-                    }
-                };
-            }
-            return _csPanelAbstract;
-        }
-
-        private Viewer getViewer() {
-            return _csPanelAbstract.getViewer();
-        }
-
-        private void sampleTerrainSuccess() {
-            Ellipsoid ellipsoid = Ellipsoid.WGS84();
-            _csPanelAbstract.getViewer().scene().globe.depthTestAgainstTerrain = true;
-
-            _csPanelAbstract.getViewer().entities().suspendEvents();
-            _csPanelAbstract.getViewer().entities().removeAll();
-
-            for (Cartographic position : _terrainSamplePositions) {
-                BigDecimal bd = new BigDecimal(position.height).setScale(1, RoundingMode.HALF_EVEN);
-
-                BillboardGraphicsOptions billboardGraphicsOptions = new BillboardGraphicsOptions();
-                billboardGraphicsOptions.verticalOrigin = new ConstantProperty<>(VerticalOrigin.BOTTOM());
-                billboardGraphicsOptions.scale = new ConstantProperty<>(0.7);
-                billboardGraphicsOptions.image = new ConstantProperty<>(GWT.getModuleBaseURL() + "images/facility.gif");
-
-                LabelGraphicsOptions labelGraphicsOptions = new LabelGraphicsOptions();
-                labelGraphicsOptions.text = new ConstantProperty<>(bd.toString());
-                labelGraphicsOptions.horizontalOrigin = new ConstantProperty<>(HorizontalOrigin.CENTER());//HorizontalOrigin.CENTER());
-                labelGraphicsOptions.scale = new ConstantProperty<>(0.3);
-                labelGraphicsOptions.pixelOffset = new ConstantProperty<>(new Cartesian2(0, -14));
-                labelGraphicsOptions.fillColor = new ConstantProperty<>(Color.RED());
-                labelGraphicsOptions.outlineColor = new ConstantProperty<>(Color.WHITE());
-
-                EntityOptions entityOptions = new EntityOptions();
-                entityOptions.name = bd.toString();
-                entityOptions.position = new ConstantPositionProperty(ellipsoid.cartographicToCartesian(position));
-                entityOptions.billboard = new BillboardGraphics(billboardGraphicsOptions);
-                entityOptions.label = new LabelGraphics(labelGraphicsOptions);
-                _csPanelAbstract.getViewer().entities().add(new Entity(entityOptions));
-            }
-
-            _csPanelAbstract.getViewer().entities().resumeEvents();
-        }
-    }
+    private ViewerPanel csVPanel;
+    private List<Cartographic> terrainSamplePositions;
+    public CesiumTerrainProvider cesiumTerrainProviderMeshes;
 
     @Inject
     public Terrain(ShowcaseExampleStore store) {
@@ -148,7 +71,19 @@ public class Terrain extends AbstractExample {
 
     @Override
     public void buildPanel() {
-        final ViewerPanel csVPanel = new ViewerPanel();
+        csVPanel = new ViewerPanel();
+
+        CesiumTerrainProviderOptions cesiumTerrainProviderOptions = new CesiumTerrainProviderOptions();
+        cesiumTerrainProviderOptions.url = "https://assets.agi.com/stk-terrain/world";
+        cesiumTerrainProviderOptions.requestWaterMask = true;
+        cesiumTerrainProviderOptions.requestVertexNormals = true;
+        cesiumTerrainProviderMeshes = new CesiumTerrainProvider(cesiumTerrainProviderOptions);
+        csVPanel.getViewer().terrainProvider = cesiumTerrainProviderMeshes;
+
+        Cartesian3 target = new Cartesian3(300770.50872389384, 5634912.131394585, 2978152.2865545116);
+        Cartesian3 offset = new Cartesian3(6344.974098678562, -793.3419798081741, 2499.9508860763162);
+        csVPanel.getViewer().camera.lookAt(target, offset);
+        csVPanel.getViewer().camera.lookAtTransform(Matrix4.IDENTITY());
 
         ListBox terrainsLBox = new ListBox();
         terrainsLBox.setWidth("130px");
@@ -166,7 +101,7 @@ public class Terrain extends AbstractExample {
                 ListBox source = (ListBox) changeEvent.getSource();
                 switch (source.getSelectedValue()) {
                     case "0": {
-                        csVPanel.getViewer().terrainProvider = csVPanel.cesiumTerrainProviderMeshes;
+                        csVPanel.getViewer().terrainProvider = cesiumTerrainProviderMeshes;
                         csVPanel.getViewer().scene().globe.enableLighting = true;
                     } break;
                     case "1": {
@@ -269,22 +204,22 @@ public class Terrain extends AbstractExample {
                 double everestLongitude = Math.toRadians(86.925145);
                 double rectangleHalfSize = 0.005;
                 Rectangle e = new Rectangle(everestLongitude - rectangleHalfSize, everestLatitude - rectangleHalfSize, everestLongitude + rectangleHalfSize, everestLatitude + rectangleHalfSize);
-                _terrainSamplePositions = new ArrayList<>();
+                terrainSamplePositions = new ArrayList<>();
                 for (int y = 0; y < gridHeight; ++y) {
                     for (int x = 0; x < gridWidth; ++x) {
                         double lon = Math.lerp(e.west, e.east, (double)x / (gridWidth -1.));
                         double lat = Math.lerp(e.south, e.north, (double)y / (gridHeight - 1.));
                         Cartographic position = new Cartographic(lon, lat);
-                        _terrainSamplePositions.add(position);
+                        terrainSamplePositions.add(position);
 
                     }
                 }
 
-                Promise<Cartographic[], Void> promise = Cesium.sampleTerrain(csVPanel.getViewer().terrainProvider, 9, _terrainSamplePositions.toArray(new Cartographic[_terrainSamplePositions.size()]));
+                Promise<Cartographic[], Void> promise = Cesium.sampleTerrain(csVPanel.getViewer().terrainProvider, 9, terrainSamplePositions.toArray(new Cartographic[terrainSamplePositions.size()]));
                 promise.then(new Fulfill<Cartographic[]>() {
                     @Override
                     public void onFulfilled(Cartographic[] value) {
-                        csVPanel.sampleTerrainSuccess();
+                        sampleTerrainSuccess();
                     }
                 });
             }
@@ -312,5 +247,39 @@ public class Terrain extends AbstractExample {
         String[] sourceCodeURLs = new String[1];
         sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "Terrain.txt";
         return sourceCodeURLs;
+    }
+
+    private void sampleTerrainSuccess() {
+        Ellipsoid ellipsoid = Ellipsoid.WGS84();
+        csVPanel.getViewer().scene().globe.depthTestAgainstTerrain = true;
+
+        csVPanel.getViewer().entities().suspendEvents();
+        csVPanel.getViewer().entities().removeAll();
+
+        for (Cartographic position : terrainSamplePositions) {
+            BigDecimal bd = new BigDecimal(position.height).setScale(1, RoundingMode.HALF_EVEN);
+
+            BillboardGraphicsOptions billboardGraphicsOptions = new BillboardGraphicsOptions();
+            billboardGraphicsOptions.verticalOrigin = new ConstantProperty<>(VerticalOrigin.BOTTOM());
+            billboardGraphicsOptions.scale = new ConstantProperty<>(0.7);
+            billboardGraphicsOptions.image = new ConstantProperty<>(GWT.getModuleBaseURL() + "images/facility.gif");
+
+            LabelGraphicsOptions labelGraphicsOptions = new LabelGraphicsOptions();
+            labelGraphicsOptions.text = new ConstantProperty<>(bd.toString());
+            labelGraphicsOptions.horizontalOrigin = new ConstantProperty<>(HorizontalOrigin.CENTER());//HorizontalOrigin.CENTER());
+            labelGraphicsOptions.scale = new ConstantProperty<>(0.3);
+            labelGraphicsOptions.pixelOffset = new ConstantProperty<>(new Cartesian2(0, -14));
+            labelGraphicsOptions.fillColor = new ConstantProperty<>(Color.RED());
+            labelGraphicsOptions.outlineColor = new ConstantProperty<>(Color.WHITE());
+
+            EntityOptions entityOptions = new EntityOptions();
+            entityOptions.name = bd.toString();
+            entityOptions.position = new ConstantPositionProperty(ellipsoid.cartographicToCartesian(position));
+            entityOptions.billboard = new BillboardGraphics(billboardGraphicsOptions);
+            entityOptions.label = new LabelGraphics(labelGraphicsOptions);
+            csVPanel.getViewer().entities().add(new Entity(entityOptions));
+        }
+
+        csVPanel.getViewer().entities().resumeEvents();
     }
 }

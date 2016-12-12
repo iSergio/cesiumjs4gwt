@@ -2,11 +2,11 @@ package org.cleanlogic.showcase.client.examples;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.CanvasElement;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
-import com.google.gwt.user.client.ui.*;
-import org.cesiumjs.cs.Configuration;
+import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.ListBox;
 import org.cesiumjs.cs.core.enums.ClockRange;
 import org.cesiumjs.cs.core.enums.ClockStep;
 import org.cesiumjs.cs.datasources.Entity;
@@ -14,7 +14,7 @@ import org.cesiumjs.cs.datasources.KmlDataSource;
 import org.cesiumjs.cs.datasources.options.KmlDataSourceOptions;
 import org.cesiumjs.cs.promise.Fulfill;
 import org.cesiumjs.cs.widgets.Viewer;
-import org.cesiumjs.cs.widgets.ViewerPanelAbstract;
+import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cleanlogic.showcase.client.basic.AbstractExample;
 import org.cleanlogic.showcase.client.components.store.ShowcaseExampleStore;
 
@@ -24,37 +24,7 @@ import javax.inject.Inject;
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 public class KML extends AbstractExample {
-    private class ViewerPanel implements IsWidget {
-        private ViewerPanelAbstract _csPanelAbstract;
-
-        private ViewerPanel() {
-            super();
-            asWidget();
-        }
-
-        @Override
-        public Widget asWidget() {
-            if (_csPanelAbstract == null) {
-                final Configuration csConfiguration = new Configuration();
-                csConfiguration.setPath(GWT.getModuleBaseURL() + "JavaScript/Cesium");
-                _csPanelAbstract = new ViewerPanelAbstract(csConfiguration) {
-                    @Override
-                    public Viewer createViewer(Element element) {
-                        _viewer = new Viewer(element);
-                        return _viewer;
-                    }
-                };
-            }
-            return _csPanelAbstract;
-        }
-
-        public void reset() {
-            _csPanelAbstract.getViewer().dataSources().removeAll();
-            _csPanelAbstract.getViewer().clock().clockRange = ClockRange.UNBOUNDED();
-            _csPanelAbstract.getViewer().clock().clockStep = ClockStep.SYSTEM_CLOCK();
-        }
-    }
-
+    private ViewerPanel csVPanel;
     @Inject
     public KML(ShowcaseExampleStore store) {
         super("KML", "A simple KML example", new String[]{"Showcase", "Cesium", "3d", "Viewer"}, store);
@@ -62,7 +32,7 @@ public class KML extends AbstractExample {
 
     @Override
     public void buildPanel() {
-        final ViewerPanel csVPanel = new ViewerPanel();
+        csVPanel = new ViewerPanel();
 
         ListBox kmlLBox = new ListBox();
         kmlLBox.addItem("KML - Global Science Facilities", GWT.getModuleBaseURL() + "SampleData/kml/facilities/facilities.kml");
@@ -71,17 +41,19 @@ public class KML extends AbstractExample {
         kmlLBox.addChangeHandler(new ChangeHandler() {
             @Override
             public void onChange(ChangeEvent changeEvent) {
-                csVPanel.reset();
+                reset();
                 ListBox source = (ListBox) changeEvent.getSource();
-                final Viewer viewer = csVPanel._csPanelAbstract.getViewer();
+                final Viewer viewer = csVPanel.getViewer();
                 org.cesiumjs.cs.scene.Camera camera = viewer.camera;
                 CanvasElement canvas = viewer.canvas();
                 camera.flyHome(0);
-                KmlDataSourceOptions kmlDataSourceOptions = new KmlDataSourceOptions(camera, canvas);
+                KmlDataSourceOptions kmlDataSourceOptions = new KmlDataSourceOptions();//camera, canvas);
+                kmlDataSourceOptions.canvas = canvas;
+                kmlDataSourceOptions.camera = camera;
                 if (!source.getSelectedValue().contains("bikeRide")) {
-                    csVPanel._csPanelAbstract.getViewer().dataSources().add(KmlDataSource.load(source.getSelectedValue(), kmlDataSourceOptions));
+                    csVPanel.getViewer().dataSources().add(KmlDataSource.load(source.getSelectedValue(), kmlDataSourceOptions));
                 } else {
-                    csVPanel._csPanelAbstract.getViewer().dataSources().add(KmlDataSource.load(source.getSelectedValue(), kmlDataSourceOptions)).then(new Fulfill<KmlDataSource>() {
+                    csVPanel.getViewer().dataSources().add(KmlDataSource.load(source.getSelectedValue(), kmlDataSourceOptions)).then(new Fulfill<KmlDataSource>() {
                         @Override
                         public void onFulfilled(KmlDataSource dataSource) {
                             viewer.clock().shouldAnimate = false;
@@ -116,5 +88,11 @@ public class KML extends AbstractExample {
         String[] sourceCodeURLs = new String[1];
         sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "KML.txt";
         return sourceCodeURLs;
+    }
+
+    public void reset() {
+        csVPanel.getViewer().dataSources().removeAll();
+        csVPanel.getViewer().clock().clockRange = ClockRange.UNBOUNDED();
+        csVPanel.getViewer().clock().clockStep = ClockStep.SYSTEM_CLOCK();
     }
 }

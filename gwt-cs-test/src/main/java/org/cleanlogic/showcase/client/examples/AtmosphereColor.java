@@ -17,20 +17,17 @@
 package org.cleanlogic.showcase.client.examples;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.ui.*;
-import org.cesiumjs.cs.Configuration;
 import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.HeadingPitchRoll;
 import org.cesiumjs.cs.core.Math;
 import org.cesiumjs.cs.scene.Camera;
 import org.cesiumjs.cs.scene.options.ViewOptions;
-import org.cesiumjs.cs.widgets.Viewer;
-import org.cesiumjs.cs.widgets.ViewerPanelAbstract;
+import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cleanlogic.showcase.client.basic.AbstractExample;
 import org.cleanlogic.showcase.client.components.store.ShowcaseExampleStore;
 import org.cleanlogic.showcase.client.examples.slider.Slider;
@@ -52,39 +49,6 @@ public class AtmosphereColor extends AbstractExample {
     private TextBox _hueShiftTBox;
     private TextBox _saturationShiftTBox;
     private TextBox _brightnessShiftTBox;
-    private class ViewerPanel implements IsWidget {
-        private ViewerPanelAbstract _csPanelAbstract;
-
-        private ViewerPanel() {
-            super();
-            asWidget();
-        }
-
-        @Override
-        public Widget asWidget() {
-            if (_csPanelAbstract == null) {
-                final Configuration csConfiguration = new Configuration();
-                csConfiguration.setPath(GWT.getModuleBaseURL() + "JavaScript/Cesium");
-                _csPanelAbstract = new ViewerPanelAbstract(csConfiguration) {
-                    @Override
-                    public Viewer createViewer(Element element) {
-                        _viewer = new Viewer(element);
-                        Camera camera = _viewer.camera;
-                        ViewOptions viewOptions = new ViewOptions();
-                        viewOptions.destinationPos = Cartesian3.fromDegrees(-75.5847, 40.0397, 1000.0);
-                        viewOptions.orientation = new HeadingPitchRoll(-Math.PI_OVER_TWO(), 0.2, 0.0);
-                        camera.setView(viewOptions);
-                        return _viewer;
-                    }
-                };
-            }
-            return _csPanelAbstract;
-        }
-
-        private Viewer getViewer() {
-            return _csPanelAbstract.getViewer();
-        }
-    }
 
     @Inject
     public AtmosphereColor(ShowcaseExampleStore store) {
@@ -94,6 +58,11 @@ public class AtmosphereColor extends AbstractExample {
     @Override
     public void buildPanel() {
         _csVPanel = new ViewerPanel();
+        Camera camera = _csVPanel.getViewer().camera;
+        ViewOptions viewOptions = new ViewOptions();
+        viewOptions.destinationPos = Cartesian3.fromDegrees(-75.5847, 40.0397, 1000.0);
+        viewOptions.orientation = new HeadingPitchRoll(-Math.PI_OVER_TWO(), 0.2, 0.0);
+        camera.setView(viewOptions);
 
         HorizontalPanel hueShiftHPanel = new HorizontalPanel();
         hueShiftHPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);

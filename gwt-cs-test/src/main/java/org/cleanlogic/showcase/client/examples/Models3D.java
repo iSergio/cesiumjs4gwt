@@ -17,11 +17,11 @@
 package org.cleanlogic.showcase.client.examples;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
-import com.google.gwt.user.client.ui.*;
-import org.cesiumjs.cs.Configuration;
+import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.ListBox;
 import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.Math;
 import org.cesiumjs.cs.core.Quaternion;
@@ -31,8 +31,7 @@ import org.cesiumjs.cs.datasources.graphics.options.ModelGraphicsOptions;
 import org.cesiumjs.cs.datasources.options.EntityOptions;
 import org.cesiumjs.cs.datasources.properties.ConstantPositionProperty;
 import org.cesiumjs.cs.datasources.properties.ConstantProperty;
-import org.cesiumjs.cs.widgets.Viewer;
-import org.cesiumjs.cs.widgets.ViewerPanelAbstract;
+import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cesiumjs.cs.widgets.options.ViewerOptions;
 import org.cleanlogic.showcase.client.basic.AbstractExample;
 import org.cleanlogic.showcase.client.components.store.ShowcaseExampleStore;
@@ -43,79 +42,7 @@ import javax.inject.Inject;
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 public class Models3D extends AbstractExample {
-    private class ViewerPanel implements IsWidget {
-        private ViewerPanelAbstract _csPanelAbstract;
-
-        private ViewerPanel() {
-            super();
-            asWidget();
-        }
-
-        @Override
-        public Widget asWidget() {
-            if (_csPanelAbstract == null) {
-                final Configuration csConfiguration = new Configuration();
-                csConfiguration.setPath(GWT.getModuleBaseURL() + "JavaScript/Cesium");
-                _csPanelAbstract = new ViewerPanelAbstract(csConfiguration) {
-                    @Override
-                    public Viewer createViewer(Element element) {
-                        ViewerOptions csViewerOptions = new ViewerOptions();
-                        csViewerOptions.infoBox = false;
-                        csViewerOptions.selectionIndicator = false;
-                        csViewerOptions.shadows = false;
-                        _viewer = new Viewer(element, csViewerOptions);
-
-                        ModelGraphicsOptions modelGraphicsOptions = new ModelGraphicsOptions();
-                        modelGraphicsOptions.uri = new ConstantProperty<>(GWT.getModuleBaseURL() + "SampleData/models/CesiumAir/Cesium_Air.glb");
-                        modelGraphicsOptions.minimumPixelSize = new ConstantProperty<>(128);
-                        modelGraphicsOptions.maximumScale = new ConstantProperty<>(20000);
-                        ModelGraphics modelGraphics = new ModelGraphics(modelGraphicsOptions);
-
-                        Cartesian3 position = Cartesian3.fromDegrees(-123.0744619, 44.0503706, 5000.0);
-                        double heading = Math.toRadians(135);
-                        double pitch = 0;
-                        double roll = 0;
-                        Quaternion orientation = Transforms.headingPitchRollQuaternion(position, heading, pitch, roll);
-                        EntityOptions entityOptions = new EntityOptions();
-                        entityOptions.name = GWT.getModuleBaseURL() + "SampleData/models/CesiumAir/Cesium_Air.glb";
-                        entityOptions.position = new ConstantPositionProperty(position);
-                        entityOptions.orientation = new ConstantProperty<>(orientation);
-                        entityOptions.model = modelGraphics;
-                        _viewer.trackedEntity = _viewer.entities().add(entityOptions);
-
-                        return _viewer;
-                    }
-                };
-            }
-            return _csPanelAbstract;
-        }
-
-        private Viewer getViewer() {
-            return _csPanelAbstract.getViewer();
-        }
-
-        private void createModel(String url, double height) {
-            _csPanelAbstract.getViewer().entities().removeAll();
-
-            ModelGraphicsOptions modelGraphicsOptions = new ModelGraphicsOptions();
-            modelGraphicsOptions.uri = new ConstantProperty<>(url);
-            modelGraphicsOptions.minimumPixelSize = new ConstantProperty<>(128);
-            modelGraphicsOptions.maximumScale = new ConstantProperty<>(20000);
-            ModelGraphics modelGraphics = new ModelGraphics(modelGraphicsOptions);
-
-            Cartesian3 position = Cartesian3.fromDegrees(-123.0744619, 44.0503706, height);
-            double heading = Math.toRadians(135);
-            double pitch = 0;
-            double roll = 0;
-            Quaternion orientation = Transforms.headingPitchRollQuaternion(position, heading, pitch, roll);
-            EntityOptions entityOptions = new EntityOptions();
-            entityOptions.name = url;
-            entityOptions.position = new ConstantPositionProperty(position);
-            entityOptions.orientation = new ConstantProperty<>(orientation);
-            entityOptions.model = modelGraphics;
-            _csPanelAbstract.getViewer().trackedEntity = _csPanelAbstract.getViewer().entities().add(entityOptions);;
-        }
-    }
+    private ViewerPanel csVPanel;
 
     @Inject
     public Models3D(ShowcaseExampleStore store) {
@@ -124,7 +51,29 @@ public class Models3D extends AbstractExample {
 
     @Override
     public void buildPanel() {
-        final ViewerPanel csVPanel = new ViewerPanel();
+        ViewerOptions csViewerOptions = new ViewerOptions();
+        csViewerOptions.infoBox = false;
+        csViewerOptions.selectionIndicator = false;
+        csViewerOptions.shadows = false;
+        csVPanel = new ViewerPanel(csViewerOptions);
+
+        ModelGraphicsOptions modelGraphicsOptions = new ModelGraphicsOptions();
+        modelGraphicsOptions.uri = new ConstantProperty<>(GWT.getModuleBaseURL() + "SampleData/models/CesiumAir/Cesium_Air.glb");
+        modelGraphicsOptions.minimumPixelSize = new ConstantProperty<>(128);
+        modelGraphicsOptions.maximumScale = new ConstantProperty<>(20000);
+        ModelGraphics modelGraphics = new ModelGraphics(modelGraphicsOptions);
+
+        Cartesian3 position = Cartesian3.fromDegrees(-123.0744619, 44.0503706, 5000.0);
+        double heading = Math.toRadians(135);
+        double pitch = 0;
+        double roll = 0;
+        Quaternion orientation = Transforms.headingPitchRollQuaternion(position, heading, pitch, roll);
+        EntityOptions entityOptions = new EntityOptions();
+        entityOptions.name = GWT.getModuleBaseURL() + "SampleData/models/CesiumAir/Cesium_Air.glb";
+        entityOptions.position = new ConstantPositionProperty(position);
+        entityOptions.orientation = new ConstantProperty<>(orientation);
+        entityOptions.model = modelGraphics;
+        csVPanel.getViewer().trackedEntity = csVPanel.getViewer().entities().add(entityOptions);
 
         final ListBox modelsLBox = new ListBox();
         modelsLBox.addItem("Aircraft", "0");
@@ -137,11 +86,11 @@ public class Models3D extends AbstractExample {
             public void onChange(ChangeEvent changeEvent) {
                 csVPanel.getViewer().entities().removeAll();
                 switch (modelsLBox.getSelectedValue()) {
-                    case "0": csVPanel.createModel(GWT.getModuleBaseURL() + "SampleData/models/CesiumAir/Cesium_Air.glb", 5000.0); break;
-                    case "1": csVPanel.createModel(GWT.getModuleBaseURL() + "SampleData/models/CesiumGround/Cesium_Ground.glb", 0); break;
-                    case "2": csVPanel.createModel(GWT.getModuleBaseURL() + "SampleData/models/CesiumBalloon/CesiumBalloon.glb", 1000.0); break;
-                    case "3": csVPanel.createModel(GWT.getModuleBaseURL() + "SampleData/models/CesiumMilkTruck/CesiumMilkTruck-kmc.glb", 0); break;
-                    case "4": csVPanel.createModel(GWT.getModuleBaseURL() + "SampleData/models/CesiumMan/Cesium_Man.glb", 0); break;
+                    case "0": createModel(GWT.getModuleBaseURL() + "SampleData/models/CesiumAir/Cesium_Air.glb", 5000.0); break;
+                    case "1": createModel(GWT.getModuleBaseURL() + "SampleData/models/CesiumGround/Cesium_Ground.glb", 0); break;
+                    case "2": createModel(GWT.getModuleBaseURL() + "SampleData/models/CesiumBalloon/CesiumBalloon.glb", 1000.0); break;
+                    case "3": createModel(GWT.getModuleBaseURL() + "SampleData/models/CesiumMilkTruck/CesiumMilkTruck-kmc.glb", 0); break;
+                    case "4": createModel(GWT.getModuleBaseURL() + "SampleData/models/CesiumMan/Cesium_Man.glb", 0); break;
                     default: break;
                 }
             }
@@ -162,5 +111,27 @@ public class Models3D extends AbstractExample {
         String[] sourceCodeURLs = new String[1];
         sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "Models3D.txt";
         return sourceCodeURLs;
+    }
+
+    private void createModel(String url, double height) {
+        csVPanel.getViewer().entities().removeAll();
+
+        ModelGraphicsOptions modelGraphicsOptions = new ModelGraphicsOptions();
+        modelGraphicsOptions.uri = new ConstantProperty<>(url);
+        modelGraphicsOptions.minimumPixelSize = new ConstantProperty<>(128);
+        modelGraphicsOptions.maximumScale = new ConstantProperty<>(20000);
+        ModelGraphics modelGraphics = new ModelGraphics(modelGraphicsOptions);
+
+        Cartesian3 position = Cartesian3.fromDegrees(-123.0744619, 44.0503706, height);
+        double heading = Math.toRadians(135);
+        double pitch = 0;
+        double roll = 0;
+        Quaternion orientation = Transforms.headingPitchRollQuaternion(position, heading, pitch, roll);
+        EntityOptions entityOptions = new EntityOptions();
+        entityOptions.name = url;
+        entityOptions.position = new ConstantPositionProperty(position);
+        entityOptions.orientation = new ConstantProperty<>(orientation);
+        entityOptions.model = modelGraphics;
+        csVPanel.getViewer().trackedEntity = csVPanel.getViewer().entities().add(entityOptions);;
     }
 }

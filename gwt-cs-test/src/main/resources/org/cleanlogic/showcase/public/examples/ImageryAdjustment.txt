@@ -1,15 +1,12 @@
 package org.cleanlogic.showcase.client.examples;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.user.client.ui.*;
-import org.cesiumjs.cs.Configuration;
 import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.scene.ImageryLayer;
-import org.cesiumjs.cs.widgets.Viewer;
-import org.cesiumjs.cs.widgets.ViewerPanelAbstract;
+import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cleanlogic.showcase.client.basic.AbstractExample;
 import org.cleanlogic.showcase.client.components.store.ShowcaseExampleStore;
 import org.cleanlogic.showcase.client.examples.slider.Slider;
@@ -36,68 +33,11 @@ public class ImageryAdjustment extends AbstractExample {
 
     ViewerPanel csVPanel;
 
-    private class ViewerPanel implements IsWidget {
-        private ViewerPanelAbstract _csPanelAbstract;
-
-        float brightness = 0.f;
-        float contrast = 0.f;
-        float hue = 0.f;
-        float saturation = 0.f;
-        float gamma = 0.f;
-
-        private ViewerPanel() {
-            super();
-            asWidget();
-        }
-
-        @Override
-        public Widget asWidget() {
-            if (_csPanelAbstract == null) {
-                final Configuration csConfiguration = new Configuration();
-                csConfiguration.setPath(GWT.getModuleBaseURL() + "JavaScript/Cesium");
-                _csPanelAbstract = new ViewerPanelAbstract(csConfiguration) {
-                    @Override
-                    public Viewer createViewer(Element element) {
-                        _viewer = new Viewer(element);
-                        _viewer.imageryLayers().layerAdded.addEventListener(new UpdateViewModel());
-                        _viewer.imageryLayers().layerRemoved.addEventListener(new UpdateViewModel());
-                        _viewer.imageryLayers().layerMoved.addEventListener(new UpdateViewModel());
-                        return _viewer;
-                    }
-                };
-            }
-            return _csPanelAbstract;
-        }
-
-        private final class UpdateViewModel implements Event.Listener {
-            @Override
-            public void function(Object... o) {
-                if (_csPanelAbstract.getViewer().imageryLayers().length > 0) {
-                    ImageryLayer layer = _csPanelAbstract.getViewer().imageryLayers().get(0);
-                    brightness = layer.brightness;
-                    contrast = layer.contrast;
-                    hue = layer.hue;
-                    saturation = layer.saturation;
-                    gamma = layer.gamma;
-
-                    if (brightnessSlider != null && contrastSlider != null && hueSlider != null && saturationSlider != null && gammaSlider != null) {
-                        brightnessSlider.setValue((int)(brightness * 100));
-                        contrastSlider.setValue((int)(contrast * 100));
-                        hueSlider.setValue((int)(hue * 100));
-                        saturationSlider.setValue((int)(saturation * 100));
-                        gammaSlider.setValue((int)(gamma * 100));
-                    }
-                    if (brightnessTBox != null && contrastTBox != null && hueTBox != null && saturationTBox != null && gammaTBox != null) {
-                        brightnessTBox.setValue("" + brightness );
-                        contrastTBox.setValue("" + brightness );
-                        hueTBox.setValue("" + brightness );
-                        saturationTBox.setValue("" + brightness );
-                        gammaTBox.setValue("" + brightness );
-                    }
-                }
-            }
-        }
-    }
+    float brightness = 0.f;
+    float contrast = 0.f;
+    float hue = 0.f;
+    float saturation = 0.f;
+    float gamma = 0.f;
 
     @Inject
     public ImageryAdjustment(ShowcaseExampleStore store) {
@@ -107,6 +47,9 @@ public class ImageryAdjustment extends AbstractExample {
     @Override
     public void buildPanel() {
         csVPanel = new ViewerPanel();
+        csVPanel.getViewer().imageryLayers().layerAdded.addEventListener(new UpdateViewModel());
+        csVPanel.getViewer().imageryLayers().layerRemoved.addEventListener(new UpdateViewModel());
+        csVPanel.getViewer().imageryLayers().layerMoved.addEventListener(new UpdateViewModel());
 
         brightnessSlider = new Slider("brightness", 0, 300, 100);
         brightnessSlider.setStep(1);
@@ -230,23 +173,23 @@ public class ImageryAdjustment extends AbstractExample {
             Slider source = e.getSource();
             float value = source.getValue() / 100.f;
             if (source.getElement().getId().equalsIgnoreCase("brightness")) {
-                csVPanel._csPanelAbstract.getViewer().imageryLayers().get(0).brightness = value;
+                csVPanel.getViewer().imageryLayers().get(0).brightness = value;
                 brightnessTBox.setValue("" + value);
             }
             else if (source.getElement().getId().equalsIgnoreCase("contrast")) {
-                csVPanel._csPanelAbstract.getViewer().imageryLayers().get(0).contrast = value;
+                csVPanel.getViewer().imageryLayers().get(0).contrast = value;
                 contrastTBox.setValue("" + value);
             }
             else if (source.getElement().getId().equalsIgnoreCase("hue")) {
-                csVPanel._csPanelAbstract.getViewer().imageryLayers().get(0).hue = value;
+                csVPanel.getViewer().imageryLayers().get(0).hue = value;
                 hueTBox.setValue("" + value);
             }
             else if (source.getElement().getId().equalsIgnoreCase("saturation")) {
-                csVPanel._csPanelAbstract.getViewer().imageryLayers().get(0).saturation = value;
+                csVPanel.getViewer().imageryLayers().get(0).saturation = value;
                 saturationTBox.setValue("" + value);
             }
             else if (source.getElement().getId().equalsIgnoreCase("gamma")) {
-                csVPanel._csPanelAbstract.getViewer().imageryLayers().get(0).gamma = value;
+                csVPanel.getViewer().imageryLayers().get(0).gamma = value;
                 gammaTBox.setValue("" + value);
             }
             return true;
@@ -283,6 +226,35 @@ public class ImageryAdjustment extends AbstractExample {
             }
             else if (source.equals(gammaTBox)) {
                 gammaSlider.setValue((int)(value * 100));
+            }
+        }
+    }
+
+    private final class UpdateViewModel implements Event.Listener {
+        @Override
+        public void function(Object... o) {
+            if (csVPanel.getViewer().imageryLayers().length() > 0) {
+                ImageryLayer layer = csVPanel.getViewer().imageryLayers().get(0);
+                brightness = layer.brightness;
+                contrast = layer.contrast;
+                hue = layer.hue;
+                saturation = layer.saturation;
+                gamma = layer.gamma;
+
+                if (brightnessSlider != null && contrastSlider != null && hueSlider != null && saturationSlider != null && gammaSlider != null) {
+                    brightnessSlider.setValue((int)(brightness * 100));
+                    contrastSlider.setValue((int)(contrast * 100));
+                    hueSlider.setValue((int)(hue * 100));
+                    saturationSlider.setValue((int)(saturation * 100));
+                    gammaSlider.setValue((int)(gamma * 100));
+                }
+                if (brightnessTBox != null && contrastTBox != null && hueTBox != null && saturationTBox != null && gammaTBox != null) {
+                    brightnessTBox.setValue("" + brightness );
+                    contrastTBox.setValue("" + brightness );
+                    hueTBox.setValue("" + brightness );
+                    saturationTBox.setValue("" + brightness );
+                    gammaTBox.setValue("" + brightness );
+                }
             }
         }
     }

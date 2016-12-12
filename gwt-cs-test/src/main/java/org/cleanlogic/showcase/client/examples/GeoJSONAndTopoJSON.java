@@ -17,12 +17,10 @@
 package org.cleanlogic.showcase.client.examples;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
-import org.cesiumjs.cs.Configuration;
 import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.core.Math;
@@ -37,8 +35,7 @@ import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.promise.Fulfill;
 import org.cesiumjs.cs.promise.Promise;
 import org.cesiumjs.cs.promise.Reject;
-import org.cesiumjs.cs.widgets.Viewer;
-import org.cesiumjs.cs.widgets.ViewerPanelAbstract;
+import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cleanlogic.showcase.client.basic.AbstractExample;
 import org.cleanlogic.showcase.client.components.store.ShowcaseExampleStore;
 
@@ -49,39 +46,7 @@ import java.util.HashMap;
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 public class GeoJSONAndTopoJSON extends AbstractExample {
-    private class ViewerPanel implements IsWidget {
-        private ViewerPanelAbstract _csPanelAbstract;
-
-        private ViewerPanel() {
-            super();
-            asWidget();
-        }
-
-        @Override
-        public Widget asWidget() {
-            if (_csPanelAbstract == null) {
-                final Configuration csConfiguration = new Configuration();
-                csConfiguration.setPath(GWT.getModuleBaseURL() + "JavaScript/Cesium");
-                _csPanelAbstract = new ViewerPanelAbstract(csConfiguration) {
-                    @Override
-                    public Viewer createViewer(Element element) {
-                        _viewer = new Viewer(element);
-                        _viewer.dataSources().removeAll();
-                        _viewer.camera.lookAt(Cartesian3.fromDegrees(-98.0, 40.0), new Cartesian3(0.0, -4790000.0, 3930000.0));
-                        _viewer.camera.lookAtTransform(Matrix4.IDENTITY());
-                        return _viewer;
-                    }
-                };
-            }
-            return _csPanelAbstract;
-        }
-
-        public void reset() {
-            _csPanelAbstract.getViewer().dataSources().removeAll();
-            _csPanelAbstract.getViewer().camera.lookAt(Cartesian3.fromDegrees(-98.0, 40.0), new Cartesian3(0.0, -4790000.0, 3930000.0));
-            _csPanelAbstract.getViewer().camera.lookAtTransform(Matrix4.IDENTITY());
-        }
-    }
+    private ViewerPanel csVPanel;
 
     @Inject
     public GeoJSONAndTopoJSON(ShowcaseExampleStore store) {
@@ -90,14 +55,18 @@ public class GeoJSONAndTopoJSON extends AbstractExample {
 
     @Override
     public void buildPanel() {
-        final ViewerPanel csVPanel = new ViewerPanel();
+        csVPanel = new ViewerPanel();
+
+        csVPanel.getViewer().dataSources().removeAll();
+        csVPanel.getViewer().camera.lookAt(Cartesian3.fromDegrees(-98.0, 40.0), new Cartesian3(0.0, -4790000.0, 3930000.0));
+        csVPanel.getViewer().camera.lookAtTransform(Matrix4.IDENTITY());
 
         Button defaultStylingBtn = new Button("Default styling");
         defaultStylingBtn.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent clickEvent) {
-                csVPanel.reset();
-                csVPanel._csPanelAbstract.getViewer().dataSources().add(GeoJsonDataSource.load(GWT.getModuleBaseURL() + "SampleData/ne_10m_us_states.topojson"));
+                reset();
+                csVPanel.getViewer().dataSources().add(GeoJsonDataSource.load(GWT.getModuleBaseURL() + "SampleData/ne_10m_us_states.topojson"));
             }
         });
 
@@ -105,12 +74,12 @@ public class GeoJSONAndTopoJSON extends AbstractExample {
         basicStylingBtn.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent clickEvent) {
-                csVPanel.reset();
+                reset();
                 GeoJsonDataSourceOptions options = new GeoJsonDataSourceOptions();
                 options.stroke = Color.HOTPINK();
                 options.fill = Color.DEEPPINK().withAlpha(0.5f);
                 options.strokeWidth = 3;
-                csVPanel._csPanelAbstract.getViewer().dataSources().add(GeoJsonDataSource.load(GWT.getModuleBaseURL() + "SampleData/ne_10m_us_states.topojson", options));
+                csVPanel.getViewer().dataSources().add(GeoJsonDataSource.load(GWT.getModuleBaseURL() + "SampleData/ne_10m_us_states.topojson", options));
             }
         });
 
@@ -124,8 +93,8 @@ public class GeoJSONAndTopoJSON extends AbstractExample {
                 promise.then(new Fulfill<GeoJsonDataSource>() {
                     @Override
                     public void onFulfilled(GeoJsonDataSource dataSource) {
-                        csVPanel.reset();
-                        csVPanel._csPanelAbstract.getViewer().dataSources().add(dataSource);
+                        reset();
+                        csVPanel.getViewer().dataSources().add(dataSource);
 
                         Entity[] entities = dataSource.entities.values();
                         HashMap<String, Color> colorHash = new HashMap<>();
@@ -177,5 +146,11 @@ public class GeoJSONAndTopoJSON extends AbstractExample {
         String[] sourceCodeURLs = new String[1];
         sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "GeoJSONAndTopoJSON.txt";
         return sourceCodeURLs;
+    }
+
+    public void reset() {
+        csVPanel.getViewer().dataSources().removeAll();
+        csVPanel.getViewer().camera.lookAt(Cartesian3.fromDegrees(-98.0, 40.0), new Cartesian3(0.0, -4790000.0, 3930000.0));
+        csVPanel.getViewer().camera.lookAtTransform(Matrix4.IDENTITY());
     }
 }

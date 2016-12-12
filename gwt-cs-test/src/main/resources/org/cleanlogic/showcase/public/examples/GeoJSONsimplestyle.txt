@@ -1,18 +1,12 @@
 package org.cleanlogic.showcase.client.examples;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.Widget;
-import org.cesiumjs.cs.Configuration;
-import org.cesiumjs.cs.datasources.DataSource;
 import org.cesiumjs.cs.datasources.GeoJsonDataSource;
 import org.cesiumjs.cs.promise.Fulfill;
 import org.cesiumjs.cs.promise.Promise;
 import org.cesiumjs.cs.scene.enums.SceneMode;
-import org.cesiumjs.cs.widgets.Viewer;
-import org.cesiumjs.cs.widgets.ViewerPanelAbstract;
+import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cesiumjs.cs.widgets.options.ViewerOptions;
 import org.cleanlogic.showcase.client.basic.AbstractExample;
 import org.cleanlogic.showcase.client.components.store.ShowcaseExampleStore;
@@ -23,43 +17,7 @@ import javax.inject.Inject;
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 public class GeoJSONsimplestyle extends AbstractExample {
-    private class ViewerPanel implements IsWidget {
-        private ViewerPanelAbstract _csPanelAbstract;
-
-        private ViewerPanel() {
-            super();
-            asWidget();
-        }
-
-        @Override
-        public Widget asWidget() {
-            if (_csPanelAbstract == null) {
-                final Configuration csConfiguration = new Configuration();
-                csConfiguration.setPath(GWT.getModuleBaseURL() + "JavaScript/Cesium");
-                _csPanelAbstract = new ViewerPanelAbstract(csConfiguration) {
-                    @Override
-                    public Viewer createViewer(Element element) {
-                        ViewerOptions viewerOptions = new ViewerOptions();
-                        viewerOptions.sceneMode = SceneMode.SCENE2D();
-                        viewerOptions.timeline = false;
-                        viewerOptions.animation = false;
-                        _viewer = new Viewer(element, viewerOptions);
-                        Promise<GeoJsonDataSource, String> dataSource = GeoJsonDataSource.load(GWT.getModuleBaseURL() + "SampleData/simplestyles.geojson");
-                        _viewer.dataSources().add(dataSource);
-                        dataSource.then(new Fulfill<GeoJsonDataSource>() {
-                            @Override
-                            public void onFulfilled(GeoJsonDataSource value) {
-                                _viewer.zoomTo(value);
-                            }
-                        });
-
-                        return _viewer;
-                    }
-                };
-            }
-            return _csPanelAbstract;
-        }
-    }
+    private ViewerPanel csVPanel;
 
     @Inject
     public GeoJSONsimplestyle(ShowcaseExampleStore store) {
@@ -68,7 +26,20 @@ public class GeoJSONsimplestyle extends AbstractExample {
 
     @Override
     public void buildPanel() {
-        ViewerPanel csVPanel = new ViewerPanel();
+        ViewerOptions viewerOptions = new ViewerOptions();
+        viewerOptions.sceneMode = SceneMode.SCENE2D();
+        viewerOptions.timeline = false;
+        viewerOptions.animation = false;
+        csVPanel = new ViewerPanel(viewerOptions);
+
+        Promise<GeoJsonDataSource, String> dataSource = GeoJsonDataSource.load(GWT.getModuleBaseURL() + "SampleData/simplestyles.geojson");
+        csVPanel.getViewer().dataSources().add(dataSource);
+        dataSource.then(new Fulfill<GeoJsonDataSource>() {
+            @Override
+            public void onFulfilled(GeoJsonDataSource value) {
+                csVPanel.getViewer().zoomTo(value);
+            }
+        });
 
         contentPanel.add(new HTML("<p>Load GeoJSON with simplestyle information.</p>"));
         contentPanel.add(csVPanel);

@@ -17,11 +17,7 @@
 package org.cleanlogic.showcase.client.examples;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.Widget;
-import org.cesiumjs.cs.Configuration;
 import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.datasources.Entity;
@@ -31,8 +27,7 @@ import org.cesiumjs.cs.datasources.options.EntityOptions;
 import org.cesiumjs.cs.datasources.properties.ColorMaterialProperty;
 import org.cesiumjs.cs.datasources.properties.ConstantPositionProperty;
 import org.cesiumjs.cs.datasources.properties.ConstantProperty;
-import org.cesiumjs.cs.widgets.Viewer;
-import org.cesiumjs.cs.widgets.ViewerPanelAbstract;
+import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cleanlogic.showcase.client.basic.AbstractExample;
 import org.cleanlogic.showcase.client.components.store.ShowcaseExampleStore;
 
@@ -42,66 +37,6 @@ import javax.inject.Inject;
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 public class SpheresAndEllipsoids extends AbstractExample {
-    private class ViewerPanel implements IsWidget {
-        private ViewerPanelAbstract _csPanelAbstract;
-
-        private ViewerPanel() {
-            super();
-            asWidget();
-        }
-
-        @Override
-        public Widget asWidget() {
-            if (_csPanelAbstract == null) {
-                final Configuration csConfiguration = new Configuration();
-                csConfiguration.setPath(GWT.getModuleBaseURL() + "JavaScript/Cesium");
-                _csPanelAbstract = new ViewerPanelAbstract(csConfiguration) {
-                    @Override
-                    public Viewer createViewer(Element element) {
-                        _viewer = new Viewer(element);
-
-                        EllipsoidGraphicsOptions ellipsoidGraphicsOptions = new EllipsoidGraphicsOptions();
-                        ellipsoidGraphicsOptions.radii = new ConstantProperty<>(new Cartesian3(200000.0, 200000.0, 300000.0));
-                        ellipsoidGraphicsOptions.material = new ColorMaterialProperty(new ConstantProperty<>(Color.BLUE()));
-                        EntityOptions entityOptions = new EntityOptions();
-                        entityOptions.name = "Blue ellipsoid";
-                        entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-114.0, 40.0, 300000.0));
-                        entityOptions.ellipsoid = new EllipsoidGraphics(ellipsoidGraphicsOptions);
-                        Entity blueEllpsoid = _viewer.entities().add(entityOptions);
-
-                        ellipsoidGraphicsOptions = new EllipsoidGraphicsOptions();
-                        ellipsoidGraphicsOptions.radii = new ConstantProperty<>(new Cartesian3(300000.0, 300000.0, 300000.0));
-                        ellipsoidGraphicsOptions.material = new ColorMaterialProperty(new ConstantProperty<>(Color.RED().withAlpha(0.5f)));
-                        ellipsoidGraphicsOptions.outline = new ConstantProperty<>(true);
-                        ellipsoidGraphicsOptions.outlineColor = new ConstantProperty<>(Color.BLACK());
-                        entityOptions = new EntityOptions();
-                        entityOptions.name = "Red sphere with black outline";
-                        entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-107.0, 40.0, 300000.0));
-                        entityOptions.ellipsoid = new EllipsoidGraphics(ellipsoidGraphicsOptions);
-                        Entity redSphere = _viewer.entities().add(entityOptions);
-
-                        ellipsoidGraphicsOptions = new EllipsoidGraphicsOptions();
-                        ellipsoidGraphicsOptions.radii = new ConstantProperty<>(new Cartesian3(200000.0, 200000.0, 300000.0));
-                        ellipsoidGraphicsOptions.outline = new ConstantProperty<>(true);
-                        ellipsoidGraphicsOptions.outlineColor = new ConstantProperty<>(Color.YELLOW());
-                        ellipsoidGraphicsOptions.fill = new ConstantProperty<>(false);
-                        ellipsoidGraphicsOptions.slicePartitions = new ConstantProperty<>(24);
-                        ellipsoidGraphicsOptions.stackPartitions = new ConstantProperty<>(36);
-                        entityOptions = new EntityOptions();
-                        entityOptions.name = "Yellow ellipsoid outline";
-                        entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-100.0, 40.0, 300000.0));
-                        entityOptions.ellipsoid = new EllipsoidGraphics(ellipsoidGraphicsOptions);
-                        Entity outlineOnly = _viewer.entities().add(entityOptions);
-
-                        _viewer.zoomTo(_viewer.entities());
-
-                        return _viewer;
-                    }
-                };
-            }
-            return _csPanelAbstract;
-        }
-    }
 
     @Inject
     public SpheresAndEllipsoids(ShowcaseExampleStore store) {
@@ -111,6 +46,41 @@ public class SpheresAndEllipsoids extends AbstractExample {
     @Override
     public void buildPanel() {
         ViewerPanel csVPanel = new ViewerPanel();
+
+        EllipsoidGraphicsOptions ellipsoidGraphicsOptions = new EllipsoidGraphicsOptions();
+        ellipsoidGraphicsOptions.radii = new ConstantProperty<>(new Cartesian3(200000.0, 200000.0, 300000.0));
+        ellipsoidGraphicsOptions.material = new ColorMaterialProperty(new ConstantProperty<>(Color.BLUE()));
+        EntityOptions entityOptions = new EntityOptions();
+        entityOptions.name = "Blue ellipsoid";
+        entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-114.0, 40.0, 300000.0));
+        entityOptions.ellipsoid = new EllipsoidGraphics(ellipsoidGraphicsOptions);
+        Entity blueEllpsoid = csVPanel.getViewer().entities().add(entityOptions);
+
+        ellipsoidGraphicsOptions = new EllipsoidGraphicsOptions();
+        ellipsoidGraphicsOptions.radii = new ConstantProperty<>(new Cartesian3(300000.0, 300000.0, 300000.0));
+        ellipsoidGraphicsOptions.material = new ColorMaterialProperty(new ConstantProperty<>(Color.RED().withAlpha(0.5f)));
+        ellipsoidGraphicsOptions.outline = new ConstantProperty<>(true);
+        ellipsoidGraphicsOptions.outlineColor = new ConstantProperty<>(Color.BLACK());
+        entityOptions = new EntityOptions();
+        entityOptions.name = "Red sphere with black outline";
+        entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-107.0, 40.0, 300000.0));
+        entityOptions.ellipsoid = new EllipsoidGraphics(ellipsoidGraphicsOptions);
+        Entity redSphere = csVPanel.getViewer().entities().add(entityOptions);
+
+        ellipsoidGraphicsOptions = new EllipsoidGraphicsOptions();
+        ellipsoidGraphicsOptions.radii = new ConstantProperty<>(new Cartesian3(200000.0, 200000.0, 300000.0));
+        ellipsoidGraphicsOptions.outline = new ConstantProperty<>(true);
+        ellipsoidGraphicsOptions.outlineColor = new ConstantProperty<>(Color.YELLOW());
+        ellipsoidGraphicsOptions.fill = new ConstantProperty<>(false);
+        ellipsoidGraphicsOptions.slicePartitions = new ConstantProperty<>(24);
+        ellipsoidGraphicsOptions.stackPartitions = new ConstantProperty<>(36);
+        entityOptions = new EntityOptions();
+        entityOptions.name = "Yellow ellipsoid outline";
+        entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-100.0, 40.0, 300000.0));
+        entityOptions.ellipsoid = new EllipsoidGraphics(ellipsoidGraphicsOptions);
+        Entity outlineOnly = csVPanel.getViewer().entities().add(entityOptions);
+
+        csVPanel.getViewer().zoomTo(csVPanel.getViewer().entities());
 
         contentPanel.add(new HTML("<p>Draw spheres and ellipsoids.</p>"));
         contentPanel.add(csVPanel);

@@ -1,13 +1,11 @@
 package org.cleanlogic.showcase.client.examples;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.ui.*;
-import org.cesiumjs.cs.Configuration;
 import org.cesiumjs.cs.core.Cartesian2;
 import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.Color;
@@ -30,8 +28,7 @@ import org.cesiumjs.cs.datasources.properties.options.CheckerboardMaterialProper
 import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.scene.ShadowMap;
 import org.cesiumjs.cs.scene.enums.ShadowMode;
-import org.cesiumjs.cs.widgets.Viewer;
-import org.cesiumjs.cs.widgets.ViewerPanelAbstract;
+import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cesiumjs.cs.widgets.options.ViewerOptions;
 import org.cleanlogic.showcase.client.basic.AbstractExample;
 import org.cleanlogic.showcase.client.components.store.ShowcaseExampleStore;
@@ -44,16 +41,18 @@ import java.util.List;
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 public class Shadows extends AbstractExample {
-    ShadowMap shadowMap;
+    private ViewerPanel csVPanel;
 
-    Entity cesiumAir;
-    Entity groundVehicle;
-    Entity cesiumMan;
-    Entity woodTower;
-    Entity simpleCity;
-    Entity boxEntity;
-    Entity checkerEntity;
-    Entity sphereEntity;
+    private ShadowMap shadowMap;
+
+    private Entity cesiumAir;
+    private Entity groundVehicle;
+    private Entity cesiumMan;
+    private Entity woodTower;
+    private Entity simpleCity;
+    private Entity boxEntity;
+    private Entity checkerEntity;
+    private Entity sphereEntity;
     private class Location {
         String name;
         double lon;
@@ -78,152 +77,6 @@ public class Shadows extends AbstractExample {
         add(new Location("Space", -1.31968, 0.698874, 2000000.0, 2457522.154792));
     }};
 
-
-    private class ViewerPanel implements IsWidget {
-        private ViewerPanelAbstract _csPanelAbstract;
-
-        private ViewerPanel() {
-            super();
-            asWidget();
-        }
-
-        @Override
-        public Widget asWidget() {
-            if (_csPanelAbstract == null) {
-                final Configuration csConfiguration = new Configuration();
-                csConfiguration.setPath(GWT.getModuleBaseURL() + "JavaScript/Cesium");
-                _csPanelAbstract = new ViewerPanelAbstract(csConfiguration) {
-                    @Override
-                    public Viewer createViewer(Element element) {
-
-                        ViewerOptions viewerOptions = new ViewerOptions();
-                        viewerOptions.infoBox = false;
-                        viewerOptions.selectionIndicator = false;
-                        viewerOptions.shadows = true;
-                        viewerOptions.terrainShadows = ShadowMode.ENABLED();
-                        _viewer = new Viewer(element, viewerOptions);
-
-                        CesiumTerrainProviderOptions cesiumTerrainProviderOptions = new CesiumTerrainProviderOptions();
-                        cesiumTerrainProviderOptions.url = "https://assets.agi.com/stk-terrain/world";
-                        cesiumTerrainProviderOptions.requestVertexNormals = true;
-                        cesiumTerrainProviderOptions.requestWaterMask = true;
-                        _viewer.terrainProvider = new CesiumTerrainProvider(cesiumTerrainProviderOptions);
-
-                        shadowMap = _viewer.shadowMap();
-                        shadowMap.maximumDistance = 10000.0;
-
-                        ModelGraphicsOptions modelGraphicsOptions = new ModelGraphicsOptions();
-                        modelGraphicsOptions.uri = new ConstantProperty<>(GWT.getModuleBaseURL() + "SampleData/models/CesiumAir/Cesium_Air.glb");
-                        EntityOptions entityOptions = new EntityOptions();
-                        entityOptions.name = "Cesium Air";
-                        entityOptions.model = new ModelGraphics(modelGraphicsOptions);
-                        JsObject.$(entityOptions, "height", 20.0);
-                        cesiumAir = _viewer.entities().add(entityOptions);
-
-                        modelGraphicsOptions = new ModelGraphicsOptions();
-                        modelGraphicsOptions.uri = new ConstantProperty<>(GWT.getModuleBaseURL() + "SampleData/models/CesiumGround/Cesium_Ground.glb");
-                        entityOptions = new EntityOptions();
-                        entityOptions.name = "Ground Vehicle";
-                        JsObject.$(entityOptions, "height", 0.0);
-                        entityOptions.model = new ModelGraphics(modelGraphicsOptions);
-                        groundVehicle = _viewer.entities().add(entityOptions);
-
-                        modelGraphicsOptions = new ModelGraphicsOptions();
-                        modelGraphicsOptions.uri = new ConstantProperty<>(GWT.getModuleBaseURL() + "SampleData/models/CesiumMan/Cesium_Man.glb");
-                        entityOptions = new EntityOptions();
-                        entityOptions.name = "Cesium Man";
-                        JsObject.$(entityOptions, "height", 0.0);
-                        entityOptions.model = new ModelGraphics(modelGraphicsOptions);
-                        cesiumMan = _viewer.entities().add(entityOptions);
-
-                        modelGraphicsOptions = new ModelGraphicsOptions();
-                        modelGraphicsOptions.uri = new ConstantProperty<>(GWT.getModuleBaseURL() + "SampleData/models/WoodTower/Wood_Tower.gltf");
-                        entityOptions = new EntityOptions();
-                        entityOptions.name = "Wood Tower";
-                        JsObject.$(entityOptions, "height", 0.0);
-                        entityOptions.model = new ModelGraphics(modelGraphicsOptions);
-                        woodTower = _viewer.entities().add(entityOptions);
-
-                        modelGraphicsOptions = new ModelGraphicsOptions();
-                        modelGraphicsOptions.uri = new ConstantProperty<>(GWT.getModuleBaseURL() + "SampleData/models/ShadowTester/Shadow_Tester_4.gltf");
-                        entityOptions = new EntityOptions();
-                        entityOptions.name = "Simple City";
-                        JsObject.$(entityOptions, "height", 0.0);
-                        entityOptions.model = new ModelGraphics(modelGraphicsOptions);
-                        simpleCity = _viewer.entities().add(entityOptions);
-
-                        BoxGraphicsOptions boxGraphicsOptions = new BoxGraphicsOptions();
-                        boxGraphicsOptions.dimensions = new ConstantProperty<>(new Cartesian3(10.0, 10.0, 10.0));
-                        boxGraphicsOptions.material = new ColorMaterialProperty(Color.RED());
-                        boxGraphicsOptions.shadows = new ConstantProperty<>(ShadowMode.ENABLED());
-                        entityOptions = new EntityOptions();
-                        entityOptions.name = "Box";
-                        JsObject.$(entityOptions, "height", 10.0);
-                        entityOptions.box = new BoxGraphics(boxGraphicsOptions);
-                        boxEntity = _viewer.entities().add(entityOptions);
-
-                        CheckerboardMaterialPropertyOptions checkerboardMaterialPropertyOptions = new CheckerboardMaterialPropertyOptions();
-                        checkerboardMaterialPropertyOptions.evenColor = new ConstantProperty<>(Color.RED().withAlpha(0.5f));
-                        checkerboardMaterialPropertyOptions.oddColor = new ConstantProperty<>(Color.RED().withAlpha(0.0f));
-                        checkerboardMaterialPropertyOptions.repeat = new ConstantProperty<>(new Cartesian2(5.0, 10.0));
-                        CheckerboardMaterialProperty checkerMaterial = new CheckerboardMaterialProperty(checkerboardMaterialPropertyOptions);
-
-                        boxGraphicsOptions = new BoxGraphicsOptions();
-                        boxGraphicsOptions.dimensions = new ConstantProperty<>(new Cartesian3(10.0, 10.0, 10.0));
-                        boxGraphicsOptions.material = checkerMaterial;
-                        boxGraphicsOptions.outline = new ConstantProperty<>(true);
-                        boxGraphicsOptions.outlineColor = new ConstantProperty<>(Color.RED());
-                        boxGraphicsOptions.shadows = new ConstantProperty<>(ShadowMode.ENABLED());
-                        entityOptions = new EntityOptions();
-                        entityOptions.name = "Checkered Box";
-                        JsObject.$(entityOptions, "height", 10.0);
-                        entityOptions.box = new BoxGraphics(boxGraphicsOptions);
-                        checkerEntity = _viewer.entities().add(entityOptions);
-
-                        EllipsoidGraphicsOptions ellipsoidGraphicsOptions = new EllipsoidGraphicsOptions();
-                        ellipsoidGraphicsOptions.radii = new ConstantProperty<>(new Cartesian3(15.0, 15.0, 15.0));
-                        ellipsoidGraphicsOptions.material = new ColorMaterialProperty(Color.BLUE().withAlpha(0.5f));
-                        ellipsoidGraphicsOptions.slicePartitions = new ConstantProperty<>(24);
-                        ellipsoidGraphicsOptions.stackPartitions = new ConstantProperty<>(36);
-                        ellipsoidGraphicsOptions.shadows = new ConstantProperty<>(ShadowMode.ENABLED());
-                        entityOptions = new EntityOptions();
-                        entityOptions.name = "Sphere";
-                        JsObject.$(entityOptions, "height", 10.0);
-                        entityOptions.ellipsoid = new EllipsoidGraphics(ellipsoidGraphicsOptions);
-                        sphereEntity = _viewer.entities().add(entityOptions);
-
-                        setLocation(locations.get(0));
-                        setEntity(cesiumAir);
-
-                        return _viewer;
-                    }
-                };
-            }
-            return _csPanelAbstract;
-        }
-
-        public void setEntity(Entity entity) {
-            for (int i = 0; i < _csPanelAbstract.getViewer().entities().values().length; ++i) {
-                _csPanelAbstract.getViewer().entities().values()[i].show = false;
-            }
-            entity.show = true;
-            _csPanelAbstract.getViewer().trackedEntity = entity;
-        }
-
-        public void setLocation(Location location) {
-            double lon = location.lon;
-            double lat = location.lat;
-            double height = location.height;
-
-            for (int i = 0; i < _csPanelAbstract.getViewer().entities().values().length; ++i) {
-                Entity entity = _csPanelAbstract.getViewer().entities().values()[i];
-                entity.position = new ConstantPositionProperty(Cartesian3.fromRadians(lon, lat, height + JsObject.getNumber(entity, "height").doubleValue()));
-            }
-            _csPanelAbstract.getViewer().clock().currentTime = new JulianDate(location.date);
-            _csPanelAbstract.getViewer().clock().multiplier = 1.0;
-        }
-    }
-
     @Inject
     public Shadows(ShowcaseExampleStore store) {
         super("Shadows", "Shadow maps", new String[]{"Showcase", "Cesium", "3d", "Shadows", "Models"}, store);
@@ -231,7 +84,104 @@ public class Shadows extends AbstractExample {
 
     @Override
     public void buildPanel() {
-        final ViewerPanel csVPanel = new ViewerPanel();
+        ViewerOptions viewerOptions = new ViewerOptions();
+        viewerOptions.infoBox = false;
+        viewerOptions.selectionIndicator = false;
+        viewerOptions.shadows = true;
+        viewerOptions.terrainShadows = ShadowMode.ENABLED();
+        csVPanel = new ViewerPanel(viewerOptions);
+
+        CesiumTerrainProviderOptions cesiumTerrainProviderOptions = new CesiumTerrainProviderOptions();
+        cesiumTerrainProviderOptions.url = "https://assets.agi.com/stk-terrain/world";
+        cesiumTerrainProviderOptions.requestVertexNormals = true;
+        cesiumTerrainProviderOptions.requestWaterMask = true;
+        csVPanel.getViewer().terrainProvider = new CesiumTerrainProvider(cesiumTerrainProviderOptions);
+
+        shadowMap = csVPanel.getViewer().shadowMap();
+        shadowMap.maximumDistance = 10000.0;
+
+        ModelGraphicsOptions modelGraphicsOptions = new ModelGraphicsOptions();
+        modelGraphicsOptions.uri = new ConstantProperty<>(GWT.getModuleBaseURL() + "SampleData/models/CesiumAir/Cesium_Air.glb");
+        EntityOptions entityOptions = new EntityOptions();
+        entityOptions.name = "Cesium Air";
+        entityOptions.model = new ModelGraphics(modelGraphicsOptions);
+        JsObject.$(entityOptions, "height", 20.0);
+        cesiumAir = csVPanel.getViewer().entities().add(entityOptions);
+
+        modelGraphicsOptions = new ModelGraphicsOptions();
+        modelGraphicsOptions.uri = new ConstantProperty<>(GWT.getModuleBaseURL() + "SampleData/models/CesiumGround/Cesium_Ground.glb");
+        entityOptions = new EntityOptions();
+        entityOptions.name = "Ground Vehicle";
+        JsObject.$(entityOptions, "height", 0.0);
+        entityOptions.model = new ModelGraphics(modelGraphicsOptions);
+        groundVehicle = csVPanel.getViewer().entities().add(entityOptions);
+
+        modelGraphicsOptions = new ModelGraphicsOptions();
+        modelGraphicsOptions.uri = new ConstantProperty<>(GWT.getModuleBaseURL() + "SampleData/models/CesiumMan/Cesium_Man.glb");
+        entityOptions = new EntityOptions();
+        entityOptions.name = "Cesium Man";
+        JsObject.$(entityOptions, "height", 0.0);
+        entityOptions.model = new ModelGraphics(modelGraphicsOptions);
+        cesiumMan = csVPanel.getViewer().entities().add(entityOptions);
+
+        modelGraphicsOptions = new ModelGraphicsOptions();
+        modelGraphicsOptions.uri = new ConstantProperty<>(GWT.getModuleBaseURL() + "SampleData/models/WoodTower/Wood_Tower.gltf");
+        entityOptions = new EntityOptions();
+        entityOptions.name = "Wood Tower";
+        JsObject.$(entityOptions, "height", 0.0);
+        entityOptions.model = new ModelGraphics(modelGraphicsOptions);
+        woodTower = csVPanel.getViewer().entities().add(entityOptions);
+
+        modelGraphicsOptions = new ModelGraphicsOptions();
+        modelGraphicsOptions.uri = new ConstantProperty<>(GWT.getModuleBaseURL() + "SampleData/models/ShadowTester/Shadow_Tester_4.gltf");
+        entityOptions = new EntityOptions();
+        entityOptions.name = "Simple City";
+        JsObject.$(entityOptions, "height", 0.0);
+        entityOptions.model = new ModelGraphics(modelGraphicsOptions);
+        simpleCity = csVPanel.getViewer().entities().add(entityOptions);
+
+        BoxGraphicsOptions boxGraphicsOptions = new BoxGraphicsOptions();
+        boxGraphicsOptions.dimensions = new ConstantProperty<>(new Cartesian3(10.0, 10.0, 10.0));
+        boxGraphicsOptions.material = new ColorMaterialProperty(Color.RED());
+        boxGraphicsOptions.shadows = new ConstantProperty<>(ShadowMode.ENABLED());
+        entityOptions = new EntityOptions();
+        entityOptions.name = "Box";
+        JsObject.$(entityOptions, "height", 10.0);
+        entityOptions.box = new BoxGraphics(boxGraphicsOptions);
+        boxEntity = csVPanel.getViewer().entities().add(entityOptions);
+
+        CheckerboardMaterialPropertyOptions checkerboardMaterialPropertyOptions = new CheckerboardMaterialPropertyOptions();
+        checkerboardMaterialPropertyOptions.evenColor = new ConstantProperty<>(Color.RED().withAlpha(0.5f));
+        checkerboardMaterialPropertyOptions.oddColor = new ConstantProperty<>(Color.RED().withAlpha(0.0f));
+        checkerboardMaterialPropertyOptions.repeat = new ConstantProperty<>(new Cartesian2(5.0, 10.0));
+        CheckerboardMaterialProperty checkerMaterial = new CheckerboardMaterialProperty(checkerboardMaterialPropertyOptions);
+
+        boxGraphicsOptions = new BoxGraphicsOptions();
+        boxGraphicsOptions.dimensions = new ConstantProperty<>(new Cartesian3(10.0, 10.0, 10.0));
+        boxGraphicsOptions.material = checkerMaterial;
+        boxGraphicsOptions.outline = new ConstantProperty<>(true);
+        boxGraphicsOptions.outlineColor = new ConstantProperty<>(Color.RED());
+        boxGraphicsOptions.shadows = new ConstantProperty<>(ShadowMode.ENABLED());
+        entityOptions = new EntityOptions();
+        entityOptions.name = "Checkered Box";
+        JsObject.$(entityOptions, "height", 10.0);
+        entityOptions.box = new BoxGraphics(boxGraphicsOptions);
+        checkerEntity = csVPanel.getViewer().entities().add(entityOptions);
+
+        EllipsoidGraphicsOptions ellipsoidGraphicsOptions = new EllipsoidGraphicsOptions();
+        ellipsoidGraphicsOptions.radii = new ConstantProperty<>(new Cartesian3(15.0, 15.0, 15.0));
+        ellipsoidGraphicsOptions.material = new ColorMaterialProperty(Color.BLUE().withAlpha(0.5f));
+        ellipsoidGraphicsOptions.slicePartitions = new ConstantProperty<>(24);
+        ellipsoidGraphicsOptions.stackPartitions = new ConstantProperty<>(36);
+        ellipsoidGraphicsOptions.shadows = new ConstantProperty<>(ShadowMode.ENABLED());
+        entityOptions = new EntityOptions();
+        entityOptions.name = "Sphere";
+        JsObject.$(entityOptions, "height", 10.0);
+        entityOptions.ellipsoid = new EllipsoidGraphics(ellipsoidGraphicsOptions);
+        sphereEntity = csVPanel.getViewer().entities().add(entityOptions);
+
+        setLocation(locations.get(0));
+        setEntity(cesiumAir);
 
         ListBox locationLBox = new ListBox();
         for (int i = 0; i < locations.size(); i++) {
@@ -242,7 +192,7 @@ public class Shadows extends AbstractExample {
             @Override
             public void onChange(ChangeEvent changeEvent) {
                 ListBox source = (ListBox) changeEvent.getSource();
-                csVPanel.setLocation(locations.get(Integer.parseInt(source.getSelectedValue())));
+                setLocation(locations.get(Integer.parseInt(source.getSelectedValue())));
             }
         });
 
@@ -260,36 +210,38 @@ public class Shadows extends AbstractExample {
             public void onChange(ChangeEvent changeEvent) {
                 ListBox source = (ListBox) changeEvent.getSource();
                 switch (source.getSelectedIndex()) {
-                    case 0: csVPanel.setEntity(cesiumAir); break;
-                    case 1: csVPanel.setEntity(groundVehicle); break;
-                    case 2: csVPanel.setEntity(cesiumMan); break;
-                    case 3: csVPanel.setEntity(woodTower); break;
-                    case 4: csVPanel.setEntity(simpleCity); break;
-                    case 5: csVPanel.setEntity(boxEntity); break;
-                    case 6: csVPanel.setEntity(checkerEntity); break;
-                    case 7: csVPanel.setEntity(sphereEntity); break;
+                    case 0: setEntity(cesiumAir); break;
+                    case 1: setEntity(groundVehicle); break;
+                    case 2: setEntity(cesiumMan); break;
+                    case 3: setEntity(woodTower); break;
+                    case 4: setEntity(simpleCity); break;
+                    case 5: setEntity(boxEntity); break;
+                    case 6: setEntity(checkerEntity); break;
+                    case 7: setEntity(sphereEntity); break;
                     default: break;
                 }
             }
         });
 
         CheckBox shadowsCBox = new CheckBox("Shadows");
+        shadowsCBox.getElement().getStyle().setColor("white");
         shadowsCBox.setValue(true);
         shadowsCBox.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
             @Override
             public void onValueChange(ValueChangeEvent<Boolean> valueChangeEvent) {
-                csVPanel._csPanelAbstract.getViewer().shadows = !csVPanel._csPanelAbstract.getViewer().shadows;
+                csVPanel.getViewer().shadows = !csVPanel.getViewer().shadows;
             }
         });
 
         CheckBox entitiShadowsCBox = new CheckBox("Entity Shadows");
+        entitiShadowsCBox.getElement().getStyle().setColor("white");
         entitiShadowsCBox.setValue(true);
         entitiShadowsCBox.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
             @Override
             public void onValueChange(ValueChangeEvent<Boolean> valueChangeEvent) {
                 Integer entityShadows = valueChangeEvent.getValue() ? ShadowMode.ENABLED() : ShadowMode.DISABLED();
-                for (int i = 0; i < csVPanel._csPanelAbstract.getViewer().entities().values().length; i++) {
-                    Entity entity = csVPanel._csPanelAbstract.getViewer().entities().values()[i];
+                for (int i = 0; i < csVPanel.getViewer().entities().values().length; i++) {
+                    Entity entity = csVPanel.getViewer().entities().values()[i];
                     if (entity.model != null) {
                         entity.model.shadows = new ConstantProperty<>(entityShadows);
                     }
@@ -304,15 +256,17 @@ public class Shadows extends AbstractExample {
         });
 
         CheckBox terrainShadowsCBox = new CheckBox("Terrain Shadows");
+        terrainShadowsCBox.getElement().getStyle().setColor("white");
         terrainShadowsCBox.setValue(true);
         terrainShadowsCBox.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
             @Override
             public void onValueChange(ValueChangeEvent<Boolean> valueChangeEvent) {
-                csVPanel._csPanelAbstract.getViewer().terrainShadows = valueChangeEvent.getValue() ? ShadowMode.ENABLED() : ShadowMode.DISABLED();
+                csVPanel.getViewer().terrainShadows = valueChangeEvent.getValue() ? ShadowMode.ENABLED() : ShadowMode.DISABLED();
             }
         });
 
         CheckBox softShadowsCBox = new CheckBox("Soft Shadows");
+        softShadowsCBox.getElement().getStyle().setColor("white");
         softShadowsCBox.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
             @Override
             public void onValueChange(ValueChangeEvent<Boolean> valueChangeEvent) {
@@ -363,5 +317,26 @@ public class Shadows extends AbstractExample {
         String[] sourceCodeURLs = new String[1];
         sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "Shadows.txt";
         return sourceCodeURLs;
+    }
+
+    public void setEntity(Entity entity) {
+        for (int i = 0; i < csVPanel.getViewer().entities().values().length; ++i) {
+            csVPanel.getViewer().entities().values()[i].show = false;
+        }
+        entity.show = true;
+        csVPanel.getViewer().trackedEntity = entity;
+    }
+
+    public void setLocation(Location location) {
+        double lon = location.lon;
+        double lat = location.lat;
+        double height = location.height;
+
+        for (int i = 0; i < csVPanel.getViewer().entities().values().length; ++i) {
+            Entity entity = csVPanel.getViewer().entities().values()[i];
+            entity.position = new ConstantPositionProperty(Cartesian3.fromRadians(lon, lat, height + JsObject.getNumber(entity, "height").doubleValue()));
+        }
+        csVPanel.getViewer().clock().currentTime = new JulianDate(location.date);
+        csVPanel.getViewer().clock().multiplier = 1.0;
     }
 }

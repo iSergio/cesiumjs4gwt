@@ -18,21 +18,18 @@ package org.cleanlogic.showcase.client.examples;
 
 import com.google.gwt.core.client.Callback;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.user.client.ui.*;
 import org.cesiumjs.cs.Cesium;
-import org.cesiumjs.cs.Configuration;
+import org.cesiumjs.cs.collections.ImageryLayerCollection;
 import org.cesiumjs.cs.core.Credit;
 import org.cesiumjs.cs.core.Rectangle;
 import org.cesiumjs.cs.scene.ImageryLayer;
-import org.cesiumjs.cs.collections.ImageryLayerCollection;
 import org.cesiumjs.cs.scene.WebMapServiceParameters;
 import org.cesiumjs.cs.scene.providers.*;
 import org.cesiumjs.cs.scene.providers.options.*;
-import org.cesiumjs.cs.widgets.Viewer;
-import org.cesiumjs.cs.widgets.ViewerPanelAbstract;
+import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cesiumjs.cs.widgets.options.ViewerOptions;
 import org.cleanlogic.showcase.client.basic.AbstractExample;
 import org.cleanlogic.showcase.client.components.store.ShowcaseExampleStore;
@@ -56,147 +53,7 @@ public class ImageryLayersManipulation extends AbstractExample {
     private HashMap<String, ImageryLayer> additionalLayers = new HashMap<>();
     private ImageryLayer selectedLayer;
 
-    private class ViewerPanel implements IsWidget {
-        private ViewerPanelAbstract _csPanelAbstract;
-
-        private Callback<Void, Void> _callback;
-
-        private ViewerPanel() {
-            super();
-            asWidget();
-        }
-
-        @Override
-        public Widget asWidget() {
-            if (_csPanelAbstract == null) {
-                final Configuration csConfiguration = new Configuration();
-                csConfiguration.setPath(GWT.getModuleBaseURL() + "JavaScript/Cesium");
-                _csPanelAbstract = new ViewerPanelAbstract(csConfiguration) {
-                    @Override
-                    public Viewer createViewer(Element element) {
-                        ViewerOptions viewerOptions = new ViewerOptions();
-                        viewerOptions.baseLayerPicker = false;
-
-                        Viewer csViewer = new Viewer(element, viewerOptions);
-
-                        imageryLayers = csViewer.imageryLayers();
-
-                        setupLayers();
-                        updateLayerList();
-
-                        _callback.onSuccess(null);
-
-                        return csViewer;
-                    }
-                };
-            }
-            return _csPanelAbstract;
-        }
-
-        private void setupLayers() {
-            addBaseLayerOption("Bing Maps Aerial", null);
-
-            BingMapsImageryProviderOptions bingMapsImageryProviderOptions = new BingMapsImageryProviderOptions();
-            bingMapsImageryProviderOptions.url = "https://dev.virtualearth.net";
-            bingMapsImageryProviderOptions.mapStyle = BingMapsStyle.ROAD();
-            addBaseLayerOption("Bing Maps Road", new BingMapsImageryProvider(bingMapsImageryProviderOptions));
-
-            ArcGisMapServerImageryProviderOptions arcGisMapServerImageryProviderOptions = new ArcGisMapServerImageryProviderOptions();
-            arcGisMapServerImageryProviderOptions.url = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer";
-            addBaseLayerOption("ArcGIS World Street Maps", new ArcGisMapServerImageryProvider(arcGisMapServerImageryProviderOptions));
-
-            addBaseLayerOption("OpenStreetMaps", Cesium.createOpenStreetMapImageryProvider());
-
-            OpenStreetMapImageryProviderOptions openStreetMapImageryProviderOptions = new OpenStreetMapImageryProviderOptions();
-            openStreetMapImageryProviderOptions.url = "https://otile1-s.mqcdn.com/tiles/1.0.0/osm/";
-            addBaseLayerOption("MapQuest OpenStreetMaps", Cesium.createOpenStreetMapImageryProvider(openStreetMapImageryProviderOptions));
-
-            openStreetMapImageryProviderOptions = new OpenStreetMapImageryProviderOptions();
-            openStreetMapImageryProviderOptions.url = "https://stamen-tiles.a.ssl.fastly.net/watercolor/";
-            openStreetMapImageryProviderOptions.fileExtension = "jpg";
-            openStreetMapImageryProviderOptions.credit = new Credit("Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under CC BY SA.");
-            addBaseLayerOption("Stamen Maps", Cesium.createOpenStreetMapImageryProvider(openStreetMapImageryProviderOptions));
-
-            TileMapServiceImageryProviderOptions tileMapServiceImageryProviderOptions = new TileMapServiceImageryProviderOptions();
-            tileMapServiceImageryProviderOptions.url = GWT.getModuleBaseURL() + "JavaScript/Cesium/Assets/Textures/NaturalEarthII";
-            addBaseLayerOption("Natural Earth II (local)", Cesium.createTileMapServiceImageryProvider(tileMapServiceImageryProviderOptions));
-
-            WebMapTileServiceImageryProviderOptions webMapTileServiceImageryProviderOptions = new WebMapTileServiceImageryProviderOptions();
-            webMapTileServiceImageryProviderOptions.url = "http://basemap.nationalmap.gov/arcgis/rest/services/USGSShadedReliefOnly/MapServer/WMTS";
-            webMapTileServiceImageryProviderOptions.layer = "USGSShadedReliefOnly";
-            webMapTileServiceImageryProviderOptions.style = "default";
-            webMapTileServiceImageryProviderOptions.format = "image/jpeg";
-            webMapTileServiceImageryProviderOptions.tileMatrixSetID = "default028mm";
-            webMapTileServiceImageryProviderOptions.maximumLevel = 19;
-            webMapTileServiceImageryProviderOptions.credit = new Credit("U. S. Geological Survey");
-            addBaseLayerOption("USGS Shaded Relief (via WMTS)", new WebMapTileServiceImageryProvider(webMapTileServiceImageryProviderOptions));
-
-
-            WebMapServiceParameters parameters = new WebMapServiceParameters();
-            parameters.format = "image/png";
-            parameters.transparent = true;
-            WebMapServiceImageryProviderOptions webMapServiceImageryProviderOptions = new WebMapServiceImageryProviderOptions();
-            webMapServiceImageryProviderOptions.url = "https://mesonet.agron.iastate.edu/cgi-bin/wms/goes/conus_ir.cgi?";
-            webMapServiceImageryProviderOptions.layers = "goes_conus_ir";
-            webMapServiceImageryProviderOptions.credit = new Credit("Infrared data courtesy Iowa Environmental Mesonet");
-            webMapServiceImageryProviderOptions.parameters = parameters;
-            addAdditionalLayerOption("United States GOES Infrared", new WebMapServiceImageryProvider(webMapServiceImageryProviderOptions), 1, true);
-
-            parameters = new WebMapServiceParameters();
-            parameters.format = "image/png";
-            parameters.transparent = true;
-            webMapServiceImageryProviderOptions = new WebMapServiceImageryProviderOptions();
-            webMapServiceImageryProviderOptions.url = "https://mesonet.agron.iastate.edu/cgi-bin/wms/nexrad/n0r.cgi?";
-            webMapServiceImageryProviderOptions.layers = "nexrad-n0r";
-            webMapServiceImageryProviderOptions.credit = new Credit("Radar data courtesy Iowa Environmental Mesonet");
-            webMapServiceImageryProviderOptions.parameters = parameters;
-            addAdditionalLayerOption("United States GOES Infrared", new WebMapServiceImageryProvider(webMapServiceImageryProviderOptions), 1, true);
-
-            tileMapServiceImageryProviderOptions = new TileMapServiceImageryProviderOptions();
-            tileMapServiceImageryProviderOptions.url = GWT.getModuleBaseURL() + "images/cesium_maptiler/Cesium_Logo_Color";
-            addAdditionalLayerOption("TileMapService Image", Cesium.createTileMapServiceImageryProvider(tileMapServiceImageryProviderOptions), 0.2f, true);
-
-            SingleTileImageryProviderOptions singleTileImageryProviderOptions = new SingleTileImageryProviderOptions();
-            singleTileImageryProviderOptions.url = GWT.getModuleBaseURL() + "images/Cesium_Logo_overlay.png";
-            singleTileImageryProviderOptions.rectangle = Rectangle.fromDegrees(-115.0, 38.0, -107, 39.75);
-            addAdditionalLayerOption("Single Image", new SingleTileImageryProvider(singleTileImageryProviderOptions), 1.0f, true);
-
-
-            addAdditionalLayerOption("Grid", new GridImageryProvider(), 1.0f, false);
-
-            addAdditionalLayerOption("Tile Coordinates", new TileCoordinatesImageryProvider(), 1.0f, false);
-        }
-
-        private void addBaseLayerOption(String name, ImageryProvider imageryProvider) {
-            ImageryLayer layer = null;
-            if (imageryProvider == null) {
-                layer = imageryLayers.get(0);
-                selectedLayer = layer;
-            } else {
-                layer = new  ImageryLayer(imageryProvider);
-            }
-            baseLayers.put(name, layer);
-        }
-
-        private void addAdditionalLayerOption(String name, ImageryProvider imageryProvider, float alpha, boolean show) {
-            ImageryLayer layer = imageryLayers.addImageryProvider(imageryProvider);
-            layer.alpha = alpha;
-            layer.show = show;
-            additionalLayers.put(name, layer);
-        }
-
-        private void updateLayerList() {
-            int numLayers = imageryLayers.length();
-            layers.clear();
-            for (int i = numLayers - 1; i >= 0; --i) {
-                layers.add(imageryLayers.get(i));
-            }
-        }
-
-        public void addCallback(Callback<Void, Void> callback) {
-            _callback = callback;
-        }
-    }
+    private Callback<Void, Void> _callback;
 
     @Inject
     public ImageryLayersManipulation(ShowcaseExampleStore store) {
@@ -205,7 +62,16 @@ public class ImageryLayersManipulation extends AbstractExample {
 
     @Override
     public void buildPanel() {
-        final ViewerPanel csVPanel = new ViewerPanel();
+        ViewerOptions viewerOptions = new ViewerOptions();
+        viewerOptions.baseLayerPicker = false;
+        ViewerPanel csVPanel = new ViewerPanel(viewerOptions);
+
+        imageryLayers = csVPanel.getViewer().imageryLayers();
+
+        setupLayers();
+        updateLayerList();
+
+        _callback.onSuccess(null);
 
         HorizontalPanel baseLayersHPanel = new HorizontalPanel();
         baseLayersHPanel.setSpacing(5);
@@ -240,7 +106,7 @@ public class ImageryLayersManipulation extends AbstractExample {
                 imageryLayers.add(baseLayer, numLayers - activeLayerIndex - 1);
                 baseLayer.show = show;
                 baseLayer.alpha = alpha;
-                csVPanel.updateLayerList();
+                updateLayerList();
 
                 selectedLayer = baseLayer;
             }
@@ -259,7 +125,7 @@ public class ImageryLayersManipulation extends AbstractExample {
                 }
             }
         };
-        csVPanel.addCallback(cesiumCreated);
+        addCallback(cesiumCreated);
 
         contentPanel.add(new HTML("<p>Layer imagery from multiple sources, including WMS servers, Bing Maps, ArcGIS Online, OpenStreetMaps, and more, and adjust the alpha of each independently.</p>"));
         contentPanel.add(baseLayersHPanel);
@@ -297,5 +163,109 @@ public class ImageryLayersManipulation extends AbstractExample {
         public void onStop(SliderEvent e) {
 
         }
+    }
+
+    private void setupLayers() {
+        addBaseLayerOption("Bing Maps Aerial", null);
+
+        BingMapsImageryProviderOptions bingMapsImageryProviderOptions = new BingMapsImageryProviderOptions();
+        bingMapsImageryProviderOptions.url = "https://dev.virtualearth.net";
+        bingMapsImageryProviderOptions.mapStyle = BingMapsStyle.ROAD();
+        addBaseLayerOption("Bing Maps Road", new BingMapsImageryProvider(bingMapsImageryProviderOptions));
+
+        ArcGisMapServerImageryProviderOptions arcGisMapServerImageryProviderOptions = new ArcGisMapServerImageryProviderOptions();
+        arcGisMapServerImageryProviderOptions.url = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer";
+        addBaseLayerOption("ArcGIS World Street Maps", new ArcGisMapServerImageryProvider(arcGisMapServerImageryProviderOptions));
+
+        addBaseLayerOption("OpenStreetMaps", Cesium.createOpenStreetMapImageryProvider());
+
+        OpenStreetMapImageryProviderOptions openStreetMapImageryProviderOptions = new OpenStreetMapImageryProviderOptions();
+        openStreetMapImageryProviderOptions.url = "https://otile1-s.mqcdn.com/tiles/1.0.0/osm/";
+        addBaseLayerOption("MapQuest OpenStreetMaps", Cesium.createOpenStreetMapImageryProvider(openStreetMapImageryProviderOptions));
+
+        openStreetMapImageryProviderOptions = new OpenStreetMapImageryProviderOptions();
+        openStreetMapImageryProviderOptions.url = "https://stamen-tiles.a.ssl.fastly.net/watercolor/";
+        openStreetMapImageryProviderOptions.fileExtension = "jpg";
+        openStreetMapImageryProviderOptions.credit = new Credit("Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under CC BY SA.");
+        addBaseLayerOption("Stamen Maps", Cesium.createOpenStreetMapImageryProvider(openStreetMapImageryProviderOptions));
+
+        TileMapServiceImageryProviderOptions tileMapServiceImageryProviderOptions = new TileMapServiceImageryProviderOptions();
+        tileMapServiceImageryProviderOptions.url = GWT.getModuleBaseURL() + "JavaScript/Cesium/Assets/Textures/NaturalEarthII";
+        addBaseLayerOption("Natural Earth II (local)", Cesium.createTileMapServiceImageryProvider(tileMapServiceImageryProviderOptions));
+
+        WebMapTileServiceImageryProviderOptions webMapTileServiceImageryProviderOptions = new WebMapTileServiceImageryProviderOptions();
+        webMapTileServiceImageryProviderOptions.url = "http://basemap.nationalmap.gov/arcgis/rest/services/USGSShadedReliefOnly/MapServer/WMTS";
+        webMapTileServiceImageryProviderOptions.layer = "USGSShadedReliefOnly";
+        webMapTileServiceImageryProviderOptions.style = "default";
+        webMapTileServiceImageryProviderOptions.format = "image/jpeg";
+        webMapTileServiceImageryProviderOptions.tileMatrixSetID = "default028mm";
+        webMapTileServiceImageryProviderOptions.maximumLevel = 19;
+        webMapTileServiceImageryProviderOptions.credit = new Credit("U. S. Geological Survey");
+        addBaseLayerOption("USGS Shaded Relief (via WMTS)", new WebMapTileServiceImageryProvider(webMapTileServiceImageryProviderOptions));
+
+
+        WebMapServiceParameters parameters = new WebMapServiceParameters();
+        parameters.format = "image/png";
+        parameters.transparent = true;
+        WebMapServiceImageryProviderOptions webMapServiceImageryProviderOptions = new WebMapServiceImageryProviderOptions();
+        webMapServiceImageryProviderOptions.url = "https://mesonet.agron.iastate.edu/cgi-bin/wms/goes/conus_ir.cgi?";
+        webMapServiceImageryProviderOptions.layers = "goes_conus_ir";
+        webMapServiceImageryProviderOptions.credit = new Credit("Infrared data courtesy Iowa Environmental Mesonet");
+        webMapServiceImageryProviderOptions.parameters = parameters;
+        addAdditionalLayerOption("United States GOES Infrared", new WebMapServiceImageryProvider(webMapServiceImageryProviderOptions), 1, true);
+
+        parameters = new WebMapServiceParameters();
+        parameters.format = "image/png";
+        parameters.transparent = true;
+        webMapServiceImageryProviderOptions = new WebMapServiceImageryProviderOptions();
+        webMapServiceImageryProviderOptions.url = "https://mesonet.agron.iastate.edu/cgi-bin/wms/nexrad/n0r.cgi?";
+        webMapServiceImageryProviderOptions.layers = "nexrad-n0r";
+        webMapServiceImageryProviderOptions.credit = new Credit("Radar data courtesy Iowa Environmental Mesonet");
+        webMapServiceImageryProviderOptions.parameters = parameters;
+        addAdditionalLayerOption("United States GOES Infrared", new WebMapServiceImageryProvider(webMapServiceImageryProviderOptions), 1, true);
+
+        tileMapServiceImageryProviderOptions = new TileMapServiceImageryProviderOptions();
+        tileMapServiceImageryProviderOptions.url = GWT.getModuleBaseURL() + "images/cesium_maptiler/Cesium_Logo_Color";
+        addAdditionalLayerOption("TileMapService Image", Cesium.createTileMapServiceImageryProvider(tileMapServiceImageryProviderOptions), 0.2f, true);
+
+        SingleTileImageryProviderOptions singleTileImageryProviderOptions = new SingleTileImageryProviderOptions();
+        singleTileImageryProviderOptions.url = GWT.getModuleBaseURL() + "images/Cesium_Logo_overlay.png";
+        singleTileImageryProviderOptions.rectangle = Rectangle.fromDegrees(-115.0, 38.0, -107, 39.75);
+        addAdditionalLayerOption("Single Image", new SingleTileImageryProvider(singleTileImageryProviderOptions), 1.0f, true);
+
+
+        addAdditionalLayerOption("Grid", new GridImageryProvider(), 1.0f, false);
+
+        addAdditionalLayerOption("Tile Coordinates", new TileCoordinatesImageryProvider(), 1.0f, false);
+    }
+
+    private void addBaseLayerOption(String name, ImageryProvider imageryProvider) {
+        ImageryLayer layer = null;
+        if (imageryProvider == null) {
+            layer = imageryLayers.get(0);
+            selectedLayer = layer;
+        } else {
+            layer = new  ImageryLayer(imageryProvider);
+        }
+        baseLayers.put(name, layer);
+    }
+
+    private void addAdditionalLayerOption(String name, ImageryProvider imageryProvider, float alpha, boolean show) {
+        ImageryLayer layer = imageryLayers.addImageryProvider(imageryProvider);
+        layer.alpha = alpha;
+        layer.show = show;
+        additionalLayers.put(name, layer);
+    }
+
+    private void updateLayerList() {
+        int numLayers = imageryLayers.length();
+        layers.clear();
+        for (int i = numLayers - 1; i >= 0; --i) {
+            layers.add(imageryLayers.get(i));
+        }
+    }
+
+    public void addCallback(Callback<Void, Void> callback) {
+        _callback = callback;
     }
 }
