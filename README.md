@@ -12,29 +12,31 @@ What was done:
 
 ### Getting started
 You not need include JavaScript of Cesium into main html file, injection realised in GWT code.
+Now no need callback for ScriptInjection or AttachOrDetach, all worked "out from box".
 See [Showcase](http://sergeserver.noip.me/gwt-cs-test/) or basic example:
 ```
-private class ViewerPanel implements IsWidget {
-    private ViewerPanelAbstract _csPanelAbstract;
-    private ViewerPanel() {
-        super();
-        asWidget();
+public class HelloWorld extends AbstractExample {
+
+    @Inject
+    public HelloWorld(ShowcaseExampleStore store) {
+        super("Hello World", "Use Viewer to start building new applications or easily embed Cesium into existing applications", new String[]{"Showcase", "Cesium", "3d", "Viewer"}, store);
     }
 
     @Override
-    public Widget asWidget() {
-        if (_csPanelAbstract == null) {
-            final Configuration csConfiguration = new Configuration();
-            csConfiguration.setPath(GWT.getModuleBaseURL() + "JavaScript/Cesium");
-            _csPanelAbstract = new ViewerPanelAbstract(csConfiguration) {
-                @Override
-                public Viewer createViewer(Element element) {
-                    Viewer csViewer = new Viewer(element);
-                    return csViewer;
-                }
-            };
-        }
-        return _csPanelAbstract;
+    public void buildPanel() {
+        ViewerPanel csVPanel = new ViewerPanel();
+
+        contentPanel.add(new HTML("<p>Use Viewer to start building new applications or easily embed Cesium into existing applications.</p>"));
+        contentPanel.add(csVPanel);
+
+        initWidget(contentPanel);
+    }
+
+    @Override
+    public String[] getSourceCodeURLs() {
+        String[] sourceCodeURLs = new String[1];
+        sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "HelloWorld.txt";
+        return sourceCodeURLs;
     }
 }
 ```
