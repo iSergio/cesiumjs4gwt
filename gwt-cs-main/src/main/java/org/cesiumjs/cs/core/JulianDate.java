@@ -16,10 +16,10 @@
 
 package org.cesiumjs.cs.core;
 
-import com.google.gwt.core.client.JsDate;
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.enums.TimeStandard;
+import org.cesiumjs.cs.js.JsDate;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
