@@ -17,6 +17,7 @@
 package org.cesiumjs.cs.widgets;
 
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.logical.shared.AttachEvent;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import org.cesiumjs.cs.js.JsObject;
@@ -37,6 +38,14 @@ public class CesiumWidgetPanel extends SimplePanel {
         Element element = getElement();
         RootPanel.getBodyElement().appendChild(element);
         _cesiumWidget = new CesiumWidget(element, options);
+        super.addAttachHandler(new AttachEvent.Handler() {
+            @Override
+            public void onAttachOrDetach(AttachEvent attachEvent) {
+                if (!attachEvent.isAttached()) {
+                    _cesiumWidget.destroy();
+                }
+            }
+        });
     }
 
     public CesiumWidget getCesiumWidget() {

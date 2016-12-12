@@ -19,6 +19,7 @@ package org.cesiumjs.cs.widgets;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.LinkElement;
+import com.google.gwt.event.logical.shared.AttachEvent;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import org.cesiumjs.cs.Cesium;
@@ -39,13 +40,22 @@ public class ViewerPanel extends SimplePanel {
         super();
         Element element = getElement();
         RootPanel.getBodyElement().appendChild(element);
-        _viewer = new Viewer(element, options);
         if (Cesium.path() != null && !Cesium.path().isEmpty()) {
             LinkElement linkElement = Document.get().createLinkElement();
             linkElement.setRel("stylesheet");
             linkElement.setHref(Cesium.path() + "Cesium/Widgets/widgets.css");
             element.getOwnerDocument().getElementsByTagName("head").getItem(0).appendChild(linkElement);
         }
+        _viewer = new Viewer(element, options);
+
+        super.addAttachHandler(new AttachEvent.Handler() {
+            @Override
+            public void onAttachOrDetach(AttachEvent attachEvent) {
+                if (!attachEvent.isAttached()) {
+                    _viewer.destroy();
+                }
+            }
+        });
     }
 
     public Viewer getViewer() {
