@@ -2599,7 +2599,7 @@ define('Core/Cartographic',[
             return undefined;
         }
 
-        var n = Cartesian3.multiplyComponents(cartesian, oneOverRadiiSquared, cartesianToCartographicN);
+        var n = Cartesian3.multiplyComponents(p, oneOverRadiiSquared, cartesianToCartographicN);
         n = Cartesian3.normalize(n, n);
 
         var h = Cartesian3.subtract(cartesian, p, cartesianToCartographicH);
@@ -3526,193 +3526,6 @@ define('Core/Interval',[
 });
 
 /*global define*/
-define('Core/HeadingPitchRoll',[
-    './defaultValue',
-    './defined',
-    './DeveloperError',
-    './Math'
-], function(
-    defaultValue,
-    defined,
-    DeveloperError,
-    CesiumMath) {
-    "use strict";
-
-    /**
-     * A rotation expressed as a heading, pitch, and roll. Heading is the rotation about the
-     * negative z axis. Pitch is the rotation about the negative y axis. Roll is the rotation about
-     * the positive x axis.
-     * @alias HeadingPitchRoll
-     * @constructor
-     *
-     * @param {Number} [heading=0.0] The heading component in radians.
-     * @param {Number} [pitch=0.0] The pitch component in radians.
-     * @param {Number} [roll=0.0] The roll component in radians.
-     */
-    function HeadingPitchRoll(heading, pitch, roll) {
-        this.heading = defaultValue(heading, 0.0);
-        this.pitch = defaultValue(pitch, 0.0);
-        this.roll = defaultValue(roll, 0.0);
-    }
-
-    /**
-     * Computes the heading, pitch and roll from a quaternion (see http://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles )
-     *
-     * @param {Quaternion} quaternion The quaternion from which to retrieve heading, pitch, and roll, all expressed in radians.
-     * @param {Quaternion} [result] The object in which to store the result. If not provided, a new instance is created and returned.
-     * @returns {HeadingPitchRoll} The modified result parameter or a new HeadingPitchRoll instance if one was not provided.
-     */
-    HeadingPitchRoll.fromQuaternion = function(quaternion, result) {
-                if (!defined(quaternion)) {
-            throw new DeveloperError('quaternion is required');
-        }
-                if (!defined(result)) {
-            result = new HeadingPitchRoll();
-        }
-        var test = 2 * (quaternion.w * quaternion.y - quaternion.z * quaternion.x);
-        var denominatorRoll = 1 - 2 * (quaternion.x * quaternion.x + quaternion.y * quaternion.y);
-        var numeratorRoll = 2 * (quaternion.w * quaternion.x + quaternion.y * quaternion.z);
-        var denominatorHeading = 1 - 2 * (quaternion.y * quaternion.y + quaternion.z * quaternion.z);
-        var numeratorHeading = 2 * (quaternion.w * quaternion.z + quaternion.x * quaternion.y);
-        result.heading = -Math.atan2(numeratorHeading, denominatorHeading);
-        result.roll = Math.atan2(numeratorRoll, denominatorRoll);
-        result.pitch = -Math.asin(test);
-        return result;
-    };
-
-    /**
-     * Returns a new HeadingPitchRoll instance from angles given in degrees.
-     *
-     * @param {Number} heading the heading in degrees
-     * @param {Number} pitch the pitch in degrees
-     * @param {Number} roll the heading in degrees
-     * @param {HeadingPitchRoll} [result] The object in which to store the result. If not provided, a new instance is created and returned.
-     * @returns {HeadingPitchRoll} A new HeadingPitchRoll instance
-     */
-    HeadingPitchRoll.fromDegrees = function(heading, pitch, roll, result) {
-                if (!defined(heading)) {
-            throw new DeveloperError('heading is required');
-        }
-        if (!defined(pitch)) {
-            throw new DeveloperError('pitch is required');
-        }
-        if (!defined(roll)) {
-            throw new DeveloperError('roll is required');
-        }
-                if (!defined(result)) {
-            result = new HeadingPitchRoll();
-        }
-        result.heading = heading * CesiumMath.RADIANS_PER_DEGREE;
-        result.pitch = pitch * CesiumMath.RADIANS_PER_DEGREE;
-        result.roll = roll * CesiumMath.RADIANS_PER_DEGREE;
-        return result;
-    };
-
-    /**
-     * Duplicates a HeadingPitchRoll instance.
-     *
-     * @param {HeadingPitchRoll} headingPitchRoll The HeadingPitchRoll to duplicate.
-     * @param {HeadingPitchRoll} [result] The object onto which to store the result.
-     * @returns {HeadingPitchRoll} The modified result parameter or a new HeadingPitchRoll instance if one was not provided. (Returns undefined if headingPitchRoll is undefined)
-     */
-    HeadingPitchRoll.clone = function(headingPitchRoll, result) {
-        if (!defined(headingPitchRoll)) {
-            return undefined;
-        }
-        if (!defined(result)) {
-            return new HeadingPitchRoll(headingPitchRoll.heading, headingPitchRoll.pitch, headingPitchRoll.roll);
-        }
-        result.heading = headingPitchRoll.heading;
-        result.pitch = headingPitchRoll.pitch;
-        result.roll = headingPitchRoll.roll;
-        return result;
-    };
-
-    /**
-     * Compares the provided HeadingPitchRolls componentwise and returns
-     * <code>true</code> if they are equal, <code>false</code> otherwise.
-     *
-     * @param {HeadingPitchRoll} [left] The first HeadingPitchRoll.
-     * @param {HeadingPitchRoll} [right] The second HeadingPitchRoll.
-     * @returns {Boolean} <code>true</code> if left and right are equal, <code>false</code> otherwise.
-     */
-    HeadingPitchRoll.equals = function(left, right) {
-        return (left === right) ||
-            ((defined(left)) &&
-                (defined(right)) &&
-                (left.heading === right.heading) &&
-                (left.pitch === right.pitch) &&
-                (left.roll === right.roll));
-    };
-
-    /**
-     * Compares the provided HeadingPitchRolls componentwise and returns
-     * <code>true</code> if they pass an absolute or relative tolerance test,
-     * <code>false</code> otherwise.
-     *
-     * @param {HeadingPitchRoll} [left] The first HeadingPitchRoll.
-     * @param {HeadingPitchRoll} [right] The second HeadingPitchRoll.
-     * @param {Number} relativeEpsilon The relative epsilon tolerance to use for equality testing.
-     * @param {Number} [absoluteEpsilon=relativeEpsilon] The absolute epsilon tolerance to use for equality testing.
-     * @returns {Boolean} <code>true</code> if left and right are within the provided epsilon, <code>false</code> otherwise.
-     */
-    HeadingPitchRoll.equalsEpsilon = function(left, right, relativeEpsilon, absoluteEpsilon) {
-        return (left === right) ||
-            (defined(left) &&
-                defined(right) &&
-                CesiumMath.equalsEpsilon(left.heading, right.heading, relativeEpsilon, absoluteEpsilon) &&
-                CesiumMath.equalsEpsilon(left.pitch, right.pitch, relativeEpsilon, absoluteEpsilon) &&
-                CesiumMath.equalsEpsilon(left.roll, right.roll, relativeEpsilon, absoluteEpsilon));
-    };
-
-    /**
-     * Duplicates this HeadingPitchRoll instance.
-     *
-     * @param {HeadingPitchRoll} [result] The object onto which to store the result.
-     * @returns {HeadingPitchRoll} The modified result parameter or a new HeadingPitchRoll instance if one was not provided.
-     */
-    HeadingPitchRoll.prototype.clone = function(result) {
-        return HeadingPitchRoll.clone(this, result);
-    };
-
-    /**
-     * Compares this HeadingPitchRoll against the provided HeadingPitchRoll componentwise and returns
-     * <code>true</code> if they are equal, <code>false</code> otherwise.
-     *
-     * @param {HeadingPitchRoll} [right] The right hand side HeadingPitchRoll.
-     * @returns {Boolean} <code>true</code> if they are equal, <code>false</code> otherwise.
-     */
-    HeadingPitchRoll.prototype.equals = function(right) {
-        return HeadingPitchRoll.equals(this, right);
-    };
-
-    /**
-     * Compares this HeadingPitchRoll against the provided HeadingPitchRoll componentwise and returns
-     * <code>true</code> if they pass an absolute or relative tolerance test,
-     * <code>false</code> otherwise.
-     *
-     * @param {HeadingPitchRoll} [right] The right hand side HeadingPitchRoll.
-     * @param {Number} relativeEpsilon The relative epsilon tolerance to use for equality testing.
-     * @param {Number} [absoluteEpsilon=relativeEpsilon] The absolute epsilon tolerance to use for equality testing.
-     * @returns {Boolean} <code>true</code> if they are within the provided epsilon, <code>false</code> otherwise.
-     */
-    HeadingPitchRoll.prototype.equalsEpsilon = function(right, relativeEpsilon, absoluteEpsilon) {
-        return HeadingPitchRoll.equalsEpsilon(this, right, relativeEpsilon, absoluteEpsilon);
-    };
-
-    /**
-     * Creates a string representing this HeadingPitchRoll in the format '(heading, pitch, roll)' in radians.
-     *
-     * @returns {String} A string representing the provided HeadingPitchRoll in the format '(heading, pitch, roll)'.
-     */
-    HeadingPitchRoll.prototype.toString = function() {
-        return '(' + this.heading + ', ' + this.pitch + ', ' + this.roll + ')';
-    };
-
-    return HeadingPitchRoll;
-});
-
-/*global define*/
 define('Core/Matrix3',[
         './Cartesian3',
         './defaultValue',
@@ -3720,7 +3533,6 @@ define('Core/Matrix3',[
         './defineProperties',
         './DeveloperError',
         './freezeObject',
-        './HeadingPitchRoll',
         './Math'
     ], function(
         Cartesian3,
@@ -3729,7 +3541,6 @@ define('Core/Matrix3',[
         defineProperties,
         DeveloperError,
         freezeObject,
-        HeadingPitchRoll,
         CesiumMath) {
     'use strict';
 
@@ -8931,175 +8742,6 @@ define('Core/Matrix4',[
 });
 
 /*global define*/
-define('Core/Plane',[
-        './Cartesian3',
-        './defined',
-        './DeveloperError',
-        './freezeObject'
-    ], function(
-        Cartesian3,
-        defined,
-        DeveloperError,
-        freezeObject) {
-    'use strict';
-
-    /**
-     * A plane in Hessian Normal Form defined by
-     * <pre>
-     * ax + by + cz + d = 0
-     * </pre>
-     * where (a, b, c) is the plane's <code>normal</code>, d is the signed
-     * <code>distance</code> to the plane, and (x, y, z) is any point on
-     * the plane.
-     *
-     * @alias Plane
-     * @constructor
-     *
-     * @param {Cartesian3} normal The plane's normal (normalized).
-     * @param {Number} distance The shortest distance from the origin to the plane.  The sign of
-     * <code>distance</code> determines which side of the plane the origin
-     * is on.  If <code>distance</code> is positive, the origin is in the half-space
-     * in the direction of the normal; if negative, the origin is in the half-space
-     * opposite to the normal; if zero, the plane passes through the origin.
-     *
-     * @example
-     * // The plane x=0
-     * var plane = new Cesium.Plane(Cesium.Cartesian3.UNIT_X, 0.0);
-     */
-    function Plane(normal, distance) {
-                if (!defined(normal))  {
-            throw new DeveloperError('normal is required.');
-        }
-        if (!defined(distance)) {
-            throw new DeveloperError('distance is required.');
-        }
-        
-        /**
-         * The plane's normal.
-         *
-         * @type {Cartesian3}
-         */
-        this.normal = Cartesian3.clone(normal);
-
-        /**
-         * The shortest distance from the origin to the plane.  The sign of
-         * <code>distance</code> determines which side of the plane the origin
-         * is on.  If <code>distance</code> is positive, the origin is in the half-space
-         * in the direction of the normal; if negative, the origin is in the half-space
-         * opposite to the normal; if zero, the plane passes through the origin.
-         *
-         * @type {Number}
-         */
-        this.distance = distance;
-    }
-
-    /**
-     * Creates a plane from a normal and a point on the plane.
-     *
-     * @param {Cartesian3} point The point on the plane.
-     * @param {Cartesian3} normal The plane's normal (normalized).
-     * @param {Plane} [result] The object onto which to store the result.
-     * @returns {Plane} A new plane instance or the modified result parameter.
-     *
-     * @example
-     * var point = Cesium.Cartesian3.fromDegrees(-72.0, 40.0);
-     * var normal = ellipsoid.geodeticSurfaceNormal(point);
-     * var tangentPlane = Cesium.Plane.fromPointNormal(point, normal);
-     */
-    Plane.fromPointNormal = function(point, normal, result) {
-                if (!defined(point)) {
-            throw new DeveloperError('point is required.');
-        }
-        if (!defined(normal)) {
-            throw new DeveloperError('normal is required.');
-        }
-        
-        var distance = -Cartesian3.dot(normal, point);
-
-        if (!defined(result)) {
-            return new Plane(normal, distance);
-        }
-
-        Cartesian3.clone(normal, result.normal);
-        result.distance = distance;
-        return result;
-    };
-
-    var scratchNormal = new Cartesian3();
-    /**
-     * Creates a plane from the general equation
-     *
-     * @param {Cartesian4} coefficients The plane's normal (normalized).
-     * @param {Plane} [result] The object onto which to store the result.
-     * @returns {Plane} A new plane instance or the modified result parameter.
-     */
-    Plane.fromCartesian4 = function(coefficients, result) {
-                if (!defined(coefficients)) {
-            throw new DeveloperError('coefficients is required.');
-        }
-        
-        var normal = Cartesian3.fromCartesian4(coefficients, scratchNormal);
-        var distance = coefficients.w;
-
-        if (!defined(result)) {
-            return new Plane(normal, distance);
-        } else {
-            Cartesian3.clone(normal, result.normal);
-            result.distance = distance;
-            return result;
-        }
-    };
-
-    /**
-     * Computes the signed shortest distance of a point to a plane.
-     * The sign of the distance determines which side of the plane the point
-     * is on.  If the distance is positive, the point is in the half-space
-     * in the direction of the normal; if negative, the point is in the half-space
-     * opposite to the normal; if zero, the plane passes through the point.
-     *
-     * @param {Plane} plane The plane.
-     * @param {Cartesian3} point The point.
-     * @returns {Number} The signed shortest distance of the point to the plane.
-     */
-    Plane.getPointDistance = function(plane, point) {
-                if (!defined(plane)) {
-            throw new DeveloperError('plane is required.');
-        }
-        if (!defined(point)) {
-            throw new DeveloperError('point is required.');
-        }
-        
-        return Cartesian3.dot(plane.normal, point) + plane.distance;
-    };
-
-    /**
-     * A constant initialized to the XY plane passing through the origin, with normal in positive Z.
-     *
-     * @type {Plane}
-     * @constant
-     */
-    Plane.ORIGIN_XY_PLANE = freezeObject(new Plane(Cartesian3.UNIT_Z, 0.0));
-
-    /**
-     * A constant initialized to the YZ plane passing through the origin, with normal in positive X.
-     *
-     * @type {Plane}
-     * @constant
-     */
-    Plane.ORIGIN_YZ_PLANE = freezeObject(new Plane(Cartesian3.UNIT_X, 0.0));
-
-    /**
-     * A constant initialized to the ZX plane passing through the origin, with normal in positive Y.
-     *
-     * @type {Plane}
-     * @constant
-     */
-    Plane.ORIGIN_ZX_PLANE = freezeObject(new Plane(Cartesian3.UNIT_Y, 0.0));
-
-    return Plane;
-});
-
-/*global define*/
 define('Core/Rectangle',[
         './Cartographic',
         './defaultValue',
@@ -9963,7 +9605,6 @@ define('Core/BoundingSphere',[
         './Interval',
         './Matrix3',
         './Matrix4',
-        './Plane',
         './Rectangle'
     ], function(
         Cartesian3,
@@ -9977,7 +9618,6 @@ define('Core/BoundingSphere',[
         Interval,
         Matrix3,
         Matrix4,
-        Plane,
         Rectangle) {
     'use strict';
 
@@ -12926,11 +12566,13 @@ define('Core/FeatureDetection',[
     function isChrome() {
         if (!defined(isChromeResult)) {
             isChromeResult = false;
-
-            var fields = (/ Chrome\/([\.0-9]+)/).exec(theNavigator.userAgent);
-            if (fields !== null) {
-                isChromeResult = true;
-                chromeVersionResult = extractVersion(fields[1]);
+            // Edge contains Chrome in the user agent too
+            if (!isEdge()) {
+                var fields = (/ Chrome\/([\.0-9]+)/).exec(theNavigator.userAgent);
+                if (fields !== null) {
+                    isChromeResult = true;
+                    chromeVersionResult = extractVersion(fields[1]);
+                }
             }
         }
 
@@ -12947,8 +12589,8 @@ define('Core/FeatureDetection',[
         if (!defined(isSafariResult)) {
             isSafariResult = false;
 
-            // Chrome contains Safari in the user agent too
-            if (!isChrome() && (/ Safari\/[\.0-9]+/).test(theNavigator.userAgent)) {
+            // Chrome and Edge contain Safari in the user agent too
+            if (!isChrome() && !isEdge() && (/ Safari\/[\.0-9]+/).test(theNavigator.userAgent)) {
                 var fields = (/ Version\/([\.0-9]+)/).exec(theNavigator.userAgent);
                 if (fields !== null) {
                     isSafariResult = true;
@@ -13011,6 +12653,24 @@ define('Core/FeatureDetection',[
 
     function internetExplorerVersion() {
         return isInternetExplorer() && internetExplorerVersionResult;
+    }
+
+    var isEdgeResult;
+    var edgeVersionResult;
+    function isEdge() {
+        if (!defined(isEdgeResult)) {
+            isEdgeResult = false;
+            var fields = (/ Edge\/([\.0-9]+)/).exec(theNavigator.userAgent);
+            if (fields !== null) {
+                isEdgeResult = true;
+                edgeVersionResult = extractVersion(fields[1]);
+            }
+        }
+        return isEdgeResult;
+    }
+
+    function edgeVersion() {
+        return isEdge() && edgeVersionResult;
     }
 
     var isFirefoxResult;
@@ -13090,6 +12750,8 @@ define('Core/FeatureDetection',[
         webkitVersion : webkitVersion,
         isInternetExplorer : isInternetExplorer,
         internetExplorerVersion : internetExplorerVersion,
+        isEdge : isEdge,
+        edgeVersion : edgeVersion,
         isFirefox : isFirefox,
         firefoxVersion : firefoxVersion,
         isWindows : isWindows,
@@ -15514,14 +15176,12 @@ define('Core/GeometryInstance',[
 define('Core/AttributeCompression',[
         './Cartesian2',
         './Cartesian3',
-        './defaultValue',
         './defined',
         './DeveloperError',
         './Math'
     ], function(
         Cartesian2,
         Cartesian3,
-        defaultValue,
         defined,
         DeveloperError,
         CesiumMath) {
@@ -17890,6 +17550,175 @@ define('Core/IntersectionTests',[
 });
 
 /*global define*/
+define('Core/Plane',[
+        './Cartesian3',
+        './defined',
+        './DeveloperError',
+        './freezeObject'
+    ], function(
+        Cartesian3,
+        defined,
+        DeveloperError,
+        freezeObject) {
+    'use strict';
+
+    /**
+     * A plane in Hessian Normal Form defined by
+     * <pre>
+     * ax + by + cz + d = 0
+     * </pre>
+     * where (a, b, c) is the plane's <code>normal</code>, d is the signed
+     * <code>distance</code> to the plane, and (x, y, z) is any point on
+     * the plane.
+     *
+     * @alias Plane
+     * @constructor
+     *
+     * @param {Cartesian3} normal The plane's normal (normalized).
+     * @param {Number} distance The shortest distance from the origin to the plane.  The sign of
+     * <code>distance</code> determines which side of the plane the origin
+     * is on.  If <code>distance</code> is positive, the origin is in the half-space
+     * in the direction of the normal; if negative, the origin is in the half-space
+     * opposite to the normal; if zero, the plane passes through the origin.
+     *
+     * @example
+     * // The plane x=0
+     * var plane = new Cesium.Plane(Cesium.Cartesian3.UNIT_X, 0.0);
+     */
+    function Plane(normal, distance) {
+                if (!defined(normal))  {
+            throw new DeveloperError('normal is required.');
+        }
+        if (!defined(distance)) {
+            throw new DeveloperError('distance is required.');
+        }
+        
+        /**
+         * The plane's normal.
+         *
+         * @type {Cartesian3}
+         */
+        this.normal = Cartesian3.clone(normal);
+
+        /**
+         * The shortest distance from the origin to the plane.  The sign of
+         * <code>distance</code> determines which side of the plane the origin
+         * is on.  If <code>distance</code> is positive, the origin is in the half-space
+         * in the direction of the normal; if negative, the origin is in the half-space
+         * opposite to the normal; if zero, the plane passes through the origin.
+         *
+         * @type {Number}
+         */
+        this.distance = distance;
+    }
+
+    /**
+     * Creates a plane from a normal and a point on the plane.
+     *
+     * @param {Cartesian3} point The point on the plane.
+     * @param {Cartesian3} normal The plane's normal (normalized).
+     * @param {Plane} [result] The object onto which to store the result.
+     * @returns {Plane} A new plane instance or the modified result parameter.
+     *
+     * @example
+     * var point = Cesium.Cartesian3.fromDegrees(-72.0, 40.0);
+     * var normal = ellipsoid.geodeticSurfaceNormal(point);
+     * var tangentPlane = Cesium.Plane.fromPointNormal(point, normal);
+     */
+    Plane.fromPointNormal = function(point, normal, result) {
+                if (!defined(point)) {
+            throw new DeveloperError('point is required.');
+        }
+        if (!defined(normal)) {
+            throw new DeveloperError('normal is required.');
+        }
+        
+        var distance = -Cartesian3.dot(normal, point);
+
+        if (!defined(result)) {
+            return new Plane(normal, distance);
+        }
+
+        Cartesian3.clone(normal, result.normal);
+        result.distance = distance;
+        return result;
+    };
+
+    var scratchNormal = new Cartesian3();
+    /**
+     * Creates a plane from the general equation
+     *
+     * @param {Cartesian4} coefficients The plane's normal (normalized).
+     * @param {Plane} [result] The object onto which to store the result.
+     * @returns {Plane} A new plane instance or the modified result parameter.
+     */
+    Plane.fromCartesian4 = function(coefficients, result) {
+                if (!defined(coefficients)) {
+            throw new DeveloperError('coefficients is required.');
+        }
+        
+        var normal = Cartesian3.fromCartesian4(coefficients, scratchNormal);
+        var distance = coefficients.w;
+
+        if (!defined(result)) {
+            return new Plane(normal, distance);
+        } else {
+            Cartesian3.clone(normal, result.normal);
+            result.distance = distance;
+            return result;
+        }
+    };
+
+    /**
+     * Computes the signed shortest distance of a point to a plane.
+     * The sign of the distance determines which side of the plane the point
+     * is on.  If the distance is positive, the point is in the half-space
+     * in the direction of the normal; if negative, the point is in the half-space
+     * opposite to the normal; if zero, the plane passes through the point.
+     *
+     * @param {Plane} plane The plane.
+     * @param {Cartesian3} point The point.
+     * @returns {Number} The signed shortest distance of the point to the plane.
+     */
+    Plane.getPointDistance = function(plane, point) {
+                if (!defined(plane)) {
+            throw new DeveloperError('plane is required.');
+        }
+        if (!defined(point)) {
+            throw new DeveloperError('point is required.');
+        }
+        
+        return Cartesian3.dot(plane.normal, point) + plane.distance;
+    };
+
+    /**
+     * A constant initialized to the XY plane passing through the origin, with normal in positive Z.
+     *
+     * @type {Plane}
+     * @constant
+     */
+    Plane.ORIGIN_XY_PLANE = freezeObject(new Plane(Cartesian3.UNIT_Z, 0.0));
+
+    /**
+     * A constant initialized to the YZ plane passing through the origin, with normal in positive X.
+     *
+     * @type {Plane}
+     * @constant
+     */
+    Plane.ORIGIN_YZ_PLANE = freezeObject(new Plane(Cartesian3.UNIT_X, 0.0));
+
+    /**
+     * A constant initialized to the ZX plane passing through the origin, with normal in positive Y.
+     *
+     * @type {Plane}
+     * @constant
+     */
+    Plane.ORIGIN_ZX_PLANE = freezeObject(new Plane(Cartesian3.UNIT_Y, 0.0));
+
+    return Plane;
+});
+
+/*global define*/
 define('Core/Tipsify',[
         './defaultValue',
         './defined',
@@ -18199,7 +18028,6 @@ define('Core/GeometryPipeline',[
         './GeographicProjection',
         './Geometry',
         './GeometryAttribute',
-        './GeometryInstance',
         './GeometryType',
         './IndexDatatype',
         './Intersect',
@@ -18226,7 +18054,6 @@ define('Core/GeometryPipeline',[
         GeographicProjection,
         Geometry,
         GeometryAttribute,
-        GeometryInstance,
         GeometryType,
         IndexDatatype,
         Intersect,
@@ -23224,6 +23051,117 @@ define('Core/clone',[
     return clone;
 });
 
+/*global define*/
+define('Core/parseResponseHeaders',[], function() {
+    'use strict';
+
+    /**
+     * Parses the result of XMLHttpRequest's getAllResponseHeaders() method into
+     * a dictionary.
+     *
+     * @exports parseResponseHeaders
+     *
+     * @param {String} headerString The header string returned by getAllResponseHeaders().  The format is
+     *                 described here: http://www.w3.org/TR/XMLHttpRequest/#the-getallresponseheaders()-method
+     * @returns {Object} A dictionary of key/value pairs, where each key is the name of a header and the corresponding value
+     *                   is that header's value.
+     * 
+     * @private
+     */
+    function parseResponseHeaders(headerString) {
+        var headers = {};
+
+        if (!headerString) {
+          return headers;
+        }
+
+        var headerPairs = headerString.split('\u000d\u000a');
+
+        for (var i = 0; i < headerPairs.length; ++i) {
+          var headerPair = headerPairs[i];
+          // Can't use split() here because it does the wrong thing
+          // if the header value has the string ": " in it.
+          var index = headerPair.indexOf('\u003a\u0020');
+          if (index > 0) {
+            var key = headerPair.substring(0, index);
+            var val = headerPair.substring(index + 2);
+            headers[key] = val;
+          }
+        }
+
+        return headers;
+    }
+
+    return parseResponseHeaders;
+});
+
+/*global define*/
+define('Core/RequestErrorEvent',[
+        './defined',
+        './parseResponseHeaders'
+    ], function(
+        defined,
+        parseResponseHeaders) {
+    'use strict';
+
+    /**
+     * An event that is raised when a request encounters an error.
+     *
+     * @constructor
+     * @alias RequestErrorEvent
+     *
+     * @param {Number} [statusCode] The HTTP error status code, such as 404.
+     * @param {Object} [response] The response included along with the error.
+     * @param {String|Object} [responseHeaders] The response headers, represented either as an object literal or as a
+     *                        string in the format returned by XMLHttpRequest's getAllResponseHeaders() function.
+     */
+    function RequestErrorEvent(statusCode, response, responseHeaders) {
+        /**
+         * The HTTP error status code, such as 404.  If the error does not have a particular
+         * HTTP code, this property will be undefined.
+         *
+         * @type {Number}
+         */
+        this.statusCode = statusCode;
+
+        /**
+         * The response included along with the error.  If the error does not include a response,
+         * this property will be undefined.
+         *
+         * @type {Object}
+         */
+        this.response = response;
+
+        /**
+         * The headers included in the response, represented as an object literal of key/value pairs.
+         * If the error does not include any headers, this property will be undefined.
+         *
+         * @type {Object}
+         */
+        this.responseHeaders = responseHeaders;
+
+        if (typeof this.responseHeaders === 'string') {
+            this.responseHeaders = parseResponseHeaders(this.responseHeaders);
+        }
+    }
+
+    /**
+     * Creates a string representing this RequestErrorEvent.
+     * @memberof RequestErrorEvent
+     *
+     * @returns {String} A string representing the provided RequestErrorEvent.
+     */
+    RequestErrorEvent.prototype.toString = function() {
+        var str = 'Request has failed.';
+        if (defined(this.statusCode)) {
+            str += ' Status Code: ' + this.statusCode;
+        }
+        return str;
+    };
+
+    return RequestErrorEvent;
+});
+
 /**
  * @license
  *
@@ -23503,15 +23441,13 @@ return URI;
 
 /*global define*/
 define('Core/TrustedServers',[
-    './defined',
-    './defineProperties',
-    './DeveloperError',
-    '../ThirdParty/Uri'
-], function(
-    defined,
-    defineProperties,
-    DeveloperError,
-    Uri) {
+        '../ThirdParty/Uri',
+        './defined',
+        './DeveloperError'
+    ], function(
+        Uri,
+        defined,
+        DeveloperError) {
     'use strict';
     
     /**
@@ -23653,133 +23589,22 @@ define('Core/TrustedServers',[
 });
 
 /*global define*/
-define('Core/parseResponseHeaders',[], function() {
-    'use strict';
-
-    /**
-     * Parses the result of XMLHttpRequest's getAllResponseHeaders() method into
-     * a dictionary.
-     *
-     * @exports parseResponseHeaders
-     *
-     * @param {String} headerString The header string returned by getAllResponseHeaders().  The format is
-     *                 described here: http://www.w3.org/TR/XMLHttpRequest/#the-getallresponseheaders()-method
-     * @returns {Object} A dictionary of key/value pairs, where each key is the name of a header and the corresponding value
-     *                   is that header's value.
-     * 
-     * @private
-     */
-    function parseResponseHeaders(headerString) {
-        var headers = {};
-
-        if (!headerString) {
-          return headers;
-        }
-
-        var headerPairs = headerString.split('\u000d\u000a');
-
-        for (var i = 0; i < headerPairs.length; ++i) {
-          var headerPair = headerPairs[i];
-          // Can't use split() here because it does the wrong thing
-          // if the header value has the string ": " in it.
-          var index = headerPair.indexOf('\u003a\u0020');
-          if (index > 0) {
-            var key = headerPair.substring(0, index);
-            var val = headerPair.substring(index + 2);
-            headers[key] = val;
-          }
-        }
-
-        return headers;
-    }
-
-    return parseResponseHeaders;
-});
-
-/*global define*/
-define('Core/RequestErrorEvent',[
-        './defined',
-        './parseResponseHeaders'
-    ], function(
-        defined,
-        parseResponseHeaders) {
-    'use strict';
-
-    /**
-     * An event that is raised when a request encounters an error.
-     *
-     * @constructor
-     * @alias RequestErrorEvent
-     *
-     * @param {Number} [statusCode] The HTTP error status code, such as 404.
-     * @param {Object} [response] The response included along with the error.
-     * @param {String|Object} [responseHeaders] The response headers, represented either as an object literal or as a
-     *                        string in the format returned by XMLHttpRequest's getAllResponseHeaders() function.
-     */
-    function RequestErrorEvent(statusCode, response, responseHeaders) {
-        /**
-         * The HTTP error status code, such as 404.  If the error does not have a particular
-         * HTTP code, this property will be undefined.
-         *
-         * @type {Number}
-         */
-        this.statusCode = statusCode;
-
-        /**
-         * The response included along with the error.  If the error does not include a response,
-         * this property will be undefined.
-         *
-         * @type {Object}
-         */
-        this.response = response;
-
-        /**
-         * The headers included in the response, represented as an object literal of key/value pairs.
-         * If the error does not include any headers, this property will be undefined.
-         *
-         * @type {Object}
-         */
-        this.responseHeaders = responseHeaders;
-
-        if (typeof this.responseHeaders === 'string') {
-            this.responseHeaders = parseResponseHeaders(this.responseHeaders);
-        }
-    }
-
-    /**
-     * Creates a string representing this RequestErrorEvent.
-     * @memberof RequestErrorEvent
-     *
-     * @returns {String} A string representing the provided RequestErrorEvent.
-     */
-    RequestErrorEvent.prototype.toString = function() {
-        var str = 'Request has failed.';
-        if (defined(this.statusCode)) {
-            str += ' Status Code: ' + this.statusCode;
-        }
-        return str;
-    };
-
-    return RequestErrorEvent;
-});
-
-/*global define*/
 define('Core/loadWithXhr',[
         '../ThirdParty/when',
-        './TrustedServers',
         './defaultValue',
         './defined',
         './DeveloperError',
         './RequestErrorEvent',
-        './RuntimeError'
+        './RuntimeError',
+        './TrustedServers'
     ], function(
         when,
-        TrustedServers,
         defaultValue,
         defined,
         DeveloperError,
         RequestErrorEvent,
-        RuntimeError) {
+        RuntimeError,
+        TrustedServers) {
     'use strict';
 
     /**
@@ -24453,6 +24278,193 @@ define('Core/EarthOrientationParameters',[
     }
 
     return EarthOrientationParameters;
+});
+
+/*global define*/
+define('Core/HeadingPitchRoll',[
+        './defaultValue',
+        './defined',
+        './DeveloperError',
+        './Math'
+    ], function(
+        defaultValue,
+        defined,
+        DeveloperError,
+        CesiumMath) {
+    "use strict";
+
+    /**
+     * A rotation expressed as a heading, pitch, and roll. Heading is the rotation about the
+     * negative z axis. Pitch is the rotation about the negative y axis. Roll is the rotation about
+     * the positive x axis.
+     * @alias HeadingPitchRoll
+     * @constructor
+     *
+     * @param {Number} [heading=0.0] The heading component in radians.
+     * @param {Number} [pitch=0.0] The pitch component in radians.
+     * @param {Number} [roll=0.0] The roll component in radians.
+     */
+    function HeadingPitchRoll(heading, pitch, roll) {
+        this.heading = defaultValue(heading, 0.0);
+        this.pitch = defaultValue(pitch, 0.0);
+        this.roll = defaultValue(roll, 0.0);
+    }
+
+    /**
+     * Computes the heading, pitch and roll from a quaternion (see http://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles )
+     *
+     * @param {Quaternion} quaternion The quaternion from which to retrieve heading, pitch, and roll, all expressed in radians.
+     * @param {Quaternion} [result] The object in which to store the result. If not provided, a new instance is created and returned.
+     * @returns {HeadingPitchRoll} The modified result parameter or a new HeadingPitchRoll instance if one was not provided.
+     */
+    HeadingPitchRoll.fromQuaternion = function(quaternion, result) {
+                if (!defined(quaternion)) {
+            throw new DeveloperError('quaternion is required');
+        }
+                if (!defined(result)) {
+            result = new HeadingPitchRoll();
+        }
+        var test = 2 * (quaternion.w * quaternion.y - quaternion.z * quaternion.x);
+        var denominatorRoll = 1 - 2 * (quaternion.x * quaternion.x + quaternion.y * quaternion.y);
+        var numeratorRoll = 2 * (quaternion.w * quaternion.x + quaternion.y * quaternion.z);
+        var denominatorHeading = 1 - 2 * (quaternion.y * quaternion.y + quaternion.z * quaternion.z);
+        var numeratorHeading = 2 * (quaternion.w * quaternion.z + quaternion.x * quaternion.y);
+        result.heading = -Math.atan2(numeratorHeading, denominatorHeading);
+        result.roll = Math.atan2(numeratorRoll, denominatorRoll);
+        result.pitch = -Math.asin(test);
+        return result;
+    };
+
+    /**
+     * Returns a new HeadingPitchRoll instance from angles given in degrees.
+     *
+     * @param {Number} heading the heading in degrees
+     * @param {Number} pitch the pitch in degrees
+     * @param {Number} roll the heading in degrees
+     * @param {HeadingPitchRoll} [result] The object in which to store the result. If not provided, a new instance is created and returned.
+     * @returns {HeadingPitchRoll} A new HeadingPitchRoll instance
+     */
+    HeadingPitchRoll.fromDegrees = function(heading, pitch, roll, result) {
+                if (!defined(heading)) {
+            throw new DeveloperError('heading is required');
+        }
+        if (!defined(pitch)) {
+            throw new DeveloperError('pitch is required');
+        }
+        if (!defined(roll)) {
+            throw new DeveloperError('roll is required');
+        }
+                if (!defined(result)) {
+            result = new HeadingPitchRoll();
+        }
+        result.heading = heading * CesiumMath.RADIANS_PER_DEGREE;
+        result.pitch = pitch * CesiumMath.RADIANS_PER_DEGREE;
+        result.roll = roll * CesiumMath.RADIANS_PER_DEGREE;
+        return result;
+    };
+
+    /**
+     * Duplicates a HeadingPitchRoll instance.
+     *
+     * @param {HeadingPitchRoll} headingPitchRoll The HeadingPitchRoll to duplicate.
+     * @param {HeadingPitchRoll} [result] The object onto which to store the result.
+     * @returns {HeadingPitchRoll} The modified result parameter or a new HeadingPitchRoll instance if one was not provided. (Returns undefined if headingPitchRoll is undefined)
+     */
+    HeadingPitchRoll.clone = function(headingPitchRoll, result) {
+        if (!defined(headingPitchRoll)) {
+            return undefined;
+        }
+        if (!defined(result)) {
+            return new HeadingPitchRoll(headingPitchRoll.heading, headingPitchRoll.pitch, headingPitchRoll.roll);
+        }
+        result.heading = headingPitchRoll.heading;
+        result.pitch = headingPitchRoll.pitch;
+        result.roll = headingPitchRoll.roll;
+        return result;
+    };
+
+    /**
+     * Compares the provided HeadingPitchRolls componentwise and returns
+     * <code>true</code> if they are equal, <code>false</code> otherwise.
+     *
+     * @param {HeadingPitchRoll} [left] The first HeadingPitchRoll.
+     * @param {HeadingPitchRoll} [right] The second HeadingPitchRoll.
+     * @returns {Boolean} <code>true</code> if left and right are equal, <code>false</code> otherwise.
+     */
+    HeadingPitchRoll.equals = function(left, right) {
+        return (left === right) ||
+            ((defined(left)) &&
+                (defined(right)) &&
+                (left.heading === right.heading) &&
+                (left.pitch === right.pitch) &&
+                (left.roll === right.roll));
+    };
+
+    /**
+     * Compares the provided HeadingPitchRolls componentwise and returns
+     * <code>true</code> if they pass an absolute or relative tolerance test,
+     * <code>false</code> otherwise.
+     *
+     * @param {HeadingPitchRoll} [left] The first HeadingPitchRoll.
+     * @param {HeadingPitchRoll} [right] The second HeadingPitchRoll.
+     * @param {Number} relativeEpsilon The relative epsilon tolerance to use for equality testing.
+     * @param {Number} [absoluteEpsilon=relativeEpsilon] The absolute epsilon tolerance to use for equality testing.
+     * @returns {Boolean} <code>true</code> if left and right are within the provided epsilon, <code>false</code> otherwise.
+     */
+    HeadingPitchRoll.equalsEpsilon = function(left, right, relativeEpsilon, absoluteEpsilon) {
+        return (left === right) ||
+            (defined(left) &&
+                defined(right) &&
+                CesiumMath.equalsEpsilon(left.heading, right.heading, relativeEpsilon, absoluteEpsilon) &&
+                CesiumMath.equalsEpsilon(left.pitch, right.pitch, relativeEpsilon, absoluteEpsilon) &&
+                CesiumMath.equalsEpsilon(left.roll, right.roll, relativeEpsilon, absoluteEpsilon));
+    };
+
+    /**
+     * Duplicates this HeadingPitchRoll instance.
+     *
+     * @param {HeadingPitchRoll} [result] The object onto which to store the result.
+     * @returns {HeadingPitchRoll} The modified result parameter or a new HeadingPitchRoll instance if one was not provided.
+     */
+    HeadingPitchRoll.prototype.clone = function(result) {
+        return HeadingPitchRoll.clone(this, result);
+    };
+
+    /**
+     * Compares this HeadingPitchRoll against the provided HeadingPitchRoll componentwise and returns
+     * <code>true</code> if they are equal, <code>false</code> otherwise.
+     *
+     * @param {HeadingPitchRoll} [right] The right hand side HeadingPitchRoll.
+     * @returns {Boolean} <code>true</code> if they are equal, <code>false</code> otherwise.
+     */
+    HeadingPitchRoll.prototype.equals = function(right) {
+        return HeadingPitchRoll.equals(this, right);
+    };
+
+    /**
+     * Compares this HeadingPitchRoll against the provided HeadingPitchRoll componentwise and returns
+     * <code>true</code> if they pass an absolute or relative tolerance test,
+     * <code>false</code> otherwise.
+     *
+     * @param {HeadingPitchRoll} [right] The right hand side HeadingPitchRoll.
+     * @param {Number} relativeEpsilon The relative epsilon tolerance to use for equality testing.
+     * @param {Number} [absoluteEpsilon=relativeEpsilon] The absolute epsilon tolerance to use for equality testing.
+     * @returns {Boolean} <code>true</code> if they are within the provided epsilon, <code>false</code> otherwise.
+     */
+    HeadingPitchRoll.prototype.equalsEpsilon = function(right, relativeEpsilon, absoluteEpsilon) {
+        return HeadingPitchRoll.equalsEpsilon(this, right, relativeEpsilon, absoluteEpsilon);
+    };
+
+    /**
+     * Creates a string representing this HeadingPitchRoll in the format '(heading, pitch, roll)' in radians.
+     *
+     * @returns {String} A string representing the provided HeadingPitchRoll in the format '(heading, pitch, roll)'.
+     */
+    HeadingPitchRoll.prototype.toString = function() {
+        return '(' + this.heading + ', ' + this.pitch + ', ' + this.roll + ')';
+    };
+
+    return HeadingPitchRoll;
 });
 
 /*global define*/
@@ -27270,7 +27282,6 @@ define('Core/CircleGeometry',[
         './DeveloperError',
         './EllipseGeometry',
         './Ellipsoid',
-        './Math',
         './VertexFormat'
     ], function(
         Cartesian3,
@@ -27280,7 +27291,6 @@ define('Core/CircleGeometry',[
         DeveloperError,
         EllipseGeometry,
         Ellipsoid,
-        CesiumMath,
         VertexFormat) {
     'use strict';
 

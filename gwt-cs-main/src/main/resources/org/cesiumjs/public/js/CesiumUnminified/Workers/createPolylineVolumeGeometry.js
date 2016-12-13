@@ -2564,7 +2564,7 @@ define('Core/Cartographic',[
             return undefined;
         }
 
-        var n = Cartesian3.multiplyComponents(cartesian, oneOverRadiiSquared, cartesianToCartographicN);
+        var n = Cartesian3.multiplyComponents(p, oneOverRadiiSquared, cartesianToCartographicN);
         n = Cartesian3.normalize(n, n);
 
         var h = Cartesian3.subtract(cartesian, p, cartesianToCartographicH);
@@ -5629,193 +5629,6 @@ define('Core/Interval',[
 });
 
 /*global define*/
-define('Core/HeadingPitchRoll',[
-    './defaultValue',
-    './defined',
-    './DeveloperError',
-    './Math'
-], function(
-    defaultValue,
-    defined,
-    DeveloperError,
-    CesiumMath) {
-    "use strict";
-
-    /**
-     * A rotation expressed as a heading, pitch, and roll. Heading is the rotation about the
-     * negative z axis. Pitch is the rotation about the negative y axis. Roll is the rotation about
-     * the positive x axis.
-     * @alias HeadingPitchRoll
-     * @constructor
-     *
-     * @param {Number} [heading=0.0] The heading component in radians.
-     * @param {Number} [pitch=0.0] The pitch component in radians.
-     * @param {Number} [roll=0.0] The roll component in radians.
-     */
-    function HeadingPitchRoll(heading, pitch, roll) {
-        this.heading = defaultValue(heading, 0.0);
-        this.pitch = defaultValue(pitch, 0.0);
-        this.roll = defaultValue(roll, 0.0);
-    }
-
-    /**
-     * Computes the heading, pitch and roll from a quaternion (see http://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles )
-     *
-     * @param {Quaternion} quaternion The quaternion from which to retrieve heading, pitch, and roll, all expressed in radians.
-     * @param {Quaternion} [result] The object in which to store the result. If not provided, a new instance is created and returned.
-     * @returns {HeadingPitchRoll} The modified result parameter or a new HeadingPitchRoll instance if one was not provided.
-     */
-    HeadingPitchRoll.fromQuaternion = function(quaternion, result) {
-                if (!defined(quaternion)) {
-            throw new DeveloperError('quaternion is required');
-        }
-                if (!defined(result)) {
-            result = new HeadingPitchRoll();
-        }
-        var test = 2 * (quaternion.w * quaternion.y - quaternion.z * quaternion.x);
-        var denominatorRoll = 1 - 2 * (quaternion.x * quaternion.x + quaternion.y * quaternion.y);
-        var numeratorRoll = 2 * (quaternion.w * quaternion.x + quaternion.y * quaternion.z);
-        var denominatorHeading = 1 - 2 * (quaternion.y * quaternion.y + quaternion.z * quaternion.z);
-        var numeratorHeading = 2 * (quaternion.w * quaternion.z + quaternion.x * quaternion.y);
-        result.heading = -Math.atan2(numeratorHeading, denominatorHeading);
-        result.roll = Math.atan2(numeratorRoll, denominatorRoll);
-        result.pitch = -Math.asin(test);
-        return result;
-    };
-
-    /**
-     * Returns a new HeadingPitchRoll instance from angles given in degrees.
-     *
-     * @param {Number} heading the heading in degrees
-     * @param {Number} pitch the pitch in degrees
-     * @param {Number} roll the heading in degrees
-     * @param {HeadingPitchRoll} [result] The object in which to store the result. If not provided, a new instance is created and returned.
-     * @returns {HeadingPitchRoll} A new HeadingPitchRoll instance
-     */
-    HeadingPitchRoll.fromDegrees = function(heading, pitch, roll, result) {
-                if (!defined(heading)) {
-            throw new DeveloperError('heading is required');
-        }
-        if (!defined(pitch)) {
-            throw new DeveloperError('pitch is required');
-        }
-        if (!defined(roll)) {
-            throw new DeveloperError('roll is required');
-        }
-                if (!defined(result)) {
-            result = new HeadingPitchRoll();
-        }
-        result.heading = heading * CesiumMath.RADIANS_PER_DEGREE;
-        result.pitch = pitch * CesiumMath.RADIANS_PER_DEGREE;
-        result.roll = roll * CesiumMath.RADIANS_PER_DEGREE;
-        return result;
-    };
-
-    /**
-     * Duplicates a HeadingPitchRoll instance.
-     *
-     * @param {HeadingPitchRoll} headingPitchRoll The HeadingPitchRoll to duplicate.
-     * @param {HeadingPitchRoll} [result] The object onto which to store the result.
-     * @returns {HeadingPitchRoll} The modified result parameter or a new HeadingPitchRoll instance if one was not provided. (Returns undefined if headingPitchRoll is undefined)
-     */
-    HeadingPitchRoll.clone = function(headingPitchRoll, result) {
-        if (!defined(headingPitchRoll)) {
-            return undefined;
-        }
-        if (!defined(result)) {
-            return new HeadingPitchRoll(headingPitchRoll.heading, headingPitchRoll.pitch, headingPitchRoll.roll);
-        }
-        result.heading = headingPitchRoll.heading;
-        result.pitch = headingPitchRoll.pitch;
-        result.roll = headingPitchRoll.roll;
-        return result;
-    };
-
-    /**
-     * Compares the provided HeadingPitchRolls componentwise and returns
-     * <code>true</code> if they are equal, <code>false</code> otherwise.
-     *
-     * @param {HeadingPitchRoll} [left] The first HeadingPitchRoll.
-     * @param {HeadingPitchRoll} [right] The second HeadingPitchRoll.
-     * @returns {Boolean} <code>true</code> if left and right are equal, <code>false</code> otherwise.
-     */
-    HeadingPitchRoll.equals = function(left, right) {
-        return (left === right) ||
-            ((defined(left)) &&
-                (defined(right)) &&
-                (left.heading === right.heading) &&
-                (left.pitch === right.pitch) &&
-                (left.roll === right.roll));
-    };
-
-    /**
-     * Compares the provided HeadingPitchRolls componentwise and returns
-     * <code>true</code> if they pass an absolute or relative tolerance test,
-     * <code>false</code> otherwise.
-     *
-     * @param {HeadingPitchRoll} [left] The first HeadingPitchRoll.
-     * @param {HeadingPitchRoll} [right] The second HeadingPitchRoll.
-     * @param {Number} relativeEpsilon The relative epsilon tolerance to use for equality testing.
-     * @param {Number} [absoluteEpsilon=relativeEpsilon] The absolute epsilon tolerance to use for equality testing.
-     * @returns {Boolean} <code>true</code> if left and right are within the provided epsilon, <code>false</code> otherwise.
-     */
-    HeadingPitchRoll.equalsEpsilon = function(left, right, relativeEpsilon, absoluteEpsilon) {
-        return (left === right) ||
-            (defined(left) &&
-                defined(right) &&
-                CesiumMath.equalsEpsilon(left.heading, right.heading, relativeEpsilon, absoluteEpsilon) &&
-                CesiumMath.equalsEpsilon(left.pitch, right.pitch, relativeEpsilon, absoluteEpsilon) &&
-                CesiumMath.equalsEpsilon(left.roll, right.roll, relativeEpsilon, absoluteEpsilon));
-    };
-
-    /**
-     * Duplicates this HeadingPitchRoll instance.
-     *
-     * @param {HeadingPitchRoll} [result] The object onto which to store the result.
-     * @returns {HeadingPitchRoll} The modified result parameter or a new HeadingPitchRoll instance if one was not provided.
-     */
-    HeadingPitchRoll.prototype.clone = function(result) {
-        return HeadingPitchRoll.clone(this, result);
-    };
-
-    /**
-     * Compares this HeadingPitchRoll against the provided HeadingPitchRoll componentwise and returns
-     * <code>true</code> if they are equal, <code>false</code> otherwise.
-     *
-     * @param {HeadingPitchRoll} [right] The right hand side HeadingPitchRoll.
-     * @returns {Boolean} <code>true</code> if they are equal, <code>false</code> otherwise.
-     */
-    HeadingPitchRoll.prototype.equals = function(right) {
-        return HeadingPitchRoll.equals(this, right);
-    };
-
-    /**
-     * Compares this HeadingPitchRoll against the provided HeadingPitchRoll componentwise and returns
-     * <code>true</code> if they pass an absolute or relative tolerance test,
-     * <code>false</code> otherwise.
-     *
-     * @param {HeadingPitchRoll} [right] The right hand side HeadingPitchRoll.
-     * @param {Number} relativeEpsilon The relative epsilon tolerance to use for equality testing.
-     * @param {Number} [absoluteEpsilon=relativeEpsilon] The absolute epsilon tolerance to use for equality testing.
-     * @returns {Boolean} <code>true</code> if they are within the provided epsilon, <code>false</code> otherwise.
-     */
-    HeadingPitchRoll.prototype.equalsEpsilon = function(right, relativeEpsilon, absoluteEpsilon) {
-        return HeadingPitchRoll.equalsEpsilon(this, right, relativeEpsilon, absoluteEpsilon);
-    };
-
-    /**
-     * Creates a string representing this HeadingPitchRoll in the format '(heading, pitch, roll)' in radians.
-     *
-     * @returns {String} A string representing the provided HeadingPitchRoll in the format '(heading, pitch, roll)'.
-     */
-    HeadingPitchRoll.prototype.toString = function() {
-        return '(' + this.heading + ', ' + this.pitch + ', ' + this.roll + ')';
-    };
-
-    return HeadingPitchRoll;
-});
-
-/*global define*/
 define('Core/Matrix3',[
         './Cartesian3',
         './defaultValue',
@@ -5823,7 +5636,6 @@ define('Core/Matrix3',[
         './defineProperties',
         './DeveloperError',
         './freezeObject',
-        './HeadingPitchRoll',
         './Math'
     ], function(
         Cartesian3,
@@ -5832,7 +5644,6 @@ define('Core/Matrix3',[
         defineProperties,
         DeveloperError,
         freezeObject,
-        HeadingPitchRoll,
         CesiumMath) {
     'use strict';
 
@@ -11034,175 +10845,6 @@ define('Core/Matrix4',[
 });
 
 /*global define*/
-define('Core/Plane',[
-        './Cartesian3',
-        './defined',
-        './DeveloperError',
-        './freezeObject'
-    ], function(
-        Cartesian3,
-        defined,
-        DeveloperError,
-        freezeObject) {
-    'use strict';
-
-    /**
-     * A plane in Hessian Normal Form defined by
-     * <pre>
-     * ax + by + cz + d = 0
-     * </pre>
-     * where (a, b, c) is the plane's <code>normal</code>, d is the signed
-     * <code>distance</code> to the plane, and (x, y, z) is any point on
-     * the plane.
-     *
-     * @alias Plane
-     * @constructor
-     *
-     * @param {Cartesian3} normal The plane's normal (normalized).
-     * @param {Number} distance The shortest distance from the origin to the plane.  The sign of
-     * <code>distance</code> determines which side of the plane the origin
-     * is on.  If <code>distance</code> is positive, the origin is in the half-space
-     * in the direction of the normal; if negative, the origin is in the half-space
-     * opposite to the normal; if zero, the plane passes through the origin.
-     *
-     * @example
-     * // The plane x=0
-     * var plane = new Cesium.Plane(Cesium.Cartesian3.UNIT_X, 0.0);
-     */
-    function Plane(normal, distance) {
-                if (!defined(normal))  {
-            throw new DeveloperError('normal is required.');
-        }
-        if (!defined(distance)) {
-            throw new DeveloperError('distance is required.');
-        }
-        
-        /**
-         * The plane's normal.
-         *
-         * @type {Cartesian3}
-         */
-        this.normal = Cartesian3.clone(normal);
-
-        /**
-         * The shortest distance from the origin to the plane.  The sign of
-         * <code>distance</code> determines which side of the plane the origin
-         * is on.  If <code>distance</code> is positive, the origin is in the half-space
-         * in the direction of the normal; if negative, the origin is in the half-space
-         * opposite to the normal; if zero, the plane passes through the origin.
-         *
-         * @type {Number}
-         */
-        this.distance = distance;
-    }
-
-    /**
-     * Creates a plane from a normal and a point on the plane.
-     *
-     * @param {Cartesian3} point The point on the plane.
-     * @param {Cartesian3} normal The plane's normal (normalized).
-     * @param {Plane} [result] The object onto which to store the result.
-     * @returns {Plane} A new plane instance or the modified result parameter.
-     *
-     * @example
-     * var point = Cesium.Cartesian3.fromDegrees(-72.0, 40.0);
-     * var normal = ellipsoid.geodeticSurfaceNormal(point);
-     * var tangentPlane = Cesium.Plane.fromPointNormal(point, normal);
-     */
-    Plane.fromPointNormal = function(point, normal, result) {
-                if (!defined(point)) {
-            throw new DeveloperError('point is required.');
-        }
-        if (!defined(normal)) {
-            throw new DeveloperError('normal is required.');
-        }
-        
-        var distance = -Cartesian3.dot(normal, point);
-
-        if (!defined(result)) {
-            return new Plane(normal, distance);
-        }
-
-        Cartesian3.clone(normal, result.normal);
-        result.distance = distance;
-        return result;
-    };
-
-    var scratchNormal = new Cartesian3();
-    /**
-     * Creates a plane from the general equation
-     *
-     * @param {Cartesian4} coefficients The plane's normal (normalized).
-     * @param {Plane} [result] The object onto which to store the result.
-     * @returns {Plane} A new plane instance or the modified result parameter.
-     */
-    Plane.fromCartesian4 = function(coefficients, result) {
-                if (!defined(coefficients)) {
-            throw new DeveloperError('coefficients is required.');
-        }
-        
-        var normal = Cartesian3.fromCartesian4(coefficients, scratchNormal);
-        var distance = coefficients.w;
-
-        if (!defined(result)) {
-            return new Plane(normal, distance);
-        } else {
-            Cartesian3.clone(normal, result.normal);
-            result.distance = distance;
-            return result;
-        }
-    };
-
-    /**
-     * Computes the signed shortest distance of a point to a plane.
-     * The sign of the distance determines which side of the plane the point
-     * is on.  If the distance is positive, the point is in the half-space
-     * in the direction of the normal; if negative, the point is in the half-space
-     * opposite to the normal; if zero, the plane passes through the point.
-     *
-     * @param {Plane} plane The plane.
-     * @param {Cartesian3} point The point.
-     * @returns {Number} The signed shortest distance of the point to the plane.
-     */
-    Plane.getPointDistance = function(plane, point) {
-                if (!defined(plane)) {
-            throw new DeveloperError('plane is required.');
-        }
-        if (!defined(point)) {
-            throw new DeveloperError('point is required.');
-        }
-        
-        return Cartesian3.dot(plane.normal, point) + plane.distance;
-    };
-
-    /**
-     * A constant initialized to the XY plane passing through the origin, with normal in positive Z.
-     *
-     * @type {Plane}
-     * @constant
-     */
-    Plane.ORIGIN_XY_PLANE = freezeObject(new Plane(Cartesian3.UNIT_Z, 0.0));
-
-    /**
-     * A constant initialized to the YZ plane passing through the origin, with normal in positive X.
-     *
-     * @type {Plane}
-     * @constant
-     */
-    Plane.ORIGIN_YZ_PLANE = freezeObject(new Plane(Cartesian3.UNIT_X, 0.0));
-
-    /**
-     * A constant initialized to the ZX plane passing through the origin, with normal in positive Y.
-     *
-     * @type {Plane}
-     * @constant
-     */
-    Plane.ORIGIN_ZX_PLANE = freezeObject(new Plane(Cartesian3.UNIT_Y, 0.0));
-
-    return Plane;
-});
-
-/*global define*/
 define('Core/BoundingSphere',[
         './Cartesian3',
         './Cartographic',
@@ -11215,7 +10857,6 @@ define('Core/BoundingSphere',[
         './Interval',
         './Matrix3',
         './Matrix4',
-        './Plane',
         './Rectangle'
     ], function(
         Cartesian3,
@@ -11229,7 +10870,6 @@ define('Core/BoundingSphere',[
         Interval,
         Matrix3,
         Matrix4,
-        Plane,
         Rectangle) {
     'use strict';
 
@@ -13407,11 +13047,13 @@ define('Core/FeatureDetection',[
     function isChrome() {
         if (!defined(isChromeResult)) {
             isChromeResult = false;
-
-            var fields = (/ Chrome\/([\.0-9]+)/).exec(theNavigator.userAgent);
-            if (fields !== null) {
-                isChromeResult = true;
-                chromeVersionResult = extractVersion(fields[1]);
+            // Edge contains Chrome in the user agent too
+            if (!isEdge()) {
+                var fields = (/ Chrome\/([\.0-9]+)/).exec(theNavigator.userAgent);
+                if (fields !== null) {
+                    isChromeResult = true;
+                    chromeVersionResult = extractVersion(fields[1]);
+                }
             }
         }
 
@@ -13428,8 +13070,8 @@ define('Core/FeatureDetection',[
         if (!defined(isSafariResult)) {
             isSafariResult = false;
 
-            // Chrome contains Safari in the user agent too
-            if (!isChrome() && (/ Safari\/[\.0-9]+/).test(theNavigator.userAgent)) {
+            // Chrome and Edge contain Safari in the user agent too
+            if (!isChrome() && !isEdge() && (/ Safari\/[\.0-9]+/).test(theNavigator.userAgent)) {
                 var fields = (/ Version\/([\.0-9]+)/).exec(theNavigator.userAgent);
                 if (fields !== null) {
                     isSafariResult = true;
@@ -13492,6 +13134,24 @@ define('Core/FeatureDetection',[
 
     function internetExplorerVersion() {
         return isInternetExplorer() && internetExplorerVersionResult;
+    }
+
+    var isEdgeResult;
+    var edgeVersionResult;
+    function isEdge() {
+        if (!defined(isEdgeResult)) {
+            isEdgeResult = false;
+            var fields = (/ Edge\/([\.0-9]+)/).exec(theNavigator.userAgent);
+            if (fields !== null) {
+                isEdgeResult = true;
+                edgeVersionResult = extractVersion(fields[1]);
+            }
+        }
+        return isEdgeResult;
+    }
+
+    function edgeVersion() {
+        return isEdge() && edgeVersionResult;
     }
 
     var isFirefoxResult;
@@ -13571,6 +13231,8 @@ define('Core/FeatureDetection',[
         webkitVersion : webkitVersion,
         isInternetExplorer : isInternetExplorer,
         internetExplorerVersion : internetExplorerVersion,
+        isEdge : isEdge,
+        edgeVersion : edgeVersion,
         isFirefox : isFirefox,
         firefoxVersion : firefoxVersion,
         isWindows : isWindows,
@@ -13989,57 +13651,6 @@ define('Core/CornerType',[
     };
 
     return freezeObject(CornerType);
-});
-
-/*global define*/
-define('Core/oneTimeWarning',[
-        './defaultValue',
-        './defined',
-        './DeveloperError'
-    ], function(
-        defaultValue,
-        defined,
-        DeveloperError) {
-    "use strict";
-
-    var warnings = {};
-
-    /**
-     * Logs a one time message to the console.  Use this function instead of
-     * <code>console.log</code> directly since this does not log duplicate messages
-     * unless it is called from multiple workers.
-     *
-     * @exports oneTimeWarning
-     *
-     * @param {String} identifier The unique identifier for this warning.
-     * @param {String} [message=identifier] The message to log to the console.
-     *
-     * @example
-     * for(var i=0;i<foo.length;++i) {
-     *    if (!defined(foo[i].bar)) {
-     *       // Something that can be recovered from but may happen a lot
-     *       oneTimeWarning('foo.bar undefined', 'foo.bar is undefined. Setting to 0.');
-     *       foo[i].bar = 0;
-     *       // ...
-     *    }
-     * }
-     *
-     * @private
-     */
-    function oneTimeWarning(identifier, message) {
-                if (!defined(identifier)) {
-            throw new DeveloperError('identifier is required.');
-        }
-        
-        if (!defined(warnings[identifier])) {
-            warnings[identifier] = true;
-            console.log(defaultValue(message, identifier));
-        }
-    }
-
-    oneTimeWarning.geometryOutlines = 'Entity geometry outlines are unsupported on terrain. Outlines will be disabled. To enable outlines, disable geometry terrain clamping by explicitly setting height to 0.';
-
-    return oneTimeWarning;
 });
 
 /*global define*/
@@ -14592,14 +14203,12 @@ define('Core/GeometryAttributes',[
 define('Core/AttributeCompression',[
         './Cartesian2',
         './Cartesian3',
-        './defaultValue',
         './defined',
         './DeveloperError',
         './Math'
     ], function(
         Cartesian2,
         Cartesian3,
-        defaultValue,
         defined,
         DeveloperError,
         CesiumMath) {
@@ -15152,134 +14761,6 @@ define('Core/EncodedCartesian3',[
     };
 
     return EncodedCartesian3;
-});
-
-/*global define*/
-define('Core/GeometryInstance',[
-        './defaultValue',
-        './defined',
-        './DeveloperError',
-        './Matrix4'
-    ], function(
-        defaultValue,
-        defined,
-        DeveloperError,
-        Matrix4) {
-    'use strict';
-
-    /**
-     * Geometry instancing allows one {@link Geometry} object to be positions in several
-     * different locations and colored uniquely.  For example, one {@link BoxGeometry} can
-     * be instanced several times, each with a different <code>modelMatrix</code> to change
-     * its position, rotation, and scale.
-     *
-     * @alias GeometryInstance
-     * @constructor
-     *
-     * @param {Object} options Object with the following properties:
-     * @param {Geometry} options.geometry The geometry to instance.
-     * @param {Matrix4} [options.modelMatrix=Matrix4.IDENTITY] The model matrix that transforms to transform the geometry from model to world coordinates.
-     * @param {Object} [options.id] A user-defined object to return when the instance is picked with {@link Scene#pick} or get/set per-instance attributes with {@link Primitive#getGeometryInstanceAttributes}.
-     * @param {Object} [options.attributes] Per-instance attributes like a show or color attribute shown in the example below.
-     *
-     *
-     * @example
-     * // Create geometry for a box, and two instances that refer to it.
-     * // One instance positions the box on the bottom and colored aqua.
-     * // The other instance positions the box on the top and color white.
-     * var geometry = Cesium.BoxGeometry.fromDimensions({
-     *   vertexFormat : Cesium.VertexFormat.POSITION_AND_NORMAL,
-     *   dimensions : new Cesium.Cartesian3(1000000.0, 1000000.0, 500000.0)
-     * });
-     * var instanceBottom = new Cesium.GeometryInstance({
-     *   geometry : geometry,
-     *   modelMatrix : Cesium.Matrix4.multiplyByTranslation(Cesium.Transforms.eastNorthUpToFixedFrame(
-     *     Cesium.Cartesian3.fromDegrees(-75.59777, 40.03883)), new Cesium.Cartesian3(0.0, 0.0, 1000000.0), new Cesium.Matrix4()),
-     *   attributes : {
-     *     color : Cesium.ColorGeometryInstanceAttribute.fromColor(Cesium.Color.AQUA)
-     *   },
-     *   id : 'bottom'
-     * });
-     * var instanceTop = new Cesium.GeometryInstance({
-     *   geometry : geometry,
-     *   modelMatrix : Cesium.Matrix4.multiplyByTranslation(Cesium.Transforms.eastNorthUpToFixedFrame(
-     *     Cesium.Cartesian3.fromDegrees(-75.59777, 40.03883)), new Cesium.Cartesian3(0.0, 0.0, 3000000.0), new Cesium.Matrix4()),
-     *   attributes : {
-     *     color : Cesium.ColorGeometryInstanceAttribute.fromColor(Cesium.Color.AQUA)
-     *   },
-     *   id : 'top'
-     * });
-     * 
-     * @see Geometry
-     */
-    function GeometryInstance(options) {
-        options = defaultValue(options, defaultValue.EMPTY_OBJECT);
-
-                if (!defined(options.geometry)) {
-            throw new DeveloperError('options.geometry is required.');
-        }
-        
-        /**
-         * The geometry being instanced.
-         *
-         * @type Geometry
-         *
-         * @default undefined
-         */
-        this.geometry = options.geometry;
-
-        /**
-         * The 4x4 transformation matrix that transforms the geometry from model to world coordinates.
-         * When this is the identity matrix, the geometry is drawn in world coordinates, i.e., Earth's WGS84 coordinates.
-         * Local reference frames can be used by providing a different transformation matrix, like that returned
-         * by {@link Transforms.eastNorthUpToFixedFrame}.
-         *
-         * @type Matrix4
-         *
-         * @default Matrix4.IDENTITY
-         */
-        this.modelMatrix = Matrix4.clone(defaultValue(options.modelMatrix, Matrix4.IDENTITY));
-
-        /**
-         * User-defined object returned when the instance is picked or used to get/set per-instance attributes.
-         *
-         * @type Object
-         *
-         * @default undefined
-         *
-         * @see Scene#pick
-         * @see Primitive#getGeometryInstanceAttributes
-         */
-        this.id = options.id;
-
-        /**
-         * Used for picking primitives that wrap geometry instances.
-         *
-         * @private
-         */
-        this.pickPrimitive = options.pickPrimitive;
-
-        /**
-         * Per-instance attributes like {@link ColorGeometryInstanceAttribute} or {@link ShowGeometryInstanceAttribute}.
-         * {@link Geometry} attributes varying per vertex; these attributes are constant for the entire instance.
-         *
-         * @type Object
-         *
-         * @default undefined
-         */
-        this.attributes = defaultValue(options.attributes, {});
-
-        /**
-         * @private
-         */
-        this.westHemisphereGeometry = undefined;
-        /**
-         * @private
-         */
-        this.eastHemisphereGeometry = undefined;
-    }
-
-    return GeometryInstance;
 });
 
 /*global define*/
@@ -17096,6 +16577,175 @@ define('Core/IntersectionTests',[
 });
 
 /*global define*/
+define('Core/Plane',[
+        './Cartesian3',
+        './defined',
+        './DeveloperError',
+        './freezeObject'
+    ], function(
+        Cartesian3,
+        defined,
+        DeveloperError,
+        freezeObject) {
+    'use strict';
+
+    /**
+     * A plane in Hessian Normal Form defined by
+     * <pre>
+     * ax + by + cz + d = 0
+     * </pre>
+     * where (a, b, c) is the plane's <code>normal</code>, d is the signed
+     * <code>distance</code> to the plane, and (x, y, z) is any point on
+     * the plane.
+     *
+     * @alias Plane
+     * @constructor
+     *
+     * @param {Cartesian3} normal The plane's normal (normalized).
+     * @param {Number} distance The shortest distance from the origin to the plane.  The sign of
+     * <code>distance</code> determines which side of the plane the origin
+     * is on.  If <code>distance</code> is positive, the origin is in the half-space
+     * in the direction of the normal; if negative, the origin is in the half-space
+     * opposite to the normal; if zero, the plane passes through the origin.
+     *
+     * @example
+     * // The plane x=0
+     * var plane = new Cesium.Plane(Cesium.Cartesian3.UNIT_X, 0.0);
+     */
+    function Plane(normal, distance) {
+                if (!defined(normal))  {
+            throw new DeveloperError('normal is required.');
+        }
+        if (!defined(distance)) {
+            throw new DeveloperError('distance is required.');
+        }
+        
+        /**
+         * The plane's normal.
+         *
+         * @type {Cartesian3}
+         */
+        this.normal = Cartesian3.clone(normal);
+
+        /**
+         * The shortest distance from the origin to the plane.  The sign of
+         * <code>distance</code> determines which side of the plane the origin
+         * is on.  If <code>distance</code> is positive, the origin is in the half-space
+         * in the direction of the normal; if negative, the origin is in the half-space
+         * opposite to the normal; if zero, the plane passes through the origin.
+         *
+         * @type {Number}
+         */
+        this.distance = distance;
+    }
+
+    /**
+     * Creates a plane from a normal and a point on the plane.
+     *
+     * @param {Cartesian3} point The point on the plane.
+     * @param {Cartesian3} normal The plane's normal (normalized).
+     * @param {Plane} [result] The object onto which to store the result.
+     * @returns {Plane} A new plane instance or the modified result parameter.
+     *
+     * @example
+     * var point = Cesium.Cartesian3.fromDegrees(-72.0, 40.0);
+     * var normal = ellipsoid.geodeticSurfaceNormal(point);
+     * var tangentPlane = Cesium.Plane.fromPointNormal(point, normal);
+     */
+    Plane.fromPointNormal = function(point, normal, result) {
+                if (!defined(point)) {
+            throw new DeveloperError('point is required.');
+        }
+        if (!defined(normal)) {
+            throw new DeveloperError('normal is required.');
+        }
+        
+        var distance = -Cartesian3.dot(normal, point);
+
+        if (!defined(result)) {
+            return new Plane(normal, distance);
+        }
+
+        Cartesian3.clone(normal, result.normal);
+        result.distance = distance;
+        return result;
+    };
+
+    var scratchNormal = new Cartesian3();
+    /**
+     * Creates a plane from the general equation
+     *
+     * @param {Cartesian4} coefficients The plane's normal (normalized).
+     * @param {Plane} [result] The object onto which to store the result.
+     * @returns {Plane} A new plane instance or the modified result parameter.
+     */
+    Plane.fromCartesian4 = function(coefficients, result) {
+                if (!defined(coefficients)) {
+            throw new DeveloperError('coefficients is required.');
+        }
+        
+        var normal = Cartesian3.fromCartesian4(coefficients, scratchNormal);
+        var distance = coefficients.w;
+
+        if (!defined(result)) {
+            return new Plane(normal, distance);
+        } else {
+            Cartesian3.clone(normal, result.normal);
+            result.distance = distance;
+            return result;
+        }
+    };
+
+    /**
+     * Computes the signed shortest distance of a point to a plane.
+     * The sign of the distance determines which side of the plane the point
+     * is on.  If the distance is positive, the point is in the half-space
+     * in the direction of the normal; if negative, the point is in the half-space
+     * opposite to the normal; if zero, the plane passes through the point.
+     *
+     * @param {Plane} plane The plane.
+     * @param {Cartesian3} point The point.
+     * @returns {Number} The signed shortest distance of the point to the plane.
+     */
+    Plane.getPointDistance = function(plane, point) {
+                if (!defined(plane)) {
+            throw new DeveloperError('plane is required.');
+        }
+        if (!defined(point)) {
+            throw new DeveloperError('point is required.');
+        }
+        
+        return Cartesian3.dot(plane.normal, point) + plane.distance;
+    };
+
+    /**
+     * A constant initialized to the XY plane passing through the origin, with normal in positive Z.
+     *
+     * @type {Plane}
+     * @constant
+     */
+    Plane.ORIGIN_XY_PLANE = freezeObject(new Plane(Cartesian3.UNIT_Z, 0.0));
+
+    /**
+     * A constant initialized to the YZ plane passing through the origin, with normal in positive X.
+     *
+     * @type {Plane}
+     * @constant
+     */
+    Plane.ORIGIN_YZ_PLANE = freezeObject(new Plane(Cartesian3.UNIT_X, 0.0));
+
+    /**
+     * A constant initialized to the ZX plane passing through the origin, with normal in positive Y.
+     *
+     * @type {Plane}
+     * @constant
+     */
+    Plane.ORIGIN_ZX_PLANE = freezeObject(new Plane(Cartesian3.UNIT_Y, 0.0));
+
+    return Plane;
+});
+
+/*global define*/
 define('Core/Tipsify',[
         './defaultValue',
         './defined',
@@ -17405,7 +17055,6 @@ define('Core/GeometryPipeline',[
         './GeographicProjection',
         './Geometry',
         './GeometryAttribute',
-        './GeometryInstance',
         './GeometryType',
         './IndexDatatype',
         './Intersect',
@@ -17432,7 +17081,6 @@ define('Core/GeometryPipeline',[
         GeographicProjection,
         Geometry,
         GeometryAttribute,
-        GeometryInstance,
         GeometryType,
         IndexDatatype,
         Intersect,
@@ -19836,6 +19484,57 @@ define('Core/GeometryPipeline',[
 });
 
 /*global define*/
+define('Core/oneTimeWarning',[
+        './defaultValue',
+        './defined',
+        './DeveloperError'
+    ], function(
+        defaultValue,
+        defined,
+        DeveloperError) {
+    "use strict";
+
+    var warnings = {};
+
+    /**
+     * Logs a one time message to the console.  Use this function instead of
+     * <code>console.log</code> directly since this does not log duplicate messages
+     * unless it is called from multiple workers.
+     *
+     * @exports oneTimeWarning
+     *
+     * @param {String} identifier The unique identifier for this warning.
+     * @param {String} [message=identifier] The message to log to the console.
+     *
+     * @example
+     * for(var i=0;i<foo.length;++i) {
+     *    if (!defined(foo[i].bar)) {
+     *       // Something that can be recovered from but may happen a lot
+     *       oneTimeWarning('foo.bar undefined', 'foo.bar is undefined. Setting to 0.');
+     *       foo[i].bar = 0;
+     *       // ...
+     *    }
+     * }
+     *
+     * @private
+     */
+    function oneTimeWarning(identifier, message) {
+                if (!defined(identifier)) {
+            throw new DeveloperError('identifier is required.');
+        }
+        
+        if (!defined(warnings[identifier])) {
+            warnings[identifier] = true;
+            console.log(defaultValue(message, identifier));
+        }
+    }
+
+    oneTimeWarning.geometryOutlines = 'Entity geometry outlines are unsupported on terrain. Outlines will be disabled. To enable outlines, disable geometry terrain clamping by explicitly setting height to 0.';
+
+    return oneTimeWarning;
+});
+
+/*global define*/
 define('ThirdParty/earcut-2.1.1',[], function() {
     'use strict';
 
@@ -20481,6 +20180,338 @@ earcut.flatten = function (data) {
 };
 
 return earcut;
+});
+
+/*global define*/
+define('Core/WindingOrder',[
+        '../Renderer/WebGLConstants',
+        './freezeObject'
+    ], function(
+        WebGLConstants,
+        freezeObject) {
+    'use strict';
+
+    /**
+     * Winding order defines the order of vertices for a triangle to be considered front-facing.
+     *
+     * @exports WindingOrder
+     */
+    var WindingOrder = {
+        /**
+         * Vertices are in clockwise order.
+         *
+         * @type {Number}
+         * @constant
+         */
+        CLOCKWISE : WebGLConstants.CW,
+
+        /**
+         * Vertices are in counter-clockwise order.
+         *
+         * @type {Number}
+         * @constant
+         */
+        COUNTER_CLOCKWISE : WebGLConstants.CCW,
+
+        /**
+         * @private
+         */
+        validate : function(windingOrder) {
+            return windingOrder === WindingOrder.CLOCKWISE ||
+                   windingOrder === WindingOrder.COUNTER_CLOCKWISE;
+        }
+    };
+
+    return freezeObject(WindingOrder);
+});
+
+/*global define*/
+define('Core/PolygonPipeline',[
+        '../ThirdParty/earcut-2.1.1',
+        './Cartesian2',
+        './Cartesian3',
+        './ComponentDatatype',
+        './defaultValue',
+        './defined',
+        './DeveloperError',
+        './Ellipsoid',
+        './Geometry',
+        './GeometryAttribute',
+        './Math',
+        './PrimitiveType',
+        './WindingOrder'
+    ], function(
+        earcut,
+        Cartesian2,
+        Cartesian3,
+        ComponentDatatype,
+        defaultValue,
+        defined,
+        DeveloperError,
+        Ellipsoid,
+        Geometry,
+        GeometryAttribute,
+        CesiumMath,
+        PrimitiveType,
+        WindingOrder) {
+    'use strict';
+
+    var scaleToGeodeticHeightN = new Cartesian3();
+    var scaleToGeodeticHeightP = new Cartesian3();
+
+    /**
+     * @private
+     */
+    var PolygonPipeline = {};
+
+    /**
+     * @exception {DeveloperError} At least three positions are required.
+     */
+    PolygonPipeline.computeArea2D = function(positions) {
+                if (!defined(positions)) {
+            throw new DeveloperError('positions is required.');
+        }
+        if (positions.length < 3) {
+            throw new DeveloperError('At least three positions are required.');
+        }
+        
+        var length = positions.length;
+        var area = 0.0;
+
+        for ( var i0 = length - 1, i1 = 0; i1 < length; i0 = i1++) {
+            var v0 = positions[i0];
+            var v1 = positions[i1];
+
+            area += (v0.x * v1.y) - (v1.x * v0.y);
+        }
+
+        return area * 0.5;
+    };
+
+    /**
+     * @returns {WindingOrder} The winding order.
+     *
+     * @exception {DeveloperError} At least three positions are required.
+     */
+    PolygonPipeline.computeWindingOrder2D = function(positions) {
+        var area = PolygonPipeline.computeArea2D(positions);
+        return (area > 0.0) ? WindingOrder.COUNTER_CLOCKWISE : WindingOrder.CLOCKWISE;
+    };
+
+    /**
+     * Triangulate a polygon.
+     *
+     * @param {Cartesian2[]} positions Cartesian2 array containing the vertices of the polygon
+     * @param {Number[]} [holes] An array of the staring indices of the holes.
+     * @returns {Number[]} Index array representing triangles that fill the polygon
+     */
+    PolygonPipeline.triangulate = function(positions, holes) {
+                if (!defined(positions)) {
+            throw new DeveloperError('positions is required.');
+        }
+        
+        var flattenedPositions = Cartesian2.packArray(positions);
+        return earcut(flattenedPositions, holes, 2);
+    };
+
+    var subdivisionV0Scratch = new Cartesian3();
+    var subdivisionV1Scratch = new Cartesian3();
+    var subdivisionV2Scratch = new Cartesian3();
+    var subdivisionS0Scratch = new Cartesian3();
+    var subdivisionS1Scratch = new Cartesian3();
+    var subdivisionS2Scratch = new Cartesian3();
+    var subdivisionMidScratch = new Cartesian3();
+
+    /**
+     * Subdivides positions and raises points to the surface of the ellipsoid.
+     *
+     * @param {Ellipsoid} ellipsoid The ellipsoid the polygon in on.
+     * @param {Cartesian3[]} positions An array of {@link Cartesian3} positions of the polygon.
+     * @param {Number[]} indices An array of indices that determines the triangles in the polygon.
+     * @param {Number} [granularity=CesiumMath.RADIANS_PER_DEGREE] The distance, in radians, between each latitude and longitude. Determines the number of positions in the buffer.
+     *
+     * @exception {DeveloperError} At least three indices are required.
+     * @exception {DeveloperError} The number of indices must be divisable by three.
+     * @exception {DeveloperError} Granularity must be greater than zero.
+     */
+    PolygonPipeline.computeSubdivision = function(ellipsoid, positions, indices, granularity) {
+        granularity = defaultValue(granularity, CesiumMath.RADIANS_PER_DEGREE);
+
+                if (!defined(ellipsoid)) {
+            throw new DeveloperError('ellipsoid is required.');
+        }
+        if (!defined(positions)) {
+            throw new DeveloperError('positions is required.');
+        }
+        if (!defined(indices)) {
+            throw new DeveloperError('indices is required.');
+        }
+        if (indices.length < 3) {
+            throw new DeveloperError('At least three indices are required.');
+        }
+        if (indices.length % 3 !== 0) {
+            throw new DeveloperError('The number of indices must be divisable by three.');
+        }
+        if (granularity <= 0.0) {
+            throw new DeveloperError('granularity must be greater than zero.');
+        }
+        
+        // triangles that need (or might need) to be subdivided.
+        var triangles = indices.slice(0);
+
+        // New positions due to edge splits are appended to the positions list.
+        var i;
+        var length = positions.length;
+        var subdividedPositions = new Array(length * 3);
+        var q = 0;
+        for (i = 0; i < length; i++) {
+            var item = positions[i];
+            subdividedPositions[q++] = item.x;
+            subdividedPositions[q++] = item.y;
+            subdividedPositions[q++] = item.z;
+        }
+
+        var subdividedIndices = [];
+
+        // Used to make sure shared edges are not split more than once.
+        var edges = {};
+
+        var radius = ellipsoid.maximumRadius;
+        var minDistance = CesiumMath.chordLength(granularity, radius);
+        var minDistanceSqrd = minDistance * minDistance;
+
+        while (triangles.length > 0) {
+            var i2 = triangles.pop();
+            var i1 = triangles.pop();
+            var i0 = triangles.pop();
+
+            var v0 = Cartesian3.fromArray(subdividedPositions, i0 * 3, subdivisionV0Scratch);
+            var v1 = Cartesian3.fromArray(subdividedPositions, i1 * 3, subdivisionV1Scratch);
+            var v2 = Cartesian3.fromArray(subdividedPositions, i2 * 3, subdivisionV2Scratch);
+
+            var s0 = Cartesian3.multiplyByScalar(Cartesian3.normalize(v0, subdivisionS0Scratch), radius, subdivisionS0Scratch);
+            var s1 = Cartesian3.multiplyByScalar(Cartesian3.normalize(v1, subdivisionS1Scratch), radius, subdivisionS1Scratch);
+            var s2 = Cartesian3.multiplyByScalar(Cartesian3.normalize(v2, subdivisionS2Scratch), radius, subdivisionS2Scratch);
+
+            var g0 = Cartesian3.magnitudeSquared(Cartesian3.subtract(s0, s1, subdivisionMidScratch));
+            var g1 = Cartesian3.magnitudeSquared(Cartesian3.subtract(s1, s2, subdivisionMidScratch));
+            var g2 = Cartesian3.magnitudeSquared(Cartesian3.subtract(s2, s0, subdivisionMidScratch));
+
+            var max = Math.max(g0, g1, g2);
+            var edge;
+            var mid;
+
+            // if the max length squared of a triangle edge is greater than the chord length of squared
+            // of the granularity, subdivide the triangle
+            if (max > minDistanceSqrd) {
+                if (g0 === max) {
+                    edge = Math.min(i0, i1) + ' ' + Math.max(i0, i1);
+
+                    i = edges[edge];
+                    if (!defined(i)) {
+                        mid = Cartesian3.add(v0, v1, subdivisionMidScratch);
+                        Cartesian3.multiplyByScalar(mid, 0.5, mid);
+                        subdividedPositions.push(mid.x, mid.y, mid.z);
+                        i = subdividedPositions.length / 3 - 1;
+                        edges[edge] = i;
+                    }
+
+                    triangles.push(i0, i, i2);
+                    triangles.push(i, i1, i2);
+                } else if (g1 === max) {
+                    edge = Math.min(i1, i2) + ' ' + Math.max(i1, i2);
+
+                    i = edges[edge];
+                    if (!defined(i)) {
+                        mid = Cartesian3.add(v1, v2, subdivisionMidScratch);
+                        Cartesian3.multiplyByScalar(mid, 0.5, mid);
+                        subdividedPositions.push(mid.x, mid.y, mid.z);
+                        i = subdividedPositions.length / 3 - 1;
+                        edges[edge] = i;
+                    }
+
+                    triangles.push(i1, i, i0);
+                    triangles.push(i, i2, i0);
+                } else if (g2 === max) {
+                    edge = Math.min(i2, i0) + ' ' + Math.max(i2, i0);
+
+                    i = edges[edge];
+                    if (!defined(i)) {
+                        mid = Cartesian3.add(v2, v0, subdivisionMidScratch);
+                        Cartesian3.multiplyByScalar(mid, 0.5, mid);
+                        subdividedPositions.push(mid.x, mid.y, mid.z);
+                        i = subdividedPositions.length / 3 - 1;
+                        edges[edge] = i;
+                    }
+
+                    triangles.push(i2, i, i1);
+                    triangles.push(i, i0, i1);
+                }
+            } else {
+                subdividedIndices.push(i0);
+                subdividedIndices.push(i1);
+                subdividedIndices.push(i2);
+            }
+        }
+
+        return new Geometry({
+            attributes : {
+                position : new GeometryAttribute({
+                    componentDatatype : ComponentDatatype.DOUBLE,
+                    componentsPerAttribute : 3,
+                    values : subdividedPositions
+                })
+            },
+            indices : subdividedIndices,
+            primitiveType : PrimitiveType.TRIANGLES
+        });
+    };
+
+    /**
+     * Scales each position of a geometry's position attribute to a height, in place.
+     *
+     * @param {Number[]} positions The array of numbers representing the positions to be scaled
+     * @param {Number} [height=0.0] The desired height to add to the positions
+     * @param {Ellipsoid} [ellipsoid=Ellipsoid.WGS84] The ellipsoid on which the positions lie.
+     * @param {Boolean} [scaleToSurface=true] <code>true</code> if the positions need to be scaled to the surface before the height is added.
+     * @returns {Number[]} The input array of positions, scaled to height
+     */
+    PolygonPipeline.scaleToGeodeticHeight = function(positions, height, ellipsoid, scaleToSurface) {
+        ellipsoid = defaultValue(ellipsoid, Ellipsoid.WGS84);
+
+        var n = scaleToGeodeticHeightN;
+        var p = scaleToGeodeticHeightP;
+
+        height = defaultValue(height, 0.0);
+        scaleToSurface = defaultValue(scaleToSurface, true);
+
+        if (defined(positions)) {
+            var length = positions.length;
+
+            for ( var i = 0; i < length; i += 3) {
+                Cartesian3.fromArray(positions, i, p);
+
+                if (scaleToSurface) {
+                    p = ellipsoid.scaleToGeodeticSurface(p, p);
+                }
+
+                if (height !== 0) {
+                    n = ellipsoid.geodeticSurfaceNormal(p, n);
+
+                    Cartesian3.multiplyByScalar(n, height, n);
+                    Cartesian3.add(p, n, p);
+                }
+
+                positions[i] = p.x;
+                positions[i + 1] = p.y;
+                positions[i + 2] = p.z;
+            }
+        }
+
+        return positions;
+    };
+
+    return PolygonPipeline;
 });
 
 /*global define*/
@@ -23260,6 +23291,117 @@ define('Core/clone',[
     return clone;
 });
 
+/*global define*/
+define('Core/parseResponseHeaders',[], function() {
+    'use strict';
+
+    /**
+     * Parses the result of XMLHttpRequest's getAllResponseHeaders() method into
+     * a dictionary.
+     *
+     * @exports parseResponseHeaders
+     *
+     * @param {String} headerString The header string returned by getAllResponseHeaders().  The format is
+     *                 described here: http://www.w3.org/TR/XMLHttpRequest/#the-getallresponseheaders()-method
+     * @returns {Object} A dictionary of key/value pairs, where each key is the name of a header and the corresponding value
+     *                   is that header's value.
+     * 
+     * @private
+     */
+    function parseResponseHeaders(headerString) {
+        var headers = {};
+
+        if (!headerString) {
+          return headers;
+        }
+
+        var headerPairs = headerString.split('\u000d\u000a');
+
+        for (var i = 0; i < headerPairs.length; ++i) {
+          var headerPair = headerPairs[i];
+          // Can't use split() here because it does the wrong thing
+          // if the header value has the string ": " in it.
+          var index = headerPair.indexOf('\u003a\u0020');
+          if (index > 0) {
+            var key = headerPair.substring(0, index);
+            var val = headerPair.substring(index + 2);
+            headers[key] = val;
+          }
+        }
+
+        return headers;
+    }
+
+    return parseResponseHeaders;
+});
+
+/*global define*/
+define('Core/RequestErrorEvent',[
+        './defined',
+        './parseResponseHeaders'
+    ], function(
+        defined,
+        parseResponseHeaders) {
+    'use strict';
+
+    /**
+     * An event that is raised when a request encounters an error.
+     *
+     * @constructor
+     * @alias RequestErrorEvent
+     *
+     * @param {Number} [statusCode] The HTTP error status code, such as 404.
+     * @param {Object} [response] The response included along with the error.
+     * @param {String|Object} [responseHeaders] The response headers, represented either as an object literal or as a
+     *                        string in the format returned by XMLHttpRequest's getAllResponseHeaders() function.
+     */
+    function RequestErrorEvent(statusCode, response, responseHeaders) {
+        /**
+         * The HTTP error status code, such as 404.  If the error does not have a particular
+         * HTTP code, this property will be undefined.
+         *
+         * @type {Number}
+         */
+        this.statusCode = statusCode;
+
+        /**
+         * The response included along with the error.  If the error does not include a response,
+         * this property will be undefined.
+         *
+         * @type {Object}
+         */
+        this.response = response;
+
+        /**
+         * The headers included in the response, represented as an object literal of key/value pairs.
+         * If the error does not include any headers, this property will be undefined.
+         *
+         * @type {Object}
+         */
+        this.responseHeaders = responseHeaders;
+
+        if (typeof this.responseHeaders === 'string') {
+            this.responseHeaders = parseResponseHeaders(this.responseHeaders);
+        }
+    }
+
+    /**
+     * Creates a string representing this RequestErrorEvent.
+     * @memberof RequestErrorEvent
+     *
+     * @returns {String} A string representing the provided RequestErrorEvent.
+     */
+    RequestErrorEvent.prototype.toString = function() {
+        var str = 'Request has failed.';
+        if (defined(this.statusCode)) {
+            str += ' Status Code: ' + this.statusCode;
+        }
+        return str;
+    };
+
+    return RequestErrorEvent;
+});
+
 /**
  * @license
  *
@@ -23539,15 +23681,13 @@ return URI;
 
 /*global define*/
 define('Core/TrustedServers',[
-    './defined',
-    './defineProperties',
-    './DeveloperError',
-    '../ThirdParty/Uri'
-], function(
-    defined,
-    defineProperties,
-    DeveloperError,
-    Uri) {
+        '../ThirdParty/Uri',
+        './defined',
+        './DeveloperError'
+    ], function(
+        Uri,
+        defined,
+        DeveloperError) {
     'use strict';
     
     /**
@@ -23689,133 +23829,22 @@ define('Core/TrustedServers',[
 });
 
 /*global define*/
-define('Core/parseResponseHeaders',[], function() {
-    'use strict';
-
-    /**
-     * Parses the result of XMLHttpRequest's getAllResponseHeaders() method into
-     * a dictionary.
-     *
-     * @exports parseResponseHeaders
-     *
-     * @param {String} headerString The header string returned by getAllResponseHeaders().  The format is
-     *                 described here: http://www.w3.org/TR/XMLHttpRequest/#the-getallresponseheaders()-method
-     * @returns {Object} A dictionary of key/value pairs, where each key is the name of a header and the corresponding value
-     *                   is that header's value.
-     * 
-     * @private
-     */
-    function parseResponseHeaders(headerString) {
-        var headers = {};
-
-        if (!headerString) {
-          return headers;
-        }
-
-        var headerPairs = headerString.split('\u000d\u000a');
-
-        for (var i = 0; i < headerPairs.length; ++i) {
-          var headerPair = headerPairs[i];
-          // Can't use split() here because it does the wrong thing
-          // if the header value has the string ": " in it.
-          var index = headerPair.indexOf('\u003a\u0020');
-          if (index > 0) {
-            var key = headerPair.substring(0, index);
-            var val = headerPair.substring(index + 2);
-            headers[key] = val;
-          }
-        }
-
-        return headers;
-    }
-
-    return parseResponseHeaders;
-});
-
-/*global define*/
-define('Core/RequestErrorEvent',[
-        './defined',
-        './parseResponseHeaders'
-    ], function(
-        defined,
-        parseResponseHeaders) {
-    'use strict';
-
-    /**
-     * An event that is raised when a request encounters an error.
-     *
-     * @constructor
-     * @alias RequestErrorEvent
-     *
-     * @param {Number} [statusCode] The HTTP error status code, such as 404.
-     * @param {Object} [response] The response included along with the error.
-     * @param {String|Object} [responseHeaders] The response headers, represented either as an object literal or as a
-     *                        string in the format returned by XMLHttpRequest's getAllResponseHeaders() function.
-     */
-    function RequestErrorEvent(statusCode, response, responseHeaders) {
-        /**
-         * The HTTP error status code, such as 404.  If the error does not have a particular
-         * HTTP code, this property will be undefined.
-         *
-         * @type {Number}
-         */
-        this.statusCode = statusCode;
-
-        /**
-         * The response included along with the error.  If the error does not include a response,
-         * this property will be undefined.
-         *
-         * @type {Object}
-         */
-        this.response = response;
-
-        /**
-         * The headers included in the response, represented as an object literal of key/value pairs.
-         * If the error does not include any headers, this property will be undefined.
-         *
-         * @type {Object}
-         */
-        this.responseHeaders = responseHeaders;
-
-        if (typeof this.responseHeaders === 'string') {
-            this.responseHeaders = parseResponseHeaders(this.responseHeaders);
-        }
-    }
-
-    /**
-     * Creates a string representing this RequestErrorEvent.
-     * @memberof RequestErrorEvent
-     *
-     * @returns {String} A string representing the provided RequestErrorEvent.
-     */
-    RequestErrorEvent.prototype.toString = function() {
-        var str = 'Request has failed.';
-        if (defined(this.statusCode)) {
-            str += ' Status Code: ' + this.statusCode;
-        }
-        return str;
-    };
-
-    return RequestErrorEvent;
-});
-
-/*global define*/
 define('Core/loadWithXhr',[
         '../ThirdParty/when',
-        './TrustedServers',
         './defaultValue',
         './defined',
         './DeveloperError',
         './RequestErrorEvent',
-        './RuntimeError'
+        './RuntimeError',
+        './TrustedServers'
     ], function(
         when,
-        TrustedServers,
         defaultValue,
         defined,
         DeveloperError,
         RequestErrorEvent,
-        RuntimeError) {
+        RuntimeError,
+        TrustedServers) {
     'use strict';
 
     /**
@@ -24489,6 +24518,193 @@ define('Core/EarthOrientationParameters',[
     }
 
     return EarthOrientationParameters;
+});
+
+/*global define*/
+define('Core/HeadingPitchRoll',[
+        './defaultValue',
+        './defined',
+        './DeveloperError',
+        './Math'
+    ], function(
+        defaultValue,
+        defined,
+        DeveloperError,
+        CesiumMath) {
+    "use strict";
+
+    /**
+     * A rotation expressed as a heading, pitch, and roll. Heading is the rotation about the
+     * negative z axis. Pitch is the rotation about the negative y axis. Roll is the rotation about
+     * the positive x axis.
+     * @alias HeadingPitchRoll
+     * @constructor
+     *
+     * @param {Number} [heading=0.0] The heading component in radians.
+     * @param {Number} [pitch=0.0] The pitch component in radians.
+     * @param {Number} [roll=0.0] The roll component in radians.
+     */
+    function HeadingPitchRoll(heading, pitch, roll) {
+        this.heading = defaultValue(heading, 0.0);
+        this.pitch = defaultValue(pitch, 0.0);
+        this.roll = defaultValue(roll, 0.0);
+    }
+
+    /**
+     * Computes the heading, pitch and roll from a quaternion (see http://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles )
+     *
+     * @param {Quaternion} quaternion The quaternion from which to retrieve heading, pitch, and roll, all expressed in radians.
+     * @param {Quaternion} [result] The object in which to store the result. If not provided, a new instance is created and returned.
+     * @returns {HeadingPitchRoll} The modified result parameter or a new HeadingPitchRoll instance if one was not provided.
+     */
+    HeadingPitchRoll.fromQuaternion = function(quaternion, result) {
+                if (!defined(quaternion)) {
+            throw new DeveloperError('quaternion is required');
+        }
+                if (!defined(result)) {
+            result = new HeadingPitchRoll();
+        }
+        var test = 2 * (quaternion.w * quaternion.y - quaternion.z * quaternion.x);
+        var denominatorRoll = 1 - 2 * (quaternion.x * quaternion.x + quaternion.y * quaternion.y);
+        var numeratorRoll = 2 * (quaternion.w * quaternion.x + quaternion.y * quaternion.z);
+        var denominatorHeading = 1 - 2 * (quaternion.y * quaternion.y + quaternion.z * quaternion.z);
+        var numeratorHeading = 2 * (quaternion.w * quaternion.z + quaternion.x * quaternion.y);
+        result.heading = -Math.atan2(numeratorHeading, denominatorHeading);
+        result.roll = Math.atan2(numeratorRoll, denominatorRoll);
+        result.pitch = -Math.asin(test);
+        return result;
+    };
+
+    /**
+     * Returns a new HeadingPitchRoll instance from angles given in degrees.
+     *
+     * @param {Number} heading the heading in degrees
+     * @param {Number} pitch the pitch in degrees
+     * @param {Number} roll the heading in degrees
+     * @param {HeadingPitchRoll} [result] The object in which to store the result. If not provided, a new instance is created and returned.
+     * @returns {HeadingPitchRoll} A new HeadingPitchRoll instance
+     */
+    HeadingPitchRoll.fromDegrees = function(heading, pitch, roll, result) {
+                if (!defined(heading)) {
+            throw new DeveloperError('heading is required');
+        }
+        if (!defined(pitch)) {
+            throw new DeveloperError('pitch is required');
+        }
+        if (!defined(roll)) {
+            throw new DeveloperError('roll is required');
+        }
+                if (!defined(result)) {
+            result = new HeadingPitchRoll();
+        }
+        result.heading = heading * CesiumMath.RADIANS_PER_DEGREE;
+        result.pitch = pitch * CesiumMath.RADIANS_PER_DEGREE;
+        result.roll = roll * CesiumMath.RADIANS_PER_DEGREE;
+        return result;
+    };
+
+    /**
+     * Duplicates a HeadingPitchRoll instance.
+     *
+     * @param {HeadingPitchRoll} headingPitchRoll The HeadingPitchRoll to duplicate.
+     * @param {HeadingPitchRoll} [result] The object onto which to store the result.
+     * @returns {HeadingPitchRoll} The modified result parameter or a new HeadingPitchRoll instance if one was not provided. (Returns undefined if headingPitchRoll is undefined)
+     */
+    HeadingPitchRoll.clone = function(headingPitchRoll, result) {
+        if (!defined(headingPitchRoll)) {
+            return undefined;
+        }
+        if (!defined(result)) {
+            return new HeadingPitchRoll(headingPitchRoll.heading, headingPitchRoll.pitch, headingPitchRoll.roll);
+        }
+        result.heading = headingPitchRoll.heading;
+        result.pitch = headingPitchRoll.pitch;
+        result.roll = headingPitchRoll.roll;
+        return result;
+    };
+
+    /**
+     * Compares the provided HeadingPitchRolls componentwise and returns
+     * <code>true</code> if they are equal, <code>false</code> otherwise.
+     *
+     * @param {HeadingPitchRoll} [left] The first HeadingPitchRoll.
+     * @param {HeadingPitchRoll} [right] The second HeadingPitchRoll.
+     * @returns {Boolean} <code>true</code> if left and right are equal, <code>false</code> otherwise.
+     */
+    HeadingPitchRoll.equals = function(left, right) {
+        return (left === right) ||
+            ((defined(left)) &&
+                (defined(right)) &&
+                (left.heading === right.heading) &&
+                (left.pitch === right.pitch) &&
+                (left.roll === right.roll));
+    };
+
+    /**
+     * Compares the provided HeadingPitchRolls componentwise and returns
+     * <code>true</code> if they pass an absolute or relative tolerance test,
+     * <code>false</code> otherwise.
+     *
+     * @param {HeadingPitchRoll} [left] The first HeadingPitchRoll.
+     * @param {HeadingPitchRoll} [right] The second HeadingPitchRoll.
+     * @param {Number} relativeEpsilon The relative epsilon tolerance to use for equality testing.
+     * @param {Number} [absoluteEpsilon=relativeEpsilon] The absolute epsilon tolerance to use for equality testing.
+     * @returns {Boolean} <code>true</code> if left and right are within the provided epsilon, <code>false</code> otherwise.
+     */
+    HeadingPitchRoll.equalsEpsilon = function(left, right, relativeEpsilon, absoluteEpsilon) {
+        return (left === right) ||
+            (defined(left) &&
+                defined(right) &&
+                CesiumMath.equalsEpsilon(left.heading, right.heading, relativeEpsilon, absoluteEpsilon) &&
+                CesiumMath.equalsEpsilon(left.pitch, right.pitch, relativeEpsilon, absoluteEpsilon) &&
+                CesiumMath.equalsEpsilon(left.roll, right.roll, relativeEpsilon, absoluteEpsilon));
+    };
+
+    /**
+     * Duplicates this HeadingPitchRoll instance.
+     *
+     * @param {HeadingPitchRoll} [result] The object onto which to store the result.
+     * @returns {HeadingPitchRoll} The modified result parameter or a new HeadingPitchRoll instance if one was not provided.
+     */
+    HeadingPitchRoll.prototype.clone = function(result) {
+        return HeadingPitchRoll.clone(this, result);
+    };
+
+    /**
+     * Compares this HeadingPitchRoll against the provided HeadingPitchRoll componentwise and returns
+     * <code>true</code> if they are equal, <code>false</code> otherwise.
+     *
+     * @param {HeadingPitchRoll} [right] The right hand side HeadingPitchRoll.
+     * @returns {Boolean} <code>true</code> if they are equal, <code>false</code> otherwise.
+     */
+    HeadingPitchRoll.prototype.equals = function(right) {
+        return HeadingPitchRoll.equals(this, right);
+    };
+
+    /**
+     * Compares this HeadingPitchRoll against the provided HeadingPitchRoll componentwise and returns
+     * <code>true</code> if they pass an absolute or relative tolerance test,
+     * <code>false</code> otherwise.
+     *
+     * @param {HeadingPitchRoll} [right] The right hand side HeadingPitchRoll.
+     * @param {Number} relativeEpsilon The relative epsilon tolerance to use for equality testing.
+     * @param {Number} [absoluteEpsilon=relativeEpsilon] The absolute epsilon tolerance to use for equality testing.
+     * @returns {Boolean} <code>true</code> if they are within the provided epsilon, <code>false</code> otherwise.
+     */
+    HeadingPitchRoll.prototype.equalsEpsilon = function(right, relativeEpsilon, absoluteEpsilon) {
+        return HeadingPitchRoll.equalsEpsilon(this, right, relativeEpsilon, absoluteEpsilon);
+    };
+
+    /**
+     * Creates a string representing this HeadingPitchRoll in the format '(heading, pitch, roll)' in radians.
+     *
+     * @returns {String} A string representing the provided HeadingPitchRoll in the format '(heading, pitch, roll)'.
+     */
+    HeadingPitchRoll.prototype.toString = function() {
+        return '(' + this.heading + ', ' + this.pitch + ', ' + this.roll + ')';
+    };
+
+    return HeadingPitchRoll;
 });
 
 /*global define*/
@@ -27164,7 +27380,6 @@ define('Core/EllipsoidTangentPlane',[
         './DeveloperError',
         './Ellipsoid',
         './IntersectionTests',
-        './Matrix3',
         './Matrix4',
         './Plane',
         './Ray',
@@ -27180,7 +27395,6 @@ define('Core/EllipsoidTangentPlane',[
         DeveloperError,
         Ellipsoid,
         IntersectionTests,
-        Matrix3,
         Matrix4,
         Plane,
         Ray,
@@ -27486,518 +27700,6 @@ define('Core/EllipsoidTangentPlane',[
     };
 
     return EllipsoidTangentPlane;
-});
-
-/*global define*/
-define('Core/pointInsideTriangle',[
-        './barycentricCoordinates',
-        './Cartesian3'
-    ], function(
-        barycentricCoordinates,
-        Cartesian3) {
-    'use strict';
-
-    var coords = new Cartesian3();
-
-    /**
-     * Determines if a point is inside a triangle.
-     *
-     * @exports pointInsideTriangle
-     *
-     * @param {Cartesian2|Cartesian3} point The point to test.
-     * @param {Cartesian2|Cartesian3} p0 The first point of the triangle.
-     * @param {Cartesian2|Cartesian3} p1 The second point of the triangle.
-     * @param {Cartesian2|Cartesian3} p2 The third point of the triangle.
-     * @returns {Boolean} <code>true</code> if the point is inside the triangle; otherwise, <code>false</code>.
-     *
-     * @example
-     * // Returns true
-     * var p = new Cesium.Cartesian2(0.25, 0.25);
-     * var b = Cesium.pointInsideTriangle(p,
-     *   new Cesium.Cartesian2(0.0, 0.0),
-     *   new Cesium.Cartesian2(1.0, 0.0),
-     *   new Cesium.Cartesian2(0.0, 1.0));
-     */
-    function pointInsideTriangle(point, p0, p1, p2) {
-        barycentricCoordinates(point, p0, p1, p2, coords);
-        return (coords.x > 0.0) && (coords.y > 0.0) && (coords.z > 0);
-    }
-
-    return pointInsideTriangle;
-});
-
-/*global define*/
-define('Core/Queue',[
-        '../Core/defineProperties'
-    ], function(
-        defineProperties) {
-    'use strict';
-
-    /**
-     * A queue that can enqueue items at the end, and dequeue items from the front.
-     *
-     * @alias Queue
-     * @constructor
-     */
-    function Queue() {
-        this._array = [];
-        this._offset = 0;
-        this._length = 0;
-    }
-
-    defineProperties(Queue.prototype, {
-        /**
-         * The length of the queue.
-         *
-         * @memberof Queue.prototype
-         *
-         * @type {Number}
-         * @readonly
-         */
-        length : {
-            get : function() {
-                return this._length;
-            }
-        }
-    });
-
-    /**
-     * Enqueues the specified item.
-     *
-     * @param {Object} item The item to enqueue.
-     */
-    Queue.prototype.enqueue = function(item) {
-        this._array.push(item);
-        this._length++;
-    };
-
-    /**
-     * Dequeues an item.  Returns undefined if the queue is empty.
-     *
-     * @returns {Object} The the dequeued item.
-     */
-    Queue.prototype.dequeue = function() {
-        if (this._length === 0) {
-            return undefined;
-        }
-
-        var array = this._array;
-        var offset = this._offset;
-        var item = array[offset];
-        array[offset] = undefined;
-
-        offset++;
-        if ((offset > 10) && (offset * 2 > array.length)) {
-            //compact array
-            this._array = array.slice(offset);
-            offset = 0;
-        }
-
-        this._offset = offset;
-        this._length--;
-
-        return item;
-    };
-
-    /**
-     * Returns the item at the front of the queue.  Returns undefined if the queue is empty.
-     *
-     * @returns {Object} The item at the front of the queue.
-     */
-    Queue.prototype.peek = function() {
-        if (this._length === 0) {
-            return undefined;
-        }
-
-        return this._array[this._offset];
-    };
-
-    /**
-     * Check whether this queue contains the specified item.
-     *
-     * @param {Object} item The item to search for.
-     */
-    Queue.prototype.contains = function(item) {
-        return this._array.indexOf(item) !== -1;
-    };
-
-    /**
-     * Remove all items from the queue.
-     */
-    Queue.prototype.clear = function() {
-        this._array.length = this._offset = this._length = 0;
-    };
-
-    /**
-     * Sort the items in the queue in-place.
-     *
-     * @param {Queue~Comparator} compareFunction A function that defines the sort order.
-     */
-    Queue.prototype.sort = function(compareFunction) {
-        if (this._offset > 0) {
-            //compact array
-            this._array = this._array.slice(this._offset);
-            this._offset = 0;
-        }
-
-        this._array.sort(compareFunction);
-    };
-
-    /**
-     * A function used to compare two items while sorting a queue.
-     * @callback Queue~Comparator
-     *
-     * @param {Object} a An item in the array.
-     * @param {Object} b An item in the array.
-     * @returns {Number} Returns a negative value if <code>a</code> is less than <code>b</code>,
-     *          a positive value if <code>a</code> is greater than <code>b</code>, or
-     *          0 if <code>a</code> is equal to <code>b</code>.
-     *
-     * @example
-     * function compareNumbers(a, b) {
-     *     return a - b;
-     * }
-     */
-
-    return Queue;
-});
-
-/*global define*/
-define('Core/WindingOrder',[
-        '../Renderer/WebGLConstants',
-        './freezeObject'
-    ], function(
-        WebGLConstants,
-        freezeObject) {
-    'use strict';
-
-    /**
-     * Winding order defines the order of vertices for a triangle to be considered front-facing.
-     *
-     * @exports WindingOrder
-     */
-    var WindingOrder = {
-        /**
-         * Vertices are in clockwise order.
-         *
-         * @type {Number}
-         * @constant
-         */
-        CLOCKWISE : WebGLConstants.CW,
-
-        /**
-         * Vertices are in counter-clockwise order.
-         *
-         * @type {Number}
-         * @constant
-         */
-        COUNTER_CLOCKWISE : WebGLConstants.CCW,
-
-        /**
-         * @private
-         */
-        validate : function(windingOrder) {
-            return windingOrder === WindingOrder.CLOCKWISE ||
-                   windingOrder === WindingOrder.COUNTER_CLOCKWISE;
-        }
-    };
-
-    return freezeObject(WindingOrder);
-});
-
-/*global define*/
-define('Core/PolygonPipeline',[
-        '../ThirdParty/earcut-2.1.1',
-        './Cartesian2',
-        './Cartesian3',
-        './ComponentDatatype',
-        './defaultValue',
-        './defined',
-        './DeveloperError',
-        './Ellipsoid',
-        './EllipsoidTangentPlane',
-        './Geometry',
-        './GeometryAttribute',
-        './Math',
-        './pointInsideTriangle',
-        './PrimitiveType',
-        './Queue',
-        './WindingOrder'
-    ], function(
-        earcut,
-        Cartesian2,
-        Cartesian3,
-        ComponentDatatype,
-        defaultValue,
-        defined,
-        DeveloperError,
-        Ellipsoid,
-        EllipsoidTangentPlane,
-        Geometry,
-        GeometryAttribute,
-        CesiumMath,
-        pointInsideTriangle,
-        PrimitiveType,
-        Queue,
-        WindingOrder) {
-    'use strict';
-
-    var scaleToGeodeticHeightN = new Cartesian3();
-    var scaleToGeodeticHeightP = new Cartesian3();
-
-    /**
-     * @private
-     */
-    var PolygonPipeline = {};
-
-    /**
-     * @exception {DeveloperError} At least three positions are required.
-     */
-    PolygonPipeline.computeArea2D = function(positions) {
-                if (!defined(positions)) {
-            throw new DeveloperError('positions is required.');
-        }
-        if (positions.length < 3) {
-            throw new DeveloperError('At least three positions are required.');
-        }
-        
-        var length = positions.length;
-        var area = 0.0;
-
-        for ( var i0 = length - 1, i1 = 0; i1 < length; i0 = i1++) {
-            var v0 = positions[i0];
-            var v1 = positions[i1];
-
-            area += (v0.x * v1.y) - (v1.x * v0.y);
-        }
-
-        return area * 0.5;
-    };
-
-    /**
-     * @returns {WindingOrder} The winding order.
-     *
-     * @exception {DeveloperError} At least three positions are required.
-     */
-    PolygonPipeline.computeWindingOrder2D = function(positions) {
-        var area = PolygonPipeline.computeArea2D(positions);
-        return (area > 0.0) ? WindingOrder.COUNTER_CLOCKWISE : WindingOrder.CLOCKWISE;
-    };
-
-    /**
-     * Triangulate a polygon.
-     *
-     * @param {Cartesian2[]} positions Cartesian2 array containing the vertices of the polygon
-     * @param {Number[]} [holes] An array of the staring indices of the holes.
-     * @returns {Number[]} Index array representing triangles that fill the polygon
-     */
-    PolygonPipeline.triangulate = function(positions, holes) {
-                if (!defined(positions)) {
-            throw new DeveloperError('positions is required.');
-        }
-        
-        var flattenedPositions = Cartesian2.packArray(positions);
-        return earcut(flattenedPositions, holes, 2);
-    };
-
-    var subdivisionV0Scratch = new Cartesian3();
-    var subdivisionV1Scratch = new Cartesian3();
-    var subdivisionV2Scratch = new Cartesian3();
-    var subdivisionS0Scratch = new Cartesian3();
-    var subdivisionS1Scratch = new Cartesian3();
-    var subdivisionS2Scratch = new Cartesian3();
-    var subdivisionMidScratch = new Cartesian3();
-
-    /**
-     * Subdivides positions and raises points to the surface of the ellipsoid.
-     *
-     * @param {Ellipsoid} ellipsoid The ellipsoid the polygon in on.
-     * @param {Cartesian3[]} positions An array of {@link Cartesian3} positions of the polygon.
-     * @param {Number[]} indices An array of indices that determines the triangles in the polygon.
-     * @param {Number} [granularity=CesiumMath.RADIANS_PER_DEGREE] The distance, in radians, between each latitude and longitude. Determines the number of positions in the buffer.
-     *
-     * @exception {DeveloperError} At least three indices are required.
-     * @exception {DeveloperError} The number of indices must be divisable by three.
-     * @exception {DeveloperError} Granularity must be greater than zero.
-     */
-    PolygonPipeline.computeSubdivision = function(ellipsoid, positions, indices, granularity) {
-        granularity = defaultValue(granularity, CesiumMath.RADIANS_PER_DEGREE);
-
-                if (!defined(ellipsoid)) {
-            throw new DeveloperError('ellipsoid is required.');
-        }
-        if (!defined(positions)) {
-            throw new DeveloperError('positions is required.');
-        }
-        if (!defined(indices)) {
-            throw new DeveloperError('indices is required.');
-        }
-        if (indices.length < 3) {
-            throw new DeveloperError('At least three indices are required.');
-        }
-        if (indices.length % 3 !== 0) {
-            throw new DeveloperError('The number of indices must be divisable by three.');
-        }
-        if (granularity <= 0.0) {
-            throw new DeveloperError('granularity must be greater than zero.');
-        }
-        
-        // triangles that need (or might need) to be subdivided.
-        var triangles = indices.slice(0);
-
-        // New positions due to edge splits are appended to the positions list.
-        var i;
-        var length = positions.length;
-        var subdividedPositions = new Array(length * 3);
-        var q = 0;
-        for (i = 0; i < length; i++) {
-            var item = positions[i];
-            subdividedPositions[q++] = item.x;
-            subdividedPositions[q++] = item.y;
-            subdividedPositions[q++] = item.z;
-        }
-
-        var subdividedIndices = [];
-
-        // Used to make sure shared edges are not split more than once.
-        var edges = {};
-
-        var radius = ellipsoid.maximumRadius;
-        var minDistance = CesiumMath.chordLength(granularity, radius);
-        var minDistanceSqrd = minDistance * minDistance;
-
-        while (triangles.length > 0) {
-            var i2 = triangles.pop();
-            var i1 = triangles.pop();
-            var i0 = triangles.pop();
-
-            var v0 = Cartesian3.fromArray(subdividedPositions, i0 * 3, subdivisionV0Scratch);
-            var v1 = Cartesian3.fromArray(subdividedPositions, i1 * 3, subdivisionV1Scratch);
-            var v2 = Cartesian3.fromArray(subdividedPositions, i2 * 3, subdivisionV2Scratch);
-
-            var s0 = Cartesian3.multiplyByScalar(Cartesian3.normalize(v0, subdivisionS0Scratch), radius, subdivisionS0Scratch);
-            var s1 = Cartesian3.multiplyByScalar(Cartesian3.normalize(v1, subdivisionS1Scratch), radius, subdivisionS1Scratch);
-            var s2 = Cartesian3.multiplyByScalar(Cartesian3.normalize(v2, subdivisionS2Scratch), radius, subdivisionS2Scratch);
-
-            var g0 = Cartesian3.magnitudeSquared(Cartesian3.subtract(s0, s1, subdivisionMidScratch));
-            var g1 = Cartesian3.magnitudeSquared(Cartesian3.subtract(s1, s2, subdivisionMidScratch));
-            var g2 = Cartesian3.magnitudeSquared(Cartesian3.subtract(s2, s0, subdivisionMidScratch));
-
-            var max = Math.max(g0, g1, g2);
-            var edge;
-            var mid;
-
-            // if the max length squared of a triangle edge is greater than the chord length of squared
-            // of the granularity, subdivide the triangle
-            if (max > minDistanceSqrd) {
-                if (g0 === max) {
-                    edge = Math.min(i0, i1) + ' ' + Math.max(i0, i1);
-
-                    i = edges[edge];
-                    if (!defined(i)) {
-                        mid = Cartesian3.add(v0, v1, subdivisionMidScratch);
-                        Cartesian3.multiplyByScalar(mid, 0.5, mid);
-                        subdividedPositions.push(mid.x, mid.y, mid.z);
-                        i = subdividedPositions.length / 3 - 1;
-                        edges[edge] = i;
-                    }
-
-                    triangles.push(i0, i, i2);
-                    triangles.push(i, i1, i2);
-                } else if (g1 === max) {
-                    edge = Math.min(i1, i2) + ' ' + Math.max(i1, i2);
-
-                    i = edges[edge];
-                    if (!defined(i)) {
-                        mid = Cartesian3.add(v1, v2, subdivisionMidScratch);
-                        Cartesian3.multiplyByScalar(mid, 0.5, mid);
-                        subdividedPositions.push(mid.x, mid.y, mid.z);
-                        i = subdividedPositions.length / 3 - 1;
-                        edges[edge] = i;
-                    }
-
-                    triangles.push(i1, i, i0);
-                    triangles.push(i, i2, i0);
-                } else if (g2 === max) {
-                    edge = Math.min(i2, i0) + ' ' + Math.max(i2, i0);
-
-                    i = edges[edge];
-                    if (!defined(i)) {
-                        mid = Cartesian3.add(v2, v0, subdivisionMidScratch);
-                        Cartesian3.multiplyByScalar(mid, 0.5, mid);
-                        subdividedPositions.push(mid.x, mid.y, mid.z);
-                        i = subdividedPositions.length / 3 - 1;
-                        edges[edge] = i;
-                    }
-
-                    triangles.push(i2, i, i1);
-                    triangles.push(i, i0, i1);
-                }
-            } else {
-                subdividedIndices.push(i0);
-                subdividedIndices.push(i1);
-                subdividedIndices.push(i2);
-            }
-        }
-
-        return new Geometry({
-            attributes : {
-                position : new GeometryAttribute({
-                    componentDatatype : ComponentDatatype.DOUBLE,
-                    componentsPerAttribute : 3,
-                    values : subdividedPositions
-                })
-            },
-            indices : subdividedIndices,
-            primitiveType : PrimitiveType.TRIANGLES
-        });
-    };
-
-    /**
-     * Scales each position of a geometry's position attribute to a height, in place.
-     *
-     * @param {Number[]} positions The array of numbers representing the positions to be scaled
-     * @param {Number} [height=0.0] The desired height to add to the positions
-     * @param {Ellipsoid} [ellipsoid=Ellipsoid.WGS84] The ellipsoid on which the positions lie.
-     * @param {Boolean} [scaleToSurface=true] <code>true</code> if the positions need to be scaled to the surface before the height is added.
-     * @returns {Number[]} The input array of positions, scaled to height
-     */
-    PolygonPipeline.scaleToGeodeticHeight = function(positions, height, ellipsoid, scaleToSurface) {
-        ellipsoid = defaultValue(ellipsoid, Ellipsoid.WGS84);
-
-        var n = scaleToGeodeticHeightN;
-        var p = scaleToGeodeticHeightP;
-
-        height = defaultValue(height, 0.0);
-        scaleToSurface = defaultValue(scaleToSurface, true);
-
-        if (defined(positions)) {
-            var length = positions.length;
-
-            for ( var i = 0; i < length; i += 3) {
-                Cartesian3.fromArray(positions, i, p);
-
-                if (scaleToSurface) {
-                    p = ellipsoid.scaleToGeodeticSurface(p, p);
-                }
-
-                if (height !== 0) {
-                    n = ellipsoid.geodeticSurfaceNormal(p, n);
-
-                    Cartesian3.multiplyByScalar(n, height, n);
-                    Cartesian3.add(p, n, p);
-                }
-
-                positions[i] = p.x;
-                positions[i + 1] = p.y;
-                positions[i + 2] = p.z;
-            }
-        }
-
-        return positions;
-    };
-
-    return PolygonPipeline;
 });
 
 /*global define*/
@@ -29484,7 +29186,6 @@ define('Core/PolylineVolumeGeometry',[
         './CornerType',
         './defaultValue',
         './defined',
-        './oneTimeWarning',
         './DeveloperError',
         './Ellipsoid',
         './Geometry',
@@ -29493,6 +29194,7 @@ define('Core/PolylineVolumeGeometry',[
         './GeometryPipeline',
         './IndexDatatype',
         './Math',
+        './oneTimeWarning',
         './PolygonPipeline',
         './PolylineVolumeGeometryLibrary',
         './PrimitiveType',
@@ -29508,7 +29210,6 @@ define('Core/PolylineVolumeGeometry',[
         CornerType,
         defaultValue,
         defined,
-        oneTimeWarning,
         DeveloperError,
         Ellipsoid,
         Geometry,
@@ -29517,6 +29218,7 @@ define('Core/PolylineVolumeGeometry',[
         GeometryPipeline,
         IndexDatatype,
         CesiumMath,
+        oneTimeWarning,
         PolygonPipeline,
         PolylineVolumeGeometryLibrary,
         PrimitiveType,
