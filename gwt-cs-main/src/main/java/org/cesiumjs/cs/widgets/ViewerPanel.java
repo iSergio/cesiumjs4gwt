@@ -40,12 +40,6 @@ public class ViewerPanel extends SimplePanel {
         super();
         Element element = getElement();
         RootPanel.getBodyElement().appendChild(element);
-        if (Cesium.path() != null && !Cesium.path().isEmpty()) {
-            LinkElement linkElement = Document.get().createLinkElement();
-            linkElement.setRel("stylesheet");
-            linkElement.setHref(Cesium.path() + "Cesium/Widgets/widgets.css");
-            element.getOwnerDocument().getElementsByTagName("head").getItem(0).appendChild(linkElement);
-        }
         _viewer = new Viewer(element, options);
 
         super.addAttachHandler(new AttachEvent.Handler() {
