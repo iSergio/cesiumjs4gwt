@@ -17,15 +17,14 @@
 <module>
     <inherits name="com.google.gwt.user.User" />
     <inherits name="com.google.gwt.json.JSON" />
-    <inherits name="com.google.gwt.resources.Resources" />
 
     <entry-point class="org.cesiumjs.cs.CesiumEntryPoint" />
 
-    <define-linker name="cesium" class="org.cesiumjs.linker.CesiumLinker" />
-    <add-linker    name="cesium"/>
+    <!--<define-linker name="cesium" class="org.cesiumjs.linker.CesiumLinker" />-->
+    <!--<add-linker    name="cesium"/>-->
 
-    <define-linker name="scriptInjector" class="org.cesiumjs.linker.CesiumScriptInjector" />
-    <add-linker    name="scriptInjector"/>
+    <define-linker name="cesiumScriptInjector" class="org.cesiumjs.linker.CesiumScriptInjector" />
+    <add-linker    name="cesiumScriptInjector"/>
 
     <set-configuration-property name='xsiframe.failIfScriptTag' value='FALSE'/>
 

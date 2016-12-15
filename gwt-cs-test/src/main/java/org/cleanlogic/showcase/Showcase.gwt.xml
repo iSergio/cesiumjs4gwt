@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE module PUBLIC "-//Google Inc.//DTD GWT 2.7.0//EN"
-        "http://gwtproject.org/doctype/2.7.0/gwt-module.dtd">
 <module rename-to="Showcase">
     <!-- Inherit the core Web Toolkit stuff. -->
     <inherits name="com.google.gwt.inject.Inject"/>
@@ -9,8 +7,10 @@
     <inherits name="com.google.gwt.logging.Logging"/>
     <inherits name='com.google.gwt.user.theme.clean.Clean'/>
 
+    <!--<inherits name="com.smartgwt.SmartGwtNoSmartClient"/>-->
+
     <!-- Other module inherits -->
-    <inherits name="org.cesiumjs.CesiumUnminified"/>
+    <inherits name="org.cesiumjs.Cesium"/>
 
     <!-- Specify the app entry point class. -->
     <entry-point class='org.cleanlogic.showcase.client.Showcase'/>
@@ -18,6 +18,8 @@
     <!-- Specify the paths for translatable code -->
     <source path='client'/>
     <source path='shared'/>
+
+    <set-configuration-property name='xsiframe.failIfScriptTag' value='FALSE'/>
 
     <!-- Logging options -->
     <set-property name="gwt.logging.logLevel" value="INFO"/>

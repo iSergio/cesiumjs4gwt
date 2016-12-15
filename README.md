@@ -10,6 +10,11 @@ What was done:
 - [x] [Examples showcase](http://sergeserver.noip.me/gwt-cs-test/).
 - [x] Integration with [gwt-olcs](https://github.com/iSergio/gwt-olcs)
 
+### Issue
+- [x] GXT work fine
+- [x] GWT work fine
+- [ ] SmartGWT: ISC_DataBinding.js script destruct some functional of Cesium.js like as CesiumTerrain (what i find)
+
 ### Getting started
 You not need include JavaScript of Cesium into main html file, injection realised in GWT code.
 Now no need callback for ScriptInjection or AttachOrDetach, all worked "out from box".

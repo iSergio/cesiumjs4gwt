@@ -35,9 +35,9 @@ import java.util.Set;
 @Shardable
 @LinkerOrder(LinkerOrder.Order.POST)
 public class CesiumScriptInjector extends AbstractLinker {
-    private static String SCRIPT_LOADER = "loadScripts.js";
-    private static String LOADED_SCRIPTS = "__gwt_scriptsLoaded";
-    private static String PAGE_RELATIVE_MODULE_PATH = "scriptInjector.pageRelativeModulePath";
+    private static String SCRIPT_LOADER = "loadCesiumScripts.js";
+    private static String LOADED_SCRIPTS = "__gwt_cesiumScriptsLoaded";
+    private static String PAGE_RELATIVE_MODULE_PATH = "cesiumScriptInjector.pageRelativeModulePath";
 
     private boolean forceScriptLoad(TreeLogger logger, String moduleName, Float gwtVersion) {
         try {
@@ -111,7 +111,7 @@ public class CesiumScriptInjector extends AbstractLinker {
 
     @Override
     public String getDescription() {
-        return "ScriptInjector";
+        return "CesiumScriptInjector";
     }
 
     protected SyntheticArtifact emitString(TreeLogger logger, String what, String partialPath, LinkerContext context) throws UnableToCompleteException {
