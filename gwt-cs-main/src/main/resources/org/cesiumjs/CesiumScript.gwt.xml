@@ -14,8 +14,8 @@
   ~ limitations under the License.
   -->
 <module>
-    <script src="js/Cesium/Cesium.js" />
-    <script src="js/GeoserverTerrainProvider.js" />
+    <script src="cs/Cesium/Cesium.js" />
+    <script src="cs/GeoserverTerrainProvider.js" />
 
-    <stylesheet src="js/Cesium/Widgets/widgets.css"/>
+    <stylesheet src="cs/Cesium/Widgets/widgets.css"/>
 </module>

@@ -78,6 +78,9 @@ public class CesiumScriptInjector extends AbstractLinker {
         String result = "if (!window." + LOADED_SCRIPTS + ") window." + LOADED_SCRIPTS + " = {};\n";
         for (ScriptReference script : scriptsToLoad) {
             String src = script.getSrc();
+            if (!src.startsWith("cs/")) {
+                continue;
+            }
             result += "if (!" + LOADED_SCRIPTS + "['" + src + "']) {\n  " +
                     LOADED_SCRIPTS + "['" + src + "'] = true;\n  " +
                     "document.write('<script src=\"" + pageRelativeModulePath + "/" + src + "\">" +
