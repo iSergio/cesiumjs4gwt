@@ -29,6 +29,7 @@ public class HelloWorld extends AbstractExample {
 
     @Override
     public void buildPanel() {
+        // Create Cesium Viewer
         ViewerPanel csVPanel = new ViewerPanel();
 
         contentPanel.add(new HTML("<p>Use Viewer to start building new applications or easily embed Cesium into existing applications.</p>"));
