@@ -13,7 +13,7 @@ What was done:
 ### Issue
 - [x] GXT work fine
 - [x] GWT work fine
-- [ ] SmartGWT: ISC_DataBinding.js script destruct some functional of Cesium.js like as CesiumTerrain (what i find)
+- [x] SmartGWT: ISC_DataBinding.js script destruct some functional of Cesium.js like as CesiumTerrain (what i find) (Fixed)
 
 ### Getting started
 You not need include JavaScript of Cesium into main html file, injection realised in GWT code.

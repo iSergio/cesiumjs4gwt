@@ -45,6 +45,16 @@ public class Cesium {
         console.log(object);
     }-*/;
 
+    /**
+     * Fix for SmartGWT
+     * Thanks for Mark Erikson (https://groups.google.com/forum/#!msg/cesium-dev/ZfyW0CNRsSU/lP6KTaUpEQAJ)
+     */
+    public static native void fixSmartGWT() /*-{
+        if ($wnd.builtInDataView !== undefined) {
+            $wnd.DataView = $wnd.builtInDataView;
+        }
+    }-*/;
+
     @JsMethod(namespace = "Cesium")
     public static native boolean defined(Object object);
 

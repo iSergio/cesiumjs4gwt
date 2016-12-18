@@ -16,6 +16,7 @@
 
 package org.cesiumjs.linker;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.ext.LinkerContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
@@ -29,7 +30,7 @@ import java.util.Set;
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
-@LinkerOrder(LinkerOrder.Order.POST)
+@LinkerOrder(LinkerOrder.Order.PRE)
 public class CesiumLinker extends AbstractLinker {
     @Override
     public String getDescription() {
@@ -47,10 +48,12 @@ public class CesiumLinker extends AbstractLinker {
             // It need for inject css files for example - Viewer
             if (partialPath.endsWith("/Cesium.js")) {
                 String contents = CesiumLinkerUtils.getContents(emittedArtifact, logger);
-                    StringBuffer sb = new StringBuffer(contents);
-                    sb.insert(0, "window.CesiumPath = '" + context.getModuleName() + "/js/';\n");
-                    toReturn.remove(emittedArtifact);
-                    toReturn.add(emitString(logger, sb.toString(), partialPath));
+                StringBuffer sb = new StringBuffer(contents);
+                sb.insert(0, "window.CesiumPath = '" + context.getModuleName() + "/js/';\n");
+                // Fix for SmartGWT. Thanks for Mark Erikson (https://groups.google.com/forum/#!msg/cesium-dev/ZfyW0CNRsSU/lP6KTaUpEQAJ)
+                sb.insert(0, "window.builtInDataView = window.DataView;\n");
+                toReturn.remove(emittedArtifact);
+                toReturn.add(emitString(logger, sb.toString(), partialPath));
             }
         }
         return toReturn;

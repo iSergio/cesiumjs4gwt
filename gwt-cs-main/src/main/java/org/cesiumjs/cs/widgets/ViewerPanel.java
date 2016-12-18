@@ -40,8 +40,8 @@ public class ViewerPanel extends SimplePanel {
         super();
         Element element = getElement();
         RootPanel.getBodyElement().appendChild(element);
+        Cesium.fixSmartGWT();
         _viewer = new Viewer(element, options);
-
         super.addAttachHandler(new AttachEvent.Handler() {
             @Override
             public void onAttachOrDetach(AttachEvent attachEvent) {

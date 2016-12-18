@@ -20,8 +20,8 @@
 
     <entry-point class="org.cesiumjs.cs.CesiumEntryPoint" />
 
-    <!--<define-linker name="cesium" class="org.cesiumjs.linker.CesiumLinker" />-->
-    <!--<add-linker    name="cesium"/>-->
+    <define-linker name="cesium" class="org.cesiumjs.linker.CesiumLinker" />
+    <add-linker    name="cesium"/>
 
     <define-linker name="cesiumScriptInjector" class="org.cesiumjs.linker.CesiumScriptInjector" />
     <add-linker    name="cesiumScriptInjector"/>

@@ -20,6 +20,7 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.logical.shared.AttachEvent;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
+import org.cesiumjs.cs.Cesium;
 import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.widgets.options.CesiumWidgetOptions;
 
@@ -37,6 +38,7 @@ public class CesiumWidgetPanel extends SimplePanel {
         super();
         Element element = getElement();
         RootPanel.getBodyElement().appendChild(element);
+        Cesium.fixSmartGWT();
         _cesiumWidget = new CesiumWidget(element, options);
         super.addAttachHandler(new AttachEvent.Handler() {
             @Override
