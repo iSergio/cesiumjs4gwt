@@ -33,7 +33,7 @@ import java.util.Set;
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @Shardable
-@LinkerOrder(LinkerOrder.Order.PRE)
+@LinkerOrder(LinkerOrder.Order.POST)
 public class CesiumScriptInjector extends AbstractLinker {
     private static String SCRIPT_LOADER = "loadCesiumScripts.js";
     private static String LOADED_SCRIPTS = "__gwt_cesiumScriptsLoaded";

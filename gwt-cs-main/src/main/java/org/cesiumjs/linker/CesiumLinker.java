@@ -50,8 +50,6 @@ public class CesiumLinker extends AbstractLinker {
                 String contents = CesiumLinkerUtils.getContents(emittedArtifact, logger);
                 StringBuffer sb = new StringBuffer(contents);
                 sb.insert(0, "window.CesiumPath = '" + context.getModuleName() + "/js/';\n");
-                // Fix for SmartGWT. Thanks for Mark Erikson (https://groups.google.com/forum/#!msg/cesium-dev/ZfyW0CNRsSU/lP6KTaUpEQAJ)
-                sb.insert(0, "window.builtInDataView = window.DataView;\n");
                 toReturn.remove(emittedArtifact);
                 toReturn.add(emitString(logger, sb.toString(), partialPath));
             }
