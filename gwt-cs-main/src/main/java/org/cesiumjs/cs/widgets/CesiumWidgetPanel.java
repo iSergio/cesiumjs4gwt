@@ -38,7 +38,6 @@ public class CesiumWidgetPanel extends SimplePanel {
         super();
         Element element = getElement();
         RootPanel.getBodyElement().appendChild(element);
-        Cesium.fixSmartGWT();
         _cesiumWidget = new CesiumWidget(element, options);
         super.addAttachHandler(new AttachEvent.Handler() {
             @Override

@@ -25,6 +25,7 @@ import com.google.gwt.core.client.GWT;
 public class CesiumEntryPoint implements EntryPoint {
     @Override
     public void onModuleLoad() {
+        Cesium.fixSmartGWT();
         if (!Cesium.isInitialized()) {
             String message = "The Core of Cesium (Cesium.js) JavaScript libraryes not loaded.\n" +
                     "If you inherit Cesium from NoScript gwt.xml, \nyou need include <script src='..../Cesium.js'> " +
