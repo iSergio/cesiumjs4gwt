@@ -29,27 +29,27 @@ public class CameraEventType {
      * A left mouse button press followed by moving the mouse and releasing the button.
      */
     @JsProperty(name = "LEFT_DRAG")
-    public static native Integer LEFT_DRAG();
+    public static native Number LEFT_DRAG();
     /**
      * A middle mouse button press followed by moving the mouse and releasing the button.
      */
     @JsProperty(name = "MIDDLE_DRAG")
-    public static native Integer MIDDLE_DRAG();
+    public static native Number MIDDLE_DRAG();
     /**
      * A two-finger touch on a touch surface.
      */
     @JsProperty(name = "PINCH")
-    public static native Integer PINCH();
+    public static native Number PINCH();
     /**
      * A right mouse button press followed by moving the mouse and releasing the button.
      */
     @JsProperty(name = "RIGHT_DRAG")
-    public static native Integer RIGHT_DRAG();
+    public static native Number RIGHT_DRAG();
     /**
      * Scrolling the middle mouse button.
      */
     @JsProperty(name = "WHEEL")
-    public static native Integer WHEEL();
+    public static native Number WHEEL();
 
     /**
      * Enumerates the available input for interacting with the camera.

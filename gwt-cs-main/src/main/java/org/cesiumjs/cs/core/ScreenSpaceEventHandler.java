@@ -89,7 +89,7 @@ public class ScreenSpaceEventHandler {
      * @param type The {@link ScreenSpaceEventType} of input event.
      * @see #setInputAction
      */
-    public native void removeInputAction(Integer type);
+    public native void removeInputAction(Number type);
 
     /**
      * Removes the function to be executed on an input event.
@@ -98,7 +98,7 @@ public class ScreenSpaceEventHandler {
      * @see  #getInputAction
      * @see #setInputAction
      */
-    public native void removeInputAction(Integer type, Integer modifier);
+    public native void removeInputAction(Number type, Number modifier);
 
     /**
      * Set a function to be executed on an input event.
@@ -107,7 +107,7 @@ public class ScreenSpaceEventHandler {
      * @see #getInputAction
      * @see #removeInputAction
      */
-    public native void setInputAction(Listener action, Integer type);
+    public native void setInputAction(Listener action, Number type);
 
     /**
      * Set a function to be executed on an input event.
@@ -117,7 +117,7 @@ public class ScreenSpaceEventHandler {
      * @see #getInputAction
      * @see #removeInputAction
      */
-    public native void setInputAction(Listener action, Integer type, Integer modifier);
+    public native void setInputAction(Listener action, Number type, Number modifier);
 
     @JsFunction
     public interface Listener<T> {

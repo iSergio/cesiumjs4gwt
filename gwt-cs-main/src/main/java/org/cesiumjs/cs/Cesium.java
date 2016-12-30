@@ -50,8 +50,10 @@ public class Cesium {
      * Thanks for Mark Erikson (https://groups.google.com/forum/#!msg/cesium-dev/ZfyW0CNRsSU/lP6KTaUpEQAJ)
      */
     public static native void fixSmartGWT() /*-{
-        if ($wnd.builtInDataView !== undefined) {
-            $wnd.DataView = $wnd.builtInDataView;
+        if ($wnd.buildInDataView !== undefined) {
+            $wnd.DataView = $wnd.buildInDataView;
+        } else {
+            console.log("$wnd.buildInDataView === undefined");
         }
     }-*/;
 

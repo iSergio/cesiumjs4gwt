@@ -29,17 +29,17 @@ public class Intersect {
      * Represents that an object is fully within the frustum.
      */
     @JsProperty(name = "INSIDE")
-    public static native Integer INSIDE();
+    public static native Number INSIDE();
     /**
      * Represents that an object intersects one of the frustum's planes.
      */
     @JsProperty(name = "INTERSECTING")
-    public static native Integer INTERSECTING();
+    public static native Number INTERSECTING();
     /**
      * Represents that an object is not contained within the frustum.
      */
     @JsProperty(name = "OUTSIDE")
-    public static native Integer OUTSIDE();
+    public static native Number OUTSIDE();
 
     /**
      * This enumerated type is used in determining where, relative to the frustum, an object is located.

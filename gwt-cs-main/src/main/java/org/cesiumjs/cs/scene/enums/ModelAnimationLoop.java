@@ -29,17 +29,17 @@ public class ModelAnimationLoop {
      * Loop the animation. First, playing it forward, then in reverse, then forward, and so on.
      */
     @JsProperty(name = "MIRRORED_REPEAT")
-    public static native Integer MIRRORED_REPEAT();
+    public static native Number MIRRORED_REPEAT();
     /**
      * Play the animation once; do not loop it.
      */
     @JsProperty(name = "NONE")
-    public static native Integer NONE();
+    public static native Number NONE();
     /**
      * Loop the animation playing it from the start immediately after it stops.
      */
     @JsProperty(name = "REPEAT")
-    public static native Integer REPEAT();
+    public static native Number REPEAT();
 
     @JsConstructor
     private ModelAnimationLoop() {}

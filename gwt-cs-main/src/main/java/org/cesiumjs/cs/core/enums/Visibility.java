@@ -30,17 +30,17 @@ public class Visibility {
      * Represents that an object is visible in its entirety.
      */
     @JsProperty(name = "FULL")
-    public static native Integer FULL();
+    public static native Number FULL();
     /**
      * Represents that no part of an object is visible.
      */
     @JsProperty(name = "NONE")
-    public static native Integer NONE();
+    public static native Number NONE();
     /**
      * Represents that part, but not all, of an object is visible
      */
     @JsProperty(name = "PARTIAL")
-    public static native Integer PARTIAL();
+    public static native Number PARTIAL();
 
 
     /**

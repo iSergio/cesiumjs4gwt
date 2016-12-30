@@ -182,7 +182,7 @@ public class ViewerOptions {
      * 	SceneMode	SceneMode.SCENE3D	optional The initial scene mode.
      * 	Default: {@link SceneMode#SCENE3D()}
      */
-    public Integer sceneMode;
+    public Number sceneMode;
     /**
      * The map projection to use in 2D and Columbus View modes.
      * Default: new GeographicProjection()
@@ -221,7 +221,7 @@ public class ViewerOptions {
      * Determines if the terrain casts or receives shadows from the sun.
      * Default: {@link ShadowMode#RECEIVE_ONLY()}
      */
-    public Integer terrainShadows;
+    public Number terrainShadows;
     /**
      * Determines if the 2D map is rotatable or can be scrolled infinitely in the horizontal direction.
      * Default: {@link MapMode2D#INFINITE_SCROLL()}

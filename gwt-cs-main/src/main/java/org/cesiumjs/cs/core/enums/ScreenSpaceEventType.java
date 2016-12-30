@@ -29,87 +29,87 @@ public class ScreenSpaceEventType {
      * Represents a mouse left click event.
      */
     @JsProperty(name = "LEFT_CLICK")
-    public static native Integer LEFT_CLICK();
+    public static native Number LEFT_CLICK();
     /**
      * Represents a mouse left double click event.
      */
     @JsProperty(name = "LEFT_DOUBLE_CLICK")
-    public static native Integer LEFT_DOUBLE_CLICK();
+    public static native Number LEFT_DOUBLE_CLICK();
     /**
      * Represents a mouse left button down event.
      */
     @JsProperty(name = "LEFT_DOWN")
-    public static native Integer LEFT_DOWN();
+    public static native Number LEFT_DOWN();
     /**
      * Represents a mouse left button up event.
      */
     @JsProperty(name = "LEFT_UP")
-    public static native Integer LEFT_UP();
+    public static native Number LEFT_UP();
     /**
      * Represents a mouse middle click event.
      */
     @JsProperty(name = "MIDDLE_CLICK")
-    public static native Integer MIDDLE_CLICK();
+    public static native Number MIDDLE_CLICK();
     /**
      * Represents a mouse middle double click event.
      */
     @JsProperty(name = "MIDDLE_DOUBLE_CLICK")
-    public static native Integer MIDDLE_DOUBLE_CLICK();
+    public static native Number MIDDLE_DOUBLE_CLICK();
     /**
      * Represents a mouse middle button down event.
      */
     @JsProperty(name = "MIDDLE_DOWN")
-    public static native Integer MIDDLE_DOWN();
+    public static native Number MIDDLE_DOWN();
     /**
      * Represents a mouse middle button up event.
      */
     @JsProperty(name = "MIDDLE_UP")
-    public static native Integer MIDDLE_UP();
+    public static native Number MIDDLE_UP();
     /**
      * Represents a mouse move event.
      */
     @JsProperty(name = "MOUSE_MOVE")
-    public static native Integer MOUSE_MOVE();
+    public static native Number MOUSE_MOVE();
     /**
      * Represents the end of a two-finger event on a touch surface.
      */
     @JsProperty(name = "PINCH_END")
-    public static native Integer PINCH_END();
+    public static native Number PINCH_END();
     /**
      * Represents a change of a two-finger event on a touch surface.
      */
     @JsProperty(name = "PINCH_MOVE")
-    public static native Integer PINCH_MOVE();
+    public static native Number PINCH_MOVE();
     /**
      * Represents the start of a two-finger event on a touch surface.
      */
     @JsProperty(name = "PINCH_START")
-    public static native Integer PINCH_START();
+    public static native Number PINCH_START();
     /**
      * Represents a mouse right click event.
      */
     @JsProperty(name = "RIGHT_CLICK")
-    public static native Integer RIGHT_CLICK();
+    public static native Number RIGHT_CLICK();
     /**
      * Represents a mouse right double click event.
      */
     @JsProperty(name = "RIGHT_DOUBLE_CLICK")
-    public static native Integer RIGHT_DOUBLE_CLICK();
+    public static native Number RIGHT_DOUBLE_CLICK();
     /**
      * Represents a mouse left button down event.
      */
     @JsProperty(name = "RIGHT_DOWN")
-    public static native Integer RIGHT_DOWN();
+    public static native Number RIGHT_DOWN();
     /**
      * Represents a mouse right button up event.
      */
     @JsProperty(name = "RIGHT_UP")
-    public static native Integer RIGHT_UP();
+    public static native Number RIGHT_UP();
     /**
      * Represents a mouse wheel event.
      */
     @JsProperty(name = "WHEEL")
-    public static native Integer WHEEL();
+    public static native Number WHEEL();
 
     /**
      * This enumerated type is for classifying mouse events: down, up, click, double click, move and move while a button is held down.

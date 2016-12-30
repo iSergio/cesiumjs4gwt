@@ -208,7 +208,7 @@ public class Scene {
      * Default: {@link SceneMode#SCENE3D()}
      */
     @JsProperty
-    public Integer mode;
+    public Number mode;
     /**
      * The Moon
      * Default:  undefined

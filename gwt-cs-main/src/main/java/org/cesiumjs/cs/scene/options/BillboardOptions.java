@@ -166,7 +166,7 @@ public class BillboardOptions {
      * or at the center of its position.
      */
     @JsProperty
-    public Integer verticalOrigin;
+    public Number verticalOrigin;
     /**
      * Gets or sets a width for the billboard. If undefined, the image width will be used.
      */

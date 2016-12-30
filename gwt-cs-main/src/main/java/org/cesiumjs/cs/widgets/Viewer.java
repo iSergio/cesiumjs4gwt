@@ -213,7 +213,7 @@ public class Viewer {
      * Determines if the terrain casts or shadows from the sun.
      */
     @JsProperty
-    public Integer terrainShadows;
+    public Number terrainShadows;
     /**
      * Gets the Timeline widget.
      */

@@ -92,7 +92,7 @@ public class Globe {
      * Default:  ShadowMode.RECEIVE_ONLY
      */
     @JsProperty
-    public Integer shadows;
+    public Number shadows;
     /**
      * Determines if the globe will be shown.
      * Default:  true

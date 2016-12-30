@@ -34,7 +34,7 @@ public class TimeStandard {
      * @return UTC standard
      */
     @JsProperty(name = "UTC")
-    public static native Integer UTC();
+    public static native Number UTC();
 
     /**
      * Represents the International Atomic Time (TAI) time standard. TAI is the principal time standard to which the
@@ -42,7 +42,7 @@ public class TimeStandard {
      * @return TAI standard
      */
     @JsProperty(name = "TAI")
-    public static native Integer TAI();
+    public static native Number TAI();
 
     @JsConstructor
     private TimeStandard() {}

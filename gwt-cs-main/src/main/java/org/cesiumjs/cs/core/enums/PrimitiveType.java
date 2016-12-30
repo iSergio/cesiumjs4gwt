@@ -28,39 +28,39 @@ public class PrimitiveType {
      * and the last vertex implicitly connects to the first.
      */
     @JsProperty(name = "LINE_LOOP")
-    public static native Integer LINE_LOOP();
+    public static native Number LINE_LOOP();
     /**
      * Line strip primitive where each vertex (or index) after the first connects a line to the previous vertex.
      */
     @JsProperty(name = "LINE_STRIP")
-    public static native Integer LINE_STRIP();
+    public static native Number LINE_STRIP();
     /**
      * Lines primitive where each two vertices (or indices) is a line segment. Line segments are not necessarily connected.
      */
     @JsProperty(name = "LINES")
-    public static native Integer LINES();
+    public static native Number LINES();
     /**
      * Points primitive where each vertex (or index) is a separate point.
      */
     @JsProperty(name = "POINTS")
-    public static native Integer POINTS();
+    public static native Number POINTS();
     /**
      * Triangle fan primitive where each vertex (or index) after the first two connect to the previous vertex and the
      * first vertex forming a triangle. For example, this can be used to model a cone or circle.
      */
     @JsProperty(name = "TRIANGLE_FAN")
-    public static native Integer TRIANGLE_FAN();
+    public static native Number TRIANGLE_FAN();
     /**
      * Triangle strip primitive where each vertex (or index) after the first two connect to the previous two
      * vertices forming a triangle. For example, this can be used to model a wall.
      */
     @JsProperty(name = "TRIANGLE_STRIP")
-    public static native Integer TRIANGLE_STRIP();
+    public static native Number TRIANGLE_STRIP();
     /**
      * Triangles primitive where each three vertices (or indices) is a triangle. Triangles do not necessarily share edges.
      */
     @JsProperty(name = "TRIANGLES")
-    public static native Integer TRIANGLES();
+    public static native Number TRIANGLES();
 
     /**
      * The type of a geometric primitive, i.e., points, lines, and triangles.

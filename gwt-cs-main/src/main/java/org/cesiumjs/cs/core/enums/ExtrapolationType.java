@@ -31,17 +31,17 @@ public class ExtrapolationType {
      * The value is extrapolated.
      */
     @JsProperty(name = "EXTRAPOLATE")
-    public static native Integer EXTRAPOLATE();
+    public static native Number EXTRAPOLATE();
     /**
      * The first or last value is used when outside the range of sample data.
      */
     @JsProperty(name = "HOLD")
-    public static native Integer HOLD();
+    public static native Number HOLD();
     /**
      * No extrapolation occurs.
      */
     @JsProperty(name = "NONE")
-    public static native Integer NONE();
+    public static native Number NONE();
 
     @JsConstructor
     private ExtrapolationType() {}

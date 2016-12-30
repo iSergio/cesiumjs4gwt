@@ -42,7 +42,7 @@ public class Clock {
      * Default: {@link ClockRange#UNBOUNDED()}
      */
     @JsProperty
-    public Integer clockRange;
+    public Number clockRange;
     /**
      * Determines if calls to {@link Clock#tick()} are frame dependent or system clock dependent.
      * Changing this property to {@link ClockStep#SYSTEM_CLOCK()} LOCK will set {@link Clock#multiplier} to 1.0,
@@ -50,7 +50,7 @@ public class Clock {
      * Default: {@link ClockStep#SYSTEM_CLOCK_MULTIPLIER()}
      */
     @JsProperty
-    public Integer clockStep;
+    public Number clockStep;
     /**
      * The current time. Changing this property will change {@link Clock#clockStep} from {@link ClockStep#SYSTEM_CLOCK()} to {@link ClockStep#SYSTEM_CLOCK_MULTIPLIER()}.
      */
