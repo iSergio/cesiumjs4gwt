@@ -255,7 +255,7 @@ public class Shadows extends AbstractExample {
         entitiShadowsCBox.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
             @Override
             public void onValueChange(ValueChangeEvent<Boolean> valueChangeEvent) {
-                Integer entityShadows = valueChangeEvent.getValue() ? ShadowMode.ENABLED() : ShadowMode.DISABLED();
+                Number entityShadows = valueChangeEvent.getValue() ? ShadowMode.ENABLED() : ShadowMode.DISABLED();
                 for (int i = 0; i < csVPanel.getViewer().entities().values().length; i++) {
                     Entity entity = csVPanel.getViewer().entities().values()[i];
                     if (entity.model != null) {
