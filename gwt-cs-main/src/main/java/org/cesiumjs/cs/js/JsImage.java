@@ -16,10 +16,7 @@
 
 package org.cesiumjs.cs.js;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import jsinterop.annotations.*;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -32,10 +29,17 @@ public class JsImage {
     public int height;
     @JsProperty
     public String src;
+    @JsProperty
+    public Listener onload;
 
     @JsConstructor
     public JsImage() {}
 
     @JsConstructor
     public JsImage(int width, int height) {}
+
+    @JsFunction
+    public interface Listener {
+        void function(Object ...o);
+    }
 }

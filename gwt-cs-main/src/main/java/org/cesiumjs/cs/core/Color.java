@@ -16,10 +16,7 @@
 
 package org.cesiumjs.cs.core;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.options.ColorRandomOptions;
 
 /**
