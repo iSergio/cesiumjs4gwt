@@ -20,7 +20,10 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.datasources.properties.Property;
+import org.cesiumjs.cs.scene.enums.ColorBlendMode;
+import org.cesiumjs.cs.scene.enums.HeightReference;
 import org.cesiumjs.cs.scene.enums.ShadowMode;
 
 /**
@@ -81,7 +84,7 @@ public class ModelGraphicsOptions {
     public Property shadows;
     /**
      * A Property specifying what the height is relative to.
-     * Default: {@link HeightReference.NONE}
+     * Default: {@link HeightReference#NONE()}
      */
     @JsProperty
     public Property heightReference;
@@ -90,6 +93,38 @@ public class ModelGraphicsOptions {
      */
     @JsProperty
     public Property distanceDisplayCondition;
+    /**
+     * A Property specifying the Color of the silhouette.
+     * Default: {@link Color#RED()}
+     */
+    @JsProperty
+    public Property silhouetteColor;
+    /**
+     * A numeric Property specifying the size of the silhouette in pixels.
+     * Default: 0.0
+     */
+    @JsProperty
+    public Property silhouetteSize;
+    /**
+     * A Property specifying the Color that blends with the model's rendered color.
+     * Default: Color.WHITE
+     */
+    @JsProperty
+    public Property color;
+    /**
+     * An enum Property specifying how the color blends with the model.
+     * Default: {@link ColorBlendMode#HIGHLIGHT()}
+     */
+    @JsProperty
+    public Property colorBlendMode;
+    /**
+     * A numeric Property specifying the color strength when the colorBlendMode is MIX.
+     * A value of 0.0 results in the model's rendered color while a value of 1.0 results in a solid color,
+     * with any value in-between resulting in a mix of the two.
+     * Default: 0.5
+     */
+    @JsProperty
+    public Property colorBlendAmount;
 
     @JsConstructor
     public ModelGraphicsOptions() {}
