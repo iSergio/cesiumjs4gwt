@@ -45,6 +45,7 @@ public class InjectorModule extends AbstractGinModule {
         bind(HelloWorld.class).asEagerSingleton();
         bind(Billboards.class).asEagerSingleton();
         bind(Models3D.class).asEagerSingleton();
+        bind(Models3DColoring.class).asEagerSingleton();
         bind(AtmosphereColor.class).asEagerSingleton();
         bind(Terrain.class).asEagerSingleton();
         bind(Picking.class).asEagerSingleton();
@@ -64,5 +65,6 @@ public class InjectorModule extends AbstractGinModule {
         bind(ImageryLayers.class).asEagerSingleton();
         bind(KML.class).asEagerSingleton();
         bind(Materials.class).asEagerSingleton();
+        bind(Labels.class).asEagerSingleton();
     }
 }
