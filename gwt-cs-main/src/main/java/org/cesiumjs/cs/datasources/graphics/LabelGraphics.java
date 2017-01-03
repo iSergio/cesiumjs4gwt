@@ -24,6 +24,7 @@ import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.datasources.graphics.options.LabelGraphicsOptions;
 import org.cesiumjs.cs.datasources.properties.Property;
+import org.cesiumjs.cs.scene.enums.HeightReference;
 import org.cesiumjs.cs.scene.enums.LabelStyle;
 import org.cesiumjs.cs.scene.enums.VerticalOrigin;
 
@@ -78,6 +79,24 @@ public class LabelGraphics {
      */
     @JsProperty
     public Property show;
+    /**
+     * A boolean Property specifying the visibility of the background behind the label.
+     * Default: false
+     */
+    @JsProperty
+    public Property showBackground;
+    /**
+     * A Property specifying the background Color.
+     * Default: Color(0.165, 0.165, 0.165, 0.8)
+     */
+    @JsProperty
+    public Property backgroundColor;
+    /**
+     * A Cartesian2 Property specifying the horizontal and vertical background padding in pixels.
+     * Default: Cartesian2(7, 5)
+     */
+    @JsProperty
+    public Property backgroundPadding;
     /**
      * A numeric Property specifying the scale to apply to the text.
      * Default: 1.0
