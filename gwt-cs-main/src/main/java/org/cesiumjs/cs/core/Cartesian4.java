@@ -219,6 +219,16 @@ public class Cartesian4 implements Packable {
     public static native Cartesian4 divideByScalar(Cartesian4 cartesian, double scalar, Cartesian4 result);
 
     /**
+     * Computes the componentwise quotient of two Cartesians.
+     * @param left The first Cartesian.
+     * @param right The second Cartesian.
+     * @param result The object onto which to store the result.
+     * @return The modified result parameter.
+     */
+    @JsMethod
+    public static native Cartesian4 divideComponents(Cartesian4 left, Cartesian4 right, Cartesian4 result);
+
+    /**
      * Computes the dot (scalar) product of two Cartesians.
      * @param left The first Cartesian.
      * @param right The second Cartesian.

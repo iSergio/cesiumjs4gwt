@@ -218,7 +218,18 @@ public class Cartesian3 implements Packable {
      * @param result The object onto which to store the result.
      * @return  The modified result parameter.
      */
+    @JsMethod
     public static native Cartesian3 divideByScalar(Cartesian3 cartesian, double scalar, Cartesian3 result);
+
+    /**
+     * Computes the componentwise quotient of two Cartesians.
+     * @param left The first Cartesian.
+     * @param right The second Cartesian.
+     * @param result The object onto which to store the result.
+     * @return The modified result parameter.
+     */
+    @JsMethod
+    public static native Cartesian3 divideComponents(Cartesian3 left, Cartesian3 right, Cartesian3 result);
 
     /**
      * Computes the dot (scalar) product of two Cartesians.
