@@ -16,6 +16,7 @@
 
 package org.cesiumjs.cs;
 
+import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
@@ -27,6 +28,7 @@ import org.cesiumjs.cs.promise.Promise;
 import org.cesiumjs.cs.scene.providers.UrlTemplateImageryProvider;
 import org.cesiumjs.cs.scene.providers.options.OpenStreetMapImageryProviderOptions;
 import org.cesiumjs.cs.scene.providers.options.TileMapServiceImageryProviderOptions;
+import org.cesiumjs.cs.widgets.Command;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -123,4 +125,56 @@ public class Cesium {
      */
     @JsMethod(namespace = "Cesium", name = "createTileMapServiceImageryProvider")
     public static native UrlTemplateImageryProvider createTileMapServiceImageryProvider(TileMapServiceImageryProviderOptions options);
+
+    /**
+     * Create a Command from a given function, for use with ViewModels. A Command is a function with an extra canExecute
+     * observable property to determine whether the command can be executed. When executed, a Command function will check
+     * the value of canExecute and throw if false. It also provides events for when a command has been or is about to be executed.
+     * @param func The function to execute.
+     * @return Command function
+     */
+    @JsMethod
+    public static native Command createCommand(Function func);
+
+    /**
+     * Create a Command from a given function, for use with ViewModels. A Command is a function with an extra canExecute
+     * observable property to determine whether the command can be executed. When executed, a Command function will check
+     * the value of canExecute and throw if false. It also provides events for when a command has been or is about to be executed.
+     * @param func The function to execute.
+     * @param canExecute A boolean indicating whether the function can currently be executed.
+     * @return Command function
+     */
+    @JsMethod
+    public static native Command createCommand(Function func, boolean canExecute);
+
+    /**
+     * A browser-independent function to request a new animation frame. This is used to create an application's
+     * draw loop as shown in the example below.
+     * @param callback The function to call when the next frame should be drawn.
+     * @return An ID that can be passed to {@link #cancelAnimationFrame} to cancel the request.
+     */
+    //TODO Example
+    @JsMethod(namespace = "Cesium", name = "requestAnimationFrame")
+    public static native Number requestAnimationFrame(RequestAnimationFrameCallback callback);
+
+    /**
+     * A browser-independent function to cancel an animation frame requested using requestAnimationFrame.
+     * @param requestID The value returned by requestAnimationFrame.
+     */
+    @JsMethod(namespace = "Cesium", name = "cancelAnimationFrame")
+    public static native void cancelAnimationFrame(Number requestID);
+
+    @JsFunction
+    public interface Function {
+        Object function(Object ...args);
+    }
+
+    @JsFunction
+    public interface RequestAnimationFrameCallback {
+        /**
+         * A function that will be called when the next frame should be drawn.
+         * @param timestamp A timestamp for the frame, in milliseconds.
+         */
+        void Callback(Number timestamp);
+    }
 }
