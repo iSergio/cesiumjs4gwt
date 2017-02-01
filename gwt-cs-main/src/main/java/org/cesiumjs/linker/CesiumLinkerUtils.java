@@ -35,7 +35,7 @@ public class CesiumLinkerUtils {
         ByteArrayOutputStream buf = new ByteArrayOutputStream();
         try {
             // Fix for SmartGWT. Thanks for Mark Erikson (https://groups.google.com/forum/#!msg/cesium-dev/ZfyW0CNRsSU/lP6KTaUpEQAJ)
-            buf.write("var buildInDataView = window.DataView;\n".getBytes());
+            buf.write("if (window.buildInDataView === undefined) {window.buildInDataView = window.DataView;}\n".getBytes());
             int result = bis.read();
             while (result != -1) {
                 byte b = (byte) result;
