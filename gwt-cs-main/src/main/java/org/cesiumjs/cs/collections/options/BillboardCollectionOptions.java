@@ -23,6 +23,7 @@ import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.collections.BillboardCollection;
 import org.cesiumjs.cs.core.Matrix4;
 import org.cesiumjs.cs.scene.Scene;
+import org.cesiumjs.cs.scene.enums.BlendOption;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -46,6 +47,14 @@ public class BillboardCollectionOptions {
      */
     @JsProperty
     public Scene scene;
+    /**
+     * The billboard blending option. The default is used for rendering both opaque and translucent billboards.
+     * However, if either all of the billboards are completely opaque or all are completely translucent, setting the
+     * technique to BillboardRenderTechnique.OPAQUE or BillboardRenderTechnique.TRANSLUCENT can improve performance by up to 2x.
+     * Default: {@link BlendOption#OPAQUE_AND_TRANSLUCENT()}
+     */
+    @JsProperty
+    public Number blendOption;
 
     /**
      * Options for {@link BillboardCollection}
