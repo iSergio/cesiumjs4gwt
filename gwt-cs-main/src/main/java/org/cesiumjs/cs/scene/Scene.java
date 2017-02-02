@@ -183,6 +183,11 @@ public class Scene {
     @JsProperty(name = "imageryLayers")
     public native ImageryLayerCollection imageryLayers();
     /**
+     * Gets or sets the position of the Imagery splitter within the viewport. Valid values are between 0.0 and 1.0.
+     */
+    @JsProperty
+    public double imagerySplitPosition;
+    /**
      * Determines if the 2D map is rotatable or can be scrolled infinitely in the horizontal direction.
      */
     @JsProperty

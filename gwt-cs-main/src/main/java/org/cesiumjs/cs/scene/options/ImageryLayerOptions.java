@@ -16,11 +16,9 @@
 
 package org.cesiumjs.cs.scene.options;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.Rectangle;
+import org.cesiumjs.cs.scene.enums.ImagerySplitDirection;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -92,6 +90,16 @@ public class ImageryLayerOptions {
     @JsProperty
     public float gamma;
     /**
+     * The {@link ImagerySplitDirection} split to apply to this layer. Default {@link ImagerySplitDirection#NONE()}
+     */
+    @JsProperty
+    public Number splitDirection;
+    /**
+     * The function split to apply to this layer. Default {@link ImagerySplitDirection#NONE()}
+     */
+    @JsProperty(name = "splitDirection")
+    public ImagerySplitDirectionFunction splitDirectionFunction;
+    /**
      * True if the layer is shown; otherwise, false.
      * Default: true
      */
@@ -115,4 +123,9 @@ public class ImageryLayerOptions {
     public double maximumTerrainLevel;
     @JsConstructor
     public ImageryLayerOptions() {}
+
+    @JsFunction
+    public interface ImagerySplitDirectionFunction {
+        void function(Object ...args);
+    }
 }
