@@ -309,6 +309,29 @@ public class Rectangle {
     public static native Rectangle fromDegrees(double west, double south, double east, double north, Rectangle result);
 
     /**
+     * Creates an rectangle given the boundary longitude and latitude in radians.
+     * @param west The westernmost longitude in radians in the range [-Math.PI, Math.PI]. Default: 0.0.
+     * @param south The southernmost latitude in radians in the range [-Math.PI/2, Math.PI/2]. Default: 0.0.
+     * @param east The easternmost longitude in radians in the range [-Math.PI, Math.PI]. Default: 0.0.
+     * @param north The northernmost latitude in radians in the range [-Math.PI/2, Math.PI/2]. Default: 0.0.
+     * @return The modified result parameter or a new Rectangle instance if none was provided.
+     */
+    @JsMethod
+    public static native Rectangle fromRadians(double west, double south, double east, double north);
+
+    /**
+     * Creates an rectangle given the boundary longitude and latitude in radians.
+     * @param west The westernmost longitude in radians in the range [-Math.PI, Math.PI]. Default: 0.0.
+     * @param south The southernmost latitude in radians in the range [-Math.PI/2, Math.PI/2]. Default: 0.0.
+     * @param east The easternmost longitude in radians in the range [-Math.PI, Math.PI]. Default: 0.0.
+     * @param north The northernmost latitude in radians in the range [-Math.PI/2, Math.PI/2]. Default: 0.0.
+     * @param result The object onto which to store the result, or undefined if a new instance should be created.
+     * @return The modified result parameter or a new Rectangle instance if none was provided.
+     */
+    @JsMethod
+    public static native Rectangle fromRadians(double west, double south, double east, double north, Rectangle result);
+
+    /**
      * Computes the intersection of two rectangles
      * @param rectangle On rectangle to find an intersection
      * @param otherRectangle Another rectangle to find an intersection
