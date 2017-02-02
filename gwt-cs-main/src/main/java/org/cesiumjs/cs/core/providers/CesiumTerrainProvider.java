@@ -20,10 +20,7 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.Credit;
-import org.cesiumjs.cs.core.Event;
-import org.cesiumjs.cs.core.GeographicTilingScheme;
-import org.cesiumjs.cs.core.TerrainData;
+import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.core.providers.options.CesiumTerrainProviderOptions;
 import org.cesiumjs.cs.promise.Promise;
 
@@ -32,6 +29,13 @@ import org.cesiumjs.cs.promise.Promise;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "CesiumTerrainProvider")
 public class CesiumTerrainProvider implements TerrainProvider {
+    /**
+     * Gets an object that can be used to determine availability of terrain from this provider, such as at points and in rectangles.
+     * This function should not be called before {@link CesiumTerrainProvider#ready} returns true.
+     * This property may be undefined if availability information is not available.
+     */
+    @JsProperty
+    public TileAvailability availability;
     /**
      * Gets the credit to display when this terrain provider is active. Typically this is used to credit the source of the terrain.
      * This function should not be called before {@link CesiumTerrainProvider#ready} returns true.
