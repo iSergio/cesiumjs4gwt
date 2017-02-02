@@ -63,7 +63,7 @@ public class ViewerOptions {
      * If set to false, the Geocoder widget will not be created. Default: true.
      */
     @JsProperty
-    public boolean geocoder;
+    public Object geocoder;
     /**
      * If set to false, the HomeButton widget will not be created. Default: true.
      */

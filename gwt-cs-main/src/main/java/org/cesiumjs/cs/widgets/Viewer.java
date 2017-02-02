@@ -29,6 +29,7 @@ import org.cesiumjs.cs.core.providers.TerrainProvider;
 import org.cesiumjs.cs.datasources.DataSource;
 import org.cesiumjs.cs.datasources.DataSourceDisplay;
 import org.cesiumjs.cs.datasources.Entity;
+import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.promise.Promise;
 import org.cesiumjs.cs.scene.Camera;
 import org.cesiumjs.cs.scene.Scene;
@@ -53,9 +54,8 @@ public class Viewer {
     /**
      * Gets the Animation widget.
      */
-    //TODO: Later
-//    @JsProperty(name = "animation")
-//    public native Animation animation();
+    @JsProperty(name = "animation")
+    public native Animation animation();
     /**
      * Gets the BaseLayerPicker.
      */
@@ -124,8 +124,8 @@ public class Viewer {
      * Gets the Geocoder.
      */
     //TODO: Later
-//    @JsProperty(name = "geocoder")
-//    public native Geocoder geocoder();
+    @JsProperty(name = "geocoder")
+    public native JsObject geocoder();
     /**
      * Gets the HomeButton.
      */
