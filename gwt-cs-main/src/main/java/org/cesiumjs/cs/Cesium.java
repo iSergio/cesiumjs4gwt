@@ -16,6 +16,8 @@
 
 package org.cesiumjs.cs;
 
+import com.google.gwt.json.client.JSONArray;
+import com.google.gwt.json.client.JSONObject;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
@@ -23,7 +25,9 @@ import jsinterop.annotations.JsProperty;
 import org.cesiumjs.cs.core.Cartographic;
 import org.cesiumjs.cs.core.Ellipsoid;
 import org.cesiumjs.cs.core.providers.TerrainProvider;
+import org.cesiumjs.cs.js.JsArray;
 import org.cesiumjs.cs.js.JsImage;
+import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.promise.Promise;
 import org.cesiumjs.cs.scene.providers.UrlTemplateImageryProvider;
 import org.cesiumjs.cs.scene.providers.options.OpenStreetMapImageryProviderOptions;
@@ -74,6 +78,94 @@ public class Cesium {
      */
     @JsMethod(namespace = "Cesium", name = "loadImage")
     public static native Promise<JsImage, Void> loadImage(String url, boolean allowCrossOrigin);
+
+    /**
+     * Asynchronously loads the given URL as JSON. Returns a promise that will resolve to a JSON object once loaded, or
+     * reject if the URL failed to load. The data is loaded using XMLHttpRequest, which means that in order to make
+     * requests to another origin, the server must have Cross-Origin Resource Sharing (CORS) headers enabled.
+     * This function adds 'Accept: application/json,*\/*;q=0.01' to the request headers, if not already specified.
+     * @param url The URL to request, or a promise for the URL.
+     * @return a promise that will resolve to the requested data when loaded.
+     */
+    @JsMethod(namespace = "Cesium", name = "loadJson")
+    public static native Promise<JsObject, String> loadJson(Promise<String, Void> url);
+
+    /**
+     * Asynchronously loads the given URL as JSON. Returns a promise that will resolve to a JSON object once loaded, or
+     * reject if the URL failed to load. The data is loaded using XMLHttpRequest, which means that in order to make
+     * requests to another origin, the server must have Cross-Origin Resource Sharing (CORS) headers enabled.
+     * This function adds 'Accept: application/json,*\/*;q=0.01' to the request headers, if not already specified.
+     * @param url The URL to request, or a promise for the URL.
+     * @return a promise that will resolve to the requested data when loaded.
+     */
+    @JsMethod(namespace = "Cesium", name = "loadJson")
+    public static native Promise<JsObject, String> loadJson(String url);
+
+    /**
+     * Asynchronously loads the given URL as JSON. Returns a promise that will resolve to a JSON object once loaded, or
+     * reject if the URL failed to load. The data is loaded using XMLHttpRequest, which means that in order to make
+     * requests to another origin, the server must have Cross-Origin Resource Sharing (CORS) headers enabled.
+     * This function adds 'Accept: application/json,*\/*;q=0.01' to the request headers, if not already specified.
+     * @param url The URL to request, or a promise for the URL.
+     * @param headers HTTP headers to send with the request. 'Accept: application/json,*\/*;q=0.01' is added to the request headers automatically if not specified.
+     * @return a promise that will resolve to the requested data when loaded.
+     */
+    @JsMethod(namespace = "Cesium", name = "loadJson")
+    public static native Promise<JsObject, String> loadJson(Promise<String, Void> url, Object headers);
+
+    /**
+     * Asynchronously loads the given URL as JSON. Returns a promise that will resolve to a JSON object once loaded, or
+     * reject if the URL failed to load. The data is loaded using XMLHttpRequest, which means that in order to make
+     * requests to another origin, the server must have Cross-Origin Resource Sharing (CORS) headers enabled.
+     * This function adds 'Accept: application/json,*\/*;q=0.01' to the request headers, if not already specified.
+     * @param url The URL to request, or a promise for the URL.
+     * @param headers HTTP headers to send with the request. 'Accept: application/json,*\/*;q=0.01' is added to the request headers automatically if not specified.
+     * @return a promise that will resolve to the requested data when loaded.
+     */
+    @JsMethod(namespace = "Cesium", name = "loadJson")
+    public static native Promise<JsObject, String> loadJson(String url, Object headers);
+
+    /**
+     * Asynchronously loads the given URL as text. Returns a promise that will resolve to a String once loaded,
+     * or reject if the URL failed to load. The data is loaded using XMLHttpRequest, which means that in order to
+     * make requests to another origin, the server must have Cross-Origin Resource Sharing (CORS) headers enabled.
+     * @param url The URL to request, or a promise for the URL.
+     * @return a promise that will resolve to the requested data when loaded.
+     */
+    @JsMethod(namespace = "Cesium", name = "loadText")
+    public static native Promise<String, String> loadText(String url);
+
+    /**
+     * Asynchronously loads the given URL as text. Returns a promise that will resolve to a String once loaded,
+     * or reject if the URL failed to load. The data is loaded using XMLHttpRequest, which means that in order to
+     * make requests to another origin, the server must have Cross-Origin Resource Sharing (CORS) headers enabled.
+     * @param url The URL to request, or a promise for the URL.
+     * @param headers HTTP headers to send with the request.
+     * @return a promise that will resolve to the requested data when loaded.
+     */
+    @JsMethod(namespace = "Cesium", name = "loadText")
+    public static native Promise<String, String> loadText(String url, JsObject headers);
+
+    /**
+     * Asynchronously loads the given URL as text. Returns a promise that will resolve to a String once loaded,
+     * or reject if the URL failed to load. The data is loaded using XMLHttpRequest, which means that in order to
+     * make requests to another origin, the server must have Cross-Origin Resource Sharing (CORS) headers enabled.
+     * @param url The URL to request, or a promise for the URL.
+     * @return a promise that will resolve to the requested data when loaded.
+     */
+    @JsMethod(namespace = "Cesium", name = "loadText")
+    public static native Promise<String, String> loadText(Promise<String, String> url);
+
+    /**
+     * Asynchronously loads the given URL as text. Returns a promise that will resolve to a String once loaded,
+     * or reject if the URL failed to load. The data is loaded using XMLHttpRequest, which means that in order to
+     * make requests to another origin, the server must have Cross-Origin Resource Sharing (CORS) headers enabled.
+     * @param url The URL to request, or a promise for the URL.
+     * @param headers HTTP headers to send with the request.
+     * @return a promise that will resolve to the requested data when loaded.
+     */
+    @JsMethod(namespace = "Cesium", name = "loadText")
+    public static native Promise<String, String> loadText(Promise<String, String> url, JsObject headers);
 
     /**
      * Initiates a terrain height query for an array of {@link Cartographic} positions by requesting tiles from a terrain provider,
@@ -133,7 +225,7 @@ public class Cesium {
      * @param func The function to execute.
      * @return Command function
      */
-    @JsMethod
+    @JsMethod(namespace = "Cesium", name = "createCommand")
     public static native Command createCommand(Function func);
 
     /**
@@ -144,7 +236,7 @@ public class Cesium {
      * @param canExecute A boolean indicating whether the function can currently be executed.
      * @return Command function
      */
-    @JsMethod
+    @JsMethod(namespace = "Cesium", name = "createCommand")
     public static native Command createCommand(Function func, boolean canExecute);
 
     /**
@@ -163,6 +255,31 @@ public class Cesium {
      */
     @JsMethod(namespace = "Cesium", name = "cancelAnimationFrame")
     public static native void cancelAnimationFrame(Number requestID);
+
+    /**
+     * Initiates a sampleTerrain() request at the maximum available tile level for a terrain dataset.
+     * @param terrainProvider The terrain provider from which to query heights.
+     * @param positions The positions to update with terrain heights.
+     * @return A promise that resolves to the provided list of positions when terrain the query has completed. This promise will reject if the terrain provider's `availability` property is undefined.
+     * <pre>
+     *     Example:
+     *     {@code
+     *     CesiumTerrainProviderOptions options = new CesiumTerrainProviderOptions();
+     *     options.url = "https://assets.agi.com/stk-terrain/world";
+     *     CesiumTerrainProvider terrainProvider = new CesiumTerrainProvider(options);
+     *     Cartographic[] positions = new Cartographic[] {Cartographic.fromDegrees(86.925145, 27.988257), Cartographic.fromDegrees(87.0, 28.0)};
+     *     Promise<Cartographic[], Void> promise = Cesium.sampleTerrainMostDetailed(terrainProvider, positions);
+     *     promise.then(new Fulfill<Cartographic[]>() {
+     *         @Override
+     *         public void onFulfilled(Cartographic[] updatedPositions) {
+     *             //
+     *         }
+     *     });
+     *     }
+     * </pre>
+     */
+    @JsMethod(namespace = "Cesium", name = "sampleTerrainMostDetailed")
+    public static native Promise<Cartographic[], Void> sampleTerrainMostDetailed(TerrainProvider terrainProvider, Cartographic[] positions);
 
     @JsFunction
     public interface Function {
