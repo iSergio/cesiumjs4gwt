@@ -66,5 +66,6 @@ public class InjectorModule extends AbstractGinModule {
         bind(KML.class).asEagerSingleton();
         bind(Materials.class).asEagerSingleton();
         bind(Labels.class).asEagerSingleton();
+        bind(CustomGeocoder.class).asEagerSingleton();
     }
 }
