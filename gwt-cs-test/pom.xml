@@ -5,14 +5,14 @@
     <parent>
         <artifactId>gwt-cs</artifactId>
         <groupId>org.cesiumjs</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.30.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>gwt-cs-test</artifactId>
     <packaging>war</packaging>
     <description>Showcase for GWT Cesium</description>
-    <version>1.0-SNAPSHOT</version>
+    <version>${parent.version}</version>
 
     <properties>
         <!-- GWT -->
@@ -154,7 +154,7 @@
         <dependency>
             <groupId>org.cesiumjs</groupId>
             <artifactId>gwt-cs-main</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${parent.version}</version>
         </dependency>
     </dependencies>
 </project>
