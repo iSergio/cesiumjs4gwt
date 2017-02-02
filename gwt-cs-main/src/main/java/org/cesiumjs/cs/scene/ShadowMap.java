@@ -62,7 +62,7 @@ public class ShadowMap {
      * and may be disabled for applications that require ultra precise shadows.
      */
     @JsConstructor
-    public ShadowMap() {}
+    private ShadowMap() {}
 
     /**
      * Creates a shadow map from the provided light camera. The normalOffset bias pushes the shadows forward slightly,
@@ -70,5 +70,5 @@ public class ShadowMap {
      * @param options Options
      */
     @JsConstructor
-    public ShadowMap(ShadowMapOptions options) {}
+    private ShadowMap(ShadowMapOptions options) {}
 }

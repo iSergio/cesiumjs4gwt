@@ -23,6 +23,7 @@ import org.cesiumjs.cs.collections.options.PointPrimitiveCollectionOptions;
 import org.cesiumjs.cs.core.Matrix4;
 import org.cesiumjs.cs.core.Transforms;
 import org.cesiumjs.cs.scene.PointPrimitive;
+import org.cesiumjs.cs.scene.enums.BlendOption;
 import org.cesiumjs.cs.scene.options.PointPrimitiveOptions;
 
 /**
@@ -30,6 +31,14 @@ import org.cesiumjs.cs.scene.options.PointPrimitiveOptions;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "PointPrimitiveCollection")
 public class PointPrimitiveCollection extends Collection<PointPrimitive> {
+    /**
+     * The billboard blending option. The default is used for rendering both opaque and translucent billboards.
+     * However, if either all of the billboards are completely opaque or all are completely translucent, setting the
+     * technique to BillboardRenderTechnique.OPAQUE or BillboardRenderTechnique.TRANSLUCENT can improve performance by up to 2x.
+     * Default: {@link BlendOption#OPAQUE_AND_TRANSLUCENT()}
+     */
+    @JsProperty
+    public Number blendOption;
     /**
      * This property is for debugging only; it is not for production use nor is it optimized.
      * Draws the bounding sphere for each draw command in the primitive.

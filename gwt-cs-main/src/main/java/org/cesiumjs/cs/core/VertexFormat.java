@@ -79,13 +79,14 @@ public class VertexFormat implements Packable {
      */
     @JsProperty(name = "POSITION_ONLY")
     public static native VertexFormat POSITION_ONLY();
+
     /**
-     * When true, the vertex has a binormal attribute (normalized), which is used for tangent-space effects like bump mapping.
+     * When true, the vertex has a bitangent attribute (normalized), which is used for tangent-space effects like bump mapping.
      * 32-bit floating-point. 3 components per attribute.
      * Default: false
      */
     @JsProperty
-    public boolean binormal;
+    public boolean bitangent;
     /**
      * When true, the vertex has an RGB color attribute.
      * 8-bit unsigned byte. 3 components per attribute.
