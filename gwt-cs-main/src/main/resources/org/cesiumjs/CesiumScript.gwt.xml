@@ -16,6 +16,7 @@
 <module>
     <script src="cs/Cesium/Cesium.js" />
     <script src="cs/GeoserverTerrainProvider.js" />
+    <script src="cs/viewerCesiumNavigationMixin.js" />
 
     <stylesheet src="cs/Cesium/Widgets/widgets.css"/>
 </module>
