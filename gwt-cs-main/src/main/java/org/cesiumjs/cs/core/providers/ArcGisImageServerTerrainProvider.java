@@ -28,8 +28,10 @@ import org.cesiumjs.cs.core.providers.options.ArcGisImageServerTerrainProviderOp
 import org.cesiumjs.cs.promise.Promise;
 
 /**
+ * @deprecated Will be removed in 1.32 due to missing TIFF support in web browsers.
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
+@Deprecated
 @JsType(isNative = true, namespace = "Cesium", name = "ArcGisImageServerTerrainProvider")
 public class ArcGisImageServerTerrainProvider implements TerrainProvider {
     /**

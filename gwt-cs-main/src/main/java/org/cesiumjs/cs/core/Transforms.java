@@ -17,6 +17,7 @@
 package org.cesiumjs.cs.core;
 
 import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.promise.Promise;
@@ -148,69 +149,19 @@ public class Transforms {
     @JsMethod
     public static native Matrix4 eastNorthUpToFixedFrame(Cartesian3 origin, Ellipsoid ellipsoid, Matrix4 result);
 
-    //TODO: Example
-    /**
-     * Computes a quaternion from a reference frame with axes computed from the heading-pitch-roll angles
-     * centered at the provided origin. Heading is the rotation from the local north
-     * direction where a positive angle is increasing eastward. Pitch is the rotation from the local east-north plane. Positive pitch angles
-     * are above the plane. Negative pitch angles are below the plane. Roll is the first rotation applied about the local east axis.
-     *
-     * @param origin origin The center point of the local reference frame.
-     * @param heading heading The heading angle in radians.
-     * @param pitch pitch The pitch angle in radians.
-     * @param roll roll The roll angle in radians.
-     * @return The modified result parameter or a new Quaternion instance if none was provided.
-     */
-    @JsMethod
-    public static native Quaternion headingPitchRollQuaternion(Cartesian3 origin, double heading, double pitch, double roll);
-
-    //TODO: Example
-    /**
-     * Computes a quaternion from a reference frame with axes computed from the heading-pitch-roll angles
-     * centered at the provided origin. Heading is the rotation from the local north
-     * direction where a positive angle is increasing eastward. Pitch is the rotation from the local east-north plane. Positive pitch angles
-     * are above the plane. Negative pitch angles are below the plane. Roll is the first rotation applied about the local east axis.
-     *
-     * @param origin origin The center point of the local reference frame.
-     * @param heading heading The heading angle in radians.
-     * @param pitch pitch The pitch angle in radians.
-     * @param roll roll The roll angle in radians.
-     * @param ellipsoid The ellipsoid whose fixed frame is used in the transformation.
-     *                  Default: {@link Ellipsoid#WGS84()}
-     * @return The modified result parameter or a new Quaternion instance if none was provided.
-     */
-    @JsMethod
-    public static native Quaternion headingPitchRollQuaternion(Cartesian3 origin, double heading, double pitch, double roll, Ellipsoid ellipsoid);
-
-    //TODO: Example
-    /**
-     * Computes a quaternion from a reference frame with axes computed from the heading-pitch-roll angles
-     * centered at the provided origin. Heading is the rotation from the local north
-     * direction where a positive angle is increasing eastward. Pitch is the rotation from the local east-north plane. Positive pitch angles
-     * are above the plane. Negative pitch angles are below the plane. Roll is the first rotation applied about the local east axis.
-     *
-     * @param origin origin The center point of the local reference frame.
-     * @param heading heading The heading angle in radians.
-     * @param pitch pitch The pitch angle in radians.
-     * @param roll roll The roll angle in radians.
-     * @param ellipsoid The ellipsoid whose fixed frame is used in the transformation.
-     *                  Default: {@link Ellipsoid#WGS84()}
-     * @param result The object onto which to store the result.
-     * @return The modified result parameter or a new Quaternion instance if none was provided.
-     */
-    @JsMethod
-    public static native Quaternion headingPitchRollQuaternion(Cartesian3 origin, double heading, double pitch, double roll, Ellipsoid ellipsoid, Quaternion result);
-
     //TODO:Example
     /**
      * Computes a quaternion from a reference frame with axes computed from the heading-pitch-roll angles centered at the
      * provided origin. Heading is the rotation from the local north direction where a positive angle is increasing eastward.
      * Pitch is the rotation from the local east-north plane. Positive pitch angles are above the plane.
      * Negative pitch angles are below the plane. Roll is the first rotation applied about the local east axis.
+     * @deprecated The method was deprecated in Cesium 1.31 and will be removed in version 1.33. Use {@link #headingPitchRollQuaternion(Cartesian3, HeadingPitchRoll, Ellipsoid, LocalFrameToFixedFrame, Quaternion)}
+     * where fixedFrameTransform is a a 4x4 transformation matrix (see Transforms.localFrameToFixedFrameGenerator)
      * @param origin The center point of the local reference frame.
      * @param headingPitchRoll The heading, pitch, and roll.
      * @return The modified result parameter or a new Quaternion instance if none was provided.
      */
+    @Deprecated
     @JsMethod
     public static native Quaternion headingPitchRollQuaternion(Cartesian3 origin, HeadingPitchRoll headingPitchRoll);
 
@@ -220,12 +171,15 @@ public class Transforms {
      * provided origin. Heading is the rotation from the local north direction where a positive angle is increasing eastward.
      * Pitch is the rotation from the local east-north plane. Positive pitch angles are above the plane.
      * Negative pitch angles are below the plane. Roll is the first rotation applied about the local east axis.
+     * @deprecated The method was deprecated in Cesium 1.31 and will be removed in version 1.33. Use {@link #headingPitchRollQuaternion(Cartesian3, HeadingPitchRoll, Ellipsoid, LocalFrameToFixedFrame, Quaternion)}
+     * where fixedFrameTransform is a a 4x4 transformation matrix (see Transforms.localFrameToFixedFrameGenerator)
      * @param origin The center point of the local reference frame.
      * @param headingPitchRoll The heading, pitch, and roll.
      * @param ellipsoid The ellipsoid whose fixed frame is used in the transformation.
      *                  Default: {@link Ellipsoid#WGS84()}
      * @return The modified result parameter or a new Quaternion instance if none was provided.
      */
+    @Deprecated
     @JsMethod
     public static native Quaternion headingPitchRollQuaternion(Cartesian3 origin, HeadingPitchRoll headingPitchRoll, Ellipsoid ellipsoid);
 
@@ -235,6 +189,8 @@ public class Transforms {
      * provided origin. Heading is the rotation from the local north direction where a positive angle is increasing eastward.
      * Pitch is the rotation from the local east-north plane. Positive pitch angles are above the plane.
      * Negative pitch angles are below the plane. Roll is the first rotation applied about the local east axis.
+     * @deprecated The method was deprecated in Cesium 1.31 and will be removed in version 1.33. Use {@link #headingPitchRollQuaternion(Cartesian3, HeadingPitchRoll, Ellipsoid, LocalFrameToFixedFrame, Quaternion)}
+     * where fixedFrameTransform is a a 4x4 transformation matrix (see Transforms.localFrameToFixedFrameGenerator)
      * @param origin The center point of the local reference frame.
      * @param headingPitchRoll The heading, pitch, and roll.
      * @param ellipsoid The ellipsoid whose fixed frame is used in the transformation.
@@ -242,8 +198,24 @@ public class Transforms {
      * @param result The object onto which to store the result.
      * @return The modified result parameter or a new Quaternion instance if none was provided.
      */
+    @Deprecated
     @JsMethod
     public static native Quaternion headingPitchRollQuaternion(Cartesian3 origin, HeadingPitchRoll headingPitchRoll, Ellipsoid ellipsoid, Quaternion result);
+
+    /**
+     * Computes a quaternion from a reference frame with axes computed from the heading-pitch-roll angles centered at the
+     * provided origin. Heading is the rotation from the local north direction where a positive angle is increasing eastward.
+     * Pitch is the rotation from the local east-north plane. Positive pitch angles are above the plane.
+     * Negative pitch angles are below the plane. Roll is the first rotation applied about the local east axis.
+     * @param origin The center point of the local reference frame.
+     * @param headingPitchRoll The heading, pitch, and roll.
+     * @param ellipsoid The ellipsoid whose fixed frame is used in the transformation.
+     *                  Default: {@link Ellipsoid#WGS84()}
+     * @param transform A 4x4 transformation matrix from a reference frame to the provided ellipsoid's fixed reference frame.
+     * @param result The object onto which to store the result.
+     * @return The modified result parameter or a new Quaternion instance if none was provided.
+     */
+    public static native Quaternion headingPitchRollQuaternion(Cartesian3 origin, HeadingPitchRoll headingPitchRoll, Ellipsoid ellipsoid, LocalFrameToFixedFrame transform, Quaternion result);
 
     //TODO: Example
     /**
@@ -252,10 +224,13 @@ public class Transforms {
      * Heading is the rotation from the local north direction where a positive angle is increasing eastward.
      * Pitch is the rotation from the local east-north plane. Positive pitch angles are above the plane.
      * Negative pitch angles are below the plane. Roll is the first rotation applied about the local east axis.
+     * @deprecated The method was deprecated in Cesium 1.31 and will be removed in version 1.33. Use {@link #headingPitchRollToFixedFrame(Cartesian3, HeadingPitchRoll, Ellipsoid, LocalFrameToFixedFrame, Matrix4)}
+     * where fixedFrameTransform is a a 4x4 transformation matrix (see Transforms.localFrameToFixedFrameGenerator)
      * @param origin The center point of the local reference frame.
      * @param headingPitchRoll The heading, pitch, and roll.
      * @return The modified result parameter or a new Matrix4 instance if none was provided.
      */
+    @Deprecated
     @JsMethod
     public static native Matrix4 headingPitchRollToFixedFrame(Cartesian3 origin, HeadingPitchRoll headingPitchRoll);
 
@@ -266,12 +241,15 @@ public class Transforms {
      * Heading is the rotation from the local north direction where a positive angle is increasing eastward.
      * Pitch is the rotation from the local east-north plane. Positive pitch angles are above the plane.
      * Negative pitch angles are below the plane. Roll is the first rotation applied about the local east axis.
+     * @deprecated The method was deprecated in Cesium 1.31 and will be removed in version 1.33. Use {@link #headingPitchRollToFixedFrame(Cartesian3, HeadingPitchRoll, Ellipsoid, LocalFrameToFixedFrame, Matrix4)}
+     * where fixedFrameTransform is a a 4x4 transformation matrix (see Transforms.localFrameToFixedFrameGenerator)
      * @param origin The center point of the local reference frame.
      * @param headingPitchRoll The heading, pitch, and roll.
      * @param ellipsoid The ellipsoid whose fixed frame is used in the transformation.
      *                  Default: {@link Ellipsoid#WGS84()}
      * @return The modified result parameter or a new Matrix4 instance if none was provided.
      */
+    @Deprecated
     @JsMethod
     public static native Matrix4 headingPitchRollToFixedFrame(Cartesian3 origin, HeadingPitchRoll headingPitchRoll, Ellipsoid ellipsoid);
 
@@ -282,6 +260,8 @@ public class Transforms {
      * Heading is the rotation from the local north direction where a positive angle is increasing eastward.
      * Pitch is the rotation from the local east-north plane. Positive pitch angles are above the plane.
      * Negative pitch angles are below the plane. Roll is the first rotation applied about the local east axis.
+     * @deprecated The method was deprecated in Cesium 1.31 and will be removed in version 1.33. Use {@link #headingPitchRollToFixedFrame(Cartesian3, HeadingPitchRoll, Ellipsoid, LocalFrameToFixedFrame, Matrix4)}
+     * where fixedFrameTransform is a a 4x4 transformation matrix (see Transforms.localFrameToFixedFrameGenerator)
      * @param origin The center point of the local reference frame.
      * @param headingPitchRoll The heading, pitch, and roll.
      * @param ellipsoid The ellipsoid whose fixed frame is used in the transformation.
@@ -289,8 +269,26 @@ public class Transforms {
      * @param result The object onto which to store the result.
      * @return The modified result parameter or a new Matrix4 instance if none was provided.
      */
+    @Deprecated
     @JsMethod
     public static native Matrix4 headingPitchRollToFixedFrame(Cartesian3 origin, HeadingPitchRoll headingPitchRoll, Ellipsoid ellipsoid, Matrix4 result);
+
+    /**
+     * Computes a 4x4 transformation matrix from a reference frame with axes computed from the heading-pitch-roll
+     * angles centered at the provided origin to the provided ellipsoid's fixed reference frame.
+     * Heading is the rotation from the local north direction where a positive angle is increasing eastward.
+     * Pitch is the rotation from the local east-north plane. Positive pitch angles are above the plane.
+     * Negative pitch angles are below the plane. Roll is the first rotation applied about the local east axis.
+     * @param origin The center point of the local reference frame.
+     * @param headingPitchRoll The heading, pitch, and roll.
+     * @param ellipsoid The ellipsoid whose fixed frame is used in the transformation.
+     *                  Default: {@link Ellipsoid#WGS84()}
+     * @param transform A 4x4 transformation matrix from a reference frame to the provided ellipsoid's fixed reference frame.
+     * @param result The object onto which to store the result.
+     * @return The modified result parameter or a new Matrix4 instance if none was provided.
+     */
+    @JsMethod
+    public static native Matrix4 headingPitchRollToFixedFrame(Cartesian3 origin, HeadingPitchRoll headingPitchRoll, Ellipsoid ellipsoid, LocalFrameToFixedFrame transform, Matrix4 result);
 
     //TODO: Example
     /**
@@ -455,4 +453,20 @@ public class Transforms {
      */
     @JsMethod
     public static native Promise<Void, Void> preloadIcrfFixed(TimeInterval timeInterval);
+
+    /**
+     * Computes a 4x4 transformation matrix from a reference frame centered at the provided origin to the provided ellipsoid's fixed reference frame.
+     */
+    //TODO: Check
+    @JsFunction
+    public interface LocalFrameToFixedFrame {
+        /**
+         * Computes a 4x4 transformation matrix from a reference frame centered at the provided origin to the provided ellipsoid's fixed reference frame.
+         * @param origin The center point of the local reference frame.
+         * @param ellipsoid The ellipsoid whose fixed frame is used in the transformation.
+         * @param result The object onto which to store the result.
+         * @return The modified result parameter or a new Matrix4 instance if none was provided.
+         */
+        Matrix4 function(Cartesian3 origin, Ellipsoid ellipsoid, Matrix4 result);
+    }
 }
