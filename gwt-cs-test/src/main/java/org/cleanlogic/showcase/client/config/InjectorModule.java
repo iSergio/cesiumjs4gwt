@@ -67,5 +67,6 @@ public class InjectorModule extends AbstractGinModule {
         bind(Materials.class).asEagerSingleton();
         bind(Labels.class).asEagerSingleton();
         bind(CustomGeocoder.class).asEagerSingleton();
+        bind(CesiumNavigation.class).asEagerSingleton();
     }
 }
