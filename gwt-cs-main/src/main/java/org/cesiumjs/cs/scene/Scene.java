@@ -258,6 +258,14 @@ public class Scene {
     @JsProperty(name = "pickPositionSupported")
     public native boolean pickPositionSupported();
     /**
+     * When true, enables picking translucent geometry using the depth buffer. {@link Scene#useDepthPicking} must also be
+     * true to enable picking the depth buffer. There is a decrease in performance when enabled. There are extra draw
+     * calls to write depth for translucent geometry.
+     * Default: false
+     */
+    @JsProperty
+    public boolean pickTranslucentDepth;
+    /**
      * Gets the event that will be raised at the end of each call to render. Subscribers to the event receive the Scene
      * instance as the first parameter and the current time as the second parameter.
      */

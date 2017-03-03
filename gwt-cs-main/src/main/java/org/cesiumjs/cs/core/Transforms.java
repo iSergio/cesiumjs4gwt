@@ -419,6 +419,17 @@ public class Transforms {
     @JsMethod
     public static native Matrix4 northWestUpToFixedFrame(Cartesian3 origin, Ellipsoid ellipsoid, Matrix4 result);
 
+    //TODO: Check
+    /**
+     * Generates a function that computes a 4x4 transformation matrix from a reference frame centered at the provided
+     * origin to the provided ellipsoid's fixed reference frame.
+     * @param firstAxis name of the first axis of the local reference frame. Must be 'east', 'north', 'up', 'west', 'south' or 'down'.
+     * @param secondAxis name of the second axis of the local reference frame. Must be 'east', 'north', 'up', 'west', 'south' or 'down'.
+     * @return The function that will computes a 4x4 transformation matrix from a reference frame, with first axis and second axis compliant with the parameters,
+     */
+    @JsMethod
+    public static native LocalFrameToFixedFrame localFrameToFixedFrameGenerator(String firstAxis, String secondAxis);
+
     //TODO: Example
     /**
      * Transform a point from model coordinates to window coordinates.

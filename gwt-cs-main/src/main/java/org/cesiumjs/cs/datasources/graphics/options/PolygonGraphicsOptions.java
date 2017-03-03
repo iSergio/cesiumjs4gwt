@@ -111,7 +111,8 @@ public class PolygonGraphicsOptions {
      * When false, leaves off the bottom of an extruded polygon open.
      * Default: true
      */
-    boolean closeBottom;
+    @JsProperty
+    public boolean closeBottom;
     /**
      * An enum Property specifying whether the polygon casts or receives shadows from each light source.
      * Default: {@link ShadowMode#DISABLED()}

@@ -155,6 +155,7 @@
             <groupId>org.cesiumjs</groupId>
             <artifactId>gwt-cs-main</artifactId>
             <version>${parent.version}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>
