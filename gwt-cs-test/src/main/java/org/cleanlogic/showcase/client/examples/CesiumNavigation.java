@@ -41,8 +41,8 @@ public class CesiumNavigation extends AbstractExample {
         ViewerCesiumNavigationMixinOptions options = new ViewerCesiumNavigationMixinOptions();
         options.defaultResetView = Rectangle.fromDegrees(71, 3, 90, 14);
         options.enableCompass = true;
-        options.enableZoomControls = false;
-        options.enableDistanceLegend = false;
+        options.enableZoomControls = true;
+        options.enableDistanceLegend = true;
         options.enableCompassOuterRing = true;
 
         ViewerPanel csVPanel = new ViewerPanel();
