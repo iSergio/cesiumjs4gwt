@@ -51,13 +51,6 @@ public class ScreenSpaceEventType {
     @JsProperty(name = "MIDDLE_CLICK")
     public static native Number MIDDLE_CLICK();
     /**
-     * Represents a mouse middle double click event.
-     * @deprecated will be removed in 1.31
-     */
-    @Deprecated
-    @JsProperty(name = "MIDDLE_DOUBLE_CLICK")
-    public static native Number MIDDLE_DOUBLE_CLICK();
-    /**
      * Represents a mouse middle button down event.
      */
     @JsProperty(name = "MIDDLE_DOWN")
@@ -92,13 +85,6 @@ public class ScreenSpaceEventType {
      */
     @JsProperty(name = "RIGHT_CLICK")
     public static native Number RIGHT_CLICK();
-    /**
-     * Represents a mouse right double click event.
-     * @deprecated will be removed in 1.31
-     */
-    @Deprecated
-    @JsProperty(name = "RIGHT_DOUBLE_CLICK")
-    public static native Number RIGHT_DOUBLE_CLICK();
     /**
      * Represents a mouse left button down event.
      */

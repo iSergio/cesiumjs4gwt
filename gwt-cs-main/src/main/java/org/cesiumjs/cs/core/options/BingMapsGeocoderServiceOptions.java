@@ -27,6 +27,11 @@ import jsinterop.annotations.JsType;
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class BingMapsGeocoderServiceOptions {
     /**
+     * The scene
+     */
+    @JsProperty
+    public String scene;
+    /**
      * A key to use with the Bing Maps geocoding service
      */
     @JsProperty

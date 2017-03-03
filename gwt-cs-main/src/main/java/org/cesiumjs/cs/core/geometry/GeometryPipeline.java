@@ -39,18 +39,16 @@ public class GeometryPipeline {
     @JsMethod
     public static native Geometry compressVertices(Geometry geometry);
 
+    //TODO: Example
     /**
-     * Computes per-vertex binormals and tangents for a geometry containing TRIANGLES. The result is new binormal and
-     * tangent attributes added to the geometry. This assumes a counter-clockwise winding order.
-     *
-     * Based on Computing Tangent Space Basis Vectors for an Arbitrary Mesh by Eric Lengyel.
-     * @deprecated will be removed in 1.31. Use GeometryPipeline.createTangentAndBitangent instead.
+     * Computes per-vertex tangents and bitangents for a geometry containing TRIANGLES.
+     * The result is new tangent and bitangent attributes added to the geometry.
+     * This assumes a counter-clockwise winding order.
      * @param geometry The geometry to modify.
-     * @return The modified geometry argument with the computed binormal and tangent attributes.
+     * @return The modified geometry argument with the computed tangent and bitangent attributes.
      */
-    @Deprecated
     @JsMethod
-    public static native Geometry computeBinormalAndTangent(Geometry geometry);
+    public static native Geometry computeTangentAndBitangent(Geometry geometry);
 
     /**
      * Computes per-vertex normals for a geometry containing TRIANGLES by averaging the normals of all triangles incident

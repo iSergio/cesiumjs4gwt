@@ -269,8 +269,8 @@ public class Color {
     /**
      * An immutable Color instance initialized to CSS color #FF00FF
      */
-    @JsProperty(name = "FUSCHIA")
-    public static native Color FUSCHIA();
+    @JsProperty(name = "FUCHSIA")
+    public static native Color FUCHSIA();
     /**
      * An immutable Color instance initialized to CSS color #DCDCDC
      */
