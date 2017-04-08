@@ -27,6 +27,11 @@ import org.cesiumjs.cs.scene.options.ViewOptions;
 @JsType(isNative = true, namespace = "Cesium", name = "Camera")
 public class Camera {
     /**
+     * The default heading/pitch/range that is used when the camera flies to a location that contains a bounding sphere.
+     */
+    @JsProperty
+    public static HeadingPitchRange DEFAULT_OFFSET;
+    /**
      * A scalar to multiply to the camera position and add it back after setting the camera to view the rectangle.
      * A value of zero means the camera will view the entire {@link Camera#DEFAULT_VIEW_RECTANGLE},
      * a value greater than zero will move it further away from the extent, and a value less than zero will move it close to the extent.
@@ -791,6 +796,18 @@ public class Camera {
      */
     @JsMethod
     public native void setView(ViewOptions options);
+
+    /**
+     * Switches the frustum/projection to orthographic. This function is a no-op in 2D which will always be orthographic.
+     */
+    @JsMethod
+    public native void switchToOrthographicFrustum();
+
+    /**
+     * Switches the frustum/projection to perspective. This function is a no-op in 2D which must always be orthographic.
+     */
+    @JsMethod
+    public native void switchToPerspectiveFrustum();
 
     /**
      * Rotate the camera counter-clockwise around its direction vector by amount, in radians.

@@ -227,6 +227,11 @@ public class ViewerOptions {
      * Default: {@link MapMode2D#INFINITE_SCROLL()}
      */
     public int mapMode2D;
+    /**
+     * If set to true, the ProjectionPicker widget will be created.
+     * Default: false
+     */
+    public boolean projectionPicker;
 
     @JsConstructor
     public ViewerOptions() {}

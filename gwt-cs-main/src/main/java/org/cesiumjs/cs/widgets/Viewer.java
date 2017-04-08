@@ -23,6 +23,7 @@ import org.cesiumjs.cs.collections.DataSourceCollection;
 import org.cesiumjs.cs.collections.EntityCollection;
 import org.cesiumjs.cs.collections.ImageryLayerCollection;
 import org.cesiumjs.cs.core.Clock;
+import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.core.HeadingPitchRange;
 import org.cesiumjs.cs.core.ScreenSpaceEventHandler;
 import org.cesiumjs.cs.core.providers.TerrainProvider;
@@ -149,6 +150,9 @@ public class Viewer {
     //TODO: Later
 //    @JsProperty(name = "navigationHelpButton")
 //    public native NavigationHelpButton navigationHelpButton();
+    //TODO: ProjectionPicker
+//    @JsProperty(name = "projectionPicker")
+//    public native ProjectionPicker projectionPicker();
     /**
      * Gets or sets a scaling factor for rendering resolution. Values less than 1.0 can improve performance on
      * less powerful devices while values greater than 1.0 will render at a higher resolution and then scale down,
@@ -180,6 +184,12 @@ public class Viewer {
      */
     @JsProperty
     public Entity selectedEntity;
+    /**
+     * Gets the event that is raised when the selected entity chages
+     * @return
+     */
+    @JsProperty(name = "selectedEntityChanged")
+    public native Event selectedEntityChanged();
     /**
      * Gets the selection indicator.
      */
@@ -224,6 +234,13 @@ public class Viewer {
      */
     @JsProperty(name = "trackedEntity")
     public Entity trackedEntity;
+
+    /**
+     * Gets the event that is raised when the tracked entity chages
+     * @return get event for change tracked entity.
+     */
+    @JsProperty(name = "trackedEntityChanged")
+    public native Event trackedEntityChanged();
     /**
      * Gets or sets whether or not this widget should control the render loop. If set to true the widget will use
      * requestAnimationFrame to perform rendering and resizing of the widget, as well as drive the simulation clock.

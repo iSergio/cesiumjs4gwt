@@ -69,15 +69,32 @@ public class CameraFlyToOptions {
      */
     @JsProperty
     public double maximumHeight;
-    //TODO: Callbacks
+    /**
+     * If camera flyes higher than that value, adjust pitch duiring the flight to look down, and keep Earth in viewport.
+     */
+    @JsProperty
+    public double pitchAdjustHeight;
+    /**
+     * There are always two ways between 2 points on globe.
+     * This option force camera to choose fight direction to fly over that longitude.
+     */
+    @JsProperty
+    public double flyOverLongitude;
+    /**
+     * Fly over the lon specifyed via flyOverLongitude only if that way is not longer than short way times flyOverLongitudeWeight.
+     */
+    @JsProperty
+    public double flyOverLongitudeWeight;
     /**
      * Controls how the time is interpolated over the duration of the flight.
      */
     @JsProperty
     public EasingFunction easingFunction;
+    /**
+     * Controls how the time is interpolated over the duration of the flight.
+     */
     @JsProperty(name = "easingFunction")
     public EasingFunction.Callback easingFunctionCallback;
-
     /**
      * The offset from the target in the local east-north-up reference frame centered at the target.
      */

@@ -25,35 +25,34 @@ import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.Matrix4;
 
 /**
+ * The viewing frustum is defined by 6 planes. Each plane is represented by a {@link org.cesiumjs.cs.core.Cartesian4} object,
+ * where the x, y, and z components define the unit vector normal to the plane, and the w component is the
+ * distance of the plane from the origin/camera position.
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
-@JsType(isNative = true, namespace = "Cesium", name = "OrthographicFrustum")
-public class OrthographicFrustum implements Frustum {
+@JsType(isNative = true, namespace = "Cesium", name = "OrthographicOffCenterFrustum")
+public class OrthographicOffCenterFrustum {
     /**
      * The bottom clipping plane.
-     * Default: undefined
-     * @deprecated will be removed in 1.33. Use OrthographicOffCenterFrustum instead.
+     * Default Value:  undefined
      */
-    @Deprecated
     @JsProperty
     public double bottom;
     /**
      * The distance of the far plane.
-     * Default: 500000000.0;
+     * Default Value:  500000000.0;
      */
     @JsProperty
     public double far;
     /**
      * The left clipping plane.
-     * Default: undefined
-     * @deprecated will be removed in 1.33. Use OrthographicOffCenterFrustum instead.
+     * Default Value:  undefined
      */
-    @Deprecated
     @JsProperty
     public double left;
     /**
      * The distance of the near plane.
-     * Default: 1.0
+     * Default Value:  1.0
      */
     @JsProperty
     public double near;
@@ -64,46 +63,35 @@ public class OrthographicFrustum implements Frustum {
     public native Matrix4 projectionMatrix();
     /**
      * The right clipping plane.
-     * Default: undefined
-     * @deprecated will be removed in 1.33. Use OrthographicOffCenterFrustum instead.
+     * Default Value:  undefined
      */
-    @Deprecated
     @JsProperty
     public double right;
     /**
      * The top clipping plane.
-     * Default: undefined
-     * @deprecated will be removed in 1.33. Use OrthographicOffCenterFrustum instead.
+     * Default Value:  undefined
      */
-    @Deprecated
     @JsProperty
     public double top;
 
-    //TODO: Example
-    /**
-     * The viewing frustum is defined by 6 planes. Each plane is represented by a Cartesian4 object, where the x, y,
-     * and z components define the unit vector normal to the plane, and the w component is the distance of the plane
-     * from the origin/camera position.
-     */
     @JsConstructor
-    public OrthographicFrustum() {}
+    public OrthographicOffCenterFrustum() {}
 
     /**
-     * OrthographicFrustum
-     * @return The modified result parameter or a new PerspectiveFrustum instance if one was not provided.
+     * Returns a duplicate of a OrthographicOffCenterFrustum instance.
+     * @return The modified result parameter or a new OrthographicOffCenterFrustum instance if one was not provided.
      */
     @JsMethod
-    public native OrthographicFrustum clone();
+    public native OrthographicOffCenterFrustum clone();
 
     /**
-     * OrthographicFrustum
+     * Returns a duplicate of a OrthographicOffCenterFrustum instance.
      * @param result The object onto which to store the result.
-     * @return The modified result parameter or a new PerspectiveFrustum instance if one was not provided.
+     * @return The modified result parameter or a new OrthographicOffCenterFrustum instance if one was not provided.
      */
     @JsMethod
-    public native OrthographicFrustum clone(OrthographicFrustum result);
+    public native OrthographicOffCenterFrustum clone(OrthographicOffCenterFrustum result);
 
-    //TODO: Example
     /**
      * Creates a culling volume for this frustum.
      * @param position The eye position.
@@ -115,21 +103,32 @@ public class OrthographicFrustum implements Frustum {
     public native CullingVolume computeCullingVolume(Cartesian3 position, Cartesian3 direction, Cartesian3 up);
 
     /**
-     * Compares the provided OrthographicFrustum componentwise and returns true if they are equal, false otherwise.
-     * @param other The right hand side OrthographicFrustum.
-     * @return true if they are equal, false otherwise.
+     * Compares the provided OrthographicOffCenterFrustum componentwise and returns true if they are equal, false otherwise.
+     * @param other The right hand side OrthographicOffCenterFrustum.
+     * @return  true if they are equal, false otherwise.
      */
     @JsMethod
-    public native boolean equals(OrthographicFrustum other);
+    public native boolean equals(OrthographicOffCenterFrustum other);
 
-    //TODO: Example
+    /**
+     * Returns the pixel's width and height in meters.
+     * @param drawingBufferWidth The width of the drawing buffer.
+     * @param drawingBufferHeight The height of the drawing buffer.
+     * @param distance The distance to the near plane in meters.
+     * @return The modified result parameter or a new instance of Cartesian2 with the pixel's
+     * width and height in the x and y properties, respectively.
+     */
+    @JsMethod
+    public native Cartesian2 getPixelDimensions(double drawingBufferWidth, double drawingBufferHeight, double distance);
+
     /**
      * Returns the pixel's width and height in meters.
      * @param drawingBufferWidth The width of the drawing buffer.
      * @param drawingBufferHeight The height of the drawing buffer.
      * @param distance The distance to the near plane in meters.
      * @param result The object onto which to store the result.
-     * @return The modified result parameter or a new instance of Cartesian2 with the pixel's width and height in the x and y properties, respectively.
+     * @return The modified result parameter or a new instance of Cartesian2 with the pixel's
+     * width and height in the x and y properties, respectively.
      */
     @JsMethod
     public native Cartesian2 getPixelDimensions(double drawingBufferWidth, double drawingBufferHeight, double distance, Cartesian2 result);
