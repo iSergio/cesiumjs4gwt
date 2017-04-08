@@ -16,7 +16,6 @@
 
 package org.cesiumjs.linker;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.ext.LinkerContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;

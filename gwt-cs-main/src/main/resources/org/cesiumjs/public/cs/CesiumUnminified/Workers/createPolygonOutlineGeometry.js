@@ -19625,9 +19625,9 @@ define('Core/Quaternion',[
                 if (headingOrHeadingPitchRoll instanceof HeadingPitchRoll) {
             Check.typeOf.object('headingPitchRoll', headingOrHeadingPitchRoll);
         } else {
-            Check.typeOf.number(headingOrHeadingPitchRoll, 'heading');
-            Check.typeOf.number(pitchOrResult, 'pitch');
-            Check.typeOf.number(roll, 'roll');
+            Check.typeOf.number('heading', headingOrHeadingPitchRoll);
+            Check.typeOf.number('pitch', pitchOrResult);
+            Check.typeOf.number('roll', roll);
         }
                 var hpr;
         if (headingOrHeadingPitchRoll instanceof HeadingPitchRoll) {

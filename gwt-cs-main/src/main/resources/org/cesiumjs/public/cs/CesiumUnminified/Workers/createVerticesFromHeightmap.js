@@ -18893,9 +18893,9 @@ define('Core/Quaternion',[
                 if (headingOrHeadingPitchRoll instanceof HeadingPitchRoll) {
             Check.typeOf.object('headingPitchRoll', headingOrHeadingPitchRoll);
         } else {
-            Check.typeOf.number(headingOrHeadingPitchRoll, 'heading');
-            Check.typeOf.number(pitchOrResult, 'pitch');
-            Check.typeOf.number(roll, 'roll');
+            Check.typeOf.number('heading', headingOrHeadingPitchRoll);
+            Check.typeOf.number('pitch', pitchOrResult);
+            Check.typeOf.number('roll', roll);
         }
                 var hpr;
         if (headingOrHeadingPitchRoll instanceof HeadingPitchRoll) {
@@ -23706,8 +23706,11 @@ define('Core/HeightmapTessellator',[
         var elementMultiplier = defaultValue(structure.elementMultiplier, HeightmapTessellator.DEFAULT_STRUCTURE.elementMultiplier);
         var isBigEndian = defaultValue(structure.isBigEndian, HeightmapTessellator.DEFAULT_STRUCTURE.isBigEndian);
 
-        var granularityX = Rectangle.computeWidth(nativeRectangle) / (width - 1);
-        var granularityY = Rectangle.computeHeight(nativeRectangle) / (height - 1);
+        var rectangleWidth = Rectangle.computeWidth(nativeRectangle);
+        var rectangleHeight = Rectangle.computeHeight(nativeRectangle);
+
+        var granularityX = rectangleWidth / (width - 1);
+        var granularityY = rectangleHeight / (height - 1);
 
         var radiiSquared = ellipsoid.radiiSquared;
         var radiiSquaredX = radiiSquared.x;
@@ -23829,10 +23832,29 @@ define('Core/HeightmapTessellator',[
 
                 heightSample = (heightSample * heightScale + heightOffset) * exaggeration;
 
+                var u = (longitude - geographicWest) / (geographicEast - geographicWest);
+                u = CesiumMath.clamp(u, 0.0, 1.0);
+                uvs[index] = new Cartesian2(u, v);
+
                 maximumHeight = Math.max(maximumHeight, heightSample);
                 minimumHeight = Math.min(minimumHeight, heightSample);
 
                 if (colIndex !== col || rowIndex !== row) {
+                    var percentage = 0.00001;
+                    if (colIndex < 0) {
+                        longitude -= percentage * rectangleWidth;
+                    } else {
+                        longitude += percentage * rectangleWidth;
+                    }
+                    if (rowIndex < 0) {
+                        latitude += percentage * rectangleHeight;
+                    } else {
+                        latitude -= percentage * rectangleHeight;
+                    }
+
+                    cosLatitude = cos(latitude);
+                    nZ = sin(latitude);
+                    kZ = radiiSquaredZ * nZ;
                     heightSample -= skirtHeight;
                 }
 
@@ -23856,10 +23878,6 @@ define('Core/HeightmapTessellator',[
 
                 positions[index] = position;
                 heights[index] = heightSample;
-
-                var u = (longitude - geographicWest) / (geographicEast - geographicWest);
-                u = CesiumMath.clamp(u, 0.0, 1.0);
-                uvs[index] = new Cartesian2(u, v);
 
                 if (includeWebMercatorT) {
                     webMercatorTs[index] = webMercatorT;
