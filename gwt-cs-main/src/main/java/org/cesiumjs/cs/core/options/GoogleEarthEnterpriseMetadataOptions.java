@@ -41,10 +41,17 @@ public class GoogleEarthEnterpriseMetadataOptions {
     private GoogleEarthEnterpriseMetadataOptions() {}
 
     @JsOverlay
-    @JsMethod
     public static GoogleEarthEnterpriseMetadataOptions create(String url) {
         GoogleEarthEnterpriseMetadataOptions options = new GoogleEarthEnterpriseMetadataOptions();
         options.url = url;
+        return options;
+    }
+
+    @JsOverlay
+    public static GoogleEarthEnterpriseMetadataOptions create(String url, Object proxy) {
+        GoogleEarthEnterpriseMetadataOptions options = new GoogleEarthEnterpriseMetadataOptions();
+        options.url = url;
+        options.proxy = proxy;
         return options;
     }
 }

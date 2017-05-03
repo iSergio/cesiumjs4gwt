@@ -18,7 +18,9 @@ package org.cesiumjs.cs.core.providers;
 
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.GoogleEarthEnterpriseMetadata;
 import org.cesiumjs.cs.core.TerrainData;
 import org.cesiumjs.cs.core.providers.options.GoogleEarthEnterpriseTerrainProviderOptions;
 import org.cesiumjs.cs.promise.Promise;
@@ -32,6 +34,18 @@ import org.cesiumjs.cs.promise.Promise;
 public class GoogleEarthEnterpriseTerrainProvider implements TerrainProvider {
     @JsConstructor
     public GoogleEarthEnterpriseTerrainProvider(GoogleEarthEnterpriseTerrainProviderOptions options) {}
+
+    @JsOverlay
+    public static GoogleEarthEnterpriseTerrainProvider create(String url) {
+        GoogleEarthEnterpriseTerrainProviderOptions options = GoogleEarthEnterpriseTerrainProviderOptions.create(url);
+        return new GoogleEarthEnterpriseTerrainProvider(options);
+    }
+
+    @JsOverlay
+    public static GoogleEarthEnterpriseTerrainProvider create(GoogleEarthEnterpriseMetadata metadata) {
+        GoogleEarthEnterpriseTerrainProviderOptions options = GoogleEarthEnterpriseTerrainProviderOptions.create(metadata);
+        return new GoogleEarthEnterpriseTerrainProvider(options);
+    }
 
     /**
      * Gets the maximum geometric error allowed in a tile at a given level.

@@ -65,7 +65,6 @@ public class GoogleEarthEnterpriseImageryProviderOptions {
     private GoogleEarthEnterpriseImageryProviderOptions() {}
 
     @JsOverlay
-    @JsMethod
     public static GoogleEarthEnterpriseImageryProviderOptions create(String url) {
         GoogleEarthEnterpriseImageryProviderOptions options = new GoogleEarthEnterpriseImageryProviderOptions();
         options.url = url;
@@ -73,7 +72,6 @@ public class GoogleEarthEnterpriseImageryProviderOptions {
     }
 
     @JsOverlay
-    @JsMethod
     public static GoogleEarthEnterpriseImageryProviderOptions create(GoogleEarthEnterpriseMetadata metadata) {
         GoogleEarthEnterpriseImageryProviderOptions options = new GoogleEarthEnterpriseImageryProviderOptions();
         options.metadata = metadata;
@@ -81,7 +79,6 @@ public class GoogleEarthEnterpriseImageryProviderOptions {
     }
 
     @JsOverlay
-    @JsMethod
     public static GoogleEarthEnterpriseImageryProviderOptions create(String url, GoogleEarthEnterpriseMetadata metadata) {
         GoogleEarthEnterpriseImageryProviderOptions options = new GoogleEarthEnterpriseImageryProviderOptions();
         options.url = url;

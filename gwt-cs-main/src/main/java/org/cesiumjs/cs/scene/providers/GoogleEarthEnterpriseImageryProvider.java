@@ -121,14 +121,12 @@ public class GoogleEarthEnterpriseImageryProvider implements ImageryProvider {
     private GoogleEarthEnterpriseImageryProvider(GoogleEarthEnterpriseImageryProviderOptions options) {}
 
     @JsOverlay
-    @JsMethod
     public static GoogleEarthEnterpriseImageryProvider create(String url) {
         GoogleEarthEnterpriseImageryProviderOptions options = GoogleEarthEnterpriseImageryProviderOptions.create(url);
         return new GoogleEarthEnterpriseImageryProvider(options);
     }
 
     @JsOverlay
-    @JsMethod
     public static GoogleEarthEnterpriseImageryProvider create(GoogleEarthEnterpriseMetadata metadata) {
         GoogleEarthEnterpriseImageryProviderOptions options = GoogleEarthEnterpriseImageryProviderOptions.create(metadata);
         return new GoogleEarthEnterpriseImageryProvider(options);

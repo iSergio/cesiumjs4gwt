@@ -57,7 +57,20 @@ public class GoogleEarthEnterpriseTerrainProviderOptions {
     private GoogleEarthEnterpriseTerrainProviderOptions() {}
 
     @JsOverlay
-    @JsMethod
+    public static GoogleEarthEnterpriseTerrainProviderOptions create(String url) {
+        GoogleEarthEnterpriseTerrainProviderOptions options = new GoogleEarthEnterpriseTerrainProviderOptions();
+        options.url = url;
+        return options;
+    }
+
+    @JsOverlay
+    public static GoogleEarthEnterpriseTerrainProviderOptions create(GoogleEarthEnterpriseMetadata metadata) {
+        GoogleEarthEnterpriseTerrainProviderOptions options = new GoogleEarthEnterpriseTerrainProviderOptions();
+        options.metadata = metadata;
+        return options;
+    }
+
+    @JsOverlay
     public static GoogleEarthEnterpriseTerrainProviderOptions create(String url, GoogleEarthEnterpriseMetadata metadata) {
         GoogleEarthEnterpriseTerrainProviderOptions options = new GoogleEarthEnterpriseTerrainProviderOptions();
         options.url = url;

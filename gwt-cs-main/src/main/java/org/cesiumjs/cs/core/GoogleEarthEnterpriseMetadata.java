@@ -16,10 +16,7 @@
 
 package org.cesiumjs.cs.core;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.options.GoogleEarthEnterpriseMetadataOptions;
 import org.cesiumjs.cs.js.JsObject;
 
@@ -37,7 +34,19 @@ public class GoogleEarthEnterpriseMetadata {
     public String url;
 
     @JsConstructor
-    public GoogleEarthEnterpriseMetadata(GoogleEarthEnterpriseMetadataOptions options) {}
+    private GoogleEarthEnterpriseMetadata(GoogleEarthEnterpriseMetadataOptions options) {}
+
+    @JsOverlay
+    public static GoogleEarthEnterpriseMetadata create(String url) {
+        GoogleEarthEnterpriseMetadataOptions options = GoogleEarthEnterpriseMetadataOptions.create(url);
+        return new GoogleEarthEnterpriseMetadata(options);
+    }
+
+    @JsOverlay
+    public static GoogleEarthEnterpriseMetadata create(String url, Object proxy) {
+        GoogleEarthEnterpriseMetadataOptions options = GoogleEarthEnterpriseMetadataOptions.create(url, proxy);
+        return new GoogleEarthEnterpriseMetadata(options);
+    }
 
     /**
      * Converts a tile's quadkey used to request an image from a Google Earth Enterprise server
