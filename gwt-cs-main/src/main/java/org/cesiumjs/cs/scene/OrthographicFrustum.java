@@ -30,27 +30,11 @@ import org.cesiumjs.cs.core.Matrix4;
 @JsType(isNative = true, namespace = "Cesium", name = "OrthographicFrustum")
 public class OrthographicFrustum implements Frustum {
     /**
-     * The bottom clipping plane.
-     * Default: undefined
-     * @deprecated will be removed in 1.33. Use OrthographicOffCenterFrustum instead.
-     */
-    @Deprecated
-    @JsProperty
-    public double bottom;
-    /**
      * The distance of the far plane.
      * Default: 500000000.0;
      */
     @JsProperty
     public double far;
-    /**
-     * The left clipping plane.
-     * Default: undefined
-     * @deprecated will be removed in 1.33. Use OrthographicOffCenterFrustum instead.
-     */
-    @Deprecated
-    @JsProperty
-    public double left;
     /**
      * The distance of the near plane.
      * Default: 1.0
@@ -62,22 +46,6 @@ public class OrthographicFrustum implements Frustum {
      */
     @JsProperty(name = "projectionMatrix")
     public native Matrix4 projectionMatrix();
-    /**
-     * The right clipping plane.
-     * Default: undefined
-     * @deprecated will be removed in 1.33. Use OrthographicOffCenterFrustum instead.
-     */
-    @Deprecated
-    @JsProperty
-    public double right;
-    /**
-     * The top clipping plane.
-     * Default: undefined
-     * @deprecated will be removed in 1.33. Use OrthographicOffCenterFrustum instead.
-     */
-    @Deprecated
-    @JsProperty
-    public double top;
 
     //TODO: Example
     /**
