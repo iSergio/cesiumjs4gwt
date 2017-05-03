@@ -42,6 +42,14 @@ public class PointGraphics {
     @JsProperty
     public Property color;
     /**
+     * Gets or sets the distance from the camera at which to disable the depth test to, for example,
+     * prevent clipping against terrain. When set to zero, the depth test is always applied. When set to
+     * Number.POSITIVE_INFINITY, the depth test is never applied.
+     * Default: 0.0
+     */
+    @JsProperty
+    public Property disableDepthTestDistance;
+    /**
      * A numeric Property specifying the size in pixels.
      * Default: 1
      */

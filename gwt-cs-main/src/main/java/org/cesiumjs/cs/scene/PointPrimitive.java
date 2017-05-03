@@ -37,6 +37,14 @@ public class PointPrimitive {
     @JsProperty
     public Color color;
     /**
+     * Gets or sets the distance from the camera at which to disable the depth test to, for example,
+     * prevent clipping against terrain. When set to zero, the depth test is always applied. When set to
+     * Number.POSITIVE_INFINITY, the depth test is never applied.
+     * Default: 0.0
+     */
+    @JsProperty
+    public double disableDepthTestDistance;
+    /**
      * Gets or sets the condition specifying at what distance from the camera that this point will be displayed.
      * Default: undefined
      */
