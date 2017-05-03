@@ -65,6 +65,12 @@ public class PolylineGraphics {
     @JsProperty
     public Property material;
     /**
+     * Gets or sets the Property specifying the material used to draw the polyline when it fails the depth test.
+     * Default: undefined.
+     */
+    @JsProperty
+    private Property depthFailMaterial;
+    /**
      * A numeric Property specifying the angular distance between each latitude and longitude if followSurface is true.
      * Default: {@link Math#RADIANS_PER_DEGREE()}
      */
