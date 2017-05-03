@@ -98,6 +98,11 @@ public class Material {
     @JsProperty(name = "PolylineArrowType")
     public static native String PolylineArrowType();
     /**
+     * Gets the name of the polyline dash material.
+     */
+    @JsProperty(name = "PolylineDashType")
+    public static native String PolylineDashType();
+    /**
      * Gets the name of the polyline glow material.
      */
     @JsProperty(name = "PolylineGlowType")
