@@ -93,6 +93,13 @@ public class Viewer {
      */
     @JsProperty(name = "clock")
     public native Clock clock();
+
+    /**
+     * Gets the clock view model.
+     * @return clock view model.
+     */
+    @JsProperty(name = "clockViewModel")
+    public native ClockViewModel clockViewModel();
     /**
      * Gets the parent container.
      */

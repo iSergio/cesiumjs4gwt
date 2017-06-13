@@ -32,6 +32,7 @@ import org.cesiumjs.cs.scene.enums.MapMode2D;
 import org.cesiumjs.cs.scene.enums.SceneMode;
 import org.cesiumjs.cs.scene.enums.ShadowMode;
 import org.cesiumjs.cs.scene.providers.ImageryProvider;
+import org.cesiumjs.cs.widgets.ClockViewModel;
 import org.cesiumjs.cs.widgets.ProviderViewModel;
 
 /**
@@ -107,9 +108,17 @@ public class ViewerOptions {
     public boolean scene3DOnly;
     /**
      * 	The clock to use to control current time. Default: new Clock().
+     * 	@deprecated Passing options.clock when creating a new Viewer instance has been deprecated and will be removed in Cesium 1.37, pass options.clockViewModel instead.
      */
+    @Deprecated
     @JsProperty
     public Clock clock;
+    /**
+     * The clock view model to use to control current time. Optional.
+     * Default: new ClockViewModel(options.clock)
+     */
+    @JsProperty
+    public ClockViewModel clockViewModel;
     /**
      * The view model for the current base imagery layer, if not supplied the first available base layer is used. This value is only valid if options.baseLayerPicker is set to true.
      */

@@ -46,68 +46,6 @@ define('Core/defined',[],function() {
 });
 
 /*global define*/
-define('Core/freezeObject',[
-        './defined'
-    ], function(
-        defined) {
-    'use strict';
-
-    /**
-     * Freezes an object, using Object.freeze if available, otherwise returns
-     * the object unchanged.  This function should be used in setup code to prevent
-     * errors from completely halting JavaScript execution in legacy browsers.
-     *
-     * @private
-     *
-     * @exports freezeObject
-     */
-    var freezeObject = Object.freeze;
-    if (!defined(freezeObject)) {
-        freezeObject = function(o) {
-            return o;
-        };
-    }
-
-    return freezeObject;
-});
-
-/*global define*/
-define('Core/defaultValue',[
-        './freezeObject'
-    ], function(
-        freezeObject) {
-    'use strict';
-
-    /**
-     * Returns the first parameter if not undefined, otherwise the second parameter.
-     * Useful for setting a default value for a parameter.
-     *
-     * @exports defaultValue
-     *
-     * @param {*} a
-     * @param {*} b
-     * @returns {*} Returns the first parameter if not undefined, otherwise the second parameter.
-     *
-     * @example
-     * param = Cesium.defaultValue(param, 'default');
-     */
-    function defaultValue(a, b) {
-        if (a !== undefined) {
-            return a;
-        }
-        return b;
-    }
-
-    /**
-     * A frozen empty object that can be used as the default value for options passed as
-     * an object literal.
-     */
-    defaultValue.EMPTY_OBJECT = freezeObject({});
-
-    return defaultValue;
-});
-
-/*global define*/
 define('Core/DeveloperError',[
         './defined'
     ], function(
@@ -186,6 +124,238 @@ define('Core/DeveloperError',[
     };
 
     return DeveloperError;
+});
+
+/*global define*/
+define('Core/Check',[
+        './defined',
+        './DeveloperError'
+    ], function(
+        defined,
+        DeveloperError) {
+    'use strict';
+
+    /**
+     * Contains functions for checking that supplied arguments are of a specified type
+     * or meet specified conditions
+     * @private
+     */
+    var Check = {};
+
+    /**
+     * Contains type checking functions, all using the typeof operator
+     */
+    Check.typeOf = {};
+
+    function getUndefinedErrorMessage(name) {
+        return name + ' is required, actual value was undefined';
+    }
+
+    function getFailedTypeErrorMessage(actual, expected, name) {
+        return 'Expected ' + name + ' to be typeof ' + expected + ', actual typeof was ' + actual;
+    }
+
+    /**
+     * Throws if test is not defined
+     *
+     * @param {String} name The name of the variable being tested
+     * @param {*} test The value that is to be checked
+     * @exception {DeveloperError} test must be defined
+     */
+    Check.defined = function (name, test) {
+        if (!defined(test)) {
+            throw new DeveloperError(getUndefinedErrorMessage(name));
+        }
+    };
+
+    /**
+     * Throws if test is not typeof 'function'
+     *
+     * @param {String} name The name of the variable being tested
+     * @param {*} test The value to test
+     * @exception {DeveloperError} test must be typeof 'function'
+     */
+    Check.typeOf.func = function (name, test) {
+        if (typeof test !== 'function') {
+            throw new DeveloperError(getFailedTypeErrorMessage(typeof test, 'function', name));
+        }
+    };
+
+    /**
+     * Throws if test is not typeof 'string'
+     *
+     * @param {String} name The name of the variable being tested
+     * @param {*} test The value to test
+     * @exception {DeveloperError} test must be typeof 'string'
+     */
+    Check.typeOf.string = function (name, test) {
+        if (typeof test !== 'string') {
+            throw new DeveloperError(getFailedTypeErrorMessage(typeof test, 'string', name));
+        }
+    };
+
+    /**
+     * Throws if test is not typeof 'number'
+     *
+     * @param {String} name The name of the variable being tested
+     * @param {*} test The value to test
+     * @exception {DeveloperError} test must be typeof 'number'
+     */
+    Check.typeOf.number = function (name, test) {
+        if (typeof test !== 'number') {
+            throw new DeveloperError(getFailedTypeErrorMessage(typeof test, 'number', name));
+        }
+    };
+
+    /**
+     * Throws if test is not typeof 'number' and less than limit
+     *
+     * @param {String} name The name of the variable being tested
+     * @param {*} test The value to test
+     * @param {Number} limit The limit value to compare against
+     * @exception {DeveloperError} test must be typeof 'number' and less than limit
+     */
+    Check.typeOf.number.lessThan = function (name, test, limit) {
+        Check.typeOf.number(name, test);
+        if (test >= limit) {
+            throw new DeveloperError('Expected ' + name + ' to be less than ' + limit + ', actual value was ' + test);
+        }
+    };
+
+    /**
+     * Throws if test is not typeof 'number' and less than or equal to limit
+     *
+     * @param {String} name The name of the variable being tested
+     * @param {*} test The value to test
+     * @param {Number} limit The limit value to compare against
+     * @exception {DeveloperError} test must be typeof 'number' and less than or equal to limit
+     */
+    Check.typeOf.number.lessThanOrEquals = function (name, test, limit) {
+        Check.typeOf.number(name, test);
+        if (test > limit) {
+            throw new DeveloperError('Expected ' + name + ' to be less than or equal to ' + limit + ', actual value was ' + test);
+        }
+    };
+
+    /**
+     * Throws if test is not typeof 'number' and greater than limit
+     *
+     * @param {String} name The name of the variable being tested
+     * @param {*} test The value to test
+     * @param {Number} limit The limit value to compare against
+     * @exception {DeveloperError} test must be typeof 'number' and greater than limit
+     */
+    Check.typeOf.number.greaterThan = function (name, test, limit) {
+        Check.typeOf.number(name, test);
+        if (test <= limit) {
+            throw new DeveloperError('Expected ' + name + ' to be greater than ' + limit + ', actual value was ' + test);
+        }
+    };
+
+    /**
+     * Throws if test is not typeof 'number' and greater than or equal to limit
+     *
+     * @param {String} name The name of the variable being tested
+     * @param {*} test The value to test
+     * @param {Number} limit The limit value to compare against
+     * @exception {DeveloperError} test must be typeof 'number' and greater than or equal to limit
+     */
+    Check.typeOf.number.greaterThanOrEquals = function (name, test, limit) {
+        Check.typeOf.number(name, test);
+        if (test < limit) {
+            throw new DeveloperError('Expected ' + name + ' to be greater than or equal to' + limit + ', actual value was ' + test);
+        }
+    };
+
+    /**
+     * Throws if test is not typeof 'object'
+     *
+     * @param {String} name The name of the variable being tested
+     * @param {*} test The value to test
+     * @exception {DeveloperError} test must be typeof 'object'
+     */
+    Check.typeOf.object = function (name, test) {
+        if (typeof test !== 'object') {
+            throw new DeveloperError(getFailedTypeErrorMessage(typeof test, 'object', name));
+        }
+    };
+
+    /**
+     * Throws if test is not typeof 'boolean'
+     *
+     * @param {String} name The name of the variable being tested
+     * @param {*} test The value to test
+     * @exception {DeveloperError} test must be typeof 'boolean'
+     */
+    Check.typeOf.bool = function (name, test) {
+        if (typeof test !== 'boolean') {
+            throw new DeveloperError(getFailedTypeErrorMessage(typeof test, 'boolean', name));
+        }
+    };
+
+    return Check;
+});
+
+/*global define*/
+define('Core/freezeObject',[
+        './defined'
+    ], function(
+        defined) {
+    'use strict';
+
+    /**
+     * Freezes an object, using Object.freeze if available, otherwise returns
+     * the object unchanged.  This function should be used in setup code to prevent
+     * errors from completely halting JavaScript execution in legacy browsers.
+     *
+     * @private
+     *
+     * @exports freezeObject
+     */
+    var freezeObject = Object.freeze;
+    if (!defined(freezeObject)) {
+        freezeObject = function(o) {
+            return o;
+        };
+    }
+
+    return freezeObject;
+});
+
+/*global define*/
+define('Core/defaultValue',[
+        './freezeObject'
+    ], function(
+        freezeObject) {
+    'use strict';
+
+    /**
+     * Returns the first parameter if not undefined, otherwise the second parameter.
+     * Useful for setting a default value for a parameter.
+     *
+     * @exports defaultValue
+     *
+     * @param {*} a
+     * @param {*} b
+     * @returns {*} Returns the first parameter if not undefined, otherwise the second parameter.
+     *
+     * @example
+     * param = Cesium.defaultValue(param, 'default');
+     */
+    function defaultValue(a, b) {
+        if (a !== undefined) {
+            return a;
+        }
+        return b;
+    }
+
+    /**
+     * A frozen empty object that can be used as the default value for options passed as
+     * an object literal.
+     */
+    defaultValue.EMPTY_OBJECT = freezeObject({});
+
+    return defaultValue;
 });
 
 /*
@@ -1195,14 +1365,14 @@ define('Core/Math',[
 
 /*global define*/
 define('Core/arrayRemoveDuplicates',[
+        './Check',
         './defaultValue',
         './defined',
-        './DeveloperError',
         './Math'
     ], function(
+        Check,
         defaultValue,
         defined,
-        DeveloperError,
         CesiumMath) {
     'use strict';
 
@@ -1239,9 +1409,7 @@ define('Core/arrayRemoveDuplicates',[
      * @private
      */
     function arrayRemoveDuplicates(values, equalsEpsilon, wrapAround) {
-                if (!defined(equalsEpsilon)) {
-            throw new DeveloperError('equalsEpsilon is required.');
-        }
+                Check.defined('equalsEpsilon', equalsEpsilon);
         
         if (!defined(values)) {
             return undefined;
@@ -1291,176 +1459,6 @@ define('Core/arrayRemoveDuplicates',[
     }
 
     return arrayRemoveDuplicates;
-});
-
-/*global define*/
-define('Core/Check',[
-        './defined',
-        './DeveloperError'
-    ], function(
-        defined,
-        DeveloperError) {
-    'use strict';
-
-    /**
-     * Contains functions for checking that supplied arguments are of a specified type
-     * or meet specified conditions
-     * @private
-     */
-    var Check = {};
-
-    /**
-     * Contains type checking functions, all using the typeof operator
-     */
-    Check.typeOf = {};
-
-    function getUndefinedErrorMessage(name) {
-        return name + ' is required, actual value was undefined';
-    }
-
-    function getFailedTypeErrorMessage(actual, expected, name) {
-        return 'Expected ' + name + ' to be typeof ' + expected + ', actual typeof was ' + actual;
-    }
-
-    /**
-     * Throws if test is not defined
-     *
-     * @param {String} name The name of the variable being tested
-     * @param {*} test The value that is to be checked
-     * @exception {DeveloperError} test must be defined
-     */
-    Check.defined = function (name, test) {
-        if (!defined(test)) {
-            throw new DeveloperError(getUndefinedErrorMessage(name));
-        }
-    };
-
-    /**
-     * Throws if test is not typeof 'function'
-     *
-     * @param {String} name The name of the variable being tested
-     * @param {*} test The value to test
-     * @exception {DeveloperError} test must be typeof 'function'
-     */
-    Check.typeOf.func = function (name, test) {
-        if (typeof test !== 'function') {
-            throw new DeveloperError(getFailedTypeErrorMessage(typeof test, 'function', name));
-        }
-    };
-
-    /**
-     * Throws if test is not typeof 'string'
-     *
-     * @param {String} name The name of the variable being tested
-     * @param {*} test The value to test
-     * @exception {DeveloperError} test must be typeof 'string'
-     */
-    Check.typeOf.string = function (name, test) {
-        if (typeof test !== 'string') {
-            throw new DeveloperError(getFailedTypeErrorMessage(typeof test, 'string', name));
-        }
-    };
-
-    /**
-     * Throws if test is not typeof 'number'
-     *
-     * @param {String} name The name of the variable being tested
-     * @param {*} test The value to test
-     * @exception {DeveloperError} test must be typeof 'number'
-     */
-    Check.typeOf.number = function (name, test) {
-        if (typeof test !== 'number') {
-            throw new DeveloperError(getFailedTypeErrorMessage(typeof test, 'number', name));
-        }
-    };
-
-    /**
-     * Throws if test is not typeof 'number' and less than limit
-     *
-     * @param {String} name The name of the variable being tested
-     * @param {*} test The value to test
-     * @param {Number} limit The limit value to compare against
-     * @exception {DeveloperError} test must be typeof 'number' and less than limit
-     */
-    Check.typeOf.number.lessThan = function (name, test, limit) {
-        Check.typeOf.number(name, test);
-        if (test >= limit) {
-            throw new DeveloperError('Expected ' + name + ' to be less than ' + limit + ', actual value was ' + test);
-        }
-    };
-
-    /**
-     * Throws if test is not typeof 'number' and less than or equal to limit
-     *
-     * @param {String} name The name of the variable being tested
-     * @param {*} test The value to test
-     * @param {Number} limit The limit value to compare against
-     * @exception {DeveloperError} test must be typeof 'number' and less than or equal to limit
-     */
-    Check.typeOf.number.lessThanOrEquals = function (name, test, limit) {
-        Check.typeOf.number(name, test);
-        if (test > limit) {
-            throw new DeveloperError('Expected ' + name + ' to be less than or equal to ' + limit + ', actual value was ' + test);
-        }
-    };
-
-    /**
-     * Throws if test is not typeof 'number' and greater than limit
-     *
-     * @param {String} name The name of the variable being tested
-     * @param {*} test The value to test
-     * @param {Number} limit The limit value to compare against
-     * @exception {DeveloperError} test must be typeof 'number' and greater than limit
-     */
-    Check.typeOf.number.greaterThan = function (name, test, limit) {
-        Check.typeOf.number(name, test);
-        if (test <= limit) {
-            throw new DeveloperError('Expected ' + name + ' to be greater than ' + limit + ', actual value was ' + test);
-        }
-    };
-
-    /**
-     * Throws if test is not typeof 'number' and greater than or equal to limit
-     *
-     * @param {String} name The name of the variable being tested
-     * @param {*} test The value to test
-     * @param {Number} limit The limit value to compare against
-     * @exception {DeveloperError} test must be typeof 'number' and greater than or equal to limit
-     */
-    Check.typeOf.number.greaterThanOrEquals = function (name, test, limit) {
-        Check.typeOf.number(name, test);
-        if (test < limit) {
-            throw new DeveloperError('Expected ' + name + ' to be greater than or equal to' + limit + ', actual value was ' + test);
-        }
-    };
-
-    /**
-     * Throws if test is not typeof 'object'
-     *
-     * @param {String} name The name of the variable being tested
-     * @param {*} test The value to test
-     * @exception {DeveloperError} test must be typeof 'object'
-     */
-    Check.typeOf.object = function (name, test) {
-        if (typeof test !== 'object') {
-            throw new DeveloperError(getFailedTypeErrorMessage(typeof test, 'object', name));
-        }
-    };
-
-    /**
-     * Throws if test is not typeof 'boolean'
-     *
-     * @param {String} name The name of the variable being tested
-     * @param {*} test The value to test
-     * @exception {DeveloperError} test must be typeof 'boolean'
-     */
-    Check.typeOf.bool = function (name, test) {
-        if (typeof test !== 'boolean') {
-            throw new DeveloperError(getFailedTypeErrorMessage(typeof test, 'boolean', name));
-        }
-    };
-
-    return Check;
 });
 
 /*global define*/
@@ -1905,15 +1903,9 @@ define('Core/Cartesian3',[
      * @returns {Cartesian3} The modified result parameter.
      */
     Cartesian3.divideComponents = function(left, right, result) {
-                if (!defined(left)) {
-            throw new DeveloperError('left is required');
-        }
-        if (!defined(right)) {
-            throw new DeveloperError('right is required');
-        }
-        if (!defined(result)) {
-            throw new DeveloperError('result is required');
-        }
+                Check.typeOf.object('left', left);
+        Check.typeOf.object('right', right);
+        Check.typeOf.object('result', result);
         
         result.x = left.x / right.x;
         result.y = left.y / right.y;
@@ -2598,17 +2590,17 @@ define('Core/scaleToGeodeticSurface',[
 /*global define*/
 define('Core/Cartographic',[
         './Cartesian3',
+        './Check',
         './defaultValue',
         './defined',
-        './DeveloperError',
         './freezeObject',
         './Math',
         './scaleToGeodeticSurface'
     ], function(
         Cartesian3,
+        Check,
         defaultValue,
         defined,
-        DeveloperError,
         freezeObject,
         CesiumMath,
         scaleToGeodeticSurface) {
@@ -2659,12 +2651,8 @@ define('Core/Cartographic',[
      * @returns {Cartographic} The modified result parameter or a new Cartographic instance if one was not provided.
      */
     Cartographic.fromRadians = function(longitude, latitude, height, result) {
-                if (!defined(longitude)) {
-            throw new DeveloperError('longitude is required.');
-        }
-        if (!defined(latitude)) {
-            throw new DeveloperError('latitude is required.');
-        }
+                Check.typeOf.number('longitude', longitude);
+        Check.typeOf.number('latitude', latitude);
         
         height = defaultValue(height, 0.0);
 
@@ -2690,12 +2678,8 @@ define('Core/Cartographic',[
      * @returns {Cartographic} The modified result parameter or a new Cartographic instance if one was not provided.
      */
     Cartographic.fromDegrees = function(longitude, latitude, height, result) {
-                if (!defined(longitude)) {
-            throw new DeveloperError('longitude is required.');
-        }
-        if (!defined(latitude)) {
-            throw new DeveloperError('latitude is required.');
-        }
+                Check.typeOf.number('longitude', longitude);
+        Check.typeOf.number('latitude', latitude);
                 longitude = CesiumMath.toRadians(longitude);
         latitude = CesiumMath.toRadians(latitude);
 
@@ -2796,9 +2780,7 @@ define('Core/Cartographic',[
      * @returns {Boolean} <code>true</code> if left and right are within the provided epsilon, <code>false</code> otherwise.
      */
     Cartographic.equalsEpsilon = function(left, right, epsilon) {
-                if (typeof epsilon !== 'number') {
-            throw new DeveloperError('epsilon is required and must be a number.');
-        }
+                Check.typeOf.number('epsilon', epsilon);
         
         return (left === right) ||
                ((defined(left)) &&
@@ -8715,7 +8697,7 @@ define('Core/Rectangle',[
     };
 
     /**
-     * Creates an rectangle given the boundary longitude and latitude in degrees.
+     * Creates a rectangle given the boundary longitude and latitude in degrees.
      *
      * @param {Number} [west=0.0] The westernmost longitude in degrees in the range [-180.0, 180.0].
      * @param {Number} [south=0.0] The southernmost latitude in degrees in the range [-90.0, 90.0].
@@ -8746,7 +8728,7 @@ define('Core/Rectangle',[
     };
 
     /**
-     * Creates an rectangle given the boundary longitude and latitude in radians.
+     * Creates a rectangle given the boundary longitude and latitude in radians.
      *
      * @param {Number} [west=0.0] The westernmost longitude in radians in the range [-Math.PI, Math.PI].
      * @param {Number} [south=0.0] The southernmost latitude in radians in the range [-Math.PI/2, Math.PI/2].
@@ -8988,7 +8970,7 @@ define('Core/Rectangle',[
             };
 
     /**
-     * Computes the southwest corner of an rectangle.
+     * Computes the southwest corner of a rectangle.
      *
      * @param {Rectangle} rectangle The rectangle for which to find the corner
      * @param {Cartographic} [result] The object onto which to store the result.
@@ -9007,7 +8989,7 @@ define('Core/Rectangle',[
     };
 
     /**
-     * Computes the northwest corner of an rectangle.
+     * Computes the northwest corner of a rectangle.
      *
      * @param {Rectangle} rectangle The rectangle for which to find the corner
      * @param {Cartographic} [result] The object onto which to store the result.
@@ -9026,7 +9008,7 @@ define('Core/Rectangle',[
     };
 
     /**
-     * Computes the northeast corner of an rectangle.
+     * Computes the northeast corner of a rectangle.
      *
      * @param {Rectangle} rectangle The rectangle for which to find the corner
      * @param {Cartographic} [result] The object onto which to store the result.
@@ -9045,7 +9027,7 @@ define('Core/Rectangle',[
     };
 
     /**
-     * Computes the southeast corner of an rectangle.
+     * Computes the southeast corner of a rectangle.
      *
      * @param {Rectangle} rectangle The rectangle for which to find the corner
      * @param {Cartographic} [result] The object onto which to store the result.
@@ -9064,7 +9046,7 @@ define('Core/Rectangle',[
     };
 
     /**
-     * Computes the center of an rectangle.
+     * Computes the center of a rectangle.
      *
      * @param {Rectangle} rectangle The rectangle for which to find the center
      * @param {Cartographic} [result] The object onto which to store the result.
@@ -9286,7 +9268,7 @@ define('Core/Rectangle',[
 
     var subsampleLlaScratch = new Cartographic();
     /**
-     * Samples an rectangle so that it includes a list of Cartesian points suitable for passing to
+     * Samples a rectangle so that it includes a list of Cartesian points suitable for passing to
      * {@link BoundingSphere#fromPoints}.  Sampling is necessary to account
      * for rectangles that cover the poles or cross the equator.
      *
@@ -9594,7 +9576,7 @@ define('Core/BoundingSphere',[
     var fromRectangle2DNortheast = new Cartographic();
 
     /**
-     * Computes a bounding sphere from an rectangle projected in 2D.
+     * Computes a bounding sphere from a rectangle projected in 2D.
      *
      * @param {Rectangle} rectangle The rectangle around which to create a bounding sphere.
      * @param {Object} [projection=GeographicProjection] The projection used to project the rectangle into 2D.
@@ -9606,7 +9588,7 @@ define('Core/BoundingSphere',[
     };
 
     /**
-     * Computes a bounding sphere from an rectangle projected in 2D.  The bounding sphere accounts for the
+     * Computes a bounding sphere from a rectangle projected in 2D.  The bounding sphere accounts for the
      * object's minimum and maximum heights over the rectangle.
      *
      * @param {Rectangle} rectangle The rectangle around which to create a bounding sphere.
@@ -9652,7 +9634,7 @@ define('Core/BoundingSphere',[
     var fromRectangle3DScratch = [];
 
     /**
-     * Computes a bounding sphere from an rectangle in 3D. The bounding sphere is created using a subsample of points
+     * Computes a bounding sphere from a rectangle in 3D. The bounding sphere is created using a subsample of points
      * on the ellipsoid and contained in the rectangle. It may not be accurate for all rectangles on all types of ellipsoids.
      *
      * @param {Rectangle} rectangle The valid rectangle used to create a bounding sphere.
@@ -10119,6 +10101,8 @@ define('Core/BoundingSphere',[
      * @returns {BoundingSphere} The modified result parameter or a new BoundingSphere instance if none was provided.
      */
     BoundingSphere.fromOrientedBoundingBox = function(orientedBoundingBox, result) {
+                Check.defined('orientedBoundingBox', orientedBoundingBox);
+        
         if (!defined(result)) {
             result = new BoundingSphere();
         }
@@ -10128,12 +10112,11 @@ define('Core/BoundingSphere',[
         var v = Matrix3.getColumn(halfAxes, 1, fromOrientedBoundingBoxScratchV);
         var w = Matrix3.getColumn(halfAxes, 2, fromOrientedBoundingBoxScratchW);
 
-        var uHalf = Cartesian3.magnitude(u);
-        var vHalf = Cartesian3.magnitude(v);
-        var wHalf = Cartesian3.magnitude(w);
+        Cartesian3.add(u, v, u);
+        Cartesian3.add(u, w, u);
 
         result.center = Cartesian3.clone(orientedBoundingBox.center, result.center);
-        result.radius = Math.max(uHalf, vHalf, wHalf);
+        result.radius = Cartesian3.magnitude(u);
 
         return result;
     };
@@ -14252,11 +14235,13 @@ define('Core/Plane',[
         './Cartesian3',
         './defined',
         './DeveloperError',
+        './Math',
         './freezeObject'
     ], function(
         Cartesian3,
         defined,
         DeveloperError,
+        CesiumMath,
         freezeObject) {
     'use strict';
 
@@ -14282,10 +14267,15 @@ define('Core/Plane',[
      * @example
      * // The plane x=0
      * var plane = new Cesium.Plane(Cesium.Cartesian3.UNIT_X, 0.0);
+     *
+     * @exception {DeveloperError} Normal must be normalized
      */
     function Plane(normal, distance) {
                 if (!defined(normal))  {
             throw new DeveloperError('normal is required.');
+        }
+        if (!CesiumMath.equalsEpsilon(Cartesian3.magnitude(normal), 1.0, CesiumMath.EPSILON6)) {
+            throw new DeveloperError('normal must be normalized.');
         }
         if (!defined(distance)) {
             throw new DeveloperError('distance is required.');
@@ -14322,6 +14312,8 @@ define('Core/Plane',[
      * var point = Cesium.Cartesian3.fromDegrees(-72.0, 40.0);
      * var normal = ellipsoid.geodeticSurfaceNormal(point);
      * var tangentPlane = Cesium.Plane.fromPointNormal(point, normal);
+     *
+     * @exception {DeveloperError} Normal must be normalized
      */
     Plane.fromPointNormal = function(point, normal, result) {
                 if (!defined(point)) {
@@ -14329,6 +14321,9 @@ define('Core/Plane',[
         }
         if (!defined(normal)) {
             throw new DeveloperError('normal is required.');
+        }
+        if (!CesiumMath.equalsEpsilon(Cartesian3.magnitude(normal), 1.0, CesiumMath.EPSILON6)) {
+            throw new DeveloperError('normal must be normalized.');
         }
         
         var distance = -Cartesian3.dot(normal, point);
@@ -14349,6 +14344,8 @@ define('Core/Plane',[
      * @param {Cartesian4} coefficients The plane's normal (normalized).
      * @param {Plane} [result] The object onto which to store the result.
      * @returns {Plane} A new plane instance or the modified result parameter.
+     *
+     * @exception {DeveloperError} Normal must be normalized
      */
     Plane.fromCartesian4 = function(coefficients, result) {
                 if (!defined(coefficients)) {
@@ -14358,6 +14355,10 @@ define('Core/Plane',[
         var normal = Cartesian3.fromCartesian4(coefficients, scratchNormal);
         var distance = coefficients.w;
 
+                if (!CesiumMath.equalsEpsilon(Cartesian3.magnitude(normal), 1.0, CesiumMath.EPSILON6)) {
+            throw new DeveloperError('normal must be normalized.');
+        }
+        
         if (!defined(result)) {
             return new Plane(normal, distance);
         } else {
@@ -14469,9 +14470,9 @@ define('Core/PolylinePipeline',[
     var wrapLongitudeInversMatrix = new Matrix4();
     var wrapLongitudeOrigin = new Cartesian3();
     var wrapLongitudeXZNormal = new Cartesian3();
-    var wrapLongitudeXZPlane = new Plane(Cartesian3.ZERO, 0.0);
+    var wrapLongitudeXZPlane = new Plane(Cartesian3.UNIT_X, 0.0);
     var wrapLongitudeYZNormal = new Cartesian3();
-    var wrapLongitudeYZPlane = new Plane(Cartesian3.ZERO, 0.0);
+    var wrapLongitudeYZPlane = new Plane(Cartesian3.UNIT_X, 0.0);
     var wrapLongitudeIntersection = new Cartesian3();
     var wrapLongitudeOffset = new Cartesian3();
 
@@ -14570,9 +14571,9 @@ define('Core/PolylinePipeline',[
             var inverseModelMatrix = Matrix4.inverseTransformation(modelMatrix, wrapLongitudeInversMatrix);
 
             var origin = Matrix4.multiplyByPoint(inverseModelMatrix, Cartesian3.ZERO, wrapLongitudeOrigin);
-            var xzNormal = Matrix4.multiplyByPointAsVector(inverseModelMatrix, Cartesian3.UNIT_Y, wrapLongitudeXZNormal);
+            var xzNormal = Cartesian3.normalize(Matrix4.multiplyByPointAsVector(inverseModelMatrix, Cartesian3.UNIT_Y, wrapLongitudeXZNormal), wrapLongitudeXZNormal);
             var xzPlane = Plane.fromPointNormal(origin, xzNormal, wrapLongitudeXZPlane);
-            var yzNormal = Matrix4.multiplyByPointAsVector(inverseModelMatrix, Cartesian3.UNIT_X, wrapLongitudeYZNormal);
+            var yzNormal = Cartesian3.normalize(Matrix4.multiplyByPointAsVector(inverseModelMatrix, Cartesian3.UNIT_X, wrapLongitudeYZNormal), wrapLongitudeYZNormal);
             var yzPlane = Plane.fromPointNormal(origin, yzNormal, wrapLongitudeYZPlane);
 
             var count = 1;
@@ -15053,9 +15054,8 @@ define('Core/Cartesian2',[
      * var d = Cesium.Cartesian2.distance(new Cesium.Cartesian2(1.0, 0.0), new Cesium.Cartesian2(2.0, 0.0));
      */
     Cartesian2.distance = function(left, right) {
-                if (!defined(left) || !defined(right)) {
-            throw new DeveloperError('left and right are required.');
-        }
+                Check.typeOf.object('left', left);
+        Check.typeOf.object('right', right);
         
         Cartesian2.subtract(left, right, distanceScratch);
         return Cartesian2.magnitude(distanceScratch);
@@ -15074,9 +15074,8 @@ define('Core/Cartesian2',[
      * var d = Cesium.Cartesian2.distance(new Cesium.Cartesian2(1.0, 0.0), new Cesium.Cartesian2(3.0, 0.0));
      */
     Cartesian2.distanceSquared = function(left, right) {
-                if (!defined(left) || !defined(right)) {
-            throw new DeveloperError('left and right are required.');
-        }
+                Check.typeOf.object('left', left);
+        Check.typeOf.object('right', right);
         
         Cartesian2.subtract(left, right, distanceScratch);
         return Cartesian2.magnitudeSquared(distanceScratch);
@@ -15439,15 +15438,15 @@ define('Core/Cartesian2',[
 /*global define*/
 define('Core/AxisAlignedBoundingBox',[
         './Cartesian3',
+        './Check',
         './defaultValue',
         './defined',
-        './DeveloperError',
         './Intersect'
     ], function(
         Cartesian3,
+        Check,
         defaultValue,
         defined,
-        DeveloperError,
         Intersect) {
     'use strict';
 
@@ -15607,12 +15606,8 @@ define('Core/AxisAlignedBoundingBox',[
      *                      intersects the plane.
      */
     AxisAlignedBoundingBox.intersectPlane = function(box, plane) {
-                if (!defined(box)) {
-            throw new DeveloperError('box is required.');
-        }
-        if (!defined(plane)) {
-            throw new DeveloperError('plane is required.');
-        }
+                Check.defined('box', box);
+        Check.defined('plane', plane);
         
         intersectScratch = Cartesian3.subtract(box.maximum, box.minimum, intersectScratch);
         var h = Cartesian3.multiplyByScalar(intersectScratch, 0.5, intersectScratch); //The positive half diagonal
@@ -16532,11 +16527,11 @@ define('Core/deprecationWarning',[
 
 /*global define*/
 define('Core/binarySearch',[
-        './defined',
-        './DeveloperError'
+        './Check',
+        './defined'
     ], function(
-        defined,
-        DeveloperError) {
+        Check,
+        defined) {
     'use strict';
 
     /**
@@ -16562,15 +16557,9 @@ define('Core/binarySearch',[
      * var index = Cesium.binarySearch(numbers, 6, comparator); // 3
      */
     function binarySearch(array, itemToFind, comparator) {
-                if (!defined(array)) {
-            throw new DeveloperError('array is required.');
-        }
-        if (!defined(itemToFind)) {
-            throw new DeveloperError('itemToFind is required.');
-        }
-        if (!defined(comparator)) {
-            throw new DeveloperError('comparator is required.');
-        }
+                Check.defined('array', array);
+        Check.defined('itemToFind', itemToFind);
+        Check.defined('comparator', comparator);
         
         var low = 0;
         var high = array.length - 1;
@@ -19551,6 +19540,8 @@ define('Core/joinUrls',[
      * @param {String|Uri} first The base URL.
      * @param {String|Uri} second The URL path to join to the base URL.  If this URL is absolute, it is returned unmodified.
      * @param {Boolean} [appendSlash=true] The boolean determining whether there should be a forward slash between first and second.
+     *
+     * @return {String} The combined url
      * @private
      */
     function joinUrls(first, second, appendSlash) {
@@ -19569,6 +19560,16 @@ define('Core/joinUrls',[
 
         if (!(second instanceof Uri)) {
             second = new Uri(second);
+        }
+
+        // Don't try to join a data uri
+        if (first.scheme === 'data') {
+            return first.toString();
+        }
+
+        // Don't try to join a data uri
+        if (second.scheme === 'data') {
+            return second.toString();
         }
 
         // Uri.isAbsolute returns false for a URL like '//foo.com'.  So if we have an authority but
@@ -20417,9 +20418,7 @@ define('Core/Quaternion',[
      * negative z axis. Pitch is the rotation about the negative y axis. Roll is the rotation about
      * the positive x axis.
      *
-     * @param {Number} heading The heading angle in radians.
-     * @param {Number} pitch The pitch angle in radians.
-     * @param {Number} roll The roll angle in radians.
+     * @param {HeadingPitchRoll} headingPitchRoll The rotation expressed as a heading, pitch and roll.
      * @param {Quaternion} [result] The object onto which to store the result.
      * @returns {Quaternion} The modified result parameter or a new Quaternion instance if none was provided.
      */
@@ -22018,14 +22017,17 @@ define('Core/Transforms',[
         return result;
     };
 
+    var swizzleMatrix = new Matrix4(
+        0.0, 0.0, 1.0, 0.0,
+        1.0, 0.0, 0.0, 0.0,
+        0.0, 1.0, 0.0, 0.0,
+        0.0, 0.0, 0.0, 1.0
+    );
+
     var scratchCartographic = new Cartographic();
     var scratchCartesian3Projection = new Cartesian3();
-    var scratchCartesian3 = new Cartesian3();
-    var scratchCartesian4Origin = new Cartesian4();
-    var scratchCartesian4NewOrigin = new Cartesian4();
-    var scratchCartesian4NewXAxis = new Cartesian4();
-    var scratchCartesian4NewYAxis = new Cartesian4();
-    var scratchCartesian4NewZAxis = new Cartesian4();
+    var scratchCenter = new Cartesian3();
+    var scratchRotation = new Matrix3();
     var scratchFromENU = new Matrix4();
     var scratchToENU = new Matrix4();
 
@@ -22043,59 +22045,24 @@ define('Core/Transforms',[
             throw new DeveloperError('result is required.');
         }
         
+        var rtcCenter = Matrix4.getTranslation(matrix, scratchCenter);
         var ellipsoid = projection.ellipsoid;
 
-        var origin = Matrix4.getColumn(matrix, 3, scratchCartesian4Origin);
-        var cartographic = ellipsoid.cartesianToCartographic(origin, scratchCartographic);
-
-        var fromENU = Transforms.eastNorthUpToFixedFrame(origin, ellipsoid, scratchFromENU);
-        var toENU = Matrix4.inverseTransformation(fromENU, scratchToENU);
-
+        // Get the 2D Center
+        var cartographic = ellipsoid.cartesianToCartographic(rtcCenter, scratchCartographic);
         var projectedPosition = projection.project(cartographic, scratchCartesian3Projection);
-        var newOrigin = scratchCartesian4NewOrigin;
-        newOrigin.x = projectedPosition.z;
-        newOrigin.y = projectedPosition.x;
-        newOrigin.z = projectedPosition.y;
-        newOrigin.w = 1.0;
+        Cartesian3.fromElements(projectedPosition.z, projectedPosition.x, projectedPosition.y, projectedPosition);
 
-        var xAxis = Matrix4.getColumn(matrix, 0, scratchCartesian3);
-        var xScale = Cartesian3.magnitude(xAxis);
-        var newXAxis = Matrix4.multiplyByVector(toENU, xAxis, scratchCartesian4NewXAxis);
-        Cartesian4.fromElements(newXAxis.z, newXAxis.x, newXAxis.y, 0.0, newXAxis);
-
-        var yAxis = Matrix4.getColumn(matrix, 1, scratchCartesian3);
-        var yScale = Cartesian3.magnitude(yAxis);
-        var newYAxis = Matrix4.multiplyByVector(toENU, yAxis, scratchCartesian4NewYAxis);
-        Cartesian4.fromElements(newYAxis.z, newYAxis.x, newYAxis.y, 0.0, newYAxis);
-
-        var zAxis = Matrix4.getColumn(matrix, 2, scratchCartesian3);
-        var zScale = Cartesian3.magnitude(zAxis);
-
-        var newZAxis = scratchCartesian4NewZAxis;
-        Cartesian3.cross(newXAxis, newYAxis, newZAxis);
-        Cartesian3.normalize(newZAxis, newZAxis);
-        Cartesian3.cross(newYAxis, newZAxis, newXAxis);
-        Cartesian3.normalize(newXAxis, newXAxis);
-        Cartesian3.cross(newZAxis, newXAxis, newYAxis);
-        Cartesian3.normalize(newYAxis, newYAxis);
-
-        Cartesian3.multiplyByScalar(newXAxis, xScale, newXAxis);
-        Cartesian3.multiplyByScalar(newYAxis, yScale, newYAxis);
-        Cartesian3.multiplyByScalar(newZAxis, zScale, newZAxis);
-
-        Matrix4.setColumn(result, 0, newXAxis, result);
-        Matrix4.setColumn(result, 1, newYAxis, result);
-        Matrix4.setColumn(result, 2, newZAxis, result);
-        Matrix4.setColumn(result, 3, newOrigin, result);
+        // Assuming the instance are positioned in WGS84, invert the WGS84 transform to get the local transform and then convert to 2D
+        var fromENU = Transforms.eastNorthUpToFixedFrame(rtcCenter, ellipsoid, scratchFromENU);
+        var toENU = Matrix4.inverseTransformation(fromENU, scratchToENU);
+        var rotation = Matrix4.getRotation(matrix, scratchRotation);
+        var local = Matrix4.multiplyByMatrix3(toENU, rotation, result);
+        Matrix4.multiply(swizzleMatrix, local, result); // Swap x, y, z for 2D
+        Matrix4.setTranslation(result, projectedPosition, result); // Use the projected center
 
         return result;
     };
-
-    var swizzleMatrix = new Matrix4(
-        0.0, 0.0, 1.0, 0.0,
-        1.0, 0.0, 0.0, 0.0,
-        0.0, 1.0, 0.0, 0.0,
-        0.0, 0.0, 0.0, 1.0);
 
     /**
      * @private
@@ -22118,13 +22085,9 @@ define('Core/Transforms',[
 
         var cartographic = ellipsoid.cartesianToCartographic(center, scratchCartographic);
         var projectedPosition = projection.project(cartographic, scratchCartesian3Projection);
-        var newOrigin = scratchCartesian4NewOrigin;
-        newOrigin.x = projectedPosition.z;
-        newOrigin.y = projectedPosition.x;
-        newOrigin.z = projectedPosition.y;
-        newOrigin.w = 1.0;
+        Cartesian3.fromElements(projectedPosition.z, projectedPosition.x, projectedPosition.y, projectedPosition);
 
-        var translation = Matrix4.fromTranslation(newOrigin, scratchFromENU);
+        var translation = Matrix4.fromTranslation(projectedPosition, scratchFromENU);
         Matrix4.multiply(swizzleMatrix, toENU, result);
         Matrix4.multiply(translation, result, result);
 
@@ -23846,7 +23809,7 @@ define('Core/IndexDatatype',[
      * or <code>Uint32Array</code> depending on the number of vertices.
      *
      * @param {Number} numberOfVertices Number of vertices that the indices will reference.
-     * @param {Any} indicesLengthOrArray Passed through to the typed array constructor.
+     * @param {*} indicesLengthOrArray Passed through to the typed array constructor.
      * @returns {Uint16Array|Uint32Array} A <code>Uint16Array</code> or <code>Uint32Array</code> constructed with <code>indicesLengthOrArray</code>.
      *
      * @example
