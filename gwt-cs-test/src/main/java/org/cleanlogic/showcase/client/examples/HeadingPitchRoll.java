@@ -50,6 +50,7 @@ import static java.lang.Math.min;
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 public class HeadingPitchRoll extends AbstractExample {
+    double deltaRadians = Math.toRadians(3.0);
     SampledPositionProperty pathPosition;
     double speed = 10;
     double r = 0;
@@ -89,7 +90,6 @@ public class HeadingPitchRoll extends AbstractExample {
 
         final org.cesiumjs.cs.core.HeadingPitchRoll hpRoll = new org.cesiumjs.cs.core.HeadingPitchRoll();
         final HeadingPitchRange hpRange = new HeadingPitchRange();
-        double deltaRadians = Math.toRadians(3.0);
 
         position = Cartesian3.fromDegrees(-123.0744619, 44.0503706, 5000.0);
         speedVector = new Cartesian3();
