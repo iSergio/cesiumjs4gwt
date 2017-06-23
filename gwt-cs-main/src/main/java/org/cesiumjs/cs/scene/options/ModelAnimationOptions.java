@@ -44,7 +44,7 @@ public class ModelAnimationOptions {
      * Default: {@link ModelAnimationLoop#NONE()}
      */
     @JsProperty
-    public Integer loop;
+    public Number loop;
     /**
      * The scene time to start playing this animation. When this is undefined, the animation starts at the next frame.
      * Default: undefined
