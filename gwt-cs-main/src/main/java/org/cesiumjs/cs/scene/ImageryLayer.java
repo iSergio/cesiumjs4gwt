@@ -22,6 +22,7 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Rectangle;
 import org.cesiumjs.cs.promise.Promise;
+import org.cesiumjs.cs.scene.enums.ImagerySplitDirection;
 import org.cesiumjs.cs.scene.options.ImageryLayerOptions;
 import org.cesiumjs.cs.scene.providers.ImageryProvider;
 
@@ -65,6 +66,12 @@ public class ImageryLayer {
      */
     @JsProperty
     public static float DEFAULT_SATURATION;
+    /**
+     * This value is used as the default spliat for the imagery layer if one is not provided during construction or by the imagery provider.
+     * Default: {@link ImagerySplitDirection#NONE()}
+     */
+    @JsProperty
+    public static Number DEFAULT_SPLIT;
     /**
      * The alpha blending value of this layer, with 0.0 representing fully transparent and 1.0 representing fully opaque.
      * Default: 1.0
@@ -121,6 +128,12 @@ public class ImageryLayer {
      */
     @JsProperty
     public boolean show;
+    /**
+     * The {@link org.cesiumjs.cs.scene.enums.ImagerySplitDirection} to apply to this layer.
+     * Default: {ImageryLayer#DEFAULT_SPLIT}.
+     */
+    @JsProperty
+    public Number splitDirection;
 
     /**
      * An imagery layer that displays tiled imagery data from a single imagery provider on a {@link org.cesiumjs.cs.core.Globe}.
