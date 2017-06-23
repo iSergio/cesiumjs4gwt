@@ -21,6 +21,7 @@ import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.collections.options.PrimitiveCollectionOptions;
+import org.cesiumjs.cs.scene.Model;
 import org.cesiumjs.cs.scene.Primitive;
 import org.cesiumjs.cs.scene.Scene;
 
@@ -64,7 +65,16 @@ public class PrimitiveCollection extends Collection<Primitive> {
      * @param collection Collection
      * @return collection
      */
+    @JsMethod
     public native Collection add(Collection collection);
+
+    /**
+     * Add model to collecntion
+     * @param model Model to add
+     * @return added Model
+     */
+    @JsMethod
+    public native Model add(Model model);
 
     /**
      * Lowers a primitive "down one" in the collection. If all primitives in the collection are drawn on the globe surface,
