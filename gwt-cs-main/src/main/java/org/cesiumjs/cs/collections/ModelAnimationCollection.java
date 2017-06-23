@@ -17,6 +17,7 @@
 package org.cesiumjs.cs.collections;
 
 import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Event;
@@ -50,7 +51,16 @@ public class ModelAnimationCollection extends Collection<ModelAnimation> {
      * @param options {@link ModelAnimationOptions}
      * @return The animation that was added to the collection.
      */
+    @JsMethod
     public native ModelAnimation add(ModelAnimationOptions options);
 
-
+    /**
+     * Creates and adds an animation with the specified initial properties to the collection for each animation in the model.
+     * This raises the ModelAnimationCollection#animationAdded event for each model so, for example, a UI can stay in sync.
+     * @param options {@link ModelAnimationOptions}
+     * @return An array of ModelAnimation objects, one for each animation added to the collection.
+     * If there are no glTF animations, the array is empty.
+     */
+    @JsMethod
+    public native ModelAnimation[] addAll(ModelAnimationOptions options);
 }
