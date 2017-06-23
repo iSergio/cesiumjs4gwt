@@ -16,9 +16,7 @@
 
 package org.cesiumjs.cs.datasources.properties;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.datasources.properties.options.PolylineGlowMaterialPropertyOptions;
 
@@ -45,6 +43,20 @@ public class PolylineGlowMaterialProperty extends MaterialProperty {
      */
     @JsConstructor
     public PolylineGlowMaterialProperty() {}
+
+    /**
+     * Simple method for create PolylineGlowMaterialProperty by color and glowPower.
+     * @param color A Property specifying the Color of the line.
+     * @param glowPower A numeric Property specifying the strength of the glow, as a percentage of the total line width.
+     * @return PolylineGlowMaterialProperty
+     */
+    @JsOverlay
+    public static PolylineGlowMaterialProperty create(Color color, double glowPower) {
+        PolylineGlowMaterialPropertyOptions options = new PolylineGlowMaterialPropertyOptions();
+        options.color = new ConstantProperty<>(color);
+        options.glowPower = new ConstantProperty<>(glowPower);
+        return new PolylineGlowMaterialProperty(options);
+    }
 
     /**
      * A {@link MaterialProperty} that maps to polyline glow {@link org.cesiumjs.cs.scene.Material} uniforms.
