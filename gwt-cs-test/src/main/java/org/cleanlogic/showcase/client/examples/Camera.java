@@ -139,7 +139,7 @@ public class Camera extends AbstractExample {
                     public void function() {
                         CameraFlyToOptions cameraFlyToOptions = new CameraFlyToOptions();
                         cameraFlyToOptions.destinationPos = Cartesian3.fromDegrees(-73.98585975679403, 40.75759944127251, 186.50838555841779);
-                        cameraFlyToOptions.orientation = new HeadingPitchRoll(Math.toRadians(200.0), Math.toRadians(-50.0));
+                        cameraFlyToOptions.orientation = new org.cesiumjs.cs.core.HeadingPitchRoll(Math.toRadians(200.0), Math.toRadians(-50.0));
                         cameraFlyToOptions.easingFunction  = EasingFunction.LINEAR_NONE();
                         csVPanel.getViewer().camera.flyTo(cameraFlyToOptions);
                     }
@@ -158,7 +158,7 @@ public class Camera extends AbstractExample {
     private void flyToHeadingPitchRoll() {
         CameraFlyToOptions cameraFlyToOptions = new CameraFlyToOptions();
         cameraFlyToOptions.destinationPos = Cartesian3.fromDegrees(-122.22, 46.12, 5000.0);
-        cameraFlyToOptions.orientation = new HeadingPitchRoll(Math.toRadians(20.0), Math.toRadians(-35.0), 0.0);
+        cameraFlyToOptions.orientation = new org.cesiumjs.cs.core.HeadingPitchRoll(Math.toRadians(20.0), Math.toRadians(-35.0), 0.0);
         csVPanel.getViewer().camera.flyTo(cameraFlyToOptions);
     }
 
@@ -220,7 +220,7 @@ public class Camera extends AbstractExample {
     private void setHeadingPitchRoll() {
         ViewOptions viewOptions = new ViewOptions();
         viewOptions.destinationPos = Cartesian3.fromDegrees(-75.5847, 40.0397, 1000.0);
-        viewOptions.orientation = new HeadingPitchRoll(-Math.PI_OVER_TWO(), -Math.PI_OVER_FOUR(), 0.0);
+        viewOptions.orientation = new org.cesiumjs.cs.core.HeadingPitchRoll(-Math.PI_OVER_TWO(), -Math.PI_OVER_FOUR(), 0.0);
         csVPanel.getViewer().camera.setView(viewOptions);
     }
 
