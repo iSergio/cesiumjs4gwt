@@ -71,5 +71,6 @@ public class InjectorModule extends AbstractGinModule {
         bind(PolylineDash.class).asEagerSingleton();
         bind(GoogleEarthEnterprise.class).asEagerSingleton();
         bind(HeadingPitchRoll.class).asEagerSingleton();
+        bind(ImageryLayersSplit.class).asEagerSingleton();
     }
 }
