@@ -70,5 +70,6 @@ public class InjectorModule extends AbstractGinModule {
         bind(CesiumNavigation.class).asEagerSingleton();
         bind(PolylineDash.class).asEagerSingleton();
         bind(GoogleEarthEnterprise.class).asEagerSingleton();
+        bind(HeadingPitchRoll.class).asEagerSingleton();
     }
 }
