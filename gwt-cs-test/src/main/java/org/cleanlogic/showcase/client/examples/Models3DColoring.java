@@ -97,7 +97,8 @@ public class Models3DColoring extends AbstractExample {
         double heading = Math.toRadians(135);
         double pitch = 0;
         double roll = 0;
-        Quaternion orientation = Transforms.headingPitchRollQuaternion(position, new HeadingPitchRoll(heading, pitch, roll));
+        org.cesiumjs.cs.core.HeadingPitchRoll hpr = new org.cesiumjs.cs.core.HeadingPitchRoll(heading, pitch, roll);
+        Quaternion orientation = Transforms.headingPitchRollQuaternion(position, hpr);
         EntityOptions entityOptions = new EntityOptions();
         entityOptions.name = GWT.getModuleBaseURL() + "SampleData/models/CesiumAir/Cesium_Air.glb";
         entityOptions.position = new ConstantPositionProperty(position);
@@ -288,7 +289,8 @@ public class Models3DColoring extends AbstractExample {
         double heading = Math.toRadians(135);
         double pitch = 0;
         double roll = 0;
-        Quaternion orientation = Transforms.headingPitchRollQuaternion(position, new HeadingPitchRoll(heading, pitch, roll));
+        org.cesiumjs.cs.core.HeadingPitchRoll hpr = new org.cesiumjs.cs.core.HeadingPitchRoll(heading, pitch, roll);
+        Quaternion orientation = Transforms.headingPitchRollQuaternion(position, hpr);
         EntityOptions entityOptions = new EntityOptions();
         entityOptions.name = url;
         entityOptions.position = new ConstantPositionProperty(position);
