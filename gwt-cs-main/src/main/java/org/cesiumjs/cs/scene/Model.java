@@ -167,7 +167,7 @@ public class Model {
      * and the WebGL resources were created. This is set to true right before Model#readyPromise is resolved.
      * Default: false
      */
-    @JsProperty(name = "")
+    @JsProperty(name = "ready")
     public native boolean ready();
     /**
      * Gets the promise that will be resolved when this model is ready to render, i.e., when the external binary,
