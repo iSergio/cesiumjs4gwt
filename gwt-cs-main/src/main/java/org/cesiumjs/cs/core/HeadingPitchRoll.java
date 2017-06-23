@@ -18,6 +18,7 @@ package org.cesiumjs.cs.core;
 
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
@@ -25,6 +26,12 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "HeadingPitchRoll")
 public class HeadingPitchRoll {
+    @JsProperty
+    public double heading;
+    @JsProperty
+    public double pitch;
+    @JsProperty
+    public double roll;
     /**
      * A rotation expressed as a heading, pitch, and roll. Heading is the rotation about the negative z axis.
      * Pitch is the rotation about the negative y axis. Roll is the rotation about the positive x axis.
