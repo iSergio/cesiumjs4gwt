@@ -24,7 +24,7 @@
         <version>1.34.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <version>${parent.version}</version>
+    <name>CesiumJS GWT Wrapper</name>
 
     <artifactId>gwt-cs-main</artifactId>
 

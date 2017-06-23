@@ -12,7 +12,6 @@
     <artifactId>gwt-cs-test</artifactId>
     <packaging>war</packaging>
     <description>Showcase for GWT Cesium</description>
-    <version>${parent.version}</version>
 
     <properties>
         <!-- GWT -->
@@ -154,7 +153,7 @@
         <dependency>
             <groupId>org.cesiumjs</groupId>
             <artifactId>gwt-cs-main</artifactId>
-            <version>${parent.version}</version>
+            <version>${project.parent.version}</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
