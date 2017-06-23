@@ -16,10 +16,7 @@
 
 package org.cesiumjs.cs.scene.providers;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.Credit;
 import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.core.Rectangle;
@@ -173,6 +170,13 @@ public class ArcGisMapServerImageryProvider implements ImageryProvider {
      */
     @JsConstructor
     public ArcGisMapServerImageryProvider(ArcGisMapServerImageryProviderOptions options) {}
+
+    @JsOverlay
+    public static ArcGisMapServerImageryProvider create(String url) {
+        ArcGisMapServerImageryProviderOptions options = new ArcGisMapServerImageryProviderOptions();
+        options.url = url;
+        return new ArcGisMapServerImageryProvider(options);
+    }
 
     /**
      * Gets the credits to be displayed when a given tile is displayed.
