@@ -21,7 +21,6 @@
  * See https://github.com/AnalyticalGraphicsInc/cesium/blob/master/LICENSE.md for full licensing details.
  */
 (function () {
-/*global define*/
 define('Core/defined',[],function() {
     'use strict';
 
@@ -45,7 +44,6 @@ define('Core/defined',[],function() {
     return defined;
 });
 
-/*global define*/
 define('Core/DeveloperError',[
         './defined'
     ], function(
@@ -126,7 +124,6 @@ define('Core/DeveloperError',[
     return DeveloperError;
 });
 
-/*global define*/
 define('Core/Check',[
         './defined',
         './DeveloperError'
@@ -293,10 +290,26 @@ define('Core/Check',[
         }
     };
 
+    /**
+     * Throws if test1 and test2 is not typeof 'number' and not equal in value
+     *
+     * @param {String} name1 The name of the first variable being tested
+     * @param {String} name2 The name of the second variable being tested against
+     * @param {*} test1 The value to test
+     * @param {*} test2 The value to test against
+     * @exception {DeveloperError} test1 and test2 should be type of 'number' and be equal in value
+     */
+    Check.typeOf.number.equals = function (name1, name2, test1, test2) {
+        Check.typeOf.number(name1, test1);
+        Check.typeOf.number(name2, test2);
+        if (test1 !== test2) {
+            throw new DeveloperError(name1 + ' must be equal to ' + name2 + ', the actual values are ' + test1 + ' and ' + test2);
+        }
+    };
+
     return Check;
 });
 
-/*global define*/
 define('Core/freezeObject',[
         './defined'
     ], function(
@@ -322,7 +335,6 @@ define('Core/freezeObject',[
     return freezeObject;
 });
 
-/*global define*/
 define('Core/defaultValue',[
         './freezeObject'
     ], function(
@@ -343,7 +355,7 @@ define('Core/defaultValue',[
      * param = Cesium.defaultValue(param, 'default');
      */
     function defaultValue(a, b) {
-        if (a !== undefined) {
+        if (a !== undefined && a !== null) {
             return a;
         }
         return b;
@@ -562,7 +574,6 @@ MersenneTwister.prototype.random = function() {
 return MersenneTwister;
 });
 
-/*global define*/
 define('Core/Math',[
         '../ThirdParty/mersenne-twister',
         './defaultValue',
@@ -1276,7 +1287,7 @@ define('Core/Math',[
     };
 
     /**
-     * Generates a random number in the range of [0.0, 1.0)
+     * Generates a random floating point number in the range of [0.0, 1.0)
      * using a Mersenne twister.
      *
      * @returns {Number} A random number in the range of [0.0, 1.0).
@@ -1286,6 +1297,18 @@ define('Core/Math',[
      */
     CesiumMath.nextRandomNumber = function() {
         return randomNumberGenerator.random();
+    };
+
+
+    /**
+     * Generates a random number between two numbers.
+     *
+     * @param {Number} min The minimum value.
+     * @param {Number} max The maximum value.
+     * @returns {Number} A random number between the min and max.
+     */
+    CesiumMath.randomBetween = function(min, max) {
+        return CesiumMath.nextRandomNumber() * (max - min) + min;
     };
 
     /**
@@ -1363,14 +1386,13 @@ define('Core/Math',[
     return CesiumMath;
 });
 
-/*global define*/
 define('Core/Cartesian3',[
-    './Check',
-    './defaultValue',
-    './defined',
-    './DeveloperError',
-    './freezeObject',
-    './Math'
+        './Check',
+        './defaultValue',
+        './defined',
+        './DeveloperError',
+        './freezeObject',
+        './Math'
     ], function(
         Check,
         defaultValue,
@@ -1987,12 +2009,10 @@ define('Core/Cartesian3',[
             } else {
                 result = Cartesian3.clone(Cartesian3.UNIT_Z, result);
             }
+        } else if (f.y <= f.z) {
+            result = Cartesian3.clone(Cartesian3.UNIT_Y, result);
         } else {
-            if (f.y <= f.z) {
-                result = Cartesian3.clone(Cartesian3.UNIT_Y, result);
-            } else {
-                result = Cartesian3.clone(Cartesian3.UNIT_Z, result);
-            }
+            result = Cartesian3.clone(Cartesian3.UNIT_Z, result);
         }
 
         return result;
@@ -2354,7 +2374,6 @@ define('Core/Cartesian3',[
     return Cartesian3;
 });
 
-/*global define*/
 define('Core/scaleToGeodeticSurface',[
         './Cartesian3',
         './defined',
@@ -2489,7 +2508,6 @@ define('Core/scaleToGeodeticSurface',[
     return scaleToGeodeticSurface;
 });
 
-/*global define*/
 define('Core/Cartographic',[
         './Cartesian3',
         './Check',
@@ -2746,7 +2764,6 @@ define('Core/Cartographic',[
     return Cartographic;
 });
 
-/*global define*/
 define('Core/defineProperties',[
         './defined'
     ], function(
@@ -2781,10 +2798,10 @@ define('Core/defineProperties',[
     return defineProperties;
 });
 
-/*global define*/
 define('Core/Ellipsoid',[
         './Cartesian3',
         './Cartographic',
+        './Check',
         './defaultValue',
         './defined',
         './defineProperties',
@@ -2795,6 +2812,7 @@ define('Core/Ellipsoid',[
     ], function(
         Cartesian3,
         Cartographic,
+        Check,
         defaultValue,
         defined,
         defineProperties,
@@ -2809,9 +2827,9 @@ define('Core/Ellipsoid',[
         y = defaultValue(y, 0.0);
         z = defaultValue(z, 0.0);
 
-                if (x < 0.0 || y < 0.0 || z < 0.0) {
-            throw new DeveloperError('All radii components must be greater than or equal to zero.');
-        }
+                Check.typeOf.number.greaterThanOrEquals('x', x, 0.0);
+        Check.typeOf.number.greaterThanOrEquals('y', y, 0.0);
+        Check.typeOf.number.greaterThanOrEquals('z', z, 0.0);
         
         ellipsoid._radii = new Cartesian3(x, y, z);
 
@@ -3063,12 +3081,8 @@ define('Core/Ellipsoid',[
      * @returns {Number[]} The array that was packed into
      */
     Ellipsoid.pack = function(value, array, startingIndex) {
-                if (!defined(value)) {
-            throw new DeveloperError('value is required');
-        }
-        if (!defined(array)) {
-            throw new DeveloperError('array is required');
-        }
+                Check.typeOf.object('value', value);
+        Check.defined('array', array);
         
         startingIndex = defaultValue(startingIndex, 0);
 
@@ -3086,9 +3100,7 @@ define('Core/Ellipsoid',[
      * @returns {Ellipsoid} The modified result parameter or a new Ellipsoid instance if one was not provided.
      */
     Ellipsoid.unpack = function(array, startingIndex, result) {
-                if (!defined(array)) {
-            throw new DeveloperError('array is required');
-        }
+                Check.defined('array', array);
         
         startingIndex = defaultValue(startingIndex, 0);
 
@@ -3114,9 +3126,7 @@ define('Core/Ellipsoid',[
      * @returns {Cartesian3} The modified result parameter or a new Cartesian3 instance if none was provided.
      */
     Ellipsoid.prototype.geodeticSurfaceNormalCartographic = function(cartographic, result) {
-                if (!defined(cartographic)) {
-            throw new DeveloperError('cartographic is required.');
-        }
+                Check.typeOf.object('cartographic', cartographic);
         
         var longitude = cartographic.longitude;
         var latitude = cartographic.latitude;
@@ -3196,9 +3206,7 @@ define('Core/Ellipsoid',[
      * var cartesianPositions = Cesium.Ellipsoid.WGS84.cartographicArrayToCartesianArray(positions);
      */
     Ellipsoid.prototype.cartographicArrayToCartesianArray = function(cartographics, result) {
-                if (!defined(cartographics)) {
-            throw new DeveloperError('cartographics is required.');
-        }
+                Check.defined('cartographics', cartographics);
         
         var length = cartographics.length;
         if (!defined(result)) {
@@ -3268,9 +3276,7 @@ define('Core/Ellipsoid',[
      * var cartographicPositions = Cesium.Ellipsoid.WGS84.cartesianArrayToCartographicArray(positions);
      */
     Ellipsoid.prototype.cartesianArrayToCartographicArray = function(cartesians, result) {
-                if (!defined(cartesians)) {
-            throw new DeveloperError('cartesians is required.');
-        }
+                Check.defined('cartesians', cartesians);
         
         var length = cartesians.length;
         if (!defined(result)) {
@@ -3306,9 +3312,7 @@ define('Core/Ellipsoid',[
      * @returns {Cartesian3} The modified result parameter or a new Cartesian3 instance if none was provided.
      */
     Ellipsoid.prototype.scaleToGeocentricSurface = function(cartesian, result) {
-                if (!defined(cartesian)) {
-            throw new DeveloperError('cartesian is required.');
-        }
+                Check.typeOf.object('cartesian', cartesian);
         
         if (!defined(result)) {
             result = new Cartesian3();
@@ -3401,15 +3405,13 @@ define('Core/Ellipsoid',[
      * @exception {DeveloperError} Ellipsoid.radii.z must be greater than 0.
      */
     Ellipsoid.prototype.getSurfaceNormalIntersectionWithZAxis = function(position, buffer, result) {
-                if (!defined(position)) {
-            throw new DeveloperError('position is required.');
-        }
+                Check.typeOf.object('position', position);
+
         if (!CesiumMath.equalsEpsilon(this._radii.x, this._radii.y, CesiumMath.EPSILON15)) {
             throw new DeveloperError('Ellipsoid must be an ellipsoid of revolution (radii.x == radii.y)');
         }
-        if (this._radii.z === 0) {
-            throw new DeveloperError('Ellipsoid.radii.z must be greater than 0');
-        }
+
+        Check.typeOf.number.greaterThan('Ellipsoid.radii.z', this._radii.z, 0);
         
         buffer = defaultValue(buffer, 0.0);
 
@@ -3433,7 +3435,6 @@ define('Core/Ellipsoid',[
     return Ellipsoid;
 });
 
-/*global define*/
 define('Core/GeographicProjection',[
         './Cartesian3',
         './Cartographic',
@@ -3551,7 +3552,6 @@ define('Core/GeographicProjection',[
     return GeographicProjection;
 });
 
-/*global define*/
 define('Core/Intersect',[
         './freezeObject'
     ], function(
@@ -3595,7 +3595,6 @@ define('Core/Intersect',[
     return freezeObject(Intersect);
 });
 
-/*global define*/
 define('Core/Interval',[
         './defaultValue'
     ], function(
@@ -3628,7 +3627,6 @@ define('Core/Interval',[
     return Interval;
 });
 
-/*global define*/
 define('Core/Matrix3',[
         './Cartesian3',
         './Check',
@@ -5059,7 +5057,6 @@ define('Core/Matrix3',[
     return Matrix3;
 });
 
-/*global define*/
 define('Core/Cartesian4',[
         './Check',
         './defaultValue',
@@ -5833,7 +5830,6 @@ define('Core/Cartesian4',[
     return Cartesian4;
 });
 
-/*global define*/
 define('Core/RuntimeError',[
         './defined'
     ], function(
@@ -5906,7 +5902,6 @@ define('Core/RuntimeError',[
     return RuntimeError;
 });
 
-/*global define*/
 define('Core/Matrix4',[
         './Cartesian3',
         './Cartesian4',
@@ -8428,7 +8423,6 @@ define('Core/Matrix4',[
     return Matrix4;
 });
 
-/*global define*/
 define('Core/Rectangle',[
         './Cartographic',
         './Check',
@@ -8717,7 +8711,8 @@ define('Core/Rectangle',[
      */
     Rectangle.fromCartesianArray = function(cartesians, ellipsoid, result) {
                 Check.defined('cartesians', cartesians);
-        
+                ellipsoid = defaultValue(ellipsoid, Ellipsoid.WGS84);
+
         var west = Number.MAX_VALUE;
         var east = -Number.MAX_VALUE;
         var westOverIDL = Number.MAX_VALUE;
@@ -8761,7 +8756,7 @@ define('Core/Rectangle',[
     };
 
     /**
-     * Duplicates an Rectangle.
+     * Duplicates a Rectangle.
      *
      * @param {Rectangle} rectangle The rectangle to clone.
      * @param {Rectangle} [result] The object onto which to store the result, or undefined if a new instance should be created.
@@ -8842,7 +8837,7 @@ define('Core/Rectangle',[
     };
 
     /**
-     * Checks an Rectangle's properties and throws if they are not in valid ranges.
+     * Checks a Rectangle's properties and throws if they are not in valid ranges.
      *
      * @param {Rectangle} rectangle The rectangle to validate
      *
@@ -9255,7 +9250,6 @@ define('Core/Rectangle',[
     return Rectangle;
 });
 
-/*global define*/
 define('Core/BoundingSphere',[
         './Cartesian3',
         './Cartographic',
@@ -9358,7 +9352,8 @@ define('Core/BoundingSphere',[
         var zMax = Cartesian3.clone(currentPos, fromPointsZMax);
 
         var numPositions = positions.length;
-        for (var i = 1; i < numPositions; i++) {
+        var i;
+        for (i = 1; i < numPositions; i++) {
             Cartesian3.clone(positions[i], currentPos);
 
             var x = currentPos.x;
@@ -9620,7 +9615,8 @@ define('Core/BoundingSphere',[
         var zMax = Cartesian3.clone(currentPos, fromPointsZMax);
 
         var numElements = positions.length;
-        for (var i = 0; i < numElements; i += stride) {
+        var i;
+        for (i = 0; i < numElements; i += stride) {
             var x = positions[i] + center.x;
             var y = positions[i + 1] + center.y;
             var z = positions[i + 2] + center.z;
@@ -9777,7 +9773,8 @@ define('Core/BoundingSphere',[
         var zMax = Cartesian3.clone(currentPos, fromPointsZMax);
 
         var numElements = positionsHigh.length;
-        for (var i = 0; i < numElements; i += 3) {
+        var i;
+        for (i = 0; i < numElements; i += 3) {
             var x = positionsHigh[i] + positionsLow[i];
             var y = positionsHigh[i + 1] + positionsLow[i + 1];
             var z = positionsHigh[i + 2] + positionsLow[i + 2];
@@ -9974,7 +9971,8 @@ define('Core/BoundingSphere',[
         }
 
         var positions = [];
-        for (var i = 0; i < length; i++) {
+        var i;
+        for (i = 0; i < length; i++) {
             positions.push(boundingSpheres[i].center);
         }
 
@@ -10523,7 +10521,6 @@ define('Core/BoundingSphere',[
     return BoundingSphere;
 });
 
-/*global define*/
 define('Core/Fullscreen',[
         './defined',
         './defineProperties'
@@ -10779,7 +10776,6 @@ define('Core/Fullscreen',[
     return Fullscreen;
 });
 
-/*global define*/
 define('Core/FeatureDetection',[
         './defaultValue',
         './defined',
@@ -11042,7 +11038,6 @@ define('Core/FeatureDetection',[
     return FeatureDetection;
 });
 
-/*global define*/
 define('Core/WebGLConstants',[
         './freezeObject'
     ], function(
@@ -11657,7 +11652,6 @@ define('Core/WebGLConstants',[
     return freezeObject(WebGLConstants);
 });
 
-/*global define*/
 define('Core/ComponentDatatype',[
         './defaultValue',
         './defined',
@@ -11984,7 +11978,6 @@ define('Core/ComponentDatatype',[
     return freezeObject(ComponentDatatype);
 });
 
-/*global define*/
 define('Core/GeometryType',[
         './freezeObject'
     ], function(
@@ -12004,7 +11997,6 @@ define('Core/GeometryType',[
     return freezeObject(GeometryType);
 });
 
-/*global define*/
 define('Core/PrimitiveType',[
         './freezeObject',
         './WebGLConstants'
@@ -12096,14 +12088,15 @@ define('Core/PrimitiveType',[
     return freezeObject(PrimitiveType);
 });
 
-/*global define*/
 define('Core/Geometry',[
+        './Check',
         './defaultValue',
         './defined',
         './DeveloperError',
         './GeometryType',
         './PrimitiveType'
     ], function(
+        Check,
         defaultValue,
         defined,
         DeveloperError,
@@ -12164,9 +12157,7 @@ define('Core/Geometry',[
     function Geometry(options) {
         options = defaultValue(options, defaultValue.EMPTY_OBJECT);
 
-                if (!defined(options.attributes)) {
-            throw new DeveloperError('options.attributes is required.');
-        }
+                Check.typeOf.object('options.attributes', options.attributes);
         
         /**
          * Attributes, which make up the geometry's vertices.  Each property in this object corresponds to a
@@ -12268,9 +12259,7 @@ define('Core/Geometry',[
      * var numVertices = Cesium.Geometry.computeNumberOfVertices(geometry);
      */
     Geometry.computeNumberOfVertices = function(geometry) {
-                if (!defined(geometry)) {
-            throw new DeveloperError('geometry is required.');
-        }
+                Check.typeOf.object('geometry', geometry);
         
         var numberOfVertices = -1;
         for ( var property in geometry.attributes) {
@@ -12293,7 +12282,6 @@ define('Core/Geometry',[
     return Geometry;
 });
 
-/*global define*/
 define('Core/GeometryAttribute',[
         './defaultValue',
         './defined',
@@ -12336,7 +12324,7 @@ define('Core/GeometryAttribute',[
      *   },
      *   primitiveType : Cesium.PrimitiveType.LINE_LOOP
      * });
-     * 
+     *
      * @see Geometry
      */
     function GeometryAttribute(options) {
@@ -12434,7 +12422,6 @@ define('Core/GeometryAttribute',[
     return GeometryAttribute;
 });
 
-/*global define*/
 define('Core/GeometryAttributes',[
         './defaultValue'
     ], function(
@@ -12530,7 +12517,6 @@ define('Core/GeometryAttributes',[
     return GeometryAttributes;
 });
 
-/*global define*/
 define('Core/IndexDatatype',[
         './defined',
         './DeveloperError',
@@ -12676,7 +12662,6 @@ define('Core/IndexDatatype',[
     return freezeObject(IndexDatatype);
 });
 
-/*global define*/
 define('Core/AxisAlignedBoundingBox',[
         './Cartesian3',
         './Check',
@@ -12905,7 +12890,6 @@ define('Core/AxisAlignedBoundingBox',[
     return AxisAlignedBoundingBox;
 });
 
-/*global define*/
 define('Core/Cartesian2',[
         './Check',
         './defaultValue',
@@ -13604,7 +13588,6 @@ define('Core/Cartesian2',[
     return Cartesian2;
 });
 
-/*global define*/
 define('Core/QuadraticRealPolynomial',[
         './DeveloperError',
         './Math'
@@ -13740,7 +13723,6 @@ define('Core/QuadraticRealPolynomial',[
     return QuadraticRealPolynomial;
 });
 
-/*global define*/
 define('Core/CubicRealPolynomial',[
         './DeveloperError',
         './QuadraticRealPolynomial'
@@ -13977,7 +13959,6 @@ define('Core/CubicRealPolynomial',[
     return CubicRealPolynomial;
 });
 
-/*global define*/
 define('Core/QuarticRealPolynomial',[
         './CubicRealPolynomial',
         './DeveloperError',
@@ -14208,9 +14189,8 @@ define('Core/QuarticRealPolynomial',[
                         return [roots1[0], roots2[0], roots2[1], roots1[1]];
                     } else if (roots1[0] > roots2[0] && roots1[0] < roots2[1]) {
                         return [roots2[0], roots1[0], roots2[1], roots1[1]];
-                    } else {
-                        return [roots1[0], roots2[0], roots1[1], roots2[1]];
                     }
+                    return [roots1[0], roots2[0], roots1[1], roots2[1]];
                 }
                 return roots1;
             }
@@ -14302,7 +14282,6 @@ define('Core/QuarticRealPolynomial',[
     return QuarticRealPolynomial;
 });
 
-/*global define*/
 define('Core/Ray',[
         './Cartesian3',
         './defaultValue',
@@ -14376,7 +14355,6 @@ define('Core/Ray',[
     return Ray;
 });
 
-/*global define*/
 define('Core/IntersectionTests',[
         './Cartesian3',
         './Cartographic',
@@ -14815,11 +14793,10 @@ define('Core/IntersectionTests',[
                     start : root1,
                     stop : root0
                 };
-            } else {
-                // qw2 == product.  Repeated roots (2 intersections).
-                var root = Math.sqrt(difference / w2);
-                return new Interval(root, root);
             }
+            // qw2 == product.  Repeated roots (2 intersections).
+            var root = Math.sqrt(difference / w2);
+            return new Interval(root, root);
         } else if (q2 < 1.0) {
             // Inside ellipsoid (2 intersections).
             difference = q2 - 1.0; // Negatively valued.
@@ -14829,17 +14806,16 @@ define('Core/IntersectionTests',[
             discriminant = qw * qw - product;
             temp = -qw + Math.sqrt(discriminant); // Positively valued.
             return new Interval(0.0, temp / w2);
-        } else {
-            // q2 == 1.0. On ellipsoid.
-            if (qw < 0.0) {
-                // Looking inward.
-                w2 = Cartesian3.magnitudeSquared(w);
-                return new Interval(0.0, -qw / w2);
-            }
-
-            // qw >= 0.0.  Looking outward or tangent.
-            return undefined;
         }
+        // q2 == 1.0. On ellipsoid.
+        if (qw < 0.0) {
+            // Looking inward.
+            w2 = Cartesian3.magnitudeSquared(w);
+            return new Interval(0.0, -qw / w2);
+        }
+
+        // qw >= 0.0.  Looking outward or tangent.
+        return undefined;
     };
 
     function addWithCancellationCheck(left, right, tolerance) {
@@ -15269,19 +15245,18 @@ define('Core/IntersectionTests',[
     return IntersectionTests;
 });
 
-/*global define*/
 define('Core/Plane',[
         './Cartesian3',
         './defined',
         './DeveloperError',
-        './Math',
-        './freezeObject'
+        './freezeObject',
+        './Math'
     ], function(
         Cartesian3,
         defined,
         DeveloperError,
-        CesiumMath,
-        freezeObject) {
+        freezeObject,
+        CesiumMath) {
     'use strict';
 
     /**
@@ -15400,11 +15375,10 @@ define('Core/Plane',[
         
         if (!defined(result)) {
             return new Plane(normal, distance);
-        } else {
-            Cartesian3.clone(normal, result.normal);
-            result.distance = distance;
-            return result;
         }
+        Cartesian3.clone(normal, result.normal);
+        result.distance = distance;
+        return result;
     };
 
     /**
@@ -16205,7 +16179,6 @@ define('ThirdParty/when',[],function () {
 	// Boilerplate for AMD, Node, and browser global
 );
 
-/*global define*/
 define('Core/oneTimeWarning',[
         './defaultValue',
         './defined',
@@ -16214,7 +16187,7 @@ define('Core/oneTimeWarning',[
         defaultValue,
         defined,
         DeveloperError) {
-    "use strict";
+    'use strict';
 
     var warnings = {};
 
@@ -16256,7 +16229,6 @@ define('Core/oneTimeWarning',[
     return oneTimeWarning;
 });
 
-/*global define*/
 define('Core/deprecationWarning',[
         './defined',
         './DeveloperError',
@@ -16266,7 +16238,7 @@ define('Core/deprecationWarning',[
         DeveloperError,
         oneTimeWarning) {
     'use strict';
-    
+
     /**
      * Logs a deprecation message to the console.  Use this function instead of
      * <code>console.log</code> directly since this does not log duplicate messages
@@ -16317,7 +16289,6 @@ define('Core/deprecationWarning',[
     return deprecationWarning;
 });
 
-/*global define*/
 define('Core/binarySearch',[
         './Check',
         './defined'
@@ -16393,7 +16364,6 @@ define('Core/binarySearch',[
     return binarySearch;
 });
 
-/*global define*/
 define('Core/EarthOrientationParametersSample',[],function() {
     'use strict';
 
@@ -16573,7 +16543,6 @@ ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 */
 
-/*global define*/
 define('ThirdParty/sprintf',[],function() {
 
 function sprintf () {
@@ -16767,7 +16736,6 @@ function sprintf () {
 return sprintf;
 });
 
-/*global define*/
 define('Core/GregorianDate',[],function() {
     'use strict';
 
@@ -16825,7 +16793,6 @@ define('Core/GregorianDate',[],function() {
     return GregorianDate;
 });
 
-/*global define*/
 define('Core/isLeapYear',[
         './DeveloperError'
     ], function(
@@ -16854,7 +16821,6 @@ define('Core/isLeapYear',[
     return isLeapYear;
 });
 
-/*global define*/
 define('Core/LeapSecond',[],function() {
     'use strict';
 
@@ -16885,7 +16851,6 @@ define('Core/LeapSecond',[],function() {
     return LeapSecond;
 });
 
-/*global define*/
 define('Core/TimeConstants',[
         './freezeObject'
     ], function(
@@ -16978,7 +16943,6 @@ define('Core/TimeConstants',[
     return freezeObject(TimeConstants);
 });
 
-/*global define*/
 define('Core/TimeStandard',[
         './freezeObject'
     ], function(
@@ -17013,7 +16977,6 @@ define('Core/TimeStandard',[
     return freezeObject(TimeStandard);
 });
 
-/*global define*/
 define('Core/JulianDate',[
         '../ThirdParty/sprintf',
         './binarySearch',
@@ -17218,6 +17181,29 @@ define('Core/JulianDate',[
     }
 
     /**
+     * Creates a new instance from a GregorianDate.
+     *
+     * @param {GregorianDate} date A GregorianDate.
+     * @param {JulianDate} [result] An existing instance to use for the result.
+     * @returns {JulianDate} The modified result parameter or a new instance if none was provided.
+     *
+     * @exception {DeveloperError} date must be a valid GregorianDate.
+     */
+    JulianDate.fromGregorianDate = function(date, result) {
+                if (!(date instanceof GregorianDate)) {
+            throw new DeveloperError('date must be a valid GregorianDate.');
+        }
+        
+        var components = computeJulianDateComponents(date.year, date.month, date.day, date.hour, date.minute, date.second, date.millisecond);
+        if (!defined(result)) {
+            return new JulianDate(components[0], components[1], TimeStandard.UTC);
+        }
+        setComponents(components[0], components[1], result);
+        convertUtcToTai(result);
+        return result;
+    };
+
+    /**
      * Creates a new instance from a JavaScript Date.
      *
      * @param {Date} date A JavaScript Date.
@@ -17352,7 +17338,8 @@ define('Core/JulianDate',[
             throw new DeveloperError(iso8601ErrorMessage);
         }
         
-        //Not move onto the time string, which is much simpler.
+        //Now move onto the time string, which is much simpler.
+        //If no time is specified, it is considered the beginning of the day, UTC to match Javascript's implementation.
         var offsetIndex;
         if (defined(time)) {
             tokens = time.match(matchHoursMinutesSeconds);
@@ -17416,9 +17403,6 @@ define('Core/JulianDate',[
                 minute = minute + new Date(Date.UTC(year, month - 1, day, hour, minute)).getTimezoneOffset();
                 break;
             }
-        } else {
-            //If no time is specified, it is considered the beginning of the day, local time.
-            minute = minute + new Date(year, month - 1, day).getTimezoneOffset();
         }
 
         //ISO8601 denotes a leap second by any time having a seconds component of 60 seconds.
@@ -17619,23 +17603,23 @@ define('Core/JulianDate',[
             throw new DeveloperError('julianDate is required.');
         }
         
-        var gDate = JulianDate.toGregorianDate(julianDate, gDate);
+        var gDate = JulianDate.toGregorianDate(julianDate, gregorianDateScratch);
         var millisecondStr;
 
         if (!defined(precision) && gDate.millisecond !== 0) {
             //Forces milliseconds into a number with at least 3 digits to whatever the default toString() precision is.
             millisecondStr = (gDate.millisecond * 0.01).toString().replace('.', '');
-            return sprintf("%04d-%02d-%02dT%02d:%02d:%02d.%sZ", gDate.year, gDate.month, gDate.day, gDate.hour, gDate.minute, gDate.second, millisecondStr);
+            return sprintf('%04d-%02d-%02dT%02d:%02d:%02d.%sZ', gDate.year, gDate.month, gDate.day, gDate.hour, gDate.minute, gDate.second, millisecondStr);
         }
 
         //Precision is either 0 or milliseconds is 0 with undefined precision, in either case, leave off milliseconds entirely
         if (!defined(precision) || precision === 0) {
-            return sprintf("%04d-%02d-%02dT%02d:%02d:%02dZ", gDate.year, gDate.month, gDate.day, gDate.hour, gDate.minute, gDate.second);
+            return sprintf('%04d-%02d-%02dT%02d:%02d:%02dZ', gDate.year, gDate.month, gDate.day, gDate.hour, gDate.minute, gDate.second);
         }
 
         //Forces milliseconds into a number with at least 3 digits to whatever the specified precision is.
         millisecondStr = (gDate.millisecond * 0.01).toFixed(precision).replace('.', '').slice(0, precision);
-        return sprintf("%04d-%02d-%02dT%02d:%02d:%02d.%sZ", gDate.year, gDate.month, gDate.day, gDate.hour, gDate.minute, gDate.second, millisecondStr);
+        return sprintf('%04d-%02d-%02dT%02d:%02d:%02d.%sZ', gDate.year, gDate.month, gDate.day, gDate.hour, gDate.minute, gDate.second, millisecondStr);
     };
 
     /**
@@ -18005,7 +17989,6 @@ define('Core/JulianDate',[
     return JulianDate;
 });
 
-/*global define*/
 define('Core/clone',[
         './defaultValue'
     ], function(
@@ -18045,7 +18028,292 @@ define('Core/clone',[
     return clone;
 });
 
-/*global define*/
+define('Core/RequestState',[
+        '../Core/freezeObject'
+    ], function(
+        freezeObject) {
+    'use strict';
+
+    /**
+     * State of the request.
+     *
+     * @exports RequestState
+     */
+    var RequestState = {
+        /**
+         * Initial unissued state.
+         *
+         * @type Number
+         * @constant
+         */
+        UNISSUED : 0,
+
+        /**
+         * Issued but not yet active. Will become active when open slots are available.
+         *
+         * @type Number
+         * @constant
+         */
+        ISSUED : 1,
+
+        /**
+         * Actual http request has been sent.
+         *
+         * @type Number
+         * @constant
+         */
+        ACTIVE : 2,
+
+        /**
+         * Request completed successfully.
+         *
+         * @type Number
+         * @constant
+         */
+        RECEIVED : 3,
+
+        /**
+         * Request was cancelled, either explicitly or automatically because of low priority.
+         *
+         * @type Number
+         * @constant
+         */
+        CANCELLED : 4,
+
+        /**
+         * Request failed.
+         *
+         * @type Number
+         * @constant
+         */
+        FAILED : 5
+    };
+
+    return freezeObject(RequestState);
+});
+
+define('Core/RequestType',[
+        '../Core/freezeObject'
+    ], function(
+        freezeObject) {
+    'use strict';
+
+    /**
+     * An enum identifying the type of request. Used for finer grained logging and priority sorting.
+     *
+     * @exports RequestType
+     */
+    var RequestType = {
+        /**
+         * Terrain request.
+         *
+         * @type Number
+         * @constant
+         */
+        TERRAIN : 0,
+
+        /**
+         * Imagery request.
+         *
+         * @type Number
+         * @constant
+         */
+        IMAGERY : 1,
+
+        /**
+         * 3D Tiles request.
+         *
+         * @type Number
+         * @constant
+         */
+        TILES3D : 2,
+
+        /**
+         * Other request.
+         *
+         * @type Number
+         * @constant
+         */
+        OTHER : 3
+    };
+
+    return freezeObject(RequestType);
+});
+
+define('Core/Request',[
+        './defaultValue',
+        './defined',
+        './defineProperties',
+        './RequestState',
+        './RequestType'
+    ], function(
+        defaultValue,
+        defined,
+        defineProperties,
+        RequestState,
+        RequestType) {
+    'use strict';
+
+    /**
+     * Stores information for making a request. In general this does not need to be constructed directly.
+     *
+     * @alias Request
+     * @constructor
+     *
+     * @param {Object} [options] An object with the following properties:
+     * @param {Boolean} [options.url] The url to request.
+     * @param {Request~RequestCallback} [options.requestFunction] The function that makes the actual data request.
+     * @param {Request~CancelCallback} [options.cancelFunction] The function that is called when the request is cancelled.
+     * @param {Request~PriorityCallback} [options.priorityFunction] The function that is called to update the request's priority, which occurs once per frame.
+     * @param {Number} [options.priority=0.0] The initial priority of the request.
+     * @param {Boolean} [options.throttle=false] Whether to throttle and prioritize the request. If false, the request will be sent immediately. If true, the request will be throttled and sent based on priority.
+     * @param {Boolean} [options.throttleByServer=false] Whether to throttle the request by server.
+     * @param {RequestType} [options.type=RequestType.OTHER] The type of request.
+     */
+    function Request(options) {
+        options = defaultValue(options, defaultValue.EMPTY_OBJECT);
+
+        var throttleByServer = defaultValue(options.throttleByServer, false);
+        var throttle = throttleByServer || defaultValue(options.throttle, false);
+
+        /**
+         * The URL to request.
+         *
+         * @type {String}
+         */
+        this.url = options.url;
+
+        /**
+         * The function that makes the actual data request.
+         *
+         * @type {Request~RequestCallback}
+         */
+        this.requestFunction = options.requestFunction;
+
+        /**
+         * The function that is called when the request is cancelled.
+         *
+         * @type {Request~CancelCallback}
+         */
+        this.cancelFunction = options.cancelFunction;
+
+        /**
+         * The function that is called to update the request's priority, which occurs once per frame.
+         *
+         * @type {Request~PriorityCallback}
+         */
+        this.priorityFunction = options.priorityFunction;
+
+        /**
+         * Priority is a unit-less value where lower values represent higher priority.
+         * For world-based objects, this is usually the distance from the camera.
+         * A request that does not have a priority function defaults to a priority of 0.
+         *
+         * If priorityFunction is defined, this value is updated every frame with the result of that call.
+         *
+         * @type {Number}
+         * @default 0.0
+         */
+        this.priority = defaultValue(options.priority, 0.0);
+
+        /**
+         * Whether to throttle and prioritize the request. If false, the request will be sent immediately. If true, the
+         * request will be throttled and sent based on priority.
+         *
+         * @type {Boolean}
+         * @readonly
+         *
+         * @default false
+         */
+        this.throttle = throttle;
+
+        /**
+         * Whether to throttle the request by server. Browsers typically support about 6-8 parallel connections
+         * for HTTP/1 servers, and an unlimited amount of connections for HTTP/2 servers. Setting this value
+         * to <code>true</code> is preferable for requests going through HTTP/1 servers.
+         *
+         * @type {Boolean}
+         * @readonly
+         *
+         * @default false
+         */
+        this.throttleByServer = throttleByServer;
+
+        /**
+         * Type of request.
+         *
+         * @type {RequestType}
+         * @readonly
+         *
+         * @default RequestType.OTHER
+         */
+        this.type = defaultValue(options.type, RequestType.OTHER);
+
+        /**
+         * A key used to identify the server that a request is going to. It is derived from the url's authority and scheme.
+         *
+         * @type {String}
+         *
+         * @private
+         */
+        this.serverKey = undefined;
+
+        /**
+         * The current state of the request.
+         *
+         * @type {RequestState}
+         * @readonly
+         */
+        this.state = RequestState.UNISSUED;
+
+        /**
+         * The requests's deferred promise.
+         *
+         * @type {Object}
+         *
+         * @private
+         */
+        this.deferred = undefined;
+
+        /**
+         * Whether the request was explicitly cancelled.
+         *
+         * @type {Boolean}
+         *
+         * @private
+         */
+        this.cancelled = false;
+    }
+
+    /**
+     * Mark the request as cancelled.
+     *
+     * @private
+     */
+    Request.prototype.cancel = function() {
+        this.cancelled = true;
+    };
+
+    /**
+     * The function that makes the actual data request.
+     * @callback Request~RequestCallback
+     * @returns {Promise} A promise for the requested data.
+     */
+
+    /**
+     * The function that is called when the request is cancelled.
+     * @callback Request~CancelCallback
+     */
+
+    /**
+     * The function that is called to update the request's priority, which occurs once per frame.
+     * @callback Request~PriorityCallback
+     * @returns {Number} The updated priority value.
+     */
+
+    return Request;
+});
+
 define('Core/parseResponseHeaders',[], function() {
     'use strict';
 
@@ -18059,7 +18327,7 @@ define('Core/parseResponseHeaders',[], function() {
      *                 described here: http://www.w3.org/TR/XMLHttpRequest/#the-getallresponseheaders()-method
      * @returns {Object} A dictionary of key/value pairs, where each key is the name of a header and the corresponding value
      *                   is that header's value.
-     * 
+     *
      * @private
      */
     function parseResponseHeaders(headerString) {
@@ -18089,7 +18357,6 @@ define('Core/parseResponseHeaders',[], function() {
     return parseResponseHeaders;
 });
 
-/*global define*/
 define('Core/RequestErrorEvent',[
         './defined',
         './parseResponseHeaders'
@@ -18180,7 +18447,6 @@ define('Core/RequestErrorEvent',[
  *   limitations under the License.
  *
  */
-/*global define*/
 define('ThirdParty/Uri',[],function() {
 
 	/**
@@ -18433,7 +18699,709 @@ define('ThirdParty/Uri',[],function() {
 return URI;
 });
 
-/*global define*/
+define('Core/Heap',[
+        './Check',
+        './defaultValue',
+        './defined',
+        './defineProperties'
+    ], function(
+        Check,
+        defaultValue,
+        defined,
+        defineProperties) {
+    'use strict';
+
+    /**
+     * Array implementation of a heap.
+     *
+     * @alias Heap
+     * @constructor
+     * @private
+     *
+     * @param {Object} options Object with the following properties:
+     * @param {Heap~ComparatorCallback} options.comparator The comparator to use for the heap. If comparator(a, b) is less than 0, sort a to a lower index than b, otherwise sort to a higher index.
+     */
+    function Heap(options) {
+                Check.typeOf.object('options', options);
+        Check.defined('options.comparator', options.comparator);
+        
+        this._comparator = options.comparator;
+        this._array = [];
+        this._length = 0;
+        this._maximumLength = undefined;
+    }
+
+    defineProperties(Heap.prototype, {
+        /**
+         * Gets the length of the heap.
+         *
+         * @memberof Heap.prototype
+         *
+         * @type {Number}
+         * @readonly
+         */
+        length : {
+            get : function() {
+                return this._length;
+            }
+        },
+
+        /**
+         * Gets the internal array.
+         *
+         * @memberof Heap.prototype
+         *
+         * @type {Array}
+         * @readonly
+         */
+        internalArray : {
+            get : function() {
+                return this._array;
+            }
+        },
+
+        /**
+         * Gets and sets the maximum length of the heap.
+         *
+         * @memberof Heap.prototype
+         *
+         * @type {Number}
+         */
+        maximumLength : {
+            get : function() {
+                return this._maximumLength;
+            },
+            set : function(value) {
+                this._maximumLength = value;
+                if (this._length > value && value > 0) {
+                    this._length = value;
+                    this._array.length = value;
+                }
+            }
+        },
+
+        /**
+         * The comparator to use for the heap. If comparator(a, b) is less than 0, sort a to a lower index than b, otherwise sort to a higher index.
+         *
+         * @memberof Heap.prototype
+         *
+         * @type {Heap~ComparatorCallback}
+         */
+        comparator : {
+            get : function() {
+                return this._comparator;
+            }
+        }
+    });
+
+    function swap(array, a, b) {
+        var temp = array[a];
+        array[a] = array[b];
+        array[b] = temp;
+    }
+
+    /**
+     * Resizes the internal array of the heap.
+     *
+     * @param {Number} [length] The length to resize internal array to. Defaults to the current length of the heap.
+     */
+    Heap.prototype.reserve = function(length) {
+        length = defaultValue(length, this._length);
+        this._array.length = length;
+    };
+
+    /**
+     * Update the heap so that index and all descendants satisfy the heap property.
+     *
+     * @param {Number} [index=0] The starting index to heapify from.
+     */
+    Heap.prototype.heapify = function(index) {
+        index = defaultValue(index, 0);
+        var length = this._length;
+        var comparator = this._comparator;
+        var array = this._array;
+        var candidate = -1;
+        var inserting = true;
+
+        while (inserting) {
+            var right = 2 * (index + 1);
+            var left = right - 1;
+
+            if (left < length && comparator(array[left], array[index]) < 0) {
+                candidate = left;
+            } else {
+                candidate = index;
+            }
+
+            if (right < length && comparator(array[right], array[candidate]) < 0) {
+                candidate = right;
+            }
+            if (candidate !== index) {
+                swap(array, candidate, index);
+                index = candidate;
+            } else {
+                inserting = false;
+            }
+        }
+    };
+
+    /**
+     * Resort the heap.
+     */
+    Heap.prototype.resort = function() {
+        var length = this._length;
+        for (var i = Math.ceil(length / 2); i >= 0; --i) {
+            this.heapify(i);
+        }
+    };
+
+    /**
+     * Insert an element into the heap. If the length would grow greater than maximumLength
+     * of the heap, extra elements are removed.
+     *
+     * @param {*} element The element to insert
+     *
+     * @return {*} The element that was removed from the heap if the heap is at full capacity.
+     */
+    Heap.prototype.insert = function(element) {
+                Check.defined('element', element);
+        
+        var array = this._array;
+        var comparator = this._comparator;
+        var maximumLength = this._maximumLength;
+
+        var index = this._length++;
+        if (index < array.length) {
+            array[index] = element;
+        } else {
+            array.push(element);
+        }
+
+        while (index !== 0) {
+            var parent = Math.floor((index - 1) / 2);
+            if (comparator(array[index], array[parent]) < 0) {
+                swap(array, index, parent);
+                index = parent;
+            } else {
+                break;
+            }
+        }
+
+        var removedElement;
+
+        if (defined(maximumLength) && (this._length > maximumLength)) {
+            removedElement = array[maximumLength];
+            this._length = maximumLength;
+        }
+
+        return removedElement;
+    };
+
+    /**
+     * Remove the element specified by index from the heap and return it.
+     *
+     * @param {Number} [index=0] The index to remove.
+     * @returns {*} The specified element of the heap.
+     */
+    Heap.prototype.pop = function(index) {
+        index = defaultValue(index, 0);
+        if (this._length === 0) {
+            return undefined;
+        }
+                Check.typeOf.number.lessThan('index', index, this._length);
+        
+        var array = this._array;
+        var root = array[index];
+        swap(array, index, --this._length);
+        this.heapify(index);
+        return root;
+    };
+
+    /**
+     * The comparator to use for the heap.
+     * @callback Heap~ComparatorCallback
+     * @param {*} a An element in the heap.
+     * @param {*} b An element in the heap.
+     * @returns {Number} If the result of the comparison is less than 0, sort a to a lower index than b, otherwise sort to a higher index.
+     */
+
+    return Heap;
+});
+
+define('Core/isBlobUri',[
+        './Check'
+    ], function(
+        Check) {
+    'use strict';
+
+    var blobUriRegex = /^blob:/i;
+
+    /**
+     * Determines if the specified uri is a blob uri.
+     *
+     * @exports isBlobUri
+     *
+     * @param {String} uri The uri to test.
+     * @returns {Boolean} true when the uri is a blob uri; otherwise, false.
+     *
+     * @private
+     */
+    function isBlobUri(uri) {
+                Check.typeOf.string('uri', uri);
+        
+        return blobUriRegex.test(uri);
+    }
+
+    return isBlobUri;
+});
+
+define('Core/isDataUri',[
+        './Check'
+    ], function(
+        Check) {
+    'use strict';
+
+    var dataUriRegex = /^data:/i;
+
+    /**
+     * Determines if the specified uri is a data uri.
+     *
+     * @exports isDataUri
+     *
+     * @param {String} uri The uri to test.
+     * @returns {Boolean} true when the uri is a data uri; otherwise, false.
+     *
+     * @private
+     */
+    function isDataUri(uri) {
+                Check.typeOf.string('uri', uri);
+        
+        return dataUriRegex.test(uri);
+    }
+
+    return isDataUri;
+});
+
+define('Core/RequestScheduler',[
+        '../ThirdParty/Uri',
+        '../ThirdParty/when',
+        './Check',
+        './clone',
+        './defined',
+        './defineProperties',
+        './Heap',
+        './isBlobUri',
+        './isDataUri',
+        './RequestState'
+    ], function(
+        Uri,
+        when,
+        Check,
+        clone,
+        defined,
+        defineProperties,
+        Heap,
+        isBlobUri,
+        isDataUri,
+        RequestState) {
+    'use strict';
+
+    function sortRequests(a, b) {
+        return a.priority - b.priority;
+    }
+
+    var statistics = {
+        numberOfAttemptedRequests : 0,
+        numberOfActiveRequests : 0,
+        numberOfCancelledRequests : 0,
+        numberOfCancelledActiveRequests : 0,
+        numberOfFailedRequests : 0,
+        numberOfActiveRequestsEver : 0
+    };
+
+    var priorityHeapLength = 20;
+    var requestHeap = new Heap({
+        comparator : sortRequests
+    });
+    requestHeap.maximumLength = priorityHeapLength;
+    requestHeap.reserve(priorityHeapLength);
+
+    var activeRequests = [];
+    var numberOfActiveRequestsByServer = {};
+
+    var pageUri = typeof document !== 'undefined' ? new Uri(document.location.href) : new Uri();
+
+    /**
+     * Tracks the number of active requests and prioritizes incoming requests.
+     *
+     * @exports RequestScheduler
+     *
+     * @private
+     */
+    function RequestScheduler() {
+    }
+
+    /**
+     * The maximum number of simultaneous active requests. Un-throttled requests do not observe this limit.
+     * @type {Number}
+     * @default 50
+     */
+    RequestScheduler.maximumRequests = 50;
+
+    /**
+     * The maximum number of simultaneous active requests per server. Un-throttled requests do not observe this limit.
+     * @type {Number}
+     * @default 6
+     */
+    RequestScheduler.maximumRequestsPerServer = 6;
+
+    /**
+     * Specifies if the request scheduler should throttle incoming requests, or let the browser queue requests under its control.
+     * @type {Boolean}
+     * @default true
+     */
+    RequestScheduler.throttleRequests = true;
+
+    /**
+     * When true, log statistics to the console every frame
+     * @type {Boolean}
+     * @default false
+     */
+    RequestScheduler.debugShowStatistics = false;
+
+    defineProperties(RequestScheduler, {
+        /**
+         * Returns the statistics used by the request scheduler.
+         *
+         * @memberof RequestScheduler
+         *
+         * @type Object
+         * @readonly
+         */
+        statistics : {
+            get : function() {
+                return statistics;
+            }
+        },
+
+        /**
+         * The maximum size of the priority heap. This limits the number of requests that are sorted by priority. Only applies to requests that are not yet active.
+         *
+         * @memberof RequestScheduler
+         *
+         * @type {Number}
+         * @default 20
+         */
+        priorityHeapLength : {
+            get : function() {
+                return priorityHeapLength;
+            },
+            set : function(value) {
+                // If the new length shrinks the heap, need to cancel some of the requests.
+                // Since this value is not intended to be tweaked regularly it is fine to just cancel the high priority requests.
+                if (value < priorityHeapLength) {
+                    while (requestHeap.length > value) {
+                        var request = requestHeap.pop();
+                        cancelRequest(request);
+                    }
+                }
+                priorityHeapLength = value;
+                requestHeap.maximumLength = value;
+                requestHeap.reserve(value);
+            }
+        }
+    });
+
+    function updatePriority(request) {
+        if (defined(request.priorityFunction)) {
+            request.priority = request.priorityFunction();
+        }
+    }
+
+    function serverHasOpenSlots(serverKey) {
+        return numberOfActiveRequestsByServer[serverKey] < RequestScheduler.maximumRequestsPerServer;
+    }
+
+    function issueRequest(request) {
+        if (request.state === RequestState.UNISSUED) {
+            request.state = RequestState.ISSUED;
+            request.deferred = when.defer();
+        }
+        return request.deferred.promise;
+    }
+
+    function getRequestReceivedFunction(request) {
+        return function(results) {
+            if (request.state === RequestState.CANCELLED) {
+                // If the data request comes back but the request is cancelled, ignore it.
+                return;
+            }
+            --statistics.numberOfActiveRequests;
+            --numberOfActiveRequestsByServer[request.serverKey];
+            request.state = RequestState.RECEIVED;
+            request.deferred.resolve(results);
+        };
+    }
+
+    function getRequestFailedFunction(request) {
+        return function(error) {
+            if (request.state === RequestState.CANCELLED) {
+                // If the data request comes back but the request is cancelled, ignore it.
+                return;
+            }
+            ++statistics.numberOfFailedRequests;
+            --statistics.numberOfActiveRequests;
+            --numberOfActiveRequestsByServer[request.serverKey];
+            request.state = RequestState.FAILED;
+            request.deferred.reject(error);
+        };
+    }
+
+    function startRequest(request) {
+        var promise = issueRequest(request);
+        request.state = RequestState.ACTIVE;
+        activeRequests.push(request);
+        ++statistics.numberOfActiveRequests;
+        ++statistics.numberOfActiveRequestsEver;
+        ++numberOfActiveRequestsByServer[request.serverKey];
+        request.requestFunction().then(getRequestReceivedFunction(request)).otherwise(getRequestFailedFunction(request));
+        return promise;
+    }
+
+    function cancelRequest(request) {
+        var active = request.state === RequestState.ACTIVE;
+        request.state = RequestState.CANCELLED;
+        ++statistics.numberOfCancelledRequests;
+        request.deferred.reject();
+
+        if (active) {
+            --statistics.numberOfActiveRequests;
+            --numberOfActiveRequestsByServer[request.serverKey];
+            ++statistics.numberOfCancelledActiveRequests;
+        }
+
+        if (defined(request.cancelFunction)) {
+            request.cancelFunction();
+        }
+    }
+
+    /**
+     * Sort requests by priority and start requests.
+     */
+    RequestScheduler.update = function() {
+        var i;
+        var request;
+
+        // Loop over all active requests. Cancelled, failed, or received requests are removed from the array to make room for new requests.
+        var removeCount = 0;
+        var activeLength = activeRequests.length;
+        for (i = 0; i < activeLength; ++i) {
+            request = activeRequests[i];
+            if (request.cancelled) {
+                // Request was explicitly cancelled
+                cancelRequest(request);
+            }
+            if (request.state !== RequestState.ACTIVE) {
+                // Request is no longer active, remove from array
+                ++removeCount;
+                continue;
+            }
+            if (removeCount > 0) {
+                // Shift back to fill in vacated slots from completed requests
+                activeRequests[i - removeCount] = request;
+            }
+        }
+        activeRequests.length -= removeCount;
+
+        // Update priority of issued requests and resort the heap
+        var issuedRequests = requestHeap.internalArray;
+        var issuedLength = requestHeap.length;
+        for (i = 0; i < issuedLength; ++i) {
+            updatePriority(issuedRequests[i]);
+        }
+        requestHeap.resort();
+
+        // Get the number of open slots and fill with the highest priority requests.
+        // Un-throttled requests are automatically added to activeRequests, so activeRequests.length may exceed maximumRequests
+        var openSlots = Math.max(RequestScheduler.maximumRequests - activeRequests.length, 0);
+        var filledSlots = 0;
+        while (filledSlots < openSlots && requestHeap.length > 0) {
+            // Loop until all open slots are filled or the heap becomes empty
+            request = requestHeap.pop();
+            if (request.cancelled) {
+                // Request was explicitly cancelled
+                cancelRequest(request);
+                continue;
+            }
+
+            if (request.throttleByServer && !serverHasOpenSlots(request.serverKey)) {
+                // Open slots are available, but the request is throttled by its server. Cancel and try again later.
+                cancelRequest(request);
+                continue;
+            }
+
+            startRequest(request);
+            ++filledSlots;
+        }
+
+        updateStatistics();
+    };
+
+    /**
+     * Get the server key from a given url.
+     *
+     * @param {String} url The url.
+     * @returns {String} The server key.
+     */
+    RequestScheduler.getServerKey = function(url) {
+                Check.typeOf.string('url', url);
+        
+        var uri = new Uri(url).resolve(pageUri);
+        uri.normalize();
+        var serverKey = uri.authority;
+        if (!/:/.test(serverKey)) {
+            // If the authority does not contain a port number, add port 443 for https or port 80 for http
+            serverKey = serverKey + ':' + (uri.scheme === 'https' ? '443' : '80');
+        }
+
+        var length = numberOfActiveRequestsByServer[serverKey];
+        if (!defined(length)) {
+            numberOfActiveRequestsByServer[serverKey] = 0;
+        }
+
+        return serverKey;
+    };
+
+    /**
+     * Issue a request. If request.throttle is false, the request is sent immediately. Otherwise the request will be
+     * queued and sorted by priority before being sent.
+     *
+     * @param {Request} request The request object.
+     *
+     * @returns {Promise|undefined} A Promise for the requested data, or undefined if this request does not have high enough priority to be issued.
+     */
+    RequestScheduler.request = function(request) {
+                Check.typeOf.object('request', request);
+        Check.typeOf.string('request.url', request.url);
+        Check.typeOf.func('request.requestFunction', request.requestFunction);
+        
+        if (isDataUri(request.url) || isBlobUri(request.url)) {
+            request.state = RequestState.RECEIVED;
+            return request.requestFunction();
+        }
+
+        ++statistics.numberOfAttemptedRequests;
+
+        if (!defined(request.serverKey)) {
+            request.serverKey = RequestScheduler.getServerKey(request.url);
+        }
+
+        if (!RequestScheduler.throttleRequests || !request.throttle) {
+            return startRequest(request);
+        }
+
+        if (activeRequests.length >= RequestScheduler.maximumRequests) {
+            // Active requests are saturated. Try again later.
+            return undefined;
+        }
+
+        if (request.throttleByServer && !serverHasOpenSlots(request.serverKey)) {
+            // Server is saturated. Try again later.
+            return undefined;
+        }
+
+        // Insert into the priority heap and see if a request was bumped off. If this request is the lowest
+        // priority it will be returned.
+        updatePriority(request);
+        var removedRequest = requestHeap.insert(request);
+
+        if (defined(removedRequest)) {
+            if (removedRequest === request) {
+                // Request does not have high enough priority to be issued
+                return undefined;
+            }
+            // A previously issued request has been bumped off the priority heap, so cancel it
+            cancelRequest(removedRequest);
+        }
+
+        return issueRequest(request);
+    };
+
+    function clearStatistics() {
+        statistics.numberOfAttemptedRequests = 0;
+        statistics.numberOfCancelledRequests = 0;
+        statistics.numberOfCancelledActiveRequests = 0;
+    }
+
+    function updateStatistics() {
+        if (!RequestScheduler.debugShowStatistics) {
+            return;
+        }
+
+        if (statistics.numberOfAttemptedRequests > 0) {
+            console.log('Number of attempted requests: ' + statistics.numberOfAttemptedRequests);
+        }
+        if (statistics.numberOfActiveRequests > 0) {
+            console.log('Number of active requests: ' + statistics.numberOfActiveRequests);
+        }
+        if (statistics.numberOfCancelledRequests > 0) {
+            console.log('Number of cancelled requests: ' + statistics.numberOfCancelledRequests);
+        }
+        if (statistics.numberOfCancelledActiveRequests > 0) {
+            console.log('Number of cancelled active requests: ' + statistics.numberOfCancelledActiveRequests);
+        }
+        if (statistics.numberOfFailedRequests > 0) {
+            console.log('Number of failed requests: ' + statistics.numberOfFailedRequests);
+        }
+
+        clearStatistics();
+    }
+
+    /**
+     * For testing only. Clears any requests that may not have completed from previous tests.
+     *
+     * @private
+     */
+    RequestScheduler.clearForSpecs = function() {
+        while (requestHeap.length > 0) {
+            var request = requestHeap.pop();
+            cancelRequest(request);
+        }
+        var length = activeRequests.length;
+        for (var i = 0; i < length; ++i) {
+            cancelRequest(activeRequests[i]);
+        }
+        activeRequests.length = 0;
+        numberOfActiveRequestsByServer = {};
+
+        // Clear stats
+        statistics.numberOfAttemptedRequests = 0;
+        statistics.numberOfActiveRequests = 0;
+        statistics.numberOfCancelledRequests = 0;
+        statistics.numberOfCancelledActiveRequests = 0;
+        statistics.numberOfFailedRequests = 0;
+        statistics.numberOfActiveRequestsEver = 0;
+    };
+
+    /**
+     * For testing only.
+     *
+     * @private
+     */
+    RequestScheduler.numberOfActiveRequestsByServer = function(serverKey) {
+        return numberOfActiveRequestsByServer[serverKey];
+    };
+
+    /**
+     * For testing only.
+     *
+     * @private
+     */
+    RequestScheduler.requestHeap = requestHeap;
+
+    return RequestScheduler;
+});
+
 define('Core/TrustedServers',[
         '../ThirdParty/Uri',
         './defined',
@@ -18443,7 +19411,7 @@ define('Core/TrustedServers',[
         defined,
         DeveloperError) {
     'use strict';
-    
+
     /**
      * A singleton that contains all of the servers that are trusted. Credentials will be sent with
      * any requests to these servers.
@@ -18578,25 +19546,32 @@ define('Core/TrustedServers',[
     TrustedServers.clear = function() {
         _servers = {};
     };
-    
+
     return TrustedServers;
 });
 
-/*global define*/
 define('Core/loadWithXhr',[
         '../ThirdParty/when',
+        './Check',
         './defaultValue',
         './defined',
+        './deprecationWarning',
         './DeveloperError',
+        './Request',
         './RequestErrorEvent',
+        './RequestScheduler',
         './RuntimeError',
         './TrustedServers'
     ], function(
         when,
+        Check,
         defaultValue,
         defined,
+        deprecationWarning,
         DeveloperError,
+        Request,
         RequestErrorEvent,
+        RequestScheduler,
         RuntimeError,
         TrustedServers) {
     'use strict';
@@ -18610,13 +19585,14 @@ define('Core/loadWithXhr',[
      * @exports loadWithXhr
      *
      * @param {Object} options Object with the following properties:
-     * @param {String|Promise.<String>} options.url The URL of the data, or a promise for the URL.
+     * @param {String} options.url The URL of the data.
      * @param {String} [options.responseType] The type of response.  This controls the type of item returned.
      * @param {String} [options.method='GET'] The HTTP method to use.
      * @param {String} [options.data] The data to send with the request, if any.
      * @param {Object} [options.headers] HTTP headers to send with the request, if any.
      * @param {String} [options.overrideMimeType] Overrides the MIME type returned by the server.
-     * @returns {Promise.<Object>} a promise that will resolve to the requested data when loaded.
+     * @param {Request} [options.request] The request object.
+     * @returns {Promise.<Object>|undefined} a promise that will resolve to the requested data when loaded. Returns undefined if <code>request.throttle</code> is true and the request does not have high enough priority.
      *
      *
      * @example
@@ -18640,23 +19616,44 @@ define('Core/loadWithXhr',[
     function loadWithXhr(options) {
         options = defaultValue(options, defaultValue.EMPTY_OBJECT);
 
-                if (!defined(options.url)) {
-            throw new DeveloperError('options.url is required.');
-        }
+                Check.defined('options.url', options.url);
         
+        var url = options.url;
+
+        if (typeof url !== 'string') {
+            // Returning a promise here is okay because it is unlikely that anyone using the deprecated functionality is also
+            // providing a Request object marked as throttled.
+            deprecationWarning('url promise', 'options.url as a Promise is deprecated and will be removed in Cesium 1.37');
+            return url.then(function(url) {
+                return makeRequest(options, url);
+            });
+        }
+
+        return makeRequest(options);
+    }
+
+    function makeRequest(options, url) {
         var responseType = options.responseType;
         var method = defaultValue(options.method, 'GET');
         var data = options.data;
         var headers = options.headers;
         var overrideMimeType = options.overrideMimeType;
+        url = defaultValue(url, options.url);
 
-        return when(options.url, function(url) {
+        var request = defined(options.request) ? options.request : new Request();
+        request.url = url;
+        request.requestFunction = function() {
             var deferred = when.defer();
-
-            loadWithXhr.load(url, responseType, method, data, headers, deferred, overrideMimeType);
-
+            var xhr = loadWithXhr.load(url, responseType, method, data, headers, deferred, overrideMimeType);
+            if (defined(xhr) && defined(xhr.abort)) {
+                request.cancelFunction = function() {
+                    xhr.abort();
+                };
+            }
             return deferred.promise;
-        });
+        };
+
+        return RequestScheduler.request(request);
     }
 
     var dataUriRegex = /^data:(.*?)(;base64)?,(.*)$/;
@@ -18772,6 +19769,8 @@ define('Core/loadWithXhr',[
         };
 
         xhr.send(data);
+
+        return xhr;
     };
 
     loadWithXhr.defaultLoad = loadWithXhr.load;
@@ -18779,7 +19778,6 @@ define('Core/loadWithXhr',[
     return loadWithXhr;
 });
 
-/*global define*/
 define('Core/loadText',[
         './loadWithXhr'
     ], function(
@@ -18794,9 +19792,10 @@ define('Core/loadText',[
      *
      * @exports loadText
      *
-     * @param {String|Promise.<String>} url The URL to request, or a promise for the URL.
+     * @param {String} url The URL to request.
      * @param {Object} [headers] HTTP headers to send with the request.
-     * @returns {Promise.<String>} a promise that will resolve to the requested data when loaded.
+     * @param {Request} [request] The request object. Intended for internal use only.
+     * @returns {Promise.<String>|undefined} a promise that will resolve to the requested data when loaded. Returns undefined if <code>request.throttle</code> is true and the request does not have high enough priority.
      *
      *
      * @example
@@ -18808,22 +19807,22 @@ define('Core/loadText',[
      * }).otherwise(function(error) {
      *     // an error occurred
      * });
-     * 
+     *
      * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest|XMLHttpRequest}
      * @see {@link http://www.w3.org/TR/cors/|Cross-Origin Resource Sharing}
      * @see {@link http://wiki.commonjs.org/wiki/Promises/A|CommonJS Promises/A}
      */
-    function loadText(url, headers) {
+    function loadText(url, headers, request) {
         return loadWithXhr({
             url : url,
-            headers : headers
+            headers : headers,
+            request : request
         });
     }
 
     return loadText;
 });
 
-/*global define*/
 define('Core/loadJson',[
         './clone',
         './defined',
@@ -18851,11 +19850,12 @@ define('Core/loadJson',[
      *
      * @exports loadJson
      *
-     * @param {String|Promise.<String>} url The URL to request, or a promise for the URL.
+     * @param {String} url The URL to request.
      * @param {Object} [headers] HTTP headers to send with the request.
      * 'Accept: application/json,&#42;&#47;&#42;;q=0.01' is added to the request headers automatically
      * if not specified.
-     * @returns {Promise.<Object>} a promise that will resolve to the requested data when loaded.
+     * @param {Request} [request] The request object. Intended for internal use only.
+     * @returns {Promise.<Object>|undefined} a promise that will resolve to the requested data when loaded. Returns undefined if <code>request.throttle</code> is true and the request does not have high enough priority.
      *
      *
      * @example
@@ -18864,12 +19864,12 @@ define('Core/loadJson',[
      * }).otherwise(function(error) {
      *     // an error occurred
      * });
-     * 
+     *
      * @see loadText
      * @see {@link http://www.w3.org/TR/cors/|Cross-Origin Resource Sharing}
      * @see {@link http://wiki.commonjs.org/wiki/Promises/A|CommonJS Promises/A}
      */
-    function loadJson(url, headers) {
+    function loadJson(url, headers, request) {
                 if (!defined(url)) {
             throw new DeveloperError('url is required.');
         }
@@ -18882,7 +19882,12 @@ define('Core/loadJson',[
             headers.Accept = defaultHeaders.Accept;
         }
 
-        return loadText(url, headers).then(function(value) {
+        var textPromise = loadText(url, headers, request);
+        if (!defined(textPromise)) {
+            return undefined;
+        }
+
+        return textPromise.then(function(value) {
             return JSON.parse(value);
         });
     }
@@ -18890,7 +19895,6 @@ define('Core/loadJson',[
     return loadJson;
 });
 
-/*global define*/
 define('Core/EarthOrientationParameters',[
         '../ThirdParty/when',
         './binarySearch',
@@ -19274,7 +20278,6 @@ define('Core/EarthOrientationParameters',[
     return EarthOrientationParameters;
 });
 
-/*global define*/
 define('Core/getAbsoluteUri',[
         '../ThirdParty/Uri',
         './defaultValue',
@@ -19312,7 +20315,6 @@ define('Core/getAbsoluteUri',[
     return getAbsoluteUri;
 });
 
-/*global define*/
 define('Core/joinUrls',[
         '../ThirdParty/Uri',
         './defaultValue',
@@ -19429,7 +20431,6 @@ define('Core/joinUrls',[
     return joinUrls;
 });
 
-/*global define*/
 define('Core/buildModuleUrl',[
         '../ThirdParty/Uri',
         './defined',
@@ -19537,7 +20538,6 @@ define('Core/buildModuleUrl',[
     return buildModuleUrl;
 });
 
-/*global define*/
 define('Core/Iau2006XysSample',[],function() {
     'use strict';
 
@@ -19576,7 +20576,6 @@ define('Core/Iau2006XysSample',[],function() {
     return Iau2006XysSample;
 });
 
-/*global define*/
 define('Core/Iau2006XysData',[
         '../ThirdParty/when',
         './buildModuleUrl',
@@ -19842,7 +20841,6 @@ define('Core/Iau2006XysData',[
     return Iau2006XysData;
 });
 
-/*global define*/
 define('Core/HeadingPitchRoll',[
         './defaultValue',
         './defined',
@@ -19853,7 +20851,7 @@ define('Core/HeadingPitchRoll',[
         defined,
         DeveloperError,
         CesiumMath) {
-    "use strict";
+    'use strict';
 
     /**
      * A rotation expressed as a heading, pitch, and roll. Heading is the rotation about the
@@ -20029,7 +21027,6 @@ define('Core/HeadingPitchRoll',[
     return HeadingPitchRoll;
 });
 
-/*global define*/
 define('Core/Quaternion',[
         './Cartesian3',
         './Check',
@@ -21029,7 +22026,6 @@ define('Core/Quaternion',[
     return Quaternion;
 });
 
-/*global define*/
 define('Core/Transforms',[
         '../ThirdParty/when',
         './Cartesian2',
@@ -21889,7 +22885,6 @@ define('Core/Transforms',[
     return Transforms;
 });
 
-/*global define*/
 define('Core/EllipsoidTangentPlane',[
         './AxisAlignedBoundingBox',
         './Cartesian2',
@@ -22223,7 +23218,6 @@ define('Core/EllipsoidTangentPlane',[
     return EllipsoidTangentPlane;
 });
 
-/*global define*/
 define('ThirdParty/earcut-2.1.1',[], function() {
     'use strict';
 
@@ -22871,7 +23865,6 @@ earcut.flatten = function (data) {
 return earcut;
 });
 
-/*global define*/
 define('Core/WindingOrder',[
         './freezeObject',
         './WebGLConstants'
@@ -22914,7 +23907,6 @@ define('Core/WindingOrder',[
     return freezeObject(WindingOrder);
 });
 
-/*global define*/
 define('Core/PolygonPipeline',[
         '../ThirdParty/earcut-2.1.1',
         './Cartesian2',
@@ -23203,23 +24195,22 @@ define('Core/PolygonPipeline',[
     return PolygonPipeline;
 });
 
-/*global define*/
 define('Core/EllipsoidGeodesic',[
         './Cartesian3',
         './Cartographic',
+        './Check',
         './defaultValue',
         './defined',
         './defineProperties',
-        './DeveloperError',
         './Ellipsoid',
         './Math'
     ], function(
         Cartesian3,
         Cartographic,
+        Check,
         defaultValue,
         defined,
         defineProperties,
-        DeveloperError,
         Ellipsoid,
         CesiumMath) {
     'use strict';
@@ -23377,13 +24368,13 @@ define('Core/EllipsoidGeodesic',[
         ellipsoidGeodesic._uSquared = uSquared;
     }
 
+    var scratchCart1 = new Cartesian3();
+    var scratchCart2 = new Cartesian3();
     function computeProperties(ellipsoidGeodesic, start, end, ellipsoid) {
         var firstCartesian = Cartesian3.normalize(ellipsoid.cartographicToCartesian(start, scratchCart2), scratchCart1);
         var lastCartesian = Cartesian3.normalize(ellipsoid.cartographicToCartesian(end, scratchCart2), scratchCart2);
 
-                if (Math.abs(Math.abs(Cartesian3.angleBetween(firstCartesian, lastCartesian)) - Math.PI) < 0.0125) {
-            throw new DeveloperError('geodesic position is not unique');
-        }
+                Check.typeOf.number.greaterThanOrEquals('value', Math.abs(Math.abs(Cartesian3.angleBetween(firstCartesian, lastCartesian)) - Math.PI), 0.0125);
         
         vincentyInverseFormula(ellipsoidGeodesic, ellipsoid.maximumRadius, ellipsoid.minimumRadius,
                                start.longitude, start.latitude, end.longitude, end.latitude);
@@ -23396,8 +24387,6 @@ define('Core/EllipsoidGeodesic',[
         setConstants(ellipsoidGeodesic);
     }
 
-    var scratchCart1 = new Cartesian3();
-    var scratchCart2 = new Cartesian3();
     /**
      * Initializes a geodesic on the ellipsoid connecting the two provided planetodetic points.
      *
@@ -23446,9 +24435,7 @@ define('Core/EllipsoidGeodesic',[
          */
         surfaceDistance : {
             get : function() {
-                                if (!defined(this._distance)) {
-                    throw new DeveloperError('set end positions before getting surfaceDistance');
-                }
+                                Check.defined('distance', this._distance);
                 
                 return this._distance;
             }
@@ -23486,9 +24473,7 @@ define('Core/EllipsoidGeodesic',[
          */
         startHeading : {
             get : function() {
-                                if (!defined(this._distance)) {
-                    throw new DeveloperError('set end positions before getting startHeading');
-                }
+                                Check.defined('distance', this._distance);
                 
                 return this._startHeading;
             }
@@ -23502,9 +24487,7 @@ define('Core/EllipsoidGeodesic',[
          */
         endHeading : {
             get : function() {
-                                if (!defined(this._distance)) {
-                    throw new DeveloperError('set end positions before getting endHeading');
-                }
+                                Check.defined('distance', this._distance);
                 
                 return this._endHeading;
             }
@@ -23518,12 +24501,8 @@ define('Core/EllipsoidGeodesic',[
      * @param {Cartographic} end The final planetodetic point on the path.
      */
     EllipsoidGeodesic.prototype.setEndPoints = function(start, end) {
-                if (!defined(start)) {
-            throw new DeveloperError('start cartographic position is required');
-        }
-        if (!defined(end)) {
-            throw new DeveloperError('end cartgraphic position is required');
-        }
+                Check.defined('start', start);
+        Check.defined('end', end);
         
         computeProperties(this, start, end, this._ellipsoid);
     };
@@ -23549,9 +24528,7 @@ define('Core/EllipsoidGeodesic',[
      * @exception {DeveloperError} start and end must be set before calling function interpolateUsingSurfaceDistance
      */
     EllipsoidGeodesic.prototype.interpolateUsingSurfaceDistance = function(distance, result) {
-                if (!defined(this._distance)) {
-            throw new DeveloperError('start and end must be set before calling function interpolateUsingSurfaceDistance');
-        }
+                Check.defined('distance', this._distance);
         
         var constants = this._constants;
 
@@ -23615,7 +24592,6 @@ define('Core/EllipsoidGeodesic',[
     return EllipsoidGeodesic;
 });
 
-/*global define*/
 define('Core/isArray',[
         './defined'
     ], function(
@@ -23639,7 +24615,6 @@ define('Core/isArray',[
     return isArray;
 });
 
-/*global define*/
 define('Core/PolylinePipeline',[
         './Cartesian3',
         './Cartographic',
@@ -23958,7 +24933,6 @@ define('Core/PolylinePipeline',[
     return PolylinePipeline;
 });
 
-/*global define*/
 define('Core/WallGeometryLibrary',[
         './Cartographic',
         './defined',
@@ -24160,7 +25134,6 @@ define('Core/WallGeometryLibrary',[
     return WallGeometryLibrary;
 });
 
-/*global define*/
 define('Core/WallOutlineGeometry',[
         './BoundingSphere',
         './Cartesian3',
@@ -24571,7 +25544,6 @@ define('Core/WallOutlineGeometry',[
     return WallOutlineGeometry;
 });
 
-/*global define*/
 define('Workers/createWallOutlineGeometry',[
         '../Core/defined',
         '../Core/Ellipsoid',
