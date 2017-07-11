@@ -20,10 +20,8 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.Credit;
-import org.cesiumjs.cs.core.Event;
-import org.cesiumjs.cs.core.Rectangle;
-import org.cesiumjs.cs.core.TilingScheme;
+import org.cesiumjs.cs.collections.TimeIntervalCollection;
+import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.js.JsImage;
 import org.cesiumjs.cs.promise.Promise;
 import org.cesiumjs.cs.scene.ImageryLayerFeatureInfo;
@@ -35,6 +33,16 @@ import org.cesiumjs.cs.scene.providers.options.WebMapTileServiceImageryProviderO
  */
 @JsType(isNative = true, namespace = "Cesium", name = "WebMapTileServiceImageryProvider")
 public class WebMapTileServiceImageryProvider implements ImageryProvider {
+    /**
+     * Gets or sets a clock that is used to get keep the time used for time dynamic parameters.
+     */
+    @JsProperty
+    public Clock clock;
+    /**
+     * Gets or sets an object that contains static dimensions and their values.
+     */
+    @JsProperty
+    public Object dimensions;
     /**
      * Gets the credit to display when this imagery provider is active. Typically this is used to credit the source of the imagery.
      * This function should not be called before WebMapTileServiceImageryProvider#ready returns true.
@@ -123,6 +131,12 @@ public class WebMapTileServiceImageryProvider implements ImageryProvider {
      */
     @JsProperty(name = "url")
     public native String url();
+    /**
+     * Gets or sets a time interval collection that is used to get time dynamic parameters.
+     * The data of each TimeInterval is an object containing the keys and values of the properties that are used during tile requests.
+     */
+    @JsProperty
+    public TimeIntervalCollection times;
 
     //TODO: Examples
     /**

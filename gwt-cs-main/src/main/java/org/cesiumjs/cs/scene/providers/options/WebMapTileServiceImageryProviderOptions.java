@@ -20,10 +20,8 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.Credit;
-import org.cesiumjs.cs.core.Ellipsoid;
-import org.cesiumjs.cs.core.Rectangle;
-import org.cesiumjs.cs.core.TilingScheme;
+import org.cesiumjs.cs.collections.TimeIntervalCollection;
+import org.cesiumjs.cs.core.*;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -62,6 +60,21 @@ public class WebMapTileServiceImageryProviderOptions {
      */
     @JsProperty
     public String[] tileMatrixLabels;
+    /**
+     * A Clock instance that is used when determining the value for the time dimension. Required when options.times is specified.
+     */
+    @JsProperty
+    public Clock clock;
+    /**
+     * TimeIntervalCollection with its data property being an object containing time dynamic dimension and their values.
+     */
+    @JsProperty
+    public TimeIntervalCollection times;
+    /**
+     * A object containing static dimensions and their values.
+     */
+    @JsProperty
+    public Object dimensions;
     /**
      * The tile width in pixels.
      * Default: 256
