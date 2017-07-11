@@ -21,6 +21,7 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.scene.Camera;
 
 /**
@@ -51,6 +52,11 @@ public class KmlDataSourceOptions {
      */
     @JsProperty
     public boolean clampToGround;
+    /**
+     * Key-value pairs which are appended to all URIs in the CZML.
+     */
+    @JsProperty
+    public JsObject query;
 
     /**
      * Options for {@link org.cesiumjs.cs.datasources.KmlDataSource}

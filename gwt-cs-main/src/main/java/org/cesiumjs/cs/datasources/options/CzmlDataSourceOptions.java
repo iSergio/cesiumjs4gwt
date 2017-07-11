@@ -20,6 +20,7 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.js.JsObject;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -31,6 +32,11 @@ public class CzmlDataSourceOptions {
      */
     @JsProperty
     public String sourceUri;
+    /**
+     * Key-value pairs which are appended to all URIs in the CZML.
+     */
+    @JsProperty
+    public JsObject query;
 
     @JsConstructor
     private CzmlDataSourceOptions() {}
