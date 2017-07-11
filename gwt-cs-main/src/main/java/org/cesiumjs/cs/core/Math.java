@@ -461,6 +461,15 @@ public class Math {
     public static native double nextRandomNumber();
 
     /**
+     * Generates a random number between two numbers.
+     * @param min The minimum value.
+     * @param max The maximum value.
+     * @return A random number between the min and max.
+     */
+    @JsMethod
+    public static native double randomBetween(double min, double max);
+
+    /**
      * Sets the seed used by the random number generator in {@link #nextRandomNumber()}.
      * @param seed An integer used as the seed.
      */
