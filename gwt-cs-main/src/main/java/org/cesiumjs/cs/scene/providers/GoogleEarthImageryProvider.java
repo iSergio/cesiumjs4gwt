@@ -32,7 +32,9 @@ import org.cesiumjs.cs.scene.providers.options.GoogleEarthImageryProviderOptions
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @deprecated will be removed in Cesium 1.37, use GoogleEarthEnterpriseMapsProvider instead.
  */
+@Deprecated
 @JsType(isNative = true, namespace = "Cesium", name = "GoogleEarthImageryProvider")
 public class GoogleEarthImageryProvider implements ImageryProvider {
     /**

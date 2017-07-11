@@ -21,6 +21,7 @@ import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.GoogleEarthEnterpriseMetadata;
+import org.cesiumjs.cs.core.Request;
 import org.cesiumjs.cs.core.TerrainData;
 import org.cesiumjs.cs.core.providers.options.GoogleEarthEnterpriseTerrainProviderOptions;
 import org.cesiumjs.cs.promise.Promise;
@@ -76,8 +77,25 @@ public class GoogleEarthEnterpriseTerrainProvider implements TerrainProvider {
      *                         should be initiated regardless of the number of requests already in progress. Default: true
      * @return A promise for the requested geometry. If this method returns undefined instead of a promise,
      * it is an indication that too many requests are already pending and the request will be retried later.
+     * @deprecated The throttleRequests parameter will be removed in 1.37. Instead set the request's throttle property to true to throttle requests.
      */
     @Override
     @JsMethod
+    @Deprecated
     public native Promise<TerrainData, Void> requestTileGeometry(int x, int y, int level, boolean throttleRequests);
+
+    /**
+     * Requests the geometry for a given tile. This function should not be called before
+     * GoogleEarthEnterpriseProvider#ready returns true. The result must include terrain
+     * data and may optionally include a water mask and an indication of which child tiles are available.
+     * @param x The X coordinate of the tile for which to request geometry.
+     * @param y The Y coordinate of the tile for which to request geometry.
+     * @param level The level of the tile for which to request geometry.
+     * @param request The request object. Intended for internal use only.
+     * @return A promise for the requested geometry. If this method returns undefined instead of a promise,
+     * it is an indication that too many requests are already pending and the request will be retried later.
+     */
+    @Override
+    @JsMethod
+    public native Promise<TerrainData, Void> requestTileGeometry(int x, int y, int level, Request request);
 }
