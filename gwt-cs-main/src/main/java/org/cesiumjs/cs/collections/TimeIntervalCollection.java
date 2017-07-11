@@ -20,6 +20,10 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.collections.options.FromIso8601DateArrayOptions;
+import org.cesiumjs.cs.collections.options.FromIso8601DurationArrayOptions;
+import org.cesiumjs.cs.collections.options.FromIso8601Options;
+import org.cesiumjs.cs.collections.options.FromJulianDateArrayOptions;
 import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.core.JulianDate;
 import org.cesiumjs.cs.core.TimeInterval;
@@ -78,6 +82,74 @@ public class TimeIntervalCollection {
      */
     @JsConstructor
     public TimeIntervalCollection(TimeInterval[] intervals) {}
+
+    /**
+     * Creates a new instance from an ISO 8601 time interval (start/end/duration).
+     * @param options {@link FromIso8601Options}
+     * @return The modified result parameter or a new instance if none was provided.
+     */
+    @JsMethod
+    public static native TimeIntervalCollection fromIso8601(FromIso8601Options options);
+
+    /**
+     * Creates a new instance from an ISO 8601 time interval (start/end/duration).
+     * @param options {@link FromIso8601Options}
+     * @param result An existing instance to use for the result.
+     * @return The modified result parameter or a new instance if none was provided.
+     */
+    @JsMethod
+    public static native TimeIntervalCollection fromIso8601(FromIso8601Options options, TimeIntervalCollection result);
+
+    /**
+     * Creates a new instance from a ISO 8601 date array.
+     * @param options {@link FromIso8601DateArrayOptions}
+     * @return The modified result parameter or a new instance if none was provided.
+     */
+    @JsMethod
+    public static native TimeIntervalCollection fromIso8601DateArray(FromIso8601DateArrayOptions options);
+
+    /**
+     * Creates a new instance from a ISO 8601 date array.
+     * @param options {@link FromIso8601DateArrayOptions}
+     * @param result An existing instance to use for the result.
+     * @return The modified result parameter or a new instance if none was provided.
+     */
+    @JsMethod
+    public static native TimeIntervalCollection fromIso8601DateArray(FromIso8601DateArrayOptions options, TimeIntervalCollection result);
+
+    /**
+     * Creates a new instance from a ISO 8601 duration array.
+     * @param options {@link FromIso8601DurationArrayOptions}
+     * @return The modified result parameter or a new instance if none was provided.
+     */
+    @JsMethod
+    public static native TimeIntervalCollection fromIso8601DurationArray(FromIso8601DurationArrayOptions options);
+
+    /**
+     * Creates a new instance from a ISO 8601 duration array.
+     * @param options {@link FromIso8601DurationArrayOptions}
+     * @param result An existing instance to use for the result.
+     * @return The modified result parameter or a new instance if none was provided.
+     */
+    @JsMethod
+    public static native TimeIntervalCollection fromIso8601DurationArray(FromIso8601DurationArrayOptions options, TimeIntervalCollection result);
+
+    /**
+     * Creates a new instance from a JulianDate array.
+     * @param options {@link FromJulianDateArrayOptions}.
+     * @return The modified result parameter or a new instance if none was provided.
+     */
+    @JsMethod
+    public static native TimeIntervalCollection fromJulianDateArray(FromJulianDateArrayOptions options);
+
+    /**
+     * Creates a new instance from a JulianDate array.
+     * @param options {@link FromJulianDateArrayOptions}.
+     * @param result An existing instance to use for the result.
+     * @return The modified result parameter or a new instance if none was provided.
+     */
+    @JsMethod
+    public static native TimeIntervalCollection fromJulianDateArray(FromJulianDateArrayOptions options, TimeIntervalCollection result);
 
     /**
      * Adds an interval to the collection, merging intervals that contain the same data and splitting intervals of
