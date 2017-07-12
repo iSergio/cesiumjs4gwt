@@ -72,5 +72,6 @@ public class InjectorModule extends AbstractGinModule {
         bind(GoogleEarthEnterprise.class).asEagerSingleton();
         bind(HeadingPitchRoll.class).asEagerSingleton();
         bind(ImageryLayersSplit.class).asEagerSingleton();
+        bind(ParticleSystemFireworks.class).asEagerSingleton();
     }
 }
