@@ -80,6 +80,14 @@ public class TimeInterval {
     @JsConstructor
     public TimeInterval(TimeIntervalOptions options) {}
 
+    @JsOverlay
+    public static TimeInterval create(JulianDate start, JulianDate stop) {
+        TimeIntervalOptions options = new TimeIntervalOptions();
+        options.start = start;
+        options.stop = stop;
+        return new TimeInterval(options);
+    }
+
     /**
      * Duplicates the provided instance.
      * @param timeInterval The instance to clone.
