@@ -17,6 +17,7 @@
 package org.cesiumjs.cs.scene.particle;
 
 import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.scene.particle.options.ParticleBurstOptions;
@@ -64,4 +65,13 @@ public class ParticleBurst {
      */
     @JsConstructor
     public ParticleBurst(ParticleBurstOptions options) {}
+
+    @JsOverlay
+    public static ParticleBurst create(double time, double minimum, double maximum) {
+        ParticleBurstOptions options = new ParticleBurstOptions();
+        options.time = time;
+        options.minimum = minimum;
+        options.maximum = maximum;
+        return new ParticleBurst(options);
+    }
 }

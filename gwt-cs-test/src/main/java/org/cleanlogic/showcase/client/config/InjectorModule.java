@@ -73,5 +73,6 @@ public class InjectorModule extends AbstractGinModule {
         bind(HeadingPitchRoll.class).asEagerSingleton();
         bind(ImageryLayersSplit.class).asEagerSingleton();
         bind(ParticleSystemFireworks.class).asEagerSingleton();
+        bind(ParticleSystem.class).asEagerSingleton();
     }
 }
