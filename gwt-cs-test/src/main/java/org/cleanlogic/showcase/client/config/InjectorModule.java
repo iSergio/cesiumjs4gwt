@@ -76,5 +76,6 @@ public class InjectorModule extends AbstractGinModule {
         bind(ParticleSystem.class).asEagerSingleton();
 //        bind(Tiles3DFeaturePicking.class).asEagerSingleton();
         bind(Tiles3DBIM.class).asEagerSingleton();
+        bind(Tiles3DPointCloud.class).asEagerSingleton();
     }
 }
