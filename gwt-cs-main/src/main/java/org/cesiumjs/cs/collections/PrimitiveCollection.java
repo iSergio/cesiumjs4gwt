@@ -24,6 +24,7 @@ import org.cesiumjs.cs.collections.options.PrimitiveCollectionOptions;
 import org.cesiumjs.cs.scene.Model;
 import org.cesiumjs.cs.scene.Primitive;
 import org.cesiumjs.cs.scene.Scene;
+import org.cesiumjs.cs.scene.particle.ParticleSystem;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -75,6 +76,9 @@ public class PrimitiveCollection extends Collection<Primitive> {
      */
     @JsMethod
     public native Model add(Model model);
+
+    @JsMethod
+    public native ParticleSystem add(ParticleSystem particleSystem);
 
     /**
      * Lowers a primitive "down one" in the collection. If all primitives in the collection are drawn on the globe surface,
