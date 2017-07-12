@@ -35,7 +35,7 @@ public class Tiles3DPhotogrammetry extends AbstractExample {
 
     @Inject
     public Tiles3DPhotogrammetry(ShowcaseExampleStore store) {
-        super("Hello World", "A sample photgrammetry dataset rendered with 3D Tiles.", new String[]{"Showcase", "Cesium", "3D Tiles"}, store);
+        super("3D Tiles Photogrammetry", "A sample photgrammetry dataset rendered with 3D Tiles.", new String[]{"Showcase", "Cesium", "3D Tiles"}, store);
     }
 
     @Override
