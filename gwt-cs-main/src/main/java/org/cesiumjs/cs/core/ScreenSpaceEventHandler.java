@@ -62,7 +62,7 @@ public class ScreenSpaceEventHandler {
      * @see #setInputAction
      * @see #removeInputAction
      */
-    public native Function getInputAction(Integer type);
+    public native Function getInputAction(Number type);
 
     /**
      * Returns the function to be executed on an input event.
