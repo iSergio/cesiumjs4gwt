@@ -17,10 +17,13 @@
 package org.cesiumjs.cs.datasources.properties;
 
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.Cesium;
 import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.core.JulianDate;
+import org.cesiumjs.cs.js.JsObject;
 
 /**
  * The interface for all properties, which represent a value that can optionally vary over time.
@@ -72,4 +75,9 @@ public class Property<T> {
      */
     @JsMethod
     public native T getValue(JulianDate time, T result);
+
+    @JsOverlay
+    public static <T> T getValueOrUndefined(Property property, JulianDate time, T result) {
+        return Cesium.defined(property) ? (T) property.getValue(time, result) : (T) JsObject.undefined();
+    }
 }
