@@ -33,6 +33,6 @@ public class PickedObject<T> {
     @JsProperty
     public T id;
 
-    @JsConstructor
-    private PickedObject() {}
+//    @JsConstructor
+//    private PickedObject() {}
 }

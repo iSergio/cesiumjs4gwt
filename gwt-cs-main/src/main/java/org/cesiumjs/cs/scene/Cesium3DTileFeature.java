@@ -21,6 +21,7 @@ import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Color;
+import org.cesiumjs.cs.core.PickedObject;
 import org.cesiumjs.cs.js.JsObject;
 
 /**
@@ -38,7 +39,7 @@ import org.cesiumjs.cs.js.JsObject;
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = "Cesium", name = "Cesium3DTileFeature")
-public class Cesium3DTileFeature {
+public class Cesium3DTileFeature extends PickedObject {
     /**
      * Gets or sets the highlight color multiplied with the feature's color. When this is white, the feature's color is not changed.
      * This is set for all features when a style's color is evaluated.
@@ -63,8 +64,8 @@ public class Cesium3DTileFeature {
     @JsProperty(name = "tileset")
     public native Cesium3DTileset tileset();
 
-    @JsConstructor
-    public Cesium3DTileFeature() {}
+//    @JsConstructor
+//    private Cesium3DTileFeature() {}
 
     /**
      * Returns a copy of the value of the feature's property with the given name. This includes properties from this
