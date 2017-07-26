@@ -148,9 +148,8 @@ public class Viewer {
     /**
      * Gets the info box.
      */
-    //TODO: Later
-//    @JsProperty(name = "infoBox")
-//    public native InfoBox infoBox();
+    @JsProperty(name = "infoBox")
+    public native InfoBox infoBox();
     /**
      * Gets the NavigationHelpButton.
      */
@@ -200,9 +199,8 @@ public class Viewer {
     /**
      * Gets the selection indicator.
      */
-    //TODO: Later
-//    @JsProperty(name = "selectionIndicator")
-//    public native SelectionIndicator selectionIndicator();
+    @JsProperty(name = "selectionIndicator")
+    public native SelectionIndicator selectionIndicator();
     /**
      * Get the scene's shadow map
      */
