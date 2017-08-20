@@ -264,31 +264,6 @@ public class Quaternion {
     public static native Quaternion fromAxisAngle(Cartesian3 axis, double angle, Quaternion result);
 
     /**
-     * Computes a rotation from the given heading, pitch and roll angles. Heading is the rotation about the negative z axis. Pitch is the rotation about the negative y axis. Roll is the rotation about the positive x axis.
-     * @deprecated The method was deprecated in Cesium 1.32 and will be removed in version 1.33. Use {@link #fromHeadingPitchRoll(HeadingPitchRoll, Quaternion)} where hpr is a HeadingPitchRoll}.
-     * @param heading The heading angle in radians.
-     * @param pitch The pitch angle in radians.
-     * @param roll The roll angle in radians.
-     * @return The modified result parameter or a new Quaternion instance if none was provided.
-     */
-    @Deprecated
-    @JsMethod
-    public static native Quaternion fromHeadingPitchRoll(double heading, double pitch, double roll);
-
-    /**
-     * Computes a rotation from the given heading, pitch and roll angles. Heading is the rotation about the negative z axis. Pitch is the rotation about the negative y axis. Roll is the rotation about the positive x axis.
-     * @deprecated The method was deprecated in Cesium 1.32 and will be removed in version 1.33. Use {@link #fromHeadingPitchRoll(HeadingPitchRoll, Quaternion)} where hpr is a HeadingPitchRoll}.
-     * @param heading The heading angle in radians.
-     * @param pitch The pitch angle in radians.
-     * @param roll The roll angle in radians.
-     * @param result The object onto which to store the result.
-     * @return The modified result parameter or a new Quaternion instance if none was provided.
-     */
-    @Deprecated
-    @JsMethod
-    public static native Quaternion fromHeadingPitchRoll(double heading, double pitch, double roll, Quaternion result);
-
-    /**
      * Computes a rotation from the given heading, pitch and roll angles. Heading is the rotation about the negative z axis.
      * Pitch is the rotation about the negative y axis. Roll is the rotation about the positive x axis.
      * @param hpr heading pitch roll object.

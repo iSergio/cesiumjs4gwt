@@ -14,29 +14,26 @@
  * limitations under the License.
  */
 
-package org.cesiumjs.cs.scene;
+package org.cesiumjs.cs.core;
 
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.Cartesian2;
-import org.cesiumjs.cs.core.Cartesian3;
-import org.cesiumjs.cs.core.Matrix4;
+import org.cesiumjs.cs.scene.CullingVolume;
+import org.cesiumjs.cs.scene.PerspectiveFrustum;
 
 /**
- * @deprecated will be removed in 1.38. Use {@link org.cesiumjs.cs.core.PerspectiveFrustum}
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
-@Deprecated
-@JsType(isNative = true, namespace = "Cesium", name = "PerspectiveFrustum")
-public class PerspectiveFrustum implements Frustum {
+@JsType(isNative = true, namespace = "Cesium", name = "PerspectiveOffCenterFrustum")
+public class PerspectiveOffCenterFrustum implements Frustum {
     /**
-     * The aspect ratio of the frustum's width to it's height.
+     * Defines the bottom clipping plane.
      * Default: undefined
      */
     @JsProperty
-    public double aspectRatio;
+    public double bottom;
     /**
      * The distance of the far plane.
      * Default: 500000000.0
@@ -44,24 +41,17 @@ public class PerspectiveFrustum implements Frustum {
     @JsProperty
     public double far;
     /**
-     * The angle of the field of view (FOV), in radians. This angle will be used as the horizontal FOV if the width is
-     * greater than the height, otherwise it will be the vertical FOV.
-     * Default: undefined
-     */
-    @JsProperty
-    public double fov;
-    /**
-     * Gets the angle of the vertical field of view, in radians.
-     * Default: undefined
-     */
-    @JsProperty(name = "fovy")
-    public native double fovy();
-    /**
-     * The perspective projection matrix computed from the view frustum with an infinite far plane.
-     * @see #projectionMatrix()
+     * Gets the perspective projection matrix computed from the view frustum with an infinite far plane.
+     * @see #projectionMatrix
      */
     @JsProperty(name = "infiniteProjectionMatrix")
     public native Matrix4 infiniteProjectionMatrix();
+    /**
+     * Defines the left clipping plane.
+     * Default: undefined
+     */
+    @JsProperty
+    public double left;
     /**
      * The distance of the near plane.
      * Default: 1.0
@@ -75,62 +65,45 @@ public class PerspectiveFrustum implements Frustum {
     @JsProperty(name = "projectionMatrix")
     public native Matrix4 projectionMatrix();
     /**
-     * Offsets the frustum in the x direction.
-     * Default: 0.0
+     * Defines the right clipping plane.
+     * Default: undefined
      */
     @JsProperty
-    public double xOffset;
+    public double right;
     /**
-     * Offsets the frustum in the y direction.
-     * Default: 0.0
+     * Defines the top clipping plane.
+     * Default: undefined
      */
     @JsProperty
-    public double yOffset;
+    public double top;
 
     /**
      * The viewing frustum is defined by 6 planes. Each plane is represented by a Cartesian4 object, where the x, y, and z
-     * components define the unit vector normal to the plane, and the w component is the distance of
-     * the plane from the origin/camera position.
-     * <pre>
-     *     Example:
-     *     {@code
-     *     PerspectiveFrustum frustum = new PerspectiveFrustum();
-     *     frustum.aspectRatio = canvas.clientWidth / canvas.clientHeight;
-     *     frustum.fov = Math.PI_OVER_THREE;
-     *     frustum.near = 1.0;
-     *     frustum.far = 2.0;
-     *     }
-     * </pre>
-     * @see PerspectiveOffCenterFrustum
+     * components define the unit vector normal to the plane, and the w component is the
+     * distance of the plane from the origin/camera position.
+     * @see PerspectiveFrustum
      */
     @JsConstructor
-    public PerspectiveFrustum() {}
+    public PerspectiveOffCenterFrustum() {}
 
     /**
-     * Returns a duplicate of a PerspectiveFrustum instance.
+     * Returns a duplicate of a PerspectiveOffCenterFrustum instance.
      * @return The modified result parameter or a new PerspectiveFrustum instance if one was not provided.
      */
     @JsMethod
-    public native PerspectiveFrustum clone();
+    public native org.cesiumjs.cs.scene.PerspectiveOffCenterFrustum clone();
 
     /**
-     * Returns a duplicate of a PerspectiveFrustum instance.
+     * Returns a duplicate of a PerspectiveOffCenterFrustum instance.
      * @param result The object onto which to store the result.
      * @return The modified result parameter or a new PerspectiveFrustum instance if one was not provided.
      */
     @JsMethod
-    public native PerspectiveFrustum clone(PerspectiveFrustum result);
+    public native org.cesiumjs.cs.scene.PerspectiveOffCenterFrustum clone(org.cesiumjs.cs.scene.PerspectiveOffCenterFrustum result);
 
+    //TODO: Example
     /**
      * Creates a culling volume for this frustum.
-     * <pre>
-     *     Example:
-     *     {@code
-     *     // Check if a bounding volume intersects the frustum.
-     *     CullingVolume cullingVolume = frustum.computeCullingVolume(cameraPosition, cameraDirection, cameraUp);
-     *     Cartesian3 intersect = cullingVolume.computeVisibility(boundingVolume);
-     *     }
-     * </pre>
      * @param position The eye position.
      * @param direction The view direction.
      * @param up The up direction.
@@ -140,13 +113,14 @@ public class PerspectiveFrustum implements Frustum {
     public native CullingVolume computeCullingVolume(Cartesian3 position, Cartesian3 direction, Cartesian3 up);
 
     /**
-     * Compares the provided PerspectiveFrustum componentwise and returns true if they are equal, false otherwise.
-     * @param other The right hand side PerspectiveFrustum.
+     * Compares the provided PerspectiveOffCenterFrustum componentwise and returns true if they are equal, false otherwise.
+     * @param other The right hand side PerspectiveOffCenterFrustum.
      * @return true if they are equal, false otherwise.
      */
     @JsMethod
-    public native boolean equals(PerspectiveFrustum other);
+    public native boolean equals(org.cesiumjs.cs.scene.PerspectiveOffCenterFrustum other);
 
+    //TODO: Example
     /**
      * Returns the pixel's width and height in meters.
      * @param drawingBufferWidth The width of the drawing buffer.
@@ -155,7 +129,6 @@ public class PerspectiveFrustum implements Frustum {
      * @param result The object onto which to store the result.
      * @return The modified result parameter or a new instance of Cartesian2 with the pixel's width and height in the x and y properties, respectively.
      */
-    // TODO: example
     @JsMethod
     public native Cartesian2 getPixelDimensions(double drawingBufferWidth, double drawingBufferHeight, double distance, Cartesian2 result);
 }

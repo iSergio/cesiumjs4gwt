@@ -261,6 +261,17 @@ public class Cesium3DTileset {
     @JsProperty
     public Cesium3DTileStyle style;
     /**
+     * The event fired to indicate that a tile's content was loaded.
+     * The loaded Cesium3DTile is passed to the event listener.
+     *
+     * This event is fired during the tileset traversal while the frame is being rendered so that updates to the tile
+     * take effect in the same frame. Do not create or modify Cesium entities or primitives during the event listener.
+     *
+     * Default: new Event()
+     */
+    @JsProperty
+    public Event tileLoad;
+    /**
      * When true, all tiles that meet the screen space error this frame are loaded. The tileset is completely loaded for this view.
      * Default: false
      */

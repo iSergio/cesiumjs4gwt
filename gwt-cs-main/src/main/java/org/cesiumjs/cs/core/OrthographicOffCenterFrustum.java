@@ -14,24 +14,21 @@
  * limitations under the License.
  */
 
-package org.cesiumjs.cs.scene;
+package org.cesiumjs.cs.core;
 
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.Cartesian2;
-import org.cesiumjs.cs.core.Cartesian3;
-import org.cesiumjs.cs.core.Matrix4;
+import org.cesiumjs.cs.scene.CullingVolume;
 
 /**
  * The viewing frustum is defined by 6 planes. Each plane is represented by a {@link org.cesiumjs.cs.core.Cartesian4} object,
  * where the x, y, and z components define the unit vector normal to the plane, and the w component is the
  * distance of the plane from the origin/camera position.
- * @deprecated will be removed in 1.38. Use Core/OrthographicOffCenterFrustum
+ *
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
-@Deprecated
 @JsType(isNative = true, namespace = "Cesium", name = "OrthographicOffCenterFrustum")
 public class OrthographicOffCenterFrustum implements Frustum {
     /**
@@ -84,7 +81,7 @@ public class OrthographicOffCenterFrustum implements Frustum {
      * @return The modified result parameter or a new OrthographicOffCenterFrustum instance if one was not provided.
      */
     @JsMethod
-    public native OrthographicOffCenterFrustum clone();
+    public native org.cesiumjs.cs.scene.OrthographicOffCenterFrustum clone();
 
     /**
      * Returns a duplicate of a OrthographicOffCenterFrustum instance.
@@ -92,7 +89,7 @@ public class OrthographicOffCenterFrustum implements Frustum {
      * @return The modified result parameter or a new OrthographicOffCenterFrustum instance if one was not provided.
      */
     @JsMethod
-    public native OrthographicOffCenterFrustum clone(OrthographicOffCenterFrustum result);
+    public native org.cesiumjs.cs.scene.OrthographicOffCenterFrustum clone(org.cesiumjs.cs.scene.OrthographicOffCenterFrustum result);
 
     /**
      * Creates a culling volume for this frustum.
@@ -110,7 +107,7 @@ public class OrthographicOffCenterFrustum implements Frustum {
      * @return  true if they are equal, false otherwise.
      */
     @JsMethod
-    public native boolean equals(OrthographicOffCenterFrustum other);
+    public native boolean equals(org.cesiumjs.cs.scene.OrthographicOffCenterFrustum other);
 
     /**
      * Returns the pixel's width and height in meters.

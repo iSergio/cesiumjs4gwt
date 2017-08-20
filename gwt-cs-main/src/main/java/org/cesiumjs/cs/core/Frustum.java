@@ -14,15 +14,13 @@
  * limitations under the License.
  */
 
-package org.cesiumjs.cs.scene;
+package org.cesiumjs.cs.core;
 
 import jsinterop.annotations.JsType;
 
 /**
- * @deprecated will be removed in 1.38. Use {@link org.cesiumjs.cs.core.Frustum}
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
-@Deprecated
 @JsType(isNative = true, namespace = "Cesium", name = "Frustum")
 public interface Frustum {
 }

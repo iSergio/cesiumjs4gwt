@@ -14,21 +14,18 @@
  * limitations under the License.
  */
 
-package org.cesiumjs.cs.scene;
+package org.cesiumjs.cs.core;
 
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.Cartesian2;
-import org.cesiumjs.cs.core.Cartesian3;
-import org.cesiumjs.cs.core.Matrix4;
+import org.cesiumjs.cs.scene.CullingVolume;
+import org.cesiumjs.cs.scene.PerspectiveOffCenterFrustum;
 
 /**
- * @deprecated will be removed in 1.38. Use {@link org.cesiumjs.cs.core.PerspectiveFrustum}
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
-@Deprecated
 @JsType(isNative = true, namespace = "Cesium", name = "PerspectiveFrustum")
 public class PerspectiveFrustum implements Frustum {
     /**
@@ -111,7 +108,7 @@ public class PerspectiveFrustum implements Frustum {
      * @return The modified result parameter or a new PerspectiveFrustum instance if one was not provided.
      */
     @JsMethod
-    public native PerspectiveFrustum clone();
+    public native org.cesiumjs.cs.scene.PerspectiveFrustum clone();
 
     /**
      * Returns a duplicate of a PerspectiveFrustum instance.
@@ -119,7 +116,7 @@ public class PerspectiveFrustum implements Frustum {
      * @return The modified result parameter or a new PerspectiveFrustum instance if one was not provided.
      */
     @JsMethod
-    public native PerspectiveFrustum clone(PerspectiveFrustum result);
+    public native org.cesiumjs.cs.scene.PerspectiveFrustum clone(org.cesiumjs.cs.scene.PerspectiveFrustum result);
 
     /**
      * Creates a culling volume for this frustum.
@@ -145,7 +142,7 @@ public class PerspectiveFrustum implements Frustum {
      * @return true if they are equal, false otherwise.
      */
     @JsMethod
-    public native boolean equals(PerspectiveFrustum other);
+    public native boolean equals(org.cesiumjs.cs.scene.PerspectiveFrustum other);
 
     /**
      * Returns the pixel's width and height in meters.

@@ -24,6 +24,7 @@ import org.cesiumjs.cs.collections.EntityCollection;
 import org.cesiumjs.cs.collections.TimeIntervalCollection;
 import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.core.JulianDate;
+import org.cesiumjs.cs.core.Matrix4;
 import org.cesiumjs.cs.datasources.graphics.*;
 import org.cesiumjs.cs.datasources.options.EntityOptions;
 import org.cesiumjs.cs.datasources.properties.PositionProperty;
@@ -202,6 +203,25 @@ public class Entity {
      */
     @JsMethod
     public native void addProperty(String propertyName);
+
+    /**
+     * Computes the model matrix for the entity's transform at specified time. Returns undefined if orientation or position are undefined.
+     * @param time The time to retrieve model matrix for.
+     * @return The modified result parameter or a new Matrix4 instance if one was not provided. Result is undefined
+     * if position or orientation are undefined.
+     */
+    @JsMethod
+    public native Matrix4 computeModelMatrix(JulianDate time);
+
+    /**
+     * Computes the model matrix for the entity's transform at specified time. Returns undefined if orientation or position are undefined.
+     * @param time The time to retrieve model matrix for.
+     * @param result The object onto which to store the result.
+     * @return The modified result parameter or a new Matrix4 instance if one was not provided. Result is undefined
+     * if position or orientation are undefined.
+     */
+    @JsMethod
+    public native Matrix4 computeModelMatrix(JulianDate time, Matrix4 result);
 
     /**
      * Given a time, returns true if this object should have data during that time.

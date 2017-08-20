@@ -14,21 +14,18 @@
  * limitations under the License.
  */
 
-package org.cesiumjs.cs.scene;
+package org.cesiumjs.cs.core;
 
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.BoundingSphere;
-import org.cesiumjs.cs.core.Cartesian4;
 import org.cesiumjs.cs.core.enums.Intersect;
 
 /**
  * The culling volume defined by planes.
- * @deprecated will be removed in 1.38. Use {@link org.cesiumjs.cs.core.CullingVolume}
+ *
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
-@Deprecated
 @JsType(isNative = true, namespace = "Cesium", name = "CullingVolume")
 public class CullingVolume {
     /**
@@ -58,7 +55,7 @@ public class CullingVolume {
      * @param boundingSphere The bounding sphere used to create the culling volume.
      * @return The culling volume created from the bounding sphere.
      */
-    public static native CullingVolume fromBoundingSphere(BoundingSphere boundingSphere);
+    public static native org.cesiumjs.cs.scene.CullingVolume fromBoundingSphere(BoundingSphere boundingSphere);
 
     /**
      * Constructs a culling volume from a bounding sphere. Creates six planes that create a box containing the sphere.
@@ -67,7 +64,7 @@ public class CullingVolume {
      * @param result The object onto which to store the result.
      * @return The culling volume created from the bounding sphere.
      */
-    public static native CullingVolume fromBoundingSphere(BoundingSphere boundingSphere, CullingVolume result);
+    public static native org.cesiumjs.cs.scene.CullingVolume fromBoundingSphere(BoundingSphere boundingSphere, org.cesiumjs.cs.scene.CullingVolume result);
 
     /**
      * Determines whether a bounding volume intersects the culling volume.

@@ -211,31 +211,27 @@ public class Transforms {
 
     //TODO: Example
     /**
-     * Computes a 4x4 transformation matrix from a reference frame with axes computed from the heading-pitch-roll
-     * angles centered at the provided origin to the provided ellipsoid's fixed reference frame.
-     * Heading is the rotation from the local north direction where a positive angle is increasing eastward.
-     * Pitch is the rotation from the local east-north plane. Positive pitch angles are above the plane.
-     * Negative pitch angles are below the plane. Roll is the first rotation applied about the local east axis.
-     * where fixedFrameTransform is a a 4x4 transformation matrix (see Transforms.localFrameToFixedFrameGenerator)
+     * Computes a 4x4 transformation matrix from a reference frame with axes computed from the heading-pitch-roll angles
+     * centered at the provided origin to the provided ellipsoid's fixed reference frame. Heading is the rotation
+     * from the local north direction where a positive angle is increasing eastward. Pitch is the rotation from the
+     * local east-north plane. Positive pitch angles are above the plane. Negative pitch angles are below the plane.
+     * Roll is the first rotation applied about the local east axis.
      * @param origin The center point of the local reference frame.
-     * @param headingPitchRoll The heading, pitch, and roll.
      * @return The modified result parameter or a new Matrix4 instance if none was provided.
      */
     @JsMethod
-    public static native Matrix4 headingPitchRollToFixedFrame(Cartesian3 origin, HeadingPitchRoll headingPitchRoll);
+    public static native Matrix4 headingPitchRollToFixedFrame(Cartesian3 origin, HeadingPitchRoll headingPitchRol);
 
     //TODO: Example
     /**
-     * Computes a 4x4 transformation matrix from a reference frame with axes computed from the heading-pitch-roll
-     * angles centered at the provided origin to the provided ellipsoid's fixed reference frame.
-     * Heading is the rotation from the local north direction where a positive angle is increasing eastward.
-     * Pitch is the rotation from the local east-north plane. Positive pitch angles are above the plane.
-     * Negative pitch angles are below the plane. Roll is the first rotation applied about the local east axis.
-     * where fixedFrameTransform is a a 4x4 transformation matrix (see Transforms.localFrameToFixedFrameGenerator)
+     * Computes a 4x4 transformation matrix from a reference frame with axes computed from the heading-pitch-roll angles
+     * centered at the provided origin to the provided ellipsoid's fixed reference frame. Heading is the rotation
+     * from the local north direction where a positive angle is increasing eastward. Pitch is the rotation from the
+     * local east-north plane. Positive pitch angles are above the plane. Negative pitch angles are below the plane.
+     * Roll is the first rotation applied about the local east axis.
      * @param origin The center point of the local reference frame.
      * @param headingPitchRoll The heading, pitch, and roll.
-     * @param ellipsoid The ellipsoid whose fixed frame is used in the transformation.
-     *                  Default: {@link Ellipsoid#WGS84()}
+     * @param ellipsoid The ellipsoid whose fixed frame is used in the transformation. Default {@link Ellipsoid#WGS84()}
      * @return The modified result parameter or a new Matrix4 instance if none was provided.
      */
     @JsMethod
@@ -243,38 +239,34 @@ public class Transforms {
 
     //TODO: Example
     /**
-     * Computes a 4x4 transformation matrix from a reference frame with axes computed from the heading-pitch-roll
-     * angles centered at the provided origin to the provided ellipsoid's fixed reference frame.
-     * Heading is the rotation from the local north direction where a positive angle is increasing eastward.
-     * Pitch is the rotation from the local east-north plane. Positive pitch angles are above the plane.
-     * Negative pitch angles are below the plane. Roll is the first rotation applied about the local east axis.
-     * where fixedFrameTransform is a a 4x4 transformation matrix (see Transforms.localFrameToFixedFrameGenerator)
+     * Computes a 4x4 transformation matrix from a reference frame with axes computed from the heading-pitch-roll angles
+     * centered at the provided origin to the provided ellipsoid's fixed reference frame. Heading is the rotation
+     * from the local north direction where a positive angle is increasing eastward. Pitch is the rotation from the
+     * local east-north plane. Positive pitch angles are above the plane. Negative pitch angles are below the plane.
+     * Roll is the first rotation applied about the local east axis.
      * @param origin The center point of the local reference frame.
      * @param headingPitchRoll The heading, pitch, and roll.
-     * @param ellipsoid The ellipsoid whose fixed frame is used in the transformation.
-     *                  Default: {@link Ellipsoid#WGS84()}
-     * @param result The object onto which to store the result.
+     * @param ellipsoid The ellipsoid whose fixed frame is used in the transformation. Default {@link Ellipsoid#WGS84()}
      * @return The modified result parameter or a new Matrix4 instance if none was provided.
      */
     @JsMethod
-    public static native Matrix4 headingPitchRollToFixedFrame(Cartesian3 origin, HeadingPitchRoll headingPitchRoll, Ellipsoid ellipsoid, Matrix4 result);
+    public static native Matrix4 headingPitchRollToFixedFrame(Cartesian3 origin, HeadingPitchRoll headingPitchRoll, Ellipsoid ellipsoid, LocalFrameToFixedFrame fixedFrameTransform);
 
+    //TODO: Example
     /**
-     * Computes a 4x4 transformation matrix from a reference frame with axes computed from the heading-pitch-roll
-     * angles centered at the provided origin to the provided ellipsoid's fixed reference frame.
-     * Heading is the rotation from the local north direction where a positive angle is increasing eastward.
-     * Pitch is the rotation from the local east-north plane. Positive pitch angles are above the plane.
-     * Negative pitch angles are below the plane. Roll is the first rotation applied about the local east axis.
+     * Computes a 4x4 transformation matrix from a reference frame with axes computed from the heading-pitch-roll angles
+     * centered at the provided origin to the provided ellipsoid's fixed reference frame. Heading is the rotation
+     * from the local north direction where a positive angle is increasing eastward. Pitch is the rotation from the
+     * local east-north plane. Positive pitch angles are above the plane. Negative pitch angles are below the plane.
+     * Roll is the first rotation applied about the local east axis.
      * @param origin The center point of the local reference frame.
      * @param headingPitchRoll The heading, pitch, and roll.
-     * @param ellipsoid The ellipsoid whose fixed frame is used in the transformation.
-     *                  Default: {@link Ellipsoid#WGS84()}
-     * @param transform A 4x4 transformation matrix from a reference frame to the provided ellipsoid's fixed reference frame.
+     * @param ellipsoid The ellipsoid whose fixed frame is used in the transformation. Default {@link Ellipsoid#WGS84()}
      * @param result The object onto which to store the result.
      * @return The modified result parameter or a new Matrix4 instance if none was provided.
      */
     @JsMethod
-    public static native Matrix4 headingPitchRollToFixedFrame(Cartesian3 origin, HeadingPitchRoll headingPitchRoll, Ellipsoid ellipsoid, LocalFrameToFixedFrame transform, Matrix4 result);
+    public static native Matrix4 headingPitchRollToFixedFrame(Cartesian3 origin, HeadingPitchRoll headingPitchRoll, Ellipsoid ellipsoid, LocalFrameToFixedFrame fixedFrameTransform, Matrix4 result);
 
     //TODO: Example
     /**

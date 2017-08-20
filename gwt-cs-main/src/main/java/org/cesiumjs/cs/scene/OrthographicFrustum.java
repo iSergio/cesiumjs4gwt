@@ -25,8 +25,10 @@ import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.Matrix4;
 
 /**
+ * @deprecated will be removed in 1.38. Use {@link org.cesiumjs.cs.core.OrthographicFrustum}
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
+@Deprecated
 @JsType(isNative = true, namespace = "Cesium", name = "OrthographicFrustum")
 public class OrthographicFrustum implements Frustum {
     /**
