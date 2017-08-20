@@ -16,10 +16,7 @@
 
 package org.cesiumjs.cs.collections;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.core.Ray;
 import org.cesiumjs.cs.promise.Promise;
@@ -156,4 +153,9 @@ public class ImageryLayerCollection extends Collection<ImageryLayer> {
      */
     @JsMethod
     public native void removeAll(boolean destroy);
+
+    @JsFunction
+    public interface Listener {
+        void function(ImageryLayer imageryLayer, int index);
+    }
 }
