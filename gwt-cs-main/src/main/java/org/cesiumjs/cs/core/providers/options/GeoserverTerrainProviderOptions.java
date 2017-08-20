@@ -20,6 +20,7 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.providers.GeoserverTerrainProviderFormatArray;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -91,6 +92,11 @@ public class GeoserverTerrainProviderOptions {
      */
     @JsProperty
     public Integer maxLevel;
+    /**
+     * Custom format array
+     */
+    @JsProperty
+    public GeoserverTerrainProviderFormatArray formatArray;
 
     @JsConstructor
     public GeoserverTerrainProviderOptions() {}
