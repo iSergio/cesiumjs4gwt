@@ -36,6 +36,21 @@ public class BingMapsStyle {
     @JsProperty(name = "AERIAL_WITH_LABELS")
     public static native String AERIAL_WITH_LABELS();
     /**
+     * A dark version of the road maps.
+     */
+    @JsProperty(name = "CANVAS_DARK")
+    public static native String CANVAS_DARK();
+    /**
+     * A grayscale version of the road maps.
+     */
+    @JsProperty(name = "CANVAS_GRAY")
+    public static native String CANVAS_GRAY();
+    /**
+     * A lighter version of the road maps.
+     */
+    @JsProperty(name = "CANVAS_LIGHT")
+    public static native String CANVAS_LIGHT();
+    /**
      * Roads without additional imagery.
      */
     @JsProperty(name = "ROAD")
