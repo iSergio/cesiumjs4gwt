@@ -18,14 +18,35 @@ package org.cesiumjs.cs.core.projection;
 
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Ellipsoid;
 
 /**
+ * The map projection used by Google Maps, Bing Maps, and most of ArcGIS Online, EPSG:3857. This projection use
+ * longitude and latitude expressed with the WGS84 and transforms them to Mercator
+ * using the spherical (rather than ellipsoidal) equations.
+ *
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = "Cesium", name = "WebMercatorProjection")
 public class WebMercatorProjection extends MapProjection {
+    /**
+     * The maximum latitude (both North and South) supported by a Web Mercator (EPSG:3857) projection. Technically,
+     * the Mercator projection is defined for any latitude up to (but not including) 90 degrees, but it makes sense
+     * to cut it off sooner because it grows exponentially with increasing latitude. The logic behind this particular
+     * cutoff value, which is the one used by Google Maps, Bing Maps, and Esri, is that it makes the projection square.
+     * That is, the rectangle is equal in the X and Y directions.
+     * The constant value is computed by calling: {@link WebMercatorProjection#mercatorAngleToGeodeticLatitude(Math.PI)}
+     */
+    @JsProperty(name = "MaximumLatitude")
+    public static native double MaximumLatitude();
+    /**
+     * Gets the Ellipsoid.
+     */
+    @JsProperty(name = "ellipsoid")
+    public native Ellipsoid ellipsoid();
+
     /**
      * The map projection used by Google Maps, Bing Maps, and most of ArcGIS Online, EPSG:3857. This projection use
      * longitude and latitude expressed with the WGS84 and transforms them to Mercator using the spherical
