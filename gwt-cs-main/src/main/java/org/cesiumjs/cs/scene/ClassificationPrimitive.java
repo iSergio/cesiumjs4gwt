@@ -24,6 +24,7 @@ import org.cesiumjs.cs.core.Matrix4;
 import org.cesiumjs.cs.core.geometry.GeometryInstance;
 import org.cesiumjs.cs.promise.Promise;
 import org.cesiumjs.cs.scene.apperances.Appearance;
+import org.cesiumjs.cs.scene.enums.ClassificationType;
 import org.cesiumjs.cs.scene.enums.ShadowMode;
 import org.cesiumjs.cs.scene.options.ClassificationPrimitiveOptions;
 
@@ -46,7 +47,7 @@ import org.cesiumjs.cs.scene.options.ClassificationPrimitiveOptions;
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = "Cesium", name = "ClassificationPrimitive")
-public class ClassificationPrimitive {
+public class ClassificationPrimitive extends Primitive {
     /**
      * When true, each geometry instance will only be pickable with Scene#pick. When false, GPU memory is saved.
      * Default: true
@@ -54,18 +55,17 @@ public class ClassificationPrimitive {
     @JsProperty(name = "allowPicking")
     public native boolean allowPicking();
     /**
-     * The Appearance used to shade this primitive. Each geometry instance is shaded with the same appearance.
-     * Some appearances, like PerInstanceColorAppearance allow giving each instance unique properties.
-     * Default: undefined
-     */
-    @JsProperty
-    public Appearance appearance;
-    /**
      * Determines if the geometry instances will be created and batched on a web worker.
      * Default: true
      */
     @JsProperty(name = "asynchronous")
     public native boolean asynchronous();
+    /**
+     * Determines whether terrain, 3D Tiles or both will be classified.
+     * Default: {@link ClassificationType#BOTH()}
+     */
+    @JsProperty
+    public Number classificationType;
     /**
      * When true, geometry vertices are compressed, which will save memory.
      * Default: true
