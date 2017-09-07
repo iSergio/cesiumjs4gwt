@@ -107,13 +107,6 @@ public class ViewerOptions {
     @JsProperty
     public boolean scene3DOnly;
     /**
-     * 	The clock to use to control current time. Default: new Clock().
-     * 	@deprecated Passing options.clock when creating a new Viewer instance has been deprecated and will be removed in Cesium 1.37, pass options.clockViewModel instead.
-     */
-    @Deprecated
-    @JsProperty
-    public Clock clock;
-    /**
      * The clock view model to use to control current time. Optional.
      * Default: new ClockViewModel(options.clock)
      */
