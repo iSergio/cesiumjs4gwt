@@ -76,7 +76,7 @@ public class EllipseGraphics {
      * Default: {@link Color#WHITE()}
      */
     @JsProperty
-    public MaterialProperty materia;
+    public MaterialProperty material;
     /**
      * A boolean Property specifying whether the ellipse is outlined.
      * Default: false
