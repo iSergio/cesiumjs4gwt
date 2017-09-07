@@ -332,6 +332,14 @@ public class Cesium3DTileset {
     }
 
     /**
+     * Provides a hook to override the method used to request the tileset json useful when fetching tilesets from remote servers
+     * @param tilesetUrl The url of the json file to be fetched
+     * @return A promise that resolves with the fetched json data
+     */
+    @JsMethod
+    public static native Promise<JsObject, Void> loadJson(String tilesetUrl);
+
+    /**
      * Destroys the WebGL resources held by this object. Destroying an object allows for deterministic release of WebGL
      * resources, instead of relying on the garbage collector to destroy this object.
      *
