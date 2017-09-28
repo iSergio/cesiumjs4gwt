@@ -16,6 +16,7 @@
 
 package org.cesiumjs.cs.scene;
 
+import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.dom.client.CanvasElement;
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsFunction;
@@ -105,6 +106,8 @@ public class Billboard {
      */
     @JsProperty
     public String image;
+    @JsProperty(name = "image")
+    public CanvasElement imageCanvas;
     /**
      * Gets or sets the pixel offset in screen space from the origin of this billboard. This is commonly used to align
      * multiple billboards and labels at the same position, e.g., an image and text. The screen space origin is the top,
