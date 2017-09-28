@@ -26,7 +26,7 @@ import org.cesiumjs.cs.scene.apperances.options.PolylineMaterialAppearanceOption
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "PolylineMaterialAppearance")
+@JsType(isNative = true, namespace = "Cesium", name = "PolylineMaterialAppearance")
 public class PolylineMaterialAppearance extends Appearance {
     /**
      * The {@link VertexFormat} that all {@link PolylineMaterialAppearance} instances are compatible with.
