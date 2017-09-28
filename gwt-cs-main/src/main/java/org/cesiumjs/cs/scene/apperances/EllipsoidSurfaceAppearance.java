@@ -16,12 +16,11 @@
 
 package org.cesiumjs.cs.scene.apperances;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.VertexFormat;
 import org.cesiumjs.cs.core.geometry.PolygonGeometry;
 import org.cesiumjs.cs.core.geometry.RectangleGeometry;
+import org.cesiumjs.cs.scene.Material;
 import org.cesiumjs.cs.scene.apperances.options.EllipsoidSurfaceAppearanceOptions;
 
 /**
@@ -76,4 +75,18 @@ public class EllipsoidSurfaceAppearance extends Appearance {
      */
     @JsConstructor
     public EllipsoidSurfaceAppearance(EllipsoidSurfaceAppearanceOptions options) {}
+
+    @JsOverlay
+    public static EllipsoidSurfaceAppearance create(Material material) {
+        EllipsoidSurfaceAppearanceOptions options = new EllipsoidSurfaceAppearanceOptions();
+        options.material = material;
+        return new EllipsoidSurfaceAppearance(options);
+    }
+
+    @JsOverlay
+    public static EllipsoidSurfaceAppearance create(boolean aboveGround) {
+        EllipsoidSurfaceAppearanceOptions options = new EllipsoidSurfaceAppearanceOptions();
+        options.aboveGround = aboveGround;
+        return new EllipsoidSurfaceAppearance(options);
+    }
 }
