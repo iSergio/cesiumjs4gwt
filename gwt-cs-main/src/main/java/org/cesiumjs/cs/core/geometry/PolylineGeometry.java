@@ -47,7 +47,7 @@ public class PolylineGeometry {
      * @return The computed vertices and indices.
      */
     @JsMethod
-    public static native PolylineGeometry createGeometry(PolylineGeometry polylineGeometry);
+    public static native Geometry createGeometry(PolylineGeometry polylineGeometry);
 
     /**
      * Stores the provided instance into the provided array.
