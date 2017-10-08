@@ -20,7 +20,6 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.scene.CullingVolume;
 
 /**
  * The viewing frustum is defined by 6 planes. Each plane is represented by a {@link org.cesiumjs.cs.core.Cartesian4} object,

@@ -55,7 +55,7 @@ public class CullingVolume {
      * @param boundingSphere The bounding sphere used to create the culling volume.
      * @return The culling volume created from the bounding sphere.
      */
-    public static native org.cesiumjs.cs.scene.CullingVolume fromBoundingSphere(BoundingSphere boundingSphere);
+    public static native CullingVolume fromBoundingSphere(BoundingSphere boundingSphere);
 
     /**
      * Constructs a culling volume from a bounding sphere. Creates six planes that create a box containing the sphere.
@@ -64,7 +64,7 @@ public class CullingVolume {
      * @param result The object onto which to store the result.
      * @return The culling volume created from the bounding sphere.
      */
-    public static native org.cesiumjs.cs.scene.CullingVolume fromBoundingSphere(BoundingSphere boundingSphere, org.cesiumjs.cs.scene.CullingVolume result);
+    public static native CullingVolume fromBoundingSphere(BoundingSphere boundingSphere, CullingVolume result);
 
     /**
      * Determines whether a bounding volume intersects the culling volume.

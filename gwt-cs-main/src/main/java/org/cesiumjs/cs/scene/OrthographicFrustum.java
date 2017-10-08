@@ -22,6 +22,7 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Cartesian2;
 import org.cesiumjs.cs.core.Cartesian3;
+import org.cesiumjs.cs.core.CullingVolume;
 import org.cesiumjs.cs.core.Matrix4;
 
 /**
