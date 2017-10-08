@@ -20,7 +20,6 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.scene.CullingVolume;
 import org.cesiumjs.cs.scene.PerspectiveOffCenterFrustum;
 
 /**
@@ -108,7 +107,7 @@ public class PerspectiveFrustum implements Frustum {
      * @return The modified result parameter or a new PerspectiveFrustum instance if one was not provided.
      */
     @JsMethod
-    public native org.cesiumjs.cs.scene.PerspectiveFrustum clone();
+    public native PerspectiveFrustum clone();
 
     /**
      * Returns a duplicate of a PerspectiveFrustum instance.
@@ -116,7 +115,7 @@ public class PerspectiveFrustum implements Frustum {
      * @return The modified result parameter or a new PerspectiveFrustum instance if one was not provided.
      */
     @JsMethod
-    public native org.cesiumjs.cs.scene.PerspectiveFrustum clone(org.cesiumjs.cs.scene.PerspectiveFrustum result);
+    public native PerspectiveFrustum clone(PerspectiveFrustum result);
 
     /**
      * Creates a culling volume for this frustum.
@@ -142,7 +141,7 @@ public class PerspectiveFrustum implements Frustum {
      * @return true if they are equal, false otherwise.
      */
     @JsMethod
-    public native boolean equals(org.cesiumjs.cs.scene.PerspectiveFrustum other);
+    public native boolean equals(PerspectiveFrustum other);
 
     /**
      * Returns the pixel's width and height in meters.
