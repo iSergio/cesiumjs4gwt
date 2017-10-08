@@ -58,7 +58,7 @@ public class OrthographicFrustum implements Frustum {
      * @return The modified result parameter or a new PerspectiveFrustum instance if one was not provided.
      */
     @JsMethod
-    public native org.cesiumjs.cs.scene.OrthographicFrustum clone();
+    public native OrthographicFrustum clone();
 
     /**
      * OrthographicFrustum
@@ -66,7 +66,7 @@ public class OrthographicFrustum implements Frustum {
      * @return The modified result parameter or a new PerspectiveFrustum instance if one was not provided.
      */
     @JsMethod
-    public native org.cesiumjs.cs.scene.OrthographicFrustum clone(org.cesiumjs.cs.scene.OrthographicFrustum result);
+    public native OrthographicFrustum clone(OrthographicFrustum result);
 
     //TODO: Example
     /**
@@ -85,7 +85,7 @@ public class OrthographicFrustum implements Frustum {
      * @return true if they are equal, false otherwise.
      */
     @JsMethod
-    public native boolean equals(org.cesiumjs.cs.scene.OrthographicFrustum other);
+    public native boolean equals(OrthographicFrustum other);
 
     //TODO: Example
     /**
