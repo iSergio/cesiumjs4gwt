@@ -80,7 +80,7 @@ public class OrthographicOffCenterFrustum implements Frustum {
      * @return The modified result parameter or a new OrthographicOffCenterFrustum instance if one was not provided.
      */
     @JsMethod
-    public native org.cesiumjs.cs.scene.OrthographicOffCenterFrustum clone();
+    public native OrthographicOffCenterFrustum clone();
 
     /**
      * Returns a duplicate of a OrthographicOffCenterFrustum instance.
@@ -88,7 +88,7 @@ public class OrthographicOffCenterFrustum implements Frustum {
      * @return The modified result parameter or a new OrthographicOffCenterFrustum instance if one was not provided.
      */
     @JsMethod
-    public native org.cesiumjs.cs.scene.OrthographicOffCenterFrustum clone(org.cesiumjs.cs.scene.OrthographicOffCenterFrustum result);
+    public native OrthographicOffCenterFrustum clone(OrthographicOffCenterFrustum result);
 
     /**
      * Creates a culling volume for this frustum.
@@ -106,7 +106,7 @@ public class OrthographicOffCenterFrustum implements Frustum {
      * @return  true if they are equal, false otherwise.
      */
     @JsMethod
-    public native boolean equals(org.cesiumjs.cs.scene.OrthographicOffCenterFrustum other);
+    public native boolean equals(OrthographicOffCenterFrustum other);
 
     /**
      * Returns the pixel's width and height in meters.
