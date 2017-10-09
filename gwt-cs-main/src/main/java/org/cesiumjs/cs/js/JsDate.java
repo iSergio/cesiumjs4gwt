@@ -34,7 +34,7 @@ public class JsDate {
     public JsDate() {}
 
     @JsConstructor
-    public JsDate(Integer value) {}
+    public JsDate(Number value) {}
 
     @JsConstructor
     public JsDate(String dateString) {}
