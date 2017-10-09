@@ -16,14 +16,12 @@
 
 package org.cesiumjs.cs.collections;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.collections.options.BillboardCollectionOptions;
 import org.cesiumjs.cs.core.Matrix4;
 import org.cesiumjs.cs.core.Transforms;
 import org.cesiumjs.cs.scene.Billboard;
+import org.cesiumjs.cs.scene.Scene;
 import org.cesiumjs.cs.scene.enums.BlendOption;
 import org.cesiumjs.cs.scene.options.BillboardOptions;
 
@@ -92,6 +90,18 @@ public class BillboardCollection extends Collection<Billboard> {
      */
     @JsConstructor
     public BillboardCollection(BillboardCollectionOptions options) {}
+
+    /**
+     * Create collection of {@link Billboard} with {@link Scene} option
+     * @param scene current {@link Scene}
+     * @return {@link BillboardCollection}
+     */
+    @JsOverlay
+    public static BillboardCollection create(Scene scene) {
+        BillboardCollectionOptions options = new BillboardCollectionOptions();
+        options.scene = scene;
+        return new BillboardCollection(options);
+    }
 
     /**
      * Creates and adds a billboard with the specified initial properties to the collection. The added billboard is
