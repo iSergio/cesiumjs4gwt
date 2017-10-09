@@ -20,13 +20,14 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Packable;
 import org.cesiumjs.cs.core.geometry.options.CircleGeometryOptions;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = "Cesium", name = "CircleGeometry")
-public class CircleGeometry {
+public class CircleGeometry extends Geometry implements Packable {
     /**
      * The number of elements used to pack the object into an array.
      */
@@ -35,6 +36,14 @@ public class CircleGeometry {
 
     @JsConstructor
     public CircleGeometry(CircleGeometryOptions options) {}
+
+    /**
+     * Computes the geometric representation of a circle on an ellipsoid, including its vertices, indices, and a bounding sphere.
+     * @param circleGeometry A description of the circle.
+     * @return The computed vertices and indices.
+     */
+    @JsMethod
+    public static native Geometry createGeometry(CircleGeometry circleGeometry);
 
     /**
      * Stores the provided instance into the provided array.

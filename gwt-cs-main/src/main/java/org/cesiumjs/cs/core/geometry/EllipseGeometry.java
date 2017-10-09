@@ -20,6 +20,7 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Packable;
 import org.cesiumjs.cs.core.geometry.options.EllipseGeometryOptions;
 import org.cesiumjs.cs.scene.Primitive;
 
@@ -27,7 +28,7 @@ import org.cesiumjs.cs.scene.Primitive;
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = "Cesium", name = "EllipseGeometry")
-public class EllipseGeometry {
+public class EllipseGeometry extends Geometry implements Packable {
     /**
      * The number of elements used to pack the object into an array.
      */

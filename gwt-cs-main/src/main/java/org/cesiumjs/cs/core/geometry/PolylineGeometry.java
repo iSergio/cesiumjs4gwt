@@ -38,6 +38,10 @@ public class PolylineGeometry {
     @JsProperty
     public int packedLength;
 
+    /**
+     * Create instance of PolylineGeometry
+     * @param options {@link PolylineGeometryOptions}
+     */
     @JsConstructor
     public PolylineGeometry(PolylineGeometryOptions options) {}
 

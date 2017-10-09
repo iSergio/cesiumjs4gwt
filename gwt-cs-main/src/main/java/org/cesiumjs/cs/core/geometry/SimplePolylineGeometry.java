@@ -20,13 +20,14 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Packable;
 import org.cesiumjs.cs.core.geometry.options.SimplePolylineGeometryOptions;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = "Cesium", name = "SimplePolylineGeometry")
-public class SimplePolylineGeometry {
+public class SimplePolylineGeometry extends Geometry implements Packable {
     /**
      * The number of elements used to pack the object into an array.
      */

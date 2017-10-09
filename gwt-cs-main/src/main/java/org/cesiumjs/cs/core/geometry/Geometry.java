@@ -57,7 +57,7 @@ public class Geometry {
      * The type of primitives in the geometry. This is most often PrimitiveType.TRIANGLES, but can varying based on the specific geometry.
      */
     @JsProperty
-    public Integer primitiveType;
+    public Number primitiveType;
 
     /**
      * A geometry representation with attributes forming vertices and optional index data defining primitives.

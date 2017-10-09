@@ -20,6 +20,7 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Packable;
 import org.cesiumjs.cs.core.geometry.options.PolygonGeometryOptions;
 
 /**
@@ -27,7 +28,7 @@ import org.cesiumjs.cs.core.geometry.options.PolygonGeometryOptions;
  */
 //TODO: Examples
 @JsType(isNative = true, namespace = "Cesium", name = "PolygonGeometry")
-public class PolygonGeometry {
+public class PolygonGeometry extends Geometry implements Packable {
     /**
      * The number of elements used to pack the object into an array.
      */

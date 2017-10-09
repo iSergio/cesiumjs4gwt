@@ -27,7 +27,7 @@ import org.cesiumjs.cs.core.geometry.options.BoxGeometryOptions;
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = "Cesium", name = "BoxGeometry")
-public class BoxGeometry implements Packable {
+public class BoxGeometry extends Geometry implements Packable {
     /**
      * The number of elements used to pack the object into an array.
      */

@@ -20,13 +20,14 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Packable;
 import org.cesiumjs.cs.core.geometry.options.EllipsoidGeometryOptions;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = "Cesium", name = "EllipsoidGeometry")
-public class EllipsoidGeometry {
+public class EllipsoidGeometry extends Geometry implements Packable {
     /**
      * The number of elements used to pack the object into an array.
      */

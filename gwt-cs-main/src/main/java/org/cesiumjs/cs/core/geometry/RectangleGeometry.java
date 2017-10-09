@@ -28,7 +28,7 @@ import org.cesiumjs.cs.scene.Primitive;
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = "Cesium", name = "RectangleGeometry")
-public class RectangleGeometry implements Packable {
+public class RectangleGeometry extends Geometry implements Packable {
     /**
      * The number of elements used to pack the object into an array.
      */
