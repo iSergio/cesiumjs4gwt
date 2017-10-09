@@ -16,10 +16,7 @@
 
 package org.cesiumjs.cs.scene;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.Matrix4;
 import org.cesiumjs.cs.core.geometry.GeometryInstance;
 import org.cesiumjs.cs.promise.Promise;
@@ -172,5 +169,5 @@ public class Primitive {
      * Do not call this function directly. This is documented just to list the exceptions that may be propagated when the scene is rendered:
      */
     @JsMethod
-    public native void update();
+    public native void update(Object frameState);
 }
