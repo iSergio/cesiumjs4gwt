@@ -21,10 +21,7 @@ import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.collections.options.PrimitiveCollectionOptions;
-import org.cesiumjs.cs.scene.Cesium3DTileset;
-import org.cesiumjs.cs.scene.Model;
-import org.cesiumjs.cs.scene.Primitive;
-import org.cesiumjs.cs.scene.Scene;
+import org.cesiumjs.cs.scene.*;
 import org.cesiumjs.cs.scene.particle.ParticleSystem;
 
 /**
@@ -69,6 +66,8 @@ public class PrimitiveCollection extends Collection<Primitive> {
      */
     @JsMethod
     public native Collection add(Collection collection);
+    @JsMethod
+    public native boolean remove(Collection collection);
 
     /**
      * Add model to collecntion
@@ -82,7 +81,6 @@ public class PrimitiveCollection extends Collection<Primitive> {
     public native ParticleSystem add(ParticleSystem particleSystem);
     @JsMethod
     public native Cesium3DTileset add(Cesium3DTileset cesium3DTileset);
-
     /**
      * Lowers a primitive "down one" in the collection. If all primitives in the collection are drawn on the globe surface,
      * this visually moves the primitive down one.
