@@ -17,6 +17,7 @@
 package org.cesiumjs.cs.core.geometry.options;
 
 import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.*;
@@ -25,7 +26,7 @@ import org.cesiumjs.cs.core.Math;
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
-@JsType(isNative = true, namespace = "Cesium", name = "Object")
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class PolygonGeometryOptions {
     /**
      * An array of positions that defined the corner points of the polygon.
