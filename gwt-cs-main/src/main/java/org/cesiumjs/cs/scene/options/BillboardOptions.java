@@ -16,6 +16,8 @@
 
 package org.cesiumjs.cs.scene.options;
 
+import com.google.gwt.canvas.client.Canvas;
+import com.google.gwt.dom.client.CanvasElement;
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
@@ -73,12 +75,12 @@ public class BillboardOptions {
      * Default: {@link HeightReference#NONE()}
      */
     @JsProperty
-    public Integer heightReference;
+    public Number heightReference;
     /**
      * Gets or sets the horizontal origin of this billboard, which determines if the billboard is to the left, center, or right of its position.
      */
     @JsProperty
-    public Integer horizontalOrigin;
+    public Number horizontalOrigin;
     /**
      * Gets or sets the user-defined object returned when the billboard is picked.
      */
@@ -93,6 +95,8 @@ public class BillboardOptions {
      */
     @JsProperty
     public String image;
+    @JsProperty(name = "image")
+    public CanvasElement imageCanvas;
     /**
      * Gets or sets the pixel offset in screen space from the origin of this billboard. This is commonly used to align
      * multiple billboards and labels at the same position, e.g., an image and text. The screen space origin is the top,
