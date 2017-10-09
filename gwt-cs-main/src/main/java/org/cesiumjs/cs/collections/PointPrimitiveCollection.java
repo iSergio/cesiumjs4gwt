@@ -66,6 +66,20 @@ public class PointPrimitiveCollection extends Collection<PointPrimitive> {
      * For best performance, prefer a few collections, each with many points, to many collections with only a few points each.
      * Organize collections so that points with the same update frequency are in the same collection, i.e.,
      * points that do not change should be in one collection; points that change every frame should be in another collection; and so on.
+     */
+    @JsConstructor
+    public PointPrimitiveCollection() {}
+
+    /**
+     * A renderable collection of points.
+     *
+     * Points are added and removed from the collection using {@link #add} and {@link #remove}.
+     *
+     * Performance:
+     *
+     * For best performance, prefer a few collections, each with many points, to many collections with only a few points each.
+     * Organize collections so that points with the same update frequency are in the same collection, i.e.,
+     * points that do not change should be in one collection; points that change every frame should be in another collection; and so on.
      * @param options {@link PointPrimitiveCollectionOptions}
      */
     @JsConstructor
