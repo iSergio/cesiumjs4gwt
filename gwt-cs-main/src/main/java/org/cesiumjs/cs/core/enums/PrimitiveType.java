@@ -18,10 +18,14 @@ package org.cesiumjs.cs.core.enums;
 
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 
 /**
+ * The type of a geometric primitive, i.e., points, lines, and triangles.
+ *
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
+@JsType(isNative = true, namespace = "Cesium", name = "PrimitiveType")
 public class PrimitiveType {
     /**
      * Line loop primitive where each vertex (or index) after the first connects a line to the previous vertex,
