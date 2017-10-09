@@ -44,13 +44,13 @@ public class PolylineMaterialAppearance extends Appearance {
     public native VertexFormat vertexFormat();
 
     /**
-     * An appearance for {@link PolylineGeometry} that supports shading with materials.
+     * An appearance for {@link org.cesiumjs.cs.core.geometry.PolylineGeometry} that supports shading with materials.
      */
     @JsConstructor
     public PolylineMaterialAppearance() {}
 
     /**
-     * An appearance for {@link PolylineGeometry} that supports shading with materials.
+     * An appearance for {@link org.cesiumjs.cs.core.geometry.PolylineGeometry} that supports shading with materials.
      * @param options {@link PolylineMaterialAppearanceOptions}
      */
     @JsConstructor
