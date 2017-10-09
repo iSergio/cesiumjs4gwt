@@ -57,9 +57,10 @@ public class Cesium {
      */
     public static native void fixSmartGWT() /*-{
         if ($wnd.buildInDataView !== undefined) {
+            console.log("Native DataView restored.");
             $wnd.DataView = $wnd.buildInDataView;
         } else {
-            console.log("$wnd.buildInDataView === undefined");
+            console.log("Native DataView not modified.");
         }
     }-*/;
 
@@ -280,6 +281,37 @@ public class Cesium {
      */
     @JsMethod(namespace = "Cesium", name = "sampleTerrainMostDetailed")
     public static native Promise<Cartographic[], Void> sampleTerrainMostDetailed(TerrainProvider terrainProvider, Cartographic[] positions);
+
+    // TODO: Example
+    /**
+     * Destroys an object. Each of the object's functions, including functions in its prototype, is replaced with a
+     * function that throws a DeveloperError, except for the object's isDestroyed function, which is set to a function
+     * that returns true. The object's properties are removed with delete.
+     *
+     * This function is used by objects that hold native resources, e.g., WebGL resources, which need to be
+     *
+     * explicitly released. Client code calls an object's destroy function, which then releases the native resource
+     * and calls destroyObject to put itself in a destroyed state.
+     * @param object The object to destroy.
+     */
+    @JsMethod(namespace = "Cesium", name = "destroyObject")
+    public static native void destroyObject(Object object);
+
+    // TODO: Example
+    /**
+     * Destroys an object. Each of the object's functions, including functions in its prototype, is replaced with a
+     * function that throws a DeveloperError, except for the object's isDestroyed function, which is set to a function
+     * that returns true. The object's properties are removed with delete.
+     *
+     * This function is used by objects that hold native resources, e.g., WebGL resources, which need to be
+     *
+     * explicitly released. Client code calls an object's destroy function, which then releases the native resource
+     * and calls destroyObject to put itself in a destroyed state.
+     * @param object The object to destroy.
+     * @param message The message to include in the exception that is thrown if a destroyed object's function is called.
+     */
+    @JsMethod(namespace = "Cesium", name = "destroyObject")
+    public static native void destroyObject(Object object, String message);
 
     @JsFunction
     public interface Function {
