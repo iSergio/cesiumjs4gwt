@@ -17,6 +17,7 @@
 package org.cesiumjs.cs.scene.apperances;
 
 import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.VertexFormat;
@@ -93,6 +94,13 @@ public class PerInstanceColorAppearance extends Appearance {
 
     @JsConstructor
     public PerInstanceColorAppearance(PerInstanceColorAppearanceOptions options) {}
+
+    @JsOverlay
+    public static PerInstanceColorAppearance create(boolean closed) {
+        PerInstanceColorAppearanceOptions options = new PerInstanceColorAppearanceOptions();
+        options.closed = closed;
+        return new PerInstanceColorAppearance(options);
+    }
 
 //    /**
 //     * Procedurally creates the full GLSL fragment shader source. For PerInstanceColorAppearance, this is derived from
