@@ -20,36 +20,40 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Cartesian3;
 
 /**
- * Options for {@link org.cesiumjs.cs.core.geometry.PolygonGeometry}.
+ * Options for {@link org.cesiumjs.cs.core.geometry.EllipsoidOutlineGeometry}.
  *
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-public class PolygonGeometryOptions extends PolygonOutlineGeometryOptions {
+public class EllipsoidOutlineGeometryOptions {
     /**
-     * The rotation of the texture coordinates, in radians. A positive rotation is counter-clockwise.
-     * Default: 0.0
+     * The radii of the ellipsoid in the x, y, and z directions.
+     * Default: Cartesian3(1.0, 1.0, 1.0)
      */
     @JsProperty
-    public double stRotation;
+    public Cartesian3 radii;
     /**
-     * When false, leaves off the top of an extruded polygon open.
-     * Default: true
+     * The number of times to partition the ellipsoid into stacks.
+     * Default: 64
      */
     @JsProperty
-    public boolean closeTop;
+    public Integer stackPartitions;
     /**
-     * When false, leaves off the bottom of an extruded polygon open.
-     * Default: true
+     * The number of times to partition the ellipsoid into radial slices.
+     * Default: 64
      */
     @JsProperty
-    public boolean closeBottom;
+    public Integer slicePartitions;
+    /**
+     * The number of points per line, determining the granularity of the curvature.
+     * Default: 128
+     */
+    @JsProperty
+    public int subdivisions;
 
-    /**
-     * Options for {@link org.cesiumjs.cs.core.geometry.PolygonGeometry}
-     */
     @JsConstructor
-    public PolygonGeometryOptions() {}
+    public EllipsoidOutlineGeometryOptions() {}
 }

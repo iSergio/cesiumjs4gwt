@@ -31,22 +31,7 @@ import org.cesiumjs.cs.core.VertexFormat;
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-public class FrustumGeometryOptions {
-    /**
-     * The frustum.
-     */
-    @JsProperty
-    public Frustum frustum;
-    /**
-     * The origin of the frustum.
-     */
-    @JsProperty
-    public Cartesian3 origin;
-    /**
-     * The orientation of the frustum.
-     */
-    @JsProperty
-    public Quaternion orientation;
+public class FrustumGeometryOptions extends FrustumOutlineGeometryOptions {
     /**
      * The vertex attributes to be computed.
      * Default: {@link VertexFormat#DEFAULT()}

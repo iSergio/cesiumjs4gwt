@@ -20,32 +20,15 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.VertexFormat;
 
 /**
+ * Options for {@link org.cesiumjs.cs.core.geometry.EllipsoidGeometry}.
+ *
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-public class EllipsoidGeometryOptions {
-    /**
-     * The radii of the ellipsoid in the x, y, and z directions.
-     * Default: Cartesian3(1.0, 1.0, 1.0)
-     */
-    @JsProperty
-    public Cartesian3 radii;
-    /**
-     * The number of times to partition the ellipsoid into stacks.
-     * Default: 64
-     */
-    @JsProperty
-    public Integer stackPartitions;
-    /**
-     * The number of times to partition the ellipsoid into radial slices.
-     * Default: 64
-     */
-    @JsProperty
-    public Integer slicePartitions;
+public class EllipsoidGeometryOptions extends EllipsoidOutlineGeometryOptions {
     /**
      * The vertex attributes to be computed.
      * Default: {@link VertexFormat#DEFAULT()}

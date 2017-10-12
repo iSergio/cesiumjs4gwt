@@ -37,7 +37,7 @@ public class RectangleGeometry extends Geometry implements Packable {
 
     /**
      * A description of a cartographic rectangle on an ellipsoid centered at the origin.
-     * Rectangle geometry can be rendered with both {@link Primitive} and {@link GroundPrimitive}.
+     * Rectangle geometry can be rendered with both {@link Primitive} and {@link org.cesiumjs.cs.scene.GroundPrimitive}.
      * @param options {@link RectangleGeometryOptions}
      */
     @JsConstructor

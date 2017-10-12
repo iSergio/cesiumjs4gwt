@@ -20,55 +20,19 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.Cartesian3;
-import org.cesiumjs.cs.core.Ellipsoid;
 import org.cesiumjs.cs.core.VertexFormat;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name =  "Object")
-public class CircleGeometryOptions {
-    /**
-     * The circle's center point in the fixed frame.
-     */
-    @JsProperty
-    public Cartesian3 center;
-    /**
-     * The radius in meters.
-     */
-    @JsProperty
-    public double radius;
-    /**
-     * The ellipsoid the circle will be on.
-     * Default: {@link Ellipsoid#WGS84()}
-     */
-    @JsProperty
-    public Ellipsoid ellipsoid;
-    /**
-     * The distance in meters between the circle and the ellipsoid surface.
-     * Default: 0.0
-     */
-    @JsProperty
-    public double height;
-    /**
-     * The angular distance between points on the circle in radians.
-     * Default: 0.02
-     */
-    @JsProperty
-    public double granularity;
+public class CircleGeometryOptions extends CircleOutlineGeometryOptions {
     /**
      * The vertex attributes to be computed.
      * Default: {@link VertexFormat#DEFAULT()}
      */
     @JsProperty
     public VertexFormat vertexFormat;
-    /**
-     * The distance in meters between the circle's extruded face and the ellipsoid surface.
-     * Default: 0.0
-     */
-    @JsProperty
-    public double extrudedHeight;
     /**
      * The rotation of the texture coordinates, in radians. A positive rotation is counter-clockwise.
      * Default: 0.0

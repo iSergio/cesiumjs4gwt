@@ -16,40 +16,31 @@
 
 package org.cesiumjs.cs.core.geometry.options;
 
-import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Cartesian3;
 
 /**
- * Options for {@link org.cesiumjs.cs.core.geometry.PolygonGeometry}.
+ * Options for {@link org.cesiumjs.cs.core.geometry.BoxOutlineGeometry}.
  *
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-public class PolygonGeometryOptions extends PolygonOutlineGeometryOptions {
+public class BoxOutlineGeometryOptions {
     /**
-     * The rotation of the texture coordinates, in radians. A positive rotation is counter-clockwise.
-     * Default: 0.0
+     * The minimum x, y, and z coordinates of the box.
      */
     @JsProperty
-    public double stRotation;
+    public Cartesian3 minimum;
     /**
-     * When false, leaves off the top of an extruded polygon open.
-     * Default: true
+     * The maximum x, y, and z coordinates of the box.
      */
     @JsProperty
-    public boolean closeTop;
+    public Cartesian3 maximum;
     /**
-     * When false, leaves off the bottom of an extruded polygon open.
-     * Default: true
+     * The width, depth, and height of the box stored in the x, y, and z coordinates of the Cartesian3, respectively.
      */
     @JsProperty
-    public boolean closeBottom;
-
-    /**
-     * Options for {@link org.cesiumjs.cs.core.geometry.PolygonGeometry}
-     */
-    @JsConstructor
-    public PolygonGeometryOptions() {}
+    public Cartesian3 dimensions;
 }

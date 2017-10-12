@@ -21,34 +21,31 @@ import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Packable;
-import org.cesiumjs.cs.core.geometry.options.EllipseGeometryOptions;
-import org.cesiumjs.cs.scene.Primitive;
+import org.cesiumjs.cs.core.geometry.options.RectangleOutlineGeometryOptions;
 
 /**
+ * A description of the outline of a a cartographic rectangle on an ellipsoid centered at the origin.
+ *
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
-@JsType(isNative = true, namespace = "Cesium", name = "EllipseGeometry")
-public class EllipseGeometry extends Geometry implements Packable {
+@JsType(isNative = true, namespace = "Cesium", name = "RectangleOutlineGeometry")
+public class RectangleOutlineGeometry extends Geometry implements Packable {
     /**
      * The number of elements used to pack the object into an array.
      */
     @JsProperty
-    public static double packedLength;
+    public static int packedLength;
 
-    /**
-     * A description of an ellipse on an ellipsoid. Ellipse geometry can be rendered with both {@link Primitive} and {@link org.cesiumjs.cs.scene.GroundPrimitive}.
-     * @param options {@link EllipseGeometryOptions}
-     */
     @JsConstructor
-    public EllipseGeometry(EllipseGeometryOptions options) {}
+    public RectangleOutlineGeometry(RectangleOutlineGeometryOptions options) {}
 
     /**
-     * Computes the geometric representation of a ellipse on an ellipsoid, including its vertices, indices, and a bounding sphere.
-     * @param ellipseGeometry A description of the ellipse.
+     * Computes the geometric representation of an outline of a rectangle, including its vertices, indices, and a bounding sphere.
+     * @param rectangleGeometry A description of the rectangle outline.
      * @return The computed vertices and indices.
      */
     @JsMethod
-    public static native Geometry createGeometry(EllipseGeometry ellipseGeometry);
+    public static native RectangleOutlineGeometry createGeometry(RectangleOutlineGeometry rectangleGeometry);
 
     /**
      * Stores the provided instance into the provided array.
@@ -57,7 +54,7 @@ public class EllipseGeometry extends Geometry implements Packable {
      * @return The array that was packed into
      */
     @JsMethod
-    public static native double[] pack(EllipseGeometry value, double[] array);
+    public static native double[] pack(RectangleOutlineGeometry value, double[] array);
 
     /**
      * Stores the provided instance into the provided array.
@@ -67,32 +64,32 @@ public class EllipseGeometry extends Geometry implements Packable {
      * @return The array that was packed into
      */
     @JsMethod
-    public static native double[] pack(EllipseGeometry value, double[] array, int startingIndex);
+    public static native double[] pack(RectangleOutlineGeometry value, double[] array, Integer startingIndex);
 
     /**
      * Retrieves an instance from a packed array.
      * @param array The packed array.
-     * @return The modified result parameter or a new EllipseGeometry instance if one was not provided.
+     * @return The modified result parameter or a new RectangleGeometry instance if one was not provided.
      */
     @JsMethod
-    public static native EllipseGeometry unpack(double[] array);
+    public static native RectangleOutlineGeometry unpack(double[] array);
 
     /**
      * Retrieves an instance from a packed array.
      * @param array The packed array.
      * @param startingIndex The starting index of the element to be unpacked.
-     * @return The modified result parameter or a new EllipseGeometry instance if one was not provided.
+     * @return The modified result parameter or a new RectangleGeometry instance if one was not provided.
      */
     @JsMethod
-    public static native EllipseGeometry unpack(double[] array, int startingIndex);
+    public static native RectangleOutlineGeometry unpack(double[] array, Integer startingIndex);
 
     /**
      * Retrieves an instance from a packed array.
      * @param array The packed array.
      * @param startingIndex The starting index of the element to be unpacked.
      * @param result The object into which to store the result.
-     * @return The modified result parameter or a new EllipseGeometry instance if one was not provided.
+     * @return The modified result parameter or a new RectangleGeometry instance if one was not provided.
      */
     @JsMethod
-    public static native EllipseGeometry unpack(double[] array, int startingIndex, EllipseGeometry result);
+    public static native RectangleOutlineGeometry unpack(double[] array, Integer startingIndex, RectangleOutlineGeometry result);
 }

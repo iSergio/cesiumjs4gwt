@@ -20,66 +20,21 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.Cartesian3;
-import org.cesiumjs.cs.core.Ellipsoid;
-import org.cesiumjs.cs.core.Math;
 import org.cesiumjs.cs.core.VertexFormat;
 
 /**
+ * Options for {@link org.cesiumjs.cs.core.geometry.EllipseGeometry}.
+ *
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-public class EllipseGeometryOptions {
-    /**
-     * The ellipse's center point in the fixed frame.
-     */
-    @JsProperty
-    public Cartesian3 center;
-    /**
-     * The length of the ellipse's semi-major axis in meters.
-     */
-    @JsProperty
-    public double semiMajorAxis;
-    /**
-     * The length of the ellipse's semi-minor axis in meters.
-     */
-    @JsProperty
-    public double semiMinorAxis;
-    /**
-     * The ellipsoid the ellipse will be on.
-     * Default: {@link Ellipsoid#WGS84()}
-     */
-    @JsProperty
-    public Ellipsoid ellipsoid;
-    /**
-     * The distance in meters between the ellipse and the ellipsoid surface.
-     * Default: 0.0
-     */
-    @JsProperty
-    public double height;
-    /**
-     * The distance in meters between the ellipse's extruded face and the ellipsoid surface.
-     */
-    @JsProperty
-    public double extrudedHeight;
-    /**
-     * The angle of rotation counter-clockwise from north.
-     * Default: 0.0
-     */
-    @JsProperty
-    public double rotation;
+public class EllipseGeometryOptions extends EllipseOutlineGeometryOptions {
     /**
      * The rotation of the texture coordinates counter-clockwise from north.
      * Default: 0.0
      */
     @JsProperty
     public double stRotation;
-    /**
-     * The angular distance between points on the ellipse in radians.
-     * Default: {@link Math#RADIANS_PER_DEGREE()}
-     */
-    @JsProperty
-    public double granularity;
     /**
      * The vertex attributes to be computed.
      * Default: {@link VertexFormat#DEFAULT()}

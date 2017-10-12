@@ -20,36 +20,33 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Cartesian3;
+import org.cesiumjs.cs.core.Frustum;
+import org.cesiumjs.cs.core.Quaternion;
 
 /**
- * Options for {@link org.cesiumjs.cs.core.geometry.PolygonGeometry}.
+ * Options for {@link org.cesiumjs.cs.core.geometry.FrustumOptionsGeometry}.
  *
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-public class PolygonGeometryOptions extends PolygonOutlineGeometryOptions {
+public class FrustumOutlineGeometryOptions {
     /**
-     * The rotation of the texture coordinates, in radians. A positive rotation is counter-clockwise.
-     * Default: 0.0
+     * The frustum.
      */
     @JsProperty
-    public double stRotation;
+    public Frustum frustum;
     /**
-     * When false, leaves off the top of an extruded polygon open.
-     * Default: true
+     * The origin of the frustum.
      */
     @JsProperty
-    public boolean closeTop;
+    public Cartesian3 origin;
     /**
-     * When false, leaves off the bottom of an extruded polygon open.
-     * Default: true
+     * The orientation of the frustum.
      */
     @JsProperty
-    public boolean closeBottom;
+    public Quaternion orientation;
 
-    /**
-     * Options for {@link org.cesiumjs.cs.core.geometry.PolygonGeometry}
-     */
     @JsConstructor
-    public PolygonGeometryOptions() {}
+    public FrustumOutlineGeometryOptions() {}
 }

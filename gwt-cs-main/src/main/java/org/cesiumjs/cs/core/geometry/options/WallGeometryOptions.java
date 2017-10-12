@@ -20,43 +20,13 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.Cartesian3;
-import org.cesiumjs.cs.core.Ellipsoid;
-import org.cesiumjs.cs.core.Math;
 import org.cesiumjs.cs.core.VertexFormat;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-public class WallGeometryOptions {
-    /**
-     * An array of Cartesian objects, which are the points of the wall.
-     */
-    @JsProperty
-    public Cartesian3[] positions;
-    /**
-     * The distance, in radians, between each latitude and longitude. Determines the number of positions in the buffer.
-     * Default: {@link Math#RADIANS_PER_DEGREE()}
-     */
-    @JsProperty
-    public double granularity;
-    /**
-     * An array parallel to positions that give the maximum height of the wall at positions. If undefined, the height of each position in used.
-     */
-    @JsProperty
-    public double[] maximumHeights;
-    /**
-     * An array parallel to positions that give the minimum height of the wall at positions. If undefined, the height at each position is 0.0.
-     */
-    @JsProperty
-    public double[] minimumHeights;
-    /**
-     * The ellipsoid for coordinate manipulation
-     * Default: {@link org.cesiumjs.cs.core.Ellipsoid#WGS84()}
-     */
-    @JsProperty
-    public Ellipsoid ellipsoid;
+public class WallGeometryOptions extends WallOutlineGeometryOptions {
     /**
      * The vertex attributes to be computed.
      * Default: {@link VertexFormat#DEFAULT()}

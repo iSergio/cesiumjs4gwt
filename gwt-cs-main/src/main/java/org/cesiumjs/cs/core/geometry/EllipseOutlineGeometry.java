@@ -21,14 +21,16 @@ import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Packable;
-import org.cesiumjs.cs.core.geometry.options.EllipseGeometryOptions;
+import org.cesiumjs.cs.core.geometry.options.EllipseOutlineGeometryOptions;
 import org.cesiumjs.cs.scene.Primitive;
 
 /**
+ * A description of the outline of an ellipse on an ellipsoid.
+ *
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
-@JsType(isNative = true, namespace = "Cesium", name = "EllipseGeometry")
-public class EllipseGeometry extends Geometry implements Packable {
+@JsType(isNative = true, namespace = "Cesium", name = "EllipseOutlineGeometry")
+public class EllipseOutlineGeometry extends Geometry implements Packable {
     /**
      * The number of elements used to pack the object into an array.
      */
@@ -37,10 +39,10 @@ public class EllipseGeometry extends Geometry implements Packable {
 
     /**
      * A description of an ellipse on an ellipsoid. Ellipse geometry can be rendered with both {@link Primitive} and {@link org.cesiumjs.cs.scene.GroundPrimitive}.
-     * @param options {@link EllipseGeometryOptions}
+     * @param options {@link EllipseOutlineGeometryOptions}
      */
     @JsConstructor
-    public EllipseGeometry(EllipseGeometryOptions options) {}
+    public EllipseOutlineGeometry(EllipseOutlineGeometryOptions options) {}
 
     /**
      * Computes the geometric representation of a ellipse on an ellipsoid, including its vertices, indices, and a bounding sphere.
@@ -48,7 +50,7 @@ public class EllipseGeometry extends Geometry implements Packable {
      * @return The computed vertices and indices.
      */
     @JsMethod
-    public static native Geometry createGeometry(EllipseGeometry ellipseGeometry);
+    public static native Geometry createGeometry(EllipseOutlineGeometry ellipseGeometry);
 
     /**
      * Stores the provided instance into the provided array.
@@ -57,7 +59,7 @@ public class EllipseGeometry extends Geometry implements Packable {
      * @return The array that was packed into
      */
     @JsMethod
-    public static native double[] pack(EllipseGeometry value, double[] array);
+    public static native double[] pack(EllipseOutlineGeometry value, double[] array);
 
     /**
      * Stores the provided instance into the provided array.
@@ -67,7 +69,7 @@ public class EllipseGeometry extends Geometry implements Packable {
      * @return The array that was packed into
      */
     @JsMethod
-    public static native double[] pack(EllipseGeometry value, double[] array, int startingIndex);
+    public static native double[] pack(EllipseOutlineGeometry value, double[] array, int startingIndex);
 
     /**
      * Retrieves an instance from a packed array.
@@ -75,7 +77,7 @@ public class EllipseGeometry extends Geometry implements Packable {
      * @return The modified result parameter or a new EllipseGeometry instance if one was not provided.
      */
     @JsMethod
-    public static native EllipseGeometry unpack(double[] array);
+    public static native EllipseOutlineGeometry unpack(double[] array);
 
     /**
      * Retrieves an instance from a packed array.
@@ -84,7 +86,7 @@ public class EllipseGeometry extends Geometry implements Packable {
      * @return The modified result parameter or a new EllipseGeometry instance if one was not provided.
      */
     @JsMethod
-    public static native EllipseGeometry unpack(double[] array, int startingIndex);
+    public static native EllipseOutlineGeometry unpack(double[] array, int startingIndex);
 
     /**
      * Retrieves an instance from a packed array.
@@ -94,5 +96,5 @@ public class EllipseGeometry extends Geometry implements Packable {
      * @return The modified result parameter or a new EllipseGeometry instance if one was not provided.
      */
     @JsMethod
-    public static native EllipseGeometry unpack(double[] array, int startingIndex, EllipseGeometry result);
+    public static native EllipseOutlineGeometry unpack(double[] array, int startingIndex, EllipseOutlineGeometry result);
 }

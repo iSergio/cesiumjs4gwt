@@ -16,7 +16,10 @@
 
 package org.cesiumjs.cs.core.geometry;
 
-import jsinterop.annotations.*;
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Packable;
 import org.cesiumjs.cs.core.geometry.options.CorridorGeometryOptions;
 
@@ -25,7 +28,7 @@ import org.cesiumjs.cs.core.geometry.options.CorridorGeometryOptions;
  *
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "CorridorGeometry")
+@JsType(isNative = true, namespace = "Cesium", name = "CorridorGeometry")
 public class CorridorGeometry extends Geometry implements Packable {
     /**
      * The number of elements used to pack the object into an array.
