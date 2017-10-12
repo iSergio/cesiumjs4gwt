@@ -37,6 +37,8 @@ public class CorridorPrimitive extends AbstractPrimitive {
 
     public CorridorPrimitive(final Scene scene, final CorridorPrimitiveOptions options) {
         super(options);
+        super.options = options;
+
         setWidth(options.width);
 
         ellipsoid = Ellipsoid.WGS84();

@@ -33,6 +33,7 @@ import org.cesiumjs.cs.scene.interaction.options.CirclePrimitiveOptions;
 public class CirclePrimitive extends AbstractPrimitive {
     public CirclePrimitive(CirclePrimitiveOptions options) {
         super(options);
+        super.options = options;
 
         if (options.center == null && options.radius == 0) {
             throw new DeveloperError("Center and radius is required option and must be defined.");

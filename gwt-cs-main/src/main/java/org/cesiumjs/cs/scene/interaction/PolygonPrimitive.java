@@ -32,6 +32,7 @@ import org.cesiumjs.cs.scene.interaction.options.AbstractPrimitiveOptions;
 public class PolygonPrimitive extends AbstractPrimitive {
     public PolygonPrimitive(AbstractPrimitiveOptions options) {
         super(options);
+        super.options = options;
 
         ellipsoid = Ellipsoid.WGS84();
         show = true;
