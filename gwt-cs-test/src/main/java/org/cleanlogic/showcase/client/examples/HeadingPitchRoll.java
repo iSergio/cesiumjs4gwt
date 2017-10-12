@@ -31,7 +31,6 @@ import org.cesiumjs.cs.datasources.properties.PolylineGlowMaterialProperty;
 import org.cesiumjs.cs.datasources.properties.SampledPositionProperty;
 import org.cesiumjs.cs.promise.Fulfill;
 import org.cesiumjs.cs.scene.Model;
-import org.cesiumjs.cs.scene.PerspectiveFrustum;
 import org.cesiumjs.cs.scene.Scene;
 import org.cesiumjs.cs.scene.ScreenSpaceCameraController;
 import org.cesiumjs.cs.scene.enums.ModelAnimationLoop;

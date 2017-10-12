@@ -40,7 +40,6 @@ import org.cesiumjs.cs.datasources.graphics.options.PolygonGraphicsOptions;
 import org.cesiumjs.cs.datasources.options.EntityOptions;
 import org.cesiumjs.cs.datasources.properties.*;
 import org.cesiumjs.cs.scene.Camera;
-import org.cesiumjs.cs.scene.PerspectiveFrustum;
 import org.cesiumjs.cs.scene.Scene;
 import org.cesiumjs.cs.scene.enums.HorizontalOrigin;
 import org.cesiumjs.cs.widgets.ViewerPanel;
