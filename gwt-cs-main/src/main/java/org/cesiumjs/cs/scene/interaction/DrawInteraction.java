@@ -138,6 +138,8 @@ public class DrawInteraction {
     private List<Listener> drawStartListeners = new ArrayList<>();
     private List<Listener> drawEndListeners = new ArrayList<>();
 
+    private boolean active = true;
+
     /**
      * Constructor of draw interaction.
      * @param scene current scene on which will be drawing primitives.
@@ -234,6 +236,20 @@ public class DrawInteraction {
         }, KeyUpEvent.getType());
     }
 
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+        if (pointPrimitive != null) {
+            pointPrimitive.show = active;
+        }
+        if (pointBillboard != null) {
+            pointBillboard.show = active;
+        }
+    }
+
     /**
      * Get current primitive collection
      * @return primitive collection
@@ -285,6 +301,9 @@ public class DrawInteraction {
     }
 
     private void startDrawing(Object event) {
+        if (!active) {
+            return;
+        }
         MouseDownEvent mouseDownEvent = (MouseDownEvent) event;
         if (mouseDownEvent.position == null) {
             return;
@@ -387,6 +406,10 @@ public class DrawInteraction {
     }
 
     private void modifyDrawing(Object event) {
+        if (!active) {
+            return;
+        }
+
         MouseMoveEvent mouseMoveEvent = (MouseMoveEvent) event;
         Cartesian2 position = mouseMoveEvent.endPosition;
         if (position == null) {
