@@ -18,10 +18,7 @@ package org.cesiumjs.cs.scene.interaction;
 
 import jsinterop.annotations.*;
 import org.cesiumjs.cs.Cesium;
-import org.cesiumjs.cs.core.Color;
-import org.cesiumjs.cs.core.ColorGeometryInstanceAttribute;
-import org.cesiumjs.cs.core.DeveloperError;
-import org.cesiumjs.cs.core.Ellipsoid;
+import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.core.geometry.Geometry;
 import org.cesiumjs.cs.core.geometry.GeometryInstance;
 import org.cesiumjs.cs.core.options.GeometryInstanceOptions;

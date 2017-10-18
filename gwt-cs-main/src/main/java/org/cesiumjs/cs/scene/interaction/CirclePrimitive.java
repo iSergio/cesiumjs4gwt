@@ -16,16 +16,26 @@
 
 package org.cesiumjs.cs.scene.interaction;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.JavaScriptObject;
+import org.cesiumjs.cs.Cesium;
 import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.DeveloperError;
+import org.cesiumjs.cs.core.EllipseGeometryLibrary;
 import org.cesiumjs.cs.core.Ellipsoid;
 import org.cesiumjs.cs.core.geometry.CircleGeometry;
 import org.cesiumjs.cs.core.geometry.Geometry;
 import org.cesiumjs.cs.core.geometry.options.CircleGeometryOptions;
+import org.cesiumjs.cs.core.options.EllipsePositionsOptions;
+import org.cesiumjs.cs.js.JsArray;
 import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.scene.Material;
 import org.cesiumjs.cs.scene.apperances.EllipsoidSurfaceAppearance;
 import org.cesiumjs.cs.scene.interaction.options.CirclePrimitiveOptions;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -84,5 +94,27 @@ public class CirclePrimitive extends AbstractPrimitive {
 
     public double getRadius() {
         return (double) getAttribute("radius");
+    }
+
+    public Cartesian3[] getPositions() {
+        EllipsePositionsOptions options = new EllipsePositionsOptions();
+        options.semiMajorAxis = getRadius();
+        options.semiMinorAxis = getRadius();
+        options.center = getCenter();
+        options.granularity = granularity;
+        options.rotation = 0;
+        JsObject jsObject = EllipseGeometryLibrary.computeEllipsePositions(options, false, true);
+        if (jsObject.getObject("outerPositions") == null) {
+            return null;
+        }
+        List<Cartesian3> positions = new ArrayList<>();
+        JsArray<Number> nativePositions = (JsArray<Number>) jsObject.getObject("outerPositions");
+        for (int i = 0; i < nativePositions.length(); i += 3) {
+            double x = JsObject.getNumber(nativePositions, i).doubleValue();
+            double y = JsObject.getNumber(nativePositions, i + 1).doubleValue();
+            double z = JsObject.getNumber(nativePositions, i + 2).doubleValue();
+            positions.add(new Cartesian3(x, y, z));
+        }
+        return positions.toArray(new Cartesian3[positions.size()]);
     }
 }

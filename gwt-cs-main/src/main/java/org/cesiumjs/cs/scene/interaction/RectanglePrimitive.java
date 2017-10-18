@@ -16,6 +16,7 @@
 
 package org.cesiumjs.cs.scene.interaction;
 
+import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.Ellipsoid;
 import org.cesiumjs.cs.core.Rectangle;
 import org.cesiumjs.cs.core.geometry.Geometry;
@@ -59,6 +60,10 @@ public class RectanglePrimitive extends AbstractPrimitive {
         };
 
         super.initialize();
+    }
+
+    public Cartesian3[] getPositions() {
+        return Rectangle.subsample(getRectangle(), ellipsoid);
     }
 
     public final void setRectangle(Rectangle rectangle) {
