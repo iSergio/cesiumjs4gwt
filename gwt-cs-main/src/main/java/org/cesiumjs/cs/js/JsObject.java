@@ -121,6 +121,14 @@ public class JsObject extends JavaScriptObject {
         return this[name];
     }-*/;
 
+    public static final native Number getNumber(JsArray<Number> array, int index) /*-{
+        return array[index];
+    }-*/;
+
+    public static final native String getString(JsArray<String> array, int index) /*-{
+        return array[index];
+    }-*/;
+
     /**
      * In JavaScript null not he same undefined. In example Interpolation, we set trackedEntity to null, and this method not worked
      * To correct this help function below.
