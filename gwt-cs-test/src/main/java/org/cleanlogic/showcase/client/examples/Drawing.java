@@ -24,6 +24,8 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
 import com.google.inject.Inject;
+import org.cesiumjs.cs.Cesium;
+import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.core.ColorGeometryInstanceAttribute;
 import org.cesiumjs.cs.core.Rectangle;
@@ -36,10 +38,7 @@ import org.cesiumjs.cs.datasources.properties.ColorMaterialProperty;
 import org.cesiumjs.cs.datasources.properties.ConstantProperty;
 import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.scene.GroundPrimitive;
-import org.cesiumjs.cs.scene.interaction.DrawInteraction;
-import org.cesiumjs.cs.scene.interaction.MarkerType;
-import org.cesiumjs.cs.scene.interaction.PrimitiveType;
-import org.cesiumjs.cs.scene.interaction.RectanglePrimitive;
+import org.cesiumjs.cs.scene.interaction.*;
 import org.cesiumjs.cs.scene.interaction.options.DrawInteractionOptions;
 import org.cesiumjs.cs.scene.options.GroundPrimitiveOptions;
 import org.cesiumjs.cs.widgets.ViewerPanel;
@@ -120,27 +119,27 @@ public class Drawing extends AbstractExample {
                     options.outlineColor = Color.RED();
                     options.outlineWidth = 1;
                     drawInteraction = new DrawInteraction(csVPanel.getViewer().scene(), options);
-//                    drawInteraction.addDrawListener(new DrawInteractionListener(), DrawInteraction.EventType.DRAW_END);
+                    drawInteraction.addDrawListener(new DrawInteractionListener(), DrawInteraction.EventType.DRAW_END);
                     // As Entity
-                    drawInteraction.addDrawListener(new DrawInteraction.Listener() {
-                        @Override
-                        public void onDraw(DrawInteraction.Event event) {
-                            if (!(event.getPrimitive() instanceof RectanglePrimitive)) {
-                                return;
-                            }
-                            RectanglePrimitive primitive = ((RectanglePrimitive) event.getPrimitive());
-                            Rectangle rectangle = primitive.getRectangle();
-
-                            RectangleGraphicsOptions rectangleGraphicsOptions = new RectangleGraphicsOptions();
-                            rectangleGraphicsOptions.coordinates = new ConstantProperty<>(rectangle);
-                            rectangleGraphicsOptions.material = new ColorMaterialProperty(Color.RED().withAlpha(0.5f));
-
-                            EntityOptions entityOptions = new EntityOptions();
-                            entityOptions.rectangle = new RectangleGraphics(rectangleGraphicsOptions);
-
-                            csVPanel.getViewer().entities().add(entityOptions);
-                        }
-                    }, DrawInteraction.EventType.DRAW_END);
+//                    drawInteraction.addDrawListener(new DrawInteraction.Listener() {
+//                        @Override
+//                        public void onDraw(DrawInteraction.Event event) {
+//                            if (!(event.getPrimitive() instanceof RectanglePrimitive)) {
+//                                return;
+//                            }
+//                            RectanglePrimitive primitive = ((RectanglePrimitive) event.getPrimitive());
+//                            Rectangle rectangle = primitive.getRectangle();
+//
+//                            RectangleGraphicsOptions rectangleGraphicsOptions = new RectangleGraphicsOptions();
+//                            rectangleGraphicsOptions.coordinates = new ConstantProperty<>(rectangle);
+//                            rectangleGraphicsOptions.material = new ColorMaterialProperty(Color.RED().withAlpha(0.5f));
+//
+//                            EntityOptions entityOptions = new EntityOptions();
+//                            entityOptions.rectangle = new RectangleGraphics(rectangleGraphicsOptions);
+//
+//                            csVPanel.getViewer().entities().add(entityOptions);
+//                        }
+//                    }, DrawInteraction.EventType.DRAW_END);
                 }
             }
         });
@@ -235,6 +234,19 @@ public class Drawing extends AbstractExample {
     private class DrawInteractionListener implements DrawInteraction.Listener {
         @Override
         public void onDraw(DrawInteraction.Event event) {
+            Cartesian3[] positions = null;
+            if (event.getPrimitive() instanceof PolygonPrimitive) {
+                positions = ((PolygonPrimitive) event.getPrimitive()).getPositions();
+            } else if (event.getPrimitive() instanceof RectanglePrimitive) {
+                positions = ((RectanglePrimitive) event.getPrimitive()).getPositions();
+            } else if (event.getPrimitive() instanceof CorridorPrimitive) {
+                positions = ((CorridorPrimitive) event.getPrimitive()).getPositions();
+            } else if (event.getPrimitive() instanceof CirclePrimitive) {
+                positions = ((CirclePrimitive) event.getPrimitive()).getPositions();
+            }
+            if (positions != null) {
+                Cesium.log(positions);
+            }
             GeometryInstanceOptions geometryInstanceOptions = new GeometryInstanceOptions();
             geometryInstanceOptions.geometry = event.getPrimitive().getGeometry();
             geometryInstanceOptions.attributes = new Object();
