@@ -10,6 +10,23 @@ What was done:
 - [x] [Examples showcase](http://sergeserver.noip.me/gwt-cs-test/).
 - [x] Integration with [gwt-olcs](https://github.com/iSergio/gwt-olcs)
 
+### DrawInteraction features:
+ - [x] Pure java (Based on JsInterop wrapper without any JS code)
+ - [x] Based on Cesium-Drawhelper (But on GroundPrimitives)
+ - [x] Free hand mode (Shift pressed)
+ - [x] Two markers type - PointPrimitive and Billboard (Canvas image)
+ - [x] Draw works on EllipsoidTerrainProvider and other TerrainProvider's
+ - [x] Dynamic colours style and marker styles
+ - [x] Start and End draw listeners
+### DrawInteraction TODO:
+ - [ ] On draw listeners (mouse move listeners and primitive change)
+ - [ ] Snap points
+ - [ ] Maximum points (finish draw on current points == maximumPoints)
+ - [ ] Outline colour and width
+ - [ ] EditInteraction
+ - [ ] BillboardPrimitive
+ - [ ] EllipsePrimitive
+
 ### Issue
 - [x] GXT work fine
 - [x] GWT work fine
