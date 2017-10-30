@@ -25,6 +25,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
 import com.google.inject.Inject;
 import org.cesiumjs.cs.Cesium;
+import org.cesiumjs.cs.collections.PointPrimitiveCollection;
 import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.core.ColorGeometryInstanceAttribute;
@@ -38,9 +39,11 @@ import org.cesiumjs.cs.datasources.properties.ColorMaterialProperty;
 import org.cesiumjs.cs.datasources.properties.ConstantProperty;
 import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.scene.GroundPrimitive;
+import org.cesiumjs.cs.scene.PointPrimitive;
 import org.cesiumjs.cs.scene.interaction.*;
 import org.cesiumjs.cs.scene.interaction.options.DrawInteractionOptions;
 import org.cesiumjs.cs.scene.options.GroundPrimitiveOptions;
+import org.cesiumjs.cs.scene.options.PointPrimitiveOptions;
 import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cleanlogic.showcase.client.basic.AbstractExample;
 import org.cleanlogic.showcase.client.components.store.ShowcaseExampleStore;
@@ -54,6 +57,7 @@ public class Drawing extends AbstractExample {
 
     private DrawInteraction drawInteraction;
 
+    private ToggleButton drawPointTBtn;
     private ToggleButton drawLineTBtn;
     private ToggleButton drawExtentTBtn;
     private ToggleButton drawPolygonTBtn;
@@ -69,7 +73,34 @@ public class Drawing extends AbstractExample {
         csVPanel = new ViewerPanel();
         csVPanel.getViewer().scene().globe.depthTestAgainstTerrain = true;
 
-        Image image = new Image(GWT.getModuleBaseURL() + "images/line.png");
+        Image image = new Image(GWT.getModuleBaseURL() + "images/point.png");
+        image.setPixelSize(22, 22);
+        drawPointTBtn = new ToggleButton(image);
+        drawPointTBtn.setPixelSize(22, 22);
+        drawPointTBtn.getElement().getStyle().setBackgroundImage("none");
+        drawPointTBtn.getElement().getStyle().setBorderColor("rgba(63,66,70,1)");
+        drawPointTBtn.getElement().getStyle().setBackgroundColor("rgba(63,66,70,0.7)");
+        drawPointTBtn.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
+            @Override
+            public void onValueChange(ValueChangeEvent<Boolean> event) {
+                drawExtentTBtn.setValue(false, false);
+                drawPolygonTBtn.setValue(false, false);
+                drawCircleTBtn.setValue(false, false);
+                if (drawInteraction != null) {
+                    drawInteraction.destroy();
+                    drawInteraction = null;
+                }
+                if (event.getValue()) {
+                    DrawInteractionOptions options = new DrawInteractionOptions();
+                    options.type = PrimitiveType.POINT;
+                    options.markerType = MarkerType.BILLBOARD_GRAPHIC;
+                    drawInteraction = new DrawInteraction(csVPanel.getViewer().scene(), options);
+                    drawInteraction.addDrawListener(new DrawInteractionListener(), DrawInteraction.EventType.DRAW_END);
+                }
+            }
+        });
+
+        image = new Image(GWT.getModuleBaseURL() + "images/line.png");
         image.setPixelSize(22, 22);
         drawLineTBtn = new ToggleButton(image);
         drawLineTBtn.setPixelSize(22, 22);
@@ -202,10 +233,11 @@ public class Drawing extends AbstractExample {
         });
 
         final FlexTable flexTable = new FlexTable();
-        flexTable.setWidget(1, 0, drawLineTBtn);
-        flexTable.setWidget(2, 0, drawExtentTBtn);
-        flexTable.setWidget(3, 0, drawPolygonTBtn);
-        flexTable.setWidget(4, 0, drawCircleTBtn);
+        flexTable.setWidget(1, 0, drawPointTBtn);
+        flexTable.setWidget(2, 0, drawLineTBtn);
+        flexTable.setWidget(3, 0, drawExtentTBtn);
+        flexTable.setWidget(4, 0, drawPolygonTBtn);
+        flexTable.setWidget(5, 0, drawCircleTBtn);
 
         final AbsolutePanel aPanel = new AbsolutePanel();
         aPanel.add(csVPanel);
@@ -243,18 +275,32 @@ public class Drawing extends AbstractExample {
                 positions = ((CorridorPrimitive) event.getPrimitive()).getPositions();
             } else if (event.getPrimitive() instanceof CirclePrimitive) {
                 positions = ((CirclePrimitive) event.getPrimitive()).getPositions();
+            } else if (event.getPrimitive() instanceof org.cesiumjs.cs.scene.interaction.PointPrimitive) {
+                positions = ((org.cesiumjs.cs.scene.interaction.PointPrimitive) event.getPrimitive()).getPositions();
             }
             if (positions != null) {
                 Cesium.log(positions);
             }
-            GeometryInstanceOptions geometryInstanceOptions = new GeometryInstanceOptions();
-            geometryInstanceOptions.geometry = event.getPrimitive().getGeometry();
-            geometryInstanceOptions.attributes = new Object();
-            JsObject.setProperty(geometryInstanceOptions.attributes, "color", ColorGeometryInstanceAttribute.fromColor(Color.RED().withAlpha(0.5f)));
 
-            GroundPrimitiveOptions options = new GroundPrimitiveOptions();
-            options.geometryInstances = new GeometryInstance[] {new GeometryInstance(geometryInstanceOptions)};
-            csVPanel.getViewer().scene().groundPrimitives().add(new GroundPrimitive(options));
+            if (event.getPrimitive() instanceof org.cesiumjs.cs.scene.interaction.PointPrimitive) {
+                PointPrimitiveOptions pointPrimitiveOptions = new PointPrimitiveOptions();
+                pointPrimitiveOptions.color = Color.RED().withAlpha(0.5f);
+                pointPrimitiveOptions.pixelSize = 10;
+                pointPrimitiveOptions.position = positions[0];
+                pointPrimitiveOptions.show = true;
+
+                PointPrimitiveCollection pointPrimitiveCollection = (PointPrimitiveCollection) csVPanel.getViewer().scene().primitives().add(new PointPrimitiveCollection());
+                pointPrimitiveCollection.add(pointPrimitiveOptions);
+            } else {
+                GeometryInstanceOptions geometryInstanceOptions = new GeometryInstanceOptions();
+                geometryInstanceOptions.geometry = event.getPrimitive().getGeometry();
+                geometryInstanceOptions.attributes = new Object();
+                JsObject.setProperty(geometryInstanceOptions.attributes, "color", ColorGeometryInstanceAttribute.fromColor(Color.RED().withAlpha(0.5f)));
+
+                GroundPrimitiveOptions options = new GroundPrimitiveOptions();
+                options.geometryInstances = new GeometryInstance[]{new GeometryInstance(geometryInstanceOptions)};
+                csVPanel.getViewer().scene().groundPrimitives().add(new GroundPrimitive(options));
+            }
         }
     }
 }
