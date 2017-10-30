@@ -16,6 +16,7 @@
 
 package org.cesiumjs.cs.scene.interaction;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
@@ -113,7 +114,8 @@ public class DrawInteraction {
     /**
      * {@link CorridorPrimitive}
      */
-    private CorridorPrimitive polyline;
+    private CorridorPrimitive corridor;
+    private org.cesiumjs.cs.scene.interaction.PointPrimitive point;
     /**
      * {@link CorridorPrimitive} for circle object.
      */
@@ -342,11 +344,11 @@ public class DrawInteraction {
                 for (Listener listener : drawStartListeners) {
                     listener.onDraw(startEvent);
                 }
-            } else if (polyline == null && type == PrimitiveType.CORRIDOR) {
-                polyline = new CorridorPrimitive(scene, new CorridorPrimitiveOptions(options));
-                JsObject.setProperty(polyline, "asynchronous", false);
-                collection.add(polyline);
-                startEvent.setPrimitive(polyline);
+            } else if (corridor == null && type == PrimitiveType.CORRIDOR) {
+                corridor = new CorridorPrimitive(scene, new CorridorPrimitiveOptions(options));
+                JsObject.setProperty(corridor, "asynchronous", false);
+                collection.add(corridor);
+                startEvent.setPrimitive(corridor);
                 for (Listener listener : drawStartListeners) {
                     listener.onDraw(startEvent);
                 }
@@ -363,8 +365,8 @@ public class DrawInteraction {
                     polygon.setPositions(positions.toArray(new Cartesian3[positions.size()]));
                     polygon.createPrimitive = true;
                 } else {
-                    polyline.setPositions(positions.toArray(new Cartesian3[positions.size()]));
-                    polyline.createPrimitive = true;
+                    corridor.setPositions(positions.toArray(new Cartesian3[positions.size()]));
+                    corridor.createPrimitive = true;
                 }
             }
             positions.add(cartesian);
@@ -400,6 +402,14 @@ public class DrawInteraction {
                 positions.add(cartesian);
             } else {
                 // Done
+                finishDrawing();
+            }
+        } else if (type == PrimitiveType.POINT) {
+            if (point == null) {
+                point = new org.cesiumjs.cs.scene.interaction.PointPrimitive(scene, new CorridorPrimitiveOptions(options));
+                positions.add(cartesian.clone());
+                point.setPositions(positions.toArray(new Cartesian3[positions.size()]));
+                collection.add(point);
                 finishDrawing();
             }
         }
@@ -453,8 +463,8 @@ public class DrawInteraction {
                     polygon.setPositions(positions.toArray(new Cartesian3[positions.size()]));
                     polygon.createPrimitive = true;
                 } else {
-                    polyline.setPositions(positions.toArray(new Cartesian3[positions.size()]));
-                    polyline.createPrimitive = true;
+                    corridor.setPositions(positions.toArray(new Cartesian3[positions.size()]));
+                    corridor.createPrimitive = true;
                 }
             }
 
@@ -502,10 +512,10 @@ public class DrawInteraction {
             event.primitive = polygon;
             polygon = null;
         }
-        if (polyline != null) {
-            collection.remove(polyline);
-            event.primitive = polyline;
-            polyline = null;
+        if (corridor != null) {
+            collection.remove(corridor);
+            event.primitive = corridor;
+            corridor = null;
         }
         if (circle != null) {
             collection.remove(circle);
@@ -515,6 +525,11 @@ public class DrawInteraction {
         if (radius != null) {
             collection.remove(radius);
             radius = null;
+        }
+        if (point != null) {
+            collection.remove(point);
+            event.primitive = point;
+            point = null;
         }
         if (markers != null) {
             markers.remove();
