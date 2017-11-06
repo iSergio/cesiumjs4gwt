@@ -23,6 +23,8 @@ import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Rectangle;
 import org.cesiumjs.cs.promise.Promise;
 import org.cesiumjs.cs.scene.enums.ImagerySplitDirection;
+import org.cesiumjs.cs.scene.enums.TextureMagnificationFilter;
+import org.cesiumjs.cs.scene.enums.TextureMinificationFilter;
 import org.cesiumjs.cs.scene.options.ImageryLayerOptions;
 import org.cesiumjs.cs.scene.providers.ImageryProvider;
 
@@ -59,6 +61,20 @@ public class ImageryLayer {
      */
     @JsProperty
     public static float DEFAULT_HUE;
+    /**
+     * This value is used as the default texture magnification filter for the imagery layer if one is not
+     * provided during construction or by the imagery provider.
+     * Default: {@link TextureMagnificationFilter#LINEAR()}
+     */
+    @JsProperty
+    public static Number DEFAULT_MAGNIFICATION_FILTER;
+    /**
+     * This value is used as the default texture minification filter for the imagery layer if one is not
+     * provided during construction or by the imagery provider.
+     * Default: {@link TextureMinificationFilter#LINEAR()}
+     */
+    @JsProperty
+    public static Number DEFAULT_MINIFICATION_FILTER;
     /**
      * This value is used as the default saturation for the imagery layer if one is not provided during construction
      * or by the imagery provider. This value does not modify the saturation of the imagery.
@@ -109,6 +125,22 @@ public class ImageryLayer {
      */
     @JsProperty(name = "imageryProvider")
     public native ImageryProvider imageryProvider();
+    /**
+     * The TextureMagnificationFilter to apply to this layer. Possible values are {@link TextureMagnificationFilter#LINEAR()} (the default) and
+     * {@link TextureMagnificationFilter#NEAREST()}. To take effect, this property must be set immediately after adding the imagery layer.
+     * Once a texture is loaded it won't be possible to change the texture filter used.
+     * Default: {@link ImageryLayer#DEFAULT_MAGNIFICATION_FILTER}
+     */
+    @JsProperty
+    public Number magnificationFilter;
+    /**
+     * The TextureMinificationFilter to apply to this layer. Possible values are {@link TextureMinificationFilter#LINEAR()} (the default) and
+     * {@link TextureMinificationFilter#NEAREST()}. To take effect, this property must be set immediately after adding
+     * the imagery layer. Once a texture is loaded it won't be possible to change the texture filter used.
+     * Default: {@link ImageryLayer#DEFAULT_MINIFICATION_FILTER}
+     */
+    @JsProperty
+    public Number minificationFilter;
     /**
      * Gets the rectangle of this layer. If this rectangle is smaller than the rectangle of the ImageryProvider,
      * only a portion of the imagery provider is shown.

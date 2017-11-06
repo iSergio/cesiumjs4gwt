@@ -19,6 +19,8 @@ package org.cesiumjs.cs.scene.options;
 import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.Rectangle;
 import org.cesiumjs.cs.scene.enums.ImagerySplitDirection;
+import org.cesiumjs.cs.scene.enums.TextureMagnificationFilter;
+import org.cesiumjs.cs.scene.enums.TextureMinificationFilter;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -99,6 +101,18 @@ public class ImageryLayerOptions {
      */
     @JsProperty(name = "splitDirection")
     public ImagerySplitDirectionFunction splitDirectionFunction;
+    /**
+     * The texture minification filter to apply to this layer. Possible values are TextureMinificationFilter.LINEAR and TextureMinificationFilter.NEAREST.
+     * Default: {@link TextureMinificationFilter#LINEAR()}
+     */
+    @JsProperty
+    public Number minificationFilter;
+    /**
+     * The texture minification filter to apply to this layer. Possible values are TextureMagnificationFilter.LINEAR and TextureMagnificationFilter.NEAREST.
+     * Default: {@link TextureMagnificationFilter#LINEAR()}
+     */
+    @JsProperty
+    public Number magnificationFilter;
     /**
      * True if the layer is shown; otherwise, false.
      * Default: true
