@@ -188,6 +188,24 @@ public class Scene {
     @JsProperty
     public double imagerySplitPosition;
     /**
+     * When false, 3D Tiles will render normally. When true, classified 3D Tile geometry will render normally and
+     * unclassified 3D Tile geometry will render with the color multiplied by {@link Scene#invertClassificationColor}.
+     * Default: false
+     */
+    @JsProperty
+    public boolean invertClassification;
+    /**
+     * The highlight color of unclassified 3D Tile geometry when Scene#invertClassification is true.
+     * When the color's alpha is less than 1.0, the unclassified portions of the 3D Tiles will not blend correctly with the
+     * classified positions of the 3D Tiles.
+     *
+     * Also, when the color's alpha is less than 1.0, the WEBGL_depth_texture and EXT_frag_depth WebGL extensions must be supported.
+     *
+     * Default: {@link Color#WHITE()}
+     */
+    @JsProperty
+    public Color invertClassificationColor;
+    /**
      * Determines if the 2D map is rotatable or can be scrolled infinitely in the horizontal direction.
      */
     @JsProperty
