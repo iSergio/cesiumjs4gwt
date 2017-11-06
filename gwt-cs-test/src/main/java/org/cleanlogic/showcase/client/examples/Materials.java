@@ -27,6 +27,7 @@ import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.ListBox;
+import org.cesiumjs.cs.collections.LabelCollection;
 import org.cesiumjs.cs.collections.PolylineCollection;
 import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.PolylinePipeline;

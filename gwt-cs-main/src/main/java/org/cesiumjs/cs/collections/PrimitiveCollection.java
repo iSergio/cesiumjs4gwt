@@ -65,9 +65,9 @@ public class PrimitiveCollection extends Collection<Primitive> {
      * @return collection
      */
     @JsMethod
-    public native Collection add(Collection collection);
+    public native Collection add(Collection<?> collection);
     @JsMethod
-    public native boolean remove(Collection collection);
+    public native boolean remove(Collection<?> collection);
 
     /**
      * Add model to collecntion
