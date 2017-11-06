@@ -167,6 +167,11 @@ public class UrlTemplateImageryProviderOptions {
      */
     @JsProperty
     public boolean enablePickFeatures;
+    /**
+     * Allow to replace custom keywords in the URL template. The object must have strings as keys and functions as values.
+     */
+    @JsProperty
+    public Object customTags;
 
     /**
      * Options for {@link org.cesiumjs.cs.scene.providers.UrlTemplateImageryProvider}

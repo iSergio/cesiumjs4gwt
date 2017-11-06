@@ -162,6 +162,7 @@ public class UrlTemplateImageryProvider implements ImageryProvider {
      * {reverseY}: The zero padding for the tile reverseY coordinate in the tiling scheme.
      * {reverseZ}: The zero padding for the reverseZ coordinate of the tile in the tiling scheme.
      */
+    @JsProperty(name = "urlSchemeZeroPadding")
     public native String urlSchemeZeroPadding();
 
     /**
