@@ -145,11 +145,21 @@ public class Scene {
     @JsProperty(name = "drawingBufferWidth")
     public native double drawingBufferWidth();
     /**
+     * The eye separation distance in meters for use with cardboard or WebVR.
+     */
+    @JsProperty
+    public double eyeSeparation;
+    /**
      * The far-to-near ratio of the multi-frustum. The default is 1,000.0.
      * Default: 1000.0
      */
     @JsProperty
     public double farToNearRatio;
+    /**
+     * The focal length for use when with cardboard or WebVR.
+     */
+    @JsProperty
+    public double focalLength;
     /**
      * Blends the atmosphere to geometry far from the camera for horizon views. Allows for additional performance
      * improvements by rendering less geometry and dispatching less terrain requests.
