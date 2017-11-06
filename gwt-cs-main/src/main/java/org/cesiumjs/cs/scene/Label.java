@@ -33,6 +33,12 @@ import org.cesiumjs.cs.scene.enums.VerticalOrigin;
 @JsType(isNative = true, namespace = "Cesium", name = "Label")
 public class Label {
     /**
+     * Determines whether or not run the algorithm, that match the text of the label to right-to-left languages
+     * Default: false
+     */
+    @JsProperty
+    public boolean enableRightToLeftDetection;
+    /**
      * Gets or sets the background color of this label.
      * Default: new Color(0.165, 0.165, 0.165, 0.8)
      */
@@ -175,7 +181,7 @@ public class Label {
      * Gets or sets the style of this label.
      * @see LabelStyle
      */
-    public int style;
+    public Number style;
     /**
      * Gets or sets the text of this label.
      */

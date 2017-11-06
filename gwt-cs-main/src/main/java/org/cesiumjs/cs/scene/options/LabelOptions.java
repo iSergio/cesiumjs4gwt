@@ -20,9 +20,8 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.Cartesian2;
-import org.cesiumjs.cs.core.Cartesian3;
-import org.cesiumjs.cs.core.Color;
+import org.cesiumjs.cs.core.*;
+import org.cesiumjs.cs.scene.enums.HeightReference;
 import org.cesiumjs.cs.scene.enums.HorizontalOrigin;
 import org.cesiumjs.cs.scene.enums.LabelStyle;
 import org.cesiumjs.cs.scene.enums.VerticalOrigin;
@@ -66,11 +65,35 @@ public class LabelOptions {
     @JsProperty
     public Color outlineColor;
     /**
+     * Get or sets the outline width of this label
+     */
+    @JsProperty
+    public double outlineWidth;
+    /**
+     * Determines if a background behind this label will be shown.
+     * Default: false
+     */
+    @JsProperty
+    public boolean showBackground;
+    /**
+     * Gets or sets the background color of this label.
+     * Default: new Color(0.165, 0.165, 0.165, 0.8)
+     */
+    @JsProperty
+    public Color backgroundColor;
+    /**
+     * Gets or sets the background padding, in pixels, of this label. The x value controls horizontal padding,
+     * and the y value controls vertical padding.
+     * Default: new Cartesian2(7, 5)
+     */
+    @JsProperty
+    public Cartesian2 backgroundPadding;
+    /**
      * Gets or sets the style of this label.
      * @see LabelStyle
      */
     @JsProperty
-    public int style;
+    public Number style;
     /**
      * Gets or sets the pixel offset in screen space from the origin of this label.
      * This is commonly used to align multiple labels and billboards at the same position, e.g., an imagery and text.
@@ -96,14 +119,14 @@ public class LabelOptions {
      * @see HorizontalOrigin
      */
     @JsProperty
-    public int horizontalOrigin;
+    public Number horizontalOrigin;
     /**
      * Gets or sets the vertical origin of this label, which determines if the label is to the above, below,
      * or at the center of its position.
      * @see VerticalOrigin
      */
     @JsProperty
-    public int verticalOrigin;
+    public Number verticalOrigin;
     /**
      * Gets or sets the uniform scale that is multiplied with the label's size in pixels.
      * A scale of 1.0 does not change the size of the label; a scale greater than 1.0 enlarges the label;
@@ -114,6 +137,36 @@ public class LabelOptions {
      */
     @JsProperty
     public double scale;
+    /**
+     * Gets or sets near and far translucency properties of a Label based on the Label's distance from the camera.
+     * A label's translucency will interpolate between the {@link NearFarScalar#nearValue} and {@link NearFarScalar#farValue} while
+     * the camera distance falls within the upper and lower bounds of the specified {@link NearFarScalar#near} and {@link NearFarScalar#far}.
+     * Outside of these ranges the label's translucency remains clamped to the nearest bound.
+     * If undefined, translucencyByDistance will be disabled.
+     */
+    @JsProperty
+    public NearFarScalar translucencyByDistance;
+    /**
+     * Gets or sets near and far pixel offset scaling properties of a Label based on the Label's distance from the camera.
+     * A label's pixel offset will be scaled between the {@link NearFarScalar#nearValue} and {@link NearFarScalar#farValue} while
+     * the camera distance falls within the upper and lower bounds of the specified {@link NearFarScalar#near} and {@link NearFarScalar#far}.
+     * Outside of these ranges the label's pixel offset scaling remains clamped to the nearest bound. If undefined,
+     * pixelOffsetScaleByDistance will be disabled.
+     */
+    @JsProperty
+    public NearFarScalar pixelOffsetScaleByDistance;
+    /**
+     * Gets or sets the height reference of this billboard.
+     * Default: {@link HeightReference#NONE()}
+     */
+    @JsProperty
+    public Number heightReference;
+    /**
+     * Gets or sets the condition specifying at what distance from the camera that this label will be displayed.
+     * Default: undefined
+     */
+    @JsProperty
+    public DistanceDisplayCondition distanceDisplayCondition;
 
     @JsConstructor
     public LabelOptions() {}
