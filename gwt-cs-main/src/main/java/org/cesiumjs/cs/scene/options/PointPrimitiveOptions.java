@@ -17,15 +17,20 @@
 package org.cesiumjs.cs.scene.options;
 
 import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.core.DistanceDisplayCondition;
 import org.cesiumjs.cs.core.NearFarScalar;
 
 /**
+ * Options for {@link org.cesiumjs.cs.collections.PointPrimitiveCollection#add(PointPrimitiveOptions)}.
+ *
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class PointPrimitiveOptions {
     /**
      * Gets or sets the inner color of the point. The red, green, blue, and alpha values are indicated by
