@@ -36,7 +36,7 @@ What was done:
 You not need include JavaScript of Cesium into main html file, injection realised in GWT code.
 Now no need callback for ScriptInjection or AttachOrDetach, all worked "out from box".
 See [Showcase](http://sergeserver.noip.me/gwt-cs-test/) or basic example:
-```
+```java
 public class HelloWorld extends AbstractExample {
 
     @Inject
