@@ -17,6 +17,7 @@
 package org.cleanlogic.showcase.client.examples;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.CanvasElement;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -72,7 +73,6 @@ public class Clustering extends AbstractExample {
     @Override
     public void buildPanel() {
         csVPanel = new ViewerPanel();
-        Cesium.log(csVPanel.getViewer().camera);
         KmlDataSourceOptions kmlDataSourceOptions = new KmlDataSourceOptions();
         kmlDataSourceOptions.camera = csVPanel.getViewer().camera;
         kmlDataSourceOptions.canvas = csVPanel.getViewer().canvas();
@@ -94,6 +94,7 @@ public class Clustering extends AbstractExample {
                 pin30 = pinBuilder.fromText("30+", Color.YELLOW(), 48).toDataUrl();
                 pin20 = pinBuilder.fromText("20+", Color.GREEN(), 48).toDataUrl();
                 pin10 = pinBuilder.fromText("10+", Color.BLUE(), 48).toDataUrl();
+
                 singleDigitPins = new String[8];
                 for (int i = 0; i < singleDigitPins.length; ++i) {
                     singleDigitPins[i] = pinBuilder.fromText("" + (i + 2), Color.VIOLET(), 48).toDataUrl();

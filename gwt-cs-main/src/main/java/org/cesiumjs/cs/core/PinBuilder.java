@@ -81,7 +81,7 @@ public class PinBuilder {
      * @return The canvas element or a Promise to the canvas element that represents the generated pin.
      */
     @JsMethod
-    public native Promise<CanvasElement, Void> fromUrl(String url, Color color, int size);
+    public native CanvasElement fromUrl(String url, Color color, int size);
 
     /**
      * @deprecated Use {@link PinBuilder#fromUrl(String, Color, int)}.
@@ -93,6 +93,6 @@ public class PinBuilder {
      * @return The canvas element or a Promise to the canvas element that represents the generated pin.
      */
     @Deprecated
-    @JsMethod
+    @JsMethod(name = "fromUrl")
     public native Promise<CanvasElement, Void> fromUrlPromise(String url, Color color, int size);
 }
