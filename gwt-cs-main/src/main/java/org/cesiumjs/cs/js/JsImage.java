@@ -31,6 +31,8 @@ public class JsImage {
     public String src;
     @JsProperty
     public Listener onload;
+    @JsProperty
+    public String crossOrigin;
 
     @JsConstructor
     public JsImage() {}
