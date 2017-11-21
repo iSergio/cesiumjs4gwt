@@ -93,7 +93,7 @@ public class LoadImages extends AbstractExample {
         });
 
         // CORS not loaded
-        Cesium.loadImage("https://www.linux.org.ru/tango/img/games-logo.png", true).then(new Fulfill<JsImage>() {
+        Cesium.loadImage("https://www.linux.org.ru/tango/img/games-logo.png", false).then(new Fulfill<JsImage>() {
             @Override
             public void onFulfilled(JsImage value) {
                 Canvas canvas = Canvas.createIfSupported();
@@ -113,22 +113,22 @@ public class LoadImages extends AbstractExample {
             }
         });
 
-        // Cors allow load image but not in localhost or 127.0.0.1
-        final JsImage image = new JsImage();
-        image.crossOrigin = "Anonymous";
-        image.onload = new JsImage.Listener() {
+        // Cors not loaded!
+        final JsImage imageAmz = new JsImage();
+        imageAmz.crossOrigin = "*";
+        imageAmz.onload = new JsImage.Listener() {
             @Override
-            public void function(Object... o) {
-                Cesium.log(o);
-                Canvas canvas = Canvas.createIfSupported();
-                canvas.setWidth(image.width + "px");
-                canvas.setHeight(image.height + "px");
+            public void function() {
+                Cesium.log(imageAmz);
+                /*Canvas canvas = Canvas.createIfSupported();
+                canvas.setWidth(imageAmz.width + "px");
+                canvas.setHeight(imageAmz.height + "px");
                 Context2d context = canvas.getContext2d();
                 context.scale(0.1, 0.1);
-                context.drawImage((ImageElement) (Object) image, 0, 0);
-
+                context.drawImage((ImageElement) (Object) imageAmz, 0, 0);*/
                 BillboardGraphicsOptions billboardOptions = new BillboardGraphicsOptions();
-                billboardOptions.image = new ConstantProperty<>(canvas.toDataUrl());
+                billboardOptions.image = new ConstantProperty<>(imageAmz);
+                //billboardOptions.image = new ConstantProperty<>(canvas.toDataUrl("image/png"));
                 EntityOptions entityOptions = new EntityOptions();
                 entityOptions.name = "Pin billboard CORS";
                 entityOptions.billboard = new BillboardGraphics(billboardOptions);
@@ -136,7 +136,30 @@ public class LoadImages extends AbstractExample {
                 csVPanel.getViewer().entities().add(new Entity(entityOptions));
             }
         };
-        image.src = "https://www.linux.org.ru/tango/img/games-logo.png";
+        imageAmz.src = "https://d1.awsstatic.com/products/cloudfront/cloudfront-100_PoP_600x400.4a1edd6022833c54c41370ad9f615ae818350a23.png";
+
+        // Worked, have Access-Control-Allow-Origin: *
+        final JsImage imageWiki = new JsImage();
+        imageWiki.crossOrigin = "*";
+        imageWiki.onload = new JsImage.Listener() {
+            @Override
+            public void function() {
+                Cesium.log(imageWiki);
+                Canvas canvas = Canvas.createIfSupported();
+                canvas.setWidth(imageWiki.width + "px");
+                canvas.setHeight(imageWiki.height + "px");
+                Context2d context = canvas.getContext2d();
+                context.drawImage((ImageElement) (Object) imageWiki, 0, 0);
+                BillboardGraphicsOptions billboardOptions = new BillboardGraphicsOptions();
+                billboardOptions.image = new ConstantProperty<>(canvas.toDataUrl("image/png"));
+                EntityOptions entityOptions = new EntityOptions();
+                entityOptions.name = "Pin billboard CORS";
+                entityOptions.billboard = new BillboardGraphics(billboardOptions);
+                entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(75, 75));
+                csVPanel.getViewer().entities().add(new Entity(entityOptions));
+            }
+        };
+        imageWiki.src = "https://ru.wikipedia.org/static/images/project-logos/ruwiki-2x.png";
 
         contentPanel.add(new HTML("<p>Cluster labels, billboards and points.</p>"));
         contentPanel.add(aPanel);
