@@ -42,6 +42,6 @@ public class JsImage {
 
     @JsFunction
     public interface Listener {
-        void function(Object ...o);
+        void function();
     }
 }
