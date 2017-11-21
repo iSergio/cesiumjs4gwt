@@ -23,6 +23,7 @@ import com.google.gwt.dom.client.CanvasElement;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.Image;
 import org.cesiumjs.cs.Cesium;
 import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.Color;
@@ -91,7 +92,7 @@ public class LoadImages extends AbstractExample {
             }
         });
 
-        // CORS
+        // CORS not loaded
         Cesium.loadImage("https://www.linux.org.ru/tango/img/games-logo.png", true).then(new Fulfill<JsImage>() {
             @Override
             public void onFulfilled(JsImage value) {
@@ -111,6 +112,31 @@ public class LoadImages extends AbstractExample {
                 csVPanel.getViewer().entities().add(new Entity(entityOptions));
             }
         });
+
+        // Cors allow load image but not in localhost or 127.0.0.1
+        final JsImage image = new JsImage();
+        image.crossOrigin = "Anonymous";
+        image.onload = new JsImage.Listener() {
+            @Override
+            public void function(Object... o) {
+                Cesium.log(o);
+                Canvas canvas = Canvas.createIfSupported();
+                canvas.setWidth(image.width + "px");
+                canvas.setHeight(image.height + "px");
+                Context2d context = canvas.getContext2d();
+                context.scale(0.1, 0.1);
+                context.drawImage((ImageElement) (Object) image, 0, 0);
+
+                BillboardGraphicsOptions billboardOptions = new BillboardGraphicsOptions();
+                billboardOptions.image = new ConstantProperty<>(canvas.toDataUrl());
+                EntityOptions entityOptions = new EntityOptions();
+                entityOptions.name = "Pin billboard CORS";
+                entityOptions.billboard = new BillboardGraphics(billboardOptions);
+                entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(65, 65));
+                csVPanel.getViewer().entities().add(new Entity(entityOptions));
+            }
+        };
+        image.src = "https://www.linux.org.ru/tango/img/games-logo.png";
 
         contentPanel.add(new HTML("<p>Cluster labels, billboards and points.</p>"));
         contentPanel.add(aPanel);
