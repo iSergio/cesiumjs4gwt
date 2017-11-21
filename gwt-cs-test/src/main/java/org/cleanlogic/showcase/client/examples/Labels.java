@@ -144,7 +144,7 @@ public class Labels extends AbstractExample {
         final JsImage image = new JsImage();
         image.onload = new JsImage.Listener() {
             @Override
-            public void function(Object... o) {
+            public void function() {
                 BillboardGraphicsOptions billboardGraphicsOptions = new BillboardGraphicsOptions();
                 billboardGraphicsOptions.scaleByDistance = new ConstantProperty<>(new NearFarScalar(1.5e2, 5.0, 1.5e7, 0.5));
                 billboardGraphicsOptions.image = new ConstantProperty<>(image);
