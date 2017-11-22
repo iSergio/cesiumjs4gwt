@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
   ~ Copyright 2016 iserge.
   ~
@@ -14,6 +15,10 @@
   ~ limitations under the License.
   -->
 <!-- If you inherits this script, you need add Cesium.js and css files into you HTML Header-->
+<!-- When updating your version of GWT, you should also update this DTD reference,
+	so that your app can take advantage of the latest GWT module capabilities. -->
+<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.8.2//EN"
+        "http://gwtproject.org/doctype/2.8.2/gwt-module.dtd">
 <module>
     <inherits name="com.google.gwt.user.User" />
     <inherits name="com.google.gwt.json.JSON" />
