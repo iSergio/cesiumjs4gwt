@@ -29,6 +29,6 @@ import javax.inject.Provider;
 public class ShowcaseLogoProvider implements Provider<Image> {
 
     public Image get() {
-        return new Image(Resources.INSTANCE.gwtOlLogo());
+        return new Image(Resources.INSTANCE.gwtCsLogo());
     }
 }

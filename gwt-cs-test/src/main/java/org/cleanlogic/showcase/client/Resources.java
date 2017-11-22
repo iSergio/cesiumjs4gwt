@@ -38,8 +38,8 @@ public interface Resources extends ClientBundle {
      *
      * @return The imagery resource.
      */
-    @Source("resources/gwt-ol-a.png")
-    ImageResource gwtOlLogo();
+    @Source("resources/gwt-cs.png")
+    ImageResource gwtCsLogo();
 
     /**
      * The info icon
