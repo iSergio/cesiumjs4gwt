@@ -1,5 +1,5 @@
 # GWT Cesium Wrapper
-[CesiumJS](http://cesiumjs.org) GWT Wrapper based on JsInterop for [GWT 2.8.0](http://www.gwtproject.org/release-notes.html#Release_Notes_2_8_0).
+[CesiumJS](http://cesiumjs.org) GWT Wrapper based on JsInterop 1.0.2 for [GWT 2.8.x](http://www.gwtproject.org/release-notes.html#Release_Notes_2_8_2).
 
 Java API looks like as JavaScript.
 What was done:
