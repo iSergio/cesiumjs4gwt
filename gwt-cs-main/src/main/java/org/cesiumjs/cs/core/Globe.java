@@ -22,6 +22,7 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.collections.ImageryLayerCollection;
 import org.cesiumjs.cs.core.providers.TerrainProvider;
+import org.cesiumjs.cs.scene.Material;
 import org.cesiumjs.cs.scene.Scene;
 
 /**
@@ -71,6 +72,11 @@ public class Globe {
      */
     @JsProperty
     public double lightingFadeOutDistance;
+    /**
+     * Gets or sets the material appearance of the Globe. This can be one of several built-in Material objects or a custom material, scripted with Fabric.
+     */
+    @JsProperty
+    public Material material;
     /**
      * The maximum screen-space error used to drive level-of-detail refinement. Higher values will provide better
      * performance but lower visual quality.
