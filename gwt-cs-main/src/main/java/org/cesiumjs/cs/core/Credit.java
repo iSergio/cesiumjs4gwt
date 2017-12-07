@@ -20,6 +20,7 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.options.CreditOptions;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -50,6 +51,14 @@ public class Credit {
 
     /**
      * A credit contains data pertaining to how to display attributions/credits for certain content on the screen.
+     * @param options {@link CreditOptions}
+     */
+    @JsConstructor
+    public Credit(CreditOptions options) {}
+
+    /**
+     * @deprecated The text, imageUrl and link parameters for Credit have been deprecated and will be removed in Cesium 1.41. Use options.text, options.imageUrl and options.link instead.
+     * A credit contains data pertaining to how to display attributions/credits for certain content on the screen.
      * <pre>
      *     Example:
      *     {@code
@@ -59,10 +68,12 @@ public class Credit {
      * </pre>
      * @param text The text to be displayed on the screen if no imageUrl is specified.
      */
+    @Deprecated
     @JsConstructor
     public Credit(String text) {}
 
     /**
+     * @deprecated The text, imageUrl and link parameters for Credit have been deprecated and will be removed in Cesium 1.41. Use options.text, options.imageUrl and options.link instead.
      * A credit contains data pertaining to how to display attributions/credits for certain content on the screen.
      * <pre>
      *     Example:
@@ -74,10 +85,12 @@ public class Credit {
      * @param text The text to be displayed on the screen if no imageUrl is specified.
      * @param imageUrl The source location for an imagery
      */
+    @Deprecated
     @JsConstructor
     public Credit(String text, String imageUrl) {}
 
     /**
+     * @deprecated The text, imageUrl and link parameters for Credit have been deprecated and will be removed in Cesium 1.41. Use options.text, options.imageUrl and options.link instead.
      * A credit contains data pertaining to how to display attributions/credits for certain content on the screen.
      * <pre>
      *     Example:
@@ -90,6 +103,7 @@ public class Credit {
      * @param imageUrl The source location for an imagery
      * @param link A URL location for which the credit will be hyperlinked
      */
+    @Deprecated
     @JsConstructor
     public Credit(String text, String imageUrl, String link) {}
 
