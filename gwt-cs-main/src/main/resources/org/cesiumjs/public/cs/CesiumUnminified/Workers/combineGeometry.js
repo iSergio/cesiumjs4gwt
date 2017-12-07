@@ -13225,14 +13225,12 @@ define('Core/AttributeCompression',[
         './Cartesian2',
         './Cartesian3',
         './Check',
-        './defined',
         './DeveloperError',
         './Math'
     ], function(
         Cartesian2,
         Cartesian3,
         Check,
-        defined,
         DeveloperError,
         CesiumMath) {
     'use strict';
