@@ -79,6 +79,11 @@ public class Model {
     @JsProperty(name = "boundingSphere")
     public native BoundingSphere boundingSphere();
     /**
+     * Determines if the model's animations should hold a pose over frames where no keyframes are specified.
+     */
+    @JsProperty
+    public boolean clampAnimations;
+    /**
      * A color that blends with the model's rendered color.
      * Default: {@link Color#WHITE()}.
      */

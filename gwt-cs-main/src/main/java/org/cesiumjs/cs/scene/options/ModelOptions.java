@@ -107,6 +107,12 @@ public class ModelOptions {
     @JsProperty
     public boolean asynchronous;
     /**
+     * Determines if the model's animations should hold a pose over frames where no keyframes are specified.
+     * Default: true
+     */
+    @JsProperty
+    boolean clampAnimations;
+    /**
      * Determines whether the model casts or receives shadows from each light source.
      * Default: {@link org.cesiumjs.cs.scene.enums.ShadowMode#ENABLED()}.
      */

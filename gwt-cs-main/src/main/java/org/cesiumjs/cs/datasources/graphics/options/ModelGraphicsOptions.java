@@ -72,6 +72,11 @@ public class ModelGraphicsOptions {
     @JsProperty
     public Property runAnimations;
     /**
+     * Determines if the model's animations should hold a pose over frames where no keyframes are specified.
+     */
+    @JsProperty
+    public boolean clampAnimations;
+    /**
      * An object, where keys are names of nodes, and values are TranslationRotationScale Properties describing the transformation to apply to that node.
      */
     @JsProperty

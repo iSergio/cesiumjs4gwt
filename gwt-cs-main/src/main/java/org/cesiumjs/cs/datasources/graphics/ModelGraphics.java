@@ -73,11 +73,16 @@ public class ModelGraphics {
     @JsProperty
     public Property incrementallyLoadTextures;
     /**
-     * A boolean Property specifying if glTF animations specified in the model should be started.
+     * A boolean Property specifying if glTF animations should hold the last pose for time durations with no keyframes.
      * Default: true
      */
     @JsProperty
     public Property runAnimations;
+    /**
+     * Determines if the model's animations should hold a pose over frames where no keyframes are specified.
+     */
+    @JsProperty
+    public boolean clampAnimations;
     /**
      * An object, where keys are names of nodes, and values are TranslationRotationScale Properties describing the transformation to apply to that node.
      */
