@@ -16,10 +16,7 @@
 
 package org.cesiumjs.cs.core;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.options.CreditOptions;
 
 /**
@@ -55,6 +52,18 @@ public class Credit {
      */
     @JsConstructor
     public Credit(CreditOptions options) {}
+
+    /**
+     * Simple create {@link Credit} instance.
+     * @param text {@link CreditOptions#text}.
+     * @return {@link Credit} instance.
+     */
+    @JsOverlay
+    public static Credit create(String text) {
+        CreditOptions options = new CreditOptions();
+        options.text = text;
+        return new Credit(options);
+    }
 
     /**
      * Returns true if the credits are equal
