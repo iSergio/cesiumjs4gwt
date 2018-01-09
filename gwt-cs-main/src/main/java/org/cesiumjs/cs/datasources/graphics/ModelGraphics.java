@@ -137,6 +137,11 @@ public class ModelGraphics {
      */
     @JsProperty
     public Property silhouetteSize;
+    /**
+     * A property specifying the {@link org.cesiumjs.cs.collections.ClippingPlaneCollection} used to selectively disable rendering the model.
+     */
+    @JsProperty
+    public Property clippingPlanes;
 
     @JsConstructor
     public ModelGraphics() {}

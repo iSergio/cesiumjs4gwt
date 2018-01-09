@@ -17,6 +17,7 @@
 package org.cesiumjs.cs.scene;
 
 import jsinterop.annotations.*;
+import org.cesiumjs.cs.collections.ClippingPlaneCollection;
 import org.cesiumjs.cs.core.BoundingSphere;
 import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.core.Matrix4;
@@ -64,6 +65,12 @@ public class Cesium3DTileset {
      */
     @JsProperty(name = "boundingSphere")
     public native BoundingSphere boundingSphere();
+    /**
+     * The {@link ClippingPlaneCollection} used to selectively disable rendering the tileset.
+     * Clipping planes are not currently supported in Internet Explorer.
+     */
+    @JsProperty
+    public ClippingPlaneCollection clippingPlanes;
     /**
      * Defines the value used to linearly interpolate between the source color and feature color when the
      * {@link Cesium3DTileset#colorBlendMode} is MIX. A value of 0.0 results in the source color while a value

@@ -20,6 +20,7 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.collections.ClippingPlaneCollection;
 import org.cesiumjs.cs.collections.ModelAnimationCollection;
 import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.promise.Promise;
@@ -213,6 +214,12 @@ public class Model {
      */
     @JsProperty
     public double silhouetteSize;
+    /**
+     * The ClippingPlaneCollection used to selectively disable rendering the model.
+     * Clipping planes are not currently supported in Internet Explorer.
+     */
+    @JsProperty
+    public ClippingPlaneCollection clippingPlane;
 
     @JsConstructor
     public Model() {}

@@ -17,6 +17,7 @@
 package org.cesiumjs.cs.scene.options;
 
 import jsinterop.annotations.*;
+import org.cesiumjs.cs.collections.ClippingPlaneCollection;
 import org.cesiumjs.cs.core.Matrix4;
 import org.cesiumjs.cs.scene.Cesium3DTileset;
 import org.cesiumjs.cs.scene.enums.ShadowMode;
@@ -127,6 +128,12 @@ public class Cesium3DTilesetOptions {
      */
     @JsProperty
     public boolean loadSiblings;
+    /**
+     * The {@link ClippingPlaneCollection} used to selectively disable rendering the tileset.
+     * Clipping planes are not currently supported in Internet Explorer.
+     */
+    @JsProperty
+    public ClippingPlaneCollection clippingPlanes;
     /**
      * For debugging only. Determines if only the tiles from last frame should be used for rendering.
      * Defaule: false;
