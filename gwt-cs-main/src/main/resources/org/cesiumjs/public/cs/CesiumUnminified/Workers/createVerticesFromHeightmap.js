@@ -13407,16 +13407,20 @@ define('Core/IntersectionTests',[
 
 define('Core/Plane',[
         './Cartesian3',
+        './Check',
         './defined',
         './DeveloperError',
         './freezeObject',
-        './Math'
+        './Math',
+        './Matrix4'
     ], function(
         Cartesian3,
+        Check,
         defined,
         DeveloperError,
         freezeObject,
-        CesiumMath) {
+        CesiumMath,
+        Matrix4) {
     'use strict';
 
     /**
@@ -13445,15 +13449,11 @@ define('Core/Plane',[
      * @exception {DeveloperError} Normal must be normalized
      */
     function Plane(normal, distance) {
-                if (!defined(normal))  {
-            throw new DeveloperError('normal is required.');
-        }
+                Check.typeOf.object('normal', normal);
         if (!CesiumMath.equalsEpsilon(Cartesian3.magnitude(normal), 1.0, CesiumMath.EPSILON6)) {
             throw new DeveloperError('normal must be normalized.');
         }
-        if (!defined(distance)) {
-            throw new DeveloperError('distance is required.');
-        }
+        Check.typeOf.number('distance', distance);
         
         /**
          * The plane's normal.
@@ -13490,12 +13490,8 @@ define('Core/Plane',[
      * @exception {DeveloperError} Normal must be normalized
      */
     Plane.fromPointNormal = function(point, normal, result) {
-                if (!defined(point)) {
-            throw new DeveloperError('point is required.');
-        }
-        if (!defined(normal)) {
-            throw new DeveloperError('normal is required.');
-        }
+                Check.typeOf.object('point', point);
+        Check.typeOf.object('normal', normal);
         if (!CesiumMath.equalsEpsilon(Cartesian3.magnitude(normal), 1.0, CesiumMath.EPSILON6)) {
             throw new DeveloperError('normal must be normalized.');
         }
@@ -13522,9 +13518,7 @@ define('Core/Plane',[
      * @exception {DeveloperError} Normal must be normalized
      */
     Plane.fromCartesian4 = function(coefficients, result) {
-                if (!defined(coefficients)) {
-            throw new DeveloperError('coefficients is required.');
-        }
+                Check.typeOf.object('coefficients', coefficients);
         
         var normal = Cartesian3.fromCartesian4(coefficients, scratchNormal);
         var distance = coefficients.w;
@@ -13553,14 +13547,67 @@ define('Core/Plane',[
      * @returns {Number} The signed shortest distance of the point to the plane.
      */
     Plane.getPointDistance = function(plane, point) {
-                if (!defined(plane)) {
-            throw new DeveloperError('plane is required.');
-        }
-        if (!defined(point)) {
-            throw new DeveloperError('point is required.');
-        }
+                Check.typeOf.object('plane', plane);
+        Check.typeOf.object('point', point);
         
         return Cartesian3.dot(plane.normal, point) + plane.distance;
+    };
+
+    var scratchPosition = new Cartesian3();
+    /**
+     * Transforms the plane by the given transformation matrix.
+     *
+     * @param {Plane} plane The plane.
+     * @param {Matrix4} transform The transformation matrix.
+     * @param {Plane} [result] The object into which to store the result.
+     * @returns {Plane} The plane transformed by the given transformation matrix.
+     */
+    Plane.transform = function(plane, transform, result) {
+                Check.typeOf.object('plane', plane);
+        Check.typeOf.object('transform', transform);
+        
+        Matrix4.multiplyByPointAsVector(transform, plane.normal, scratchNormal);
+        Cartesian3.normalize(scratchNormal, scratchNormal);
+
+        Cartesian3.multiplyByScalar(plane.normal, -plane.distance, scratchPosition);
+        Matrix4.multiplyByPoint(transform, scratchPosition, scratchPosition);
+
+        return Plane.fromPointNormal(scratchPosition, scratchNormal, result);
+    };
+
+    /**
+     * Duplicates a Plane instance.
+     *
+     * @param {Plane} plane The plane to duplicate.
+     * @param {Plane} [result] The object onto which to store the result.
+     * @returns {Plane} The modified result parameter or a new Plane instance if one was not provided.
+     */
+    Plane.clone = function(plane, result) {
+                Check.typeOf.object('plane', plane);
+        
+        if (!defined(result)) {
+            return new Plane(plane.normal, plane.distance);
+        }
+
+        Cartesian3.clone(plane.normal, result.normal);
+        result.distance = plane.distance;
+
+        return result;
+    };
+
+    /**
+     * Compares the provided Planes by normal and distance and returns
+     * <code>true</code> if they are equal, <code>false</code> otherwise.
+     *
+     * @param {Plane} left The first plane.
+     * @param {Plane} right The second plane.
+     * @returns {Boolean} <code>true</code> if left and right are equal, <code>false</code> otherwise.
+     */
+    Plane.equals = function(left, right) {
+                Check.typeOf.object('left', left);
+        Check.typeOf.object('right', right);
+        
+        return (left.distance === right.distance) && Cartesian3.equals(left.normal, right.normal);
     };
 
     /**
@@ -17781,10 +17828,13 @@ define('Core/loadWithXhr',[
             var response = xhr.response;
             var browserResponseType = xhr.responseType;
 
-            //All modern browsers will go into either the first if block or last else block.
+            //All modern browsers will go into either the first or second if block or last else block.
             //Other code paths support older browsers that either do not support the supplied responseType
             //or do not support the xhr.response property.
-            if (defined(response) && (!defined(responseType) || (browserResponseType === responseType))) {
+            if (xhr.status === 204) {
+                // accept no content
+                deferred.resolve();
+            } else if (defined(response) && (!defined(responseType) || (browserResponseType === responseType))) {
                 deferred.resolve(response);
             } else if ((responseType === 'json') && typeof response === 'string') {
                 try {
@@ -17925,6 +17975,9 @@ define('Core/loadJson',[
         }
 
         return textPromise.then(function(value) {
+            if (!defined(value)) {
+                return;
+            }
             return JSON.parse(value);
         });
     }
