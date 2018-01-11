@@ -57,7 +57,7 @@ public class ImageryLayers extends AbstractExample {
         ImageryLayerCollection layers = csVPanel.getViewer().imageryLayers();
         TileMapServiceImageryProviderOptions tileMapServiceImageryProviderOptions = new TileMapServiceImageryProviderOptions();
         tileMapServiceImageryProviderOptions.url = "https://cesiumjs.org/blackmarble";
-        tileMapServiceImageryProviderOptions.credit = new Credit("Black Marble imagery courtesy NASA Earth Observatory");
+        tileMapServiceImageryProviderOptions.credit = Credit.create("Black Marble imagery courtesy NASA Earth Observatory");
         tileMapServiceImageryProviderOptions.flipXY = true;
         ImageryLayer blackMarble = layers.addImageryProvider(Cesium.createTileMapServiceImageryProvider(tileMapServiceImageryProviderOptions));
         blackMarble.alpha = 0.5f;
