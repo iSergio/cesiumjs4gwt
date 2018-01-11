@@ -7,7 +7,7 @@
     <groupId>org.cesiumjs</groupId>
     <artifactId>gwt-cs</artifactId>
     <packaging>pom</packaging>
-    <version>1.40.17</version>
+    <version>1.41.15</version>
 
     <modules>
         <module>gwt-cs-main</module>
