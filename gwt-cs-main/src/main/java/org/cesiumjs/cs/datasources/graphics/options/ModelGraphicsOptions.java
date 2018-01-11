@@ -130,6 +130,11 @@ public class ModelGraphicsOptions {
      */
     @JsProperty
     public Property colorBlendAmount;
+    /**
+     * A property specifying the ClippingPlaneCollection used to selectively disable rendering the model.
+     */
+    @JsProperty
+    public Property clippingPlanes;
 
     @JsConstructor
     public ModelGraphicsOptions() {}
