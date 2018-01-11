@@ -71,6 +71,32 @@ public class Plane {
     public Plane(Cartesian3 normal, double distance) {}
 
     /**
+     * Duplicates a Plane instance.
+     * @param plane The plane to duplicate.
+     * @return The modified result parameter or a new Plane instance if one was not provided.
+     */
+    @JsMethod
+    public static native Plane clone(Plane plane);
+
+    /**
+     * Duplicates a Plane instance.
+     * @param plane The plane to duplicate.
+     * @param result The object onto which to store the result.
+     * @return The modified result parameter or a new Plane instance if one was not provided.
+     */
+    @JsMethod
+    public static native Plane clone(Plane plane, Plane result);
+
+    /**
+     * Compares the provided Planes by normal and distance and returns true if they are equal, false otherwise.
+     * @param left The first plane.
+     * @param right The second plane.
+     * @return true if left and right are equal, false otherwise.
+     */
+    @JsMethod
+    public static native Plane equals(Plane left, Plane right);
+
+    /**
      * Creates a plane from the general equation
      * @param coefficients The plane's normal (normalized).
      * @return A new plane instance or the modified result parameter.
@@ -132,4 +158,23 @@ public class Plane {
      */
     @JsMethod
     public static native double getPointDistance(Plane plane, Cartesian3 point);
+
+    /**
+     * Transforms the plane by the given transformation matrix.
+     * @param plane The plane.
+     * @param transform The transformation matrix.
+     * @return The plane transformed by the given transformation matrix.
+     */
+    @JsMethod
+    public static native Plane transform(Plane plane, Matrix4 transform);
+
+    /**
+     * Transforms the plane by the given transformation matrix.
+     * @param plane The plane.
+     * @param transform The transformation matrix.
+     * @param result The object into which to store the result.
+     * @return The plane transformed by the given transformation matrix.
+     */
+    @JsMethod
+    public static native Plane transform(Plane plane, Matrix4 transform, Plane result);
 }
