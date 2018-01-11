@@ -1,0 +1,328 @@
+/*
+ * Copyright 2018 iserge.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package org.cleanlogic.showcase.client.examples;
+
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.CheckBox;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.ListBox;
+import org.cesiumjs.cs.Cesium;
+import org.cesiumjs.cs.collections.ClippingPlaneCollection;
+import org.cesiumjs.cs.collections.options.ClippingPlaneCollectionOptions;
+import org.cesiumjs.cs.core.*;
+import org.cesiumjs.cs.core.HeadingPitchRoll;
+import org.cesiumjs.cs.core.Math;
+import org.cesiumjs.cs.core.enums.ScreenSpaceEventType;
+import org.cesiumjs.cs.core.events.MouseDownEvent;
+import org.cesiumjs.cs.core.events.MouseMoveEvent;
+import org.cesiumjs.cs.datasources.Entity;
+import org.cesiumjs.cs.datasources.graphics.ModelGraphics;
+import org.cesiumjs.cs.datasources.graphics.PlaneGraphics;
+import org.cesiumjs.cs.datasources.graphics.options.ModelGraphicsOptions;
+import org.cesiumjs.cs.datasources.graphics.options.PlaneGraphicsOptions;
+import org.cesiumjs.cs.datasources.options.EntityOptions;
+import org.cesiumjs.cs.datasources.properties.*;
+import org.cesiumjs.cs.js.JsObject;
+import org.cesiumjs.cs.promise.Fulfill;
+import org.cesiumjs.cs.scene.Cesium3DTileset;
+import org.cesiumjs.cs.scene.options.Cesium3DTilesetOptions;
+import org.cesiumjs.cs.widgets.ViewerPanel;
+import org.cesiumjs.cs.widgets.options.ViewerOptions;
+import org.cleanlogic.showcase.client.basic.AbstractExample;
+import org.cleanlogic.showcase.client.components.store.ShowcaseExampleStore;
+
+import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ */
+public class Tiles3DClippingPlanes extends AbstractExample {
+    private ViewerPanel csVPanel;
+    private CheckBox boundingVolumeCBox;
+    private CheckBox edgeStylingCBox;
+    private double targetY = 0.0;
+    private Plane scratchPlane = new Plane(Cartesian3.UNIT_X(), 0.0);
+    private List<Entity> planeEntities = new ArrayList<>();
+    private PlaneGraphics selectedPlane;
+    private Cesium3DTileset tileset;
+    private ClippingPlaneCollection modelEntityClippingPlanes;
+
+    private String bimUrl = "https://beta.cesium.com/api/assets/1459?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIzNjUyM2I5Yy01YmRhLTQ0MjktOGI0Zi02MDdmYzBjMmY0MjYiLCJpZCI6NDQsImFzc2V0cyI6WzE0NTldLCJpYXQiOjE0OTkyNjQ3ODF9.SW_rwY-ic0TwQBeiweXNqFyywoxnnUBtcVjeCmDGef4";
+    private String pointCloudUrl = "https://beta.cesium.com/api/assets/1460?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIyMzk2YzJiOS1jZGFmLTRlZmYtYmQ4MS00NTA3NjEwMzViZTkiLCJpZCI6NDQsImFzc2V0cyI6WzE0NjBdLCJpYXQiOjE0OTkyNjQ3NTV9.oWjvN52CRQ-dk3xtvD4e8ZnOHZhoWSpJLlw115mbQJM";
+    private String instancedUrl = GWT.getModuleBaseURL() + "../Specs/Data/Cesium3DTiles/Instanced/InstancedOrientation/";
+    private String modelUrl = GWT.getModuleBaseURL() + "SampleData/models/CesiumAir/Cesium_Air.glb";
+
+    @Inject
+    public Tiles3DClippingPlanes(ShowcaseExampleStore store) {
+        super("3D Tiles Clipping Planes", "User-defined clipping planes applied to a batched 3D Tileset, point cloud, and model.", new String[]{"Showcase", "3D Tiles", "Clipping"}, store);
+    }
+
+    @Override
+    public void buildPanel() {
+        ViewerOptions viewerOptions = new ViewerOptions();
+        viewerOptions.skyAtmosphere = null;
+        viewerOptions.infoBox = false;
+        viewerOptions.selectionIndicator = false;
+        csVPanel = new ViewerPanel(viewerOptions);
+
+        ScreenSpaceEventHandler downHandler = new ScreenSpaceEventHandler(csVPanel.getViewer().canvas());
+        downHandler.setInputAction(new ScreenSpaceEventHandler.Listener() {
+            @Override
+            public void function(Object event) {
+                MouseDownEvent mouseDownEvent = (MouseDownEvent) event;
+                PickedObject pickedObject = csVPanel.getViewer().scene().pick(mouseDownEvent.position);
+                if (!Cesium.defined(pickedObject)) {
+                    return;
+                }
+                if (!(pickedObject.id instanceof Entity)) {
+                    return;
+                }
+                if (Cesium.defined(pickedObject) && Cesium.defined(pickedObject.id) && Cesium.defined(((Entity) pickedObject.id).plane)) {
+                    selectedPlane = ((Entity) pickedObject.id).plane;
+                    selectedPlane.material = new ColorMaterialProperty(Color.WHITE().withAlpha(0.05f));
+                    selectedPlane.outlineColor = new ConstantProperty<>(Color.WHITE());
+                    csVPanel.getViewer().scene().screenSpaceCameraController().enableInputs = false;
+                }
+            }
+        }, ScreenSpaceEventType.LEFT_DOWN());
+
+        ScreenSpaceEventHandler upHandler = new ScreenSpaceEventHandler(csVPanel.getViewer().canvas());
+        upHandler.setInputAction(new ScreenSpaceEventHandler.Listener() {
+            @Override
+            public void function(Object event) {
+                if (Cesium.defined(selectedPlane)) {
+                    selectedPlane.material = new ColorMaterialProperty(Color.WHITE().withAlpha(0.1f));
+                    selectedPlane.outlineColor = new ConstantProperty<>(Color.WHITE());
+                    selectedPlane = (PlaneGraphics) JsObject.undefined();
+                }
+                csVPanel.getViewer().scene().screenSpaceCameraController().enableInputs = true;
+            }
+        }, ScreenSpaceEventType.LEFT_UP());
+
+        ScreenSpaceEventHandler moveHandler = new ScreenSpaceEventHandler(csVPanel.getViewer().scene().canvas());
+        moveHandler.setInputAction(new ScreenSpaceEventHandler.Listener() {
+            @Override
+            public void function(Object event) {
+                if (Cesium.defined(selectedPlane)) {
+                    MouseMoveEvent mouseMoveEvent = (MouseMoveEvent) event;
+                    double deltaY = mouseMoveEvent.startPosition.y - mouseMoveEvent.endPosition.y;
+                    targetY += deltaY;
+                }
+            }
+        }, ScreenSpaceEventType.MOUSE_MOVE());
+
+        ListBox clipObjectLBox = new ListBox();
+        clipObjectLBox.addItem("BIM");
+        clipObjectLBox.addItem("Point Cloud");
+        clipObjectLBox.addItem("Instanced");
+        clipObjectLBox.addItem("Model");
+        clipObjectLBox.addChangeHandler(new ChangeHandler() {
+            @Override
+            public void onChange(ChangeEvent event) {
+                reset();
+                ListBox source = (ListBox) event.getSource();
+                switch (source.getSelectedIndex()) {
+                    case 0: loadTileset(bimUrl); break;
+                    case 1:
+                        loadTileset(pointCloudUrl);
+                        tileset.readyPromise().then(new Fulfill<Cesium3DTileset>() {
+                            @Override
+                            public void onFulfilled(Cesium3DTileset value) {
+                                tileset.clippingPlanes.modelMatrix = Transforms.eastNorthUpToFixedFrame(tileset.boundingSphere().center);
+                            }
+                        });
+                        break;
+                    case 2:
+                        loadTileset(instancedUrl);
+                        tileset.readyPromise().then(new Fulfill<Cesium3DTileset>() {
+                            @Override
+                            public void onFulfilled(Cesium3DTileset value) {
+                                tileset.clippingPlanes.modelMatrix = Transforms.eastNorthUpToFixedFrame(tileset.boundingSphere().center);
+                            }
+                        });
+                        break;
+                    case 3: loadModel(modelUrl); break;
+                    default: break;
+                }
+            }
+        });
+
+        boundingVolumeCBox = new CheckBox("Show bounding volume");
+        boundingVolumeCBox.setValue(false);
+        boundingVolumeCBox.getElement().getStyle().setColor("white");
+        boundingVolumeCBox.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
+            @Override
+            public void onValueChange(ValueChangeEvent<Boolean> event) {
+                if (Cesium.defined(tileset)) {
+                    tileset.debugShowBoundingVolume = event.getValue();
+                }
+            }
+        });
+
+        edgeStylingCBox = new CheckBox("Enable edge styling");
+        edgeStylingCBox.setValue(true);
+        edgeStylingCBox.getElement().getStyle().setColor("white");
+        edgeStylingCBox.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
+            @Override
+            public void onValueChange(ValueChangeEvent<Boolean> event) {
+                double edgeWidth = event.getValue() ? 1.0 : 0.0;
+
+                if (Cesium.defined(tileset)) {
+                    tileset.clippingPlanes.edgeWidth = edgeWidth;
+                }
+
+                if (Cesium.defined(modelEntityClippingPlanes)) {
+                    modelEntityClippingPlanes.edgeWidth = edgeWidth;
+                }
+            }
+        });
+
+        AbsolutePanel aPanel = new AbsolutePanel();
+        aPanel.add(csVPanel);
+        aPanel.add(clipObjectLBox, 20, 20);
+        aPanel.add(boundingVolumeCBox,20, 50);
+        aPanel.add(edgeStylingCBox, 20, 70);
+
+        contentPanel.add(new HTML("<p>User-defined clipping planes applied to a batched 3D Tileset, point cloud, and model.</p>"));
+        contentPanel.add(aPanel);
+
+        initWidget(contentPanel);
+
+        loadTileset(bimUrl);
+    }
+
+    @Override
+    public String[] getSourceCodeURLs() {
+        String[] sourceCodeURLs = new String[1];
+        sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "Tiles3DClippingPlanes.txt";
+        return sourceCodeURLs;
+    }
+
+    private void loadTileset(String url) {
+        Plane[] clippingPlanes = new Plane[] {new Plane(new Cartesian3(0.0, 0.0, -1.0), -100.0)};
+
+        ClippingPlaneCollectionOptions clippingPlaneCollectionOptions = new ClippingPlaneCollectionOptions();
+        clippingPlaneCollectionOptions.planes = clippingPlanes;
+        clippingPlaneCollectionOptions.edgeWidth = edgeStylingCBox.getValue() ? 1.0 : 0.0;
+
+        Cesium3DTilesetOptions tilesetOptions = Cesium3DTilesetOptions.create(url);
+        tilesetOptions.clippingPlanes = new ClippingPlaneCollection(clippingPlaneCollectionOptions);
+
+        tileset = csVPanel.getViewer().scene().primitives().add(new Cesium3DTileset(tilesetOptions));
+        tileset.readyPromise().then(new Fulfill<Cesium3DTileset>() {
+            @Override
+            public void onFulfilled(Cesium3DTileset value) {
+                BoundingSphere boundingSphere = tileset.boundingSphere();
+                double radius = boundingSphere.radius;
+
+                csVPanel.getViewer().camera.viewBoundingSphere(boundingSphere, new HeadingPitchRange(0.5, -0.2, radius * 4.0));
+                csVPanel.getViewer().camera.lookAtTransform(Matrix4.IDENTITY());
+
+                for (Plane plane : clippingPlanes) {
+                    PlaneGraphicsOptions planeGraphicsOptions = new PlaneGraphicsOptions();
+                    planeGraphicsOptions.dimensions = new ConstantProperty<>(new Cartesian2(radius * 2.5, radius * 2.5));
+                    planeGraphicsOptions.material = new ColorMaterialProperty(Color.WHITE().withAlpha(0.1f));
+                    planeGraphicsOptions.plane = new CallbackProperty(new CallbackProperty.Callback() {
+                        @Override
+                        public Object function(JulianDate time, Object result) {
+                            plane.distance = targetY;
+                            return Plane.transform(plane, tileset.modelMatrix, scratchPlane);
+                        }
+                    }, false);
+                    planeGraphicsOptions.outline = new ConstantProperty<>(true);
+                    planeGraphicsOptions.outlineColor = new ConstantProperty<>(Color.WHITE());
+
+                    EntityOptions entityOptions = new EntityOptions();
+                    entityOptions.position = new ConstantPositionProperty(boundingSphere.center);
+                    entityOptions.plane = new PlaneGraphics(planeGraphicsOptions);
+                    planeEntities.add(csVPanel.getViewer().entities().add(entityOptions));
+                }
+            }
+        });
+
+        tileset.debugShowBoundingVolume = boundingVolumeCBox.getValue();
+    }
+
+    private void loadModel(String url) {
+        Plane[] clippingPlanes = new Plane[] {new Plane(new Cartesian3(0.0, 0.0, -1.0), -100.0)};
+
+        ClippingPlaneCollectionOptions clippingPlaneCollectionOptions = new ClippingPlaneCollectionOptions();
+        clippingPlaneCollectionOptions.planes = clippingPlanes;
+        clippingPlaneCollectionOptions.edgeWidth = edgeStylingCBox.getValue() ? 1.0 : 0.0;
+
+        modelEntityClippingPlanes = new ClippingPlaneCollection(clippingPlaneCollectionOptions);
+
+        Cartesian3 position = Cartesian3.fromDegrees(-123.0744619, 44.0503706, 100.0);
+        double heading = Math.toRadians(135.0);
+        double pitch = 0.0;
+        double roll = 0.0;
+        HeadingPitchRoll hpr = new HeadingPitchRoll(heading, pitch, roll);
+        Quaternion orientation = Transforms.headingPitchRollQuaternion(position, hpr);
+        ModelGraphicsOptions modelGraphicsOptions = new ModelGraphicsOptions();
+        modelGraphicsOptions.uri = new ConstantProperty<>(url);
+        modelGraphicsOptions.scale = new ConstantProperty<>(8.0);
+        modelGraphicsOptions.minimumPixelSize = new ConstantProperty<>(100.0);
+        modelGraphicsOptions.clippingPlanes = new CallbackProperty(new CallbackProperty.Callback() {
+            @Override
+            public Object function(JulianDate time, Object result) {
+                return modelEntityClippingPlanes;
+            }
+        }, false);
+
+        EntityOptions entityOptions = new EntityOptions();
+        entityOptions.name = url;
+        entityOptions.position = new ConstantPositionProperty(position);
+        entityOptions.orientation = new ConstantProperty<>(orientation);
+        entityOptions.model = new ModelGraphics(modelGraphicsOptions);
+        csVPanel.getViewer().trackedEntity = csVPanel.getViewer().entities().add(entityOptions);
+
+        for (final Plane plane : clippingPlanes) {
+            PlaneGraphicsOptions planeGraphicsOptions = new PlaneGraphicsOptions();
+            planeGraphicsOptions.dimensions = new ConstantProperty<>(new Cartesian2(300.0, 300.0));
+            planeGraphicsOptions.material = new ColorMaterialProperty(Color.WHITE().withAlpha(0.1f));
+            planeGraphicsOptions.plane = new CallbackProperty(new CallbackProperty.Callback() {
+                @Override
+                public Object function(JulianDate time, Object result) {
+                    plane.distance = targetY;
+                    return Plane.transform(plane, Matrix4.IDENTITY(), scratchPlane);
+                }
+            }, false);
+            planeGraphicsOptions.outline = new ConstantProperty<>(true);
+            planeGraphicsOptions.outlineColor = new ConstantProperty<>(Color.WHITE());
+
+            EntityOptions planeEntityOptions = new EntityOptions();
+            planeEntityOptions.position = new ConstantPositionProperty(position);
+            planeEntityOptions.plane = new PlaneGraphics(planeGraphicsOptions);
+
+            planeEntities.add(csVPanel.getViewer().entities().add(planeEntityOptions));
+        }
+    }
+
+    private void reset() {
+        csVPanel.getViewer().entities().removeAll();
+        csVPanel.getViewer().scene().primitives().removeAll();
+        planeEntities.clear();
+        targetY = 0.0;
+    }
+}
