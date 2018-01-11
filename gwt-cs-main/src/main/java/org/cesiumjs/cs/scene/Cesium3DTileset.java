@@ -330,7 +330,7 @@ public class Cesium3DTileset {
      * @param options {@link Cesium3DTilesetOptions}
      */
     @JsConstructor
-    private Cesium3DTileset(Cesium3DTilesetOptions options) {}
+    public Cesium3DTileset(Cesium3DTilesetOptions options) {}
 
     @JsOverlay
     public static Cesium3DTileset create(String url) {
