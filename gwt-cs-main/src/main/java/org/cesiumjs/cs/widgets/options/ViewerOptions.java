@@ -22,7 +22,6 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.collections.DataSourceCollection;
-import org.cesiumjs.cs.core.Clock;
 import org.cesiumjs.cs.core.Globe;
 import org.cesiumjs.cs.core.SkyAtmosphere;
 import org.cesiumjs.cs.core.SkyBox;

@@ -16,9 +16,6 @@
 
 package org.cesiumjs.cs.scene.interaction;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.JavaScriptObject;
-import org.cesiumjs.cs.Cesium;
 import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.DeveloperError;
 import org.cesiumjs.cs.core.EllipseGeometryLibrary;
@@ -29,12 +26,10 @@ import org.cesiumjs.cs.core.geometry.options.CircleGeometryOptions;
 import org.cesiumjs.cs.core.options.EllipsePositionsOptions;
 import org.cesiumjs.cs.js.JsArray;
 import org.cesiumjs.cs.js.JsObject;
-import org.cesiumjs.cs.scene.Material;
 import org.cesiumjs.cs.scene.apperances.EllipsoidSurfaceAppearance;
 import org.cesiumjs.cs.scene.interaction.options.CirclePrimitiveOptions;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**

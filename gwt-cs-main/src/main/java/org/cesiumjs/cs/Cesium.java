@@ -16,8 +16,6 @@
 
 package org.cesiumjs.cs;
 
-import com.google.gwt.json.client.JSONArray;
-import com.google.gwt.json.client.JSONObject;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
@@ -25,7 +23,6 @@ import jsinterop.annotations.JsProperty;
 import org.cesiumjs.cs.core.Cartographic;
 import org.cesiumjs.cs.core.Ellipsoid;
 import org.cesiumjs.cs.core.providers.TerrainProvider;
-import org.cesiumjs.cs.js.JsArray;
 import org.cesiumjs.cs.js.JsImage;
 import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.promise.Promise;

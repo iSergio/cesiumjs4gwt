@@ -22,7 +22,6 @@ import org.cesiumjs.cs.core.geometry.CorridorGeometry;
 import org.cesiumjs.cs.core.geometry.Geometry;
 import org.cesiumjs.cs.core.geometry.options.CorridorGeometryOptions;
 import org.cesiumjs.cs.js.JsObject;
-import org.cesiumjs.cs.scene.Material;
 import org.cesiumjs.cs.scene.Scene;
 import org.cesiumjs.cs.scene.apperances.PolylineMaterialAppearance;
 import org.cesiumjs.cs.scene.interaction.options.CorridorPrimitiveOptions;

@@ -18,7 +18,6 @@ package org.cleanlogic.showcase.client.examples;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.HTML;
-import org.cesiumjs.cs.core.DefaultProxy;
 import org.cesiumjs.cs.core.GoogleEarthEnterpriseMetadata;
 import org.cesiumjs.cs.core.Rectangle;
 import org.cesiumjs.cs.core.providers.GoogleEarthEnterpriseTerrainProvider;

@@ -21,8 +21,6 @@ import org.cesiumjs.cs.core.Ellipsoid;
 import org.cesiumjs.cs.core.geometry.Geometry;
 import org.cesiumjs.cs.core.geometry.PolygonGeometry;
 import org.cesiumjs.cs.core.geometry.options.PolygonGeometryOptions;
-import org.cesiumjs.cs.js.JsObject;
-import org.cesiumjs.cs.scene.Material;
 import org.cesiumjs.cs.scene.apperances.EllipsoidSurfaceAppearance;
 import org.cesiumjs.cs.scene.interaction.options.AbstractPrimitiveOptions;
 

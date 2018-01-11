@@ -22,7 +22,6 @@ import org.cesiumjs.cs.core.geometry.Geometry;
 import org.cesiumjs.cs.scene.Scene;
 import org.cesiumjs.cs.scene.apperances.EllipsoidSurfaceAppearance;
 import org.cesiumjs.cs.scene.interaction.options.AbstractPrimitiveOptions;
-import org.cesiumjs.cs.scene.interaction.options.CorridorPrimitiveOptions;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>

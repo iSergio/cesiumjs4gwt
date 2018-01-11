@@ -21,7 +21,6 @@ import org.cesiumjs.cs.core.Credit;
 import org.cesiumjs.cs.core.Ellipsoid;
 import org.cesiumjs.cs.core.GoogleEarthEnterpriseMetadata;
 import org.cesiumjs.cs.scene.TileDiscardPolicy;
-import org.cesiumjs.cs.scene.providers.GoogleEarthEnterpriseImageryProvider;
 
 /**
  * Options for {@link org.cesiumjs.cs.scene.providers.GoogleEarthEnterpriseImageryProvider}.

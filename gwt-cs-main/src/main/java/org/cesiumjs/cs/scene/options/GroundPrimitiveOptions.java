@@ -21,7 +21,6 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.geometry.GeometryInstance;
-import org.cesiumjs.cs.scene.enums.ClassificationType;
 
 /**
  * Options for {@link org.cesiumjs.cs.scene.GroundPrimitive}

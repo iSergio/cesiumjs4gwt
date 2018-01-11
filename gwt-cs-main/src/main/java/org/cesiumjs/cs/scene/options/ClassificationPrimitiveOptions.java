@@ -24,7 +24,6 @@ import org.cesiumjs.cs.core.Matrix4;
 import org.cesiumjs.cs.core.geometry.GeometryInstance;
 import org.cesiumjs.cs.scene.apperances.Appearance;
 import org.cesiumjs.cs.scene.enums.ClassificationType;
-import org.cesiumjs.cs.scene.enums.ShadowMode;
 
 /**
  * Options for {@link org.cesiumjs.cs.scene.ClassificationPrimitive}

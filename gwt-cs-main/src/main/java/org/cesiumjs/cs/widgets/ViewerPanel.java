@@ -16,13 +16,10 @@
 
 package org.cesiumjs.cs.widgets;
 
-import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.LinkElement;
 import com.google.gwt.event.logical.shared.AttachEvent;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
-import org.cesiumjs.cs.Cesium;
 import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.widgets.options.ViewerOptions;
 

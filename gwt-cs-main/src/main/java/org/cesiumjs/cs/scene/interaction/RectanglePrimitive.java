@@ -21,11 +21,7 @@ import org.cesiumjs.cs.core.Ellipsoid;
 import org.cesiumjs.cs.core.Rectangle;
 import org.cesiumjs.cs.core.geometry.Geometry;
 import org.cesiumjs.cs.core.geometry.RectangleGeometry;
-import org.cesiumjs.cs.core.geometry.RectangleOutlineGeometry;
 import org.cesiumjs.cs.core.geometry.options.RectangleGeometryOptions;
-import org.cesiumjs.cs.core.geometry.options.RectangleOutlineGeometryOptions;
-import org.cesiumjs.cs.js.JsObject;
-import org.cesiumjs.cs.scene.Material;
 import org.cesiumjs.cs.scene.apperances.EllipsoidSurfaceAppearance;
 import org.cesiumjs.cs.scene.interaction.options.AbstractPrimitiveOptions;
 

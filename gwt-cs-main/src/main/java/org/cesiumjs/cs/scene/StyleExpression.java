@@ -16,11 +16,7 @@
 
 package org.cesiumjs.cs.scene;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.Color;
-import org.cesiumjs.cs.js.JsObject;
 
 /**
  * An expression for a style applied to a {@link Cesium3DTileset}.

@@ -23,7 +23,6 @@ import com.google.gwt.dom.client.CanvasElement;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.Image;
 import org.cesiumjs.cs.Cesium;
 import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.Color;

@@ -19,8 +19,6 @@ package org.cesiumjs.cs.scene.options;
 import jsinterop.annotations.*;
 import org.cesiumjs.cs.collections.ClippingPlaneCollection;
 import org.cesiumjs.cs.core.Matrix4;
-import org.cesiumjs.cs.scene.Cesium3DTileset;
-import org.cesiumjs.cs.scene.enums.ShadowMode;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>

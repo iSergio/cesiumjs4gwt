@@ -16,7 +16,6 @@
 
 package org.cesiumjs.cs.scene.options;
 
-import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.dom.client.CanvasElement;
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;

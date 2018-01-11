@@ -17,7 +17,6 @@
 package org.cesiumjs.cs.scene.apperances;
 
 import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.VertexFormat;

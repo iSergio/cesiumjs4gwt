@@ -19,7 +19,6 @@ package org.cesiumjs.cs.scene;
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.Matrix4;
 import org.cesiumjs.cs.core.geometry.GeometryInstance;
 import org.cesiumjs.cs.promise.Promise;

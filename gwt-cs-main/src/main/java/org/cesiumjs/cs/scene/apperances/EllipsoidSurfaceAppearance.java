@@ -16,7 +16,10 @@
 
 package org.cesiumjs.cs.scene.apperances;
 
-import jsinterop.annotations.*;
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsOverlay;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.VertexFormat;
 import org.cesiumjs.cs.core.geometry.PolygonGeometry;
 import org.cesiumjs.cs.core.geometry.RectangleGeometry;

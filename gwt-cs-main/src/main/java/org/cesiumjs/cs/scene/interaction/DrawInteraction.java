@@ -16,7 +16,6 @@
 
 package org.cesiumjs.cs.scene.interaction;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;

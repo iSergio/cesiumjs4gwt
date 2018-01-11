@@ -22,9 +22,9 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.core.Matrix4;
+import org.cesiumjs.cs.scene.emitters.ParticleEmitter;
 import org.cesiumjs.cs.scene.particle.ParticleBurst;
 import org.cesiumjs.cs.scene.particle.ParticleSystem;
-import org.cesiumjs.cs.scene.emitters.ParticleEmitter;
 
 /**
  * Options for {@link ParticleSystem}.

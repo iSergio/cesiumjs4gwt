@@ -16,9 +16,11 @@
 
 package org.cesiumjs.cs.core.options;
 
-import jsinterop.annotations.*;
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Request;
-import org.cesiumjs.cs.core.enums.RequestType;
 
 /**
  * Options for {@link org.cesiumjs.cs.core.Request}

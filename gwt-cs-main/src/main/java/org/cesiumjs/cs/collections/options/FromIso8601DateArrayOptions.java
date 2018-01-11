@@ -16,7 +16,10 @@
 
 package org.cesiumjs.cs.collections.options;
 
-import jsinterop.annotations.*;
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 
 /**
  * Options for {@link org.cesiumjs.cs.collections.TimeIntervalCollection#fromIso8601DateArray}.

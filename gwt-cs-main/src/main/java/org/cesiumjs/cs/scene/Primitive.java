@@ -16,7 +16,10 @@
 
 package org.cesiumjs.cs.scene;
 
-import jsinterop.annotations.*;
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Matrix4;
 import org.cesiumjs.cs.core.geometry.GeometryInstance;
 import org.cesiumjs.cs.promise.Promise;

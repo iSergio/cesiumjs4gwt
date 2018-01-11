@@ -18,19 +18,16 @@ package org.cesiumjs.cs.scene.interaction;
 
 import jsinterop.annotations.*;
 import org.cesiumjs.cs.Cesium;
-import org.cesiumjs.cs.core.*;
+import org.cesiumjs.cs.core.ColorGeometryInstanceAttribute;
+import org.cesiumjs.cs.core.DeveloperError;
+import org.cesiumjs.cs.core.Ellipsoid;
 import org.cesiumjs.cs.core.geometry.Geometry;
 import org.cesiumjs.cs.core.geometry.GeometryInstance;
 import org.cesiumjs.cs.core.options.GeometryInstanceOptions;
 import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.scene.GroundPrimitive;
-import org.cesiumjs.cs.scene.Material;
-import org.cesiumjs.cs.scene.Primitive;
-import org.cesiumjs.cs.scene.apperances.PerInstanceColorAppearance;
-import org.cesiumjs.cs.scene.apperances.options.PerInstanceColorAppearanceOptions;
 import org.cesiumjs.cs.scene.interaction.options.AbstractPrimitiveOptions;
 import org.cesiumjs.cs.scene.options.GroundPrimitiveOptions;
-import org.cesiumjs.cs.scene.options.PrimitiveOptions;
 
 /**
  * Abstract class used for override Primitive.prototype.update function through @JsFunction

@@ -16,7 +16,10 @@
 
 package org.cesiumjs.cs.datasources.properties;
 
-import jsinterop.annotations.*;
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsOverlay;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.datasources.properties.options.PolylineGlowMaterialPropertyOptions;
 

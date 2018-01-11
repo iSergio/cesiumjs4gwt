@@ -21,7 +21,10 @@ import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.collections.options.PrimitiveCollectionOptions;
-import org.cesiumjs.cs.scene.*;
+import org.cesiumjs.cs.scene.Cesium3DTileset;
+import org.cesiumjs.cs.scene.Model;
+import org.cesiumjs.cs.scene.Primitive;
+import org.cesiumjs.cs.scene.Scene;
 import org.cesiumjs.cs.scene.particle.ParticleSystem;
 
 /**

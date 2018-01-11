@@ -16,7 +16,6 @@
 
 package org.cesiumjs.cs.core;
 
-import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
