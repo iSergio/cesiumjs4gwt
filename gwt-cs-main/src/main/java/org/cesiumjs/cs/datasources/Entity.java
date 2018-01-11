@@ -146,6 +146,11 @@ public class Entity {
     @JsProperty
     public PathGraphics path;
     /**
+     * Gets or sets the plane.
+     */
+    @JsProperty
+    public PlaneGraphics plane;
+    /**
      * A point to associate with this entity.
      */
     @JsProperty

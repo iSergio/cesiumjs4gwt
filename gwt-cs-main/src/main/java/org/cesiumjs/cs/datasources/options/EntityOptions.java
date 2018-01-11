@@ -123,6 +123,11 @@ public class EntityOptions {
     @JsProperty
     public PathGraphics path;
     /**
+     * A plane to associate with this entity.
+     */
+    @JsProperty
+    public PlaneGraphics plane;
+    /**
      * A point to associate with this entity.
      */
     @JsProperty
