@@ -16,10 +16,7 @@
 
 package org.cesiumjs.cs.widgets;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.JulianDate;
 
 /**
@@ -152,6 +149,7 @@ public class AnimationViewModel {
     /**
      * A function that formats a date for display.
      */
+    @JsFunction
     public interface DateFormatter {
         /**
          * A function that formats a date for display.
@@ -165,6 +163,7 @@ public class AnimationViewModel {
     /**
      * A function that formats a time for display.
      */
+    @JsFunction
     public interface TimeFormatter {
         /**
          * A function that formats a date for display.
