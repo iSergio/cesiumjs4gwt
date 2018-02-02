@@ -19,6 +19,7 @@ package org.cesiumjs.cs.scene;
 import jsinterop.annotations.*;
 import org.cesiumjs.cs.collections.ClippingPlaneCollection;
 import org.cesiumjs.cs.core.BoundingSphere;
+import org.cesiumjs.cs.core.Ellipsoid;
 import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.core.Matrix4;
 import org.cesiumjs.cs.js.JsObject;
@@ -83,6 +84,11 @@ public class Cesium3DTileset {
      */
     @JsProperty(name = "classificationType")
     public native ClassificationType classificationType();
+    /**
+     * The ellipsoid determining the size and shape of the globe.
+     * Default: {@link Ellipsoid#WGS84()}.
+     */
+    public Ellipsoid ellipsoid;
     /**
      * The {@link ClippingPlaneCollection} used to selectively disable rendering the tileset.
      * Clipping planes are not currently supported in Internet Explorer.
