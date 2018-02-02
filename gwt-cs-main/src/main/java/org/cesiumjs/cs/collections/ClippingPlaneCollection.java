@@ -84,4 +84,11 @@ public class ClippingPlaneCollection extends Collection<Plane> {
      */
     @JsConstructor
     public ClippingPlaneCollection(ClippingPlaneCollectionOptions options) {}
+
+    /**
+     * Determines if rendering with clipping planes is supported.
+     * @return true if ClippingPlaneCollections are supported; otherwise, returns false
+     */
+    @JsMethod
+    public static native boolean isSupported();
 }
