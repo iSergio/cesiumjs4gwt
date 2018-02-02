@@ -64,6 +64,13 @@ public class Cesium {
     @JsMethod(namespace = "Cesium")
     public static native boolean defined(Object object);
 
+    /**
+     * Asynchronously loads the given imagery URL. Returns a promise that will resolve to an Image once loaded, or reject if the imagery failed to load
+     * @param url The source of the imagery, or a promise for the URL.
+     * @return a promise that will resolve to the requested data when loaded.
+     * @deprecated deprecated and will be removed in Cesium 1.44. Please use the equivalent fetch functions on the {@link org.cesiumjs.cs.core.Resource} class.
+     */
+    @Deprecated
     @JsMethod(namespace = "Cesium", name = "loadImage")
     public static native Promise<JsImage, Void> loadImage(String url);
     /**
@@ -73,7 +80,9 @@ public class Cesium {
      *                         CORS is only actually used if the imagery URL is actually cross-origin.
      *                         Data URIs are never requested using CORS.
      * @return a promise that will resolve to the requested data when loaded.
+     * @deprecated deprecated and will be removed in Cesium 1.44. Please use the equivalent fetch functions on the {@link org.cesiumjs.cs.core.Resource} class.
      */
+    @Deprecated
     @JsMethod(namespace = "Cesium", name = "loadImage")
     public static native Promise<JsImage, Void> loadImage(String url, boolean allowCrossOrigin);
 
@@ -84,7 +93,9 @@ public class Cesium {
      * This function adds 'Accept: application/json,*\/*;q=0.01' to the request headers, if not already specified.
      * @param url The URL to request, or a promise for the URL.
      * @return a promise that will resolve to the requested data when loaded.
+     * @deprecated deprecated and will be removed in Cesium 1.44. Please use the equivalent fetch functions on the {@link org.cesiumjs.cs.core.Resource} class.
      */
+    @Deprecated
     @JsMethod(namespace = "Cesium", name = "loadJson")
     public static native Promise<JsObject, String> loadJson(Promise<String, Void> url);
 
@@ -95,7 +106,9 @@ public class Cesium {
      * This function adds 'Accept: application/json,*\/*;q=0.01' to the request headers, if not already specified.
      * @param url The URL to request, or a promise for the URL.
      * @return a promise that will resolve to the requested data when loaded.
+     * @deprecated deprecated and will be removed in Cesium 1.44. Please use the equivalent fetch functions on the {@link org.cesiumjs.cs.core.Resource} class.
      */
+    @Deprecated
     @JsMethod(namespace = "Cesium", name = "loadJson")
     public static native Promise<JsObject, String> loadJson(String url);
 
@@ -107,7 +120,9 @@ public class Cesium {
      * @param url The URL to request, or a promise for the URL.
      * @param headers HTTP headers to send with the request. 'Accept: application/json,*\/*;q=0.01' is added to the request headers automatically if not specified.
      * @return a promise that will resolve to the requested data when loaded.
+     * @deprecated deprecated and will be removed in Cesium 1.44. Please use the equivalent fetch functions on the {@link org.cesiumjs.cs.core.Resource} class.
      */
+    @Deprecated
     @JsMethod(namespace = "Cesium", name = "loadJson")
     public static native Promise<JsObject, String> loadJson(Promise<String, Void> url, Object headers);
 
@@ -119,7 +134,9 @@ public class Cesium {
      * @param url The URL to request, or a promise for the URL.
      * @param headers HTTP headers to send with the request. 'Accept: application/json,*\/*;q=0.01' is added to the request headers automatically if not specified.
      * @return a promise that will resolve to the requested data when loaded.
+     * @deprecated deprecated and will be removed in Cesium 1.44. Please use the equivalent fetch functions on the {@link org.cesiumjs.cs.core.Resource} class.
      */
+    @Deprecated
     @JsMethod(namespace = "Cesium", name = "loadJson")
     public static native Promise<JsObject, String> loadJson(String url, Object headers);
 
@@ -129,7 +146,9 @@ public class Cesium {
      * make requests to another origin, the server must have Cross-Origin Resource Sharing (CORS) headers enabled.
      * @param url The URL to request, or a promise for the URL.
      * @return a promise that will resolve to the requested data when loaded.
+     * @deprecated deprecated and will be removed in Cesium 1.44. Please use the equivalent fetch functions on the {@link org.cesiumjs.cs.core.Resource} class.
      */
+    @Deprecated
     @JsMethod(namespace = "Cesium", name = "loadText")
     public static native Promise<String, String> loadText(String url);
 
@@ -140,7 +159,9 @@ public class Cesium {
      * @param url The URL to request, or a promise for the URL.
      * @param headers HTTP headers to send with the request.
      * @return a promise that will resolve to the requested data when loaded.
+     * @deprecated deprecated and will be removed in Cesium 1.44. Please use the equivalent fetch functions on the {@link org.cesiumjs.cs.core.Resource} class.
      */
+    @Deprecated
     @JsMethod(namespace = "Cesium", name = "loadText")
     public static native Promise<String, String> loadText(String url, JsObject headers);
 
@@ -150,7 +171,9 @@ public class Cesium {
      * make requests to another origin, the server must have Cross-Origin Resource Sharing (CORS) headers enabled.
      * @param url The URL to request, or a promise for the URL.
      * @return a promise that will resolve to the requested data when loaded.
+     * @deprecated deprecated and will be removed in Cesium 1.44. Please use the equivalent fetch functions on the {@link org.cesiumjs.cs.core.Resource} class.
      */
+    @Deprecated
     @JsMethod(namespace = "Cesium", name = "loadText")
     public static native Promise<String, String> loadText(Promise<String, String> url);
 
@@ -161,7 +184,9 @@ public class Cesium {
      * @param url The URL to request, or a promise for the URL.
      * @param headers HTTP headers to send with the request.
      * @return a promise that will resolve to the requested data when loaded.
+     * @deprecated deprecated and will be removed in Cesium 1.44. Please use the equivalent fetch functions on the {@link org.cesiumjs.cs.core.Resource} class.
      */
+    @Deprecated
     @JsMethod(namespace = "Cesium", name = "loadText")
     public static native Promise<String, String> loadText(Promise<String, String> url, JsObject headers);
 
