@@ -17,10 +17,8 @@
 package org.cesiumjs.cs.widgets;
 
 import com.google.gwt.dom.client.Element;
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import com.google.gwt.dom.client.Style;
+import jsinterop.annotations.*;
 
 /**
  * The Animation widget provides buttons for play, pause, and reverse, along with the current time and date,
@@ -158,4 +156,23 @@ public class Animation {
      */
     @JsMethod
     public native void resize();
+
+    /**
+     * Method set visible of Animation widget
+     * @param hidden false to hide Animation widget, true widget is show.
+     */
+    @JsOverlay
+    public final void setHidden(boolean hidden) {
+        Style.Display display = hidden ? Style.Display.NONE : Style.Display.BLOCK;
+        this.container().getStyle().setDisplay(display);
+    }
+
+    /**
+     * Request for visible of Animation widget.
+     * @return true if widget not hidden, false is hidden
+     */
+    @JsOverlay
+    public final boolean isHidden() {
+        return this.container().getStyle().getDisplay().isEmpty() || this.container().getStyle().getDisplay().equalsIgnoreCase(Style.Display.BLOCK.name());
+    }
 }

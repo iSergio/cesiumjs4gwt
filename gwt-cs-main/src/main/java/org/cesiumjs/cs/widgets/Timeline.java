@@ -17,10 +17,8 @@
 package org.cesiumjs.cs.widgets;
 
 import com.google.gwt.dom.client.Element;
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import com.google.gwt.dom.client.Style;
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.Clock;
 import org.cesiumjs.cs.core.JulianDate;
 
@@ -69,4 +67,23 @@ public class Timeline {
      */
     @JsMethod
     public native void zoomTo(JulianDate startTime, JulianDate stopTime);
+
+    /**
+     * Method set visible of Timeline widget
+     * @param hidden false to hide Timeline widget, true widget is show.
+     */
+    @JsOverlay
+    public final void setHidden(boolean hidden) {
+        Style.Display display = hidden ? Style.Display.NONE : Style.Display.BLOCK;
+        this.container.getStyle().setDisplay(display);
+    }
+
+    /**
+     * Request for visible of Timeline widget.
+     * @return true if widget not hidden, false is hidden
+     */
+    @JsOverlay
+    public final boolean isHidden() {
+        return this.container.getStyle().getDisplay().isEmpty() || this.container.getStyle().getDisplay().equalsIgnoreCase(Style.Display.BLOCK.name());
+    }
 }
