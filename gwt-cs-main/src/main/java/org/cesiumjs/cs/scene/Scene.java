@@ -551,6 +551,14 @@ public class Scene {
     @JsMethod
     public native Cartesian3 pickPosition(Cartesian2 windowPosition, Cartesian3 result);
 
+    /**
+     * Requests a new rendered frame when Scene#requestRenderMode is set to true.
+     * The render rate will not exceed the {@link org.cesiumjs.cs.widgets.CesiumWidget#targetFrameRate}.
+     * @see Scene#requestRenderMode
+     */
+    @JsMethod
+    public native void requestRender();
+
     @JsFunction
     public interface Listener {
         void function(Scene scene, JulianDate time);
