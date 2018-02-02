@@ -237,6 +237,15 @@ public class Scene {
     @JsProperty(name = "maximumCubeMapSize")
     public native int maximumCubeMapSize();
     /**
+     * If {@link Scene#requestRenderMode} is true, this value defines the maximum change in simulation time allowed before a
+     * render is requested. Lower values increase the number of frames rendered and higher values decrease the number
+     * of frames rendered. If undefined, changes to the simulation time will never request a render. This value impacts
+     * the rate of rendering for changes in the scene like lighting, entity property updates, and animations.
+     * Default: 0.5
+     */
+    @JsProperty
+    public double maximumRenderTimeChange;
+    /**
      * Gets or sets the current mode of the scene.
      * Default: {@link SceneMode#SCENE3D()}
      */
@@ -317,6 +326,16 @@ public class Scene {
      */
     @JsProperty(name = "renderError")
     public native Event renderError();
+
+    /**
+     * When true, rendering a frame will only occur when needed as determined by changes within the scene.
+     * Enabling improves performance of the application, but requires using {@link Scene#requestRender()} to render a new
+     * frame explicitly in this mode. This will be necessary in many cases after making changes to the scene in
+     * other parts of the API.
+     * Default: false
+     */
+    @JsProperty
+    public boolean requestRenderMode;
     /**
      * Exceptions occurring in render are always caught in order to raise the renderError event.
      * If this property is true, the error is rethrown after the event is raised. If this property is false,
