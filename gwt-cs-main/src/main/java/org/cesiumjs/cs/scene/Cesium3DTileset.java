@@ -292,6 +292,14 @@ public class Cesium3DTileset {
     @JsProperty
     public Cesium3DTileStyle style;
     /**
+     * The event fired to indicate that a tile's content failed to load.
+     * If there are no event listeners, error messages will be logged to the console.
+     *
+     * Default: new Event()
+     */
+    @JsProperty
+    public Event tileFailed;
+    /**
      * The event fired to indicate that a tile's content was loaded.
      * The loaded Cesium3DTile is passed to the event listener.
      *
