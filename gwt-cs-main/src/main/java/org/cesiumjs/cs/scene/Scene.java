@@ -309,11 +309,28 @@ public class Scene {
     @JsProperty(name = "postRender")
     public native Event postRender();
     /**
+     * Gets the event that will be raised immediately after the scene is updated and before the scene is rendered.
+     * Subscribers to the event receive the Scene instance as the first parameter and the current time as the second parameter.
+     * @see Scene#preUpdate()
+     * @see Scene#preRender()
+     * @see Scene#postRender()
+     */
+    @JsProperty(name = "postUpdate")
+    public native Event postUpdate();
+    /**
      * Gets the event that will be raised at the start of each call to render. Subscribers to the event receive the Scene
      * instance as the first parameter and the current time as the second parameter.
      */
     @JsProperty(name = "preRender")
     public native Event preRender();
+    /**
+     * Gets the event that will be raised before the scene is updated or rendered. Subscribers to the event receive the Scene instance as the first parameter and the current time as the second parameter.
+     * @see Scene#postRender()
+     * @see Scene#preRender()
+     * @see Scene#postRender()
+     */
+    @JsProperty(name = "preUpdate")
+    public native Event preUpdate();
     /**
      * Gets the collection of primitives.
      */
