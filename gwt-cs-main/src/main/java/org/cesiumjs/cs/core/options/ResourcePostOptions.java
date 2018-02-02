@@ -16,9 +16,7 @@
 
 package org.cesiumjs.cs.core.options;
 
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.js.JsObject;
 
 /**
@@ -44,8 +42,10 @@ public class ResourcePostOptions extends ResourceOptions {
     @JsProperty
     public String overrideMimeType;
 
+    @JsConstructor
     ResourcePostOptions() {}
 
+    @JsOverlay
     public static ResourcePostOptions create(String url, JsObject data) {
         ResourcePostOptions options = new ResourcePostOptions();
         options.url = url;
