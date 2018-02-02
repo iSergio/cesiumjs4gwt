@@ -26,6 +26,8 @@ import com.google.gwt.user.client.ui.HTML;
 import org.cesiumjs.cs.Cesium;
 import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.Color;
+import org.cesiumjs.cs.core.Resource;
+import org.cesiumjs.cs.core.options.ResourceImageOptions;
 import org.cesiumjs.cs.datasources.Entity;
 import org.cesiumjs.cs.datasources.graphics.BillboardGraphics;
 import org.cesiumjs.cs.datasources.graphics.options.BillboardGraphicsOptions;
@@ -71,7 +73,7 @@ public class LoadImages extends AbstractExample {
             }
         });
 
-        Cesium.loadImage(GWT.getModuleBaseURL() + "images/Cesium_Logo_Color_Overlay.png", true).then(new Fulfill<JsImage>() {
+        Resource.fetchImage((ResourceImageOptions) ResourceImageOptions.create(GWT.getModuleBaseURL() + "images/Cesium_Logo_Color_Overlay.png")).then(new Fulfill<JsImage>() {
             @Override
             public void onFulfilled(JsImage value) {
                 Canvas canvas = Canvas.createIfSupported();
@@ -92,7 +94,7 @@ public class LoadImages extends AbstractExample {
         });
 
         // CORS not loaded
-        Cesium.loadImage("https://www.linux.org.ru/tango/img/games-logo.png", false).then(new Fulfill<JsImage>() {
+        Resource.fetchImage((ResourceImageOptions) ResourceImageOptions.create("https://www.linux.org.ru/tango/img/games-logo.png")).then(new Fulfill<JsImage>() {
             @Override
             public void onFulfilled(JsImage value) {
                 Canvas canvas = Canvas.createIfSupported();
