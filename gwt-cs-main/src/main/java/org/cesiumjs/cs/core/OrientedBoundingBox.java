@@ -17,6 +17,7 @@
 package org.cesiumjs.cs.core;
 
 import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.enums.Intersect;
 
@@ -182,6 +183,7 @@ public class OrientedBoundingBox {
      * @return Intersect.INSIDE if the entire box is on the side of the plane the normal is pointing, Intersect.OUTSIDE
      * if the entire box is on the opposite side, and {@link Intersect#INTERSECTING()}  if the box intersects the plane.
      */
+    @JsMethod
     public static native Integer intersectPlane(OrientedBoundingBox box, Plane plane);
 
     /**
@@ -190,7 +192,37 @@ public class OrientedBoundingBox {
      * @param occluder The occluder.
      * @return true if the box is not visible; otherwise false.
      */
+    @JsMethod
     public static native boolean isOccluded(OrientedBoundingBox box, Occluder occluder);
+
+    /**
+     * Stores the provided instance into the provided array.
+     * @param value The value to pack.
+     * @param array The array to pack into.
+     * @return The array that was packed into
+     */
+    @JsMethod
+    public static native double[] pack(OrientedBoundingBox value, double[] array);
+
+    /**
+     * Stores the provided instance into the provided array.
+     * @param value The value to pack.
+     * @param array The array to pack into.
+     * @param startingIndex The index into the array at which to start packing the elements.
+     * @return The array that was packed into
+     */
+    @JsMethod
+    public static native double[] pack(OrientedBoundingBox value, double[] array, int startingIndex);
+
+    /**
+     * Retrieves an instance from a packed array.
+     * @param array The packed array.
+     * @param startingIndex The starting index of the element to be unpacked.
+     * @param result The object into which to store the result.
+     * @return The modified result parameter or a new OrientedBoundingBox instance if one was not provided.
+     */
+    @JsMethod
+    public static native OrientedBoundingBox unpack(double[] array, int startingIndex, OrientedBoundingBox result);
 
     /**
      * Duplicates this OrientedBoundingBox instance.
