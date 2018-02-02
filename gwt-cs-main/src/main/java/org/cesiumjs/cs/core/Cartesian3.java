@@ -696,6 +696,16 @@ public class Cartesian3 implements Packable {
     public static native JsArrayNumber packArray(Cartesian3[] array, JsArrayNumber result);
 
     /**
+     * Projects vector a onto vector b
+     * @param a The vector that needs projecting
+     * @param b The vector to project onto
+     * @param result The result cartesian
+     * @return The modified result parameter
+     */
+    @JsMethod
+    public static native Cartesian3 projectVector(Cartesian3 a, Cartesian3 b, Cartesian3 result);
+
+    /**
      * Computes the componentwise difference of two Cartesians.
      * @param left The first Cartesian.
      * @param right The second Cartesian.
