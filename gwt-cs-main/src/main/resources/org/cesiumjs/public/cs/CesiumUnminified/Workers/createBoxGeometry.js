@@ -2019,6 +2019,22 @@ define('Core/Cartesian3',[
     };
 
     /**
+     * Projects vector a onto vector b
+     * @param {Cartesian3} a The vector that needs projecting
+     * @param {Cartesian3} b The vector to project onto
+     * @param {Cartesian3} result The result cartesian
+     * @returns {Cartesian3} The modified result parameter
+     */
+    Cartesian3.projectVector = function(a, b, result) {
+                Check.defined('a', a);
+        Check.defined('b', b);
+        Check.defined('result', result);
+        
+        var scalar = Cartesian3.dot(a, b) / Cartesian3.dot(b, b);
+        return Cartesian3.multiplyByScalar(b, scalar, result);
+    };
+
+    /**
      * Compares the provided Cartesians componentwise and returns
      * <code>true</code> if they are equal, <code>false</code> otherwise.
      *
@@ -2650,6 +2666,21 @@ define('Core/Cartographic',[
         result.latitude = latitude;
         result.height = height;
         return result;
+    };
+
+    /**
+     * Creates a new Cartesian3 instance from a Cartographic input. The values in the inputted
+     * object should be in radians.
+     *
+     * @param {Cartographic} cartographic Input to be converted into a Cartesian3 output.
+     * @param {Ellipsoid} [ellipsoid=Ellipsoid.WGS84] The ellipsoid on which the position lies.
+     * @param {Cartesian3} [result] The object onto which to store the result.
+     * @returns {Cartesian3} The position
+     */
+    Cartographic.toCartesian = function(cartographic, ellipsoid, result) {
+                Check.defined('cartographic', cartographic);
+        
+        return Cartesian3.fromRadians(cartographic.longitude, cartographic.latitude, cartographic.height, ellipsoid, result);
     };
 
     /**
@@ -9253,6 +9284,7 @@ define('Core/Rectangle',[
 define('Core/BoundingSphere',[
         './Cartesian3',
         './Cartographic',
+        './Math',
         './Check',
         './defaultValue',
         './defined',
@@ -9266,6 +9298,7 @@ define('Core/BoundingSphere',[
     ], function(
         Cartesian3,
         Cartographic,
+        CesiumMath,
         Check,
         defaultValue,
         defined,
@@ -9318,6 +9351,7 @@ define('Core/BoundingSphere',[
     var fromPointsMinBoxPt = new Cartesian3();
     var fromPointsMaxBoxPt = new Cartesian3();
     var fromPointsNaiveCenterScratch = new Cartesian3();
+    var volumeConstant = (4.0 / 3.0) * CesiumMath.PI;
 
     /**
      * Computes a tight-fitting bounding sphere enclosing a list of 3D Cartesian points.
@@ -10522,6 +10556,15 @@ define('Core/BoundingSphere',[
      */
     BoundingSphere.prototype.clone = function(result) {
         return BoundingSphere.clone(this, result);
+    };
+
+    /**
+     * Computes the radius of the BoundingSphere.
+     * @returns {Number} The radius of the BoundingSphere.
+     */
+    BoundingSphere.prototype.volume = function() {
+        var radius = this.radius;
+        return volumeConstant * radius * radius * radius;
     };
 
     return BoundingSphere;
@@ -12137,7 +12180,7 @@ define('Core/Geometry',[
      * @see BoxGeometry
      * @see EllipsoidGeometry
      *
-     * @demo {@link http://cesiumjs.org/Cesium/Apps/Sandcastle/index.html?src=Geometry%20and%20Appearances.html|Geometry and Appearances Demo}
+     * @demo {@link https://cesiumjs.org/Cesium/Apps/Sandcastle/index.html?src=Geometry%20and%20Appearances.html|Geometry and Appearances Demo}
      *
      * @example
      * // Create geometry with a position attribute and indexed lines.
@@ -12872,7 +12915,7 @@ define('Core/BoxGeometry',[
      * @see BoxGeometry.createGeometry
      * @see Packable
      *
-     * @demo {@link http://cesiumjs.org/Cesium/Apps/Sandcastle/index.html?src=Box.html|Cesium Sandcastle Box Demo}
+     * @demo {@link https://cesiumjs.org/Cesium/Apps/Sandcastle/index.html?src=Box.html|Cesium Sandcastle Box Demo}
      *
      * @example
      * var box = new Cesium.BoxGeometry({
@@ -13645,6 +13688,24 @@ define('Core/BoxGeometry',[
             primitiveType : PrimitiveType.TRIANGLES,
             boundingSphere : new BoundingSphere(Cartesian3.ZERO, radius)
         });
+    };
+
+    var unitBoxGeometry;
+
+    /**
+     * Returns the geometric representation of a unit box, including its vertices, indices, and a bounding sphere.
+     * @returns {Geometry} The computed vertices and indices.
+     *
+     * @private
+     */
+    BoxGeometry.getUnitBox = function() {
+        if (!defined(unitBoxGeometry)) {
+            unitBoxGeometry = BoxGeometry.createGeometry(BoxGeometry.fromDimensions({
+                dimensions : new Cartesian3(1.0, 1.0, 1.0),
+                vertexFormat : VertexFormat.POSITION_ONLY
+            }));
+        }
+        return unitBoxGeometry;
     };
 
     return BoxGeometry;
