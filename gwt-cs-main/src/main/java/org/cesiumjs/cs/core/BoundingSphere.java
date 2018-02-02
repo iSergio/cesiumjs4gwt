@@ -653,4 +653,11 @@ public class BoundingSphere {
      */
     @JsMethod
     public native boolean isOccluded(Occluder occluder);
+
+    /**
+     * Computes the radius of the BoundingSphere.
+     * @return The radius of the BoundingSphere.
+     */
+    @JsMethod
+    public native double volume();
 }
