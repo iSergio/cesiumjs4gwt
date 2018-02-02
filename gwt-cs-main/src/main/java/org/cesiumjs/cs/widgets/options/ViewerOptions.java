@@ -33,6 +33,7 @@ import org.cesiumjs.cs.scene.enums.ShadowMode;
 import org.cesiumjs.cs.scene.providers.ImageryProvider;
 import org.cesiumjs.cs.widgets.ClockViewModel;
 import org.cesiumjs.cs.widgets.ProviderViewModel;
+import org.cesiumjs.cs.widgets.Viewer;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -105,6 +106,13 @@ public class ViewerOptions {
      */
     @JsProperty
     public boolean scene3DOnly;
+    /**
+     * if the clock should attempt to advance simulation time by default, false otherwise. This option takes precedence
+     * over setting {@link Viewer#clockViewModel()}.
+     * Default: false
+     */
+    @JsProperty
+    public boolean shouldAnimate;
     /**
      * The clock view model to use to control current time. Optional.
      * Default: new ClockViewModel(options.clock)
