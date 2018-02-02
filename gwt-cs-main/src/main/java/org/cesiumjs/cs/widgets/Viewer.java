@@ -33,6 +33,7 @@ import org.cesiumjs.cs.datasources.Entity;
 import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.promise.Promise;
 import org.cesiumjs.cs.scene.Camera;
+import org.cesiumjs.cs.scene.Cesium3DTileset;
 import org.cesiumjs.cs.scene.Scene;
 import org.cesiumjs.cs.scene.ShadowMap;
 import org.cesiumjs.cs.widgets.options.FlyToOptions;
@@ -432,6 +433,9 @@ public class Viewer {
 
     @JsMethod
     public native Promise<Boolean, Void> zoomTo(DataSource target);
+
+    @JsMethod
+    public native Promise<Boolean, Void> zoomTo(Cesium3DTileset target);
 
     /**
      * Asynchronously sets the camera to view the provided entity, entities, or data source. If the data source is
