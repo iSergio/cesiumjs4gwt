@@ -74,6 +74,11 @@ public class Globe {
     @JsProperty
     public double lightingFadeInDistance;
     /**
+     * Gets an event that's raised when an imagery layer is added, shown, hidden, moved, or removed.
+     */
+    @JsProperty(name = "imageryLayersUpdatedEvent")
+    public native Event imageryLayersUpdatedEvent();
+    /**
      * The distance where everything becomes lit. This only takes effect when enableLighting is true.
      * Default:  6500000.0
      */
