@@ -24,6 +24,7 @@ import org.cesiumjs.cs.core.Matrix4;
 import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.promise.Promise;
 import org.cesiumjs.cs.scene.enums.Cesium3DTileColorBlendMode;
+import org.cesiumjs.cs.scene.enums.ClassificationType;
 import org.cesiumjs.cs.scene.options.Cesium3DTilesetOptions;
 
 /**
@@ -65,6 +66,23 @@ public class Cesium3DTileset {
      */
     @JsProperty(name = "boundingSphere")
     public native BoundingSphere boundingSphere();
+    /**
+     * Determines whether terrain, 3D Tiles or both will be classified by this tileset.
+     * This option is only applied to tilesets containing batched 3D models, geometry data, or vector data. Even when undefined,
+     * vector data and geometry data must render as classifications and will default to rendering on both terrain and other 3D Tiles tilesets.
+     *
+     * When enabled for batched 3D model tilesets, there are a few requirements/limitations on the glTF:
+     *
+     * POSITION and _BATCHID semantics are required.
+     * All indices with the same batch id must occupy contiguous sections of the index buffer.
+     * All shaders and techniques are ignored. The generated shader simply multiplies the position by the model-view-projection matrix.
+     * The only supported extensions are CESIUM_RTC and WEB3D_quantized_attributes.
+     * Only one node is supported.
+     * Only one mesh per node is supported.
+     * Only one primitive per mesh is supported.
+     */
+    @JsProperty(name = "classificationType")
+    public native ClassificationType classificationType();
     /**
      * The {@link ClippingPlaneCollection} used to selectively disable rendering the tileset.
      * Clipping planes are not currently supported in Internet Explorer.

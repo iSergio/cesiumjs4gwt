@@ -19,6 +19,7 @@ package org.cesiumjs.cs.scene.options;
 import jsinterop.annotations.*;
 import org.cesiumjs.cs.collections.ClippingPlaneCollection;
 import org.cesiumjs.cs.core.Matrix4;
+import org.cesiumjs.cs.scene.enums.ClassificationType;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -132,6 +133,12 @@ public class Cesium3DTilesetOptions {
      */
     @JsProperty
     public ClippingPlaneCollection clippingPlanes;
+    /**
+     * Determines whether terrain, 3D Tiles or both will be classified by this tileset.
+     * See {@link org.cesiumjs.cs.scene.Cesium3DTileset#classificationType} for details about restrictions and limitations.
+     */
+    @JsProperty
+    public ClassificationType classificationType;
     /**
      * For debugging only. Determines if only the tiles from last frame should be used for rendering.
      * Defaule: false;
