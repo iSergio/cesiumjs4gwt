@@ -160,6 +160,23 @@ public class Plane {
     public static native double getPointDistance(Plane plane, Cartesian3 point);
 
     /**
+     * Projects a point onto the plane.
+     * @param plane The plane to project the point onto
+     * @param point The point to project onto the plane
+     */
+    @JsMethod
+    public static native void projectPointOntoPlane(Plane plane, Cartesian3 point);
+
+    /**
+     * Projects a point onto the plane.
+     * @param plane The plane to project the point onto
+     * @param point The point to project onto the plane
+     * @param result The result point. If undefined, a new Cartesian3 will be created.
+     */
+    @JsMethod
+    public static native void projectPointOntoPlane(Plane plane, Cartesian3 point, Cartesian3 result);
+
+    /**
      * Transforms the plane by the given transformation matrix.
      * @param plane The plane.
      * @param transform The transformation matrix.
