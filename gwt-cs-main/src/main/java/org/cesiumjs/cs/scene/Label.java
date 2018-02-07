@@ -37,7 +37,7 @@ public class Label {
      * Default: false
      */
     @JsProperty
-    public boolean enableRightToLeftDetection;
+    public static boolean enableRightToLeftDetection;
     /**
      * Gets or sets the background color of this label.
      * Default: new Color(0.165, 0.165, 0.165, 0.8)
@@ -101,7 +101,7 @@ public class Label {
      * @see HorizontalOrigin
      */
     @JsProperty
-    public int horizontalOrigin;
+    public Number horizontalOrigin;
     /**
      * Gets or sets the user-defined object returned when the label is picked.
      */
@@ -204,7 +204,7 @@ public class Label {
      * @see VerticalOrigin
      */
     @JsProperty
-    public int verticalOrigin;
+    public Number verticalOrigin;
 
     /**
      * A Label draws viewport-aligned text positioned in the 3D scene.
@@ -214,7 +214,7 @@ public class Label {
      * @see LabelCollection#add
      */
     @JsConstructor
-    public Label() {}
+    protected Label() {}
 
     /**
      * Computes the screen-space position of the label's origin, taking into account eye and pixel offsets.
