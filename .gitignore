@@ -1,4 +1,6 @@
 /gwt-cs-main/target/
+/gwt-cs-main/war/
+/gwt-cs-main/gwt-unitCache/
 /gwt-cs-test/target/
 .idea
 *.iml
