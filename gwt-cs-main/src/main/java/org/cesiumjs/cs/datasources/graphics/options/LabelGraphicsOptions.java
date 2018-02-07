@@ -21,6 +21,7 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Color;
+import org.cesiumjs.cs.core.NearFarScalar;
 import org.cesiumjs.cs.datasources.properties.Property;
 import org.cesiumjs.cs.scene.enums.LabelStyle;
 import org.cesiumjs.cs.scene.enums.VerticalOrigin;
@@ -130,6 +131,15 @@ public class LabelGraphicsOptions {
     @JsProperty
     public Property pixelOffsetScaleByDistance;
     /**
+     * Gets or sets near and far scaling properties of a Label based on the label's distance from the camera.
+     * A label's scale will interpolate between the {@link NearFarScalar#nearValue} and {@link NearFarScalar#farValue} while the camera
+     * distance falls within the upper and lower bounds of the specified {@link NearFarScalar#near} and {@link NearFarScalar#far}.
+     * Outside of these ranges the label's scale remains clamped to the nearest bound. If undefined,
+     * scaleByDistance will be disabled.
+     */
+    @JsProperty
+    public NearFarScalar scaleByDistance;
+    /**
      * A Property specifying what the height is relative to.
      * Default: {@link HeightReference#NONE()}
      */
@@ -140,6 +150,11 @@ public class LabelGraphicsOptions {
      */
     @JsProperty
     public Property distanceDisplayCondition;
+    /**
+     * A Property specifying the distance from the camera at which to disable the depth test to.
+     */
+    @JsProperty
+    public Property disableDepthTestDistance;
 
     /**
      * Options for {@link org.cesiumjs.cs.datasources.graphics.LabelGraphics}
