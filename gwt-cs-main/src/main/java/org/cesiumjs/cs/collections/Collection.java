@@ -25,7 +25,7 @@ import jsinterop.annotations.JsType;
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = "Cesium", name = "Collection")
-public class Collection<T> {
+public abstract class Collection<T> {
     /**
      * Returns the number of elements in this collection.
      * This is commonly used with Collection#get to iterate over all the elements in the collection.
@@ -34,7 +34,7 @@ public class Collection<T> {
     public native int length();
 
     @JsConstructor
-    public Collection() {}
+    protected Collection() {}
 
     @JsMethod
     public native T add(T value);
@@ -49,7 +49,7 @@ public class Collection<T> {
     public native void destroy();
 
     @JsMethod
-    public native T get(Integer index);
+    public native T get(int index);
 
     @JsMethod
     public native boolean isDestroyed();
