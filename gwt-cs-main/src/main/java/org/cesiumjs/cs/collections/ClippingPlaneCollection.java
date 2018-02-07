@@ -36,7 +36,7 @@ public class ClippingPlaneCollection extends Collection<Plane> {
     /**
      * The maximum number of supported clipping planes.
      */
-    @JsMethod(name = "MAX_CLIPPING_PLANES")
+    @JsProperty(name = "MAX_CLIPPING_PLANES")
     public static native double MAX_CLIPPING_PLANES();
     /**
      * The color applied to highlight the edge along which an object is clipped.
