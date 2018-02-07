@@ -35,8 +35,10 @@ import org.cesiumjs.cs.datasources.options.EntityOptions;
 import org.cesiumjs.cs.datasources.properties.ConstantPositionProperty;
 import org.cesiumjs.cs.datasources.properties.ConstantProperty;
 import org.cesiumjs.cs.js.JsImage;
+import org.cesiumjs.cs.scene.Label;
 import org.cesiumjs.cs.scene.enums.HorizontalOrigin;
 import org.cesiumjs.cs.scene.enums.LabelStyle;
+import org.cesiumjs.cs.scene.options.LabelOptions;
 import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cleanlogic.showcase.client.basic.AbstractExample;
 import org.cleanlogic.showcase.client.components.store.ShowcaseExampleStore;
@@ -65,6 +67,8 @@ public class Labels extends AbstractExample {
         labelsLBox.addItem("Set properties", "2");
         labelsLBox.addItem("Offset label by distance", "3");
         labelsLBox.addItem("Fade label by distance", "4");
+        labelsLBox.addItem("Scale label by distance", "5");
+        labelsLBox.addItem("Set label with right-to-left language", "6");
         labelsLBox.addChangeHandler(new ChangeHandler() {
             @Override
             public void onChange(ChangeEvent event) {
@@ -76,6 +80,8 @@ public class Labels extends AbstractExample {
                     case "2": setProperties(); break;
                     case "3": offsetByDistance(); break;
                     case "4": fadeByDistance(); break;
+                    case "5": scaleByDistance(); break;
+                    case "6": setRightToLeft(); break;
                     default: break;
                 }
             }
@@ -183,6 +189,26 @@ public class Labels extends AbstractExample {
 
         entityOptions = new EntityOptions();
         entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-84.39, 33.75));
+        entityOptions.label = new LabelGraphics(labelGraphicsOptions);
+        csVPanel.getViewer().entities().add(entityOptions);
+    }
+
+    private void scaleByDistance() {
+        LabelGraphicsOptions labelGraphicsOptions = new LabelGraphicsOptions();
+        labelGraphicsOptions.text = new ConstantProperty<>("Philadelphia");
+        labelGraphicsOptions.scaleByDistance = new NearFarScalar(1.5e2, 2.0, 1.5e7, 0.5);
+        EntityOptions entityOptions = new EntityOptions();
+        entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-75.1641667, 39.9522222));
+        entityOptions.label = new LabelGraphics(labelGraphicsOptions);
+        csVPanel.getViewer().entities().add(entityOptions);
+    }
+
+    private void setRightToLeft() {
+        Label.enableRightToLeftDetection = true;
+        LabelGraphicsOptions labelGraphicsOptions = new LabelGraphicsOptions();
+        labelGraphicsOptions.text = new ConstantProperty<>("Master (אדון): Hello\nתלמיד (student): שלום");
+        EntityOptions entityOptions = new EntityOptions();
+        entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-75.1641667, 39.9522222));
         entityOptions.label = new LabelGraphics(labelGraphicsOptions);
         csVPanel.getViewer().entities().add(entityOptions);
     }
