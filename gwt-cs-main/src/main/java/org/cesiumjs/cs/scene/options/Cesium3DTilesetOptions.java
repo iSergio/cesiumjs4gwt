@@ -19,6 +19,8 @@ package org.cesiumjs.cs.scene.options;
 import jsinterop.annotations.*;
 import org.cesiumjs.cs.collections.ClippingPlaneCollection;
 import org.cesiumjs.cs.core.Matrix4;
+import org.cesiumjs.cs.core.Resource;
+import org.cesiumjs.cs.promise.Promise;
 import org.cesiumjs.cs.scene.enums.ClassificationType;
 
 /**
@@ -31,6 +33,10 @@ public class Cesium3DTilesetOptions {
      */
     @JsProperty
     public String url;
+    @JsProperty(name = "url")
+    public Resource resource;
+    @JsProperty(name = "url")
+    public Promise<?, ?> promise;
     /**
      * Determines if the tileset will be shown.
      * Default: true
@@ -201,6 +207,20 @@ public class Cesium3DTilesetOptions {
     public static Cesium3DTilesetOptions create(String url) {
         Cesium3DTilesetOptions options = new Cesium3DTilesetOptions();
         options.url = url;
+        return options;
+    }
+
+    @JsOverlay
+    public static Cesium3DTilesetOptions create(Resource url) {
+        Cesium3DTilesetOptions options = new Cesium3DTilesetOptions();
+        options.resource = url;
+        return options;
+    }
+
+    @JsOverlay
+    public static Cesium3DTilesetOptions create(Promise<?, ?> url) {
+        Cesium3DTilesetOptions options = new Cesium3DTilesetOptions();
+        options.promise = url;
         return options;
     }
 }

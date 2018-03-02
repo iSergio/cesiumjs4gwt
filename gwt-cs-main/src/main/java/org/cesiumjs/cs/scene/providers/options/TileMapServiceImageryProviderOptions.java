@@ -20,10 +20,8 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.Credit;
-import org.cesiumjs.cs.core.Ellipsoid;
-import org.cesiumjs.cs.core.Rectangle;
-import org.cesiumjs.cs.core.TilingScheme;
+import org.cesiumjs.cs.core.*;
+import org.cesiumjs.cs.promise.Promise;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -36,17 +34,21 @@ public class TileMapServiceImageryProviderOptions {
     @JsProperty
     public String url;
     /**
+     * Path to image tiles on server.
+     */
+    @JsProperty(name = "url")
+    public Resource resource;
+    /**
+     * Path to image tiles on server.
+     */
+    @JsProperty(name = "url")
+    public Promise<Resource, Void> promise;
+    /**
      * The file extension for images on the server.
      * Default: png
      */
     @JsProperty
     public String fileExtension;
-    //TODO: Proxy
-//    /**
-//     * A proxy to use for requests. This object is expected to have a getURL function which returns the proxied URL.
-//     */
-//    @JsProperty
-//    public Proxy proxy;
     /**
      * A credit for the data source, which is displayed on the canvas.
      */

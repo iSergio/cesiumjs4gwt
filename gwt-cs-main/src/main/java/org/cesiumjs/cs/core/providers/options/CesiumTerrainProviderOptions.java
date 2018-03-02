@@ -22,6 +22,8 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Credit;
 import org.cesiumjs.cs.core.Ellipsoid;
+import org.cesiumjs.cs.core.Resource;
+import org.cesiumjs.cs.promise.Promise;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -33,12 +35,10 @@ public class CesiumTerrainProviderOptions {
      */
     @JsProperty
     public String url;
-//TODO: Proxy
-//    /**
-//     * A proxy to use for requests. This object is expected to have a getURL function which returns the proxied URL, if needed.
-//     */
-//    @JsProperty
-//    public Proxy proxy;
+    @JsProperty(name = "url")
+    public Resource resource;
+    @JsProperty(name = "url")
+    public Promise<Resource, Void> promise;
     /**
      * Flag that indicates if the client should request additional lighting information from the server, in the form of per vertex normals if available.
      * Default: false

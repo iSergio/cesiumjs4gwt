@@ -18,10 +18,7 @@ package org.cesiumjs.cs.scene;
 
 import jsinterop.annotations.*;
 import org.cesiumjs.cs.collections.ClippingPlaneCollection;
-import org.cesiumjs.cs.core.BoundingSphere;
-import org.cesiumjs.cs.core.Ellipsoid;
-import org.cesiumjs.cs.core.Event;
-import org.cesiumjs.cs.core.Matrix4;
+import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.promise.Promise;
 import org.cesiumjs.cs.scene.enums.Cesium3DTileColorBlendMode;
@@ -366,6 +363,18 @@ public class Cesium3DTileset {
 
     @JsOverlay
     public static Cesium3DTileset create(String url) {
+        Cesium3DTilesetOptions options = Cesium3DTilesetOptions.create(url);
+        return new Cesium3DTileset(options);
+    }
+
+    @JsOverlay
+    public static Cesium3DTileset create(Resource url) {
+        Cesium3DTilesetOptions options = Cesium3DTilesetOptions.create(url);
+        return new Cesium3DTileset(options);
+    }
+
+    @JsOverlay
+    public static Cesium3DTileset create(Promise<?, ?> url) {
         Cesium3DTilesetOptions options = Cesium3DTilesetOptions.create(url);
         return new Cesium3DTileset(options);
     }
