@@ -16,12 +16,10 @@
 
 package org.cesiumjs.cs;
 
-import jsinterop.annotations.JsFunction;
-import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.Cartographic;
 import org.cesiumjs.cs.core.Ellipsoid;
+import org.cesiumjs.cs.core.providers.CesiumTerrainProvider;
 import org.cesiumjs.cs.core.providers.TerrainProvider;
 import org.cesiumjs.cs.js.JsImage;
 import org.cesiumjs.cs.js.JsObject;
@@ -335,6 +333,21 @@ public class Cesium {
     @JsMethod(namespace = "Cesium", name = "destroyObject")
     public static native void destroyObject(Object object, String message);
 
+    /**
+     * Creates a {@link CesiumTerrainProvider} instance for the <a href="https://cesium.com/content/cesiumworldterrain">Cesium World Terrain</a>.
+     * @return
+     */
+    @JsMethod(namespace = "Cesium", name = "createWorldTerrain")
+    public static native CesiumTerrainProvider createWorldTerrain();
+
+    /**
+     * Creates a {@link CesiumTerrainProvider} instance for the <a href="https://cesium.com/content/cesiumworldterrain">Cesium World Terrain</a>.
+     * @param options {@link CreateWorldTerrainOptions} object.
+     * @return
+     */
+    @JsMethod(namespace = "Cesium", name = "createWorldTerrain")
+    public static native CesiumTerrainProvider createWorldTerrain(CreateWorldTerrainOptions options);
+
     @JsFunction
     public interface Function {
         Object function(Object ...args);
@@ -347,5 +360,52 @@ public class Cesium {
          * @param timestamp A timestamp for the frame, in milliseconds.
          */
         void Callback(Number timestamp);
+    }
+
+    @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+    public static class CreateWorldTerrainOptions {
+        /**
+         * Flag that indicates if the client should request additional lighting information from the server if available.
+         * Default: false
+         */
+        @JsProperty
+        public boolean requestVertexNormals;
+        /**
+         * Flag that indicates if the client should request per tile water masks from the server if available.
+         * Default: false
+         */
+        @JsProperty
+        public boolean requestWaterMask;
+
+        @JsConstructor
+        public CreateWorldTerrainOptions() {}
+
+        /**
+         * Create instance for {@link Cesium#createWorldTerrain()}.
+         *
+         * @param requestVertexNormals Flag that indicates if the client should request additional lighting information from the server if available.
+         * @return instance for {@link Cesium#createWorldTerrain()}.
+         */
+        @JsOverlay
+        public static CreateWorldTerrainOptions create(boolean requestVertexNormals) {
+            CreateWorldTerrainOptions options = new CreateWorldTerrainOptions();
+            options.requestVertexNormals = requestVertexNormals;
+            return options;
+        }
+
+        /**
+         * Create instance for {@link Cesium#createWorldTerrain()}.
+         *
+         * @param requestVertexNormals Flag that indicates if the client should request additional lighting information from the server if available.
+         * @param requestWaterMask Flag that indicates if the client should request per tile water masks from the server if available.
+         * @return instance for {@link Cesium#createWorldTerrain()}.
+         */
+        @JsOverlay
+        public static CreateWorldTerrainOptions create(boolean requestVertexNormals, boolean requestWaterMask) {
+            CreateWorldTerrainOptions options = new CreateWorldTerrainOptions();
+            options.requestVertexNormals = requestVertexNormals;
+            options.requestWaterMask = requestWaterMask;
+            return options;
+        }
     }
 }
