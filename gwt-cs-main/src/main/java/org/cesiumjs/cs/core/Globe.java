@@ -149,6 +149,12 @@ public class Globe {
      */
     @JsProperty
     public Event tileLoadProgressEvent;
+    /**
+     * Returns true when the tile load queue is empty, false otherwise. When the load queue is empty,
+     * all terrain and imagery for the current view have been loaded.
+     */
+    @JsMethod(name = "tilesLoaded")
+    public native boolean tilesLoaded();
 
     @JsConstructor
     public Globe() {}
