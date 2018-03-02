@@ -590,6 +590,7 @@ define('Core/Math',[
      * Math functions.
      *
      * @exports CesiumMath
+     * @alias Math
      */
     var CesiumMath = {};
 
@@ -1374,6 +1375,20 @@ define('Core/Math',[
         }
                 return Math.log(number) / Math.log(base);
     };
+
+    function cbrt(number) {
+        var result = Math.pow(Math.abs(number), 1.0 / 3.0);
+        return number < 0.0 ? -result : result;
+    }
+
+    /**
+     * Finds the cube root of a number.
+     * Returns NaN if <code>number</code> is not provided.
+     *
+     * @param {Number} [number] The number.
+     * @returns {Number} The result.
+     */
+    CesiumMath.cbrt = defined(Math.cbrt) ? Math.cbrt : cbrt;
 
     /**
      * @private
@@ -17188,6 +17203,7 @@ define('Core/Plane',[
      * @param {Plane} plane The plane to project the point onto
      * @param {Cartesian3} point The point to project onto the plane
      * @param {Cartesian3} [result] The result point.  If undefined, a new Cartesian3 will be created.
+     * @returns {Cartesian3} The modified result parameter or a new Cartesian3 instance if one was not provided.
      */
     Plane.projectPointOntoPlane = function(plane, point, result) {
                 Check.typeOf.object('plane', plane);

@@ -590,6 +590,7 @@ define('Core/Math',[
      * Math functions.
      *
      * @exports CesiumMath
+     * @alias Math
      */
     var CesiumMath = {};
 
@@ -1374,6 +1375,20 @@ define('Core/Math',[
         }
                 return Math.log(number) / Math.log(base);
     };
+
+    function cbrt(number) {
+        var result = Math.pow(Math.abs(number), 1.0 / 3.0);
+        return number < 0.0 ? -result : result;
+    }
+
+    /**
+     * Finds the cube root of a number.
+     * Returns NaN if <code>number</code> is not provided.
+     *
+     * @param {Number} [number] The number.
+     * @returns {Number} The result.
+     */
+    CesiumMath.cbrt = defined(Math.cbrt) ? Math.cbrt : cbrt;
 
     /**
      * @private
@@ -13665,7 +13680,7 @@ define('Core/AttributeCompression',[
      * @param {Uint16Array} vBuffer The buffer view of v values.
      * @param {Uint16Array} [heightBuffer] The buffer view of height values.
      *
-     * @see {@link https://cesiumjs.org/data-and-assets/terrain/formats/quantized-mesh-1.0.html|quantized-mesh-1.0 terrain format}
+     * @see {@link https://github.com/AnalyticalGraphicsInc/quantized-mesh|quantized-mesh-1.0 terrain format}
      */
     AttributeCompression.zigZagDeltaDecode = function(uBuffer, vBuffer, heightBuffer) {
                 Check.defined('uBuffer', uBuffer);
@@ -15910,6 +15925,7 @@ define('Core/Plane',[
      * @param {Plane} plane The plane to project the point onto
      * @param {Cartesian3} point The point to project onto the plane
      * @param {Cartesian3} [result] The result point.  If undefined, a new Cartesian3 will be created.
+     * @returns {Cartesian3} The modified result parameter or a new Cartesian3 instance if one was not provided.
      */
     Plane.projectPointOntoPlane = function(plane, point, result) {
                 Check.typeOf.object('plane', plane);
@@ -22742,8 +22758,6 @@ define('Core/RectangleGeometry',[
      * @param {Number} [options.rotation=0.0] The rotation of the rectangle, in radians. A positive rotation is counter-clockwise.
      * @param {Number} [options.stRotation=0.0] The rotation of the texture coordinates, in radians. A positive rotation is counter-clockwise.
      * @param {Number} [options.extrudedHeight] The distance in meters between the rectangle's extruded face and the ellipsoid surface.
-     * @param {Boolean} [options.closeTop=true] Specifies whether the rectangle has a top cover when extruded.
-     * @param {Boolean} [options.closeBottom=true] Specifies whether the rectangle has a bottom cover when extruded.
      *
      * @exception {DeveloperError} <code>options.rectangle.north</code> must be in the interval [<code>-Pi/2</code>, <code>Pi/2</code>].
      * @exception {DeveloperError} <code>options.rectangle.south</code> must be in the interval [<code>-Pi/2</code>, <code>Pi/2</code>].
@@ -22769,8 +22783,7 @@ define('Core/RectangleGeometry',[
      *   ellipsoid : Cesium.Ellipsoid.WGS84,
      *   rectangle : Cesium.Rectangle.fromDegrees(-80.0, 39.0, -74.0, 42.0),
      *   height : 10000.0,
-     *   extrudedHeight: 300000,
-     *   closeTop: false
+     *   extrudedHeight: 300000
      * });
      * var geometry = Cesium.RectangleGeometry.createGeometry(rectangle);
      */
@@ -22795,8 +22808,6 @@ define('Core/RectangleGeometry',[
         this._vertexFormat = VertexFormat.clone(defaultValue(options.vertexFormat, VertexFormat.DEFAULT));
         this._extrudedHeight = defaultValue(options.extrudedHeight, 0.0);
         this._extrude = defined(options.extrudedHeight);
-        this._closeTop = defaultValue(options.closeTop, true);
-        this._closeBottom = defaultValue(options.closeBottom, true);
         this._shadowVolume = defaultValue(options.shadowVolume, false);
         this._workerName = 'createRectangleGeometry';
         this._rotatedRectangle = computeRectangle(this._rectangle, this._ellipsoid, rotation);
@@ -22806,7 +22817,7 @@ define('Core/RectangleGeometry',[
      * The number of elements used to pack the object into an array.
      * @type {Number}
      */
-    RectangleGeometry.packedLength = Rectangle.packedLength + Ellipsoid.packedLength + VertexFormat.packedLength + Rectangle.packedLength + 9;
+    RectangleGeometry.packedLength = Rectangle.packedLength + Ellipsoid.packedLength + VertexFormat.packedLength + Rectangle.packedLength + 7;
 
     /**
      * Stores the provided instance into the provided array.
@@ -22841,8 +22852,6 @@ define('Core/RectangleGeometry',[
         array[startingIndex++] = value._stRotation;
         array[startingIndex++] = value._extrudedHeight;
         array[startingIndex++] = value._extrude ? 1.0 : 0.0;
-        array[startingIndex++] = value._closeTop ? 1.0 : 0.0;
-        array[startingIndex++] = value._closeBottom ? 1.0 : 0.0;
         array[startingIndex] = value._shadowVolume ? 1.0 : 0.0;
 
         return array;
@@ -22860,8 +22869,6 @@ define('Core/RectangleGeometry',[
         rotation : undefined,
         stRotation : undefined,
         extrudedHeight : undefined,
-        closeTop : undefined,
-        closeBottom : undefined,
         shadowVolume : undefined
     };
 
@@ -22896,8 +22903,6 @@ define('Core/RectangleGeometry',[
         var stRotation = array[startingIndex++];
         var extrudedHeight = array[startingIndex++];
         var extrude = array[startingIndex++] === 1.0;
-        var closeTop = array[startingIndex++] === 1.0;
-        var closeBottom = array[startingIndex++] === 1.0;
         var shadowVolume = array[startingIndex] === 1.0;
 
         if (!defined(result)) {
@@ -22906,8 +22911,6 @@ define('Core/RectangleGeometry',[
             scratchOptions.rotation = rotation;
             scratchOptions.stRotation = stRotation;
             scratchOptions.extrudedHeight = extrude ? extrudedHeight : undefined;
-            scratchOptions.closeTop = closeTop;
-            scratchOptions.closeBottom = closeBottom;
             scratchOptions.shadowVolume = shadowVolume;
             return new RectangleGeometry(scratchOptions);
         }
@@ -22921,8 +22924,6 @@ define('Core/RectangleGeometry',[
         result._stRotation = stRotation;
         result._extrudedHeight = extrude ? extrudedHeight : undefined;
         result._extrude = extrude;
-        result._closeTop = closeTop;
-        result._closeBottom = closeBottom;
         result._rotatedRectangle = rotatedRectangle;
         result._shadowVolume = shadowVolume;
 
@@ -23023,8 +23024,6 @@ define('Core/RectangleGeometry',[
             granularity : granularity,
             extrudedHeight : maxHeight,
             height : minHeight,
-            closeTop : true,
-            closeBottom : true,
             vertexFormat : VertexFormat.POSITION_ONLY,
             shadowVolume : true
         });

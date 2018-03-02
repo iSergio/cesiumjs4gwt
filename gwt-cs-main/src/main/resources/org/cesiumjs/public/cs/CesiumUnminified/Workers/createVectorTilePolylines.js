@@ -590,6 +590,7 @@ define('Core/Math',[
      * Math functions.
      *
      * @exports CesiumMath
+     * @alias Math
      */
     var CesiumMath = {};
 
@@ -1374,6 +1375,20 @@ define('Core/Math',[
         }
                 return Math.log(number) / Math.log(base);
     };
+
+    function cbrt(number) {
+        var result = Math.pow(Math.abs(number), 1.0 / 3.0);
+        return number < 0.0 ? -result : result;
+    }
+
+    /**
+     * Finds the cube root of a number.
+     * Returns NaN if <code>number</code> is not provided.
+     *
+     * @param {Number} [number] The number.
+     * @returns {Number} The result.
+     */
+    CesiumMath.cbrt = defined(Math.cbrt) ? Math.cbrt : cbrt;
 
     /**
      * @private
@@ -3362,7 +3377,7 @@ define('Core/AttributeCompression',[
      * @param {Uint16Array} vBuffer The buffer view of v values.
      * @param {Uint16Array} [heightBuffer] The buffer view of height values.
      *
-     * @see {@link https://cesiumjs.org/data-and-assets/terrain/formats/quantized-mesh-1.0.html|quantized-mesh-1.0 terrain format}
+     * @see {@link https://github.com/AnalyticalGraphicsInc/quantized-mesh|quantized-mesh-1.0 terrain format}
      */
     AttributeCompression.zigZagDeltaDecode = function(uBuffer, vBuffer, heightBuffer) {
                 Check.defined('uBuffer', uBuffer);
