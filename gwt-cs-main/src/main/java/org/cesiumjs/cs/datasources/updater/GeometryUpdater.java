@@ -47,16 +47,6 @@ import org.cesiumjs.cs.scene.apperances.Appearance;
 @JsType(isNative = true, namespace = "Cesium", name = "GeometryUpdater")
 public abstract class GeometryUpdater {
     /**
-     * Gets the type of Appearance to use for material-based geometry.
-     */
-    @JsProperty
-    public static Appearance materialAppearanceType;
-    /**
-     * Gets the type of Appearance to use for simple color-based geometry.
-     */
-    @JsProperty
-    public static Appearance perInstanceColorAppearanceType;
-    /**
      * Gets or sets the DistanceDisplayCondition Property specifying at what distance from the camera that this geometry will be displayed.
      */
     @JsProperty(name = "distanceDisplayConditionProperty")
