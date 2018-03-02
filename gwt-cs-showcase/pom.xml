@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>gwt-cs-test</artifactId>
+    <artifactId>gwt-cs-showcase</artifactId>
     <packaging>war</packaging>
     <description>Showcase for GWT Cesium</description>
 
@@ -39,6 +39,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.12</version>
                 <configuration>
+                    <skipTests>true</skipTests>
                     <includes>
                         <include>**/*Test.java</include>
                     </includes>

@@ -223,7 +223,7 @@ public class Tiles3DClippingPlanes extends AbstractExample {
     }
 
     private void loadTileset(String url) {
-        Plane[] clippingPlanes = new Plane[] {new Plane(new Cartesian3(0.0, 0.0, -1.0), -100.0)};
+        final Plane[] clippingPlanes = new Plane[] {new Plane(new Cartesian3(0.0, 0.0, -1.0), -100.0)};
 
         ClippingPlaneCollectionOptions clippingPlaneCollectionOptions = new ClippingPlaneCollectionOptions();
         clippingPlaneCollectionOptions.planes = clippingPlanes;
@@ -242,7 +242,7 @@ public class Tiles3DClippingPlanes extends AbstractExample {
                 csVPanel.getViewer().camera.viewBoundingSphere(boundingSphere, new HeadingPitchRange(0.5, -0.2, radius * 4.0));
                 csVPanel.getViewer().camera.lookAtTransform(Matrix4.IDENTITY());
 
-                for (Plane plane : clippingPlanes) {
+                for (final Plane plane : clippingPlanes) {
                     PlaneGraphicsOptions planeGraphicsOptions = new PlaneGraphicsOptions();
                     planeGraphicsOptions.dimensions = new ConstantProperty<>(new Cartesian2(radius * 2.5, radius * 2.5));
                     planeGraphicsOptions.material = new ColorMaterialProperty(Color.WHITE().withAlpha(0.1f));

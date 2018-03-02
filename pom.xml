@@ -67,7 +67,7 @@
 
     <modules>
         <module>gwt-cs-main</module>
-        <module>gwt-cs-test</module>
+        <module>gwt-cs-showcase</module>
     </modules>
 
 
