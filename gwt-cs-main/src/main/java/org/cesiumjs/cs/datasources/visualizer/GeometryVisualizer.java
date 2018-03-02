@@ -31,12 +31,11 @@ import org.cesiumjs.cs.scene.Scene;
 public class GeometryVisualizer implements Visualizer {
     /**
      * A general purpose visualizer for geometry represented by {@link org.cesiumjs.cs.scene.Primitive} instances.
-     * @param type The updater to be used for creating the geometry.
      * @param scene The scene the primitives will be rendered in.
      * @param entityCollection The entityCollection to visualize.
      */
     @JsConstructor
-    public GeometryVisualizer(GeometryUpdater type, Scene scene, EntityCollection entityCollection) {}
+    public GeometryVisualizer(Scene scene, EntityCollection entityCollection) {}
 
     /**
      * Removes and destroys all primitives created by this instance.
