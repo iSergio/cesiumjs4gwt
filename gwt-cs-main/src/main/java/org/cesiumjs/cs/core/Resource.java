@@ -113,13 +113,22 @@ public class Resource {
     public Resource(ResourceOptions options) {}
 
     /**
+     * Creates a Resource from a URL and calls delete() on it.
+     * @param options {@link ResourceHttpOptions}.
+     * @return a promise that will resolve to the requested data when loaded. Returns undefined if request.throttle
+     * is true and the request does not have high enough priority.
+     */
+    @JsMethod
+    public static native Promise<JsObject, Void> delete(ResourceHttpOptions options);
+
+    /**
      * Creates a Resource from a URL and calls fetch() on it.
      * @param options {@link RequestOptions}.
      * @return a promise that will resolve to the requested data when loaded. Returns undefined if request.throttle is
      * true and the request does not have high enough priority.
      */
     @JsMethod
-    public static native Promise<JsObject, Void> fetch(ResourceFetchOptions options);
+    public static native Promise<JsObject, Void> fetch(ResourceHttpOptions options);
 
     /**
      * Creates a Resource and calls fetchArrayBuffer() on it.
@@ -179,12 +188,12 @@ public class Resource {
 
     /**
      * Creates a Resource from a URL and calls fetch() on it.
-     * @param options {@link ResourcePostOptions} object.
+     * @param options {@link ResourceHttpOptions} object.
      * @return a promise that will resolve to the requested data when loaded. Returns undefined if request.throttle is
      * true and the request does not have high enough priority.
      */
     @JsMethod
-    public static native Promise<JsObject, Void> post(ResourcePostOptions options);
+    public static native Promise<JsObject, Void> post(ResourceHttpOptions options);
 
     /**
      * Combines the specified object and the existing query parameters. This allows you to add many parameters at once,
@@ -373,6 +382,52 @@ public class Resource {
     public native String getUrlComponent(boolean query, boolean proxy);
 
     /**
+     * Asynchronously gets headers the given resource. Returns a promise that will resolve to the result once loaded, or
+     * reject if the resource failed to load. The data is loaded using XMLHttpRequest, which means that in order to
+     * make requests to another origin, the server must have Cross-Origin Resource Sharing (CORS) headers enabled.
+     * @return a promise that will resolve to the requested data when loaded. Returns undefined if request.throttle is true
+     * and the request does not have high enough priority.
+     * @see <a href="http://www.w3.org/TR/cors/">Cross-Origin Resource Sharing</a>
+     * @see <a href="http://wiki.commonjs.org/wiki/Promises/A">CommonJS Promises/A</a>
+     */
+    @JsMethod
+    public native Promise<JsObject, Void> head();
+
+    /**
+     * Asynchronously gets headers the given resource. Returns a promise that will resolve to the result once loaded, or
+     * reject if the resource failed to load. The data is loaded using XMLHttpRequest, which means that in order to
+     * make requests to another origin, the server must have Cross-Origin Resource Sharing (CORS) headers enabled.
+     * @param options {@link ResourceHttpOptions} object.
+     * @return a promise that will resolve to the requested data when loaded. Returns undefined if request.throttle is true
+     * and the request does not have high enough priority.
+     * @see <a href="http://www.w3.org/TR/cors/">Cross-Origin Resource Sharing</a>
+     * @see <a href="http://wiki.commonjs.org/wiki/Promises/A">CommonJS Promises/A</a>
+     */
+    @JsMethod
+    public native Promise<JsObject, Void> head(ResourceHttpOptions options);
+
+    /**
+     * Asynchronously gets options the given resource. Returns a promise that will resolve to the result once loaded,
+     * or reject if the resource failed to load. The data is loaded using XMLHttpRequest, which means that in order
+     * to make requests to another origin, the server must have Cross-Origin Resource Sharing (CORS) headers enabled.
+     * @return a promise that will resolve to the requested data when loaded. Returns undefined if request.throttle is true
+     * and the request does not have high enough priority.
+     */
+    @JsMethod
+    public native Promise<JsObject, Void> options();
+
+    /**
+     * Asynchronously gets options the given resource. Returns a promise that will resolve to the result once loaded,
+     * or reject if the resource failed to load. The data is loaded using XMLHttpRequest, which means that in order
+     * to make requests to another origin, the server must have Cross-Origin Resource Sharing (CORS) headers enabled.
+     * @param options {@link ResourceHttpOptions} object.
+     * @return a promise that will resolve to the requested data when loaded. Returns undefined if request.throttle is true
+     * and the request does not have high enough priority.
+     */
+    @JsMethod
+    public native Promise<JsObject, Void> options(ResourceHttpOptions options);
+
+    /**
      * Asynchronously posts data the given resource. Returns a promise that will resolve to the result once loaded,
      * or reject if the resource failed to load. The data is loaded using XMLHttpRequest, which means that in order
      * to make requests to another origin, the server must have Cross-Origin Resource Sharing (CORS) headers enabled.
@@ -388,12 +443,12 @@ public class Resource {
      * or reject if the resource failed to load. The data is loaded using XMLHttpRequest, which means that in order
      * to make requests to another origin, the server must have Cross-Origin Resource Sharing (CORS) headers enabled.
      * @param data Data that is posted with the resource.
-     * @param options Object with the following properties: {@link ResourcePostOptions}.
+     * @param options Object with the following properties: {@link ResourceHttpOptions}.
      * @return a promise that will resolve to the requested data when loaded. Returns undefined if request.throttle is
      * true and the request does not have high enough priority.
      */
     @JsMethod
-    public native Promise<JsObject, Void> post(JsObject data, ResourcePostOptions options);
+    public native Promise<JsObject, Void> post(JsObject data, ResourceHttpOptions options);
 
     /**
      * Called when a resource fails to load. This will call the retryCallback function if defined until retryAttempts is reached.

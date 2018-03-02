@@ -16,40 +16,37 @@
 
 package org.cesiumjs.cs.core.options;
 
-import jsinterop.annotations.*;
-import org.cesiumjs.cs.js.JsObject;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
+import net.sourceforge.htmlunit.corejs.javascript.annotations.JSConstructor;
+import org.cesiumjs.cs.core.Resource;
 
 /**
- * Options for {@link org.cesiumjs.cs.core.Resource#post(ResourcePostOptions)}.
+ * Options for {@link org.cesiumjs.cs.core.IonResource#fromAssetId(int, FromAssetIdOptions)} method.
  *
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-public class ResourcePostOptions extends ResourceOptions {
+public class FromAssetIdOptions {
     /**
-     * Data that is posted with the resource.
+     * The access token to use.
+     * Default: {@link org.cesiumjs.cs.core.Ion#defaultAccessToken}.
      */
     @JsProperty
-    public JsObject data;
+    public String accessToken;
     /**
-     * The type of response. This controls the type of item returned.
+     * The resource to the Cesium ion API server.
+     * Default: {@link org.cesiumjs.cs.core.Ion#defaultServer}.
      */
     @JsProperty
-    public String responseType;
+    public String server;
     /**
-     * Overrides the MIME type returned by the server.
+     * The resource to the Cesium ion API server.
      */
-    @JsProperty
-    public String overrideMimeType;
+    @JsProperty(name = "server")
+    public Resource serverResource;
 
-    @JsConstructor
-    ResourcePostOptions() {}
-
-    @JsOverlay
-    public static ResourcePostOptions create(String url, JsObject data) {
-        ResourcePostOptions options = new ResourcePostOptions();
-        options.url = url;
-        options.data = data;
-        return options;
-    }
+    @JSConstructor
+    public FromAssetIdOptions() {}
 }
