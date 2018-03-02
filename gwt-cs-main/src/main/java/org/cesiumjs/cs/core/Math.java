@@ -28,6 +28,11 @@ import jsinterop.annotations.JsType;
 @JsType(isNative = true, namespace = "Cesium", name = "Math")
 public class Math {
     /**
+     * Finds the cube root of a number. Returns NaN if number is not provided.
+     */
+    @JsProperty
+    public static Number cbrt;
+    /**
      * The number of degrees in a radian.
      */
     @JsProperty(name = "DEGREES_PER_RADIAN")
