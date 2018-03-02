@@ -65,9 +65,6 @@ public abstract class BaseTestCase extends GWTTestCase {
 
     }
 
-//    protected abstract void execute();
-
-//    @FunctionalInterface
     public interface Test {
         void execute();
     }

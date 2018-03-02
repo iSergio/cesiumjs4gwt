@@ -17,6 +17,7 @@
 package org.cesiumjs.cs.core;
 
 import org.cesiumjs.cs.BaseTestCase;
+import org.cesiumjs.cs.Cesium;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
