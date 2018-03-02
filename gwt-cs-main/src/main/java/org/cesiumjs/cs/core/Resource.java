@@ -355,7 +355,7 @@ public class Resource {
      * @return The resource derived from the current one.
      */
     @JsMethod
-    public native Resource getDerivedResource(ResourceOptions options);
+    public native Resource getDerivedResource(DerivedResourceOptions options);
 
     /**
      * Returns the url, optional with the query string and processed by a proxy.
