@@ -16,16 +16,14 @@
 
 package org.cesiumjs.cs.datasources.graphics;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsOptional;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.core.Math;
 import org.cesiumjs.cs.datasources.graphics.options.PolygonGraphicsOptions;
 import org.cesiumjs.cs.datasources.properties.MaterialProperty;
 import org.cesiumjs.cs.datasources.properties.Property;
+import org.cesiumjs.cs.scene.enums.ClassificationType;
 import org.cesiumjs.cs.scene.enums.ShadowMode;
 
 /**
@@ -33,6 +31,12 @@ import org.cesiumjs.cs.scene.enums.ShadowMode;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "PolygonGraphics")
 public class PolygonGraphics {
+    /**
+     * Gets or sets the ClassificationType Property specifying whether this polygon will classify terrain, 3D Tiles, or both when on the ground.
+     * Default: {@link ClassificationType#BOTH()}.
+     */
+    @JsProperty
+    public Number classificationType;
     /**
      * Gets the event that is raised whenever a property or sub-property is changed or modified.
      */
@@ -145,11 +149,13 @@ public class PolygonGraphics {
      * @param result The object onto which to store the result.
      * @return The modified result parameter or a new instance if one was not provided.
      */
+    @JsMethod
     public native PolygonGraphics clone(@JsOptional PolygonGraphics result);
 
     /**
      * Assigns each unassigned property on this object to the value of the same property on the provided source object.
      * @param source The object to be merged into this object.
      */
+    @JsMethod
     public native void merge(PolygonGraphics source);
 }

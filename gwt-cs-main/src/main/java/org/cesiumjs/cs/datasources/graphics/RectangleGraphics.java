@@ -22,6 +22,7 @@ import org.cesiumjs.cs.core.Math;
 import org.cesiumjs.cs.datasources.graphics.options.RectangleGraphicsOptions;
 import org.cesiumjs.cs.datasources.properties.MaterialProperty;
 import org.cesiumjs.cs.datasources.properties.Property;
+import org.cesiumjs.cs.scene.enums.ClassificationType;
 import org.cesiumjs.cs.scene.enums.ShadowMode;
 
 /**
@@ -29,6 +30,12 @@ import org.cesiumjs.cs.scene.enums.ShadowMode;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "RectangleGraphics")
 public class RectangleGraphics {
+    /**
+     * Gets or sets the ClassificationType Property specifying whether this polygon will classify terrain, 3D Tiles, or both when on the ground.
+     * Default: {@link ClassificationType#BOTH()}.
+     */
+    @JsProperty
+    public Number classificationType;
     /**
      * Gets or sets the boolean Property specifying whether the rectangle has a bottom cover when extruded.
      * Default: true
