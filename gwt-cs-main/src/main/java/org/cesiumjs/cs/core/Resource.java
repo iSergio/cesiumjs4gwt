@@ -237,6 +237,14 @@ public class Resource {
     public native void appendForwardSlash();
 
     /**
+     * Combines the specified object and the existing query parameters. This allows you to add many parameters at once,
+     * as opposed to adding them one at a time to the queryParameters property.
+     * @param params The query parameters
+     */
+    @JsMethod
+    public native void appendQueryParameters(JsObject params);
+
+    /**
      * Duplicates a Resource instance.
      * @return The modified result parameter or a new Resource instance if one was not provided.
      */
@@ -464,6 +472,25 @@ public class Resource {
      */
     @JsMethod
     public native Promise<Boolean, Void> retryOnError(JsObject error);
+
+    /**
+     * Combines the specified object and the existing query parameters. This allows you to add many parameters at once,
+     * as opposed to adding them one at a time to the queryParameters property. If a value is already set,
+     * it will be replaced with the new value.
+     * @param params The query parameters
+     */
+    @JsMethod
+    public native void setQueryParameters(JsObject params);
+
+    /**
+     * Combines the specified object and the existing query parameters. This allows you to add many parameters at once,
+     * as opposed to adding them one at a time to the queryParameters property. If a value is already set,
+     * it will be replaced with the new value.
+     * @param params The query parameters
+     * @param useAsDefault If true the params will be used as the default values, so they will only be set if they are undefined.
+     */
+    @JsMethod
+    public native void setQueryParameters(JsObject params, boolean useAsDefault);
 
     /**
      * A function that returns the value of the property.
