@@ -17,6 +17,7 @@
 package org.cesiumjs.cs;
 
 import org.cesiumjs.cs.core.providers.CesiumTerrainProvider;
+import org.cesiumjs.cs.promise.Fulfill;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -46,8 +47,15 @@ public class CesiumTest extends BaseTestCase {
                 assertNotNull(terrainProvider);
                 assertEquals(options.requestVertexNormals, terrainProvider.requestVertexNormals);
                 assertEquals(options.requestWaterMask, terrainProvider.requestWaterMask);
-                assertEquals(options.requestVertexNormals, terrainProvider.hasVertexNormals);
-                assertEquals(options.requestWaterMask, terrainProvider.hasWaterMask);
+                terrainProvider.readyPromise().then(new Fulfill<Boolean>() {
+                    @Override
+                    public void onFulfilled(Boolean ready) {
+                        if (ready) {
+                            assertEquals(options.requestVertexNormals, terrainProvider.hasVertexNormals);
+                            assertEquals(options.requestWaterMask, terrainProvider.hasWaterMask);
+                        }
+                    }
+                });
             }
         });
     }
