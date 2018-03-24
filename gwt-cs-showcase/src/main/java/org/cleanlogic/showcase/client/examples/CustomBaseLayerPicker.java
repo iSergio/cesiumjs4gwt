@@ -45,7 +45,7 @@ public class CustomBaseLayerPicker extends AbstractExample {
 
     @Inject
     public CustomBaseLayerPicker(ShowcaseExampleStore store) {
-        super("Custom BaseLayerPicker widgt", "Configure custom BaseLayerPicker widget", new String[]{"Showcase", "Cesium", "3d", "BaseLayerPicker", "BaseLayerPickerViewModel"}, store);
+        super("Custom BaseLayerPicker widget", "Configure custom BaseLayerPicker widget", new String[]{"Showcase", "Cesium", "3d", "BaseLayerPicker", "BaseLayerPickerViewModel"}, store);
     }
 
     @Override
