@@ -16,9 +16,7 @@
 
 package org.cesiumjs.cs.scene.providers.options;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsOverlay;
-import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.Resource;
 import org.cesiumjs.cs.scene.providers.IonImageryProvider;
 
@@ -27,6 +25,7 @@ import org.cesiumjs.cs.scene.providers.IonImageryProvider;
  *
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class IonImageryProviderOptions {
     /**
      * An ion imagery asset ID;
