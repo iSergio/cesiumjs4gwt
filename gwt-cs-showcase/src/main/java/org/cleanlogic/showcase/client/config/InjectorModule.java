@@ -84,5 +84,6 @@ public class InjectorModule extends AbstractGinModule {
         bind(LoadImages.class).asEagerSingleton();
         bind(TerrainClippingPlanes.class).asEagerSingleton();
         bind(Tiles3DClippingPlanes.class).asEagerSingleton();
+        bind(CustomBaseLayerPicker.class).asEagerSingleton();
     }
 }
