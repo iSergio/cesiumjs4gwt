@@ -138,9 +138,8 @@ public class Viewer {
     /**
      * Gets the HomeButton.
      */
-    //TODO: Later
-//    @JsProperty(name = "homeButton")
-//    public native HomeButton homeButton();
+    @JsProperty(name = "homeButton")
+    public native HomeButton homeButton();
     /**
      * Gets the collection of imagery layers that will be rendered on the globe.
      */
