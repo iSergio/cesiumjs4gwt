@@ -24,6 +24,7 @@ import org.cesiumjs.cs.collections.options.ClippingPlaneCollectionOptions;
 import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.core.Matrix4;
 import org.cesiumjs.cs.core.Plane;
+import org.cesiumjs.cs.scene.ClippingPlane;
 
 /**
  * Specifies a set of clipping planes. Clipping planes selectively disable rendering in a
@@ -32,7 +33,7 @@ import org.cesiumjs.cs.core.Plane;
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = "Cesium", name = "ClippingPlaneCollection")
-public class ClippingPlaneCollection extends Collection<Plane> {
+public class ClippingPlaneCollection extends Collection<ClippingPlane> {
     /**
      * The maximum number of supported clipping planes.
      */

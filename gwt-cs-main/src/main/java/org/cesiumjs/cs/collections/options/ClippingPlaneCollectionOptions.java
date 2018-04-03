@@ -23,6 +23,7 @@ import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.core.Matrix4;
 import org.cesiumjs.cs.core.Plane;
+import org.cesiumjs.cs.scene.ClippingPlane;
 
 /**
  * Options for {@link org.cesiumjs.cs.collections.ClippingPlaneCollection}.
@@ -36,7 +37,7 @@ public class ClippingPlaneCollectionOptions {
      * Default: []
      */
     @JsProperty
-    public Plane[] planes;
+    public ClippingPlane[] planes;
     /**
      * Determines whether the clipping planes are active.
      * Default: true
