@@ -25,6 +25,7 @@ import com.google.gwt.user.client.ui.ListBox;
 import org.cesiumjs.cs.Cesium;
 import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.core.Math;
+import org.cesiumjs.cs.core.options.ResourceImageOptions;
 import org.cesiumjs.cs.datasources.Entity;
 import org.cesiumjs.cs.datasources.graphics.BillboardGraphics;
 import org.cesiumjs.cs.datasources.graphics.options.BillboardGraphicsOptions;
@@ -211,56 +212,50 @@ public class Billboards extends AbstractExample {
     }
 
     private void offsetByDistance() {
-        Cesium.loadImage(GWT.getModuleBaseURL() + "images/Cesium_Logo_overlay.png").then(
-                new Fulfill<JsImage>() {
+        Resource.fetchImage(GWT.getModuleBaseURL() + "images/Cesium_Logo_overlay.png").then(new Fulfill<JsImage>() {
+            @Override
+            public void onFulfilled(JsImage logoImg) {
+                Resource.fetchImage(GWT.getModuleBaseURL() + "images/facility.gif").then(new Fulfill<JsImage>() {
                     @Override
-                    public void onFulfilled(final JsImage logoImg) {
-                        Cesium.loadImage(GWT.getModuleBaseURL() + "images/facility.gif").then(
-                                new Fulfill<JsImage>() {
-                                    @Override
-                                    public void onFulfilled(JsImage facilityImg) {
-                                        int facilityHeight = facilityImg.height;
+                    public void onFulfilled(JsImage facilityImg) {
+                        int facilityHeight = facilityImg.height;
 
-                                        BillboardGraphicsOptions billboardGraphicsOptions = new BillboardGraphicsOptions();
-                                        billboardGraphicsOptions.image = new ConstantProperty<>(facilityImg);
-                                        billboardGraphicsOptions.horizontalOrigin = new ConstantProperty<>(HorizontalOrigin.CENTER());
-                                        billboardGraphicsOptions.verticalOrigin = new ConstantProperty<>(VerticalOrigin.BOTTOM());
-                                        BillboardGraphics billboardGraphics = new BillboardGraphics(billboardGraphicsOptions);
-                                        EntityOptions entityOptions = new EntityOptions();
-                                        entityOptions.billboard = billboardGraphics;
-                                        entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-75.59777, 40.03883));
-                                        csVPanel.getViewer().entities().add(new Entity(entityOptions));
+                        BillboardGraphicsOptions billboardGraphicsOptions = new BillboardGraphicsOptions();
+                        billboardGraphicsOptions.image = new ConstantProperty<>(facilityImg);
+                        billboardGraphicsOptions.horizontalOrigin = new ConstantProperty<>(HorizontalOrigin.CENTER());
+                        billboardGraphicsOptions.verticalOrigin = new ConstantProperty<>(VerticalOrigin.BOTTOM());
+                        BillboardGraphics billboardGraphics = new BillboardGraphics(billboardGraphicsOptions);
+                        EntityOptions entityOptions = new EntityOptions();
+                        entityOptions.billboard = billboardGraphics;
+                        entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-75.59777, 40.03883));
+                        csVPanel.getViewer().entities().add(new Entity(entityOptions));
 
-                                        billboardGraphicsOptions = new BillboardGraphicsOptions();
-                                        billboardGraphicsOptions.image = new ConstantProperty<>(logoImg);
-                                        billboardGraphicsOptions.horizontalOrigin = new ConstantProperty<>(HorizontalOrigin.CENTER());
-                                        billboardGraphicsOptions.verticalOrigin = new ConstantProperty<>(VerticalOrigin.BOTTOM());
-                                        billboardGraphicsOptions.pixelOffset = new ConstantProperty<>(new Cartesian2(0.0, -facilityHeight));
-                                        billboardGraphicsOptions.pixelOffsetScaleByDistance = new ConstantProperty<>(new NearFarScalar(1.0e3, 1.0, 1.5e6, 0.0));
-                                        billboardGraphicsOptions.translucencyByDistance = new ConstantProperty<>(new NearFarScalar(1.0e3, 1.0, 1.5e6, 0.1));
-                                        billboardGraphics = new BillboardGraphics(billboardGraphicsOptions);
-                                        entityOptions = new EntityOptions();
-                                        entityOptions.billboard = billboardGraphics;
-                                        entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-75.59777, 40.03883));
-                                        csVPanel.getViewer().entities().add(new Entity(entityOptions));
-                                    }
-                                },
-                                new Reject<Void>() {
-                                    @Override
-                                    public void onRejected(Void value) {
-                                        LOGGER.info("facility imagery not loaded");
-                                    }
-                                }
-                        );
+                        billboardGraphicsOptions = new BillboardGraphicsOptions();
+                        billboardGraphicsOptions.image = new ConstantProperty<>(logoImg);
+                        billboardGraphicsOptions.horizontalOrigin = new ConstantProperty<>(HorizontalOrigin.CENTER());
+                        billboardGraphicsOptions.verticalOrigin = new ConstantProperty<>(VerticalOrigin.BOTTOM());
+                        billboardGraphicsOptions.pixelOffset = new ConstantProperty<>(new Cartesian2(0.0, -facilityHeight));
+                        billboardGraphicsOptions.pixelOffsetScaleByDistance = new ConstantProperty<>(new NearFarScalar(1.0e3, 1.0, 1.5e6, 0.0));
+                        billboardGraphicsOptions.translucencyByDistance = new ConstantProperty<>(new NearFarScalar(1.0e3, 1.0, 1.5e6, 0.1));
+                        billboardGraphics = new BillboardGraphics(billboardGraphicsOptions);
+                        entityOptions = new EntityOptions();
+                        entityOptions.billboard = billboardGraphics;
+                        entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-75.59777, 40.03883));
+                        csVPanel.getViewer().entities().add(new Entity(entityOptions));
                     }
-                },
-                new Reject<Void>() {
+                }, new Reject<Void>() {
                     @Override
                     public void onRejected(Void value) {
-                        LOGGER.info("Cesium_Logo_overlay imagery not loaded");
+                        LOGGER.info("facility imagery not loaded");
                     }
-                }
-        );
+                });
+            }
+        }, new Reject<Void>() {
+            @Override
+            public void onRejected(Void value) {
+                LOGGER.info("Cesium_Logo_overlay imagery not loaded");
+            }
+        });
     }
 
     private void addMarkerBillboards() {
