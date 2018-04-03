@@ -40,7 +40,7 @@ public abstract class Collection<T> {
     public native T add(T value);
 
     @JsMethod
-    private native Collection add(Collection value);
+    public native Collection<?> add(Collection<?> value);
 
     @JsMethod
     public native boolean contains(T value);
@@ -56,6 +56,9 @@ public abstract class Collection<T> {
 
     @JsMethod
     public native boolean remove(T value);
+
+    @JsMethod
+    public native boolean remove(Collection<?> value);
 
     @JsMethod
     public native void removeAll();
