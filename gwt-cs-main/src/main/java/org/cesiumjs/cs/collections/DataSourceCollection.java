@@ -82,4 +82,32 @@ public class DataSourceCollection<T extends DataSource> extends Collection<DataS
      */
     @JsMethod
     public native void removeAll(boolean destroy);
+
+    /**
+     * Lowers a data source down one position in the collection.
+     * @param dataSource The data source to move.
+     */
+    @JsMethod
+    public native void lower(T dataSource);
+
+    /**
+     * Lowers a data source to the bottom of the collection.
+     * @param dataSource The data source to move.
+     */
+    @JsMethod
+    public native void lowerToBottom(T dataSource);
+
+    /**
+     * Raises a data source up one position in the collection.
+     * @param dataSource The data source to move.
+     */
+    @JsMethod
+    public native void raise(T dataSource);
+
+    /**
+     * Raises a data source to the top of the collection.
+     * @param dataSource The data source to move.
+     */
+    @JsMethod
+    public native void raiseToTop(T dataSource);
 }
