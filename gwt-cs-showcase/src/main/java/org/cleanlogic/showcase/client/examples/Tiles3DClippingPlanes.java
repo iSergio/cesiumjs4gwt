@@ -46,7 +46,10 @@ import org.cesiumjs.cs.datasources.properties.ConstantPositionProperty;
 import org.cesiumjs.cs.datasources.properties.ConstantProperty;
 import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.promise.Fulfill;
+import org.cesiumjs.cs.promise.Promise;
 import org.cesiumjs.cs.scene.Cesium3DTileset;
+import org.cesiumjs.cs.scene.ClippingPlane;
+import org.cesiumjs.cs.scene.Primitive;
 import org.cesiumjs.cs.scene.options.Cesium3DTilesetOptions;
 import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cesiumjs.cs.widgets.options.ViewerOptions;
@@ -71,9 +74,9 @@ public class Tiles3DClippingPlanes extends AbstractExample {
     private Cesium3DTileset tileset;
     private ClippingPlaneCollection modelEntityClippingPlanes;
 
-    private String bimUrl = "https://beta.cesium.com/api/assets/1459?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIzNjUyM2I5Yy01YmRhLTQ0MjktOGI0Zi02MDdmYzBjMmY0MjYiLCJpZCI6NDQsImFzc2V0cyI6WzE0NTldLCJpYXQiOjE0OTkyNjQ3ODF9.SW_rwY-ic0TwQBeiweXNqFyywoxnnUBtcVjeCmDGef4";
-    private String pointCloudUrl = "https://beta.cesium.com/api/assets/1460?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIyMzk2YzJiOS1jZGFmLTRlZmYtYmQ4MS00NTA3NjEwMzViZTkiLCJpZCI6NDQsImFzc2V0cyI6WzE0NjBdLCJpYXQiOjE0OTkyNjQ3NTV9.oWjvN52CRQ-dk3xtvD4e8ZnOHZhoWSpJLlw115mbQJM";
-    private String instancedUrl = GWT.getModuleBaseURL() + "../Specs/Data/Cesium3DTiles/Instanced/InstancedOrientation/";
+    private Promise<IonResource, Void> bimUrl = IonResource.fromAssetId(3837);
+    private Promise<IonResource, Void> pointCloudUrl = IonResource.fromAssetId(3838);
+    private Promise<IonResource, Void> instancedUrl = IonResource.fromAssetId(3876);
     private String modelUrl = GWT.getModuleBaseURL() + "SampleData/models/CesiumAir/Cesium_Air.glb";
 
     @Inject
@@ -222,27 +225,26 @@ public class Tiles3DClippingPlanes extends AbstractExample {
         return sourceCodeURLs;
     }
 
-    private void loadTileset(String url) {
-        final Plane[] clippingPlanes = new Plane[] {new Plane(new Cartesian3(0.0, 0.0, -1.0), -100.0)};
-
+    private void loadTileset(Promise<IonResource, Void> resource) {
+        final ClippingPlane[] clippingPlanes = new ClippingPlane[] {new ClippingPlane(new Cartesian3(0.0, 0.0, -1.0), -100.0)};
         ClippingPlaneCollectionOptions clippingPlaneCollectionOptions = new ClippingPlaneCollectionOptions();
         clippingPlaneCollectionOptions.planes = clippingPlanes;
         clippingPlaneCollectionOptions.edgeWidth = edgeStylingCBox.getValue() ? 1.0 : 0.0;
 
-        Cesium3DTilesetOptions tilesetOptions = Cesium3DTilesetOptions.create(url);
+        Cesium3DTilesetOptions tilesetOptions = Cesium3DTilesetOptions.create(resource);
         tilesetOptions.clippingPlanes = new ClippingPlaneCollection(clippingPlaneCollectionOptions);
 
-        tileset = csVPanel.getViewer().scene().primitives().add(new Cesium3DTileset(tilesetOptions));
+        tileset = (Cesium3DTileset) csVPanel.getViewer().scene().primitives().add(new Cesium3DTileset(tilesetOptions));
+        tileset.debugShowBoundingVolume = boundingVolumeCBox.getValue();
         tileset.readyPromise().then(new Fulfill<Cesium3DTileset>() {
             @Override
             public void onFulfilled(Cesium3DTileset value) {
                 BoundingSphere boundingSphere = tileset.boundingSphere();
                 double radius = boundingSphere.radius;
 
-                csVPanel.getViewer().camera.viewBoundingSphere(boundingSphere, new HeadingPitchRange(0.5, -0.2, radius * 4.0));
-                csVPanel.getViewer().camera.lookAtTransform(Matrix4.IDENTITY());
+                csVPanel.getViewer().zoomTo(tileset, new HeadingPitchRange(0.5, -0.2, radius * 4.0));
 
-                for (final Plane plane : clippingPlanes) {
+                for (final ClippingPlane plane : clippingPlanes) {
                     PlaneGraphicsOptions planeGraphicsOptions = new PlaneGraphicsOptions();
                     planeGraphicsOptions.dimensions = new ConstantProperty<>(new Cartesian2(radius * 2.5, radius * 2.5));
                     planeGraphicsOptions.material = new ColorMaterialProperty(Color.WHITE().withAlpha(0.1f));
@@ -250,7 +252,7 @@ public class Tiles3DClippingPlanes extends AbstractExample {
                         @Override
                         public Object function(JulianDate time, Object result) {
                             plane.distance = targetY;
-                            return Plane.transform(plane, tileset.modelMatrix, scratchPlane);
+                            return ClippingPlane.transform(plane, tileset.modelMatrix, scratchPlane);
                         }
                     }, false);
                     planeGraphicsOptions.outline = new ConstantProperty<>(true);
@@ -263,12 +265,10 @@ public class Tiles3DClippingPlanes extends AbstractExample {
                 }
             }
         });
-
-        tileset.debugShowBoundingVolume = boundingVolumeCBox.getValue();
     }
 
     private void loadModel(String url) {
-        Plane[] clippingPlanes = new Plane[] {new Plane(new Cartesian3(0.0, 0.0, -1.0), -100.0)};
+        ClippingPlane[] clippingPlanes = new ClippingPlane[] {new ClippingPlane(new Cartesian3(0.0, 0.0, -1.0), -100.0)};
 
         ClippingPlaneCollectionOptions clippingPlaneCollectionOptions = new ClippingPlaneCollectionOptions();
         clippingPlaneCollectionOptions.planes = clippingPlanes;
@@ -300,15 +300,15 @@ public class Tiles3DClippingPlanes extends AbstractExample {
         entityOptions.model = new ModelGraphics(modelGraphicsOptions);
         csVPanel.getViewer().trackedEntity = csVPanel.getViewer().entities().add(entityOptions);
 
-        for (final Plane plane : clippingPlanes) {
+        for (final ClippingPlane clippingPlane : clippingPlanes) {
             PlaneGraphicsOptions planeGraphicsOptions = new PlaneGraphicsOptions();
             planeGraphicsOptions.dimensions = new ConstantProperty<>(new Cartesian2(300.0, 300.0));
             planeGraphicsOptions.material = new ColorMaterialProperty(Color.WHITE().withAlpha(0.1f));
             planeGraphicsOptions.plane = new CallbackProperty(new CallbackProperty.Callback() {
                 @Override
                 public Object function(JulianDate time, Object result) {
-                    plane.distance = targetY;
-                    return Plane.transform(plane, Matrix4.IDENTITY(), scratchPlane);
+                    clippingPlane.distance = targetY;
+                    return ClippingPlane.transform(clippingPlane, Matrix4.IDENTITY(), scratchPlane);
                 }
             }, false);
             planeGraphicsOptions.outline = new ConstantProperty<>(true);
@@ -324,8 +324,9 @@ public class Tiles3DClippingPlanes extends AbstractExample {
 
     private void reset() {
         csVPanel.getViewer().entities().removeAll();
-        csVPanel.getViewer().scene().primitives().removeAll();
+        csVPanel.getViewer().scene().primitives().remove(tileset);
         planeEntities.clear();
         targetY = 0.0;
+        tileset = (Cesium3DTileset) JsObject.undefined();
     }
 }
