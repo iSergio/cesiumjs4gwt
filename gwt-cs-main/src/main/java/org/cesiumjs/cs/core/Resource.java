@@ -114,6 +114,15 @@ public class Resource {
 
     /**
      * Creates a Resource from a URL and calls delete() on it.
+     * @param url The url of the resource.
+     * @return a promise that will resolve to the requested data when loaded. Returns undefined if request.throttle
+     * is true and the request does not have high enough priority.
+     */
+    @JsMethod
+    public static native Promise<JsObject, Void> delete(String url);
+
+    /**
+     * Creates a Resource from a URL and calls delete() on it.
      * @param options {@link ResourceHttpOptions}.
      * @return a promise that will resolve to the requested data when loaded. Returns undefined if request.throttle
      * is true and the request does not have high enough priority.
@@ -123,12 +132,30 @@ public class Resource {
 
     /**
      * Creates a Resource from a URL and calls fetch() on it.
+     * @param url The url of the resource.
+     * @return a promise that will resolve to the requested data when loaded. Returns undefined if request.throttle is
+     * true and the request does not have high enough priority.
+     */
+    @JsMethod
+    public static native Promise<JsObject, Void> fetch(String url);
+
+    /**
+     * Creates a Resource from a URL and calls fetch() on it.
      * @param options {@link RequestOptions}.
      * @return a promise that will resolve to the requested data when loaded. Returns undefined if request.throttle is
      * true and the request does not have high enough priority.
      */
     @JsMethod
     public static native Promise<JsObject, Void> fetch(ResourceHttpOptions options);
+
+    /**
+     * Creates a Resource and calls fetchArrayBuffer() on it.
+     * @param url The url of the resource.
+     * @return a promise that will resolve to the requested data when loaded. Returns undefined if request.throttle is
+     * true and the request does not have high enough priority.
+     */
+    @JsMethod
+    public static native Promise<ArrayBuffer, Void> fetchArrayBuffer(String url);
 
     /**
      * Creates a Resource and calls fetchArrayBuffer() on it.
@@ -143,12 +170,30 @@ public class Resource {
 
     /**
      * Creates a Resource and calls fetchImage() on it.
+     * @param url The url of the resource.
+     * @return a promise that will resolve to the requested data when loaded. Returns undefined if request.throttle is
+     * true and the request does not have high enough priority.
+     */
+    @JsMethod
+    public static native Promise<JsImage, Void> fetchImage(String url);
+
+    /**
+     * Creates a Resource and calls fetchImage() on it.
      * @param options {@link ResourceImageOptions} object.
      * @return a promise that will resolve to the requested data when loaded. Returns undefined if request.throttle is
      * true and the request does not have high enough priority.
      */
     @JsMethod
     public static native Promise<JsImage, Void> fetchImage(ResourceImageOptions options);
+
+    /**
+     * Creates a Resource and calls fetchJson() on it.
+     * @param url The url of the resource.
+     * @return a promise that will resolve to the requested data when loaded. Returns undefined if request.throttle is
+     * true and the request does not have high enough priority.
+     */
+    @JsMethod
+    public static native Promise<JsObject, Void> fetchJson(String url);
 
     /**
      * Creates a Resource and calls fetchJson() on it.
@@ -161,12 +206,30 @@ public class Resource {
 
     /**
      * Creates a Resource from a URL and calls fetchJsonp() on it.
+     * @param url The url of the resource.
+     * @return a promise that will resolve to the requested data when loaded. Returns undefined if request.throttle is
+     * true and the request does not have high enough priority.
+     */
+    @JsMethod
+    public static native Promise<JsObject, Void> fetchJsonp(String url);
+
+    /**
+     * Creates a Resource from a URL and calls fetchJsonp() on it.
      * @param options {@link ResourceJsonpOptions} object.
      * @return a promise that will resolve to the requested data when loaded. Returns undefined if request.throttle is
      * true and the request does not have high enough priority.
      */
     @JsMethod
     public static native Promise<JsObject, Void> fetchJsonp(ResourceJsonpOptions options);
+
+    /**
+     * Creates a Resource and calls fetchText() on it.
+     * @param url The url of the resource.
+     * @return a promise that will resolve to the requested data when loaded. Returns undefined if request.throttle is
+     * true and the request does not have high enough priority.
+     */
+    @JsMethod
+    public static native Promise<JsObject, Void> fetchText(String url);
 
     /**
      * Creates a Resource and calls fetchText() on it.
@@ -179,12 +242,48 @@ public class Resource {
 
     /**
      * Creates a Resource and calls fetchXML() on it.
+     * @param url The url of the resource.
+     * @return a promise that will resolve to the requested data when loaded. Returns undefined if request.throttle is
+     * true and the request does not have high enough priority.
+     */
+    @JsMethod
+    public static native Promise<JsObject, Void> fetchXML(String url);
+
+    /**
+     * Creates a Resource and calls fetchXML() on it.
      * @param options {@link ResourceOptions} object.
      * @return a promise that will resolve to the requested data when loaded. Returns undefined if request.throttle is
      * true and the request does not have high enough priority.
      */
     @JsMethod
     public static native Promise<JsObject, Void> fetchXML(ResourceOptions options);
+
+    /**
+     * Creates a Resource from a URL and calls patch() on it.
+     * @param url The url of the resource.
+     * @return a promise that will resolve to the requested data when loaded. Returns undefined if request.throttle is
+     * true and the request does not have high enough priority.
+     */
+    @JsMethod
+    public static native Promise<JsObject, Void> patch(String url);
+
+    /**
+     * Creates a Resource from a URL and calls patch() on it.
+     * @param options {@link ResourcePathOptions} object.
+     * @return a promise that will resolve to the requested data when loaded. Returns undefined if request.throttle is
+     * true and the request does not have high enough priority.
+     */
+    @JsMethod
+    public static native Promise<JsObject, Void> patch(ResourcePathOptions options);
+
+    /**
+     * Creates a Resource from a URL and calls fetch() on it.
+     * @param url The url of the resource.
+     * @return a promise that will resolve to the requested data when loaded. Returns undefined if request.throttle is
+     * true and the request does not have high enough priority.
+     */
+    @JsMethod
+    public static native Promise<JsObject, Void> post(String url);
 
     /**
      * Creates a Resource from a URL and calls fetch() on it.
@@ -194,6 +293,24 @@ public class Resource {
      */
     @JsMethod
     public static native Promise<JsObject, Void> post(ResourceHttpOptions options);
+
+    /**
+     * Creates a Resource from a URL and calls put() on it.
+     * @param url The url of the resource.
+     * @return a promise that will resolve to the requested data when loaded. Returns undefined if request.throttle is true and
+     * the request does not have high enough priority.
+     */
+    @JsMethod
+    public static native Promise<JsObject, Void> put(String url);
+
+    /**
+     * Creates a Resource from a URL and calls put() on it.
+     * @param options {@link ResourcePutOptions} opbject.
+     * @return a promise that will resolve to the requested data when loaded. Returns undefined if request.throttle is true and
+     * the request does not have high enough priority.
+     */
+    @JsMethod
+    public static native Promise<JsObject, Void> put(ResourcePutOptions options);
 
     /**
      * Combines the specified object and the existing query parameters. This allows you to add many parameters at once,
@@ -318,8 +435,8 @@ public class Resource {
      * @return a promise that will resolve to the requested data when loaded. Returns undefined if request.throttle is
      * true and the request does not have high enough priority.
      */
-    @JsMethod
-    public native Promise<JsObject, Void> fetchJsonp(String callbackParameterName);
+    @JsMethod(name = "fetchJsonp")
+    public native Promise<JsObject, Void> fetchJsonpCallback(String callbackParameterName);
 
     /**
      * Asynchronously loads the given resource as text. Returns a promise that will resolve to a String once loaded,
