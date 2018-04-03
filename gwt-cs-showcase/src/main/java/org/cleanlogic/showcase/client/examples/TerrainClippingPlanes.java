@@ -36,6 +36,7 @@ import org.cesiumjs.cs.datasources.options.EntityOptions;
 import org.cesiumjs.cs.datasources.properties.ColorMaterialProperty;
 import org.cesiumjs.cs.datasources.properties.ConstantPositionProperty;
 import org.cesiumjs.cs.datasources.properties.ConstantProperty;
+import org.cesiumjs.cs.scene.ClippingPlane;
 import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cesiumjs.cs.widgets.options.ViewerOptions;
 import org.cleanlogic.showcase.client.basic.AbstractExample;
@@ -89,11 +90,11 @@ public class TerrainClippingPlanes extends AbstractExample {
 
         ClippingPlaneCollectionOptions clippingPlaneCollectionOptions = new ClippingPlaneCollectionOptions();
         clippingPlaneCollectionOptions.modelMatrix = entity.computeModelMatrix(JulianDate.now());
-        clippingPlaneCollectionOptions.planes = new Plane[] {
-                new Plane(new Cartesian3(1.0,  0.0, 0.0), -700.0),
-                new Plane(new Cartesian3(-1.0,  0.0, 0.0), -700.0),
-                new Plane(new Cartesian3(0.0,  1.0, 0.0), -700.0),
-                new Plane(new Cartesian3(0.0, -1.0, 0.0), -700.0)
+        clippingPlaneCollectionOptions.planes = new ClippingPlane[] {
+                new ClippingPlane(new Cartesian3(1.0,  0.0, 0.0), -700.0),
+                new ClippingPlane(new Cartesian3(-1.0,  0.0, 0.0), -700.0),
+                new ClippingPlane(new Cartesian3(0.0,  1.0, 0.0), -700.0),
+                new ClippingPlane(new Cartesian3(0.0, -1.0, 0.0), -700.0)
         };
         clippingPlaneCollectionOptions.edgeWidth = 1.0;
         clippingPlaneCollectionOptions.edgeColor = Color.WHITE();

@@ -231,7 +231,7 @@ public class Materials extends AbstractExample {
         ellipsoidSurfaceAppearanceOptions.aboveGround = false;
         primitiveOptions.asynchronous = false;
         primitiveOptions.appearance = new EllipsoidSurfaceAppearance(ellipsoidSurfaceAppearanceOptions);
-        rectangle = scene.primitives().add(new Primitive(primitiveOptions));
+        rectangle = (Primitive) scene.primitives().add(new Primitive(primitiveOptions));
 
         primitiveOptions = new PrimitiveOptions();
         geometryInstanceOptions = new GeometryInstanceOptions();
@@ -245,7 +245,7 @@ public class Materials extends AbstractExample {
         primitiveOptions.appearance = new EllipsoidSurfaceAppearance(ellipsoidSurfaceAppearanceOptions);
         primitiveOptions.show = false;
         primitiveOptions.asynchronous = false;
-        worldRectangle = scene.primitives().add(new Primitive(primitiveOptions));
+        worldRectangle = (Primitive) scene.primitives().add(new Primitive(primitiveOptions));
 
         PolylineCollection polylines = (PolylineCollection) scene.primitives().add(new PolylineCollection());
         PolylineOptions polylineOptions = new PolylineOptions();

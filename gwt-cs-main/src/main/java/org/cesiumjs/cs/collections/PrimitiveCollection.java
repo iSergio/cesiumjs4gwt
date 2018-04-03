@@ -21,18 +21,15 @@ import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.collections.options.PrimitiveCollectionOptions;
-import org.cesiumjs.cs.scene.Cesium3DTileset;
-import org.cesiumjs.cs.scene.Model;
 import org.cesiumjs.cs.scene.Primitive;
 import org.cesiumjs.cs.scene.Scene;
-import org.cesiumjs.cs.scene.particle.ParticleSystem;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 // TODO: examples
 @JsType(isNative = true, namespace = "Cesium", name = "PrimitiveCollection")
-public class PrimitiveCollection extends Collection<Primitive> {
+public class PrimitiveCollection extends Collection<Object> {
     /**
      * Determines if primitives in the collection are destroyed when they are removed by {@link PrimitiveCollection#destroy()} or
      * {@link PrimitiveCollection#remove(Object)} or implicitly by PrimitiveCollection#removeAll.
@@ -62,28 +59,29 @@ public class PrimitiveCollection extends Collection<Primitive> {
     @JsConstructor
     public PrimitiveCollection(PrimitiveCollectionOptions options) {}
 
-    /**
-     * Add collection
-     * @param collection Collection
-     * @return collection
-     */
-    @JsMethod
-    public native Collection add(Collection<?> collection);
-    @JsMethod
-    public native boolean remove(Collection<?> collection);
-
-    /**
-     * Add model to collecntion
-     * @param model Model to add
-     * @return added Model
-     */
-    @JsMethod
-    public native Model add(Model model);
-
-    @JsMethod
-    public native ParticleSystem add(ParticleSystem particleSystem);
-    @JsMethod
-    public native Cesium3DTileset add(Cesium3DTileset cesium3DTileset);
+//    /**
+//     * Add collection
+//     * @param collection Collection
+//     * @return collection
+//     */
+//    @JsMethod
+//    public native Collection add(Collection<?> collection);
+//    @JsMethod
+//    public native boolean remove(Collection<?> collection);
+//
+//    /**
+//     * Add model to collecntion
+//     * @param model Model to add
+//     * @return added Model
+//     */
+//    @JsMethod
+//    public native Model add(Model model);
+//
+//    @JsMethod
+//    public native ParticleSystem add(ParticleSystem particleSystem);
+//
+//    @JsMethod
+//    public native Cesium3DTileset add(Cesium3DTileset cesium3DTileset);
     /**
      * Lowers a primitive "down one" in the collection. If all primitives in the collection are drawn on the globe surface,
      * this visually moves the primitive down one.

@@ -16,10 +16,7 @@
 
 package org.cesiumjs.cs.scene;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.Plane;
 
@@ -30,7 +27,7 @@ import org.cesiumjs.cs.core.Plane;
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = "Cesium", name = "ClippingPlane")
-public class ClippingPlane {
+public class ClippingPlane extends Plane {
     /**
      * The shortest distance from the origin to the plane. The sign of distance determines which side of the plane the
      * origin is on. If distance is positive, the origin is in the half-space in the direction of the normal;
@@ -44,20 +41,36 @@ public class ClippingPlane {
     @JsProperty
     public Cartesian3 normal;
 
-    @JsConstructor
-    private ClippingPlane() {}
-
     /**
-     * A Plane in Hessian Normal form to be used with {@link org.cesiumjs.cs.collections.ClippingPlaneCollection}.
-     * Compatible with mathematics functions in {@link org.cesiumjs.cs.core.Plane}
-     * @param normal The plane's normal (normalized).
+     * A plane in Hessian Normal Form defined by
+     * <p>
+     * ax + by + cz + d = 0
+     * <p>
+     * where (a, b, c) is the plane's normal, d is the signed distance to the plane, and (x, y, z) is any point on the plane.
+     *
+     * @param normal   The plane's normal (normalized).
      * @param distance The shortest distance from the origin to the plane. The sign of distance determines which side
      *                 of the plane the origin is on. If distance is positive, the origin is in the half-space in the
      *                 direction of the normal; if negative, the origin is in the half-space opposite to the normal;
-     *                 if zero, the plane passes through the origin.
      */
-    @JsConstructor
-    public ClippingPlane(Cartesian3 normal, double distance) {}
+    public ClippingPlane(Cartesian3 normal, double distance) {
+        super(normal, distance);
+    }
+
+//    @JsConstructor
+//    private ClippingPlane() {}
+//
+//    /**
+//     * A Plane in Hessian Normal form to be used with {@link org.cesiumjs.cs.collections.ClippingPlaneCollection}.
+//     * Compatible with mathematics functions in {@link org.cesiumjs.cs.core.Plane}
+//     * @param normal The plane's normal (normalized).
+//     * @param distance The shortest distance from the origin to the plane. The sign of distance determines which side
+//     *                 of the plane the origin is on. If distance is positive, the origin is in the half-space in the
+//     *                 direction of the normal; if negative, the origin is in the half-space opposite to the normal;
+//     *                 if zero, the plane passes through the origin.
+//     */
+//    @JsConstructor
+//    public ClippingPlane(Cartesian3 normal, double distance) {}
 
     /**
      * Clones the ClippingPlane without setting its ownership.

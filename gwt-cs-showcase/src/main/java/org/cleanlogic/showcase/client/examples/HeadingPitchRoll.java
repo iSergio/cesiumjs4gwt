@@ -98,7 +98,7 @@ public class HeadingPitchRoll extends AbstractExample {
         fromGltfOptions.url = GWT.getModuleBaseURL() + "SampleData/models/CesiumAir/Cesium_Air.glb";
         fromGltfOptions.modelMatrix = Transforms.headingPitchRollToFixedFrame(position, hpRoll, Ellipsoid.WGS84());//, fixedFrameTransform);
         fromGltfOptions.minimumPixelSize = 128;
-        planePrimitive = csVPanel.getViewer().scene().primitives().add(Model.fromGltf(fromGltfOptions));
+        planePrimitive = (Model) csVPanel.getViewer().scene().primitives().add(Model.fromGltf(fromGltfOptions));
         planePrimitive.readyPromise().then(new Fulfill<Model>() {
             @Override
             public void onFulfilled(Model model) {

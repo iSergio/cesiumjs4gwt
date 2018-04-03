@@ -208,7 +208,7 @@ public class ParticleSystem extends AbstractExample {
             }
         }};
 
-        particleSystem = csVPanel.getViewer().scene().primitives().add(new org.cesiumjs.cs.scene.particle.ParticleSystem(particleSystemOptions));
+        particleSystem = (org.cesiumjs.cs.scene.particle.ParticleSystem) csVPanel.getViewer().scene().primitives().add(new org.cesiumjs.cs.scene.particle.ParticleSystem(particleSystemOptions));
 
         csVPanel.getViewer().scene().preRender().addEventListener(new Event.Listener() {
             @Override
