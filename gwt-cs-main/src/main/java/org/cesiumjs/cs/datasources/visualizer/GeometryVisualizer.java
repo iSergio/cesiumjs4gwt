@@ -20,6 +20,7 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.collections.EntityCollection;
+import org.cesiumjs.cs.collections.PrimitiveCollection;
 import org.cesiumjs.cs.core.JulianDate;
 import org.cesiumjs.cs.datasources.updater.GeometryUpdater;
 import org.cesiumjs.cs.scene.Scene;
@@ -36,6 +37,25 @@ public class GeometryVisualizer implements Visualizer {
      */
     @JsConstructor
     public GeometryVisualizer(Scene scene, EntityCollection entityCollection) {}
+
+    /**
+     * A general purpose visualizer for geometry represented by {@link org.cesiumjs.cs.scene.Primitive} instances.
+     * @param scene The scene the primitives will be rendered in.
+     * @param entityCollection The entityCollection to visualize.
+     * @param primitives A collection to add primitives related to the entities
+     */
+    @JsConstructor
+    public GeometryVisualizer(Scene scene, EntityCollection entityCollection, PrimitiveCollection primitives) {}
+
+    /**
+     * A general purpose visualizer for geometry represented by {@link org.cesiumjs.cs.scene.Primitive} instances.
+     * @param scene The scene the primitives will be rendered in.
+     * @param entityCollection The entityCollection to visualize.
+     * @param primitives A collection to add primitives related to the entities
+     * @param groundPrimitives A collection to add ground primitives related to the entities
+     */
+    @JsConstructor
+    public GeometryVisualizer(Scene scene, EntityCollection entityCollection, PrimitiveCollection primitives, PrimitiveCollection groundPrimitives) {}
 
     /**
      * Removes and destroys all primitives created by this instance.
