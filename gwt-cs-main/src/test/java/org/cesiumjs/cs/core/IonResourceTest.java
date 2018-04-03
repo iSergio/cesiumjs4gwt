@@ -16,9 +16,7 @@
 
 package org.cesiumjs.cs.core;
 
-import junit.framework.TestCase;
 import org.cesiumjs.cs.BaseTestCase;
-import org.cesiumjs.cs.Cesium;
 import org.cesiumjs.cs.promise.Fulfill;
 import org.cesiumjs.cs.promise.Reject;
 
@@ -26,39 +24,44 @@ import org.cesiumjs.cs.promise.Reject;
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 public class IonResourceTest extends BaseTestCase {
+    public void testFromAssetId1() {
+        delayTestFinish(10_000);
 
-    public void testFromAssetId() {
         super.beginTest(new Test() {
             @Override
             public void execute() {
-                IonResource.fromAssetId(10890).then(new Fulfill<IonResource>() {
+                IonResource.fromAssetId(3827).then(new Fulfill<IonResource>() {
                     @Override
                     public void onFulfilled(IonResource resource) {
                         assertNotNull(resource);
+                        finishTest();
                     }
                 }, new Reject<Void>() {
                     @Override
                     public void onRejected(Void value) {
-                        Cesium.log("Request rejected");
-                        assertTrue(true);
+                        finishTest();
                     }
                 });
             }
         });
+    }
+
+    public void testFromAssetId2() {
+        delayTestFinish(10_000);
 
         super.beginTest(new Test() {
             @Override
             public void execute() {
-                IonResource.fromAssetId(3883).then(new Fulfill<IonResource>() {
+                IonResource.fromAssetId(3956).then(new Fulfill<IonResource>() {
                     @Override
-                    public void onFulfilled(IonResource value) {
-                        assertNotNull(value);
+                    public void onFulfilled(IonResource resource) {
+                        assertNotNull(resource);
+                        finishTest();
                     }
                 }, new Reject<Void>() {
                     @Override
                     public void onRejected(Void value) {
-                        Cesium.log("Request rejected");
-                        assertTrue(true);
+                        finishTest();
                     }
                 });
             }
