@@ -40,10 +40,10 @@ public class CesiumTest extends BaseTestCase {
         super.beginTest(new Test() {
             @Override
             public void execute() {
-                Cesium.CreateWorldTerrainOptions options = new Cesium.CreateWorldTerrainOptions();
+                final Cesium.CreateWorldTerrainOptions options = new Cesium.CreateWorldTerrainOptions();
                 options.requestVertexNormals = true;
                 options.requestWaterMask = true;
-                CesiumTerrainProvider terrainProvider = Cesium.createWorldTerrain(options);
+                final CesiumTerrainProvider terrainProvider = Cesium.createWorldTerrain(options);
                 assertNotNull(terrainProvider);
                 assertEquals(options.requestVertexNormals, terrainProvider.requestVertexNormals);
                 assertEquals(options.requestWaterMask, terrainProvider.requestWaterMask);
