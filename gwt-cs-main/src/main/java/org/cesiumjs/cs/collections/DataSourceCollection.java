@@ -25,6 +25,8 @@ import org.cesiumjs.cs.datasources.DataSource;
 import org.cesiumjs.cs.promise.Promise;
 
 /**
+ * A collection of {@link DataSource} instances.
+ *
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = "Cesium", name = "DataSourceCollection")
