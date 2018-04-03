@@ -23,15 +23,6 @@ import org.cesiumjs.cs.BaseTestCase;
  */
 public class ClippingPlaneCollectionTest extends BaseTestCase {
 
-    public void testMaxClippingPlanes() {
-        super.beginTest(new Test() {
-            @Override
-            public void execute() {
-                assertEquals(6.0, ClippingPlaneCollection.MAX_CLIPPING_PLANES());
-            }
-        });
-    }
-
     public void testIsSupported() {
         super.beginTest(new Test() {
             @Override
