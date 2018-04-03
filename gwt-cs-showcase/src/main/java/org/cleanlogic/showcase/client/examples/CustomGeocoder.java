@@ -27,6 +27,7 @@ import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.Cesium;
 import org.cesiumjs.cs.core.GeocoderResult;
 import org.cesiumjs.cs.core.Rectangle;
+import org.cesiumjs.cs.core.Resource;
 import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.promise.Fulfill;
 import org.cesiumjs.cs.promise.Promise;
@@ -52,11 +53,11 @@ public class CustomGeocoder extends AbstractExample {
         OpenStreetMapNominatimGeocoder openStreetMapNominatimGeocoder = new OpenStreetMapNominatimGeocoder();
         openStreetMapNominatimGeocoder.geocode = new OpenStreetMapNominatimGeocoder.Geocode() {
             @Override
-            public Promise<JsObject, String> function(String input) {
+            public Promise<JsObject, Void> function(String input) {
                 String endpoint = "http://nominatim.openstreetmap.org/search?";
                 String query = "format=json&q=" + input;
                 String requestString = endpoint + query;
-                Promise<JsObject, String> promise = Cesium.loadJson(requestString);
+                Promise<JsObject, Void> promise = Resource.fetchJson(requestString);
                 promise.then(new Fulfill<JsObject>() {
                     @Override
                     public void onFulfilled(JsObject value) {
@@ -103,7 +104,7 @@ public class CustomGeocoder extends AbstractExample {
 
         @JsFunction
         public interface Geocode {
-            Promise<JsObject, String> function(String input);
+            Promise<JsObject, Void> function(String input);
         }
     }
 }
