@@ -36,14 +36,10 @@ public abstract class BaseTestCase extends GWTTestCase {
         return "org.cesiumjs.CesiumTest";
     }
 
-    protected void beginTest(final Test test) {//final Test test) {
-
+    protected void beginTest(final Test test) {
         if (loaded) {
             test.execute();
         } else {
-
-            super.delayTestFinish(10_000);
-
             ScriptInjector.fromUrl("cs/CesiumUnminified/Cesium.js").setWindow(ScriptInjector.TOP_WINDOW).setCallback(new Callback<Void, Exception>() {
 
                 @Override
@@ -56,13 +52,10 @@ public abstract class BaseTestCase extends GWTTestCase {
                 public void onSuccess(Void result) {
                     loaded = true;
                     test.execute();
-                    finishTest();
                 }
 
             }).inject();
-
         }
-
     }
 
     public interface Test {
