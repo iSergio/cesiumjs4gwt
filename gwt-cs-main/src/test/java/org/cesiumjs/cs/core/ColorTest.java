@@ -25,12 +25,15 @@ import org.cesiumjs.cs.Cesium;
 public class ColorTest extends BaseTestCase {
 
     public void testConstructor() {
+        delayTestFinish(10_000);
+
         super.beginTest(new Test() {
             @Override
             public void execute() {
                 Color color = new Color(1.0f, 0.0f, 0.0f, 1.0f);
                 assertNotNull(color);
                 assertEquals(color, Color.RED());
+                finishTest();
             }
         });
     }

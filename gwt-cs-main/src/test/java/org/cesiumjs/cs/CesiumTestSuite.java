@@ -19,6 +19,7 @@ package org.cesiumjs.cs;
 import com.google.gwt.junit.tools.GWTTestSuite;
 import junit.framework.TestSuite;
 import org.cesiumjs.cs.collections.ClippingPlaneCollectionTest;
+import org.cesiumjs.cs.collections.DataSourceCollectionTest;
 import org.cesiumjs.cs.collections.LabelCollectionTest;
 import org.cesiumjs.cs.core.ColorTest;
 import org.cesiumjs.cs.core.Cartesian2Test;
@@ -46,6 +47,7 @@ public class CesiumTestSuite extends GWTTestSuite {
         // Scene
         suite.addTestSuite(LabelTest.class);
         suite.addTestSuite(ClippingPlaneCollectionTest.class);
+//        suite.addTestSuite(DataSourceCollectionTest.class);
         suite.addTestSuite(Cesium3DTilesetTest.class);
 
         // Widgets

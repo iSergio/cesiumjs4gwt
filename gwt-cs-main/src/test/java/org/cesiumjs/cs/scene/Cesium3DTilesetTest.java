@@ -18,10 +18,12 @@ package org.cesiumjs.cs.scene;
 
 import junit.framework.TestCase;
 import org.cesiumjs.cs.BaseTestCase;
+import org.cesiumjs.cs.Cesium;
 import org.cesiumjs.cs.core.IonResource;
 import org.cesiumjs.cs.core.Resource;
 import org.cesiumjs.cs.promise.Fulfill;
 import org.cesiumjs.cs.promise.Promise;
+import org.cesiumjs.cs.promise.Reject;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -29,6 +31,8 @@ import org.cesiumjs.cs.promise.Promise;
 public class Cesium3DTilesetTest extends BaseTestCase {
 
     public void testCreateResource() {
+        delayTestFinish(10_000);
+
         super.beginTest(new Test() {
             @Override
             public void execute() {
@@ -41,6 +45,12 @@ public class Cesium3DTilesetTest extends BaseTestCase {
                             @Override
                             public void onFulfilled(Cesium3DTileset value) {
                                 assertNotNull(value);
+                                finishTest();
+                            }
+                        }, new Reject<Void>() {
+                            @Override
+                            public void onRejected(Void value) {
+                                finishTest();
                             }
                         });
                     }
@@ -50,6 +60,8 @@ public class Cesium3DTilesetTest extends BaseTestCase {
     }
 
     public void testCreatePromise() {
+        delayTestFinish(10_000);
+
         super.beginTest(new Test() {
             @Override
             public void execute() {
@@ -59,6 +71,13 @@ public class Cesium3DTilesetTest extends BaseTestCase {
                     @Override
                     public void onFulfilled(Cesium3DTileset value) {
                         assertNotNull(value);
+                        finishTest();
+                    }
+                }, new Reject<Void>() {
+                    @Override
+                    public void onRejected(Void value) {
+                        assertTrue(false);
+                        finishTest();
                     }
                 });
             }

@@ -27,18 +27,34 @@ import org.cesiumjs.cs.scene.options.LabelOptions;
  */
 public class LabelTest extends BaseTestCase {
     public void testVerticalOrigin() {
-        LabelCollection collection = new LabelCollection();
-        LabelOptions options = new LabelOptions();
-        options.verticalOrigin = VerticalOrigin.TOP();
-        Label label = collection.add(options);
-        assertEquals(VerticalOrigin.TOP(), label.verticalOrigin);
+        delayTestFinish(10_000);
+
+        super.beginTest(new Test() {
+            @Override
+            public void execute() {
+                LabelCollection collection = new LabelCollection();
+                LabelOptions options = new LabelOptions();
+                options.verticalOrigin = VerticalOrigin.TOP();
+                Label label = collection.add(options);
+                assertEquals(VerticalOrigin.TOP(), label.verticalOrigin);
+                finishTest();
+            }
+        });
     }
 
     public void testHorizontalOrigin() {
-        LabelCollection collection = new LabelCollection();
-        LabelOptions options = new LabelOptions();
-        options.horizontalOrigin = HorizontalOrigin.RIGHT();
-        Label label = collection.add(options);
-        assertEquals(HorizontalOrigin.RIGHT(), label.horizontalOrigin);
+        delayTestFinish(10_000);
+
+        super.beginTest(new Test() {
+            @Override
+            public void execute() {
+                LabelCollection collection = new LabelCollection();
+                LabelOptions options = new LabelOptions();
+                options.horizontalOrigin = HorizontalOrigin.RIGHT();
+                Label label = collection.add(options);
+                assertEquals(HorizontalOrigin.RIGHT(), label.horizontalOrigin);
+                finishTest();
+            }
+        });
     }
 }

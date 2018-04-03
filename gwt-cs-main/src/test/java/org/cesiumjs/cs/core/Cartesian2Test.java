@@ -27,6 +27,8 @@ import java.util.logging.Logger;
 public class Cartesian2Test extends BaseTestCase {
     private static final Logger LOGGER = LogManager.getLogManager().getLogger(Cartesian2Test.class.getName());
     public void testConstructor() {
+        delayTestFinish(10_000);
+
         super.beginTest(new Test() {
             @Override
             public void execute() {
@@ -34,6 +36,7 @@ public class Cartesian2Test extends BaseTestCase {
                 assertNotNull(cartesian2);
                 assertEquals(1.0, cartesian2.x);
                 assertEquals(2.0, cartesian2.y);
+                finishTest();
             }
         });
     }

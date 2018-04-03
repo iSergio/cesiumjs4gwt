@@ -29,6 +29,8 @@ import org.cesiumjs.cs.BaseTestCase;
  */
 public class ViewerPanelTest extends BaseTestCase {
     public void testRequestRenderMode() {
+        delayTestFinish(10_000);
+
         super.beginTest(new Test() {
             @Override
             public void execute() {
@@ -43,8 +45,10 @@ public class ViewerPanelTest extends BaseTestCase {
                 Element element = RootPanel.get().getElement().getOwnerDocument().getElementById("cesium");
                 assertNotNull(element);
                 ViewerOptions options = new ViewerOptions();
+                assertNotNull(options);
                 Viewer viewer = new Viewer(element, options);
-                assertNotNull(viewer);
+//                assertNotNull(viewer);
+                finishTest();
             }
         });
     }

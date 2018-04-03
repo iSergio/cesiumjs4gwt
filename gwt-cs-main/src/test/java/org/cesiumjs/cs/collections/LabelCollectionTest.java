@@ -28,6 +28,8 @@ public class LabelCollectionTest extends BaseTestCase {
     private static final String VALUE = "LABEL";
 
     public void testAdd() {
+        delayTestFinish(10_000);
+
         super.beginTest(new Test() {
             @Override
             public void execute() {
@@ -47,11 +49,14 @@ public class LabelCollectionTest extends BaseTestCase {
 
                 assertNotNull(label);
                 assertEquals(VALUE, label.text);
+                finishTest();
             }
         });
     }
 
     public void testContains() {
+        delayTestFinish(10_000);
+
         super.beginTest(new Test() {
             @Override
             public void execute() {
@@ -70,11 +75,14 @@ public class LabelCollectionTest extends BaseTestCase {
                 collection.add(options);
 
                 assertTrue(collection.contains(label));
+                finishTest();
             }
         });
     }
 
     public void testGet() {
+        delayTestFinish(10_000);
+
         super.beginTest(new Test() {
             @Override
             public void execute() {
@@ -93,6 +101,7 @@ public class LabelCollectionTest extends BaseTestCase {
                 collection.add(options);
 
                 assertEquals(label, collection.get(1));
+                finishTest();
             }
         });
     }

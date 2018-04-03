@@ -25,6 +25,8 @@ import org.cesiumjs.cs.promise.Fulfill;
 public class CesiumTest extends BaseTestCase {
 
     public void testCreateWorldTerrain() {
+        delayTestFinish(10_000);
+
         super.beginTest(new Test() {
             @Override
             public void execute() {
@@ -32,11 +34,14 @@ public class CesiumTest extends BaseTestCase {
                 assertNotNull(terrainProvider);
                 assertEquals(false, terrainProvider.requestVertexNormals);
                 assertEquals(false, terrainProvider.requestWaterMask);
+                finishTest();
             }
         });
     }
 
     public void testCreateWorldTerrain1() {
+        delayTestFinish(10_000);
+
         super.beginTest(new Test() {
             @Override
             public void execute() {
@@ -53,6 +58,7 @@ public class CesiumTest extends BaseTestCase {
                         if (ready) {
                             assertEquals(options.requestVertexNormals, terrainProvider.hasVertexNormals);
                             assertEquals(options.requestWaterMask, terrainProvider.hasWaterMask);
+                            finishTest();
                         }
                     }
                 });
