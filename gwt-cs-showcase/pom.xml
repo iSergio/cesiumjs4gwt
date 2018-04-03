@@ -11,7 +11,7 @@
 
     <artifactId>gwt-cs-showcase</artifactId>
     <packaging>war</packaging>
-    <description>Showcase for GWT Cesium</description>
+    <name>CesiumJS GWT Showcase</name>
 
     <properties>
         <!-- GWT -->
