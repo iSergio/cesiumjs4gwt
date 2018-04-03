@@ -27,18 +27,13 @@ import org.cesiumjs.cs.core.Plane;
 import org.cesiumjs.cs.scene.ClippingPlane;
 
 /**
- * Specifies a set of clipping planes. Clipping planes selectively disable rendering in a
- * region on the outside of the specified list of Plane objects.
+ * Specifies a set of clipping planes. Clipping planes selectively disable rendering in a region on the outside of the
+ * specified list of {@link ClippingPlane} objects for a single gltf model, 3D Tileset, or the globe.
  *
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = "Cesium", name = "ClippingPlaneCollection")
 public class ClippingPlaneCollection extends Collection<ClippingPlane> {
-    /**
-     * The maximum number of supported clipping planes.
-     */
-    @JsProperty(name = "MAX_CLIPPING_PLANES")
-    public static native double MAX_CLIPPING_PLANES();
     /**
      * The color applied to highlight the edge along which an object is clipped.
      * Default: {@link Color#WHITE()}.
