@@ -255,11 +255,8 @@ public class Viewer {
     /**
      * Gets the VRButton.
      */
-    //TODO: Later
-//    @JsProperty(name = "vrButton")
-//    public native VRButton vrButton();
-    @JsProperty
-    public Cesium3DTilesInspector cesium3DTilesInspector;
+    @JsProperty(name = "vrButton")
+    public native VRButton vrButton();
 
     /**
      * A base widget for building applications. It composites all of the standard Cesium widgets into one reusable package.
