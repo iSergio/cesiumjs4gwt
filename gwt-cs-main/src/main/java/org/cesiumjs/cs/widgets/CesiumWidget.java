@@ -24,6 +24,7 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.collections.ImageryLayerCollection;
 import org.cesiumjs.cs.core.Clock;
+import org.cesiumjs.cs.core.ScreenSpaceEventHandler;
 import org.cesiumjs.cs.core.providers.TerrainProvider;
 import org.cesiumjs.cs.scene.Camera;
 import org.cesiumjs.cs.scene.Scene;
@@ -79,12 +80,11 @@ public class CesiumWidget {
      */
     @JsProperty
     public Scene scene;
-    //TODO: ScreenSpaceEventHandler
-//    /**
-//     * Gets the screen space event handler.
-//     */
-//    @JsProperty
-//    public ScreenSpaceEventHandler screenSpaceEventHandler;
+    /**
+     * Gets the screen space event handler.
+     */
+    @JsProperty
+    public ScreenSpaceEventHandler screenSpaceEventHandler;
     /**
      * Gets or sets the target frame rate of the widget when useDefaultRenderLoop is true.
      * If undefined, the browser's requestAnimationFrame implementation determines the frame rate.

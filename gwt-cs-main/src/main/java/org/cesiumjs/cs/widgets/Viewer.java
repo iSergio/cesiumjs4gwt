@@ -108,7 +108,6 @@ public class Viewer {
     /**
      * Gets the display used for DataSource visualization.
      */
-    //TODO: Later
     @JsProperty(name = "dataSourceDisplay")
     public native DataSourceDisplay dataSourceDisplay();
     /**
@@ -331,7 +330,6 @@ public class Viewer {
      *               You can also pass a promise that resolves to one of the previously mentioned types.
      * @return A Promise that resolves to true if the flight was successful or false if the entity is not currently visualized in the scene or the flight was cancelled.
      */
-    //TODO: Promise
     public native Promise<Boolean, Void> flyTo(Object target);
 
     /**
