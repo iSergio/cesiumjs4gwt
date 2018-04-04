@@ -18,6 +18,13 @@ package org.cesiumjs.cs;
 
 import com.google.gwt.junit.tools.GWTTestSuite;
 import junit.framework.TestSuite;
+import org.cesiumjs.cs.collections.ClippingPlaneCollectionTest;
+import org.cesiumjs.cs.collections.LabelCollectionTest;
+import org.cesiumjs.cs.core.Cartesian2Test;
+import org.cesiumjs.cs.core.ColorTest;
+import org.cesiumjs.cs.core.IonResourceTest;
+import org.cesiumjs.cs.scene.Cesium3DTilesetTest;
+import org.cesiumjs.cs.scene.LabelTest;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -27,19 +34,19 @@ public class CesiumTestSuite extends GWTTestSuite {
         TestSuite suite = new TestSuite("GWTTestSuite for Cesium Wrapper");
 
         // Cesium
-//        suite.addTestSuite(CesiumTest.class);
-//
-//        // Core
-//        suite.addTestSuite(ColorTest.class);
-//        suite.addTestSuite(Cartesian2Test.class);
-//        suite.addTestSuite(LabelCollectionTest.class);
-//        suite.addTestSuite(IonResourceTest.class);
-//
-//        // Scene
-//        suite.addTestSuite(LabelTest.class);
-//        suite.addTestSuite(ClippingPlaneCollectionTest.class);
-////        suite.addTestSuite(DataSourceCollectionTest.class);
-//        suite.addTestSuite(Cesium3DTilesetTest.class);
+        suite.addTestSuite(CesiumTest.class);
+
+        // Core
+        suite.addTestSuite(ColorTest.class);
+        suite.addTestSuite(Cartesian2Test.class);
+        suite.addTestSuite(LabelCollectionTest.class);
+        suite.addTestSuite(IonResourceTest.class);
+
+        // Scene
+        suite.addTestSuite(LabelTest.class);
+        suite.addTestSuite(ClippingPlaneCollectionTest.class);
+//        suite.addTestSuite(DataSourceCollectionTest.class);
+        suite.addTestSuite(Cesium3DTilesetTest.class);
 
         // Widgets
         // Not understand how test widgets, in this moment strange error
