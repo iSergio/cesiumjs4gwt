@@ -174,9 +174,8 @@ public class Viewer {
     /**
      * Gets the SceneModePicker.
      */
-    //TODO: Later
-//    @JsProperty(name = "sceneModePicker")
-//    public native SceneModePicker sceneModePicker();
+    @JsProperty(name = "sceneModePicker")
+    public native SceneModePicker sceneModePicker();
     /**
      * Gets the screen space event handler.
      */
