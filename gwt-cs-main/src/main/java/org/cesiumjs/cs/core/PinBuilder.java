@@ -84,15 +84,12 @@ public class PinBuilder {
     public native CanvasElement fromUrl(String url, Color color, int size);
 
     /**
-     * @deprecated Use {@link PinBuilder#fromUrl(String, Color, int)}.
-     *
      * Creates a pin with the specified icon, color, and size.
      * @param url The url of the image to be stamped onto the pin.
      * @param color The color of the pin.
      * @param size The size of the pin, in pixels.
      * @return The canvas element or a Promise to the canvas element that represents the generated pin.
      */
-    @Deprecated
     @JsMethod(name = "fromUrl")
     public native Promise<CanvasElement, Void> fromUrlPromise(String url, Color color, int size);
 }

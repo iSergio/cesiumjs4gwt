@@ -72,9 +72,7 @@ public class Clustering extends AbstractExample {
     @Override
     public void buildPanel() {
         csVPanel = new ViewerPanel();
-        KmlDataSourceOptions kmlDataSourceOptions = new KmlDataSourceOptions();
-        kmlDataSourceOptions.camera = csVPanel.getViewer().camera;
-        kmlDataSourceOptions.canvas = csVPanel.getViewer().canvas();
+        KmlDataSourceOptions kmlDataSourceOptions = KmlDataSourceOptions.create(csVPanel.getViewer().camera, csVPanel.getViewer().canvas());
         Promise<KmlDataSource, Void> dataSourcePromise = csVPanel.getViewer().dataSources().add(KmlDataSource.load(GWT.getModuleBaseURL() + "SampleData/kml/facilities/facilities.kml", kmlDataSourceOptions));
         dataSourcePromise.then(new Fulfill<KmlDataSource>() {
             @Override

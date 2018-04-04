@@ -24,7 +24,7 @@ import jsinterop.annotations.JsType;
  * Enumerates all possible filters used when magnifying WebGL textures, which takes places when zooming into imagery.
  * Provides the possible values for the {@link org.cesiumjs.cs.scene.ImageryLayer#magnificationFilter} property.
  * @see TextureMinificationFilter
- * @see ImageryLayer#magnificationFilter
+ * @see org.cesiumjs.cs.scene.ImageryLayer#magnificationFilter
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = "Cesium", name = "TextureMagnificationFilter")

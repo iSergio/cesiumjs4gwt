@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 iserge.
+ * Copyright 2018 iserge.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,39 +14,43 @@
  * limitations under the License.
  */
 
-package org.cesiumjs.cs.core.geometry.options;
+package org.cesiumjs.cs.datasources.options;
 
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.Cartesian3;
-import org.cesiumjs.cs.core.Frustum;
-import org.cesiumjs.cs.core.Quaternion;
+import org.cesiumjs.cs.core.Ellipsoid;
 
 /**
- * Options for {@link org.cesiumjs.cs.core.geometry.FrustumOutlineGeometry}.
+ * Options for {@link org.cesiumjs.cs.datasources.KmlDataSource#load(String, KmlDataSourceLoadOptions)}.
  *
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-public class FrustumOutlineGeometryOptions {
+public class KmlDataSourceLoadOptions {
     /**
-     * The frustum.
+     * Overrides the url to use for resolving relative links and other KML network features.
      */
     @JsProperty
-    public Frustum frustum;
+    public String sourceUri;
     /**
-     * The origin of the frustum.
+     * true if we want the geometry features (Polygons, LineStrings and LinearRings) clamped to the ground. If true,
+     * lines will use corridors so use Entity.corridor instead of Entity.polyline.
+     * Default: true
      */
     @JsProperty
-    public Cartesian3 origin;
+    public boolean clampToGround;
     /**
-     * The orientation of the frustum.
+     * The global ellipsoid used for geographical calculations.
+     *
      */
     @JsProperty
-    public Quaternion orientation;
+    public Ellipsoid ellipsoid;
 
+    /**
+     * Options for {@link org.cesiumjs.cs.datasources.KmlDataSource#load(String, KmlDataSourceLoadOptions)}.
+     */
     @JsConstructor
-    public FrustumOutlineGeometryOptions() {}
+    public KmlDataSourceLoadOptions() {}
 }

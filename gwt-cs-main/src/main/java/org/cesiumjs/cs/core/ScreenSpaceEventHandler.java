@@ -17,10 +17,7 @@
 package org.cesiumjs.cs.core;
 
 import com.google.gwt.dom.client.CanvasElement;
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsFunction;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.enums.KeyboardEventModifier;
 import org.cesiumjs.cs.core.enums.ScreenSpaceEventType;
 import org.cesiumjs.cs.promise.Function;
@@ -53,6 +50,7 @@ public class ScreenSpaceEventHandler {
      * DeveloperError exception. Therefore, assign the return value (undefined) to the object as done in the example.
      * @see #isDestroyed()
      */
+    @JsMethod
     public native void destroy();
 
     /**
@@ -62,6 +60,8 @@ public class ScreenSpaceEventHandler {
      * @see #setInputAction
      * @see #removeInputAction
      */
+    @SuppressWarnings("unusable-by-js")
+    @JsMethod
     public native Function getInputAction(Number type);
 
     /**
@@ -72,7 +72,9 @@ public class ScreenSpaceEventHandler {
      * @see #setInputAction
      * @see #removeInputAction
      */
-    public native Function getInputAction(Integer type, Integer modifier);
+    @SuppressWarnings("unusable-by-js")
+    @JsMethod
+    public native Function getInputAction(Number type, Number modifier);
 
     /**
      * Returns true if this object was destroyed; otherwise, false.
@@ -82,6 +84,7 @@ public class ScreenSpaceEventHandler {
      * @return true if this object was destroyed; otherwise, false.
      * @see #destroy()
      */
+    @JsMethod
     public native boolean isDestroyed();
 
     /**
@@ -89,6 +92,8 @@ public class ScreenSpaceEventHandler {
      * @param type The {@link ScreenSpaceEventType} of input event.
      * @see #setInputAction
      */
+    @SuppressWarnings("unusable-by-js")
+    @JsMethod
     public native void removeInputAction(Number type);
 
     /**
@@ -98,6 +103,8 @@ public class ScreenSpaceEventHandler {
      * @see  #getInputAction
      * @see #setInputAction
      */
+    @SuppressWarnings("unusable-by-js")
+    @JsMethod
     public native void removeInputAction(Number type, Number modifier);
 
     /**
@@ -107,6 +114,8 @@ public class ScreenSpaceEventHandler {
      * @see #getInputAction
      * @see #removeInputAction
      */
+    @SuppressWarnings("unusable-by-js")
+    @JsMethod
     public native void setInputAction(Listener action, Number type);
 
     /**
@@ -117,6 +126,8 @@ public class ScreenSpaceEventHandler {
      * @see #getInputAction
      * @see #removeInputAction
      */
+    @SuppressWarnings("unusable-by-js")
+    @JsMethod
     public native void setInputAction(Listener action, Number type, Number modifier);
 
     @JsFunction

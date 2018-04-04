@@ -105,7 +105,7 @@ public class CompositeEntityCollection {
      * @param index the index to add the collection at. If omitted, the collection will added on top of all existing collections.
      */
     @JsMethod
-    public native void addCollection(EntityCollection collection, Integer index);
+    public native void addCollection(EntityCollection collection, int index);
 
     /**
      * Computes the maximum availability of the entities in the collection. If the collection contains a mix of infinitely
@@ -145,14 +145,13 @@ public class CompositeEntityCollection {
      * @return collection by index
      */
     @JsMethod
-    public native EntityCollection getCollection(Integer index);
+    public native EntityCollection getCollection(int index);
 
     /**
      * Gets the number of collections in this composite.
-     * @return
      */
     @JsMethod
-    public native Integer getCollectionsLength();
+    public native int getCollectionsLength();
 
     /**
      * Determines the index of a given collection in the composite.
@@ -160,7 +159,7 @@ public class CompositeEntityCollection {
      * @return The index of the collection in the composite, or -1 if the collection does not exist in the composite.
      */
     @JsMethod
-    public native Integer indexOfCollection(EntityCollection collection);
+    public native int indexOfCollection(EntityCollection collection);
 
     /**
      * Lowers a collection down one position in the composite.

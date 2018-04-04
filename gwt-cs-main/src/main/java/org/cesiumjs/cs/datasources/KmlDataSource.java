@@ -23,6 +23,8 @@ import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.collections.EntityCollection;
 import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.core.JulianDate;
+import org.cesiumjs.cs.datasources.options.KmlDataSourceLoadOptions;
+import org.cesiumjs.cs.datasources.options.KmlDataSourceLoadStaticOptions;
 import org.cesiumjs.cs.datasources.options.KmlDataSourceOptions;
 import org.cesiumjs.cs.promise.Promise;
 
@@ -107,10 +109,28 @@ public class KmlDataSource implements DataSource {
     /**
      * Creates a Promise to a new instance loaded with the provided KML data.
      * @param data A url containing binary KMZ data or a parsed KML document.
-     * @param options {@link KmlDataSourceOptions}
+     * @param options {@link KmlDataSourceLoadStaticOptions}
      * @return A promise that will resolve to a new KmlDataSource instance once the KML is loaded.
      */
-    public static native Promise<KmlDataSource, Void> load(String data, KmlDataSourceOptions options);
+    @JsMethod
+    public static native Promise<KmlDataSource, Void> load(String data, KmlDataSourceLoadStaticOptions options);
+
+    /**
+     * Creates a Promise to a new instance loaded with the provided KML data.
+     * @param data A url containing binary KMZ data or a parsed KML document.
+     * @return A promise that will resolve to a new KmlDataSource instance once the KML is loaded.
+     */
+    @JsMethod
+    public native Promise<KmlDataSource, Void> load(String data);
+
+    /**
+     * Creates a Promise to a new instance loaded with the provided KML data.
+     * @param data A url containing binary KMZ data or a parsed KML document.
+     * @param options {@link KmlDataSourceLoadStaticOptions}
+     * @return A promise that will resolve to a new KmlDataSource instance once the KML is loaded.
+     */
+    @JsMethod
+    public native Promise<KmlDataSource, Void> load(String data, KmlDataSourceLoadOptions options);
 
     @Override
     @JsMethod

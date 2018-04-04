@@ -22,7 +22,6 @@ import jsinterop.annotations.JsType;
 
 /**
  * Default settings for accessing the Cesium Ion API.
- * @see
  *
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */

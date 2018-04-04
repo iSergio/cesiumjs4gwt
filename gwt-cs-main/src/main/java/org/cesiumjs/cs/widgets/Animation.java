@@ -60,14 +60,14 @@ public class Animation {
      *     ClockViewModel clockViewModel = new ClockViewModel(clock);
      *     AnimationViewModel viewModel = new AnimationViewModel(clockViewModel);
      *     animationPanel.addAttachHandler(new AttachEvent.Handler() {
-     *         @Override
+     *         {@literal @}Override
      *         public void onAttachOrDetach(AttachEvent attachEvent) {
      *             if (attachEvent.isAttached()) {
      *                 Animation animation = new Animation(((SimplePanel) attachEvent.getSource()).getElement(), viewModel);
      *                 animation.resize();
      *
      *                 Cesium.RequestAnimationFrameCallback tick = new Cesium.RequestAnimationFrameCallback() {
-     *                     @Override
+     *                     {@literal @}Override
      *                     public void Callback(Number timestamp) {
      *                         clock.tick();
      *                         Cesium.requestAnimationFrame(this);
@@ -107,14 +107,14 @@ public class Animation {
      *     ClockViewModel clockViewModel = new ClockViewModel(clock);
      *     AnimationViewModel viewModel = new AnimationViewModel(clockViewModel);
      *     animationPanel.addAttachHandler(new AttachEvent.Handler() {
-     *         @Override
+     *         {@literal @}Override
      *         public void onAttachOrDetach(AttachEvent attachEvent) {
      *             if (attachEvent.isAttached()) {
      *                 Animation animation = new Animation(((SimplePanel) attachEvent.getSource()).getElement(), viewModel);
      *                 animation.resize();
      *
      *                 Cesium.RequestAnimationFrameCallback tick = new Cesium.RequestAnimationFrameCallback() {
-     *                     @Override
+     *                     {@literal @}Override
      *                     public void Callback(Number timestamp) {
      *                         clock.tick();
      *                         Cesium.requestAnimationFrame(this);

@@ -164,7 +164,7 @@ public class GeometryPipeline {
      * @param cacheCapacity The number of vertices that can be held in the GPU's vertex cache. Default: 24.
      * @return The modified geometry argument, with its indices reordered for the post-vertex-shader cache.
      * @see #reorderForPreVertexCache
-     * @see <a href="http://gfx.cs.princ0eton.edu/pubs/Sander_2007_%253ETR/tipsy.pdf">Fast Triangle Reordering for Vertex Locality and Reduced Overdraw</a> by Sander, Nehab, and Barczak
+     * <a href="http://gfx.cs.princ0eton.edu/pubs/Sander_2007_%253ETR/tipsy.pdf">Fast Triangle Reordering for Vertex Locality and Reduced Overdraw</a> by Sander, Nehab, and Barczak
      */
     @JsMethod
     public static native Geometry reorderForPostVertexCache(Geometry geometry, int cacheCapacity);

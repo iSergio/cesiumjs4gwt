@@ -58,8 +58,6 @@ public class IntersectionTests {
      * @param p0 The first vertex of the triangle.
      * @param p1 The second vertex of the triangle.
      * @param p2 The third vertex of the triangle.
-     * @param cullBackFaces If true, will only compute an intersection with the front face of the triangle and return
-     *                      undefined for intersections with the back face.
      * @return The intersection point or undefined if there is no intersections.
      */
     @JsMethod

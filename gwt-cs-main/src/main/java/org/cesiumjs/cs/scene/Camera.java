@@ -707,7 +707,7 @@ public class Camera {
     /**
      * Rotates the camera around axis by angle. The distance of the camera's position to the center of the camera's reference frame remains the same.
      * @param axis The axis to rotate around given in world coordinates.
-     * @see #rotateUp()
+     * @see #rotateUp(double)
      * @see #rotateDown()
      * @see #rotateLeft()
      * @see #rotateRight()
@@ -719,7 +719,7 @@ public class Camera {
      * Rotates the camera around axis by angle. The distance of the camera's position to the center of the camera's reference frame remains the same.
      * @param axis The axis to rotate around given in world coordinates.
      * @param angle The angle, in radians, to rotate by. Defaults to defaultRotateAmount.
-     * @see #rotateUp()
+     * @see #rotateUp(double)
      * @see #rotateDown()
      * @see #rotateLeft()
      * @see #rotateRight()
@@ -729,7 +729,7 @@ public class Camera {
 
     /**
      * Rotates the camera around the center of the camera's reference frame by angle downwards.
-     * @see #rotateUp()
+     * @see #rotateUp(double)
      * @see #rotate(org.cesiumjs.cs.core.Cartesian3)
      * @see #rotate(org.cesiumjs.cs.core.Cartesian3, double)
      */
@@ -739,7 +739,7 @@ public class Camera {
     /**
      * Rotates the camera around the center of the camera's reference frame by angle downwards.
      * @param angle The angle, in radians, to rotate by. Defaults to defaultRotateAmount.
-     * @see #rotateUp()
+     * @see #rotateUp(double)
      * @see #rotate(org.cesiumjs.cs.core.Cartesian3)
      * @see #rotate(org.cesiumjs.cs.core.Cartesian3, double)
      */
@@ -749,7 +749,7 @@ public class Camera {
     /**
      * Rotates the camera around the center of the camera's reference frame by angle to the left.
      * @see #rotateRight()
-     * @see #rotate()
+     * @see #rotate
      */
     @JsMethod
     public native void rotateLeft();
@@ -758,7 +758,7 @@ public class Camera {
      * Rotates the camera around the center of the camera's reference frame by angle to the left.
      * @param angle The angle, in radians, to rotate by. Defaults to defaultRotateAmount.
      * @see #rotateRight()
-     * @see #rotate()
+     * @see #rotate
      */
     @JsMethod
     public native void rotateLeft(double angle);
@@ -766,7 +766,7 @@ public class Camera {
     /**
      * Rotates the camera around the center of the camera's reference frame by angle to the right.
      * @see #rotateLeft()
-     * @see #rotate()
+     * @see #rotate
      */
     @JsMethod
     public native void rotateRight();
@@ -775,7 +775,7 @@ public class Camera {
      * Rotates the camera around the center of the camera's reference frame by angle to the right.
      * @param angle The angle, in radians, to rotate by. Defaults to defaultRotateAmount.
      * @see #rotateLeft()
-     * @see #rotate()
+     * @see #rotate
      */
     @JsMethod
     public native void rotateRight(double angle);
@@ -784,7 +784,7 @@ public class Camera {
      * Rotates the camera around the center of the camera's reference frame by angle upwards.
      * @param angle The angle, in radians, to rotate by. Defaults to defaultRotateAmount.
      * @see #rotateDown()
-     * @see #rotate()
+     * @see #rotate
      */
     @JsMethod
     public native void rotateUp(double angle);

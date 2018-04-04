@@ -162,7 +162,7 @@ public class BoundingRectangle {
      * @return {@link Intersect#INTERSECTING()} if the rectangles intersect, {@link Intersect#OUTSIDE()}  otherwise.
      */
     @JsMethod
-    public static native Integer intersect(BoundingRectangle left, BoundingRectangle right);
+    public static native int intersect(BoundingRectangle left, BoundingRectangle right);
 
     /**
      * Stores the provided instance into the provided array.
@@ -250,5 +250,5 @@ public class BoundingRectangle {
      * @return {@link Intersect#INTERSECTING()} if the rectangles intersect, {@link Intersect#OUTSIDE()} otherwise}.
      */
     @JsMethod
-    public native Integer intersect(BoundingRectangle right);
+    public native int intersect(BoundingRectangle right);
 }

@@ -22,6 +22,7 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.datasources.properties.Property;
+import org.cesiumjs.cs.scene.enums.HeightReference;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -70,7 +71,7 @@ public class PointGraphicsOptions {
     public Property translucencyByDistance;
     /**
      * A Property specifying what the height is relative to.
-     * Default: {@link HeightReference#NONE}
+     * Default: {@link HeightReference#NONE()}
      */
     @JsProperty
     public Property heightReference;

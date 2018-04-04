@@ -17,6 +17,7 @@
 package org.cesiumjs.cs.scene.providers;
 
 import jsinterop.annotations.*;
+import org.cesiumjs.cs.Cesium;
 import org.cesiumjs.cs.core.Credit;
 import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.core.Rectangle;
@@ -158,15 +159,15 @@ public class ArcGisMapServerImageryProvider implements ImageryProvider {
      * </pre>
      * @param options Options
      * @see BingMapsImageryProvider
-     * @see GoogleEarthImageryProvider
-     * @see createOpenStreetMapImageryProvider
+     * @see GoogleEarthEnterpriseImageryProvider
+     * @see Cesium#createOpenStreetMapImageryProvider
      * @see SingleTileImageryProvider
-     * @see createTileMapServiceImageryProvider
+     * @see Cesium#createTileMapServiceImageryProvider
      * @see WebMapServiceImageryProvider
      * @see WebMapTileServiceImageryProvider
      * @see UrlTemplateImageryProvider
      * @see <a href="http://resources.esri.com/help/9.3/arcgisserver/apis/rest/">ArcGIS Server REST API</a>
-     * @see <a gref="https://www.w3.org/TR/cors/">Cross-Origin Resource Sharing</a>
+     * @see <a gref=\"https://www.w3.org/TR/cors/">Cross-Origin Resource Sharing</a>
      */
     @JsConstructor
     public ArcGisMapServerImageryProvider(ArcGisMapServerImageryProviderOptions options) {}

@@ -38,7 +38,6 @@ public class VerticalOrigin {
     /**
      * If the object contains text, the origin is at the baseline of the text,
      * else the origin is at the bottom of the object.
-     * @return
      */
     @JsProperty(name = "BASELINE")
     public static native Number BASELINE();

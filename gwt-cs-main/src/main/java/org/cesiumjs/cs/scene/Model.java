@@ -104,6 +104,7 @@ public class Model {
      * Defines how the color blends with the model.
      * Default:  {@link ColorBlendMode#HIGHLIGHT()}.
      */
+    @SuppressWarnings("unusable-by-js")
     @JsProperty
     public Number colorBlendMode;
     /**
@@ -278,6 +279,7 @@ public class Model {
      * @param name The glTF name of the mesh.
      * @return The mesh or undefined if no mesh with name exists.
      */
+    @SuppressWarnings("unusable-by-js")
     @JsMethod
     public native ModelMesh getMesh(String name);
 

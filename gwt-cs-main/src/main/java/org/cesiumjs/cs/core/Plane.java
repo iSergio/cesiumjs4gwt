@@ -163,7 +163,7 @@ public class Plane {
      * Projects a point onto the plane.
      * @param plane The plane to project the point onto
      * @param point The point to project onto the plane
-     * @result The result point.
+     * @return The result point.
      */
     @JsMethod
     public static native Cartesian3 projectPointOntoPlane(Plane plane, Cartesian3 point);

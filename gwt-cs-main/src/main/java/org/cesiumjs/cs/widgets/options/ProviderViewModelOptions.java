@@ -48,13 +48,13 @@ public class ProviderViewModelOptions {
     public String iconUrl;
     /**
      * A function or Command that creates one or more providers which will be added to the globe when this item is selected.
-     * @see ProviderViewModel.ImageryProviderCreationFunction
+     * @see org.cesiumjs.cs.widgets.ProviderViewModel.ImageryProviderCreationFunction
      */
     @JsProperty(name = "creationFunction")
     public ProviderViewModel.ImageryProviderCreationFunction imageryProviderCreationFunction;
     /**
      * A function or Command that creates one or more providers which will be added to the globe when this item is selected.
-     * @see ProviderViewModel.TerrainProviderCreationFunction
+     * @see org.cesiumjs.cs.widgets.ProviderViewModel.TerrainProviderCreationFunction
      */
     @JsProperty(name = "creationFunction")
     public ProviderViewModel.TerrainProviderCreationFunction terrainProviderCreationFunction;

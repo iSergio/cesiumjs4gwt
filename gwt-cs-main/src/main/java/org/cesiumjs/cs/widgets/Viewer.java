@@ -192,7 +192,6 @@ public class Viewer {
     public Entity selectedEntity;
     /**
      * Gets the event that is raised when the selected entity chages
-     * @return
      */
     @JsProperty(name = "selectedEntityChanged")
     public native Event selectedEntityChanged();
@@ -402,7 +401,7 @@ public class Viewer {
      * If the heading cannot be determined from the offset, the heading will be north.
      * @param target The entity, array of entities, entity collection, data source or imagery layer to view.
      *               You can also pass a promise that resolves to one of the previously mentioned types.
-     * @return
+     * @return ready promise for {@link EntityCollection}
      */
     @JsMethod
     public native Promise<Boolean, Void> zoomTo(EntityCollection target);
@@ -422,7 +421,7 @@ public class Viewer {
      * If the heading cannot be determined from the offset, the heading will be north.
      * @param target The entity, array of entities, entity collection, data source or imagery layer to view.
      *               You can also pass a promise that resolves to one of the previously mentioned types.
-     * @return
+     * @return ready promise for {@link Entity}
      */
     @JsMethod
     public native Promise<Boolean, Void> zoomTo(Entity target);

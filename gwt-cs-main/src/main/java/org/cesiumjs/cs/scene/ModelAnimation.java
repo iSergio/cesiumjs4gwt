@@ -39,8 +39,9 @@ public class ModelAnimation {
      * Determines if and how the animation is looped.
      * Default: {@link ModelAnimationLoop#NONE()}
      */
+    @SuppressWarnings("unusable-by-js")
     @JsProperty(name = "loop")
-    public native Integer loop();
+    public native Number loop();
     /**
      * The glTF animation name that identifies this animation.
      */
@@ -113,7 +114,7 @@ public class ModelAnimation {
      * same glTF animation, each with a different start time.
      * Create this by calling {@link ModelAnimationCollection#add}.
      *
-     * @see: ModelAnimationCollection#add
+     * @see ModelAnimationCollection#add
      */
     @JsConstructor
     public ModelAnimation() {}

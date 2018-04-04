@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 iserge.
+ * Copyright 2018 iserge.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,36 +20,33 @@ import com.google.gwt.dom.client.CanvasElement;
 import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.Ellipsoid;
 import org.cesiumjs.cs.datasources.KmlDataSource;
-import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.scene.Camera;
 
 /**
+ * Options for {@link KmlDataSource}
+ *
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-public class KmlDataSourceOptions {
+public class KmlDataSourceLoadStaticOptions extends KmlDataSourceOptions {
     /**
-     * The camera that is used for viewRefreshModes and sending camera properties to network links.
+     * Overrides the url to use for resolving relative links and other KML network features.
      */
     @JsProperty
-    public Camera camera;
+    public String sourceUri;
     /**
-     * The canvas that is used for sending viewer properties to network links.
+     * true if we want the geometry features (Polygons, LineStrings and LinearRings) clamped to the ground. If true,
+     * lines will use corridors so use Entity.corridor instead of Entity.polyline.
+     * Default: true
      */
     @JsProperty
-    public CanvasElement canvas;
-    /**
-     * The global ellipsoid used for geographical calculations.
-     *
-     */
-    @JsProperty
-    public Ellipsoid ellipsoid;
+    public boolean clampToGround;
 
     /**
-     * Options for {@link org.cesiumjs.cs.datasources.KmlDataSource}
+     * Options for {@link KmlDataSource}
      */
     @JsConstructor
-    protected KmlDataSourceOptions() {}
+    protected KmlDataSourceLoadStaticOptions() {}
 
     /**
      * Create instance options for {@link org.cesiumjs.cs.datasources.KmlDataSource}
@@ -58,8 +55,8 @@ public class KmlDataSourceOptions {
      * @return instance options for {@link org.cesiumjs.cs.datasources.KmlDataSource}
      */
     @JsOverlay
-    public static KmlDataSourceOptions create(Camera camera, CanvasElement canvas) {
-        KmlDataSourceOptions options = new KmlDataSourceOptions();
+    public static KmlDataSourceLoadStaticOptions create(Camera camera, CanvasElement canvas) {
+        KmlDataSourceLoadStaticOptions options = new KmlDataSourceLoadStaticOptions();
         options.camera = camera;
         options.canvas = canvas;
         return options;
@@ -72,8 +69,8 @@ public class KmlDataSourceOptions {
      * @return instance options for {@link org.cesiumjs.cs.datasources.KmlDataSource}
      */
     @JsOverlay
-    public static KmlDataSourceOptions create(Camera camera, CanvasElement canvas, Ellipsoid ellipsoid) {
-        KmlDataSourceOptions options = new KmlDataSourceOptions();
+    public static KmlDataSourceLoadStaticOptions create(Camera camera, CanvasElement canvas, Ellipsoid ellipsoid) {
+        KmlDataSourceLoadStaticOptions options = new KmlDataSourceLoadStaticOptions();
         options.camera = camera;
         options.canvas = canvas;
         options.ellipsoid = ellipsoid;

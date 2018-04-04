@@ -147,5 +147,5 @@ public class AxisAlignedBoundingBox {
      * if the box intersects the plane.
      */
     @JsMethod
-    public native Integer intersectPlane(Plane plane);
+    public native int intersectPlane(Plane plane);
 }

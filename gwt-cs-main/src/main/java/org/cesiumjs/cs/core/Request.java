@@ -79,6 +79,7 @@ public class Request {
      * @see org.cesiumjs.cs.core.enums.RequestType
      * Default: {@link RequestType#OTHER()}
      */
+    @SuppressWarnings("unusable-by-js")
     @JsProperty(name = "type")
     public native Number type();
     /**

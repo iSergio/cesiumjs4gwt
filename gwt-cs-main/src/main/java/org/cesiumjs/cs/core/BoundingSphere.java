@@ -643,8 +643,9 @@ public class BoundingSphere {
      * @return {@link Intersect#INSIDE()} if the entire sphere is on the side of the plane the normal is pointing, {@link Intersect#OUTSIDE()}
      * if the entire sphere is on the opposite side, and {@link Intersect#INTERSECTING()} if the sphere intersects the plane.
      */
+    @SuppressWarnings("unusable-by-js")
     @JsMethod
-    public native Integer intersectPlane(Plane plane);
+    public native Number intersectPlane(Plane plane);
 
     /**
      * Determines whether or not a sphere is hidden from view by the occluder.

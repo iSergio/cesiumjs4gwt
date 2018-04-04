@@ -45,7 +45,7 @@ public class JsArray<T extends Object> {
      * @param start Start index, defaults to 0.
      */
     @JsMethod
-    public native JsArray<T> fill(T value, Integer start);
+    public native JsArray<T> fill(T value, int start);
 
     /**
      * Fills all the elements of an array from a start index to an end index with a static value.
@@ -54,7 +54,7 @@ public class JsArray<T extends Object> {
      * @param end End index, defaults to this.length.
      */
     @JsMethod
-    public native JsArray<T> fill(T value, Integer start, Integer end);
+    public native JsArray<T> fill(T value, int start, int end);
 
     /**
      * Removes the last element from an array and returns that element. This method changes the length of the array.
@@ -69,7 +69,7 @@ public class JsArray<T extends Object> {
      * @return The new {@link #length} property of the object upon which the method was called.
      */
     @JsMethod
-    public native Integer push(T ...elementN);
+    public native int push(T ...elementN);
 
     /**
      * Sorts the elements of an array in place and returns the array. The sort is not necessarily stable.
@@ -96,7 +96,7 @@ public class JsArray<T extends Object> {
      * @return The first index of the element in the array; -1 if not found.
      */
     @JsMethod
-    public native Integer indexOf(T searchElement);
+    public native int indexOf(T searchElement);
 
     /**
      * Returns the first index at which a given element can be found in the array, or -1 if it is not present.
@@ -110,7 +110,7 @@ public class JsArray<T extends Object> {
      * @return The first index of the element in the array; -1 if not found.
      */
     @JsMethod
-    public native Integer indexOf(T searchElement, Integer fromElement);
+    public native int indexOf(T searchElement, int fromElement);
 
     /**
      * Joins all elements of an array into a string.
@@ -135,7 +135,7 @@ public class JsArray<T extends Object> {
      * @return The last index of the element in the array; -1 if not found.
      */
     @JsMethod
-    public native Integer lastIndexOf(T searchElement, Integer fromIndex);
+    public native int lastIndexOf(T searchElement, int fromIndex);
 
     /**
      * String representing the specified array and its elements.

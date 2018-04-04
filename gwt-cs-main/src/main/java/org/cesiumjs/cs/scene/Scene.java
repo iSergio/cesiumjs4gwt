@@ -64,7 +64,7 @@ public class Scene {
      *     Example:
      *     {@code
      *     _viewer.scene().debugCommandFilter = new Scene.DebugCommandFilter() {
-     *         @Override
+     *         {@literal @}Override
      *         public boolean function(Object object) {
      *             return ((JsObject)object).getObject("owner") == _viewer.scene().skyAtmosphere;
      *         }

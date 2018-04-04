@@ -38,7 +38,7 @@ public class EllipsoidOutlineGeometry extends Geometry implements Packable {
 
     /**
      * A description of an ellipsoid centered at the origin.
-     * @param options {@Link EllipsoidGeometryOptions}
+     * @param options {@link org.cesiumjs.cs.core.geometry.options.EllipsoidGeometryOptions}
      * @see EllipsoidOutlineGeometry#createGeometry
      */
     @JsConstructor

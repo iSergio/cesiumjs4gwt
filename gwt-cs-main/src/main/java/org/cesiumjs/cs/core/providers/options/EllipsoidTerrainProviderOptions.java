@@ -18,6 +18,7 @@ package org.cesiumjs.cs.core.providers.options;
 
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Ellipsoid;
 import org.cesiumjs.cs.core.TilingScheme;
@@ -29,13 +30,15 @@ import org.cesiumjs.cs.core.TilingScheme;
 public class EllipsoidTerrainProviderOptions {
     /**
      * The tiling scheme specifying how the ellipsoidal surface is broken into tiles.
-     * If this parameter is not provided, a {@link org.cesiumjs.core.GeographicTilingScheme} is used.
+     * If this parameter is not provided, a {@link org.cesiumjs.cs.core.GeographicTilingScheme} is used.
      */
+    @JsProperty
     public TilingScheme tilingScheme;
     /**
      * The ellipsoid. If the tilingScheme is specified, this parameter is ignored and the tiling scheme's ellipsoid is used instead.
      * If neither parameter is specified, the {@link Ellipsoid#WGS84()} ellipsoid is used.
      */
+    @JsProperty
     public Ellipsoid ellipsoid;
 
     @JsConstructor

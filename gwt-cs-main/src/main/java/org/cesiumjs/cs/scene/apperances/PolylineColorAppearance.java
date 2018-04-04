@@ -44,14 +44,14 @@ public class PolylineColorAppearance extends Appearance {
     public native VertexFormat vertexFormat();
 
     /**
-     * An appearance for {@link GeometryInstance} instances with color attributes and {@link PolylineGeometry}.
+     * An appearance for {@link GeometryInstance} instances with color attributes and {@link org.cesiumjs.cs.core.geometry.PolylineGeometry}.
      * This allows several geometry instances, each with a different color, to be drawn with the same {@link Primitive}.
      */
     @JsConstructor
     public PolylineColorAppearance() {}
 
     /**
-     * An appearance for {@link GeometryInstance} instances with color attributes and {@link PolylineGeometry}.
+     * An appearance for {@link GeometryInstance} instances with color attributes and {@link org.cesiumjs.cs.core.geometry.PolylineGeometry}.
      * This allows several geometry instances, each with a different color, to be drawn with the same {@link Primitive}.
      * @param options {@link PolylineColorAppearanceOptions}
      */

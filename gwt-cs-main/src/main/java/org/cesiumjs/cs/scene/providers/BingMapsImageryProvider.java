@@ -165,7 +165,7 @@ public class BingMapsImageryProvider implements ImageryProvider {
     /**
      * Converts a tile's quadkey used to request an image from a Bing Maps server into the (x, y, level) position.
      * @param quadkey The tile's quad key
-     * @return
+     * @return (x, y, level) position
      * @see <a href="https://msdn.microsoft.com/en-us/library/bb259689.aspx">Bing Maps Tile System</a>
      * @see #tileXYToQuadKey(int, int, int)
      */

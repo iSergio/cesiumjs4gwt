@@ -108,7 +108,7 @@ public class GroundPrimitive extends Primitive {
     public native boolean interleave();
     /**
      * Determines if the primitive is complete and ready to render. If this property is true,
-     * the primitive will be rendered the next time that {@link GroundPrimitive#update()} is called.
+     * the primitive will be rendered the next time that {@link GroundPrimitive#update(Object)} is called.
      */
     @JsProperty(name = "ready")
     public native boolean ready();

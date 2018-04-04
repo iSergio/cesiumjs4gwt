@@ -23,6 +23,7 @@ import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.core.NearFarScalar;
 import org.cesiumjs.cs.datasources.properties.Property;
+import org.cesiumjs.cs.scene.enums.HeightReference;
 import org.cesiumjs.cs.scene.enums.LabelStyle;
 import org.cesiumjs.cs.scene.enums.VerticalOrigin;
 

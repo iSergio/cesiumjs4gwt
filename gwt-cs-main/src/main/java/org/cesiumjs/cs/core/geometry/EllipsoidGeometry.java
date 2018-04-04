@@ -36,7 +36,7 @@ public class EllipsoidGeometry extends Geometry implements Packable {
 
     /**
      * A description of an ellipsoid centered at the origin.
-     * @param options {@Link EllipsoidGeometryOptions}
+     * @param options {@link EllipsoidGeometryOptions}
      * @see EllipsoidGeometry#createGeometry
      */
     @JsConstructor

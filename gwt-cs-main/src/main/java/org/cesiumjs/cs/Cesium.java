@@ -177,7 +177,7 @@ public class Cesium {
      *     Cartographic[] positions = new Cartographic[] {Cartographic.fromDegrees(86.925145, 27.988257), Cartographic.fromDegrees(87.0, 28.0)};
      *     Promise<Cartographic[], Void> promise = Cesium.sampleTerrainMostDetailed(terrainProvider, positions);
      *     promise.then(new Fulfill<Cartographic[]>() {
-     *         @Override
+     *         {@literal @}Override
      *         public void onFulfilled(Cartographic[] updatedPositions) {
      *             //
      *         }
@@ -221,7 +221,7 @@ public class Cesium {
 
     /**
      * Creates a {@link CesiumTerrainProvider} instance for the <a href="https://cesium.com/content/cesiumworldterrain">Cesium World Terrain</a>.
-     * @return
+     * @return {@link CesiumTerrainProvider} instance for the <a href="https://cesium.com/content/cesiumworldterrain">Cesium World Terrain</a>.
      */
     @JsMethod(namespace = "Cesium", name = "createWorldTerrain")
     public static native CesiumTerrainProvider createWorldTerrain();
@@ -229,7 +229,7 @@ public class Cesium {
     /**
      * Creates a {@link CesiumTerrainProvider} instance for the <a href="https://cesium.com/content/cesiumworldterrain">Cesium World Terrain</a>.
      * @param options {@link CreateWorldTerrainOptions} object.
-     * @return
+     * @return {@link CesiumTerrainProvider} instance for the <a href="https://cesium.com/content/cesiumworldterrain">Cesium World Terrain</a>.
      */
     @JsMethod(namespace = "Cesium", name = "createWorldTerrain")
     public static native CesiumTerrainProvider createWorldTerrain(CreateWorldTerrainOptions options);
@@ -245,6 +245,7 @@ public class Cesium {
          * A function that will be called when the next frame should be drawn.
          * @param timestamp A timestamp for the frame, in milliseconds.
          */
+        @SuppressWarnings("unusable-by-js")
         void Callback(Number timestamp);
     }
 

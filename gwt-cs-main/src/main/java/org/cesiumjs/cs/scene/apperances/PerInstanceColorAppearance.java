@@ -82,7 +82,7 @@ public class PerInstanceColorAppearance extends Appearance {
      * and still be compatible - at a potential performance cost - but it can't have less.
      */
     @JsProperty(name = "vertexFormat")
-    public native Integer vertexFormat();
+    public native VertexFormat vertexFormat();
 //    /**
 //     * The GLSL source code for the vertex shader.
 //     */

@@ -140,8 +140,9 @@ public class Occluder {
      * @return {@link Visibility#NONE()} if the occludee is not visible, {@link Visibility#PARTIAL()} if the
      * occludee is partially visible, or {@link Visibility#FULL()} if the occludee is fully visible.
      */
+    @SuppressWarnings("unusable-by-js")
     @JsMethod
-    public native Integer computeVisibility(BoundingSphere occludeeBS);
+    public native Number computeVisibility(BoundingSphere occludeeBS);
 
     /**
      * Determines whether or not a sphere, the occludee, is hidden from view by the occluder.

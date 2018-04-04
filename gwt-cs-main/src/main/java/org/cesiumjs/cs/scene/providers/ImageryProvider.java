@@ -24,7 +24,7 @@ import jsinterop.annotations.JsType;
  * @see ArcGisMapServerImageryProvider
  * @see SingleTileImageryProvider
  * @see BingMapsImageryProvider
- * @see GoogleEarthImageryProvider
+ * @see GoogleEarthEnterpriseImageryProvider
  * @see MapboxImageryProvider
  * @see WebMapTileServiceImageryProvider
  * @see WebMapServiceImageryProvider

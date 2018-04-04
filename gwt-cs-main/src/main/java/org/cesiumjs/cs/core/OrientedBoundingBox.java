@@ -228,6 +228,7 @@ public class OrientedBoundingBox {
      * Duplicates this OrientedBoundingBox instance.
      * @return a new OrientedBoundingBox instance if one was not provided.
      */
+    @JsMethod
     public native OrientedBoundingBox clone();
 
     /**
@@ -238,6 +239,7 @@ public class OrientedBoundingBox {
      * @param direction The direction from position.
      * @return The nearest and farthest distances on the bounding box from position in direction.
      */
+    @JsMethod
     public native Interval computePlaneDistances(Cartesian3 position, Cartesian3 direction);
 
     /**
@@ -249,6 +251,7 @@ public class OrientedBoundingBox {
      * @param result A Interval to store the nearest and farthest distances.
      * @return The nearest and farthest distances on the bounding box from position in direction.
      */
+    @JsMethod
     public native Interval computePlaneDistances(Cartesian3 position, Cartesian3 direction, Interval result);
 
     /**
@@ -256,6 +259,7 @@ public class OrientedBoundingBox {
      * @param cartesian The point
      * @return The estimated distance squared from the bounding sphere to the point.
      */
+    @JsMethod
     public native double distanceSquaredTo(Cartesian3 cartesian);
 
     /**
@@ -264,6 +268,7 @@ public class OrientedBoundingBox {
      * @param right The right hand side OrientedBoundingBox.
      * @return true if they are equal, false otherwise.
      */
+    @JsMethod
     public native boolean equals(OrientedBoundingBox right);
 
     /**
@@ -272,12 +277,15 @@ public class OrientedBoundingBox {
      * @return Intersect.INSIDE if the entire box is on the side of the plane the normal is pointing, Intersect.OUTSIDE
      * if the entire box is on the opposite side, and {@link Intersect#INTERSECTING()} if the box intersects the plane.
      */
-    public native Integer intersectPlane(Plane plane);
+    @SuppressWarnings("unusable-by-js")
+    @JsMethod
+    public native Number intersectPlane(Plane plane);
 
     /**
      * Determines whether or not a bounding box is hidden from view by the occluder.
      * @param occluder The occluder.
      * @return true if the sphere is not visible; otherwise false.
      */
+    @JsMethod
     public native boolean isOccluded(Occluder occluder);
 }

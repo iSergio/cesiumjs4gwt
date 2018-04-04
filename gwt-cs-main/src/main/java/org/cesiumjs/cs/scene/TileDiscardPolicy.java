@@ -45,6 +45,7 @@ public class TileDiscardPolicy {
      * @param image An imagery to test.
      * @return True if the imagery should be discarded; otherwise, false.
      */
+    @SuppressWarnings("unusable-by-js")
     @JsMethod
     public native boolean shouldDiscardImage(Image image);
 }

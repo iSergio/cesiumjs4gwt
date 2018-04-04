@@ -32,7 +32,7 @@ import org.cesiumjs.cs.promise.Promise;
 public interface TerrainProvider {
     /**
      * Gets the maximum geometric error allowed in a tile at a given level. This function should not be called before
-     * {@link TerrainProvider#ready} returns true.
+     * ready returns true.
      * @param level The tile level for which to get the maximum geometric error.
      * @return The maximum geometric error.
      */
@@ -50,7 +50,7 @@ public interface TerrainProvider {
     boolean getTileDataAvailable(int x, int y , int level);
 
     /**
-     * Requests the geometry for a given tile. This function should not be called before {@link TerrainProvider#ready} returns true.
+     * Requests the geometry for a given tile. This function should not be called before ready returns true.
      * The result must include terrain data and may optionally include a water mask and an indication of which child tiles are available.
      * @param x The X coordinate of the tile for which to request geometry.
      * @param y The Y coordinate of the tile for which to request geometry.

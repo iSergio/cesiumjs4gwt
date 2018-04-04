@@ -36,6 +36,7 @@ public class GeoserverTerrainProviderFormatArray {
 
     @JsFunction
     public interface PostProcessArray {
+        @SuppressWarnings("unusable-by-js")
         Float32Array function(ArrayBuffer bufferIn, Size size, float highest, float lowest, float offset);
     }
 }

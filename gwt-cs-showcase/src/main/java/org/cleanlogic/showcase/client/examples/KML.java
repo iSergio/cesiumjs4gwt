@@ -63,9 +63,7 @@ public class KML extends AbstractExample {
                 org.cesiumjs.cs.scene.Camera camera = viewer.camera;
                 CanvasElement canvas = viewer.canvas();
                 camera.flyHome(0);
-                KmlDataSourceOptions kmlDataSourceOptions = new KmlDataSourceOptions();//camera, canvas);
-                kmlDataSourceOptions.canvas = canvas;
-                kmlDataSourceOptions.camera = camera;
+                KmlDataSourceOptions kmlDataSourceOptions = KmlDataSourceOptions.create(camera, canvas);
                 if (!source.getSelectedValue().contains("bikeRide")) {
                     csVPanel.getViewer().dataSources().add(KmlDataSource.load(source.getSelectedValue(), kmlDataSourceOptions));
                 } else {

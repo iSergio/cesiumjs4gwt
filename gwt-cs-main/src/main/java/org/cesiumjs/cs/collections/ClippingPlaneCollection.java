@@ -54,7 +54,7 @@ public class ClippingPlaneCollection extends Collection<ClippingPlane> {
     public boolean enabled;
     /**
      * The 4x4 transformation matrix specifying an additional transform relative to the clipping planes original coordinate system.
-     * Default: {@lnk Matrix4#IDENTITY()}.
+     * Default: {@link Matrix4#IDENTITY()}.
      */
     @JsProperty
     public Matrix4 modelMatrix;

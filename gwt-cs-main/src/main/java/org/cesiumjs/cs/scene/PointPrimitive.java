@@ -109,8 +109,8 @@ public class PointPrimitive {
      * traffic is the same regardless of how many properties were updated. If most pointPrimitives in a collection
      * need to be updated, it may be more efficient to clear the collection with PointPrimitiveCollection#removeAll
      * and add new pointPrimitives instead of modifying each one.
-     * @see PointPrimitiveCollection
-     * @see PointPrimitiveCollection#add
+     * @see org.cesiumjs.cs.collections.PointPrimitiveCollection
+     * @see org.cesiumjs.cs.collections.PointPrimitiveCollection#add
      */
     @JsConstructor
     public PointPrimitive() {}

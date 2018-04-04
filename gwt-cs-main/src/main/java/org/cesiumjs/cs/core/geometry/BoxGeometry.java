@@ -62,8 +62,8 @@ public class BoxGeometry extends Geometry implements Packable {
 
     /**
      * Creates a cube centered at the origin given its dimensions.
-     * @param options
-     * @return
+     * @param options {@link BoxGeometryOptions} object
+     * @return cube centered at the origin given its dimensions.
      * @see BoxGeometry#createGeometry
      */
     @JsMethod

@@ -57,7 +57,7 @@ public class Clock {
     @JsProperty
     public JulianDate currentTime;
     /**
-     * Gets or sets how much time advances when {@link Clock#tick} is called. Negative values allow for advancing backwards.
+     * Gets or sets how much time advances when {@link Clock#tick()} is called. Negative values allow for advancing backwards.
      * If {@link Clock#clockStep} is set to {@link ClockStep#TICK_DEPENDENT()}, this is the number of seconds to advance.
      * If {@link Clock#clockStep} is set to {@link ClockStep#SYSTEM_CLOCK_MULTIPLIER()}, this value is multiplied by the elapsed system
      * time since the last call to {@link Clock#tick}. Changing this property will change {@link Clock#clockStep} from {@link ClockStep#SYSTEM_CLOCK()} to
@@ -66,10 +66,10 @@ public class Clock {
      */
     public double multiplier;
     /**
-     * Indicates whether {@link Clock#tick} should attempt to advance time. The clock will only advance time when both
+     * Indicates whether {@link Clock#tick()} should attempt to advance time. The clock will only advance time when both
      * {@link Clock#canAnimate} and {@link Clock#shouldAnimate} are true. Changing this property will change {@link Clock#clockStep} from
-     * {@link ClockStep#SYSTEM_CLOCK() to {@link ClockStep#SYSTEM_CLOCK_MULTIPLIER()}.
-     * Default: true.
+     * {@link ClockStep#SYSTEM_CLOCK()} to {@link ClockStep#SYSTEM_CLOCK_MULTIPLIER()}.
+     * Default: true
      */
     @JsProperty
     public boolean shouldAnimate;

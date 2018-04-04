@@ -36,25 +36,25 @@ public class NearFarScalar {
      * Default: 1.0
      */
     @JsProperty
-    public Number far;
+    public double far;
     /**
      * The value at the upper bound of the camera range.
      * Default: 0.0
      */
     @JsProperty
-    public Number farValue;
+    public double farValue;
     /**
      * The lower bound of the camera range.
      * Default: 0.0
      */
     @JsProperty
-    public Number near;
+    public double near;
     /**
      * The value at the lower bound of the camera range.
      * Default: 0.0
      */
     @JsProperty
-    public Number nearValue;
+    public double nearValue;
 
     /**
      * Represents a scalar value's lower and upper bound at a near distance and far distance in eye space.
@@ -99,7 +99,7 @@ public class NearFarScalar {
      * @return The array that was packed into
      */
     @JsMethod
-    public native Number[] pack(NearFarScalar value, Number[] array);
+    public native double[] pack(NearFarScalar value, double[] array);
 
     /**
      * Stores the provided instance into the provided array.
@@ -109,7 +109,7 @@ public class NearFarScalar {
      * @return The array that was packed into
      */
     @JsMethod
-    public native Number[] pack(NearFarScalar value, Number[] array, Integer startingIndex);
+    public native double[] pack(NearFarScalar value, double[] array, int startingIndex);
 
     /**
      * Retrieves an instance from a packed array.
@@ -117,7 +117,7 @@ public class NearFarScalar {
      * @return The modified result parameter or a new NearFarScalar instance if one was not provided.
      */
     @JsMethod
-    public static native NearFarScalar unpack(Number[] array);
+    public static native NearFarScalar unpack(double[] array);
 
     /**
      * Retrieves an instance from a packed array.
@@ -126,7 +126,7 @@ public class NearFarScalar {
      * @return The modified result parameter or a new NearFarScalar instance if one was not provided.
      */
     @JsMethod
-    public static native NearFarScalar unpack(Number[] array, Integer startingIndex);
+    public static native NearFarScalar unpack(double[] array, int startingIndex);
 
     /**
      * Retrieves an instance from a packed array.
@@ -136,7 +136,7 @@ public class NearFarScalar {
      * @return The modified result parameter or a new NearFarScalar instance if one was not provided.
      */
     @JsMethod
-    public static native NearFarScalar unpack(Number[] array, Integer startingIndex, NearFarScalar result);
+    public static native NearFarScalar unpack(double[] array, int startingIndex, NearFarScalar result);
 
     /**
      * Duplicates this instance.

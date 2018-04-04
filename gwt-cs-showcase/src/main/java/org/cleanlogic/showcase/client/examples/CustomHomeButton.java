@@ -43,14 +43,12 @@ public class CustomHomeButton extends AbstractExample {
         final ViewerPanel viewer = new ViewerPanel(viewerOptions);
         viewer.getViewer().homeButton().viewModel.tooltip = "Fly to New York";
         viewer.getViewer().entities().add(entity);
-        viewer.getViewer().homeButton().viewModel.command.beforeExecute.addEventListener(
-                new Event.Listener() {
-                    @Override
-                    public void function(Object... o) {
+        viewer.getViewer().homeButton().viewModel.command.beforeExecute.addEventListener(new Event.Listener() {
+            @Override
+            public void function(Object... o) {
                         viewer.getViewer().flyTo(entity);
                     }
-                }
-        );
+        });
 
         contentPanel.add(new HTML("<div>Click the home button to fly to New York.</div>"));
         contentPanel.add(viewer);

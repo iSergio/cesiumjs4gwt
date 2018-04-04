@@ -48,7 +48,7 @@ public class BoxOutlineGeometry extends Geometry implements Packable {
     /**
      * Creates an outline of a cube from the dimensions of an AxisAlignedBoundingBox.
      * @param boundingBox A description of the AxisAlignedBoundingBox.
-     * @return
+     * @return outline of a cube
      */
     @JsMethod
     public static native BoxOutlineGeometry fromAxisAlignedBoundingBox(AxisAlignedBoundingBox boundingBox);
@@ -56,7 +56,7 @@ public class BoxOutlineGeometry extends Geometry implements Packable {
     /**
      * Creates an outline of a cube centered at the origin given its dimensions.
      * @param options {@link BoxOutlineGeometryOptions}
-     * @return
+     * @return outline of a cube
      */
     @JsMethod
     public static native BoxOutlineGeometry fromDimensions(BoxOutlineGeometryOptions options);

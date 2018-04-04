@@ -69,7 +69,7 @@ public class CullingVolume {
     /**
      * Determines whether a bounding volume intersects the culling volume.
      * @param boundingVolume The bounding volume whose intersection with the culling volume is to be tested.
-     * @return {@link Intersect#OUTSIDE(), {@link Intersect#INTERSECTING()}, or {@link Intersect#INSIDE()}.
+     * @return {@link Intersect#OUTSIDE()}, {@link Intersect#INTERSECTING()}, or {@link Intersect#INSIDE()}.
      * @see org.cesiumjs.cs.core.enums.Intersect
      */
     public native int computeVisibility(Object boundingVolume);

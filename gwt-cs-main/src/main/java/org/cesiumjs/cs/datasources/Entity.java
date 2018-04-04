@@ -203,7 +203,7 @@ public class Entity {
 
     /**
      * Adds a property to this object. Once a property is added, it can be observed with {@link #definitionChanged()} and
-     * composited with {@link CompositeEntityCollection}
+     * composited with {@link org.cesiumjs.cs.collections.CompositeEntityCollection}
      * @param propertyName The name of the property to add.
      */
     @JsMethod

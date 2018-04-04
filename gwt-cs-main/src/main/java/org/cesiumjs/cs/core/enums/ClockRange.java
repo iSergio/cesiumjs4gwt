@@ -27,7 +27,7 @@ import org.cesiumjs.cs.core.Clock;
 @JsType(isNative = true, namespace = "Cesium", name = "ClockRange")
 public class ClockRange {
     /**
-     * When {@link Clock#startTime or {@link Clock#stopTime} is reached, {@link Clock#tick} will not advance {@link Clock#currentTime} any further.
+     * When {@link Clock#startTime} or {@link Clock#stopTime} is reached, {@link Clock#tick} will not advance {@link Clock#currentTime} any further.
      */
     @JsProperty(name = "CLAMPED")
     public static native Number CLAMPED();

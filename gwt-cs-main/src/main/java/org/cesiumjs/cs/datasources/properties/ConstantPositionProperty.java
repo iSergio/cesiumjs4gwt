@@ -32,8 +32,9 @@ public class ConstantPositionProperty extends PositionProperty {
      * Gets the reference frame in which the position is defined.
      * Default: {@link ReferenceFrame#FIXED()};
      */
+    @SuppressWarnings("unusable-by-js")
     @JsProperty
-    public Integer referenceFrame;
+    public Number referenceFrame;
 
     /**
      * A {@link PositionProperty} whose value does not change in respect to the {@link ReferenceFrame} in which is it defined.
@@ -68,6 +69,7 @@ public class ConstantPositionProperty extends PositionProperty {
      * @param value The property value.
      * @param referenceFrame {@link ReferenceFrame} The reference frame in which the position is defined. Default: this.referenceFrame
      */
+    @SuppressWarnings("unusable-by-js")
     @JsMethod
-    public native void setValue(Cartesian3 value, Integer referenceFrame);
+    public native void setValue(Cartesian3 value, Number referenceFrame);
 }

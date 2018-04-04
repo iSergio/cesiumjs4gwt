@@ -85,13 +85,14 @@ public class CreditDisplay {
     public native void beginFrame();
 
     /**
-     * Destroys the resources held by this object. Destroying an object allows for deterministic release of resources, instead of relying on the garbage collector to destroy this object.
+     * Destroys the resources held by this object. Destroying an object allows for deterministic release of resources,
+     * instead of relying on the garbage collector to destroy this object.
      *
-     * Once an object is destroyed, it should not be used; calling any function other than isDestroyed will result in a DeveloperError exception. Therefore, assign the return value (undefined) to the object as done in the example.
-     * @return
+     * Once an object is destroyed, it should not be used; calling any function other than isDestroyed will result in a
+     * DeveloperError exception. Therefore, assign the return value (undefined) to the object as done in the example.
      */
     @JsMethod
-    public native JsObject destroy();
+    public native void destroy();
 
     /**
      * Sets the credit display to the end of frame state, displaying credits from the last frame in the credit container.
