@@ -61,9 +61,8 @@ public class Viewer {
     /**
      * Gets the BaseLayerPicker.
      */
-    //TODO: Later
-//    @JsProperty(name = "baseLayerPicker")
-//    public native BaseLayerPicker baseLayerPicker();
+    @JsProperty(name = "baseLayerPicker")
+    public native BaseLayerPicker baseLayerPicker();
     /**
      * Gets the DOM element for the area at the bottom of the window containing the CreditDisplay and potentially other things.
      */
@@ -126,13 +125,11 @@ public class Viewer {
     /**
      * Gets the FullscreenButton.
      */
-    //TODO: Later
-//    @JsProperty(name = "fullscreenButton")
-//    public native FullscreenButton fullscreenButton();
+    @JsProperty(name = "fullscreenButton")
+    public native FullscreenButton fullscreenButton();
     /**
      * Gets the Geocoder.
      */
-    //TODO: Later
     @JsProperty(name = "geocoder")
     public native JsObject geocoder();
     /**
