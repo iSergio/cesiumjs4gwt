@@ -22,7 +22,6 @@ import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Credit;
-import org.cesiumjs.cs.js.JsObject;
 
 /**
  * The credit display is responsible for displaying credits on screen.

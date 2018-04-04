@@ -16,11 +16,8 @@
 
 package org.cesiumjs.cs.scene;
 
-import junit.framework.TestCase;
 import org.cesiumjs.cs.BaseTestCase;
-import org.cesiumjs.cs.Cesium;
 import org.cesiumjs.cs.core.IonResource;
-import org.cesiumjs.cs.core.Resource;
 import org.cesiumjs.cs.promise.Fulfill;
 import org.cesiumjs.cs.promise.Promise;
 import org.cesiumjs.cs.promise.Reject;

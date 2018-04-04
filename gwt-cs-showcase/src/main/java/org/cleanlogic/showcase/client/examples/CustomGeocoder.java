@@ -24,7 +24,6 @@ import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.Cesium;
 import org.cesiumjs.cs.core.GeocoderResult;
 import org.cesiumjs.cs.core.Rectangle;
 import org.cesiumjs.cs.core.Resource;

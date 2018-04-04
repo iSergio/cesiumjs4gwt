@@ -22,7 +22,6 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.core.Matrix4;
-import org.cesiumjs.cs.core.Plane;
 import org.cesiumjs.cs.scene.ClippingPlane;
 
 /**

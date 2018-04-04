@@ -21,8 +21,6 @@ import org.cesiumjs.cs.core.Cartographic;
 import org.cesiumjs.cs.core.Ellipsoid;
 import org.cesiumjs.cs.core.providers.CesiumTerrainProvider;
 import org.cesiumjs.cs.core.providers.TerrainProvider;
-import org.cesiumjs.cs.js.JsImage;
-import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.promise.Promise;
 import org.cesiumjs.cs.scene.providers.UrlTemplateImageryProvider;
 import org.cesiumjs.cs.scene.providers.options.OpenStreetMapImageryProviderOptions;

@@ -18,7 +18,6 @@ package org.cesiumjs.cs.core.options;
 
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.Resource;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>

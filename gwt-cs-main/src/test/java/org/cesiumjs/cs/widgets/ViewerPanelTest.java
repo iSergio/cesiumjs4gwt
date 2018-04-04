@@ -21,8 +21,8 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.LinkElement;
 import com.google.gwt.user.client.ui.RootPanel;
-import org.cesiumjs.cs.widgets.options.ViewerOptions;
 import org.cesiumjs.cs.BaseTestCase;
+import org.cesiumjs.cs.widgets.options.ViewerOptions;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>

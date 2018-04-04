@@ -27,7 +27,6 @@ import org.cesiumjs.cs.datasources.Entity;
 import org.cesiumjs.cs.datasources.properties.MaterialProperty;
 import org.cesiumjs.cs.datasources.properties.Property;
 import org.cesiumjs.cs.scene.Scene;
-import org.cesiumjs.cs.scene.apperances.Appearance;
 
 /**
  * Defines the interface for a geometry updater. A GeometryUpdater maps geometry

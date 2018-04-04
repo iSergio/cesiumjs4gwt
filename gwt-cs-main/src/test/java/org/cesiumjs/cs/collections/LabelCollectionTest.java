@@ -16,7 +16,6 @@
 
 package org.cesiumjs.cs.collections;
 
-import junit.framework.TestCase;
 import org.cesiumjs.cs.BaseTestCase;
 import org.cesiumjs.cs.scene.Label;
 import org.cesiumjs.cs.scene.options.LabelOptions;

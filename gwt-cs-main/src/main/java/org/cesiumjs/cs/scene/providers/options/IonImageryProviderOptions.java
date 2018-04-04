@@ -18,7 +18,6 @@ package org.cesiumjs.cs.scene.providers.options;
 
 import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.Resource;
-import org.cesiumjs.cs.scene.providers.IonImageryProvider;
 
 /**
  * Options for {@link org.cesiumjs.cs.scene.providers.IonImageryProvider}.

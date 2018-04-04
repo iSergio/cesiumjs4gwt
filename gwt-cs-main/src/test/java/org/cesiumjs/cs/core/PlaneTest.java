@@ -16,7 +16,6 @@
 
 package org.cesiumjs.cs.core;
 
-import junit.framework.TestCase;
 import org.cesiumjs.cs.BaseTestCase;
 
 /**

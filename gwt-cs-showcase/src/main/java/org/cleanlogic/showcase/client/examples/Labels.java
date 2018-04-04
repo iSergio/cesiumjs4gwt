@@ -38,7 +38,6 @@ import org.cesiumjs.cs.js.JsImage;
 import org.cesiumjs.cs.scene.Label;
 import org.cesiumjs.cs.scene.enums.HorizontalOrigin;
 import org.cesiumjs.cs.scene.enums.LabelStyle;
-import org.cesiumjs.cs.scene.options.LabelOptions;
 import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cleanlogic.showcase.client.basic.AbstractExample;
 import org.cleanlogic.showcase.client.components.store.ShowcaseExampleStore;

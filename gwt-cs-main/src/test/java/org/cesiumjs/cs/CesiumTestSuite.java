@@ -18,15 +18,6 @@ package org.cesiumjs.cs;
 
 import com.google.gwt.junit.tools.GWTTestSuite;
 import junit.framework.TestSuite;
-import org.cesiumjs.cs.collections.ClippingPlaneCollectionTest;
-import org.cesiumjs.cs.collections.DataSourceCollectionTest;
-import org.cesiumjs.cs.collections.LabelCollectionTest;
-import org.cesiumjs.cs.core.ColorTest;
-import org.cesiumjs.cs.core.Cartesian2Test;
-import org.cesiumjs.cs.core.IonResourceTest;
-import org.cesiumjs.cs.scene.Cesium3DTilesetTest;
-import org.cesiumjs.cs.scene.LabelTest;
-import org.cesiumjs.cs.widgets.ViewerPanelTest;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>

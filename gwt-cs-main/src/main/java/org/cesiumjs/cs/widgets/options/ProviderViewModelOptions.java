@@ -20,7 +20,6 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.widgets.Command;
 import org.cesiumjs.cs.widgets.ProviderViewModel;
 

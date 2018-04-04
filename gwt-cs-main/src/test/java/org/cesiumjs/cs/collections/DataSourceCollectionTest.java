@@ -17,22 +17,12 @@
 package org.cesiumjs.cs.collections;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.http.client.RequestBuilder;
-import com.google.gwt.http.client.RequestCallback;
-import com.google.gwt.http.client.RequestException;
-import com.google.gwt.http.client.Response;
 import org.cesiumjs.cs.BaseTestCase;
 import org.cesiumjs.cs.Cesium;
-import org.cesiumjs.cs.core.IonResource;
-import org.cesiumjs.cs.core.Request;
-import org.cesiumjs.cs.core.Resource;
-import org.cesiumjs.cs.core.options.ResourceOptions;
 import org.cesiumjs.cs.datasources.DataSource;
 import org.cesiumjs.cs.datasources.GeoJsonDataSource;
-import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.promise.Fulfill;
 import org.cesiumjs.cs.promise.Reject;
-import org.junit.Assert;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>

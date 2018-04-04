@@ -49,7 +49,6 @@ import org.cesiumjs.cs.promise.Fulfill;
 import org.cesiumjs.cs.promise.Promise;
 import org.cesiumjs.cs.scene.Cesium3DTileset;
 import org.cesiumjs.cs.scene.ClippingPlane;
-import org.cesiumjs.cs.scene.Primitive;
 import org.cesiumjs.cs.scene.options.Cesium3DTilesetOptions;
 import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cesiumjs.cs.widgets.options.ViewerOptions;

@@ -18,12 +18,7 @@ package org.cesiumjs.cs;
 
 import com.google.gwt.core.client.Callback;
 import com.google.gwt.core.client.ScriptInjector;
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.LinkElement;
 import com.google.gwt.junit.client.GWTTestCase;
-
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>

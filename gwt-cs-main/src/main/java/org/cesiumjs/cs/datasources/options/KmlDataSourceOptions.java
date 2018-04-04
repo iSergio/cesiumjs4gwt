@@ -19,8 +19,6 @@ package org.cesiumjs.cs.datasources.options;
 import com.google.gwt.dom.client.CanvasElement;
 import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.Ellipsoid;
-import org.cesiumjs.cs.datasources.KmlDataSource;
-import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.scene.Camera;
 
 /**

@@ -16,7 +16,9 @@
 
 package org.cesiumjs.cs.scene;
 
-import jsinterop.annotations.*;
+import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.Plane;
 
