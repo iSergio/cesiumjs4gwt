@@ -150,9 +150,8 @@ public class Viewer {
     /**
      * Gets the NavigationHelpButton.
      */
-    //TODO: Later
-//    @JsProperty(name = "navigationHelpButton")
-//    public native NavigationHelpButton navigationHelpButton();
+    @JsProperty(name = "navigationHelpButton")
+    public native NavigationHelpButton navigationHelpButton();
     //TODO: ProjectionPicker
 //    @JsProperty(name = "projectionPicker")
 //    public native ProjectionPicker projectionPicker();
