@@ -152,9 +152,11 @@ public class Viewer {
      */
     @JsProperty(name = "navigationHelpButton")
     public native NavigationHelpButton navigationHelpButton();
-    //TODO: ProjectionPicker
-//    @JsProperty(name = "projectionPicker")
-//    public native ProjectionPicker projectionPicker();
+    /**
+     * Gets the ProjectionPicker
+     */
+    @JsProperty(name = "projectionPicker")
+    public native ProjectionPicker projectionPicker();
     /**
      * Gets or sets a scaling factor for rendering resolution. Values less than 1.0 can improve performance on
      * less powerful devices while values greater than 1.0 will render at a higher resolution and then scale down,
