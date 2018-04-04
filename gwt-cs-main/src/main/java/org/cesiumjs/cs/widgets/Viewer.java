@@ -256,6 +256,8 @@ public class Viewer {
      */
     @JsProperty(name = "vrButton")
     public native VRButton vrButton();
+    @JsProperty
+    public Cesium3DTilesInspector cesium3DTilesInspector;
 
     /**
      * A base widget for building applications. It composites all of the standard Cesium widgets into one reusable package.
@@ -330,6 +332,7 @@ public class Viewer {
      *               You can also pass a promise that resolves to one of the previously mentioned types.
      * @return A Promise that resolves to true if the flight was successful or false if the entity is not currently visualized in the scene or the flight was cancelled.
      */
+    @JsMethod
     public native Promise<Boolean, Void> flyTo(Object target);
 
     /**
