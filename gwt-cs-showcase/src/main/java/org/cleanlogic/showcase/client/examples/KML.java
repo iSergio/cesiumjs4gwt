@@ -27,6 +27,7 @@ import org.cesiumjs.cs.core.enums.ClockRange;
 import org.cesiumjs.cs.core.enums.ClockStep;
 import org.cesiumjs.cs.datasources.Entity;
 import org.cesiumjs.cs.datasources.KmlDataSource;
+import org.cesiumjs.cs.datasources.options.KmlDataSourceLoadStaticOptions;
 import org.cesiumjs.cs.datasources.options.KmlDataSourceOptions;
 import org.cesiumjs.cs.promise.Fulfill;
 import org.cesiumjs.cs.widgets.Viewer;
@@ -63,7 +64,7 @@ public class KML extends AbstractExample {
                 org.cesiumjs.cs.scene.Camera camera = viewer.camera;
                 CanvasElement canvas = viewer.canvas();
                 camera.flyHome(0);
-                KmlDataSourceOptions kmlDataSourceOptions = KmlDataSourceOptions.create(camera, canvas);
+                KmlDataSourceLoadStaticOptions kmlDataSourceOptions = KmlDataSourceLoadStaticOptions.create(camera, canvas);
                 if (!source.getSelectedValue().contains("bikeRide")) {
                     csVPanel.getViewer().dataSources().add(KmlDataSource.load(source.getSelectedValue(), kmlDataSourceOptions));
                 } else {

@@ -14,6 +14,7 @@ import org.cesiumjs.cs.datasources.Entity;
 import org.cesiumjs.cs.datasources.EntityCluster;
 import org.cesiumjs.cs.datasources.EntityClusterObject;
 import org.cesiumjs.cs.datasources.KmlDataSource;
+import org.cesiumjs.cs.datasources.options.KmlDataSourceLoadStaticOptions;
 import org.cesiumjs.cs.datasources.options.KmlDataSourceOptions;
 import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.promise.Fulfill;
@@ -56,10 +57,7 @@ public class Clustering extends AbstractExample {
     @Override
     public void buildPanel() {
         csVPanel = new ViewerPanel();
-        Cesium.log(csVPanel.getViewer().camera);
-        KmlDataSourceOptions kmlDataSourceOptions = new KmlDataSourceOptions();
-        kmlDataSourceOptions.camera = csVPanel.getViewer().camera;
-        kmlDataSourceOptions.canvas = csVPanel.getViewer().canvas();
+        KmlDataSourceLoadStaticOptions kmlDataSourceOptions = KmlDataSourceLoadStaticOptions.create(csVPanel.getViewer().camera, csVPanel.getViewer().canvas());
         Promise<KmlDataSource, Void> dataSourcePromise = csVPanel.getViewer().dataSources().add(KmlDataSource.load(GWT.getModuleBaseURL() + "SampleData/kml/facilities/facilities.kml", kmlDataSourceOptions));
         dataSourcePromise.then(new Fulfill<KmlDataSource>() {
             @Override
@@ -78,6 +76,7 @@ public class Clustering extends AbstractExample {
                 pin30 = pinBuilder.fromText("30+", Color.YELLOW(), 48).toDataUrl();
                 pin20 = pinBuilder.fromText("20+", Color.GREEN(), 48).toDataUrl();
                 pin10 = pinBuilder.fromText("10+", Color.BLUE(), 48).toDataUrl();
+
                 singleDigitPins = new String[8];
                 for (int i = 0; i < singleDigitPins.length; ++i) {
                     singleDigitPins[i] = pinBuilder.fromText("" + (i + 2), Color.VIOLET(), 48).toDataUrl();

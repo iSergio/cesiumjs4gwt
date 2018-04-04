@@ -30,6 +30,7 @@ import org.cesiumjs.cs.datasources.Entity;
 import org.cesiumjs.cs.datasources.EntityCluster;
 import org.cesiumjs.cs.datasources.EntityClusterObject;
 import org.cesiumjs.cs.datasources.KmlDataSource;
+import org.cesiumjs.cs.datasources.options.KmlDataSourceLoadStaticOptions;
 import org.cesiumjs.cs.datasources.options.KmlDataSourceOptions;
 import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.promise.Fulfill;
@@ -72,7 +73,7 @@ public class Clustering extends AbstractExample {
     @Override
     public void buildPanel() {
         csVPanel = new ViewerPanel();
-        KmlDataSourceOptions kmlDataSourceOptions = KmlDataSourceOptions.create(csVPanel.getViewer().camera, csVPanel.getViewer().canvas());
+        KmlDataSourceLoadStaticOptions kmlDataSourceOptions = KmlDataSourceLoadStaticOptions.create(csVPanel.getViewer().camera, csVPanel.getViewer().canvas());
         Promise<KmlDataSource, Void> dataSourcePromise = csVPanel.getViewer().dataSources().add(KmlDataSource.load(GWT.getModuleBaseURL() + "SampleData/kml/facilities/facilities.kml", kmlDataSourceOptions));
         dataSourcePromise.then(new Fulfill<KmlDataSource>() {
             @Override
