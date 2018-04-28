@@ -212,10 +212,10 @@ public class Billboards extends AbstractExample {
     private void offsetByDistance() {
         Resource.fetchImage(GWT.getModuleBaseURL() + "images/Cesium_Logo_overlay.png").then(new Fulfill<JsImage>() {
             @Override
-            public void onFulfilled(JsImage logoImg) {
+            public void onFulfilled(final JsImage logoImg) {
                 Resource.fetchImage(GWT.getModuleBaseURL() + "images/facility.gif").then(new Fulfill<JsImage>() {
                     @Override
-                    public void onFulfilled(JsImage facilityImg) {
+                    public void onFulfilled(final JsImage facilityImg) {
                         int facilityHeight = facilityImg.height;
 
                         BillboardGraphicsOptions billboardGraphicsOptions = new BillboardGraphicsOptions();
