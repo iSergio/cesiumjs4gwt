@@ -87,5 +87,6 @@ public class InjectorModule extends AbstractGinModule {
         bind(CustomBaseLayerPicker.class).asEagerSingleton();
         bind(CustomHomeButton.class).asEagerSingleton();
         bind(PolylineArrow.class).asEagerSingleton();
+        bind(CallbackProperty.class).asEagerSingleton();
     }
 }
