@@ -28,7 +28,7 @@ import org.cesiumjs.cs.core.JulianDate;
 @JsType(isNative = true, namespace = "Cesium", name = "CallbackProperty")
 public class CallbackProperty<T> extends Property<T> {
     @JsConstructor
-    public CallbackProperty(Callback callback, boolean isConstant) {}
+    public CallbackProperty(Callback<T> callback, boolean isConstant) {}
 
     /**
      * Sets the callback to be used.
