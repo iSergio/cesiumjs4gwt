@@ -21,6 +21,7 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Fullscreen;
 
 /**
  * The view model for {@link FullscreenButton}.
@@ -46,7 +47,7 @@ public class FullscreenButtonViewModel {
     public boolean isFullscreen;
     /**
      * Gets or sets whether or not fullscreen functionality should be enabled. This property is observable.
-     * @see Fullscreen.enabled
+     * @see Fullscreen#enabled()
      */
     @JsProperty
     public boolean isFullscreenEnabled;

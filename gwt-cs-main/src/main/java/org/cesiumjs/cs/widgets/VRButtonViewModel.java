@@ -21,6 +21,7 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Fullscreen;
 import org.cesiumjs.cs.scene.Scene;
 
 /**
@@ -37,7 +38,7 @@ public class VRButtonViewModel {
     public Command command;
     /**
      * Gets or sets whether or not VR functionality should be enabled.
-     * @see Fullscreen.enabled
+     * @see Fullscreen#enabled()
      */
     @JsProperty
     public boolean isVREnabled;
