@@ -21,8 +21,11 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.collections.TimeIntervalCollection;
+import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.datasources.Entity;
 import org.cesiumjs.cs.datasources.graphics.*;
+import org.cesiumjs.cs.datasources.properties.CallbackProperty;
+import org.cesiumjs.cs.datasources.properties.ConstantPositionProperty;
 import org.cesiumjs.cs.datasources.properties.PositionProperty;
 import org.cesiumjs.cs.datasources.properties.Property;
 import org.cesiumjs.cs.js.JsObject;
@@ -61,7 +64,12 @@ public class EntityOptions {
      * A Property specifying the entity position.
      */
     @JsProperty
-    public PositionProperty position;
+    public Property position;
+    /**
+     * Property for {@link CallbackProperty}.
+     */
+    @JsProperty(name = "position")
+    public CallbackProperty<Cartesian3> positionCallback;
     /**
      * A Property specifying the entity orientation.
      */
