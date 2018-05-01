@@ -1,0 +1,110 @@
+package org.cleanlogic.showcase.client.examples;
+
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.i18n.client.NumberFormat;
+import com.google.gwt.user.client.ui.HTML;
+import org.cesiumjs.cs.core.*;
+import org.cesiumjs.cs.datasources.Entity;
+import org.cesiumjs.cs.datasources.graphics.LabelGraphics;
+import org.cesiumjs.cs.datasources.graphics.PolylineGraphics;
+import org.cesiumjs.cs.datasources.graphics.options.LabelGraphicsOptions;
+import org.cesiumjs.cs.datasources.graphics.options.PolylineGraphicsOptions;
+import org.cesiumjs.cs.datasources.options.EntityOptions;
+import org.cesiumjs.cs.datasources.properties.*;
+import org.cesiumjs.cs.widgets.ViewerPanel;
+import org.cleanlogic.showcase.client.basic.AbstractExample;
+import org.cleanlogic.showcase.client.components.store.ShowcaseExampleStore;
+
+import javax.inject.Inject;
+import java.lang.Math;
+
+/**
+ * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ */
+public class CallbackProperty extends AbstractExample {
+    private double startLatitude = 35;
+    private double startLongitude = -120;
+    private double endLongitude;
+    private JulianDate startTime = JulianDate.now();
+
+    private Entity redLine;
+
+    private Cartographic startCartographic = Cartographic.fromDegrees(startLongitude, startLatitude);
+
+    // use scratch object to avoid new allocations per frame.
+    private Cartographic endCartographic = new Cartographic();
+    private Cartographic scratch = new Cartographic();
+    private EllipsoidGeodesic geodesic = new EllipsoidGeodesic();
+
+    @Inject
+    public CallbackProperty(ShowcaseExampleStore store) {
+        super("Callback Property", "Callback property", new String[]{"Showcase", "3D Tiles", "Callback property"}, store);
+    }
+
+    @Override
+    public void buildPanel() {
+        final ViewerPanel csVPanel = new ViewerPanel();
+        csVPanel.getViewer().clock().shouldAnimate = true;
+
+        PolylineGraphicsOptions polylineGraphicsOptions = new PolylineGraphicsOptions();
+        polylineGraphicsOptions.positions = new org.cesiumjs.cs.datasources.properties.CallbackProperty<>(new org.cesiumjs.cs.datasources.properties.CallbackProperty.Callback<Cartesian3[]>() {
+            @Override
+            public Cartesian3[] function(JulianDate time, Cartesian3[] result) {
+                endLongitude = startLongitude + 0.001 * JulianDate.secondsDifference(time, startTime);
+                return Cartesian3.fromDegreesArray(new double[] {startLongitude, startLatitude, endLongitude, startLatitude}, Ellipsoid.WGS84(), result);
+            }
+        }, false);
+        polylineGraphicsOptions.width = new ConstantProperty<>(5);
+        polylineGraphicsOptions.material = new ColorMaterialProperty(Color.RED());
+        EntityOptions options = new EntityOptions();
+        options.polyline = new PolylineGraphics(polylineGraphicsOptions);
+        redLine = csVPanel.getViewer().entities().add(options);
+
+        LabelGraphicsOptions labelGraphicsOptions = new LabelGraphicsOptions();
+        labelGraphicsOptions.text = new org.cesiumjs.cs.datasources.properties.CallbackProperty<>(new GetLength(), false);
+        labelGraphicsOptions.font = new ConstantProperty<>("20px sans-serif");
+        labelGraphicsOptions.pixelOffset = new ConstantProperty<>(new Cartesian2(0.0, 20));
+        options = new EntityOptions();
+        options.positionCallback = new org.cesiumjs.cs.datasources.properties.CallbackProperty<>(new GetMidpoint(), false);
+        options.label = new LabelGraphics(labelGraphicsOptions);
+
+        csVPanel.getViewer().trackedEntity = csVPanel.getViewer().entities().add(options);
+
+        contentPanel.add(new HTML("<p></p>"));
+        contentPanel.add(csVPanel);
+
+        initWidget(contentPanel);
+    }
+
+    @Override
+    public String[] getSourceCodeURLs() {
+        String[] sourceCodeURLs = new String[1];
+        sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "CallbackProperty.txt";
+        return sourceCodeURLs;
+    }
+
+    private final class GetMidpoint implements org.cesiumjs.cs.datasources.properties.CallbackProperty.Callback<Cartesian3> {
+        @Override
+        public Cartesian3 function(JulianDate time, Cartesian3 result) {
+            // Get the end position from the polyLine's callback.
+            Cartesian3 endPoint = ((Cartesian3[]) redLine.polyline.positions.getValue(time))[1];
+            endCartographic = Cartographic.fromCartesian(endPoint);
+            geodesic.setEndPoints(startCartographic, endCartographic);
+            Cartographic midpointCartographic = geodesic.interpolateUsingFraction(0.5, scratch);
+            return Cartesian3.fromRadians(midpointCartographic.longitude, midpointCartographic.latitude);
+        }
+    }
+
+    private final class GetLength implements org.cesiumjs.cs.datasources.properties.CallbackProperty.Callback<String> {
+        @Override
+        public String function(JulianDate time, String result) {
+            // Get the end position from the polyLine's callback.
+            Cartesian3 endPoint = ((Cartesian3[])redLine.polyline.positions.getValue(time))[1];
+            endCartographic = Cartographic.fromCartesian(endPoint);
+
+            geodesic.setEndPoints(startCartographic, endCartographic);
+            double lengthInMeters = Math.round(geodesic.surfaceDistance());
+            return NumberFormat.getFormat("#.#").format(lengthInMeters / 1000) + " km";
+        }
+    }
+}
