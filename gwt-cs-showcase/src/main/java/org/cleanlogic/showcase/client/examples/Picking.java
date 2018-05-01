@@ -200,7 +200,7 @@ public class Picking extends AbstractExample {
     }
 
     private void makeProperty(final Entity entity, final Color color) {
-        Property<Color> colorProperty = new CallbackProperty<>(new CallbackProperty.Callback<Color>() {
+        Property<Color> colorProperty = new org.cesiumjs.cs.datasources.properties.CallbackProperty<>(new org.cesiumjs.cs.datasources.properties.CallbackProperty.Callback<Color>() {
             @Override
             public Color function(JulianDate time, Color result) {
                 if (_pickedEntities.contains(entity)) {
