@@ -216,6 +216,26 @@ public class Scene {
     @JsProperty
     public Color invertClassificationColor;
     /**
+     * Gets the simulation time when the scene was last rendered. Returns undefined if the scene has not yet been rendered.
+     */
+    @JsProperty(name = "lastRenderTime")
+    public native JulianDate lastRenderTime();
+    /**
+     * Whether or not to use a logarithmic depth buffer. Enabling this option will allow for less frustums in the multi-frustum,
+     * increasing performance. This property relies on {@link Context#fragmentDepth} being supported.
+     */
+    @JsProperty
+    public boolean logarithmicDepthBuffer;
+    /**
+     * The far-to-near ratio of the multi-frustum when using a logarithmic depth buffer.
+     * This value is used to create the near and far values for each frustum of the multi-frustum.
+     * It is only used when {@link Scene#logarithmicDepthBuffer} is true. When logarithmicDepthBuffer is false,
+     * use {@link Scene#farToNearRatio}.
+     * Default: 1e9
+     */
+    @JsProperty
+    public double logarithmicDepthFarToNearRatio;
+    /**
      * Determines if the 2D map is rotatable or can be scrolled infinitely in the horizontal direction.
      */
     @JsProperty
