@@ -63,26 +63,34 @@ public class ParticleSystemOptions {
     @JsProperty
     public Matrix4 emitterModelMatrix;
     /**
+     * Sets the color of a particle for the duration of its particleLife.
+     * Default: {@link Color#WHITE()}
+     */
+    @JsProperty
+    public Color color;
+    /**
      * The color of a particle when it is born.
-     * Default: {@link org.cesiumjs.cs.core.Color#WHITE()}.
      */
     @JsProperty
     public Color startColor;
     /**
      * The color of a particle when it dies.
-     * Default: {@link org.cesiumjs.cs.core.Color#WHITE()}.
      */
     @JsProperty
     public Color endColor;
     /**
-     * The scale of the particle when it is born.
+     * Sets the scale to apply to the image of the particle for the duration of its particleLife.
      * Default: 1.0
+     */
+    @JsProperty
+    public double scale;
+    /**
+     * The scale of the particle when it is born.
      */
     @JsProperty
     public double startScale;
     /**
      * The scale of the particle when it dies.
-     * Default: 1.0
      */
     @JsProperty
     public double endScale;
