@@ -771,16 +771,14 @@ define('Core/Math',[
      * @param {Number} value The value to return the sign of.
      * @returns {Number} The sign of value.
      */
-    CesiumMath.sign = function(value) {
-        if (value > 0) {
-            return 1;
+    CesiumMath.sign = defaultValue(Math.sign, function sign(value) {
+        value = +value; // coerce to number
+        if (value === 0 || value !== value) {
+            // zero or NaN
+            return value;
         }
-        if (value < 0) {
-            return -1;
-        }
-
-        return 0;
-    };
+        return value > 0 ? 1 : -1;
+    });
 
     /**
      * Returns 1.0 if the given value is positive or zero, and -1.0 if it is negative.
@@ -840,12 +838,9 @@ define('Core/Math',[
      * @param {Number} value The number whose hyperbolic sine is to be returned.
      * @returns {Number} The hyperbolic sine of <code>value</code>.
      */
-    CesiumMath.sinh = function(value) {
-        var part1 = Math.pow(Math.E, value);
-        var part2 = Math.pow(Math.E, -1.0 * value);
-
-        return (part1 - part2) * 0.5;
-    };
+    CesiumMath.sinh = defaultValue(Math.sinh, function sinh(value) {
+        return (Math.exp(value) - Math.exp(-value)) / 2.0;
+    });
 
     /**
      * Returns the hyperbolic cosine of a number.
@@ -866,12 +861,9 @@ define('Core/Math',[
      * @param {Number} value The number whose hyperbolic cosine is to be returned.
      * @returns {Number} The hyperbolic cosine of <code>value</code>.
      */
-    CesiumMath.cosh = function(value) {
-        var part1 = Math.pow(Math.E, value);
-        var part2 = Math.pow(Math.E, -1.0 * value);
-
-        return (part1 + part2) * 0.5;
-    };
+    CesiumMath.cosh = defaultValue(Math.cosh, function cosh(value) {
+        return (Math.exp(value) + Math.exp(-value)) / 2.0;
+    });
 
     /**
      * Computes the linear interpolation of two values.
@@ -910,7 +902,7 @@ define('Core/Math',[
      * @type {Number}
      * @constant
      */
-    CesiumMath.PI_OVER_TWO = Math.PI * 0.5;
+    CesiumMath.PI_OVER_TWO = Math.PI / 2.0;
 
     /**
      * pi/3
@@ -942,7 +934,7 @@ define('Core/Math',[
      * @type {Number}
      * @constant
      */
-    CesiumMath.THREE_PI_OVER_TWO = (3.0 * Math.PI) * 0.5;
+    CesiumMath.THREE_PI_OVER_TWO = 3.0 * Math.PI / 2.0;
 
     /**
      * 2pi
@@ -1375,11 +1367,6 @@ define('Core/Math',[
                 return Math.log(number) / Math.log(base);
     };
 
-    function cbrt(number) {
-        var result = Math.pow(Math.abs(number), 1.0 / 3.0);
-        return number < 0.0 ? -result : result;
-    }
-
     /**
      * Finds the cube root of a number.
      * Returns NaN if <code>number</code> is not provided.
@@ -1387,7 +1374,20 @@ define('Core/Math',[
      * @param {Number} [number] The number.
      * @returns {Number} The result.
      */
-    CesiumMath.cbrt = defined(Math.cbrt) ? Math.cbrt : cbrt;
+    CesiumMath.cbrt = defaultValue(Math.cbrt, function cbrt(number) {
+        var result = Math.pow(Math.abs(number), 1.0 / 3.0);
+        return number < 0.0 ? -result : result;
+    });
+
+    /**
+     * Finds the base 2 logarithm of a number.
+     *
+     * @param {Number} number The number.
+     * @returns {Number} The result.
+     */
+    CesiumMath.log2 = defaultValue(Math.log2, function log2(number) {
+        return Math.log(number) * Math.LOG2E;
+    });
 
     /**
      * @private
@@ -11029,6 +11029,7 @@ define('Core/FeatureDetection',[
         defined,
         Fullscreen) {
     'use strict';
+    /*global CanvasPixelArray*/
 
     var theNavigator;
     if (typeof navigator !== 'undefined') {
@@ -11184,6 +11185,14 @@ define('Core/FeatureDetection',[
         return isFirefox() && firefoxVersionResult;
     }
 
+    var isNodeJsResult;
+    function isNodeJs() {
+        if (!defined(isNodeJsResult)) {
+            isNodeJsResult = typeof process === 'object' && Object.prototype.toString.call(process) === '[object process]'; // eslint-disable-line
+        }
+        return isNodeJsResult;
+    }
+
     var hasPointerEvents;
     function supportsPointerEvents() {
         if (!defined(hasPointerEvents)) {
@@ -11218,6 +11227,19 @@ define('Core/FeatureDetection',[
         return supportsImageRenderingPixelated() ? imageRenderingValueResult : undefined;
     }
 
+    var typedArrayTypes = [];
+    if (typeof ArrayBuffer !== 'undefined') {
+        typedArrayTypes.push(Int8Array, Uint8Array, Int16Array, Uint16Array, Int32Array, Uint32Array, Float32Array, Float64Array);
+
+        if (typeof Uint8ClampedArray !== 'undefined') {
+            typedArrayTypes.push(Uint8ClampedArray);
+        }
+
+        if (typeof CanvasPixelArray !== 'undefined') {
+            typedArrayTypes.push(CanvasPixelArray);
+        }
+    }
+
     /**
      * A set of functions to detect whether the current browser supports
      * various features.
@@ -11238,10 +11260,12 @@ define('Core/FeatureDetection',[
         isFirefox : isFirefox,
         firefoxVersion : firefoxVersion,
         isWindows : isWindows,
+        isNodeJs: isNodeJs,
         hardwareConcurrency : defaultValue(theNavigator.hardwareConcurrency, 3),
         supportsPointerEvents : supportsPointerEvents,
         supportsImageRenderingPixelated: supportsImageRenderingPixelated,
-        imageRenderingValue: imageRenderingValue
+        imageRenderingValue: imageRenderingValue,
+        typedArrayTypes: typedArrayTypes
     };
 
     /**
@@ -11276,6 +11300,17 @@ define('Core/FeatureDetection',[
      */
     FeatureDetection.supportsWebWorkers = function() {
         return typeof Worker !== 'undefined';
+    };
+
+    /**
+     * Detects whether the current browser supports Web Assembly.
+     *
+     * @returns {Boolean} true if the browsers supports Web Assembly, false if not.
+     *
+     * @see {@link https://developer.mozilla.org/en-US/docs/WebAssembly}
+     */
+    FeatureDetection.supportsWebAssembly = function() {
+        return typeof WebAssembly !== 'undefined' && !FeatureDetection.isEdge();
     };
 
     return FeatureDetection;
@@ -18056,14 +18091,26 @@ define('Core/getAbsoluteUri',[
      * var absoluteUri = Cesium.getAbsoluteUri('awesome.png', 'https://test.com');
      */
     function getAbsoluteUri(relative, base) {
-        return getAbsoluteUri._implementation(relative, base, document);
+        var documentObject;
+        if (typeof document !== 'undefined') {
+            documentObject = document;
+        }
+
+        return getAbsoluteUri._implementation(relative, base, documentObject);
     }
 
     getAbsoluteUri._implementation = function(relative, base, documentObject) {
                 if (!defined(relative)) {
             throw new DeveloperError('relative uri is required.');
         }
-                base = defaultValue(base, defaultValue(documentObject.baseURI, documentObject.location.href));
+        
+        if (!defined(base)) {
+            if (typeof documentObject === 'undefined') {
+                return relative;
+            }
+            base = defaultValue(documentObject.baseURI, documentObject.location.href);
+        }
+
         var baseUri = new Uri(base);
         var relativeUri = new Uri(relative);
         return relativeUri.resolve(baseUri).toString();
@@ -19241,6 +19288,7 @@ define('Core/RequestScheduler',[
         '../ThirdParty/Uri',
         '../ThirdParty/when',
         './Check',
+        './defaultValue',
         './defined',
         './defineProperties',
         './Event',
@@ -19252,6 +19300,7 @@ define('Core/RequestScheduler',[
         Uri,
         when,
         Check,
+        defaultValue,
         defined,
         defineProperties,
         Event,
@@ -19306,11 +19355,20 @@ define('Core/RequestScheduler',[
     RequestScheduler.maximumRequests = 50;
 
     /**
-     * The maximum number of simultaneous active requests per server. Un-throttled requests do not observe this limit.
+     * The maximum number of simultaneous active requests per server. Un-throttled requests or servers specifically
+     * listed in requestsByServer do not observe this limit.
      * @type {Number}
      * @default 6
      */
     RequestScheduler.maximumRequestsPerServer = 6;
+
+    /**
+     * A per serverKey list of overrides to use for throttling instead of maximumRequestsPerServer
+     */
+    RequestScheduler.requestsByServer = {
+        'api.cesium.com:443': 18,
+        'assets.cesium.com:443': 18
+    };
 
     /**
      * Specifies if the request scheduler should throttle incoming requests, or let the browser queue requests under its control.
@@ -19385,7 +19443,8 @@ define('Core/RequestScheduler',[
     }
 
     function serverHasOpenSlots(serverKey) {
-        return numberOfActiveRequestsByServer[serverKey] < RequestScheduler.maximumRequestsPerServer;
+        var maxRequests = defaultValue(RequestScheduler.requestsByServer[serverKey], RequestScheduler.maximumRequestsPerServer);
+        return numberOfActiveRequestsByServer[serverKey] < maxRequests;
     }
 
     function issueRequest(request) {
@@ -19831,6 +19890,7 @@ define('Core/Resource',[
         './defineProperties',
         './deprecationWarning',
         './DeveloperError',
+        './FeatureDetection',
         './freezeObject',
         './getAbsoluteUri',
         './getBaseUri',
@@ -19858,6 +19918,7 @@ define('Core/Resource',[
         defineProperties,
         deprecationWarning,
         DeveloperError,
+        FeatureDetection,
         freezeObject,
         getAbsoluteUri,
         getBaseUri,
@@ -21245,6 +21306,7 @@ define('Core/Resource',[
      *
      * @param {String|Object} options A url or an object with the following properties
      * @param {String} options.url The url of the resource.
+     * @param {Object} [options.data] Data that is posted with the resource.
      * @param {Object} [options.queryParameters] An object containing query parameters that will be sent when retrieving the resource.
      * @param {Object} [options.templateValues] Key/Value pairs that are used to replace template values (eg. {x}).
      * @param {Object} [options.headers={}] Additional HTTP headers that will be sent.
@@ -21261,7 +21323,8 @@ define('Core/Resource',[
         return resource.delete({
             // Make copy of just the needed fields because headers can be passed to both the constructor and to fetch
             responseType: options.responseType,
-            overrideMimeType: options.overrideMimeType
+            overrideMimeType: options.overrideMimeType,
+            data: options.data
         });
     };
 
@@ -21385,6 +21448,7 @@ define('Core/Resource',[
      *
      * @param {Object} data Data that is posted with the resource.
      * @param {Object} [options] Object with the following properties:
+     * @param {Object} [options.data] Data that is posted with the resource.
      * @param {String} [options.responseType] The type of response.  This controls the type of item returned.
      * @param {Object} [options.headers] Additional HTTP headers to send with the request, if any.
      * @param {String} [options.overrideMimeType] Overrides the MIME type returned by the server.
@@ -21589,10 +21653,72 @@ define('Core/Resource',[
         image.src = url;
     };
 
+    function decodeResponse(loadWithHttpResponse, responseType) {
+        switch (responseType) {
+          case 'text':
+              return loadWithHttpResponse.toString('utf8');
+          case 'json':
+              return JSON.parse(loadWithHttpResponse.toString('utf8'));
+          default:
+              return new Uint8Array(loadWithHttpResponse).buffer;
+        }
+    }
+
+    function loadWithHttpRequest(url, responseType, method, data, headers, deferred, overrideMimeType) {
+        // Note: only the 'json' and 'text' responseTypes transforms the loaded buffer
+        var URL = require('url').parse(url);
+        var http = URL.protocol === 'https:' ? require('https') : require('http');
+        var zlib = require('zlib');
+        var options = {
+            protocol : URL.protocol,
+            hostname : URL.hostname,
+            port : URL.port,
+            path : URL.path,
+            query : URL.query,
+            method : method,
+            headers : headers
+        };
+
+        http.request(options)
+            .on('response', function(res) {
+                if (res.statusCode < 200 || res.statusCode >= 300) {
+                    deferred.reject(new RequestErrorEvent(res.statusCode, res, res.headers));
+                    return;
+                }
+
+                var chunkArray = [];
+                res.on('data', function(chunk) {
+                    chunkArray.push(chunk);
+                });
+
+                res.on('end', function() {
+                    var result = Buffer.concat(chunkArray); // eslint-disable-line
+                    if (res.headers['content-encoding'] === 'gzip') {
+                        zlib.gunzip(result, function(error, resultUnzipped) {
+                            if (error) {
+                                deferred.reject(new RuntimeError('Error decompressing response.'));
+                            } else {
+                                deferred.resolve(decodeResponse(resultUnzipped, responseType));
+                            }
+                        });
+                    } else {
+                        deferred.resolve(decodeResponse(result, responseType));
+                    }
+                });
+            }).on('error', function(e) {
+                deferred.reject(new RequestErrorEvent());
+            }).end();
+    }
+
     Resource._Implementations.loadWithXhr = function(url, responseType, method, data, headers, deferred, overrideMimeType) {
         var dataUriRegexResult = dataUriRegex.exec(url);
         if (dataUriRegexResult !== null) {
             deferred.resolve(decodeDataUri(dataUriRegexResult, responseType));
+            return;
+        }
+
+        if (FeatureDetection.isNodeJs()) {
+            loadWithHttpRequest(url, responseType, method, data, headers, deferred, overrideMimeType);
             return;
         }
 
@@ -21623,7 +21749,7 @@ define('Core/Resource',[
         // While non-standard, file protocol always returns a status of 0 on success
         var localFile = false;
         if (typeof url === 'string') {
-            localFile = (url.indexOf('file://') === 0) || window.location.origin === 'file://';
+            localFile = (url.indexOf('file://') === 0) || (typeof window !== 'undefined' && window.location.origin === 'file://');
         }
 
         xhr.onload = function() {
@@ -22117,13 +22243,11 @@ define('Core/EarthOrientationParameters',[
 });
 
 define('Core/buildModuleUrl',[
-        '../ThirdParty/Uri',
         './defined',
         './DeveloperError',
         './Resource',
         'require'
     ], function(
-        Uri,
         defined,
         DeveloperError,
         Resource,
@@ -25745,12 +25869,14 @@ define('Core/barycentricCoordinates',[
         './Cartesian2',
         './Cartesian3',
         './Check',
-        './defined'
+        './defined',
+        './Math'
     ], function(
         Cartesian2,
         Cartesian3,
         Check,
-        defined) {
+        defined,
+        CesiumMath) {
     'use strict';
 
     var scratchCartesian1 = new Cartesian3();
@@ -25788,34 +25914,61 @@ define('Core/barycentricCoordinates',[
         }
 
         // Implementation based on http://www.blackpawn.com/texts/pointinpoly/default.html.
-        var v0, v1, v2;
-        var dot00, dot01, dot02, dot11, dot12;
+        var v0;
+        var v1;
+        var v2;
+        var dot00;
+        var dot01;
+        var dot02;
+        var dot11;
+        var dot12;
 
         if(!defined(p0.z)) {
-          v0 = Cartesian2.subtract(p1, p0, scratchCartesian1);
-          v1 = Cartesian2.subtract(p2, p0, scratchCartesian2);
-          v2 = Cartesian2.subtract(point, p0, scratchCartesian3);
+            if (Cartesian2.equalsEpsilon(point, p0, CesiumMath.EPSILON14)) {
+                return Cartesian3.clone(Cartesian3.UNIT_X, result);
+            }
+            if (Cartesian2.equalsEpsilon(point, p1, CesiumMath.EPSILON14)) {
+                return Cartesian3.clone(Cartesian3.UNIT_Y, result);
+            }
+            if (Cartesian2.equalsEpsilon(point, p2, CesiumMath.EPSILON14)) {
+                return Cartesian3.clone(Cartesian3.UNIT_Z, result);
+            }
 
-          dot00 = Cartesian2.dot(v0, v0);
-          dot01 = Cartesian2.dot(v0, v1);
-          dot02 = Cartesian2.dot(v0, v2);
-          dot11 = Cartesian2.dot(v1, v1);
-          dot12 = Cartesian2.dot(v1, v2);
+            v0 = Cartesian2.subtract(p1, p0, scratchCartesian1);
+            v1 = Cartesian2.subtract(p2, p0, scratchCartesian2);
+            v2 = Cartesian2.subtract(point, p0, scratchCartesian3);
+
+            dot00 = Cartesian2.dot(v0, v0);
+            dot01 = Cartesian2.dot(v0, v1);
+            dot02 = Cartesian2.dot(v0, v2);
+            dot11 = Cartesian2.dot(v1, v1);
+            dot12 = Cartesian2.dot(v1, v2);
         } else {
-          v0 = Cartesian3.subtract(p1, p0, scratchCartesian1);
-          v1 = Cartesian3.subtract(p2, p0, scratchCartesian2);
-          v2 = Cartesian3.subtract(point, p0, scratchCartesian3);
+            if (Cartesian3.equalsEpsilon(point, p0, CesiumMath.EPSILON14)) {
+                return Cartesian3.clone(Cartesian3.UNIT_X, result);
+            }
+            if (Cartesian3.equalsEpsilon(point, p1, CesiumMath.EPSILON14)) {
+                return Cartesian3.clone(Cartesian3.UNIT_Y, result);
+            }
+            if (Cartesian3.equalsEpsilon(point, p2, CesiumMath.EPSILON14)) {
+                return Cartesian3.clone(Cartesian3.UNIT_Z, result);
+            }
 
-          dot00 = Cartesian3.dot(v0, v0);
-          dot01 = Cartesian3.dot(v0, v1);
-          dot02 = Cartesian3.dot(v0, v2);
-          dot11 = Cartesian3.dot(v1, v1);
-          dot12 = Cartesian3.dot(v1, v2);
+            v0 = Cartesian3.subtract(p1, p0, scratchCartesian1);
+            v1 = Cartesian3.subtract(p2, p0, scratchCartesian2);
+            v2 = Cartesian3.subtract(point, p0, scratchCartesian3);
+
+            dot00 = Cartesian3.dot(v0, v0);
+            dot01 = Cartesian3.dot(v0, v1);
+            dot02 = Cartesian3.dot(v0, v2);
+            dot11 = Cartesian3.dot(v1, v1);
+            dot12 = Cartesian3.dot(v1, v2);
         }
 
-        var q = 1.0 / (dot00 * dot11 - dot01 * dot01);
-        result.y = (dot11 * dot02 - dot01 * dot12) * q;
-        result.z = (dot00 * dot12 - dot01 * dot02) * q;
+        var q = dot00 * dot11 - dot01 * dot01;
+        var invQ = 1.0 / q;
+        result.y = (dot11 * dot02 - dot01 * dot12) * invQ;
+        result.z = (dot00 * dot12 - dot01 * dot02) * invQ;
         result.x = 1.0 - result.y - result.z;
         return result;
     }
@@ -30784,31 +30937,26 @@ define('Core/PolygonOutlineGeometry',[
                 Check.typeOf.object('options', options);
         Check.typeOf.object('options.polygonHierarchy', options.polygonHierarchy);
 
-        if (defined(options.perPositionHeight) && options.perPositionHeight && defined(options.height)) {
+        if (options.perPositionHeight && defined(options.height)) {
             throw new DeveloperError('Cannot use both options.perPositionHeight and options.height');
         }
         
         var polygonHierarchy = options.polygonHierarchy;
         var ellipsoid = defaultValue(options.ellipsoid, Ellipsoid.WGS84);
         var granularity = defaultValue(options.granularity, CesiumMath.RADIANS_PER_DEGREE);
-        var height = defaultValue(options.height, 0.0);
         var perPositionHeight = defaultValue(options.perPositionHeight, false);
+        var perPositionHeightExtrude = perPositionHeight && defined(options.extrudedHeight);
 
-        var extrudedHeight = options.extrudedHeight;
-        var extrude = defined(extrudedHeight);
-        if (extrude && !perPositionHeight) {
-            var h = extrudedHeight;
-            extrudedHeight = Math.min(h, height);
-            height = Math.max(h, height);
-        }
+        var height = defaultValue(options.height, 0.0);
+        var extrudedHeight = defaultValue(options.extrudedHeight, height);
 
         this._ellipsoid = Ellipsoid.clone(ellipsoid);
         this._granularity = granularity;
-        this._height = height;
-        this._extrudedHeight = defaultValue(extrudedHeight, 0.0);
-        this._extrude = extrude;
+        this._height = Math.max(height, extrudedHeight);
+        this._extrudedHeight = Math.min(extrudedHeight, height);
         this._polygonHierarchy = polygonHierarchy;
         this._perPositionHeight = perPositionHeight;
+        this._perPositionHeightExtrude = perPositionHeightExtrude;
         this._workerName = 'createPolygonOutlineGeometry';
 
         /**
@@ -30841,9 +30989,9 @@ define('Core/PolygonOutlineGeometry',[
         array[startingIndex++] = value._height;
         array[startingIndex++] = value._extrudedHeight;
         array[startingIndex++] = value._granularity;
-        array[startingIndex++] = value._extrude ? 1.0 : 0.0;
+        array[startingIndex++] = value._perPositionHeightExtrude ? 1.0 : 0.0;
         array[startingIndex++] = value._perPositionHeight ? 1.0 : 0.0;
-        array[startingIndex++] = value.packedLength;
+        array[startingIndex] = value.packedLength;
 
         return array;
     };
@@ -30876,9 +31024,9 @@ define('Core/PolygonOutlineGeometry',[
         var height = array[startingIndex++];
         var extrudedHeight = array[startingIndex++];
         var granularity = array[startingIndex++];
-        var extrude = array[startingIndex++] === 1.0;
+        var perPositionHeightExtrude = array[startingIndex++] === 1.0;
         var perPositionHeight = array[startingIndex++] === 1.0;
-        var packedLength = array[startingIndex++];
+        var packedLength = array[startingIndex];
 
         if (!defined(result)) {
             result = new PolygonOutlineGeometry(dummyOptions);
@@ -30889,8 +31037,8 @@ define('Core/PolygonOutlineGeometry',[
         result._height = height;
         result._extrudedHeight = extrudedHeight;
         result._granularity = granularity;
-        result._extrude = extrude;
         result._perPositionHeight = perPositionHeight;
+        result._perPositionHeightExtrude = perPositionHeightExtrude;
         result.packedLength = packedLength;
 
         return result;
@@ -30951,9 +31099,6 @@ define('Core/PolygonOutlineGeometry',[
     PolygonOutlineGeometry.createGeometry = function(polygonGeometry) {
         var ellipsoid = polygonGeometry._ellipsoid;
         var granularity = polygonGeometry._granularity;
-        var height = polygonGeometry._height;
-        var extrudedHeight = polygonGeometry._extrudedHeight;
-        var extrude = polygonGeometry._extrude;
         var polygonHierarchy = polygonGeometry._polygonHierarchy;
         var perPositionHeight = polygonGeometry._perPositionHeight;
 
@@ -31001,6 +31146,10 @@ define('Core/PolygonOutlineGeometry',[
         var geometry;
         var geometries = [];
         var minDistance = CesiumMath.chordLength(granularity, ellipsoid.maximumRadius);
+
+        var height = polygonGeometry._height;
+        var extrudedHeight = polygonGeometry._extrudedHeight;
+        var extrude = polygonGeometry._perPositionHeightExtrude || !CesiumMath.equalsEpsilon(height, extrudedHeight, 0, CesiumMath.EPSILON2);
 
         if (extrude) {
             for (i = 0; i < polygons.length; i++) {
