@@ -17,6 +17,7 @@
 package org.cesiumjs.cs.scene.particle;
 
 import jsinterop.annotations.*;
+import org.cesiumjs.cs.core.Cartesian2;
 import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.core.Matrix4;
@@ -76,9 +77,17 @@ public class ParticleSystem {
     public boolean isComplete;
     /**
      * How long the particle system will emit particles, in seconds.
+     * @deprecated Use {@link ParticleSystem#lifetime} instead. Will be removed in 1.46.x
      */
+    @Deprecated
     @JsProperty
     public double lifeTime;
+    /**
+     * How long the particle system will emit particles, in seconds.
+     * Default: {@link Double#MAX_VALUE}
+     */
+    @JsProperty
+    public double lifetime;
     /**
      * Whether the particle system should loop it's bursts when it is complete.
      * Default: true
@@ -88,13 +97,22 @@ public class ParticleSystem {
     /**
      * Sets the maximum height of particles in pixels.
      * Default: 1.0
+     * @deprecated Use {@link ParticleSystem#maximumImageSize} instead. Will be removed on 1.46.x
      */
+    @Deprecated
     @JsProperty
     public double maximumHeight;
     /**
+     * Sets the maximum bound, width by height, below which to randomly scale the particle image's dimensions in pixels.
+     */
+    @JsProperty
+    public Cartesian2 maximumImageSize;
+    /**
      * Sets the maximum life of particles in seconds.
      * Default: 5.0
+     * @deprecated Use {@link ParticleSystem#maximumParticleLife} instead. Will be removed in 1.46.x
      */
+    @Deprecated
     @JsProperty
     public double maximumLife;
     /**
@@ -104,6 +122,12 @@ public class ParticleSystem {
     @JsProperty
     public double maximumMass;
     /**
+     * Sets the maximum bound in seconds for the possible duration of a particle's life below which a particle's actual
+     * life will be randomly chosen.
+     */
+    @JsProperty
+    public double maximumParticleLife;
+    /**
      * Sets the maximum speed in meters per second.
      * Default: 1.0
      */
@@ -112,19 +136,30 @@ public class ParticleSystem {
     /**
      * Sets the maximum width of particles in pixels.
      * Default: 1.0
+     * @deprecated Use {@link ParticleSystem#maximumImageSize} instead. Will be removed on 1.46.x
      */
+    @Deprecated
     @JsProperty
     public double maximumWidth;
     /**
      * Sets the minimum height of particles in pixels.
      * Default: 1.0
+     * @deprecated Use {@link ParticleSystem#minimumImageSize} instead. Will be removed on 1.46.x
      */
+    @Deprecated
     @JsProperty
     public double minimumHeight;
     /**
+     * Sets the minimum bound, width by height, above which to randomly scale the particle image's dimensions in pixels.
+     */
+    @JsProperty
+    public Cartesian2 minimumImageSize;
+    /**
      * Sets the minimum life of particles in seconds.
      * Default: 5.0
+     * @deprecated Use {@link ParticleSystem#minimumParticleLife} instead. Will be removed in 1.46.x
      */
+    @Deprecated
     @JsProperty
     public double minimumLife;
     /**
@@ -134,6 +169,12 @@ public class ParticleSystem {
     @JsProperty
     public double minimumMass;
     /**
+     * Sets the minimum bound in seconds for the possible duration of a particle's life above which a particle's actual
+     * life will be randomly chosen.
+     */
+    @JsProperty
+    public double minimumParticleLife;
+    /**
      * Sets the minimum speed in meters per second.
      * Default: 1.0
      */
@@ -142,7 +183,9 @@ public class ParticleSystem {
     /**
      * Sets the minimum width of particles in pixels.
      * Default: 1.0
+     * @deprecated Use {@link ParticleSystem#minimumImageSize} instead. Will be removed on 1.46.x
      */
+    @Deprecated
     @JsProperty
     public double minimumWidth;
     /**
@@ -154,9 +197,17 @@ public class ParticleSystem {
     /**
      * The number of particles to emit per second.
      * Default: 5
+     * @deprecated Use {@link ParticleSystem#emissionRate}. Will be removed in 1.46.x
      */
+    @Deprecated
     @JsProperty
     public double rate;
+    /**
+     * The number of particles to emit per second.
+     * Default: 5
+     */
+    @JsProperty
+    public double emissionRate;
     /**
      * Whether to display the particle system.
      * Default: true
@@ -211,12 +262,28 @@ public class ParticleSystem {
     public native boolean isDestroyed();
 
 
+    @Deprecated
     @JsFunction
     public interface ApplyForce {
         /**
          * A function used to apply a force to the particle on each time step.
          * @param particle The particle to apply the force to.
          * @param dt The time since the last update.
+         */
+        void function(Particle particle, double dt);
+    }
+
+    /**
+     * @see <a href="https://cesiumjs.org/tutorials/Particle-Systems-Tutorial/">Particle Systems Tutorial</a>
+     */
+    @JsFunction
+    public interface UpdateCallback {
+        /**
+         * A function used to modify attributes of the particle at each time step.
+         * This can include force modifications, color, sizing, etc.
+         * @see <a href="https://cesiumjs.org/tutorials/Particle-Systems-Tutorial/">Particle Systems Tutorial</a>
+         * @param particle The particle being updated.
+         * @param dt The time in seconds since the last update.
          */
         void function(Particle particle, double dt);
     }

@@ -20,6 +20,7 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Cartesian2;
 import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.core.Matrix4;
 import org.cesiumjs.cs.scene.emitters.ParticleEmitter;
@@ -41,9 +42,16 @@ public class ParticleSystemOptions {
     public boolean show;
     /**
      * An array of force callbacks.
+     * @deprecated Use updateCallback instead. Will be removed in 1.46.x
      */
+    @Deprecated
     @JsProperty
     public ParticleSystem.ApplyForce[] forces;
+    /**
+     * The callback function to be called each frame to update a particle.
+     */
+    @JsProperty
+    public ParticleSystem.UpdateCallback updateCallback;
     /**
      * The particle emitter for this system.
      * Default: new CircleEmitter(0.5)
@@ -97,9 +105,17 @@ public class ParticleSystemOptions {
     /**
      * The number of particles to emit per second.
      * Default: 5
+     * @deprecated Use emissionRate. Will be removed in 1.46.x
      */
+    @Deprecated
     @JsProperty
     public double rate;
+    /**
+     * The number of particles to emit per second.
+     * Default: 5
+     */
+    @JsProperty
+    public double emissionRate;
     /**
      * An array of ParticleBurst, emitting bursts of particles at periodic times.
      */
@@ -130,21 +146,45 @@ public class ParticleSystemOptions {
     public double maximumSpeed;
     /**
      * Sets the minimum and maximum life of particles in seconds.
+     * @deprecated Use particleLife instead. Will be removed in 1.46.x
      */
+    @Deprecated
     @JsProperty
     public double life;
     /**
      * Sets the minimum life of particles in seconds.
      * Default: 5.0
+     * @deprecated Use minimumParticleLife instead. Will be removed in 1.46.x
      */
+    @Deprecated
     @JsProperty
     public double minimumLife;
     /**
      * Sets the maximum life of particles in seconds.
      * Default: 5.0
+     * @deprecated Use maximumParticleLife instead. Will be removed in 1.46.x
      */
+    @Deprecated
     @JsProperty
     public double maximumLife;
+    /**
+     * If set, overrides the minimumParticleLife and maximumParticleLife inputs with this value.
+     * Default: 5.0
+     */
+    @JsProperty
+    public double particleLife;
+    /**
+     * Sets the minimum bound in seconds for the possible duration of a particle's life above which a particle's actual
+     * life will be randomly chosen.
+     */
+    @JsProperty
+    public double minimumParticleLife;
+    /**
+     * Sets the maximum bound in seconds for the possible duration of a particle's life below which a particle's actual
+     * life will be randomly chosen.
+     */
+    @JsProperty
+    public double maximumParticleLife;
     /**
      * Sets the minimum and maximum mass of particles in kilograms.
      */
@@ -169,43 +209,79 @@ public class ParticleSystemOptions {
     public Object image;
     /**
      * Sets the minimum and maximum width of particles in pixels.
+     * @deprecated Use imageSize's x component instead. Will be removed on 1.46.x
      */
+    @Deprecated
     @JsProperty
     public double width;
     /**
      * Sets the minimum width of particles in pixels.
      * Default: 1.0
+     * @deprecated Use minimumImageSize's x component instead. Will be removed on 1.46.x
      */
+    @Deprecated
     @JsProperty
     public double minimumWidth;
     /**
      * Sets the maximum width of particles in pixels.
      * Default: 1.0
+     * @deprecated Use maximumImageSize's x component instead.. Will be removed on 1.46.x
      */
+    @Deprecated
     @JsProperty
     public double maximumWidth;
     /**
      * Sets the minimum and maximum height of particles in pixels.
+     * @deprecated Use imageSize's x component instead. Will be removed on 1.46.x
      */
+    @Deprecated
     @JsProperty
     public double height;
     /**
      * Sets the minimum height of particles in pixels.
      * Default: 1.0
+     * @deprecated Use minimumImageSize's x component instead. Will be removed on 1.46.x
      */
+    @Deprecated
     @JsProperty
     public double minimumHeight;
     /**
      * Sets the maximum height of particles in pixels.
      * Default: 1.0
+     * @deprecated Use maximumImageSize's x component instead.. Will be removed on 1.46.x
      */
+    @Deprecated
     @JsProperty
     public double maximumHeight;
     /**
-     * How long the particle system will emit particles, in seconds.
+     * If set, overrides the minimumImageSize and maximumImageSize inputs that scale the particle image's dimensions in pixels.
+     * Default: new Cartesian2(1.0, 1.0)
      */
     @JsProperty
+    public Cartesian2 imageSize;
+    /**
+     * Sets the minimum bound, width by height, above which to randomly scale the particle image's dimensions in pixels.
+     */
+    @JsProperty
+    public Cartesian2 minimumImageSize;
+    /**
+     * Sets the maximum bound, width by height, below which to randomly scale the particle image's dimensions in pixels.
+     */
+    @JsProperty
+    public Cartesian2 maximumImageSize;
+    /**
+     * How long the particle system will emit particles, in seconds.
+     * @deprecated Use lifetime instead. Will be removed in 1.46.x
+     */
+    @Deprecated
+    @JsProperty
     public double lifeTime;
+    /**
+     * How long the particle system will emit particles, in seconds.
+     * Default: {@link Double#MAX_VALUE}
+     */
+    @JsProperty
+    public double lifetime;
 
     /**
      * Options for {@link ParticleSystem}.
