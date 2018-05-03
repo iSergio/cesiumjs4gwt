@@ -7,7 +7,7 @@
     <groupId>org.cesiumjs</groupId>
     <artifactId>gwt-cs</artifactId>
     <packaging>pom</packaging>
-    <version>1.44.47</version>
+    <version>1.45.29</version>
     <name>CesiumJS GWT Framework</name>
 
     <properties>

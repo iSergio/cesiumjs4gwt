@@ -21,7 +21,7 @@
     <parent>
         <artifactId>gwt-cs</artifactId>
         <groupId>org.cesiumjs</groupId>
-        <version>1.44.47</version>
+        <version>1.45.29</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <name>CesiumJS GWT Wrapper</name>
