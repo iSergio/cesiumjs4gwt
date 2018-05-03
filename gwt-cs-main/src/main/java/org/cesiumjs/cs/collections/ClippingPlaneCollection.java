@@ -79,13 +79,4 @@ public class ClippingPlaneCollection extends Collection<ClippingPlane> {
      */
     @JsConstructor
     public ClippingPlaneCollection(ClippingPlaneCollectionOptions options) {}
-
-    /**
-     * Determines if rendering with clipping planes is supported.
-     * @deprecated now supported in Internet Explorer, so ClippingPlaneCollection.isSupported has been deprecated and will be removed in Cesium 1.45.
-     * @return true if ClippingPlaneCollections are supported; otherwise, returns false
-     */
-    @JsMethod
-    @Deprecated
-    public static native boolean isSupported();
 }
