@@ -46,6 +46,11 @@ public class ProviderViewModelOptions {
     @JsProperty
     public String iconUrl;
     /**
+     * A category for the layer.
+     */
+    @JsProperty
+    public String category;
+    /**
      * A function or Command that creates one or more providers which will be added to the globe when this item is selected.
      * @see org.cesiumjs.cs.widgets.ProviderViewModel.ImageryProviderCreationFunction
      */

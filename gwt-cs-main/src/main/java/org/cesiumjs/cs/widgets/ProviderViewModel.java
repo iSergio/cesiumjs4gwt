@@ -34,10 +34,15 @@ import org.cesiumjs.cs.widgets.options.ProviderViewModelOptions;
 @JsType(isNative = true, namespace = "Cesium", name = "ProviderViewModel")
 public class ProviderViewModel {
     /**
+     * Gets the category
+     */
+    @JsProperty(name = "category")
+    public native String category();
+    /**
      * Gets the Command that creates one or more providers which will be added to the globe when this item is selected.
      */
-    @JsProperty
-    public Command creationCommand;
+    @JsProperty(name = "creationCommand")
+    public native Command creationCommand();
     /**
      * Gets the icon. This property is observable.
      */
@@ -56,7 +61,7 @@ public class ProviderViewModel {
 
     /**
      * Constructor of a view model that represents each item in the {@link BaseLayerPicker}.
-     * @param options
+     * @param options {@link ProviderViewModelOptions} object.
      */
     @JsConstructor
     public ProviderViewModel(ProviderViewModelOptions options) {}
