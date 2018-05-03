@@ -16,21 +16,13 @@
 
 package org.cesiumjs.cs.core.options;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import jsinterop.annotations.*;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class BingMapsGeocoderServiceOptions {
-    /**
-     * The scene
-     */
-    @JsProperty
-    public String scene;
     /**
      * A key to use with the Bing Maps geocoding service
      */
@@ -41,5 +33,17 @@ public class BingMapsGeocoderServiceOptions {
      * Options for {@link org.cesiumjs.cs.core.BingMapsGeocoderService}
      */
     @JsConstructor
-    public BingMapsGeocoderServiceOptions() {}
+    private BingMapsGeocoderServiceOptions() {}
+
+    /**
+     * Fast create {@link BingMapsGeocoderServiceOptions} instance by mandatory parameter - key
+     * @param key A key to use with the Bing Maps geocoding service
+     * @return {@link BingMapsGeocoderServiceOptions} instance.
+     */
+    @JsOverlay
+    public static BingMapsGeocoderServiceOptions create(String key) {
+        BingMapsGeocoderServiceOptions options = new BingMapsGeocoderServiceOptions();
+        options.key = key;
+        return options;
+    }
 }
