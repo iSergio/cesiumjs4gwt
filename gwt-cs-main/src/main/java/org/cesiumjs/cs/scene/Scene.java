@@ -222,7 +222,7 @@ public class Scene {
     public native JulianDate lastRenderTime();
     /**
      * Whether or not to use a logarithmic depth buffer. Enabling this option will allow for less frustums in the multi-frustum,
-     * increasing performance. This property relies on {@link Context#fragmentDepth} being supported.
+     * increasing performance. This property relies on Context#fragmentDepth being supported.
      */
     @JsProperty
     public boolean logarithmicDepthBuffer;
