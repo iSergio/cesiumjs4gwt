@@ -21,6 +21,8 @@ import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.RootPanel;
 import org.cesiumjs.cs.Cesium;
+import org.cesiumjs.cs.core.providers.EllipsoidTerrainProvider;
+import org.cesiumjs.cs.core.providers.TerrainProvider;
 import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.scene.providers.ImageryProvider;
 import org.cesiumjs.cs.scene.providers.IonImageryProvider;
@@ -55,6 +57,7 @@ public class CustomBaseLayerPicker extends AbstractExample {
         divElement.setPropertyString("style", "position:absolute;top:50px;right:42px;width:38px;height:38px;");
 
         List<ProviderViewModel> imageryViewModels = new ArrayList<>();
+        List<ProviderViewModel> terrainViewModels = new ArrayList<>();
 
         ProviderViewModelOptions options = new ProviderViewModelOptions();
         options.name = "Open\u00adStreet\u00adMap";
@@ -62,8 +65,8 @@ public class CustomBaseLayerPicker extends AbstractExample {
         options.tooltip = "OpenStreetMap (OSM) is a collaborative project to create a free editable map of the world.\nhttp://www.openstreetmap.org";
         options.imageryProviderCreationFunction = new ProviderViewModel.ImageryProviderCreationFunction() {
             @Override
-            public ImageryProvider[] function() {
-                return new ImageryProvider[] {Cesium.createOpenStreetMapImageryProvider("https://a.tile.openstreetmap.org/")};
+            public ImageryProvider function() {
+                return Cesium.createOpenStreetMapImageryProvider("https://a.tile.openstreetmap.org/");
             }
         };
         imageryViewModels.add(new ProviderViewModel(options));
@@ -75,8 +78,8 @@ public class CustomBaseLayerPicker extends AbstractExample {
                 "        in this global view of the Earth at night as seen by NASA/NOAA\\'s Suomi NPP satellite.";
         options.imageryProviderCreationFunction = new ProviderViewModel.ImageryProviderCreationFunction() {
             @Override
-            public ImageryProvider[] function() {
-                return new ImageryProvider[] {new IonImageryProvider(IonImageryProviderOptions.create(3812))};
+            public ImageryProvider function() {
+                return new IonImageryProvider(IonImageryProviderOptions.create(3812));
             }
         };
         imageryViewModels.add(new ProviderViewModel(options));
@@ -88,11 +91,35 @@ public class CustomBaseLayerPicker extends AbstractExample {
                 "        in this global view of the Earth at night as seen by NASA/NOAA\\'s Suomi NPP satellite.";
         options.imageryProviderCreationFunction = new ProviderViewModel.ImageryProviderCreationFunction() {
             @Override
-            public ImageryProvider[] function() {
-                return new ImageryProvider[] {Cesium.createTileMapServiceImageryProvider(GWT.getModuleBaseURL() + "cs/CesiumUnminified/Assets/Textures/NaturalEarthII")};
+            public ImageryProvider function() {
+                return Cesium.createTileMapServiceImageryProvider(GWT.getModuleBaseURL() + "cs/CesiumUnminified/Assets/Textures/NaturalEarthII");
             }
         };
         imageryViewModels.add(new ProviderViewModel(options));
+
+        options = new ProviderViewModelOptions();
+        options.name = "EllipsoidTerrainProvider";
+        options.iconUrl = GWT.getModuleBaseURL() + "cs/CesiumUnminified/Widgets/Images/ImageryProviders/naturalEarthII.png";
+        options.tooltip = "Some Terrain Description.";
+        options.terrainProviderCreationFunction = new ProviderViewModel.TerrainProviderCreationFunction() {
+            @Override
+            public TerrainProvider function() {
+                return new EllipsoidTerrainProvider();
+            }
+        };
+        terrainViewModels.add(new ProviderViewModel(options));
+
+        options = new ProviderViewModelOptions();
+        options.name = "WorldTerrain";
+        options.iconUrl = GWT.getModuleBaseURL() + "cs/CesiumUnminified/Widgets/Images/ImageryProviders/naturalEarthII.png";
+        options.tooltip = "WorldTerrain.";
+        options.terrainProviderCreationFunction = new ProviderViewModel.TerrainProviderCreationFunction() {
+            @Override
+            public TerrainProvider function() {
+                return Cesium.createWorldTerrain(Cesium.CreateWorldTerrainOptions.create(true, true));
+            }
+        };
+        terrainViewModels.add(new ProviderViewModel(options));
 
         ViewerOptions viewerOptions = new ViewerOptions();
         viewerOptions.imageryProvider = (ImageryProvider) JsObject.undefined();
@@ -103,8 +130,8 @@ public class CustomBaseLayerPicker extends AbstractExample {
         csVPanel.getViewer().container().getFirstChildElement().appendChild(divElement);
 
         BaseLayerPickerViewModelOptions baseLayerPickerOptions = BaseLayerPickerViewModelOptions.create(csVPanel.getViewer().scene().globe);
-        baseLayerPickerOptions.imageryProviderViewModels = imageryViewModels.toArray(new ProviderViewModel[imageryViewModels.size()]);
-        baseLayerPickerOptions.selectedImageryProviderViewModel = imageryViewModels.get(0);
+        baseLayerPickerOptions.imageryProviderViewModels = imageryViewModels.toArray(new ProviderViewModel[0]);
+        baseLayerPickerOptions.terrainProviderViewModels = terrainViewModels.toArray(new ProviderViewModel[0]);
 
         BaseLayerPicker baseLayerPicker = new BaseLayerPicker(divElement, baseLayerPickerOptions);
 

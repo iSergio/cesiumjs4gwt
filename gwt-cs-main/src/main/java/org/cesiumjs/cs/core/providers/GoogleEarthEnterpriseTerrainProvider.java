@@ -64,6 +64,8 @@ public class GoogleEarthEnterpriseTerrainProvider implements TerrainProvider {
      * @param level The level of the tile for which to request geometry.
      * @return Undefined if not supported, otherwise true or false.
      */
+    @Override
+    @JsMethod
     public native boolean getTileDataAvailable(int x, int y, int level);
 
     /**

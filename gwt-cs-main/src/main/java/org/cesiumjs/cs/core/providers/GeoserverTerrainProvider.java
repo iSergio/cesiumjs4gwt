@@ -103,6 +103,7 @@ public class GeoserverTerrainProvider implements TerrainProvider {
      * @param level The level of the tile for which to request geometry.
      * @return Undefined if not supported by the terrain provider, otherwise true or false.
      */
+    @Override
     @JsMethod
     public native boolean getTileDataAvailable(int x, int y , int level);
 

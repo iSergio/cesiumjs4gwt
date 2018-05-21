@@ -75,7 +75,7 @@ public class ProviderViewModel {
          * A function which creates one or more providers.
          * @return The ImageryProvider array of providers, to be added to the globe.
          */
-        ImageryProvider[] function();
+        ImageryProvider function();
     }
 
     @JsFunction
@@ -84,6 +84,6 @@ public class ProviderViewModel {
          * A function which creates one or more providers.
          * @return The TerrainProvider array of providers, to be added to the globe.
          */
-        TerrainProvider[] function();
+        TerrainProvider function();
     }
 }
