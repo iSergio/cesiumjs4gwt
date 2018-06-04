@@ -56,7 +56,7 @@ public class PostProcessStageCompositeOptions {
     private PostProcessStageCompositeOptions() {}
 
     @JsOverlay
-    public PostProcessStageCompositeOptions create(PostProcessStage[] stages) {
+    public static PostProcessStageCompositeOptions create(PostProcessStage[] stages) {
         PostProcessStageCompositeOptions options = new PostProcessStageCompositeOptions();
         options.stages = stages;
         return options;
