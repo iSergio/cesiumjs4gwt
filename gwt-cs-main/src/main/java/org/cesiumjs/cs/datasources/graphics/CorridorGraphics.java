@@ -21,6 +21,7 @@ import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.core.Math;
 import org.cesiumjs.cs.datasources.graphics.options.CorridorGraphicsOptions;
+import org.cesiumjs.cs.datasources.properties.ConstantProperty;
 import org.cesiumjs.cs.datasources.properties.Property;
 import org.cesiumjs.cs.scene.enums.ClassificationType;
 import org.cesiumjs.cs.scene.enums.ShadowMode;
@@ -121,6 +122,13 @@ public class CorridorGraphics {
      */
     @JsProperty
     public Property distanceDisplayCondition;
+    /**
+     * A Property specifying the zIndex of the corridor, used for ordering. Only has an effect if height and extrudedHeight
+     * are undefined, and if the corridor is static.
+     * Default: 0
+     */
+    @JsProperty
+    public ConstantProperty<Integer> zIndex;
 
     /**
      * Describes a corridor, which is a shape defined by a centerline and width that conforms to the curvature of the globe.

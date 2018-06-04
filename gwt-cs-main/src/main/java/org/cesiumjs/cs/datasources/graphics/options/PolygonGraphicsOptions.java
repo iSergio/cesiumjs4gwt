@@ -22,6 +22,7 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.core.Math;
+import org.cesiumjs.cs.datasources.properties.ConstantProperty;
 import org.cesiumjs.cs.datasources.properties.MaterialProperty;
 import org.cesiumjs.cs.datasources.properties.Property;
 import org.cesiumjs.cs.scene.enums.ShadowMode;
@@ -124,6 +125,13 @@ public class PolygonGraphicsOptions {
      */
     @JsProperty
     public Property distanceDisplayCondition;
+    /**
+     * A property specifying the zIndex used for ordering ground geometry. Only has an effect if the polygon is
+     * constant and neither height or extrudedHeight are specified.
+     * Default: 0
+     */
+    @JsProperty
+    public ConstantProperty<Integer> zIndex;
 
     /**
      * Options for {@link org.cesiumjs.cs.datasources.graphics.PolygonGraphics}

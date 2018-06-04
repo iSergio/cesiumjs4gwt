@@ -21,6 +21,7 @@ import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.core.Math;
 import org.cesiumjs.cs.datasources.graphics.options.PolygonGraphicsOptions;
+import org.cesiumjs.cs.datasources.properties.ConstantProperty;
 import org.cesiumjs.cs.datasources.properties.MaterialProperty;
 import org.cesiumjs.cs.datasources.properties.Property;
 import org.cesiumjs.cs.scene.enums.ClassificationType;
@@ -134,6 +135,13 @@ public class PolygonGraphics {
      */
     @JsProperty
     public Property distanceDisplayCondition;
+    /**
+     * A property specifying the zIndex used for ordering ground geometry. Only has an effect if the polygon is
+     * constant and neither height or extrudedHeight are specified.
+     * Default: 0
+     */
+    @JsProperty
+    public ConstantProperty<Integer> zIndex;
 
     /**
      * Describes a polygon defined by an hierarchy of linear rings which make up the outer shape and any nested holes.

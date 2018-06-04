@@ -16,12 +16,10 @@
 
 package org.cesiumjs.cs.datasources.graphics.options;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.core.Math;
+import org.cesiumjs.cs.datasources.properties.ConstantProperty;
 import org.cesiumjs.cs.datasources.properties.MaterialProperty;
 import org.cesiumjs.cs.datasources.properties.Property;
 import org.cesiumjs.cs.scene.enums.ShadowMode;
@@ -124,6 +122,13 @@ public class RectangleGraphicsOptions {
      */
     @JsProperty
     public Property distanceDisplayCondition;
+    /**
+     * A Property specifying the zIndex used for ordering ground geometry. Only has an effect if the rectangle is
+     * constant and neither height or extrudedHeight are specified.
+     * Default: 0
+     */
+    @JsProperty
+    public ConstantProperty<Integer> zIndex;
 
     @JsConstructor
     public RectangleGraphicsOptions() {}

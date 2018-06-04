@@ -22,6 +22,7 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.core.Math;
+import org.cesiumjs.cs.datasources.properties.ConstantProperty;
 import org.cesiumjs.cs.datasources.properties.Property;
 import org.cesiumjs.cs.scene.enums.ShadowMode;
 
@@ -110,6 +111,13 @@ public class CorridorGraphicsOptions {
      */
     @JsProperty
     public Property distanceDisplayCondition;
+    /**
+     * A Property specifying the zIndex of the corridor, used for ordering. Only has an effect if height and extrudedHeight
+     * are undefined, and if the corridor is static.
+     * Default: 0
+     */
+    @JsProperty
+    public ConstantProperty<Integer> zIndex;
 
     /**
      * Options for {@link org.cesiumjs.cs.datasources.graphics.CorridorGraphics}

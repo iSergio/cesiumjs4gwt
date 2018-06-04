@@ -21,6 +21,7 @@ import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.core.Math;
 import org.cesiumjs.cs.datasources.graphics.options.EllipseGraphicsOptions;
+import org.cesiumjs.cs.datasources.properties.ConstantProperty;
 import org.cesiumjs.cs.datasources.properties.MaterialProperty;
 import org.cesiumjs.cs.datasources.properties.Property;
 import org.cesiumjs.cs.scene.enums.ClassificationType;
@@ -134,6 +135,13 @@ public class EllipseGraphics {
      */
     @JsProperty
     public Property distanceDisplayCondition;
+    /**
+     * A property specifying the zIndex of the Ellipse. Used for ordering ground geometry. Only has an effect if the
+     * ellipse is constant and neither height or exturdedHeight are specified.
+     * Default: 0
+     */
+    @JsProperty
+    public ConstantProperty<Integer> zIndex;
 
     @JsConstructor
     public EllipseGraphics() {}
