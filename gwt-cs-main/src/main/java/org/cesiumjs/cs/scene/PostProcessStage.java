@@ -31,7 +31,7 @@ import org.cesiumjs.cs.scene.options.PostProcessStageOptions;
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = "Cesium", name = "PostProcessStage")
-public class PostProcessStage {
+public class PostProcessStage implements PostProcess {
     /**
      * The color to clear the output texture to.
      */

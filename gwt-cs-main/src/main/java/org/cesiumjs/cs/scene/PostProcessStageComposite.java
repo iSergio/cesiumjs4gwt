@@ -34,7 +34,7 @@ import org.cesiumjs.cs.scene.options.PostProcessStageCompositeOptions;
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = "Cesium", name = "PostProcessStageComposite")
-public class PostProcessStageComposite {
+public class PostProcessStageComposite implements PostProcess {
     /**
      * Whether or not to execute this post-process stage when ready.
      */
@@ -86,17 +86,9 @@ public class PostProcessStageComposite {
     /**
      * Gets the post-process stage at index
      * @param index The index of the post-process stage or composite.
-     * @return The post-process stage at index.
+     * @return The post-process stage or composite at index.
      */
-    @JsMethod(name = "get")
-    public native PostProcessStage getPostProcessStage(int index);
-    /**
-     * Gets the post-process stage at index
-     * @param index The index of the post-process stage or composite.
-     * @return The post-process composite at index.
-     */
-    @JsMethod(name = "get")
-    public native PostProcessStageComposite getPostProcessStageComposite(int index);
+    public native PostProcess getPostProcessStage(int index);
 
     /**
      * Returns true if this object was destroyed; otherwise, false.
