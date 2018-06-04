@@ -41,13 +41,6 @@ public class ParticleSystemOptions {
     @JsProperty
     public boolean show;
     /**
-     * An array of force callbacks.
-     * @deprecated Use updateCallback instead. Will be removed in 1.46.x
-     */
-    @Deprecated
-    @JsProperty
-    public ParticleSystem.ApplyForce[] forces;
-    /**
      * The callback function to be called each frame to update a particle.
      */
     @JsProperty

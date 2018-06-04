@@ -61,11 +61,6 @@ public class ParticleSystem {
     @JsProperty
     public double endScale;
     /**
-     * An array of force callbacks.
-     */
-    @JsProperty
-    public ParticleSystem.ApplyForce[] forces;
-    /**
      * The URI, HTMLImageElement, or HTMLCanvasElement to use for the billboard.
      */
     @JsProperty
@@ -260,18 +255,6 @@ public class ParticleSystem {
      */
     @JsMethod
     public native boolean isDestroyed();
-
-
-    @Deprecated
-    @JsFunction
-    public interface ApplyForce {
-        /**
-         * A function used to apply a force to the particle on each time step.
-         * @param particle The particle to apply the force to.
-         * @param dt The time since the last update.
-         */
-        void function(Particle particle, double dt);
-    }
 
     /**
      * @see <a href="https://cesiumjs.org/tutorials/Particle-Systems-Tutorial/">Particle Systems Tutorial</a>
