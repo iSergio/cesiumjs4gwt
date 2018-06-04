@@ -32,7 +32,7 @@ import org.cesiumjs.cs.scene.enums.ShadowMode;
 public class CorridorGraphics {
     /**
      * Gets or sets the ClassificationType Property specifying whether this polygon will classify terrain, 3D Tiles, or both when on the ground.
-     * Default: {@link ClassificationType#BOTH()}.
+     * Default: {@link ClassificationType#TERRAIN()}.
      */
     @JsProperty
     public Number classificationType;

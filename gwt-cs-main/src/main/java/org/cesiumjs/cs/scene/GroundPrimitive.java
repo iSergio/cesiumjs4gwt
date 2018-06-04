@@ -65,7 +65,7 @@ public class GroundPrimitive extends Primitive {
     public native boolean asynchronous();
     /**
      * Determines whether terrain, 3D Tiles or both will be classified.
-     * Default: {@link ClassificationType#BOTH()}
+     * Default: {@link ClassificationType#TERRAIN()}
      */
     @JsProperty
     public Number classificationType;
