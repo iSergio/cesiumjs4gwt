@@ -17,9 +17,11 @@
 package org.cesiumjs.cs.scene;
 
 import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.geometry.GeometryInstance;
+import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.promise.Promise;
 import org.cesiumjs.cs.scene.enums.ClassificationType;
 import org.cesiumjs.cs.scene.options.GroundPrimitiveOptions;
@@ -46,11 +48,6 @@ import org.cesiumjs.cs.scene.options.GroundPrimitiveOptions;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "GroundPrimitive")
 public class GroundPrimitive extends Primitive {
-    /**
-     * Determines if GroundPrimitive rendering is supported.
-     */
-    @JsProperty
-    public static boolean isSupported ;
     /**
      * When true, each geometry instance will only be pickable with Scene#pick. When false, GPU memory is saved.
      * Default: true
@@ -143,4 +140,29 @@ public class GroundPrimitive extends Primitive {
     // TODO: Examples
     @JsConstructor
     public GroundPrimitive(GroundPrimitiveOptions options) {}
+
+    /**
+     * Initializes the minimum and maximum terrain heights.
+     * This only needs to be called if you are creating the GroundPrimitive synchronously.
+     * @return A promise that will resolve once the terrain heights have been loaded.
+     */
+    @JsMethod
+    public static native Promise<JsObject, Void> initializeTerrainHeights();
+
+    /**
+     * Determines if GroundPrimitive rendering is supported.
+     * @param scene The scene.
+     * @return true if GroundPrimitives are supported; otherwise, returns false
+     */
+    @JsMethod
+    public static native boolean isSupported(Scene scene);
+
+    /**
+     * Checks if the given Scene supports materials on GroundPrimitives. Materials on GroundPrimitives require support
+     * for the WEBGL_depth_texture extension.
+     * @param scene The current scene.
+     * @return Whether or not the current scene supports materials on GroundPrimitives.
+     */
+    @JsMethod
+    public static native boolean supportsMaterials(Scene scene);
 }

@@ -29,6 +29,7 @@ import org.cesiumjs.cs.datasources.graphics.*;
 import org.cesiumjs.cs.datasources.options.EntityOptions;
 import org.cesiumjs.cs.datasources.properties.PositionProperty;
 import org.cesiumjs.cs.datasources.properties.Property;
+import org.cesiumjs.cs.scene.Scene;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -200,6 +201,15 @@ public class Entity {
      */
     @JsConstructor
     public Entity(EntityOptions options) {}
+
+    /**
+     * Checks if the given Scene supports materials besides Color on Entities draped on terrain. If this feature is not supported,
+     * Entities with non-color materials but no `height` will instead be rendered as if height is 0.
+     * @param scene The current scene.
+     * @return Whether or not the current scene supports materials for entities on terrain.
+     */
+    @JsMethod
+    public static native boolean supportsMaterialsforEntitiesOnTerrain(Scene scene);
 
     /**
      * Adds a property to this object. Once a property is added, it can be observed with {@link #definitionChanged()} and
