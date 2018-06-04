@@ -43,10 +43,11 @@ public class PostProcessStage implements PostProcess {
     @JsProperty
     public boolean enabled;
     /**
-     * Whether or not to force the output texture dimensions to be both equal powers of two. The power of two will be the next power of two of the minimum of the dimensions.
+     * Whether or not to force the output texture dimensions to be both equal powers of two.
+     * The power of two will be the next power of two of the minimum of the dimensions.
      */
     @JsProperty(name = "forcePowerOfTwo")
-    public native Number forcePowerOfTwo();
+    public native double forcePowerOfTwo();
     /**
      * The fragment shader to use when execute this post-process stage.
      * The shader must contain a sampler uniform declaration for colorTexture, depthTexture, or both.
