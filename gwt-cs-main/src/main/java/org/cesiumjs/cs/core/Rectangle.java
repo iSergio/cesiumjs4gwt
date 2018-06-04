@@ -157,6 +157,17 @@ public class Rectangle {
     public static native boolean equals(Rectangle left, Rectangle right);
 
     /**
+     * Compares the provided Rectangles componentwise and returns true if they pass an absolute or relative tolerance test,
+     * false otherwise.
+     * @param left The first Rectangle.
+     * @param right The second Rectangle.
+     * @param absoluteEpsilon The absolute epsilon tolerance to use for equality testing.
+     * @return true if left and right are within the provided epsilon, false otherwise.
+     */
+    @JsMethod
+    public static native boolean equalsEpsilon(Rectangle left, Rectangle right, double absoluteEpsilon);
+
+    /**
      * Computes a rectangle by enlarging the provided rectangle until it contains the provided cartographic.
      * @param rectangle A rectangle to expand.
      * @param cartographic A cartographic to enclose in a rectangle.
