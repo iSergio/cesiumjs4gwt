@@ -169,7 +169,9 @@ public class Scene {
     /**
      * When true, enables Fast Approximate Anti-aliasing even when order independent translucency is unsupported.
      * Default:  true
+     * @deprecated will be removed in Cesium 1.47. Use Scene.postProcessStages.fxaa.enabled.
      */
+    @Deprecated
     @JsProperty
     public boolean fxaa;
     /**
@@ -322,6 +324,11 @@ public class Scene {
      */
     @JsProperty
     public boolean pickTranslucentDepth;
+    /**
+     * Post processing effects applied to the final render.
+     */
+    @JsProperty
+    public PostProcessStageCollection postProcessStages;
     /**
      * Gets the event that will be raised at the end of each call to render. Subscribers to the event receive the Scene
      * instance as the first parameter and the current time as the second parameter.
