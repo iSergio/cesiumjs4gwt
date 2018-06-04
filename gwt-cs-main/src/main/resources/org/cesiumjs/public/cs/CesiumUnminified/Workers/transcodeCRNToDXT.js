@@ -27,7 +27,7 @@ define('Core/defined',[],function() {
     /**
      * @exports defined
      *
-     * @param {Object} value The object.
+     * @param {*} value The object.
      * @returns {Boolean} Returns true if the object is defined, returns false otherwise.
      *
      * @example
@@ -88,6 +88,8 @@ define('Core/CompressedTextureBuffer',[
 
     /**
      * Describes a compressed texture and contains a compressed texture buffer.
+     * @alias CompressedTextureBuffer
+     * @constructor
      *
      * @param {PixelFormat} internalFormat The pixel format of the compressed texture.
      * @param {Number} width The width of the texture.
@@ -106,6 +108,7 @@ define('Core/CompressedTextureBuffer',[
          * The format of the compressed texture.
          * @type PixelFormat
          * @readonly
+         * @memberof CompressedTextureBuffer.prototype
          */
         internalFormat : {
             get : function() {
@@ -116,6 +119,7 @@ define('Core/CompressedTextureBuffer',[
          * The width of the texture.
          * @type Number
          * @readonly
+         * @memberof CompressedTextureBuffer.prototype
          */
         width : {
             get : function() {
@@ -126,6 +130,7 @@ define('Core/CompressedTextureBuffer',[
          * The height of the texture.
          * @type Number
          * @readonly
+         * @memberof CompressedTextureBuffer.prototype
          */
         height : {
             get : function() {
@@ -136,6 +141,7 @@ define('Core/CompressedTextureBuffer',[
          * The compressed texture buffer.
          * @type Uint8Array
          * @readonly
+         * @memberof CompressedTextureBuffer.prototype
          */
         bufferView : {
             get : function() {
@@ -526,6 +532,9 @@ define('Core/WebGLConstants',[
         // WEBGL_compressed_texture_etc1
         COMPRESSED_RGB_ETC1_WEBGL : 0x8D64,
 
+        // EXT_color_buffer_half_float
+        HALF_FLOAT_OES : 0x8D61,
+
         // Desktop OpenGL
         DOUBLE : 0x140A,
 
@@ -825,6 +834,7 @@ define('Renderer/PixelDatatype',[
         UNSIGNED_SHORT : WebGLConstants.UNSIGNED_SHORT,
         UNSIGNED_INT : WebGLConstants.UNSIGNED_INT,
         FLOAT : WebGLConstants.FLOAT,
+        HALF_FLOAT : WebGLConstants.HALF_FLOAT_OES,
         UNSIGNED_INT_24_8 : WebGLConstants.UNSIGNED_INT_24_8,
         UNSIGNED_SHORT_4_4_4_4 : WebGLConstants.UNSIGNED_SHORT_4_4_4_4,
         UNSIGNED_SHORT_5_5_5_1 : WebGLConstants.UNSIGNED_SHORT_5_5_5_1,
@@ -845,6 +855,7 @@ define('Renderer/PixelDatatype',[
                 case PixelDatatype.UNSIGNED_SHORT_4_4_4_4:
                 case PixelDatatype.UNSIGNED_SHORT_5_5_5_1:
                 case PixelDatatype.UNSIGNED_SHORT_5_6_5:
+                case PixelDatatype.HALF_FLOAT:
                     return 2;
                 case PixelDatatype.UNSIGNED_INT:
                 case PixelDatatype.FLOAT:
@@ -858,6 +869,7 @@ define('Renderer/PixelDatatype',[
                     (pixelDatatype === PixelDatatype.UNSIGNED_SHORT) ||
                     (pixelDatatype === PixelDatatype.UNSIGNED_INT) ||
                     (pixelDatatype === PixelDatatype.FLOAT) ||
+                    (pixelDatatype === PixelDatatype.HALF_FLOAT) ||
                     (pixelDatatype === PixelDatatype.UNSIGNED_INT_24_8) ||
                     (pixelDatatype === PixelDatatype.UNSIGNED_SHORT_4_4_4_4) ||
                     (pixelDatatype === PixelDatatype.UNSIGNED_SHORT_5_5_5_1) ||
@@ -1362,7 +1374,7 @@ define('Core/formatError',[
      *
      * @exports formatError
      *
-     * @param {Object} object The item to find in the array.
+     * @param {*} object The item to find in the array.
      * @returns {String} A string containing the formatted error.
      */
     function formatError(object) {
