@@ -72,13 +72,6 @@ public class ParticleSystem {
     public boolean isComplete;
     /**
      * How long the particle system will emit particles, in seconds.
-     * @deprecated Use {@link ParticleSystem#lifetime} instead. Will be removed in 1.46.x
-     */
-    @Deprecated
-    @JsProperty
-    public double lifeTime;
-    /**
-     * How long the particle system will emit particles, in seconds.
      * Default: {@link Double#MAX_VALUE}
      */
     @JsProperty
@@ -90,26 +83,10 @@ public class ParticleSystem {
     @JsProperty
     public boolean loop;
     /**
-     * Sets the maximum height of particles in pixels.
-     * Default: 1.0
-     * @deprecated Use {@link ParticleSystem#maximumImageSize} instead. Will be removed on 1.46.x
-     */
-    @Deprecated
-    @JsProperty
-    public double maximumHeight;
-    /**
      * Sets the maximum bound, width by height, below which to randomly scale the particle image's dimensions in pixels.
      */
     @JsProperty
     public Cartesian2 maximumImageSize;
-    /**
-     * Sets the maximum life of particles in seconds.
-     * Default: 5.0
-     * @deprecated Use {@link ParticleSystem#maximumParticleLife} instead. Will be removed in 1.46.x
-     */
-    @Deprecated
-    @JsProperty
-    public double maximumLife;
     /**
      * Sets the maximum mass of particles in kilograms.
      * Default: 1.0
@@ -129,34 +106,10 @@ public class ParticleSystem {
     @JsProperty
     public double maximumSpeed;
     /**
-     * Sets the maximum width of particles in pixels.
-     * Default: 1.0
-     * @deprecated Use {@link ParticleSystem#maximumImageSize} instead. Will be removed on 1.46.x
-     */
-    @Deprecated
-    @JsProperty
-    public double maximumWidth;
-    /**
-     * Sets the minimum height of particles in pixels.
-     * Default: 1.0
-     * @deprecated Use {@link ParticleSystem#minimumImageSize} instead. Will be removed on 1.46.x
-     */
-    @Deprecated
-    @JsProperty
-    public double minimumHeight;
-    /**
      * Sets the minimum bound, width by height, above which to randomly scale the particle image's dimensions in pixels.
      */
     @JsProperty
     public Cartesian2 minimumImageSize;
-    /**
-     * Sets the minimum life of particles in seconds.
-     * Default: 5.0
-     * @deprecated Use {@link ParticleSystem#minimumParticleLife} instead. Will be removed in 1.46.x
-     */
-    @Deprecated
-    @JsProperty
-    public double minimumLife;
     /**
      * Sets the minimum mass of particles in kilograms.
      * Default: 1.0
@@ -176,27 +129,11 @@ public class ParticleSystem {
     @JsProperty
     public double minimumSpeed;
     /**
-     * Sets the minimum width of particles in pixels.
-     * Default: 1.0
-     * @deprecated Use {@link ParticleSystem#minimumImageSize} instead. Will be removed on 1.46.x
-     */
-    @Deprecated
-    @JsProperty
-    public double minimumWidth;
-    /**
      * The 4x4 transformation matrix that transforms the particle system from model to world coordinates.
      * Default: {@link org.cesiumjs.cs.core.Matrix4#IDENTITY()}.
      */
     @JsProperty
     public Matrix4 modelMatrix;
-    /**
-     * The number of particles to emit per second.
-     * Default: 5
-     * @deprecated Use {@link ParticleSystem#emissionRate}. Will be removed in 1.46.x
-     */
-    @Deprecated
-    @JsProperty
-    public double rate;
     /**
      * The number of particles to emit per second.
      * Default: 5
