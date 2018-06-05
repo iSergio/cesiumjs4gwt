@@ -18,6 +18,7 @@ package org.cleanlogic.showcase.client.config;
 
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.google.gwt.user.client.ui.Image;
+import org.cesiumjs.cs.scene.PostProcess;
 import org.cleanlogic.showcase.client.config.provider.ShowcaseBrandsProvider;
 import org.cleanlogic.showcase.client.config.provider.ShowcaseLogoProvider;
 import org.cleanlogic.showcase.client.examples.*;
@@ -88,5 +89,7 @@ public class InjectorModule extends AbstractGinModule {
         bind(CustomHomeButton.class).asEagerSingleton();
         bind(PolylineArrow.class).asEagerSingleton();
         bind(CallbackProperty.class).asEagerSingleton();
+        // Post processing
+        bind(PostProcessing.class).asEagerSingleton();
     }
 }
