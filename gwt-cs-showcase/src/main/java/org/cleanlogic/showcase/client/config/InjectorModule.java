@@ -92,5 +92,6 @@ public class InjectorModule extends AbstractGinModule {
         // Post processing
         bind(PostProcessing.class).asEagerSingleton();
         bind(AmbientOcclusion.class).asEagerSingleton();
+        bind(Bloom.class).asEagerSingleton();
     }
 }
