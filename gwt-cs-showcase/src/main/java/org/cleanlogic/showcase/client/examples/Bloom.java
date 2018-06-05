@@ -48,10 +48,10 @@ public class Bloom extends AbstractExample {
     private CheckBox bloomCBox;
     private CheckBox glowOnlyCBox;
     private Slider contrastSlider;
-    private Slider brightnessCBox;
-    private Slider deltaCBox;
-    private Slider sigmaCBox;
-    private Slider stepSizeCBox;
+    private Slider brightnessSlider;
+    private Slider deltaSlider;
+    private Slider sigmaSlider;
+    private Slider stepSizeSlider;
 
     private int numberOfBalloons = 13;
     private double lonIncrement = 0.00025;
@@ -86,25 +86,25 @@ public class Bloom extends AbstractExample {
         contrastSlider.setWidth("150px");
         contrastSlider.addListener(new MSliderListener());
 
-        brightnessCBox = new Slider("brightnessCBox", -100, 100, -30);
-        brightnessCBox.setStep(1);
-        brightnessCBox.setWidth("150px");
-        brightnessCBox.addListener(new MSliderListener());
+        brightnessSlider = new Slider("brightnessSlider", -100, 100, -30);
+        brightnessSlider.setStep(1);
+        brightnessSlider.setWidth("150px");
+        brightnessSlider.addListener(new MSliderListener());
 
-        deltaCBox = new Slider("deltaCBox", 100, 500, 100);
-        deltaCBox.setStep(1);
-        deltaCBox.setWidth("150px");
-        deltaCBox.addListener(new MSliderListener());
+        deltaSlider = new Slider("deltaSlider", 100, 500, 100);
+        deltaSlider.setStep(1);
+        deltaSlider.setWidth("150px");
+        deltaSlider.addListener(new MSliderListener());
 
-        sigmaCBox = new Slider("sigmaCBox", 100, 1000, 378);
-        sigmaCBox.setStep(1);
-        sigmaCBox.setWidth("150px");
-        sigmaCBox.addListener(new MSliderListener());
+        sigmaSlider = new Slider("sigmaSlider", 100, 1000, 378);
+        sigmaSlider.setStep(1);
+        sigmaSlider.setWidth("150px");
+        sigmaSlider.addListener(new MSliderListener());
 
-        stepSizeCBox = new Slider("stepSizeCBox", 0, 700, 500);
-        stepSizeCBox.setStep(1);
-        stepSizeCBox.setWidth("150px");
-        stepSizeCBox.addListener(new MSliderListener());
+        stepSizeSlider = new Slider("stepSizeSlider", 0, 700, 500);
+        stepSizeSlider.setStep(1);
+        stepSizeSlider.setWidth("150px");
+        stepSizeSlider.addListener(new MSliderListener());
 
         FlexTable flexTable = new FlexTable();
         flexTable.setHTML(1, 0, "<font color=\"white\">Bloom</font>");
@@ -114,13 +114,13 @@ public class Bloom extends AbstractExample {
         flexTable.setHTML(3, 0, "<font color=\"white\">Contrast</font>");
         flexTable.setWidget(3, 1, contrastSlider);
         flexTable.setHTML(4, 0, "<font color=\"white\">Brightness</font>");
-        flexTable.setWidget(4, 1, brightnessCBox);
+        flexTable.setWidget(4, 1, brightnessSlider);
         flexTable.setHTML(5, 0, "<font color=\"white\">Delta</font>");
-        flexTable.setWidget(5, 1, deltaCBox);
+        flexTable.setWidget(5, 1, deltaSlider);
         flexTable.setHTML(6, 0, "<font color=\"white\">Sigma</font>");
-        flexTable.setWidget(6, 1, sigmaCBox);
+        flexTable.setWidget(6, 1, sigmaSlider);
         flexTable.setHTML(7, 0, "<font color=\"white\">Step Size</font>");
-        flexTable.setWidget(7, 1, stepSizeCBox);
+        flexTable.setWidget(7, 1, stepSizeSlider);
 
         AbsolutePanel aPanel = new AbsolutePanel();
         aPanel.add(csVPanel);
@@ -154,10 +154,10 @@ public class Bloom extends AbstractExample {
         bloom.enabled = bloomCBox.getValue();
         bloom.uniforms.setProperty("glowOnly", glowOnlyCBox.getValue());
         bloom.uniforms.setProperty("contrast", contrastSlider.getValue() / 100.0);
-        bloom.uniforms.setProperty("brightness", brightnessCBox.getValue() / 100.0);
-        bloom.uniforms.setProperty("delta", deltaCBox.getValue() / 100.0);
-        bloom.uniforms.setProperty("sigma", sigmaCBox.getValue() / 100.0);
-        bloom.uniforms.setProperty("stepSize", stepSizeCBox.getValue() / 100.0);
+        bloom.uniforms.setProperty("brightness", brightnessSlider.getValue() / 100.0);
+        bloom.uniforms.setProperty("delta", deltaSlider.getValue() / 100.0);
+        bloom.uniforms.setProperty("sigma", sigmaSlider.getValue() / 100.0);
+        bloom.uniforms.setProperty("stepSize", stepSizeSlider.getValue() / 100.0);
     }
 
     @Override
