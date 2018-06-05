@@ -33,6 +33,7 @@ import org.cesiumjs.cs.scene.particle.ParticleSystem;
 import org.cesiumjs.cs.scene.particle.options.ParticleBurstOptions;
 import org.cesiumjs.cs.scene.particle.options.ParticleSystemOptions;
 import org.cesiumjs.cs.widgets.ViewerPanel;
+import org.cesiumjs.cs.widgets.options.ViewerOptions;
 import org.cleanlogic.showcase.client.basic.AbstractExample;
 import org.cleanlogic.showcase.client.components.store.ShowcaseExampleStore;
 
@@ -52,7 +53,7 @@ public class ParticleSystemFireworks extends AbstractExample {
 
     private double minimumExplosionSize = 30.0;
     private double maximumExplosionSize = 100.0;
-    private double particlePixelSize = 7.0;
+    private Cartesian2 particlePixelSize = new Cartesian2(7.0, 7.0);
     private double burstSize = 400.0;
     private double lifetime = 10.0;
     private double numberOfFireworks = 20.0;
@@ -71,7 +72,9 @@ public class ParticleSystemFireworks extends AbstractExample {
 
     @Override
     public void buildPanel() {
-        ViewerPanel csVPanel = new ViewerPanel();
+        ViewerOptions viewerOptions = new ViewerOptions();
+        viewerOptions.shouldAnimate = true;
+        ViewerPanel csVPanel = new ViewerPanel(viewerOptions);
 
         csVPanel.getViewer().scene().debugShowFramesPerSecond = true;
 
@@ -159,7 +162,7 @@ public class ParticleSystemFireworks extends AbstractExample {
         final double size = Math.randomBetween(minimumExplosionSize, maximumExplosionSize);
         final Cartesian3 particlePositionScratch = new Cartesian3();
 
-        ParticleSystem.ApplyForce force = new ParticleSystem.ApplyForce() {
+        ParticleSystem.UpdateCallback updateCallback = new ParticleSystem.UpdateCallback() {
             @Override
             public void function(Particle particle, double dt) {
                 Cartesian3 position = Matrix4.multiplyByPoint(worldToParticle, particle.position, particlePositionScratch);
@@ -177,15 +180,14 @@ public class ParticleSystemFireworks extends AbstractExample {
         particleSystemOptions.image = getImage();
         particleSystemOptions.startColor = color;
         particleSystemOptions.endColor = color.withAlpha(0.0f);
-        particleSystemOptions.life = life;
+        particleSystemOptions.particleLife = life;
         particleSystemOptions.speed = 100.0;
-        particleSystemOptions.width = particlePixelSize;
-        particleSystemOptions.height = particlePixelSize;
-        particleSystemOptions.rate = 0;
+        particleSystemOptions.imageSize = particlePixelSize;
+        particleSystemOptions.emissionRate = 0;
         particleSystemOptions.emitter = new SphereEmitter(0.1);
         particleSystemOptions.bursts = bursts;
-        particleSystemOptions.lifeTime = lifetime;
-        particleSystemOptions.forces = new ParticleSystem.ApplyForce[] {force};
+        particleSystemOptions.lifetime = lifetime;
+        particleSystemOptions.updateCallback = updateCallback;
         particleSystemOptions.modelMatrix = modelMatrix;
         particleSystemOptions.emitterModelMatrix = emitterModelMatrix;
         scene.primitives().add(new ParticleSystem(particleSystemOptions));

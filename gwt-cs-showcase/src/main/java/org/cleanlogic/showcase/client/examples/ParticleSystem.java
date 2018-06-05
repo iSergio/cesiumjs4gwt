@@ -138,6 +138,7 @@ public class ParticleSystem extends AbstractExample {
         csVPanel.getViewer().clock().currentTime = start.clone();
         csVPanel.getViewer().clock().clockRange = ClockRange.LOOP_STOP(); //Loop at the end
         csVPanel.getViewer().clock().multiplier = 1;
+        csVPanel.getViewer().clock().shouldAnimate = true;
 
         //Set timeline to simulation bounds
         csVPanel.getViewer().timeline().zoomTo(start, stop);
@@ -170,19 +171,15 @@ public class ParticleSystem extends AbstractExample {
         particleSystemOptions.startScale = viewModel.startScale;
         particleSystemOptions.endScale = viewModel.endScale;
 
-        particleSystemOptions.minimumLife = viewModel.minimumLife;
-        particleSystemOptions.maximumLife = viewModel.maximumLife;
+        particleSystemOptions.minimumParticleLife = viewModel.minimumParticleLife;
+        particleSystemOptions.maximumParticleLife = viewModel.maximumParticleLife;
 
         particleSystemOptions.minimumSpeed = viewModel.minimumSpeed;
         particleSystemOptions.maximumSpeed = viewModel.maximumSpeed;
 
-        particleSystemOptions.minimumWidth = viewModel.particleSize;
-        particleSystemOptions.minimumHeight = viewModel.particleSize;
+        particleSystemOptions.imageSize = new Cartesian2(viewModel.particleSize, viewModel.particleSize);
 
-        particleSystemOptions.maximumWidth = viewModel.particleSize;
-        particleSystemOptions.maximumHeight = viewModel.particleSize;
-
-        particleSystemOptions.rate = viewModel.rate;
+        particleSystemOptions.emissionRate = viewModel.emissionRate;
 
         particleSystemOptions.bursts = new ParticleBurst[] {
                 ParticleBurst.create(5.0, 300, 500),
@@ -190,13 +187,13 @@ public class ParticleSystem extends AbstractExample {
                 ParticleBurst.create(15.0, 200, 300)
         };
 
-        particleSystemOptions.lifeTime = 16;
+        particleSystemOptions.lifetime = 16.0;
 
-        particleSystemOptions.emitter = new CircleEmitter(0.5);
+        particleSystemOptions.emitter = new CircleEmitter(2.0);
 
         particleSystemOptions.emitterModelMatrix = computeEmitterModelMatrix();
 
-        particleSystemOptions.forces = new org.cesiumjs.cs.scene.particle.ParticleSystem.ApplyForce[] {new org.cesiumjs.cs.scene.particle.ParticleSystem.ApplyForce() {
+        particleSystemOptions.updateCallback = new org.cesiumjs.cs.scene.particle.ParticleSystem.UpdateCallback() {
             @Override
             public void function(Particle particle, double dt) {
                 Cartesian3 position = particle.position;
@@ -206,7 +203,7 @@ public class ParticleSystem extends AbstractExample {
 
                 particle.velocity = Cartesian3.add(particle.velocity, gravityScratch, particle.velocity);
             }
-        }};
+        };
 
         particleSystem = (org.cesiumjs.cs.scene.particle.ParticleSystem) csVPanel.getViewer().scene().primitives().add(new org.cesiumjs.cs.scene.particle.ParticleSystem(particleSystemOptions));
 
@@ -247,12 +244,12 @@ public class ParticleSystem extends AbstractExample {
         MSliderListener sliderListener = new MSliderListener();
         MChangeHandler tboxListener = new MChangeHandler();
 
-        rateSlider = new Slider("rate", 0, 100, (int) viewModel.rate);
+        rateSlider = new Slider("rate", 0, 100, (int) viewModel.emissionRate);
         rateSlider.setStep(1);
         rateSlider.setWidth("150px");
         rateSlider.addListener(sliderListener);
         rateTBox = new TextBox();
-        rateTBox.setValue("" + (int) viewModel.rate);
+        rateTBox.setValue("" + (int) viewModel.emissionRate);
         rateTBox.setSize("30px", "12px");
         rateTBox.addChangeHandler(tboxListener);
 
@@ -265,21 +262,21 @@ public class ParticleSystem extends AbstractExample {
         sizeTBox.setSize("30px", "12px");
         sizeTBox.addChangeHandler(tboxListener);
 
-        minLifeSlider = new Slider("minLife", 1, 30, (int) viewModel.minimumLife);
+        minLifeSlider = new Slider("minLife", 1, 30, (int) viewModel.minimumParticleLife);
         minLifeSlider.setStep(1);
         minLifeSlider.setWidth("150px");
         minLifeSlider.addListener(sliderListener);
         minLifeTBox = new TextBox();
-        minLifeTBox.setValue("" + (int) viewModel.minimumLife);
+        minLifeTBox.setValue("" + (int) viewModel.minimumParticleLife);
         minLifeTBox.setSize("30px", "12px");
         minLifeTBox.addChangeHandler(tboxListener);
 
-        maxLifeSlider = new Slider("maxLife", 1, 30, (int) viewModel.maximumLife);
+        maxLifeSlider = new Slider("maxLife", 1, 30, (int) viewModel.maximumParticleLife);
         maxLifeSlider.setStep(1);
         maxLifeSlider.setWidth("150px");
         maxLifeSlider.addListener(sliderListener);
         maxLifeTBox = new TextBox();
-        maxLifeTBox.setValue("" + (int) viewModel.maximumLife);
+        maxLifeTBox.setValue("" + (int) viewModel.maximumParticleLife);
         maxLifeTBox.setSize("30px", "12px");
         maxLifeTBox.addChangeHandler(tboxListener);
 
@@ -468,23 +465,23 @@ public class ParticleSystem extends AbstractExample {
     }
 
     public static class ViewModel {
-        double rate = 5.0;
+        double emissionRate = 5.0;
         double gravity = 0.0;
-        double minimumLife = 1.0;
-        double maximumLife = 1.0;
-        double minimumSpeed = 5.0;
-        double maximumSpeed = 5.0;
+        double minimumParticleLife = 1.0;
+        double maximumParticleLife = 1.0;
+        double minimumSpeed = 1.0;
+        double maximumSpeed = 4.0;
         double startScale = 1.0;
-        double endScale = 4.0;
-        double particleSize = 20.0;
+        double endScale = 5.0;
+        double particleSize = 25.0;
         double transX = 2.5;
         double transY = 4.0;
         double transZ = 1.0;
         double heading = 0.0;
         double pitch = 0.0;
         double roll = 0.0;
-        boolean fly = false;
-        boolean spin = false;
+        boolean fly = true;
+        boolean spin = true;
         boolean show = true;
     }
 
@@ -536,19 +533,19 @@ public class ParticleSystem extends AbstractExample {
             Slider source = e.getSource();
             int value = source.getValue();
             if (source == rateSlider) {
-                particleSystem.rate = value;
+                particleSystem.emissionRate = value;
                 rateTBox.setValue("" + value);
             } else if (source == sizeSlider) {
-                particleSystem.minimumWidth = value;
-                particleSystem.maximumWidth = value;
-                particleSystem.minimumHeight = value;
-                particleSystem.maximumHeight = value;
+                particleSystem.minimumImageSize.x = value;
+                particleSystem.minimumImageSize.y = value;
+                particleSystem.maximumImageSize.x = value;
+                particleSystem.maximumImageSize.y = value;
                 sizeTBox.setValue("" + value);
             } else if (source == minLifeSlider) {
-                particleSystem.minimumLife = value;
+                particleSystem.minimumParticleLife = value;
                 minLifeTBox.setValue("" + value);
             } else if (source == maxLifeSlider) {
-                particleSystem.maximumLife = value;
+                particleSystem.maximumParticleLife = value;
                 maxLifeTBox.setValue("" + value);
             } else if (source == minSpeedSlider) {
                 particleSystem.minimumSpeed = value;
@@ -587,18 +584,18 @@ public class ParticleSystem extends AbstractExample {
             int value = Integer.parseInt(source.getValue());
             if (source == rateTBox) {
                 rateSlider.setValue(value);
-                particleSystem.rate = value;
+                particleSystem.emissionRate = value;
             } else if (source == sizeTBox) {
-                particleSystem.minimumWidth = value;
-                particleSystem.maximumWidth = value;
-                particleSystem.minimumHeight = value;
-                particleSystem.maximumHeight = value;
+                particleSystem.minimumImageSize.x = value;
+                particleSystem.minimumImageSize.y = value;
+                particleSystem.maximumImageSize.x = value;
+                particleSystem.maximumImageSize.y = value;
                 sizeSlider.setValue(value);
             } else if (source == minLifeTBox) {
-                particleSystem.minimumLife = value;
+                particleSystem.minimumParticleLife = value;
                 minLifeSlider.setValue(value);
             } else if (source == maxLifeTBox) {
-                particleSystem.maximumLife = value;
+                particleSystem.maximumParticleLife = value;
                 maxLifeSlider.setValue(value);
             } else if (source == minSpeedTBox) {
                 particleSystem.minimumSpeed = value;
