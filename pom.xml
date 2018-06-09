@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.cesiumjs</groupId>
-    <artifactId>gwt-cs</artifactId>
+    <artifactId>cesiumjs4gwt</artifactId>
     <packaging>pom</packaging>
     <version>1.46.1</version>
     <name>CesiumJS GWT Framework</name>
@@ -67,8 +67,8 @@
     </build>
 
     <modules>
-        <module>gwt-cs-main</module>
-        <module>gwt-cs-showcase</module>
+        <module>cesiumjs4gwt-main</module>
+        <module>cesiumjs4gwt-showcase</module>
     </modules>
 
 
