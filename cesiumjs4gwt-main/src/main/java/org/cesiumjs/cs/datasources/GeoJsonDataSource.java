@@ -22,6 +22,7 @@ import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.core.JulianDate;
 import org.cesiumjs.cs.datasources.options.GeoJsonDataSourceOptions;
+import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.promise.Promise;
 
 /**
@@ -156,15 +157,15 @@ public class GeoJsonDataSource implements DataSource {
 
     /**
      * Creates a Promise to a new instance loaded with the provided GeoJSON or TopoJSON data.
-     * @param data A url, GeoJSON object, or TopoJSON object to be loaded.
+     * @param data GeoJSON object, or TopoJSON object to be loaded.
      * @return A promise that will resolve when the data is loaded.
      */
     @JsMethod
-    public static native Promise<GeoJsonDataSource, String> load(Object data);
+    public static native Promise<GeoJsonDataSource, String> load(JsObject data);
 
     /**
      * Creates a Promise to a new instance loaded with the provided GeoJSON or TopoJSON data.
-     * @param data A url, GeoJSON object, or TopoJSON object to be loaded.
+     * @param data A url to be loaded.
      * @return A promise that will resolve when the data is loaded.
      */
     @JsMethod
@@ -172,16 +173,16 @@ public class GeoJsonDataSource implements DataSource {
 
     /**
      * Creates a Promise to a new instance loaded with the provided GeoJSON or TopoJSON data.
-     * @param data A url, GeoJSON object, or TopoJSON object to be loaded.
+     * @param data A GeoJSON object, or TopoJSON object to be loaded.
      * @param options Options
      * @return A promise that will resolve when the data is loaded.
      */
     @JsMethod
-    public static native Promise<GeoJsonDataSource, String> load(Object data, GeoJsonDataSourceOptions options);
+    public static native Promise<GeoJsonDataSource, String> load(JsObject data, GeoJsonDataSourceOptions options);
 
     /**
      * Creates a Promise to a new instance loaded with the provided GeoJSON or TopoJSON data.
-     * @param data A url, GeoJSON object, or TopoJSON object to be loaded.
+     * @param data A url to be loaded.
      * @param options Options
      * @return A promise that will resolve when the data is loaded.
      */
