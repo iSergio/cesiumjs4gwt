@@ -16,7 +16,6 @@
 
 package org.cesiumjs.cs.datasources;
 
-import com.google.gwt.json.client.JSONObject;
 import jsinterop.annotations.*;
 import org.cesiumjs.cs.collections.EntityCollection;
 import org.cesiumjs.cs.core.Color;
@@ -161,7 +160,7 @@ public class GeoJsonDataSource implements DataSource {
      * @return A promise that will resolve when the data is loaded.
      */
     @JsMethod
-    public static native Promise<GeoJsonDataSource, String> load(JSONObject data);
+    public static native Promise<GeoJsonDataSource, String> load(Object data);
 
     /**
      * Creates a Promise to a new instance loaded with the provided GeoJSON or TopoJSON data.
@@ -178,7 +177,7 @@ public class GeoJsonDataSource implements DataSource {
      * @return A promise that will resolve when the data is loaded.
      */
     @JsMethod
-    public static native Promise<GeoJsonDataSource, String> load(JSONObject data, GeoJsonDataSourceOptions options);
+    public static native Promise<GeoJsonDataSource, String> load(Object data, GeoJsonDataSourceOptions options);
 
     /**
      * Creates a Promise to a new instance loaded with the provided GeoJSON or TopoJSON data.
