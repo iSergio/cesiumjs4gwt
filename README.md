@@ -6,8 +6,8 @@ What was done:
 - [x] CesiumJS API like as native JavaScript. Based on CesiumJS source code
 - [x] Simple support Promise
 - [x] Simple support Callback functions.
-- [x] Full Cesium documentation in javadoc. You can see they on official [CesiumJS](http://cesiumjs.org/refdoc.html) or on site [gwt-cs Documentation](https://sergeserver.noip.me/docs/gwt-cs)
-- [x] [Examples showcase](https://sergeserver.noip.me/gwt-cs-test/).
+- [x] Full Cesium documentation in javadoc. You can see they on official [CesiumJS](http://cesiumjs.org/refdoc.html) or on site [cesiumjs4gwt Documentation](https://sergeserver.noip.me/docs/cesiumjs4gwt)
+- [x] [Examples showcase](https://sergeserver.noip.me/cesiumjs4gwt-showcase/).
 - [x] Integration with [gwt-olcs](https://github.com/iSergio/gwt-olcs)
 
 ### DrawInteraction features:
@@ -35,7 +35,7 @@ What was done:
 ### Getting started
 You not need include JavaScript of Cesium into main html file, injection realised in GWT code.
 Now no need callback for ScriptInjection or AttachOrDetach, all worked "out from box".
-See [Showcase](https://sergeserver.noip.me/gwt-cs-test/) or basic example:
+See [Showcase](https://sergeserver.noip.me/cesiumjs4gwt-showcase/) or basic example:
 ```java
 public class HelloWorld extends AbstractExample {
 
