@@ -159,6 +159,23 @@ public class GeoJsonDataSource implements DataSource {
      * Creates a Promise to a new instance loaded with the provided GeoJSON or TopoJSON data.
      * @param data GeoJSON object, or TopoJSON object to be loaded.
      * @return A promise that will resolve when the data is loaded.
+     * Example:
+     * {@code
+     * JsObject jsonObject = JsJSON.parse("{"type":"MultiPolygon","coordinates":[[[[131.50108952,43.666989],[131.50109395,44.00032979],[132.00110764,44.00032626],[132.00110313,43.66698549],[131.50108952,43.666989]]]],"crs":{"type":"name","properties":{"name":"EPSG:4326"}}}");
+     * GeoJsonDataSource.load(jsonObject).then(
+     *     new Fulfill<GeoJsonDataSource>() {
+     *         {@literal @}Override
+     *         public void onFulfilled(GeoJsonDataSource value) {
+     *             viewer.dataSources().add(value);
+     *         }
+     *      },
+     *      new Reject<String>() {
+     *          {@literal @}Override
+     *          public void onRejected(String value) {
+     *              Cesium.log(value);
+     *          }
+     *      });
+     * }
      */
     @JsMethod
     public static native Promise<GeoJsonDataSource, String> load(JsObject data);
@@ -176,6 +193,23 @@ public class GeoJsonDataSource implements DataSource {
      * @param data A GeoJSON object, or TopoJSON object to be loaded.
      * @param options Options
      * @return A promise that will resolve when the data is loaded.
+     * Example:
+     * {@code
+     * JsObject jsonObject = JsJSON.parse("{"type":"MultiPolygon","coordinates":[[[[131.50108952,43.666989],[131.50109395,44.00032979],[132.00110764,44.00032626],[132.00110313,43.66698549],[131.50108952,43.666989]]]],"crs":{"type":"name","properties":{"name":"EPSG:4326"}}}");
+     * GeoJsonDataSource.load(jsonObject).then(
+     *     new Fulfill<GeoJsonDataSource>() {
+     *         {@literal @}Override
+     *         public void onFulfilled(GeoJsonDataSource value) {
+     *             viewer.dataSources().add(value);
+     *         }
+     *      },
+     *      new Reject<String>() {
+     *          {@literal @}Override
+     *          public void onRejected(String value) {
+     *              Cesium.log(value);
+     *          }
+     *      });
+     * }
      */
     @JsMethod
     public static native Promise<GeoJsonDataSource, String> load(JsObject data, GeoJsonDataSourceOptions options);
