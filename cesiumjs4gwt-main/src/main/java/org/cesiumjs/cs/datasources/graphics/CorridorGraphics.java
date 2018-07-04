@@ -65,10 +65,20 @@ public class CorridorGraphics {
     @JsProperty
     public Property height;
     /**
+     * A Property specifying what the height is relative to.
+     */
+    @JsProperty
+    public Property heightReference;
+    /**
      * A numeric Property specifying the altitude of the corridor's extruded face relative to the ellipsoid surface.
      */
     @JsProperty
     public Property extrudedHeight;
+    /**
+     * A Property specifying what the extrudedHeight is relative to.
+     */
+    @JsProperty
+    public Property extrudedHeightReference;
     /**
      * A boolean Property specifying the visibility of the corridor.
      * Default: true

@@ -67,11 +67,21 @@ public class RectangleGraphics {
     @JsProperty
     public Property distanceDisplayCondition;
     /**
+     * A Property specifying what the height is relative to.
+     */
+    @JsProperty
+    public Property heightReference;
+    /**
      * Gets or sets the numeric Property specifying the altitude of the rectangle extrusion.
      * Setting this property creates volume starting at height and ending at this altitude.
      */
     @JsProperty
     public Property extrudedHeight;
+    /**
+     * A Property specifying what the extrudedHeight is relative to.
+     */
+    @JsProperty
+    public Property extrudedHeightReference;
     /**
      * Gets or sets the boolean Property specifying whether the rectangle is filled with the provided material.
      * Default: true
