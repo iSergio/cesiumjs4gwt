@@ -31,6 +31,12 @@ import org.cesiumjs.cs.scene.enums.ShadowMode;
 @JsType(isNative = true, namespace = "Cesium", name = "PolylineGraphics")
 public class PolylineGraphics {
     /**
+     * Gets or sets the boolean Property specifying whether the polyline should be clamped to the ground.
+     * Default: false
+     */
+    @JsProperty
+    public Property clampToGround;
+    /**
      * Gets the event that is raised whenever a property or sub-property is changed or modified.
      */
     @JsProperty(name = "definitionChanged")

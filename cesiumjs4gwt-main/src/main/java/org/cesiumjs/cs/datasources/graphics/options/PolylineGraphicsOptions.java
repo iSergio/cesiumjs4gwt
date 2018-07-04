@@ -41,6 +41,12 @@ public class PolylineGraphicsOptions {
     @JsProperty
     public Property followSurface;
     /**
+     * A boolean Property specifying whether the Polyline should be clamped to the ground.
+     * Default: false
+     */
+    @JsProperty
+    public Property clampToGround;
+    /**
      * A numeric Property specifying the width in pixels.
      * Default: 1.0
      */
