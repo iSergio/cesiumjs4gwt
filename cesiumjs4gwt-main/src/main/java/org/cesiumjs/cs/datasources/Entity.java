@@ -212,6 +212,16 @@ public class Entity {
     public static native boolean supportsMaterialsforEntitiesOnTerrain(Scene scene);
 
     /**
+     * Checks if the given Scene supports polylines clamped to the ground.. If this feature is not supported, Entities
+     * with PolylineGraphics will be rendered with vertices at the provided heights and using the `followSurface`
+     * parameter instead of clamped to the ground.
+     * @param scene The current scene.
+     * @return Whether or not the current scene supports Polylines on Terrain.
+     */
+    @JsMethod
+    public static native boolean supportsPolylinesOnTerrain(Scene scene);
+
+    /**
      * Adds a property to this object. Once a property is added, it can be observed with {@link #definitionChanged()} and
      * composited with {@link org.cesiumjs.cs.collections.CompositeEntityCollection}
      * @param propertyName The name of the property to add.
