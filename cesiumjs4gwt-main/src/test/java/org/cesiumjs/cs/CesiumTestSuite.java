@@ -23,6 +23,7 @@ import org.cesiumjs.cs.collections.LabelCollectionTest;
 import org.cesiumjs.cs.core.Cartesian2Test;
 import org.cesiumjs.cs.core.ColorTest;
 import org.cesiumjs.cs.core.IonResourceTest;
+import org.cesiumjs.cs.core.geometry.GroundPolylineGeometryTest;
 import org.cesiumjs.cs.scene.Cesium3DTilesetTest;
 import org.cesiumjs.cs.scene.LabelTest;
 
@@ -39,6 +40,7 @@ public class CesiumTestSuite extends GWTTestSuite {
         // Core
         suite.addTestSuite(ColorTest.class);
         suite.addTestSuite(Cartesian2Test.class);
+        suite.addTestSuite(GroundPolylineGeometryTest.class);
         suite.addTestSuite(LabelCollectionTest.class);
         suite.addTestSuite(IonResourceTest.class);
 

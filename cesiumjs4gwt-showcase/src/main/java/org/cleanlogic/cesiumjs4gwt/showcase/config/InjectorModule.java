@@ -96,5 +96,7 @@ public class InjectorModule extends AbstractGinModule {
         bind(CustomPostProcess.class).asEagerSingleton();
         bind(DepthOfField.class).asEagerSingleton();
         bind(LensFlare.class).asEagerSingleton();
+
+        bind(GroundPolylinePrimitive.class).asEagerSingleton();
     }
 }
