@@ -24,6 +24,7 @@ import org.cesiumjs.cs.datasources.properties.ConstantProperty;
 import org.cesiumjs.cs.datasources.properties.MaterialProperty;
 import org.cesiumjs.cs.datasources.properties.Property;
 import org.cesiumjs.cs.scene.enums.ClassificationType;
+import org.cesiumjs.cs.scene.enums.HeightReference;
 import org.cesiumjs.cs.scene.enums.ShadowMode;
 
 /**
@@ -67,7 +68,8 @@ public class RectangleGraphics {
     @JsProperty
     public Property distanceDisplayCondition;
     /**
-     * A Property specifying what the height is relative to.
+     * Gets or sets the Property specifying the HeightReference.
+     * Default: {@link HeightReference#NONE()}
      */
     @JsProperty
     public Property heightReference;
@@ -78,7 +80,8 @@ public class RectangleGraphics {
     @JsProperty
     public Property extrudedHeight;
     /**
-     * A Property specifying what the extrudedHeight is relative to.
+     * Gets or sets the Property specifying the extruded HeightReference.
+     * Default: {@link HeightReference#NONE()}
      */
     @JsProperty
     public Property extrudedHeightReference;
