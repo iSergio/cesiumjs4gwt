@@ -1,7 +1,7 @@
-/gwt-cs-main/target/
-/gwt-cs-main/war/
-/gwt-cs-main/gwt-unitCache/
-/gwt-cs-showcase/target/
+/cesiumjs4gwt-main/target/
+/cesiumjs4gwt-main/war/
+/cesiumjs4gwt-main/gwt-unitCache/
+/cesiumjs4gwt-showcase/target/
 .idea
 *.iml
 .DS_Store
