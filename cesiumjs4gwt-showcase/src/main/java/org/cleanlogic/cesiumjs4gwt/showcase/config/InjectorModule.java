@@ -98,5 +98,6 @@ public class InjectorModule extends AbstractGinModule {
         bind(LensFlare.class).asEagerSingleton();
 
         bind(GroundPolylinePrimitive.class).asEagerSingleton();
+        bind(DrawingOnTerrain.class).asEagerSingleton();
     }
 }
