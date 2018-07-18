@@ -99,5 +99,6 @@ public class InjectorModule extends AbstractGinModule {
 
         bind(GroundPolylinePrimitive.class).asEagerSingleton();
         bind(DrawingOnTerrain.class).asEagerSingleton();
+        bind(GeometryHeightReference.class).asEagerSingleton();
     }
 }
