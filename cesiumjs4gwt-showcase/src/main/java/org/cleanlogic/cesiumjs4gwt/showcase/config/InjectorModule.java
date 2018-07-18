@@ -18,7 +18,6 @@ package org.cleanlogic.cesiumjs4gwt.showcase.config;
 
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.google.gwt.user.client.ui.Image;
-import org.cesiumjs.cs.scene.PostProcess;
 import org.cleanlogic.cesiumjs4gwt.showcase.config.provider.ShowcaseBrandsProvider;
 import org.cleanlogic.cesiumjs4gwt.showcase.config.provider.ShowcaseLogoProvider;
 import org.cleanlogic.cesiumjs4gwt.showcase.examples.*;
@@ -100,5 +99,6 @@ public class InjectorModule extends AbstractGinModule {
         bind(GroundPolylinePrimitive.class).asEagerSingleton();
         bind(DrawingOnTerrain.class).asEagerSingleton();
         bind(GeometryHeightReference.class).asEagerSingleton();
+        bind(MultipleSyncedViews.class).asEagerSingleton();
     }
 }
