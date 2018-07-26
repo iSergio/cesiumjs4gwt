@@ -138,14 +138,4 @@ public class PostProcessStage implements PostProcess {
      */
     @JsMethod
     public native boolean isDestroyed();
-
-    /**
-     * Whether or not this post process stage is supported.
-     * A post process stage is not supported when it requires a depth texture and the WEBGL_depth_texture extension
-     * is not supported.
-     * @param scene The scene.
-     * @return Whether this post process stage is supported.
-     */
-    @JsMethod
-    public native boolean isSupported(Scene scene);
 }

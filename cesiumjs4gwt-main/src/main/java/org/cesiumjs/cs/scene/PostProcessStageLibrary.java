@@ -109,4 +109,40 @@ public class PostProcessStageLibrary {
      */
     @JsMethod
     public static native PostProcessStageComposite createSilhouetteStage();
+
+    /**
+     * Whether or not an ambient occlusion stage is supported.
+     * This stage requires the WEBGL_depth_texture extension.
+     * @param scene The scene.
+     * @return Whether this post process stage is supported.
+     */
+    @JsMethod
+    public static native boolean isAmbientOcclusionSupported(Scene scene);
+
+    /**
+     * Whether or not a depth of field stage is supported.
+     * This stage requires the WEBGL_depth_texture extension.
+     * @param scene The scene.
+     * @return Whether this post process stage is supported.
+     */
+    @JsMethod
+    public static native boolean isDepthOfFieldSupported(Scene scene);
+
+    /**
+     * Whether or not an edge detection stage is supported.
+     * This stage requires the WEBGL_depth_texture extension.
+     * @param scene The scene.
+     * @return Whether this post process stage is supported.
+     */
+    @JsMethod
+    public static native boolean isEdgeDetectionSupported(Scene scene);
+
+    /**
+     * Whether or not a silhouette stage is supported.
+     * This stage requires the WEBGL_depth_texture extension.
+     * @param scene The scene.
+     * @return Whether this post process stage is supported.
+     */
+    @JsMethod
+    public static native boolean isSilhouetteSupported(Scene scene);
 }
