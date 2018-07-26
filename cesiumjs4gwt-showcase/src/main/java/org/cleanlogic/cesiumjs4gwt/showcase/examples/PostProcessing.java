@@ -89,7 +89,7 @@ public class PostProcessing extends AbstractExample {
         brightness = (PostProcessStage) collection.add(PostProcessStageLibrary.createBrightnessStage());
         nightVision = (PostProcessStage) collection.add(PostProcessStageLibrary.createNightVisionStage());
 
-        if (silhouette.isSupported(csVPanel.getViewer().scene())) {
+        if (!PostProcessStageLibrary.isSilhouetteSupported(csVPanel.getViewer().scene())) {
             Cesium.log("This browser does not support the silhouette post process.");
         }
 

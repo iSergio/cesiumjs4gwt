@@ -121,7 +121,7 @@ public class DepthOfField extends AbstractExample {
         initWidget(contentPanel);
 
         depthOfField = (PostProcessStageComposite) csVPanel.getViewer().scene().postProcessStages.add(PostProcessStageLibrary.createDepthOfFieldStage());
-        if (!depthOfField.isSupported(csVPanel.getViewer().scene())) {
+        if (!PostProcessStageLibrary.isDepthOfFieldSupported(csVPanel.getViewer().scene())) {
             Cesium.log("This browser does not support the depth of field post process.");
         }
 
