@@ -71,7 +71,7 @@ public class AmbientOcclusion extends AbstractExample {
     public void buildPanel() {
         csVPanel = new ViewerPanel();
 
-        if (!csVPanel.getViewer().scene().postProcessStages.ambientOcclusion().isSupported(csVPanel.getViewer().scene())) {
+        if (!PostProcessStageLibrary.isAmbientOcclusionSupported(csVPanel.getViewer().scene())) {
             Cesium.log("This browser does not support the ambient occlusion post process.");
         }
 
