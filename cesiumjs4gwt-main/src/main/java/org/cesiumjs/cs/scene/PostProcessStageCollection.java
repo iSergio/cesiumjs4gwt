@@ -60,11 +60,19 @@ public class PostProcessStageCollection {
 
     /**
      * Adds the post-process stage to the collection.
-     * @param stage {@link PostProcessStage} | {@link PostProcessStageComposite} The post-process stage to add to the collection.
+     * @param stage {@link PostProcessStage} The post-process stage to add to the collection.
      * @return The post-process stage that was added to the collection.
      */
     @JsMethod
-    public native PostProcess add(PostProcess stage);
+    public native PostProcessStage add(PostProcessStage stage);
+
+    /**
+     * Adds the post-process stage to the collection.
+     * @param stage {@link PostProcessStageComposite} The post-process stage to add to the collection.
+     * @return The post-process stage that was added to the collection.
+     */
+    @JsMethod
+    public native PostProcessStageComposite add(PostProcessStageComposite stage);
 
     /**
      * Returns whether the collection contains a post-process stage.
