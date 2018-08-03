@@ -454,6 +454,7 @@ define('Core/defaultValue',[
     /**
      * A frozen empty object that can be used as the default value for options passed as
      * an object literal.
+     * @type {Object}
      */
     defaultValue.EMPTY_OBJECT = freezeObject({});
 
@@ -2424,7 +2425,8 @@ define('Core/isCrossOriginUrl',[
         var protocol = a.protocol;
 
         a.href = url;
-        a.href = a.href; // IE only absolutizes href on get, not set
+        // IE only absolutizes href on get, not set
+        a.href = a.href; // eslint-disable-line no-self-assign
 
         return protocol !== a.protocol || host !== a.host;
     }
@@ -6121,7 +6123,9 @@ define('Core/buildModuleUrl',[
             a = document.createElement('a');
         }
         a.href = url;
-        a.href = a.href; // IE only absolutizes href on get, not set
+
+        // IE only absolutizes href on get, not set
+        a.href = a.href; // eslint-disable-line no-self-assign
         return a.href;
     }
 
@@ -6579,7 +6583,8 @@ define('Core/Math',[
     CesiumMath.EPSILON20 = 0.00000000000000000001;
 
     /**
-     * 3.986004418e14
+     * The gravitational parameter of the Earth in meters cubed
+     * per second squared as defined by the WGS84 model: 3.986004418e14
      * @type {Number}
      * @constant
      */
@@ -8022,6 +8027,25 @@ define('Core/Cartesian3',[
         result.x = x;
         result.y = y;
         result.z = z;
+        return result;
+    };
+
+    /**
+     * Computes the midpoint between the right and left Cartesian.
+     * @param {Cartesian3} left The first Cartesian.
+     * @param {Cartesian3} right The second Cartesian.
+     * @param {Cartesian3} result The object onto which to store the result.
+     * @returns {Cartesian3} The midpoint.
+     */
+    Cartesian3.midpoint = function(left, right, result) {
+                Check.typeOf.object('left', left);
+        Check.typeOf.object('right', right);
+        Check.typeOf.object('result', result);
+        
+        result.x = (left.x + right.x) * 0.5;
+        result.y = (left.y + right.y) * 0.5;
+        result.z = (left.z + right.z) * 0.5;
+
         return result;
     };
 
@@ -15372,7 +15396,7 @@ define('Core/BoundingSphere',[
         maxBoxPt.y = yMax.y;
         maxBoxPt.z = zMax.z;
 
-        var naiveCenter = Cartesian3.multiplyByScalar(Cartesian3.add(minBoxPt, maxBoxPt, fromPointsScratch), 0.5, fromPointsNaiveCenterScratch);
+        var naiveCenter = Cartesian3.midpoint(minBoxPt, maxBoxPt, fromPointsNaiveCenterScratch);
 
         // Begin 2nd pass to find naive radius and modify the ritter sphere.
         var naiveRadius = 0;
@@ -15643,7 +15667,7 @@ define('Core/BoundingSphere',[
         maxBoxPt.y = yMax.y;
         maxBoxPt.z = zMax.z;
 
-        var naiveCenter = Cartesian3.multiplyByScalar(Cartesian3.add(minBoxPt, maxBoxPt, fromPointsScratch), 0.5, fromPointsNaiveCenterScratch);
+        var naiveCenter = Cartesian3.midpoint(minBoxPt, maxBoxPt, fromPointsNaiveCenterScratch);
 
         // Begin 2nd pass to find naive radius and modify the ritter sphere.
         var naiveRadius = 0;
@@ -15801,7 +15825,7 @@ define('Core/BoundingSphere',[
         maxBoxPt.y = yMax.y;
         maxBoxPt.z = zMax.z;
 
-        var naiveCenter = Cartesian3.multiplyByScalar(Cartesian3.add(minBoxPt, maxBoxPt, fromPointsScratch), 0.5, fromPointsNaiveCenterScratch);
+        var naiveCenter = Cartesian3.midpoint(minBoxPt, maxBoxPt, fromPointsNaiveCenterScratch);
 
         // Begin 2nd pass to find naive radius and modify the ritter sphere.
         var naiveRadius = 0;
@@ -15863,9 +15887,7 @@ define('Core/BoundingSphere',[
             result = new BoundingSphere();
         }
 
-        var center = result.center;
-        Cartesian3.add(corner, oppositeCorner, center);
-        Cartesian3.multiplyByScalar(center, 0.5, center);
+        var center = Cartesian3.midpoint(corner, oppositeCorner, result.center);
         result.radius = Cartesian3.distance(center, oppositeCorner);
         return result;
     };
@@ -17517,9 +17539,7 @@ define('Core/ApproximateTerrainHeights',[
             ellipsoid.cartographicToCartesian(Rectangle.southwest(rectangle, scratchDiagonalCartographic),
                 scratchDiagonalCartesianSW);
 
-            Cartesian3.subtract(scratchDiagonalCartesianSW, scratchDiagonalCartesianNE, scratchCenterCartesian);
-            Cartesian3.add(scratchDiagonalCartesianNE,
-                Cartesian3.multiplyByScalar(scratchCenterCartesian, 0.5, scratchCenterCartesian), scratchCenterCartesian);
+            Cartesian3.midpoint(scratchDiagonalCartesianSW, scratchDiagonalCartesianNE, scratchCenterCartesian);
             var surfacePosition = ellipsoid.scaleToGeodeticSurface(scratchCenterCartesian, scratchSurfaceCartesian);
             if (defined(surfacePosition)) {
                 var distance = Cartesian3.distance(scratchCenterCartesian, surfacePosition);
@@ -27303,9 +27323,9 @@ define('Core/GroundPolylineGeometry',[
                 positions : positions,
                 granularity : granularity,
                 loop : loop,
-                ellipsoid : ellipsoid,
-                projection : new PROJECTIONS[projectionIndex](ellipsoid)
+                ellipsoid : ellipsoid
             });
+            geometry._projectionIndex = projectionIndex;
             geometry._scene3DOnly = scene3DOnly;
             return geometry;
         }
@@ -33136,6 +33156,7 @@ define('Renderer/AutomaticUniforms',[
          * and <code>w</code> components, respectively.
          *
          * @alias czm_viewport
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -33169,6 +33190,7 @@ define('Renderer/AutomaticUniforms',[
          * from window coordinates to clip coordinates, and is often used to assign to <code>gl_Position</code>.
          *
          * @alias czm_viewportOrthographic
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -33207,6 +33229,7 @@ define('Renderer/AutomaticUniforms',[
          * from window coordinates to clip coordinates, and is often used to assign to <code>gl_Position</code>.
          *
          * @alias czm_viewportTransformation
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -33240,6 +33263,7 @@ define('Renderer/AutomaticUniforms',[
          * @private
          *
          * @alias czm_globeDepthTexture
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -33263,6 +33287,7 @@ define('Renderer/AutomaticUniforms',[
          * transforms model coordinates to world coordinates.
          *
          * @alias czm_model
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -33290,6 +33315,7 @@ define('Renderer/AutomaticUniforms',[
          * transforms world coordinates to model coordinates.
          *
          * @alias czm_inverseModel
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -33316,6 +33342,7 @@ define('Renderer/AutomaticUniforms',[
          * transforms world coordinates to eye coordinates.
          *
          * @alias czm_view
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -33348,6 +33375,7 @@ define('Renderer/AutomaticUniforms',[
          * 2D and Columbus View in the same way that 3D is lit.
          *
          * @alias czm_view3D
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -33373,6 +33401,7 @@ define('Renderer/AutomaticUniforms',[
          * transforms vectors in world coordinates to eye coordinates.
          *
          * @alias czm_viewRotation
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -33403,6 +33432,7 @@ define('Renderer/AutomaticUniforms',[
          * 2D and Columbus View in the same way that 3D is lit.
          *
          * @alias czm_viewRotation3D
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -33428,6 +33458,7 @@ define('Renderer/AutomaticUniforms',[
          * transforms from eye coordinates to world coordinates.
          *
          * @alias czm_inverseView
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -33457,6 +33488,7 @@ define('Renderer/AutomaticUniforms',[
          * 2D and Columbus View in the same way that 3D is lit.
          *
          * @alias czm_inverseView3D
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -33482,6 +33514,7 @@ define('Renderer/AutomaticUniforms',[
          * transforms vectors from eye coordinates to world coordinates.
          *
          * @alias czm_inverseViewRotation
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -33512,6 +33545,7 @@ define('Renderer/AutomaticUniforms',[
          * 2D and Columbus View in the same way that 3D is lit.
          *
          * @alias czm_inverseViewRotation3D
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -33538,6 +33572,7 @@ define('Renderer/AutomaticUniforms',[
          * coordinate system for a vertex shader's <code>gl_Position</code> output.
          *
          * @alias czm_projection
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -33566,6 +33601,7 @@ define('Renderer/AutomaticUniforms',[
          * coordinate system for a vertex shader's <code>gl_Position</code> output.
          *
          * @alias czm_inverseProjection
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -33594,6 +33630,7 @@ define('Renderer/AutomaticUniforms',[
          * are not clipped by the far plane.
          *
          * @alias czm_infiniteProjection
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -33623,6 +33660,7 @@ define('Renderer/AutomaticUniforms',[
          * normals should be transformed using {@link czm_normal}.
          *
          * @alias czm_modelView
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -33660,6 +33698,7 @@ define('Renderer/AutomaticUniforms',[
          * normals should be transformed using {@link czm_normal3D}.
          *
          * @alias czm_modelView3D
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -33689,6 +33728,7 @@ define('Renderer/AutomaticUniforms',[
          * in conjunction with {@link czm_translateRelativeToEye}.
          *
          * @alias czm_modelViewRelativeToEye
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -33722,6 +33762,7 @@ define('Renderer/AutomaticUniforms',[
          * transforms from eye coordinates to model coordinates.
          *
          * @alias czm_inverseModelView
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -33750,6 +33791,7 @@ define('Renderer/AutomaticUniforms',[
          * 2D and Columbus View in the same way that 3D is lit.
          *
          * @alias czm_inverseModelView3D
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -33777,6 +33819,7 @@ define('Renderer/AutomaticUniforms',[
          * coordinate system for a vertex shader's <code>gl_Position</code> output.
          *
          * @alias czm_viewProjection
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -33809,6 +33852,7 @@ define('Renderer/AutomaticUniforms',[
          * coordinate system for a vertex shader's <code>gl_Position</code> output.
          *
          * @alias czm_inverseViewProjection
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -33835,6 +33879,7 @@ define('Renderer/AutomaticUniforms',[
          * coordinate system for a vertex shader's <code>gl_Position</code> output.
          *
          * @alias czm_modelViewProjection
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -33870,6 +33915,7 @@ define('Renderer/AutomaticUniforms',[
          * coordinate system for a vertex shader's <code>gl_Position</code> output.
          *
          * @alias czm_inverseModelViewProjection
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -33897,6 +33943,7 @@ define('Renderer/AutomaticUniforms',[
          * conjunction with {@link czm_translateRelativeToEye}.
          *
          * @alias czm_modelViewProjectionRelativeToEye
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -33933,6 +33980,7 @@ define('Renderer/AutomaticUniforms',[
          * proxy geometry to ensure that triangles are not clipped by the far plane.
          *
          * @alias czm_modelViewInfiniteProjection
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -33963,6 +34011,7 @@ define('Renderer/AutomaticUniforms',[
          * An automatic GLSL uniform that indicates if the current camera is orthographic in 3D.
          *
          * @alias czm_orthographicIn3D
+         * @namespace
          * @glslUniform
          * @see UniformState#orthographicIn3D
          */
@@ -33982,6 +34031,7 @@ define('Renderer/AutomaticUniforms',[
          * normals should be transformed using <code>czm_normal</code>.
          *
          * @alias czm_normal
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -34015,6 +34065,7 @@ define('Renderer/AutomaticUniforms',[
          * normals should be transformed using <code>czm_normal3D</code>.
          *
          * @alias czm_normal3D
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -34041,6 +34092,7 @@ define('Renderer/AutomaticUniforms',[
          * the opposite of the transform provided by {@link czm_normal}.
          *
          * @alias czm_inverseNormal
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -34073,6 +34125,7 @@ define('Renderer/AutomaticUniforms',[
          * 2D and Columbus View in the same way that 3D is lit.
          *
          * @alias czm_inverseNormal3D
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -34098,6 +34151,7 @@ define('Renderer/AutomaticUniforms',[
          *  of the eye (camera) in the 2D scene in meters.
          *
          * @alias czm_eyeHeight2D
+         * @namespace
          * @glslUniform
          *
          * @see UniformState#eyeHeight2D
@@ -34116,6 +34170,7 @@ define('Renderer/AutomaticUniforms',[
          * frustum used for multi-frustum rendering.
          *
          * @alias czm_entireFrustum
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -34142,6 +34197,7 @@ define('Renderer/AutomaticUniforms',[
          * frustum used for multi-frustum rendering.
          *
          * @alias czm_currentFrustum
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -34167,6 +34223,7 @@ define('Renderer/AutomaticUniforms',[
          * the x, y, z, and w components, respectively.
          *
          * @alias czm_frustumPlanes
+         * @namespace
          * @glslUniform
          */
         czm_frustumPlanes : new AutomaticUniform({
@@ -34181,6 +34238,7 @@ define('Renderer/AutomaticUniforms',[
          * The log2 of the current frustums far plane. Used for computing the log depth.
          *
          * @alias czm_log2FarDistance
+         * @namespace
          * @glslUniform
          *
          * @private
@@ -34198,6 +34256,7 @@ define('Renderer/AutomaticUniforms',[
          * This is used when reversing log depth computations.
          *
          * @alias czm_log2FarPlusOne
+         * @namespace
          * @glslUniform
          */
         czm_log2FarPlusOne : new AutomaticUniform({
@@ -34213,6 +34272,7 @@ define('Renderer/AutomaticUniforms',[
          * This is used when writing log depth in the fragment shader.
          *
          * @alias czm_log2NearDistance
+         * @namespace
          * @glslUniform
          */
         czm_log2NearDistance : new AutomaticUniform({
@@ -34227,6 +34287,7 @@ define('Renderer/AutomaticUniforms',[
          * An automatic GLSL uniform representing the sun position in world coordinates.
          *
          * @alias czm_sunPositionWC
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -34249,6 +34310,7 @@ define('Renderer/AutomaticUniforms',[
          * An automatic GLSL uniform representing the sun position in Columbus view world coordinates.
          *
          * @alias czm_sunPositionColumbusView
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -34271,6 +34333,7 @@ define('Renderer/AutomaticUniforms',[
          * This is commonly used for directional lighting computations.
          *
          * @alias czm_sunDirectionEC
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -34297,6 +34360,7 @@ define('Renderer/AutomaticUniforms',[
          * This is commonly used for directional lighting computations.
          *
          * @alias czm_sunDirectionWC
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -34320,6 +34384,7 @@ define('Renderer/AutomaticUniforms',[
          * This is commonly used for directional lighting computations.
          *
          * @alias czm_moonDirectionEC
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -34346,6 +34411,7 @@ define('Renderer/AutomaticUniforms',[
          * as described in {@link http://blogs.agi.com/insight3d/index.php/2008/09/03/precisions-precisions/|Precisions, Precisions}.
          *
          * @alias czm_encodedCameraPositionMCHigh
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -34370,6 +34436,7 @@ define('Renderer/AutomaticUniforms',[
          * as described in {@link http://blogs.agi.com/insight3d/index.php/2008/09/03/precisions-precisions/|Precisions, Precisions}.
          *
          * @alias czm_encodedCameraPositionMCLow
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -34392,6 +34459,7 @@ define('Renderer/AutomaticUniforms',[
          * An automatic GLSL uniform representing the position of the viewer (camera) in world coordinates.
          *
          * @alias czm_viewerPositionWC
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -34411,6 +34479,7 @@ define('Renderer/AutomaticUniforms',[
          * every frame.
          *
          * @alias czm_frameNumber
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -34430,6 +34499,7 @@ define('Renderer/AutomaticUniforms',[
          * 2D/Columbus View and 3D, with 0.0 being 2D or Columbus View and 1.0 being 3D.
          *
          * @alias czm_morphTime
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -34452,6 +34522,7 @@ define('Renderer/AutomaticUniforms',[
          * as a float.
          *
          * @alias czm_sceneMode
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -34481,6 +34552,7 @@ define('Renderer/AutomaticUniforms',[
          * An automatic GLSL uniform representing the current rendering pass.
          *
          * @alias czm_pass
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -34505,6 +34577,7 @@ define('Renderer/AutomaticUniforms',[
          * An automatic GLSL uniform representing the current scene background color.
          *
          * @alias czm_backgroundColor
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -34534,6 +34607,7 @@ define('Renderer/AutomaticUniforms',[
          * An automatic GLSL uniform containing the BRDF look up texture used for image-based lighting computations.
          *
          * @alias czm_brdfLut
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -34557,6 +34631,7 @@ define('Renderer/AutomaticUniforms',[
          * An automatic GLSL uniform containing the environment map used within the scene.
          *
          * @alias czm_environmentMap
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -34580,6 +34655,7 @@ define('Renderer/AutomaticUniforms',[
          * from True Equator Mean Equinox (TEME) axes to the pseudo-fixed axes at the current scene time.
          *
          * @alias czm_temeToPseudoFixed
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -34604,6 +34680,7 @@ define('Renderer/AutomaticUniforms',[
          * An automatic GLSL uniform representing the ratio of canvas coordinate space to canvas pixel space.
          *
          * @alias czm_resolutionScale
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -34621,6 +34698,7 @@ define('Renderer/AutomaticUniforms',[
          * An automatic GLSL uniform scalar used to mix a color with the fog color based on the distance to the camera.
          *
          * @alias czm_fogDensity
+         * @namespace
          * @glslUniform
          *
          * @see czm_fog
@@ -34638,6 +34716,7 @@ define('Renderer/AutomaticUniforms',[
          * This will be in pixel coordinates relative to the canvas.
          *
          * @alias czm_imagerySplitPosition
+         * @namespace
          * @glslUniform
          *
          * @example
@@ -34656,6 +34735,7 @@ define('Renderer/AutomaticUniforms',[
          * An automatic GLSL uniform scalar representing the geometric tolerance per meter
          *
          * @alias czm_geometricToleranceOverMeter
+         * @namespace
          * @glslUniform
          */
         czm_geometricToleranceOverMeter : new AutomaticUniform({
@@ -34672,6 +34752,7 @@ define('Renderer/AutomaticUniforms',[
          * the depth test should never be applied.
          *
          * @alias czm_minimumDisableDepthTestDistance
+         * @namespace
          * @glslUniform
          */
         czm_minimumDisableDepthTestDistance : new AutomaticUniform({
@@ -34686,6 +34767,7 @@ define('Renderer/AutomaticUniforms',[
          * An automatic GLSL uniform that will be the highlight color of unclassified 3D Tiles.
          *
          * @alias czm_invertClassificationColor
+         * @namespace
          * @glslUniform
          */
         czm_invertClassificationColor : new AutomaticUniform({
@@ -34707,6 +34789,7 @@ define('Renderer/createUniform',[
         '../Core/Color',
         '../Core/defined',
         '../Core/DeveloperError',
+        '../Core/FeatureDetection',
         '../Core/Matrix2',
         '../Core/Matrix3',
         '../Core/Matrix4',
@@ -34718,11 +34801,18 @@ define('Renderer/createUniform',[
         Color,
         defined,
         DeveloperError,
+        FeatureDetection,
         Matrix2,
         Matrix3,
         Matrix4,
         RuntimeError) {
     'use strict';
+
+    // Bail out if the browser doesn't support typed arrays, to prevent the setup function
+    // from failing, since we won't be able to create a WebGL context anyway.
+    if (!FeatureDetection.supportsTypedArrays()) {
+        return {};
+    }
 
     /**
      * @private
@@ -34835,7 +34925,7 @@ define('Renderer/createUniform',[
                 this._gl.uniform3f(this._location, v.x, v.y, v.z);
             }
         } else {
-                        throw new DeveloperError('Invalid vec3 value for uniform "' + this._activethis.name + '".');
+                        throw new DeveloperError('Invalid vec3 value for uniform "' + this.name + '".');
                     }
     };
 
@@ -34868,7 +34958,7 @@ define('Renderer/createUniform',[
                 this._gl.uniform4f(this._location, v.x, v.y, v.z, v.w);
             }
         } else {
-                        throw new DeveloperError('Invalid vec4 value for uniform "' + this._activethis.name + '".');
+                        throw new DeveloperError('Invalid vec4 value for uniform "' + this.name + '".');
                     }
     };
 
@@ -34995,6 +35085,8 @@ define('Renderer/createUniform',[
 
     ///////////////////////////////////////////////////////////////////////////
 
+    var scratchUniformArray = new Float32Array(4);
+
     function UniformMat2(gl, activeUniform, uniformName, location) {
         /**
          * @readonly
@@ -35002,7 +35094,7 @@ define('Renderer/createUniform',[
         this.name = uniformName;
 
         this.value = undefined;
-        this._value = new Float32Array(4);
+        this._value = new Matrix2();
 
         this._gl = gl;
         this._location = location;
@@ -35010,12 +35102,16 @@ define('Renderer/createUniform',[
 
     UniformMat2.prototype.set = function() {
         if (!Matrix2.equalsArray(this.value, this._value, 0)) {
-            Matrix2.toArray(this.value, this._value);
-            this._gl.uniformMatrix2fv(this._location, false, this._value);
+            Matrix2.clone(this.value, this._value);
+
+            var array = Matrix2.toArray(this.value, scratchUniformArray);
+            this._gl.uniformMatrix2fv(this._location, false, array);
         }
     };
 
     ///////////////////////////////////////////////////////////////////////////
+
+    var scratchMat3Array = new Float32Array(9);
 
     function UniformMat3(gl, activeUniform, uniformName, location) {
         /**
@@ -35024,7 +35120,7 @@ define('Renderer/createUniform',[
         this.name = uniformName;
 
         this.value = undefined;
-        this._value = new Float32Array(9);
+        this._value = new Matrix3();
 
         this._gl = gl;
         this._location = location;
@@ -35032,12 +35128,16 @@ define('Renderer/createUniform',[
 
     UniformMat3.prototype.set = function() {
         if (!Matrix3.equalsArray(this.value, this._value, 0)) {
-            Matrix3.toArray(this.value, this._value);
-            this._gl.uniformMatrix3fv(this._location, false, this._value);
+            Matrix3.clone(this.value, this._value);
+
+            var array = Matrix3.toArray(this.value, scratchMat3Array);
+            this._gl.uniformMatrix3fv(this._location, false, array);
         }
     };
 
     ///////////////////////////////////////////////////////////////////////////
+
+    var scratchMat4Array = new Float32Array(16);
 
     function UniformMat4(gl, activeUniform, uniformName, location) {
         /**
@@ -35046,7 +35146,7 @@ define('Renderer/createUniform',[
         this.name = uniformName;
 
         this.value = undefined;
-        this._value = new Float32Array(16);
+        this._value = new Matrix4();
 
         this._gl = gl;
         this._location = location;
@@ -35054,8 +35154,10 @@ define('Renderer/createUniform',[
 
     UniformMat4.prototype.set = function() {
         if (!Matrix4.equalsArray(this.value, this._value, 0)) {
-            Matrix4.toArray(this.value, this._value);
-            this._gl.uniformMatrix4fv(this._location, false, this._value);
+            Matrix4.clone(this.value, this._value);
+
+            var array = Matrix4.toArray(this.value, scratchMat4Array);
+            this._gl.uniformMatrix4fv(this._location, false, array);
         }
     };
 
@@ -37904,13 +38006,18 @@ define('Shaders/Builtin/Functions/vertexLogDepth',[],function() {
     'use strict';
     return "#ifdef LOG_DEPTH\n\
 varying float v_logZ;\n\
+#ifdef SHADOW_MAP\n\
 varying vec3 v_logPositionEC;\n\
+#endif\n\
 #endif\n\
 void czm_updatePositionDepth() {\n\
 #if defined(LOG_DEPTH) && !defined(DISABLE_GL_POSITION_LOG_DEPTH)\n\
-v_logPositionEC = (czm_inverseProjection * gl_Position).xyz;\n\
+vec3 logPositionEC = (czm_inverseProjection * gl_Position).xyz;\n\
+#ifdef SHADOW_MAP\n\
+v_logPositionEC = logPositionEC;\n\
+#endif\n\
 #ifdef ENABLE_GL_POSITION_LOG_DEPTH_AT_HEIGHT\n\
-if (length(v_logPositionEC) < 2.0e6)\n\
+if (length(logPositionEC) < 2.0e6)\n\
 {\n\
 return;\n\
 }\n\
@@ -47688,6 +47795,7 @@ define('Core/Tipsify',[
     /**
      * Optimizes triangles for the post-vertex shader cache.
      *
+     * @param {Object} options Object with the following properties:
      * @param {Number[]} options.indices Lists triads of numbers corresponding to the indices of the vertices
      *                        in the vertex buffer that define the geometry's triangles.
      * @param {Number} [options.maximumIndex] The maximum value of the elements in <code>args.indices</code>.

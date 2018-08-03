@@ -2,26 +2,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <artifactId>cesiumjs4gwt</artifactId>
         <groupId>org.cesiumjs</groupId>
         <version>1.47.17</version>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
 
+    <name>CesiumJS GWT Showcase</name>
     <artifactId>cesiumjs4gwt-showcase</artifactId>
     <packaging>war</packaging>
-    <name>CesiumJS GWT Showcase</name>
-
-    <properties>
-        <!-- GWT -->
-        <gwt.version>2.8.2</gwt.version>
-        <gwt.style>OBF</gwt.style>
-
-        <!-- Maven -->
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
-    </properties>
 
     <build>
         <outputDirectory>${webappDirectory}/WEB-INF/classes</outputDirectory>
