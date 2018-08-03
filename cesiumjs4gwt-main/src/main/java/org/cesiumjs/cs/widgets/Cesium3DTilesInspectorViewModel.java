@@ -175,6 +175,12 @@ public class Cesium3DTilesInspectorViewModel {
     @JsProperty(name = "pickStatisticsText")
     public native String pickStatisticsText();
     /**
+     * Gets or sets the flag to enable point cloud shading. This property is observable.
+     * Default: false
+     */
+    @JsProperty
+    public boolean pointCloudShading;
+    /**
      * Gets the names of the properties in the tileset. This property is observable.
      */
     @JsProperty(name = "properties")

@@ -229,6 +229,11 @@ public class Cesium3DTileset {
     @JsProperty
     public Matrix4 modelMatrix;
     /**
+     * Options for controlling point size based on geometric error and eye dome lighting.
+     */
+    @JsProperty
+    public PointCloudShading pointCloudShading;
+    /**
      * Gets the tileset's properties dictionary object, which contains metadata about per-feature properties.
      * See the properties schema in the 3D Tiles spec for the full set of properties.
      * @see Cesium3DTileFeature#getProperty

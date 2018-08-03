@@ -18,9 +18,11 @@ package org.cesiumjs.cs.scene.options;
 
 import jsinterop.annotations.*;
 import org.cesiumjs.cs.collections.ClippingPlaneCollection;
+import org.cesiumjs.cs.core.Ellipsoid;
 import org.cesiumjs.cs.core.Matrix4;
 import org.cesiumjs.cs.core.Resource;
 import org.cesiumjs.cs.promise.Promise;
+import org.cesiumjs.cs.scene.PointCloudShading;
 import org.cesiumjs.cs.scene.enums.ClassificationType;
 
 /**
@@ -145,6 +147,17 @@ public class Cesium3DTilesetOptions {
      */
     @JsProperty
     public ClassificationType classificationType;
+    /**
+     * The ellipsoid determining the size and shape of the globe.
+     * Default: {@link Ellipsoid#WGS84()}
+     */
+    @JsProperty
+    public Ellipsoid ellipsoid;
+    /**
+     * Options for constructing a PointCloudShading object to control point attenuation based on geometric error and lighting.
+     */
+    @JsProperty
+    public PointCloudShading pointCloudShading;
     /**
      * For debugging only. Determines if only the tiles from last frame should be used for rendering.
      * Defaule: false;
