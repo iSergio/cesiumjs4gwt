@@ -102,5 +102,7 @@ public class InjectorModule extends AbstractGinModule {
         bind(DrawingOnTerrain.class).asEagerSingleton();
         bind(GeometryHeightReference.class).asEagerSingleton();
         bind(MultipleSyncedViews.class).asEagerSingleton();
+
+        bind(TimeDynamicPointCloud.class).asEagerSingleton();
     }
 }
