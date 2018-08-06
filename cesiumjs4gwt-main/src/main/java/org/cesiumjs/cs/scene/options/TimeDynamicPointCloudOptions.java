@@ -16,10 +16,7 @@
 
 package org.cesiumjs.cs.scene.options;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.collections.ClippingPlaneCollection;
 import org.cesiumjs.cs.collections.TimeIntervalCollection;
 import org.cesiumjs.cs.core.Clock;
@@ -96,6 +93,7 @@ public class TimeDynamicPointCloudOptions {
      *                  and an optional transform.
      * @return options instance
      */
+    @JsOverlay
     public static TimeDynamicPointCloudOptions create(Clock clock, TimeIntervalCollection intervals) {
         TimeDynamicPointCloudOptions options = new TimeDynamicPointCloudOptions();
         options.clock = clock;

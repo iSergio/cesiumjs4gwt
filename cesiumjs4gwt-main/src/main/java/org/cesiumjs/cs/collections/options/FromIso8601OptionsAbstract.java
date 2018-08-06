@@ -20,12 +20,14 @@ import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.TimeInterval;
+import org.cesiumjs.cs.js.JsObject;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-public abstract class FromIso8601OptionsAbstract {
+public abstract class FromIso8601OptionsAbstract<T> {
     /**
      * if start time is included in the interval, false otherwise.
      * Default: true
@@ -55,10 +57,10 @@ public abstract class FromIso8601OptionsAbstract {
      * If unspecified, the data will be the index in the collection.
      */
     @JsProperty
-    public DataCallback dataCallback;
+    public DataCallback<T> dataCallback;
 
     @JsFunction
-    public interface DataCallback {
-        void function();
+    public interface DataCallback<T> {
+        T function(TimeInterval interval, int index);
     }
 }
