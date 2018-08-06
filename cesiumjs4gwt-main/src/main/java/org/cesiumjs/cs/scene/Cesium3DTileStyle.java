@@ -17,8 +17,10 @@
 package org.cesiumjs.cs.scene;
 
 import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.promise.Promise;
 
 /**
@@ -47,6 +49,9 @@ public class Cesium3DTileStyle {
      */
     @JsProperty
     public StyleExpression pointSize;
+
+    @JsProperty(name = "pointSize")
+    public double pointSizeDouble;
     /**
      * When true, the style is ready and its expressions can be evaluated. When a style is constructed with an object, as opposed to a url, this is true immediately.
      * Default: false
