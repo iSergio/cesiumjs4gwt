@@ -86,9 +86,22 @@ public class PostProcessStageLibrary {
      * haloWidth is a scalar representing the width of the halo from the ghost dispersal. The default value is 0.4.
      * earthRadius is the maximum radius of the earth. The default value is Ellipsoid.WGS84.maximumRadius.
      * @return A post-process stage for applying a lens flare effect.
+     *
+     * @deprecated PostProcessStageLibrary.createLensFlarStage is deprecated due to misspelling and will be removed in Cesium 1.49.
+     * Use PostProcessStageLibrary.createLensFlareStage instead.
      */
+    @Deprecated
     @JsMethod
     public static native PostProcessStage createLensFlarStage();
+
+    /**
+     * Creates a post-process stage that applies an effect simulating light flaring a camera lens.
+     * This stage has the following uniforms: dirtTexture, starTexture, intensity, distortion, ghostDispersal,
+     * haloWidth, and earthRadius.
+     * @return A post-process stage for applying a lens flare effect.
+     */
+    @JsMethod
+    public static native PostProcessStage createLensFlareStage();
 
     /**
      * Creates a post-process stage that adds a night vision effect to the input texture.
