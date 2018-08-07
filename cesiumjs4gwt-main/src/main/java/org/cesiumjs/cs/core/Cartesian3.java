@@ -612,6 +612,16 @@ public class Cartesian3 implements Packable {
     public static native double maximumComponent(Cartesian3 cartesian);
 
     /**
+     * Computes the midpoint between the right and left Cartesian.
+     * @param left The first Cartesian.
+     * @param right The second Cartesian.
+     * @param result The object onto which to store the result.
+     * @return The midpoint.
+     */
+    @JsMethod
+    public static native Cartesian3 midpoint(Cartesian3 left, Cartesian3 right, Cartesian3 result);
+
+    /**
      * Compares two Cartesians and computes a Cartesian which contains the minimum components of the supplied Cartesians.
      * @param first A cartesian to compare.
      * @param second A cartesian to compare.
