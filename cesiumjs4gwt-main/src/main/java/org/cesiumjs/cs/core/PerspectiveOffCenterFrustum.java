@@ -118,6 +118,27 @@ public class PerspectiveOffCenterFrustum implements Frustum {
     @JsMethod
     public native boolean equals(PerspectiveOffCenterFrustum other);
 
+    /**
+     * Compares the provided PerspectiveOffCenterFrustum componentwise and returns true if they pass an absolute or
+     * relative tolerance test, false otherwise.
+     * @param other The right hand side PerspectiveOffCenterFrustum.
+     * @param relativeEpsilon The relative epsilon tolerance to use for equality testing.
+     * @return true if this and other are within the provided epsilon, false otherwise.
+     */
+    @JsMethod
+    public native boolean equalsEpsilon(PerspectiveOffCenterFrustum other, double relativeEpsilon);
+
+    /**
+     * Compares the provided PerspectiveOffCenterFrustum componentwise and returns true if they pass an absolute or
+     * relative tolerance test, false otherwise.
+     * @param other The right hand side PerspectiveOffCenterFrustum.
+     * @param relativeEpsilon The relative epsilon tolerance to use for equality testing.
+     * @param absoluteEpsilon The absolute epsilon tolerance to use for equality testing.
+     * @return true if this and other are within the provided epsilon, false otherwise.
+     */
+    @JsMethod
+    public native boolean equalsEpsilon(PerspectiveOffCenterFrustum other, double relativeEpsilon, double absoluteEpsilon);
+
     //TODO: Example
     /**
      * Returns the pixel's width and height in meters.

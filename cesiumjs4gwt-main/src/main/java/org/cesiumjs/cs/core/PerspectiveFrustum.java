@@ -143,6 +143,27 @@ public class PerspectiveFrustum implements Frustum {
     public native boolean equals(PerspectiveFrustum other);
 
     /**
+     * Compares the provided PerspectiveFrustum componentwise and returns true if they pass an absolute or
+     * relative tolerance test, false otherwise.
+     * @param other The right hand side PerspectiveFrustum.
+     * @param relativeEpsilon The relative epsilon tolerance to use for equality testing.
+     * @return true if this and other are within the provided epsilon, false otherwise.
+     */
+    @JsMethod
+    public native boolean equalsEpsilon(PerspectiveFrustum other, double relativeEpsilon);
+
+    /**
+     * Compares the provided PerspectiveFrustum componentwise and returns true if they pass an absolute or
+     * relative tolerance test, false otherwise.
+     * @param other The right hand side PerspectiveFrustum.
+     * @param relativeEpsilon The relative epsilon tolerance to use for equality testing.
+     * @param absoluteEpsilon The absolute epsilon tolerance to use for equality testing.
+     * @return true if this and other are within the provided epsilon, false otherwise.
+     */
+    @JsMethod
+    public native boolean equalsEpsilon(PerspectiveFrustum other, double relativeEpsilon, double absoluteEpsilon);
+
+    /**
      * Returns the pixel's width and height in meters.
      * @param drawingBufferWidth The width of the drawing buffer.
      * @param drawingBufferHeight The height of the drawing buffer.
