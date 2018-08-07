@@ -62,7 +62,7 @@ public class TimeDynamicPointCloud extends AbstractExample {
                 "2018-07-19T15:18:02.5Z"
         };
 
-        String[] uris = new String[]{
+        final String[] uris = new String[]{
                 GWT.getModuleBaseURL() + "SampleData/Cesium3DTiles/PointCloud/PointCloudTimeDynamic/0.pnts",
                 GWT.getModuleBaseURL() + "SampleData/Cesium3DTiles/PointCloud/PointCloudTimeDynamic/1.pnts",
                 GWT.getModuleBaseURL() + "SampleData/Cesium3DTiles/PointCloud/PointCloudTimeDynamic/2.pnts",
