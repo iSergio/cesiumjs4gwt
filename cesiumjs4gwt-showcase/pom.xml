@@ -7,7 +7,7 @@
     <parent>
         <artifactId>cesiumjs4gwt</artifactId>
         <groupId>org.cesiumjs</groupId>
-        <version>1.47.17</version>
+        <version>1.48.20</version>
     </parent>
 
     <name>CesiumJS GWT Showcase</name>
