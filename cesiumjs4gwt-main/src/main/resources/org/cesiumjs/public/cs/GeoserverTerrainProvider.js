@@ -252,6 +252,14 @@
         }
 
         var url = xml.querySelector("Request>GetMap OnlineResource").getAttribute("xlink:href");
+        // By iSerge. If work redirect from HTTPS to HTTP we need replace HTTP to HTTPS or we have error by CORS
+        if (window.location.protocol === 'https:' && url.indexOf('https:') < 0) {
+            url = url.replace('http:', 'https:');
+            var index = url.indexOf(':80');
+            if (index > -1) {
+                url = url.replace(':80', '');
+            }
+        }
         var index = url.indexOf("?");
         if (index > -1) {
             url = url.substring(0, index);
@@ -702,7 +710,7 @@
             //format
             var nodeFormats = [].slice.call(layerNode.querySelectorAll("Format"));
             for (var l = 0; l < OGCHelper.FormatImage.length &&
-            !Cesium.defined(formatImage); l++) {
+                !Cesium.defined(formatImage); l++) {
                 var validFormats = nodeFormats.filter(function(elt) {
                     return elt.textContent === OGCHelper.FormatImage[l].format;
                 });
