@@ -167,14 +167,6 @@ public class Scene {
     @JsProperty
     public Fog fog;
     /**
-     * When true, enables Fast Approximate Anti-aliasing even when order independent translucency is unsupported.
-     * Default:  true
-     * @deprecated will be removed in Cesium 1.47. Use Scene.postProcessStages.fxaa.enabled.
-     */
-    @Deprecated
-    @JsProperty
-    public boolean fxaa;
-    /**
      * Gets or sets the depth-test ellipsoid.
      */
     @JsProperty
