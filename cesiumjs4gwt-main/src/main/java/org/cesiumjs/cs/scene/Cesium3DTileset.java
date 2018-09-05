@@ -254,6 +254,11 @@ public class Cesium3DTileset {
     @JsProperty(name = "readyPromise")
     public native Promise<Cesium3DTileset, Void> readyPromise();
     /**
+     * The root tile.
+     */
+    @JsProperty
+    public Cesium3DTile root;
+    /**
      * Determines whether the tileset casts or receives shadows from each light source.
      * Default: {@link org.cesiumjs.cs.scene.enums.ShadowMode#ENABLED()}
      */
