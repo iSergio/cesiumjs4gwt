@@ -105,4 +105,17 @@ public class GeocoderViewModel {
      */
     @JsMethod
     public native void destroy();
+
+    /**
+     * A function that handles the result of a successful geocode.
+     */
+    @JsFunction
+    public interface DestinationFoundFunction {
+        /**
+         * A function that handles the result of a successful geocode.
+         * @param viewModel The view model.
+         * @param destination {@link org.cesiumjs.cs.core.Cartesian3} | {@link org.cesiumjs.cs.core.Rectangle} The destination result of the geocode.
+         */
+        void function(GeocoderViewModel viewModel, Object destination);
+    }
 }

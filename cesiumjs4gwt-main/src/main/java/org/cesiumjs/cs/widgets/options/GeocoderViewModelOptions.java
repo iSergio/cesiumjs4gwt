@@ -19,6 +19,7 @@ package org.cesiumjs.cs.widgets.options;
 import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.GeocoderService;
 import org.cesiumjs.cs.scene.Scene;
+import org.cesiumjs.cs.widgets.GeocoderViewModel;
 
 /**
  * Options for {@link org.cesiumjs.cs.widgets.GeocoderViewModel}
@@ -44,6 +45,11 @@ public class GeocoderViewModelOptions {
      */
     @JsProperty
     public double flightDuration;
+    /**
+     * A callback function that is called after a successful geocode. If not supplied, the default behavior is to fly the camera to the result destination.
+     */
+    @JsProperty
+    public GeocoderViewModel.DestinationFoundFunction destinationFound;
 
     @JsConstructor
     private GeocoderViewModelOptions() {}
