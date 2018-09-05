@@ -62,6 +62,13 @@ public class Cesium3DTile {
      */
     @JsProperty
     public double expireDuration;
+
+    /**
+     * Returns the extras property in the tileset JSON for this tile, which contains application specific metadata.
+     * Returns undefined if extras does not exist.
+     */
+    @JsProperty
+    public native Object extras();
     /**
      * The error, in meters, introduced if this tile is rendered and its children are not. This is used
      * to compute screen space error, i.e., the error measured in pixels.

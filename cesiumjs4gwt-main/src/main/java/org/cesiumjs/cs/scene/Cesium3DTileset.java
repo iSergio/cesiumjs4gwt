@@ -87,6 +87,12 @@ public class Cesium3DTileset {
      */
     public Ellipsoid ellipsoid;
     /**
+     * Returns the extras property at the top-level of the tileset JSON, which contains application specific metadata.
+     * Returns undefined if extras does not exist.
+     */
+    @JsProperty(name = "extras")
+    public native Object extras();
+    /**
      * The {@link ClippingPlaneCollection} used to selectively disable rendering the tileset.
      * Clipping planes are not currently supported in Internet Explorer.
      */
@@ -256,8 +262,8 @@ public class Cesium3DTileset {
     /**
      * The root tile.
      */
-    @JsProperty
-    public Cesium3DTile root;
+    @JsProperty(name = "root")
+    public native Cesium3DTile root();
     /**
      * Determines whether the tileset casts or receives shadows from each light source.
      * Default: {@link org.cesiumjs.cs.scene.enums.ShadowMode#ENABLED()}
