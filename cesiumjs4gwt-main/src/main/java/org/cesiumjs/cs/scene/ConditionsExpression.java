@@ -67,12 +67,11 @@ public class ConditionsExpression implements StyleExpression {
      * RegExp object will be returned. If the result is a Cartesian2, Cartesian3, or Cartesian4, a Cartesian2,
      * Cartesian3, or Cartesian4 object will be returned. If the result argument is a Color, the Cartesian4 value is
      * converted to a Color and then returned.
-     * @param frameState The frame state.
      * @param feature The feature whose properties may be used as variables in the expression.
      * @return The result of evaluating the expression.
      */
     @JsMethod
-    public native Object evaluate(Object frameState, Cesium3DTileFeature feature);
+    public native Object evaluate(Cesium3DTileFeature feature);
 
     /**
      * Evaluates the result of an expression, optionally using the provided feature's properties.
@@ -81,32 +80,29 @@ public class ConditionsExpression implements StyleExpression {
      * RegExp object will be returned. If the result is a Cartesian2, Cartesian3, or Cartesian4, a Cartesian2,
      * Cartesian3, or Cartesian4 object will be returned. If the result argument is a Color, the Cartesian4 value is
      * converted to a Color and then returned.
-     * @param frameState The frame state.
      * @param feature The feature whose properties may be used as variables in the expression.
      * @param result The object onto which to store the result.
      * @return The result of evaluating the expression.
      */
     @JsMethod
-    public native Object evaluate(Object frameState, Cesium3DTileFeature feature, Object result);
+    public native Object evaluate(Cesium3DTileFeature feature, Object result);
 
     /**
      * Evaluates the result of a Color expression, optionally using the provided feature's properties.
      * This is equivalent to StyleExpression#evaluate but always returns a Color object.
-     * @param frameState The frame state.
      * @param feature The feature whose properties may be used as variables in the expression.
      * @return The modified result parameter or a new Color instance if one was not provided.
      */
     @JsMethod
-    public native Color evaluateColor(Object frameState, Cesium3DTileFeature feature);
+    public native Color evaluateColor(Cesium3DTileFeature feature);
 
     /**
      * Evaluates the result of a Color expression, optionally using the provided feature's properties.
      * This is equivalent to StyleExpression#evaluate but always returns a Color object.
-     * @param frameState The frame state.
      * @param feature The feature whose properties may be used as variables in the expression.
      * @param result The object in which to store the result.
      * @return The modified result parameter or a new Color instance if one was not provided.
      */
     @JsMethod
-    public native Color evaluateColor(Object frameState, Cesium3DTileFeature feature, Color result);
+    public native Color evaluateColor(Cesium3DTileFeature feature, Color result);
 }
