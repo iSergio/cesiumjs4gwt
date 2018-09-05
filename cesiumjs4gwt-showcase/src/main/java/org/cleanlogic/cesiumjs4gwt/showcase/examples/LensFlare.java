@@ -105,7 +105,7 @@ public class LensFlare extends AbstractExample {
 
         initWidget(contentPanel);
 
-        lensFlare = (PostProcessStage) csVPanel.getViewer().scene().postProcessStages.add(PostProcessStageLibrary.createLensFlarStage());
+        lensFlare = (PostProcessStage) csVPanel.getViewer().scene().postProcessStages.add(PostProcessStageLibrary.createLensFlareStage());
 
         updatePostProcess();
 
