@@ -25,6 +25,7 @@ import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.datasources.graphics.options.CylinderGraphicsOptions;
 import org.cesiumjs.cs.datasources.properties.MaterialProperty;
 import org.cesiumjs.cs.datasources.properties.Property;
+import org.cesiumjs.cs.scene.enums.HeightReference;
 import org.cesiumjs.cs.scene.enums.ShadowMode;
 
 /**
@@ -64,6 +65,12 @@ public class CylinderGraphics {
      */
     @JsProperty
     public Property fill;
+    /**
+     * Gets or sets the Property specifying the HeightReference.
+     * Default: {@link HeightReference#NONE()}
+     */
+    @JsProperty
+    public Number heightReference;
     /**
      * A Property specifying the material used to fill the cylinder.
      * Default: {@link Color#WHITE()}

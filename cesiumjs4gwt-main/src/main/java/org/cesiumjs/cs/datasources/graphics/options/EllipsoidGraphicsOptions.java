@@ -31,6 +31,11 @@ import org.cesiumjs.cs.scene.enums.ShadowMode;
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class EllipsoidGraphicsOptions {
     /**
+     * A Property specifying what the height from the entity position is relative to.
+     */
+    @JsProperty
+    public Property heightReference;
+    /**
      * A Cartesian3 Property specifying the radii of the ellipsoid.
      */
     @JsProperty

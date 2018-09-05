@@ -54,6 +54,12 @@ public class BoxGraphics {
     @JsProperty
     public Property fill;
     /**
+     * Gets or sets the Property specifying the HeightReference.
+     * Default: {@link org.cesiumjs.cs.scene.enums.HeightReference#NONE()}
+     */
+    @JsProperty
+    public Number heightReference;
+    /**
      * Gets or sets the material used to fill the box.
      * Default: {@link Color#WHITE()}
      */

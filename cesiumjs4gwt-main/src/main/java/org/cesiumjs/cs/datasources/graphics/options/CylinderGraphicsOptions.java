@@ -32,6 +32,11 @@ import org.cesiumjs.cs.scene.enums.ShadowMode;
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class CylinderGraphicsOptions {
     /**
+     * Property specifying what the height from the entity position is relative to.
+     */
+    @JsProperty
+    public Property heightReference;
+    /**
      * A numeric Property specifying the length of the cylinder.
      */
     @JsProperty
