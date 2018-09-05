@@ -77,7 +77,6 @@ public class PostProcessStageLibrary {
      * Creates a post-process stage that applies an effect simulating light flaring a camera lens.
      * This stage has the following uniforms: dirtTexture, starTexture, intensity, distortion, ghostDispersal,
      * haloWidth, and earthRadius.
-     *
      * dirtTexture is a texture sampled to simulate dirt on the lens.
      * starTexture is the texture sampled for the star pattern of the flare.
      * intensity is a scalar multiplied by the result of the lens flare. The default value is 2.0.
@@ -85,19 +84,6 @@ public class PostProcessStageLibrary {
      * ghostDispesal is a scalar indicating how far the halo effect is from the center of the texture. The default value is 0.4.
      * haloWidth is a scalar representing the width of the halo from the ghost dispersal. The default value is 0.4.
      * earthRadius is the maximum radius of the earth. The default value is Ellipsoid.WGS84.maximumRadius.
-     * @return A post-process stage for applying a lens flare effect.
-     *
-     * @deprecated PostProcessStageLibrary.createLensFlarStage is deprecated due to misspelling and will be removed in Cesium 1.49.
-     * Use PostProcessStageLibrary.createLensFlareStage instead.
-     */
-    @Deprecated
-    @JsMethod
-    public static native PostProcessStage createLensFlarStage();
-
-    /**
-     * Creates a post-process stage that applies an effect simulating light flaring a camera lens.
-     * This stage has the following uniforms: dirtTexture, starTexture, intensity, distortion, ghostDispersal,
-     * haloWidth, and earthRadius.
      * @return A post-process stage for applying a lens flare effect.
      */
     @JsMethod
