@@ -915,6 +915,16 @@ public class Matrix4 {
     public static native Matrix4 setRow(Matrix4 matrix, int index, Cartesian4 cartesian, Matrix4 result);
 
     /**
+     * Computes a new matrix that replaces the scale with the provided scale. This assumes the matrix is an affine transformation
+     * @param matrix The matrix to use.
+     * @param scale The scale that replaces the scale of the provided matrix.
+     * @param result The object onto which to store the result.
+     * @return The modified result parameter.
+     */
+    @JsMethod
+    public static native Matrix4 setScale(Matrix4 matrix, Cartesian3 scale, Matrix4 result);
+
+    /**
      * Computes a new matrix that replaces the translation in the rightmost column of the provided matrix with the provided
      * translation. This assumes the matrix is an affine transformation
      * @param matrix The matrix to use.
