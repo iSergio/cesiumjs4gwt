@@ -371,6 +371,60 @@ define('Core/defaultValue',[
     return defaultValue;
 });
 
+define('Core/arrayFill',[
+        './Check',
+        './defaultValue',
+        './defined'
+    ], function(
+        Check,
+        defaultValue,
+        defined) {
+    'use strict';
+
+    /**
+     * Fill an array or a portion of an array with a given value.
+     *
+     * @param {Array} array The array to fill.
+     * @param {*} value The value to fill the array with.
+     * @param {Number} [start=0] The index to start filling at.
+     * @param {Number} [end=array.length] The index to end stop at.
+     *
+     * @returns {Array} The resulting array.
+     * @private
+     */
+    function arrayFill(array, value, start, end) {
+                Check.defined('array', array);
+        Check.defined('value', value);
+        if (defined(start)) {
+            Check.typeOf.number('start', start);
+        }
+        if (defined(end)) {
+            Check.typeOf.number('end', end);
+        }
+        
+        if (typeof array.fill === 'function') {
+            return array.fill(value, start, end);
+        }
+
+        var length = array.length >>> 0;
+        var relativeStart = defaultValue(start, 0);
+        // If negative, find wrap around position
+        var k = (relativeStart < 0) ? Math.max(length + relativeStart, 0) : Math.min(relativeStart, length);
+        var relativeEnd = defaultValue(end, length);
+        // If negative, find wrap around position
+        var last = (relativeEnd < 0) ? Math.max(length + relativeEnd, 0) : Math.min(relativeEnd, length);
+
+        // Fill array accordingly
+        while (k < last) {
+            array[k] = value;
+            k++;
+        }
+        return array;
+    }
+
+    return arrayFill;
+});
+
 /*
   I've wrapped Makoto Matsumoto and Takuji Nishimura's code in a namespace
   so it's better encapsulated. Now you can have multiple random number generators
@@ -7159,7 +7213,7 @@ define('Core/Matrix4',[
      *
      * @param {Matrix4} matrix The matrix to use.
      * @param {Cartesian3} translation The translation that replaces the translation of the provided matrix.
-     * @param {Cartesian4} result The object onto which to store the result.
+     * @param {Matrix4} result The object onto which to store the result.
      * @returns {Matrix4} The modified result parameter.
      */
     Matrix4.setTranslation = function(matrix, translation, result) {
@@ -7188,6 +7242,25 @@ define('Core/Matrix4',[
         result[15] = matrix[15];
 
         return result;
+    };
+
+    var scaleScratch = new Cartesian3();
+    /**
+     * Computes a new matrix that replaces the scale with the provided scale.  This assumes the matrix is an affine transformation
+     *
+     * @param {Matrix4} matrix The matrix to use.
+     * @param {Cartesian3} scale The scale that replaces the scale of the provided matrix.
+     * @param {Matrix4} result The object onto which to store the result.
+     * @returns {Matrix4} The modified result parameter.
+     */
+    Matrix4.setScale = function(matrix, scale, result) {
+                Check.typeOf.object('matrix', matrix);
+        Check.typeOf.object('scale', scale);
+        Check.typeOf.object('result', result);
+        
+        var existingScale = Matrix4.getScale(matrix, scaleScratch);
+        var newScale = Cartesian3.divideComponents(scale, existingScale, scaleScratch);
+        return Matrix4.multiplyByScale(matrix, newScale, result);
     };
 
     /**
@@ -11888,7 +11961,9 @@ define('Core/FeatureDetection',[
             //we still need to use it if it exists in order to support browsers
             //that rely on it, such as the Windows WebBrowser control which defines
             //PointerEvent but sets navigator.pointerEnabled to false.
-            hasPointerEvents = typeof PointerEvent !== 'undefined' && (!defined(theNavigator.pointerEnabled) || theNavigator.pointerEnabled);
+
+            //Firefox disabled because of https://github.com/AnalyticalGraphicsInc/cesium/issues/6372
+            hasPointerEvents = !isFirefox() && typeof PointerEvent !== 'undefined' && (!defined(theNavigator.pointerEnabled) || theNavigator.pointerEnabled);
         }
         return hasPointerEvents;
     }
@@ -24385,6 +24460,7 @@ define('Core/VertexFormat',[
 });
 
 define('Core/EllipsoidGeometry',[
+        './arrayFill',
         './BoundingSphere',
         './Cartesian2',
         './Cartesian3',
@@ -24396,11 +24472,13 @@ define('Core/EllipsoidGeometry',[
         './Geometry',
         './GeometryAttribute',
         './GeometryAttributes',
+        './GeometryOffsetAttribute',
         './IndexDatatype',
         './Math',
         './PrimitiveType',
         './VertexFormat'
     ], function(
+        arrayFill,
         BoundingSphere,
         Cartesian2,
         Cartesian3,
@@ -24412,6 +24490,7 @@ define('Core/EllipsoidGeometry',[
         Geometry,
         GeometryAttribute,
         GeometryAttributes,
+        GeometryOffsetAttribute,
         IndexDatatype,
         CesiumMath,
         PrimitiveType,
@@ -24466,11 +24545,15 @@ define('Core/EllipsoidGeometry',[
         if (stackPartitions < 3) {
             throw new DeveloperError('options.stackPartitions cannot be less than three.');
         }
+        if (defined(options.offsetAttribute) && options.offsetAttribute === GeometryOffsetAttribute.TOP) {
+            throw new DeveloperError('GeometryOffsetAttribute.TOP is not a supported options.offsetAttribute for this geometry.');
+        }
         
         this._radii = Cartesian3.clone(radii);
         this._stackPartitions = stackPartitions;
         this._slicePartitions = slicePartitions;
         this._vertexFormat = VertexFormat.clone(vertexFormat);
+        this._offsetAttribute = options.offsetAttribute;
         this._workerName = 'createEllipsoidGeometry';
     }
 
@@ -24478,7 +24561,7 @@ define('Core/EllipsoidGeometry',[
      * The number of elements used to pack the object into an array.
      * @type {Number}
      */
-    EllipsoidGeometry.packedLength = Cartesian3.packedLength + VertexFormat.packedLength + 2;
+    EllipsoidGeometry.packedLength = Cartesian3.packedLength + VertexFormat.packedLength + 3;
 
     /**
      * Stores the provided instance into the provided array.
@@ -24506,7 +24589,8 @@ define('Core/EllipsoidGeometry',[
         startingIndex += VertexFormat.packedLength;
 
         array[startingIndex++] = value._stackPartitions;
-        array[startingIndex]   = value._slicePartitions;
+        array[startingIndex++] = value._slicePartitions;
+        array[startingIndex] = defaultValue(value._offsetAttribute, -1);
 
         return array;
     };
@@ -24517,7 +24601,8 @@ define('Core/EllipsoidGeometry',[
         radii : scratchRadii,
         vertexFormat : scratchVertexFormat,
         stackPartitions : undefined,
-        slicePartitions : undefined
+        slicePartitions : undefined,
+        offsetAttribute : undefined
     };
 
     /**
@@ -24542,11 +24627,13 @@ define('Core/EllipsoidGeometry',[
         startingIndex += VertexFormat.packedLength;
 
         var stackPartitions = array[startingIndex++];
-        var slicePartitions = array[startingIndex];
+        var slicePartitions = array[startingIndex++];
+        var offsetAttribute = array[startingIndex];
 
         if (!defined(result)) {
             scratchOptions.stackPartitions = stackPartitions;
             scratchOptions.slicePartitions = slicePartitions;
+            scratchOptions.offsetAttribute = offsetAttribute === -1 ? undefined : offsetAttribute;
             return new EllipsoidGeometry(scratchOptions);
         }
 
@@ -24554,6 +24641,7 @@ define('Core/EllipsoidGeometry',[
         result._vertexFormat = VertexFormat.clone(vertexFormat, result._vertexFormat);
         result._stackPartitions = stackPartitions;
         result._slicePartitions = slicePartitions;
+        result._offsetAttribute = offsetAttribute === -1 ? undefined : offsetAttribute;
 
         return result;
     };
@@ -24738,6 +24826,18 @@ define('Core/EllipsoidGeometry',[
             }
         }
 
+        if (defined(ellipsoidGeometry._offsetAttribute)) {
+            var length = positions.length;
+            var applyOffset = new Uint8Array(length / 3);
+            var offsetValue = ellipsoidGeometry._offsetAttribute === GeometryOffsetAttribute.NONE ? 0 : 1;
+            arrayFill(applyOffset, offsetValue);
+            attributes.applyOffset = new GeometryAttribute({
+                componentDatatype : ComponentDatatype.UNSIGNED_BYTE,
+                componentsPerAttribute : 1,
+                values: applyOffset
+            });
+        }
+
         index = 0;
         for (j = 0; j < slicePartitions - 1; j++) {
             indices[index++] = slicePartitions + j;
@@ -24776,7 +24876,8 @@ define('Core/EllipsoidGeometry',[
             attributes : attributes,
             indices : indices,
             primitiveType : PrimitiveType.TRIANGLES,
-            boundingSphere : BoundingSphere.fromEllipsoid(ellipsoid)
+            boundingSphere : BoundingSphere.fromEllipsoid(ellipsoid),
+            offsetAttribute : ellipsoidGeometry._offsetAttribute
         });
     };
 

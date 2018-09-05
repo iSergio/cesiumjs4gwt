@@ -371,6 +371,60 @@ define('Core/defaultValue',[
     return defaultValue;
 });
 
+define('Core/arrayFill',[
+        './Check',
+        './defaultValue',
+        './defined'
+    ], function(
+        Check,
+        defaultValue,
+        defined) {
+    'use strict';
+
+    /**
+     * Fill an array or a portion of an array with a given value.
+     *
+     * @param {Array} array The array to fill.
+     * @param {*} value The value to fill the array with.
+     * @param {Number} [start=0] The index to start filling at.
+     * @param {Number} [end=array.length] The index to end stop at.
+     *
+     * @returns {Array} The resulting array.
+     * @private
+     */
+    function arrayFill(array, value, start, end) {
+                Check.defined('array', array);
+        Check.defined('value', value);
+        if (defined(start)) {
+            Check.typeOf.number('start', start);
+        }
+        if (defined(end)) {
+            Check.typeOf.number('end', end);
+        }
+        
+        if (typeof array.fill === 'function') {
+            return array.fill(value, start, end);
+        }
+
+        var length = array.length >>> 0;
+        var relativeStart = defaultValue(start, 0);
+        // If negative, find wrap around position
+        var k = (relativeStart < 0) ? Math.max(length + relativeStart, 0) : Math.min(relativeStart, length);
+        var relativeEnd = defaultValue(end, length);
+        // If negative, find wrap around position
+        var last = (relativeEnd < 0) ? Math.max(length + relativeEnd, 0) : Math.min(relativeEnd, length);
+
+        // Fill array accordingly
+        while (k < last) {
+            array[k] = value;
+            k++;
+        }
+        return array;
+    }
+
+    return arrayFill;
+});
+
 /*
   I've wrapped Makoto Matsumoto and Takuji Nishimura's code in a namespace
   so it's better encapsulated. Now you can have multiple random number generators
@@ -7159,7 +7213,7 @@ define('Core/Matrix4',[
      *
      * @param {Matrix4} matrix The matrix to use.
      * @param {Cartesian3} translation The translation that replaces the translation of the provided matrix.
-     * @param {Cartesian4} result The object onto which to store the result.
+     * @param {Matrix4} result The object onto which to store the result.
      * @returns {Matrix4} The modified result parameter.
      */
     Matrix4.setTranslation = function(matrix, translation, result) {
@@ -7188,6 +7242,25 @@ define('Core/Matrix4',[
         result[15] = matrix[15];
 
         return result;
+    };
+
+    var scaleScratch = new Cartesian3();
+    /**
+     * Computes a new matrix that replaces the scale with the provided scale.  This assumes the matrix is an affine transformation
+     *
+     * @param {Matrix4} matrix The matrix to use.
+     * @param {Cartesian3} scale The scale that replaces the scale of the provided matrix.
+     * @param {Matrix4} result The object onto which to store the result.
+     * @returns {Matrix4} The modified result parameter.
+     */
+    Matrix4.setScale = function(matrix, scale, result) {
+                Check.typeOf.object('matrix', matrix);
+        Check.typeOf.object('scale', scale);
+        Check.typeOf.object('result', result);
+        
+        var existingScale = Matrix4.getScale(matrix, scaleScratch);
+        var newScale = Cartesian3.divideComponents(scale, existingScale, scaleScratch);
+        return Matrix4.multiplyByScale(matrix, newScale, result);
     };
 
     /**
@@ -11888,7 +11961,9 @@ define('Core/FeatureDetection',[
             //we still need to use it if it exists in order to support browsers
             //that rely on it, such as the Windows WebBrowser control which defines
             //PointerEvent but sets navigator.pointerEnabled to false.
-            hasPointerEvents = typeof PointerEvent !== 'undefined' && (!defined(theNavigator.pointerEnabled) || theNavigator.pointerEnabled);
+
+            //Firefox disabled because of https://github.com/AnalyticalGraphicsInc/cesium/issues/6372
+            hasPointerEvents = !isFirefox() && typeof PointerEvent !== 'undefined' && (!defined(theNavigator.pointerEnabled) || theNavigator.pointerEnabled);
         }
         return hasPointerEvents;
     }
@@ -24445,6 +24520,7 @@ define('Core/VertexFormat',[
 });
 
 define('Core/CylinderGeometry',[
+        './arrayFill',
         './BoundingSphere',
         './Cartesian2',
         './Cartesian3',
@@ -24456,11 +24532,13 @@ define('Core/CylinderGeometry',[
         './Geometry',
         './GeometryAttribute',
         './GeometryAttributes',
+        './GeometryOffsetAttribute',
         './IndexDatatype',
         './Math',
         './PrimitiveType',
         './VertexFormat'
     ], function(
+        arrayFill,
         BoundingSphere,
         Cartesian2,
         Cartesian3,
@@ -24472,6 +24550,7 @@ define('Core/CylinderGeometry',[
         Geometry,
         GeometryAttribute,
         GeometryAttributes,
+        GeometryOffsetAttribute,
         IndexDatatype,
         CesiumMath,
         PrimitiveType,
@@ -24531,12 +24610,16 @@ define('Core/CylinderGeometry',[
         if (slices < 3) {
             throw new DeveloperError('options.slices must be greater than or equal to 3.');
         }
+        if (defined(options.offsetAttribute) && options.offsetAttribute === GeometryOffsetAttribute.TOP) {
+            throw new DeveloperError('GeometryOffsetAttribute.TOP is not a supported options.offsetAttribute for this geometry.');
+        }
         
         this._length = length;
         this._topRadius = topRadius;
         this._bottomRadius = bottomRadius;
         this._vertexFormat = VertexFormat.clone(vertexFormat);
         this._slices = slices;
+        this._offsetAttribute = options.offsetAttribute;
         this._workerName = 'createCylinderGeometry';
     }
 
@@ -24544,7 +24627,7 @@ define('Core/CylinderGeometry',[
      * The number of elements used to pack the object into an array.
      * @type {Number}
      */
-    CylinderGeometry.packedLength = VertexFormat.packedLength + 4;
+    CylinderGeometry.packedLength = VertexFormat.packedLength + 5;
 
     /**
      * Stores the provided instance into the provided array.
@@ -24571,7 +24654,8 @@ define('Core/CylinderGeometry',[
         array[startingIndex++] = value._length;
         array[startingIndex++] = value._topRadius;
         array[startingIndex++] = value._bottomRadius;
-        array[startingIndex]   = value._slices;
+        array[startingIndex++] = value._slices;
+        array[startingIndex] = defaultValue(value._offsetAttribute, -1);
 
         return array;
     };
@@ -24582,7 +24666,8 @@ define('Core/CylinderGeometry',[
         length : undefined,
         topRadius : undefined,
         bottomRadius : undefined,
-        slices : undefined
+        slices : undefined,
+        offsetAttribute : undefined
     };
 
     /**
@@ -24606,13 +24691,15 @@ define('Core/CylinderGeometry',[
         var length = array[startingIndex++];
         var topRadius = array[startingIndex++];
         var bottomRadius = array[startingIndex++];
-        var slices = array[startingIndex];
+        var slices = array[startingIndex++];
+        var offsetAttribute = array[startingIndex];
 
         if (!defined(result)) {
             scratchOptions.length = length;
             scratchOptions.topRadius = topRadius;
             scratchOptions.bottomRadius = bottomRadius;
             scratchOptions.slices = slices;
+            scratchOptions.offsetAttribute = offsetAttribute === -1 ? undefined : offsetAttribute;
             return new CylinderGeometry(scratchOptions);
         }
 
@@ -24621,6 +24708,7 @@ define('Core/CylinderGeometry',[
         result._topRadius = topRadius;
         result._bottomRadius = bottomRadius;
         result._slices = slices;
+        result._offsetAttribute = offsetAttribute === -1 ? undefined : offsetAttribute;
 
         return result;
     };
@@ -24663,15 +24751,17 @@ define('Core/CylinderGeometry',[
             var tangentIndex = 0;
             var bitangentIndex = 0;
 
+            var theta = Math.atan2(bottomRadius - topRadius, length);
             var normal = normalScratch;
-            normal.z = 0;
+            normal.z = Math.sin(theta);
+            var normalScale = Math.cos(theta);
             var tangent = tangentScratch;
             var bitangent = bitangentScratch;
 
             for (i = 0; i < slices; i++) {
                 var angle = i / slices * CesiumMath.TWO_PI;
-                var x = Math.cos(angle);
-                var y = Math.sin(angle);
+                var x = normalScale * Math.cos(angle);
+                var y = normalScale * Math.sin(angle);
                 if (computeNormal) {
                     normal.x = x;
                     normal.y = y;
@@ -24681,12 +24771,12 @@ define('Core/CylinderGeometry',[
                     }
 
                     if (vertexFormat.normal) {
-                        normals[normalIndex++] = x;
-                        normals[normalIndex++] = y;
-                        normals[normalIndex++] = 0;
-                        normals[normalIndex++] = x;
-                        normals[normalIndex++] = y;
-                        normals[normalIndex++] = 0;
+                        normals[normalIndex++] = normal.x;
+                        normals[normalIndex++] = normal.y;
+                        normals[normalIndex++] = normal.z;
+                        normals[normalIndex++] = normal.x;
+                        normals[normalIndex++] = normal.y;
+                        normals[normalIndex++] = normal.z;
                     }
 
                     if (vertexFormat.tangent) {
@@ -24838,11 +24928,24 @@ define('Core/CylinderGeometry',[
 
         var boundingSphere = new BoundingSphere(Cartesian3.ZERO, Cartesian2.magnitude(radiusScratch));
 
+        if (defined(cylinderGeometry._offsetAttribute)) {
+            length = positions.length;
+            var applyOffset = new Uint8Array(length / 3);
+            var offsetValue = cylinderGeometry._offsetAttribute === GeometryOffsetAttribute.NONE ? 0 : 1;
+            arrayFill(applyOffset, offsetValue);
+            attributes.applyOffset = new GeometryAttribute({
+                componentDatatype : ComponentDatatype.UNSIGNED_BYTE,
+                componentsPerAttribute : 1,
+                values: applyOffset
+            });
+        }
+
         return new Geometry({
             attributes : attributes,
             indices : indices,
             primitiveType : PrimitiveType.TRIANGLES,
-            boundingSphere : boundingSphere
+            boundingSphere : boundingSphere,
+            offsetAttribute : cylinderGeometry._offsetAttribute
         });
     };
 

@@ -371,6 +371,60 @@ define('Core/defaultValue',[
     return defaultValue;
 });
 
+define('Core/arrayFill',[
+        './Check',
+        './defaultValue',
+        './defined'
+    ], function(
+        Check,
+        defaultValue,
+        defined) {
+    'use strict';
+
+    /**
+     * Fill an array or a portion of an array with a given value.
+     *
+     * @param {Array} array The array to fill.
+     * @param {*} value The value to fill the array with.
+     * @param {Number} [start=0] The index to start filling at.
+     * @param {Number} [end=array.length] The index to end stop at.
+     *
+     * @returns {Array} The resulting array.
+     * @private
+     */
+    function arrayFill(array, value, start, end) {
+                Check.defined('array', array);
+        Check.defined('value', value);
+        if (defined(start)) {
+            Check.typeOf.number('start', start);
+        }
+        if (defined(end)) {
+            Check.typeOf.number('end', end);
+        }
+        
+        if (typeof array.fill === 'function') {
+            return array.fill(value, start, end);
+        }
+
+        var length = array.length >>> 0;
+        var relativeStart = defaultValue(start, 0);
+        // If negative, find wrap around position
+        var k = (relativeStart < 0) ? Math.max(length + relativeStart, 0) : Math.min(relativeStart, length);
+        var relativeEnd = defaultValue(end, length);
+        // If negative, find wrap around position
+        var last = (relativeEnd < 0) ? Math.max(length + relativeEnd, 0) : Math.min(relativeEnd, length);
+
+        // Fill array accordingly
+        while (k < last) {
+            array[k] = value;
+            k++;
+        }
+        return array;
+    }
+
+    return arrayFill;
+});
+
 /*
   I've wrapped Makoto Matsumoto and Takuji Nishimura's code in a namespace
   so it's better encapsulated. Now you can have multiple random number generators
@@ -7159,7 +7213,7 @@ define('Core/Matrix4',[
      *
      * @param {Matrix4} matrix The matrix to use.
      * @param {Cartesian3} translation The translation that replaces the translation of the provided matrix.
-     * @param {Cartesian4} result The object onto which to store the result.
+     * @param {Matrix4} result The object onto which to store the result.
      * @returns {Matrix4} The modified result parameter.
      */
     Matrix4.setTranslation = function(matrix, translation, result) {
@@ -7188,6 +7242,25 @@ define('Core/Matrix4',[
         result[15] = matrix[15];
 
         return result;
+    };
+
+    var scaleScratch = new Cartesian3();
+    /**
+     * Computes a new matrix that replaces the scale with the provided scale.  This assumes the matrix is an affine transformation
+     *
+     * @param {Matrix4} matrix The matrix to use.
+     * @param {Cartesian3} scale The scale that replaces the scale of the provided matrix.
+     * @param {Matrix4} result The object onto which to store the result.
+     * @returns {Matrix4} The modified result parameter.
+     */
+    Matrix4.setScale = function(matrix, scale, result) {
+                Check.typeOf.object('matrix', matrix);
+        Check.typeOf.object('scale', scale);
+        Check.typeOf.object('result', result);
+        
+        var existingScale = Matrix4.getScale(matrix, scaleScratch);
+        var newScale = Cartesian3.divideComponents(scale, existingScale, scaleScratch);
+        return Matrix4.multiplyByScale(matrix, newScale, result);
     };
 
     /**
@@ -11191,7 +11264,9 @@ define('Core/FeatureDetection',[
             //we still need to use it if it exists in order to support browsers
             //that rely on it, such as the Windows WebBrowser control which defines
             //PointerEvent but sets navigator.pointerEnabled to false.
-            hasPointerEvents = typeof PointerEvent !== 'undefined' && (!defined(theNavigator.pointerEnabled) || theNavigator.pointerEnabled);
+
+            //Firefox disabled because of https://github.com/AnalyticalGraphicsInc/cesium/issues/6372
+            hasPointerEvents = !isFirefox() && typeof PointerEvent !== 'undefined' && (!defined(theNavigator.pointerEnabled) || theNavigator.pointerEnabled);
         }
         return hasPointerEvents;
     }
@@ -23934,26 +24009,32 @@ define('Core/GeometryAttributes',[
 });
 
 define('Core/BoxOutlineGeometry',[
+        './arrayFill',
         './BoundingSphere',
         './Cartesian3',
         './Check',
         './ComponentDatatype',
         './defaultValue',
         './defined',
+        './DeveloperError',
         './Geometry',
         './GeometryAttribute',
         './GeometryAttributes',
+        './GeometryOffsetAttribute',
         './PrimitiveType'
     ], function(
+        arrayFill,
         BoundingSphere,
         Cartesian3,
         Check,
         ComponentDatatype,
         defaultValue,
         defined,
+        DeveloperError,
         Geometry,
         GeometryAttribute,
         GeometryAttributes,
+        GeometryOffsetAttribute,
         PrimitiveType) {
     'use strict';
 
@@ -23988,9 +24069,13 @@ define('Core/BoxOutlineGeometry',[
 
                 Check.typeOf.object('min', min);
         Check.typeOf.object('max', max);
+        if (defined(options.offsetAttribute) && options.offsetAttribute === GeometryOffsetAttribute.TOP) {
+            throw new DeveloperError('GeometryOffsetAttribute.TOP is not a supported options.offsetAttribute for this geometry.');
+        }
         
         this._min = Cartesian3.clone(min);
         this._max = Cartesian3.clone(max);
+        this._offsetAttribute = options.offsetAttribute;
         this._workerName = 'createBoxOutlineGeometry';
     }
 
@@ -24025,7 +24110,8 @@ define('Core/BoxOutlineGeometry',[
 
         return new BoxOutlineGeometry({
             minimum : Cartesian3.negate(corner, new Cartesian3()),
-            maximum : corner
+            maximum : corner,
+            offsetAttribute: options.offsetAttribute
         });
     };
 
@@ -24062,7 +24148,7 @@ define('Core/BoxOutlineGeometry',[
      * The number of elements used to pack the object into an array.
      * @type {Number}
      */
-    BoxOutlineGeometry.packedLength = 2 * Cartesian3.packedLength;
+    BoxOutlineGeometry.packedLength = 2 * Cartesian3.packedLength + 1;
 
     /**
      * Stores the provided instance into the provided array.
@@ -24081,6 +24167,8 @@ define('Core/BoxOutlineGeometry',[
 
         Cartesian3.pack(value._min, array, startingIndex);
         Cartesian3.pack(value._max, array, startingIndex + Cartesian3.packedLength);
+        array[startingIndex + (Cartesian3.packedLength * 2)] = defaultValue(value._offsetAttribute, -1);
+
         return array;
     };
 
@@ -24088,7 +24176,8 @@ define('Core/BoxOutlineGeometry',[
     var scratchMax = new Cartesian3();
     var scratchOptions = {
         minimum : scratchMin,
-        maximum : scratchMax
+        maximum : scratchMax,
+        offsetAttribute : undefined
     };
 
     /**
@@ -24106,13 +24195,16 @@ define('Core/BoxOutlineGeometry',[
 
         var min = Cartesian3.unpack(array, startingIndex, scratchMin);
         var max = Cartesian3.unpack(array, startingIndex + Cartesian3.packedLength, scratchMax);
+        var offsetAttribute = array[startingIndex + Cartesian3.packedLength * 2];
 
         if (!defined(result)) {
+            scratchOptions.offsetAttribute = offsetAttribute === -1 ? undefined : offsetAttribute;
             return new BoxOutlineGeometry(scratchOptions);
         }
 
         result._min = Cartesian3.clone(min, result._min);
         result._max = Cartesian3.clone(max, result._max);
+        result._offsetAttribute = offsetAttribute === -1 ? undefined : offsetAttribute;
 
         return result;
     };
@@ -24202,11 +24294,24 @@ define('Core/BoxOutlineGeometry',[
         var diff = Cartesian3.subtract(max, min, diffScratch);
         var radius = Cartesian3.magnitude(diff) * 0.5;
 
+        if (defined(boxGeometry._offsetAttribute)) {
+            var length = positions.length;
+            var applyOffset = new Uint8Array(length / 3);
+            var offsetValue = boxGeometry._offsetAttribute === GeometryOffsetAttribute.NONE ? 0 : 1;
+            arrayFill(applyOffset, offsetValue);
+            attributes.applyOffset = new GeometryAttribute({
+                componentDatatype : ComponentDatatype.UNSIGNED_BYTE,
+                componentsPerAttribute : 1,
+                values: applyOffset
+            });
+        }
+
         return new Geometry({
             attributes : attributes,
             indices : indices,
             primitiveType : PrimitiveType.LINES,
-            boundingSphere : new BoundingSphere(Cartesian3.ZERO, radius)
+            boundingSphere : new BoundingSphere(Cartesian3.ZERO, radius),
+            offsetAttribute : boxGeometry._offsetAttribute
         });
     };
 
