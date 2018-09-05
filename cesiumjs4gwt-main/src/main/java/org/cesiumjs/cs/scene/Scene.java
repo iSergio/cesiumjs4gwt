@@ -486,6 +486,12 @@ public class Scene {
      * window coordinate position.
      * Other properties may also be set depending on the type of primitive. The primitives in the list are ordered by
      * their visual order in the scene (front to back).
+     * <pre>
+     *     Example:
+     *     {@code
+     *     Object[] pickedObjects = scene.drillPick(new Cartesian2(100.0, 200.0));
+     *     }
+     * </pre>
      * @param windowPosition Window coordinates to perform picking on.
      * @return Array of objects, each containing 1 picked primitives.
      */
@@ -509,6 +515,45 @@ public class Scene {
      */
     @JsMethod
     public native PickedObject[] drillPick(Cartesian2 windowPosition, double limit);
+
+    /**
+     * Returns a list of objects, each containing a `primitive` property, for all primitives at a particular
+     * window coordinate position.
+     * Other properties may also be set depending on the type of primitive. The primitives in the list are ordered by
+     * their visual order in the scene (front to back).
+     * <pre>
+     *     Example:
+     *     {@code
+     *     Object[] pickedObjects = scene.drillPick(new Cartesian2(100.0, 200.0));
+     *     }
+     * </pre>
+     * @param windowPosition Window coordinates to perform picking on.
+     * @param limit If supplied, stop drilling after collecting this many picks.
+     * @param width Width of the pick rectangle.
+     * @return Array of objects, each containing 1 picked primitives.
+     */
+    @JsMethod
+    public native PickedObject[] drillPick(Cartesian2 windowPosition, double limit, int width);
+
+    /**
+     * Returns a list of objects, each containing a `primitive` property, for all primitives at a particular
+     * window coordinate position.
+     * Other properties may also be set depending on the type of primitive. The primitives in the list are ordered by
+     * their visual order in the scene (front to back).
+     * <pre>
+     *     Example:
+     *     {@code
+     *     Object[] pickedObjects = scene.drillPick(new Cartesian2(100.0, 200.0));
+     *     }
+     * </pre>
+     * @param windowPosition Window coordinates to perform picking on.
+     * @param limit If supplied, stop drilling after collecting this many picks.
+     * @param width Width of the pick rectangle.
+     * @param height Height of the pick rectangle.
+     * @return Array of objects, each containing 1 picked primitives.
+     */
+    @JsMethod
+    public native PickedObject[] drillPick(Cartesian2 windowPosition, double limit, int width, int height);
 
     /**
      * Returns true if this object was destroyed; otherwise, false.
