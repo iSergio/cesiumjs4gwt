@@ -102,6 +102,19 @@ public class Globe {
     @JsProperty
     public double maximumScreenSpaceError;
     /**
+     * The distance where the darkness of night from the ground atmosphere fades in to an unlit ground atmosphere.
+     * This only takes effect when showGroundAtmosphere and enableLighting are true.
+     * Default: 50000000.0
+     */
+    @JsProperty
+    public double nightFadeInDistance;
+    /**
+     * The distance where the darkness of night from the ground atmosphere fades out to a lit ground atmosphere. This only takes effect when showGroundAtmosphere and enableLighting are true.
+     * Default: 10000000.0
+     */
+    @JsProperty
+    public double nightFadeOutDistance;
+    /**
      * The normal map to use for rendering waves in the ocean. Setting this property will only have an effect if the
      * configured terrain provider includes a water mask.
      * Default:  buildModuleUrl('Assets/Textures/waterNormalsSmall.jpg')
@@ -122,6 +135,12 @@ public class Globe {
      */
     @JsProperty
     public boolean show;
+    /**
+     * Enable the ground atmosphere.
+     * Default: true
+     */
+    @JsProperty
+    public boolean showGroundAtmosphere;
     /**
      * True if an animated wave effect should be shown in areas of the globe covered by water; otherwise, false.
      * This property is ignored if the terrainProvider does not provide a water mask.
