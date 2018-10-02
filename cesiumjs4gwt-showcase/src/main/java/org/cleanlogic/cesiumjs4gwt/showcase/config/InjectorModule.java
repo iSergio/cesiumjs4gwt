@@ -106,5 +106,6 @@ public class InjectorModule extends AbstractGinModule {
         bind(TimeDynamicPointCloud.class).asEagerSingleton();
 
         bind(Atmosphere.class).asEagerSingleton();
+        bind(CartographicLimitRectangle.class).asEagerSingleton();
     }
 }
