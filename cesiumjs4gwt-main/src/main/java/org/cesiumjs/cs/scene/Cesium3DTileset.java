@@ -204,7 +204,7 @@ public class Cesium3DTileset {
      * This event is fired once when all tiles in the initial view are loaded.
      * This event is fired at the end of the frame after the scene is rendered.
      * Default: new Event();
-     * @see {@link Cesium3DTileset#allTilesLoaded}
+     * @see Cesium3DTileset#allTilesLoaded
      */
     @JsProperty
     public Event initialTilesLoaded;
