@@ -23,6 +23,7 @@ import org.cesiumjs.cs.collections.PrimitiveCollection;
 import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.core.projection.MapProjection;
 import org.cesiumjs.cs.core.providers.TerrainProvider;
+import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.scene.enums.SceneMode;
 import org.cesiumjs.cs.scene.options.SceneOptions;
 
@@ -381,6 +382,12 @@ public class Scene {
     @JsProperty
     public boolean rethrowRenderErrors;
     /**
+     * Returns true if the sampleHeight function is supported.
+     * @see {@link Scene#sampleHeight(Cartographic, JsObject[])}
+     */
+    @JsProperty(name = "sampleHeightSupported")
+    public native boolean sampleHeightSupported();
+    /**
      * Gets whether or not the scene is optimized for 3D only viewing.
      */
     @JsProperty(name = "scene3DOnly")
@@ -463,6 +470,50 @@ public class Scene {
      */
     @JsConstructor
     public Scene(SceneOptions options) {}
+
+    /**
+     * Clamps the given cartesian position to the scene geometry along the geodetic surface normal. Returns the clamped
+     * position or undefined if there was no scene geometry to clamp to. May be used to clamp objects to the globe, 3D Tiles, or primitives in the scene.
+     * This function only clamps to globe tiles and 3D Tiles that are rendered in the current view.
+     * Clamps to all other primitives regardless of their visibility.
+     * @param cartesian The cartesian position.
+     * This may be undefined if there was no scene geometry to clamp to.
+     *
+     * @see {@link Scene#sampleHeight(Cartographic, JsObject[])}
+     */
+    @JsMethod
+    public native Cartesian3 clampToHeight(Cartesian3 cartesian);
+
+    /**
+     * Clamps the given cartesian position to the scene geometry along the geodetic surface normal. Returns the clamped
+     * position or undefined if there was no scene geometry to clamp to. May be used to clamp objects to the globe, 3D Tiles, or primitives in the scene.
+     * This function only clamps to globe tiles and 3D Tiles that are rendered in the current view.
+     * Clamps to all other primitives regardless of their visibility.
+     * @param cartesian The cartesian position.
+     * @param objectsToExclude A list of primitives, entities, or features to not clamp to.
+     * @return The modified result parameter or a new Cartesian3 instance if one was not provided.
+     * This may be undefined if there was no scene geometry to clamp to.
+     *
+     * @see {@link Scene#sampleHeight(Cartographic, JsObject[])}
+     */
+    @JsMethod
+    public native Cartesian3 clampToHeight(Cartesian3 cartesian, JsObject[] objectsToExclude);
+
+    /**
+     * Clamps the given cartesian position to the scene geometry along the geodetic surface normal. Returns the clamped
+     * position or undefined if there was no scene geometry to clamp to. May be used to clamp objects to the globe, 3D Tiles, or primitives in the scene.
+     * This function only clamps to globe tiles and 3D Tiles that are rendered in the current view.
+     * Clamps to all other primitives regardless of their visibility.
+     * @param cartesian The cartesian position.
+     * @param objectsToExclude A list of primitives, entities, or features to not clamp to.
+     * @param result An optional object to return the clamped position.
+     * @return The modified result parameter or a new Cartesian3 instance if one was not provided.
+     * This may be undefined if there was no scene geometry to clamp to.
+     *
+     * @see {@link Scene#sampleHeight(Cartographic, JsObject[])}
+     */
+    @JsMethod
+    public native Cartesian3 clampToHeight(Cartesian3 cartesian, JsObject[] objectsToExclude, Cartesian3 result);
 
     /**
      * Instantly completes an active transition.
@@ -639,6 +690,33 @@ public class Scene {
      */
     @JsMethod
     public native void requestRender();
+
+    /**
+     * Returns the height of scene geometry at the given cartographic position or undefined if there was no
+     * scene geometry to sample height from. May be used to clamp objects to the globe, 3D Tiles, or primitives in the scene.
+     * This function only samples height from globe tiles and 3D Tiles that are rendered in the current view.
+     * Samples height from all other primitives regardless of their visibility.
+     * @param position The cartographic position to sample height from.
+     * @return The height. This may be undefined if there was no scene geometry to sample height from.
+     *
+     * @see {@link Scene#clampToHeight}
+     */
+    @JsMethod
+    public native double sampleHeight(Cartographic position);
+
+    /**
+     * Returns the height of scene geometry at the given cartographic position or undefined if there was no
+     * scene geometry to sample height from. May be used to clamp objects to the globe, 3D Tiles, or primitives in the scene.
+     * This function only samples height from globe tiles and 3D Tiles that are rendered in the current view.
+     * Samples height from all other primitives regardless of their visibility.
+     * @param position The cartographic position to sample height from.
+     * @param objectsToExclude A list of primitives, entities, or features to not sample height from.
+     * @return The height. This may be undefined if there was no scene geometry to sample height from.
+     *
+     * @see {@link Scene#clampToHeight}
+     */
+    @JsMethod
+    public native double sampleHeight(Cartographic position, JsObject[] objectsToExclude);
 
     @JsFunction
     public interface Listener {
