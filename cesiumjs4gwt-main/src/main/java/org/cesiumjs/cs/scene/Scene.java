@@ -472,6 +472,63 @@ public class Scene {
     public Scene(SceneOptions options) {}
 
     /**
+     * Transforms a position in cartesian coordinates to canvas coordinates. This is commonly used to place an HTML
+     * element at the same screen position as an object in the scene.
+     * @param position The position in cartesian coordinates.
+     * @return The modified result parameter or a new Cartesian2 instance if one was not provided.
+     * This may be undefined if the input position is near the center of the ellipsoid.
+     *
+     * <pre>
+     *     Example:
+     *     {@code
+     *     ViewerPanel panel = new ViewerPanel();
+     *     panel.getViewer().extend(viewerCesiumNavigationMixin.instance(), options);
+     *     final Scene scene = panel.getViewer().scene();
+     *     Ellipsoid ellipsoid = scene.globe.ellipsoid;
+     *     final Cartesian3 position = Cartesian3.fromDegrees(0.0, 0.0);
+     *     ScreenSpaceEventHandler handler = new ScreenSpaceEventHandler(scene.canvas());
+     *     handler.setInputAction(new ScreenSpaceEventHandler.Listener() {
+     *         @Override
+     *         public void function(Object event) {
+     *             Cesium.log(scene.cartesianToCanvasCoordinates(position));
+     *         }
+     *     }, ScreenSpaceEventType.MOUSE_MOVE());
+     *     }
+     * </pre>
+     */
+    @JsMethod
+    public native Cartesian2 cartesianToCanvasCoordinates(Cartesian3 position);
+
+    /**
+     * Transforms a position in cartesian coordinates to canvas coordinates. This is commonly used to place an HTML
+     * element at the same screen position as an object in the scene.
+     * @param position The position in cartesian coordinates.
+     * @param result An optional object to return the input position transformed to canvas coordinates.
+     * @return The modified result parameter or a new Cartesian2 instance if one was not provided.
+     * This may be undefined if the input position is near the center of the ellipsoid.
+     *
+     * <pre>
+     *     Example:
+     *     {@code
+     *     ViewerPanel panel = new ViewerPanel();
+     *     panel.getViewer().extend(viewerCesiumNavigationMixin.instance(), options);
+     *     final Scene scene = panel.getViewer().scene();
+     *     Ellipsoid ellipsoid = scene.globe.ellipsoid;
+     *     final Cartesian3 position = Cartesian3.fromDegrees(0.0, 0.0);
+     *     ScreenSpaceEventHandler handler = new ScreenSpaceEventHandler(scene.canvas());
+     *     handler.setInputAction(new ScreenSpaceEventHandler.Listener() {
+     *         @Override
+     *         public void function(Object event) {
+     *             Cesium.log(scene.cartesianToCanvasCoordinates(position));
+     *         }
+     *     }, ScreenSpaceEventType.MOUSE_MOVE());
+     *     }
+     * </pre>
+     */
+    @JsMethod
+    public native Cartesian2 cartesianToCanvasCoordinates(Cartesian3 position, Cartesian2 result);
+
+    /**
      * Clamps the given cartesian position to the scene geometry along the geodetic surface normal. Returns the clamped
      * position or undefined if there was no scene geometry to clamp to. May be used to clamp objects to the globe, 3D Tiles, or primitives in the scene.
      * This function only clamps to globe tiles and 3D Tiles that are rendered in the current view.
