@@ -29,6 +29,7 @@ public class Rectangle {
     /**
      * The largest possible rectangle.
      */
+    @JsProperty(name = "MAX_VALUE")
     public static native Rectangle MAX_VALUE();
     /**
      * The number of elements used to pack the object into an array.
