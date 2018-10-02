@@ -104,5 +104,7 @@ public class InjectorModule extends AbstractGinModule {
         bind(MultipleSyncedViews.class).asEagerSingleton();
 
         bind(TimeDynamicPointCloud.class).asEagerSingleton();
+
+        bind(Atmosphere.class).asEagerSingleton();
     }
 }
