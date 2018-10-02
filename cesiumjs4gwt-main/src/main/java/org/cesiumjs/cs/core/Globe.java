@@ -43,6 +43,11 @@ public class Globe {
     @JsProperty
     public ClippingPlaneCollection clippingPlanes;
     /**
+     * Use this to limit terrain and imagery to a specific Rectangle area.
+     */
+    @JsProperty
+    public Rectangle cartographicLimitRectangle;
+    /**
      * True if primitives such as billboards, polylines, labels, etc. should be depth-tested against the terrain surface,
      * or false if such primitives should always be drawn on top of terrain unless they're on the opposite side of the globe.
      * The disadvantage of depth testing primitives against terrain is that slight numerical noise or terrain
