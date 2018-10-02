@@ -383,7 +383,7 @@ public class Scene {
     public boolean rethrowRenderErrors;
     /**
      * Returns true if the sampleHeight function is supported.
-     * @see {@link Scene#sampleHeight(Cartographic, JsObject[])}
+     * @see Scene#sampleHeight
      */
     @JsProperty(name = "sampleHeightSupported")
     public native boolean sampleHeightSupported();
@@ -488,7 +488,7 @@ public class Scene {
      *     final Cartesian3 position = Cartesian3.fromDegrees(0.0, 0.0);
      *     ScreenSpaceEventHandler handler = new ScreenSpaceEventHandler(scene.canvas());
      *     handler.setInputAction(new ScreenSpaceEventHandler.Listener() {
-     *         @Override
+     *         {@literal @}Override
      *         public void function(Object event) {
      *             Cesium.log(scene.cartesianToCanvasCoordinates(position));
      *         }
@@ -517,7 +517,7 @@ public class Scene {
      *     final Cartesian3 position = Cartesian3.fromDegrees(0.0, 0.0);
      *     ScreenSpaceEventHandler handler = new ScreenSpaceEventHandler(scene.canvas());
      *     handler.setInputAction(new ScreenSpaceEventHandler.Listener() {
-     *         @Override
+     *         {@literal @}Override
      *         public void function(Object event) {
      *             Cesium.log(scene.cartesianToCanvasCoordinates(position));
      *         }
@@ -536,7 +536,7 @@ public class Scene {
      * @param cartesian The cartesian position.
      * This may be undefined if there was no scene geometry to clamp to.
      *
-     * @see {@link Scene#sampleHeight(Cartographic, JsObject[])}
+     * @see Scene#sampleHeight
      */
     @JsMethod
     public native Cartesian3 clampToHeight(Cartesian3 cartesian);
@@ -551,7 +551,7 @@ public class Scene {
      * @return The modified result parameter or a new Cartesian3 instance if one was not provided.
      * This may be undefined if there was no scene geometry to clamp to.
      *
-     * @see {@link Scene#sampleHeight(Cartographic, JsObject[])}
+     * @see Scene#sampleHeight
      */
     @JsMethod
     public native Cartesian3 clampToHeight(Cartesian3 cartesian, JsObject[] objectsToExclude);
@@ -567,7 +567,7 @@ public class Scene {
      * @return The modified result parameter or a new Cartesian3 instance if one was not provided.
      * This may be undefined if there was no scene geometry to clamp to.
      *
-     * @see {@link Scene#sampleHeight(Cartographic, JsObject[])}
+     * @see Scene#sampleHeight
      */
     @JsMethod
     public native Cartesian3 clampToHeight(Cartesian3 cartesian, JsObject[] objectsToExclude, Cartesian3 result);
@@ -756,7 +756,7 @@ public class Scene {
      * @param position The cartographic position to sample height from.
      * @return The height. This may be undefined if there was no scene geometry to sample height from.
      *
-     * @see {@link Scene#clampToHeight}
+     * @see Scene#clampToHeight
      */
     @JsMethod
     public native double sampleHeight(Cartographic position);
@@ -770,7 +770,7 @@ public class Scene {
      * @param objectsToExclude A list of primitives, entities, or features to not sample height from.
      * @return The height. This may be undefined if there was no scene geometry to sample height from.
      *
-     * @see {@link Scene#clampToHeight}
+     * @see Scene#clampToHeight
      */
     @JsMethod
     public native double sampleHeight(Cartographic position, JsObject[] objectsToExclude);
