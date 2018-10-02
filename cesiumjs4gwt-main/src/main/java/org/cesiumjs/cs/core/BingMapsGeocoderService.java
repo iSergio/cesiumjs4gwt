@@ -55,5 +55,5 @@ public class BingMapsGeocoderService implements GeocoderService {
      * @return promise
      */
     @JsMethod
-    public native Promise<GeocoderResult, String> geocode(String query);
+    public native Promise<GeocoderResult[], String> geocode(String query);
 }

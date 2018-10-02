@@ -130,7 +130,7 @@ public class Viewer {
      * Gets the Geocoder.
      */
     @JsProperty(name = "geocoder")
-    public native JsObject geocoder();
+    public native Geocoder geocoder();
     /**
      * Gets the HomeButton.
      */

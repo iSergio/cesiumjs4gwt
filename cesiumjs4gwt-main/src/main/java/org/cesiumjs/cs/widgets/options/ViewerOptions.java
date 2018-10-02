@@ -22,6 +22,7 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.collections.DataSourceCollection;
+import org.cesiumjs.cs.core.GeocoderService;
 import org.cesiumjs.cs.core.Globe;
 import org.cesiumjs.cs.core.SkyAtmosphere;
 import org.cesiumjs.cs.core.SkyBox;
@@ -65,7 +66,7 @@ public class ViewerOptions {
      * If set to false, the Geocoder widget will not be created. Default: true.
      */
     @JsProperty
-    public Object geocoder;
+    public GeocoderService[] geocoder;
     /**
      * If set to false, the HomeButton widget will not be created. Default: true.
      */

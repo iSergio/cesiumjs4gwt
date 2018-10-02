@@ -39,5 +39,5 @@ public class CartographicGeocoderService {
      * @return promise
      */
     @JsMethod
-    public native Promise<GeocoderResult, String> geocode(String query);
+    public native Promise<GeocoderResult[], String> geocode(String query);
 }
