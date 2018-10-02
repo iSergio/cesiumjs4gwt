@@ -25,6 +25,7 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.GeocoderResult;
+import org.cesiumjs.cs.core.GeocoderService;
 import org.cesiumjs.cs.core.Rectangle;
 import org.cesiumjs.cs.core.Resource;
 import org.cesiumjs.cs.js.JsObject;
@@ -81,7 +82,7 @@ public class CustomGeocoder extends AbstractExample {
             }
         };
         ViewerOptions viewerOptions = new ViewerOptions();
-        viewerOptions.geocoder = openStreetMapNominatimGeocoder;
+        viewerOptions.geocoderServices = new GeocoderService[] {openStreetMapNominatimGeocoder};
         csVPanel = new ViewerPanel(viewerOptions);
         contentPanel.add(new HTML("<p>Example of a custom geocoder.</p>"));
         contentPanel.add(csVPanel);
@@ -97,7 +98,7 @@ public class CustomGeocoder extends AbstractExample {
     }
 
     @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-    private static class OpenStreetMapNominatimGeocoder {
+    private static class OpenStreetMapNominatimGeocoder implements GeocoderService {
         @JsProperty(name = "geocode")
         public Geocode geocode;
 
