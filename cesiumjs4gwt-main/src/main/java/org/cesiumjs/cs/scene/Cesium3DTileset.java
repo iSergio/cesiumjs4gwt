@@ -200,6 +200,15 @@ public class Cesium3DTileset {
     @JsProperty
     public boolean immediatelyLoadDesiredLevelOfDetail;
     /**
+     * The event fired to indicate that all tiles that meet the screen space error this frame are loaded.
+     * This event is fired once when all tiles in the initial view are loaded.
+     * This event is fired at the end of the frame after the scene is rendered.
+     * Default: new Event();
+     * @see {@link Cesium3DTileset#allTilesLoaded}
+     */
+    @JsProperty
+    public Event initialTilesLoaded;
+    /**
      * The event fired to indicate progress of loading new tiles. This event is fired when a new tile is requested,
      * when a requested tile is finished downloading, and when a downloaded tile has been processed and is ready to render.
      * The number of pending tile requests, numberOfPendingRequests, and number of tiles processing, numberOfTilesProcessing
