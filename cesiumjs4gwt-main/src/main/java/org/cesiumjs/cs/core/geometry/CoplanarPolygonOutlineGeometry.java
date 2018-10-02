@@ -55,7 +55,7 @@ public class CoplanarPolygonOutlineGeometry extends Geometry implements Packable
     /**
      * A description of a coplanar polygon outline from an array of positions.
      * @param options {@link CoplanarPolygonOutlineGeometryFromPositionsOptions} object.
-     * @return
+     * @return coplanar polygon outline from an array of positions.
      */
     @JsMethod
     public static native CoplanarPolygonOutlineGeometry fromPositions(CoplanarPolygonOutlineGeometryFromPositionsOptions options);
