@@ -388,6 +388,12 @@ public class Scene {
     @JsProperty(name = "sampleHeightSupported")
     public native boolean sampleHeightSupported();
     /**
+     * Returns true if the clampToHeight function is supported.
+     * @see Scene#clampToHeight
+     */
+    @JsProperty
+    public native boolean clampToHeightSupported();
+    /**
      * Gets whether or not the scene is optimized for 3D only viewing.
      */
     @JsProperty(name = "scene3DOnly")
