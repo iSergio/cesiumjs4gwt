@@ -58,7 +58,7 @@ public class CartographicLimitRectangle extends AbstractExample {
         csVPanel = new ViewerPanel(viewerOptions);
 
         // Tropics of Cancer and Capricorn
-        Rectangle coffeeBeltRectangle = Rectangle.fromDegrees(-180.0, -23.43687, 180.0, 23.43687);
+        final Rectangle coffeeBeltRectangle = Rectangle.fromDegrees(-180.0, -23.43687, 180.0, 23.43687);
 
         csVPanel.getViewer().scene().globe.cartographicLimitRectangle = coffeeBeltRectangle;
         csVPanel.getViewer().scene().skyAtmosphere.show = false;

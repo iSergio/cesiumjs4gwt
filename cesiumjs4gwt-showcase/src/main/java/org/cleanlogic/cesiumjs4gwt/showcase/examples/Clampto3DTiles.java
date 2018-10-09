@@ -84,7 +84,7 @@ public class Clampto3DTiles extends AbstractExample {
                 @Override
                 public void function(Object... o) {
                     clock.shouldAnimate = true;
-                    JsObject[] objectsToExclude = new JsObject[] {(JsObject) (Object) entity};
+                    final JsObject[] objectsToExclude = new JsObject[] {(JsObject) (Object) entity};
                     scene.postRender().addEventListener(new Event.Listener() {
                         @Override
                         public void function(Object... o) {
