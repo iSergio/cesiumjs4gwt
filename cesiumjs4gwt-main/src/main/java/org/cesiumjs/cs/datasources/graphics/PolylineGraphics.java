@@ -22,6 +22,7 @@ import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.core.Math;
 import org.cesiumjs.cs.datasources.graphics.options.PolylineGraphicsOptions;
+import org.cesiumjs.cs.datasources.properties.MaterialProperty;
 import org.cesiumjs.cs.datasources.properties.Property;
 import org.cesiumjs.cs.scene.enums.ShadowMode;
 
@@ -69,13 +70,13 @@ public class PolylineGraphics {
      * Default: {@link org.cesiumjs.cs.core.Color#WHITE()}
      */
     @JsProperty
-    public Property material;
+    public MaterialProperty material;
     /**
      * Gets or sets the Property specifying the material used to draw the polyline when it fails the depth test.
      * Default: undefined.
      */
     @JsProperty
-    private Property depthFailMaterial;
+    private MaterialProperty depthFailMaterial;
     /**
      * A numeric Property specifying the angular distance between each latitude and longitude if followSurface is true.
      * Default: {@link Math#RADIANS_PER_DEGREE()}
