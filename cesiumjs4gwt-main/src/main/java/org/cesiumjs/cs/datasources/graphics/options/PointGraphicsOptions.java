@@ -80,6 +80,11 @@ public class PointGraphicsOptions {
      */
     @JsProperty
     public Property distanceDisplayCondition;
+    /**
+     * A Property specifying the distance from the camera at which to disable the depth test to.
+     */
+    @JsProperty
+    public Property disableDepthTestDistance;
 
     /**
      * Options for {@link org.cesiumjs.cs.datasources.graphics.PointGraphics}
