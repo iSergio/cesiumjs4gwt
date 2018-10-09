@@ -16,12 +16,10 @@
 
 package org.cesiumjs.cs.datasources;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.collections.EntityCollection;
 import org.cesiumjs.cs.core.Event;
+import org.cesiumjs.cs.core.JulianDate;
 import org.cesiumjs.cs.datasources.options.CzmlDataSourceOptions;
 import org.cesiumjs.cs.promise.Promise;
 
@@ -29,7 +27,7 @@ import org.cesiumjs.cs.promise.Promise;
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = "Cesium", name = "CzmlDataSource")
-public class CzmlDataSource {
+public class CzmlDataSource implements DataSource {
     //TODO: Gets the array of CZML processing functions.
 //    staticCesium.CzmlDataSource.updaters : Array DataSources/CzmlDataSource.js 1965
 //    Gets the array of CZML processing functions.
@@ -207,4 +205,9 @@ public class CzmlDataSource {
      */
     @JsMethod
     public native Promise<CzmlDataSource, Void> process(Object czml, CzmlDataSourceOptions options);
+
+    @Override
+    @JsMethod
+    @JsIgnore
+    public native boolean update(JulianDate time);
 }
