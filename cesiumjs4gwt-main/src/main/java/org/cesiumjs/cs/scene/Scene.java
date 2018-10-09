@@ -391,7 +391,7 @@ public class Scene {
      * Returns true if the clampToHeight function is supported.
      * @see Scene#clampToHeight
      */
-    @JsProperty
+    @JsProperty(name = "clampToHeightSupported")
     public native boolean clampToHeightSupported();
     /**
      * Gets whether or not the scene is optimized for 3D only viewing.
