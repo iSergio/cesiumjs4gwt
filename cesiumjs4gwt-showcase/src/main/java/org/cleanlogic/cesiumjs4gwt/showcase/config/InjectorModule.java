@@ -109,5 +109,6 @@ public class InjectorModule extends AbstractGinModule {
         bind(CartographicLimitRectangle.class).asEagerSingleton();
         bind(Clampto3DModel.class).asEagerSingleton();
         bind(Clampto3DTiles.class).asEagerSingleton();
+        bind(ClamptoTerrain.class).asEagerSingleton();
     }
 }
