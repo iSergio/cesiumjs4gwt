@@ -25,6 +25,7 @@ import org.cesiumjs.cs.core.Math;
 import org.cesiumjs.cs.datasources.properties.ConstantProperty;
 import org.cesiumjs.cs.datasources.properties.MaterialProperty;
 import org.cesiumjs.cs.datasources.properties.Property;
+import org.cesiumjs.cs.scene.enums.ClassificationType;
 import org.cesiumjs.cs.scene.enums.ShadowMode;
 
 /**
@@ -142,6 +143,11 @@ public class PolygonGraphicsOptions {
      */
     @JsProperty
     public ConstantProperty<Integer> zIndex;
+    /**
+     * Gets or sets the {@link ClassificationType#TERRAIN()} Property specifying whether this polygon will classify terrain, 3D Tiles, or both when on the ground.
+     */
+    @JsProperty
+    public Property classificationType;
 
     /**
      * Options for {@link org.cesiumjs.cs.datasources.graphics.PolygonGraphics}
