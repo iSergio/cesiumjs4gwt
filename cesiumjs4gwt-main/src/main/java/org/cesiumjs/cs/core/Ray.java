@@ -52,6 +52,23 @@ public class Ray {
     public Ray(Cartesian3 origin, Cartesian3 direction) {}
 
     /**
+     * Duplicates a Ray instance.
+     * @param ray The ray to duplicate.
+     * @return The modified result parameter or a new Ray instance if one was not provided. (Returns undefined if ray is undefined)
+     */
+    @JsMethod
+    public static native Ray clone(Ray ray);
+
+    /**
+     * Duplicates a Ray instance.
+     * @param ray The ray to duplicate.
+     * @param result The object onto which to store the result.
+     * @return The modified result parameter or a new Ray instance if one was not provided. (Returns undefined if ray is undefined)
+     */
+    @JsMethod
+    public static native Ray clone(Ray ray, Ray result);
+
+    /**
      * Computes the point along the ray given by r(t) = o + t*d, where o is the origin of the ray and d is the direction.
      * <pre>
      *     Example:
