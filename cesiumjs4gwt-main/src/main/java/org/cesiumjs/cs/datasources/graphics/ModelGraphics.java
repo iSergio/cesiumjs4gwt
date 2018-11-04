@@ -73,6 +73,11 @@ public class ModelGraphics {
     @JsProperty
     public Property incrementallyLoadTextures;
     /**
+     * A property specifying the Cartesian3 color of the light source when shading the model.
+     */
+    @JsProperty
+    public Property lightColor;
+    /**
      * A boolean Property specifying if glTF animations should hold the last pose for time durations with no keyframes.
      * Default: true
      */

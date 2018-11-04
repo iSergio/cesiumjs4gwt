@@ -23,9 +23,7 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.collections.ClippingPlaneCollection;
-import org.cesiumjs.cs.core.Color;
-import org.cesiumjs.cs.core.DistanceDisplayCondition;
-import org.cesiumjs.cs.core.Matrix4;
+import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.scene.Scene;
 
 /**
@@ -190,6 +188,17 @@ public class ModelOptions {
      */
     @JsProperty
     public boolean dequantizeInShader;
+    /**
+     * Scales diffuse and specular image-based lighting from the earth, sky, atmosphere and star skybox.
+     * Default: new Cartesian2(1.0, 1.0)
+     */
+    @JsProperty
+    public Cartesian2 imageBasedLightingFactor;
+    /**
+     * The color and intensity of the sunlight used to shade the model.
+     */
+    @JsProperty
+    public Cartesian3 lightColor;
 
     @JsConstructor
     public  ModelOptions() {}

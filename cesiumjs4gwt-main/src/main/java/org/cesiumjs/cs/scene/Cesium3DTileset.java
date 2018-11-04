@@ -209,6 +209,14 @@ public class Cesium3DTileset {
     @JsProperty
     public Event initialTilesLoaded;
     /**
+     * The color and intensity of the sunlight used to shade a model.
+     * For example, disabling additional light sources by setting model.imageBasedLightingFactor = new Cartesian2(0.0, 0.0)
+     * will make the model much darker. Here, increasing the intensity of the light source will make the model brighter.
+     * Default Value:  undefined
+     */
+    @JsProperty
+    public Cartesian3 lightColor;
+    /**
      * The event fired to indicate progress of loading new tiles. This event is fired when a new tile is requested,
      * when a requested tile is finished downloading, and when a downloaded tile has been processed and is ready to render.
      * The number of pending tile requests, numberOfPendingRequests, and number of tiles processing, numberOfTilesProcessing

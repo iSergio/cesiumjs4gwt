@@ -18,9 +18,7 @@ package org.cesiumjs.cs.scene.options;
 
 import jsinterop.annotations.*;
 import org.cesiumjs.cs.collections.ClippingPlaneCollection;
-import org.cesiumjs.cs.core.Ellipsoid;
-import org.cesiumjs.cs.core.Matrix4;
-import org.cesiumjs.cs.core.Resource;
+import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.promise.Promise;
 import org.cesiumjs.cs.scene.PointCloudShading;
 import org.cesiumjs.cs.scene.enums.ClassificationType;
@@ -158,6 +156,17 @@ public class Cesium3DTilesetOptions {
      */
     @JsProperty
     public PointCloudShading pointCloudShading;
+    /**
+     * Scales the diffuse and specular image-based lighting from the earth, sky, atmosphere and star skybox.
+     * Default: new Cartesian2(1.0, 1.0)
+     */
+    @JsProperty
+    public Cartesian2 imageBasedLightingFactor;
+    /**
+     * The color and intensity of the sunlight used to shade models.
+     */
+    @JsProperty
+    public Cartesian3 lightColor;
     /**
      * For debugging only. Determines if only the tiles from last frame should be used for rendering.
      * Defaule: false;

@@ -22,10 +22,7 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.collections.ClippingPlaneCollection;
 import org.cesiumjs.cs.collections.ModelAnimationCollection;
-import org.cesiumjs.cs.core.BoundingSphere;
-import org.cesiumjs.cs.core.Color;
-import org.cesiumjs.cs.core.DistanceDisplayCondition;
-import org.cesiumjs.cs.core.Matrix4;
+import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.promise.Promise;
 import org.cesiumjs.cs.scene.enums.ColorBlendMode;
 import org.cesiumjs.cs.scene.enums.ShadowMode;
@@ -147,6 +144,15 @@ public class Model {
      */
     @JsProperty
     public boolean incrementallyLoadTextures;
+    /**
+     * The color and intensity of the sunlight used to shade the model.
+     * For example, disabling additional light sources by setting
+     * model.imageBasedLightingFactor = new Cesium.Cartesian2(0.0, 0.0) will make the model much darker. Here,
+     * increasing the intensity of the light source will make the model brighter.
+     * Default: undefined
+     */
+    @JsProperty
+    public Cartesian3 lightColor;
     /**
      * The maximum scale size for a model. This can be used to give an upper limit to the {@link Model#minimumPixelSize},
      * ensuring that the model is never an unreasonable scale.

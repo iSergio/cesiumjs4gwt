@@ -135,6 +135,17 @@ public class ModelGraphicsOptions {
      */
     @JsProperty
     public Property clippingPlanes;
+    /**
+     * A property specifying the contribution from diffuse and specular image-based lighting.
+     * Default: new Cartesian2(1.0, 1.0)
+     */
+    @JsProperty
+    public Property imageBasedLightingFactor;
+    /**
+     * A property specifying the light color to use when shading the model. The default sun light color will be used when undefined.
+     */
+    @JsProperty
+    public Property lightColor;
 
     @JsConstructor
     public ModelGraphicsOptions() {}
