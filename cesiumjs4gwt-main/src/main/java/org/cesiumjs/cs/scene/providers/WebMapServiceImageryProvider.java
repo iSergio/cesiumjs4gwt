@@ -20,10 +20,8 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.Credit;
-import org.cesiumjs.cs.core.Event;
-import org.cesiumjs.cs.core.Rectangle;
-import org.cesiumjs.cs.core.TilingScheme;
+import org.cesiumjs.cs.collections.TimeIntervalCollection;
+import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.js.JsImage;
 import org.cesiumjs.cs.promise.Promise;
 import org.cesiumjs.cs.scene.GetFeatureInfoParameters;
@@ -89,12 +87,6 @@ public class WebMapServiceImageryProvider implements ImageryProvider {
      */
     @JsProperty(name = "minimumLevel")
     public native int minimumLevel();
-    //TODO: Proxy
-//    /**
-//     * Gets the proxy used by this provider.
-//     */
-//    @JsProperty(name = "proxy")
-//    public native Proxy proxy();
     /**
      * Gets a value indicating whether or not the provider is ready for use.
      */
@@ -138,6 +130,17 @@ public class WebMapServiceImageryProvider implements ImageryProvider {
      */
     @JsProperty(name = "url")
     public native String url();
+    /**
+     * Gets or sets a clock that is used to get keep the time used for time dynamic parameters.
+     */
+    @JsProperty
+    public Clock clock;
+    /**
+     * Gets or sets a time interval collection that is used to get time dynamic parameters. The data of each TimeInterval
+     * is an object containing the keys and values of the properties that are used during tile requests.
+     */
+    @JsProperty
+    public TimeIntervalCollection times;
 
     /**
      * Provides tiled imagery hosted by a Web Map Service (WMS) server.

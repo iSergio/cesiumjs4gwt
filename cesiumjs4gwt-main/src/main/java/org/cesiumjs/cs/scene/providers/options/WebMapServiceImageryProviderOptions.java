@@ -19,10 +19,8 @@ package org.cesiumjs.cs.scene.providers.options;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.Credit;
-import org.cesiumjs.cs.core.Ellipsoid;
-import org.cesiumjs.cs.core.Rectangle;
-import org.cesiumjs.cs.core.TilingScheme;
+import org.cesiumjs.cs.collections.TimeIntervalCollection;
+import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.scene.GetFeatureInfoFormat;
 import org.cesiumjs.cs.scene.GetFeatureInfoParameters;
 import org.cesiumjs.cs.scene.WebMapServiceParameters;
@@ -113,19 +111,40 @@ public class WebMapServiceImageryProviderOptions {
     @JsProperty
     public int maximumLevel;
     /**
+     * CRS specification, for use with WMS specification >= 1.3.0.
+     */
+    @JsProperty
+    public String crs;
+    /**
+     * SRS specification, for use with WMS specification 1.1.0 or 1.1.1
+     */
+    @JsProperty
+    public String srs;
+    /**
      * A credit for the data source, which is displayed on the canvas.
      */
     @JsProperty
     public Credit credit;
-    //TODO: Proxy
-//    /**
-//     * A proxy to use for requests. This object is expected to have a getURL function which returns the proxied URL, if needed.
-//     */
-//    @JsProperty
-//    public Proxy proxy;
     /**
-     * 'abc'
+     * A credit for the data source, which is displayed on the canvas.
+     */
+    @JsProperty(name = "credit")
+    public String creditStr;
+    /**
+     * The subdomains to use for the {s} placeholder in the URL template. If this parameter is a single string,
+     * each character in the string is a subdomain. If it is an array, each element in the array is a subdomain.
+     * Default: 'abc'
      */
     @JsProperty
     public String[] subdomains;
+    /**
+     * A Clock instance that is used when determining the value for the time dimension. Required when options.times is specified.
+     */
+    @JsProperty
+    private Clock clock;
+    /**
+     * TimeIntervalCollection with its data property being an object containing time dynamic dimension and their values.
+     */
+    @JsProperty
+    private TimeIntervalCollection times;
 }
