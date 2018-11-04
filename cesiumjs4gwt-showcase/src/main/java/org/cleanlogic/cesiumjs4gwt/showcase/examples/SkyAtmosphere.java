@@ -1,3 +1,19 @@
+/*
+ * Copyright 2017 iserge.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package org.cleanlogic.cesiumjs4gwt.showcase.examples;
 
 import com.google.gwt.core.client.GWT;
@@ -23,7 +39,7 @@ import javax.inject.Inject;
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
-public class AtmosphereColor extends AbstractExample {
+public class SkyAtmosphere extends AbstractExample {
     private ViewerPanel _csVPanel;
 
     private Slider _hueShiftSlider;
@@ -35,8 +51,8 @@ public class AtmosphereColor extends AbstractExample {
     private TextBox _brightnessShiftTBox;
 
     @Inject
-    public AtmosphereColor(ShowcaseExampleStore store) {
-        super("Atmosphere Color", "Adjust hue, saturation, and brightness of the sky/atmosphere", new String[]{"Showcase", "Cesium", "3d", "atmosphere", "fog", "lighting", "hue", "saturation", "brightness"}, store);
+    public SkyAtmosphere(ShowcaseExampleStore store) {
+        super("Sky Atmosphere", "Adjust hue, saturation, and brightness of the sky/atmosphere", new String[]{"Showcase", "Cesium", "3d", "atmosphere", "fog", "lighting", "hue", "saturation", "brightness"}, store);
     }
 
     @Override
@@ -195,7 +211,7 @@ public class AtmosphereColor extends AbstractExample {
     @Override
     public String[] getSourceCodeURLs() {
         String[] sourceCodeURLs = new String[1];
-        sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "AtmosphereColor.txt";
+        sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "SkyAtmosphere.txt";
         return sourceCodeURLs;
     }
 }
