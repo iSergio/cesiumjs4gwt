@@ -17900,6 +17900,9 @@ define('Core/oneTimeWarning',[
 
     oneTimeWarning.geometryZIndex = 'Entity geometry with zIndex are unsupported when height or extrudedHeight are defined.  zIndex will be ignored';
 
+    oneTimeWarning.geometryHeightReference = 'Entity corridor, ellipse, polygon or rectangle with heightReference must also have a defined height.  heightReference will be ignored';
+    oneTimeWarning.geometryExtrudedHeightReference = 'Entity corridor, ellipse, polygon or rectangle with extrudedHeightReference must also have a defined extrudedHeight.  extrudedHeightReference will be ignored';
+
     return oneTimeWarning;
 });
 
@@ -18203,6 +18206,39 @@ define('Core/isDataUri',[
     }
 
     return isDataUri;
+});
+
+define('Core/loadAndExecuteScript',[
+    '../ThirdParty/when'
+], function(
+    when) {
+        'use strict';
+
+    /**
+     * @private
+     */
+    function loadAndExecuteScript(url) {
+        var deferred = when.defer();
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = url;
+
+        var head = document.getElementsByTagName('head')[0];
+        script.onload = function() {
+            script.onload = undefined;
+            head.removeChild(script);
+            deferred.resolve();
+        };
+        script.onerror = function(e) {
+            deferred.reject(e);
+        };
+
+        head.appendChild(script);
+
+        return deferred.promise;
+    }
+
+    return loadAndExecuteScript;
 });
 
 define('Core/isArray',[
@@ -19788,7 +19824,6 @@ define('Core/Resource',[
         './defineProperties',
         './deprecationWarning',
         './DeveloperError',
-        './FeatureDetection',
         './freezeObject',
         './getAbsoluteUri',
         './getBaseUri',
@@ -19796,6 +19831,7 @@ define('Core/Resource',[
         './isBlobUri',
         './isCrossOriginUrl',
         './isDataUri',
+        './loadAndExecuteScript',
         './objectToQuery',
         './queryToObject',
         './Request',
@@ -19816,7 +19852,6 @@ define('Core/Resource',[
         defineProperties,
         deprecationWarning,
         DeveloperError,
-        FeatureDetection,
         freezeObject,
         getAbsoluteUri,
         getBaseUri,
@@ -19824,6 +19859,7 @@ define('Core/Resource',[
         isBlobUri,
         isCrossOriginUrl,
         isDataUri,
+        loadAndExecuteScript,
         objectToQuery,
         queryToObject,
         Request,
@@ -21708,20 +21744,7 @@ define('Core/Resource',[
     };
 
     Resource._Implementations.loadAndExecuteScript = function(url, functionName, deferred) {
-        var script = document.createElement('script');
-        script.async = true;
-        script.src = url;
-
-        var head = document.getElementsByTagName('head')[0];
-        script.onload = function() {
-            script.onload = undefined;
-            head.removeChild(script);
-        };
-        script.onerror = function(e) {
-            deferred.reject(e);
-        };
-
-        head.appendChild(script);
+        return loadAndExecuteScript(url, functionName).otherwise(deferred.reject);
     };
 
     /**
@@ -22139,6 +22162,192 @@ define('Core/EarthOrientationParameters',[
     }
 
     return EarthOrientationParameters;
+});
+
+define('Core/HeadingPitchRoll',[
+        './defaultValue',
+        './defined',
+        './DeveloperError',
+        './Math'
+    ], function(
+        defaultValue,
+        defined,
+        DeveloperError,
+        CesiumMath) {
+    'use strict';
+
+    /**
+     * A rotation expressed as a heading, pitch, and roll. Heading is the rotation about the
+     * negative z axis. Pitch is the rotation about the negative y axis. Roll is the rotation about
+     * the positive x axis.
+     * @alias HeadingPitchRoll
+     * @constructor
+     *
+     * @param {Number} [heading=0.0] The heading component in radians.
+     * @param {Number} [pitch=0.0] The pitch component in radians.
+     * @param {Number} [roll=0.0] The roll component in radians.
+     */
+    function HeadingPitchRoll(heading, pitch, roll) {
+        this.heading = defaultValue(heading, 0.0);
+        this.pitch = defaultValue(pitch, 0.0);
+        this.roll = defaultValue(roll, 0.0);
+    }
+
+    /**
+     * Computes the heading, pitch and roll from a quaternion (see http://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles )
+     *
+     * @param {Quaternion} quaternion The quaternion from which to retrieve heading, pitch, and roll, all expressed in radians.
+     * @param {HeadingPitchRoll} [result] The object in which to store the result. If not provided, a new instance is created and returned.
+     * @returns {HeadingPitchRoll} The modified result parameter or a new HeadingPitchRoll instance if one was not provided.
+     */
+    HeadingPitchRoll.fromQuaternion = function(quaternion, result) {
+                if (!defined(quaternion)) {
+            throw new DeveloperError('quaternion is required');
+        }
+                if (!defined(result)) {
+            result = new HeadingPitchRoll();
+        }
+        var test = 2 * (quaternion.w * quaternion.y - quaternion.z * quaternion.x);
+        var denominatorRoll = 1 - 2 * (quaternion.x * quaternion.x + quaternion.y * quaternion.y);
+        var numeratorRoll = 2 * (quaternion.w * quaternion.x + quaternion.y * quaternion.z);
+        var denominatorHeading = 1 - 2 * (quaternion.y * quaternion.y + quaternion.z * quaternion.z);
+        var numeratorHeading = 2 * (quaternion.w * quaternion.z + quaternion.x * quaternion.y);
+        result.heading = -Math.atan2(numeratorHeading, denominatorHeading);
+        result.roll = Math.atan2(numeratorRoll, denominatorRoll);
+        result.pitch = -Math.asin(test);
+        return result;
+    };
+
+    /**
+     * Returns a new HeadingPitchRoll instance from angles given in degrees.
+     *
+     * @param {Number} heading the heading in degrees
+     * @param {Number} pitch the pitch in degrees
+     * @param {Number} roll the heading in degrees
+     * @param {HeadingPitchRoll} [result] The object in which to store the result. If not provided, a new instance is created and returned.
+     * @returns {HeadingPitchRoll} A new HeadingPitchRoll instance
+     */
+    HeadingPitchRoll.fromDegrees = function(heading, pitch, roll, result) {
+                if (!defined(heading)) {
+            throw new DeveloperError('heading is required');
+        }
+        if (!defined(pitch)) {
+            throw new DeveloperError('pitch is required');
+        }
+        if (!defined(roll)) {
+            throw new DeveloperError('roll is required');
+        }
+                if (!defined(result)) {
+            result = new HeadingPitchRoll();
+        }
+        result.heading = heading * CesiumMath.RADIANS_PER_DEGREE;
+        result.pitch = pitch * CesiumMath.RADIANS_PER_DEGREE;
+        result.roll = roll * CesiumMath.RADIANS_PER_DEGREE;
+        return result;
+    };
+
+    /**
+     * Duplicates a HeadingPitchRoll instance.
+     *
+     * @param {HeadingPitchRoll} headingPitchRoll The HeadingPitchRoll to duplicate.
+     * @param {HeadingPitchRoll} [result] The object onto which to store the result.
+     * @returns {HeadingPitchRoll} The modified result parameter or a new HeadingPitchRoll instance if one was not provided. (Returns undefined if headingPitchRoll is undefined)
+     */
+    HeadingPitchRoll.clone = function(headingPitchRoll, result) {
+        if (!defined(headingPitchRoll)) {
+            return undefined;
+        }
+        if (!defined(result)) {
+            return new HeadingPitchRoll(headingPitchRoll.heading, headingPitchRoll.pitch, headingPitchRoll.roll);
+        }
+        result.heading = headingPitchRoll.heading;
+        result.pitch = headingPitchRoll.pitch;
+        result.roll = headingPitchRoll.roll;
+        return result;
+    };
+
+    /**
+     * Compares the provided HeadingPitchRolls componentwise and returns
+     * <code>true</code> if they are equal, <code>false</code> otherwise.
+     *
+     * @param {HeadingPitchRoll} [left] The first HeadingPitchRoll.
+     * @param {HeadingPitchRoll} [right] The second HeadingPitchRoll.
+     * @returns {Boolean} <code>true</code> if left and right are equal, <code>false</code> otherwise.
+     */
+    HeadingPitchRoll.equals = function(left, right) {
+        return (left === right) ||
+            ((defined(left)) &&
+                (defined(right)) &&
+                (left.heading === right.heading) &&
+                (left.pitch === right.pitch) &&
+                (left.roll === right.roll));
+    };
+
+    /**
+     * Compares the provided HeadingPitchRolls componentwise and returns
+     * <code>true</code> if they pass an absolute or relative tolerance test,
+     * <code>false</code> otherwise.
+     *
+     * @param {HeadingPitchRoll} [left] The first HeadingPitchRoll.
+     * @param {HeadingPitchRoll} [right] The second HeadingPitchRoll.
+     * @param {Number} relativeEpsilon The relative epsilon tolerance to use for equality testing.
+     * @param {Number} [absoluteEpsilon=relativeEpsilon] The absolute epsilon tolerance to use for equality testing.
+     * @returns {Boolean} <code>true</code> if left and right are within the provided epsilon, <code>false</code> otherwise.
+     */
+    HeadingPitchRoll.equalsEpsilon = function(left, right, relativeEpsilon, absoluteEpsilon) {
+        return (left === right) ||
+            (defined(left) &&
+                defined(right) &&
+                CesiumMath.equalsEpsilon(left.heading, right.heading, relativeEpsilon, absoluteEpsilon) &&
+                CesiumMath.equalsEpsilon(left.pitch, right.pitch, relativeEpsilon, absoluteEpsilon) &&
+                CesiumMath.equalsEpsilon(left.roll, right.roll, relativeEpsilon, absoluteEpsilon));
+    };
+
+    /**
+     * Duplicates this HeadingPitchRoll instance.
+     *
+     * @param {HeadingPitchRoll} [result] The object onto which to store the result.
+     * @returns {HeadingPitchRoll} The modified result parameter or a new HeadingPitchRoll instance if one was not provided.
+     */
+    HeadingPitchRoll.prototype.clone = function(result) {
+        return HeadingPitchRoll.clone(this, result);
+    };
+
+    /**
+     * Compares this HeadingPitchRoll against the provided HeadingPitchRoll componentwise and returns
+     * <code>true</code> if they are equal, <code>false</code> otherwise.
+     *
+     * @param {HeadingPitchRoll} [right] The right hand side HeadingPitchRoll.
+     * @returns {Boolean} <code>true</code> if they are equal, <code>false</code> otherwise.
+     */
+    HeadingPitchRoll.prototype.equals = function(right) {
+        return HeadingPitchRoll.equals(this, right);
+    };
+
+    /**
+     * Compares this HeadingPitchRoll against the provided HeadingPitchRoll componentwise and returns
+     * <code>true</code> if they pass an absolute or relative tolerance test,
+     * <code>false</code> otherwise.
+     *
+     * @param {HeadingPitchRoll} [right] The right hand side HeadingPitchRoll.
+     * @param {Number} relativeEpsilon The relative epsilon tolerance to use for equality testing.
+     * @param {Number} [absoluteEpsilon=relativeEpsilon] The absolute epsilon tolerance to use for equality testing.
+     * @returns {Boolean} <code>true</code> if they are within the provided epsilon, <code>false</code> otherwise.
+     */
+    HeadingPitchRoll.prototype.equalsEpsilon = function(right, relativeEpsilon, absoluteEpsilon) {
+        return HeadingPitchRoll.equalsEpsilon(this, right, relativeEpsilon, absoluteEpsilon);
+    };
+
+    /**
+     * Creates a string representing this HeadingPitchRoll in the format '(heading, pitch, roll)' in radians.
+     *
+     * @returns {String} A string representing the provided HeadingPitchRoll in the format '(heading, pitch, roll)'.
+     */
+    HeadingPitchRoll.prototype.toString = function() {
+        return '(' + this.heading + ', ' + this.pitch + ', ' + this.roll + ')';
+    };
+
+    return HeadingPitchRoll;
 });
 
 define('Core/buildModuleUrl',[
@@ -22595,6 +22804,7 @@ define('Core/Transforms',[
         './EarthOrientationParameters',
         './EarthOrientationParametersSample',
         './Ellipsoid',
+        './HeadingPitchRoll',
         './Iau2006XysData',
         './Iau2006XysSample',
         './JulianDate',
@@ -22616,6 +22826,7 @@ define('Core/Transforms',[
         EarthOrientationParameters,
         EarthOrientationParametersSample,
         Ellipsoid,
+        HeadingPitchRoll,
         Iau2006XysData,
         Iau2006XysSample,
         JulianDate,
@@ -22704,92 +22915,92 @@ define('Core/Transforms',[
     * @return {localFrameToFixedFrameGenerator~resultat} The function that will computes a
     * 4x4 transformation matrix from a reference frame, with first axis and second axis compliant with the parameters,
     */
-    Transforms.localFrameToFixedFrameGenerator = function( firstAxis, secondAxis) {
-      if (!vectorProductLocalFrame.hasOwnProperty(firstAxis) || !vectorProductLocalFrame[firstAxis].hasOwnProperty(secondAxis)) {
-          throw new DeveloperError('firstAxis and secondAxis must be east, north, up, west, south or down.');
-      }
-      var thirdAxis = vectorProductLocalFrame[firstAxis][secondAxis];
+    Transforms.localFrameToFixedFrameGenerator = function (firstAxis, secondAxis) {
+        if (!vectorProductLocalFrame.hasOwnProperty(firstAxis) || !vectorProductLocalFrame[firstAxis].hasOwnProperty(secondAxis)) {
+            throw new DeveloperError('firstAxis and secondAxis must be east, north, up, west, south or down.');
+        }
+        var thirdAxis = vectorProductLocalFrame[firstAxis][secondAxis];
 
-      /**
-       * Computes a 4x4 transformation matrix from a reference frame
-       * centered at the provided origin to the provided ellipsoid's fixed reference frame.
-       * @callback Transforms~LocalFrameToFixedFrame
-       * @param {Cartesian3} origin The center point of the local reference frame.
-       * @param {Ellipsoid} [ellipsoid=Ellipsoid.WGS84] The ellipsoid whose fixed frame is used in the transformation.
-       * @param {Matrix4} [result] The object onto which to store the result.
-       * @returns {Matrix4} The modified result parameter or a new Matrix4 instance if none was provided.
-       */
-      var resultat;
-      var hashAxis = firstAxis + secondAxis;
-      if (defined(localFrameToFixedFrameCache[hashAxis])) {
-          resultat = localFrameToFixedFrameCache[hashAxis];
-      } else {
-          resultat = function(origin, ellipsoid, result) {
-                            if (!defined(origin)) {
-                  throw new DeveloperError('origin is required.');
-              }
-                            if (!defined(result)) {
-                  result = new Matrix4();
-              }
-              // If x and y are zero, assume origin is at a pole, which is a special case.
-              if (CesiumMath.equalsEpsilon(origin.x, 0.0, CesiumMath.EPSILON14) && CesiumMath.equalsEpsilon(origin.y, 0.0, CesiumMath.EPSILON14)) {
-                  var sign = CesiumMath.sign(origin.z);
+        /**
+         * Computes a 4x4 transformation matrix from a reference frame
+         * centered at the provided origin to the provided ellipsoid's fixed reference frame.
+         * @callback Transforms~LocalFrameToFixedFrame
+         * @param {Cartesian3} origin The center point of the local reference frame.
+         * @param {Ellipsoid} [ellipsoid=Ellipsoid.WGS84] The ellipsoid whose fixed frame is used in the transformation.
+         * @param {Matrix4} [result] The object onto which to store the result.
+         * @returns {Matrix4} The modified result parameter or a new Matrix4 instance if none was provided.
+         */
+        var resultat;
+        var hashAxis = firstAxis + secondAxis;
+        if (defined(localFrameToFixedFrameCache[hashAxis])) {
+            resultat = localFrameToFixedFrameCache[hashAxis];
+        } else {
+            resultat = function (origin, ellipsoid, result) {
+                                if (!defined(origin)) {
+                    throw new DeveloperError('origin is required.');
+                }
+                                if (!defined(result)) {
+                    result = new Matrix4();
+                }
+                // If x and y are zero, assume origin is at a pole, which is a special case.
+                if (CesiumMath.equalsEpsilon(origin.x, 0.0, CesiumMath.EPSILON14) && CesiumMath.equalsEpsilon(origin.y, 0.0, CesiumMath.EPSILON14)) {
+                    var sign = CesiumMath.sign(origin.z);
 
-                  Cartesian3.unpack(degeneratePositionLocalFrame[firstAxis], 0, scratchFirstCartesian);
-                  if (firstAxis !== 'east' && firstAxis !== 'west') {
-                      Cartesian3.multiplyByScalar(scratchFirstCartesian, sign, scratchFirstCartesian);
-                  }
+                    Cartesian3.unpack(degeneratePositionLocalFrame[firstAxis], 0, scratchFirstCartesian);
+                    if (firstAxis !== 'east' && firstAxis !== 'west') {
+                        Cartesian3.multiplyByScalar(scratchFirstCartesian, sign, scratchFirstCartesian);
+                    }
 
-                  Cartesian3.unpack(degeneratePositionLocalFrame[secondAxis], 0, scratchSecondCartesian);
-                  if (secondAxis !== 'east' && secondAxis !== 'west') {
-                      Cartesian3.multiplyByScalar(scratchSecondCartesian, sign, scratchSecondCartesian);
-                  }
+                    Cartesian3.unpack(degeneratePositionLocalFrame[secondAxis], 0, scratchSecondCartesian);
+                    if (secondAxis !== 'east' && secondAxis !== 'west') {
+                        Cartesian3.multiplyByScalar(scratchSecondCartesian, sign, scratchSecondCartesian);
+                    }
 
-                  Cartesian3.unpack(degeneratePositionLocalFrame[thirdAxis], 0, scratchThirdCartesian);
-                  if (thirdAxis !== 'east' && thirdAxis !== 'west') {
-                      Cartesian3.multiplyByScalar(scratchThirdCartesian, sign, scratchThirdCartesian);
-                  }
-              } else {
-                  ellipsoid = defaultValue(ellipsoid, Ellipsoid.WGS84);
-                  ellipsoid.geodeticSurfaceNormal(origin, scratchCalculateCartesian.up);
+                    Cartesian3.unpack(degeneratePositionLocalFrame[thirdAxis], 0, scratchThirdCartesian);
+                    if (thirdAxis !== 'east' && thirdAxis !== 'west') {
+                        Cartesian3.multiplyByScalar(scratchThirdCartesian, sign, scratchThirdCartesian);
+                    }
+                } else {
+                    ellipsoid = defaultValue(ellipsoid, Ellipsoid.WGS84);
+                    ellipsoid.geodeticSurfaceNormal(origin, scratchCalculateCartesian.up);
 
-                  var up = scratchCalculateCartesian.up;
-                  var east = scratchCalculateCartesian.east;
-                  east.x = -origin.y;
-                  east.y = origin.x;
-                  east.z = 0.0;
-                  Cartesian3.normalize(east, scratchCalculateCartesian.east);
-                  Cartesian3.cross(up, east, scratchCalculateCartesian.north);
+                    var up = scratchCalculateCartesian.up;
+                    var east = scratchCalculateCartesian.east;
+                    east.x = -origin.y;
+                    east.y = origin.x;
+                    east.z = 0.0;
+                    Cartesian3.normalize(east, scratchCalculateCartesian.east);
+                    Cartesian3.cross(up, east, scratchCalculateCartesian.north);
 
-                  Cartesian3.multiplyByScalar(scratchCalculateCartesian.up, -1, scratchCalculateCartesian.down);
-                  Cartesian3.multiplyByScalar(scratchCalculateCartesian.east, -1, scratchCalculateCartesian.west);
-                  Cartesian3.multiplyByScalar(scratchCalculateCartesian.north, -1, scratchCalculateCartesian.south);
+                    Cartesian3.multiplyByScalar(scratchCalculateCartesian.up, -1, scratchCalculateCartesian.down);
+                    Cartesian3.multiplyByScalar(scratchCalculateCartesian.east, -1, scratchCalculateCartesian.west);
+                    Cartesian3.multiplyByScalar(scratchCalculateCartesian.north, -1, scratchCalculateCartesian.south);
 
-                  scratchFirstCartesian = scratchCalculateCartesian[firstAxis];
-                  scratchSecondCartesian = scratchCalculateCartesian[secondAxis];
-                  scratchThirdCartesian = scratchCalculateCartesian[thirdAxis];
-              }
-              result[0] = scratchFirstCartesian.x;
-              result[1] = scratchFirstCartesian.y;
-              result[2] = scratchFirstCartesian.z;
-              result[3] = 0.0;
-              result[4] = scratchSecondCartesian.x;
-              result[5] = scratchSecondCartesian.y;
-              result[6] = scratchSecondCartesian.z;
-              result[7] = 0.0;
-              result[8] = scratchThirdCartesian.x;
-              result[9] = scratchThirdCartesian.y;
-              result[10] = scratchThirdCartesian.z;
-              result[11] = 0.0;
-              result[12] = origin.x;
-              result[13] = origin.y;
-              result[14] = origin.z;
-              result[15] = 1.0;
-              return result;
-          };
-          localFrameToFixedFrameCache[hashAxis] = resultat;
-      }
-      return resultat;
+                    scratchFirstCartesian = scratchCalculateCartesian[firstAxis];
+                    scratchSecondCartesian = scratchCalculateCartesian[secondAxis];
+                    scratchThirdCartesian = scratchCalculateCartesian[thirdAxis];
+                }
+                result[0] = scratchFirstCartesian.x;
+                result[1] = scratchFirstCartesian.y;
+                result[2] = scratchFirstCartesian.z;
+                result[3] = 0.0;
+                result[4] = scratchSecondCartesian.x;
+                result[5] = scratchSecondCartesian.y;
+                result[6] = scratchSecondCartesian.z;
+                result[7] = 0.0;
+                result[8] = scratchThirdCartesian.x;
+                result[9] = scratchThirdCartesian.y;
+                result[10] = scratchThirdCartesian.z;
+                result[11] = 0.0;
+                result[12] = origin.x;
+                result[13] = origin.y;
+                result[14] = origin.z;
+                result[15] = 1.0;
+                return result;
+            };
+            localFrameToFixedFrameCache[hashAxis] = resultat;
+        }
+        return resultat;
     };
 
     /**
@@ -22953,6 +23164,51 @@ define('Core/Transforms',[
         var transform = Transforms.headingPitchRollToFixedFrame(origin, headingPitchRoll, ellipsoid, fixedFrameTransform, scratchENUMatrix4);
         var rotation = Matrix4.getRotation(transform, scratchHPRMatrix3);
         return Quaternion.fromRotationMatrix(rotation, result);
+    };
+
+    var noScale = new Cartesian3(1.0, 1.0, 1.0);
+    var hprCenterScratch = new Cartesian3();
+    var ffScratch = new Matrix4();
+    var hprTransformScratch = new Matrix4();
+    var hprRotationScratch = new Matrix3();
+    var hprQuaternionScratch = new Quaternion();
+    /**
+     * Computes heading-pitch-roll angles from a transform in a particular reference frame. Heading is the rotation from the local north
+     * direction where a positive angle is increasing eastward. Pitch is the rotation from the local east-north plane. Positive pitch angles
+     * are above the plane. Negative pitch angles are below the plane. Roll is the first rotation applied about the local east axis.
+     *
+     * @param {Matrix4} transform The transform
+     * @param {Ellipsoid} [ellipsoid=Ellipsoid.WGS84] The ellipsoid whose fixed frame is used in the transformation.
+     * @param {Transforms~LocalFrameToFixedFrame} [fixedFrameTransform=Transforms.eastNorthUpToFixedFrame] A 4x4 transformation
+     *  matrix from a reference frame to the provided ellipsoid's fixed reference frame
+     * @param {HeadingPitchRoll} [result] The object onto which to store the result.
+     * @returns {HeadingPitchRoll} The modified result parameter or a new HeadingPitchRoll instance if none was provided.
+     */
+    Transforms.fixedFrameToHeadingPitchRoll = function(transform, ellipsoid, fixedFrameTransform, result) {
+                Check.defined('transform', transform);
+        
+        ellipsoid = defaultValue(ellipsoid, Ellipsoid.WGS84);
+        fixedFrameTransform = defaultValue(fixedFrameTransform, Transforms.eastNorthUpToFixedFrame);
+        if (!defined(result)) {
+            result = new HeadingPitchRoll();
+        }
+
+        var center = Matrix4.getTranslation(transform, hprCenterScratch);
+        if (Cartesian3.equals(center, Cartesian3.ZERO)) {
+            result.heading = 0;
+            result.pitch = 0;
+            result.roll = 0;
+            return result;
+        }
+        var toFixedFrame = Matrix4.inverseTransformation(fixedFrameTransform(center, ellipsoid, ffScratch), ffScratch);
+        var transformCopy = Matrix4.setScale(transform, noScale, hprTransformScratch);
+        transformCopy = Matrix4.setTranslation(transformCopy, Cartesian3.ZERO, transformCopy);
+
+        toFixedFrame = Matrix4.multiply(toFixedFrame, transformCopy, toFixedFrame);
+        var quaternionRotation = Quaternion.fromRotationMatrix(Matrix4.getRotation(toFixedFrame, hprRotationScratch), hprQuaternionScratch);
+        quaternionRotation = Quaternion.normalize(quaternionRotation, quaternionRotation);
+
+        return HeadingPitchRoll.fromQuaternion(quaternionRotation, result);
     };
 
     var gmstConstant0 = 6 * 3600 + 41 * 60 + 50.54841;
@@ -23327,13 +23583,16 @@ define('Core/Transforms',[
         
         var normal = defaultValue(ellipsoid, Ellipsoid.WGS84).geodeticSurfaceNormal(position, normalScratch);
         var right = Cartesian3.cross(velocity, normal, rightScratch);
+
         if (Cartesian3.equalsEpsilon(right, Cartesian3.ZERO, CesiumMath.EPSILON6)) {
             right = Cartesian3.clone(Cartesian3.UNIT_X, right);
         }
 
         var up = Cartesian3.cross(right, velocity, upScratch);
+        Cartesian3.normalize(up, up);
         Cartesian3.cross(velocity, up, right);
         Cartesian3.negate(right, right);
+        Cartesian3.normalize(right, right);
 
         if (!defined(result)) {
             result = new Matrix3();
@@ -25628,14 +25887,14 @@ define('Core/QuarticRealPolynomial',[
 
 define('Core/Ray',[
         './Cartesian3',
+        './Check',
         './defaultValue',
-        './defined',
-        './DeveloperError'
+        './defined'
     ], function(
         Cartesian3,
+        Check,
         defaultValue,
-        defined,
-        DeveloperError) {
+        defined) {
     'use strict';
 
     /**
@@ -25667,6 +25926,25 @@ define('Core/Ray',[
     }
 
     /**
+     * Duplicates a Ray instance.
+     *
+     * @param {Ray} ray The ray to duplicate.
+     * @param {Ray} [result] The object onto which to store the result.
+     * @returns {Ray} The modified result parameter or a new Ray instance if one was not provided. (Returns undefined if ray is undefined)
+     */
+    Ray.clone = function(ray, result) {
+        if (!defined(ray)) {
+            return undefined;
+        }
+        if (!defined(result)) {
+            return new Ray(ray.origin, ray.direction);
+        }
+        result.origin = Cartesian3.clone(ray.origin);
+        result.direction = Cartesian3.clone(ray.direction);
+        return result;
+    };
+
+    /**
      * Computes the point along the ray given by r(t) = o + t*d,
      * where o is the origin of the ray and d is the direction.
      *
@@ -25681,12 +25959,8 @@ define('Core/Ray',[
      * var point = Cesium.Ray.getPoint(ray, intersection.start);
      */
     Ray.getPoint = function(ray, t, result) {
-                if (!defined(ray)){
-            throw new DeveloperError('ray is requred');
-        }
-        if (typeof t !== 'number') {
-            throw new DeveloperError('t is a required number');
-        }
+                Check.typeOf.object('ray', ray);
+        Check.typeOf.number('t', t);
         
         if (!defined(result)) {
             result = new Cartesian3();
