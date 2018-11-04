@@ -134,7 +134,14 @@ public class ImageryLayerOptions {
     /**
      * The maximum terrain level-of-detail at which to show this imagery layer, or undefined to show it at all levels. Level zero is the least-detailed level.
      */
+    @JsProperty
     public double maximumTerrainLevel;
+    /**
+     * Cartographic rectangle for cutting out a portion of this ImageryLayer.
+     */
+    @JsProperty
+    public Rectangle cutoutRectangle;
+
     @JsConstructor
     public ImageryLayerOptions() {}
 

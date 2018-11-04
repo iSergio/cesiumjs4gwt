@@ -109,6 +109,11 @@ public class ImageryLayer {
     @JsProperty
     public float contrast;
     /**
+     * Rectangle cutout in this layer of imagery.
+     */
+    @JsProperty
+    public Rectangle cutoutRectangle;
+    /**
      * The gamma correction to apply to this layer. 1.0 uses the unmodified imagery color.
      * Default: {@link ImageryLayer#DEFAULT_GAMMA}
      */
