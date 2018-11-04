@@ -57,6 +57,14 @@ public class Cesium {
         }
     }-*/;
 
+    /**
+     * Given a non-relative moduleID, returns an absolute URL to the file represented by that module ID,
+     * using, in order of preference, require.toUrl, the value of a global CESIUM_BASE_URL, or
+     * the base URL of the Cesium.js script.
+     */
+    @JsMethod(namespace = "Cesium", name = "buildModuleUrl")
+    public static native String buildModuleUrl(String moduleId);
+
     @JsMethod(namespace = "Cesium")
     public static native boolean defined(Object object);
 
