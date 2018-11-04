@@ -32,6 +32,26 @@ import org.cesiumjs.cs.scene.Scene;
 @JsType(isNative = true, namespace = "Cesium", name = "Globe")
 public class Globe {
     /**
+     * The brightness shift to apply to the atmosphere. Defaults to 0.0 (no shift).
+     * A brightness shift of -1.0 is complete darkness, which will let space show through.
+     * Default: 0.0
+     */
+    @JsProperty
+    public double atmosphereBrightnessShift;
+    /**
+     * The hue shift to apply to the atmosphere. Defaults to 0.0 (no shift).
+     * A hue shift of 1.0 indicates a complete rotation of the hues available.
+     * Default: 0.0
+     */
+    @JsProperty
+    public double atmosphereHueShift;
+    /**
+     * The saturation shift to apply to the atmosphere. Defaults to 0.0 (no shift). A saturation shift of -1.0 is monochrome.
+     * Default: 0.0
+     */
+    @JsProperty
+    public double atmosphereSaturationShift;
+    /**
      * Gets or sets the color of the globe when no imagery is available.
      */
     @JsProperty
