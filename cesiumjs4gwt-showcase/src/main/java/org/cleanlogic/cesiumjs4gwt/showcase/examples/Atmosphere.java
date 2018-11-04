@@ -26,7 +26,7 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.ui.*;
 import com.google.inject.Inject;
 import org.cesiumjs.cs.Cesium;
-import org.cesiumjs.cs.core.Globe;
+import org.cesiumjs.cs.scene.Globe;
 import org.cesiumjs.cs.core.providers.EllipsoidTerrainProvider;
 import org.cesiumjs.cs.scene.Scene;
 import org.cesiumjs.cs.widgets.ViewerPanel;

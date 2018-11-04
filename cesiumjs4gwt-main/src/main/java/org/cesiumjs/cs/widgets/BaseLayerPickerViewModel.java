@@ -19,7 +19,7 @@ package org.cesiumjs.cs.widgets;
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.Globe;
+import org.cesiumjs.cs.scene.Globe;
 import org.cesiumjs.cs.widgets.options.BaseLayerPickerViewModelOptions;
 
 /**

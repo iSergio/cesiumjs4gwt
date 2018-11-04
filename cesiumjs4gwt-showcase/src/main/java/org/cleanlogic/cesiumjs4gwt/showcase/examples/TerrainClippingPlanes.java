@@ -26,7 +26,7 @@ import org.cesiumjs.cs.collections.ClippingPlaneCollection;
 import org.cesiumjs.cs.collections.options.ClippingPlaneCollectionOptions;
 import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.Color;
-import org.cesiumjs.cs.core.Globe;
+import org.cesiumjs.cs.scene.Globe;
 import org.cesiumjs.cs.core.JulianDate;
 import org.cesiumjs.cs.core.providers.CesiumTerrainProvider;
 import org.cesiumjs.cs.core.providers.options.CesiumTerrainProviderOptions;

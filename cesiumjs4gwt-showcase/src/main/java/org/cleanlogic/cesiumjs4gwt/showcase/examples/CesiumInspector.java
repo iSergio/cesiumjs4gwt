@@ -29,6 +29,7 @@ import org.cesiumjs.cs.core.options.GeometryInstanceOptions;
 import org.cesiumjs.cs.core.providers.CesiumTerrainProvider;
 import org.cesiumjs.cs.core.providers.options.CesiumTerrainProviderOptions;
 import org.cesiumjs.cs.js.JsObject;
+import org.cesiumjs.cs.scene.Globe;
 import org.cesiumjs.cs.scene.Primitive;
 import org.cesiumjs.cs.scene.Scene;
 import org.cesiumjs.cs.scene.apperances.PerInstanceColorAppearance;

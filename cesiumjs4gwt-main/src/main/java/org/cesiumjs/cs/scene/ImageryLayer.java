@@ -173,14 +173,14 @@ public class ImageryLayer {
     public Number splitDirection;
 
     /**
-     * An imagery layer that displays tiled imagery data from a single imagery provider on a {@link org.cesiumjs.cs.core.Globe}.
+     * An imagery layer that displays tiled imagery data from a single imagery provider on a {@link Globe}.
      * @param imageryProvider The imagery provider to use.
      */
     @JsConstructor
     public ImageryLayer(ImageryProvider imageryProvider) {}
 
     /**
-     * An imagery layer that displays tiled imagery data from a single imagery provider on a {@link org.cesiumjs.cs.core.Globe}.
+     * An imagery layer that displays tiled imagery data from a single imagery provider on a {@link Globe}.
      * @param imageryProvider The imagery provider to use.
      * @param options Options.
      */

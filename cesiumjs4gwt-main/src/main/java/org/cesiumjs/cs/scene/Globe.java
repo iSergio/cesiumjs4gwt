@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.cesiumjs.cs.core;
+package org.cesiumjs.cs.scene;
 
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
@@ -22,6 +22,7 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.collections.ClippingPlaneCollection;
 import org.cesiumjs.cs.collections.ImageryLayerCollection;
+import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.core.providers.TerrainProvider;
 import org.cesiumjs.cs.scene.Material;
 import org.cesiumjs.cs.scene.Scene;

@@ -17,7 +17,7 @@
 package org.cesiumjs.cs.widgets.options;
 
 import jsinterop.annotations.*;
-import org.cesiumjs.cs.core.Globe;
+import org.cesiumjs.cs.scene.Globe;
 import org.cesiumjs.cs.widgets.ProviderViewModel;
 
 /**
