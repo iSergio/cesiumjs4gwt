@@ -88,7 +88,6 @@ public class InjectorModule extends AbstractGinModule {
         bind(CustomHomeButton.class).asEagerSingleton();
         bind(PolylineArrow.class).asEagerSingleton();
         bind(CallbackProperty.class).asEagerSingleton();
-        // Post processing
         bind(PostProcessing.class).asEagerSingleton();
         bind(AmbientOcclusion.class).asEagerSingleton();
         bind(Bloom.class).asEagerSingleton();
@@ -97,18 +96,17 @@ public class InjectorModule extends AbstractGinModule {
         bind(LensFlare.class).asEagerSingleton();
         bind(CustomPerFeaturePostProcess.class).asEagerSingleton();
         bind(PerFeaturePostProcessing.class).asEagerSingleton();
-
         bind(GroundPolylinePrimitive.class).asEagerSingleton();
         bind(DrawingOnTerrain.class).asEagerSingleton();
         bind(GeometryHeightReference.class).asEagerSingleton();
         bind(MultipleSyncedViews.class).asEagerSingleton();
-
         bind(TimeDynamicPointCloud.class).asEagerSingleton();
-
         bind(GroundAtmosphere.class).asEagerSingleton();
         bind(CartographicLimitRectangle.class).asEagerSingleton();
         bind(Clampto3DModel.class).asEagerSingleton();
         bind(Clampto3DTiles.class).asEagerSingleton();
         bind(ClamptoTerrain.class).asEagerSingleton();
+
+        bind(ImageryCutout.class).asEagerSingleton();
     }
 }
