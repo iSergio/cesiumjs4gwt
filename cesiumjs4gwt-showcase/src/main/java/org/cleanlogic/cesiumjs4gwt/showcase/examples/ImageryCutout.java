@@ -55,6 +55,7 @@ public class ImageryCutout extends AbstractExample {
 
     private ViewerPanel csVPanel;
     private Flags flags = new Flags();
+    private double moveIncrement = 0.05;
 
     @Inject
     public ImageryCutout(ShowcaseExampleStore store) {
@@ -93,7 +94,7 @@ public class ImageryCutout extends AbstractExample {
         layers.addImageryProvider(new SingleTileImageryProvider(singleTileImageryProviderOptions));
 
         // Add an Earth at Night layer and a "traveling" cutout
-        ImageryLayer earthAtNight = layers.addImageryProvider(new IonImageryProvider(IonImageryProviderOptions.create(3812)));
+        final ImageryLayer earthAtNight = layers.addImageryProvider(new IonImageryProvider(IonImageryProviderOptions.create(3812)));
         earthAtNight.cutoutRectangle = Rectangle.fromDegrees(-100, 10, -60, 50);
         earthAtNight.alpha = 0.9f;
 
@@ -111,7 +112,6 @@ public class ImageryCutout extends AbstractExample {
             }
         }, KeyUpEvent.getType());
 
-        double moveIncrement = 0.05;
         csVPanel.getViewer().clock().onTick.addEventListener(new Event.Listener() {
             @Override
             public void function(Object... o) {
