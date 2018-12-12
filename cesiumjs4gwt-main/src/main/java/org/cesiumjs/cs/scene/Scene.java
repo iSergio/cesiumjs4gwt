@@ -407,6 +407,11 @@ public class Scene {
     @JsProperty(name = "clampToHeightSupported")
     public native boolean clampToHeightSupported();
     /**
+     * Returns true if the {@link Scene#invertClassification} is supported.
+     */
+    @JsProperty(name = "invertClassificationSupported")
+    public native boolean invertClassificationSupported();
+    /**
      * Gets whether or not the scene is optimized for 3D only viewing.
      */
     @JsProperty(name = "scene3DOnly")
