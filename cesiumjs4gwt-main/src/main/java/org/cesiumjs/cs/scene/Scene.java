@@ -24,6 +24,7 @@ import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.core.projection.MapProjection;
 import org.cesiumjs.cs.core.providers.TerrainProvider;
 import org.cesiumjs.cs.js.JsObject;
+import org.cesiumjs.cs.promise.Promise;
 import org.cesiumjs.cs.scene.enums.SceneMode;
 import org.cesiumjs.cs.scene.options.SceneOptions;
 
@@ -780,6 +781,35 @@ public class Scene {
      */
     @JsMethod
     public native double sampleHeight(Cartographic position, JsObject[] objectsToExclude);
+
+    /**
+     * Initiates an asynchronous {@link Scene#sampleHeight} query for an array of Cartographic positions using the
+     * maximum level of detail for 3D Tilesets in the scene. The height of the input positions is ignored.
+     * Returns a promise that is resolved when the query completes. Each point height is modified in place.
+     * If a height cannot be determined because no geometry can be sampled at that location, or another error occurs,
+     * the height is set to undefined.
+     * @param positions The cartographic positions to update with sampled heights.
+     * @return A promise that resolves to the provided list of positions when the query has completed.
+     *
+     * @see Scene#sampleHeight
+     */
+    @JsMethod
+    public native Promise<double[], Void> sampleHeightMostDetailed(Cartographic[] positions);
+
+    /**
+     * Initiates an asynchronous {@link Scene#sampleHeight} query for an array of Cartographic positions using the
+     * maximum level of detail for 3D Tilesets in the scene. The height of the input positions is ignored.
+     * Returns a promise that is resolved when the query completes. Each point height is modified in place.
+     * If a height cannot be determined because no geometry can be sampled at that location, or another error occurs,
+     * the height is set to undefined.
+     * @param positions The cartographic positions to update with sampled heights.
+     * @param objectsToExclude A list of primitives, entities, or 3D Tiles features to not sample height from.
+     * @return A promise that resolves to the provided list of positions when the query has completed.
+     *
+     * @see Scene#sampleHeight
+     */
+    @JsMethod
+    public native Promise<double[], Void> sampleHeightMostDetailed(Cartographic[] positions, JsObject[] objectsToExclude);
 
     @JsFunction
     public interface Listener {
