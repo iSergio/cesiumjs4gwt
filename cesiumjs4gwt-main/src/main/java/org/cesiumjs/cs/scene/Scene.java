@@ -601,6 +601,18 @@ public class Scene {
      * Each position is modified in place. If a position cannot be clamped because no geometry can be sampled at
      * that location, or another error occurs, the element in the array is set to undefined.
      * @param cartesians The cartesian positions to update with clamped positions.
+     * @return A promise that resolves to the provided list of positions when the query has completed.
+     * @see Scene#clampToHeight
+     */
+    @JsMethod
+    public native Promise<Cartesian3[], Void> clampToHeightMostDetailed(Cartesian3[] cartesians);
+
+    /**
+     * Initiates an asynchronous {link Scene#clampToHeight} query for an array of Cartesian3 positions using the maximum
+     * level of detail for 3D Tilesets in the scene. Returns a promise that is resolved when the query completes.
+     * Each position is modified in place. If a position cannot be clamped because no geometry can be sampled at
+     * that location, or another error occurs, the element in the array is set to undefined.
+     * @param cartesians The cartesian positions to update with clamped positions.
      * @param objectsToExclude A list of primitives, entities, or 3D Tiles features to not clamp to.
      * @return A promise that resolves to the provided list of positions when the query has completed.
      * @see Scene#clampToHeight
