@@ -186,10 +186,9 @@ public class Scene {
     boolean highDynamicRange;
     /**
      * Whether or not high dynamic range rendering is supported.
-     * Default: true
      */
-    @JsProperty
-    boolean highDynamicRangeSupported;
+    @JsProperty(name = "highDynamicRangeSupported")
+    public native boolean highDynamicRangeSupported();
     /**
      * Gets the unique identifier for this scene.
      */
