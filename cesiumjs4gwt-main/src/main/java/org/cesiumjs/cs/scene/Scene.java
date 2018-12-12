@@ -179,6 +179,18 @@ public class Scene {
     @JsProperty(name = "groundPrimitives")
     public native PrimitiveCollection groundPrimitives();
     /**
+     * Whether or not to use high dynamic range rendering.
+     * Default: true
+     */
+    @JsProperty
+    boolean highDynamicRange;
+    /**
+     * Whether or not high dynamic range rendering is supported.
+     * Default: true
+     */
+    @JsProperty
+    boolean highDynamicRangeSupported;
+    /**
      * Gets the unique identifier for this scene.
      */
     @JsProperty(name = "id")
