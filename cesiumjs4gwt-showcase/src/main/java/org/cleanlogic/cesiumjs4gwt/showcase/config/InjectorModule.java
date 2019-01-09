@@ -107,7 +107,8 @@ public class InjectorModule extends AbstractGinModule {
         bind(Clampto3DTiles.class).asEagerSingleton();
         bind(ClamptoTerrain.class).asEagerSingleton();
         bind(ImageryCutout.class).asEagerSingleton();
-
         bind(SampleHeightFrom3DTiles.class).asEagerSingleton();
+
+        bind(ImageBasedLighting.class).asEagerSingleton();
     }
 }
