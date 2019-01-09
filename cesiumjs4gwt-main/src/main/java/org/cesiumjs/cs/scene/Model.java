@@ -154,6 +154,14 @@ public class Model {
     @JsProperty
     public Cartesian3 lightColor;
     /**
+     * The sun's luminance at the zenith in kilo candela per meter squared to use for this model's
+     * procedural environment map. This is used when {@link Model#specularEnvironmentMaps} and
+     * {@link Model#sphericalHarmonicCoefficients} are not defined.
+     * Default: 0.5
+     */
+    @JsProperty
+    public double luminanceAtZenith;
+    /**
      * The maximum scale size for a model. This can be used to give an upper limit to the {@link Model#minimumPixelSize},
      * ensuring that the model is never an unreasonable scale.
      */
@@ -230,6 +238,23 @@ public class Model {
      */
     @JsProperty
     public ClippingPlaneCollection clippingPlane;
+    /**
+     * A URL to a KTX file that contains a cube map of the specular lighting and the convoluted specular mipmaps.
+     * @see Model#sphericalHarmonicCoefficients
+     */
+    @JsProperty
+    public String specularEnvironmentMaps;
+    /**
+     * The third order spherical harmonic coefficients used for the diffuse color of image-based lighting.
+     * When undefined, a diffuse irradiance computed from the atmosphere color is used.
+     * There are nine Cartesian3 coefficients. The order of the coefficients is: L00, L1-1, L10, L11, L2-2, L2-1, L20, L21, L22
+     *
+     * These values can be obtained by preprocessing the environment map using the cmgen tool of Google's Filament project.
+     * This will also generate a KTX file that can be supplied to Model#specularEnvironmentMaps.
+     * @see <a href="https://graphics.stanford.edu/papers/envmap/envmap.pdf">An Efficient Representation for Irradiance Environment Maps</a>
+     */
+    @JsProperty
+    public Cartesian3[] sphericalHarmonicCoefficients;
 
     @JsConstructor
     public Model() {}

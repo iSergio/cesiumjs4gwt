@@ -440,6 +440,16 @@ public class Scene {
     @JsProperty
     public SkyBox skyBox;
     /**
+     * The url to the KTX file containing the specular environment map and convoluted mipmaps for image-based lighting of PBR models.
+     */
+    @JsProperty
+    public String specularEnvironmentMaps;
+    /**
+     * The spherical harmonic coefficients for image-based lighting of PBR models.
+     */
+    @JsProperty
+    public Cartesian3[] sphericalHarmonicCoefficients;
+    /**
      * The Sun.
      * Default: undefined
      */

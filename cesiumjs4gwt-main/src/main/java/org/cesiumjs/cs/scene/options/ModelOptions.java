@@ -199,6 +199,22 @@ public class ModelOptions {
      */
     @JsProperty
     public Cartesian3 lightColor;
+    /**
+     * The sun's luminance at the zenith in kilo candela per meter squared to use for this model's procedural environment map.
+     * Default: 0.5
+     */
+    @JsProperty
+    public double luminanceAtZenith;
+    /**
+     * The third order spherical harmonic coefficients used for the diffuse color of image-based lighting.
+     */
+    @JsProperty
+    public Cartesian3[] sphericalHarmonicCoefficients;
+    /**
+     * A URL to a KTX file that contains a cube map of the specular lighting and the convoluted specular mipmaps.
+     */
+    @JsProperty
+    public String specularEnvironmentMaps;
 
     @JsConstructor
     public  ModelOptions() {}
