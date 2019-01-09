@@ -25,19 +25,19 @@ import jsinterop.annotations.JsType;
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = "Cesium", name = "PerspectiveFrustum")
-public class PerspectiveFrustum implements Frustum {
+public class PerspectiveFrustum extends Frustum {
     /**
      * The aspect ratio of the frustum's width to it's height.
      * Default: undefined
      */
     @JsProperty
     public double aspectRatio;
-    /**
-     * The distance of the far plane.
-     * Default: 500000000.0
-     */
-    @JsProperty
-    public double far;
+//    /**
+//     * The distance of the far plane.
+//     * Default: 500000000.0
+//     */
+//    @JsProperty
+//    public double far;
     /**
      * The angle of the field of view (FOV), in radians. This angle will be used as the horizontal FOV if the width is
      * greater than the height, otherwise it will be the vertical FOV.
@@ -57,18 +57,6 @@ public class PerspectiveFrustum implements Frustum {
      */
     @JsProperty(name = "infiniteProjectionMatrix")
     public native Matrix4 infiniteProjectionMatrix();
-    /**
-     * The distance of the near plane.
-     * Default: 1.0
-     */
-    @JsProperty
-    public double near;
-    /**
-     * Gets the perspective projection matrix computed from the view frustum.
-     * @see #infiniteProjectionMatrix()
-     */
-    @JsProperty(name = "projectionMatrix")
-    public native Matrix4 projectionMatrix();
     /**
      * Offsets the frustum in the x direction.
      * Default: 0.0

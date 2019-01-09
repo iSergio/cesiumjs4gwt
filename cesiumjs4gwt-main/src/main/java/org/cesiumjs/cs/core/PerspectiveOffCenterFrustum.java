@@ -25,19 +25,13 @@ import jsinterop.annotations.JsType;
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = "Cesium", name = "PerspectiveOffCenterFrustum")
-public class PerspectiveOffCenterFrustum implements Frustum {
+public class PerspectiveOffCenterFrustum extends Frustum {
     /**
      * Defines the bottom clipping plane.
      * Default: undefined
      */
     @JsProperty
     public double bottom;
-    /**
-     * The distance of the far plane.
-     * Default: 500000000.0
-     */
-    @JsProperty
-    public double far;
     /**
      * Gets the perspective projection matrix computed from the view frustum with an infinite far plane.
      * @see #projectionMatrix
@@ -50,18 +44,6 @@ public class PerspectiveOffCenterFrustum implements Frustum {
      */
     @JsProperty
     public double left;
-    /**
-     * The distance of the near plane.
-     * Default: 1.0
-     */
-    @JsProperty
-    public double near;
-    /**
-     * Gets the perspective projection matrix computed from the view frustum.
-     * @see #infiniteProjectionMatrix()
-     */
-    @JsProperty(name = "projectionMatrix")
-    public native Matrix4 projectionMatrix();
     /**
      * Defines the right clipping plane.
      * Default: undefined

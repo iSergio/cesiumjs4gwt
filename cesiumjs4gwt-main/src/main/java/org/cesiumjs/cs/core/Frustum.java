@@ -16,11 +16,33 @@
 
 package org.cesiumjs.cs.core;
 
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = "Cesium", name = "Frustum")
-public interface Frustum {
+public class Frustum {
+    /**
+     * The distance of the far plane.
+     * Default: 500000000.0;
+     */
+    @JsProperty
+    public double far;
+    /**
+     * The distance of the near plane.
+     * Default: 1.0
+     */
+    @JsProperty
+    public double near;
+    /**
+     * Gets the perspective projection matrix computed from the view frustum.
+     */
+    @JsProperty(name = "projectionMatrix")
+    public native Matrix4 projectionMatrix();
+
+    @JsConstructor
+    public Frustum() {}
 }

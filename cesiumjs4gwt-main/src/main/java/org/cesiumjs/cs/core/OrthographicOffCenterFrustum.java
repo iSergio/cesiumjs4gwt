@@ -29,7 +29,7 @@ import jsinterop.annotations.JsType;
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = "Cesium", name = "OrthographicOffCenterFrustum")
-public class OrthographicOffCenterFrustum implements Frustum {
+public class OrthographicOffCenterFrustum extends Frustum {
     /**
      * The bottom clipping plane.
      * Default Value:  undefined
@@ -37,28 +37,11 @@ public class OrthographicOffCenterFrustum implements Frustum {
     @JsProperty
     public double bottom;
     /**
-     * The distance of the far plane.
-     * Default Value:  500000000.0;
-     */
-    @JsProperty
-    public double far;
-    /**
      * The left clipping plane.
      * Default Value:  undefined
      */
     @JsProperty
     public double left;
-    /**
-     * The distance of the near plane.
-     * Default Value:  1.0
-     */
-    @JsProperty
-    public double near;
-    /**
-     * Gets the orthographic projection matrix computed from the view frustum.
-     */
-    @JsProperty(name = "projectionMatrix")
-    public native Matrix4 projectionMatrix();
     /**
      * The right clipping plane.
      * Default Value:  undefined

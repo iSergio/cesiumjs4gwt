@@ -25,25 +25,7 @@ import jsinterop.annotations.JsType;
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = "Cesium", name = "OrthographicFrustum")
-public class OrthographicFrustum implements Frustum {
-    /**
-     * The distance of the far plane.
-     * Default: 500000000.0;
-     */
-    @JsProperty
-    public double far;
-    /**
-     * The distance of the near plane.
-     * Default: 1.0
-     */
-    @JsProperty
-    public double near;
-    /**
-     * Gets the orthographic projection matrix computed from the view frustum.
-     */
-    @JsProperty(name = "projectionMatrix")
-    public native Matrix4 projectionMatrix();
-
+public class OrthographicFrustum extends Frustum {
     //TODO: Example
     /**
      * The viewing frustum is defined by 6 planes. Each plane is represented by a Cartesian4 object, where the x, y,
