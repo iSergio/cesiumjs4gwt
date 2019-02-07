@@ -103,7 +103,7 @@ public class HeadingPitchRoll extends AbstractExample {
             @Override
             public void onFulfilled(Model model) {
                 ModelAnimationOptions modelAnimationOptions = new ModelAnimationOptions();
-                modelAnimationOptions.speedup = 0.5;
+                modelAnimationOptions.multiplier = 0.5;
                 modelAnimationOptions.loop = ModelAnimationLoop.REPEAT();
                 model.activeAnimations.addAll(modelAnimationOptions);
                 // Zoom to model
