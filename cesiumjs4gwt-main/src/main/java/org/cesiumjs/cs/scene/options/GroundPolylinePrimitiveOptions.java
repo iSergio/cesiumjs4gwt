@@ -19,6 +19,7 @@ package org.cesiumjs.cs.scene.options;
 import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.geometry.GeometryInstance;
 import org.cesiumjs.cs.scene.apperances.Appearance;
+import org.cesiumjs.cs.scene.enums.ClassificationType;
 
 /**
  * Options for {@link org.cesiumjs.cs.scene.GroundPolylinePrimitive}.
@@ -68,6 +69,12 @@ public class GroundPolylinePrimitiveOptions {
      */
     @JsProperty
     public boolean asynchronous;
+    /**
+     * Determines whether terrain, 3D Tiles or both will be classified.
+     * Default: {@link ClassificationType#BOTH()}
+     */
+    @JsProperty
+    public ClassificationType classificationType;
     /**
      * For debugging only. Determines if this primitive's commands' bounding spheres are shown.
      * Default: false

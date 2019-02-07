@@ -25,6 +25,7 @@ import org.cesiumjs.cs.core.geometry.GeometryInstance;
 import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.promise.Promise;
 import org.cesiumjs.cs.scene.apperances.Appearance;
+import org.cesiumjs.cs.scene.enums.ClassificationType;
 import org.cesiumjs.cs.scene.options.GroundPolylinePrimitiveOptions;
 
 /**
@@ -55,6 +56,12 @@ public class GroundPolylinePrimitive {
      */
     @JsProperty(name = "asynchronous")
     public native boolean asynchronous();
+    /**
+     * Determines whether terrain, 3D Tiles or both will be classified.
+     * Default: {@link ClassificationType#BOTH()}
+     */
+    @JsProperty
+    public ClassificationType classificationType;
     /**
      * This property is for debugging only; it is not for production use nor is it optimized.
      * Draws the bounding sphere for each draw command in the primitive.
