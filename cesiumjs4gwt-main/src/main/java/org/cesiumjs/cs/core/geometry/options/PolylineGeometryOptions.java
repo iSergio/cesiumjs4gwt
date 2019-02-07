@@ -22,6 +22,7 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.core.Math;
+import org.cesiumjs.cs.core.enums.ArcType;
 
 /**
  * Options for {@link org.cesiumjs.cs.core.geometry.PolylineGeometry}
@@ -53,9 +54,17 @@ public class PolylineGeometryOptions {
     @JsProperty
     public boolean colorsPerVertex;
     /**
+     * The type of line the polyline segments must follow.
+     * Default: {@link org.cesiumjs.cs.core.enums.ArcType#GEODESIC()}
+     */
+    @JsProperty
+    public ArcType arcType;
+    /**
      * A boolean that determines whether positions will be adjusted to the surface of the ellipsoid via a great arc.
      * Default: true
+     * @deprecated Removed in 1.57
      */
+    @Deprecated
     @JsProperty
     public boolean followSurface;
     /**
