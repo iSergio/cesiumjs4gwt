@@ -21,9 +21,11 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.core.Math;
+import org.cesiumjs.cs.core.enums.ArcType;
 import org.cesiumjs.cs.datasources.graphics.options.PolylineGraphicsOptions;
 import org.cesiumjs.cs.datasources.properties.MaterialProperty;
 import org.cesiumjs.cs.datasources.properties.Property;
+import org.cesiumjs.cs.scene.enums.ClassificationType;
 import org.cesiumjs.cs.scene.enums.ShadowMode;
 
 /**
@@ -38,6 +40,12 @@ public class PolylineGraphics {
     @JsProperty
     public Property clampToGround;
     /**
+     * Gets or sets the ClassificationType Property specifying whether this polyline will classify terrain, 3D Tiles, or both when on the ground.
+     * Default: {@link ClassificationType#BOTH()}
+     */
+    @JsProperty
+    public Property classificationType;
+    /**
      * Gets the event that is raised whenever a property or sub-property is changed or modified.
      */
     @JsProperty(name = "definitionChanged")
@@ -48,9 +56,17 @@ public class PolylineGraphics {
     @JsProperty
     public Property positions;
     /**
+     * The type of line the polyline segments must follow.
+     * Default: {@link org.cesiumjs.cs.core.enums.ArcType#GEODESIC()}
+     */
+    @JsProperty
+    public ArcType arcType;
+    /**
      * A boolean Property specifying whether the line segments should be great arcs or linearly connected.
      * Default: true
+     * @deprecated Removed in 1.57
      */
+    @Deprecated
     @JsProperty
     public Property followSurface;
     /**

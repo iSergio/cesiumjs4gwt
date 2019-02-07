@@ -21,8 +21,10 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Math;
+import org.cesiumjs.cs.core.enums.ArcType;
 import org.cesiumjs.cs.datasources.properties.MaterialProperty;
 import org.cesiumjs.cs.datasources.properties.Property;
+import org.cesiumjs.cs.scene.enums.ClassificationType;
 import org.cesiumjs.cs.scene.enums.ShadowMode;
 
 /**
@@ -36,9 +38,17 @@ public class PolylineGraphicsOptions {
     @JsProperty
     public Property positions;
     /**
+     * The type of line the polyline segments must follow.
+     * Default: {@link org.cesiumjs.cs.core.enums.ArcType#GEODESIC()}
+     */
+    @JsProperty
+    public ArcType arcType;
+    /**
      * A boolean Property specifying whether the line segments should be great arcs or linearly connected.
      * Default: true
+     * @deprecated Removed in 1.57
      */
+    @Deprecated
     @JsProperty
     public Property followSurface;
     /**
@@ -87,6 +97,19 @@ public class PolylineGraphicsOptions {
      */
     @JsProperty
     public Property distanceDisplayCondition;
+    /**
+     * Gets or sets the ClassificationType Property specifying whether this polyline will classify terrain, 3D Tiles, or both when on the ground.
+     * Default: {@link ClassificationType#BOTH()}
+     */
+    @JsProperty
+    public Property classificationType;
+    /**
+     * A Property specifying the zIndex used for ordering ground geometry. Only has an effect if `clampToGround` is true
+     * and polylines on terrain is supported.
+     * Default: 0
+     */
+    @JsProperty
+    public Property zIndex;
 
     /**
      * Options for {@link org.cesiumjs.cs.datasources.graphics.PolylineGraphics}
