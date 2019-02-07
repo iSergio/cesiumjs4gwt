@@ -73,13 +73,11 @@ public class ModelAnimationOptions {
     public boolean reverse;
     /**
      * Values greater than 1.0 increase the speed that the animation is played relative to the scene clock speed;
-     * values less than 1.0 decrease the speed. A value of 1.0 plays the animation at the speed in the glTF animation
-     * mapped to the scene clock speed. For example, if the scene is played at 2x real-time, a two-second glTF
-     * animation will play in one second even if speedup is 1.0.
+     * values less than 1.0 decrease the speed.
      * Default: 1.0
      */
     @JsProperty
-    public double speedup;
+    public double multiplier;
 
     /**
      * Options for {@link org.cesiumjs.cs.collections.ModelAnimationCollection#add(ModelAnimationOptions)}

@@ -25,6 +25,8 @@ import org.cesiumjs.cs.scene.ModelAnimation;
 import org.cesiumjs.cs.scene.options.ModelAnimationOptions;
 
 /**
+ * A collection of active model animations. Access this using {@link org.cesiumjs.cs.scene.Model#activeAnimations}.
+ *
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = "Cesium", name = "ModelAnimationCollection")

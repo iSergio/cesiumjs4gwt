@@ -23,8 +23,15 @@ import org.cesiumjs.cs.collections.ModelAnimationCollection;
 import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.core.JulianDate;
 import org.cesiumjs.cs.scene.enums.ModelAnimationLoop;
+import org.cesiumjs.cs.scene.options.ModelAnimationOptions;
 
 /**
+ * An active glTF animation. A glTF asset can contain animations. An active animation is an animation that is currently
+ * playing or scheduled to be played because it was added to a model's ModelAnimationCollection. An active animation is
+ * an instance of an animation; for example, there can be multiple active animations for the same glTF animation,
+ * each with a different start time.
+ * Create this by calling {@link ModelAnimationCollection#add(ModelAnimationOptions)}.
+ *
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
 @JsType(isNative = true, namespace = "Cesium", name = "ModelAnimation")
@@ -64,11 +71,10 @@ public class ModelAnimation {
      * Values greater than 1.0 increase the speed that the animation is played relative to the scene clock speed;
      * values less than 1.0 decrease the speed. A value of 1.0 plays the animation at the speed in the glTF animation
      * mapped to the scene clock speed. For example, if the scene is played at 2x real-time, a two-second glTF
-     * animation will play in one second even if speedup is 1.0.
-     * Default: 1.0
+     * animation will play in one second even if multiplier is 1.0.
      */
-    @JsProperty(name = "speedup")
-    public native double speedup();
+    @JsProperty(name = "multiplier")
+    public native double multiplier();
     /**
      * The event fired when this animation is started. This can be used, for example, to play a sound or start a particle system, when the animation starts.
      * This event is fired at the end of the frame after the scene is rendered.
@@ -117,5 +123,5 @@ public class ModelAnimation {
      * @see ModelAnimationCollection#add
      */
     @JsConstructor
-    public ModelAnimation() {}
+    private ModelAnimation() {}
 }
