@@ -596,6 +596,23 @@ public class Scene {
      * Clamps to all other primitives regardless of their visibility.
      * @param cartesian The cartesian position.
      * @param objectsToExclude A list of primitives, entities, or features to not clamp to.
+     * @param width Width of the intersection volume in meters.
+     * @return The modified result parameter or a new Cartesian3 instance if one was not provided.
+     * This may be undefined if there was no scene geometry to clamp to.
+     *
+     * @see Scene#sampleHeight
+     */
+    @JsMethod
+    public native Cartesian3 clampToHeight(Cartesian3 cartesian, JsObject[] objectsToExclude, double width);
+
+    /**
+     * Clamps the given cartesian position to the scene geometry along the geodetic surface normal. Returns the clamped
+     * position or undefined if there was no scene geometry to clamp to. May be used to clamp objects to the globe, 3D Tiles, or primitives in the scene.
+     * This function only clamps to globe tiles and 3D Tiles that are rendered in the current view.
+     * Clamps to all other primitives regardless of their visibility.
+     * @param cartesian The cartesian position.
+     * @param objectsToExclude A list of primitives, entities, or features to not clamp to.
+     * @param width Width of the intersection volume in meters.
      * @param result An optional object to return the clamped position.
      * @return The modified result parameter or a new Cartesian3 instance if one was not provided.
      * This may be undefined if there was no scene geometry to clamp to.
@@ -603,7 +620,7 @@ public class Scene {
      * @see Scene#sampleHeight
      */
     @JsMethod
-    public native Cartesian3 clampToHeight(Cartesian3 cartesian, JsObject[] objectsToExclude, Cartesian3 result);
+    public native Cartesian3 clampToHeight(Cartesian3 cartesian, JsObject[] objectsToExclude, double width, Cartesian3 result);
 
     /**
      * Initiates an asynchronous {link Scene#clampToHeight} query for an array of Cartesian3 positions using the maximum
@@ -629,6 +646,20 @@ public class Scene {
      */
     @JsMethod
     public native Promise<Cartesian3[], Void> clampToHeightMostDetailed(Cartesian3[] cartesians, JsObject[] objectsToExclude);
+
+    /**
+     * Initiates an asynchronous {link Scene#clampToHeight} query for an array of Cartesian3 positions using the maximum
+     * level of detail for 3D Tilesets in the scene. Returns a promise that is resolved when the query completes.
+     * Each position is modified in place. If a position cannot be clamped because no geometry can be sampled at
+     * that location, or another error occurs, the element in the array is set to undefined.
+     * @param cartesians The cartesian positions to update with clamped positions.
+     * @param objectsToExclude A list of primitives, entities, or 3D Tiles features to not clamp to.
+     * @param width Width of the intersection volume in meters.
+     * @return A promise that resolves to the provided list of positions when the query has completed.
+     * @see Scene#clampToHeight
+     */
+    @JsMethod
+    public native Promise<Cartesian3[], Void> clampToHeightMostDetailed(Cartesian3[] cartesians, JsObject[] objectsToExclude, double width);
 
     /**
      * Instantly completes an active transition.
@@ -834,6 +865,21 @@ public class Scene {
     public native double sampleHeight(Cartographic position, JsObject[] objectsToExclude);
 
     /**
+     * Returns the height of scene geometry at the given cartographic position or undefined if there was no
+     * scene geometry to sample height from. May be used to clamp objects to the globe, 3D Tiles, or primitives in the scene.
+     * This function only samples height from globe tiles and 3D Tiles that are rendered in the current view.
+     * Samples height from all other primitives regardless of their visibility.
+     * @param position The cartographic position to sample height from.
+     * @param objectsToExclude A list of primitives, entities, or features to not sample height from.
+     * @param width Width of the intersection volume in meters.
+     * @return The height. This may be undefined if there was no scene geometry to sample height from.
+     *
+     * @see Scene#clampToHeight
+     */
+    @JsMethod
+    public native double sampleHeight(Cartographic position, JsObject[] objectsToExclude, double width);
+
+    /**
      * Initiates an asynchronous {@link Scene#sampleHeight} query for an array of Cartographic positions using the
      * maximum level of detail for 3D Tilesets in the scene. The height of the input positions is ignored.
      * Returns a promise that is resolved when the query completes. Each point height is modified in place.
@@ -861,6 +907,22 @@ public class Scene {
      */
     @JsMethod
     public native Promise<double[], Void> sampleHeightMostDetailed(Cartographic[] positions, JsObject[] objectsToExclude);
+
+    /**
+     * Initiates an asynchronous {@link Scene#sampleHeight} query for an array of Cartographic positions using the
+     * maximum level of detail for 3D Tilesets in the scene. The height of the input positions is ignored.
+     * Returns a promise that is resolved when the query completes. Each point height is modified in place.
+     * If a height cannot be determined because no geometry can be sampled at that location, or another error occurs,
+     * the height is set to undefined.
+     * @param positions The cartographic positions to update with sampled heights.
+     * @param objectsToExclude A list of primitives, entities, or 3D Tiles features to not sample height from.
+     * @param width Width of the intersection volume in meters.
+     * @return A promise that resolves to the provided list of positions when the query has completed.
+     *
+     * @see Scene#sampleHeight
+     */
+    @JsMethod
+    public native Promise<double[], Void> sampleHeightMostDetailed(Cartographic[] positions, JsObject[] objectsToExclude, double width);
 
     @JsFunction
     public interface Listener {
