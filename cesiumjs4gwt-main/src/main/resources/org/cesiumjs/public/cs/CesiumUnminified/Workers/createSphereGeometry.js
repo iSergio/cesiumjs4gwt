@@ -1144,6 +1144,100 @@ define('Core/Math',[
         return absDiff <= absoluteEpsilon || absDiff <= relativeEpsilon * Math.max(Math.abs(left), Math.abs(right));
     };
 
+    /**
+     * Determines if the left value is less than the right value. If the two values are within
+     * <code>absoluteEpsilon</code> of each other, they are considered equal and this function returns false.
+     *
+     * @param {Number} left The first number to compare.
+     * @param {Number} right The second number to compare.
+     * @param {Number} absoluteEpsilon The absolute epsilon to use in comparison.
+     * @returns {Boolean} <code>true</code> if <code>left</code> is less than <code>right</code> by more than
+     *          <code>absoluteEpsilon<code>. <code>false</code> if <code>left</code> is greater or if the two
+     *          values are nearly equal.
+     */
+    CesiumMath.lessThan = function(left, right, absoluteEpsilon) {
+                if (!defined(left)) {
+            throw new DeveloperError('first is required.');
+        }
+        if (!defined(right)) {
+            throw new DeveloperError('second is required.');
+        }
+        if (!defined(absoluteEpsilon)) {
+            throw new DeveloperError('relativeEpsilon is required.');
+        }
+                return left - right < -absoluteEpsilon;
+    };
+
+    /**
+     * Determines if the left value is less than or equal to the right value. If the two values are within
+     * <code>absoluteEpsilon</code> of each other, they are considered equal and this function returns true.
+     *
+     * @param {Number} left The first number to compare.
+     * @param {Number} right The second number to compare.
+     * @param {Number} absoluteEpsilon The absolute epsilon to use in comparison.
+     * @returns {Boolean} <code>true</code> if <code>left</code> is less than <code>right</code> or if the
+     *          the values are nearly equal.
+     */
+    CesiumMath.lessThanOrEquals = function(left, right, absoluteEpsilon) {
+                if (!defined(left)) {
+            throw new DeveloperError('first is required.');
+        }
+        if (!defined(right)) {
+            throw new DeveloperError('second is required.');
+        }
+        if (!defined(absoluteEpsilon)) {
+            throw new DeveloperError('relativeEpsilon is required.');
+        }
+                return left - right < absoluteEpsilon;
+    };
+
+    /**
+     * Determines if the left value is greater the right value. If the two values are within
+     * <code>absoluteEpsilon</code> of each other, they are considered equal and this function returns false.
+     *
+     * @param {Number} left The first number to compare.
+     * @param {Number} right The second number to compare.
+     * @param {Number} absoluteEpsilon The absolute epsilon to use in comparison.
+     * @returns {Boolean} <code>true</code> if <code>left</code> is greater than <code>right</code> by more than
+     *          <code>absoluteEpsilon<code>. <code>false</code> if <code>left</code> is less or if the two
+     *          values are nearly equal.
+     */
+    CesiumMath.greaterThan = function(left, right, absoluteEpsilon) {
+                if (!defined(left)) {
+            throw new DeveloperError('first is required.');
+        }
+        if (!defined(right)) {
+            throw new DeveloperError('second is required.');
+        }
+        if (!defined(absoluteEpsilon)) {
+            throw new DeveloperError('relativeEpsilon is required.');
+        }
+                return left - right > absoluteEpsilon;
+    };
+
+    /**
+     * Determines if the left value is greater than or equal to the right value. If the two values are within
+     * <code>absoluteEpsilon</code> of each other, they are considered equal and this function returns true.
+     *
+     * @param {Number} left The first number to compare.
+     * @param {Number} right The second number to compare.
+     * @param {Number} absoluteEpsilon The absolute epsilon to use in comparison.
+     * @returns {Boolean} <code>true</code> if <code>left</code> is greater than <code>right</code> or if the
+     *          the values are nearly equal.
+     */
+    CesiumMath.greaterThanOrEquals = function(left, right, absoluteEpsilon) {
+                if (!defined(left)) {
+            throw new DeveloperError('first is required.');
+        }
+        if (!defined(right)) {
+            throw new DeveloperError('second is required.');
+        }
+        if (!defined(absoluteEpsilon)) {
+            throw new DeveloperError('relativeEpsilon is required.');
+        }
+                return left - right > -absoluteEpsilon;
+    };
+
     var factorials = [1];
 
     /**
@@ -12548,12 +12642,16 @@ define('ThirdParty/when',[],function () {
 define('Core/FeatureDetection',[
         './defaultValue',
         './defined',
+        './defineProperties',
+        './DeveloperError',
         './Fullscreen',
         './RuntimeError',
         '../ThirdParty/when'
     ], function(
         defaultValue,
         defined,
+        defineProperties,
+        DeveloperError,
         Fullscreen,
         RuntimeError,
         when) {
@@ -12750,44 +12848,52 @@ define('Core/FeatureDetection',[
         return supportsImageRenderingPixelated() ? imageRenderingValueResult : undefined;
     }
 
-    var supportsWebPResult;
-    var supportsWebPPromise;
     function supportsWebP() {
+                if (!supportsWebP.initialized) {
+            throw new DeveloperError('You must call FeatureDetection.supportsWebP.initialize and wait for the promise to resolve before calling FeatureDetection.supportsWebP');
+        }
+                return supportsWebP._result;
+    }
+    supportsWebP._promise = undefined;
+    supportsWebP._result = undefined;
+    supportsWebP.initialize = function() {
         // From https://developers.google.com/speed/webp/faq#how_can_i_detect_browser_support_for_webp
-        if (defined(supportsWebPPromise)) {
-            return supportsWebPPromise.promise;
+        if (defined(supportsWebP._promise)) {
+            return supportsWebP._promise;
         }
 
-        supportsWebPPromise = when.defer();
+        var supportsWebPDeferred = when.defer();
+        supportsWebP._promise = supportsWebPDeferred.promise;
         if (isEdge()) {
             // Edge's WebP support with WebGL is incomplete.
             // See bug report: https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/19221241/
-            supportsWebPResult = false;
-            supportsWebPPromise.resolve(supportsWebPResult);
+            supportsWebP._result = false;
+            supportsWebPDeferred.resolve(supportsWebP._result);
+            return supportsWebPDeferred.promise;
         }
 
         var image = new Image();
         image.onload = function () {
-            supportsWebPResult = (image.width > 0) && (image.height > 0);
-            supportsWebPPromise.resolve(supportsWebPResult);
+            supportsWebP._result = (image.width > 0) && (image.height > 0);
+            supportsWebPDeferred.resolve(supportsWebP._result);
         };
 
         image.onerror = function () {
-            supportsWebPResult = false;
-            supportsWebPPromise.resolve(supportsWebPResult);
+            supportsWebP._result = false;
+            supportsWebPDeferred.resolve(supportsWebP._result);
         };
 
         image.src = 'data:image/webp;base64,UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEADsD+JaQAA3AAAAAA';
 
-        return supportsWebPPromise.promise;
-    }
-
-    function supportsWebPSync() {
-        if (!defined(supportsWebPPromise)) {
-            supportsWebP();
+        return supportsWebPDeferred.promise;
+    };
+    defineProperties(supportsWebP, {
+        initialized: {
+            get: function() {
+                return defined(supportsWebP._result);
+            }
         }
-        return supportsWebPResult;
-    }
+    });
 
     var typedArrayTypes = [];
     if (typeof ArrayBuffer !== 'undefined') {
@@ -12826,7 +12932,6 @@ define('Core/FeatureDetection',[
         supportsPointerEvents : supportsPointerEvents,
         supportsImageRenderingPixelated: supportsImageRenderingPixelated,
         supportsWebP: supportsWebP,
-        supportsWebPSync: supportsWebPSync,
         imageRenderingValue: imageRenderingValue,
         typedArrayTypes: typedArrayTypes
     };
@@ -18587,7 +18692,7 @@ define('Core/Request',[
         options = defaultValue(options, defaultValue.EMPTY_OBJECT);
 
         var throttleByServer = defaultValue(options.throttleByServer, false);
-        var throttle = throttleByServer || defaultValue(options.throttle, false);
+        var throttle = defaultValue(options.throttle, false);
 
         /**
          * The URL to request.
@@ -19603,17 +19708,17 @@ define('Core/RequestScheduler',[
             request.serverKey = RequestScheduler.getServerKey(request.url);
         }
 
+        if (request.throttleByServer && !serverHasOpenSlots(request.serverKey)) {
+            // Server is saturated. Try again later.
+            return undefined;
+        }
+
         if (!RequestScheduler.throttleRequests || !request.throttle) {
             return startRequest(request);
         }
 
         if (activeRequests.length >= RequestScheduler.maximumRequests) {
             // Active requests are saturated. Try again later.
-            return undefined;
-        }
-
-        if (request.throttleByServer && !serverHasOpenSlots(request.serverKey)) {
-            // Server is saturated. Try again later.
             return undefined;
         }
 
@@ -21644,10 +21749,15 @@ define('Core/Resource',[
     }
 
     function loadWithHttpRequest(url, responseType, method, data, headers, deferred, overrideMimeType) {
+
+        // Specifically use the Node version of require to avoid conflicts with the global
+        // require defined in the built version of Cesium.
+        var nodeRequire = global.require; // eslint-disable-line
+
         // Note: only the 'json' and 'text' responseTypes transforms the loaded buffer
-        var URL = require('url').parse(url);
-        var http = URL.protocol === 'https:' ? require('https') : require('http');
-        var zlib = require('zlib');
+        var URL = nodeRequire('url').parse(url);
+        var http = URL.protocol === 'https:' ? nodeRequire('https') : nodeRequire('http');
+        var zlib = nodeRequire('zlib');
         var options = {
             protocol : URL.protocol,
             hostname : URL.hostname,
@@ -24389,6 +24499,25 @@ define('Core/IndexDatatype',[
 
                 throw new DeveloperError('indexDatatype is required and must be a valid IndexDatatype constant.');
             };
+
+    /**
+     * Gets the datatype with a given size in bytes.
+     *
+     * @param {Number} sizeInBytes The size of a single index in bytes.
+     * @returns {IndexDatatype} The index datatype with the given size.
+     */
+    IndexDatatype.fromSizeInBytes = function(sizeInBytes) {
+        switch (sizeInBytes) {
+            case 2:
+                return IndexDatatype.UNSIGNED_SHORT;
+            case 4:
+                return IndexDatatype.UNSIGNED_INT;
+            case 1:
+                return IndexDatatype.UNSIGNED_BYTE;
+                        default:
+                throw new DeveloperError('Size in bytes cannot be mapped to an IndexDatatype');
+                    }
+    };
 
     /**
      * Validates that the provided index datatype is a valid {@link IndexDatatype}.
