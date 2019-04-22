@@ -313,41 +313,6 @@ public class Resource {
     public static native Promise<JsObject, Void> put(ResourcePutOptions options);
 
     /**
-     * Combines the specified object and the existing query parameters. This allows you to add many parameters at once,
-     * as opposed to adding them one at a time to the queryParameters property.
-     * @param params The query parameters
-     */
-    @JsMethod
-    public native void addQueryParameters(JsObject params);
-
-    /**
-     * Combines the specified object and the existing query parameters. This allows you to add many parameters at once,
-     * as opposed to adding them one at a time to the queryParameters property.
-     * @param params The query parameters
-     * @param useAsDefault If true the params will be used as the default values, so they will only be set if they are undefined.
-     */
-    @JsMethod
-    public native void addQueryParameters(JsObject params, boolean useAsDefault);
-
-    /**
-     * Combines the specified object and the existing template values. This allows you to add many values at once,
-     * as opposed to adding them one at a time to the templateValues property.
-     * @param params The template values
-     */
-    @JsMethod
-    public native void addTemplateValues(JsObject params);
-
-    /**
-     * Combines the specified object and the existing template values. This allows you to add many values at once,
-     * as opposed to adding them one at a time to the templateValues property.
-     * @param params The template values
-     * @param useAsDefault If true the values will be used as the default values,
-     *                     so they will only be set if they are undefined.
-     */
-    @JsMethod
-    public native void addTemplateValues(JsObject params, boolean useAsDefault);
-
-    /**
      * Appends a forward slash to the URL.
      */
     @JsMethod
