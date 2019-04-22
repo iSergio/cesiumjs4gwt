@@ -33,4 +33,11 @@ public class ResourceImageOptions extends ResourceOptions {
      */
     @JsProperty
     public boolean preferBlob;
+    /**
+     * Whether to vertically flip the image during fetch and decode. Only applies when requesting an image and the browser
+     * supports createImageBitmap.
+     * Default: false
+     */
+    @JsProperty
+    public boolean flipY;
 }
