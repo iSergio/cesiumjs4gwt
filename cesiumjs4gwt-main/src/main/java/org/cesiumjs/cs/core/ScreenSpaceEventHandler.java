@@ -34,6 +34,12 @@ public class ScreenSpaceEventHandler {
      */
     @JsProperty
     public static int mouseEmulationIgnoreMilliseconds;
+    /**
+     * The amount of time, in milliseconds, before a touch on the screen becomes a touch and hold.
+     * Default: 1500
+     */
+    @JsProperty
+    public static int touchHoldDelayMilliseconds;
 
     /**
      * Handles user input events. Custom functions can be added to be executed on when the user enters input.
