@@ -34,6 +34,12 @@ public class ResourceImageOptions extends ResourceOptions {
     @JsProperty
     public boolean preferBlob;
     /**
+     * If true, image will be decoded during fetch and an ImageBitmap is returned.
+     * Default: false
+     */
+    @JsProperty
+    public boolean preferImageBitmap;
+    /**
      * Whether to vertically flip the image during fetch and decode. Only applies when requesting an image and the browser
      * supports createImageBitmap.
      * Default: false
