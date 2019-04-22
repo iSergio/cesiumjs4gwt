@@ -68,6 +68,18 @@ public class PointCloudShadingOptions {
      */
     @JsProperty
     public double eyeDomeLightingRadius;
+    /**
+     * Determines whether back-facing points are hidden. This option works only if data has normals included.
+     * Default: false
+     */
+    @JsProperty
+    public boolean backFaceCulling;
+    /**
+     * Determines whether a point cloud that contains normals is shaded based on the sun direction.
+     * Default: true
+     */
+    @JsProperty
+    public boolean normalShading;
 
     @JsConstructor
     public PointCloudShadingOptions() {}

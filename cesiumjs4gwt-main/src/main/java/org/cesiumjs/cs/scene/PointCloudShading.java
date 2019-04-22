@@ -36,6 +36,12 @@ public class PointCloudShading {
     @JsProperty
     public boolean attenuation;
     /**
+     * Determines whether back-facing points are hidden. This option works only if data has normals included.
+     * Default:  false
+     */
+    @JsProperty
+    public boolean backFaceCulling;
+    /**
      * Scale to be applied to each tile's geometric error.
      * Default: 1.0
      */
@@ -69,6 +75,12 @@ public class PointCloudShading {
      */
     @JsProperty
     public double eyeDomeLightingRadius;
+    /**
+     * Determines whether a point cloud that contains normals is shaded based on the sun direction.
+     * Default:  true
+     */
+    @JsProperty
+    public boolean normalShading;
 
     /**
      * Options for performing point attenuation based on geometric error when rendering point clouds using 3D Tiles.
