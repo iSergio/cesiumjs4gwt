@@ -41,6 +41,13 @@ public class PolylineGlowMaterialPropertyOptions {
     @JsProperty
     public Property glowPower;
     /**
+     * A numeric Property specifying the strength of the tapering effect, as a percentage of the total line length.
+     * If 1.0 or higher, no taper effect is used.
+     * Default: 1.0
+     */
+    @JsProperty
+    public Property taperPower;
+    /**
      * Options for {@link org.cesiumjs.cs.datasources.properties.PolylineGlowMaterialProperty}
      */
     @JsConstructor
