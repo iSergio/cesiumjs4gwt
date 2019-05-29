@@ -1618,121 +1618,6 @@ define('Core/defineProperties',[
     return defineProperties;
 });
 
-define('Core/oneTimeWarning',[
-        './defaultValue',
-        './defined',
-        './DeveloperError'
-    ], function(
-        defaultValue,
-        defined,
-        DeveloperError) {
-    'use strict';
-
-    var warnings = {};
-
-    /**
-     * Logs a one time message to the console.  Use this function instead of
-     * <code>console.log</code> directly since this does not log duplicate messages
-     * unless it is called from multiple workers.
-     *
-     * @exports oneTimeWarning
-     *
-     * @param {String} identifier The unique identifier for this warning.
-     * @param {String} [message=identifier] The message to log to the console.
-     *
-     * @example
-     * for(var i=0;i<foo.length;++i) {
-     *    if (!defined(foo[i].bar)) {
-     *       // Something that can be recovered from but may happen a lot
-     *       oneTimeWarning('foo.bar undefined', 'foo.bar is undefined. Setting to 0.');
-     *       foo[i].bar = 0;
-     *       // ...
-     *    }
-     * }
-     *
-     * @private
-     */
-    function oneTimeWarning(identifier, message) {
-                if (!defined(identifier)) {
-            throw new DeveloperError('identifier is required.');
-        }
-        
-        if (!defined(warnings[identifier])) {
-            warnings[identifier] = true;
-            console.warn(defaultValue(message, identifier));
-        }
-    }
-
-    oneTimeWarning.geometryOutlines = 'Entity geometry outlines are unsupported on terrain. Outlines will be disabled. To enable outlines, disable geometry terrain clamping by explicitly setting height to 0.';
-
-    oneTimeWarning.geometryZIndex = 'Entity geometry with zIndex are unsupported when height or extrudedHeight are defined.  zIndex will be ignored';
-
-    oneTimeWarning.geometryHeightReference = 'Entity corridor, ellipse, polygon or rectangle with heightReference must also have a defined height.  heightReference will be ignored';
-    oneTimeWarning.geometryExtrudedHeightReference = 'Entity corridor, ellipse, polygon or rectangle with extrudedHeightReference must also have a defined extrudedHeight.  extrudedHeightReference will be ignored';
-
-    return oneTimeWarning;
-});
-
-define('Core/deprecationWarning',[
-        './defined',
-        './DeveloperError',
-        './oneTimeWarning'
-    ], function(
-        defined,
-        DeveloperError,
-        oneTimeWarning) {
-    'use strict';
-
-    /**
-     * Logs a deprecation message to the console.  Use this function instead of
-     * <code>console.log</code> directly since this does not log duplicate messages
-     * unless it is called from multiple workers.
-     *
-     * @exports deprecationWarning
-     *
-     * @param {String} identifier The unique identifier for this deprecated API.
-     * @param {String} message The message to log to the console.
-     *
-     * @example
-     * // Deprecated function or class
-     * function Foo() {
-     *    deprecationWarning('Foo', 'Foo was deprecated in Cesium 1.01.  It will be removed in 1.03.  Use newFoo instead.');
-     *    // ...
-     * }
-     *
-     * // Deprecated function
-     * Bar.prototype.func = function() {
-     *    deprecationWarning('Bar.func', 'Bar.func() was deprecated in Cesium 1.01.  It will be removed in 1.03.  Use Bar.newFunc() instead.');
-     *    // ...
-     * };
-     *
-     * // Deprecated property
-     * defineProperties(Bar.prototype, {
-     *     prop : {
-     *         get : function() {
-     *             deprecationWarning('Bar.prop', 'Bar.prop was deprecated in Cesium 1.01.  It will be removed in 1.03.  Use Bar.newProp instead.');
-     *             // ...
-     *         },
-     *         set : function(value) {
-     *             deprecationWarning('Bar.prop', 'Bar.prop was deprecated in Cesium 1.01.  It will be removed in 1.03.  Use Bar.newProp instead.');
-     *             // ...
-     *         }
-     *     }
-     * });
-     *
-     * @private
-     */
-    function deprecationWarning(identifier, message) {
-                if (!defined(identifier) || !defined(message)) {
-            throw new DeveloperError('identifier and message are required.');
-        }
-        
-        oneTimeWarning(identifier, message);
-    }
-
-    return deprecationWarning;
-});
-
 define('Core/Fullscreen',[
         './defined',
         './defineProperties'
@@ -3567,7 +3452,8 @@ define('Core/RequestScheduler',[
         numberOfCancelledRequests : 0,
         numberOfCancelledActiveRequests : 0,
         numberOfFailedRequests : 0,
-        numberOfActiveRequestsEver : 0
+        numberOfActiveRequestsEver : 0,
+        lastNumberOfActiveRequests : 0
     };
 
     var priorityHeapLength = 20;
@@ -3902,34 +3788,34 @@ define('Core/RequestScheduler',[
         return issueRequest(request);
     };
 
-    function clearStatistics() {
-        statistics.numberOfAttemptedRequests = 0;
-        statistics.numberOfCancelledRequests = 0;
-        statistics.numberOfCancelledActiveRequests = 0;
-    }
-
     function updateStatistics() {
         if (!RequestScheduler.debugShowStatistics) {
             return;
         }
 
-        if (statistics.numberOfAttemptedRequests > 0) {
-            console.log('Number of attempted requests: ' + statistics.numberOfAttemptedRequests);
-        }
-        if (statistics.numberOfActiveRequests > 0) {
-            console.log('Number of active requests: ' + statistics.numberOfActiveRequests);
-        }
-        if (statistics.numberOfCancelledRequests > 0) {
-            console.log('Number of cancelled requests: ' + statistics.numberOfCancelledRequests);
-        }
-        if (statistics.numberOfCancelledActiveRequests > 0) {
-            console.log('Number of cancelled active requests: ' + statistics.numberOfCancelledActiveRequests);
-        }
-        if (statistics.numberOfFailedRequests > 0) {
-            console.log('Number of failed requests: ' + statistics.numberOfFailedRequests);
+        if (statistics.numberOfActiveRequests === 0 && statistics.lastNumberOfActiveRequests > 0) {
+            if (statistics.numberOfAttemptedRequests > 0) {
+                console.log('Number of attempted requests: ' + statistics.numberOfAttemptedRequests);
+                statistics.numberOfAttemptedRequests = 0;
+            }
+
+            if (statistics.numberOfCancelledRequests > 0) {
+                console.log('Number of cancelled requests: ' + statistics.numberOfCancelledRequests);
+                statistics.numberOfCancelledRequests = 0;
+            }
+
+            if (statistics.numberOfCancelledActiveRequests > 0) {
+                console.log('Number of cancelled active requests: ' + statistics.numberOfCancelledActiveRequests);
+                statistics.numberOfCancelledActiveRequests = 0;
+            }
+
+            if (statistics.numberOfFailedRequests > 0) {
+                console.log('Number of failed requests: ' + statistics.numberOfFailedRequests);
+                statistics.numberOfFailedRequests = 0;
+            }
         }
 
-        clearStatistics();
+        statistics.lastNumberOfActiveRequests = statistics.numberOfActiveRequests;
     }
 
     /**
@@ -3956,6 +3842,7 @@ define('Core/RequestScheduler',[
         statistics.numberOfCancelledActiveRequests = 0;
         statistics.numberOfFailedRequests = 0;
         statistics.numberOfActiveRequestsEver = 0;
+        statistics.lastNumberOfActiveRequests = 0;
     };
 
     /**
@@ -4207,7 +4094,6 @@ define('Core/Resource',[
         './defaultValue',
         './defined',
         './defineProperties',
-        './deprecationWarning',
         './DeveloperError',
         './freezeObject',
         './FeatureDetection',
@@ -4236,7 +4122,6 @@ define('Core/Resource',[
         defaultValue,
         defined,
         defineProperties,
-        deprecationWarning,
         DeveloperError,
         freezeObject,
         FeatureDetection,
@@ -4601,7 +4486,8 @@ define('Core/Resource',[
         })
             .then(function(blob) {
                 return createImageBitmap(blob, {
-                    imageOrientation: 'flipY'
+                    imageOrientation: 'flipY',
+                    premultiplyAlpha: 'none'
                 });
             })
             .then(function(imageBitmap) {
@@ -5066,12 +4952,6 @@ define('Core/Resource',[
      * @see {@link http://wiki.commonjs.org/wiki/Promises/A|CommonJS Promises/A}
      */
     Resource.prototype.fetchImage = function (options) {
-        if (typeof options === 'boolean') {
-            deprecationWarning('fetchImage-parameter-change', 'fetchImage now takes an options object in CesiumJS 1.57. Use resource.fetchImage({ preferBlob: true }) instead of resource.fetchImage(true).');
-            options = {
-                preferBlob : options
-            };
-        }
         options = defaultValue(options, defaultValue.EMPTY_OBJECT);
         var preferImageBitmap = defaultValue(options.preferImageBitmap, false);
         var preferBlob = defaultValue(options.preferBlob, false);
@@ -5113,7 +4993,10 @@ define('Core/Resource',[
                 }
                 generatedBlob = blob;
                 if (useImageBitmap) {
-                    return Resource._Implementations.createImageBitmapFromBlob(blob, flipY);
+                    return Resource.createImageBitmapFromBlob(blob, {
+                        flipY: flipY,
+                        premultiplyAlpha: false
+                    });
                 }
                 var blobUrl = window.URL.createObjectURL(blob);
                 generatedBlobResource = new Resource({
@@ -6069,7 +5952,10 @@ define('Core/Resource',[
                     return;
                 }
 
-                return Resource._Implementations.createImageBitmapFromBlob(blob, flipY);
+                return Resource.createImageBitmapFromBlob(blob, {
+                    flipY: flipY,
+                    premultiplyAlpha: false
+                });
             })
             .then(function(imageBitmap) {
                 if (!defined(imageBitmap)) {
@@ -6081,9 +5967,19 @@ define('Core/Resource',[
             .otherwise(deferred.reject);
     };
 
-    Resource._Implementations.createImageBitmapFromBlob = function(blob, flipY) {
+    /**
+     * Wrapper for createImageBitmap
+     *
+     * @private
+     */
+    Resource.createImageBitmapFromBlob = function(blob, options) {
+        Check.defined('options', options);
+        Check.typeOf.bool('options.flipY', options.flipY);
+        Check.typeOf.bool('options.premultiplyAlpha', options.premultiplyAlpha);
+
         return createImageBitmap(blob, {
-            imageOrientation: flipY ? 'flipY' : 'none'
+            imageOrientation: options.flipY ? 'flipY' : 'none',
+            premultiplyAlpha: options.premultiplyAlpha ? 'premultiply' : 'none'
         });
     };
 
@@ -6849,29 +6745,41 @@ define('Core/Math',[
     };
 
     /**
-     * Converts a scalar value in the range [-1.0, 1.0] to a SNORM in the range [0, rangeMax]
+     * Converts a scalar value in the range [-1.0, 1.0] to a SNORM in the range [0, rangeMaximum]
      * @param {Number} value The scalar value in the range [-1.0, 1.0]
-     * @param {Number} [rangeMax=255] The maximum value in the mapped range, 255 by default.
-     * @returns {Number} A SNORM value, where 0 maps to -1.0 and rangeMax maps to 1.0.
+     * @param {Number} [rangeMaximum=255] The maximum value in the mapped range, 255 by default.
+     * @returns {Number} A SNORM value, where 0 maps to -1.0 and rangeMaximum maps to 1.0.
      *
      * @see CesiumMath.fromSNorm
      */
-    CesiumMath.toSNorm = function(value, rangeMax) {
-        rangeMax = defaultValue(rangeMax, 255);
-        return Math.round((CesiumMath.clamp(value, -1.0, 1.0) * 0.5 + 0.5) * rangeMax);
+    CesiumMath.toSNorm = function(value, rangeMaximum) {
+        rangeMaximum = defaultValue(rangeMaximum, 255);
+        return Math.round((CesiumMath.clamp(value, -1.0, 1.0) * 0.5 + 0.5) * rangeMaximum);
     };
 
     /**
-     * Converts a SNORM value in the range [0, rangeMax] to a scalar in the range [-1.0, 1.0].
-     * @param {Number} value SNORM value in the range [0, 255]
-     * @param {Number} [rangeMax=255] The maximum value in the SNORM range, 255 by default.
+     * Converts a SNORM value in the range [0, rangeMaximum] to a scalar in the range [-1.0, 1.0].
+     * @param {Number} value SNORM value in the range [0, rangeMaximum]
+     * @param {Number} [rangeMaximum=255] The maximum value in the SNORM range, 255 by default.
      * @returns {Number} Scalar in the range [-1.0, 1.0].
      *
      * @see CesiumMath.toSNorm
      */
-    CesiumMath.fromSNorm = function(value, rangeMax) {
-        rangeMax = defaultValue(rangeMax, 255);
-        return CesiumMath.clamp(value, 0.0, rangeMax) / rangeMax * 2.0 - 1.0;
+    CesiumMath.fromSNorm = function(value, rangeMaximum) {
+        rangeMaximum = defaultValue(rangeMaximum, 255);
+        return CesiumMath.clamp(value, 0.0, rangeMaximum) / rangeMaximum * 2.0 - 1.0;
+    };
+
+    /**
+     * Converts a scalar value in the range [rangeMinimum, rangeMaximum] to a scalar in the range [0.0, 1.0]
+     * @param {Number} value The scalar value in the range [rangeMinimum, rangeMaximum]
+     * @param {Number} rangeMinimum The minimum value in the mapped range.
+     * @param {Number} rangeMaximum The maximum value in the mapped range.
+     * @returns {Number} A scalar value, where rangeMinimum maps to 0.0 and rangeMaximum maps to 1.0.
+     */
+    CesiumMath.normalize = function(value, rangeMinimum, rangeMaximum) {
+        rangeMaximum = Math.max(rangeMaximum - rangeMinimum, 0.0);
+        return rangeMaximum === 0.0 ? 0.0 : CesiumMath.clamp((value - rangeMinimum) / rangeMaximum, 0.0, 1.0);
     };
 
     /**
