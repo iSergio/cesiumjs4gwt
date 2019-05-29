@@ -572,14 +572,14 @@ public class Cesium3DTileset {
     /**
      * Optimization option. Used as a callback when {@link Cesium3DTileset#foveatedScreenSpaceError} is true to control
      * how much to raise the screen space error for tiles outside the foveated cone,
-     * interpolating between {@link Cesium3DTileset##foveatedMinimumScreenSpaceErrorRelaxation and {@link Cesium3DTileset##maximumScreenSpaceError}.
+     * interpolating between {@link Cesium3DTileset#foveatedMinimumScreenSpaceErrorRelaxation} and {@link Cesium3DTileset#maximumScreenSpaceError}.
      */
     @JsFunction
     public interface FoveatedInterpolationCallback {
         /**
          * Optimization option. Used as a callback when {@link Cesium3DTileset#foveatedScreenSpaceError} is true to control
          * how much to raise the screen space error for tiles outside the foveated cone,
-         * interpolating between {@link Cesium3DTileset##foveatedMinimumScreenSpaceErrorRelaxation and {@link Cesium3DTileset##maximumScreenSpaceError}.
+         * interpolating between {@link Cesium3DTileset#foveatedMinimumScreenSpaceErrorRelaxation} and {@link Cesium3DTileset#maximumScreenSpaceError}.
          * @param p The start value to interpolate.
          * @param q The end value to interpolate.
          * @param time The time of interpolation generally in the range [0.0, 1.0].

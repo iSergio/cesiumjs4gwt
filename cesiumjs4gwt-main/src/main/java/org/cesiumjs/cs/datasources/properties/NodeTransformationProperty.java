@@ -23,7 +23,7 @@ import org.cesiumjs.cs.core.TranslationRotationScale;
 import org.cesiumjs.cs.datasources.properties.options.NodeTransformationPropertyOptions;
 
 /**
- * A {@link Property} that produces {@link TranslationRotationScale) data.
+ * A {@link Property} that produces {@link TranslationRotationScale} data.
  *
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
