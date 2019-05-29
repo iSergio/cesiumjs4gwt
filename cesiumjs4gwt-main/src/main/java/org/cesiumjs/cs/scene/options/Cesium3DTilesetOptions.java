@@ -20,6 +20,7 @@ import jsinterop.annotations.*;
 import org.cesiumjs.cs.collections.ClippingPlaneCollection;
 import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.promise.Promise;
+import org.cesiumjs.cs.scene.Cesium3DTileset;
 import org.cesiumjs.cs.scene.PointCloudShading;
 import org.cesiumjs.cs.scene.enums.ClassificationType;
 
@@ -74,6 +75,36 @@ public class Cesium3DTilesetOptions {
     @JsProperty
     public boolean cullWithChildrenBounds;
     /**
+     * Don't request tiles that will likely be unused when they come back because of the camera's movement.
+     * Default: true
+     */
+    @JsProperty
+    public boolean cullRequestsWhileMoving;
+    /**
+     * Multiplier used in culling requests while moving. Larger is more aggressive culling, smaller less aggressive culling.
+     * Defaule: 60.0
+     */
+    @JsProperty
+    public double cullRequestsWhileMovingMultiplier;
+    /**
+     * Preload tiles when tileset.show is false. Loads tiles as if the tileset is visible but does not render them.
+     * Default: false
+     */
+    @JsProperty
+    public boolean preloadWhenHidden;
+    /**
+     * Preload tiles at the camera's flight destination while the camera is in flight.
+     * Default: true
+     */
+    @JsProperty
+    public boolean preloadFlightDestinations;
+    /**
+     * Optimization option. Prefer loading of leaves first.
+     * Default: false
+     */
+    @JsProperty
+    public boolean preferLeaves;
+    /**
      * Optimization option. Reduce the screen space error for tiles that are further away from the camera.
      * Defaule: false
      */
@@ -97,6 +128,57 @@ public class Cesium3DTilesetOptions {
      */
     @JsProperty
     public double dynamicScreenSpaceErrorHeightFalloff;
+    /**
+     * Optimization option. If between (0.0, 0.5], tiles at or above the screen space error for the reduced screen
+     * resolution of progressiveResolutionHeightFraction*screenHeight will be prioritized first. This can help get a
+     * quick layer of tiles down while full resolution tiles continue to load.
+     * Default: 0.3
+     */
+    @JsProperty
+    public double progressiveResolutionHeightFraction;
+    /**
+     * Optimization option. Prioritize loading tiles in the center of the screen by temporarily raising the screen
+     * space error for tiles around the edge of the screen. Screen space error returns to normal once all the tiles
+     * in the center of the screen as determined by the {@link org.cesiumjs.cs.scene.Cesium3DTileset#foveatedConeSize} are loaded.
+     * Default: true
+     */
+    @JsProperty
+    public boolean foveatedScreenSpaceError;
+    /**
+     * Optimization option. Used when {@link org.cesiumjs.cs.scene.Cesium3DTileset#foveatedScreenSpaceError} is true to control the cone size that
+     * determines which tiles are deferred. Tiles that are inside this cone are loaded immediately. Tiles outside the
+     * cone are potentially deferred based on how far outside the cone they are and their screen space error.
+     * This is controlled by {@link org.cesiumjs.cs.scene.Cesium3DTileset#foveatedInterpolationCallback} and {@link org.cesiumjs.cs.scene.Cesium3DTileset#foveatedMinimumScreenSpaceErrorRelaxation}.
+     * Setting this to 0.0 means the cone will be the line formed by the camera position and its view direction.
+     * Setting this to 1.0 means the cone encompasses the entire field of view of the camera, disabling the effect.
+     * Default: 0.1
+     */
+    @JsProperty
+    public double foveatedConeSize;
+    /**
+     * Optimization option. Used when {@link org.cesiumjs.cs.scene.Cesium3DTileset#foveatedScreenSpaceError} is true to control the starting screen
+     * space error relaxation for tiles outside the foveated cone. The screen space error will be raised starting with
+     * tileset value up to {@link org.cesiumjs.cs.scene.Cesium3DTileset#maximumScreenSpaceError} based on the provided {@link org.cesiumjs.cs.scene.Cesium3DTileset#foveatedInterpolationCallback}.
+     * Default: 0.0
+     */
+    @JsProperty
+    public double foveatedMinimumScreenSpaceErrorRelaxation;
+    /**
+     * Optimization option. Used when {@link Cesium3DTileset#foveatedScreenSpaceError} is true to control how much to
+     * raise the screen space error for tiles outside the foveated cone, interpolating
+     * between {@link Cesium3DTileset#foveatedMinimumScreenSpaceErrorRelaxation} and {@link Cesium3DTileset#maximumScreenSpaceError}
+     */
+    @JsProperty
+    public Cesium3DTileset.FoveatedInterpolationCallback foveatedInterpolationCallback;
+    /**
+     * Optimization option. Used when {@link org.cesiumjs.cs.scene.Cesium3DTileset#foveatedScreenSpaceError} is true to control how long in seconds
+     * to wait after the camera stops moving before deferred tiles start loading in. This time delay prevents requesting
+     * tiles around the edges of the screen when the camera is moving.
+     * Setting this to 0.0 will immediately request all tiles in any given view.
+     * Default: 0.2
+     */
+    @JsProperty
+    public double foveatedTimeDelay;
     /**
      * Optimization option. Determines if level of detail skipping should be applied during the traversal.
      * Defaule: true
