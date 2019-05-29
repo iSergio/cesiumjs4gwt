@@ -111,7 +111,7 @@ public class ImageryLayer {
      * Normalized (0-1) threshold for color-to-alpha.
      */
     @JsProperty
-    double colorToAlphaThreshold;
+    public double colorToAlphaThreshold;
     /**
      * The contrast of this layer. 1.0 uses the unmodified imagery color. Less than 1.0 reduces the contrast while
      * greater than 1.0 increases it.
