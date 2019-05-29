@@ -466,6 +466,16 @@ public class Math {
     public static native double nextRandomNumber();
 
     /**
+     * Converts a scalar value in the range [rangeMinimum, rangeMaximum] to a scalar in the range [0.0, 1.0]
+     * @param value The scalar value in the range [rangeMinimum, rangeMaximum]
+     * @param rangeMinimum The minimum value in the mapped range.
+     * @param rangeMaximum The maximum value in the mapped range.
+     * @return A scalar value, where rangeMinimum maps to 0.0 and rangeMaximum maps to 1.0.
+     */
+    @JsMethod
+    public static native double normalize(double value, double rangeMinimum, double rangeMaximum);
+
+    /**
      * Generates a random number between two numbers.
      * @param min The minimum value.
      * @param max The maximum value.
