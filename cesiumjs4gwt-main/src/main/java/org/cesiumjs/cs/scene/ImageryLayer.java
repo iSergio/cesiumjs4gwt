@@ -20,6 +20,7 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.core.Rectangle;
 import org.cesiumjs.cs.promise.Promise;
 import org.cesiumjs.cs.scene.enums.ImagerySplitDirection;
@@ -101,6 +102,16 @@ public class ImageryLayer {
      */
     @JsProperty
     public float brightness;
+    /**
+     * Color value that should be set to transparent.
+     */
+    @JsProperty
+    public Color colorToAlpha;
+    /**
+     * Normalized (0-1) threshold for color-to-alpha.
+     */
+    @JsProperty
+    double colorToAlphaThreshold;
     /**
      * The contrast of this layer. 1.0 uses the unmodified imagery color. Less than 1.0 reduces the contrast while
      * greater than 1.0 increases it.

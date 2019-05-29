@@ -17,6 +17,7 @@
 package org.cesiumjs.cs.scene.options;
 
 import jsinterop.annotations.*;
+import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.core.Rectangle;
 import org.cesiumjs.cs.scene.enums.ImagerySplitDirection;
 import org.cesiumjs.cs.scene.enums.TextureMagnificationFilter;
@@ -141,6 +142,17 @@ public class ImageryLayerOptions {
      */
     @JsProperty
     public Rectangle cutoutRectangle;
+    /**
+     * Color to be used as alpha.
+     */
+    @JsProperty
+    public Color colorToAlpha;
+    /**
+     * Threshold for color-to-alpha.
+     * Default: 0.004
+     */
+    @JsProperty
+    public double colorToAlphaThreshold;
 
     @JsConstructor
     public ImageryLayerOptions() {}
