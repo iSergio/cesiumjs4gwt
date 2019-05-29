@@ -117,6 +117,7 @@ public class SampledPositionProperty extends PositionProperty {
      * @param times An array of JulianDate instances where each index is a sample time.
      * @param positions The array of values, where each value corresponds to the provided times index.
      */
+    @JsMethod
     public native void addSamples(JulianDate[] times, Cartesian3[] positions);
 
     /**
@@ -125,6 +126,7 @@ public class SampledPositionProperty extends PositionProperty {
      * @param positions The array of values, where each value corresponds to the provided times index.
      * @param derivativeValues An array where each item is the array of derivatives at the equivalent time index.
      */
+    @JsMethod
     public native void addSamples(JulianDate[] times, Cartesian3[] positions, Cartesian3[]derivativeValues);
 
     /**
@@ -133,11 +135,28 @@ public class SampledPositionProperty extends PositionProperty {
      * @param packedSamples The array of packed samples.
      * @param epoch If any of the dates in packedSamples are numbers, they are considered an offset from this epoch, in seconds.
      */
+    @JsMethod
     public native void addSamplesPackedArray(double[] packedSamples, JulianDate epoch);
+
+    /**
+     * Removes a sample at the given time, if present.
+     * @param time The sample time.
+     * @return true if a sample at time was removed, false otherwise.
+     */
+    @JsMethod
+    public native boolean removeSample(JulianDate time);
+
+    /**
+     * Removes all samples for the given time interval.
+     * @param time The time interval for which to remove all samples.
+     */
+    @JsMethod
+    public native void removeSamples(org.cesiumjs.cs.core.TimeInterval time);
 
     /**
      * Sets the algorithm and degree to use when interpolating a value.
      * @param options Options
      */
+    @JsMethod
     public native void setInterpolationOptions(SampledPropertyInterpolationOptions options);
 }

@@ -22,6 +22,7 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.JulianDate;
 import org.cesiumjs.cs.core.Packable;
+import org.cesiumjs.cs.core.TimeInterval;
 import org.cesiumjs.cs.core.enums.ExtrapolationType;
 import org.cesiumjs.cs.core.interpolation.InterpolationAlgorithm;
 import org.cesiumjs.cs.core.interpolation.LinearApproximation;
@@ -119,6 +120,7 @@ public class SampledProperty<T extends Packable> extends Property<T> {
      * @param times An array of JulianDate instances where each index is a sample time.
      * @param values The array of values, where each value corresponds to the provided times index.
      */
+    @JsMethod
     public native void addSamples(JulianDate[] times, T[] values);
 
     /**
@@ -127,6 +129,7 @@ public class SampledProperty<T extends Packable> extends Property<T> {
      * @param values The array of values, where each value corresponds to the provided times index.
      * @param derivativeValues An array where each item is the array of derivatives at the equivalent time index.
      */
+    @JsMethod
     public native void addSamples(JulianDate[] times, T[] values, T[]derivativeValues);
 
     /**
@@ -135,11 +138,28 @@ public class SampledProperty<T extends Packable> extends Property<T> {
      * @param packedSamples The array of packed samples.
      * @param epoch If any of the dates in packedSamples are numbers, they are considered an offset from this epoch, in seconds.
      */
+    @JsMethod
     public native void addSamplesPackedArray(double[] packedSamples, JulianDate epoch);
+
+    /**
+     * Removes a sample at the given time, if present.
+     * @param time The sample time.
+     * @return true if a sample at time was removed, false otherwise.
+     */
+    @JsMethod
+    public native boolean removeSample(JulianDate time);
+
+    /**
+     * Removes all samples for the given time interval.
+     * @param time The time interval for which to remove all samples.
+     */
+    @JsMethod
+    public native void removeSamples(org.cesiumjs.cs.core.TimeInterval time);
 
     /**
      * Sets the algorithm and degree to use when interpolating a value.
      * @param options Options
      */
+    @JsMethod
     public native void setInterpolationOptions(SampledPropertyInterpolationOptions options);
 }
