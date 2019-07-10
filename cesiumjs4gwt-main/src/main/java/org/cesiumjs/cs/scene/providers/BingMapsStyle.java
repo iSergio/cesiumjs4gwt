@@ -32,9 +32,16 @@ public class BingMapsStyle {
     public static native String AERIAL();
     /**
      * Aerial imagery with a road overlay.
+     * @deprecated See https://github.com/AnalyticalGraphicsInc/cesium/issues/7128. Use `BingMapsStyle.AERIAL_WITH_LABELS_ON_DEMAND` instead
      */
+    @Deprecated
     @JsProperty(name = "AERIAL_WITH_LABELS")
     public static native String AERIAL_WITH_LABELS();
+    /**
+     * Aerial imagery with a road overlay.
+     */
+    @JsProperty(name = "AERIAL_WITH_LABELS_ON_DEMAND")
+    public static native String AERIAL_WITH_LABELS_ON_DEMAND();
     /**
      * A dark version of the road maps.
      */
@@ -52,9 +59,16 @@ public class BingMapsStyle {
     public static native String CANVAS_LIGHT();
     /**
      * Roads without additional imagery.
+     * @deprecated See https://github.com/AnalyticalGraphicsInc/cesium/issues/7128. Use `BingMapsStyle.ROAD_ON_DEMAND` instead
      */
+    @Deprecated
     @JsProperty(name = "ROAD")
     public static native String ROAD();
+    /**
+     * Roads without additional imagery.
+     */
+    @JsProperty(name = "ROAD_ON_DEMAND")
+    public static native String ROAD_ON_DEMAND();
     /**
      * Ordnance Survey imagery
      */
