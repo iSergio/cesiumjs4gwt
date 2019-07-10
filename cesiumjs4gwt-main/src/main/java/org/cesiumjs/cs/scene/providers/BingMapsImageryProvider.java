@@ -115,9 +115,10 @@ public class BingMapsImageryProvider implements ImageryProvider {
     @JsProperty(name = "rectangle")
     public native Rectangle rectangle();
     /**
-     * Gets the tile discard policy. If not undefined, the discard policy is responsible for filtering out "missing"
-     * tiles via its shouldDiscardImage function. If this function returns undefined, no tiles are filtered.
-     * This function should not be called before BingMapsImageryProvider#ready returns true.
+     * The policy that determines if a tile is invalid and should be discarded.
+     * By default, a {@link org.cesiumjs.cs.scene.DiscardEmptyTileImagePolicy} will be used, with the expectation that
+     * the Bing Maps server will send a zero-length response for missing tiles. To ensure that no tiles are discarded,
+     * construct and pass a {@link org.cesiumjs.cs.scene.NeverTileDiscardPolicy} for this parameter.
      */
     @JsProperty(name = "tileDiscardPolicy")
     public native TileDiscardPolicy tileDiscardPolicy();
