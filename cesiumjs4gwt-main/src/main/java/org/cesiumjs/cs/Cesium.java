@@ -17,10 +17,15 @@
 package org.cesiumjs.cs;
 
 import jsinterop.annotations.*;
+import org.cesiumjs.cs.collections.EntityCollection;
 import org.cesiumjs.cs.core.Cartographic;
 import org.cesiumjs.cs.core.Ellipsoid;
+import org.cesiumjs.cs.core.JulianDate;
+import org.cesiumjs.cs.core.TimeInterval;
 import org.cesiumjs.cs.core.providers.CesiumTerrainProvider;
 import org.cesiumjs.cs.core.providers.TerrainProvider;
+import org.cesiumjs.cs.datasources.graphics.ModelGraphics;
+import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.promise.Promise;
 import org.cesiumjs.cs.scene.providers.UrlTemplateImageryProvider;
 import org.cesiumjs.cs.scene.providers.options.OpenStreetMapImageryProviderOptions;
@@ -240,6 +245,22 @@ public class Cesium {
     @JsMethod(namespace = "Cesium", name = "createWorldTerrain")
     public static native CesiumTerrainProvider createWorldTerrain(CreateWorldTerrainOptions options);
 
+    /**
+     * Exports an EntityCollection as a KML document. Only Point, Billboard, Model, Path, Polygon, Polyline geometries
+     * will be exported. Note that there is not a 1 to 1 mapping of Entity properties to KML Feature properties.
+     * For example, entity properties that are time dynamic but cannot be dynamic in KML are exported with their
+     * values at options.time or the beginning of the EntityCollection's time interval if not specified.
+     * For time-dynamic properties that are supported in KML, we use the samples if it is a {@link org.cesiumjs.cs.datasources.properties.SampledProperty}
+     * otherwise we sample the value using the options.sampleDuration. Point, Billboard, Model
+     * and Path geometries with time-dynamic positions will be exported as gx:Track Features.
+     * Not all Materials are representable in KML, so for more advanced Materials just the primary color is used.
+     * Canvas objects are exported as PNG images.
+     * @param options object with properties
+     * @return A promise that resolved to an object containing the KML string and a dictionary of external file blobs, or a kmz file as a blob if options.kmz is true.
+     */
+    @JsMethod(namespace = "Cesium", name = "exportKml")
+    public static native Promise<Object, Void> exportKml(ExportKmlOptions options);
+
     @JsFunction
     public interface Function {
         Object function(Object ...args);
@@ -299,6 +320,81 @@ public class Cesium {
             options.requestVertexNormals = requestVertexNormals;
             options.requestWaterMask = requestWaterMask;
             return options;
+        }
+    }
+
+    /**
+     * Options for {@link Cesium#exportKml(ExportKmlOptions)}
+     */
+    @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+    public static class ExportKmlOptions {
+        /**
+         * The EntityCollection to export as KML.
+         */
+        @JsProperty
+        public EntityCollection entities;
+        /**
+         * The ellipsoid for the output file.
+         * Default: {@link Ellipsoid#WGS84()}
+         */
+        @JsProperty
+        public Ellipsoid ellipsoid;
+        /**
+         * A callback that will be called with a ModelGraphics instance and should return the URI to use in the KML.
+         * Required if a model exists in the entity collection.
+         */
+        @JsProperty
+        public ModelCallback modelCallback;
+        /**
+         * The time value to use to get properties that are not time varying in KML.
+         */
+        @JsProperty
+        public JulianDate time;
+        /**
+         * The interval that will be sampled if an entity doesn't have an availability.
+         */
+        @JsProperty
+        public TimeInterval defaultAvailability;
+        /**
+         * The number of seconds to sample properties that are varying in KML.
+         * Default: 60
+         */
+        @JsProperty
+        public int sampleDuration;
+        /**
+         * If true KML and external files will be compressed into a kmz file.
+         * Default: false
+         */
+        @JsProperty
+        public boolean kmz;
+
+        @JsConstructor
+        private ExportKmlOptions() {}
+
+        @JsOverlay
+        public static ExportKmlOptions create(EntityCollection entities) {
+            ExportKmlOptions options = new ExportKmlOptions();
+            options.entities = entities;
+            return options;
+        }
+
+        /**
+         * Since KML does not support glTF models, this callback is required to specify what URL to use for the model in the KML document.
+         * It can also be used to add additional files to the externalFiles object, which is the list of files embedded
+         * in the exported KMZ, or otherwise returned with the KML string when exporting.
+         */
+        @JsFunction
+        public interface ModelCallback {
+            /**
+             * Since KML does not support glTF models, this callback is required to specify what URL to use for the model in the KML document.
+             * It can also be used to add additional files to the externalFiles object, which is the list of files embedded
+             * in the exported KMZ, or otherwise returned with the KML string when exporting.
+             * @param model The ModelGraphics instance for an Entity.
+             * @param time The time that any properties should use to get the value.
+             * @param externalFiles An object that maps a filename to a Blob or a Promise that resolves to a Blob.
+             * @return The URL to use for the href in the KML document.
+             */
+            String Callback(ModelGraphics model, org.cesiumjs.cs.core.JulianDate time, JsObject externalFiles);
         }
     }
 }
