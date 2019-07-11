@@ -19,6 +19,7 @@ package org.cesiumjs.cs.core;
 import com.google.gwt.typedarrays.shared.ArrayBuffer;
 import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.options.*;
+import org.cesiumjs.cs.js.JsBlob;
 import org.cesiumjs.cs.js.JsImage;
 import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.promise.Promise;
@@ -354,7 +355,21 @@ public class Resource {
     @JsMethod
     public native Promise<ArrayBuffer, Void> fetchArrayBuffer();
 
-    // TODO: fetchBlob
+    /**
+     * Creates a Resource and calls fetchBlob() on it.
+     * @param url url
+     * @return resource
+     */
+    @JsMethod
+    public static native Promise<JsBlob, Void> fetchBlob(String url);
+
+    /**
+     * Creates a Resource and calls fetchBlob() on it.
+     * @param options {@link ResourceOptions}
+     * @return resource
+     */
+    @JsMethod
+    public static native Promise<JsBlob, Void> fetchBlob(ResourceOptions options);
 
     /**
      * Asynchronously loads the given image resource. Returns a promise that will resolve to an Image once loaded, or
