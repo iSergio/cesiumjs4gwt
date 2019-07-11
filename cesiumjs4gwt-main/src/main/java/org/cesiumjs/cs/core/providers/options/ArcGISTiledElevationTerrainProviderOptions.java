@@ -16,6 +16,7 @@
 
 package org.cesiumjs.cs.core.providers.options;
 
+import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -34,7 +35,7 @@ public class ArcGISTiledElevationTerrainProviderOptions {
      * The URL of the ArcGIS ImageServer service.
      */
     @JsProperty
-    public Resource url;//	Resource | String | Promise.<Resource> | Promise.<String>
+    public Resource url;
 
     /**
      * The URL of the ArcGIS ImageServer service.
@@ -65,18 +66,21 @@ public class ArcGISTiledElevationTerrainProviderOptions {
 
     private ArcGISTiledElevationTerrainProviderOptions() {}
 
+    @JsOverlay
     public static ArcGISTiledElevationTerrainProviderOptions create(Resource url) {
         ArcGISTiledElevationTerrainProviderOptions options = new ArcGISTiledElevationTerrainProviderOptions();
         options.url = url;
         return options;
     }
 
+    @JsOverlay
     public static ArcGISTiledElevationTerrainProviderOptions create(String url) {
         ArcGISTiledElevationTerrainProviderOptions options = new ArcGISTiledElevationTerrainProviderOptions();
         options.urlStr = url;
         return options;
     }
 
+    @JsOverlay
     public static ArcGISTiledElevationTerrainProviderOptions create(Promise<Resource, Void> promise) {
         ArcGISTiledElevationTerrainProviderOptions options = new ArcGISTiledElevationTerrainProviderOptions();
         options.urlPromise = promise;
