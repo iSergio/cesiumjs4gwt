@@ -259,7 +259,7 @@ public class Cesium {
      * @return A promise that resolved to an object containing the KML string and a dictionary of external file blobs, or a kmz file as a blob if options.kmz is true.
      */
     @JsMethod(namespace = "Cesium", name = "exportKml")
-    public static native Promise<Object, Void> exportKml(ExportKmlOptions options);
+    public static native Promise<JsObject, Void> exportKml(ExportKmlOptions options);
 
     @JsFunction
     public interface Function {
