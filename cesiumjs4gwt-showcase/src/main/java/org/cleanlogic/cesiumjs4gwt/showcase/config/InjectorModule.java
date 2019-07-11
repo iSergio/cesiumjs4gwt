@@ -114,5 +114,6 @@ public class InjectorModule extends AbstractGinModule {
         bind(ImageryColorToAlpha.class).asEagerSingleton();
 
         bind(ExportKML.class).asEagerSingleton();
+        bind(ArcGISTiledElevationTerrain.class).asEagerSingleton();
     }
 }
