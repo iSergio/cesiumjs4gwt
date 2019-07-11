@@ -115,5 +115,6 @@ public class InjectorModule extends AbstractGinModule {
 
         bind(ExportKML.class).asEagerSingleton();
         bind(ArcGISTiledElevationTerrain.class).asEagerSingleton();
+        bind(CZMLModelArticulations.class).asEagerSingleton();
     }
 }
