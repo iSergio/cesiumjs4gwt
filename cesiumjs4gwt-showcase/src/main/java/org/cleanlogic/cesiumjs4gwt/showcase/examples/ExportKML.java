@@ -78,7 +78,7 @@ public class ExportKML extends AbstractExample {
             }
         };
 
-        JsObject[] modelCzml = new JsObject[2];
+        final JsObject[] modelCzml = new JsObject[2];
         JsObject descriptionCzml = JsObject.create();
         descriptionCzml.setProperty("id", "document");
         descriptionCzml.setProperty("name", "CZML Model");

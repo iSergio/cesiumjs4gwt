@@ -91,7 +91,7 @@ public class CZMLModelArticulations extends AbstractExample {
 
         ViewerOptions options = new ViewerOptions();
         options.shouldAnimate = true;
-        ViewerPanel csVPanel = new ViewerPanel(options);
+        final ViewerPanel csVPanel = new ViewerPanel(options);
 
         Promise<CzmlDataSource, Void> dataSourcePromise = csVPanel.getViewer().dataSources().add(CzmlDataSource.load(new JsObject[] {firstCZML, secondCZML}));
 
