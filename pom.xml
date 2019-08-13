@@ -69,7 +69,7 @@
     <modules>
         <module>cesiumjs4gwt-main</module>
         <module>cesiumjs4gwt-showcase</module>
+        <!--<module>cesiumjs4gwt-vaadin</module>-->
     </modules>
-
 
 </project>
