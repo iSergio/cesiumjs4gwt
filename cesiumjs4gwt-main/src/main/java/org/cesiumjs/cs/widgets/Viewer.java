@@ -242,6 +242,15 @@ public class Viewer {
     @JsProperty(name = "trackedEntityChanged")
     public native Event trackedEntityChanged();
     /**
+     * Boolean flag indicating if the browser's recommended resolution is used. If true, the browser's device pixel
+     * ratio is ignored and 1.0 is used instead, effectively rendering based on CSS pixels instead of device pixels.
+     * This can improve performance on less powerful devices that have high pixel density. When false, rendering will be in device pixels.
+     * CesiumWidget#resolutionScale will still take effect whether this flag is true or false.
+     * Default: false
+     */
+    @JsProperty
+    public boolean useBrowserRecommendedResolution;
+    /**
      * Gets or sets whether or not this widget should control the render loop. If set to true the widget will use
      * requestAnimationFrame to perform rendering and resizing of the widget, as well as drive the simulation clock.
      * If set to false, you must manually call the resize, render methods as part of a custom render loop.

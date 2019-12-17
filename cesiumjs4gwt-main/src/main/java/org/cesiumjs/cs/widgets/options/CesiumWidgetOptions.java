@@ -92,6 +92,12 @@ public class CesiumWidgetOptions {
     @JsProperty
     public Globe globe;
     /**
+     * If true, render at the browser's recommended resolution and ignore window.devicePixelRatio.
+     * Default: false
+     */
+    @JsProperty
+    public boolean useBrowserRecommendedResolution;
+    /**
      * True if this widget should control the render loop, false otherwise.
      * Default: true
      */

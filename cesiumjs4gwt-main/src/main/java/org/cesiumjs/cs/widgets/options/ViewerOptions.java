@@ -194,6 +194,12 @@ public class ViewerOptions {
     @JsProperty
     public boolean showRenderLoopErrors;
     /**
+     * If true, render at the browser's recommended resolution and ignore window.devicePixelRatio.
+     * Default: false
+     */
+    @JsProperty
+    public boolean useBrowserRecommendedResolution;
+    /**
      * If true, this widget will automatically track the clock settings of newly added DataSources, updating
      * if the DataSource's clock changes. Set this to false if you want to configure the clock independently.
      */
