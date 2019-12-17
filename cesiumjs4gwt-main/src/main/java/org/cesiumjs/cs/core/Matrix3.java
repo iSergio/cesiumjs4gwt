@@ -596,6 +596,15 @@ public class Matrix3 {
     public static native double getMaximumScale(Matrix3 matrix);
 
     /**
+     * Extracts the rotation assuming the matrix is an affine transformation.
+     * @param matrix The matrix.
+     * @param result The object onto which to store the result.
+     * @return The modified result parameter
+     */
+    @JsMethod
+    public static native Matrix3 getRotation(Matrix3 matrix, Matrix3 result);
+
+    /**
      * Retrieves a copy of the matrix row at the provided index as a Cartesian3 instance.
      * @param matrix The matrix to use.
      * @param index The zero-based index of the row to retrieve.
