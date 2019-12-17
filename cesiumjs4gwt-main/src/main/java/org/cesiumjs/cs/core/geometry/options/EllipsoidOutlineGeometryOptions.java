@@ -53,6 +53,35 @@ public class EllipsoidOutlineGeometryOptions {
      */
     @JsProperty
     public int subdivisions;
+    /**
+     * The inner radii of the ellipsoid in the x, y, and z directions.
+     */
+    @JsProperty
+    public Cartesian3 innerRadii;
+    /**
+     * The minimum angle lying in the xy-plane measured from the positive x-axis and toward the positive y-axis.
+     * Default: 0.0
+     */
+    @JsProperty
+    public Number minimumClock;
+    /**
+     * The maximum angle lying in the xy-plane measured from the positive x-axis and toward the positive y-axis.
+     * Default: 2 * PI
+     */
+    @JsProperty
+    public Number maximumClock;
+    /**
+     * The minimum angle measured from the positive z-axis and toward the negative z-axis.
+     * Default: 0.0
+     */
+    @JsProperty
+    public Number minimumCone;
+    /**
+     * The maximum angle measured from the positive z-axis and toward the negative z-axis.
+     * Default: PI
+     */
+    @JsProperty
+    public Number maximumCone;
 
     @JsConstructor
     public EllipsoidOutlineGeometryOptions() {}
