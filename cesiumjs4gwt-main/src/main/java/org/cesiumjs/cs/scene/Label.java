@@ -183,6 +183,12 @@ public class Label {
      */
     public Number style;
     /**
+     * Gets the total scale of the label, which is the label's scale multiplied by the computed relative size of the desired font compared to the generated glyph size.
+     * Default: 1.0
+     */
+    @JsProperty
+    public Number totalScale;
+    /**
      * Gets or sets the text of this label.
      */
     @JsProperty
