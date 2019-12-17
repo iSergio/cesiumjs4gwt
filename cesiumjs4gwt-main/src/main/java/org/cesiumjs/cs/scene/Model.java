@@ -105,6 +105,11 @@ public class Model {
     @JsProperty
     public Number colorBlendMode;
     /**
+     * Gets the credit that will be displayed for the model
+     */
+    @JsProperty
+    public Credit credit;
+    /**
      * This property is for debugging only; it is not for production use nor is it optimized.
      * Draws the bounding sphere for each draw command in the model. A glTF primitive corresponds to one draw command.
      * A glTF mesh has an array of primitives, often of length one.

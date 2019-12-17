@@ -19,6 +19,7 @@ package org.cesiumjs.cs.datasources;
 import jsinterop.annotations.*;
 import org.cesiumjs.cs.collections.EntityCollection;
 import org.cesiumjs.cs.core.Color;
+import org.cesiumjs.cs.core.Credit;
 import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.core.JulianDate;
 import org.cesiumjs.cs.datasources.options.GeoJsonDataSourceOptions;
@@ -139,6 +140,11 @@ public class GeoJsonDataSource implements DataSource {
      */
     @JsProperty
     public boolean show;
+    /**
+     * Gets the credit that will be displayed for the model
+     */
+    @JsProperty
+    public Credit credit;
 
     /**
      * A {@link DataSource} which processes both <a href="http://www.geojson.org/">GeoJSON</a> and <a href="https://github.com/mbostock/topojson">TopoJSON</a> data.

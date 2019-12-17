@@ -18,6 +18,7 @@ package org.cesiumjs.cs.datasources.options;
 
 import com.google.gwt.dom.client.CanvasElement;
 import jsinterop.annotations.*;
+import org.cesiumjs.cs.core.Credit;
 import org.cesiumjs.cs.core.Ellipsoid;
 import org.cesiumjs.cs.datasources.KmlDataSource;
 import org.cesiumjs.cs.scene.Camera;
@@ -41,6 +42,16 @@ public class KmlDataSourceLoadStaticOptions extends KmlDataSourceOptions {
      */
     @JsProperty
     public boolean clampToGround;
+    /**
+     * A credit for the data source, which is displayed on the canvas.
+     */
+    @JsProperty
+    public Credit credit;
+    /**
+     * A credit for the data source, which is displayed on the canvas.
+     */
+    @JsProperty(name = "credit")
+    public String creditStr;
 
     /**
      * Options for {@link KmlDataSource}

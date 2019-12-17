@@ -215,6 +215,16 @@ public class ModelOptions {
      */
     @JsProperty
     public String specularEnvironmentMaps;
+    /**
+     * A credit for the data source, which is displayed on the canvas.
+     */
+    @JsProperty
+    public Credit credit;
+    /**
+     * A credit for the data source, which is displayed on the canvas.
+     */
+    @JsProperty(name = "credit")
+    public String creditStr;
 
     @JsConstructor
     public  ModelOptions() {}

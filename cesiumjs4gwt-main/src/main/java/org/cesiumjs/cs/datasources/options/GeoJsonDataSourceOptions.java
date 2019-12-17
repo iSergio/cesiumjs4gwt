@@ -21,6 +21,7 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Color;
+import org.cesiumjs.cs.core.Credit;
 import org.cesiumjs.cs.datasources.GeoJsonDataSource;
 
 /**
@@ -81,6 +82,16 @@ public class GeoJsonDataSourceOptions {
      */
     @JsProperty
     public boolean clampToGround;
+    /**
+     * A credit for the data source, which is displayed on the canvas.
+     */
+    @JsProperty
+    public Credit credit;
+    /**
+     * A credit for the data source, which is displayed on the canvas.
+     */
+    @JsProperty(name = "credit")
+    public String creditStr;
 
     /**
      * Options for {@link org.cesiumjs.cs.datasources.GeoJsonDataSource#load(String, GeoJsonDataSourceOptions)}

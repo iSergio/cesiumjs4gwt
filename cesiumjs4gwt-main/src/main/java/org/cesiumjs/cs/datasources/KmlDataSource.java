@@ -21,6 +21,7 @@ import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.collections.EntityCollection;
+import org.cesiumjs.cs.core.Credit;
 import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.core.JulianDate;
 import org.cesiumjs.cs.datasources.options.KmlDataSourceLoadOptions;
@@ -90,6 +91,11 @@ public class KmlDataSource implements DataSource {
      */
     @JsProperty
     public Event unsupportedNodeEvent;
+    /**
+     * Gets the credit that will be displayed for the model
+     */
+    @JsProperty
+    public Credit credit;
 
     /**
      * A DataSource which processes Keyhole Markup Language 2.2 (KML).
