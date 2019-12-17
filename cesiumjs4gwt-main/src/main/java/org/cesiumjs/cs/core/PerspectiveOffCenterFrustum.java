@@ -127,9 +127,10 @@ public class PerspectiveOffCenterFrustum extends Frustum {
      * @param drawingBufferWidth The width of the drawing buffer.
      * @param drawingBufferHeight The height of the drawing buffer.
      * @param distance The distance to the near plane in meters.
+     * @param pixelRatio The scaling factor from pixel space to coordinate space.
      * @param result The object onto which to store the result.
      * @return The modified result parameter or a new instance of Cartesian2 with the pixel's width and height in the x and y properties, respectively.
      */
     @JsMethod
-    public native Cartesian2 getPixelDimensions(double drawingBufferWidth, double drawingBufferHeight, double distance, Cartesian2 result);
+    public native Cartesian2 getPixelDimensions(double drawingBufferWidth, double drawingBufferHeight, double distance, double pixelRatio, Cartesian2 result);
 }
