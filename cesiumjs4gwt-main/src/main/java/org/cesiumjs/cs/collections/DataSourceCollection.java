@@ -62,6 +62,14 @@ public class DataSourceCollection<T extends DataSource> extends Collection<DataS
     public native Promise<T, Void> add(T dataSource);
 
     /**
+     * Gets a data source by name from the collection.
+     * @param name The name to retrieve.
+     * @return A list of all data sources matching the provided name.
+     */
+    @JsMethod
+    public native DataSource[] getByName(String name);
+
+    /**
      * Determines the index of a given data source in the collection.
      * @param dataSource The data source to find the index of.
      * @return The index of the data source in the collection, or -1 if the data source does not exist in the collection.
