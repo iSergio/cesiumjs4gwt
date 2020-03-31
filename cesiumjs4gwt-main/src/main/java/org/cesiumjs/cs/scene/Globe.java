@@ -82,6 +82,18 @@ public class Globe {
     @JsProperty
     public boolean depthTestAgainstTerrain;
     /**
+     * Enable dynamic lighting effects on atmosphere and fog. This only takes effect when enableLighting is true.
+     * Defaut: true
+     */
+    @JsProperty
+    public boolean dynamicAtmosphereLighting;
+    /**
+     * Whether dynamic atmosphere lighting uses the sun direction instead of the scene's light direction. This only takes effect when enableLighting and dynamicAtmosphereLighting are true.
+     * Default: false
+     */
+    @JsProperty
+    public boolean dynamicAtmosphereLightingFromSun;
+    /**
      * Gets an ellipsoid describing the shape of this globe.
      */
     @JsProperty
