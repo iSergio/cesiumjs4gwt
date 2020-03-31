@@ -1,7 +1,7 @@
 /**
- * Cesium - https://github.com/AnalyticalGraphicsInc/cesium
+ * Cesium - https://github.com/CesiumGS/cesium
  *
- * Copyright 2011-2017 Cesium Contributors
+ * Copyright 2011-2020 Cesium Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,9 +18,9 @@
  * Columbus View (Pat. Pend.)
  *
  * Portions licensed separately.
- * See https://github.com/AnalyticalGraphicsInc/cesium/blob/master/LICENSE.md for full licensing details.
+ * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
-define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './defaultValue-29c9b1af', './Math-9620d065', './RuntimeError-51c34ab4', './WebGLConstants-90dbfe2f', './ComponentDatatype-30d0acd7', './when-1faa3867', './IndexDatatype-85d10a10', './createTaskProcessorWorker'], function (defined, Check, freezeObject, defaultValue, _Math, RuntimeError, WebGLConstants, ComponentDatatype, when, IndexDatatype, createTaskProcessorWorker) { 'use strict';
+define(['./when-a55a8a4c', './Check-bc1d37d9', './Math-d7cbfcf6', './RuntimeError-7c184ac0', './WebGLConstants-4c11ee5f', './ComponentDatatype-919a7463', './IndexDatatype-4351ba4c', './createTaskProcessorWorker'], function (when, Check, _Math, RuntimeError, WebGLConstants, ComponentDatatype, IndexDatatype, createTaskProcessorWorker) { 'use strict';
 
     /* global require */
 
@@ -154,7 +154,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
 
             var vertexArrayLength = numPoints * numComponents;
             var vertexArray;
-            if (defined.defined(quantization)) {
+            if (when.defined(quantization)) {
                 vertexArray = decodeQuantizedDracoTypedArray(dracoGeometry, dracoDecoder, dracoAttribute, quantization, vertexArrayLength);
             } else {
                 vertexArray = decodeDracoTypedArray(dracoGeometry, dracoDecoder, dracoAttribute, vertexArrayLength);
@@ -267,7 +267,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
         }
 
         function decode(parameters) {
-            if (defined.defined(parameters.primitive)) {
+            if (when.defined(parameters.primitive)) {
                 return decodePrimitive(parameters);
             }
             return decodePointCloud(parameters);
@@ -284,11 +284,11 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
 
             // Expect the first message to be to load a web assembly module
             var wasmConfig = data.webAssemblyConfig;
-            if (defined.defined(wasmConfig)) {
+            if (when.defined(wasmConfig)) {
                 // Require and compile WebAssembly module, or use fallback if not supported
                 return require([wasmConfig.modulePath], function(dracoModule) {
-                    if (defined.defined(wasmConfig.wasmBinaryFile)) {
-                        if (!defined.defined(dracoModule)) {
+                    if (when.defined(wasmConfig.wasmBinaryFile)) {
+                        if (!when.defined(dracoModule)) {
                             dracoModule = self.DracoDecoderModule;
                         }
 

@@ -1,7 +1,7 @@
 /**
- * Cesium - https://github.com/AnalyticalGraphicsInc/cesium
+ * Cesium - https://github.com/CesiumGS/cesium
  *
- * Copyright 2011-2017 Cesium Contributors
+ * Copyright 2011-2020 Cesium Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,9 +18,9 @@
  * Columbus View (Pat. Pend.)
  *
  * Portions licensed separately.
- * See https://github.com/AnalyticalGraphicsInc/cesium/blob/master/LICENSE.md for full licensing details.
+ * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
-define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './defaultValue-29c9b1af', './Math-9620d065', './Cartesian2-8defcb50', './defineProperties-c817531e', './Transforms-d68fc962', './RuntimeError-51c34ab4', './WebGLConstants-90dbfe2f', './ComponentDatatype-30d0acd7', './GeometryAttribute-6b99fe3b', './when-1faa3867', './GeometryAttributes-f8548d3f', './AttributeCompression-bb5cef3d', './GeometryPipeline-77528d9e', './EncodedCartesian3-323e61aa', './IndexDatatype-85d10a10', './IntersectionTests-23274ea8', './Plane-e22638e7', './PrimitivePipeline-a6a2bdf8', './WebMercatorProjection-2a43d110', './createTaskProcessorWorker'], function (defined, Check, freezeObject, defaultValue, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, when, GeometryAttributes, AttributeCompression, GeometryPipeline, EncodedCartesian3, IndexDatatype, IntersectionTests, Plane, PrimitivePipeline, WebMercatorProjection, createTaskProcessorWorker) { 'use strict';
+define(['./when-a55a8a4c', './Check-bc1d37d9', './Math-d7cbfcf6', './Cartesian2-6ec3db89', './Transforms-a4d7073e', './RuntimeError-7c184ac0', './WebGLConstants-4c11ee5f', './ComponentDatatype-919a7463', './GeometryAttribute-291ff23b', './GeometryAttributes-1c7ce91d', './AttributeCompression-6cfb9427', './GeometryPipeline-9b42374e', './EncodedCartesian3-5ad054af', './IndexDatatype-4351ba4c', './IntersectionTests-3d9e1b94', './Plane-37b84dad', './PrimitivePipeline-18b85988', './WebMercatorProjection-e471eea5', './createTaskProcessorWorker'], function (when, Check, _Math, Cartesian2, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, GeometryAttributes, AttributeCompression, GeometryPipeline, EncodedCartesian3, IndexDatatype, IntersectionTests, Plane, PrimitivePipeline, WebMercatorProjection, createTaskProcessorWorker) { 'use strict';
 
     /* global require */
 
@@ -28,7 +28,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
 
         function getModule(moduleName) {
             var module = moduleCache[moduleName];
-            if (!defined.defined(module)) {
+            if (!when.defined(module)) {
                 if (typeof exports === 'object') {
                     // Use CommonJS-style require.
                     moduleCache[module] = module = require('Workers/' + moduleName);
@@ -54,7 +54,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
                 var geometry = task.geometry;
                 var moduleName = task.moduleName;
 
-                if (defined.defined(moduleName)) {
+                if (when.defined(moduleName)) {
                     var createFunction = getModule(moduleName);
                     resultsOrPromises[i] = createFunction(geometry, task.offset);
                 } else {

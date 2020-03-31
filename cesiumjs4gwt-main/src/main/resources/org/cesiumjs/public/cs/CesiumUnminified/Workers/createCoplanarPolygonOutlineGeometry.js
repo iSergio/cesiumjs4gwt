@@ -1,7 +1,7 @@
 /**
- * Cesium - https://github.com/AnalyticalGraphicsInc/cesium
+ * Cesium - https://github.com/CesiumGS/cesium
  *
- * Copyright 2011-2017 Cesium Contributors
+ * Copyright 2011-2020 Cesium Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,9 +18,9 @@
  * Columbus View (Pat. Pend.)
  *
  * Portions licensed separately.
- * See https://github.com/AnalyticalGraphicsInc/cesium/blob/master/LICENSE.md for full licensing details.
+ * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
-define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './defaultValue-29c9b1af', './Math-9620d065', './Cartesian2-8defcb50', './defineProperties-c817531e', './Transforms-d68fc962', './RuntimeError-51c34ab4', './WebGLConstants-90dbfe2f', './ComponentDatatype-30d0acd7', './GeometryAttribute-6b99fe3b', './when-1faa3867', './GeometryAttributes-f8548d3f', './AttributeCompression-bb5cef3d', './GeometryPipeline-77528d9e', './EncodedCartesian3-323e61aa', './IndexDatatype-85d10a10', './IntersectionTests-23274ea8', './Plane-e22638e7', './GeometryInstance-2bd6cab9', './arrayRemoveDuplicates-f4096661', './EllipsoidTangentPlane-b0651cb6', './OrientedBoundingBox-f35e8fac', './CoplanarPolygonGeometryLibrary-8824d65f', './ArcType-e0f1982f', './EllipsoidRhumbLine-1d34a7ab', './PolygonPipeline-50b197b4', './PolygonGeometryLibrary-a62c484f'], function (defined, Check, freezeObject, defaultValue, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, when, GeometryAttributes, AttributeCompression, GeometryPipeline, EncodedCartesian3, IndexDatatype, IntersectionTests, Plane, GeometryInstance, arrayRemoveDuplicates, EllipsoidTangentPlane, OrientedBoundingBox, CoplanarPolygonGeometryLibrary, ArcType, EllipsoidRhumbLine, PolygonPipeline, PolygonGeometryLibrary) { 'use strict';
+define(['./when-a55a8a4c', './Check-bc1d37d9', './Math-d7cbfcf6', './Cartesian2-6ec3db89', './Transforms-a4d7073e', './RuntimeError-7c184ac0', './WebGLConstants-4c11ee5f', './ComponentDatatype-919a7463', './GeometryAttribute-291ff23b', './GeometryAttributes-1c7ce91d', './AttributeCompression-6cfb9427', './GeometryPipeline-9b42374e', './EncodedCartesian3-5ad054af', './IndexDatatype-4351ba4c', './IntersectionTests-3d9e1b94', './Plane-37b84dad', './GeometryInstance-fadc2629', './arrayRemoveDuplicates-69403a22', './EllipsoidTangentPlane-323c7a98', './OrientedBoundingBox-764de7b5', './CoplanarPolygonGeometryLibrary-5c0e2fd3', './ArcType-66bc286a', './EllipsoidRhumbLine-4d1a57d2', './PolygonPipeline-5b0d203a', './PolygonGeometryLibrary-34f7d7a7'], function (when, Check, _Math, Cartesian2, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, GeometryAttributes, AttributeCompression, GeometryPipeline, EncodedCartesian3, IndexDatatype, IntersectionTests, Plane, GeometryInstance, arrayRemoveDuplicates, EllipsoidTangentPlane, OrientedBoundingBox, CoplanarPolygonGeometryLibrary, ArcType, EllipsoidRhumbLine, PolygonPipeline, PolygonGeometryLibrary) { 'use strict';
 
     function createGeometryFromPositions(positions){
             var length = positions.length;
@@ -78,7 +78,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
          * var geometry = Cesium.CoplanarPolygonOutlineGeometry.createGeometry(polygonOutline);
          */
         function CoplanarPolygonOutlineGeometry(options) {
-            options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+            options = when.defaultValue(options, when.defaultValue.EMPTY_OBJECT);
             var polygonHierarchy = options.polygonHierarchy;
             //>>includeStart('debug', pragmas.debug);
             Check.Check.defined('options.polygonHierarchy', polygonHierarchy);
@@ -102,7 +102,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
          * @returns {CoplanarPolygonOutlineGeometry}
          */
         CoplanarPolygonOutlineGeometry.fromPositions = function(options) {
-            options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+            options = when.defaultValue(options, when.defaultValue.EMPTY_OBJECT);
 
             //>>includeStart('debug', pragmas.debug);
             Check.Check.defined('options.positions', options.positions);
@@ -131,7 +131,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
             Check.Check.defined('array', array);
             //>>includeEnd('debug');
 
-            startingIndex = defaultValue.defaultValue(startingIndex, 0);
+            startingIndex = when.defaultValue(startingIndex, 0);
 
             startingIndex = PolygonGeometryLibrary.PolygonGeometryLibrary.packPolygonHierarchy(value._polygonHierarchy, array, startingIndex);
 
@@ -156,14 +156,14 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
             Check.Check.defined('array', array);
             //>>includeEnd('debug');
 
-            startingIndex = defaultValue.defaultValue(startingIndex, 0);
+            startingIndex = when.defaultValue(startingIndex, 0);
 
             var polygonHierarchy = PolygonGeometryLibrary.PolygonGeometryLibrary.unpackPolygonHierarchy(array, startingIndex);
             startingIndex = polygonHierarchy.startingIndex;
             delete polygonHierarchy.startingIndex;
             var packedLength = array[startingIndex];
 
-            if (!defined.defined(result)) {
+            if (!when.defined(result)) {
                 result = new CoplanarPolygonOutlineGeometry(scratchOptions);
             }
 
@@ -219,7 +219,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
         };
 
     function createCoplanarPolygonOutlineGeometry(polygonGeometry, offset) {
-            if (defined.defined(offset)) {
+            if (when.defined(offset)) {
                 polygonGeometry = CoplanarPolygonOutlineGeometry.unpack(polygonGeometry, offset);
             }
             polygonGeometry._ellipsoid = Cartesian2.Ellipsoid.clone(polygonGeometry._ellipsoid);

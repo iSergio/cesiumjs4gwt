@@ -1,7 +1,7 @@
 /**
- * Cesium - https://github.com/AnalyticalGraphicsInc/cesium
+ * Cesium - https://github.com/CesiumGS/cesium
  *
- * Copyright 2011-2017 Cesium Contributors
+ * Copyright 2011-2020 Cesium Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,9 +18,9 @@
  * Columbus View (Pat. Pend.)
  *
  * Portions licensed separately.
- * See https://github.com/AnalyticalGraphicsInc/cesium/blob/master/LICENSE.md for full licensing details.
+ * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
-define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './defaultValue-29c9b1af', './Math-9620d065', './Cartesian2-8defcb50', './defineProperties-c817531e', './Transforms-d68fc962', './RuntimeError-51c34ab4', './WebGLConstants-90dbfe2f', './ComponentDatatype-30d0acd7', './when-1faa3867', './AttributeCompression-bb5cef3d', './IntersectionTests-23274ea8', './Plane-e22638e7', './WebMercatorProjection-2a43d110', './createTaskProcessorWorker', './EllipsoidTangentPlane-b0651cb6', './OrientedBoundingBox-f35e8fac', './EllipsoidalOccluder-dedbdfa5', './TerrainEncoding-39d9fb95'], function (defined, Check, freezeObject, defaultValue, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, when, AttributeCompression, IntersectionTests, Plane, WebMercatorProjection, createTaskProcessorWorker, EllipsoidTangentPlane, OrientedBoundingBox, EllipsoidalOccluder, TerrainEncoding) { 'use strict';
+define(['./when-a55a8a4c', './Check-bc1d37d9', './Math-d7cbfcf6', './Cartesian2-6ec3db89', './Transforms-a4d7073e', './RuntimeError-7c184ac0', './WebGLConstants-4c11ee5f', './ComponentDatatype-919a7463', './AttributeCompression-6cfb9427', './IntersectionTests-3d9e1b94', './Plane-37b84dad', './WebMercatorProjection-e471eea5', './createTaskProcessorWorker', './EllipsoidTangentPlane-323c7a98', './OrientedBoundingBox-764de7b5', './TerrainEncoding-69e30123'], function (when, Check, _Math, Cartesian2, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, AttributeCompression, IntersectionTests, Plane, WebMercatorProjection, createTaskProcessorWorker, EllipsoidTangentPlane, OrientedBoundingBox, TerrainEncoding) { 'use strict';
 
     var sizeOfUint16 = Uint16Array.BYTES_PER_ELEMENT;
         var sizeOfInt32 = Int32Array.BYTES_PER_ELEMENT;
@@ -29,7 +29,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
         var sizeOfDouble = Float64Array.BYTES_PER_ELEMENT;
 
         function indexOfEpsilon(arr, elem, elemType) {
-            elemType = defaultValue.defaultValue(elemType, _Math.CesiumMath);
+            elemType = when.defaultValue(elemType, _Math.CesiumMath);
             var count = arr.length;
             for (var i = 0; i < count; ++i) {
                 if (elemType.equalsEpsilon(arr[i], elem, _Math.CesiumMath.EPSILON12)) {
@@ -63,7 +63,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
                 occludeePointInScaledSpace : statistics.occludeePointInScaledSpace,
                 encoding : statistics.encoding,
                 vertexCountWithoutSkirts : statistics.vertexCountWithoutSkirts,
-                skirtIndex : statistics.skirtIndex,
+                indexCountWithoutSkirts : statistics.indexCountWithoutSkirts,
                 westIndicesSouthToNorth : statistics.westIndicesSouthToNorth,
                 southIndicesEastToWest : statistics.southIndicesEastToWest,
                 eastIndicesNorthToSouth : statistics.eastIndicesNorthToSouth,
@@ -84,7 +84,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
             var geographicNorth;
             var rectangleWidth, rectangleHeight;
 
-            if (!defined.defined(rectangle)) {
+            if (!when.defined(rectangle)) {
                 geographicWest = _Math.CesiumMath.toRadians(nativeRectangle.west);
                 geographicSouth = _Math.CesiumMath.toRadians(nativeRectangle.south);
                 geographicEast = _Math.CesiumMath.toRadians(nativeRectangle.east);
@@ -317,7 +317,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
             }
 
             var vertexCountWithoutSkirts = pointOffset;
-            var skirtIndex = indicesOffset;
+            var indexCountWithoutSkirts = indicesOffset;
 
             // Add skirt points
             var skirtOptions = {
@@ -370,14 +370,12 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
 
             var boundingSphere3D = Transforms.BoundingSphere.fromPoints(positions);
             var orientedBoundingBox;
-            if (defined.defined(rectangle) && rectangle.width < _Math.CesiumMath.PI_OVER_TWO + _Math.CesiumMath.EPSILON5) {
-                // Here, rectangle.width < pi/2, and rectangle.height < pi
-                // (though it would still work with rectangle.width up to pi)
+            if (when.defined(rectangle)) {
                 orientedBoundingBox = OrientedBoundingBox.OrientedBoundingBox.fromRectangle(rectangle, minHeight, maxHeight, ellipsoid);
             }
 
-            var occluder = new EllipsoidalOccluder.EllipsoidalOccluder(ellipsoid);
-            var occludeePointInScaledSpace = occluder.computeHorizonCullingPoint(relativeToCenter, positions);
+            var occluder = new TerrainEncoding.EllipsoidalOccluder(ellipsoid);
+            var occludeePointInScaledSpace = occluder.computeHorizonCullingPointPossiblyUnderEllipsoid(relativeToCenter, positions, minHeight);
 
             var aaBox = new EllipsoidTangentPlane.AxisAlignedBoundingBox(minimum, maximum, relativeToCenter);
             var encoding = new TerrainEncoding.TerrainEncoding(aaBox, skirtOptions.hMin, maxHeight, fromENU, false, includeWebMercatorT);
@@ -409,7 +407,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
                 orientedBoundingBox : orientedBoundingBox,
                 occludeePointInScaledSpace : occludeePointInScaledSpace,
                 vertexCountWithoutSkirts : vertexCountWithoutSkirts,
-                skirtIndex : skirtIndex,
+                indexCountWithoutSkirts : indexCountWithoutSkirts,
                 westIndicesSouthToNorth : westIndicesSouthToNorth,
                 southIndicesEastToWest : southIndicesEastToWest,
                 eastIndicesNorthToSouth : eastIndicesNorthToSouth,
@@ -465,7 +463,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
                 Cartesian2.Cartesian3.maximumByComponent(scratchCartesian, maximum, maximum);
 
                 var lastBorderPoint = skirtOptions.lastBorderPoint;
-                if (defined.defined(lastBorderPoint)) {
+                if (when.defined(lastBorderPoint)) {
                     var lastBorderIndex = lastBorderPoint.index;
                     indices.push(lastBorderIndex, currentIndex - 1, currentIndex, currentIndex, borderIndex, lastBorderIndex);
                 }

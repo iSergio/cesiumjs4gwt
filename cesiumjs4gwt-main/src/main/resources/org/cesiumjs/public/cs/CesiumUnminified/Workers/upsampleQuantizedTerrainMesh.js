@@ -1,7 +1,7 @@
 /**
- * Cesium - https://github.com/AnalyticalGraphicsInc/cesium
+ * Cesium - https://github.com/CesiumGS/cesium
  *
- * Copyright 2011-2017 Cesium Contributors
+ * Copyright 2011-2020 Cesium Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,9 +18,9 @@
  * Columbus View (Pat. Pend.)
  *
  * Portions licensed separately.
- * See https://github.com/AnalyticalGraphicsInc/cesium/blob/master/LICENSE.md for full licensing details.
+ * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
-define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './defaultValue-29c9b1af', './Math-9620d065', './Cartesian2-8defcb50', './defineProperties-c817531e', './Transforms-d68fc962', './RuntimeError-51c34ab4', './WebGLConstants-90dbfe2f', './ComponentDatatype-30d0acd7', './when-1faa3867', './AttributeCompression-bb5cef3d', './IndexDatatype-85d10a10', './IntersectionTests-23274ea8', './Plane-e22638e7', './createTaskProcessorWorker', './EllipsoidTangentPlane-b0651cb6', './OrientedBoundingBox-f35e8fac', './EllipsoidalOccluder-dedbdfa5', './TerrainEncoding-39d9fb95'], function (defined, Check, freezeObject, defaultValue, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, when, AttributeCompression, IndexDatatype, IntersectionTests, Plane, createTaskProcessorWorker, EllipsoidTangentPlane, OrientedBoundingBox, EllipsoidalOccluder, TerrainEncoding) { 'use strict';
+define(['./when-a55a8a4c', './Check-bc1d37d9', './Math-d7cbfcf6', './Cartesian2-6ec3db89', './Transforms-a4d7073e', './RuntimeError-7c184ac0', './WebGLConstants-4c11ee5f', './ComponentDatatype-919a7463', './AttributeCompression-6cfb9427', './IndexDatatype-4351ba4c', './IntersectionTests-3d9e1b94', './Plane-37b84dad', './createTaskProcessorWorker', './EllipsoidTangentPlane-323c7a98', './OrientedBoundingBox-764de7b5', './TerrainEncoding-69e30123'], function (when, Check, _Math, Cartesian2, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, AttributeCompression, IndexDatatype, IntersectionTests, Plane, createTaskProcessorWorker, EllipsoidTangentPlane, OrientedBoundingBox, TerrainEncoding) { 'use strict';
 
     /**
          * Contains functions for operating on 2D triangles.
@@ -57,24 +57,24 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
          */
         Intersections2D.clipTriangleAtAxisAlignedThreshold = function(threshold, keepAbove, u0, u1, u2, result) {
             //>>includeStart('debug', pragmas.debug);
-            if (!defined.defined(threshold)) {
+            if (!when.defined(threshold)) {
                 throw new Check.DeveloperError('threshold is required.');
             }
-            if (!defined.defined(keepAbove)) {
+            if (!when.defined(keepAbove)) {
                 throw new Check.DeveloperError('keepAbove is required.');
             }
-            if (!defined.defined(u0)) {
+            if (!when.defined(u0)) {
                 throw new Check.DeveloperError('u0 is required.');
             }
-            if (!defined.defined(u1)) {
+            if (!when.defined(u1)) {
                 throw new Check.DeveloperError('u1 is required.');
             }
-            if (!defined.defined(u2)) {
+            if (!when.defined(u2)) {
                 throw new Check.DeveloperError('u2 is required.');
             }
             //>>includeEnd('debug');
 
-            if (!defined.defined(result)) {
+            if (!when.defined(result)) {
                 result = [];
             } else {
                 result.length = 0;
@@ -246,28 +246,28 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
          */
         Intersections2D.computeBarycentricCoordinates = function(x, y, x1, y1, x2, y2, x3, y3, result) {
             //>>includeStart('debug', pragmas.debug);
-            if (!defined.defined(x)) {
+            if (!when.defined(x)) {
                 throw new Check.DeveloperError('x is required.');
             }
-            if (!defined.defined(y)) {
+            if (!when.defined(y)) {
                 throw new Check.DeveloperError('y is required.');
             }
-            if (!defined.defined(x1)) {
+            if (!when.defined(x1)) {
                 throw new Check.DeveloperError('x1 is required.');
             }
-            if (!defined.defined(y1)) {
+            if (!when.defined(y1)) {
                 throw new Check.DeveloperError('y1 is required.');
             }
-            if (!defined.defined(x2)) {
+            if (!when.defined(x2)) {
                 throw new Check.DeveloperError('x2 is required.');
             }
-            if (!defined.defined(y2)) {
+            if (!when.defined(y2)) {
                 throw new Check.DeveloperError('y2 is required.');
             }
-            if (!defined.defined(x3)) {
+            if (!when.defined(x3)) {
                 throw new Check.DeveloperError('x3 is required.');
             }
-            if (!defined.defined(y3)) {
+            if (!when.defined(y3)) {
                 throw new Check.DeveloperError('y3 is required.');
             }
             //>>includeEnd('debug');
@@ -283,7 +283,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
             var l2 = (-y1my3 * xmx3 + x1mx3 * ymy3) * inverseDeterminant;
             var l3 = 1.0 - l1 - l2;
 
-            if (defined.defined(result)) {
+            if (when.defined(result)) {
                 result.x = l1;
                 result.y = l2;
                 result.z = l3;
@@ -336,7 +336,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
             var ub1 = numerator1B / denominator1;
 
             if (ua1 >= 0 && ua1 <= 1 && ub1 >= 0 && ub1 <= 1) {
-                if (!defined.defined(result)) {
+                if (!when.defined(result)) {
                     result = new Cartesian2.Cartesian2();
                 }
 
@@ -392,7 +392,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
 
             var parentVertices = parameters.vertices;
             var parentIndices = parameters.indices;
-            parentIndices = parentIndices.subarray(0, parameters.skirtIndex);
+            parentIndices = parentIndices.subarray(0, parameters.indexCountWithoutSkirts);
 
             var encoding = TerrainEncoding.TerrainEncoding.clone(parameters.encoding);
             var hasVertexNormals = encoding.hasVertexNormals;
@@ -540,7 +540,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
             cartesianVertices.length = 0;
 
             var ellipsoid = Cartesian2.Ellipsoid.clone(parameters.ellipsoid);
-            var rectangle = parameters.childRectangle;
+            var rectangle = Cartesian2.Rectangle.clone(parameters.childRectangle);
 
             var north = rectangle.north;
             var south = rectangle.south;
@@ -602,8 +602,8 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
             var boundingSphere = Transforms.BoundingSphere.fromVertices(cartesianVertices, Cartesian2.Cartesian3.ZERO, 3, boundingSphereScratch);
             var orientedBoundingBox = OrientedBoundingBox.OrientedBoundingBox.fromRectangle(rectangle, minimumHeight, maximumHeight, ellipsoid, orientedBoundingBoxScratch);
 
-            var occluder = new EllipsoidalOccluder.EllipsoidalOccluder(ellipsoid);
-            var horizonOcclusionPoint = occluder.computeHorizonCullingPointFromVertices(boundingSphere.center, cartesianVertices, 3, boundingSphere.center, horizonOcclusionPointScratch);
+            var occluder = new TerrainEncoding.EllipsoidalOccluder(ellipsoid);
+            var horizonOcclusionPoint = occluder.computeHorizonCullingPointFromVerticesPossiblyUnderEllipsoid(boundingSphere.center, cartesianVertices, 3, boundingSphere.center, minimumHeight, horizonOcclusionPointScratch);
 
             var heightRange = maximumHeight - minimumHeight;
 
@@ -661,7 +661,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
         }
 
         Vertex.prototype.clone = function(result) {
-            if (!defined.defined(result)) {
+            if (!when.defined(result)) {
                 result = new Vertex();
             }
 
@@ -719,25 +719,25 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
         };
 
         Vertex.prototype.isIndexed = function() {
-            return defined.defined(this.index);
+            return when.defined(this.index);
         };
 
         Vertex.prototype.getH = function() {
-            if (defined.defined(this.index)) {
+            if (when.defined(this.index)) {
                 return this.heightBuffer[this.index];
             }
             return _Math.CesiumMath.lerp(this.first.getH(), this.second.getH(), this.ratio);
         };
 
         Vertex.prototype.getU = function() {
-            if (defined.defined(this.index)) {
+            if (when.defined(this.index)) {
                 return this.uBuffer[this.index];
             }
             return _Math.CesiumMath.lerp(this.first.getU(), this.second.getU(), this.ratio);
         };
 
         Vertex.prototype.getV = function() {
-            if (defined.defined(this.index)) {
+            if (when.defined(this.index)) {
                 return this.vBuffer[this.index];
             }
             return _Math.CesiumMath.lerp(this.first.getV(), this.second.getV(), this.ratio);
@@ -768,7 +768,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
         }
 
         Vertex.prototype.getNormalX = function() {
-            if (defined.defined(this.index)) {
+            if (when.defined(this.index)) {
                 return this.normalBuffer[this.index * 2];
             }
 
@@ -777,7 +777,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
         };
 
         Vertex.prototype.getNormalY = function() {
-            if (defined.defined(this.index)) {
+            if (when.defined(this.index)) {
                 return this.normalBuffer[this.index * 2 + 1];
             }
 
@@ -806,7 +806,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
                 var polygonVertex = polygonVertices[i];
                 if (!polygonVertex.isIndexed()) {
                     var key = polygonVertex.getKey();
-                    if (defined.defined(vertexMap[key])) {
+                    if (when.defined(vertexMap[key])) {
                         polygonVertex.newIndex = vertexMap[key];
                     } else {
                         var newIndex = uBuffer.length;

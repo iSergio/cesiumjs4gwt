@@ -1,7 +1,7 @@
 /**
- * Cesium - https://github.com/AnalyticalGraphicsInc/cesium
+ * Cesium - https://github.com/CesiumGS/cesium
  *
- * Copyright 2011-2017 Cesium Contributors
+ * Copyright 2011-2020 Cesium Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,9 +18,53 @@
  * Columbus View (Pat. Pend.)
  *
  * Portions licensed separately.
- * See https://github.com/AnalyticalGraphicsInc/cesium/blob/master/LICENSE.md for full licensing details.
+ * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
-define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './defaultValue-29c9b1af', './Math-9620d065', './Cartesian2-8defcb50', './defineProperties-c817531e', './Transforms-d68fc962', './RuntimeError-51c34ab4', './WebGLConstants-90dbfe2f', './ComponentDatatype-30d0acd7', './GeometryAttribute-6b99fe3b', './when-1faa3867', './GeometryAttributes-f8548d3f', './AttributeCompression-bb5cef3d', './GeometryPipeline-77528d9e', './EncodedCartesian3-323e61aa', './IndexDatatype-85d10a10', './IntersectionTests-23274ea8', './Plane-e22638e7', './VertexFormat-ba88c609', './arrayRemoveDuplicates-f4096661', './BoundingRectangle-82caf517', './EllipsoidTangentPlane-b0651cb6', './EllipsoidRhumbLine-1d34a7ab', './PolygonPipeline-50b197b4', './PolylineVolumeGeometryLibrary-fe438580', './EllipsoidGeodesic-1758a5f7', './PolylinePipeline-f1013f6f'], function (defined, Check, freezeObject, defaultValue, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, when, GeometryAttributes, AttributeCompression, GeometryPipeline, EncodedCartesian3, IndexDatatype, IntersectionTests, Plane, VertexFormat, arrayRemoveDuplicates, BoundingRectangle, EllipsoidTangentPlane, EllipsoidRhumbLine, PolygonPipeline, PolylineVolumeGeometryLibrary, EllipsoidGeodesic, PolylinePipeline) { 'use strict';
+define(['./when-a55a8a4c', './Check-bc1d37d9', './Math-d7cbfcf6', './Cartesian2-6ec3db89', './Transforms-a4d7073e', './RuntimeError-7c184ac0', './WebGLConstants-4c11ee5f', './ComponentDatatype-919a7463', './GeometryAttribute-291ff23b', './GeometryAttributes-1c7ce91d', './AttributeCompression-6cfb9427', './GeometryPipeline-9b42374e', './EncodedCartesian3-5ad054af', './IndexDatatype-4351ba4c', './IntersectionTests-3d9e1b94', './Plane-37b84dad', './VertexFormat-7f136973', './arrayRemoveDuplicates-69403a22', './BoundingRectangle-e7351c16', './EllipsoidTangentPlane-323c7a98', './EllipsoidRhumbLine-4d1a57d2', './PolygonPipeline-5b0d203a', './PolylineVolumeGeometryLibrary-41894c8d', './EllipsoidGeodesic-365e69f7', './PolylinePipeline-83c8909c'], function (when, Check, _Math, Cartesian2, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, GeometryAttributes, AttributeCompression, GeometryPipeline, EncodedCartesian3, IndexDatatype, IntersectionTests, Plane, VertexFormat, arrayRemoveDuplicates, BoundingRectangle, EllipsoidTangentPlane, EllipsoidRhumbLine, PolygonPipeline, PolylineVolumeGeometryLibrary, EllipsoidGeodesic, PolylinePipeline) { 'use strict';
+
+    var warnings = {};
+
+        /**
+         * Logs a one time message to the console.  Use this function instead of
+         * <code>console.log</code> directly since this does not log duplicate messages
+         * unless it is called from multiple workers.
+         *
+         * @exports oneTimeWarning
+         *
+         * @param {String} identifier The unique identifier for this warning.
+         * @param {String} [message=identifier] The message to log to the console.
+         *
+         * @example
+         * for(var i=0;i<foo.length;++i) {
+         *    if (!defined(foo[i].bar)) {
+         *       // Something that can be recovered from but may happen a lot
+         *       oneTimeWarning('foo.bar undefined', 'foo.bar is undefined. Setting to 0.');
+         *       foo[i].bar = 0;
+         *       // ...
+         *    }
+         * }
+         *
+         * @private
+         */
+        function oneTimeWarning(identifier, message) {
+            //>>includeStart('debug', pragmas.debug);
+            if (!when.defined(identifier)) {
+                throw new Check.DeveloperError('identifier is required.');
+            }
+            //>>includeEnd('debug');
+
+            if (!when.defined(warnings[identifier])) {
+                warnings[identifier] = true;
+                console.warn(when.defaultValue(message, identifier));
+            }
+        }
+
+        oneTimeWarning.geometryOutlines = 'Entity geometry outlines are unsupported on terrain. Outlines will be disabled. To enable outlines, disable geometry terrain clamping by explicitly setting height to 0.';
+
+        oneTimeWarning.geometryZIndex = 'Entity geometry with zIndex are unsupported when height or extrudedHeight are defined.  zIndex will be ignored';
+
+        oneTimeWarning.geometryHeightReference = 'Entity corridor, ellipse, polygon or rectangle with heightReference must also have a defined height.  heightReference will be ignored';
+        oneTimeWarning.geometryExtrudedHeightReference = 'Entity corridor, ellipse, polygon or rectangle with extrudedHeightReference must also have a defined extrudedHeight.  extrudedHeightReference will be ignored';
 
     function computeAttributes(combinedPositions, shape, boundingRectangle, vertexFormat) {
             var attributes = new GeometryAttributes.GeometryAttributes();
@@ -141,8 +185,8 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
                 try {
                     geometry = GeometryPipeline.GeometryPipeline.computeTangentAndBitangent(geometry);
                 } catch (e) {
-                    Transforms.oneTimeWarning('polyline-volume-tangent-bitangent', 'Unable to compute tangents and bitangents for polyline volume geometry');
-                    //TODO https://github.com/AnalyticalGraphicsInc/cesium/issues/3609
+                    oneTimeWarning('polyline-volume-tangent-bitangent', 'Unable to compute tangents and bitangents for polyline volume geometry');
+                    //TODO https://github.com/CesiumGS/cesium/issues/3609
                 }
 
                 if (!vertexFormat.tangent) {
@@ -197,25 +241,25 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
          * });
          */
         function PolylineVolumeGeometry(options) {
-            options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+            options = when.defaultValue(options, when.defaultValue.EMPTY_OBJECT);
             var positions = options.polylinePositions;
             var shape = options.shapePositions;
 
             //>>includeStart('debug', pragmas.debug);
-            if (!defined.defined(positions)) {
+            if (!when.defined(positions)) {
                 throw new Check.DeveloperError('options.polylinePositions is required.');
             }
-            if (!defined.defined(shape)) {
+            if (!when.defined(shape)) {
                 throw new Check.DeveloperError('options.shapePositions is required.');
             }
             //>>includeEnd('debug');
 
             this._positions = positions;
             this._shape = shape;
-            this._ellipsoid = Cartesian2.Ellipsoid.clone(defaultValue.defaultValue(options.ellipsoid, Cartesian2.Ellipsoid.WGS84));
-            this._cornerType = defaultValue.defaultValue(options.cornerType, PolylineVolumeGeometryLibrary.CornerType.ROUNDED);
-            this._vertexFormat = VertexFormat.VertexFormat.clone(defaultValue.defaultValue(options.vertexFormat, VertexFormat.VertexFormat.DEFAULT));
-            this._granularity = defaultValue.defaultValue(options.granularity, _Math.CesiumMath.RADIANS_PER_DEGREE);
+            this._ellipsoid = Cartesian2.Ellipsoid.clone(when.defaultValue(options.ellipsoid, Cartesian2.Ellipsoid.WGS84));
+            this._cornerType = when.defaultValue(options.cornerType, PolylineVolumeGeometryLibrary.CornerType.ROUNDED);
+            this._vertexFormat = VertexFormat.VertexFormat.clone(when.defaultValue(options.vertexFormat, VertexFormat.VertexFormat.DEFAULT));
+            this._granularity = when.defaultValue(options.granularity, _Math.CesiumMath.RADIANS_PER_DEGREE);
             this._workerName = 'createPolylineVolumeGeometry';
 
             var numComponents = 1 + positions.length * Cartesian2.Cartesian3.packedLength;
@@ -239,15 +283,15 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
          */
         PolylineVolumeGeometry.pack = function(value, array, startingIndex) {
             //>>includeStart('debug', pragmas.debug);
-            if (!defined.defined(value)) {
+            if (!when.defined(value)) {
                 throw new Check.DeveloperError('value is required');
             }
-            if (!defined.defined(array)) {
+            if (!when.defined(array)) {
                 throw new Check.DeveloperError('array is required');
             }
             //>>includeEnd('debug');
 
-            startingIndex = defaultValue.defaultValue(startingIndex, 0);
+            startingIndex = when.defaultValue(startingIndex, 0);
 
             var i;
 
@@ -300,12 +344,12 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
          */
         PolylineVolumeGeometry.unpack = function(array, startingIndex, result) {
             //>>includeStart('debug', pragmas.debug);
-            if (!defined.defined(array)) {
+            if (!when.defined(array)) {
                 throw new Check.DeveloperError('array is required');
             }
             //>>includeEnd('debug');
 
-            startingIndex = defaultValue.defaultValue(startingIndex, 0);
+            startingIndex = when.defaultValue(startingIndex, 0);
 
             var i;
 
@@ -332,7 +376,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
             var cornerType = array[startingIndex++];
             var granularity = array[startingIndex];
 
-            if (!defined.defined(result)) {
+            if (!when.defined(result)) {
                 scratchOptions.polylinePositions = positions;
                 scratchOptions.shapePositions = shape;
                 scratchOptions.cornerType = cornerType;
@@ -378,7 +422,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
         };
 
     function createPolylineVolumeGeometry(polylineVolumeGeometry, offset) {
-            if (defined.defined(offset)) {
+            if (when.defined(offset)) {
                 polylineVolumeGeometry = PolylineVolumeGeometry.unpack(polylineVolumeGeometry, offset);
             }
             polylineVolumeGeometry._ellipsoid = Cartesian2.Ellipsoid.clone(polylineVolumeGeometry._ellipsoid);

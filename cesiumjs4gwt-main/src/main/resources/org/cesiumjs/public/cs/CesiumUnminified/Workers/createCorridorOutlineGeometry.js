@@ -1,7 +1,7 @@
 /**
- * Cesium - https://github.com/AnalyticalGraphicsInc/cesium
+ * Cesium - https://github.com/CesiumGS/cesium
  *
- * Copyright 2011-2017 Cesium Contributors
+ * Copyright 2011-2020 Cesium Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,9 +18,9 @@
  * Columbus View (Pat. Pend.)
  *
  * Portions licensed separately.
- * See https://github.com/AnalyticalGraphicsInc/cesium/blob/master/LICENSE.md for full licensing details.
+ * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
-define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './defaultValue-29c9b1af', './Math-9620d065', './Cartesian2-8defcb50', './defineProperties-c817531e', './Transforms-d68fc962', './RuntimeError-51c34ab4', './WebGLConstants-90dbfe2f', './ComponentDatatype-30d0acd7', './GeometryAttribute-6b99fe3b', './when-1faa3867', './GeometryAttributes-f8548d3f', './IndexDatatype-85d10a10', './IntersectionTests-23274ea8', './Plane-e22638e7', './GeometryOffsetAttribute-37c3dade', './arrayRemoveDuplicates-f4096661', './EllipsoidTangentPlane-b0651cb6', './EllipsoidRhumbLine-1d34a7ab', './PolygonPipeline-50b197b4', './PolylineVolumeGeometryLibrary-fe438580', './EllipsoidGeodesic-1758a5f7', './PolylinePipeline-f1013f6f', './CorridorGeometryLibrary-3566b5cb'], function (defined, Check, freezeObject, defaultValue, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, when, GeometryAttributes, IndexDatatype, IntersectionTests, Plane, GeometryOffsetAttribute, arrayRemoveDuplicates, EllipsoidTangentPlane, EllipsoidRhumbLine, PolygonPipeline, PolylineVolumeGeometryLibrary, EllipsoidGeodesic, PolylinePipeline, CorridorGeometryLibrary) { 'use strict';
+define(['./when-a55a8a4c', './Check-bc1d37d9', './Math-d7cbfcf6', './Cartesian2-6ec3db89', './Transforms-a4d7073e', './RuntimeError-7c184ac0', './WebGLConstants-4c11ee5f', './ComponentDatatype-919a7463', './GeometryAttribute-291ff23b', './GeometryAttributes-1c7ce91d', './IndexDatatype-4351ba4c', './IntersectionTests-3d9e1b94', './Plane-37b84dad', './GeometryOffsetAttribute-c9accdb9', './arrayRemoveDuplicates-69403a22', './EllipsoidTangentPlane-323c7a98', './EllipsoidRhumbLine-4d1a57d2', './PolygonPipeline-5b0d203a', './PolylineVolumeGeometryLibrary-41894c8d', './EllipsoidGeodesic-365e69f7', './PolylinePipeline-83c8909c', './CorridorGeometryLibrary-8e916345'], function (when, Check, _Math, Cartesian2, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, GeometryAttributes, IndexDatatype, IntersectionTests, Plane, GeometryOffsetAttribute, arrayRemoveDuplicates, EllipsoidTangentPlane, EllipsoidRhumbLine, PolygonPipeline, PolylineVolumeGeometryLibrary, EllipsoidGeodesic, PolylinePipeline, CorridorGeometryLibrary) { 'use strict';
 
     var cartesian1 = new Cartesian2.Cartesian3();
         var cartesian2 = new Cartesian2.Cartesian3();
@@ -56,7 +56,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
             for (i = 0; i < corners.length; i++) {
                 corner = corners[i];
                 var leftSide = corners[i].leftPositions;
-                if (defined.defined(leftSide)) {
+                if (when.defined(leftSide)) {
                     length = leftSide.length;
                     leftCount += length;
                     indicesLength += length / 3 * 2;
@@ -67,7 +67,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
                 }
             }
 
-            var addEndPositions = defined.defined(endPositions);
+            var addEndPositions = when.defined(endPositions);
             var endPositionLength;
             if (addEndPositions) {
                 endPositionLength = endPositions[0].length - 3;
@@ -143,7 +143,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
                 var r = corner.rightPositions;
                 var start;
                 var outsidePoint = cartesian3;
-                if (defined.defined(l)) {
+                if (when.defined(l)) {
                     back -= 3;
                     start = UR;
                     wallIndices.push(LR);
@@ -268,7 +268,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
             attributes.position.values = newPositions;
 
             length /= 3;
-            if (defined.defined(params.offsetAttribute)) {
+            if (when.defined(params.offsetAttribute)) {
                 var applyOffset = new Uint8Array(length * 2);
                 if (params.offsetAttribute === GeometryOffsetAttribute.GeometryOffsetAttribute.TOP) {
                     applyOffset = GeometryOffsetAttribute.arrayFill(applyOffset, 1, 0, length);
@@ -334,7 +334,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
          * });
          */
         function CorridorOutlineGeometry(options) {
-            options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+            options = when.defaultValue(options, when.defaultValue.EMPTY_OBJECT);
             var positions = options.positions;
             var width = options.width;
 
@@ -343,16 +343,16 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
             Check.Check.typeOf.number('options.width', width);
             //>>includeEnd('debug');
 
-            var height = defaultValue.defaultValue(options.height, 0.0);
-            var extrudedHeight = defaultValue.defaultValue(options.extrudedHeight, height);
+            var height = when.defaultValue(options.height, 0.0);
+            var extrudedHeight = when.defaultValue(options.extrudedHeight, height);
 
             this._positions = positions;
-            this._ellipsoid = Cartesian2.Ellipsoid.clone(defaultValue.defaultValue(options.ellipsoid, Cartesian2.Ellipsoid.WGS84));
+            this._ellipsoid = Cartesian2.Ellipsoid.clone(when.defaultValue(options.ellipsoid, Cartesian2.Ellipsoid.WGS84));
             this._width = width;
             this._height = Math.max(height, extrudedHeight);
             this._extrudedHeight = Math.min(height, extrudedHeight);
-            this._cornerType = defaultValue.defaultValue(options.cornerType, PolylineVolumeGeometryLibrary.CornerType.ROUNDED);
-            this._granularity = defaultValue.defaultValue(options.granularity, _Math.CesiumMath.RADIANS_PER_DEGREE);
+            this._cornerType = when.defaultValue(options.cornerType, PolylineVolumeGeometryLibrary.CornerType.ROUNDED);
+            this._granularity = when.defaultValue(options.granularity, _Math.CesiumMath.RADIANS_PER_DEGREE);
             this._offsetAttribute = options.offsetAttribute;
             this._workerName = 'createCorridorOutlineGeometry';
 
@@ -378,7 +378,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
             Check.Check.typeOf.object('array', array);
             //>>includeEnd('debug');
 
-            startingIndex = defaultValue.defaultValue(startingIndex, 0);
+            startingIndex = when.defaultValue(startingIndex, 0);
 
             var positions = value._positions;
             var length = positions.length;
@@ -396,7 +396,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
             array[startingIndex++] = value._extrudedHeight;
             array[startingIndex++] = value._cornerType;
             array[startingIndex++] = value._granularity;
-            array[startingIndex] = defaultValue.defaultValue(value._offsetAttribute, -1);
+            array[startingIndex] = when.defaultValue(value._offsetAttribute, -1);
 
             return array;
         };
@@ -426,7 +426,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
             Check.Check.typeOf.object('array', array);
             //>>includeEnd('debug');
 
-            startingIndex = defaultValue.defaultValue(startingIndex, 0);
+            startingIndex = when.defaultValue(startingIndex, 0);
 
             var length = array[startingIndex++];
             var positions = new Array(length);
@@ -445,7 +445,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
             var granularity = array[startingIndex++];
             var offsetAttribute = array[startingIndex];
 
-            if (!defined.defined(result)) {
+            if (!when.defined(result)) {
                 scratchOptions.positions = positions;
                 scratchOptions.width = width;
                 scratchOptions.height = height;
@@ -509,7 +509,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
                 attr = combine(computedPositions, params.cornerType);
                 attr.attributes.position.values = PolygonPipeline.PolygonPipeline.scaleToGeodeticHeight(attr.attributes.position.values, height, ellipsoid);
 
-                if (defined.defined(corridorOutlineGeometry._offsetAttribute)) {
+                if (when.defined(corridorOutlineGeometry._offsetAttribute)) {
                     var length = attr.attributes.position.values.length;
                     var applyOffset = new Uint8Array(length / 3);
                     var offsetValue = corridorOutlineGeometry._offsetAttribute === GeometryOffsetAttribute.GeometryOffsetAttribute.NONE ? 0 : 1;
@@ -534,7 +534,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
         };
 
     function createCorridorOutlineGeometry(corridorOutlineGeometry, offset) {
-            if (defined.defined(offset)) {
+            if (when.defined(offset)) {
                 corridorOutlineGeometry = CorridorOutlineGeometry.unpack(corridorOutlineGeometry, offset);
             }
             corridorOutlineGeometry._ellipsoid = Cartesian2.Ellipsoid.clone(corridorOutlineGeometry._ellipsoid);

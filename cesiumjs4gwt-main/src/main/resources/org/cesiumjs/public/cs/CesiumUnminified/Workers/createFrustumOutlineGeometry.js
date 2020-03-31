@@ -1,7 +1,7 @@
 /**
- * Cesium - https://github.com/AnalyticalGraphicsInc/cesium
+ * Cesium - https://github.com/CesiumGS/cesium
  *
- * Copyright 2011-2017 Cesium Contributors
+ * Copyright 2011-2020 Cesium Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,9 +18,9 @@
  * Columbus View (Pat. Pend.)
  *
  * Portions licensed separately.
- * See https://github.com/AnalyticalGraphicsInc/cesium/blob/master/LICENSE.md for full licensing details.
+ * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
-define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './defaultValue-29c9b1af', './Math-9620d065', './Cartesian2-8defcb50', './defineProperties-c817531e', './Transforms-d68fc962', './RuntimeError-51c34ab4', './WebGLConstants-90dbfe2f', './ComponentDatatype-30d0acd7', './GeometryAttribute-6b99fe3b', './when-1faa3867', './GeometryAttributes-f8548d3f', './Plane-e22638e7', './VertexFormat-ba88c609', './FrustumGeometry-8c05d9b3'], function (defined, Check, freezeObject, defaultValue, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, when, GeometryAttributes, Plane, VertexFormat, FrustumGeometry) { 'use strict';
+define(['./when-a55a8a4c', './Check-bc1d37d9', './Math-d7cbfcf6', './Cartesian2-6ec3db89', './Transforms-a4d7073e', './RuntimeError-7c184ac0', './WebGLConstants-4c11ee5f', './ComponentDatatype-919a7463', './GeometryAttribute-291ff23b', './GeometryAttributes-1c7ce91d', './Plane-37b84dad', './VertexFormat-7f136973', './FrustumGeometry-e26d33c0'], function (when, Check, _Math, Cartesian2, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, GeometryAttributes, Plane, VertexFormat, FrustumGeometry) { 'use strict';
 
     var PERSPECTIVE = 0;
         var ORTHOGRAPHIC = 1;
@@ -51,7 +51,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
             // This is private because it is used by DebugCameraPrimitive to draw a multi-frustum by
             // creating multiple FrustumOutlineGeometrys. This way the near plane of one frustum doesn't overlap
             // the far plane of another.
-            var drawNearPlane = defaultValue.defaultValue(options._drawNearPlane, true);
+            var drawNearPlane = when.defaultValue(options._drawNearPlane, true);
 
             var frustumType;
             var frustumPackedLength;
@@ -92,7 +92,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
             Check.Check.defined('array', array);
             //>>includeEnd('debug');
 
-            startingIndex = defaultValue.defaultValue(startingIndex, 0);
+            startingIndex = when.defaultValue(startingIndex, 0);
 
             var frustumType = value._frustumType;
             var frustum = value._frustum;
@@ -133,7 +133,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
             Check.Check.defined('array', array);
             //>>includeEnd('debug');
 
-            startingIndex = defaultValue.defaultValue(startingIndex, 0);
+            startingIndex = when.defaultValue(startingIndex, 0);
 
             var frustumType = array[startingIndex++];
 
@@ -152,7 +152,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
             startingIndex += Transforms.Quaternion.packedLength;
             var drawNearPlane = array[startingIndex] === 1.0;
 
-            if (!defined.defined(result)) {
+            if (!when.defined(result)) {
                 return new FrustumOutlineGeometry({
                     frustum : frustum,
                     origin : origin,
@@ -242,7 +242,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
         };
 
     function createFrustumOutlineGeometry(frustumGeometry, offset) {
-            if (defined.defined(offset)) {
+            if (when.defined(offset)) {
                 frustumGeometry = FrustumOutlineGeometry.unpack(frustumGeometry, offset);
             }
             return FrustumOutlineGeometry.createGeometry(frustumGeometry);

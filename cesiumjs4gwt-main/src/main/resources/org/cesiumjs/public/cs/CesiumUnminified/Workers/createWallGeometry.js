@@ -1,7 +1,7 @@
 /**
- * Cesium - https://github.com/AnalyticalGraphicsInc/cesium
+ * Cesium - https://github.com/CesiumGS/cesium
  *
- * Copyright 2011-2017 Cesium Contributors
+ * Copyright 2011-2020 Cesium Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,9 +18,9 @@
  * Columbus View (Pat. Pend.)
  *
  * Portions licensed separately.
- * See https://github.com/AnalyticalGraphicsInc/cesium/blob/master/LICENSE.md for full licensing details.
+ * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
-define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './defaultValue-29c9b1af', './Math-9620d065', './Cartesian2-8defcb50', './defineProperties-c817531e', './Transforms-d68fc962', './RuntimeError-51c34ab4', './WebGLConstants-90dbfe2f', './ComponentDatatype-30d0acd7', './GeometryAttribute-6b99fe3b', './when-1faa3867', './GeometryAttributes-f8548d3f', './IndexDatatype-85d10a10', './IntersectionTests-23274ea8', './Plane-e22638e7', './VertexFormat-ba88c609', './EllipsoidTangentPlane-b0651cb6', './EllipsoidRhumbLine-1d34a7ab', './PolygonPipeline-50b197b4', './EllipsoidGeodesic-1758a5f7', './PolylinePipeline-f1013f6f', './WallGeometryLibrary-7c74922f'], function (defined, Check, freezeObject, defaultValue, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, when, GeometryAttributes, IndexDatatype, IntersectionTests, Plane, VertexFormat, EllipsoidTangentPlane, EllipsoidRhumbLine, PolygonPipeline, EllipsoidGeodesic, PolylinePipeline, WallGeometryLibrary) { 'use strict';
+define(['./when-a55a8a4c', './Check-bc1d37d9', './Math-d7cbfcf6', './Cartesian2-6ec3db89', './Transforms-a4d7073e', './RuntimeError-7c184ac0', './WebGLConstants-4c11ee5f', './ComponentDatatype-919a7463', './GeometryAttribute-291ff23b', './GeometryAttributes-1c7ce91d', './IndexDatatype-4351ba4c', './IntersectionTests-3d9e1b94', './Plane-37b84dad', './VertexFormat-7f136973', './EllipsoidTangentPlane-323c7a98', './EllipsoidRhumbLine-4d1a57d2', './PolygonPipeline-5b0d203a', './EllipsoidGeodesic-365e69f7', './PolylinePipeline-83c8909c', './WallGeometryLibrary-9b863158'], function (when, Check, _Math, Cartesian2, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, GeometryAttributes, IndexDatatype, IntersectionTests, Plane, VertexFormat, EllipsoidTangentPlane, EllipsoidRhumbLine, PolygonPipeline, EllipsoidGeodesic, PolylinePipeline, WallGeometryLibrary) { 'use strict';
 
     var scratchCartesian3Position1 = new Cartesian2.Cartesian3();
         var scratchCartesian3Position2 = new Cartesian2.Cartesian3();
@@ -71,27 +71,27 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
          * var geometry = Cesium.WallGeometry.createGeometry(wall);
          */
         function WallGeometry(options) {
-            options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+            options = when.defaultValue(options, when.defaultValue.EMPTY_OBJECT);
 
             var wallPositions = options.positions;
             var maximumHeights = options.maximumHeights;
             var minimumHeights = options.minimumHeights;
 
             //>>includeStart('debug', pragmas.debug);
-            if (!defined.defined(wallPositions)) {
+            if (!when.defined(wallPositions)) {
                 throw new Check.DeveloperError('options.positions is required.');
             }
-            if (defined.defined(maximumHeights) && maximumHeights.length !== wallPositions.length) {
+            if (when.defined(maximumHeights) && maximumHeights.length !== wallPositions.length) {
                 throw new Check.DeveloperError('options.positions and options.maximumHeights must have the same length.');
             }
-            if (defined.defined(minimumHeights) && minimumHeights.length !== wallPositions.length) {
+            if (when.defined(minimumHeights) && minimumHeights.length !== wallPositions.length) {
                 throw new Check.DeveloperError('options.positions and options.minimumHeights must have the same length.');
             }
             //>>includeEnd('debug');
 
-            var vertexFormat = defaultValue.defaultValue(options.vertexFormat, VertexFormat.VertexFormat.DEFAULT);
-            var granularity = defaultValue.defaultValue(options.granularity, _Math.CesiumMath.RADIANS_PER_DEGREE);
-            var ellipsoid = defaultValue.defaultValue(options.ellipsoid, Cartesian2.Ellipsoid.WGS84);
+            var vertexFormat = when.defaultValue(options.vertexFormat, VertexFormat.VertexFormat.DEFAULT);
+            var granularity = when.defaultValue(options.granularity, _Math.CesiumMath.RADIANS_PER_DEGREE);
+            var ellipsoid = when.defaultValue(options.ellipsoid, Cartesian2.Ellipsoid.WGS84);
 
             this._positions = wallPositions;
             this._minimumHeights = minimumHeights;
@@ -102,10 +102,10 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
             this._workerName = 'createWallGeometry';
 
             var numComponents = 1 + wallPositions.length * Cartesian2.Cartesian3.packedLength + 2;
-            if (defined.defined(minimumHeights)) {
+            if (when.defined(minimumHeights)) {
                 numComponents += minimumHeights.length;
             }
-            if (defined.defined(maximumHeights)) {
+            if (when.defined(maximumHeights)) {
                 numComponents += maximumHeights.length;
             }
 
@@ -127,15 +127,15 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
          */
         WallGeometry.pack = function(value, array, startingIndex) {
             //>>includeStart('debug', pragmas.debug);
-            if (!defined.defined(value)) {
+            if (!when.defined(value)) {
                 throw new Check.DeveloperError('value is required');
             }
-            if (!defined.defined(array)) {
+            if (!when.defined(array)) {
                 throw new Check.DeveloperError('array is required');
             }
             //>>includeEnd('debug');
 
-            startingIndex = defaultValue.defaultValue(startingIndex, 0);
+            startingIndex = when.defaultValue(startingIndex, 0);
 
             var i;
 
@@ -148,20 +148,20 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
             }
 
             var minimumHeights = value._minimumHeights;
-            length = defined.defined(minimumHeights) ? minimumHeights.length : 0;
+            length = when.defined(minimumHeights) ? minimumHeights.length : 0;
             array[startingIndex++] = length;
 
-            if (defined.defined(minimumHeights)) {
+            if (when.defined(minimumHeights)) {
                 for (i = 0; i < length; ++i) {
                     array[startingIndex++] = minimumHeights[i];
                 }
             }
 
             var maximumHeights = value._maximumHeights;
-            length = defined.defined(maximumHeights) ? maximumHeights.length : 0;
+            length = when.defined(maximumHeights) ? maximumHeights.length : 0;
             array[startingIndex++] = length;
 
-            if (defined.defined(maximumHeights)) {
+            if (when.defined(maximumHeights)) {
                 for (i = 0; i < length; ++i) {
                     array[startingIndex++] = maximumHeights[i];
                 }
@@ -199,12 +199,12 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
          */
         WallGeometry.unpack = function(array, startingIndex, result) {
             //>>includeStart('debug', pragmas.debug);
-            if (!defined.defined(array)) {
+            if (!when.defined(array)) {
                 throw new Check.DeveloperError('array is required');
             }
             //>>includeEnd('debug');
 
-            startingIndex = defaultValue.defaultValue(startingIndex, 0);
+            startingIndex = when.defaultValue(startingIndex, 0);
 
             var i;
 
@@ -243,7 +243,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
 
             var granularity = array[startingIndex];
 
-            if (!defined.defined(result)) {
+            if (!when.defined(result)) {
                 scratchOptions.positions = positions;
                 scratchOptions.minimumHeights = minimumHeights;
                 scratchOptions.maximumHeights = maximumHeights;
@@ -294,11 +294,11 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
          * @see WallGeometry#createGeometry
          */
         WallGeometry.fromConstantHeights = function(options) {
-            options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+            options = when.defaultValue(options, when.defaultValue.EMPTY_OBJECT);
             var positions = options.positions;
 
             //>>includeStart('debug', pragmas.debug);
-            if (!defined.defined(positions)) {
+            if (!when.defined(positions)) {
                 throw new Check.DeveloperError('options.positions is required.');
             }
             //>>includeEnd('debug');
@@ -309,8 +309,8 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
             var min = options.minimumHeight;
             var max = options.maximumHeight;
 
-            var doMin = defined.defined(min);
-            var doMax = defined.defined(max);
+            var doMin = when.defined(min);
+            var doMax = when.defined(max);
             if (doMin || doMax) {
                 var length = positions.length;
                 minHeights = (doMin) ? new Array(length) : undefined;
@@ -352,7 +352,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
             var ellipsoid = wallGeometry._ellipsoid;
 
             var pos = WallGeometryLibrary.WallGeometryLibrary.computePositions(ellipsoid, wallPositions, maximumHeights, minimumHeights, granularity, true);
-            if (!defined.defined(pos)) {
+            if (!when.defined(pos)) {
                 return;
             }
 
@@ -558,7 +558,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
         };
 
     function createWallGeometry(wallGeometry, offset) {
-            if (defined.defined(offset)) {
+            if (when.defined(offset)) {
                 wallGeometry = WallGeometry.unpack(wallGeometry, offset);
             }
             wallGeometry._ellipsoid = Cartesian2.Ellipsoid.clone(wallGeometry._ellipsoid);

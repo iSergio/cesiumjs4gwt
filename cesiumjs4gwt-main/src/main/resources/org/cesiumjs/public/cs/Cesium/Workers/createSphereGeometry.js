@@ -1,7 +1,7 @@
 /**
- * Cesium - https://github.com/AnalyticalGraphicsInc/cesium
+ * Cesium - https://github.com/CesiumGS/cesium
  *
- * Copyright 2011-2017 Cesium Contributors
+ * Copyright 2011-2020 Cesium Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,6 @@
  * Columbus View (Pat. Pend.)
  *
  * Portions licensed separately.
- * See https://github.com/AnalyticalGraphicsInc/cesium/blob/master/LICENSE.md for full licensing details.
+ * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
-define(["./defined-2a4f2d00","./Check-e5651467","./freezeObject-a51e076f","./defaultValue-29c9b1af","./Math-7782f09e","./Cartesian2-ba70b51f","./defineProperties-c817531e","./Transforms-5119c07b","./RuntimeError-51c34ab4","./WebGLConstants-90dbfe2f","./ComponentDatatype-418b1c61","./GeometryAttribute-8bc1900e","./when-1faa3867","./GeometryAttributes-f8548d3f","./IndexDatatype-2bcfc06b","./GeometryOffsetAttribute-fa4e7a11","./VertexFormat-e2e35139","./EllipsoidGeometry-d739b425"],function(a,e,t,i,r,o,n,s,c,d,l,m,f,u,p,y,G,b){"use strict";function k(e){var t=i.defaultValue(e.radius,1),r={radii:new o.Cartesian3(t,t,t),stackPartitions:e.stackPartitions,slicePartitions:e.slicePartitions,vertexFormat:e.vertexFormat};this._ellipsoidGeometry=new b.EllipsoidGeometry(r),this._workerName="createSphereGeometry"}k.packedLength=b.EllipsoidGeometry.packedLength,k.pack=function(e,t,r){return b.EllipsoidGeometry.pack(e._ellipsoidGeometry,t,r)};var v=new b.EllipsoidGeometry,x={radius:void 0,radii:new o.Cartesian3,vertexFormat:new G.VertexFormat,stackPartitions:void 0,slicePartitions:void 0};return k.unpack=function(e,t,r){var i=b.EllipsoidGeometry.unpack(e,t,v);return x.vertexFormat=G.VertexFormat.clone(i._vertexFormat,x.vertexFormat),x.stackPartitions=i._stackPartitions,x.slicePartitions=i._slicePartitions,a.defined(r)?(o.Cartesian3.clone(i._radii,x.radii),r._ellipsoidGeometry=new b.EllipsoidGeometry(x),r):(x.radius=i._radii.x,new k(x))},k.createGeometry=function(e){return b.EllipsoidGeometry.createGeometry(e._ellipsoidGeometry)},function(e,t){return a.defined(t)&&(e=k.unpack(e,t)),k.createGeometry(e)}});
+define(["./when-a55a8a4c","./Check-bc1d37d9","./Math-73a8bd13","./Cartesian2-8c9f79ed","./Transforms-7a81c8c2","./RuntimeError-7c184ac0","./WebGLConstants-4c11ee5f","./ComponentDatatype-c2c50230","./GeometryAttribute-f9641809","./GeometryAttributes-1c7ce91d","./IndexDatatype-486e7786","./GeometryOffsetAttribute-9ecab91f","./VertexFormat-e1477d0a","./EllipsoidGeometry-232477be"],function(a,e,t,o,r,i,n,s,c,d,l,m,u,p){"use strict";function y(e){var t=a.defaultValue(e.radius,1),r={radii:new o.Cartesian3(t,t,t),stackPartitions:e.stackPartitions,slicePartitions:e.slicePartitions,vertexFormat:e.vertexFormat};this._ellipsoidGeometry=new p.EllipsoidGeometry(r),this._workerName="createSphereGeometry"}y.packedLength=p.EllipsoidGeometry.packedLength,y.pack=function(e,t,r){return p.EllipsoidGeometry.pack(e._ellipsoidGeometry,t,r)};var G=new p.EllipsoidGeometry,f={radius:void 0,radii:new o.Cartesian3,vertexFormat:new u.VertexFormat,stackPartitions:void 0,slicePartitions:void 0};return y.unpack=function(e,t,r){var i=p.EllipsoidGeometry.unpack(e,t,G);return f.vertexFormat=u.VertexFormat.clone(i._vertexFormat,f.vertexFormat),f.stackPartitions=i._stackPartitions,f.slicePartitions=i._slicePartitions,a.defined(r)?(o.Cartesian3.clone(i._radii,f.radii),r._ellipsoidGeometry=new p.EllipsoidGeometry(f),r):(f.radius=i._radii.x,new y(f))},y.createGeometry=function(e){return p.EllipsoidGeometry.createGeometry(e._ellipsoidGeometry)},function(e,t){return a.defined(t)&&(e=y.unpack(e,t)),y.createGeometry(e)}});

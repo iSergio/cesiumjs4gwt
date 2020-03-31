@@ -1,7 +1,7 @@
 /**
- * Cesium - https://github.com/AnalyticalGraphicsInc/cesium
+ * Cesium - https://github.com/CesiumGS/cesium
  *
- * Copyright 2011-2017 Cesium Contributors
+ * Copyright 2011-2020 Cesium Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,9 +18,9 @@
  * Columbus View (Pat. Pend.)
  *
  * Portions licensed separately.
- * See https://github.com/AnalyticalGraphicsInc/cesium/blob/master/LICENSE.md for full licensing details.
+ * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
-define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './defaultValue-29c9b1af', './Math-9620d065', './Cartesian2-8defcb50', './defineProperties-c817531e', './Transforms-d68fc962', './RuntimeError-51c34ab4', './WebGLConstants-90dbfe2f', './when-1faa3867', './AttributeCompression-bb5cef3d', './IndexDatatype-85d10a10', './IntersectionTests-23274ea8', './Plane-e22638e7', './createTaskProcessorWorker', './EllipsoidTangentPlane-b0651cb6', './OrientedBoundingBox-f35e8fac', './Color-35ef923d'], function (defined, Check, freezeObject, defaultValue, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, when, AttributeCompression, IndexDatatype, IntersectionTests, Plane, createTaskProcessorWorker, EllipsoidTangentPlane, OrientedBoundingBox, Color) { 'use strict';
+define(['./when-a55a8a4c', './Check-bc1d37d9', './Math-d7cbfcf6', './Cartesian2-6ec3db89', './Transforms-a4d7073e', './RuntimeError-7c184ac0', './WebGLConstants-4c11ee5f', './AttributeCompression-6cfb9427', './IndexDatatype-4351ba4c', './IntersectionTests-3d9e1b94', './Plane-37b84dad', './createTaskProcessorWorker', './EllipsoidTangentPlane-323c7a98', './OrientedBoundingBox-764de7b5', './Color-7baed48c'], function (when, Check, _Math, Cartesian2, Transforms, RuntimeError, WebGLConstants, AttributeCompression, IndexDatatype, IntersectionTests, Plane, createTaskProcessorWorker, EllipsoidTangentPlane, OrientedBoundingBox, Color) { 'use strict';
 
     var scratchCenter = new Cartesian2.Cartesian3();
         var scratchEllipsoid = new Cartesian2.Ellipsoid();
@@ -134,7 +134,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
 
             var minimumHeights = parameters.minimumHeights;
             var maximumHeights = parameters.maximumHeights;
-            if (defined.defined(minimumHeights) && defined.defined(maximumHeights)) {
+            if (when.defined(minimumHeights) && when.defined(maximumHeights)) {
                 minimumHeights = new Float32Array(minimumHeights);
                 maximumHeights = new Float32Array(maximumHeights);
             }
@@ -183,7 +183,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
             var colorToBuffers = {};
             for (i = 0; i < countsLength; ++i) {
                 rgba = batchTableColors[i];
-                if (!defined.defined(colorToBuffers[rgba])) {
+                if (!when.defined(colorToBuffers[rgba])) {
                     colorToBuffers[rgba] = {
                         positionLength : counts[i],
                         indexLength : indexCounts[i],
@@ -247,7 +247,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
 
                 var polygonMinimumHeight = minHeight;
                 var polygonMaximumHeight = maxHeight;
-                if (defined.defined(minimumHeights) && defined.defined(maximumHeights)) {
+                if (when.defined(minimumHeights) && when.defined(maximumHeights)) {
                     polygonMinimumHeight = minimumHeights[i];
                     polygonMaximumHeight = maximumHeights[i];
                 }
