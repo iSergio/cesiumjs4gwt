@@ -21,6 +21,8 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.js.JsObject;
+import org.cesiumjs.cs.scene.enums.TextureMagnificationFilter;
+import org.cesiumjs.cs.scene.enums.TextureMinificationFilter;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -39,6 +41,18 @@ public class MaterialOptions {
      */
     @JsProperty
     public boolean translucent;
+    /**
+     * The TextureMinificationFilter to apply to this material's textures.
+     * Default: TextureMinificationFilter.LINEAR
+     */
+    @JsProperty
+    public TextureMinificationFilter minificationFilter;
+    /**
+     * The TextureMagnificationFilter to apply to this material's textures.
+     * Default: TextureMagnificationFilter.LINEAR
+     */
+    @JsProperty
+    public TextureMagnificationFilter magnificationFilter;
     /**
      * The fabric JSON used to generate the material.
      */

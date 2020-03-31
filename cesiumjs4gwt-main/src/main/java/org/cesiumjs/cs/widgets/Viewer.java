@@ -246,7 +246,7 @@ public class Viewer {
      * ratio is ignored and 1.0 is used instead, effectively rendering based on CSS pixels instead of device pixels.
      * This can improve performance on less powerful devices that have high pixel density. When false, rendering will be in device pixels.
      * CesiumWidget#resolutionScale will still take effect whether this flag is true or false.
-     * Default: false
+     * Default: true
      */
     @JsProperty
     public boolean useBrowserRecommendedResolution;
