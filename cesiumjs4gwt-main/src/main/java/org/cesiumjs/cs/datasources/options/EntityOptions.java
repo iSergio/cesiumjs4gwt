@@ -25,8 +25,6 @@ import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.datasources.Entity;
 import org.cesiumjs.cs.datasources.graphics.*;
 import org.cesiumjs.cs.datasources.properties.CallbackProperty;
-import org.cesiumjs.cs.datasources.properties.ConstantPositionProperty;
-import org.cesiumjs.cs.datasources.properties.PositionProperty;
 import org.cesiumjs.cs.datasources.properties.Property;
 import org.cesiumjs.cs.js.JsObject;
 
@@ -125,6 +123,11 @@ public class EntityOptions {
      */
     @JsProperty
     public ModelGraphics model;
+    /**
+     * A 3D Tiles tileset to associate with this entity.
+     */
+    @JsProperty
+    public Cesium3DTilesetGraphics tileset;
     /**
      * A path to associate with this entity.
      */

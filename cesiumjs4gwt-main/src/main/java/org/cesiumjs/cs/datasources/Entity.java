@@ -92,6 +92,11 @@ public class Entity {
     @JsProperty
     public Property orientation;
     /**
+     * Gets or sets the tileset.
+     */
+    @JsProperty
+    public Cesium3DTilesetGraphics tileset;
+    /**
      * A suggested initial offset for viewing this object.
      */
     @JsProperty
