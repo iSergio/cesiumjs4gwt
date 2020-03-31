@@ -645,7 +645,7 @@ public class Matrix4 {
      *     //     [13.0, 17.0, 21.0, 25.0]
      *
      *     Matrix4 b = new Matrix4();
-     *     Matrix4.getRotation(m,b);
+     *     Matrix4.getMatrix3(m,b);
      *     // b = [10.0, 14.0, 18.0]
      *     //     [11.0, 15.0, 19.0]
      *     //     [12.0, 16.0, 20.0]
@@ -656,7 +656,7 @@ public class Matrix4 {
      * @return The modified result parameter.
      */
     @JsMethod
-    public static native Matrix3 getRotation(Matrix4 matrix, Matrix3 result);
+    public static native Matrix3 getMatrix3(Matrix4 matrix, Matrix3 result);
 
     /**
      * Retrieves a copy of the matrix row at the provided index as a Cartesian3 instance.
