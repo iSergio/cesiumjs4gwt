@@ -24,8 +24,6 @@ import org.cesiumjs.cs.collections.ClippingPlaneCollection;
 import org.cesiumjs.cs.collections.ImageryLayerCollection;
 import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.core.providers.TerrainProvider;
-import org.cesiumjs.cs.scene.Material;
-import org.cesiumjs.cs.scene.Scene;
 
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
@@ -52,6 +50,12 @@ public class Globe {
      */
     @JsProperty
     public double atmosphereSaturationShift;
+    /**
+     * Whether to cull back-facing terrain. Set this to false when viewing terrain from below the surface.
+     * Default: true
+     */
+    @JsProperty
+    public boolean backFaceCulling;
     /**
      * Gets or sets the color of the globe when no imagery is available.
      */
