@@ -25,6 +25,7 @@ import org.cesiumjs.cs.core.Rectangle;
 import org.cesiumjs.cs.scene.ImageryLayer;
 import org.cesiumjs.cs.scene.providers.ArcGisMapServerImageryProvider;
 import org.cesiumjs.cs.scene.providers.SingleTileImageryProvider;
+import org.cesiumjs.cs.scene.providers.TileMapServiceImageryProvider;
 import org.cesiumjs.cs.scene.providers.options.ArcGisMapServerImageryProviderOptions;
 import org.cesiumjs.cs.scene.providers.options.SingleTileImageryProviderOptions;
 import org.cesiumjs.cs.scene.providers.options.TileMapServiceImageryProviderOptions;
@@ -59,7 +60,7 @@ public class ImageryLayers extends AbstractExample {
         tileMapServiceImageryProviderOptions.url = "https://cesiumjs.org/blackmarble";
         tileMapServiceImageryProviderOptions.credit = Credit.create("Black Marble imagery courtesy NASA Earth Observatory");
         tileMapServiceImageryProviderOptions.flipXY = true;
-        ImageryLayer blackMarble = layers.addImageryProvider(Cesium.createTileMapServiceImageryProvider(tileMapServiceImageryProviderOptions));
+        ImageryLayer blackMarble = layers.addImageryProvider(new TileMapServiceImageryProvider(tileMapServiceImageryProviderOptions));
         blackMarble.alpha = 0.5f;
         blackMarble.brightness = 2.0f;
 

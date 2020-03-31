@@ -27,11 +27,12 @@ import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.core.Math;
 import org.cesiumjs.cs.core.Rectangle;
 import org.cesiumjs.cs.scene.ImageryLayer;
-import org.cesiumjs.cs.scene.options.ViewOptions;
 import org.cesiumjs.cs.scene.providers.IonImageryProvider;
 import org.cesiumjs.cs.scene.providers.SingleTileImageryProvider;
+import org.cesiumjs.cs.scene.providers.TileMapServiceImageryProvider;
 import org.cesiumjs.cs.scene.providers.options.IonImageryProviderOptions;
 import org.cesiumjs.cs.scene.providers.options.SingleTileImageryProviderOptions;
+import org.cesiumjs.cs.scene.providers.options.TileMapServiceImageryProviderOptions;
 import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cesiumjs.cs.widgets.options.ViewerOptions;
 import org.cleanlogic.cesiumjs4gwt.showcase.basic.AbstractExample;
@@ -64,8 +65,10 @@ public class ImageryCutout extends AbstractExample {
 
     @Override
     public void buildPanel() {
+        TileMapServiceImageryProviderOptions tmsOptions = new TileMapServiceImageryProviderOptions();
+        tmsOptions.url = Cesium.buildModuleUrl("Assets/Textures/NaturalEarthII");
         ViewerOptions viewerOptions = new ViewerOptions();
-        viewerOptions.imageryProvider = Cesium.createTileMapServiceImageryProvider(Cesium.buildModuleUrl("Assets/Textures/NaturalEarthII"));
+        viewerOptions.imageryProvider = new TileMapServiceImageryProvider(tmsOptions);
         viewerOptions.baseLayerPicker = false;
 
         csVPanel = new ViewerPanel(viewerOptions);

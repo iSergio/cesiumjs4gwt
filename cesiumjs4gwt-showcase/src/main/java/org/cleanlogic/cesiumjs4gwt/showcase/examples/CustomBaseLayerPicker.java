@@ -26,7 +26,11 @@ import org.cesiumjs.cs.core.providers.TerrainProvider;
 import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.scene.providers.ImageryProvider;
 import org.cesiumjs.cs.scene.providers.IonImageryProvider;
+import org.cesiumjs.cs.scene.providers.OpenStreetMapImageryProvider;
+import org.cesiumjs.cs.scene.providers.TileMapServiceImageryProvider;
 import org.cesiumjs.cs.scene.providers.options.IonImageryProviderOptions;
+import org.cesiumjs.cs.scene.providers.options.OpenStreetMapImageryProviderOptions;
+import org.cesiumjs.cs.scene.providers.options.TileMapServiceImageryProviderOptions;
 import org.cesiumjs.cs.widgets.BaseLayerPicker;
 import org.cesiumjs.cs.widgets.ProviderViewModel;
 import org.cesiumjs.cs.widgets.ViewerPanel;
@@ -66,7 +70,10 @@ public class CustomBaseLayerPicker extends AbstractExample {
         options.imageryProviderCreationFunction = new ProviderViewModel.ImageryProviderCreationFunction() {
             @Override
             public ImageryProvider function() {
-                return Cesium.createOpenStreetMapImageryProvider("https://a.tile.openstreetmap.org/");
+                OpenStreetMapImageryProviderOptions options = new OpenStreetMapImageryProviderOptions();
+                options.url = "https://a.tile.openstreetmap.org/";
+                return new OpenStreetMapImageryProvider(options);
+                // return Cesium.createOpenStreetMapImageryProvider("https://a.tile.openstreetmap.org/");
             }
         };
         imageryViewModels.add(new ProviderViewModel(options));
@@ -92,7 +99,9 @@ public class CustomBaseLayerPicker extends AbstractExample {
         options.imageryProviderCreationFunction = new ProviderViewModel.ImageryProviderCreationFunction() {
             @Override
             public ImageryProvider function() {
-                return Cesium.createTileMapServiceImageryProvider(GWT.getModuleBaseURL() + "cs/CesiumUnminified/Assets/Textures/NaturalEarthII");
+                TileMapServiceImageryProviderOptions options = new TileMapServiceImageryProviderOptions();
+                options.url = GWT.getModuleBaseURL() + "cs/CesiumUnminified/Assets/Textures/NaturalEarthII";
+                return new TileMapServiceImageryProvider(options);
             }
         };
         imageryViewModels.add(new ProviderViewModel(options));

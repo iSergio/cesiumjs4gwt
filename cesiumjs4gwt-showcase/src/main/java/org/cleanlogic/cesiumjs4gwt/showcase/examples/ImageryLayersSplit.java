@@ -25,6 +25,7 @@ import org.cesiumjs.cs.core.Credit;
 import org.cesiumjs.cs.scene.ImageryLayer;
 import org.cesiumjs.cs.scene.enums.ImagerySplitDirection;
 import org.cesiumjs.cs.scene.providers.ArcGisMapServerImageryProvider;
+import org.cesiumjs.cs.scene.providers.TileMapServiceImageryProvider;
 import org.cesiumjs.cs.scene.providers.options.TileMapServiceImageryProviderOptions;
 import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cesiumjs.cs.widgets.options.ViewerOptions;
@@ -58,7 +59,7 @@ public class ImageryLayersSplit extends AbstractExample {
         tileMapServiceImageryProviderOptions.url = "https://cesiumjs.org/blackmarble";
         tileMapServiceImageryProviderOptions.credit = Credit.create("Black Marble imagery courtesy NASA Earth Observatory");
         tileMapServiceImageryProviderOptions.flipXY = true;
-        ImageryLayer blackMarble = layers.addImageryProvider(Cesium.createTileMapServiceImageryProvider(tileMapServiceImageryProviderOptions));
+        ImageryLayer blackMarble = layers.addImageryProvider(new TileMapServiceImageryProvider(tileMapServiceImageryProviderOptions));
         blackMarble.splitDirection = ImagerySplitDirection.LEFT();
 
         csVPanel.getViewer().scene().imagerySplitPosition = 0.5;
