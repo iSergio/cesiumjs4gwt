@@ -1068,6 +1068,17 @@ public class Color {
     public static native Color fromRgba(int rgba, Color result);
 
     /**
+     * Computes the linear interpolation or extrapolation at t between the provided colors.
+     * @param start The color corresponding to t at 0.0.
+     * @param end The color corresponding to t at 1.0.
+     * @param t The point along t at which to interpolate.
+     * @param result The object onto which to store the result.
+     * @return The modified result parameter.
+     */
+    @JsMethod
+    public static native Color lerp(Color start, Color end, double t, Color result);
+
+    /**
      * Computes the componentwise modulus of two Colors.
      * @param left The first Color.
      * @param right The second Color.
