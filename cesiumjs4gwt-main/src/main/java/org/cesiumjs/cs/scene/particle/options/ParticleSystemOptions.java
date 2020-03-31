@@ -186,6 +186,11 @@ public class ParticleSystemOptions {
     @JsProperty
     public Cartesian2 maximumImageSize;
     /**
+     * Sets if the size of particles is in meters or pixels. true to size the particles in meters; otherwise, the size is in pixels.
+     */
+    @JsProperty
+    public boolean sizeInMeters;
+    /**
      * How long the particle system will emit particles, in seconds.
      * Default: {@link Double#MAX_VALUE}
      */

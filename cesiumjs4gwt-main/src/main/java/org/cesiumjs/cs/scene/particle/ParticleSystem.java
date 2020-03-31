@@ -147,6 +147,12 @@ public class ParticleSystem {
     @JsProperty
     public boolean show;
     /**
+     * Sets if the size of particles is in meters or pixels. true to size the particles in meters; otherwise, the size is in pixels.
+     * Default: false
+     */
+    @JsProperty
+    public boolean sizeInMeters;
+    /**
      * The color of a particle when it is born.
      * Default: {@link org.cesiumjs.cs.core.Color#WHITE()}.
      */
