@@ -179,6 +179,13 @@ public class Globe {
     @JsProperty
     public boolean showGroundAtmosphere;
     /**
+     * Whether to show terrain skirts. Terrain skirts are geometry extending downwards from a 
+     * tile's edges used to hide seams between neighboring tiles. It may be desirable to hide 
+     * terrain skirts if terrain is translucent or when viewing terrain from below the surface.
+     */
+    @JsProperty
+    public boolean showSkirts;
+    /**
      * True if an animated wave effect should be shown in areas of the globe covered by water; otherwise, false.
      * This property is ignored if the terrainProvider does not provide a water mask.
      * Default:  true
