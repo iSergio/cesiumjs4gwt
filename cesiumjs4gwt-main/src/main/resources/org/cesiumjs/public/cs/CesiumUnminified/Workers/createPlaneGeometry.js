@@ -20,249 +20,255 @@
  * Portions licensed separately.
  * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
-define(['./when-a55a8a4c', './Check-bc1d37d9', './Math-d7cbfcf6', './Cartesian2-6ec3db89', './Transforms-a4d7073e', './RuntimeError-7c184ac0', './WebGLConstants-4c11ee5f', './ComponentDatatype-919a7463', './GeometryAttribute-291ff23b', './GeometryAttributes-1c7ce91d', './VertexFormat-7f136973'], function (when, Check, _Math, Cartesian2, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, GeometryAttributes, VertexFormat) { 'use strict';
 
-    /**
-         * Describes geometry representing a plane centered at the origin, with a unit width and length.
-         *
-         * @alias PlaneGeometry
-         * @constructor
-         *
-         * @param {Object} options Object with the following properties:
-         * @param {VertexFormat} [options.vertexFormat=VertexFormat.DEFAULT] The vertex attributes to be computed.
-         *
-         * @example
-         * var planeGeometry = new Cesium.PlaneGeometry({
-         *   vertexFormat : Cesium.VertexFormat.POSITION_ONLY
-         * });
-         */
-        function PlaneGeometry(options) {
-            options = when.defaultValue(options, when.defaultValue.EMPTY_OBJECT);
+define(['./when-54c2dc71', './Check-6c0211bc', './Math-1124a290', './Cartesian2-33d2657c', './Transforms-8be64844', './RuntimeError-2109023a', './WebGLConstants-76bb35d1', './ComponentDatatype-a26dd044', './GeometryAttribute-e9a8b203', './GeometryAttributes-4fcfcf40', './VertexFormat-4d8b817a'], function (when, Check, _Math, Cartesian2, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, GeometryAttributes, VertexFormat) { 'use strict';
 
-            var vertexFormat = when.defaultValue(options.vertexFormat, VertexFormat.VertexFormat.DEFAULT);
+  /**
+   * Describes geometry representing a plane centered at the origin, with a unit width and length.
+   *
+   * @alias PlaneGeometry
+   * @constructor
+   *
+   * @param {Object} [options] Object with the following properties:
+   * @param {VertexFormat} [options.vertexFormat=VertexFormat.DEFAULT] The vertex attributes to be computed.
+   *
+   * @example
+   * var planeGeometry = new Cesium.PlaneGeometry({
+   *   vertexFormat : Cesium.VertexFormat.POSITION_ONLY
+   * });
+   */
+  function PlaneGeometry(options) {
+    options = when.defaultValue(options, when.defaultValue.EMPTY_OBJECT);
 
-            this._vertexFormat = vertexFormat;
-            this._workerName = 'createPlaneGeometry';
-        }
+    var vertexFormat = when.defaultValue(options.vertexFormat, VertexFormat.VertexFormat.DEFAULT);
 
-        /**
-         * The number of elements used to pack the object into an array.
-         * @type {Number}
-         */
-        PlaneGeometry.packedLength = VertexFormat.VertexFormat.packedLength;
+    this._vertexFormat = vertexFormat;
+    this._workerName = "createPlaneGeometry";
+  }
 
-        /**
-         * Stores the provided instance into the provided array.
-         *
-         * @param {PlaneGeometry} value The value to pack.
-         * @param {Number[]} array The array to pack into.
-         * @param {Number} [startingIndex=0] The index into the array at which to start packing the elements.
-         *
-         * @returns {Number[]} The array that was packed into
-         */
-        PlaneGeometry.pack = function(value, array, startingIndex) {
-            //>>includeStart('debug', pragmas.debug);
-            Check.Check.typeOf.object('value', value);
-            Check.Check.defined('array', array);
-            //>>includeEnd('debug');
+  /**
+   * The number of elements used to pack the object into an array.
+   * @type {Number}
+   */
+  PlaneGeometry.packedLength = VertexFormat.VertexFormat.packedLength;
 
-            startingIndex = when.defaultValue(startingIndex, 0);
+  /**
+   * Stores the provided instance into the provided array.
+   *
+   * @param {PlaneGeometry} value The value to pack.
+   * @param {Number[]} array The array to pack into.
+   * @param {Number} [startingIndex=0] The index into the array at which to start packing the elements.
+   *
+   * @returns {Number[]} The array that was packed into
+   */
+  PlaneGeometry.pack = function (value, array, startingIndex) {
+    //>>includeStart('debug', pragmas.debug);
+    Check.Check.typeOf.object("value", value);
+    Check.Check.defined("array", array);
+    //>>includeEnd('debug');
 
-            VertexFormat.VertexFormat.pack(value._vertexFormat, array, startingIndex);
+    startingIndex = when.defaultValue(startingIndex, 0);
 
-            return array;
-        };
+    VertexFormat.VertexFormat.pack(value._vertexFormat, array, startingIndex);
 
-        var scratchVertexFormat = new VertexFormat.VertexFormat();
-        var scratchOptions = {
-            vertexFormat: scratchVertexFormat
-        };
+    return array;
+  };
 
-        /**
-         * Retrieves an instance from a packed array.
-         *
-         * @param {Number[]} array The packed array.
-         * @param {Number} [startingIndex=0] The starting index of the element to be unpacked.
-         * @param {PlaneGeometry} [result] The object into which to store the result.
-         * @returns {PlaneGeometry} The modified result parameter or a new PlaneGeometry instance if one was not provided.
-         */
-        PlaneGeometry.unpack = function(array, startingIndex, result) {
-            //>>includeStart('debug', pragmas.debug);
-            Check.Check.defined('array', array);
-            //>>includeEnd('debug');
+  var scratchVertexFormat = new VertexFormat.VertexFormat();
+  var scratchOptions = {
+    vertexFormat: scratchVertexFormat,
+  };
 
-            startingIndex = when.defaultValue(startingIndex, 0);
+  /**
+   * Retrieves an instance from a packed array.
+   *
+   * @param {Number[]} array The packed array.
+   * @param {Number} [startingIndex=0] The starting index of the element to be unpacked.
+   * @param {PlaneGeometry} [result] The object into which to store the result.
+   * @returns {PlaneGeometry} The modified result parameter or a new PlaneGeometry instance if one was not provided.
+   */
+  PlaneGeometry.unpack = function (array, startingIndex, result) {
+    //>>includeStart('debug', pragmas.debug);
+    Check.Check.defined("array", array);
+    //>>includeEnd('debug');
 
-            var vertexFormat = VertexFormat.VertexFormat.unpack(array, startingIndex, scratchVertexFormat);
+    startingIndex = when.defaultValue(startingIndex, 0);
 
-            if (!when.defined(result)) {
-                return new PlaneGeometry(scratchOptions);
-            }
+    var vertexFormat = VertexFormat.VertexFormat.unpack(
+      array,
+      startingIndex,
+      scratchVertexFormat
+    );
 
-            result._vertexFormat = VertexFormat.VertexFormat.clone(vertexFormat, result._vertexFormat);
+    if (!when.defined(result)) {
+      return new PlaneGeometry(scratchOptions);
+    }
 
-            return result;
-        };
+    result._vertexFormat = VertexFormat.VertexFormat.clone(vertexFormat, result._vertexFormat);
 
-        var min = new Cartesian2.Cartesian3(-0.5, -0.5, 0.0);
-        var max = new Cartesian2.Cartesian3( 0.5,  0.5, 0.0);
+    return result;
+  };
 
-        /**
-         * Computes the geometric representation of a plane, including its vertices, indices, and a bounding sphere.
-         *
-         * @param {PlaneGeometry} planeGeometry A description of the plane.
-         * @returns {Geometry|undefined} The computed vertices and indices.
-         */
-        PlaneGeometry.createGeometry = function(planeGeometry) {
-            var vertexFormat = planeGeometry._vertexFormat;
+  var min = new Cartesian2.Cartesian3(-0.5, -0.5, 0.0);
+  var max = new Cartesian2.Cartesian3(0.5, 0.5, 0.0);
 
-            var attributes = new GeometryAttributes.GeometryAttributes();
-            var indices;
-            var positions;
+  /**
+   * Computes the geometric representation of a plane, including its vertices, indices, and a bounding sphere.
+   *
+   * @param {PlaneGeometry} planeGeometry A description of the plane.
+   * @returns {Geometry|undefined} The computed vertices and indices.
+   */
+  PlaneGeometry.createGeometry = function (planeGeometry) {
+    var vertexFormat = planeGeometry._vertexFormat;
 
-            if (vertexFormat.position) {
-                // 4 corner points.  Duplicated 3 times each for each incident edge/face.
-                positions = new Float64Array(4 * 3);
+    var attributes = new GeometryAttributes.GeometryAttributes();
+    var indices;
+    var positions;
 
-                // +z face
-                positions[0]  = min.x;
-                positions[1]  = min.y;
-                positions[2]  = 0.0;
-                positions[3]  = max.x;
-                positions[4]  = min.y;
-                positions[5]  = 0.0;
-                positions[6]  = max.x;
-                positions[7]  = max.y;
-                positions[8]  = 0.0;
-                positions[9]  = min.x;
-                positions[10] = max.y;
-                positions[11] = 0.0;
+    if (vertexFormat.position) {
+      // 4 corner points.  Duplicated 3 times each for each incident edge/face.
+      positions = new Float64Array(4 * 3);
 
-                attributes.position = new GeometryAttribute.GeometryAttribute({
-                    componentDatatype : ComponentDatatype.ComponentDatatype.DOUBLE,
-                    componentsPerAttribute : 3,
-                    values : positions
-                });
+      // +z face
+      positions[0] = min.x;
+      positions[1] = min.y;
+      positions[2] = 0.0;
+      positions[3] = max.x;
+      positions[4] = min.y;
+      positions[5] = 0.0;
+      positions[6] = max.x;
+      positions[7] = max.y;
+      positions[8] = 0.0;
+      positions[9] = min.x;
+      positions[10] = max.y;
+      positions[11] = 0.0;
 
-                if (vertexFormat.normal) {
-                    var normals = new Float32Array(4 * 3);
+      attributes.position = new GeometryAttribute.GeometryAttribute({
+        componentDatatype: ComponentDatatype.ComponentDatatype.DOUBLE,
+        componentsPerAttribute: 3,
+        values: positions,
+      });
 
-                    // +z face
-                    normals[0]  = 0.0;
-                    normals[1]  = 0.0;
-                    normals[2]  = 1.0;
-                    normals[3]  = 0.0;
-                    normals[4]  = 0.0;
-                    normals[5]  = 1.0;
-                    normals[6]  = 0.0;
-                    normals[7]  = 0.0;
-                    normals[8]  = 1.0;
-                    normals[9]  = 0.0;
-                    normals[10] = 0.0;
-                    normals[11] = 1.0;
+      if (vertexFormat.normal) {
+        var normals = new Float32Array(4 * 3);
 
-                    attributes.normal = new GeometryAttribute.GeometryAttribute({
-                        componentDatatype : ComponentDatatype.ComponentDatatype.FLOAT,
-                        componentsPerAttribute : 3,
-                        values : normals
-                    });
-                }
+        // +z face
+        normals[0] = 0.0;
+        normals[1] = 0.0;
+        normals[2] = 1.0;
+        normals[3] = 0.0;
+        normals[4] = 0.0;
+        normals[5] = 1.0;
+        normals[6] = 0.0;
+        normals[7] = 0.0;
+        normals[8] = 1.0;
+        normals[9] = 0.0;
+        normals[10] = 0.0;
+        normals[11] = 1.0;
 
-                if (vertexFormat.st) {
-                    var texCoords = new Float32Array(4 * 2);
+        attributes.normal = new GeometryAttribute.GeometryAttribute({
+          componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
+          componentsPerAttribute: 3,
+          values: normals,
+        });
+      }
 
-                    // +z face
-                    texCoords[0]  = 0.0;
-                    texCoords[1]  = 0.0;
-                    texCoords[2]  = 1.0;
-                    texCoords[3]  = 0.0;
-                    texCoords[4]  = 1.0;
-                    texCoords[5]  = 1.0;
-                    texCoords[6]  = 0.0;
-                    texCoords[7]  = 1.0;
+      if (vertexFormat.st) {
+        var texCoords = new Float32Array(4 * 2);
 
-                    attributes.st = new GeometryAttribute.GeometryAttribute({
-                        componentDatatype : ComponentDatatype.ComponentDatatype.FLOAT,
-                        componentsPerAttribute : 2,
-                        values : texCoords
-                    });
-                }
+        // +z face
+        texCoords[0] = 0.0;
+        texCoords[1] = 0.0;
+        texCoords[2] = 1.0;
+        texCoords[3] = 0.0;
+        texCoords[4] = 1.0;
+        texCoords[5] = 1.0;
+        texCoords[6] = 0.0;
+        texCoords[7] = 1.0;
 
-                if (vertexFormat.tangent) {
-                    var tangents = new Float32Array(4 * 3);
+        attributes.st = new GeometryAttribute.GeometryAttribute({
+          componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
+          componentsPerAttribute: 2,
+          values: texCoords,
+        });
+      }
 
-                    // +z face
-                    tangents[0]  = 1.0;
-                    tangents[1]  = 0.0;
-                    tangents[2]  = 0.0;
-                    tangents[3]  = 1.0;
-                    tangents[4]  = 0.0;
-                    tangents[5]  = 0.0;
-                    tangents[6]  = 1.0;
-                    tangents[7]  = 0.0;
-                    tangents[8]  = 0.0;
-                    tangents[9]  = 1.0;
-                    tangents[10] = 0.0;
-                    tangents[11] = 0.0;
+      if (vertexFormat.tangent) {
+        var tangents = new Float32Array(4 * 3);
 
-                    attributes.tangent = new GeometryAttribute.GeometryAttribute({
-                        componentDatatype : ComponentDatatype.ComponentDatatype.FLOAT,
-                        componentsPerAttribute : 3,
-                        values : tangents
-                    });
-                }
+        // +z face
+        tangents[0] = 1.0;
+        tangents[1] = 0.0;
+        tangents[2] = 0.0;
+        tangents[3] = 1.0;
+        tangents[4] = 0.0;
+        tangents[5] = 0.0;
+        tangents[6] = 1.0;
+        tangents[7] = 0.0;
+        tangents[8] = 0.0;
+        tangents[9] = 1.0;
+        tangents[10] = 0.0;
+        tangents[11] = 0.0;
 
-                if (vertexFormat.bitangent) {
-                    var bitangents = new Float32Array(4 * 3);
+        attributes.tangent = new GeometryAttribute.GeometryAttribute({
+          componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
+          componentsPerAttribute: 3,
+          values: tangents,
+        });
+      }
 
-                    // +z face
-                    bitangents[0] = 0.0;
-                    bitangents[1] = 1.0;
-                    bitangents[2] = 0.0;
-                    bitangents[3] = 0.0;
-                    bitangents[4] = 1.0;
-                    bitangents[5] = 0.0;
-                    bitangents[6] = 0.0;
-                    bitangents[7] = 1.0;
-                    bitangents[8] = 0.0;
-                    bitangents[9] = 0.0;
-                    bitangents[10] = 1.0;
-                    bitangents[11] = 0.0;
+      if (vertexFormat.bitangent) {
+        var bitangents = new Float32Array(4 * 3);
 
-                    attributes.bitangent = new GeometryAttribute.GeometryAttribute({
-                        componentDatatype : ComponentDatatype.ComponentDatatype.FLOAT,
-                        componentsPerAttribute : 3,
-                        values : bitangents
-                    });
-                }
+        // +z face
+        bitangents[0] = 0.0;
+        bitangents[1] = 1.0;
+        bitangents[2] = 0.0;
+        bitangents[3] = 0.0;
+        bitangents[4] = 1.0;
+        bitangents[5] = 0.0;
+        bitangents[6] = 0.0;
+        bitangents[7] = 1.0;
+        bitangents[8] = 0.0;
+        bitangents[9] = 0.0;
+        bitangents[10] = 1.0;
+        bitangents[11] = 0.0;
 
-                // 2 triangles
-                indices = new Uint16Array(2 * 3);
+        attributes.bitangent = new GeometryAttribute.GeometryAttribute({
+          componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
+          componentsPerAttribute: 3,
+          values: bitangents,
+        });
+      }
 
-                // +z face
-                indices[0] = 0;
-                indices[1] = 1;
-                indices[2] = 2;
-                indices[3] = 0;
-                indices[4] = 2;
-                indices[5] = 3;
-            }
+      // 2 triangles
+      indices = new Uint16Array(2 * 3);
 
-            return new GeometryAttribute.Geometry({
-                attributes : attributes,
-                indices : indices,
-                primitiveType : GeometryAttribute.PrimitiveType.TRIANGLES,
-                boundingSphere : new Transforms.BoundingSphere(Cartesian2.Cartesian3.ZERO, Math.sqrt(2.0))
-            });
-        };
+      // +z face
+      indices[0] = 0;
+      indices[1] = 1;
+      indices[2] = 2;
+      indices[3] = 0;
+      indices[4] = 2;
+      indices[5] = 3;
+    }
 
-    function createPlaneGeometry(planeGeometry, offset) {
-            if (when.defined(offset)) {
-                planeGeometry = PlaneGeometry.unpack(planeGeometry, offset);
-            }
-            return PlaneGeometry.createGeometry(planeGeometry);
-        }
+    return new GeometryAttribute.Geometry({
+      attributes: attributes,
+      indices: indices,
+      primitiveType: GeometryAttribute.PrimitiveType.TRIANGLES,
+      boundingSphere: new Transforms.BoundingSphere(Cartesian2.Cartesian3.ZERO, Math.sqrt(2.0)),
+    });
+  };
 
-    return createPlaneGeometry;
+  function createPlaneGeometry(planeGeometry, offset) {
+    if (when.defined(offset)) {
+      planeGeometry = PlaneGeometry.unpack(planeGeometry, offset);
+    }
+    return PlaneGeometry.createGeometry(planeGeometry);
+  }
+
+  return createPlaneGeometry;
 
 });
+//# sourceMappingURL=createPlaneGeometry.js.map

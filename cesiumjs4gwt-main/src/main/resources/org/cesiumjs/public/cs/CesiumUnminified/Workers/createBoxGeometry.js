@@ -20,15 +20,17 @@
  * Portions licensed separately.
  * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
-define(['./when-a55a8a4c', './Check-bc1d37d9', './Math-d7cbfcf6', './Cartesian2-6ec3db89', './Transforms-a4d7073e', './RuntimeError-7c184ac0', './WebGLConstants-4c11ee5f', './ComponentDatatype-919a7463', './GeometryAttribute-291ff23b', './GeometryAttributes-1c7ce91d', './GeometryOffsetAttribute-c9accdb9', './VertexFormat-7f136973', './BoxGeometry-f57bb5bb'], function (when, Check, _Math, Cartesian2, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, GeometryAttributes, GeometryOffsetAttribute, VertexFormat, BoxGeometry) { 'use strict';
 
-    function createBoxGeometry(boxGeometry, offset) {
-            if (when.defined(offset)) {
-                boxGeometry = BoxGeometry.BoxGeometry.unpack(boxGeometry, offset);
-            }
-            return BoxGeometry.BoxGeometry.createGeometry(boxGeometry);
-        }
+define(['./when-54c2dc71', './Check-6c0211bc', './Math-1124a290', './Cartesian2-33d2657c', './Transforms-8be64844', './RuntimeError-2109023a', './WebGLConstants-76bb35d1', './ComponentDatatype-a26dd044', './GeometryAttribute-e9a8b203', './GeometryAttributes-4fcfcf40', './GeometryOffsetAttribute-d746452d', './VertexFormat-4d8b817a', './BoxGeometry-5b17b51c'], function (when, Check, _Math, Cartesian2, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, GeometryAttributes, GeometryOffsetAttribute, VertexFormat, BoxGeometry) { 'use strict';
 
-    return createBoxGeometry;
+  function createBoxGeometry(boxGeometry, offset) {
+    if (when.defined(offset)) {
+      boxGeometry = BoxGeometry.BoxGeometry.unpack(boxGeometry, offset);
+    }
+    return BoxGeometry.BoxGeometry.createGeometry(boxGeometry);
+  }
+
+  return createBoxGeometry;
 
 });
+//# sourceMappingURL=createBoxGeometry.js.map

@@ -20,15 +20,20 @@
  * Portions licensed separately.
  * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
-define(['./when-a55a8a4c', './Check-bc1d37d9', './Math-d7cbfcf6', './Cartesian2-6ec3db89', './Transforms-a4d7073e', './RuntimeError-7c184ac0', './WebGLConstants-4c11ee5f', './ComponentDatatype-919a7463', './GeometryAttribute-291ff23b', './GeometryAttributes-1c7ce91d', './IndexDatatype-4351ba4c', './GeometryOffsetAttribute-c9accdb9', './EllipsoidOutlineGeometry-ba860aab'], function (when, Check, _Math, Cartesian2, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, GeometryAttributes, IndexDatatype, GeometryOffsetAttribute, EllipsoidOutlineGeometry) { 'use strict';
 
-    function createEllipsoidOutlineGeometry(ellipsoidGeometry, offset) {
-            if (when.defined(ellipsoidGeometry.buffer)) {
-                ellipsoidGeometry = EllipsoidOutlineGeometry.EllipsoidOutlineGeometry.unpack(ellipsoidGeometry, offset);
-            }
-            return EllipsoidOutlineGeometry.EllipsoidOutlineGeometry.createGeometry(ellipsoidGeometry);
-        }
+define(['./when-54c2dc71', './Check-6c0211bc', './Math-1124a290', './Cartesian2-33d2657c', './Transforms-8be64844', './RuntimeError-2109023a', './WebGLConstants-76bb35d1', './ComponentDatatype-a26dd044', './GeometryAttribute-e9a8b203', './GeometryAttributes-4fcfcf40', './IndexDatatype-25023891', './GeometryOffsetAttribute-d746452d', './EllipsoidOutlineGeometry-040f1e9f'], function (when, Check, _Math, Cartesian2, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, GeometryAttributes, IndexDatatype, GeometryOffsetAttribute, EllipsoidOutlineGeometry) { 'use strict';
 
-    return createEllipsoidOutlineGeometry;
+  function createEllipsoidOutlineGeometry(ellipsoidGeometry, offset) {
+    if (when.defined(ellipsoidGeometry.buffer)) {
+      ellipsoidGeometry = EllipsoidOutlineGeometry.EllipsoidOutlineGeometry.unpack(
+        ellipsoidGeometry,
+        offset
+      );
+    }
+    return EllipsoidOutlineGeometry.EllipsoidOutlineGeometry.createGeometry(ellipsoidGeometry);
+  }
+
+  return createEllipsoidOutlineGeometry;
 
 });
+//# sourceMappingURL=createEllipsoidOutlineGeometry.js.map
