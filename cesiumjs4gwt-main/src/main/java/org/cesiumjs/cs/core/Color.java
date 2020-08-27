@@ -1301,6 +1301,13 @@ public class Color {
     public native String toCssColorString();
 
     /**
+     * Creates a string containing CSS hex string color value for this color.
+     * @return The CSS hex string equivalent of this color.
+     */
+    @JsMethod
+    public native String toCssHexString();
+
+    /**
      * Converts this color to a single numeric unsigned 32-bit RGBA value, using the endianness of the system.
      * @return A single numeric unsigned 32-bit RGBA value.
      * @see #fromRgba(int)
