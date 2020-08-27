@@ -48,6 +48,12 @@ public class Cesium3DTileset {
     @JsProperty(name = "asset")
     public native Object asset();
     /**
+     * Whether to cull back-facing geometry. When true, back face culling is determined by the glTF material's doubleSided property; when false, back face culling is disabled.
+     * Default: true
+     */
+    @JsProperty
+    public boolean backFaceCulling;
+    /**
      * The base path that non-absolute paths in tileset.json are relative to.
      */
     @JsProperty(name = "basePath")

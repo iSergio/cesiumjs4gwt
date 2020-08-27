@@ -64,6 +64,12 @@ public class Model {
     @JsProperty(name = "asynchronous")
     public native boolean asynchronous();
     /**
+     * Whether to cull back-facing geometry. When true, back face culling is determined by the material's doubleSided property; when false, back face culling is disabled. Back faces are not culled if Model#color is translucent or Model#silhouetteSize is greater than 0.0.
+     * Default: true
+     */
+    @JsProperty
+    public boolean backFaceCulling;
+    /**
      * The base path that paths in the glTF JSON are relative to. The base path is the same path as the path containing
      * the .gltf file minus the .gltf file, when binary, image, and shader files are in the same directory as
      * the .gltf. When this is '', the app's base path is used.

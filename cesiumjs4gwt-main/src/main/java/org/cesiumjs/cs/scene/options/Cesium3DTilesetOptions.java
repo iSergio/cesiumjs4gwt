@@ -266,6 +266,12 @@ public class Cesium3DTilesetOptions {
     @JsProperty
     public String specularEnvironmentMaps;
     /**
+     * Whether to cull back-facing geometry. When true, back face culling is determined by the glTF material's doubleSided property; when false, back face culling is disabled.
+     * Default: true
+     */
+    @JsProperty
+    public boolean backFaceCulling;
+    /**
      * For debugging only. Determines if only the tiles from last frame should be used for rendering.
      * Defaule: false;
      */

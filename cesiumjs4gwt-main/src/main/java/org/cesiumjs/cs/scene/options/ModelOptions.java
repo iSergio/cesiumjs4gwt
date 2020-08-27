@@ -226,6 +226,13 @@ public class ModelOptions {
     @JsProperty(name = "credit")
     public String creditStr;
 
+    /**
+     * Whether to cull back-facing geometry. When true, back face culling is determined by the glTF material's doubleSided property; when false, back face culling is disabled.
+     * Default: true
+     */
+    @JsProperty
+    public boolean backFaceCulling;
+
     @JsConstructor
     public  ModelOptions() {}
 }
