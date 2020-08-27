@@ -494,6 +494,36 @@ public class Transforms {
     public static native Promise<Void, Void> preloadIcrfFixed(TimeInterval timeInterval);
 
     /**
+     * Transform a position and velocity to a rotation matrix.
+     * @param position The position to transform.
+     * @param velocity The velocity vector to transform.
+     * @return The modified result parameter or a new Matrix3 instance if none was provided.
+     */
+    @JsMethod
+    public static native Matrix3 rotationMatrixFromPositionVelocity(Cartesian3 position, Cartesian3 velocity);
+
+    /**
+     * Transform a position and velocity to a rotation matrix.
+     * @param position The position to transform.
+     * @param velocity The velocity vector to transform.
+     * @param ellipsoid The ellipsoid whose fixed frame is used in the transformation.
+     * @return The modified result parameter or a new Matrix3 instance if none was provided.
+     */
+    @JsMethod
+    public static native Matrix3 rotationMatrixFromPositionVelocity(Cartesian3 position, Cartesian3 velocity, Ellipsoid ellipsoid);
+
+    /**
+     * Transform a position and velocity to a rotation matrix.
+     * @param position The position to transform.
+     * @param velocity The velocity vector to transform.
+     * @param ellipsoid The ellipsoid whose fixed frame is used in the transformation.
+     * @param result The object onto which to store the result.
+     * @return The modified result parameter or a new Matrix3 instance if none was provided.
+     */
+    @JsMethod
+    public static native Matrix3 rotationMatrixFromPositionVelocity(Cartesian3 position, Cartesian3 velocity, Ellipsoid ellipsoid, Matrix3 result);
+
+    /**
      * Computes a 4x4 transformation matrix from a reference frame centered at the provided origin to the provided ellipsoid's fixed reference frame.
      */
     //TODO: Check
