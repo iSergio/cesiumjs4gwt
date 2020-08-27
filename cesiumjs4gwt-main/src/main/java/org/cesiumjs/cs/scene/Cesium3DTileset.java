@@ -85,7 +85,13 @@ public class Cesium3DTileset {
      * The ellipsoid determining the size and shape of the globe.
      * Default: {@link Ellipsoid#WGS84()}.
      */
-    public Ellipsoid ellipsoid;
+    @JsProperty(name = "ellipsoid")
+    public native Ellipsoid ellipsoid();
+    /**
+     * Gets the tileset's extensions object property.
+     */
+    @JsProperty(name = "extensions")
+    public native Object extensions();
     /**
      * Returns the extras property at the top-level of the tileset JSON, which contains application specific metadata.
      * Returns undefined if extras does not exist.
