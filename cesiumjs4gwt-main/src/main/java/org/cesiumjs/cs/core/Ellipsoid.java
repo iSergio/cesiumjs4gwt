@@ -369,6 +369,14 @@ public class Ellipsoid {
     public native Cartesian3 scaleToGeodeticSurface(Cartesian3 cartesian, Cartesian3 result);
 
     /**
+     * Computes an approximation of the surface area of a rectangle on the surface of an ellipsoid using Gauss-Legendre 10th order quadrature.
+     * @param rectangle The rectangle used for computing the surface area.
+     * @return The approximate area of the rectangle on the surface of this ellipsoid.
+     */
+    @JsMethod
+    public native Number surfaceArea(Rectangle rectangle);
+
+    /**
      * Creates a string representing this Ellipsoid in the format '(radii.x, radii.y, radii.z)'.
      * @return A string representing this ellipsoid in the format '(radii.x, radii.y, radii.z)'.
      */
