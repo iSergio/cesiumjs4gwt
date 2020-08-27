@@ -270,6 +270,13 @@ public class Camera {
     public native void cancelFlight();
 
     /**
+     * Completes the current camera flight and moves the camera immediately to its final 
+     * destination. If no flight is in progress, this this function does nothing.
+     */
+    @JsMethod
+    public native void completeFlight();
+
+    /**
      * Computes the approximate visible rectangle on the ellipsoid.
      * @return The visible rectangle or undefined if the ellipsoid isn't visible at all.
      */
