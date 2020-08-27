@@ -590,6 +590,33 @@ public class Resource {
     public native void setQueryParameters(JsObject params, boolean useAsDefault);
 
     /**
+     * Combines the specified object and the existing template values. This allows you to add many 
+     * values at once, as opposed to adding them one at a time to the templateValues property. 
+     * If a value is already set, it will become an array and the new value will be appended.
+     * @param template The template values
+     */
+    @JsMethod
+    public native void setTemplateValues(JsObject template);
+
+    /**
+     * Combines the specified object and the existing template values. This allows you to add many 
+     * values at once, as opposed to adding them one at a time to the templateValues property. 
+     * If a value is already set, it will become an array and the new value will be appended.
+     * @param template The template values
+     * @param useAsDefault If true the values will be used as the default values, so they will only be set if they are undefined. Default: false
+     */
+    @JsMethod
+    public native void setTemplateValues(JsObject template, boolean useAsDefault);
+
+    /**
+     * Override Object#toString so that implicit string conversion gives the complete URL represented by this Resource.
+     * @return The URL represented by this Resource
+     */
+    @JsMethod
+    @Override
+    public native String toString();
+
+    /**
      * A function that returns the value of the property.
      */
     @JsFunction
