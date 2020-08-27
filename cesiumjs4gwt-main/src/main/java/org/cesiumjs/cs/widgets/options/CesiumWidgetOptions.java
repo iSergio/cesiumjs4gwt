@@ -23,7 +23,7 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Clock;
 import org.cesiumjs.cs.scene.Globe;
-import org.cesiumjs.cs.core.SkyAtmosphere;
+import org.cesiumjs.cs.scene.SkyAtmosphere;
 import org.cesiumjs.cs.core.SkyBox;
 import org.cesiumjs.cs.core.projection.MapProjection;
 import org.cesiumjs.cs.core.providers.TerrainProvider;

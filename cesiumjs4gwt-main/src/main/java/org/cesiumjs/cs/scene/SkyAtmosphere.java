@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-package org.cesiumjs.cs.core;
+package org.cesiumjs.cs.scene;
+
+import org.cesiumjs.cs.core.Ellipsoid;
 
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
