@@ -45,6 +45,12 @@ public class SkyAtmosphere {
     @JsProperty
     public float hueShift;
     /**
+     * Compute atmosphere per-fragment instead of per-vertex. This produces better looking atmosphere with a slight performance penalty.
+     * Default: false
+     */
+    @JsProperty
+    public boolean perFragmentAtmosphere;
+    /**
      * The saturation shift to apply to the atmosphere. Defaults to 0.0 (no shift). A saturation shift of -1.0 is monochrome.
      * Default:  0.0
      */
