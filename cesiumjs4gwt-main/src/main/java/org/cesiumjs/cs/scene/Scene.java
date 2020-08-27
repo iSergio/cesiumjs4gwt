@@ -46,6 +46,12 @@ public class Scene {
     @JsProperty(name = "camera")
     public native Camera camera();
     /**
+     * Whether or not the camera is underneath the globe.
+     * Default: false
+     */
+    @JsProperty(name = "cameraUnderground")
+    public native boolean cameraUnderground();
+    /**
      * Gets the canvas element to which this scene is bound.
      */
     @JsProperty(name = "canvas")
