@@ -26,6 +26,7 @@ import org.cesiumjs.cs.scene.enums.TextureMinificationFilter;
 /**
  * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
  */
+// TODO: realization of function for alpha, nightAlpha and others.
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class ImageryLayerOptions {
     /**
@@ -43,6 +44,28 @@ public class ImageryLayerOptions {
      */
     @JsProperty
     public float alpha;
+    /**
+     * The alpha blending value of this layer on the night side of the globe, from 0.0 to 1.0. 
+     * This can either be a simple number or a function with the signature 
+     * function(frameState, layer, x, y, level). The function is passed the current frame state, 
+     * this layer, and the x, y, and level coordinates of the imagery tile for which the alpha is 
+     * required, and it is expected to return the alpha value to use for the tile. 
+     * This only takes effect when enableLighting is true.
+     * Default: 1.0
+     */
+    @JsProperty
+    public float nightAlpha;
+    /**
+     * The alpha blending value of this layer on the day side of the globe, from 0.0 to 1.0. 
+     * This can either be a simple number or a function with the signature 
+     * function(frameState, layer, x, y, level). The function is passed the current frame state, 
+     * this layer, and the x, y, and level coordinates of the imagery tile for which the alpha is 
+     * required, and it is expected to return the alpha value to use for the tile. 
+     * This only takes effect when enableLighting is true.
+     * Default: 1.0
+     */
+    @JsProperty
+    public float dayAlpha;
     /**
      * The brightness of this layer. 1.0 uses the unmodified imagery color. Less than 1.0 makes the imagery darker
      * while greater than 1.0 makes it brighter. This can either be a simple number or a function with the signature
