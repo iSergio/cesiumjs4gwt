@@ -8,7 +8,7 @@ stages:
   - compile
   - junit
   - javadoc
-  - compileshowcase
+  - compile_showcase
   - deploy
 
 default:
@@ -36,10 +36,10 @@ javadoc:cesiumjs4gwt-main:
   script:
     - mvn -pl cesiumjs4gwt-main javadoc:javadoc -Dadditionalparam=-Xdoclint:none
 
-compileshowcase:cesiumjs4gwt-showcase:
-  stage: compileshowcase
-  script:
-    - mvn -pl cesiumjs4gwt-showcase clean install
+# compileshowcase:cesiumjs4gwt-showcase:
+#   stage: compile_showcase
+#   script:
+#     - mvn -pl cesiumjs4gwt-showcase clean install
 
 deploy:cesiumjs4gwt-main:
   stage: deploy
@@ -79,11 +79,11 @@ deploy:cesiumjs4gwt-main:
     - master
     - tags
 
-deploy:cesiumjs4gwt-showcase:
-  stage: deploy
-  script:
-    - mv cesiumjs4gwt-showcase/target/cesiumjs4gwt-showcase*.war cesiumjs4gwt-showcase/target/cesiumjs4gwt-showcase.war
-    - jboss-cli.sh --controller=127.0.0.1:9999 --connect --commands="deploy cesiumjs4gwt-showcase/target/cesiumjs4gwt-showcase.war --force"
-  only:
-    - master
-    - tags
+# deploy:cesiumjs4gwt-showcase:
+#   stage: deploy
+#   script:
+#     - mv cesiumjs4gwt-showcase/target/cesiumjs4gwt-showcase*.war cesiumjs4gwt-showcase/target/cesiumjs4gwt-showcase.war
+#     - jboss-cli.sh --controller=127.0.0.1:9999 --connect --commands="deploy cesiumjs4gwt-showcase/target/cesiumjs4gwt-showcase.war --force"
+#   only:
+#     - master
+#     - tags
