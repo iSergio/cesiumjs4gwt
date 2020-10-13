@@ -38,11 +38,15 @@ javadoc:cesiumjs4gwt-main:
 
 compileshowcase:cesiumjs4gwt-showcase:
   stage: compile_showcase
+  dependencies:
+    - javadoc:cesiumjs4gwt-main
   script:
-    - mvn -pl cesiumjs4gwt-showcase -am install -DskipTests=true
+    - mvn -pl cesiumjs4gwt-showcase
 
 deploy:cesiumjs4gwt-main:
   stage: deploy
+  dependencies:
+    - compile:cesiumjs4gwt-main
   before_script: 
     # Install JFrog CLI
     -  curl -fL https://getcli.jfrog.io | sh
@@ -81,6 +85,8 @@ deploy:cesiumjs4gwt-main:
 
 deploy:cesiumjs4gwt-showcase:
   stage: deploy
+  dependencies:
+    - compileshowcase:cesiumjs4gwt-showcase
   script:
     - mv cesiumjs4gwt-showcase/target/cesiumjs4gwt-showcase*.war cesiumjs4gwt-showcase/target/cesiumjs4gwt-showcase.war
     - jboss-cli.sh --controller=127.0.0.1:9999 --connect --commands="deploy cesiumjs4gwt-showcase/target/cesiumjs4gwt-showcase.war --force"
