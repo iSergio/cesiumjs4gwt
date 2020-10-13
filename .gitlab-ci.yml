@@ -89,7 +89,7 @@ deploy:cesiumjs4gwt-showcase:
     - compileshowcase:cesiumjs4gwt-showcase
   script:
     - mv cesiumjs4gwt-showcase/target/cesiumjs4gwt-showcase*.war cesiumjs4gwt-showcase/target/cesiumjs4gwt-showcase.war
-    - jboss-cli.sh --controller=127.0.0.1:9999 --user=$WILDFLY_USER --password=$WILDFLY_PASSWORD --connect --commands="deploy cesiumjs4gwt-showcase/target/cesiumjs4gwt-showcase.war --force"
+    - jboss-cli.sh --controller=127.0.0.1:9999 --user=$WILDFLY_USER --password=$WILDFLY_PASSW --connect --commands="deploy cesiumjs4gwt-showcase/target/cesiumjs4gwt-showcase.war --force"
   only:
     - master
     - tags
