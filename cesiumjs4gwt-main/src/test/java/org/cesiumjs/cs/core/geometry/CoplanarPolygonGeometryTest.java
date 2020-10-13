@@ -19,32 +19,25 @@ package org.cesiumjs.cs.core.geometry;
 import org.cesiumjs.cs.BaseTestCase;
 import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.geometry.options.CoplanarPolygonGeometryFromPositionsOptions;
-import org.cesiumjs.cs.core.geometry.options.CoplanarPolygonGeometryOptions;
-import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 public class CoplanarPolygonGeometryTest extends BaseTestCase {
-    public void testFromPositions() {
-        delayTestFinish(10_000);
+  public void testFromPositions() {
+    delayTestFinish(10_000);
 
-        super.beginTest(new Test() {
-            @Override
-            public void execute() {
-                Cartesian3[] positions = Cartesian3.fromDegreesArrayHeights(new double[] {
-                    -90.0, 30.0, 0.0,
-                    -90.0, 30.0, 1000.0,
-                    -80.0, 30.0, 1000.0,
-                    -80.0, 30.0, 0.0
-                });
-                CoplanarPolygonGeometryFromPositionsOptions options = CoplanarPolygonGeometryFromPositionsOptions.create(positions);
-                CoplanarPolygonGeometry geometry = CoplanarPolygonGeometry.fromPositions(options);
+    super.beginTest(new Test() {
+      @Override
+      public void execute() {
+        Cartesian3[] positions = Cartesian3.fromDegreesArrayHeights(
+            new double[] { -90.0, 30.0, 0.0, -90.0, 30.0, 1000.0, -80.0, 30.0, 1000.0, -80.0, 30.0, 0.0 });
+        CoplanarPolygonGeometryFromPositionsOptions options = CoplanarPolygonGeometryFromPositionsOptions
+            .create(positions);
+        CoplanarPolygonGeometry geometry = CoplanarPolygonGeometry.fromPositions(options);
 
-                finishTest();
-            }
-        });
-    }
+        finishTest();
+      }
+    });
+  }
 }

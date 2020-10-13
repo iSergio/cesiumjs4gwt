@@ -21,35 +21,36 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.LinkElement;
 import com.google.gwt.user.client.ui.RootPanel;
+
 import org.cesiumjs.cs.BaseTestCase;
 import org.cesiumjs.cs.widgets.options.ViewerOptions;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 public class ViewerPanelTest extends BaseTestCase {
-    public void testRequestRenderMode() {
-        delayTestFinish(10_000);
+  public void testRequestRenderMode() {
+    delayTestFinish(10_000);
 
-        super.beginTest(new Test() {
-            @Override
-            public void execute() {
-                LinkElement linkElement = Document.get().createLinkElement();
-                linkElement.setRel("stylesheet");
-                linkElement.setHref("cs/CesiumUnminified/Widgets/widgets.css");
-                Document.get().getElementsByTagName("head").getItem(0).appendChild(linkElement);
+    super.beginTest(new Test() {
+      @Override
+      public void execute() {
+        LinkElement linkElement = Document.get().createLinkElement();
+        linkElement.setRel("stylesheet");
+        linkElement.setHref("cs/CesiumUnminified/Widgets/widgets.css");
+        Document.get().getElementsByTagName("head").getItem(0).appendChild(linkElement);
 
-                DivElement divElement = RootPanel.get().getElement().getOwnerDocument().createDivElement();
-                divElement.setId("cesium");
-                RootPanel.get().getElement().appendChild(divElement);
-                Element element = RootPanel.get().getElement().getOwnerDocument().getElementById("cesium");
-                assertNotNull(element);
-                ViewerOptions options = new ViewerOptions();
-                assertNotNull(options);
-                Viewer viewer = new Viewer(element, options);
-//                assertNotNull(viewer);
-                finishTest();
-            }
-        });
-    }
+        DivElement divElement = RootPanel.get().getElement().getOwnerDocument().createDivElement();
+        divElement.setId("cesium");
+        RootPanel.get().getElement().appendChild(divElement);
+        Element element = RootPanel.get().getElement().getOwnerDocument().getElementById("cesium");
+        assertNotNull(element);
+        ViewerOptions options = new ViewerOptions();
+        assertNotNull(options);
+        Viewer viewer = new Viewer(element, options);
+        // assertNotNull(viewer);
+        finishTest();
+      }
+    });
+  }
 }

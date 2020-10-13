@@ -17,6 +17,7 @@
 package org.cesiumjs.cs.collections;
 
 import com.google.gwt.core.client.GWT;
+
 import org.cesiumjs.cs.BaseTestCase;
 import org.cesiumjs.cs.Cesium;
 import org.cesiumjs.cs.datasources.DataSource;
@@ -25,33 +26,34 @@ import org.cesiumjs.cs.promise.Fulfill;
 import org.cesiumjs.cs.promise.Reject;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 public class DataSourceCollectionTest extends BaseTestCase {
-    private DataSourceCollection collection;
-    private DataSource geojsonDS;
-    private DataSource topojsonDS;
+  private DataSourceCollection collection;
+  private DataSource geojsonDS;
+  private DataSource topojsonDS;
 
-    public void testLower() {
-        delayTestFinish(10_000);
+  public void testLower() {
+    delayTestFinish(10_000);
 
-        super.beginTest(new Test() {
-            @Override
-            public void execute() {
-                GeoJsonDataSource.load(GWT.getModuleBaseURL() + "SampleData/simplestyles.geojson").then(new Fulfill<GeoJsonDataSource>() {
-                    @Override
-                    public void onFulfilled(GeoJsonDataSource dataSource) {
-                        assertNotNull(dataSource);
-                        finishTest();
-                    }
-                }, new Reject<String>() {
-                    @Override
-                    public void onRejected(String value) {
-                        Cesium.log("onRejected: " + value);
-                        finishTest();
-                    }
-                });
-            }
-        });
-    }
+    super.beginTest(new Test() {
+      @Override
+      public void execute() {
+        GeoJsonDataSource.load(GWT.getModuleBaseURL() + "SampleData/simplestyles.geojson")
+            .then(new Fulfill<GeoJsonDataSource>() {
+              @Override
+              public void onFulfilled(GeoJsonDataSource dataSource) {
+                assertNotNull(dataSource);
+                finishTest();
+              }
+            }, new Reject<String>() {
+              @Override
+              public void onRejected(String value) {
+                Cesium.log("onRejected: " + value);
+                finishTest();
+              }
+            });
+      }
+    });
+  }
 }

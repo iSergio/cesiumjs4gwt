@@ -21,50 +21,50 @@ import org.cesiumjs.cs.promise.Fulfill;
 import org.cesiumjs.cs.promise.Reject;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 public class IonResourceTest extends BaseTestCase {
-    public void testFromAssetId1() {
-        delayTestFinish(10_000);
+  public void testFromAssetId1() {
+    delayTestFinish(10_000);
 
-        super.beginTest(new Test() {
-            @Override
-            public void execute() {
-                IonResource.fromAssetId(3827).then(new Fulfill<IonResource>() {
-                    @Override
-                    public void onFulfilled(IonResource resource) {
-                        assertNotNull(resource);
-                        finishTest();
-                    }
-                }, new Reject<Void>() {
-                    @Override
-                    public void onRejected(Void value) {
-                        finishTest();
-                    }
-                });
-            }
+    super.beginTest(new Test() {
+      @Override
+      public void execute() {
+        IonResource.fromAssetId(3827).then(new Fulfill<IonResource>() {
+          @Override
+          public void onFulfilled(IonResource resource) {
+            assertNotNull(resource);
+            finishTest();
+          }
+        }, new Reject<Void>() {
+          @Override
+          public void onRejected(Void value) {
+            finishTest();
+          }
         });
-    }
+      }
+    });
+  }
 
-    public void testFromAssetId2() {
-        delayTestFinish(10_000);
+  public void testFromAssetId2() {
+    delayTestFinish(10_000);
 
-        super.beginTest(new Test() {
-            @Override
-            public void execute() {
-                IonResource.fromAssetId(3956).then(new Fulfill<IonResource>() {
-                    @Override
-                    public void onFulfilled(IonResource resource) {
-                        assertNotNull(resource);
-                        finishTest();
-                    }
-                }, new Reject<Void>() {
-                    @Override
-                    public void onRejected(Void value) {
-                        finishTest();
-                    }
-                });
-            }
+    super.beginTest(new Test() {
+      @Override
+      public void execute() {
+        IonResource.fromAssetId(3956).then(new Fulfill<IonResource>() {
+          @Override
+          public void onFulfilled(IonResource resource) {
+            assertNotNull(resource);
+            finishTest();
+          }
+        }, new Reject<Void>() {
+          @Override
+          public void onRejected(Void value) {
+            finishTest();
+          }
         });
-    }
+      }
+    });
+  }
 }

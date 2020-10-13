@@ -19,20 +19,20 @@ package org.cesiumjs.cs.collections;
 import org.cesiumjs.cs.BaseTestCase;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 public class ClippingPlaneCollectionTest extends BaseTestCase {
 
-    public void testIsSupported() {
-        delayTestFinish(10_000);
+  public void testIsSupported() {
+    delayTestFinish(10_000);
 
-        super.beginTest(new Test() {
-            @Override
-            public void execute() {
-                // not supported only under IE
-                assertTrue(true);
-                finishTest();
-            }
-        });
-    }
+    super.beginTest(new Test() {
+      @Override
+      public void execute() {
+        // not supported only under IE
+        assertTrue(true);
+        finishTest();
+      }
+    });
+  }
 }
