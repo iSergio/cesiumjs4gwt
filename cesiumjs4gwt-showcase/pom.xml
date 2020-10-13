@@ -107,7 +107,7 @@
       <groupId>org.cesiumjs</groupId>
       <artifactId>cesiumjs4gwt-main</artifactId>
       <version>${project.parent.version}</version>
-      <scope>provided</scope>
+      <scope>compile</scope>
     </dependency>
   </dependencies>
 </project>
