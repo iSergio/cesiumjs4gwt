@@ -39,7 +39,7 @@ javadoc:cesiumjs4gwt-main:
 compileshowcase:cesiumjs4gwt-showcase:
   stage: compile_showcase
   script:
-    - mvn -pl cesiumjs4gwt-showcase install
+    - mvn -pl cesiumjs4gwt-showcase -am install -DskipTests=true
 
 deploy:cesiumjs4gwt-main:
   stage: deploy
@@ -79,11 +79,11 @@ deploy:cesiumjs4gwt-main:
     - master
     - tags
 
-# deploy:cesiumjs4gwt-showcase:
-#   stage: deploy
-#   script:
-#     - mv cesiumjs4gwt-showcase/target/cesiumjs4gwt-showcase*.war cesiumjs4gwt-showcase/target/cesiumjs4gwt-showcase.war
-#     - jboss-cli.sh --controller=127.0.0.1:9999 --connect --commands="deploy cesiumjs4gwt-showcase/target/cesiumjs4gwt-showcase.war --force"
-#   only:
-#     - master
-#     - tags
+deploy:cesiumjs4gwt-showcase:
+  stage: deploy
+  script:
+    - mv cesiumjs4gwt-showcase/target/cesiumjs4gwt-showcase*.war cesiumjs4gwt-showcase/target/cesiumjs4gwt-showcase.war
+    - jboss-cli.sh --controller=127.0.0.1:9999 --connect --commands="deploy cesiumjs4gwt-showcase/target/cesiumjs4gwt-showcase.war --force"
+  only:
+    - master
+    - tags
