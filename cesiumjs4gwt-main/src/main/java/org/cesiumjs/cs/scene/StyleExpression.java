@@ -21,11 +21,14 @@ import jsinterop.annotations.JsType;
 /**
  * An expression for a style applied to a {@link Cesium3DTileset}.
  *
- * Derived classes of this interface evaluate expressions in the <a href="https://github.com/AnalyticalGraphicsInc/3d-tiles/tree/master/Styling">3D Tiles Styling language</a>.
+ * Derived classes of this interface evaluate expressions in the <a href=
+ * "https://github.com/AnalyticalGraphicsInc/3d-tiles/tree/master/Styling">3D
+ * Tiles Styling language</a>.
  *
- * This type describes an interface and is not intended to be instantiated directly.
+ * This type describes an interface and is not intended to be instantiated
+ * directly.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "StyleExpression")
 public interface StyleExpression {

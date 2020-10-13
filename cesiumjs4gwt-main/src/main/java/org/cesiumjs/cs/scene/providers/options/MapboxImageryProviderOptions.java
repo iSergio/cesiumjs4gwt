@@ -16,78 +16,82 @@
 
 package org.cesiumjs.cs.scene.providers.options;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Credit;
 import org.cesiumjs.cs.core.Ellipsoid;
 import org.cesiumjs.cs.core.Rectangle;
 
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
+
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class MapboxImageryProviderOptions {
-    /**
-     * The Mapbox server url.
-     * Default: https://api.mapbox.com/v4/
-     */
-    @JsProperty
-    public String url;
-    /**
-     * The Mapbox Map ID.
-     */
-    @JsProperty
-    public String mapId;
-    /**
-     * The public access token for the imagery.
-     */
-    @JsProperty
-    public String accessToken;
-    /**
-     * The format of the image request.
-     * Default: png
-     */
-    @JsProperty
-    public String format;
-    //TODO: Proxy
-//    /**
-//     * A proxy to use for requests. This object is expected to have a getURL function which returns the proxied URL.
-//     */
-//    @JsProperty
-//    public Proxy proxy;
-    /**
-     * The ellipsoid. If not specified, the WGS84 ellipsoid is used.
-     */
-    @JsProperty
-    public Ellipsoid ellipsoid;
-    /**
-     * The minimum level-of-detail supported by the imagery provider. Take care when specifying this that the number of tiles at the minimum level is small, such as four or less. A larger number is likely to result in rendering problems.
-     * Default: 0
-     */
-    @JsProperty
-    public int minimumLevel;
-    /**
-     * The maximum level-of-detail supported by the imagery provider, or undefined if there is no limit.
-     */
-    @JsProperty
-    public int maximumLevel;
-    /**
-     * The rectangle, in radians, covered by the image.
-     * Default: {@link Rectangle#MAX_VALUE()}
-     */
-    @JsProperty
-    public Rectangle rectangle;
-    /**
-     * A credit for the data source, which is displayed on the canvas.
-     */
-    @JsProperty
-    public Credit credit;
+  /**
+   * The Mapbox server url. Default: https://api.mapbox.com/v4/
+   */
+  @JsProperty
+  public String url;
+  /**
+   * The Mapbox Map ID.
+   */
+  @JsProperty
+  public String mapId;
+  /**
+   * The public access token for the imagery.
+   */
+  @JsProperty
+  public String accessToken;
+  /**
+   * The format of the image request. Default: png
+   */
+  @JsProperty
+  public String format;
+  // TODO: Proxy
+  // /**
+  // * A proxy to use for requests. This object is expected to have a getURL
+  // function which returns the proxied URL.
+  // */
+  // @JsProperty
+  // public Proxy proxy;
+  /**
+   * The ellipsoid. If not specified, the WGS84 ellipsoid is used.
+   */
+  @JsProperty
+  public Ellipsoid ellipsoid;
+  /**
+   * The minimum level-of-detail supported by the imagery provider. Take care when
+   * specifying this that the number of tiles at the minimum level is small, such
+   * as four or less. A larger number is likely to result in rendering problems.
+   * Default: 0
+   */
+  @JsProperty
+  public int minimumLevel;
+  /**
+   * The maximum level-of-detail supported by the imagery provider, or undefined
+   * if there is no limit.
+   */
+  @JsProperty
+  public int maximumLevel;
+  /**
+   * The rectangle, in radians, covered by the image. Default:
+   * {@link Rectangle#MAX_VALUE()}
+   */
+  @JsProperty
+  public Rectangle rectangle;
+  /**
+   * A credit for the data source, which is displayed on the canvas.
+   */
+  @JsProperty
+  public Credit credit;
 
-    /**
-     * Options for {@link org.cesiumjs.cs.scene.providers.MapboxImageryProvider}
-     */
-    @JsConstructor
-    public MapboxImageryProviderOptions() {}
+  /**
+   * Options for {@link org.cesiumjs.cs.scene.providers.MapboxImageryProvider}
+   */
+  @JsConstructor
+  public MapboxImageryProviderOptions() {
+  }
 }

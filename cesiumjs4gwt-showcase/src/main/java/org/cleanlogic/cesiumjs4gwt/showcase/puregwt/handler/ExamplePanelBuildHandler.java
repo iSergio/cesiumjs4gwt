@@ -26,7 +26,7 @@ import com.google.gwt.event.shared.GwtEvent;
  */
 public interface ExamplePanelBuildHandler extends EventHandler {
 
-    GwtEvent.Type<ExamplePanelBuildHandler> TYPE = new GwtEvent.Type<ExamplePanelBuildHandler>();
+  GwtEvent.Type<ExamplePanelBuildHandler> TYPE = new GwtEvent.Type<ExamplePanelBuildHandler>();
 
-    void buildExamplePanel(String filter);
+  void buildExamplePanel(String filter);
 }

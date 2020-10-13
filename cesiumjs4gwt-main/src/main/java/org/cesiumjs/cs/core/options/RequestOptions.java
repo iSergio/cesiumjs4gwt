@@ -16,66 +16,68 @@
 
 package org.cesiumjs.cs.core.options;
 
+import org.cesiumjs.cs.core.Request;
+
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.Request;
 
 /**
  * Options for {@link org.cesiumjs.cs.core.Request}
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class RequestOptions {
-    /**
-     * The url to request.
-     */
-    @JsProperty
-    public boolean url;
-    /**
-     * The function that makes the actual data request.
-     */
-    @JsProperty
-    public Request.RequestCallback requestFunction;
-    /**
-     * The function that is called when the request is cancelled.
-     */
-    @JsProperty
-    public Request.CancelCallback cancelFunction;
-    /**
-     * The function that is called to update the request's priority, which occurs once per frame.
-     */
-    @JsProperty
-    public Request.PriorityCallback priorityFunction;
-    /**
-     * The initial priority of the request.
-     * Default: 0.0
-     */
-    @JsProperty
-    public double priority;
-    /**
-     * Whether to throttle and prioritize the request. If false, the request will be sent immediately.
-     * If true, the request will be throttled and sent based on priority.
-     * Default: false
-     */
-    @JsProperty
-    public boolean throttle;
-    /**
-     * Whether to throttle the request by server.
-     * Default: false
-     */
-    @JsProperty
-    public boolean throttleByServer;
-    /**
-     * The type of request.
-     * @see org.cesiumjs.cs.core.enums.RequestType
-     * Default: {@link org.cesiumjs.cs.core.enums.RequestType#OTHER()}
-     */
-    @JsProperty
-    public Number type;
+  /**
+   * The url to request.
+   */
+  @JsProperty
+  public boolean url;
+  /**
+   * The function that makes the actual data request.
+   */
+  @JsProperty
+  public Request.RequestCallback requestFunction;
+  /**
+   * The function that is called when the request is cancelled.
+   */
+  @JsProperty
+  public Request.CancelCallback cancelFunction;
+  /**
+   * The function that is called to update the request's priority, which occurs
+   * once per frame.
+   */
+  @JsProperty
+  public Request.PriorityCallback priorityFunction;
+  /**
+   * The initial priority of the request. Default: 0.0
+   */
+  @JsProperty
+  public double priority;
+  /**
+   * Whether to throttle and prioritize the request. If false, the request will be
+   * sent immediately. If true, the request will be throttled and sent based on
+   * priority. Default: false
+   */
+  @JsProperty
+  public boolean throttle;
+  /**
+   * Whether to throttle the request by server. Default: false
+   */
+  @JsProperty
+  public boolean throttleByServer;
+  /**
+   * The type of request.
+   * 
+   * @see org.cesiumjs.cs.core.enums.RequestType Default:
+   *      {@link org.cesiumjs.cs.core.enums.RequestType#OTHER()}
+   */
+  @JsProperty
+  public Number type;
 
-    @JsConstructor
-    public RequestOptions() {}
+  @JsConstructor
+  public RequestOptions() {
+  }
 }

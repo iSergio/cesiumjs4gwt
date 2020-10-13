@@ -21,16 +21,16 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * Options for {@link org.cesiumjs.cs.core.Resource#fetchJsonp(ResourceJsonpOptions)}.
+ * Options for
+ * {@link org.cesiumjs.cs.core.Resource#fetchJsonp(ResourceJsonpOptions)}.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class ResourceJsonpOptions extends ResourceOptions {
-    /**
-     * The callback parameter name that the server expects.
-     * Default: callback
-     */
-    @JsProperty
-    public String callbackParameterName;
+  /**
+   * The callback parameter name that the server expects. Default: callback
+   */
+  @JsProperty
+  public String callbackParameterName;
 }

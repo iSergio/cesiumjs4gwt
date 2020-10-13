@@ -22,30 +22,28 @@ import jsinterop.annotations.JsType;
 
 /**
  * @see <a href="http://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class TimeIntervalIso8601Options {
-    /**
-     * An ISO 8601 interval.
-     */
-    @JsProperty
-    public String iso8601;
-    /**
-     * if options.start is included in the interval, false otherwise.
-     * Default: true
-     */
-    @JsProperty
-    public boolean isStartIncluded;
-    /**
-     * if options.stop is included in the interval, false otherwise.
-     * Default: true
-     */
-    @JsProperty
-    public boolean isStopIncluded;
-    /**
-     * Arbitrary data associated with this interval.
-     */
-    @JsProperty
-    public Object data;
+  /**
+   * An ISO 8601 interval.
+   */
+  @JsProperty
+  public String iso8601;
+  /**
+   * if options.start is included in the interval, false otherwise. Default: true
+   */
+  @JsProperty
+  public boolean isStartIncluded;
+  /**
+   * if options.stop is included in the interval, false otherwise. Default: true
+   */
+  @JsProperty
+  public boolean isStopIncluded;
+  /**
+   * Arbitrary data associated with this interval.
+   */
+  @JsProperty
+  public Object data;
 }

@@ -17,6 +17,7 @@
 package org.cleanlogic.cesiumjs4gwt.showcase;
 
 import com.google.gwt.core.client.EntryPoint;
+
 import org.cleanlogic.cesiumjs4gwt.showcase.components.responsibility.BuilderManager;
 
 /**
@@ -24,11 +25,11 @@ import org.cleanlogic.cesiumjs4gwt.showcase.components.responsibility.BuilderMan
  */
 public class Showcase implements EntryPoint {
 
-    final BuilderManager showcaseBuilder = new BuilderManager();
+  final BuilderManager showcaseBuilder = new BuilderManager();
 
-    @Override
-    public void onModuleLoad() {
-        showcaseBuilder.buildShowcase();
-    }
+  @Override
+  public void onModuleLoad() {
+    showcaseBuilder.buildShowcase();
+  }
 
 }

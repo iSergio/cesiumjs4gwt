@@ -20,35 +20,36 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.logical.shared.AttachEvent;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
+
 import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.widgets.options.CesiumWidgetOptions;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 public class CesiumWidgetPanel extends SimplePanel {
-    private CesiumWidget _cesiumWidget;
+  private CesiumWidget _cesiumWidget;
 
-    public CesiumWidgetPanel() {
-        this((CesiumWidgetOptions) JsObject.undefined());
-    }
+  public CesiumWidgetPanel() {
+    this((CesiumWidgetOptions) JsObject.undefined());
+  }
 
-    public CesiumWidgetPanel(CesiumWidgetOptions options) {
-        super();
-        Element element = getElement();
-        RootPanel.getBodyElement().appendChild(element);
-        _cesiumWidget = new CesiumWidget(element, options);
-        super.addAttachHandler(new AttachEvent.Handler() {
-            @Override
-            public void onAttachOrDetach(AttachEvent attachEvent) {
-                if (!attachEvent.isAttached()) {
-                    _cesiumWidget.destroy();
-                }
-            }
-        });
-    }
+  public CesiumWidgetPanel(CesiumWidgetOptions options) {
+    super();
+    Element element = getElement();
+    RootPanel.getBodyElement().appendChild(element);
+    _cesiumWidget = new CesiumWidget(element, options);
+    super.addAttachHandler(new AttachEvent.Handler() {
+      @Override
+      public void onAttachOrDetach(AttachEvent attachEvent) {
+        if (!attachEvent.isAttached()) {
+          _cesiumWidget.destroy();
+        }
+      }
+    });
+  }
 
-    public CesiumWidget getCesiumWidget() {
-        return _cesiumWidget;
-    }
+  public CesiumWidget getCesiumWidget() {
+    return _cesiumWidget;
+  }
 }

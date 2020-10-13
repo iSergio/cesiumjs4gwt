@@ -24,63 +24,62 @@ import jsinterop.annotations.JsType;
 /**
  * Options for {@link org.cesiumjs.cs.scene.PointCloudShading}.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class PointCloudShadingOptions {
-    /**
-     * Perform point attenuation based on geometric error.
-     * Default: false
-     */
-    @JsProperty
-    public boolean attenuation;
-    /**
-     * Scale to be applied to each tile's geometric error.
-     * Default: 1.0
-     */
-    @JsProperty
-    public double geometricErrorScale;
-    /**
-     * Maximum attenuation in pixels. Defaults to the Cesium3DTileset's maximumScreenSpaceError.
-     */
-    @JsProperty
-    public int maximumAttenuation;
-    /**
-     * Average base resolution for the dataset in meters. Substitute for Geometric Error when not available.
-     */
-    @JsProperty
-    public double baseResolution;
-    /**
-     * When true, use eye dome lighting when drawing with point attenuation.
-     * Default: true
-     */
-    @JsProperty
-    public boolean eyeDomeLighting;
-    /**
-     * Increasing this value increases contrast on slopes and edges.
-     * Default: 1.0
-     */
-    @JsProperty
-    public double eyeDomeLightingStrength;
-    /**
-     * Increase the thickness of contours from eye dome lighting.
-     * Default: 1.0
-     */
-    @JsProperty
-    public double eyeDomeLightingRadius;
-    /**
-     * Determines whether back-facing points are hidden. This option works only if data has normals included.
-     * Default: false
-     */
-    @JsProperty
-    public boolean backFaceCulling;
-    /**
-     * Determines whether a point cloud that contains normals is shaded based on the sun direction.
-     * Default: true
-     */
-    @JsProperty
-    public boolean normalShading;
+  /**
+   * Perform point attenuation based on geometric error. Default: false
+   */
+  @JsProperty
+  public boolean attenuation;
+  /**
+   * Scale to be applied to each tile's geometric error. Default: 1.0
+   */
+  @JsProperty
+  public double geometricErrorScale;
+  /**
+   * Maximum attenuation in pixels. Defaults to the Cesium3DTileset's
+   * maximumScreenSpaceError.
+   */
+  @JsProperty
+  public int maximumAttenuation;
+  /**
+   * Average base resolution for the dataset in meters. Substitute for Geometric
+   * Error when not available.
+   */
+  @JsProperty
+  public double baseResolution;
+  /**
+   * When true, use eye dome lighting when drawing with point attenuation.
+   * Default: true
+   */
+  @JsProperty
+  public boolean eyeDomeLighting;
+  /**
+   * Increasing this value increases contrast on slopes and edges. Default: 1.0
+   */
+  @JsProperty
+  public double eyeDomeLightingStrength;
+  /**
+   * Increase the thickness of contours from eye dome lighting. Default: 1.0
+   */
+  @JsProperty
+  public double eyeDomeLightingRadius;
+  /**
+   * Determines whether back-facing points are hidden. This option works only if
+   * data has normals included. Default: false
+   */
+  @JsProperty
+  public boolean backFaceCulling;
+  /**
+   * Determines whether a point cloud that contains normals is shaded based on the
+   * sun direction. Default: true
+   */
+  @JsProperty
+  public boolean normalShading;
 
-    @JsConstructor
-    public PointCloudShadingOptions() {}
+  @JsConstructor
+  public PointCloudShadingOptions() {
+  }
 }

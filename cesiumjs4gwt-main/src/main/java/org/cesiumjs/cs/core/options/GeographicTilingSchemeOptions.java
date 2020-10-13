@@ -21,10 +21,11 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class GeographicTilingSchemeOptions extends TilingSchemeOptions {
-    @JsConstructor
-    public GeographicTilingSchemeOptions() {}
+  @JsConstructor
+  public GeographicTilingSchemeOptions() {
+  }
 }

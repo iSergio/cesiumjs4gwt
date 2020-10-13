@@ -16,45 +16,46 @@
 
 package org.cesiumjs.cs.datasources.properties.options;
 
+import org.cesiumjs.cs.core.Color;
+import org.cesiumjs.cs.datasources.properties.Property;
+
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.Color;
-import org.cesiumjs.cs.datasources.properties.Property;
 
 /**
- * Options for {@link org.cesiumjs.cs.datasources.properties.PolylineDashMaterialProperty}.
+ * Options for
+ * {@link org.cesiumjs.cs.datasources.properties.PolylineDashMaterialProperty}.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class PolylineDashMaterialPropertyOptions {
-    /**
-     * A Property specifying the Color of the line.
-     * Default: {@link Color#WHITE()}.
-     */
-    @JsProperty
-    public Property color;
-    /**
-     * A Property specifying the Color of the gaps in the line.
-     * Default: {@link Color#TRANSPARENT()}.
-     */
-    @JsProperty
-    public Property gapColor;
-    /**
-     * A numeric Property specifying the length of the dash pattern in pixels
-     * Dedault: 16.0;
-     */
-    @JsProperty
-    public Property dashLength;
-    /**
-     * A numeric Property specifying a 16 bit pattern for the dash
-     * Default: 255.0
-     */
-    @JsProperty
-    public Property dashPattern;
+  /**
+   * A Property specifying the Color of the line. Default: {@link Color#WHITE()}.
+   */
+  @JsProperty
+  public Property color;
+  /**
+   * A Property specifying the Color of the gaps in the line. Default:
+   * {@link Color#TRANSPARENT()}.
+   */
+  @JsProperty
+  public Property gapColor;
+  /**
+   * A numeric Property specifying the length of the dash pattern in pixels
+   * Dedault: 16.0;
+   */
+  @JsProperty
+  public Property dashLength;
+  /**
+   * A numeric Property specifying a 16 bit pattern for the dash Default: 255.0
+   */
+  @JsProperty
+  public Property dashPattern;
 
-    @JsConstructor
-    public PolylineDashMaterialPropertyOptions() {}
+  @JsConstructor
+  public PolylineDashMaterialPropertyOptions() {
+  }
 }

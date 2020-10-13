@@ -19,34 +19,36 @@ package org.cesiumjs.cs.scene.interaction.options;
 import org.cesiumjs.cs.core.Cartesian3;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 public class CirclePrimitiveOptions extends AbstractPrimitiveOptions {
-    /**
-     * Center of start drawing
-     */
-    public Cartesian3 center;
-    /**
-     * Radius of circle
-     */
-    public double radius;
+  /**
+   * Center of start drawing
+   */
+  public Cartesian3 center;
+  /**
+   * Radius of circle
+   */
+  public double radius;
 
-    /**
-     * Default constructor
-     */
-    public CirclePrimitiveOptions() {
-        super();
-    }
+  /**
+   * Default constructor
+   */
+  public CirclePrimitiveOptions() {
+    super();
+  }
 
-    /**
-     * Construct {@link CirclePrimitiveOptions} instance from {@link DrawInteractionOptions}
-     * @param options {@link DrawInteractionOptions}
-     */
-    public CirclePrimitiveOptions(DrawInteractionOptions options) {
-        super();
+  /**
+   * Construct {@link CirclePrimitiveOptions} instance from
+   * {@link DrawInteractionOptions}
+   * 
+   * @param options {@link DrawInteractionOptions}
+   */
+  public CirclePrimitiveOptions(DrawInteractionOptions options) {
+    super();
 
-        super.color = options.color;
-        super.outlineColor = options.outlineColor;
-        super.outlineWidth = options.outlineWidth;
-    }
+    super.color = options.color;
+    super.outlineColor = options.outlineColor;
+    super.outlineWidth = options.outlineWidth;
+  }
 }

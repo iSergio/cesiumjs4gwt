@@ -25,16 +25,19 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "SunLight")
 public class SunLight extends Light {
-    /**
-     * A directional light source that originates from the Sun.
-     */
-    @JsConstructor
-    public SunLight() {}
+  /**
+   * A directional light source that originates from the Sun.
+   */
+  @JsConstructor
+  public SunLight() {
+  }
 
-    /**
-     * A directional light source that originates from the Sun.
-     * @param options Options {@link SunLightOptions}
-     */
-    @JsConstructor
-    public SunLight(SunLightOptions options) {}
+  /**
+   * A directional light source that originates from the Sun.
+   * 
+   * @param options Options {@link SunLightOptions}
+   */
+  @JsConstructor
+  public SunLight(SunLightOptions options) {
+  }
 }

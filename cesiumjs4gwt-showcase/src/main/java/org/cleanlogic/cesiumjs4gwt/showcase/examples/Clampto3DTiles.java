@@ -19,8 +19,13 @@ package org.cleanlogic.cesiumjs4gwt.showcase.examples;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.inject.Inject;
+
 import org.cesiumjs.cs.Cesium;
-import org.cesiumjs.cs.core.*;
+import org.cesiumjs.cs.core.Cartesian3;
+import org.cesiumjs.cs.core.Clock;
+import org.cesiumjs.cs.core.Event;
+import org.cesiumjs.cs.core.IonResource;
+import org.cesiumjs.cs.core.Matrix4;
 import org.cesiumjs.cs.datasources.CzmlDataSource;
 import org.cesiumjs.cs.datasources.Entity;
 import org.cesiumjs.cs.datasources.properties.ConstantPositionProperty;
@@ -37,75 +42,79 @@ import org.cleanlogic.cesiumjs4gwt.showcase.basic.AbstractExample;
 import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ShowcaseExampleStore;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 public class Clampto3DTiles extends AbstractExample {
-    private ViewerPanel csVPanel;
+  private ViewerPanel csVPanel;
 
-    private Scene scene;
-    private Clock clock;
+  private Scene scene;
+  private Clock clock;
 
-    private Entity entity;
-    private PositionProperty positionProperty;
+  private Entity entity;
+  private PositionProperty positionProperty;
 
-    @Inject
-    public Clampto3DTiles(ShowcaseExampleStore store) {
-        super("Clamp to 3D Tiles", "Clamp a model to a 3D Tileset using the clampToHeight function.", new String[]{"Clamp", "Point", "Label", "3DTiles"}, store);
-    }
+  @Inject
+  public Clampto3DTiles(ShowcaseExampleStore store) {
+    super("Clamp to 3D Tiles", "Clamp a model to a 3D Tileset using the clampToHeight function.",
+        new String[] { "Clamp", "Point", "Label", "3DTiles" }, store);
+  }
 
-    @Override
-    public void buildPanel() {
-        ViewerOptions viewerOptions = new ViewerOptions();
-        viewerOptions.terrainProvider = Cesium.createWorldTerrain();
-        csVPanel = new ViewerPanel(viewerOptions);
+  @Override
+  public void buildPanel() {
+    ViewerOptions viewerOptions = new ViewerOptions();
+    viewerOptions.terrainProvider = Cesium.createWorldTerrain();
+    csVPanel = new ViewerPanel(viewerOptions);
 
-        scene = csVPanel.getViewer().scene();
-        clock = csVPanel.getViewer().clock();
+    scene = csVPanel.getViewer().scene();
+    clock = csVPanel.getViewer().clock();
 
-        Promise<CzmlDataSource, Void> dataSourcePromise = CzmlDataSource.load(GWT.getModuleBaseURL() + "SampleData/ClampToGround.czml");
-        csVPanel.getViewer().dataSources().add(dataSourcePromise).then(new Fulfill<CzmlDataSource>() {
+    Promise<CzmlDataSource, Void> dataSourcePromise = CzmlDataSource
+        .load(GWT.getModuleBaseURL() + "SampleData/ClampToGround.czml");
+    csVPanel.getViewer().dataSources().add(dataSourcePromise).then(new Fulfill<CzmlDataSource>() {
+      @Override
+      public void onFulfilled(CzmlDataSource dataSource) {
+        entity = dataSource.entities.getById("CesiumMilkTruck");
+        positionProperty = entity.position;
+      }
+    });
+
+    Cesium3DTileset tileset = (Cesium3DTileset) scene.primitives()
+        .add(Cesium3DTileset.create(IonResource.fromAssetId(6074)));
+
+    ViewOptions viewOptions = new ViewOptions();
+    viewOptions.destinationPos = new Cartesian3(1216403.8845586285, -4736357.493351395, 4081299.715698949);
+    viewOptions.orientation = new org.cesiumjs.cs.core.HeadingPitchRoll(4.2892217081808806, -0.4799070147502502,
+        6.279789177843313);
+    viewOptions.endTransform = Matrix4.IDENTITY();
+    csVPanel.getViewer().camera.setView(viewOptions);
+
+    if (scene.clampToHeightSupported()) {
+      tileset.initialTilesLoaded.addEventListener(new Event.Listener() {
+        @Override
+        public void function(Object... o) {
+          clock.shouldAnimate = true;
+          final JsObject[] objectsToExclude = new JsObject[] { (JsObject) (Object) entity };
+          scene.postRender().addEventListener(new Event.Listener() {
             @Override
-            public void onFulfilled(CzmlDataSource dataSource) {
-                entity = dataSource.entities.getById("CesiumMilkTruck");
-                positionProperty = entity.position;
+            public void function(Object... o) {
+              Cartesian3 position = positionProperty.getValue(clock.currentTime);
+              entity.position = new ConstantPositionProperty(scene.clampToHeight(position, objectsToExclude));
             }
-        });
-
-        Cesium3DTileset tileset = (Cesium3DTileset) scene.primitives().add(Cesium3DTileset.create(IonResource.fromAssetId(6074)));
-
-        ViewOptions viewOptions = new ViewOptions();
-        viewOptions.destinationPos = new Cartesian3(1216403.8845586285, -4736357.493351395, 4081299.715698949);
-        viewOptions.orientation = new org.cesiumjs.cs.core.HeadingPitchRoll(4.2892217081808806, -0.4799070147502502, 6.279789177843313);
-        viewOptions.endTransform = Matrix4.IDENTITY();
-        csVPanel.getViewer().camera.setView(viewOptions);
-
-        if (scene.clampToHeightSupported()) {
-            tileset.initialTilesLoaded.addEventListener(new Event.Listener() {
-                @Override
-                public void function(Object... o) {
-                    clock.shouldAnimate = true;
-                    final JsObject[] objectsToExclude = new JsObject[] {(JsObject) (Object) entity};
-                    scene.postRender().addEventListener(new Event.Listener() {
-                        @Override
-                        public void function(Object... o) {
-                            Cartesian3 position = positionProperty.getValue(clock.currentTime);
-                            entity.position = new ConstantPositionProperty(scene.clampToHeight(position, objectsToExclude));
-                        }
-                    });
-                }
-            });
+          });
         }
-
-        contentPanel.add(new HTML("<p>Clamp a model to a 3D Tileset using the clampToHeight function.</p>"));
-        contentPanel.add(csVPanel);
-
-        initWidget(contentPanel);
+      });
     }
 
-    @Override
-    public String[] getSourceCodeURLs() {
-        String[] sourceCodeURLs = new String[1];
-        sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "Clampto3DTiles.txt";
-        return sourceCodeURLs;
-    }
+    contentPanel.add(new HTML("<p>Clamp a model to a 3D Tileset using the clampToHeight function.</p>"));
+    contentPanel.add(csVPanel);
+
+    initWidget(contentPanel);
+  }
+
+  @Override
+  public String[] getSourceCodeURLs() {
+    String[] sourceCodeURLs = new String[1];
+    sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "Clampto3DTiles.txt";
+    return sourceCodeURLs;
+  }
 }

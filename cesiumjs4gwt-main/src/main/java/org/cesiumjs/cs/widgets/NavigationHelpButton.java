@@ -17,50 +17,59 @@
 package org.cesiumjs.cs.widgets;
 
 import com.google.gwt.dom.client.Element;
+
+import org.cesiumjs.cs.widgets.options.NavigationHelpButtonOptions;
+
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.widgets.options.NavigationHelpButtonOptions;
 
 /**
- * The NavigationHelpButton is a single button widget for displaying instructions for navigating the globe with the mouse.
+ * The NavigationHelpButton is a single button widget for displaying
+ * instructions for navigating the globe with the mouse.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "NavigationHelpButton")
 public class NavigationHelpButton {
-    /**
-     * Gets the parent container.
-     */
-    @JsProperty
-    public Element container;
-    /**
-     * Gets the view model.
-     */
-    @JsProperty
-    public NavigationHelpButtonViewModel viewModel;
+  /**
+   * Gets the parent container.
+   */
+  @JsProperty
+  public Element container;
+  /**
+   * Gets the view model.
+   */
+  @JsProperty
+  public NavigationHelpButtonViewModel viewModel;
 
-    @JsConstructor
-    private NavigationHelpButton() {}
+  @JsConstructor
+  private NavigationHelpButton() {
+  }
 
-    /**
-     * The NavigationHelpButton is a single button widget for displaying instructions for navigating the globe with the mouse.
-     * @param options object {@link NavigationHelpButtonOptions}
-     */
-    @JsConstructor
-    public NavigationHelpButton(NavigationHelpButtonOptions options) {}
+  /**
+   * The NavigationHelpButton is a single button widget for displaying
+   * instructions for navigating the globe with the mouse.
+   * 
+   * @param options object {@link NavigationHelpButtonOptions}
+   */
+  @JsConstructor
+  public NavigationHelpButton(NavigationHelpButtonOptions options) {
+  }
 
-    /**
-     * Destroys the widget. Should be called if permanently removing the widget from layout.
-     */
-    @JsMethod
-    public native void destroy();
+  /**
+   * Destroys the widget. Should be called if permanently removing the widget from
+   * layout.
+   */
+  @JsMethod
+  public native void destroy();
 
-    /**
-     * true if the object has been destroyed, false otherwise.
-     * @return true if the object has been destroyed, false otherwise.
-     */
-    @JsMethod
-    public native boolean isDestroyed();
+  /**
+   * true if the object has been destroyed, false otherwise.
+   * 
+   * @return true if the object has been destroyed, false otherwise.
+   */
+  @JsMethod
+  public native boolean isDestroyed();
 }

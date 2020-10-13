@@ -26,199 +26,258 @@ import org.cesiumjs.cs.datasources.DataSource;
 import org.cesiumjs.cs.datasources.Entity;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * Non-destructively composites multiple EntityCollection instances into a single collection. 
+ * If a Entity with the same ID exists in multiple collections, it is non-destructively merged 
+ * into a single new entity instance. If an entity has the same property in multiple collections, 
+ * the property of the Entity in the last collection of the list it belongs to is used. 
+ * CompositeEntityCollection can be used almost anywhere that a EntityCollection is used.
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "CompositeEntityCollection")
 public class CompositeEntityCollection {
-    /**
-     * Gets the event that is fired when entities are added or removed from the collection. The generated event is a
-     */
-    @JsProperty(name = "collectionChanged")
-    public native Event collectionChanged();
-    /**
-     * Gets a globally unique identifier for this collection.
-     */
-    @JsProperty(name = "id")
-    public native String id();
-    /**
-     * Gets the owner of this entity collection, ie. the data source or composite entity collection which created it.
-     */
-    @JsProperty(name = "owner")
-    public native Object owner();
-    /**
-     * Gets the array of Entity instances in the collection. This array should not be modified directly.
-     */
-    @JsProperty(name = "values")
-    public native Entity[] values();
+  /**
+   * Gets the event that is fired when entities are added or removed from the
+   * collection. The generated event is a
+   */
+  @JsProperty(name = "collectionChanged")
+  @SuppressWarnings("rawtypes")
+  public native Event collectionChanged();
 
-    /**
-     * Non-destructively composites multiple {@link EntityCollection} instances into a single collection. If a Entity with the
-     * same ID exists in multiple collections, it is non-destructively merged into a single new entity instance.
-     * If an entity has the same property in multiple collections, the property of the Entity in the last collection of
-     * the list it belongs to is used. CompositeEntityCollection can be used almost anywhere that a EntityCollection is used.
-     */
-    @JsConstructor
-    public CompositeEntityCollection() {}
+  /**
+   * Gets a globally unique identifier for this collection.
+   */
+  @JsProperty(name = "id")
+  public native String id();
 
-    /**
-     * Non-destructively composites multiple {@link EntityCollection} instances into a single collection. If a Entity with the
-     * same ID exists in multiple collections, it is non-destructively merged into a single new entity instance.
-     * If an entity has the same property in multiple collections, the property of the Entity in the last collection of
-     * the list it belongs to is used. CompositeEntityCollection can be used almost anywhere that a EntityCollection is used.
-     * @param collections The initial list of EntityCollection instances to merge.
-     */
-    @JsConstructor
-    public CompositeEntityCollection(EntityCollection[] collections) {}
+  /**
+   * Gets the owner of this entity collection, ie. the data source or composite
+   * entity collection which created it.
+   */
+  @JsProperty(name = "owner")
+  public native Object owner();
 
-    /**
-     * Non-destructively composites multiple {@link EntityCollection} instances into a single collection. If a Entity with the
-     * same ID exists in multiple collections, it is non-destructively merged into a single new entity instance.
-     * If an entity has the same property in multiple collections, the property of the Entity in the last collection of
-     * the list it belongs to is used. CompositeEntityCollection can be used almost anywhere that a EntityCollection is used.
-     * @param collections The initial list of EntityCollection instances to merge.
-     * @param owner The data source (or composite entity collection) which created this collection.
-     */
-    @JsConstructor
-    public CompositeEntityCollection(EntityCollection[] collections, DataSource owner) {}
+  /**
+   * Gets the array of Entity instances in the collection. This array should not
+   * be modified directly.
+   */
+  @JsProperty(name = "values")
+  public native Entity[] values();
 
-    /**
-     * Non-destructively composites multiple {@link EntityCollection} instances into a single collection. If a Entity with the
-     * same ID exists in multiple collections, it is non-destructively merged into a single new entity instance.
-     * If an entity has the same property in multiple collections, the property of the Entity in the last collection of
-     * the list it belongs to is used. CompositeEntityCollection can be used almost anywhere that a EntityCollection is used.
-     * @param collections The initial list of EntityCollection instances to merge.
-     * @param owner The data source (or composite entity collection) which created this collection.
-     */
-    @JsConstructor
-    public CompositeEntityCollection(EntityCollection[] collections, CompositeEntityCollection owner) {}
+  /**
+   * Non-destructively composites multiple {@link EntityCollection} instances into
+   * a single collection. If a Entity with the same ID exists in multiple
+   * collections, it is non-destructively merged into a single new entity
+   * instance. If an entity has the same property in multiple collections, the
+   * property of the Entity in the last collection of the list it belongs to is
+   * used. CompositeEntityCollection can be used almost anywhere that a
+   * EntityCollection is used.
+   */
+  @JsConstructor
+  public CompositeEntityCollection() {
+  }
 
-    /**
-     * Adds a collection to the composite.
-     * @param collection the collection to add.
-     */
-    @JsMethod
-    public native void addCollection(EntityCollection collection);
+  /**
+   * Non-destructively composites multiple {@link EntityCollection} instances into
+   * a single collection. If a Entity with the same ID exists in multiple
+   * collections, it is non-destructively merged into a single new entity
+   * instance. If an entity has the same property in multiple collections, the
+   * property of the Entity in the last collection of the list it belongs to is
+   * used. CompositeEntityCollection can be used almost anywhere that a
+   * EntityCollection is used.
+   * 
+   * @param collections The initial list of EntityCollection instances to merge.
+   */
+  @JsConstructor
+  public CompositeEntityCollection(EntityCollection[] collections) {
+  }
 
-    /**
-     * Adds a collection to the composite.
-     * @param collection the collection to add.
-     * @param index the index to add the collection at. If omitted, the collection will added on top of all existing collections.
-     */
-    @JsMethod
-    public native void addCollection(EntityCollection collection, int index);
+  /**
+   * Non-destructively composites multiple {@link EntityCollection} instances into
+   * a single collection. If a Entity with the same ID exists in multiple
+   * collections, it is non-destructively merged into a single new entity
+   * instance. If an entity has the same property in multiple collections, the
+   * property of the Entity in the last collection of the list it belongs to is
+   * used. CompositeEntityCollection can be used almost anywhere that a
+   * EntityCollection is used.
+   * 
+   * @param collections The initial list of EntityCollection instances to merge.
+   * @param owner       The data source (or composite entity collection) which
+   *                    created this collection.
+   */
+  @JsConstructor
+  public CompositeEntityCollection(EntityCollection[] collections, DataSource owner) {
+  }
 
-    /**
-     * Computes the maximum availability of the entities in the collection. If the collection contains a mix of infinitely
-     * available data and non-infinite data, It will return the interval pertaining to the non-infinite data only.
-     * If all data is infinite, an infinite interval will be returned.
-     * @return The availability of entities in the collection.
-     */
-    @JsMethod
-    public native TimeInterval computeAvailability();
+  /**
+   * Non-destructively composites multiple {@link EntityCollection} instances into
+   * a single collection. If a Entity with the same ID exists in multiple
+   * collections, it is non-destructively merged into a single new entity
+   * instance. If an entity has the same property in multiple collections, the
+   * property of the Entity in the last collection of the list it belongs to is
+   * used. CompositeEntityCollection can be used almost anywhere that a
+   * EntityCollection is used.
+   * 
+   * @param collections The initial list of EntityCollection instances to merge.
+   * @param owner       The data source (or composite entity collection) which
+   *                    created this collection.
+   */
+  @JsConstructor
+  public CompositeEntityCollection(EntityCollection[] collections, 
+      CompositeEntityCollection owner) {
+    //
+  }
 
-    /**
-     * Returns true if the provided entity is in this collection, false otherwise.
-     * @param entity The entity.
-     * @return true if the provided entity is in this collection, false otherwise.
-     */
-    @JsMethod
-    public native boolean contains(Entity entity);
+  /**
+   * Adds a collection to the composite.
+   * 
+   * @param collection the collection to add.
+   */
+  @JsMethod
+  public native void addCollection(EntityCollection collection);
 
-    /**
-     * Checks to see if the composite contains a given collection.
-     * @param collection the collection to check for.
-     * @return true if the composite contains the collection, false otherwise.
-     */
-    @JsMethod
-    public native boolean containsCollection(EntityCollection collection);
+  /**
+   * Adds a collection to the composite.
+   * 
+   * @param collection the collection to add.
+   * @param index      the index to add the collection at. If omitted, the
+   *                   collection will added on top of all existing collections.
+   */
+  @JsMethod
+  public native void addCollection(EntityCollection collection, int index);
 
-    /**
-     * Gets an entity with the specified id.
-     * @param id The id of the entity to retrieve.
-     * @return The entity with the provided id or undefined if the id did not exist in the collection.
-     */
-    public native Entity getById(Object id);
+  /**
+   * Computes the maximum availability of the entities in the collection. If the
+   * collection contains a mix of infinitely available data and non-infinite data,
+   * It will return the interval pertaining to the non-infinite data only. If all
+   * data is infinite, an infinite interval will be returned.
+   * 
+   * @return The availability of entities in the collection.
+   */
+  @JsMethod
+  public native TimeInterval computeAvailability();
 
-    /**
-     * Gets a collection by index from the composite.
-     * @param index the index to retrieve.
-     * @return collection by index
-     */
-    @JsMethod
-    public native EntityCollection getCollection(int index);
+  /**
+   * Returns true if the provided entity is in this collection, false otherwise.
+   * 
+   * @param entity The entity.
+   * @return true if the provided entity is in this collection, false otherwise.
+   */
+  @JsMethod
+  public native boolean contains(Entity entity);
 
-    /**
-     * Gets the number of collections in this composite.
-     */
-    @JsMethod
-    public native int getCollectionsLength();
+  /**
+   * Checks to see if the composite contains a given collection.
+   * 
+   * @param collection the collection to check for.
+   * @return true if the composite contains the collection, false otherwise.
+   */
+  @JsMethod
+  public native boolean containsCollection(EntityCollection collection);
 
-    /**
-     * Determines the index of a given collection in the composite.
-     * @param collection The collection to find the index of.
-     * @return The index of the collection in the composite, or -1 if the collection does not exist in the composite.
-     */
-    @JsMethod
-    public native int indexOfCollection(EntityCollection collection);
+  /**
+   * Gets an entity with the specified id.
+   * 
+   * @param id The id of the entity to retrieve.
+   * @return The entity with the provided id or undefined if the id did not exist
+   *         in the collection.
+   */
+  public native Entity getById(Object id);
 
-    /**
-     * Lowers a collection down one position in the composite.
-     * @param collection the collection to move.
-     */
-    @JsMethod
-    public native void lowerCollection(EntityCollection collection);
+  /**
+   * Gets a collection by index from the composite.
+   * 
+   * @param index the index to retrieve.
+   * @return collection by index
+   */
+  @JsMethod
+  public native EntityCollection getCollection(int index);
 
-    /**
-     * Lowers a collection to the bottom of the composite.
-     * @param collection the collection to move.
-     */
-    @JsMethod
-    public native void lowerCollectionToBottom(EntityCollection collection);
+  /**
+   * Gets the number of collections in this composite.
+   */
+  @JsMethod
+  public native int getCollectionsLength();
 
-    /**
-     * Raises a collection up one position in the composite.
-     * @param collection the collection to move.
-     */
-    @JsMethod
-    public native void raiseCollection(EntityCollection collection);
+  /**
+   * Determines the index of a given collection in the composite.
+   * 
+   * @param collection The collection to find the index of.
+   * @return The index of the collection in the composite, or -1 if the collection
+   *         does not exist in the composite.
+   */
+  @JsMethod
+  public native int indexOfCollection(EntityCollection collection);
 
-    /**
-     * Raises a collection to the top of the composite.
-     * @param collection the collection to move.
-     */
-    @JsMethod
-    public native void raiseCollectionToTop(EntityCollection collection);
+  /**
+   * Lowers a collection down one position in the composite.
+   * 
+   * @param collection the collection to move.
+   */
+  @JsMethod
+  public native void lowerCollection(EntityCollection collection);
 
-    /**
-     * Removes all collections from this composite.
-     */
-    @JsMethod
-    public native void removeAllCollections();
+  /**
+   * Lowers a collection to the bottom of the composite.
+   * 
+   * @param collection the collection to move.
+   */
+  @JsMethod
+  public native void lowerCollectionToBottom(EntityCollection collection);
 
-    /**
-     * Removes a collection from this composite, if present.
-     * @param collection The collection to remove.
-     * @return true if the collection was in the composite and was removed, false if the collection was not in the composite.
-     */
-    @JsMethod
-    public native boolean removeCollection(EntityCollection collection);
+  /**
+   * Raises a collection up one position in the composite.
+   * 
+   * @param collection the collection to move.
+   */
+  @JsMethod
+  public native void raiseCollection(EntityCollection collection);
 
-    /**
-     * Resumes raising {@link EntityCollection#collectionChanged} events immediately when an item is added or removed.
-     * Any modifications made while while events were suspended will be triggered as a single event when this function is called.
-     * This function also ensures the collection is recomposited if events are also resumed. This function is reference
-     * counted and can safely be called multiple times as long as there are corresponding calls to {@link EntityCollection#resumeEvents}.
-     */
-    @JsMethod
-    public native void resumeEvents();
+  /**
+   * Raises a collection to the top of the composite.
+   * 
+   * @param collection the collection to move.
+   */
+  @JsMethod
+  public native void raiseCollectionToTop(EntityCollection collection);
 
-    /**
-     * Prevents {@link EntityCollection#collectionChanged} events from being raised until a corresponding call is made
-     * to {@link EntityCollection#resumeEvents}, at which point a single event will be raised that covers all
-     * suspended operations. This allows for many items to be added and removed efficiently. While events are suspended,
-     * recompositing of the collections will also be suspended, as this can be a costly operation. This function can be
-     * safely called multiple times as long as there are corresponding calls to {@link EntityCollection#resumeEvents}.
-     */
-    @JsMethod
-    public native void suspendEvents();
+  /**
+   * Removes all collections from this composite.
+   */
+  @JsMethod
+  public native void removeAllCollections();
+
+  /**
+   * Removes a collection from this composite, if present.
+   * 
+   * @param collection The collection to remove.
+   * @return true if the collection was in the composite and was removed, false if
+   *         the collection was not in the composite.
+   */
+  @JsMethod
+  public native boolean removeCollection(EntityCollection collection);
+
+  /**
+   * Resumes raising {@link EntityCollection#collectionChanged} events immediately
+   * when an item is added or removed. Any modifications made while while events
+   * were suspended will be triggered as a single event when this function is
+   * called. This function also ensures the collection is recomposited if events
+   * are also resumed. This function is reference counted and can safely be called
+   * multiple times as long as there are corresponding calls to
+   * {@link EntityCollection#resumeEvents}.
+   */
+  @JsMethod
+  public native void resumeEvents();
+
+  /**
+   * Prevents {@link EntityCollection#collectionChanged} events from being raised
+   * until a corresponding call is made to {@link EntityCollection#resumeEvents},
+   * at which point a single event will be raised that covers all suspended
+   * operations. This allows for many items to be added and removed efficiently.
+   * While events are suspended, recompositing of the collections will also be
+   * suspended, as this can be a costly operation. This function can be safely
+   * called multiple times as long as there are corresponding calls to
+   * {@link EntityCollection#resumeEvents}.
+   */
+  @JsMethod
+  public native void suspendEvents();
 }

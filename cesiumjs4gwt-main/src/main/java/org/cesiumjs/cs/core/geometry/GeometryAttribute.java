@@ -17,58 +17,68 @@
 package org.cesiumjs.cs.core.geometry;
 
 import com.google.gwt.typedarrays.shared.TypedArrays;
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+
 import org.cesiumjs.cs.core.ComponentDatatype;
 import org.cesiumjs.cs.core.options.GeometryAttributeOptions;
 
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
+
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "GeometryAttribute")
 public class GeometryAttribute {
-    /**
-     * {@link ComponentDatatype}
-     * The datatype of each component in the attribute, e.g., individual elements in GeometryAttribute#values.
-     */
-    @JsProperty
-    public int componentDatatype;
-    /**
-     * A number between 1 and 4 that defines the number of components in an attributes. For example,
-     * a position attribute with x, y, and z components would have 3 as shown in the code example.
-     */
-    @JsProperty
-    public int componentsPerAttribute;
-    /**
-     * When true and componentDatatype is an integer format, indicate that the components should be mapped to the range [0, 1]
-     * (unsigned) or [-1, 1] (signed) when they are accessed as floating-point for rendering.
-     * This is commonly used when storing colors using ComponentDatatype.UNSIGNED_BYTE.
-     *
-     * Default: false
-     */
-    @JsProperty
-    public boolean normalize;
-    /**
-     * The values for the attributes stored in a typed array. In the code example, every three elements
-     * in values defines one attributes since componentsPerAttribute is 3.
-     */
-    @JsProperty
-    public TypedArrays values;
+  /**
+   * {@link ComponentDatatype} The datatype of each component in the attribute,
+   * e.g., individual elements in GeometryAttribute#values.
+   */
+  @JsProperty
+  public int componentDatatype;
+  /**
+   * A number between 1 and 4 that defines the number of components in an
+   * attributes. For example, a position attribute with x, y, and z components
+   * would have 3 as shown in the code example.
+   */
+  @JsProperty
+  public int componentsPerAttribute;
+  /**
+   * When true and componentDatatype is an integer format, indicate that the
+   * components should be mapped to the range [0, 1] (unsigned) or [-1, 1]
+   * (signed) when they are accessed as floating-point for rendering. This is
+   * commonly used when storing colors using ComponentDatatype.UNSIGNED_BYTE.
+   *
+   * Default: false
+   */
+  @JsProperty
+  public boolean normalize;
+  /**
+   * The values for the attributes stored in a typed array. In the code example,
+   * every three elements in values defines one attributes since
+   * componentsPerAttribute is 3.
+   */
+  @JsProperty
+  public TypedArrays values;
 
-    /**
-     * Values and type information for geometry attributes.
-     * A Geometry generally contains one or more attributes. All attributes together form the geometry's vertices.
-     */
-    @JsConstructor
-    public GeometryAttribute() {}
+  /**
+   * Values and type information for geometry attributes. A Geometry generally
+   * contains one or more attributes. All attributes together form the geometry's
+   * vertices.
+   */
+  @JsConstructor
+  public GeometryAttribute() {
+  }
 
-    /**
-     * Values and type information for geometry attributes.
-     * A Geometry generally contains one or more attributes. All attributes together form the geometry's vertices.
-     * @param options Options
-     */
-    //TODO: Examples
-    @JsConstructor
-    public GeometryAttribute(GeometryAttributeOptions options) {}
+  /**
+   * Values and type information for geometry attributes. A Geometry generally
+   * contains one or more attributes. All attributes together form the geometry's
+   * vertices.
+   * 
+   * @param options Options
+   */
+  // TODO: Examples
+  @JsConstructor
+  public GeometryAttribute(GeometryAttributeOptions options) {
+  }
 }

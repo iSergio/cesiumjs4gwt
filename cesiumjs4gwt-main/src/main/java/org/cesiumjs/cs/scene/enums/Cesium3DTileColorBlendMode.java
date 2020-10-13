@@ -21,29 +21,33 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * Defines how per-feature colors set from the Cesium API or declarative styling blend with the source colors from
- * the original feature, e.g. glTF material or per-point color in the tile.
+ * Defines how per-feature colors set from the Cesium API or declarative styling
+ * blend with the source colors from the original feature, e.g. glTF material or
+ * per-point color in the tile.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "Cesium3DTileColorBlendMode")
 public class Cesium3DTileColorBlendMode {
-    /**
-     * Multiplies the source color by the feature color.
-     */
-    @JsProperty(name = "HIGHLIGHT")
-    public static native Number HIGHLIGHT();
-    /**
-     * Blends the source color and feature color together.
-     */
-    @JsProperty(name = "MIX")
-    public static native Number MIX();
-    /**
-     * Replaces the source color with the feature color.
-     */
-    @JsProperty(name = "REPLACE")
-    public static native Number REPLACE();
+  /**
+   * Multiplies the source color by the feature color.
+   */
+  @JsProperty(name = "HIGHLIGHT")
+  public static native Number HIGHLIGHT();
 
-    @JsConstructor
-    private Cesium3DTileColorBlendMode() {}
+  /**
+   * Blends the source color and feature color together.
+   */
+  @JsProperty(name = "MIX")
+  public static native Number MIX();
+
+  /**
+   * Replaces the source color with the feature color.
+   */
+  @JsProperty(name = "REPLACE")
+  public static native Number REPLACE();
+
+  @JsConstructor
+  private Cesium3DTileColorBlendMode() {
+  }
 }

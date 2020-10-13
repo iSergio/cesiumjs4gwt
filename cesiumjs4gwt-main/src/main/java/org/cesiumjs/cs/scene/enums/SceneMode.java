@@ -20,38 +20,40 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "SceneMode")
 public class SceneMode {
-    /**
-     * Columbus View mode. A 2.5D perspective view where the map is laid out flat and objects with non-zero height are drawn above it.
-     */
-    @JsProperty(name = "COLUMBUS_VIEW")
-    public static native Number COLUMBUS_VIEW();
+  /**
+   * Columbus View mode. A 2.5D perspective view where the map is laid out flat
+   * and objects with non-zero height are drawn above it.
+   */
+  @JsProperty(name = "COLUMBUS_VIEW")
+  public static native Number COLUMBUS_VIEW();
 
-    /**
-     * Morphing between mode, e.g., 3D to 2D.
-     */
-    @JsProperty(name = "MORPHING")
-    public static native Number MORPHING();
+  /**
+   * Morphing between mode, e.g., 3D to 2D.
+   */
+  @JsProperty(name = "MORPHING")
+  public static native Number MORPHING();
 
-    /**
-     * 2D mode. The map is viewed top-down with an orthographic projection.
-     */
-    @JsProperty(name = "SCENE2D")
-    public static native Number SCENE2D();
+  /**
+   * 2D mode. The map is viewed top-down with an orthographic projection.
+   */
+  @JsProperty(name = "SCENE2D")
+  public static native Number SCENE2D();
 
-    /**
-     * 3D mode. A traditional 3D perspective view of the globe.
-     */
-    @JsProperty(name = "SCENE3D")
-    public static native Number SCENE3D();
+  /**
+   * 3D mode. A traditional 3D perspective view of the globe.
+   */
+  @JsProperty(name = "SCENE3D")
+  public static native Number SCENE3D();
 
-    /**
-     * Returns the morph time for the given scene mode.
-     * @param value The scene mode
-     * @return The morph time
-     */
-    public static native double getMorphTime(int value);
+  /**
+   * Returns the morph time for the given scene mode.
+   * 
+   * @param value The scene mode
+   * @return The morph time
+   */
+  public static native double getMorphTime(int value);
 }

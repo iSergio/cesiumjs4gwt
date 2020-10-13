@@ -16,43 +16,48 @@
 
 package org.cesiumjs.cs.core.options;
 
+import org.cesiumjs.cs.core.ComponentDatatype;
+import org.cesiumjs.cs.core.GeometryInstanceAttribute;
+
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.ComponentDatatype;
-import org.cesiumjs.cs.core.GeometryInstanceAttribute;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class GeometryInstanceAttributeOptions {
-    /**
-     * The datatype of each component in the attribute, e.g., individual elements in values.
-     */
-    @JsProperty
-    public ComponentDatatype componentDatatype;
-    /**
-     * A number between 1 and 4 that defines the number of components in an attributes.
-     */
-    @JsProperty
-    public double componentsPerAttribute;
-    /**
-     * When true and componentDatatype is an integer format, indicate that the components should be mapped to the
-     * range [0, 1] (unsigned) or [-1, 1] (signed) when they are accessed as floating-point for rendering.
-     */
-    @JsProperty
-    public boolean normalize;
-    /**
-     * The value for the attribute.
-     */
-    @JsProperty
-    public double[] value;
+  /**
+   * The datatype of each component in the attribute, e.g., individual elements in
+   * values.
+   */
+  @JsProperty
+  public ComponentDatatype componentDatatype;
+  /**
+   * A number between 1 and 4 that defines the number of components in an
+   * attributes.
+   */
+  @JsProperty
+  public double componentsPerAttribute;
+  /**
+   * When true and componentDatatype is an integer format, indicate that the
+   * components should be mapped to the range [0, 1] (unsigned) or [-1, 1]
+   * (signed) when they are accessed as floating-point for rendering.
+   */
+  @JsProperty
+  public boolean normalize;
+  /**
+   * The value for the attribute.
+   */
+  @JsProperty
+  public double[] value;
 
-    /**
-     * Options for {@link GeometryInstanceAttribute}
-     */
-    @JsConstructor
-    public GeometryInstanceAttributeOptions() {}
+  /**
+   * Options for {@link GeometryInstanceAttribute}
+   */
+  @JsConstructor
+  public GeometryInstanceAttributeOptions() {
+  }
 }

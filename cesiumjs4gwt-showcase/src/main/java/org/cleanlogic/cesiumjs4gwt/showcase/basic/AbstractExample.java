@@ -16,17 +16,18 @@
  */
 package org.cleanlogic.cesiumjs4gwt.showcase.basic;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Logger;
+
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
+
 import org.cleanlogic.cesiumjs4gwt.showcase.ExampleBean;
 import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ExampleStore;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * The abstract base for each Example
@@ -35,58 +36,58 @@ import java.util.logging.Logger;
  *
  */
 public abstract class AbstractExample extends Composite {
-    public static final Logger LOGGER = Logger.getLogger(AbstractExample.class.getName());
-    protected VerticalPanel contentPanel = new VerticalPanel();
-    protected HorizontalPanel horizontalPanel = new HorizontalPanel();
-    private final List<ShowSourceButton> showSourceButtons = new ArrayList<ShowSourceButton>();
-    protected ExampleBean example;
+  public static final Logger LOGGER = Logger.getLogger(AbstractExample.class.getName());
+  protected VerticalPanel contentPanel = new VerticalPanel();
+  protected HorizontalPanel horizontalPanel = new HorizontalPanel();
+  private final List<ShowSourceButton> showSourceButtons = new ArrayList<ShowSourceButton>();
+  protected ExampleBean example;
 
-    public AbstractExample(String name, String description, String[] tags, ExampleStore store) {
-        this(name, description, tags);
-        store.addExample(example);
+  public AbstractExample(String name, String description, String[] tags, ExampleStore store) {
+    this(name, description, tags);
+    store.addExample(example);
+  }
+
+  /**
+   * The constructor.
+   *
+   */
+  public AbstractExample(String name, String description, String[] tags) {
+    for (String sourceCodeUrl : getSourceCodeURLs()) {
+      ShowSourceButton butShowSource = new ShowSourceButton("");
+      butShowSource.setSourceCodeURL(sourceCodeUrl);
+      showSourceButtons.add(butShowSource);
     }
+    setTitle(name);
+    this.example = new ExampleBean(name, description, tags, this);
+  }
 
-    /**
-     * The constructor.
-     *
-     */
-    public AbstractExample(String name, String description, String[] tags) {
-        for (String sourceCodeUrl : getSourceCodeURLs()) {
-            ShowSourceButton butShowSource = new ShowSourceButton("");
-            butShowSource.setSourceCodeURL(sourceCodeUrl);
-            showSourceButtons.add(butShowSource);
-        }
-        setTitle(name);
-        this.example = new ExampleBean(name, description, tags, this);
+  public abstract void buildPanel();
+
+  public abstract String[] getSourceCodeURLs();
+
+  /**
+   * @param title the title to set
+   */
+  @Override
+  public void setTitle(String title) {
+    for (ShowSourceButton butShowSource : showSourceButtons) {
+      horizontalPanel.add(butShowSource);
     }
+    contentPanel.setSpacing(5);
+    contentPanel.getElement().getStyle().setPadding(10, Unit.PX);
+    contentPanel.setWidth("100%");
+    contentPanel.add(new HTML("<H1>" + title + "</H1>"));
+    contentPanel.add(horizontalPanel);
+  }
 
-    public abstract void buildPanel();
-    
-    public abstract String[] getSourceCodeURLs();
+  /**
+   * @return the example
+   */
+  public ExampleBean getExample() {
+    return example;
+  }
 
-    /**
-     * @param title the title to set
-     */
-    @Override
-    public void setTitle(String title) {
-        for (ShowSourceButton butShowSource : showSourceButtons) {
-            horizontalPanel.add(butShowSource);
-        }
-        contentPanel.setSpacing(5);
-        contentPanel.getElement().getStyle().setPadding(10, Unit.PX);
-        contentPanel.setWidth("100%");
-        contentPanel.add(new HTML("<H1>" + title + "</H1>"));
-        contentPanel.add(horizontalPanel);
-    }
-
-    /**
-     * @return the example
-     */
-    public ExampleBean getExample() {
-        return example;
-    }
-
-    public static native void log(Object object) /*-{
-        console.log(object);
-    }-*/;
+  public static native void log(Object object) /*-{
+                                               console.log(object);
+                                               }-*/;
 }

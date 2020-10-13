@@ -17,75 +17,88 @@
 package org.cesiumjs.cs.widgets;
 
 import com.google.gwt.dom.client.Element;
-import jsinterop.annotations.*;
+
 import org.cesiumjs.cs.scene.Scene;
 import org.cesiumjs.cs.widgets.options.GeocoderOptions;
 
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsOverlay;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
+
 /**
- * A widget for finding addresses and landmarks, and flying the camera to them. Geocoding is performed using the Bing Maps Locations API.
+ * A widget for finding addresses and landmarks, and flying the camera to them.
+ * Geocoding is performed using the Bing Maps Locations API.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "Geocoder")
 public class Geocoder {
-    /**
-     * Gets the parent container.
-     */
-    @JsProperty
-    public Element container;
-    /**
-     * Gets the parent container.
-     */
-    @JsProperty
-    public Element searchSuggestionsContainer;
-    /**
-     * Gets the view model.
-     */
-    @JsProperty
-    public GeocoderViewModel viewModel;
+  /**
+   * Gets the parent container.
+   */
+  @JsProperty
+  public Element container;
+  /**
+   * Gets the parent container.
+   */
+  @JsProperty
+  public Element searchSuggestionsContainer;
+  /**
+   * Gets the view model.
+   */
+  @JsProperty
+  public GeocoderViewModel viewModel;
 
-    @JsConstructor
-    private Geocoder() {}
+  @JsConstructor
+  private Geocoder() {
+  }
 
-    /**
-     * Default constructor
-     * @param options {@link GeocoderOptions} object
-     */
-    @JsConstructor
-    public Geocoder(GeocoderOptions options) {}
+  /**
+   * Default constructor
+   * 
+   * @param options {@link GeocoderOptions} object
+   */
+  @JsConstructor
+  public Geocoder(GeocoderOptions options) {
+  }
 
-    /**
-     * Fast create instance of {@link Geocoder} by mandatory params.
-     * @param container The DOM element that will contain the widget.
-     * @param scene The Scene instance to use.
-     * @return {@link Geocoder} instance
-     */
-    @JsOverlay
-    public static Geocoder create(Element container, Scene scene) {
-        return new Geocoder(GeocoderOptions.create(container, scene));
-    }
+  /**
+   * Fast create instance of {@link Geocoder} by mandatory params.
+   * 
+   * @param container The DOM element that will contain the widget.
+   * @param scene     The Scene instance to use.
+   * @return {@link Geocoder} instance
+   */
+  @JsOverlay
+  public static Geocoder create(Element container, Scene scene) {
+    return new Geocoder(GeocoderOptions.create(container, scene));
+  }
 
-    /**
-     * Fast create instance of {@link Geocoder} by mandatory params.
-     * @param container The ID that will contain the widget.
-     * @param scene The Scene instance to use.
-     * @return {@link Geocoder} instance
-     */
-    @JsOverlay
-    public static Geocoder create(String container, Scene scene) {
-        return new Geocoder(GeocoderOptions.create(container, scene));
-    }
+  /**
+   * Fast create instance of {@link Geocoder} by mandatory params.
+   * 
+   * @param container The ID that will contain the widget.
+   * @param scene     The Scene instance to use.
+   * @return {@link Geocoder} instance
+   */
+  @JsOverlay
+  public static Geocoder create(String container, Scene scene) {
+    return new Geocoder(GeocoderOptions.create(container, scene));
+  }
 
-    /**
-     * Destroys the widget. Should be called if permanently removing the widget from layout.
-     */
-    @JsMethod
-    public native void destroy();
+  /**
+   * Destroys the widget. Should be called if permanently removing the widget from
+   * layout.
+   */
+  @JsMethod
+  public native void destroy();
 
-    /**
-     *
-     * @return true if the object has been destroyed, false otherwise.
-     */
-    @JsMethod
-    public native boolean isDestroyed();
+  /**
+   *
+   * @return true if the object has been destroyed, false otherwise.
+   */
+  @JsMethod
+  public native boolean isDestroyed();
 }

@@ -16,61 +16,72 @@
 
 package org.cesiumjs.cs.core;
 
+import org.cesiumjs.cs.core.enums.Intersect;
+
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.enums.Intersect;
 
 /**
  * The culling volume defined by planes.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "CullingVolume")
 public class CullingVolume {
-    /**
-     * Each plane is represented by a Cartesian4 object, where the x, y, and z components define the unit vector normal
-     * to the plane, and the w component is the distance of the plane from the origin.
-     * Default: []
-     */
-    @JsProperty
-    public Cartesian4[] planes;
+  /**
+   * Each plane is represented by a Cartesian4 object, where the x, y, and z
+   * components define the unit vector normal to the plane, and the w component is
+   * the distance of the plane from the origin. Default: []
+   */
+  @JsProperty
+  public Cartesian4[] planes;
 
-    /**
-     * The culling volume defined by planes.
-     */
-    @JsConstructor
-    public CullingVolume() {}
+  /**
+   * The culling volume defined by planes.
+   */
+  @JsConstructor
+  public CullingVolume() {
+  }
 
-    /**
-     * The culling volume defined by planes.
-     * @param planes An array of clipping planes.
-     */
-    @JsConstructor
-    public CullingVolume(Cartesian4[] planes) {}
+  /**
+   * The culling volume defined by planes.
+   * 
+   * @param planes An array of clipping planes.
+   */
+  @JsConstructor
+  public CullingVolume(Cartesian4[] planes) {
+  }
 
-    /**
-     * Constructs a culling volume from a bounding sphere. Creates six planes that create a box containing the sphere.
-     * The planes are aligned to the x, y, and z axes in world coordinates.
-     * @param boundingSphere The bounding sphere used to create the culling volume.
-     * @return The culling volume created from the bounding sphere.
-     */
-    public static native CullingVolume fromBoundingSphere(BoundingSphere boundingSphere);
+  /**
+   * Constructs a culling volume from a bounding sphere. Creates six planes that
+   * create a box containing the sphere. The planes are aligned to the x, y, and z
+   * axes in world coordinates.
+   * 
+   * @param boundingSphere The bounding sphere used to create the culling volume.
+   * @return The culling volume created from the bounding sphere.
+   */
+  public static native CullingVolume fromBoundingSphere(BoundingSphere boundingSphere);
 
-    /**
-     * Constructs a culling volume from a bounding sphere. Creates six planes that create a box containing the sphere.
-     * The planes are aligned to the x, y, and z axes in world coordinates.
-     * @param boundingSphere The bounding sphere used to create the culling volume.
-     * @param result The object onto which to store the result.
-     * @return The culling volume created from the bounding sphere.
-     */
-    public static native CullingVolume fromBoundingSphere(BoundingSphere boundingSphere, CullingVolume result);
+  /**
+   * Constructs a culling volume from a bounding sphere. Creates six planes that
+   * create a box containing the sphere. The planes are aligned to the x, y, and z
+   * axes in world coordinates.
+   * 
+   * @param boundingSphere The bounding sphere used to create the culling volume.
+   * @param result         The object onto which to store the result.
+   * @return The culling volume created from the bounding sphere.
+   */
+  public static native CullingVolume fromBoundingSphere(BoundingSphere boundingSphere, CullingVolume result);
 
-    /**
-     * Determines whether a bounding volume intersects the culling volume.
-     * @param boundingVolume The bounding volume whose intersection with the culling volume is to be tested.
-     * @return {@link Intersect#OUTSIDE()}, {@link Intersect#INTERSECTING()}, or {@link Intersect#INSIDE()}.
-     * @see org.cesiumjs.cs.core.enums.Intersect
-     */
-    public native int computeVisibility(Object boundingVolume);
+  /**
+   * Determines whether a bounding volume intersects the culling volume.
+   * 
+   * @param boundingVolume The bounding volume whose intersection with the culling
+   *                       volume is to be tested.
+   * @return {@link Intersect#OUTSIDE()}, {@link Intersect#INTERSECTING()}, or
+   *         {@link Intersect#INSIDE()}.
+   * @see org.cesiumjs.cs.core.enums.Intersect
+   */
+  public native int computeVisibility(Object boundingVolume);
 }

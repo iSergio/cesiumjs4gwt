@@ -16,43 +16,40 @@
 
 package org.cesiumjs.cs.core.options;
 
+import org.cesiumjs.cs.core.JulianDate;
+
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.JulianDate;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class TimeIntervalOptions {
-    /**
-     * The start time of the interval.
-     * Default: new JulianDate()
-     */
-    @JsProperty
-    public JulianDate start;
-    /**
-     * The stop time of the interval.
-     * Default: new JulianDate()
-     */
-    @JsProperty
-    public JulianDate stop;
-    /**
-     * if options.start is included in the interval, false otherwise.
-     * Default: true
-     */
-    @JsProperty
-    public boolean isStartIncluded;
-    /**
-     * if options.stop is included in the interval, false otherwise.
-     * Default: true
-     */
-    @JsProperty
-    public boolean isStopIncluded;
-    /**
-     * Arbitrary data associated with this interval.
-     */
-    @JsProperty
-    public Object data;
+  /**
+   * The start time of the interval. Default: new JulianDate()
+   */
+  @JsProperty
+  public JulianDate start;
+  /**
+   * The stop time of the interval. Default: new JulianDate()
+   */
+  @JsProperty
+  public JulianDate stop;
+  /**
+   * if options.start is included in the interval, false otherwise. Default: true
+   */
+  @JsProperty
+  public boolean isStartIncluded;
+  /**
+   * if options.stop is included in the interval, false otherwise. Default: true
+   */
+  @JsProperty
+  public boolean isStopIncluded;
+  /**
+   * Arbitrary data associated with this interval.
+   */
+  @JsProperty
+  public Object data;
 }

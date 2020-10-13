@@ -19,9 +19,9 @@ package org.cesiumjs.cs.promise;
 import jsinterop.annotations.JsFunction;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsFunction
 public interface PromiseCallback<T> {
-    void execute();
+  void execute();
 }

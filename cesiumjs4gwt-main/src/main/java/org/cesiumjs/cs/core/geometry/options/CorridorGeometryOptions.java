@@ -16,29 +16,30 @@
 
 package org.cesiumjs.cs.core.geometry.options;
 
+import org.cesiumjs.cs.core.VertexFormat;
+
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.VertexFormat;
 
 /**
  * Options for {@link org.cesiumjs.cs.core.geometry.CorridorGeometry}
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class CorridorGeometryOptions extends CorridorOutlineGeometryOptions {
-    /**
-     * The vertex attributes to be computed.
-     * Default: {@link VertexFormat#DEFAULT()}
-     */
-    @JsProperty
-    public VertexFormat vertexFormat;
+  /**
+   * The vertex attributes to be computed. Default: {@link VertexFormat#DEFAULT()}
+   */
+  @JsProperty
+  public VertexFormat vertexFormat;
 
-    /**
-     * Options for {@link org.cesiumjs.cs.core.geometry.CorridorGeometry}
-     */
-    @JsConstructor
-    public CorridorGeometryOptions() {}
+  /**
+   * Options for {@link org.cesiumjs.cs.core.geometry.CorridorGeometry}
+   */
+  @JsConstructor
+  public CorridorGeometryOptions() {
+  }
 }

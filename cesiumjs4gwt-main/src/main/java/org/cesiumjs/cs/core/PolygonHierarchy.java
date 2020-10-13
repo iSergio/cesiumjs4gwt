@@ -22,42 +22,49 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "PolygonHierarchy")
 public class PolygonHierarchy {
-    /**
-     * A linear ring defining the outer boundary of the polygon or hole.
-     */
-    @JsProperty
-    public Cartesian3[] positions;
-    /**
-     * An array of polygon hierarchies defining holes in the polygon.
-     */
-    @JsProperty
-    public PolygonHierarchy[] holes;
+  /**
+   * A linear ring defining the outer boundary of the polygon or hole.
+   */
+  @JsProperty
+  public Cartesian3[] positions;
+  /**
+   * An array of polygon hierarchies defining holes in the polygon.
+   */
+  @JsProperty
+  public PolygonHierarchy[] holes;
 
-    /**
-     * An hierarchy of linear rings which define a polygon and its holes.
-     * The holes themselves may also have holes which nest inner polygons.
-     */
-    @JsConstructor
-    public PolygonHierarchy() {}
+  /**
+   * An hierarchy of linear rings which define a polygon and its holes. The holes
+   * themselves may also have holes which nest inner polygons.
+   */
+  @JsConstructor
+  public PolygonHierarchy() {
+  }
 
-    /**
-     * An hierarchy of linear rings which define a polygon and its holes.
-     * The holes themselves may also have holes which nest inner polygons.
-     * @param positions Positions
-     */
-    @JsConstructor
-    public PolygonHierarchy(@JsOptional Cartesian3[] positions) {}
+  /**
+   * An hierarchy of linear rings which define a polygon and its holes. The holes
+   * themselves may also have holes which nest inner polygons.
+   * 
+   * @param positions Positions
+   */
+  @JsConstructor
+  public PolygonHierarchy(@JsOptional Cartesian3[] positions) {
+  }
 
-    /**
-     * An hierarchy of linear rings which define a polygon and its holes.
-     * The holes themselves may also have holes which nest inner polygons.
-     * @param positions A linear ring defining the outer boundary of the polygon or hole.
-     * @param holes An array of polygon hierarchies defining holes in the polygon.
-     */
-    @JsConstructor
-    public PolygonHierarchy(@JsOptional Cartesian3[] positions, @JsOptional PolygonHierarchy[] holes) {}
+  /**
+   * An hierarchy of linear rings which define a polygon and its holes. The holes
+   * themselves may also have holes which nest inner polygons.
+   * 
+   * @param positions A linear ring defining the outer boundary of the polygon or
+   *                  hole.
+   * @param holes     An array of polygon hierarchies defining holes in the
+   *                  polygon.
+   */
+  @JsConstructor
+  public PolygonHierarchy(@JsOptional Cartesian3[] positions, @JsOptional PolygonHierarchy[] holes) {
+  }
 }

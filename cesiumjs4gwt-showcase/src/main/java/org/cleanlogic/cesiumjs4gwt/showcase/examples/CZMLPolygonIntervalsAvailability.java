@@ -16,38 +16,40 @@
 
 package org.cleanlogic.cesiumjs4gwt.showcase.examples;
 
+import javax.inject.Inject;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.HTML;
+
 import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cleanlogic.cesiumjs4gwt.showcase.basic.AbstractExample;
 import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ShowcaseExampleStore;
 
-import javax.inject.Inject;
-
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 public class CZMLPolygonIntervalsAvailability extends AbstractExample {
 
-    @Inject
-    public CZMLPolygonIntervalsAvailability(ShowcaseExampleStore store) {
-        super("CZML Polygon - Intervals,Availability", "CZML Dynamic Polygon - Intervals and Availability", new String[]{"Showcase", "Cesium", "3d", "CZML", "Polygon", "Interva;s"}, store);
-    }
+  @Inject
+  public CZMLPolygonIntervalsAvailability(ShowcaseExampleStore store) {
+    super("CZML Polygon - Intervals,Availability", "CZML Dynamic Polygon - Intervals and Availability",
+        new String[] { "Showcase", "Cesium", "3d", "CZML", "Polygon", "Interva;s" }, store);
+  }
 
-    @Override
-    public void buildPanel() {
-        ViewerPanel csVPanel = new ViewerPanel();
+  @Override
+  public void buildPanel() {
+    ViewerPanel csVPanel = new ViewerPanel();
 
-        contentPanel.add(new HTML("<p>CZML Dynamic Polygon - Intervals and Availability.</p>"));
-        contentPanel.add(csVPanel);
+    contentPanel.add(new HTML("<p>CZML Dynamic Polygon - Intervals and Availability.</p>"));
+    contentPanel.add(csVPanel);
 
-        initWidget(contentPanel);
-    }
+    initWidget(contentPanel);
+  }
 
-    @Override
-    public String[] getSourceCodeURLs() {
-        String[] sourceCodeURLs = new String[1];
-        sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "CZMLPolygonIntervalsAvailability.txt";
-        return sourceCodeURLs;
-    }
+  @Override
+  public String[] getSourceCodeURLs() {
+    String[] sourceCodeURLs = new String[1];
+    sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "CZMLPolygonIntervalsAvailability.txt";
+    return sourceCodeURLs;
+  }
 }

@@ -21,48 +21,60 @@ import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
 
 /**
- * A set of functions to detect whether the current browser supports various features.
+ * A set of functions to detect whether the current browser supports various
+ * features.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "FeatureDetection")
 public class FeatureDetection {
-    /**
-     * A set of functions to detect whether the current browser supports various features.
-     */
-    @JsConstructor
-    private FeatureDetection() {}
+  /**
+   * A set of functions to detect whether the current browser supports various
+   * features.
+   */
+  @JsConstructor
+  private FeatureDetection() {
+  }
 
-    /**
-     * Detects whether the current browser supports the full screen standard.
-     * @return true if the browser supports the full screen standard, false if not.
-     * @see Fullscreen
-     * @see <a href="http://dvcs.w3.org/hg/fullscreen/raw-file/tip/Overview.html">W3C Fullscreen Living Specification</a>
-     */
-    @JsMethod
-    public static native boolean supportsFullscreen();
+  /**
+   * Detects whether the current browser supports the full screen standard.
+   * 
+   * @return true if the browser supports the full screen standard, false if not.
+   * @see Fullscreen
+   * @see <a href=
+   *      "http://dvcs.w3.org/hg/fullscreen/raw-file/tip/Overview.html">W3C
+   *      Fullscreen Living Specification</a>
+   */
+  @JsMethod
+  public static native boolean supportsFullscreen();
 
-    /**
-     * Detects whether the current browser supports typed arrays.
-     * @return true if the browser supports typed arrays, false if not.
-     * @see <a href="http://www.khronos.org/registry/typedarray/specs/latest/">Typed Array Specification</a>
-     */
-    @JsMethod
-    public static native boolean supportsTypedArrays();
+  /**
+   * Detects whether the current browser supports typed arrays.
+   * 
+   * @return true if the browser supports typed arrays, false if not.
+   * @see <a href="http://www.khronos.org/registry/typedarray/specs/latest/">Typed
+   *      Array Specification</a>
+   */
+  @JsMethod
+  public static native boolean supportsTypedArrays();
 
-    /**
-     * Detects whether the current browser supports Web Assembly.
-     * @return true if the browsers supports Web Assembly, false if not.
-     * @see <a href="https://developer.mozilla.org/en-US/docs/WebAssembly">https://developer.mozilla.org/en-US/docs/WebAssembly</a>
-     */
-    @JsMethod
-    public static native boolean supportsWebAssembly();
+  /**
+   * Detects whether the current browser supports Web Assembly.
+   * 
+   * @return true if the browsers supports Web Assembly, false if not.
+   * @see <a href=
+   *      "https://developer.mozilla.org/en-US/docs/WebAssembly">https://developer.mozilla.org/en-US/docs/WebAssembly</a>
+   */
+  @JsMethod
+  public static native boolean supportsWebAssembly();
 
-    /**
-     * Detects whether the current browser supports Web Workers.
-     * @return true if the browsers supports Web Workers, false if not.
-     * @see <a href="http://www.w3.org/TR/workers/">http://www.w3.org/TR/workers/</a>
-     */
-    @JsMethod
-    public static native boolean supportsWebWorkers();
+  /**
+   * Detects whether the current browser supports Web Workers.
+   * 
+   * @return true if the browsers supports Web Workers, false if not.
+   * @see <a href=
+   *      "http://www.w3.org/TR/workers/">http://www.w3.org/TR/workers/</a>
+   */
+  @JsMethod
+  public static native boolean supportsWebWorkers();
 }

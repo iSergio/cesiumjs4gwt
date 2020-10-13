@@ -23,22 +23,22 @@ import jsinterop.annotations.JsType;
 /**
  * Default settings for accessing the Cesium Ion API.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "Ion")
 public class Ion {
-    /**
-     * Gets or sets the default Cesium ion access token.
-     */
-    @JsProperty
-    public static String defaultAccessToken;
-    /**
-     * Gets or sets the default Cesium ion server.
-     * Default:  https://api.cesium.com
-     */
-    @JsProperty
-    public static String defaultServer;
+  /**
+   * Gets or sets the default Cesium ion access token.
+   */
+  @JsProperty
+  public static String defaultAccessToken;
+  /**
+   * Gets or sets the default Cesium ion server. Default: https://api.cesium.com
+   */
+  @JsProperty
+  public static String defaultServer;
 
-    @JsConstructor
-    private Ion() {}
+  @JsConstructor
+  private Ion() {
+  }
 }

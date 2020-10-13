@@ -16,6 +16,8 @@
 
 package org.cleanlogic.cesiumjs4gwt.showcase.examples;
 
+import javax.inject.Inject;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
@@ -23,11 +25,12 @@ import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.ListBox;
+
 import org.cesiumjs.cs.Cesium;
-import org.cesiumjs.cs.core.Math;
 import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.core.HeadingPitchRange;
+import org.cesiumjs.cs.core.Math;
 import org.cesiumjs.cs.core.Matrix4;
 import org.cesiumjs.cs.core.options.ColorRandomOptions;
 import org.cesiumjs.cs.core.providers.CesiumTerrainProvider;
@@ -43,110 +46,112 @@ import org.cesiumjs.cs.widgets.options.ViewerOptions;
 import org.cleanlogic.cesiumjs4gwt.showcase.basic.AbstractExample;
 import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ShowcaseExampleStore;
 
-import javax.inject.Inject;
-
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 public class GeometryHeightReference extends AbstractExample {
-    private CesiumTerrainProvider cesiumTerrainProvider;
-    private EllipsoidTerrainProvider ellipsoidTerrainProvider;
-    private ViewerPanel csVPanel;
+  private CesiumTerrainProvider cesiumTerrainProvider;
+  private EllipsoidTerrainProvider ellipsoidTerrainProvider;
+  private ViewerPanel csVPanel;
 
-    double longitude = 6.850615989890521;
-    double latitude = 45.89546589994886;
-    double delta = 0.001;
+  double longitude = 6.850615989890521;
+  double latitude = 45.89546589994886;
+  double delta = 0.001;
 
-    @Inject
-    public GeometryHeightReference(ShowcaseExampleStore store) {
-        super("Geometry Height Reference", "An example for how to use the GeometryHeightProperty to height reference a corridor, ellipse, polygon or rectangle.", new String[]{"GeometryHeightProperty", "corridor", "ellipse", "polygon", "rectangle"}, store);
-    }
+  @Inject
+  public GeometryHeightReference(ShowcaseExampleStore store) {
+    super("Geometry Height Reference",
+        "An example for how to use the GeometryHeightProperty to height reference a corridor, ellipse, polygon or rectangle.",
+        new String[] { "GeometryHeightProperty", "corridor", "ellipse", "polygon", "rectangle" }, store);
+  }
 
-    @Override
-    public void buildPanel() {
-        cesiumTerrainProvider = Cesium.createWorldTerrain();
-        ellipsoidTerrainProvider = new EllipsoidTerrainProvider();
+  @Override
+  public void buildPanel() {
+    cesiumTerrainProvider = Cesium.createWorldTerrain();
+    ellipsoidTerrainProvider = new EllipsoidTerrainProvider();
 
-        ViewerOptions viewerOptions = new ViewerOptions();
-        viewerOptions.baseLayerPicker = false;
-        viewerOptions.terrainProvider = cesiumTerrainProvider;
-        csVPanel = new ViewerPanel(viewerOptions);
+    ViewerOptions viewerOptions = new ViewerOptions();
+    viewerOptions.baseLayerPicker = false;
+    viewerOptions.terrainProvider = cesiumTerrainProvider;
+    csVPanel = new ViewerPanel(viewerOptions);
 
-        csVPanel.getViewer().scene().globe.depthTestAgainstTerrain = true;
+    csVPanel.getViewer().scene().globe.depthTestAgainstTerrain = true;
 
-        ListBox terrainLBox = new ListBox();
-        terrainLBox.addItem("Disabled", "0");
-        terrainLBox.addItem("Enabled", "1");
-        terrainLBox.addChangeHandler(new ChangeHandler() {
-            @Override
-            public void onChange(ChangeEvent event) {
-                ListBox source = (ListBox) event.getSource();
-                if (source.getSelectedValue().equalsIgnoreCase("0")) {
-                    csVPanel.getViewer().terrainProvider = ellipsoidTerrainProvider;
-                } else if (source.getSelectedValue().equalsIgnoreCase("1")) {
-                    csVPanel.getViewer().terrainProvider = cesiumTerrainProvider;
-                }
-            }
-        });
-        terrainLBox.setSelectedIndex(1);
-
-        FlexTable flexTable = new FlexTable();
-        flexTable.setHTML(1, 0, "<font color=\"white\">Terrain</font>");
-        flexTable.setWidget(1, 1, terrainLBox);
-
-        AbsolutePanel aPanel = new AbsolutePanel();
-        aPanel.add(csVPanel);
-        aPanel.add(flexTable, 20, 20);
-
-        contentPanel.add(new HTML("<p>An example for how to use the GeometryHeightProperty to height reference a corridor, ellipse, polygon or rectangle..</p>"));
-        contentPanel.add(aPanel);
-
-        initWidget(contentPanel);
-
-        // create 16 polygons that are side-by-side
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                addEntity(i, j);
-            }
+    ListBox terrainLBox = new ListBox();
+    terrainLBox.addItem("Disabled", "0");
+    terrainLBox.addItem("Enabled", "1");
+    terrainLBox.addChangeHandler(new ChangeHandler() {
+      @Override
+      public void onChange(ChangeEvent event) {
+        ListBox source = (ListBox) event.getSource();
+        if (source.getSelectedValue().equalsIgnoreCase("0")) {
+          csVPanel.getViewer().terrainProvider = ellipsoidTerrainProvider;
+        } else if (source.getSelectedValue().equalsIgnoreCase("1")) {
+          csVPanel.getViewer().terrainProvider = cesiumTerrainProvider;
         }
+      }
+    });
+    terrainLBox.setSelectedIndex(1);
 
-        csVPanel.getViewer().camera.lookAt(Cartesian3.fromDegrees(longitude, latitude, 500), new HeadingPitchRange(Math.PI(), -Math.PI_OVER_FOUR(), 2000));
-        csVPanel.getViewer().camera.lookAtTransform(Matrix4.IDENTITY());//Sandcastle_End
+    FlexTable flexTable = new FlexTable();
+    flexTable.setHTML(1, 0, "<font color=\"white\">Terrain</font>");
+    flexTable.setWidget(1, 1, terrainLBox);
+
+    AbsolutePanel aPanel = new AbsolutePanel();
+    aPanel.add(csVPanel);
+    aPanel.add(flexTable, 20, 20);
+
+    contentPanel.add(new HTML(
+        "<p>An example for how to use the GeometryHeightProperty to height reference a corridor, ellipse, polygon or rectangle..</p>"));
+    contentPanel.add(aPanel);
+
+    initWidget(contentPanel);
+
+    // create 16 polygons that are side-by-side
+    for (int i = 0; i < 4; i++) {
+      for (int j = 0; j < 4; j++) {
+        addEntity(i, j);
+      }
     }
 
-    @Override
-    public String[] getSourceCodeURLs() {
-        String[] sourceCodeURLs = new String[1];
-        sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "GeometryHeightReference.txt";
-        return sourceCodeURLs;
-    }
+    csVPanel.getViewer().camera.lookAt(Cartesian3.fromDegrees(longitude, latitude, 500),
+        new HeadingPitchRange(Math.PI(), -Math.PI_OVER_FOUR(), 2000));
+    csVPanel.getViewer().camera.lookAtTransform(Matrix4.IDENTITY());// Sandcastle_End
+  }
 
-    private void addEntity(int i, int j) {
-        double west = longitude + delta * i;
-        double east = longitude + delta * i + delta;
+  @Override
+  public String[] getSourceCodeURLs() {
+    String[] sourceCodeURLs = new String[1];
+    sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "GeometryHeightReference.txt";
+    return sourceCodeURLs;
+  }
 
-        double south = latitude + delta * j;
-        double north = latitude + delta * j + delta;
-        Cartesian3 a = Cartesian3.fromDegrees(west, south);
-        Cartesian3 b = Cartesian3.fromDegrees(west, north);
-        Cartesian3 c = Cartesian3.fromDegrees(east, north);
-        Cartesian3 d = Cartesian3.fromDegrees(east, south);
+  private void addEntity(int i, int j) {
+    double west = longitude + delta * i;
+    double east = longitude + delta * i + delta;
 
-        Cartesian3[] positions = new Cartesian3[]{a, b, c, d};
+    double south = latitude + delta * j;
+    double north = latitude + delta * j + delta;
+    Cartesian3 a = Cartesian3.fromDegrees(west, south);
+    Cartesian3 b = Cartesian3.fromDegrees(west, north);
+    Cartesian3 c = Cartesian3.fromDegrees(east, north);
+    Cartesian3 d = Cartesian3.fromDegrees(east, south);
 
-        ColorRandomOptions colorRandomOptions = new ColorRandomOptions();
-        colorRandomOptions.alpha = 1.0f;
+    Cartesian3[] positions = new Cartesian3[] { a, b, c, d };
 
-        PolygonGraphicsOptions polygonGraphicsOptions = new PolygonGraphicsOptions();
-        polygonGraphicsOptions.hierarchy = new ConstantProperty<>(positions);
-        polygonGraphicsOptions.material = new ColorMaterialProperty(Color.fromRandom(colorRandomOptions));
-        polygonGraphicsOptions.height = new ConstantProperty<>(40.0);
-        polygonGraphicsOptions.heightReference = new ConstantProperty<>(HeightReference.RELATIVE_TO_GROUND());
-        polygonGraphicsOptions.extrudedHeight = new ConstantProperty<>(0.0);
-        polygonGraphicsOptions.extrudedHeightReference = new ConstantProperty<>(HeightReference.CLAMP_TO_GROUND());
+    ColorRandomOptions colorRandomOptions = new ColorRandomOptions();
+    colorRandomOptions.alpha = 1.0f;
 
-        EntityOptions entityOptions = new EntityOptions();
-        entityOptions.polygon = new PolygonGraphics(polygonGraphicsOptions);
-        csVPanel.getViewer().entities().add(entityOptions);
-    }
+    PolygonGraphicsOptions polygonGraphicsOptions = new PolygonGraphicsOptions();
+    polygonGraphicsOptions.hierarchy = new ConstantProperty<>(positions);
+    polygonGraphicsOptions.material = new ColorMaterialProperty(Color.fromRandom(colorRandomOptions));
+    polygonGraphicsOptions.height = new ConstantProperty<>(40.0);
+    polygonGraphicsOptions.heightReference = new ConstantProperty<>(HeightReference.RELATIVE_TO_GROUND());
+    polygonGraphicsOptions.extrudedHeight = new ConstantProperty<>(0.0);
+    polygonGraphicsOptions.extrudedHeightReference = new ConstantProperty<>(HeightReference.CLAMP_TO_GROUND());
+
+    EntityOptions entityOptions = new EntityOptions();
+    entityOptions.polygon = new PolygonGraphics(polygonGraphicsOptions);
+    csVPanel.getViewer().entities().add(entityOptions);
+  }
 }

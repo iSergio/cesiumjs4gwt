@@ -24,32 +24,33 @@ import jsinterop.annotations.JsType;
 /**
  * Options for {@link org.cesiumjs.cs.core.Credit}.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class CreditOptions {
-    /**
-     * The text to be displayed on the screen if no imageUrl is specified.
-     */
-    @JsProperty
-    public String text;
-    /**
-     * The source location for an image
-     */
-    @JsProperty
-    public String imageUrl;
-    /**
-     * A URL location for which the credit will be hyperlinked
-     */
-    @JsProperty
-    public String link;
-    /**
-     * If true, the credit will be visible in the main credit container. Otherwise, it will appear in a popover
-     * Default: false
-     */
-    @JsProperty
-    public boolean showOnScreen;
+  /**
+   * The text to be displayed on the screen if no imageUrl is specified.
+   */
+  @JsProperty
+  public String text;
+  /**
+   * The source location for an image
+   */
+  @JsProperty
+  public String imageUrl;
+  /**
+   * A URL location for which the credit will be hyperlinked
+   */
+  @JsProperty
+  public String link;
+  /**
+   * If true, the credit will be visible in the main credit container. Otherwise,
+   * it will appear in a popover Default: false
+   */
+  @JsProperty
+  public boolean showOnScreen;
 
-    @JsConstructor
-    public CreditOptions() {}
+  @JsConstructor
+  public CreditOptions() {
+  }
 }

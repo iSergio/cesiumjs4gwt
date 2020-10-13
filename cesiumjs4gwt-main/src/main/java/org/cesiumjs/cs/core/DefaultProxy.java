@@ -21,23 +21,29 @@ import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
 
 /**
- * A simple proxy that appends the desired resource as the sole query parameter to the given proxy URL.
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * A simple proxy that appends the desired resource as the sole query parameter
+ * to the given proxy URL.
+ * 
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "DefaultProxy")
 public class DefaultProxy {
-    /**
-     * A simple proxy that appends the desired resource as the sole query parameter to the given proxy URL.
-     * @param proxy The proxy URL that will be used to requests all resources.
-     */
-    @JsConstructor
-    public DefaultProxy(String proxy) {}
+  /**
+   * A simple proxy that appends the desired resource as the sole query parameter
+   * to the given proxy URL.
+   * 
+   * @param proxy The proxy URL that will be used to requests all resources.
+   */
+  @JsConstructor
+  public DefaultProxy(String proxy) {
+  }
 
-    /**
-     * Get the final URL to use to request a given resource.
-     * @param resource The resource to request.
-     * @return proxied resource
-     */
-    @JsMethod
-    public native String getURL(String resource);
+  /**
+   * Get the final URL to use to request a given resource.
+   * 
+   * @param resource The resource to request.
+   * @return proxied resource
+   */
+  @JsMethod
+  public native String getURL(String resource);
 }

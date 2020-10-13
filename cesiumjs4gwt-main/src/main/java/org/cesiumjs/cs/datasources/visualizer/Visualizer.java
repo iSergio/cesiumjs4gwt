@@ -19,7 +19,7 @@ package org.cesiumjs.cs.datasources.visualizer;
 import jsinterop.annotations.JsType;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "Visualizer")
 public interface Visualizer {

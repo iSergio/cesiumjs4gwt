@@ -16,30 +16,36 @@
 
 package org.cesiumjs.cs.scene.emitters;
 
+import org.cesiumjs.cs.core.Cartesian3;
+
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.Cartesian3;
 
 /**
- * A ParticleEmitter that emits particles within a box. Particles will be positioned randomly within the box and have
- * initial velocities emanating from the center of the box.
+ * A ParticleEmitter that emits particles within a box. Particles will be
+ * positioned randomly within the box and have initial velocities emanating from
+ * the center of the box.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "BoxEmitter")
 public class BoxEmitter implements ParticleEmitter {
-    /**
-     * The width, height and depth dimensions of the box in meters.
-     * Default: new Cartesian3(1.0, 1.0, 1.0)
-     */
-    @JsProperty
-    public Cartesian3 dimensions;
-    /**
-     * A ParticleEmitter that emits particles within a box. Particles will be positioned randomly within the box and
-     * have initial velocities emanating from the center of the box.
-     * @param dimensions The width, height and depth dimensions of the box.
-     */
-    @JsConstructor
-    public BoxEmitter(Cartesian3 dimensions) {}
+  /**
+   * The width, height and depth dimensions of the box in meters. Default: new
+   * Cartesian3(1.0, 1.0, 1.0)
+   */
+  @JsProperty
+  public Cartesian3 dimensions;
+
+  /**
+   * A ParticleEmitter that emits particles within a box. Particles will be
+   * positioned randomly within the box and have initial velocities emanating from
+   * the center of the box.
+   * 
+   * @param dimensions The width, height and depth dimensions of the box.
+   */
+  @JsConstructor
+  public BoxEmitter(Cartesian3 dimensions) {
+  }
 }

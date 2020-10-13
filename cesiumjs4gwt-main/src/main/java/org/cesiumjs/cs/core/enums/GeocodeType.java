@@ -21,22 +21,27 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * The type of geocoding to be performed by a {@link org.cesiumjs.cs.core.GeocoderService}.
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * The type of geocoding to be performed by a
+ * {@link org.cesiumjs.cs.core.GeocoderService}.
+ * 
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "GeocodeType")
 public class GeocodeType {
-    /**
-     * Perform an auto-complete using partial input, typically reserved for providing possible results as a user is typing.
-     */
-    @JsProperty(name = "AUTOCOMPLETE")
-    public static native Number AUTOCOMPLETE();
-    /**
-     * Perform a search where the input is considered complete.
-     */
-    @JsProperty(name = "SEARCH")
-    public static native Number SEARCH();
+  /**
+   * Perform an auto-complete using partial input, typically reserved for
+   * providing possible results as a user is typing.
+   */
+  @JsProperty(name = "AUTOCOMPLETE")
+  public static native Number AUTOCOMPLETE();
 
-    @JsConstructor
-    private GeocodeType() {}
+  /**
+   * Perform a search where the input is considered complete.
+   */
+  @JsProperty(name = "SEARCH")
+  public static native Number SEARCH();
+
+  @JsConstructor
+  private GeocodeType() {
+  }
 }

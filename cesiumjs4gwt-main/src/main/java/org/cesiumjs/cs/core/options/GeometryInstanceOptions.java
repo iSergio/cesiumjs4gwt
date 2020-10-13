@@ -16,35 +16,40 @@
 
 package org.cesiumjs.cs.core.options;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Matrix4;
 import org.cesiumjs.cs.core.geometry.Geometry;
 
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsType;
+
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class GeometryInstanceOptions {
-    /**
-     * The geometry to instance.
-     */
-    public Geometry geometry;
-    /**
-     * The model matrix that transforms to transform the geometry from model to world coordinates.
-     * Default: {@link Matrix4#IDENTITY()}
-     */
-    public Matrix4 modelMatrix;
-    /**
-     * A user-defined object to return when the instance is picked with Scene#pick or get/set per-instance attributes with Primitive#getGeometryInstanceAttributes.
-     */
-    public Object id;
-    /**
-     * Per-instance attributes like a show or color attribute shown in the example below.
-     */
-    public Object attributes;
+  /**
+   * The geometry to instance.
+   */
+  public Geometry geometry;
+  /**
+   * The model matrix that transforms to transform the geometry from model to
+   * world coordinates. Default: {@link Matrix4#IDENTITY()}
+   */
+  public Matrix4 modelMatrix;
+  /**
+   * A user-defined object to return when the instance is picked with Scene#pick
+   * or get/set per-instance attributes with
+   * Primitive#getGeometryInstanceAttributes.
+   */
+  public Object id;
+  /**
+   * Per-instance attributes like a show or color attribute shown in the example
+   * below.
+   */
+  public Object attributes;
 
-    @JsConstructor
-    public GeometryInstanceOptions() {}
+  @JsConstructor
+  public GeometryInstanceOptions() {
+  }
 }

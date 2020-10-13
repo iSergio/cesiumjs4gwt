@@ -26,16 +26,15 @@ import jsinterop.annotations.JsType;
 @JsType(isNative = true, namespace = "Cesium", name = "DebugCameraPrimitive")
 public class DebugCameraPrimitive extends Primitive {
   /**
-   * User-defined value returned when the primitive is picked.
-   * Default: undefined
+   * User-defined value returned when the primitive is picked. Default: undefined
+   * 
    * @see {org.cesiumjs.cs.scene.Scene#pick}
    */
   @JsProperty
   public Object id;
 
   /**
-   * Determines if this primitive will be shown.
-   * Default: true
+   * Determines if this primitive will be shown. Default: true
    */
   @JsProperty
   public boolean show;
@@ -46,5 +45,6 @@ public class DebugCameraPrimitive extends Primitive {
    * @param options object {@see }
    */
   @JsConstructor
-  public DebugCameraPrimitive(DebugCameraPrimitiveOptions options) {}
+  public DebugCameraPrimitive(DebugCameraPrimitiveOptions options) {
+  }
 }

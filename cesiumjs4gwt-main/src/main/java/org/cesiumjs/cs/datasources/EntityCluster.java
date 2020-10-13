@@ -16,69 +16,83 @@
 
 package org.cesiumjs.cs.datasources;
 
-import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.datasources.options.EntityClusterOptions;
 
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsFunction;
+import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
+
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "EntityCluster")
 public class EntityCluster {
-    /**
-     * Gets the event that will be raised when a new cluster will be displayed.
-     * The signature of the event listener is EntityCluster~newClusterCallback.
-     */
-    @JsProperty
-    public Event clusterEvent;
-    /**
-     * Gets or sets whether clustering is enabled.
-     */
-    @JsProperty
-    public boolean enabled;
-    /**
-     * Gets or sets the minimum number of screen space objects that can be clustered.
-     */
-    @JsProperty
-    public int minimumClusterSize;
-    /**
-     * Gets or sets the pixel range to extend the screen space bounding box.
-     */
-    @JsProperty
-    public int pixelRange;
+  /**
+   * Gets the event that will be raised when a new cluster will be displayed. The
+   * signature of the event listener is EntityCluster~newClusterCallback.
+   */
+  @JsProperty
+  public Event clusterEvent;
+  /**
+   * Gets or sets whether clustering is enabled.
+   */
+  @JsProperty
+  public boolean enabled;
+  /**
+   * Gets or sets the minimum number of screen space objects that can be
+   * clustered.
+   */
+  @JsProperty
+  public int minimumClusterSize;
+  /**
+   * Gets or sets the pixel range to extend the screen space bounding box.
+   */
+  @JsProperty
+  public int pixelRange;
 
-    /**
-     * Defines how screen space objects (billboards, points, labels) are clustered.
-     */
-    @JsConstructor
-    public EntityCluster() {}
+  /**
+   * Defines how screen space objects (billboards, points, labels) are clustered.
+   */
+  @JsConstructor
+  public EntityCluster() {
+  }
 
-    /**
-     * Defines how screen space objects (billboards, points, labels) are clustered.
-     * @param options {@link EntityClusterOptions}.
-     */
-    @JsConstructor
-    public EntityCluster(EntityClusterOptions options) {}
+  /**
+   * Defines how screen space objects (billboards, points, labels) are clustered.
+   * 
+   * @param options {@link EntityClusterOptions}.
+   */
+  @JsConstructor
+  public EntityCluster(EntityClusterOptions options) {
+  }
 
-    /**
-     * Destroys the WebGL resources held by this object. Destroying an object allows for deterministic release of WebGL
-     * resources, instead of relying on the garbage collector to destroy this object.
-     *
-     * Unlike other objects that use WebGL resources, this object can be reused.
-     * For example, if a data source is removed from a data source collection and added to another.
-     */
-    @JsMethod
-    public native void destroy();
+  /**
+   * Destroys the WebGL resources held by this object. Destroying an object allows
+   * for deterministic release of WebGL resources, instead of relying on the
+   * garbage collector to destroy this object.
+   *
+   * Unlike other objects that use WebGL resources, this object can be reused. For
+   * example, if a data source is removed from a data source collection and added
+   * to another.
+   */
+  @JsMethod
+  public native void destroy();
 
-    //TODO: Example
-    @JsFunction
-    public interface newClusterCallback {
-        /**
-         * A event listener function used to style clusters.
-         * @param clusteredEntities An array of the entities contained in the cluster.
-         * @param cluster An object containing billboard, label, and point properties. The values are the same as billboard,
-         *                label and point entities, but must be the values of the ConstantProperty.
-         */
-        void function(Entity[] clusteredEntities, EntityClusterObject cluster);
-    }
+  // TODO: Example
+  @JsFunction
+  public interface newClusterCallback {
+    /**
+     * A event listener function used to style clusters.
+     * 
+     * @param clusteredEntities An array of the entities contained in the cluster.
+     * @param cluster           An object containing billboard, label, and point
+     *                          properties. The values are the same as billboard,
+     *                          label and point entities, but must be the values of
+     *                          the ConstantProperty.
+     */
+    void function(Entity[] clusteredEntities, EntityClusterObject cluster);
+  }
 }

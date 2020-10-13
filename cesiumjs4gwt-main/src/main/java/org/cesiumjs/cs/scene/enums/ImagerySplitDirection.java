@@ -21,28 +21,33 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * The direction to display an ImageryLayer relative to the {@link org.cesiumjs.cs.scene.Scene#imagerySplitPosition}.
+ * The direction to display an ImageryLayer relative to the
+ * {@link org.cesiumjs.cs.scene.Scene#imagerySplitPosition}.
+ * 
  * @see org.cesiumjs.cs.scene.ImageryLayer#splitDirection
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "ImagerySplitDirection")
 public class ImagerySplitDirection {
-    /**
-     * Display the ImageryLayer to the left of the Scene#imagerySplitPosition.
-     */
-    @JsProperty(name = "LEFT")
-    public static native Number LEFT();
-    /**
-     * Always display the ImageryLayer.
-     */
-    @JsProperty(name = "NONE")
-    public static native Number NONE();
-    /**
-     * Display the ImageryLayer to the right of the Scene#imagerySplitPosition.
-     */
-    @JsProperty(name = "RIGHT")
-    public static native Number RIGHT();
+  /**
+   * Display the ImageryLayer to the left of the Scene#imagerySplitPosition.
+   */
+  @JsProperty(name = "LEFT")
+  public static native Number LEFT();
 
-    @JsConstructor
-    private ImagerySplitDirection() {}
+  /**
+   * Always display the ImageryLayer.
+   */
+  @JsProperty(name = "NONE")
+  public static native Number NONE();
+
+  /**
+   * Display the ImageryLayer to the right of the Scene#imagerySplitPosition.
+   */
+  @JsProperty(name = "RIGHT")
+  public static native Number RIGHT();
+
+  @JsConstructor
+  private ImagerySplitDirection() {
+  }
 }

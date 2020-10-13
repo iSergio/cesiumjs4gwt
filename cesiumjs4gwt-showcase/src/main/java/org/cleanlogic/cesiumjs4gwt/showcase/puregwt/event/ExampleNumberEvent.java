@@ -17,6 +17,7 @@
 package org.cleanlogic.cesiumjs4gwt.showcase.puregwt.event;
 
 import com.google.gwt.event.shared.GwtEvent;
+
 import org.cleanlogic.cesiumjs4gwt.showcase.puregwt.handler.ExampleNumberHandler;
 
 /**
@@ -25,23 +26,23 @@ import org.cleanlogic.cesiumjs4gwt.showcase.puregwt.handler.ExampleNumberHandler
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class ExampleNumberEvent extends GwtEvent<ExampleNumberHandler> {
-    
-    protected int number;
 
-    @Override
-    public Type<ExampleNumberHandler> getAssociatedType() {
-        return ExampleNumberHandler.TYPE;
-    }
+  protected int number;
 
-    @Override
-    protected void dispatch(ExampleNumberHandler handler) {
-        handler.updateExampleNumber(number);
-    }
+  @Override
+  public Type<ExampleNumberHandler> getAssociatedType() {
+    return ExampleNumberHandler.TYPE;
+  }
 
-    /**
-     * @param number the number to set
-     */
-    public void setNumber(int number) {
-        this.number = number;
-    }
+  @Override
+  protected void dispatch(ExampleNumberHandler handler) {
+    handler.updateExampleNumber(number);
+  }
+
+  /**
+   * @param number the number to set
+   */
+  public void setNumber(int number) {
+    this.number = number;
+  }
 }

@@ -21,31 +21,36 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "Intersect")
 public class Intersect {
-    /**
-     * Represents that an object is fully within the frustum.
-     */
-    @JsProperty(name = "INSIDE")
-    public static native Number INSIDE();
-    /**
-     * Represents that an object intersects one of the frustum's planes.
-     */
-    @JsProperty(name = "INTERSECTING")
-    public static native Number INTERSECTING();
-    /**
-     * Represents that an object is not contained within the frustum.
-     */
-    @JsProperty(name = "OUTSIDE")
-    public static native Number OUTSIDE();
+  /**
+   * Represents that an object is fully within the frustum.
+   */
+  @JsProperty(name = "INSIDE")
+  public static native Number INSIDE();
 
-    /**
-     * This enumerated type is used in determining where, relative to the frustum, an object is located.
-     * The object can either be fully contained within the frustum (INSIDE), partially inside the frustum and partially
-     * outside (INTERSECTING), or somwhere entirely outside of the frustum's 6 planes (OUTSIDE).
-     */
-    @JsConstructor
-    private Intersect() {}
+  /**
+   * Represents that an object intersects one of the frustum's planes.
+   */
+  @JsProperty(name = "INTERSECTING")
+  public static native Number INTERSECTING();
+
+  /**
+   * Represents that an object is not contained within the frustum.
+   */
+  @JsProperty(name = "OUTSIDE")
+  public static native Number OUTSIDE();
+
+  /**
+   * This enumerated type is used in determining where, relative to the frustum,
+   * an object is located. The object can either be fully contained within the
+   * frustum (INSIDE), partially inside the frustum and partially outside
+   * (INTERSECTING), or somwhere entirely outside of the frustum's 6 planes
+   * (OUTSIDE).
+   */
+  @JsConstructor
+  private Intersect() {
+  }
 }

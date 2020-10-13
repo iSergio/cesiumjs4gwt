@@ -16,49 +16,52 @@
 
 package org.cesiumjs.cs.scene.providers.options;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Credit;
 import org.cesiumjs.cs.core.Ellipsoid;
 import org.cesiumjs.cs.core.Rectangle;
 
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
+
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class SingleTileImageryProviderOptions {
-    /**
-     * The url for the tile.
-     */
-    @JsProperty
-    public String url;
-    /**
-     * The rectangle, in radians, covered by the image.
-     * Default: {@link Rectangle#MAX_VALUE()}
-     */
-    @JsProperty
-    public Rectangle rectangle;
-    /**
-     * A credit for the data source, which is displayed on the canvas.
-     */
-    @JsProperty
-    public Credit credit;
-    /**
-     * The ellipsoid. If not specified, the WGS84 ellipsoid is used.
-     */
-    @JsProperty
-    public Ellipsoid ellipsoid;
-    /**
-     * A proxy to use for requests. This object is expected to have a getURL function which returns the proxied URL, if needed.
-     */
-    @JsProperty
-    public Object proxy;
+  /**
+   * The url for the tile.
+   */
+  @JsProperty
+  public String url;
+  /**
+   * The rectangle, in radians, covered by the image. Default:
+   * {@link Rectangle#MAX_VALUE()}
+   */
+  @JsProperty
+  public Rectangle rectangle;
+  /**
+   * A credit for the data source, which is displayed on the canvas.
+   */
+  @JsProperty
+  public Credit credit;
+  /**
+   * The ellipsoid. If not specified, the WGS84 ellipsoid is used.
+   */
+  @JsProperty
+  public Ellipsoid ellipsoid;
+  /**
+   * A proxy to use for requests. This object is expected to have a getURL
+   * function which returns the proxied URL, if needed.
+   */
+  @JsProperty
+  public Object proxy;
 
-    /**
-     * Options for {@link org.cesiumjs.cs.scene.providers.SingleTileImageryProvider}
-     */
-    @JsConstructor
-    public SingleTileImageryProviderOptions() {}
+  /**
+   * Options for {@link org.cesiumjs.cs.scene.providers.SingleTileImageryProvider}
+   */
+  @JsConstructor
+  public SingleTileImageryProviderOptions() {
+  }
 }

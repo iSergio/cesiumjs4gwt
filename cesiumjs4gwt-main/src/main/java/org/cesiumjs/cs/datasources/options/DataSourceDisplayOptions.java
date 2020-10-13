@@ -16,36 +16,39 @@
 
 package org.cesiumjs.cs.datasources.options;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.collections.DataSourceCollection;
 import org.cesiumjs.cs.datasources.DataSourceDisplay;
 import org.cesiumjs.cs.scene.Scene;
 
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
+
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class DataSourceDisplayOptions {
-    /**
-     * The scene in which to display the data.
-     */
-    @JsProperty
-    public Scene scene;
-    /**
-     * The data sources to display.
-     */
-    @JsProperty
-    public DataSourceCollection dataSourceCollection;
-    /**
-     * A function which creates an array of visualizers used for visualization. If undefined, all standard visualizers are used.
-     * Default: DataSourceDisplay.defaultVisualizersCallback
-     */
-    @JsProperty
-    public DataSourceDisplay.VisualizersCallback visualizersCallback;
+  /**
+   * The scene in which to display the data.
+   */
+  @JsProperty
+  public Scene scene;
+  /**
+   * The data sources to display.
+   */
+  @JsProperty
+  public DataSourceCollection dataSourceCollection;
+  /**
+   * A function which creates an array of visualizers used for visualization. If
+   * undefined, all standard visualizers are used. Default:
+   * DataSourceDisplay.defaultVisualizersCallback
+   */
+  @JsProperty
+  public DataSourceDisplay.VisualizersCallback visualizersCallback;
 
-    @JsConstructor
-    public DataSourceDisplayOptions() {}
+  @JsConstructor
+  public DataSourceDisplayOptions() {
+  }
 }

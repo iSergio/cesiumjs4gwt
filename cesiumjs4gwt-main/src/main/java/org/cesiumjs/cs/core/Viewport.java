@@ -21,16 +21,16 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class Viewport {
-    @JsProperty
-    public double x;
-    @JsProperty
-    public double y;
-    @JsProperty
-    public double width;
-    @JsProperty
-    public double height;
+  @JsProperty
+  public double x;
+  @JsProperty
+  public double y;
+  @JsProperty
+  public double width;
+  @JsProperty
+  public double height;
 }

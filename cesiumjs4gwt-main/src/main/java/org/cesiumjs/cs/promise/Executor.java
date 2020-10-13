@@ -19,9 +19,9 @@ package org.cesiumjs.cs.promise;
 import jsinterop.annotations.JsFunction;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsFunction
 public interface Executor<V, E> {
-    void function(Fulfill<V> fulfill, Reject<E> reject);
+  void function(Fulfill<V> fulfill, Reject<E> reject);
 }

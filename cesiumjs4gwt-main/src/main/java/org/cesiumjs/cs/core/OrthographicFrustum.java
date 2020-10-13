@@ -21,84 +21,104 @@ import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "OrthographicFrustum")
 public class OrthographicFrustum extends Frustum {
-    //TODO: Example
-    /**
-     * The viewing frustum is defined by 6 planes. Each plane is represented by a Cartesian4 object, where the x, y,
-     * and z components define the unit vector normal to the plane, and the w component is the distance of the plane
-     * from the origin/camera position.
-     */
-    @JsConstructor
-    public OrthographicFrustum() {}
+  // TODO: Example
+  /**
+   * The viewing frustum is defined by 6 planes. Each plane is represented by a
+   * Cartesian4 object, where the x, y, and z components define the unit vector
+   * normal to the plane, and the w component is the distance of the plane from
+   * the origin/camera position.
+   */
+  @JsConstructor
+  public OrthographicFrustum() {
+  }
 
-    /**
-     * OrthographicFrustum
-     * @return The modified result parameter or a new PerspectiveFrustum instance if one was not provided.
-     */
-    @JsMethod
-    public native OrthographicFrustum clone();
+  /**
+   * OrthographicFrustum
+   * 
+   * @return The modified result parameter or a new PerspectiveFrustum instance if
+   *         one was not provided.
+   */
+  @JsMethod
+  public native OrthographicFrustum clone();
 
-    /**
-     * OrthographicFrustum
-     * @param result The object onto which to store the result.
-     * @return The modified result parameter or a new PerspectiveFrustum instance if one was not provided.
-     */
-    @JsMethod
-    public native OrthographicFrustum clone(OrthographicFrustum result);
+  /**
+   * OrthographicFrustum
+   * 
+   * @param result The object onto which to store the result.
+   * @return The modified result parameter or a new PerspectiveFrustum instance if
+   *         one was not provided.
+   */
+  @JsMethod
+  public native OrthographicFrustum clone(OrthographicFrustum result);
 
-    //TODO: Example
-    /**
-     * Creates a culling volume for this frustum.
-     * @param position The eye position.
-     * @param direction The view direction.
-     * @param up The up direction.
-     * @return A culling volume at the given position and orientation.
-     */
-    @JsMethod
-    public native CullingVolume computeCullingVolume(Cartesian3 position, Cartesian3 direction, Cartesian3 up);
+  // TODO: Example
+  /**
+   * Creates a culling volume for this frustum.
+   * 
+   * @param position  The eye position.
+   * @param direction The view direction.
+   * @param up        The up direction.
+   * @return A culling volume at the given position and orientation.
+   */
+  @JsMethod
+  public native CullingVolume computeCullingVolume(Cartesian3 position, Cartesian3 direction, Cartesian3 up);
 
-    /**
-     * Compares the provided OrthographicFrustum componentwise and returns true if they are equal, false otherwise.
-     * @param other The right hand side OrthographicFrustum.
-     * @return true if they are equal, false otherwise.
-     */
-    @JsMethod
-    public native boolean equals(OrthographicFrustum other);
+  /**
+   * Compares the provided OrthographicFrustum componentwise and returns true if
+   * they are equal, false otherwise.
+   * 
+   * @param other The right hand side OrthographicFrustum.
+   * @return true if they are equal, false otherwise.
+   */
+  @JsMethod
+  public native boolean equals(OrthographicFrustum other);
 
-    /**
-     * Compares the provided OrthographicFrustum componentwise and returns true if they pass an absolute or relative
-     * tolerance test, false otherwise.
-     * @param other The right hand side OrthographicFrustum.
-     * @param relativeEpsilon The relative epsilon tolerance to use for equality testing.
-     * @return true if this and other are within the provided epsilon, false otherwise.
-     */
-    @JsMethod
-    public native boolean equalsEpsilon(OrthographicFrustum other, double relativeEpsilon);
+  /**
+   * Compares the provided OrthographicFrustum componentwise and returns true if
+   * they pass an absolute or relative tolerance test, false otherwise.
+   * 
+   * @param other           The right hand side OrthographicFrustum.
+   * @param relativeEpsilon The relative epsilon tolerance to use for equality
+   *                        testing.
+   * @return true if this and other are within the provided epsilon, false
+   *         otherwise.
+   */
+  @JsMethod
+  public native boolean equalsEpsilon(OrthographicFrustum other, double relativeEpsilon);
 
-    /**
-     * Compares the provided OrthographicFrustum componentwise and returns true if they pass an absolute or relative
-     * tolerance test, false otherwise.
-     * @param other The right hand side OrthographicFrustum.
-     * @param relativeEpsilon The relative epsilon tolerance to use for equality testing.
-     * @param absoluteEpsilon The absolute epsilon tolerance to use for equality testing.
-     * @return true if this and other are within the provided epsilon, false otherwise.
-     */
-    @JsMethod
-    public native boolean equalsEpsilon(OrthographicFrustum other, double relativeEpsilon, double absoluteEpsilon);
+  /**
+   * Compares the provided OrthographicFrustum componentwise and returns true if
+   * they pass an absolute or relative tolerance test, false otherwise.
+   * 
+   * @param other           The right hand side OrthographicFrustum.
+   * @param relativeEpsilon The relative epsilon tolerance to use for equality
+   *                        testing.
+   * @param absoluteEpsilon The absolute epsilon tolerance to use for equality
+   *                        testing.
+   * @return true if this and other are within the provided epsilon, false
+   *         otherwise.
+   */
+  @JsMethod
+  public native boolean equalsEpsilon(OrthographicFrustum other, double relativeEpsilon, double absoluteEpsilon);
 
-    //TODO: Example
-    /**
-     * Returns the pixel's width and height in meters.
-     * @param drawingBufferWidth The width of the drawing buffer.
-     * @param drawingBufferHeight The height of the drawing buffer.
-     * @param distance The distance to the near plane in meters.
-     * @param pixelRatio The scaling factor from pixel space to coordinate space.
-     * @param result The object onto which to store the result.
-     * @return The modified result parameter or a new instance of Cartesian2 with the pixel's width and height in the x and y properties, respectively.
-     */
-    @JsMethod
-    public native Cartesian2 getPixelDimensions(double drawingBufferWidth, double drawingBufferHeight, double distance, double pixelRatio, Cartesian2 result);
+  // TODO: Example
+  /**
+   * Returns the pixel's width and height in meters.
+   * 
+   * @param drawingBufferWidth  The width of the drawing buffer.
+   * @param drawingBufferHeight The height of the drawing buffer.
+   * @param distance            The distance to the near plane in meters.
+   * @param pixelRatio          The scaling factor from pixel space to coordinate
+   *                            space.
+   * @param result              The object onto which to store the result.
+   * @return The modified result parameter or a new instance of Cartesian2 with
+   *         the pixel's width and height in the x and y properties, respectively.
+   */
+  @JsMethod
+  public native Cartesian2 getPixelDimensions(double drawingBufferWidth, double drawingBufferHeight, double distance,
+      double pixelRatio, Cartesian2 result);
 }

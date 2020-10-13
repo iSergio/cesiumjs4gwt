@@ -16,38 +16,42 @@
 
 package org.cesiumjs.cs.datasources.properties.options;
 
+import org.cesiumjs.cs.core.Cartesian3;
+import org.cesiumjs.cs.core.Quaternion;
+import org.cesiumjs.cs.datasources.properties.Property;
+
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.Cartesian3;
-import org.cesiumjs.cs.core.Quaternion;
-import org.cesiumjs.cs.datasources.properties.NodeTransformationProperty;
-import org.cesiumjs.cs.datasources.properties.Property;
 
 /**
- * Options for {@link org.cesiumjs.cs.datasources.properties.NodeTransformationProperty}.
+ * Options for
+ * {@link org.cesiumjs.cs.datasources.properties.NodeTransformationProperty}.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class NodeTransformationPropertyOptions {
-    /**
-     * A Cartesian3 Property specifying the (x, y, z) translation to apply to the node.
-     */
-    @JsProperty
-    public Property<Cartesian3> translation;
-    /**
-     * A Quaternion Property specifying the (x, y, z, w) rotation to apply to the node.
-     */
-    @JsProperty
-    public Property<Quaternion> rotation;
-    /**
-     * A Cartesian3 Property specifying the (x, y, z) scaling to apply to the node.
-     */
-    @JsProperty
-    public Property<Cartesian3> scale;
+  /**
+   * A Cartesian3 Property specifying the (x, y, z) translation to apply to the
+   * node.
+   */
+  @JsProperty
+  public Property<Cartesian3> translation;
+  /**
+   * A Quaternion Property specifying the (x, y, z, w) rotation to apply to the
+   * node.
+   */
+  @JsProperty
+  public Property<Quaternion> rotation;
+  /**
+   * A Cartesian3 Property specifying the (x, y, z) scaling to apply to the node.
+   */
+  @JsProperty
+  public Property<Cartesian3> scale;
 
-    @JsConstructor
-    public NodeTransformationPropertyOptions() {}
+  @JsConstructor
+  public NodeTransformationPropertyOptions() {
+  }
 }

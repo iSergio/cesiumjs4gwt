@@ -20,45 +20,53 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsType;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "TranslationRotationScale")
 public class TranslationRotationScale {
-    /**
-     * Gets or sets the (x, y, z, w) rotation to apply to the node.
-     * Default: {@link Quaternion#IDENTITY()}
-     */
-    public Quaternion rotation;
-    /**
-     * Gets or sets the (x, y, z) scaling to apply to the node.
-     * Default: new Cartesian3(1.0, 1.0, 1.0)
-     */
-    public Cartesian3 scale;
-    /**
-     * Gets or sets the (x, y, z) translation to apply to the node.
-     * Default: {@link Cartesian3#ZERO()}
-     */
-    public Cartesian3 translation;
+  /**
+   * Gets or sets the (x, y, z, w) rotation to apply to the node. Default:
+   * {@link Quaternion#IDENTITY()}
+   */
+  public Quaternion rotation;
+  /**
+   * Gets or sets the (x, y, z) scaling to apply to the node. Default: new
+   * Cartesian3(1.0, 1.0, 1.0)
+   */
+  public Cartesian3 scale;
+  /**
+   * Gets or sets the (x, y, z) translation to apply to the node. Default:
+   * {@link Cartesian3#ZERO()}
+   */
+  public Cartesian3 translation;
 
-    /**
-     * An affine transformation defined by a translation, rotation, and scale.
-     */
-    @JsConstructor
-    public TranslationRotationScale() {}
+  /**
+   * An affine transformation defined by a translation, rotation, and scale.
+   */
+  @JsConstructor
+  public TranslationRotationScale() {
+  }
 
-    /**
-     * An affine transformation defined by a translation, rotation, and scale.
-     * @param translation A Cartesian3 specifying the (x, y, z) translation to apply to the node. Default: {@link Cartesian3#ZERO()}
-     * @param rotation A Quaternion specifying the (x, y, z, w) rotation to apply to the node. Default: {@link Quaternion#IDENTITY()}
-     * @param scale A Cartesian3 specifying the (x, y, z) scaling to apply to the node. Default: new Cartesian3(1.0, 1.0, 1.0)
-     */
-    @JsConstructor
-    public TranslationRotationScale(Cartesian3 translation, Quaternion rotation, Cartesian3 scale) {}
+  /**
+   * An affine transformation defined by a translation, rotation, and scale.
+   * 
+   * @param translation A Cartesian3 specifying the (x, y, z) translation to apply
+   *                    to the node. Default: {@link Cartesian3#ZERO()}
+   * @param rotation    A Quaternion specifying the (x, y, z, w) rotation to apply
+   *                    to the node. Default: {@link Quaternion#IDENTITY()}
+   * @param scale       A Cartesian3 specifying the (x, y, z) scaling to apply to
+   *                    the node. Default: new Cartesian3(1.0, 1.0, 1.0)
+   */
+  @JsConstructor
+  public TranslationRotationScale(Cartesian3 translation, Quaternion rotation, Cartesian3 scale) {
+  }
 
-    /**
-     * Compares this instance against the provided instance and returns true if they are equal, false otherwise.
-     * @param right The right hand side TranslationRotationScale.
-     * @return true if they are equal, false otherwise.
-     */
-    public native boolean equals(TranslationRotationScale right);
+  /**
+   * Compares this instance against the provided instance and returns true if they
+   * are equal, false otherwise.
+   * 
+   * @param right The right hand side TranslationRotationScale.
+   * @return true if they are equal, false otherwise.
+   */
+  public native boolean equals(TranslationRotationScale right);
 }

@@ -16,47 +16,53 @@
 
 package org.cesiumjs.cs.core.geometry.options;
 
-import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.Cartesian3;
+
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsOverlay;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 
 /**
  * Options for {@link org.cesiumjs.cs.core.geometry.GroundPolylineGeometry}.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class GroundPolylineGeometryOptions {
-    /**
-     * An array of Cartesian3 defining the polyline's points. Heights above the ellipsoid will be ignored.
-     */
-    @JsProperty
-    public Cartesian3[] positions;
-    /**
-     * The screen space width in pixels.
-     * Default: 1
-     */
-    @JsProperty
-    public int width;
-    /**
-     * The distance interval in meters used for interpolating options.points. Defaults to 9999.0 meters. Zero indicates no interpolation.
-     * Default: 9999.0
-     */
-    @JsProperty
-    public double granularity;
-    /**
-     * Whether during geometry creation a line segment will be added between the last and first line positions to make this Polyline a loop.
-     * Default: false
-     */
-    @JsProperty
-    public boolean loop;
+  /**
+   * An array of Cartesian3 defining the polyline's points. Heights above the
+   * ellipsoid will be ignored.
+   */
+  @JsProperty
+  public Cartesian3[] positions;
+  /**
+   * The screen space width in pixels. Default: 1
+   */
+  @JsProperty
+  public int width;
+  /**
+   * The distance interval in meters used for interpolating options.points.
+   * Defaults to 9999.0 meters. Zero indicates no interpolation. Default: 9999.0
+   */
+  @JsProperty
+  public double granularity;
+  /**
+   * Whether during geometry creation a line segment will be added between the
+   * last and first line positions to make this Polyline a loop. Default: false
+   */
+  @JsProperty
+  public boolean loop;
 
-    @JsConstructor
-    private GroundPolylineGeometryOptions() {}
+  @JsConstructor
+  private GroundPolylineGeometryOptions() {
+  }
 
-    @JsOverlay
-    public static GroundPolylineGeometryOptions create(Cartesian3[] positions) {
-        GroundPolylineGeometryOptions options = new GroundPolylineGeometryOptions();
-        options.positions = positions;
-        return options;
-    }
+  @JsOverlay
+  public static GroundPolylineGeometryOptions create(Cartesian3[] positions) {
+    GroundPolylineGeometryOptions options = new GroundPolylineGeometryOptions();
+    options.positions = positions;
+    return options;
+  }
 }

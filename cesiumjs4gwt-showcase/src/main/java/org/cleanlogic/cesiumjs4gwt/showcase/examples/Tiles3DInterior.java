@@ -16,8 +16,11 @@
 
 package org.cleanlogic.cesiumjs4gwt.showcase.examples;
 
+import javax.inject.Inject;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.HTML;
+
 import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.Matrix4;
 import org.cesiumjs.cs.scene.Cesium3DTileset;
@@ -26,42 +29,43 @@ import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cleanlogic.cesiumjs4gwt.showcase.basic.AbstractExample;
 import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ShowcaseExampleStore;
 
-import javax.inject.Inject;
-
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 public class Tiles3DInterior extends AbstractExample {
 
-    @Inject
-    public Tiles3DInterior(ShowcaseExampleStore store) {
-        super("3D Tiles Interior", "A sample interior rendered with 3D Tiles.", new String[]{"Showcase", "Cesium", "3D Tiles"}, store);
-    }
+  @Inject
+  public Tiles3DInterior(ShowcaseExampleStore store) {
+    super("3D Tiles Interior", "A sample interior rendered with 3D Tiles.",
+        new String[] { "Showcase", "Cesium", "3D Tiles" }, store);
+  }
 
-    @Override
-    public void buildPanel() {
-        ViewerPanel csVPanel = new ViewerPanel();
+  @Override
+  public void buildPanel() {
+    ViewerPanel csVPanel = new ViewerPanel();
 
-        csVPanel.getViewer().scene().primitives().add(Cesium3DTileset.create("https://beta.cesium.com/api/assets/1463?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI5ZGExZTdmMS0xZjA5LTQxODAtOThmYi04MWU1YjZkMWZjNjgiLCJpZCI6NDQsImFzc2V0cyI6WzE0NjNdLCJpYXQiOjE0OTkyNzYwNzV9.eTEtaAEBUehNIZushZQnp0On9BPRtZYS7XEWFwneSRU"));
+    csVPanel.getViewer().scene().primitives().add(Cesium3DTileset.create(
+        "https://beta.cesium.com/api/assets/1463?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI5ZGExZTdmMS0xZjA5LTQxODAtOThmYi04MWU1YjZkMWZjNjgiLCJpZCI6NDQsImFzc2V0cyI6WzE0NjNdLCJpYXQiOjE0OTkyNzYwNzV9.eTEtaAEBUehNIZushZQnp0On9BPRtZYS7XEWFwneSRU"));
 
-        Cartesian3 initialPosition = new Cartesian3(-1111583.3721328347, -5855888.151574568, 2262561.444696748);
-        org.cesiumjs.cs.core.HeadingPitchRoll initialOrientation = org.cesiumjs.cs.core.HeadingPitchRoll.fromDegrees(100.0, -15.0, 0.0);
-        ViewOptions viewOptions = new ViewOptions();
-        viewOptions.destinationPos = initialPosition;
-        viewOptions.orientation = initialOrientation;
-        viewOptions.endTransform = Matrix4.IDENTITY();
-        csVPanel.getViewer().scene().camera().setView(viewOptions);
+    Cartesian3 initialPosition = new Cartesian3(-1111583.3721328347, -5855888.151574568, 2262561.444696748);
+    org.cesiumjs.cs.core.HeadingPitchRoll initialOrientation = org.cesiumjs.cs.core.HeadingPitchRoll.fromDegrees(100.0,
+        -15.0, 0.0);
+    ViewOptions viewOptions = new ViewOptions();
+    viewOptions.destinationPos = initialPosition;
+    viewOptions.orientation = initialOrientation;
+    viewOptions.endTransform = Matrix4.IDENTITY();
+    csVPanel.getViewer().scene().camera().setView(viewOptions);
 
-        contentPanel.add(new HTML("<p>A sample interior rendered with 3D Tiles.</p>"));
-        contentPanel.add(csVPanel);
+    contentPanel.add(new HTML("<p>A sample interior rendered with 3D Tiles.</p>"));
+    contentPanel.add(csVPanel);
 
-        initWidget(contentPanel);
-    }
+    initWidget(contentPanel);
+  }
 
-    @Override
-    public String[] getSourceCodeURLs() {
-        String[] sourceCodeURLs = new String[1];
-        sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "Tiles3DInterior.txt";
-        return sourceCodeURLs;
-    }
+  @Override
+  public String[] getSourceCodeURLs() {
+    String[] sourceCodeURLs = new String[1];
+    sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "Tiles3DInterior.txt";
+    return sourceCodeURLs;
+  }
 }

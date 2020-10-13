@@ -17,28 +17,29 @@
 package org.cleanlogic.cesiumjs4gwt.showcase.components.responsibility;
 
 import com.google.gwt.user.client.ui.RootPanel;
+
 import org.cleanlogic.cesiumjs4gwt.showcase.puregwt.event.ExamplePanelBuildEvent;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class AllExamplesHandler extends ShowcaseBuilderHandler {
 
-    @Override
-    protected void buildShowcase() {
-        if (canBuildShowcase()) {
-            RootPanel.get().add(injector.getShowcaseTopPanel());
-            RootPanel.get().add(injector.getShowcaseExamplePanel());
+  @Override
+  protected void buildShowcase() {
+    if (canBuildShowcase()) {
+      RootPanel.get().add(injector.getShowcaseTopPanel());
+      RootPanel.get().add(injector.getShowcaseExamplePanel());
 
-            injector.getEventBus().fireEvent(new ExamplePanelBuildEvent(""));
-        }
+      injector.getEventBus().fireEvent(new ExamplePanelBuildEvent(""));
     }
+  }
 
-    @Override
-    protected boolean canBuildShowcase() {
-        return Boolean.TRUE;
-    }
+  @Override
+  protected boolean canBuildShowcase() {
+    return Boolean.TRUE;
+  }
 
 }

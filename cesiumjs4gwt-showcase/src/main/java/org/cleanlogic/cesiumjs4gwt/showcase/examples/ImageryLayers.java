@@ -16,9 +16,11 @@
 
 package org.cleanlogic.cesiumjs4gwt.showcase.examples;
 
+import javax.inject.Inject;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.HTML;
-import org.cesiumjs.cs.Cesium;
+
 import org.cesiumjs.cs.collections.ImageryLayerCollection;
 import org.cesiumjs.cs.core.Credit;
 import org.cesiumjs.cs.core.Rectangle;
@@ -34,51 +36,50 @@ import org.cesiumjs.cs.widgets.options.ViewerOptions;
 import org.cleanlogic.cesiumjs4gwt.showcase.basic.AbstractExample;
 import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ShowcaseExampleStore;
 
-import javax.inject.Inject;
-
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 public class ImageryLayers extends AbstractExample {
-    @Inject
-    public ImageryLayers(ShowcaseExampleStore store) {
-        super("Imagery Layers", "Create imagery layers from multiple sources", new String[]{"Showcase", "Cesium", "3d", "Viewer"}, store);
-    }
+  @Inject
+  public ImageryLayers(ShowcaseExampleStore store) {
+    super("Imagery Layers", "Create imagery layers from multiple sources",
+        new String[] { "Showcase", "Cesium", "3d", "Viewer" }, store);
+  }
 
-    @Override
-    public void buildPanel() {
-        ViewerOptions viewerOptions = new ViewerOptions();
-        ArcGisMapServerImageryProviderOptions arcGisMapServerImageryProviderOptions = new ArcGisMapServerImageryProviderOptions();
-        arcGisMapServerImageryProviderOptions.url = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer";
-        viewerOptions.imageryProvider = new ArcGisMapServerImageryProvider(arcGisMapServerImageryProviderOptions);
-        viewerOptions.baseLayerPicker = false;
-        ViewerPanel csVPanel = new ViewerPanel(viewerOptions);
+  @Override
+  public void buildPanel() {
+    ViewerOptions viewerOptions = new ViewerOptions();
+    ArcGisMapServerImageryProviderOptions arcGisMapServerImageryProviderOptions = new ArcGisMapServerImageryProviderOptions();
+    arcGisMapServerImageryProviderOptions.url = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer";
+    viewerOptions.imageryProvider = new ArcGisMapServerImageryProvider(arcGisMapServerImageryProviderOptions);
+    viewerOptions.baseLayerPicker = false;
+    ViewerPanel csVPanel = new ViewerPanel(viewerOptions);
 
+    ImageryLayerCollection layers = csVPanel.getViewer().imageryLayers();
+    TileMapServiceImageryProviderOptions tileMapServiceImageryProviderOptions = new TileMapServiceImageryProviderOptions();
+    tileMapServiceImageryProviderOptions.url = "https://cesiumjs.org/blackmarble";
+    tileMapServiceImageryProviderOptions.credit = Credit.create("Black Marble imagery courtesy NASA Earth Observatory");
+    tileMapServiceImageryProviderOptions.flipXY = true;
+    ImageryLayer blackMarble = layers
+        .addImageryProvider(new TileMapServiceImageryProvider(tileMapServiceImageryProviderOptions));
+    blackMarble.alpha = 0.5f;
+    blackMarble.brightness = 2.0f;
 
-        ImageryLayerCollection layers = csVPanel.getViewer().imageryLayers();
-        TileMapServiceImageryProviderOptions tileMapServiceImageryProviderOptions = new TileMapServiceImageryProviderOptions();
-        tileMapServiceImageryProviderOptions.url = "https://cesiumjs.org/blackmarble";
-        tileMapServiceImageryProviderOptions.credit = Credit.create("Black Marble imagery courtesy NASA Earth Observatory");
-        tileMapServiceImageryProviderOptions.flipXY = true;
-        ImageryLayer blackMarble = layers.addImageryProvider(new TileMapServiceImageryProvider(tileMapServiceImageryProviderOptions));
-        blackMarble.alpha = 0.5f;
-        blackMarble.brightness = 2.0f;
+    SingleTileImageryProviderOptions singleTileImageryProviderOptions = new SingleTileImageryProviderOptions();
+    singleTileImageryProviderOptions.url = GWT.getModuleBaseURL() + "images/Cesium_Logo_overlay.png";
+    singleTileImageryProviderOptions.rectangle = Rectangle.fromDegrees(-75.0, 28.0, -67.0, 29.75);
+    layers.addImageryProvider(new SingleTileImageryProvider(singleTileImageryProviderOptions));
 
-        SingleTileImageryProviderOptions singleTileImageryProviderOptions = new SingleTileImageryProviderOptions();
-        singleTileImageryProviderOptions.url = GWT.getModuleBaseURL() + "images/Cesium_Logo_overlay.png";
-        singleTileImageryProviderOptions.rectangle = Rectangle.fromDegrees(-75.0, 28.0, -67.0, 29.75);
-        layers.addImageryProvider(new SingleTileImageryProvider(singleTileImageryProviderOptions));
+    contentPanel.add(new HTML("<p>Create imagery layers from multiple sources.</p>"));
+    contentPanel.add(csVPanel);
 
-        contentPanel.add(new HTML("<p>Create imagery layers from multiple sources.</p>"));
-        contentPanel.add(csVPanel);
+    initWidget(contentPanel);
+  }
 
-        initWidget(contentPanel);
-    }
-
-    @Override
-    public String[] getSourceCodeURLs() {
-        String[] sourceCodeURLs = new String[1];
-        sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "ImageryLayers.txt";
-        return sourceCodeURLs;
-    }
+  @Override
+  public String[] getSourceCodeURLs() {
+    String[] sourceCodeURLs = new String[1];
+    sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "ImageryLayers.txt";
+    return sourceCodeURLs;
+  }
 }

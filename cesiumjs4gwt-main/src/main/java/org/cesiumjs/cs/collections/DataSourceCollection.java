@@ -27,97 +27,121 @@ import org.cesiumjs.cs.promise.Promise;
 /**
  * A collection of {@link DataSource} instances.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "DataSourceCollection")
 public class DataSourceCollection<T extends DataSource> extends Collection<DataSource> {
-    /**
-     * An event that is raised when a data source is added to the collection. Event handlers are passed the data source that was added.
-     */
-    @JsProperty(name = "dataSourceAdded")
-    public native Event dataSourceAdded();
-    /**
-     * An event that is raised when a data source is removed from the collection. Event handlers are passed the data source that was removed.
-     */
-    @JsProperty(name = "dataSourceRemoved")
-    public native Event dataSourceRemoved();
+  /**
+   * An event that is raised when a data source is added to the collection. Event
+   * handlers are passed the data source that was added.
+   */
+  @SuppressWarnings("rawtypes")
+  @JsProperty(name = "dataSourceAdded")
+  public native Event dataSourceAdded();
 
-    @JsConstructor
-    public DataSourceCollection() {}
+  /**
+   * An event that is raised when a data source is removed from the collection.
+   * Event handlers are passed the data source that was removed.
+   */
+  @SuppressWarnings("rawtypes")
+  @JsProperty(name = "dataSourceRemoved")
+  public native Event dataSourceRemoved();
 
-    /**
-     * Adds a data source to the collection.
-     * @param dataSource A data source or a promise to a data source to add to the collection. When passing a promise,
-     *                   the data source will not actually be added to the collection until the promise resolves successfully.
-     */
-    @JsMethod
-    public native Promise<T, Void> add(Promise<T, Void> dataSource);
+  @JsConstructor
+  public DataSourceCollection() {
+  }
 
-    /**
-     * Adds a data source to the collection.
-     * @param dataSource A data source or a promise to a data source to add to the collection. When passing a promise,
-     *                   the data source will not actually be added to the collection until the promise resolves successfully.
-     */
-    @JsMethod
-    public native Promise<T, Void> add(T dataSource);
+  /**
+   * Adds a data source to the collection.
+   * 
+   * @param dataSource A data source or a promise to a data source to add to the
+   *                   collection. When passing a promise, the data source will
+   *                   not actually be added to the collection until the promise
+   *                   resolves successfully.
+   */
+  @JsMethod
+  public native Promise<T, Void> add(Promise<T, Void> dataSource);
 
-    /**
-     * Gets a data source by name from the collection.
-     * @param name The name to retrieve.
-     * @return A list of all data sources matching the provided name.
-     */
-    @JsMethod
-    public native DataSource[] getByName(String name);
+  /**
+   * Adds a data source to the collection.
+   * 
+   * @param dataSource A data source or a promise to a data source to add to the
+   *                   collection. When passing a promise, the data source will
+   *                   not actually be added to the collection until the promise
+   *                   resolves successfully.
+   */
+  @JsMethod
+  public native Promise<T, Void> add(T dataSource);
 
-    /**
-     * Determines the index of a given data source in the collection.
-     * @param dataSource The data source to find the index of.
-     * @return The index of the data source in the collection, or -1 if the data source does not exist in the collection.
-     */
-    @JsMethod
-    public native int indexOf(T dataSource);
+  /**
+   * Gets a data source by name from the collection.
+   * 
+   * @param name The name to retrieve.
+   * @return A list of all data sources matching the provided name.
+   */
+  @JsMethod
+  public native DataSource[] getByName(String name);
 
-    /**
-     * Removes a data source from this collection, if present.
-     * @param dataSource The data source to remove.
-     * @param destroy Whether to destroy the data source in addition to removing it. Default: false
-     * @return true if the data source was in the collection and was removed, false if the data source was not in the collection.
-     */
-    @JsMethod
-    public native boolean remove(T dataSource, boolean destroy);
+  /**
+   * Determines the index of a given data source in the collection.
+   * 
+   * @param dataSource The data source to find the index of.
+   * @return The index of the data source in the collection, or -1 if the data
+   *         source does not exist in the collection.
+   */
+  @JsMethod
+  public native int indexOf(T dataSource);
 
-    /**
-     * Removes all data sources from this collection.
-     * @param destroy whether to destroy the data sources in addition to removing them. Default: false
-     */
-    @JsMethod
-    public native void removeAll(boolean destroy);
+  /**
+   * Removes a data source from this collection, if present.
+   * 
+   * @param dataSource The data source to remove.
+   * @param destroy    Whether to destroy the data source in addition to removing
+   *                   it. Default: false
+   * @return true if the data source was in the collection and was removed, false
+   *         if the data source was not in the collection.
+   */
+  @JsMethod
+  public native boolean remove(T dataSource, boolean destroy);
 
-    /**
-     * Lowers a data source down one position in the collection.
-     * @param dataSource The data source to move.
-     */
-    @JsMethod
-    public native void lower(T dataSource);
+  /**
+   * Removes all data sources from this collection.
+   * 
+   * @param destroy whether to destroy the data sources in addition to removing
+   *                them. Default: false
+   */
+  @JsMethod
+  public native void removeAll(boolean destroy);
 
-    /**
-     * Lowers a data source to the bottom of the collection.
-     * @param dataSource The data source to move.
-     */
-    @JsMethod
-    public native void lowerToBottom(T dataSource);
+  /**
+   * Lowers a data source down one position in the collection.
+   * 
+   * @param dataSource The data source to move.
+   */
+  @JsMethod
+  public native void lower(T dataSource);
 
-    /**
-     * Raises a data source up one position in the collection.
-     * @param dataSource The data source to move.
-     */
-    @JsMethod
-    public native void raise(T dataSource);
+  /**
+   * Lowers a data source to the bottom of the collection.
+   * 
+   * @param dataSource The data source to move.
+   */
+  @JsMethod
+  public native void lowerToBottom(T dataSource);
 
-    /**
-     * Raises a data source to the top of the collection.
-     * @param dataSource The data source to move.
-     */
-    @JsMethod
-    public native void raiseToTop(T dataSource);
+  /**
+   * Raises a data source up one position in the collection.
+   * 
+   * @param dataSource The data source to move.
+   */
+  @JsMethod
+  public native void raise(T dataSource);
+
+  /**
+   * Raises a data source to the top of the collection.
+   * 
+   * @param dataSource The data source to move.
+   */
+  @JsMethod
+  public native void raiseToTop(T dataSource);
 }

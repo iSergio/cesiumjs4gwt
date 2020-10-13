@@ -16,28 +16,31 @@
 
 package org.cesiumjs.cs.core.options;
 
+import org.cesiumjs.cs.core.Cartesian3;
+
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.Cartesian3;
 
 /**
- * Options for {@link org.cesiumjs.cs.core.EllipseGeometryLibrary#computeEllipsePositions}.
+ * Options for
+ * {@link org.cesiumjs.cs.core.EllipseGeometryLibrary#computeEllipsePositions}.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class EllipsePositionsOptions {
-    @JsProperty
-    public double semiMinorAxis;
-    @JsProperty
-    public double semiMajorAxis;
-    @JsProperty
-    public double rotation;
-    @JsProperty
-    public Cartesian3 center;
-    @JsProperty
-    public double granularity;
+  @JsProperty
+  public double semiMinorAxis;
+  @JsProperty
+  public double semiMajorAxis;
+  @JsProperty
+  public double rotation;
+  @JsProperty
+  public Cartesian3 center;
+  @JsProperty
+  public double granularity;
 
-    public EllipsePositionsOptions() {}
+  public EllipsePositionsOptions() {
+  }
 }

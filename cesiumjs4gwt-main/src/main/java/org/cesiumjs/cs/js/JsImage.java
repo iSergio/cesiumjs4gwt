@@ -16,32 +16,38 @@
 
 package org.cesiumjs.cs.js;
 
-import jsinterop.annotations.*;
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsFunction;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Image")
 public class JsImage {
-    @JsProperty
-    public int width;
-    @JsProperty
-    public int height;
-    @JsProperty
-    public String src;
-    @JsProperty
-    public Listener onload;
-    @JsProperty
-    public String crossOrigin;
+  @JsProperty
+  public int width;
+  @JsProperty
+  public int height;
+  @JsProperty
+  public String src;
+  @JsProperty
+  public Listener onload;
+  @JsProperty
+  public String crossOrigin;
 
-    @JsConstructor
-    public JsImage() {}
+  @JsConstructor
+  public JsImage() {
+  }
 
-    @JsConstructor
-    public JsImage(int width, int height) {}
+  @JsConstructor
+  public JsImage(int width, int height) {
+  }
 
-    @JsFunction
-    public interface Listener {
-        void function();
-    }
+  @JsFunction
+  public interface Listener {
+    void function();
+  }
 }

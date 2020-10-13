@@ -16,37 +16,38 @@
 
 package org.cesiumjs.cs.core.events;
 
+import org.cesiumjs.cs.core.Cartesian2;
+
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.Cartesian2;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class TouchPinchMovementEvent {
+  @JsProperty
+  public Distance distance;
+
+  @JsProperty
+  public AngleAndHeight angleAndHeight;
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+  private static class Distance {
     @JsProperty
-    public Distance distance;
+    Cartesian2 startPosition;
 
     @JsProperty
-    public AngleAndHeight angleAndHeight;
+    Cartesian2 endPosition;
+  }
 
-    @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-    private static class Distance {
-        @JsProperty
-        Cartesian2 startPosition;
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+  private static class AngleAndHeight {
+    @JsProperty
+    Cartesian2 startPosition;
 
-        @JsProperty
-        Cartesian2 endPosition;
-    }
-
-    @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-    private static class AngleAndHeight {
-        @JsProperty
-        Cartesian2 startPosition;
-
-        @JsProperty
-        Cartesian2 endPosition;
-    }
+    @JsProperty
+    Cartesian2 endPosition;
+  }
 }

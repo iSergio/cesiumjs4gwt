@@ -16,31 +16,32 @@
 
 package org.cesiumjs.cs.datasources;
 
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.scene.options.BillboardOptions;
 import org.cesiumjs.cs.scene.options.LabelOptions;
 import org.cesiumjs.cs.scene.options.PointPrimitiveOptions;
 
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
+
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class EntityClusterObject {
-    /**
-     * Billboard options
-     */
-    @JsProperty(name = "billboard")
-    public BillboardOptions billboard;
-    /**
-     * Label options
-     */
-    @JsProperty(name = "label")
-    public LabelOptions label;
-    /**
-     * Point options
-     */
-    @JsProperty(name = "point")
-    public PointPrimitiveOptions point;
+  /**
+   * Billboard options
+   */
+  @JsProperty(name = "billboard")
+  public BillboardOptions billboard;
+  /**
+   * Label options
+   */
+  @JsProperty(name = "label")
+  public LabelOptions label;
+  /**
+   * Point options
+   */
+  @JsProperty(name = "point")
+  public PointPrimitiveOptions point;
 }

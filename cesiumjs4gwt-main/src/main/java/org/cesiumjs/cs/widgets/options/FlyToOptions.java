@@ -16,30 +16,31 @@
 
 package org.cesiumjs.cs.widgets.options;
 
+import org.cesiumjs.cs.core.HeadingPitchRange;
+
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.HeadingPitchRange;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class FlyToOptions {
-    /**
-     * The duration of the flight in seconds.
-     * Default: 3.0
-     */
-    @JsProperty
-    public double duration;
-    /**
-     * The maximum height at the peak of the flight.
-     */
-    @JsProperty
-    public double maximumHeight;
-    /**
-     * The offset from the target in the local east-north-up reference frame centered at the target.
-     */
-    @JsProperty
-    public HeadingPitchRange offset;
+  /**
+   * The duration of the flight in seconds. Default: 3.0
+   */
+  @JsProperty
+  public double duration;
+  /**
+   * The maximum height at the peak of the flight.
+   */
+  @JsProperty
+  public double maximumHeight;
+  /**
+   * The offset from the target in the local east-north-up reference frame
+   * centered at the target.
+   */
+  @JsProperty
+  public HeadingPitchRange offset;
 }

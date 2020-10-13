@@ -24,29 +24,32 @@ import jsinterop.annotations.JsType;
 /**
  * Style options for corners.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "CornerType")
 public class CornerType {
-    /**
-     * Corner is clipped.
-     */
-    @JsProperty(name = "BEVELED")
-    private static native Number BEVELED();
-    /**
-     * Corner point is the intersection of adjacent edges.
-     */
-    @JsProperty(name = "MITERED")
-    private static native Number MITERED();
-    /**
-     * Corner has a smooth edge.
-     */
-    @JsProperty(name = "ROUNDED")
-    private static native Number ROUNDED();
+  /**
+   * Corner is clipped.
+   */
+  @JsProperty(name = "BEVELED")
+  private static native Number BEVELED();
 
-    /**
-     * Style options for corners.
-     */
-    @JsConstructor
-    private CornerType() {}
+  /**
+   * Corner point is the intersection of adjacent edges.
+   */
+  @JsProperty(name = "MITERED")
+  private static native Number MITERED();
+
+  /**
+   * Corner has a smooth edge.
+   */
+  @JsProperty(name = "ROUNDED")
+  private static native Number ROUNDED();
+
+  /**
+   * Style options for corners.
+   */
+  @JsConstructor
+  private CornerType() {
+  }
 }

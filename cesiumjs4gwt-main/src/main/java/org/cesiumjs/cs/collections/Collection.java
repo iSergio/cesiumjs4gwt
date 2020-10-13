@@ -22,47 +22,49 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * Abstract class of Collection, not use it directly!.
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "Collection")
 public abstract class Collection<T> {
-    /**
-     * Returns the number of elements in this collection.
-     * This is commonly used with Collection#get to iterate over all the elements in the collection.
-     */
-    @JsProperty(name = "length")
-    public native int length();
+  /**
+   * Returns the number of elements in this collection. This is commonly used with
+   * Collection#get to iterate over all the elements in the collection.
+   */
+  @JsProperty(name = "length")
+  public native int length();
 
-    @JsConstructor
-    protected Collection() {}
+  @JsConstructor
+  protected Collection() {
+  }
 
-    @JsMethod
-    public native T add(T value);
+  @JsMethod
+  public native T add(T value);
 
-    @JsMethod
-    public native Collection<?> add(Collection<?> value);
+  @JsMethod
+  public native Collection<?> add(Collection<?> value);
 
-    @JsMethod
-    public native boolean contains(T value);
+  @JsMethod
+  public native boolean contains(T value);
 
-    @JsMethod
-    public native void destroy();
+  @JsMethod
+  public native void destroy();
 
-    @JsMethod
-    public native T get(int index);
+  @JsMethod
+  public native T get(int index);
 
-    @JsMethod
-    public native boolean isDestroyed();
+  @JsMethod
+  public native boolean isDestroyed();
 
-    @JsMethod
-    public native boolean remove(T value);
+  @JsMethod
+  public native boolean remove(T value);
 
-    @JsMethod
-    public native boolean remove(Collection<?> value);
+  @JsMethod
+  public native boolean remove(Collection<?> value);
 
-    @JsMethod
-    public native void removeAll();
+  @JsMethod
+  public native void removeAll();
 
-    @JsMethod
-    public native void update();
+  @JsMethod
+  public native void update();
 }

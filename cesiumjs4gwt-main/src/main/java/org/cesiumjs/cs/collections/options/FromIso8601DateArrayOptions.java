@@ -16,31 +16,44 @@
 
 package org.cesiumjs.cs.collections.options;
 
-import jsinterop.annotations.*;
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsOverlay;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 
 /**
- * Options for {@link org.cesiumjs.cs.collections.TimeIntervalCollection#fromIso8601DateArray}.
+ * Options for
+ * {@link org.cesiumjs.cs.collections.TimeIntervalCollection#fromIso8601DateArray}.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
+@SuppressWarnings("rawtypes")
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class FromIso8601DateArrayOptions<T> extends FromIso8601OptionsAbstract<T> {
-    /**
-     * An ISO 8601 interval.
-     */
-    @JsProperty
-    public String[] iso8601Dates;
+  /**
+   * An ISO 8601 interval.
+   */
+  @JsProperty
+  public String[] iso8601Dates;
 
-    /**
-     * Options for {@link org.cesiumjs.cs.collections.TimeIntervalCollection#fromIso8601DateArray}.
-     */
-    @JsConstructor
-    private FromIso8601DateArrayOptions() {}
+  /**
+   * Options for
+   * {@link org.cesiumjs.cs.collections.TimeIntervalCollection#fromIso8601DateArray}.
+   */
+  @JsConstructor
+  private FromIso8601DateArrayOptions() {
+  }
 
-    @JsOverlay
-    public static FromIso8601DateArrayOptions create(String[] iso8601Dates) {
-        FromIso8601DateArrayOptions options = new FromIso8601DateArrayOptions();
-        options.iso8601Dates = iso8601Dates;
-        return options;
-    }
+  /**
+   * Crate instnce of FromIso8601DateArrayOptions.
+   * @param iso8601Dates Array of dates.
+   * @return options object.
+   */
+  @JsOverlay
+  public static FromIso8601DateArrayOptions create(String[] iso8601Dates) {
+    FromIso8601DateArrayOptions options = new FromIso8601DateArrayOptions();
+    options.iso8601Dates = iso8601Dates;
+    return options;
+  }
 }

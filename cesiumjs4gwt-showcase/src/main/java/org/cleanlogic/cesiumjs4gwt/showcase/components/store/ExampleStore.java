@@ -16,9 +16,9 @@
  */
 package org.cleanlogic.cesiumjs4gwt.showcase.components.store;
 
-import org.cleanlogic.cesiumjs4gwt.showcase.ExampleBean;
-
 import java.util.List;
+
+import org.cleanlogic.cesiumjs4gwt.showcase.ExampleBean;
 
 /**
  *
@@ -27,10 +27,10 @@ import java.util.List;
  */
 public interface ExampleStore {
 
-    void addExample(ExampleBean example);
+  void addExample(ExampleBean example);
 
-    List<ExampleBean> getExamples();
+  List<ExampleBean> getExamples();
 
-    ExampleBean getExample(String exampleName);
+  ExampleBean getExample(String exampleName);
 
 }

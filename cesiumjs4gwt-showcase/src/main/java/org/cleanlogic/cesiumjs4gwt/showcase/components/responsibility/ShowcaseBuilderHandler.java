@@ -17,38 +17,39 @@
 package org.cleanlogic.cesiumjs4gwt.showcase.components.responsibility;
 
 import com.google.gwt.core.client.GWT;
+
 import org.cleanlogic.cesiumjs4gwt.showcase.config.Injector;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class ShowcaseBuilderHandler {
 
-    static {
-        injector = GWT.create(Injector.class);
+  static {
+    injector = GWT.create(Injector.class);
+  }
+
+  protected static final Injector injector;
+
+  private ShowcaseBuilderHandler successor;
+
+  /**
+   * @param theSuccessor the successor to set
+   */
+  public void setSuccessor(ShowcaseBuilderHandler theSuccessor) {
+    this.successor = theSuccessor;
+  }
+
+  protected abstract void buildShowcase();
+
+  protected void forwardBuildShowcase() {
+    if (successor != null) {
+      successor.buildShowcase();
     }
+  }
 
-    protected static final Injector injector;
-
-    private ShowcaseBuilderHandler successor;
-
-    /**
-     * @param theSuccessor the successor to set
-     */
-    public void setSuccessor(ShowcaseBuilderHandler theSuccessor) {
-        this.successor = theSuccessor;
-    }
-
-    protected abstract void buildShowcase();
-
-    protected void forwardBuildShowcase() {
-        if (successor != null) {
-            successor.buildShowcase();
-        }
-    }
-
-    protected abstract boolean canBuildShowcase();
+  protected abstract boolean canBuildShowcase();
 
 }

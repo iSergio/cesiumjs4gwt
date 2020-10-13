@@ -16,48 +16,50 @@
 
 package org.cleanlogic.cesiumjs4gwt.showcase.examples;
 
+import javax.inject.Inject;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.HTML;
+
 import org.cesiumjs.cs.core.Rectangle;
 import org.cesiumjs.cs.widgets.ViewerPanel;
-import org.cesiumjs.cs.widgets.options.ViewerCesiumNavigationMixinOptions;
 import org.cesiumjs.cs.widgets.viewerCesiumNavigationMixin;
+import org.cesiumjs.cs.widgets.options.ViewerCesiumNavigationMixinOptions;
 import org.cleanlogic.cesiumjs4gwt.showcase.basic.AbstractExample;
 import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ShowcaseExampleStore;
 
-import javax.inject.Inject;
-
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 public class CesiumNavigation extends AbstractExample {
-    @Inject
-    public CesiumNavigation(ShowcaseExampleStore store) {
-        super("Cesium Navigation", "Use CesiumNavigation plugin with GWT wrapper.", new String[]{"Showcase", "Cesium", "3d", "Viewer", "Navigation"}, store);
-    }
+  @Inject
+  public CesiumNavigation(ShowcaseExampleStore store) {
+    super("Cesium Navigation", "Use CesiumNavigation plugin with GWT wrapper.",
+        new String[] { "Showcase", "Cesium", "3d", "Viewer", "Navigation" }, store);
+  }
 
-    @Override
-    public void buildPanel() {
-        ViewerCesiumNavigationMixinOptions options = new ViewerCesiumNavigationMixinOptions();
-        options.defaultResetView = Rectangle.fromDegrees(71, 3, 90, 14);
-        options.enableCompass = true;
-        options.enableZoomControls = true;
-        options.enableDistanceLegend = true;
-        options.enableCompassOuterRing = true;
+  @Override
+  public void buildPanel() {
+    ViewerCesiumNavigationMixinOptions options = new ViewerCesiumNavigationMixinOptions();
+    options.defaultResetView = Rectangle.fromDegrees(71, 3, 90, 14);
+    options.enableCompass = true;
+    options.enableZoomControls = true;
+    options.enableDistanceLegend = true;
+    options.enableCompassOuterRing = true;
 
-        ViewerPanel csVPanel = new ViewerPanel();
-        csVPanel.getViewer().extend(viewerCesiumNavigationMixin.instance(), options);
+    ViewerPanel csVPanel = new ViewerPanel();
+    csVPanel.getViewer().extend(viewerCesiumNavigationMixin.instance(), options);
 
-        contentPanel.add(new HTML("<p>Use CesiumNavigation plugin with GWT wrapper.</p>"));
-        contentPanel.add(csVPanel);
+    contentPanel.add(new HTML("<p>Use CesiumNavigation plugin with GWT wrapper.</p>"));
+    contentPanel.add(csVPanel);
 
-        initWidget(contentPanel);
-    }
+    initWidget(contentPanel);
+  }
 
-    @Override
-    public String[] getSourceCodeURLs() {
-        String[] sourceCodeURLs = new String[1];
-        sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "CesiumNavigation.txt";
-        return sourceCodeURLs;
-    }
+  @Override
+  public String[] getSourceCodeURLs() {
+    String[] sourceCodeURLs = new String[1];
+    sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "CesiumNavigation.txt";
+    return sourceCodeURLs;
+  }
 }

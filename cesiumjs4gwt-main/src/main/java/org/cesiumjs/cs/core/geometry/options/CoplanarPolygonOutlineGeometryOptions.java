@@ -16,29 +16,36 @@
 
 package org.cesiumjs.cs.core.geometry.options;
 
-import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.PolygonHierarchy;
 
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsOverlay;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
+
 /**
- * Options for {@link org.cesiumjs.cs.core.geometry.CoplanarPolygonOutlineGeometry}.
+ * Options for
+ * {@link org.cesiumjs.cs.core.geometry.CoplanarPolygonOutlineGeometry}.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class CoplanarPolygonOutlineGeometryOptions {
-    /**
-     * A polygon hierarchy that can include holes.
-     */
-    @JsProperty
-    public PolygonHierarchy polygonHierarchy;
+  /**
+   * A polygon hierarchy that can include holes.
+   */
+  @JsProperty
+  public PolygonHierarchy polygonHierarchy;
 
-    @JsConstructor
-    private CoplanarPolygonOutlineGeometryOptions() {}
+  @JsConstructor
+  private CoplanarPolygonOutlineGeometryOptions() {
+  }
 
-    @JsOverlay
-    public static CoplanarPolygonOutlineGeometryOptions create(PolygonHierarchy polygonHierarchy) {
-        CoplanarPolygonOutlineGeometryOptions options = new CoplanarPolygonOutlineGeometryOptions();
-        options.polygonHierarchy = polygonHierarchy;
-        return options;
-    }
+  @JsOverlay
+  public static CoplanarPolygonOutlineGeometryOptions create(PolygonHierarchy polygonHierarchy) {
+    CoplanarPolygonOutlineGeometryOptions options = new CoplanarPolygonOutlineGeometryOptions();
+    options.polygonHierarchy = polygonHierarchy;
+    return options;
+  }
 }

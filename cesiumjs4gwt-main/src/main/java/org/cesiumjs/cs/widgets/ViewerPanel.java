@@ -20,35 +20,36 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.logical.shared.AttachEvent;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
+
 import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.widgets.options.ViewerOptions;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 public class ViewerPanel extends SimplePanel {
-    private Viewer _viewer;
+  private Viewer _viewer;
 
-    public ViewerPanel() {
-        this((ViewerOptions) JsObject.undefined());
-    }
+  public ViewerPanel() {
+    this((ViewerOptions) JsObject.undefined());
+  }
 
-    public ViewerPanel(ViewerOptions options) {
-        super();
-        Element element = getElement();
-        RootPanel.getBodyElement().appendChild(element);
-        _viewer = new Viewer(element, options);
-        super.addAttachHandler(new AttachEvent.Handler() {
-            @Override
-            public void onAttachOrDetach(AttachEvent attachEvent) {
-                if (!attachEvent.isAttached()) {
-                    _viewer.destroy();
-                }
-            }
-        });
-    }
+  public ViewerPanel(ViewerOptions options) {
+    super();
+    Element element = getElement();
+    RootPanel.getBodyElement().appendChild(element);
+    _viewer = new Viewer(element, options);
+    super.addAttachHandler(new AttachEvent.Handler() {
+      @Override
+      public void onAttachOrDetach(AttachEvent attachEvent) {
+        if (!attachEvent.isAttached()) {
+          _viewer.destroy();
+        }
+      }
+    });
+  }
 
-    public Viewer getViewer() {
-        return _viewer;
-    }
+  public Viewer getViewer() {
+    return _viewer;
+  }
 }

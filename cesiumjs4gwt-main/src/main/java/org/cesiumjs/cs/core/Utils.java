@@ -22,15 +22,15 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true)
 public class Utils {
-    @JsMethod(name = "setTimeout", namespace = JsPackage.GLOBAL)
-    public static native void setTimeout(TimeoutListener listener, int milliseconds);
+  @JsMethod(name = "setTimeout", namespace = JsPackage.GLOBAL)
+  public static native void setTimeout(TimeoutListener listener, int milliseconds);
 
-    @JsFunction
-    public interface TimeoutListener {
-        void function();
-    }
+  @JsFunction
+  public interface TimeoutListener {
+    void function();
+  }
 }

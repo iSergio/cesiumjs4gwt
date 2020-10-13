@@ -24,23 +24,24 @@ import jsinterop.annotations.JsType;
 
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class Cesium3DTilesetGraphicsOptions {
-    /**
-     * A boolean Property specifying the visibility of the tileset.
-     * Default: true
-     */
-    @JsProperty
-    public Property show;
-    /**
-     * A string or Resource Property specifying the URI of the tileset.
-     */
-    @JsProperty
-    public Property uri;
-    /**
-     * A number or Property specifying the maximum screen space error used to drive level of detail refinement.
-     */
-    @JsProperty
-    public Property maximumScreenSpaceError;
+  /**
+   * A boolean Property specifying the visibility of the tileset. Default: true
+   */
+  @JsProperty
+  public Property show;
+  /**
+   * A string or Resource Property specifying the URI of the tileset.
+   */
+  @JsProperty
+  public Property uri;
+  /**
+   * A number or Property specifying the maximum screen space error used to drive
+   * level of detail refinement.
+   */
+  @JsProperty
+  public Property maximumScreenSpaceError;
 
-    @JsConstructor
-    public Cesium3DTilesetGraphicsOptions() {}
+  @JsConstructor
+  public Cesium3DTilesetGraphicsOptions() {
+  }
 }

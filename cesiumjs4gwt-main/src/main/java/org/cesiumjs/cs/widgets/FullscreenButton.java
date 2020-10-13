@@ -17,6 +17,7 @@
 package org.cesiumjs.cs.widgets;
 
 import com.google.gwt.dom.client.Element;
+
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
@@ -25,61 +26,71 @@ import jsinterop.annotations.JsType;
 /**
  * A single button widget for toggling fullscreen mode.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "FullscreenButton")
 public class FullscreenButton {
-    /**
-     * Gets the parent container.
-     */
-    @JsProperty
-    public Element container;
-    /**
-     * Gets the view model.
-     */
-    @JsProperty
-    public FullscreenButtonViewModel viewModel;
+  /**
+   * Gets the parent container.
+   */
+  @JsProperty
+  public Element container;
+  /**
+   * Gets the view model.
+   */
+  @JsProperty
+  public FullscreenButtonViewModel viewModel;
 
-    /**
-     * A single button widget for toggling fullscreen mode.
-     * @param element The DOM element or ID that will contain the widget.
-     */
-    @JsConstructor
-    public FullscreenButton(String element) {}
+  /**
+   * A single button widget for toggling fullscreen mode.
+   * 
+   * @param element The DOM element or ID that will contain the widget.
+   */
+  @JsConstructor
+  public FullscreenButton(String element) {
+  }
 
-    /**
-     * A single button widget for toggling fullscreen mode.
-     * @param element The DOM element or ID that will contain the widget.
-     * @param fullscreenElement The element or id to be placed into fullscreen mode.
-     */
-    @JsConstructor
-    public FullscreenButton(String element, String fullscreenElement) {}
+  /**
+   * A single button widget for toggling fullscreen mode.
+   * 
+   * @param element           The DOM element or ID that will contain the widget.
+   * @param fullscreenElement The element or id to be placed into fullscreen mode.
+   */
+  @JsConstructor
+  public FullscreenButton(String element, String fullscreenElement) {
+  }
 
-    /**
-     * A single button widget for toggling fullscreen mode.
-     * @param element The DOM element or ID that will contain the widget.
-     */
-    @JsConstructor
-    public FullscreenButton(Element element) {}
+  /**
+   * A single button widget for toggling fullscreen mode.
+   * 
+   * @param element The DOM element or ID that will contain the widget.
+   */
+  @JsConstructor
+  public FullscreenButton(Element element) {
+  }
 
-    /**
-     * A single button widget for toggling fullscreen mode.
-     * @param element The DOM element or ID that will contain the widget.
-     * @param fullscreenElement The element or id to be placed into fullscreen mode.
-     */
-    @JsConstructor
-    public FullscreenButton(Element element, Element fullscreenElement) {}
+  /**
+   * A single button widget for toggling fullscreen mode.
+   * 
+   * @param element           The DOM element or ID that will contain the widget.
+   * @param fullscreenElement The element or id to be placed into fullscreen mode.
+   */
+  @JsConstructor
+  public FullscreenButton(Element element, Element fullscreenElement) {
+  }
 
-    /**
-     * Destroys the widget. Should be called if permanently removing the widget from layout.
-     */
-    @JsMethod
-    public native void destroy();
+  /**
+   * Destroys the widget. Should be called if permanently removing the widget from
+   * layout.
+   */
+  @JsMethod
+  public native void destroy();
 
-    /**
-     * true if the object has been destroyed, false otherwise.
-     * @return true if the object has been destroyed, false otherwise.
-     */
-    @JsMethod
-    public native boolean isDestroyed();
+  /**
+   * true if the object has been destroyed, false otherwise.
+   * 
+   * @return true if the object has been destroyed, false otherwise.
+   */
+  @JsMethod
+  public native boolean isDestroyed();
 }

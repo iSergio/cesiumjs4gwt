@@ -19,8 +19,10 @@ package org.cesiumjs.cs.scene;
 import jsinterop.annotations.JsType;
 
 /**
- * A {@link TileDiscardPolicy} specifying that tile images should never be discard.
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * A {@link TileDiscardPolicy} specifying that tile images should never be
+ * discard.
+ * 
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "NeverTileDiscardPolicy")
 public class NeverTileDiscardPolicy extends TileDiscardPolicy {

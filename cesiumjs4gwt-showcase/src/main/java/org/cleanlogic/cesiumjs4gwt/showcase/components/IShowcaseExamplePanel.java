@@ -17,15 +17,16 @@
 package org.cleanlogic.cesiumjs4gwt.showcase.components;
 
 import com.google.gwt.event.shared.HandlerRegistration;
+
 import org.cleanlogic.cesiumjs4gwt.showcase.puregwt.handler.ExamplePanelBuildHandler;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public interface IShowcaseExamplePanel extends ExamplePanelBuildHandler {
 
-    HandlerRegistration addShowcaseExamplePanelHandler();
+  HandlerRegistration addShowcaseExamplePanelHandler();
 
 }

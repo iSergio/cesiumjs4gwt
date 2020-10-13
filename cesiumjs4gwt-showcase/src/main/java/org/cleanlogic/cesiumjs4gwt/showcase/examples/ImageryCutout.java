@@ -16,11 +16,19 @@
 
 package org.cleanlogic.cesiumjs4gwt.showcase.examples;
 
+import javax.inject.Inject;
+
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.*;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.KeyDownEvent;
+import com.google.gwt.event.dom.client.KeyDownHandler;
+import com.google.gwt.event.dom.client.KeyUpEvent;
+import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.RootPanel;
+
 import org.cesiumjs.cs.Cesium;
 import org.cesiumjs.cs.collections.ImageryLayerCollection;
 import org.cesiumjs.cs.core.Event;
@@ -38,179 +46,170 @@ import org.cesiumjs.cs.widgets.options.ViewerOptions;
 import org.cleanlogic.cesiumjs4gwt.showcase.basic.AbstractExample;
 import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ShowcaseExampleStore;
 
-import javax.inject.Inject;
-
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 public class ImageryCutout extends AbstractExample {
 
-    private class Flags {
-        boolean moveEast = false;
-        boolean moveWest = false;
-        boolean moveNorth = false;
-        boolean moveSouth = false;
+  private class Flags {
+    boolean moveEast = false;
+    boolean moveWest = false;
+    boolean moveNorth = false;
+    boolean moveSouth = false;
 
-        public Flags() {}
+    public Flags() {
     }
+  }
 
-    private ViewerPanel csVPanel;
-    private Flags flags = new Flags();
-    private double moveIncrement = 0.05;
+  private ViewerPanel csVPanel;
+  private Flags flags = new Flags();
+  private double moveIncrement = 0.05;
 
-    @Inject
-    public ImageryCutout(ShowcaseExampleStore store) {
-        super("Imagery Cutout", "Demonstration of imagery layers with rectangular cutouts.", new String[]{"ImageryLayer", "Cutouts"}, store);
-    }
+  @Inject
+  public ImageryCutout(ShowcaseExampleStore store) {
+    super("Imagery Cutout", "Demonstration of imagery layers with rectangular cutouts.",
+        new String[] { "ImageryLayer", "Cutouts" }, store);
+  }
 
-    @Override
-    public void buildPanel() {
-        TileMapServiceImageryProviderOptions tmsOptions = new TileMapServiceImageryProviderOptions();
-        tmsOptions.url = Cesium.buildModuleUrl("Assets/Textures/NaturalEarthII");
-        ViewerOptions viewerOptions = new ViewerOptions();
-        viewerOptions.imageryProvider = new TileMapServiceImageryProvider(tmsOptions);
-        viewerOptions.baseLayerPicker = false;
+  @Override
+  public void buildPanel() {
+    TileMapServiceImageryProviderOptions tmsOptions = new TileMapServiceImageryProviderOptions();
+    tmsOptions.url = Cesium.buildModuleUrl("Assets/Textures/NaturalEarthII");
+    ViewerOptions viewerOptions = new ViewerOptions();
+    viewerOptions.imageryProvider = new TileMapServiceImageryProvider(tmsOptions);
+    viewerOptions.baseLayerPicker = false;
 
-        csVPanel = new ViewerPanel(viewerOptions);
+    csVPanel = new ViewerPanel(viewerOptions);
 
-        csVPanel.addHandler(new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent clickEvent) {
-                csVPanel.getViewer().canvas().focus();
-            }
-        }, ClickEvent.getType());
+    csVPanel.addHandler(new ClickHandler() {
+      @Override
+      public void onClick(ClickEvent clickEvent) {
+        csVPanel.getViewer().canvas().focus();
+      }
+    }, ClickEvent.getType());
 
-        csVPanel.getViewer().canvas().setAttribute("tabindex", "0");
+    csVPanel.getViewer().canvas().setAttribute("tabindex", "0");
 
-        Rectangle defaultImageryLayerCutout = Rectangle.fromDegrees(-90, 20, -70, 40);
+    Rectangle defaultImageryLayerCutout = Rectangle.fromDegrees(-90, 20, -70, 40);
 
-        // Cut a rectangle out of the base layer
-        ImageryLayerCollection layers = csVPanel.getViewer().imageryLayers();
-        ImageryLayer imageryBaseLayer = layers.get(0);
+    // Cut a rectangle out of the base layer
+    ImageryLayerCollection layers = csVPanel.getViewer().imageryLayers();
+    ImageryLayer imageryBaseLayer = layers.get(0);
 
-        imageryBaseLayer.cutoutRectangle = defaultImageryLayerCutout;
+    imageryBaseLayer.cutoutRectangle = defaultImageryLayerCutout;
 
-        // Fit a SingleTileImageryProvider inside the cutout on the lowest layer
-        SingleTileImageryProviderOptions singleTileImageryProviderOptions = new SingleTileImageryProviderOptions();
-        singleTileImageryProviderOptions.url = GWT.getModuleBaseURL() + "images/Cesium_Logo_overlay.png";
-        singleTileImageryProviderOptions.rectangle = defaultImageryLayerCutout;
-        layers.addImageryProvider(new SingleTileImageryProvider(singleTileImageryProviderOptions));
+    // Fit a SingleTileImageryProvider inside the cutout on the lowest layer
+    SingleTileImageryProviderOptions singleTileImageryProviderOptions = new SingleTileImageryProviderOptions();
+    singleTileImageryProviderOptions.url = GWT.getModuleBaseURL() + "images/Cesium_Logo_overlay.png";
+    singleTileImageryProviderOptions.rectangle = defaultImageryLayerCutout;
+    layers.addImageryProvider(new SingleTileImageryProvider(singleTileImageryProviderOptions));
 
-        // Add an Earth at Night layer and a "traveling" cutout
-        final ImageryLayer earthAtNight = layers.addImageryProvider(new IonImageryProvider(IonImageryProviderOptions.create(3812)));
-        earthAtNight.cutoutRectangle = Rectangle.fromDegrees(-100, 10, -60, 50);
-        earthAtNight.alpha = 0.9f;
+    // Add an Earth at Night layer and a "traveling" cutout
+    final ImageryLayer earthAtNight = layers
+        .addImageryProvider(new IonImageryProvider(IonImageryProviderOptions.create(3812)));
+    earthAtNight.cutoutRectangle = Rectangle.fromDegrees(-100, 10, -60, 50);
+    earthAtNight.alpha = 0.9f;
 
-        RootPanel.get().addDomHandler(new KeyDownHandler() {
-            @Override
-            public void onKeyDown(KeyDownEvent keyDownEvent) {
-                setFlag(keyDownEvent.getNativeKeyCode(), true);
-            }
-        }, KeyDownEvent.getType());
+    RootPanel.get().addDomHandler(new KeyDownHandler() {
+      @Override
+      public void onKeyDown(KeyDownEvent keyDownEvent) {
+        setFlag(keyDownEvent.getNativeKeyCode(), true);
+      }
+    }, KeyDownEvent.getType());
 
-        RootPanel.get().addDomHandler(new KeyUpHandler() {
-            @Override
-            public void onKeyUp(KeyUpEvent keyUpEvent) {
-                setFlag(keyUpEvent.getNativeKeyCode(), false);
-            }
-        }, KeyUpEvent.getType());
+    RootPanel.get().addDomHandler(new KeyUpHandler() {
+      @Override
+      public void onKeyUp(KeyUpEvent keyUpEvent) {
+        setFlag(keyUpEvent.getNativeKeyCode(), false);
+      }
+    }, KeyUpEvent.getType());
 
-        csVPanel.getViewer().clock().onTick.addEventListener(new Event.Listener() {
-            @Override
-            public void function(Object... o) {
-                Rectangle travelingRectangle = earthAtNight.cutoutRectangle;
-                if (flags.moveNorth && travelingRectangle.north + moveIncrement < Math.PI_OVER_TWO()) {
-                    travelingRectangle.north += moveIncrement;
-                    travelingRectangle.south += moveIncrement;
-                }
-                if (flags.moveSouth && travelingRectangle.south - moveIncrement > -Math.PI_OVER_TWO()) {
-                    travelingRectangle.north -= moveIncrement;
-                    travelingRectangle.south -= moveIncrement;
-                }
-                if (flags.moveEast) {
-                    travelingRectangle.east += moveIncrement;
-                    travelingRectangle.west += moveIncrement;
-                }
-                if (flags.moveWest) {
-                    travelingRectangle.east -= moveIncrement;
-                    travelingRectangle.west -= moveIncrement;
-                }
-                travelingRectangle.east = wrapLongitude(travelingRectangle.east);
-                travelingRectangle.west = wrapLongitude(travelingRectangle.west);
-            }
-        });
-
-        HTML html = new HTML();
-        html.setHTML("<div id=\"toolbar\">\n" +
-                "    <table class=\"infoPanel\">\n" +
-                "        <tbody>\n" +
-                "        <tr>\n" +
-                "            <td>Click on the Cesium display to start.</td>\n" +
-                "        </tr>\n" +
-                "        <tr>\n" +
-                "            <td>w/s - move cutout north/south</td>\n" +
-                "        </tr>\n" +
-                "        <tr>\n" +
-                "            <td>a/d - move cutout west/east</td>\n" +
-                "        </tr>\n" +
-                "        </tbody>\n" +
-                "    </table>\n" +
-                "</div>");
-        html.getElement().getStyle().setColor("white");
-
-        AbsolutePanel aPanel = new AbsolutePanel();
-        aPanel.add(csVPanel);
-        aPanel.add(html, 20, 20);
-
-        contentPanel.add(new HTML("<p>Demonstration of imagery layers with rectangular cutouts.</p>"));
-        contentPanel.add(aPanel);
-
-        initWidget(contentPanel);
-    }
-
-    @Override
-    public String[] getSourceCodeURLs() {
-        String[] sourceCodeURLs = new String[1];
-        sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "ImageryCutout.txt";
-        return sourceCodeURLs;
-    }
-
-    private String getFlagForKeyCode(int keyCode) {
-        if ("W".codePointAt(0) == keyCode) {
-            return "moveNorth";
-        } else if ("S".codePointAt(0) == keyCode) {
-            return "moveSouth";
-        } else if ("D".codePointAt(0) == keyCode) {
-            return "moveEast";
-        } else if ("A".codePointAt(0) == keyCode) {
-            return "moveWest";
-        } else {
-            return null;
+    csVPanel.getViewer().clock().onTick.addEventListener(new Event.Listener() {
+      @Override
+      public void function(Object... o) {
+        Rectangle travelingRectangle = earthAtNight.cutoutRectangle;
+        if (flags.moveNorth && travelingRectangle.north + moveIncrement < Math.PI_OVER_TWO()) {
+          travelingRectangle.north += moveIncrement;
+          travelingRectangle.south += moveIncrement;
         }
-    }
+        if (flags.moveSouth && travelingRectangle.south - moveIncrement > -Math.PI_OVER_TWO()) {
+          travelingRectangle.north -= moveIncrement;
+          travelingRectangle.south -= moveIncrement;
+        }
+        if (flags.moveEast) {
+          travelingRectangle.east += moveIncrement;
+          travelingRectangle.west += moveIncrement;
+        }
+        if (flags.moveWest) {
+          travelingRectangle.east -= moveIncrement;
+          travelingRectangle.west -= moveIncrement;
+        }
+        travelingRectangle.east = wrapLongitude(travelingRectangle.east);
+        travelingRectangle.west = wrapLongitude(travelingRectangle.west);
+      }
+    });
 
-    private void setFlag(int keyCode, boolean flag) {
-        String flagName = getFlagForKeyCode(keyCode);
-        if (flagName != null) {
-            if (flagName.equalsIgnoreCase("moveNorth")) {
-                flags.moveNorth = flag;
-            } else if (flagName.equalsIgnoreCase("moveSouth")) {
-                flags.moveSouth = flag;
-            } else if (flagName.equalsIgnoreCase("moveEast")) {
-                flags.moveEast = flag;
-            } else if (flagName.equalsIgnoreCase("moveWest")) {
-                flags.moveWest = flag;
-            }
-        }
-    }
+    HTML html = new HTML();
+    html.setHTML("<div id=\"toolbar\">\n" + "    <table class=\"infoPanel\">\n" + "        <tbody>\n" + "        <tr>\n"
+        + "            <td>Click on the Cesium display to start.</td>\n" + "        </tr>\n" + "        <tr>\n"
+        + "            <td>w/s - move cutout north/south</td>\n" + "        </tr>\n" + "        <tr>\n"
+        + "            <td>a/d - move cutout west/east</td>\n" + "        </tr>\n" + "        </tbody>\n"
+        + "    </table>\n" + "</div>");
+    html.getElement().getStyle().setColor("white");
 
-    private double wrapLongitude(double value) {
-        if (value < -Math.PI()) {
-            return value + Math.TWO_PI();
-        }
-        if (value > Math.PI()) {
-            return value - Math.TWO_PI();
-        }
-        return value;
+    AbsolutePanel aPanel = new AbsolutePanel();
+    aPanel.add(csVPanel);
+    aPanel.add(html, 20, 20);
+
+    contentPanel.add(new HTML("<p>Demonstration of imagery layers with rectangular cutouts.</p>"));
+    contentPanel.add(aPanel);
+
+    initWidget(contentPanel);
+  }
+
+  @Override
+  public String[] getSourceCodeURLs() {
+    String[] sourceCodeURLs = new String[1];
+    sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "ImageryCutout.txt";
+    return sourceCodeURLs;
+  }
+
+  private String getFlagForKeyCode(int keyCode) {
+    if ("W".codePointAt(0) == keyCode) {
+      return "moveNorth";
+    } else if ("S".codePointAt(0) == keyCode) {
+      return "moveSouth";
+    } else if ("D".codePointAt(0) == keyCode) {
+      return "moveEast";
+    } else if ("A".codePointAt(0) == keyCode) {
+      return "moveWest";
+    } else {
+      return null;
     }
+  }
+
+  private void setFlag(int keyCode, boolean flag) {
+    String flagName = getFlagForKeyCode(keyCode);
+    if (flagName != null) {
+      if (flagName.equalsIgnoreCase("moveNorth")) {
+        flags.moveNorth = flag;
+      } else if (flagName.equalsIgnoreCase("moveSouth")) {
+        flags.moveSouth = flag;
+      } else if (flagName.equalsIgnoreCase("moveEast")) {
+        flags.moveEast = flag;
+      } else if (flagName.equalsIgnoreCase("moveWest")) {
+        flags.moveWest = flag;
+      }
+    }
+  }
+
+  private double wrapLongitude(double value) {
+    if (value < -Math.PI()) {
+      return value + Math.TWO_PI();
+    }
+    if (value > Math.PI()) {
+      return value - Math.TWO_PI();
+    }
+    return value;
+  }
 }

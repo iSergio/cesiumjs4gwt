@@ -17,6 +17,7 @@
 package org.cleanlogic.cesiumjs4gwt.showcase.puregwt.event;
 
 import com.google.gwt.event.shared.GwtEvent;
+
 import org.cleanlogic.cesiumjs4gwt.showcase.puregwt.handler.ExamplePanelBuildHandler;
 
 /**
@@ -26,29 +27,29 @@ import org.cleanlogic.cesiumjs4gwt.showcase.puregwt.handler.ExamplePanelBuildHan
  */
 public class ExamplePanelBuildEvent extends GwtEvent<ExamplePanelBuildHandler> {
 
-    private String filter;
+  private String filter;
 
-    public ExamplePanelBuildEvent() {
-    }
+  public ExamplePanelBuildEvent() {
+  }
 
-    public ExamplePanelBuildEvent(String filter) {
-        this.filter = filter;
-    }
+  public ExamplePanelBuildEvent(String filter) {
+    this.filter = filter;
+  }
 
-    @Override
-    public Type<ExamplePanelBuildHandler> getAssociatedType() {
-        return ExamplePanelBuildHandler.TYPE;
-    }
+  @Override
+  public Type<ExamplePanelBuildHandler> getAssociatedType() {
+    return ExamplePanelBuildHandler.TYPE;
+  }
 
-    @Override
-    protected void dispatch(ExamplePanelBuildHandler handler) {
-        handler.buildExamplePanel(filter);
-    }
+  @Override
+  protected void dispatch(ExamplePanelBuildHandler handler) {
+    handler.buildExamplePanel(filter);
+  }
 
-    /**
-     * @param filter the filter to set
-     */
-    public void setFilter(String filter) {
-        this.filter = filter;
-    }
+  /**
+   * @param filter the filter to set
+   */
+  public void setFilter(String filter) {
+    this.filter = filter;
+  }
 }

@@ -21,10 +21,10 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "JSON" )
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "JSON")
 public class JsJSON {
-    @JsMethod
-    native static public <T> T parse(String json);
+  @JsMethod
+  native static public <T> T parse(String json);
 }

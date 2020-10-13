@@ -34,26 +34,24 @@ public class DebugCameraPrimitiveOptions {
   @JsProperty
   public Camera camera;
   /**
-   * Distances to the near and far planes of the camera frustums. 
-   * This overrides the camera's frustum near and far values.
+   * Distances to the near and far planes of the camera frustums. This overrides
+   * the camera's frustum near and far values.
    */
   @JsProperty
   public Number[] frustumSplits;
   /**
-   * The color of the debug outline.
-   * Default: Color.CYAN
+   * The color of the debug outline. Default: Color.CYAN
    */
   @JsProperty
   public Color color;
   /**
-   * Whether the primitive updates when the underlying camera changes.
-   * Default: true
+   * Whether the primitive updates when the underlying camera changes. Default:
+   * true
    */
   @JsProperty
   public boolean updateOnChange;
   /**
-   * Determines if this primitive will be shown.
-   * Default: true
+   * Determines if this primitive will be shown. Default: true
    */
   @JsProperty
   public boolean show;
@@ -64,10 +62,12 @@ public class DebugCameraPrimitiveOptions {
   public Object id;
 
   @JsConstructor
-  protected DebugCameraPrimitiveOptions() {}
+  protected DebugCameraPrimitiveOptions() {
+  }
 
   /**
    * Create new instance
+   * 
    * @param camera The camera.
    * @return options
    */

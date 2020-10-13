@@ -19,6 +19,7 @@ package org.cleanlogic.cesiumjs4gwt.showcase.basic;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.ScrollPanel;
+
 import org.cleanlogic.cesiumjs4gwt.showcase.DialogBoxWithCloseButton;
 import org.cleanlogic.cesiumjs4gwt.showcase.components.ShowcaseSearchPanel;
 
@@ -31,28 +32,27 @@ import org.cleanlogic.cesiumjs4gwt.showcase.components.ShowcaseSearchPanel;
  */
 public class ShowSourceButton extends AbstractSourceButton {
 
-    private String source;
+  private String source;
 
-    public ShowSourceButton(String source) {
-        super(source);
-        this.source = source;
-    }
+  public ShowSourceButton(String source) {
+    super(source);
+    this.source = source;
+  }
 
-    protected void showSourceCode(String sourceCode) {
-        sourceCode = sourceCode.replaceAll("<", "&lt,").replace(">", "&gt;");
+  protected void showSourceCode(String sourceCode) {
+    sourceCode = sourceCode.replaceAll("<", "&lt,").replace(">", "&gt;");
 
-        final String html = "<pre class=\"brush: java; toolbar: false;\">" + sourceCode + "</pre>";
-        ScrollPanel sp = new ScrollPanel();
-        sp.setSize((Window.getClientWidth() * 0.6) + "px",
-                (Window.getClientHeight() * 0.7) + "px");
-        sp.add(new HTML(html));
+    final String html = "<pre class=\"brush: java; toolbar: false;\">" + sourceCode + "</pre>";
+    ScrollPanel sp = new ScrollPanel();
+    sp.setSize((Window.getClientWidth() * 0.6) + "px", (Window.getClientHeight() * 0.7) + "px");
+    sp.add(new HTML(html));
 
-        DialogBoxWithCloseButton dialogBox = new DialogBoxWithCloseButton(false);
-        dialogBox.setWidget(sp);
-        dialogBox.setText(ShowcaseSearchPanel.I18N.viewSource(source));
-        dialogBox.center();
+    DialogBoxWithCloseButton dialogBox = new DialogBoxWithCloseButton(false);
+    dialogBox.setWidget(sp);
+    dialogBox.setText(ShowcaseSearchPanel.I18N.viewSource(source));
+    dialogBox.center();
 
-        super.doFormat();
-    }
+    super.doFormat();
+  }
 
 }

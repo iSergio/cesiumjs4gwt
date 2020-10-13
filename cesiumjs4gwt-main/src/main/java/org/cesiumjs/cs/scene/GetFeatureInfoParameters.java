@@ -22,17 +22,18 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class GetFeatureInfoParameters {
-    @JsProperty
-    public String service;
-    @JsProperty
-    public String version;
-    @JsProperty
-    public String request;
+  @JsProperty
+  public String service;
+  @JsProperty
+  public String version;
+  @JsProperty
+  public String request;
 
-    @JsConstructor
-    public GetFeatureInfoParameters() {}
+  @JsConstructor
+  public GetFeatureInfoParameters() {
+  }
 }

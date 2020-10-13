@@ -16,44 +16,50 @@
 
 package org.cesiumjs.cs.core;
 
+import org.cesiumjs.cs.core.options.BingMapsGeocoderServiceOptions;
+import org.cesiumjs.cs.promise.Promise;
+
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.options.BingMapsGeocoderServiceOptions;
-import org.cesiumjs.cs.promise.Promise;
 
 /**
  * Provides geocoding through Bing Maps.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "BingMapsGeocoderService")
 public class BingMapsGeocoderService implements GeocoderService {
-    @JsConstructor
-    private BingMapsGeocoderService() {}
+  @JsConstructor
+  private BingMapsGeocoderService() {
+  }
 
-    /**
-     * Provides geocoding through Bing Maps.
-     * @param options {@link BingMapsGeocoderServiceOptions} object.
-     */
-    @JsConstructor
-    public BingMapsGeocoderService(BingMapsGeocoderServiceOptions options) {}
+  /**
+   * Provides geocoding through Bing Maps.
+   * 
+   * @param options {@link BingMapsGeocoderServiceOptions} object.
+   */
+  @JsConstructor
+  public BingMapsGeocoderService(BingMapsGeocoderServiceOptions options) {
+  }
 
-    /**
-     * Provides geocoding through Bing Maps.
-     * @param key A key to use with the Bing Maps geocoding service
-     */
-    @JsOverlay
-    public static BingMapsGeocoderService create(String key) {
-        return new BingMapsGeocoderService(BingMapsGeocoderServiceOptions.create(key));
-    }
+  /**
+   * Provides geocoding through Bing Maps.
+   * 
+   * @param key A key to use with the Bing Maps geocoding service
+   */
+  @JsOverlay
+  public static BingMapsGeocoderService create(String key) {
+    return new BingMapsGeocoderService(BingMapsGeocoderServiceOptions.create(key));
+  }
 
-    /**
-     * Process query request to service
-     * @param query The query to be sent to the geocoder service
-     * @return promise
-     */
-    @JsMethod
-    public native Promise<GeocoderResult[], String> geocode(String query);
+  /**
+   * Process query request to service
+   * 
+   * @param query The query to be sent to the geocoder service
+   * @return promise
+   */
+  @JsMethod
+  public native Promise<GeocoderResult[], String> geocode(String query);
 }

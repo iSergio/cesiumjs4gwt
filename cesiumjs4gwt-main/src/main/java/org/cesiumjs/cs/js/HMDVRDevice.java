@@ -20,9 +20,10 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
-//TODO: Write code with specification https://developer.mozilla.org/en-US/docs/Web/API/HMDVRDevice
+// TODO: Write code with specification
+// https://developer.mozilla.org/en-US/docs/Web/API/HMDVRDevice
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class HMDVRDevice {
 }

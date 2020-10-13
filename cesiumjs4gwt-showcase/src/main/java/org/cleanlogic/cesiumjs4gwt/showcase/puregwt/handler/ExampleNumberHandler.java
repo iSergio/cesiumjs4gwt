@@ -26,7 +26,7 @@ import com.google.gwt.event.shared.GwtEvent;
  */
 public interface ExampleNumberHandler extends EventHandler {
 
-    GwtEvent.Type<ExampleNumberHandler> TYPE = new GwtEvent.Type<ExampleNumberHandler>();
-    
-    void updateExampleNumber(int number);
+  GwtEvent.Type<ExampleNumberHandler> TYPE = new GwtEvent.Type<ExampleNumberHandler>();
+
+  void updateExampleNumber(int number);
 }

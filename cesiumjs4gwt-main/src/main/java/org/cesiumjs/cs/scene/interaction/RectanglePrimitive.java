@@ -26,48 +26,48 @@ import org.cesiumjs.cs.scene.apperances.EllipsoidSurfaceAppearance;
 import org.cesiumjs.cs.scene.interaction.options.AbstractPrimitiveOptions;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 public class RectanglePrimitive extends AbstractPrimitive {
-    public RectanglePrimitive(AbstractPrimitiveOptions options) {
-        super(options);
-        super.options = options;
+  public RectanglePrimitive(AbstractPrimitiveOptions options) {
+    super(options);
+    super.options = options;
 
-        ellipsoid = Ellipsoid.WGS84();
-        show = true;
-        debugShowBoundingVolume = false;
+    ellipsoid = Ellipsoid.WGS84();
+    show = true;
+    debugShowBoundingVolume = false;
 
-        appearance = EllipsoidSurfaceAppearance.create(false);
-        granularity = Math.PI / 180.0;
+    appearance = EllipsoidSurfaceAppearance.create(false);
+    granularity = Math.PI / 180.0;
 
-        getGeometry = new GetGeometry() {
-            @Override
-            public Geometry function() {
-                Rectangle rectangle = getRectangle();
-                if (rectangle == null) {
-                    return null;
-                }
-                RectangleGeometryOptions options = new RectangleGeometryOptions();
-                options.rectangle = rectangle;
-                options.vertexFormat = EllipsoidSurfaceAppearance.VERTEX_FORMAT();
-                options.ellipsoid = ellipsoid;
-                return new RectangleGeometry(options);
-            }
-        };
+    getGeometry = new GetGeometry() {
+      @Override
+      public Geometry function() {
+        Rectangle rectangle = getRectangle();
+        if (rectangle == null) {
+          return null;
+        }
+        RectangleGeometryOptions options = new RectangleGeometryOptions();
+        options.rectangle = rectangle;
+        options.vertexFormat = EllipsoidSurfaceAppearance.VERTEX_FORMAT();
+        options.ellipsoid = ellipsoid;
+        return new RectangleGeometry(options);
+      }
+    };
 
-        super.initialize();
-    }
+    super.initialize();
+  }
 
-    public Cartesian3[] getPositions() {
-        return Rectangle.subsample(getRectangle(), ellipsoid);
-    }
+  public Cartesian3[] getPositions() {
+    return Rectangle.subsample(getRectangle(), ellipsoid);
+  }
 
-    public final void setRectangle(Rectangle rectangle) {
-        setAttribute("rectangle", rectangle);
-        createPrimitive = true;
-    }
+  public final void setRectangle(Rectangle rectangle) {
+    setAttribute("rectangle", rectangle);
+    createPrimitive = true;
+  }
 
-    public final Rectangle getRectangle() {
-        return (Rectangle) getAttribute("rectangle");
-    }
+  public final Rectangle getRectangle() {
+    return (Rectangle) getAttribute("rectangle");
+  }
 }

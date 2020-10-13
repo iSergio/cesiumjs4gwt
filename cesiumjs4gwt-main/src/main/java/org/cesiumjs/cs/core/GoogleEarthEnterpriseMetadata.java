@@ -16,54 +16,63 @@
 
 package org.cesiumjs.cs.core;
 
-import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.options.GoogleEarthEnterpriseMetadataOptions;
 import org.cesiumjs.cs.js.JsObject;
+
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsOverlay;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 
 /**
  * Provides metadata using the Google Earth Enterprise REST API.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "GoogleEarthEnterpriseMetadata")
 public class GoogleEarthEnterpriseMetadata {
-    /**
-     * The url of the Google Earth Enterprise server hosting the imagery
-     */
-    @JsProperty
-    public String url;
+  /**
+   * The url of the Google Earth Enterprise server hosting the imagery
+   */
+  @JsProperty
+  public String url;
 
-    @JsConstructor
-    private GoogleEarthEnterpriseMetadata(GoogleEarthEnterpriseMetadataOptions options) {}
+  @JsConstructor
+  private GoogleEarthEnterpriseMetadata(GoogleEarthEnterpriseMetadataOptions options) {
+  }
 
-    @JsOverlay
-    public static GoogleEarthEnterpriseMetadata create(String url) {
-        GoogleEarthEnterpriseMetadataOptions options = GoogleEarthEnterpriseMetadataOptions.create(url);
-        return new GoogleEarthEnterpriseMetadata(options);
-    }
+  @JsOverlay
+  public static GoogleEarthEnterpriseMetadata create(String url) {
+    GoogleEarthEnterpriseMetadataOptions options = GoogleEarthEnterpriseMetadataOptions.create(url);
+    return new GoogleEarthEnterpriseMetadata(options);
+  }
 
-    @JsOverlay
-    public static GoogleEarthEnterpriseMetadata create(String url, Object proxy) {
-        GoogleEarthEnterpriseMetadataOptions options = GoogleEarthEnterpriseMetadataOptions.create(url, proxy);
-        return new GoogleEarthEnterpriseMetadata(options);
-    }
+  @JsOverlay
+  public static GoogleEarthEnterpriseMetadata create(String url, Object proxy) {
+    GoogleEarthEnterpriseMetadataOptions options = GoogleEarthEnterpriseMetadataOptions.create(url, proxy);
+    return new GoogleEarthEnterpriseMetadata(options);
+  }
 
-    /**
-     * Converts a tile's quadkey used to request an image from a Google Earth Enterprise server
-     * into the (x, y, level) position.
-     * @param quadkey The tile's quad key
-     * @return Object with x, y and level.
-     */
-    @JsMethod
-    public static native JsObject quadKeyToTileXY(String quadkey);
+  /**
+   * Converts a tile's quadkey used to request an image from a Google Earth
+   * Enterprise server into the (x, y, level) position.
+   * 
+   * @param quadkey The tile's quad key
+   * @return Object with x, y and level.
+   */
+  @JsMethod
+  public static native JsObject quadKeyToTileXY(String quadkey);
 
-    /**
-     * Converts a tiles (x, y, level) position into a quadkey used to request an image from a Google Earth Enterprise server.
-     * @param x The tile's x coordinate.
-     * @param y The tile's y coordinate.
-     * @param level The tile's zoom level.
-     * @return quad key of tile
-     */
-    @JsMethod
-    public static native String tileXYToQuadKey(int x, int y, int level);
+  /**
+   * Converts a tiles (x, y, level) position into a quadkey used to request an
+   * image from a Google Earth Enterprise server.
+   * 
+   * @param x     The tile's x coordinate.
+   * @param y     The tile's y coordinate.
+   * @param level The tile's zoom level.
+   * @return quad key of tile
+   */
+  @JsMethod
+  public static native String tileXYToQuadKey(int x, int y, int level);
 }

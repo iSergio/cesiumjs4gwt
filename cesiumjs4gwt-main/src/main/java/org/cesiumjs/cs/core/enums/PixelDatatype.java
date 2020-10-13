@@ -20,26 +20,34 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "PixelDatatype")
 public class PixelDatatype {
-    @JsProperty(name = "UNSIGNED_BYTE")
-    public static native Number UNSIGNED_BYTE();
-    @JsProperty(name = "UNSIGNED_SHORT")
-    public static native Number UNSIGNED_SHORT();
-    @JsProperty(name = "UNSIGNED_INT")
-    public static native Number UNSIGNED_INT();
-    @JsProperty(name = "FLOAT")
-    public static native Number FLOAT();
-    @JsProperty(name = "HALF_FLOAT")
-    public static native Number HALF_FLOAT();
-    @JsProperty(name = "UNSIGNED_INT_24_8")
-    public static native Number UNSIGNED_INT_24_8();
-    @JsProperty(name = "UNSIGNED_SHORT_4_4_4_4")
-    public static native Number UNSIGNED_SHORT_4_4_4_4();
-    @JsProperty(name = "UNSIGNED_SHORT_5_5_5_1")
-    public static native Number UNSIGNED_SHORT_5_5_5_1();
-    @JsProperty(name = "UNSIGNED_SHORT_5_6_5")
-    public static native Number UNSIGNED_SHORT_5_6_5();
+  @JsProperty(name = "UNSIGNED_BYTE")
+  public static native Number UNSIGNED_BYTE();
+
+  @JsProperty(name = "UNSIGNED_SHORT")
+  public static native Number UNSIGNED_SHORT();
+
+  @JsProperty(name = "UNSIGNED_INT")
+  public static native Number UNSIGNED_INT();
+
+  @JsProperty(name = "FLOAT")
+  public static native Number FLOAT();
+
+  @JsProperty(name = "HALF_FLOAT")
+  public static native Number HALF_FLOAT();
+
+  @JsProperty(name = "UNSIGNED_INT_24_8")
+  public static native Number UNSIGNED_INT_24_8();
+
+  @JsProperty(name = "UNSIGNED_SHORT_4_4_4_4")
+  public static native Number UNSIGNED_SHORT_4_4_4_4();
+
+  @JsProperty(name = "UNSIGNED_SHORT_5_5_5_1")
+  public static native Number UNSIGNED_SHORT_5_5_5_1();
+
+  @JsProperty(name = "UNSIGNED_SHORT_5_6_5")
+  public static native Number UNSIGNED_SHORT_5_6_5();
 }

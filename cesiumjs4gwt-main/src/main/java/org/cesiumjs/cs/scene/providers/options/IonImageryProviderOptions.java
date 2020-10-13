@@ -16,46 +16,52 @@
 
 package org.cesiumjs.cs.scene.providers.options;
 
-import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.Resource;
+
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsOverlay;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 
 /**
  * Options for {@link org.cesiumjs.cs.scene.providers.IonImageryProvider}.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class IonImageryProviderOptions {
-    /**
-     * An ion imagery asset ID;
-     */
-    @JsProperty
-    public int assetId;
-    /**
-     * The access token to use.
-     * Default: {@link org.cesiumjs.cs.core.Ion#defaultAccessToken}
-     */
-    @JsProperty
-    public String accessToken;
-    /**
-     * The resource to the Cesium ion API server.
-     * Default: {@link org.cesiumjs.cs.core.Ion#defaultServer}
-     */
-    @JsProperty
-    public String server;
-    /**
-     * The resource to the Cesium ion API server.
-     */
-    @JsProperty(name = "server")
-    public Resource serverResource;
+  /**
+   * An ion imagery asset ID;
+   */
+  @JsProperty
+  public int assetId;
+  /**
+   * The access token to use. Default:
+   * {@link org.cesiumjs.cs.core.Ion#defaultAccessToken}
+   */
+  @JsProperty
+  public String accessToken;
+  /**
+   * The resource to the Cesium ion API server. Default:
+   * {@link org.cesiumjs.cs.core.Ion#defaultServer}
+   */
+  @JsProperty
+  public String server;
+  /**
+   * The resource to the Cesium ion API server.
+   */
+  @JsProperty(name = "server")
+  public Resource serverResource;
 
-    @JsConstructor
-    private IonImageryProviderOptions() {}
+  @JsConstructor
+  private IonImageryProviderOptions() {
+  }
 
-    @JsOverlay
-    public static IonImageryProviderOptions create(int assetId) {
-        IonImageryProviderOptions options = new IonImageryProviderOptions();
-        options.assetId = assetId;
-        return options;
-    }
+  @JsOverlay
+  public static IonImageryProviderOptions create(int assetId) {
+    IonImageryProviderOptions options = new IonImageryProviderOptions();
+    options.assetId = assetId;
+    return options;
+  }
 }

@@ -16,53 +16,61 @@
 
 package org.cesiumjs.cs.core.options;
 
-import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.Resource;
 import org.cesiumjs.cs.scene.Scene;
+
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsOverlay;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 
 /**
  * Options for {@link org.cesiumjs.cs.core.IonGeocoderService}.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class IonGeocoderServiceOptions {
-    /**
-     * The scene
-     */
-    @JsProperty
-    public Scene scene;
-    /**
-     * The access token to use.
-     * Default: {@link org.cesiumjs.cs.core.Ion#defaultAccessToken}
-     */
-    @JsProperty
-    public String accessToken;
-    /**
-     * The resource to the Cesium ion API server.
-     * Default: {@link org.cesiumjs.cs.core.Ion#defaultServer}
-     */
-    @JsProperty
-    public String server;
-    /**
-     * The resource to the Cesium ion API server.
-     * Default: {@link org.cesiumjs.cs.core.Ion#defaultServer}
-     */
-    @JsProperty(name = "server")
-    public Resource serverResource;
+  /**
+   * The scene
+   */
+  @JsProperty
+  public Scene scene;
+  /**
+   * The access token to use. Default:
+   * {@link org.cesiumjs.cs.core.Ion#defaultAccessToken}
+   */
+  @JsProperty
+  public String accessToken;
+  /**
+   * The resource to the Cesium ion API server. Default:
+   * {@link org.cesiumjs.cs.core.Ion#defaultServer}
+   */
+  @JsProperty
+  public String server;
+  /**
+   * The resource to the Cesium ion API server. Default:
+   * {@link org.cesiumjs.cs.core.Ion#defaultServer}
+   */
+  @JsProperty(name = "server")
+  public Resource serverResource;
 
-    @JsConstructor
-    private IonGeocoderServiceOptions() {}
+  @JsConstructor
+  private IonGeocoderServiceOptions() {
+  }
 
-    /**
-     * Fast create instance of {@link IonGeocoderServiceOptions} by mandatory param Scene
-     * @param scene The scene
-     * @return {@link IonGeocoderServiceOptions} instance.
-     */
-    @JsOverlay
-    public static IonGeocoderServiceOptions create(Scene scene) {
-        IonGeocoderServiceOptions options = new IonGeocoderServiceOptions();
-        options.scene = scene;
-        return options;
-    }
+  /**
+   * Fast create instance of {@link IonGeocoderServiceOptions} by mandatory param
+   * Scene
+   * 
+   * @param scene The scene
+   * @return {@link IonGeocoderServiceOptions} instance.
+   */
+  @JsOverlay
+  public static IonGeocoderServiceOptions create(Scene scene) {
+    IonGeocoderServiceOptions options = new IonGeocoderServiceOptions();
+    options.scene = scene;
+    return options;
+  }
 }

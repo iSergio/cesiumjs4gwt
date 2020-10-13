@@ -21,26 +21,23 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class EntityClusterOptions {
-    /**
-     * Whether or not to enable clustering.
-     * Default: false
-     */
-    @JsProperty
-    public boolean enabled;
-    /**
-     * The pixel range to extend the screen space bounding box.
-     * Default: 80
-     */
-    @JsProperty
-    public int pixelRange;
-    /**
-     * The minimum number of screen space objects that can be clustered.
-     * Default: 2
-     */
-    @JsProperty
-    public int minimumClusterSize;
+  /**
+   * Whether or not to enable clustering. Default: false
+   */
+  @JsProperty
+  public boolean enabled;
+  /**
+   * The pixel range to extend the screen space bounding box. Default: 80
+   */
+  @JsProperty
+  public int pixelRange;
+  /**
+   * The minimum number of screen space objects that can be clustered. Default: 2
+   */
+  @JsProperty
+  public int minimumClusterSize;
 }

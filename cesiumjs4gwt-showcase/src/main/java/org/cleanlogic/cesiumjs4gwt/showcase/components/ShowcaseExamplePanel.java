@@ -16,16 +16,17 @@
  */
 package org.cleanlogic.cesiumjs4gwt.showcase.components;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.FlowPanel;
+
 import org.cleanlogic.cesiumjs4gwt.showcase.ExampleBean;
 import org.cleanlogic.cesiumjs4gwt.showcase.ExamplePanel;
 import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ShowcaseExampleStore;
 import org.cleanlogic.cesiumjs4gwt.showcase.puregwt.ShowcaseEventBus;
 import org.cleanlogic.cesiumjs4gwt.showcase.puregwt.event.ExampleNumberEvent;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
 
 /**
  *
@@ -33,56 +34,53 @@ import javax.inject.Singleton;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Singleton
-public class ShowcaseExamplePanel extends FlowPanel implements
-        IShowcaseExamplePanel {
+public class ShowcaseExamplePanel extends FlowPanel implements IShowcaseExamplePanel {
 
-    private final ShowcaseExampleStore store;
-    private final ShowcaseEventBus bus;
-    private final ExampleNumberEvent event = new ExampleNumberEvent();
+  private final ShowcaseExampleStore store;
+  private final ShowcaseEventBus bus;
+  private final ExampleNumberEvent event = new ExampleNumberEvent();
 
-    @Inject
-    public ShowcaseExamplePanel(ShowcaseExampleStore theStore,
-            ShowcaseEventBus theBus) {
-        super.setWidth("100%");
-        this.store = theStore;
-        this.bus = theBus;
+  @Inject
+  public ShowcaseExamplePanel(ShowcaseExampleStore theStore, ShowcaseEventBus theBus) {
+    super.setWidth("100%");
+    this.store = theStore;
+    this.bus = theBus;
 
-        addShowcaseExamplePanelHandler();
-    }
+    addShowcaseExamplePanelHandler();
+  }
 
-    public void buildExamplePanel(String filter) {
-        super.clear();
+  public void buildExamplePanel(String filter) {
+    super.clear();
 
-        int numberOfExamples = 0;
+    int numberOfExamples = 0;
 
-        for (ExampleBean example : store.getExamples()) {
-            boolean show = false;
-            String[] tags = example.getTags();
-            if ((filter == null) || (filter.trim().equals(""))) {
-                show = true;
-            } else {
-                for (String tag : tags) {
-                    if (tag.trim().toLowerCase().contains(
-                            filter.trim().toLowerCase())) {
-                        show = true;
-                        break;
-                    }
-                }
-            }
-
-            if (show) {
-                super.add(new ExamplePanel(example));
-                numberOfExamples++;
-            }
+    for (ExampleBean example : store.getExamples()) {
+      boolean show = false;
+      String[] tags = example.getTags();
+      if ((filter == null) || (filter.trim().equals(""))) {
+        show = true;
+      } else {
+        for (String tag : tags) {
+          if (tag.trim().toLowerCase().contains(filter.trim().toLowerCase())) {
+            show = true;
+            break;
+          }
         }
+      }
 
-        this.event.setNumber(numberOfExamples);
-        this.bus.fireEvent(event);
+      if (show) {
+        super.add(new ExamplePanel(example));
+        numberOfExamples++;
+      }
     }
 
-    public final HandlerRegistration addShowcaseExamplePanelHandler() {
-        return this.bus.addHandler(TYPE, this);
+    this.event.setNumber(numberOfExamples);
+    this.bus.fireEvent(event);
+  }
 
-    }
+  public final HandlerRegistration addShowcaseExamplePanelHandler() {
+    return this.bus.addHandler(TYPE, this);
+
+  }
 
 }

@@ -16,38 +16,39 @@
 
 package org.cesiumjs.cs.core.options;
 
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Ellipsoid;
 import org.cesiumjs.cs.core.Rectangle;
 
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
+
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class TilingSchemeOptions {
-    /**
-     * The ellipsoid whose surface is being tiled. Defaults to the WGS84 ellipsoid.
-     * Default: {@link Ellipsoid#WGS84}
-     */
-    @JsProperty
-    public Ellipsoid ellipsoid;
-    /**
-     * The rectangle, in radians, covered by the tiling scheme.
-     * Default: Rectangle.MAX_VALUE
-     */
-    @JsProperty
-    public Rectangle rectangle;
-    /**
-     * The number of tiles in the X direction at level zero of the tile tree.
-     * Default: 2
-     */
-    @JsProperty
-    public int numberOfLevelZeroTilesX;
-    /**
-     * The number of tiles in the Y direction at level zero of the tile tree.
-     */
-    @JsProperty
-    public int numberOfLevelZeroTilesY;
+  /**
+   * The ellipsoid whose surface is being tiled. Defaults to the WGS84 ellipsoid.
+   * Default: {@link Ellipsoid#WGS84}
+   */
+  @JsProperty
+  public Ellipsoid ellipsoid;
+  /**
+   * The rectangle, in radians, covered by the tiling scheme. Default:
+   * Rectangle.MAX_VALUE
+   */
+  @JsProperty
+  public Rectangle rectangle;
+  /**
+   * The number of tiles in the X direction at level zero of the tile tree.
+   * Default: 2
+   */
+  @JsProperty
+  public int numberOfLevelZeroTilesX;
+  /**
+   * The number of tiles in the Y direction at level zero of the tile tree.
+   */
+  @JsProperty
+  public int numberOfLevelZeroTilesY;
 }

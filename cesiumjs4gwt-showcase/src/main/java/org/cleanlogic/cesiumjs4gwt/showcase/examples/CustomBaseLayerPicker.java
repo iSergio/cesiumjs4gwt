@@ -16,10 +16,16 @@
 
 package org.cleanlogic.cesiumjs4gwt.showcase.examples;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.inject.Inject;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.RootPanel;
+
 import org.cesiumjs.cs.Cesium;
 import org.cesiumjs.cs.core.providers.EllipsoidTerrainProvider;
 import org.cesiumjs.cs.core.providers.TerrainProvider;
@@ -40,120 +46,119 @@ import org.cesiumjs.cs.widgets.options.ViewerOptions;
 import org.cleanlogic.cesiumjs4gwt.showcase.basic.AbstractExample;
 import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ShowcaseExampleStore;
 
-import javax.inject.Inject;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 public class CustomBaseLayerPicker extends AbstractExample {
 
-    @Inject
-    public CustomBaseLayerPicker(ShowcaseExampleStore store) {
-        super("Custom BaseLayerPicker widget", "Configure custom BaseLayerPicker widget", new String[]{"Showcase", "Cesium", "3d", "BaseLayerPicker", "BaseLayerPickerViewModel"}, store);
-    }
+  @Inject
+  public CustomBaseLayerPicker(ShowcaseExampleStore store) {
+    super("Custom BaseLayerPicker widget", "Configure custom BaseLayerPicker widget",
+        new String[] { "Showcase", "Cesium", "3d", "BaseLayerPicker", "BaseLayerPickerViewModel" }, store);
+  }
 
-    @Override
-    public void buildPanel() {
-        DivElement divElement = RootPanel.get().getElement().getOwnerDocument().createDivElement();
-        divElement.setId("baseLayerPickerContainer");
-        divElement.setPropertyString("style", "position:absolute;top:50px;right:42px;width:38px;height:38px;");
+  @Override
+  public void buildPanel() {
+    DivElement divElement = RootPanel.get().getElement().getOwnerDocument().createDivElement();
+    divElement.setId("baseLayerPickerContainer");
+    divElement.setPropertyString("style", "position:absolute;top:50px;right:42px;width:38px;height:38px;");
 
-        List<ProviderViewModel> imageryViewModels = new ArrayList<>();
-        List<ProviderViewModel> terrainViewModels = new ArrayList<>();
+    List<ProviderViewModel> imageryViewModels = new ArrayList<>();
+    List<ProviderViewModel> terrainViewModels = new ArrayList<>();
 
-        ProviderViewModelOptions options = new ProviderViewModelOptions();
-        options.name = "Open\u00adStreet\u00adMap";
-        options.iconUrl = GWT.getModuleBaseURL() + "cs/CesiumUnminified/Widgets/Images/ImageryProviders/openStreetMap.png";
-        options.tooltip = "OpenStreetMap (OSM) is a collaborative project to create a free editable map of the world.\nhttp://www.openstreetmap.org";
-        options.imageryProviderCreationFunction = new ProviderViewModel.ImageryProviderCreationFunction() {
-            @Override
-            public ImageryProvider function() {
-                OpenStreetMapImageryProviderOptions options = new OpenStreetMapImageryProviderOptions();
-                options.url = "https://a.tile.openstreetmap.org/";
-                return new OpenStreetMapImageryProvider(options);
-                // return Cesium.createOpenStreetMapImageryProvider("https://a.tile.openstreetmap.org/");
-            }
-        };
-        imageryViewModels.add(new ProviderViewModel(options));
+    ProviderViewModelOptions options = new ProviderViewModelOptions();
+    options.name = "Open\u00adStreet\u00adMap";
+    options.iconUrl = GWT.getModuleBaseURL() + "cs/CesiumUnminified/Widgets/Images/ImageryProviders/openStreetMap.png";
+    options.tooltip = "OpenStreetMap (OSM) is a collaborative project to create a free editable map of the world.\nhttp://www.openstreetmap.org";
+    options.imageryProviderCreationFunction = new ProviderViewModel.ImageryProviderCreationFunction() {
+      @Override
+      public ImageryProvider function() {
+        OpenStreetMapImageryProviderOptions options = new OpenStreetMapImageryProviderOptions();
+        options.url = "https://a.tile.openstreetmap.org/";
+        return new OpenStreetMapImageryProvider(options);
+        // return
+        // Cesium.createOpenStreetMapImageryProvider("https://a.tile.openstreetmap.org/");
+      }
+    };
+    imageryViewModels.add(new ProviderViewModel(options));
 
-        options = new ProviderViewModelOptions();
-        options.name = "Earth at Night";
-        options.iconUrl = GWT.getModuleBaseURL() + "cs/CesiumUnminified/Widgets/Images/ImageryProviders/blueMarble.png";
-        options.tooltip = "The lights of cities and villages trace the outlines of civilization \n" +
-                "        in this global view of the Earth at night as seen by NASA/NOAA\\'s Suomi NPP satellite.";
-        options.imageryProviderCreationFunction = new ProviderViewModel.ImageryProviderCreationFunction() {
-            @Override
-            public ImageryProvider function() {
-                return new IonImageryProvider(IonImageryProviderOptions.create(3812));
-            }
-        };
-        imageryViewModels.add(new ProviderViewModel(options));
+    options = new ProviderViewModelOptions();
+    options.name = "Earth at Night";
+    options.iconUrl = GWT.getModuleBaseURL() + "cs/CesiumUnminified/Widgets/Images/ImageryProviders/blueMarble.png";
+    options.tooltip = "The lights of cities and villages trace the outlines of civilization \n"
+        + "        in this global view of the Earth at night as seen by NASA/NOAA\\'s Suomi NPP satellite.";
+    options.imageryProviderCreationFunction = new ProviderViewModel.ImageryProviderCreationFunction() {
+      @Override
+      public ImageryProvider function() {
+        return new IonImageryProvider(IonImageryProviderOptions.create(3812));
+      }
+    };
+    imageryViewModels.add(new ProviderViewModel(options));
 
-        options = new ProviderViewModelOptions();
-        options.name = "Natural Earth\u00a0II";
-        options.iconUrl = GWT.getModuleBaseURL() + "cs/CesiumUnminified/Widgets/Images/ImageryProviders/naturalEarthII.png";
-        options.tooltip = "The lights of cities and villages trace the outlines of civilization \n" +
-                "        in this global view of the Earth at night as seen by NASA/NOAA\\'s Suomi NPP satellite.";
-        options.imageryProviderCreationFunction = new ProviderViewModel.ImageryProviderCreationFunction() {
-            @Override
-            public ImageryProvider function() {
-                TileMapServiceImageryProviderOptions options = new TileMapServiceImageryProviderOptions();
-                options.url = GWT.getModuleBaseURL() + "cs/CesiumUnminified/Assets/Textures/NaturalEarthII";
-                return new TileMapServiceImageryProvider(options);
-            }
-        };
-        imageryViewModels.add(new ProviderViewModel(options));
+    options = new ProviderViewModelOptions();
+    options.name = "Natural Earth\u00a0II";
+    options.iconUrl = GWT.getModuleBaseURL() + "cs/CesiumUnminified/Widgets/Images/ImageryProviders/naturalEarthII.png";
+    options.tooltip = "The lights of cities and villages trace the outlines of civilization \n"
+        + "        in this global view of the Earth at night as seen by NASA/NOAA\\'s Suomi NPP satellite.";
+    options.imageryProviderCreationFunction = new ProviderViewModel.ImageryProviderCreationFunction() {
+      @Override
+      public ImageryProvider function() {
+        TileMapServiceImageryProviderOptions options = new TileMapServiceImageryProviderOptions();
+        options.url = GWT.getModuleBaseURL() + "cs/CesiumUnminified/Assets/Textures/NaturalEarthII";
+        return new TileMapServiceImageryProvider(options);
+      }
+    };
+    imageryViewModels.add(new ProviderViewModel(options));
 
-        options = new ProviderViewModelOptions();
-        options.name = "EllipsoidTerrainProvider";
-        options.iconUrl = GWT.getModuleBaseURL() + "cs/CesiumUnminified/Widgets/Images/ImageryProviders/naturalEarthII.png";
-        options.tooltip = "Some Terrain Description.";
-        options.terrainProviderCreationFunction = new ProviderViewModel.TerrainProviderCreationFunction() {
-            @Override
-            public TerrainProvider function() {
-                return new EllipsoidTerrainProvider();
-            }
-        };
-        terrainViewModels.add(new ProviderViewModel(options));
+    options = new ProviderViewModelOptions();
+    options.name = "EllipsoidTerrainProvider";
+    options.iconUrl = GWT.getModuleBaseURL() + "cs/CesiumUnminified/Widgets/Images/ImageryProviders/naturalEarthII.png";
+    options.tooltip = "Some Terrain Description.";
+    options.terrainProviderCreationFunction = new ProviderViewModel.TerrainProviderCreationFunction() {
+      @Override
+      public TerrainProvider function() {
+        return new EllipsoidTerrainProvider();
+      }
+    };
+    terrainViewModels.add(new ProviderViewModel(options));
 
-        options = new ProviderViewModelOptions();
-        options.name = "WorldTerrain";
-        options.iconUrl = GWT.getModuleBaseURL() + "cs/CesiumUnminified/Widgets/Images/ImageryProviders/naturalEarthII.png";
-        options.tooltip = "WorldTerrain.";
-        options.terrainProviderCreationFunction = new ProviderViewModel.TerrainProviderCreationFunction() {
-            @Override
-            public TerrainProvider function() {
-                return Cesium.createWorldTerrain(Cesium.CreateWorldTerrainOptions.create(true, true));
-            }
-        };
-        terrainViewModels.add(new ProviderViewModel(options));
+    options = new ProviderViewModelOptions();
+    options.name = "WorldTerrain";
+    options.iconUrl = GWT.getModuleBaseURL() + "cs/CesiumUnminified/Widgets/Images/ImageryProviders/naturalEarthII.png";
+    options.tooltip = "WorldTerrain.";
+    options.terrainProviderCreationFunction = new ProviderViewModel.TerrainProviderCreationFunction() {
+      @Override
+      public TerrainProvider function() {
+        return Cesium.createWorldTerrain(Cesium.CreateWorldTerrainOptions.create(true, true));
+      }
+    };
+    terrainViewModels.add(new ProviderViewModel(options));
 
-        ViewerOptions viewerOptions = new ViewerOptions();
-        viewerOptions.imageryProvider = (ImageryProvider) JsObject.undefined();
-        viewerOptions.baseLayerPicker = false;
-        ViewerPanel csVPanel = new ViewerPanel(viewerOptions);
-        csVPanel.getViewer().scene().imageryLayers().removeAll(true);
+    ViewerOptions viewerOptions = new ViewerOptions();
+    viewerOptions.imageryProvider = (ImageryProvider) JsObject.undefined();
+    viewerOptions.baseLayerPicker = false;
+    ViewerPanel csVPanel = new ViewerPanel(viewerOptions);
+    csVPanel.getViewer().scene().imageryLayers().removeAll(true);
 
-        csVPanel.getViewer().container().getFirstChildElement().appendChild(divElement);
+    csVPanel.getViewer().container().getFirstChildElement().appendChild(divElement);
 
-        BaseLayerPickerViewModelOptions baseLayerPickerOptions = BaseLayerPickerViewModelOptions.create(csVPanel.getViewer().scene().globe);
-        baseLayerPickerOptions.imageryProviderViewModels = imageryViewModels.toArray(new ProviderViewModel[0]);
-        baseLayerPickerOptions.terrainProviderViewModels = terrainViewModels.toArray(new ProviderViewModel[0]);
+    BaseLayerPickerViewModelOptions baseLayerPickerOptions = BaseLayerPickerViewModelOptions
+        .create(csVPanel.getViewer().scene().globe);
+    baseLayerPickerOptions.imageryProviderViewModels = imageryViewModels.toArray(new ProviderViewModel[0]);
+    baseLayerPickerOptions.terrainProviderViewModels = terrainViewModels.toArray(new ProviderViewModel[0]);
 
-        BaseLayerPicker baseLayerPicker = new BaseLayerPicker(divElement, baseLayerPickerOptions);
+    BaseLayerPicker baseLayerPicker = new BaseLayerPicker(divElement, baseLayerPickerOptions);
 
-        contentPanel.add(new HTML("<p>Configure custom BaseLayerPicker widget.</p>"));
-        contentPanel.add(csVPanel);
+    contentPanel.add(new HTML("<p>Configure custom BaseLayerPicker widget.</p>"));
+    contentPanel.add(csVPanel);
 
-        initWidget(contentPanel);
-    }
+    initWidget(contentPanel);
+  }
 
-    @Override
-    public String[] getSourceCodeURLs() {
-        String[] sourceCodeURLs = new String[1];
-        sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "CustomBaseLayerPicker.txt";
-        return sourceCodeURLs;
-    }
+  @Override
+  public String[] getSourceCodeURLs() {
+    String[] sourceCodeURLs = new String[1];
+    sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "CustomBaseLayerPicker.txt";
+    return sourceCodeURLs;
+  }
 }

@@ -16,37 +16,41 @@
 
 package org.cesiumjs.cs.datasources.properties;
 
+import org.cesiumjs.cs.collections.TimeIntervalCollection;
+
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.collections.TimeIntervalCollection;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "CompositeProperty")
 public class CompositeProperty extends Property<TimeIntervalCollection> {
-    //TODO: Example
-    /**
-     * Gets the interval collection.
-     */
-    @JsProperty
-    public TimeIntervalCollection intervals;
+  // TODO: Example
+  /**
+   * Gets the interval collection.
+   */
+  @JsProperty
+  public TimeIntervalCollection intervals;
 
-    /**
-     * A Property which is defined by a {@link TimeIntervalCollection},
-     * where the data property of each {@link org.cesiumjs.cs.core.TimeInterval} is another Property
-     * instance which is evaluated at the provided time.
-     */
-    @JsConstructor
-    public CompositeProperty() {}
+  /**
+   * A Property which is defined by a {@link TimeIntervalCollection}, where the
+   * data property of each {@link org.cesiumjs.cs.core.TimeInterval} is another
+   * Property instance which is evaluated at the provided time.
+   */
+  @JsConstructor
+  public CompositeProperty() {
+  }
 
-    /**
-     * Compares this property to the provided property and returns true if they are equal, false otherwise.
-     * @param other The other property.
-     * @return true if left and right are equal, false otherwise.
-     */
-    @JsMethod
-    public native boolean equals(Property other);
+  /**
+   * Compares this property to the provided property and returns true if they are
+   * equal, false otherwise.
+   * 
+   * @param other The other property.
+   * @return true if left and right are equal, false otherwise.
+   */
+  @JsMethod
+  public native boolean equals(Property other);
 }

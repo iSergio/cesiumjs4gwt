@@ -16,25 +16,27 @@
 
 package org.cesiumjs.cs.datasources.properties;
 
+import org.cesiumjs.cs.collections.TimeIntervalCollection;
+
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.collections.TimeIntervalCollection;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "CompositeMaterialProperty")
 public class CompositeMaterialProperty extends MaterialProperty {
-    /**
-     * Gets the interval collection.
-     */
-    @JsProperty
-    public TimeIntervalCollection intervals;
+  /**
+   * Gets the interval collection.
+   */
+  @JsProperty
+  public TimeIntervalCollection intervals;
 
-    /**
-     * A {@link CompositeProperty} which is also a {@link MaterialProperty}.
-     */
-    @JsConstructor
-    public CompositeMaterialProperty() {}
+  /**
+   * A {@link CompositeProperty} which is also a {@link MaterialProperty}.
+   */
+  @JsConstructor
+  public CompositeMaterialProperty() {
+  }
 }

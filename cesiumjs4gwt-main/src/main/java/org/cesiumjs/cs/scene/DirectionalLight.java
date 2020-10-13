@@ -28,23 +28,24 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "DirectionalLight")
 public class DirectionalLight extends Light {
-    /**
-     * The direction in which light gets emitted.
-     */
-    @JsProperty
-    public Cartesian3 direction;
+  /**
+   * The direction in which light gets emitted.
+   */
+  @JsProperty
+  public Cartesian3 direction;
 
-    @JsConstructor
-    protected DirectionalLight(DirectionalLightOptions options) {}
+  @JsConstructor
+  protected DirectionalLight(DirectionalLightOptions options) {
+  }
 
-    @JsOverlay
-    public static DirectionalLight create(Cartesian3 direction) {
-        DirectionalLightOptions options = DirectionalLightOptions.create(direction);
-        return new DirectionalLight(options);
-    }
+  @JsOverlay
+  public static DirectionalLight create(Cartesian3 direction) {
+    DirectionalLightOptions options = DirectionalLightOptions.create(direction);
+    return new DirectionalLight(options);
+  }
 
-    @JsOverlay
-    public static DirectionalLight create(DirectionalLightOptions options) {
-        return new DirectionalLight(options);
-    }
+  @JsOverlay
+  public static DirectionalLight create(DirectionalLightOptions options) {
+    return new DirectionalLight(options);
+  }
 }

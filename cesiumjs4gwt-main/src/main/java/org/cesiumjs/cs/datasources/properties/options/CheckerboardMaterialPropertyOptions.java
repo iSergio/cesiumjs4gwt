@@ -16,40 +16,41 @@
 
 package org.cesiumjs.cs.datasources.properties.options;
 
+import org.cesiumjs.cs.core.Color;
+import org.cesiumjs.cs.datasources.properties.Property;
+
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.Color;
-import org.cesiumjs.cs.datasources.properties.Property;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class CheckerboardMaterialPropertyOptions {
-    /**
-     * A Property specifying the first Color.
-     * Default: {@link Color#WHITE()}
-     */
-    @JsProperty
-    public Property evenColor;
-    /**
-     * A Property specifying the second Color.
-     * Default: {@link Color#BLACK()}
-     */
-    @JsProperty
-    public Property oddColor;
-    /**
-     * A Cartesian2 Property specifying how many times the tiles repeat in each direction.
-     * Default: new Cartesian2(2.0, 2.0)
-     */
-    @JsProperty
-    public Property repeat;
+  /**
+   * A Property specifying the first Color. Default: {@link Color#WHITE()}
+   */
+  @JsProperty
+  public Property evenColor;
+  /**
+   * A Property specifying the second Color. Default: {@link Color#BLACK()}
+   */
+  @JsProperty
+  public Property oddColor;
+  /**
+   * A Cartesian2 Property specifying how many times the tiles repeat in each
+   * direction. Default: new Cartesian2(2.0, 2.0)
+   */
+  @JsProperty
+  public Property repeat;
 
-    /**
-     * Options for {@link org.cesiumjs.cs.datasources.properties.CheckerboardMaterialProperty}
-     */
-    @JsConstructor
-    public CheckerboardMaterialPropertyOptions() {}
+  /**
+   * Options for
+   * {@link org.cesiumjs.cs.datasources.properties.CheckerboardMaterialProperty}
+   */
+  @JsConstructor
+  public CheckerboardMaterialPropertyOptions() {
+  }
 }

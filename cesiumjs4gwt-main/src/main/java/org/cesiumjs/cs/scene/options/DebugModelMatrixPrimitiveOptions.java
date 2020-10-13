@@ -16,52 +16,52 @@
 
 package org.cesiumjs.cs.scene.options;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Cartesian2;
 import org.cesiumjs.cs.core.Matrix4;
 import org.cesiumjs.cs.core.PickedObject;
 
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
+
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class DebugModelMatrixPrimitiveOptions {
-    /**
-     * The length of the axes in meters.
-     * Default: 10000000.0
-     */
-    @JsProperty
-    public double length;
-    /**
-     * The width of the axes in pixels.
-     * Default: 2.0
-     */
-    @JsProperty
-    public double width;
-    /**
-     * The 4x4 matrix that defines the reference frame, i.e., origin plus axes, to visualize.
-     * Default: {@link Matrix4#IDENTITY()}
-     */
-    @JsProperty
-    public Matrix4 modelMatrix;
-    /**
-     * Determines if this primitive will be shown.
-     * Default: true
-     */
-    @JsProperty
-    public boolean show;
-    /**
-     * A user-defined object to return when the instance is picked with {@link org.cesiumjs.cs.scene.Scene#pick(Cartesian2)}
-     */
-    @JsProperty
-    public PickedObject id;
+  /**
+   * The length of the axes in meters. Default: 10000000.0
+   */
+  @JsProperty
+  public double length;
+  /**
+   * The width of the axes in pixels. Default: 2.0
+   */
+  @JsProperty
+  public double width;
+  /**
+   * The 4x4 matrix that defines the reference frame, i.e., origin plus axes, to
+   * visualize. Default: {@link Matrix4#IDENTITY()}
+   */
+  @JsProperty
+  public Matrix4 modelMatrix;
+  /**
+   * Determines if this primitive will be shown. Default: true
+   */
+  @JsProperty
+  public boolean show;
+  /**
+   * A user-defined object to return when the instance is picked with
+   * {@link org.cesiumjs.cs.scene.Scene#pick(Cartesian2)}
+   */
+  @JsProperty
+  public PickedObject id;
 
-    /**
-     * Options for {@link org.cesiumjs.cs.scene.DebugModelMatrixPrimitive}
-     */
-    @JsConstructor
-    public DebugModelMatrixPrimitiveOptions() {}
+  /**
+   * Options for {@link org.cesiumjs.cs.scene.DebugModelMatrixPrimitive}
+   */
+  @JsConstructor
+  public DebugModelMatrixPrimitiveOptions() {
+  }
 }

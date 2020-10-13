@@ -16,20 +16,23 @@
 
 package org.cesiumjs.cs.scene.emitters;
 
-import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.scene.particle.Particle;
 import org.cesiumjs.cs.scene.particle.ParticleSystem;
+
+import jsinterop.annotations.JsType;
 
 /**
  * An object that initializes a {@link Particle} from a {@link ParticleSystem}.
  *
- * This type describes an interface and is not intended to be instantiated directly.
+ * This type describes an interface and is not intended to be instantiated
+ * directly.
+ * 
  * @see BoxEmitter
  * @see CircleEmitter
  * @see ConeEmitter
  * @see SphereEmitter
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true)
 public interface ParticleEmitter {

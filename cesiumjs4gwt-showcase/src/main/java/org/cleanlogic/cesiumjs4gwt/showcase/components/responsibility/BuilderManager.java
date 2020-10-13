@@ -19,14 +19,14 @@ package org.cleanlogic.cesiumjs4gwt.showcase.components.responsibility;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class BuilderManager implements ShowcaseBuilderManager {
 
-    private final ShowcaseBuilderHandler kvpHandler = new KvpParameterHandler();
+  private final ShowcaseBuilderHandler kvpHandler = new KvpParameterHandler();
 
-    public void buildShowcase() {
-        this.kvpHandler.buildShowcase();
-    }
+  public void buildShowcase() {
+    this.kvpHandler.buildShowcase();
+  }
 
 }

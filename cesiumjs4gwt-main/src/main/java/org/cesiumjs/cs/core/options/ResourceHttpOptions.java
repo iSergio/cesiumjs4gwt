@@ -16,69 +16,82 @@
 
 package org.cesiumjs.cs.core.options;
 
-import jsinterop.annotations.*;
 import org.cesiumjs.cs.js.JsObject;
+
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsOverlay;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 
 /**
  * Options for {@link org.cesiumjs.cs.core.Resource#head} method.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class ResourceHttpOptions {
-    /**
-     * The type of response. This controls the type of item returned.
-     */
-    @JsProperty
-    public String responseType;
-    /**
-     * Additional HTTP headers to send with the request, if any.
-     */
-    @JsProperty
-    public JsObject headers;
-    /**
-     * Overrides the MIME type returned by the server.
-     */
-    @JsProperty
-    public String overrideMimeType;
+  /**
+   * The type of response. This controls the type of item returned.
+   */
+  @JsProperty
+  public String responseType;
+  /**
+   * Additional HTTP headers to send with the request, if any.
+   */
+  @JsProperty
+  public JsObject headers;
+  /**
+   * Overrides the MIME type returned by the server.
+   */
+  @JsProperty
+  public String overrideMimeType;
 
-    @JsConstructor
-    public ResourceHttpOptions() {}
+  @JsConstructor
+  public ResourceHttpOptions() {
+  }
 
-    /**
-     * Create instance of {@link ResourceHttpOptions} object.
-     * @param responseType The type of response. This controls the type of item returned.
-     * @return instance of {@link ResourceHttpOptions} object.
-     */
-    @JsOverlay
-    public static ResourceHttpOptions create(String responseType) {
-        return create(responseType, null, "");
-    }
+  /**
+   * Create instance of {@link ResourceHttpOptions} object.
+   * 
+   * @param responseType The type of response. This controls the type of item
+   *                     returned.
+   * @return instance of {@link ResourceHttpOptions} object.
+   */
+  @JsOverlay
+  public static ResourceHttpOptions create(String responseType) {
+    return create(responseType, null, "");
+  }
 
-    /**
-     * Create instance of {@link ResourceHttpOptions} object.
-     * @param responseType The type of response. This controls the type of item returned.
-     * @param headers Additional HTTP headers to send with the request, if any.
-     * @return instance of {@link ResourceHttpOptions} object.
-     */
-    @JsOverlay
-    public static ResourceHttpOptions create(String responseType, JsObject headers) {
-        return create(responseType, headers, "");
-    }
+  /**
+   * Create instance of {@link ResourceHttpOptions} object.
+   * 
+   * @param responseType The type of response. This controls the type of item
+   *                     returned.
+   * @param headers      Additional HTTP headers to send with the request, if any.
+   * @return instance of {@link ResourceHttpOptions} object.
+   */
+  @JsOverlay
+  public static ResourceHttpOptions create(String responseType, JsObject headers) {
+    return create(responseType, headers, "");
+  }
 
-    /**
-     * Create instance of {@link ResourceHttpOptions} object.
-     * @param responseType The type of response. This controls the type of item returned.
-     * @param headers Additional HTTP headers to send with the request, if any.
-     * @param overrideMimeType Overrides the MIME type returned by the server.
-     * @return instance of {@link ResourceHttpOptions} object.
-     */
-    @JsOverlay
-    public static ResourceHttpOptions create(String responseType, JsObject headers, String overrideMimeType) {
-        ResourceHttpOptions options = new ResourceHttpOptions();
-        options.responseType = responseType;
-        options.headers = headers;
-        options.overrideMimeType = overrideMimeType;
-        return options;
-    }
+  /**
+   * Create instance of {@link ResourceHttpOptions} object.
+   * 
+   * @param responseType     The type of response. This controls the type of item
+   *                         returned.
+   * @param headers          Additional HTTP headers to send with the request, if
+   *                         any.
+   * @param overrideMimeType Overrides the MIME type returned by the server.
+   * @return instance of {@link ResourceHttpOptions} object.
+   */
+  @JsOverlay
+  public static ResourceHttpOptions create(String responseType, JsObject headers, String overrideMimeType) {
+    ResourceHttpOptions options = new ResourceHttpOptions();
+    options.responseType = responseType;
+    options.headers = headers;
+    options.overrideMimeType = overrideMimeType;
+    return options;
+  }
 }

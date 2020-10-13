@@ -16,51 +16,54 @@
 
 package org.cesiumjs.cs.core;
 
+import org.cesiumjs.cs.core.enums.GeocodeType;
+import org.cesiumjs.cs.promise.Promise;
+
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.enums.GeocodeType;
-import org.cesiumjs.cs.promise.Promise;
 
 /**
  * Provides geocoding via a <a href="https://pelias.io/">Pelias</a> server.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "PeliasGeocoderService")
 public class PeliasGeocoderService implements GeocoderService {
-    /**
-     * Provides geocoding via a <a href="https://pelias.io/">Pelias</a> server.
-     *
-     * @param url The endpoint to the Pelias server.
-     */
-    @JsConstructor
-    public PeliasGeocoderService(Resource url) {
-    }
+  /**
+   * Provides geocoding via a <a href="https://pelias.io/">Pelias</a> server.
+   *
+   * @param url The endpoint to the Pelias server.
+   */
+  @JsConstructor
+  public PeliasGeocoderService(Resource url) {
+  }
 
-    /**
-     * Provides geocoding via a <a href="https://pelias.io/">Pelias</a> server.
-     *
-     * @param url The endpoint to the Pelias server.
-     */
-    @JsConstructor
-    public PeliasGeocoderService(String url) {
-    }
+  /**
+   * Provides geocoding via a <a href="https://pelias.io/">Pelias</a> server.
+   *
+   * @param url The endpoint to the Pelias server.
+   */
+  @JsConstructor
+  public PeliasGeocoderService(String url) {
+  }
 
-    /**
-     * Process query request to service
-     * @param query The query to be sent to the geocoder service
-     * @return query result
-     */
-    @JsMethod
-    public native Promise<GeocoderResult[], Void> geocode(String query);
+  /**
+   * Process query request to service
+   * 
+   * @param query The query to be sent to the geocoder service
+   * @return query result
+   */
+  @JsMethod
+  public native Promise<GeocoderResult[], Void> geocode(String query);
 
-    /**
-     * Process query request to service
-     * @param query The query to be sent to the geocoder service
-     * @param type  The type of geocode to perform.
-     * @return query result
-     */
-    @JsMethod
-    public native Promise<GeocoderResult[], Void> geocode(String query, GeocodeType type);
+  /**
+   * Process query request to service
+   * 
+   * @param query The query to be sent to the geocoder service
+   * @param type  The type of geocode to perform.
+   * @return query result
+   */
+  @JsMethod
+  public native Promise<GeocoderResult[], Void> geocode(String query, GeocodeType type);
 }

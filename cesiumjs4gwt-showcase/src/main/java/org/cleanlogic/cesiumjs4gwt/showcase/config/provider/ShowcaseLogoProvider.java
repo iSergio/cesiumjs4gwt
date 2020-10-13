@@ -16,10 +16,11 @@
  */
 package org.cleanlogic.cesiumjs4gwt.showcase.config.provider;
 
-import com.google.gwt.user.client.ui.Image;
-import org.cleanlogic.cesiumjs4gwt.showcase.Resources;
-
 import javax.inject.Provider;
+
+import com.google.gwt.user.client.ui.Image;
+
+import org.cleanlogic.cesiumjs4gwt.showcase.Resources;
 
 /**
  *
@@ -28,7 +29,7 @@ import javax.inject.Provider;
  */
 public class ShowcaseLogoProvider implements Provider<Image> {
 
-    public Image get() {
-        return new Image(Resources.INSTANCE.gwtCsLogo());
-    }
+  public Image get() {
+    return new Image(Resources.INSTANCE.gwtCsLogo());
+  }
 }

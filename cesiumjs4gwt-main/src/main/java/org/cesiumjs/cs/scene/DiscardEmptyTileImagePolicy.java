@@ -16,24 +16,29 @@
 
 package org.cesiumjs.cs.scene;
 
+import org.cesiumjs.cs.js.JsImage;
+
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.js.JsImage;
 
 /**
- * A policy for discarding tile images that contain no data (and so aren't actually images). This policy discards DiscardEmptyTileImagePolicy.EMPTY_IMAGE,
- * which is expected to be used in place of any empty tile images by the image loading code.
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * A policy for discarding tile images that contain no data (and so aren't
+ * actually images). This policy discards
+ * DiscardEmptyTileImagePolicy.EMPTY_IMAGE, which is expected to be used in
+ * place of any empty tile images by the image loading code.
+ * 
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "DiscardEmptyTileImagePolicy")
 public class DiscardEmptyTileImagePolicy extends TileDiscardPolicy {
-    /**
-     * Default value for representing an empty image.
-     */
-    @JsProperty(name = "EMPTY_IMAGE")
-    public static native JsImage EMPTY_IMAGE();
+  /**
+   * Default value for representing an empty image.
+   */
+  @JsProperty(name = "EMPTY_IMAGE")
+  public static native JsImage EMPTY_IMAGE();
 
-    @JsConstructor
-    public DiscardEmptyTileImagePolicy() {}
+  @JsConstructor
+  public DiscardEmptyTileImagePolicy() {
+  }
 }

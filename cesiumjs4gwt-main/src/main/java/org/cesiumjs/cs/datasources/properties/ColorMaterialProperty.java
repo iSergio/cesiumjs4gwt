@@ -16,36 +16,41 @@
 
 package org.cesiumjs.cs.datasources.properties;
 
+import org.cesiumjs.cs.core.Color;
+
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.Color;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "ColorMaterialProperty")
 public class ColorMaterialProperty extends MaterialProperty {
-    /**
-     * Gets or sets the Color Property.
-     * Default: {@link Color#WHITE()}
-     */
-    @JsProperty
-    public Property color;
+  /**
+   * Gets or sets the Color Property. Default: {@link Color#WHITE()}
+   */
+  @JsProperty
+  public Property color;
 
-    /**
-     * A MaterialProperty that maps to solid color Material uniforms.
-     */
-    @JsConstructor
-    public ColorMaterialProperty() {}
+  /**
+   * A MaterialProperty that maps to solid color Material uniforms.
+   */
+  @JsConstructor
+  public ColorMaterialProperty() {
+  }
 
-    /**
-     * A MaterialProperty that maps to solid color Material uniforms.
-     * @param color The {@link Color} Property to be used. Default: {@link Color#WHITE()}
-     */
-    @JsConstructor
-    public ColorMaterialProperty(Property color) {}
+  /**
+   * A MaterialProperty that maps to solid color Material uniforms.
+   * 
+   * @param color The {@link Color} Property to be used. Default:
+   *              {@link Color#WHITE()}
+   */
+  @JsConstructor
+  public ColorMaterialProperty(Property color) {
+  }
 
-    @JsConstructor
-    public ColorMaterialProperty(Color color) {}
+  @JsConstructor
+  public ColorMaterialProperty(Color color) {
+  }
 }

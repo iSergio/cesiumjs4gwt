@@ -16,48 +16,54 @@
 
 package org.cesiumjs.cs.widgets.options;
 
+import org.cesiumjs.cs.core.Rectangle;
+
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.Rectangle;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class ViewerCesiumNavigationMixinOptions {
-    /**
-     * Default view when resetting the map view with the reset navigation
-     * control. Values accepted are of type Cesium.Cartographic and Cesium.Rectangle
-     */
-    @JsProperty
-    public Rectangle defaultResetView;
-    /**
-     * Enable or disable the compass. Values accepted are true for enabling and false to disable.
-     * The default is true. The compass will not be added to the map if setting the option to false.
-     */
-    @JsProperty
-    public boolean enableCompass;
-    /**
-     * Enable or disable the zoom controls. Values accepted are true for enabling and false to disable.
-     * The default is true. The zoom controls  will not be added to the map if setting the option to false.
-     */
-    @JsProperty
-    public boolean enableZoomControls;
-    /**
-     * Enable or disable the distance legend. Values accepted are true for enabling and false to disable.
-     * The default is true. The distance legend will not be added to the map if setting the option to false.
-     */
-    @JsProperty
-    public boolean enableDistanceLegend;
-    /**
-     * Enable or disable the Compass Outer Ring. Values accepted are true for enabling and false to disable.
-     * The default is true. The ring will be visible but inactive if setting the option to false.
-     */
-    @JsProperty
-    public boolean enableCompassOuterRing;
+  /**
+   * Default view when resetting the map view with the reset navigation control.
+   * Values accepted are of type Cesium.Cartographic and Cesium.Rectangle
+   */
+  @JsProperty
+  public Rectangle defaultResetView;
+  /**
+   * Enable or disable the compass. Values accepted are true for enabling and
+   * false to disable. The default is true. The compass will not be added to the
+   * map if setting the option to false.
+   */
+  @JsProperty
+  public boolean enableCompass;
+  /**
+   * Enable or disable the zoom controls. Values accepted are true for enabling
+   * and false to disable. The default is true. The zoom controls will not be
+   * added to the map if setting the option to false.
+   */
+  @JsProperty
+  public boolean enableZoomControls;
+  /**
+   * Enable or disable the distance legend. Values accepted are true for enabling
+   * and false to disable. The default is true. The distance legend will not be
+   * added to the map if setting the option to false.
+   */
+  @JsProperty
+  public boolean enableDistanceLegend;
+  /**
+   * Enable or disable the Compass Outer Ring. Values accepted are true for
+   * enabling and false to disable. The default is true. The ring will be visible
+   * but inactive if setting the option to false.
+   */
+  @JsProperty
+  public boolean enableCompassOuterRing;
 
-    @JsConstructor
-    public ViewerCesiumNavigationMixinOptions() {}
+  @JsConstructor
+  public ViewerCesiumNavigationMixinOptions() {
+  }
 }

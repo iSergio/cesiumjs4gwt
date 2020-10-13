@@ -20,25 +20,31 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsType;
 
 /**
- * A ParticleEmitter that emits particles within a cone. Particles will be positioned at the tip of the
- * cone and have initial velocities going towards the base.
+ * A ParticleEmitter that emits particles within a cone. Particles will be
+ * positioned at the tip of the cone and have initial velocities going towards
+ * the base.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "ConeEmitter")
 public class ConeEmitter implements ParticleEmitter {
-    /**
-     * A ParticleEmitter that emits particles within a cone. Particles will be positioned at the tip of
-     * the cone and have initial velocities going towards the base.
-     */
-    @JsConstructor
-    public ConeEmitter() {}
+  /**
+   * A ParticleEmitter that emits particles within a cone. Particles will be
+   * positioned at the tip of the cone and have initial velocities going towards
+   * the base.
+   */
+  @JsConstructor
+  public ConeEmitter() {
+  }
 
-    /**
-     * A ParticleEmitter that emits particles within a cone. Particles will be positioned at the tip of
-     * the cone and have initial velocities going towards the base.
-     * @param angle The angle of the cone in radians. Default: Math.toRadians(30.0).
-     */
-    @JsConstructor
-    public ConeEmitter(double angle) {}
+  /**
+   * A ParticleEmitter that emits particles within a cone. Particles will be
+   * positioned at the tip of the cone and have initial velocities going towards
+   * the base.
+   * 
+   * @param angle The angle of the cone in radians. Default: Math.toRadians(30.0).
+   */
+  @JsConstructor
+  public ConeEmitter(double angle) {
+  }
 }

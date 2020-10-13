@@ -16,49 +16,60 @@
 
 package org.cesiumjs.cs.collections.options;
 
-import jsinterop.annotations.*;
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsFunction;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.JulianDate;
 
 /**
- * Options for {@link org.cesiumjs.cs.collections.TimeIntervalCollection#fromIso8601DurationArray}.
+ * Options for
+ * {@link org.cesiumjs.cs.collections.TimeIntervalCollection#fromIso8601DurationArray}.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
+@SuppressWarnings("rawtypes")
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class FromIso8601DurationArrayOptions extends FromIso8601OptionsAbstract {
-    /**
-     * An date that the durations are relative to.
-     */
-    @JsProperty
-    public JulianDate epoch;
-    /**
-     * An array of ISO 8601 durations.
-     */
-    @JsProperty
-    public String iso8601Durations;
-    /**
-     * if durations are relative to previous date, false if always relative to the epoch.
-     * Default: false
-     */
-    @JsProperty
-    public boolean relativeToPrevious;
+  /**
+   * An date that the durations are relative to.
+   */
+  @JsProperty
+  public JulianDate epoch;
+  /**
+   * An array of ISO 8601 durations.
+   */
+  @JsProperty
+  public String iso8601Durations;
+  /**
+   * if durations are relative to previous date, false if always relative to the
+   * epoch. Default: false
+   */
+  @JsProperty
+  public boolean relativeToPrevious;
 
-    /**
-     * Options for {@link org.cesiumjs.cs.collections.TimeIntervalCollection#fromIso8601DurationArray}.
-     */
-    @JsConstructor
-    private FromIso8601DurationArrayOptions() {}
+  /**
+   * Options for
+   * {@link org.cesiumjs.cs.collections.TimeIntervalCollection#fromIso8601DurationArray}.
+   */
+  @JsConstructor
+  private FromIso8601DurationArrayOptions() {
+  }
 
-    /**
-     * Options for {@link org.cesiumjs.cs.collections.TimeIntervalCollection#fromIso8601DurationArray}.
-     * @param epoch An date that the durations are relative to.
-     * @param iso8601Durations An array of ISO 8601 durations.
-     */
-    @JsConstructor
-    public FromIso8601DurationArrayOptions(JulianDate epoch, String iso8601Durations) {}
+  /**
+   * Options for
+   * {@link org.cesiumjs.cs.collections.TimeIntervalCollection#fromIso8601DurationArray}.
+   * 
+   * @param epoch            An date that the durations are relative to.
+   * @param iso8601Durations An array of ISO 8601 durations.
+   */
+  @JsConstructor
+  public FromIso8601DurationArrayOptions(JulianDate epoch, String iso8601Durations) {
+  }
 
-    @JsFunction
-    public interface DataCallback {
-        void function();
-    }
+  @JsFunction
+  public interface DataCallback {
+    void function();
+  }
 }

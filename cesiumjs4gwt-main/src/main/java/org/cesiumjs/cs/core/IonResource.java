@@ -16,85 +16,88 @@
 
 package org.cesiumjs.cs.core;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.options.FromAssetIdOptions;
 import org.cesiumjs.cs.core.options.ResourceOptions;
 import org.cesiumjs.cs.promise.Promise;
 
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
+
 /**
- * A {@link Resource} instance that encapsulates Cesium ion asset access. This object is normally not instantiated directly,
- * use IonResource.fromAssetId.
+ * A {@link Resource} instance that encapsulates Cesium ion asset access. This
+ * object is normally not instantiated directly, use IonResource.fromAssetId.
  *
  * @see Ion
  * @see org.cesiumjs.cs.scene.providers.IonImageryProvider
  * @see <a href="https://cesium.com/">https://cesium.com</a>
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "IonResource")
 public class IonResource extends Resource {
-    /**
-     * Gets the credits required for attribution of the asset.
-     */
-    @JsProperty
-    public Credit[] credits;
+  /**
+   * Gets the credits required for attribution of the asset.
+   */
+  @JsProperty
+  public Credit[] credits;
 
-    @JsConstructor
-    private IonResource(ResourceOptions options) {
-        super(options);
-    }
+  @JsConstructor
+  private IonResource(ResourceOptions options) {
+    super(options);
+  }
 
-    /**
-     * Asynchronously creates an instance.
-     * @param assetId The Cesium ion asset id.
-     * @return A Promise to am instance representing the Cesium ion Asset.
-     * <pre>
-     * Examples:
-     * <code>
-     * IonResource.fromAssetId(3883).then(new Fulfill<IonResource>() {
-     *    {@literal @}Override
-     *     public void onFulfilled(IonResource value) {
-     *         viewer.scene().primitives().add(value);
-     *     }
-     * }, new Reject<Void>() {
-     *    {@literal @}Override
-     *     public void onRejected(Void value) {
-     *         Cesium.log("Request rejected");
-     *     }
-     * });
-     * </code>
-     * </pre>
-     */
-    @JsMethod
-    public static native Promise<IonResource, Void> fromAssetId(int assetId);
+  /**
+   * Asynchronously creates an instance.
+   * 
+   * @param assetId The Cesium ion asset id.
+   * @return A Promise to am instance representing the Cesium ion Asset.
+   * 
+   *         <pre>
+   * Examples:
+   * <code>
+   * IonResource.fromAssetId(3883).then(new Fulfill<IonResource>() {
+   *    {@literal @}Override
+   *     public void onFulfilled(IonResource value) {
+   *         viewer.scene().primitives().add(value);
+   *     }
+   * }, new Reject<Void>() {
+   *    {@literal @}Override
+   *     public void onRejected(Void value) {
+   *         Cesium.log("Request rejected");
+   *     }
+   * });
+   * </code>
+   *         </pre>
+   */
+  @JsMethod
+  public static native Promise<IonResource, Void> fromAssetId(int assetId);
 
-    /**
-     * Asynchronously creates an instance.
-     * @param assetId The Cesium ion asset id.
-     * @param options {@link FromAssetIdOptions} object.
-     * @return A Promise to am instance representing the Cesium ion Asset.
-     *
-     * <pre>
-     * Examples:
-     * <code>
-     * IonResource.fromAssetId(3883).then(new Fulfill<IonResource>() {
-     *    {@literal @}Override
-     *     public void onFulfilled(IonResource value) {
-     *         viewer.scene().primitives().add(value);
-     *     }
-     * }, new Reject<Void>() {
-     *    {@literal @}Override
-     *     public void onRejected(Void value) {
-     *         Cesium.log("Request rejected");
-     *     }
-     * });
-     * </code>
-     * </pre>
-     */
-    @JsMethod
-    public static native Promise<IonResource, Void> fromAssetId(int assetId, FromAssetIdOptions options);
-
+  /**
+   * Asynchronously creates an instance.
+   * 
+   * @param assetId The Cesium ion asset id.
+   * @param options {@link FromAssetIdOptions} object.
+   * @return A Promise to am instance representing the Cesium ion Asset.
+   *
+   *         <pre>
+   * Examples:
+   * <code>
+   * IonResource.fromAssetId(3883).then(new Fulfill<IonResource>() {
+   *    {@literal @}Override
+   *     public void onFulfilled(IonResource value) {
+   *         viewer.scene().primitives().add(value);
+   *     }
+   * }, new Reject<Void>() {
+   *    {@literal @}Override
+   *     public void onRejected(Void value) {
+   *         Cesium.log("Request rejected");
+   *     }
+   * });
+   * </code>
+   *         </pre>
+   */
+  @JsMethod
+  public static native Promise<IonResource, Void> fromAssetId(int assetId, FromAssetIdOptions options);
 
 }

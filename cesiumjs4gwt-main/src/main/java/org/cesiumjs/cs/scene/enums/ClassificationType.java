@@ -23,26 +23,29 @@ import jsinterop.annotations.JsType;
 /**
  * Whether a classification affects terrain, 3D Tiles or both.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "ClassificationType")
 public class ClassificationType {
-    /**
-     * Only terrain will be classified.
-     */
-    @JsProperty(name = "TERRAIN")
-    public static native Number TERRAIN();
-    /**
-     * Only 3D Tiles will be classified.
-     */
-    @JsProperty(name = "CESIUM_3D_TILE")
-    public static native Number CESIUM_3D_TILE();
-    /**
-     * Both terrain and 3D Tiles will be classified.
-     */
-    @JsProperty(name = "BOTH")
-    public static native Number BOTH();
+  /**
+   * Only terrain will be classified.
+   */
+  @JsProperty(name = "TERRAIN")
+  public static native Number TERRAIN();
 
-    @JsConstructor
-    private ClassificationType() {}
+  /**
+   * Only 3D Tiles will be classified.
+   */
+  @JsProperty(name = "CESIUM_3D_TILE")
+  public static native Number CESIUM_3D_TILE();
+
+  /**
+   * Both terrain and 3D Tiles will be classified.
+   */
+  @JsProperty(name = "BOTH")
+  public static native Number BOTH();
+
+  @JsConstructor
+  private ClassificationType() {
+  }
 }

@@ -16,6 +16,9 @@
 
 package org.cleanlogic.cesiumjs4gwt.showcase.examples;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
@@ -24,6 +27,7 @@ import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.inject.Inject;
+
 import org.cesiumjs.cs.Cesium;
 import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.core.Rectangle;
@@ -38,91 +42,91 @@ import org.cesiumjs.cs.widgets.options.ViewerOptions;
 import org.cleanlogic.cesiumjs4gwt.showcase.basic.AbstractExample;
 import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ShowcaseExampleStore;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 public class CartographicLimitRectangle extends AbstractExample {
-    private ViewerPanel csVPanel;
-    @Inject
-    public CartographicLimitRectangle(ShowcaseExampleStore store) {
-        super("Cartographic Limit Rectangle", "Limit terrain and imagery to a cartographic Rectangle area.", new String[]{"Terrain", "Cartographic", "Limit", "Rectangle"}, store);
+  private ViewerPanel csVPanel;
+
+  @Inject
+  public CartographicLimitRectangle(ShowcaseExampleStore store) {
+    super("Cartographic Limit Rectangle", "Limit terrain and imagery to a cartographic Rectangle area.",
+        new String[] { "Terrain", "Cartographic", "Limit", "Rectangle" }, store);
+  }
+
+  @Override
+  public void buildPanel() {
+    ViewerOptions viewerOptions = new ViewerOptions();
+    viewerOptions.terrainProvider = Cesium.createWorldTerrain();
+    csVPanel = new ViewerPanel(viewerOptions);
+
+    // Tropics of Cancer and Capricorn
+    final Rectangle coffeeBeltRectangle = Rectangle.fromDegrees(-180.0, -23.43687, 180.0, 23.43687);
+
+    csVPanel.getViewer().scene().globe.cartographicLimitRectangle = coffeeBeltRectangle;
+    csVPanel.getViewer().scene().skyAtmosphere.show = false;
+
+    // Add rectangles to show bounds
+    final List<Entity> rectangles = new ArrayList<>();
+
+    for (int i = 0; i < 10; i++) {
+      RectangleGraphicsOptions rectangleGraphicsOptions = new RectangleGraphicsOptions();
+      rectangleGraphicsOptions.coordinates = new ConstantProperty<>(coffeeBeltRectangle);
+      rectangleGraphicsOptions.material = new ColorMaterialProperty(Color.WHITE().withAlpha(0.0f));
+      rectangleGraphicsOptions.height = new ConstantProperty<>(i * 5000.0);
+      rectangleGraphicsOptions.outline = new ConstantProperty<>(true);
+      rectangleGraphicsOptions.outlineWidth = new ConstantProperty<>(4.0);
+      rectangleGraphicsOptions.outlineColor = new ConstantProperty<>(Color.WHITE());
+
+      EntityOptions entityOptions = new EntityOptions();
+      entityOptions.rectangle = new RectangleGraphics(rectangleGraphicsOptions);
+
+      rectangles.add(csVPanel.getViewer().entities().add(entityOptions));
     }
 
-    @Override
-    public void buildPanel() {
-        ViewerOptions viewerOptions = new ViewerOptions();
-        viewerOptions.terrainProvider = Cesium.createWorldTerrain();
-        csVPanel = new ViewerPanel(viewerOptions);
+    CheckBox enableLimitCBox = new CheckBox();
+    enableLimitCBox.setWidth("100px");
+    enableLimitCBox.setValue(true);
+    enableLimitCBox.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
+      @Override
+      public void onValueChange(ValueChangeEvent<Boolean> event) {
+        csVPanel.getViewer().scene().globe.cartographicLimitRectangle = event.getValue() ? coffeeBeltRectangle
+            : Rectangle.MAX_VALUE();
+      }
+    });
 
-        // Tropics of Cancer and Capricorn
-        final Rectangle coffeeBeltRectangle = Rectangle.fromDegrees(-180.0, -23.43687, 180.0, 23.43687);
-
-        csVPanel.getViewer().scene().globe.cartographicLimitRectangle = coffeeBeltRectangle;
-        csVPanel.getViewer().scene().skyAtmosphere.show = false;
-
-        // Add rectangles to show bounds
-        final List<Entity> rectangles = new ArrayList<>();
-
-        for (int i = 0; i < 10; i++) {
-            RectangleGraphicsOptions rectangleGraphicsOptions = new RectangleGraphicsOptions();
-            rectangleGraphicsOptions.coordinates = new ConstantProperty<>(coffeeBeltRectangle);
-            rectangleGraphicsOptions.material = new ColorMaterialProperty(Color.WHITE().withAlpha(0.0f));
-            rectangleGraphicsOptions.height = new ConstantProperty<>(i * 5000.0);
-            rectangleGraphicsOptions.outline = new ConstantProperty<>(true);
-            rectangleGraphicsOptions.outlineWidth = new ConstantProperty<>(4.0);
-            rectangleGraphicsOptions.outlineColor = new ConstantProperty<>(Color.WHITE());
-
-            EntityOptions entityOptions = new EntityOptions();
-            entityOptions.rectangle = new RectangleGraphics(rectangleGraphicsOptions);
-
-            rectangles.add(csVPanel.getViewer().entities().add(entityOptions));
+    CheckBox showBoundsBox = new CheckBox();
+    showBoundsBox.setWidth("100px");
+    showBoundsBox.setValue(true);
+    showBoundsBox.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
+      @Override
+      public void onValueChange(ValueChangeEvent<Boolean> event) {
+        for (Entity rectangle : rectangles) {
+          rectangle.show = event.getValue();
         }
+      }
+    });
 
-        CheckBox enableLimitCBox = new CheckBox();
-        enableLimitCBox.setWidth("100px");
-        enableLimitCBox.setValue(true);
-        enableLimitCBox.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
-            @Override
-            public void onValueChange(ValueChangeEvent<Boolean> event) {
-                csVPanel.getViewer().scene().globe.cartographicLimitRectangle = event.getValue() ? coffeeBeltRectangle : Rectangle.MAX_VALUE();
-            }
-        });
+    FlexTable flexTable = new FlexTable();
+    flexTable.setHTML(1, 0, "<font color=\"white\">Limit Enabled</font>");
+    flexTable.setWidget(1, 1, enableLimitCBox);
+    flexTable.setHTML(2, 0, "<font color=\"white\">Show Bounds</font>");
+    flexTable.setWidget(2, 1, showBoundsBox);
 
-        CheckBox showBoundsBox = new CheckBox();
-        showBoundsBox.setWidth("100px");
-        showBoundsBox.setValue(true);
-        showBoundsBox.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
-            @Override
-            public void onValueChange(ValueChangeEvent<Boolean> event) {
-                for (Entity rectangle : rectangles) {
-                    rectangle.show = event.getValue();
-                }
-            }
-        });
+    AbsolutePanel aPanel = new AbsolutePanel();
+    aPanel.add(csVPanel);
+    aPanel.add(flexTable, 20, 20);
 
-        FlexTable flexTable = new FlexTable();
-        flexTable.setHTML(1, 0, "<font color=\"white\">Limit Enabled</font>");
-        flexTable.setWidget(1, 1, enableLimitCBox);
-        flexTable.setHTML(2, 0, "<font color=\"white\">Show Bounds</font>");
-        flexTable.setWidget(2, 1, showBoundsBox);
+    contentPanel.add(new HTML("<p>Limit terrain and imagery to a cartographic Rectangle area.</p>"));
+    contentPanel.add(aPanel);
 
-        AbsolutePanel aPanel = new AbsolutePanel();
-        aPanel.add(csVPanel);
-        aPanel.add(flexTable, 20, 20);
+    initWidget(contentPanel);
+  }
 
-        contentPanel.add(new HTML("<p>Limit terrain and imagery to a cartographic Rectangle area.</p>"));
-        contentPanel.add(aPanel);
-
-        initWidget(contentPanel);
-    }
-
-    @Override
-    public String[] getSourceCodeURLs() {
-        String[] sourceCodeURLs = new String[1];
-        sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "CartographicLimitRectangle.txt";
-        return sourceCodeURLs;
-    }
+  @Override
+  public String[] getSourceCodeURLs() {
+    String[] sourceCodeURLs = new String[1];
+    sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "CartographicLimitRectangle.txt";
+    return sourceCodeURLs;
+  }
 }

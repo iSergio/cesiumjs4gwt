@@ -23,41 +23,48 @@ import jsinterop.annotations.JsType;
 /**
  * State of the request.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "RequestState")
 public class RequestState {
-    /**
-     * Actual http request has been sent.
-     */
-    @JsProperty(name = "ACTIVE")
-    public static native Number ACTIVE();
-    /**
-     * Request was cancelled, either explicitly or automatically because of low priority.
-     */
-    @JsProperty(name = "CANCELLED")
-    public static native Number CANCELLED();
-    /**
-     * Request failed.
-     */
-    @JsProperty(name = "FAILED")
-    public static native Number FAILED();
-    /**
-     * Issued but not yet active. Will become active when open slots are available.
-     */
-    @JsProperty(name = "ISSUED")
-    public static native Number ISSUED();
-    /**
-     * Request completed successfully.
-     */
-    @JsProperty(name = "RECEIVED")
-    public static native Number RECEIVED();
-    /**
-     * Initial unissued state.
-     */
-    @JsProperty(name = "UNISSUED")
-    public static native Number UNISSUED();
+  /**
+   * Actual http request has been sent.
+   */
+  @JsProperty(name = "ACTIVE")
+  public static native Number ACTIVE();
 
-    @JsConstructor
-    private RequestState() {}
+  /**
+   * Request was cancelled, either explicitly or automatically because of low
+   * priority.
+   */
+  @JsProperty(name = "CANCELLED")
+  public static native Number CANCELLED();
+
+  /**
+   * Request failed.
+   */
+  @JsProperty(name = "FAILED")
+  public static native Number FAILED();
+
+  /**
+   * Issued but not yet active. Will become active when open slots are available.
+   */
+  @JsProperty(name = "ISSUED")
+  public static native Number ISSUED();
+
+  /**
+   * Request completed successfully.
+   */
+  @JsProperty(name = "RECEIVED")
+  public static native Number RECEIVED();
+
+  /**
+   * Initial unissued state.
+   */
+  @JsProperty(name = "UNISSUED")
+  public static native Number UNISSUED();
+
+  @JsConstructor
+  private RequestState() {
+  }
 }

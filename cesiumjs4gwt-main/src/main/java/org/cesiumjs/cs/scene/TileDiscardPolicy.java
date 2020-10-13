@@ -17,35 +17,40 @@
 package org.cesiumjs.cs.scene;
 
 import com.google.gwt.user.client.ui.Image;
+
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "TileDiscardPolicy")
 public class TileDiscardPolicy {
-    /**
-     * A policy for discarding tile images according to some criteria.
-     * This type describes an interface and is not intended to be instantiated directly.
-     */
-    @JsConstructor
-    public TileDiscardPolicy() {}
+  /**
+   * A policy for discarding tile images according to some criteria. This type
+   * describes an interface and is not intended to be instantiated directly.
+   */
+  @JsConstructor
+  public TileDiscardPolicy() {
+  }
 
-    /**
-     * Determines if the discard policy is ready to process images.
-     * @return True if the discard policy is ready to process images; otherwise, false.
-     */
-    @JsMethod
-    public native boolean isReady();
+  /**
+   * Determines if the discard policy is ready to process images.
+   * 
+   * @return True if the discard policy is ready to process images; otherwise,
+   *         false.
+   */
+  @JsMethod
+  public native boolean isReady();
 
-    /**
-     * Given a tile imagery, decide whether to discard that imagery.
-     * @param image An imagery to test.
-     * @return True if the imagery should be discarded; otherwise, false.
-     */
-    @SuppressWarnings("unusable-by-js")
-    @JsMethod
-    public native boolean shouldDiscardImage(Image image);
+  /**
+   * Given a tile imagery, decide whether to discard that imagery.
+   * 
+   * @param image An imagery to test.
+   * @return True if the imagery should be discarded; otherwise, false.
+   */
+  @SuppressWarnings("unusable-by-js")
+  @JsMethod
+  public native boolean shouldDiscardImage(Image image);
 }

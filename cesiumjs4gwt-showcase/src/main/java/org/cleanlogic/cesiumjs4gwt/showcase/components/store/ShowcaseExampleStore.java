@@ -16,10 +16,15 @@
  */
 package org.cleanlogic.cesiumjs4gwt.showcase.components.store;
 
-import org.cleanlogic.cesiumjs4gwt.showcase.ExampleBean;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.inject.Singleton;
-import java.util.*;
+
+import org.cleanlogic.cesiumjs4gwt.showcase.ExampleBean;
 
 /**
  *
@@ -29,24 +34,23 @@ import java.util.*;
 @Singleton
 public class ShowcaseExampleStore implements ExampleStore {
 
-    private final Map<String, ExampleBean> examples = new HashMap<String, ExampleBean>();
+  private final Map<String, ExampleBean> examples = new HashMap<String, ExampleBean>();
 
-    public final void addExample(ExampleBean example) {
-        if (this.examples.containsValue(example)) {
-            throw new IllegalStateException("Example with Name : " + example.getName()
-                    + " already present in the Store");
-        }
-        this.examples.put(example.getName(), example);
+  public final void addExample(ExampleBean example) {
+    if (this.examples.containsValue(example)) {
+      throw new IllegalStateException("Example with Name : " + example.getName() + " already present in the Store");
     }
+    this.examples.put(example.getName(), example);
+  }
 
-    public List<ExampleBean> getExamples() {
-        List<ExampleBean> list = new ArrayList<ExampleBean>(examples.values());
-        Collections.sort(list);
-        return Collections.unmodifiableList(list);
-    }
+  public List<ExampleBean> getExamples() {
+    List<ExampleBean> list = new ArrayList<ExampleBean>(examples.values());
+    Collections.sort(list);
+    return Collections.unmodifiableList(list);
+  }
 
-    public ExampleBean getExample(String exampleName) {
-        return this.examples.get(exampleName);
-    }
+  public ExampleBean getExample(String exampleName) {
+    return this.examples.get(exampleName);
+  }
 
 }

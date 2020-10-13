@@ -16,34 +16,36 @@
 
 package org.cesiumjs.cs.core.options;
 
+import org.cesiumjs.cs.core.Cartesian2;
+
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.Cartesian2;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class WebMercatorTilingSchemeOptions {
-    /**
-     * The southwest corner of the rectangle covered by the tiling scheme, in meters.
-     * If this parameter or rectangleNortheastInMeters is not specified,
-     * the entire globe is covered in the longitude direction and an equal distance is
-     * covered in the latitude direction, resulting in a square projection.
-     */
-    @JsProperty
-    public Cartesian2 rectangleSouthwestInMeters;
-    /**
-     * optional The northeast corner of the rectangle covered by the tiling scheme, in meters.
-     * If this parameter or rectangleSouthwestInMeters is not specified, the entire globe is
-     * covered in the longitude direction and an equal distance is covered in the latitude direction,
-     * resulting in a square projection.
-     */
-    @JsProperty
-    public Cartesian2 rectangleNortheastInMeters;
+  /**
+   * The southwest corner of the rectangle covered by the tiling scheme, in
+   * meters. If this parameter or rectangleNortheastInMeters is not specified, the
+   * entire globe is covered in the longitude direction and an equal distance is
+   * covered in the latitude direction, resulting in a square projection.
+   */
+  @JsProperty
+  public Cartesian2 rectangleSouthwestInMeters;
+  /**
+   * optional The northeast corner of the rectangle covered by the tiling scheme,
+   * in meters. If this parameter or rectangleSouthwestInMeters is not specified,
+   * the entire globe is covered in the longitude direction and an equal distance
+   * is covered in the latitude direction, resulting in a square projection.
+   */
+  @JsProperty
+  public Cartesian2 rectangleNortheastInMeters;
 
-    @JsConstructor
-    public WebMercatorTilingSchemeOptions() {}
+  @JsConstructor
+  public WebMercatorTilingSchemeOptions() {
+  }
 }

@@ -22,33 +22,35 @@ import jsinterop.annotations.JsProperty;
 /**
  * A model's mesh and its materials.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 public class ModelMesh {
-    /**
-     * The name of the glTF JSON property for this mesh. This is guaranteed to be unique among all meshes.
-     * It may not match the mesh's name property (@link ModelMesh#name),
-     * which is assigned by the artist when the asset is created.
-     */
-    @JsProperty(name = "id")
-    public native String id();
+  /**
+   * The name of the glTF JSON property for this mesh. This is guaranteed to be
+   * unique among all meshes. It may not match the mesh's name property (@link
+   * ModelMesh#name), which is assigned by the artist when the asset is created.
+   */
+  @JsProperty(name = "id")
+  public native String id();
 
-    /**
-     * An array of ModelMaterial instances indexed by the mesh's primitive indices.
-     */
-    @JsProperty(name = "materials")
-    public native ModelMaterial[] materials();
+  /**
+   * An array of ModelMaterial instances indexed by the mesh's primitive indices.
+   */
+  @JsProperty(name = "materials")
+  public native ModelMaterial[] materials();
 
-    /**
-     * The value of the name property of this mesh. This is the name assigned by the artist when the asset is created.
-     * This can be different than the name of the mesh property {@link ModelMesh#id}, which is internal to glTF.
-     */
-    @JsProperty(name = "name")
-    public native String name();
+  /**
+   * The value of the name property of this mesh. This is the name assigned by the
+   * artist when the asset is created. This can be different than the name of the
+   * mesh property {@link ModelMesh#id}, which is internal to glTF.
+   */
+  @JsProperty(name = "name")
+  public native String name();
 
-    /**
-     * Use {@link Model#getMesh} to create an instance.
-     */
-    @JsConstructor
-    public ModelMesh() {}
+  /**
+   * Use {@link Model#getMesh} to create an instance.
+   */
+  @JsConstructor
+  public ModelMesh() {
+  }
 }

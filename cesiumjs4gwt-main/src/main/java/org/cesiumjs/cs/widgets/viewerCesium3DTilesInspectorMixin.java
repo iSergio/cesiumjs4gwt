@@ -20,14 +20,15 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true)
 public class viewerCesium3DTilesInspectorMixin {
-    /**
-     * A mixin which adds the Cesium3DTilesInspector widget to the Viewer widget. Rather than being called directly,
-     * this function is normally passed as a parameter to {@link Viewer#extend}, as shown in the example below.
-     */
-    @JsProperty(namespace = "Cesium", name = "viewerCesium3DTilesInspectorMixin")
-    public static native Object instance();
+  /**
+   * A mixin which adds the Cesium3DTilesInspector widget to the Viewer widget.
+   * Rather than being called directly, this function is normally passed as a
+   * parameter to {@link Viewer#extend}, as shown in the example below.
+   */
+  @JsProperty(namespace = "Cesium", name = "viewerCesium3DTilesInspectorMixin")
+  public static native Object instance();
 }

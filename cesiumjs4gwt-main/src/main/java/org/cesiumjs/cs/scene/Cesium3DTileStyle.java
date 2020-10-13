@@ -16,68 +16,79 @@
 
 package org.cesiumjs.cs.scene;
 
+import org.cesiumjs.cs.promise.Promise;
+
 import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.js.JsObject;
-import org.cesiumjs.cs.promise.Promise;
 
 /**
  * A style that is applied to a {@link Cesium3DTileset}.
  *
- * Evaluates an expression defined using the <a href="https://github.com/AnalyticalGraphicsInc/3d-tiles/tree/master/Styling">3D Tiles Styling language</a>.
+ * Evaluates an expression defined using the <a href=
+ * "https://github.com/AnalyticalGraphicsInc/3d-tiles/tree/master/Styling">3D
+ * Tiles Styling language</a>.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "Cesium3DTileStyle")
 public class Cesium3DTileStyle {
-    /**
-     * Gets or sets the StyleExpression object used to evaluate the style's color property.
-     * The expression must return a Color.
-     */
-    @JsProperty
-    public StyleExpression color;
-    /**
-     * Gets or sets the object containing application-specific expression that can be explicitly evaluated, e.g., for display in a UI.
-     */
-    @JsProperty
-    public StyleExpression meta;
-    /**
-     * Gets or sets the StyleExpression object used to evaluate the style's pointSize property.
-     * The expression must return or convert to a Number.
-     */
-    @JsProperty
-    public StyleExpression pointSize;
+  /**
+   * Gets or sets the StyleExpression object used to evaluate the style's color
+   * property. The expression must return a Color.
+   */
+  @JsProperty
+  public StyleExpression color;
+  /**
+   * Gets or sets the object containing application-specific expression that can
+   * be explicitly evaluated, e.g., for display in a UI.
+   */
+  @JsProperty
+  public StyleExpression meta;
+  /**
+   * Gets or sets the StyleExpression object used to evaluate the style's
+   * pointSize property. The expression must return or convert to a Number.
+   */
+  @JsProperty
+  public StyleExpression pointSize;
 
-    @JsProperty(name = "pointSize")
-    public double pointSizeDouble;
-    /**
-     * When true, the style is ready and its expressions can be evaluated. When a style is constructed with an object, as opposed to a url, this is true immediately.
-     * Default: false
-     */
-    @JsProperty(name = "ready")
-    public native boolean ready();
-    /**
-     * Gets the promise that will be resolved when the the style is ready and its expressions can be evaluated.
-     */
-    @JsProperty(name = "readyPromise")
-    public native Promise<Cesium3DTileStyle, Void> readyPromise();
-    /**
-     * Gets or sets the StyleExpression object used to evaluate the style's show property.
-     * The expression must return or convert to a Boolean.
-     */
-    @JsProperty
-    public StyleExpression show;
-    /**
-     * Gets the object defining the style using the 3D Tiles Styling language.
-     * Default: undefined
-     */
-    @JsProperty(name = "style")
-    public native Object style();
+  @JsProperty(name = "pointSize")
+  public double pointSizeDouble;
 
-    @JsConstructor
-    public Cesium3DTileStyle() {}
-    @JsConstructor
-    public Cesium3DTileStyle(String style) {}
+  /**
+   * When true, the style is ready and its expressions can be evaluated. When a
+   * style is constructed with an object, as opposed to a url, this is true
+   * immediately. Default: false
+   */
+  @JsProperty(name = "ready")
+  public native boolean ready();
+
+  /**
+   * Gets the promise that will be resolved when the the style is ready and its
+   * expressions can be evaluated.
+   */
+  @JsProperty(name = "readyPromise")
+  public native Promise<Cesium3DTileStyle, Void> readyPromise();
+
+  /**
+   * Gets or sets the StyleExpression object used to evaluate the style's show
+   * property. The expression must return or convert to a Boolean.
+   */
+  @JsProperty
+  public StyleExpression show;
+
+  /**
+   * Gets the object defining the style using the 3D Tiles Styling language.
+   * Default: undefined
+   */
+  @JsProperty(name = "style")
+  public native Object style();
+
+  @JsConstructor
+  public Cesium3DTileStyle() {
+  }
+
+  @JsConstructor
+  public Cesium3DTileStyle(String style) {
+  }
 }

@@ -16,108 +16,132 @@
 
 package org.cesiumjs.cs.core.providers;
 
+import org.cesiumjs.cs.core.Credit;
+import org.cesiumjs.cs.core.Event;
+import org.cesiumjs.cs.core.GeographicTilingScheme;
+import org.cesiumjs.cs.core.Request;
+import org.cesiumjs.cs.core.TerrainData;
+import org.cesiumjs.cs.core.providers.options.GeoserverTerrainProviderOptions;
+import org.cesiumjs.cs.promise.Promise;
+
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.*;
-import org.cesiumjs.cs.core.providers.options.GeoserverTerrainProviderOptions;
-import org.cesiumjs.cs.promise.Promise;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "GeoserverTerrainProvider")
 public class GeoserverTerrainProvider implements TerrainProvider {
-    /**
-     * Gets the credit to display when this terrain provider is active. Typically this is used to credit the source of the terrain.
-     * This function should not be called before {@link GeoserverTerrainProvider#ready} returns true.
-     */
-    @JsProperty
-    public Credit credit;
-    /**
-     * Gets an event that is raised when the terrain provider encounters an asynchronous error.. By subscribing to the event,
-     * you will be notified of the error and can potentially recover from it. Event listeners are passed an instance of TileProviderError.
-     */
-    @JsProperty
-    public Event errorEvent;
-    /**
-     * Gets a value indicating whether or not the requested tiles include vertex normals.
-     * This function should not be called before {@link GeoserverTerrainProvider#ready} returns true.
-     */
-    @JsProperty
-    public boolean hasVertexNormals;
-    /**
-     * Gets a value indicating whether or not the provider includes a water mask.
-     * The water mask indicates which areas of the globe are water rather than land,
-     * so they can be rendered as a reflective surface with animated waves. This function should not be
-     * called before TerrainProvider#ready returns true.
-     */
-    @JsProperty
-    public boolean hasWaterMask;
-    /**
-     * Gets a value indicating whether or not the provider is ready for use.
-     */
-    @JsProperty
-    public boolean ready;
-    /**
-     * Gets a promise that resolves to true when the provider is ready for use.
-     */
-    @JsProperty(name = "readyPromise")
-    public native Promise<Boolean, Void> readyPromise();
-    /**
-     * Boolean flag that indicates if the client should request vertex normals from the server. Vertex normals data is
-     * appended to the standard tile mesh data only if the client requests the vertex normals and if the server provides vertex normals.
-     */
-    @JsProperty
-    public boolean requestVertexNormals;
-    /**
-     * Boolean flag that indicates if the client should request a watermask from the server. Watermask data is appended to
-     * the standard tile mesh data only if the client requests the watermask and if the server provides a watermask.
-     */
-    @JsProperty
-    public boolean requestWaterMask;
-    /**
-     * Gets the tiling scheme used by this provider. This function should not be called before {@link GeoserverTerrainProvider#ready} returns true.
-     */
-    @JsProperty
-    public GeographicTilingScheme tilingScheme;
+  /**
+   * Gets the credit to display when this terrain provider is active. Typically
+   * this is used to credit the source of the terrain. This function should not be
+   * called before {@link GeoserverTerrainProvider#ready} returns true.
+   */
+  @JsProperty
+  public Credit credit;
+  /**
+   * Gets an event that is raised when the terrain provider encounters an
+   * asynchronous error.. By subscribing to the event, you will be notified of the
+   * error and can potentially recover from it. Event listeners are passed an
+   * instance of TileProviderError.
+   */
+  @JsProperty
+  public Event errorEvent;
+  /**
+   * Gets a value indicating whether or not the requested tiles include vertex
+   * normals. This function should not be called before
+   * {@link GeoserverTerrainProvider#ready} returns true.
+   */
+  @JsProperty
+  public boolean hasVertexNormals;
+  /**
+   * Gets a value indicating whether or not the provider includes a water mask.
+   * The water mask indicates which areas of the globe are water rather than land,
+   * so they can be rendered as a reflective surface with animated waves. This
+   * function should not be called before TerrainProvider#ready returns true.
+   */
+  @JsProperty
+  public boolean hasWaterMask;
+  /**
+   * Gets a value indicating whether or not the provider is ready for use.
+   */
+  @JsProperty
+  public boolean ready;
 
-    @JsConstructor
-    public GeoserverTerrainProvider(GeoserverTerrainProviderOptions options) {}
+  /**
+   * Gets a promise that resolves to true when the provider is ready for use.
+   */
+  @JsProperty(name = "readyPromise")
+  public native Promise<Boolean, Void> readyPromise();
 
-    /**
-     * Gets the maximum geometric error allowed in a tile at a given level. This function should not be called before
-     * {@link GeoserverTerrainProvider#ready} returns true.
-     * @param level The tile level for which to get the maximum geometric error.
-     * @return The maximum geometric error.
-     */
-    @Override
-    @JsMethod
-    public native double getLevelMaximumGeometricError(int level);
+  /**
+   * Boolean flag that indicates if the client should request vertex normals from
+   * the server. Vertex normals data is appended to the standard tile mesh data
+   * only if the client requests the vertex normals and if the server provides
+   * vertex normals.
+   */
+  @JsProperty
+  public boolean requestVertexNormals;
+  /**
+   * Boolean flag that indicates if the client should request a watermask from the
+   * server. Watermask data is appended to the standard tile mesh data only if the
+   * client requests the watermask and if the server provides a watermask.
+   */
+  @JsProperty
+  public boolean requestWaterMask;
+  /**
+   * Gets the tiling scheme used by this provider. This function should not be
+   * called before {@link GeoserverTerrainProvider#ready} returns true.
+   */
+  @JsProperty
+  public GeographicTilingScheme tilingScheme;
 
-    /**
-     * Determines whether data for a tile is available to be loaded.
-     * @param x The X coordinate of the tile for which to request geometry.
-     * @param y The Y coordinate of the tile for which to request geometry.
-     * @param level The level of the tile for which to request geometry.
-     * @return Undefined if not supported by the terrain provider, otherwise true or false.
-     */
-    @Override
-    @JsMethod
-    public native boolean getTileDataAvailable(int x, int y , int level);
+  @JsConstructor
+  public GeoserverTerrainProvider(GeoserverTerrainProviderOptions options) {
+  }
 
-    /**
-     * Requests the geometry for a given tile. This function should not be called before {@link GeoserverTerrainProvider#ready} returns true.
-     * The result must include terrain data and may optionally include a water mask and an indication of which child tiles are available.
-     * @param x The X coordinate of the tile for which to request geometry.
-     * @param y The Y coordinate of the tile for which to request geometry.
-     * @param level The level of the tile for which to request geometry.
-     * @param request The request object. Intended for internal use only.
-     * @return A promise for the requested geometry. If this method returns undefined instead of a promise,
-     * it is an indication that too many requests are already pending and the request will be retried later.
-     */
-    @Override
-    @JsMethod
-    public native Promise<TerrainData, Void> requestTileGeometry(int x, int y, int level, Request request);
+  /**
+   * Gets the maximum geometric error allowed in a tile at a given level. This
+   * function should not be called before {@link GeoserverTerrainProvider#ready}
+   * returns true.
+   * 
+   * @param level The tile level for which to get the maximum geometric error.
+   * @return The maximum geometric error.
+   */
+  @Override
+  @JsMethod
+  public native double getLevelMaximumGeometricError(int level);
+
+  /**
+   * Determines whether data for a tile is available to be loaded.
+   * 
+   * @param x     The X coordinate of the tile for which to request geometry.
+   * @param y     The Y coordinate of the tile for which to request geometry.
+   * @param level The level of the tile for which to request geometry.
+   * @return Undefined if not supported by the terrain provider, otherwise true or
+   *         false.
+   */
+  @Override
+  @JsMethod
+  public native boolean getTileDataAvailable(int x, int y, int level);
+
+  /**
+   * Requests the geometry for a given tile. This function should not be called
+   * before {@link GeoserverTerrainProvider#ready} returns true. The result must
+   * include terrain data and may optionally include a water mask and an
+   * indication of which child tiles are available.
+   * 
+   * @param x       The X coordinate of the tile for which to request geometry.
+   * @param y       The Y coordinate of the tile for which to request geometry.
+   * @param level   The level of the tile for which to request geometry.
+   * @param request The request object. Intended for internal use only.
+   * @return A promise for the requested geometry. If this method returns
+   *         undefined instead of a promise, it is an indication that too many
+   *         requests are already pending and the request will be retried later.
+   */
+  @Override
+  @JsMethod
+  public native Promise<TerrainData, Void> requestTileGeometry(int x, int y, int level, Request request);
 }

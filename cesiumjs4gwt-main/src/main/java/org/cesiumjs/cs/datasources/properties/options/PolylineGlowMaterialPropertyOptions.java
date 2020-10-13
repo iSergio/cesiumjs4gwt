@@ -16,15 +16,16 @@
 
 package org.cesiumjs.cs.datasources.properties.options;
 
+import org.cesiumjs.cs.core.Color;
+import org.cesiumjs.cs.datasources.properties.Property;
+
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.Color;
-import org.cesiumjs.cs.datasources.properties.Property;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class PolylineGlowMaterialPropertyOptions {

@@ -27,47 +27,49 @@ import org.cesiumjs.cs.scene.ClippingPlane;
 /**
  * Options for {@link org.cesiumjs.cs.collections.ClippingPlaneCollection}.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class ClippingPlaneCollectionOptions {
-    /**
-     * An array of up to 6 Plane objects used to selectively disable rendering on the outside of each plane.
-     * Default: []
-     */
-    @JsProperty
-    public ClippingPlane[] planes;
-    /**
-     * Determines whether the clipping planes are active.
-     * Default: true
-     */
-    @JsProperty
-    public boolean enabled;
-    /**
-     * The 4x4 transformation matrix specifying an additional transform relative to the clipping planes original coordinate system.
-     * Default: {@link org.cesiumjs.cs.core.Matrix4#IDENTITY()}.
-     */
-    @JsProperty
-    public Matrix4 modelMatrix;
-    /**
-     * If true, a region will be clipped if included in any plane in the collection. Otherwise, the region to be clipped must intersect the regions defined by all planes in this collection.
-     * Default: false
-     */
-    @JsProperty
-    public boolean unionClippingRegions;
-    /**
-     * The color applied to highlight the edge along which an object is clipped.
-     * Default: {@link org.cesiumjs.cs.core.Color#WHITE()}.
-     */
-    @JsProperty
-    public Color edgeColor;
-    /**
-     * The width, in pixels, of the highlight applied to the edge along which an object is clipped.
-     * Default: 0.0
-     */
-    @JsProperty
-    public double edgeWidth;
+  /**
+   * An array of up to 6 Plane objects used to selectively disable rendering on
+   * the outside of each plane. Default: []
+   */
+  @JsProperty
+  public ClippingPlane[] planes;
+  /**
+   * Determines whether the clipping planes are active. Default: true
+   */
+  @JsProperty
+  public boolean enabled;
+  /**
+   * The 4x4 transformation matrix specifying an additional transform relative to
+   * the clipping planes original coordinate system. Default:
+   * {@link org.cesiumjs.cs.core.Matrix4#IDENTITY()}.
+   */
+  @JsProperty
+  public Matrix4 modelMatrix;
+  /**
+   * If true, a region will be clipped if included in any plane in the collection.
+   * Otherwise, the region to be clipped must intersect the regions defined by all
+   * planes in this collection. Default: false
+   */
+  @JsProperty
+  public boolean unionClippingRegions;
+  /**
+   * The color applied to highlight the edge along which an object is clipped.
+   * Default: {@link org.cesiumjs.cs.core.Color#WHITE()}.
+   */
+  @JsProperty
+  public Color edgeColor;
+  /**
+   * The width, in pixels, of the highlight applied to the edge along which an
+   * object is clipped. Default: 0.0
+   */
+  @JsProperty
+  public double edgeWidth;
 
-    @JsConstructor
-    public ClippingPlaneCollectionOptions() {}
+  @JsConstructor
+  public ClippingPlaneCollectionOptions() {
+  }
 }

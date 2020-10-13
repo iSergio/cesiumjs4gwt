@@ -16,19 +16,20 @@
 
 package org.cesiumjs.cs.core.events;
 
+import org.cesiumjs.cs.core.Cartesian2;
+
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.Cartesian2;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class TouchMoveEvent {
-    @JsProperty
-    public Cartesian2 startPosition;
+  @JsProperty
+  public Cartesian2 startPosition;
 
-    @JsProperty
-    public Cartesian2 endPosition;
+  @JsProperty
+  public Cartesian2 endPosition;
 }

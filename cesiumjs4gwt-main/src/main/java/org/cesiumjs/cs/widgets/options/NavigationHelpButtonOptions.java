@@ -17,62 +17,68 @@
 package org.cesiumjs.cs.widgets.options;
 
 import com.google.gwt.dom.client.Element;
-import jsinterop.annotations.*;
+
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsOverlay;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 
 /**
  * Options for {@link org.cesiumjs.cs.widgets.NavigationHelpButton}.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class NavigationHelpButtonOptions {
-    /**
-     * The DOM element.
-     */
-    @JsProperty(name = "container")
-    public Element containerElement;
-    /**
-     * ID that will contain the widget.
-     */
-    @JsProperty(name = "container")
-    public String container;
-    /**
-     * True if the navigation instructions should initially be visible; otherwise, false.
-     * Default: false
-     */
-    @JsProperty
-    public boolean instructionsInitiallyVisible;
+  /**
+   * The DOM element.
+   */
+  @JsProperty(name = "container")
+  public Element containerElement;
+  /**
+   * ID that will contain the widget.
+   */
+  @JsProperty(name = "container")
+  public String container;
+  /**
+   * True if the navigation instructions should initially be visible; otherwise,
+   * false. Default: false
+   */
+  @JsProperty
+  public boolean instructionsInitiallyVisible;
 
-    @JsConstructor
-    public NavigationHelpButtonOptions() {}
+  @JsConstructor
+  public NavigationHelpButtonOptions() {
+  }
 
-    @JsOverlay
-    public static NavigationHelpButtonOptions create(String element) {
-        NavigationHelpButtonOptions options = new NavigationHelpButtonOptions();
-        options.container = element;
-        return options;
-    }
+  @JsOverlay
+  public static NavigationHelpButtonOptions create(String element) {
+    NavigationHelpButtonOptions options = new NavigationHelpButtonOptions();
+    options.container = element;
+    return options;
+  }
 
-    @JsOverlay
-    public static NavigationHelpButtonOptions create(Element element) {
-        NavigationHelpButtonOptions options = new NavigationHelpButtonOptions();
-        options.containerElement = element;
-        return options;
-    }
+  @JsOverlay
+  public static NavigationHelpButtonOptions create(Element element) {
+    NavigationHelpButtonOptions options = new NavigationHelpButtonOptions();
+    options.containerElement = element;
+    return options;
+  }
 
-    @JsOverlay
-    public static NavigationHelpButtonOptions create(String element, boolean instructionsInitiallyVisible) {
-        NavigationHelpButtonOptions options = new NavigationHelpButtonOptions();
-        options.container = element;
-        options.instructionsInitiallyVisible = instructionsInitiallyVisible;
-        return options;
-    }
+  @JsOverlay
+  public static NavigationHelpButtonOptions create(String element, boolean instructionsInitiallyVisible) {
+    NavigationHelpButtonOptions options = new NavigationHelpButtonOptions();
+    options.container = element;
+    options.instructionsInitiallyVisible = instructionsInitiallyVisible;
+    return options;
+  }
 
-    @JsOverlay
-    public static NavigationHelpButtonOptions create(Element element, boolean instructionsInitiallyVisible) {
-        NavigationHelpButtonOptions options = new NavigationHelpButtonOptions();
-        options.containerElement = element;
-        options.instructionsInitiallyVisible = instructionsInitiallyVisible;
-        return options;
-    }
+  @JsOverlay
+  public static NavigationHelpButtonOptions create(Element element, boolean instructionsInitiallyVisible) {
+    NavigationHelpButtonOptions options = new NavigationHelpButtonOptions();
+    options.containerElement = element;
+    options.instructionsInitiallyVisible = instructionsInitiallyVisible;
+    return options;
+  }
 }

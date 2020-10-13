@@ -16,55 +16,58 @@
 
 package org.cesiumjs.cs.core.providers.options;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Credit;
 import org.cesiumjs.cs.core.Ellipsoid;
 import org.cesiumjs.cs.core.Resource;
 import org.cesiumjs.cs.promise.Promise;
 
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
+
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class CesiumTerrainProviderOptions {
-    /**
-     * The URL of the Cesium terrain server.
-     */
-    @JsProperty
-    public String url;
-    @JsProperty(name = "url")
-    public Resource resource;
-    @JsProperty(name = "url")
-    public Promise<Resource, Void> promise;
-    /**
-     * Flag that indicates if the client should request additional lighting information from the server, in the form of per vertex normals if available.
-     * Default: false
-     */
-    @JsProperty
-    public boolean requestVertexNormals;
-    /**
-     * Flag that indicates if the client should request per tile water masks from the server, if available.
-     * Default: false
-     */
-    @JsProperty
-    public boolean requestWaterMask;
-    /**
-     * The ellipsoid. If not specified, the WGS84 ellipsoid is used.
-     */
-    @JsProperty
-    public Ellipsoid ellipsoid;
-    /**
-     * A credit for the data source, which is displayed on the canvas.
-     */
-    @JsProperty
-    public Credit credit;
+  /**
+   * The URL of the Cesium terrain server.
+   */
+  @JsProperty
+  public String url;
+  @JsProperty(name = "url")
+  public Resource resource;
+  @JsProperty(name = "url")
+  public Promise<Resource, Void> promise;
+  /**
+   * Flag that indicates if the client should request additional lighting
+   * information from the server, in the form of per vertex normals if available.
+   * Default: false
+   */
+  @JsProperty
+  public boolean requestVertexNormals;
+  /**
+   * Flag that indicates if the client should request per tile water masks from
+   * the server, if available. Default: false
+   */
+  @JsProperty
+  public boolean requestWaterMask;
+  /**
+   * The ellipsoid. If not specified, the WGS84 ellipsoid is used.
+   */
+  @JsProperty
+  public Ellipsoid ellipsoid;
+  /**
+   * A credit for the data source, which is displayed on the canvas.
+   */
+  @JsProperty
+  public Credit credit;
 
-    /**
-     * Options for CesiumTerrainProvider
-     */
-    @JsConstructor
-    public CesiumTerrainProviderOptions() {}
+  /**
+   * Options for CesiumTerrainProvider
+   */
+  @JsConstructor
+  public CesiumTerrainProviderOptions() {
+  }
 }

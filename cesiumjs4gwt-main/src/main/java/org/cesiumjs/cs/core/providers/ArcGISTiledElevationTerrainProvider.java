@@ -16,37 +16,40 @@
 
 package org.cesiumjs.cs.core.providers;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Request;
 import org.cesiumjs.cs.core.TerrainData;
 import org.cesiumjs.cs.core.providers.options.ArcGISTiledElevationTerrainProviderOptions;
 import org.cesiumjs.cs.promise.Promise;
 
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsType;
+
 /**
- * A {@link TerrainProvider} that produces terrain geometry by tessellating height maps retrieved from Elevation Tiles
- * of an an ArcGIS ImageService.
+ * A {@link TerrainProvider} that produces terrain geometry by tessellating
+ * height maps retrieved from Elevation Tiles of an an ArcGIS ImageService.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "ArcGISTiledElevationTerrainProvider")
 public class ArcGISTiledElevationTerrainProvider implements TerrainProvider {
-    @JsConstructor
-    private ArcGISTiledElevationTerrainProvider() {}
+  @JsConstructor
+  private ArcGISTiledElevationTerrainProvider() {
+  }
 
-    @JsConstructor
-    public ArcGISTiledElevationTerrainProvider(ArcGISTiledElevationTerrainProviderOptions options) {}
+  @JsConstructor
+  public ArcGISTiledElevationTerrainProvider(ArcGISTiledElevationTerrainProviderOptions options) {
+  }
 
-    @Override
-    @JsMethod
-    public native double getLevelMaximumGeometricError(int level);
+  @Override
+  @JsMethod
+  public native double getLevelMaximumGeometricError(int level);
 
-    @Override
-    @JsMethod
-    public native boolean getTileDataAvailable(int x, int y, int level);
+  @Override
+  @JsMethod
+  public native boolean getTileDataAvailable(int x, int y, int level);
 
-    @Override
-    @JsMethod
-    public native Promise<TerrainData, Void> requestTileGeometry(int x, int y, int level, Request request);
+  @Override
+  @JsMethod
+  public native Promise<TerrainData, Void> requestTileGeometry(int x, int y, int level, Request request);
 }

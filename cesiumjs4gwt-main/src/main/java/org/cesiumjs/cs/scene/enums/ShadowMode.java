@@ -21,34 +21,38 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "ShadowMode")
 public class ShadowMode {
-    /**
-     * The object casts shadows only.
-     */
-    @JsProperty(name = "CAST_ONLY")
-    public static native Number CAST_ONLY();
-    /**
-     * The object receives shadows only.
-     */
-    @JsProperty(name = "RECEIVE_ONLY")
-    public static native Number RECEIVE_ONLY();
-    /**
-     * The object casts and receives shadows.
-     */
-    @JsProperty(name = "ENABLED")
-    public static native Number ENABLED();
-    /**
-     * The object does not cast or receive shadows.
-     */
-    @JsProperty(name = "DISABLED")
-    public static native Number DISABLED();
+  /**
+   * The object casts shadows only.
+   */
+  @JsProperty(name = "CAST_ONLY")
+  public static native Number CAST_ONLY();
 
-    /**
-     * Describes how the map will operate in 2D.
-     */
-    @JsConstructor
-    private ShadowMode() {}
+  /**
+   * The object receives shadows only.
+   */
+  @JsProperty(name = "RECEIVE_ONLY")
+  public static native Number RECEIVE_ONLY();
+
+  /**
+   * The object casts and receives shadows.
+   */
+  @JsProperty(name = "ENABLED")
+  public static native Number ENABLED();
+
+  /**
+   * The object does not cast or receive shadows.
+   */
+  @JsProperty(name = "DISABLED")
+  public static native Number DISABLED();
+
+  /**
+   * Describes how the map will operate in 2D.
+   */
+  @JsConstructor
+  private ShadowMode() {
+  }
 }

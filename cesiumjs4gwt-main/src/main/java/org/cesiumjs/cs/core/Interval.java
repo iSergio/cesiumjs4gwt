@@ -21,33 +21,35 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "Interval")
 public class Interval {
-    /**
-     * The beginning of the interval.
-     * Default: 0.0
-     */
-    @JsProperty
-    public double start;
-    /**
-     * The end of the interval.
-     * Default: 0.0
-     */
-    @JsProperty
-    public double stop;
+  /**
+   * The beginning of the interval. Default: 0.0
+   */
+  @JsProperty
+  public double start;
+  /**
+   * The end of the interval. Default: 0.0
+   */
+  @JsProperty
+  public double stop;
 
-    /**
-     * Represents the closed interval [start, stop].
-     */
-    @JsConstructor
-    public Interval() {}
-    /**
-     * Represents the closed interval [start, stop].
-     * @param start The beginning of the interval. Default: 0.0
-     * @param stop The end of the interval. Default: 0.0
-     */
-    @JsConstructor
-    public Interval(double start, double stop) {}
+  /**
+   * Represents the closed interval [start, stop].
+   */
+  @JsConstructor
+  public Interval() {
+  }
+
+  /**
+   * Represents the closed interval [start, stop].
+   * 
+   * @param start The beginning of the interval. Default: 0.0
+   * @param stop  The end of the interval. Default: 0.0
+   */
+  @JsConstructor
+  public Interval(double start, double stop) {
+  }
 }

@@ -16,51 +16,58 @@
 
 package org.cesiumjs.cs.scene;
 
+import org.cesiumjs.cs.core.Matrix4;
+
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.Matrix4;
 
 /**
- * A model node with a transform for user-defined animations. A glTF asset can contain animations that target a
- * node's transform. This class allows changing a node's transform externally so animation can be driven by another source,
+ * A model node with a transform for user-defined animations. A glTF asset can
+ * contain animations that target a node's transform. This class allows changing
+ * a node's transform externally so animation can be driven by another source,
  * not just an animation in the glTF asset.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "ModelNode")
 public class ModelNode {
-    /**
-     * The name of the glTF JSON property for this node. This is guaranteed to be unique among all nodes.
-     * It may not match the node's name property {@link ModelNode#name}, which is assigned by the artist when the asset is created.
-     */
-    @JsProperty(name = "id")
-    public native String id();
+  /**
+   * The name of the glTF JSON property for this node. This is guaranteed to be
+   * unique among all nodes. It may not match the node's name property
+   * {@link ModelNode#name}, which is assigned by the artist when the asset is
+   * created.
+   */
+  @JsProperty(name = "id")
+  public native String id();
 
-    /**
-     * The node's 4x4 matrix transform from its local coordinates to its parent's.
-     *
-     * For changes to take effect, this property must be assigned to; setting individual elements of the matrix will not work.
-     */
-    @JsProperty
-    public Matrix4 matrix;
-    /**
-     * The value of the name property of this node. This is the name assigned by the artist when the asset is created.
-     * This can be different than the name of the node property {@link ModelNode#id}, which is internal to glTF.
-     */
-    @JsProperty(name = "name")
-    public native String name();
+  /**
+   * The node's 4x4 matrix transform from its local coordinates to its parent's.
+   *
+   * For changes to take effect, this property must be assigned to; setting
+   * individual elements of the matrix will not work.
+   */
+  @JsProperty
+  public Matrix4 matrix;
 
-    /**
-     * Determines if this node and its children will be shown.
-     * Default: true.
-     */
-    @JsProperty
-    public boolean show;
+  /**
+   * The value of the name property of this node. This is the name assigned by the
+   * artist when the asset is created. This can be different than the name of the
+   * node property {@link ModelNode#id}, which is internal to glTF.
+   */
+  @JsProperty(name = "name")
+  public native String name();
 
-    /**
-     * Use {@link Model#getNode} to create an instance.
-     */
-    @JsConstructor
-    public ModelNode() {}
+  /**
+   * Determines if this node and its children will be shown. Default: true.
+   */
+  @JsProperty
+  public boolean show;
+
+  /**
+   * Use {@link Model#getNode} to create an instance.
+   */
+  @JsConstructor
+  public ModelNode() {
+  }
 }

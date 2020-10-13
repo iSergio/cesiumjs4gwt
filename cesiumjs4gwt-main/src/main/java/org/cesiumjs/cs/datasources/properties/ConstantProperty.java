@@ -21,36 +21,45 @@ import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "ConstantProperty")
 public class ConstantProperty<T> extends Property<T> {
-    /**
-     * A {@link Property} whose value does not change with respect to simulation time.
-     * @see ConstantPositionProperty
-     */
-    @JsConstructor
-    public ConstantProperty() {}
+  /**
+   * A {@link Property} whose value does not change with respect to simulation
+   * time.
+   * 
+   * @see ConstantPositionProperty
+   */
+  @JsConstructor
+  public ConstantProperty() {
+  }
 
-    /**
-     * A {@link Property} whose value does not change with respect to simulation time.
-     * @param value The property value.
-     * @see ConstantPositionProperty
-     */
-    @JsConstructor
-    public ConstantProperty(T value) {}
+  /**
+   * A {@link Property} whose value does not change with respect to simulation
+   * time.
+   * 
+   * @param value The property value.
+   * @see ConstantPositionProperty
+   */
+  @JsConstructor
+  public ConstantProperty(T value) {
+  }
 
-    /**
-     * Sets the value of the property.
-     * @param value The property value.
-     */
-    @JsMethod
-    public native void setValue(T value);
+  /**
+   * Sets the value of the property.
+   * 
+   * @param value The property value.
+   */
+  @JsMethod
+  public native void setValue(T value);
 
-    /**
-     * Gets the value of the property at the provided time.
-     * @return The modified result parameter or a new instance if the result parameter was not supplied.
-     */
-    @JsMethod
-    public native T getValue();
+  /**
+   * Gets the value of the property at the provided time.
+   * 
+   * @return The modified result parameter or a new instance if the result
+   *         parameter was not supplied.
+   */
+  @JsMethod
+  public native T getValue();
 }

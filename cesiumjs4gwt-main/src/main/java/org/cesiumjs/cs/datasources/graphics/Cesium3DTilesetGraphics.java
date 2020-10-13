@@ -26,53 +26,64 @@ import jsinterop.annotations.JsType;
 
 @JsType(isNative = true, namespace = "Cesium", name = "Cesium3DTilesetGraphics")
 public class Cesium3DTilesetGraphics {
-    /**
-     * Gets the event that is raised whenever a property or sub-property is changed or modified.
-     */
-    @JsProperty(name = "definitionChanged")
-    public native Event definitionChanged();
-    /**
-     * Gets or sets the maximum screen space error used to drive level of detail refinement.
-     */
-    @JsProperty
-    public Property maximumScreenSpaceError;
-    /**
-     * Gets or sets the boolean Property specifying the visibility of the model.
-     * Default: true
-     */
-    @JsProperty
-    public boolean show;
-    /**
-     * Gets or sets the string Property specifying the URI of the glTF asset.
-     */
-    @JsProperty
-    public Property uri;
+  /**
+   * Gets the event that is raised whenever a property or sub-property is changed
+   * or modified.
+   */
+  @JsProperty(name = "definitionChanged")
+  public native Event definitionChanged();
 
-    @JsConstructor
-    public Cesium3DTilesetGraphics() {}
+  /**
+   * Gets or sets the maximum screen space error used to drive level of detail
+   * refinement.
+   */
+  @JsProperty
+  public Property maximumScreenSpaceError;
+  /**
+   * Gets or sets the boolean Property specifying the visibility of the model.
+   * Default: true
+   */
+  @JsProperty
+  public boolean show;
+  /**
+   * Gets or sets the string Property specifying the URI of the glTF asset.
+   */
+  @JsProperty
+  public Property uri;
 
-    @JsConstructor
-    public Cesium3DTilesetGraphics(Cesium3DTilesetGraphicsOptions options) {}
+  @JsConstructor
+  public Cesium3DTilesetGraphics() {
+  }
 
-    /**
-     * Duplicates this instance.
-     * @return The modified result parameter or a new instance if one was not provided.
-     */
-    @JsMethod
-    public native Cesium3DTilesetGraphics clone();
+  @JsConstructor
+  public Cesium3DTilesetGraphics(Cesium3DTilesetGraphicsOptions options) {
+  }
 
-    /**
-     * Duplicates this instance.
-     * @param result The object onto which to store the result.
-     * @return The modified result parameter or a new instance if one was not provided.
-     */
-    @JsMethod
-    public native Cesium3DTilesetGraphics clone(Cesium3DTilesetGraphics result);
+  /**
+   * Duplicates this instance.
+   * 
+   * @return The modified result parameter or a new instance if one was not
+   *         provided.
+   */
+  @JsMethod
+  public native Cesium3DTilesetGraphics clone();
 
-    /**
-     * Assigns each unassigned property on this object to the value of the same property on the provided source object.
-     * @param source The object to be merged into this object.
-     */
-    @JsMethod
-    public native void megre(Cesium3DTilesetGraphics source);
+  /**
+   * Duplicates this instance.
+   * 
+   * @param result The object onto which to store the result.
+   * @return The modified result parameter or a new instance if one was not
+   *         provided.
+   */
+  @JsMethod
+  public native Cesium3DTilesetGraphics clone(Cesium3DTilesetGraphics result);
+
+  /**
+   * Assigns each unassigned property on this object to the value of the same
+   * property on the provided source object.
+   * 
+   * @param source The object to be merged into this object.
+   */
+  @JsMethod
+  public native void megre(Cesium3DTilesetGraphics source);
 }

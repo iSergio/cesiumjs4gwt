@@ -16,75 +16,91 @@
 
 package org.cesiumjs.cs.core;
 
-import jsinterop.annotations.*;
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsFunction;
+import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "Event")
 public class Event<T> {
-    @JsProperty(name = "numberOfListeners")
-    public native int numberOfListeners();
-    /**
-     * A generic utility class for managing subscribers for a particular event. This class is usually instantiated inside
-     * of a container class and exposed as a property for others to subscribe to.
-     */
-    @JsConstructor
-    public Event() {}
+  @JsProperty(name = "numberOfListeners")
+  public native int numberOfListeners();
 
-    /**
-     * Registers a callback function to be executed whenever the event is raised. An optional scope can be provided to
-     * serve as the this pointer in which the function will execute.
-     * @param listener The function to be executed when the event is raised.
-     * @return A function that will remove this event listener when invoked.
-     */
-    @JsMethod
-    public native RemoveCallback addEventListener(T listener);
+  /**
+   * A generic utility class for managing subscribers for a particular event. This
+   * class is usually instantiated inside of a container class and exposed as a
+   * property for others to subscribe to.
+   */
+  @JsConstructor
+  public Event() {
+  }
 
-    /**
-     * Registers a callback function to be executed whenever the event is raised. An optional scope can be provided to
-     * serve as the this pointer in which the function will execute.
-     * @param listener The function to be executed when the event is raised.
-     * @param scope An optional object scope to serve as the this pointer in which the listener function will execute.
-     * @return A function that will remove this event listener when invoked.
-     */
-    @JsMethod
-    public native RemoveCallback addEventListener(T listener, Object scope);
+  /**
+   * Registers a callback function to be executed whenever the event is raised. An
+   * optional scope can be provided to serve as the this pointer in which the
+   * function will execute.
+   * 
+   * @param listener The function to be executed when the event is raised.
+   * @return A function that will remove this event listener when invoked.
+   */
+  @JsMethod
+  public native RemoveCallback addEventListener(T listener);
 
-    // TODO: I'm dont understand this moment
-//    @JsMethod
-//    public native void raiseEvent(*)
+  /**
+   * Registers a callback function to be executed whenever the event is raised. An
+   * optional scope can be provided to serve as the this pointer in which the
+   * function will execute.
+   * 
+   * @param listener The function to be executed when the event is raised.
+   * @param scope    An optional object scope to serve as the this pointer in
+   *                 which the listener function will execute.
+   * @return A function that will remove this event listener when invoked.
+   */
+  @JsMethod
+  public native RemoveCallback addEventListener(T listener, Object scope);
 
-    /**
-     * Unregisters a previously registered callback.
-     * @param listener he function to be unregistered.
-     * @return true if the listener was removed; false if the listener and scope are not registered with the event.
-     */
-    @JsMethod
-    public native boolean removeEventListener(T listener);
+  // TODO: I'm dont understand this moment
+  // @JsMethod
+  // public native void raiseEvent(*)
 
-    /**
-     * Unregisters a previously registered callback.
-     * @param listener he function to be unregistered.
-     * @param scope The scope that was originally passed to addEventListener.
-     * @return true if the listener was removed; false if the listener and scope are not registered with the event.
-     */
-    @JsMethod
-    public native boolean removeEventListener(T listener, Object scope);
+  /**
+   * Unregisters a previously registered callback.
+   * 
+   * @param listener he function to be unregistered.
+   * @return true if the listener was removed; false if the listener and scope are
+   *         not registered with the event.
+   */
+  @JsMethod
+  public native boolean removeEventListener(T listener);
 
-    /**
-     * Universal callback listener, supports array params
-     */
-    @JsFunction
-    public interface Listener {
-        void function(Object ...o);
-    }
+  /**
+   * Unregisters a previously registered callback.
+   * 
+   * @param listener he function to be unregistered.
+   * @param scope    The scope that was originally passed to addEventListener.
+   * @return true if the listener was removed; false if the listener and scope are
+   *         not registered with the event.
+   */
+  @JsMethod
+  public native boolean removeEventListener(T listener, Object scope);
 
-    /**
-     * A function that removes a listener.
-     */
-    @JsFunction
-    public interface RemoveCallback {
-        void function();
-    }
+  /**
+   * Universal callback listener, supports array params
+   */
+  @JsFunction
+  public interface Listener {
+    void function(Object... o);
+  }
+
+  /**
+   * A function that removes a listener.
+   */
+  @JsFunction
+  public interface RemoveCallback {
+    void function();
+  }
 }

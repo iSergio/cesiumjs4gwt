@@ -16,10 +16,6 @@
 
 package org.cesiumjs.cs.datasources.graphics.options;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.core.NearFarScalar;
 import org.cesiumjs.cs.datasources.properties.Property;
@@ -27,139 +23,145 @@ import org.cesiumjs.cs.scene.enums.HeightReference;
 import org.cesiumjs.cs.scene.enums.LabelStyle;
 import org.cesiumjs.cs.scene.enums.VerticalOrigin;
 
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
+
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class LabelGraphicsOptions {
-    /**
-     * A Property specifying the text.
-     */
-    @JsProperty
-    public Property text;
-    /**
-     * A Property specifying the CSS font.
-     * Default: '10px sans-serif'
-     */
-    @JsProperty
-    public Property font;
-    /**
-     * A Property specifying the LabelStyle.
-     * Default: {@link LabelStyle#FILL()}
-     */
-    @JsProperty
-    public Property style;
-    /**
-     * A Property specifying the fill Color.
-     * Default: {@link org.cesiumjs.cs.core.Color#BLACK()}
-     */
-    @JsProperty
-    public Property fillColor;
-    /**
-     * A Property specifying the outline Color.
-     * Default: {@link Color#BLACK()}
-     */
-    @JsProperty
-    public Property outlineColor;
-    /**
-     * A numeric Property specifying the outline width.
-     * Default: 1.0
-     */
-    @JsProperty
-    public Property outlineWidth;
-    /**
-     * A boolean Property specifying the visibility of the label.
-     * Default: true
-     */
-    @JsProperty
-    public Property show;
-    /**
-     * A boolean Property specifying the visibility of the background behind the label.
-     * Default: false
-     */
-    @JsProperty
-    public Property showBackground;
-    /**
-     * A Property specifying the background Color.
-     * Default: Color(0.165, 0.165, 0.165, 0.8)
-     */
-    @JsProperty
-    public Property backgroundColor;
-    /**
-     * A Cartesian2 Property specifying the horizontal and vertical background padding in pixels.
-     * Default: Cartesian2(7, 5)
-     */
-    @JsProperty
-    public Property backgroundPadding;
-    /**
-     * A numeric Property specifying the scale to apply to the text.
-     * Default: 1.0
-     */
-    @JsProperty
-    public Property scale;
-    /**
-     * A Property specifying the HorizontalOrigin.
-     * Default: {@link VerticalOrigin#CENTER()}
-     */
-    @JsProperty
-    public Property horizontalOrigin;
-    /**
-     * A Property specifying the VerticalOrigin.
-     * Default: {@link VerticalOrigin#CENTER()}
-     */
-    @JsProperty
-    public Property verticalOrigin;
-    /**
-     * A Cartesian3 Property specifying the eye offset.
-     * Default: {@link org.cesiumjs.cs.core.Cartesian3#ZERO()}
-     */
-    @JsProperty
-    public Property eyeOffset;
-    /**
-     * A Cartesian2 Property specifying the pixel offset.
-     * Default: {@link org.cesiumjs.cs.core.Cartesian2#ZERO()}
-     */
-    @JsProperty
-    public Property pixelOffset;
-    /**
-     * A NearFarScalar Property used to set translucency based on distance from the camera.
-     */
-    @JsProperty
-    public Property translucencyByDistance;
-    /**
-     * A NearFarScalar Property used to set pixelOffset based on distance from the camera.
-     */
-    @JsProperty
-    public Property pixelOffsetScaleByDistance;
-    /**
-     * Gets or sets near and far scaling properties of a Label based on the label's distance from the camera.
-     * A label's scale will interpolate between the {@link NearFarScalar#nearValue} and {@link NearFarScalar#farValue} while the camera
-     * distance falls within the upper and lower bounds of the specified {@link NearFarScalar#near} and {@link NearFarScalar#far}.
-     * Outside of these ranges the label's scale remains clamped to the nearest bound. If undefined,
-     * scaleByDistance will be disabled.
-     */
-    @JsProperty
-    public NearFarScalar scaleByDistance;
-    /**
-     * A Property specifying what the height is relative to.
-     * Default: {@link HeightReference#NONE()}
-     */
-    @JsProperty
-    public Property heightReference;
-    /**
-     * A Property specifying at what distance from the camera that this label will be displayed.
-     */
-    @JsProperty
-    public Property distanceDisplayCondition;
-    /**
-     * A Property specifying the distance from the camera at which to disable the depth test to.
-     */
-    @JsProperty
-    public Property disableDepthTestDistance;
+  /**
+   * A Property specifying the text.
+   */
+  @JsProperty
+  public Property text;
+  /**
+   * A Property specifying the CSS font. Default: '10px sans-serif'
+   */
+  @JsProperty
+  public Property font;
+  /**
+   * A Property specifying the LabelStyle. Default: {@link LabelStyle#FILL()}
+   */
+  @JsProperty
+  public Property style;
+  /**
+   * A Property specifying the fill Color. Default:
+   * {@link org.cesiumjs.cs.core.Color#BLACK()}
+   */
+  @JsProperty
+  public Property fillColor;
+  /**
+   * A Property specifying the outline Color. Default: {@link Color#BLACK()}
+   */
+  @JsProperty
+  public Property outlineColor;
+  /**
+   * A numeric Property specifying the outline width. Default: 1.0
+   */
+  @JsProperty
+  public Property outlineWidth;
+  /**
+   * A boolean Property specifying the visibility of the label. Default: true
+   */
+  @JsProperty
+  public Property show;
+  /**
+   * A boolean Property specifying the visibility of the background behind the
+   * label. Default: false
+   */
+  @JsProperty
+  public Property showBackground;
+  /**
+   * A Property specifying the background Color. Default: Color(0.165, 0.165,
+   * 0.165, 0.8)
+   */
+  @JsProperty
+  public Property backgroundColor;
+  /**
+   * A Cartesian2 Property specifying the horizontal and vertical background
+   * padding in pixels. Default: Cartesian2(7, 5)
+   */
+  @JsProperty
+  public Property backgroundPadding;
+  /**
+   * A numeric Property specifying the scale to apply to the text. Default: 1.0
+   */
+  @JsProperty
+  public Property scale;
+  /**
+   * A Property specifying the HorizontalOrigin. Default:
+   * {@link VerticalOrigin#CENTER()}
+   */
+  @JsProperty
+  public Property horizontalOrigin;
+  /**
+   * A Property specifying the VerticalOrigin. Default:
+   * {@link VerticalOrigin#CENTER()}
+   */
+  @JsProperty
+  public Property verticalOrigin;
+  /**
+   * A Cartesian3 Property specifying the eye offset. Default:
+   * {@link org.cesiumjs.cs.core.Cartesian3#ZERO()}
+   */
+  @JsProperty
+  public Property eyeOffset;
+  /**
+   * A Cartesian2 Property specifying the pixel offset. Default:
+   * {@link org.cesiumjs.cs.core.Cartesian2#ZERO()}
+   */
+  @JsProperty
+  public Property pixelOffset;
+  /**
+   * A NearFarScalar Property used to set translucency based on distance from the
+   * camera.
+   */
+  @JsProperty
+  public Property translucencyByDistance;
+  /**
+   * A NearFarScalar Property used to set pixelOffset based on distance from the
+   * camera.
+   */
+  @JsProperty
+  public Property pixelOffsetScaleByDistance;
+  /**
+   * Gets or sets near and far scaling properties of a Label based on the label's
+   * distance from the camera. A label's scale will interpolate between the
+   * {@link NearFarScalar#nearValue} and {@link NearFarScalar#farValue} while the
+   * camera distance falls within the upper and lower bounds of the specified
+   * {@link NearFarScalar#near} and {@link NearFarScalar#far}. Outside of these
+   * ranges the label's scale remains clamped to the nearest bound. If undefined,
+   * scaleByDistance will be disabled.
+   */
+  @JsProperty
+  public NearFarScalar scaleByDistance;
+  /**
+   * A Property specifying what the height is relative to. Default:
+   * {@link HeightReference#NONE()}
+   */
+  @JsProperty
+  public Property heightReference;
+  /**
+   * A Property specifying at what distance from the camera that this label will
+   * be displayed.
+   */
+  @JsProperty
+  public Property distanceDisplayCondition;
+  /**
+   * A Property specifying the distance from the camera at which to disable the
+   * depth test to.
+   */
+  @JsProperty
+  public Property disableDepthTestDistance;
 
-    /**
-     * Options for {@link org.cesiumjs.cs.datasources.graphics.LabelGraphics}
-     */
-    @JsConstructor
-    public LabelGraphicsOptions() {}
+  /**
+   * Options for {@link org.cesiumjs.cs.datasources.graphics.LabelGraphics}
+   */
+  @JsConstructor
+  public LabelGraphicsOptions() {
+  }
 }

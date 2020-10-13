@@ -16,62 +16,67 @@
 
 package org.cesiumjs.cs.scene.particle;
 
+import org.cesiumjs.cs.scene.particle.options.ParticleBurstOptions;
+
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.scene.particle.options.ParticleBurstOptions;
 
 /**
- * Represents a burst of {@link Particle} from a {@link ParticleSystem} at a given time in the systems lifetime.
+ * Represents a burst of {@link Particle} from a {@link ParticleSystem} at a
+ * given time in the systems lifetime.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "ParticleBurst")
 public class ParticleBurst {
-    /**
-     * true if the burst has been completed; false otherwise.
-     */
-    @JsProperty
-    public boolean complete;
-    /**
-     * The time in seconds after the beginning of the particle system's lifetime that the burst will occur.
-     * Default: 0.0
-     */
-    @JsProperty
-    public double time;
-    /**
-     * The minimum number of particles emmitted in the burst.
-     * Default: 0.0
-     */
-    @JsProperty
-    public double minimum;
-    /**
-     * The maximum number of particles emitted in the burst.
-     * Default: 50.0
-     */
-    @JsProperty
-    public double maximum;
+  /**
+   * true if the burst has been completed; false otherwise.
+   */
+  @JsProperty
+  public boolean complete;
+  /**
+   * The time in seconds after the beginning of the particle system's lifetime
+   * that the burst will occur. Default: 0.0
+   */
+  @JsProperty
+  public double time;
+  /**
+   * The minimum number of particles emmitted in the burst. Default: 0.0
+   */
+  @JsProperty
+  public double minimum;
+  /**
+   * The maximum number of particles emitted in the burst. Default: 50.0
+   */
+  @JsProperty
+  public double maximum;
 
-    /**
-     * Represents a burst of {@link Particle} from a {@link ParticleSystem} at a given time in the systems lifetime.
-     */
-    @JsConstructor
-    public ParticleBurst() {}
+  /**
+   * Represents a burst of {@link Particle} from a {@link ParticleSystem} at a
+   * given time in the systems lifetime.
+   */
+  @JsConstructor
+  public ParticleBurst() {
+  }
 
-    /**
-     * Represents a burst of {@link Particle} from a {@link ParticleSystem} at a given time in the systems lifetime.
-     * @param options {@link ParticleBurstOptions}
-     */
-    @JsConstructor
-    public ParticleBurst(ParticleBurstOptions options) {}
+  /**
+   * Represents a burst of {@link Particle} from a {@link ParticleSystem} at a
+   * given time in the systems lifetime.
+   * 
+   * @param options {@link ParticleBurstOptions}
+   */
+  @JsConstructor
+  public ParticleBurst(ParticleBurstOptions options) {
+  }
 
-    @JsOverlay
-    public static ParticleBurst create(double time, double minimum, double maximum) {
-        ParticleBurstOptions options = new ParticleBurstOptions();
-        options.time = time;
-        options.minimum = minimum;
-        options.maximum = maximum;
-        return new ParticleBurst(options);
-    }
+  @JsOverlay
+  public static ParticleBurst create(double time, double minimum, double maximum) {
+    ParticleBurstOptions options = new ParticleBurstOptions();
+    options.time = time;
+    options.minimum = minimum;
+    options.maximum = maximum;
+    return new ParticleBurst(options);
+  }
 }

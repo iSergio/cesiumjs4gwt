@@ -22,28 +22,31 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * Options for {@link org.cesiumjs.cs.core.TaskProcessor#initWebAssemblyModule(WebAssemblyOptions)}
+ * Options for
+ * {@link org.cesiumjs.cs.core.TaskProcessor#initWebAssemblyModule(WebAssemblyOptions)}
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class WebAssemblyOptions {
-    /**
-     * The path of the web assembly JavaScript wrapper module.
-     */
-    @JsProperty
-    public String modulePath;
-    /**
-     * The path of the web assembly binary file.
-     */
-    @JsProperty
-    public String wasmBinaryFile;
-    /**
-     * The path of the fallback JavaScript module to use if web assembly is not supported.
-     */
-    @JsProperty
-    public String fallbackModulePath;
+  /**
+   * The path of the web assembly JavaScript wrapper module.
+   */
+  @JsProperty
+  public String modulePath;
+  /**
+   * The path of the web assembly binary file.
+   */
+  @JsProperty
+  public String wasmBinaryFile;
+  /**
+   * The path of the fallback JavaScript module to use if web assembly is not
+   * supported.
+   */
+  @JsProperty
+  public String fallbackModulePath;
 
-    @JsConstructor
-    public WebAssemblyOptions() {}
+  @JsConstructor
+  public WebAssemblyOptions() {
+  }
 }

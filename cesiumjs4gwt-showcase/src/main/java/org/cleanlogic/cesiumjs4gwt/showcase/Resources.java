@@ -28,24 +28,24 @@ import com.google.gwt.resources.client.ImageResource;
  */
 public interface Resources extends ClientBundle {
 
-    /**
-     * The singleton instance.
-     */
-    Resources INSTANCE = GWT.create(Resources.class);
+  /**
+   * The singleton instance.
+   */
+  Resources INSTANCE = GWT.create(Resources.class);
 
-    /**
-     * The GWT-OL logo.
-     *
-     * @return The imagery resource.
-     */
-    @Source("resources/gwt-cs.png")
-    ImageResource gwtCsLogo();
+  /**
+   * The GWT-OL logo.
+   *
+   * @return The imagery resource.
+   */
+  @Source("resources/gwt-cs.png")
+  ImageResource gwtCsLogo();
 
-    /**
-     * The info icon
-     *
-     * @return The imagery resource.
-     */
-    @Source("resources/icon-info.png")
-    ImageResource icon_info();
+  /**
+   * The info icon
+   *
+   * @return The imagery resource.
+   */
+  @Source("resources/icon-info.png")
+  ImageResource icon_info();
 }

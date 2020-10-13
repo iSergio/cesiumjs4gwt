@@ -21,6 +21,7 @@ import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.inject.Inject;
+
 import org.cesiumjs.cs.collections.ImageryLayerCollection;
 import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.core.Rectangle;
@@ -35,84 +36,84 @@ import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderEvent;
 import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderListener;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 public class ImageryColorToAlpha extends AbstractExample {
-    private ImageryLayer singleTileLayer;
+  private ImageryLayer singleTileLayer;
 
-    @Inject
-    public ImageryColorToAlpha(ShowcaseExampleStore store) {
-        super("Imagery Color To Alpha", "Apply simple color-to-alpha on imagery layers.", new String[]{"Showcase", "color to alpha"}, store);
+  @Inject
+  public ImageryColorToAlpha(ShowcaseExampleStore store) {
+    super("Imagery Color To Alpha", "Apply simple color-to-alpha on imagery layers.",
+        new String[] { "Showcase", "color to alpha" }, store);
+  }
+
+  @Override
+  public void buildPanel() {
+    ViewerPanel csVPanel = new ViewerPanel();
+
+    ImageryLayerCollection layers = csVPanel.getViewer().scene().imageryLayers();
+
+    // Set oceans on Bing base layer to transparent
+    ImageryLayer baseLayer = layers.get(0);
+    baseLayer.colorToAlpha = new Color(0.0, 0.016, 0.059, 1.0f);
+    baseLayer.colorToAlphaThreshold = 0.2;
+
+    // Add a bump layer with adjustable threshold
+    SingleTileImageryProviderOptions options = new SingleTileImageryProviderOptions();
+    options.url = GWT.getModuleBaseURL() + "images/earthbump1k.jpg";
+    options.rectangle = Rectangle.fromDegrees(-180.0, -90.0, 180.0, 90.0);
+    singleTileLayer = layers.addImageryProvider(new SingleTileImageryProvider(options));
+    singleTileLayer.colorToAlpha = new Color(0.0, 0.0, 0.0, 1.0);
+    singleTileLayer.colorToAlphaThreshold = 0.1;
+
+    Slider thresholdSlider = new Slider("thresholdSlider", 0, 100, 10);
+    thresholdSlider.setStep(1);
+    thresholdSlider.setWidth("150px");
+    thresholdSlider.addListener(new MSliderListener());
+
+    FlexTable flexTable = new FlexTable();
+    flexTable.setHTML(1, 0, "<font color=\"white\">Threshold</font>");
+    flexTable.setWidget(1, 1, thresholdSlider);
+
+    AbsolutePanel aPanel = new AbsolutePanel();
+    aPanel.add(csVPanel);
+    aPanel.add(flexTable, 20, 20);
+
+    contentPanel.add(new HTML("<p>Apply simple color-to-alpha on imagery layers.</p>"));
+    contentPanel.add(aPanel);
+
+    initWidget(contentPanel);
+  }
+
+  @Override
+  public String[] getSourceCodeURLs() {
+    String[] sourceCodeURLs = new String[1];
+    sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "ImageryColorToAlpha.txt";
+    return sourceCodeURLs;
+  }
+
+  private class MSliderListener implements SliderListener {
+    @Override
+    public void onStart(SliderEvent e) {
+
     }
 
     @Override
-    public void buildPanel() {
-        ViewerPanel csVPanel = new ViewerPanel();
-
-        ImageryLayerCollection layers = csVPanel.getViewer().scene().imageryLayers();
-
-        // Set oceans on Bing base layer to transparent
-        ImageryLayer baseLayer = layers.get(0);
-        baseLayer.colorToAlpha = new Color(0.0, 0.016, 0.059, 1.0f);
-        baseLayer.colorToAlphaThreshold = 0.2;
-
-        // Add a bump layer with adjustable threshold
-        SingleTileImageryProviderOptions options = new SingleTileImageryProviderOptions();
-        options.url = GWT.getModuleBaseURL() + "images/earthbump1k.jpg";
-        options.rectangle = Rectangle.fromDegrees(-180.0, -90.0, 180.0, 90.0);
-        singleTileLayer = layers.addImageryProvider(new SingleTileImageryProvider(options));
-        singleTileLayer.colorToAlpha = new Color(0.0, 0.0, 0.0, 1.0);
-        singleTileLayer.colorToAlphaThreshold = 0.1;
-
-        Slider thresholdSlider = new Slider("thresholdSlider", 0, 100, 10);
-        thresholdSlider.setStep(1);
-        thresholdSlider.setWidth("150px");
-        thresholdSlider.addListener(new MSliderListener());
-
-
-        FlexTable flexTable = new FlexTable();
-        flexTable.setHTML(1, 0, "<font color=\"white\">Threshold</font>");
-        flexTable.setWidget(1, 1, thresholdSlider);
-
-        AbsolutePanel aPanel = new AbsolutePanel();
-        aPanel.add(csVPanel);
-        aPanel.add(flexTable, 20, 20);
-
-        contentPanel.add(new HTML("<p>Apply simple color-to-alpha on imagery layers.</p>"));
-        contentPanel.add(aPanel);
-
-        initWidget(contentPanel);
+    public boolean onSlide(SliderEvent e) {
+      Slider source = e.getSource();
+      int value = source.getValue();
+      singleTileLayer.colorToAlphaThreshold = value / 100.0f;
+      return true;
     }
 
     @Override
-    public String[] getSourceCodeURLs() {
-        String[] sourceCodeURLs = new String[1];
-        sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "ImageryColorToAlpha.txt";
-        return sourceCodeURLs;
+    public void onChange(SliderEvent e) {
+
     }
 
-    private class MSliderListener implements SliderListener {
-        @Override
-        public void onStart(SliderEvent e) {
+    @Override
+    public void onStop(SliderEvent e) {
 
-        }
-
-        @Override
-        public boolean onSlide(SliderEvent e) {
-            Slider source = e.getSource();
-            int value = source.getValue();
-            singleTileLayer.colorToAlphaThreshold = value / 100.0f;
-            return true;
-        }
-
-        @Override
-        public void onChange(SliderEvent e) {
-
-        }
-
-        @Override
-        public void onStop(SliderEvent e) {
-
-        }
     }
+  }
 }

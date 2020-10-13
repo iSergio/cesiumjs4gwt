@@ -22,23 +22,24 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class WebMapServiceParameters {
-    @JsProperty
-    public String service;
-    @JsProperty
-    public String version;
-    @JsProperty
-    public String request;
-    @JsProperty
-    public String styles;
-    @JsProperty
-    public String format;
-    @JsProperty
-    public boolean transparent;
+  @JsProperty
+  public String service;
+  @JsProperty
+  public String version;
+  @JsProperty
+  public String request;
+  @JsProperty
+  public String styles;
+  @JsProperty
+  public String format;
+  @JsProperty
+  public boolean transparent;
 
-    @JsConstructor
-    public WebMapServiceParameters() {}
+  @JsConstructor
+  public WebMapServiceParameters() {
+  }
 }

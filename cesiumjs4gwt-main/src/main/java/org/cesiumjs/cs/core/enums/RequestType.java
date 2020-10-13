@@ -20,32 +20,37 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * An enum identifying the type of request. Used for finer grained logging and priority sorting.
+ * An enum identifying the type of request. Used for finer grained logging and
+ * priority sorting.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "RequestType")
 public class RequestType {
-    /**
-     * Imagery request.
-     */
-    @JsProperty(name = "IMAGERY")
-    public static native Number IMAGERY();
-    /**
-     * Other request.
-      */
-    @JsProperty(name = "OTHER")
-    public static native Number OTHER();
-    /**
-     * Terrain request.
-      */
-    @JsProperty(name = "TERRAIN")
-    public static native Number TERRAIN();
-    /**
-     * 3D Tiles request.
-      */
-    @JsProperty(name = "TILES3D")
-    public static native Number TILES3D();
+  /**
+   * Imagery request.
+   */
+  @JsProperty(name = "IMAGERY")
+  public static native Number IMAGERY();
 
-    private RequestType() {}
+  /**
+   * Other request.
+   */
+  @JsProperty(name = "OTHER")
+  public static native Number OTHER();
+
+  /**
+   * Terrain request.
+   */
+  @JsProperty(name = "TERRAIN")
+  public static native Number TERRAIN();
+
+  /**
+   * 3D Tiles request.
+   */
+  @JsProperty(name = "TILES3D")
+  public static native Number TILES3D();
+
+  private RequestType() {
+  }
 }

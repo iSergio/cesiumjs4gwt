@@ -21,20 +21,21 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * Options for {@link org.cesiumjs.cs.core.Resource#put(ResourcePutOptions)} method.
+ * Options for {@link org.cesiumjs.cs.core.Resource#put(ResourcePutOptions)}
+ * method.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class ResourcePutOptions extends ResourceOptions {
-    /**
-     * The type of response. This controls the type of item returned.
-     */
-    @JsProperty
-    public String responseType;
-    /**
-     * Overrides the MIME type returned by the server.
-     */
-    @JsProperty
-    public String overrideMimeType;
+  /**
+   * The type of response. This controls the type of item returned.
+   */
+  @JsProperty
+  public String responseType;
+  /**
+   * Overrides the MIME type returned by the server.
+   */
+  @JsProperty
+  public String overrideMimeType;
 }

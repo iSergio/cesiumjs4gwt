@@ -16,45 +16,55 @@
 
 package org.cesiumjs.cs.scene.apperances;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.VertexFormat;
 import org.cesiumjs.cs.core.geometry.GeometryInstance;
 import org.cesiumjs.cs.scene.Primitive;
 import org.cesiumjs.cs.scene.apperances.options.PolylineColorAppearanceOptions;
 
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
+
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "PolylineColorAppearance")
 public class PolylineColorAppearance extends Appearance {
-    /**
-     * The VertexFormat that all {@link PolylineColorAppearance} instances are compatible with.
-     * This requires only a position attribute.
-     */
-    @JsProperty(name = "VERTEX_FORMAT")
-    public static native VertexFormat VERTEX_FORMAT();
-    /**
-     * The {@link VertexFormat} that this appearance instance is compatible with. A geometry can have more vertex
-     * attributes and still be compatible - at a potential performance cost - but it can't have less.
-     * Default: {@link PolylineColorAppearance#VERTEX_FORMAT()}
-     */
-    @JsProperty(name = "vertexFormat")
-    public native VertexFormat vertexFormat();
+  /**
+   * The VertexFormat that all {@link PolylineColorAppearance} instances are
+   * compatible with. This requires only a position attribute.
+   */
+  @JsProperty(name = "VERTEX_FORMAT")
+  public static native VertexFormat VERTEX_FORMAT();
 
-    /**
-     * An appearance for {@link GeometryInstance} instances with color attributes and {@link org.cesiumjs.cs.core.geometry.PolylineGeometry}.
-     * This allows several geometry instances, each with a different color, to be drawn with the same {@link Primitive}.
-     */
-    @JsConstructor
-    public PolylineColorAppearance() {}
+  /**
+   * The {@link VertexFormat} that this appearance instance is compatible with. A
+   * geometry can have more vertex attributes and still be compatible - at a
+   * potential performance cost - but it can't have less. Default:
+   * {@link PolylineColorAppearance#VERTEX_FORMAT()}
+   */
+  @JsProperty(name = "vertexFormat")
+  public native VertexFormat vertexFormat();
 
-    /**
-     * An appearance for {@link GeometryInstance} instances with color attributes and {@link org.cesiumjs.cs.core.geometry.PolylineGeometry}.
-     * This allows several geometry instances, each with a different color, to be drawn with the same {@link Primitive}.
-     * @param options {@link PolylineColorAppearanceOptions}
-     */
-    @JsConstructor
-    public PolylineColorAppearance(PolylineColorAppearanceOptions options) {}
+  /**
+   * An appearance for {@link GeometryInstance} instances with color attributes
+   * and {@link org.cesiumjs.cs.core.geometry.PolylineGeometry}. This allows
+   * several geometry instances, each with a different color, to be drawn with the
+   * same {@link Primitive}.
+   */
+  @JsConstructor
+  public PolylineColorAppearance() {
+  }
+
+  /**
+   * An appearance for {@link GeometryInstance} instances with color attributes
+   * and {@link org.cesiumjs.cs.core.geometry.PolylineGeometry}. This allows
+   * several geometry instances, each with a different color, to be drawn with the
+   * same {@link Primitive}.
+   * 
+   * @param options {@link PolylineColorAppearanceOptions}
+   */
+  @JsConstructor
+  public PolylineColorAppearance(PolylineColorAppearanceOptions options) {
+  }
 }

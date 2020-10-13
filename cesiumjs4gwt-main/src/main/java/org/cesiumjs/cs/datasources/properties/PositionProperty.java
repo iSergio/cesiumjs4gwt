@@ -16,56 +16,70 @@
 
 package org.cesiumjs.cs.datasources.properties;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.JulianDate;
 import org.cesiumjs.cs.core.enums.ReferenceFrame;
 
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
+
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "PositionProperty")
 public class PositionProperty extends Property<Cartesian3> {
-    /**
-     * Gets the reference frame that the position is defined in.
-     * @see ReferenceFrame
-     */
-    @SuppressWarnings("unusable-by-js")
-    @JsProperty
-    public Number referenceFrame;
+  /**
+   * Gets the reference frame that the position is defined in.
+   * 
+   * @see ReferenceFrame
+   */
+  @SuppressWarnings("unusable-by-js")
+  @JsProperty
+  public Number referenceFrame;
 
-    /**
-     * The interface for all Property objects that define a world location as a Cartesian3 with an associated ReferenceFrame.
-     * This type defines an interface and cannot be instantiated directly.
-     * @see CompositePositionProperty
-     * @see ConstantPositionProperty
-     * @see SampledPositionProperty
-     * @see TimeIntervalCollectionPositionProperty
-     */
-    @JsConstructor
-    public PositionProperty() {}
+  /**
+   * The interface for all Property objects that define a world location as a
+   * Cartesian3 with an associated ReferenceFrame. This type defines an interface
+   * and cannot be instantiated directly.
+   * 
+   * @see CompositePositionProperty
+   * @see ConstantPositionProperty
+   * @see SampledPositionProperty
+   * @see TimeIntervalCollectionPositionProperty
+   */
+  @JsConstructor
+  public PositionProperty() {
+  }
 
-    /**
-     * Gets the value of the property at the provided time and in the provided reference frame.
-     * @param time The time for which to retrieve the value.
-     * @param referenceFrame {@link ReferenceFrame} The desired referenceFrame of the result.
-     * @return The modified result parameter or a new instance if the result parameter was not supplied.
-     */
-    @SuppressWarnings("unusable-by-js")
-    @JsMethod
-    public native Cartesian3 getValueInReferenceFrame(JulianDate time, Number referenceFrame);
+  /**
+   * Gets the value of the property at the provided time and in the provided
+   * reference frame.
+   * 
+   * @param time           The time for which to retrieve the value.
+   * @param referenceFrame {@link ReferenceFrame} The desired referenceFrame of
+   *                       the result.
+   * @return The modified result parameter or a new instance if the result
+   *         parameter was not supplied.
+   */
+  @SuppressWarnings("unusable-by-js")
+  @JsMethod
+  public native Cartesian3 getValueInReferenceFrame(JulianDate time, Number referenceFrame);
 
-    /**
-     * Gets the value of the property at the provided time and in the provided reference frame.
-     * @param time The time for which to retrieve the value.
-     * @param referenceFrame {@link ReferenceFrame} The desired referenceFrame of the result.
-     * @param result The object to store the value into, if omitted, a new instance is created and returned.
-     * @return The modified result parameter or a new instance if the result parameter was not supplied.
-     */
-    @SuppressWarnings("unusable-by-js")
-    @JsMethod
-    public native Cartesian3 getValueInReferenceFrame(JulianDate time, Number referenceFrame, Cartesian3 result);
+  /**
+   * Gets the value of the property at the provided time and in the provided
+   * reference frame.
+   * 
+   * @param time           The time for which to retrieve the value.
+   * @param referenceFrame {@link ReferenceFrame} The desired referenceFrame of
+   *                       the result.
+   * @param result         The object to store the value into, if omitted, a new
+   *                       instance is created and returned.
+   * @return The modified result parameter or a new instance if the result
+   *         parameter was not supplied.
+   */
+  @SuppressWarnings("unusable-by-js")
+  @JsMethod
+  public native Cartesian3 getValueInReferenceFrame(JulianDate time, Number referenceFrame, Cartesian3 result);
 }

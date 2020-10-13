@@ -21,24 +21,26 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "ReferenceFrame")
 public class ReferenceFrame {
-    /**
-     * The fixed frame.
-     */
-    @JsProperty(name = "FIXED")
-    public static native Number FIXED();
-    /**
-     * The inertial frame.
-     */
-    @JsProperty(name = "INTERNAL")
-    public static native Number INERTIAL();
+  /**
+   * The fixed frame.
+   */
+  @JsProperty(name = "FIXED")
+  public static native Number FIXED();
 
-    /**
-     * Constants for identifying well-known reference frames.
-     */
-    @JsConstructor
-    private ReferenceFrame() {}
+  /**
+   * The inertial frame.
+   */
+  @JsProperty(name = "INTERNAL")
+  public static native Number INERTIAL();
+
+  /**
+   * Constants for identifying well-known reference frames.
+   */
+  @JsConstructor
+  private ReferenceFrame() {
+  }
 }

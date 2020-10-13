@@ -19,6 +19,7 @@ package org.cleanlogic.cesiumjs4gwt.showcase.config;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
+
 import org.cleanlogic.cesiumjs4gwt.showcase.components.ShowcaseExamplePanel;
 import org.cleanlogic.cesiumjs4gwt.showcase.components.ShowcaseSearchPanel;
 import org.cleanlogic.cesiumjs4gwt.showcase.components.ShowcaseTopPanel;
@@ -30,31 +31,30 @@ import org.cleanlogic.cesiumjs4gwt.showcase.puregwt.ShowcaseEventBus;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@GinModules(value = {InjectorModule.class})
+@GinModules(value = { InjectorModule.class })
 public interface Injector extends Ginjector {
 
-    public static class MainInjector {
+  public static class MainInjector {
 
-        private static final Injector instance = GWT.create(
-                Injector.class);
+    private static final Injector instance = GWT.create(Injector.class);
 
-        private MainInjector() {
-        }
-
-        public static Injector getInstance() {
-            return instance;
-        }
-
+    private MainInjector() {
     }
 
-    public ShowcaseEventBus getEventBus();
+    public static Injector getInstance() {
+      return instance;
+    }
 
-    public ShowcaseExampleStore getExampleStore();
+  }
 
-    public ShowcaseSearchPanel getShowcaseSearchPanel();
+  public ShowcaseEventBus getEventBus();
 
-    public ShowcaseTopPanel getShowcaseTopPanel();
+  public ShowcaseExampleStore getExampleStore();
 
-    public ShowcaseExamplePanel getShowcaseExamplePanel();
+  public ShowcaseSearchPanel getShowcaseSearchPanel();
+
+  public ShowcaseTopPanel getShowcaseTopPanel();
+
+  public ShowcaseExamplePanel getShowcaseExamplePanel();
 
 }

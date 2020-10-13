@@ -24,9 +24,10 @@ import com.google.gwt.i18n.client.Messages;
  * @author fks/Frank Wynants
  *
  */
-public interface I18NMessages extends Messages
-{
-   String filterByKeywords();
-   String tags(String string);
-   String viewSource(String source);
+public interface I18NMessages extends Messages {
+  String filterByKeywords();
+
+  String tags(String string);
+
+  String viewSource(String source);
 }

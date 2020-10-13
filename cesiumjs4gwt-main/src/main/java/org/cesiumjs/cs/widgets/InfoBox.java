@@ -17,6 +17,7 @@
 package org.cesiumjs.cs.widgets;
 
 import com.google.gwt.dom.client.Element;
+
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
@@ -25,50 +26,56 @@ import jsinterop.annotations.JsType;
 /**
  * A widget for displaying information or a description.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "InfoBox")
 public class InfoBox {
-    /**
-     * Gets the parent container.
-     */
-    @JsProperty
-    public Element container;
-    //TODO: HTMLIFrameElement
-//    /**
-//     * Gets the iframe used to display the description.
-//     */
-//    HTMLIFrameElement frame;
-    /**
-     * Gets the view model.
-     */
-    @JsProperty
-    public InfoBoxViewModel viewModel;
+  /**
+   * Gets the parent container.
+   */
+  @JsProperty
+  public Element container;
+  // TODO: HTMLIFrameElement
+  // /**
+  // * Gets the iframe used to display the description.
+  // */
+  // HTMLIFrameElement frame;
+  /**
+   * Gets the view model.
+   */
+  @JsProperty
+  public InfoBoxViewModel viewModel;
 
-    /**
-     * A widget for displaying information or a description.
-     * @param container The DOM element or ID that will contain the widget.
-     */
-    @JsConstructor
-    public InfoBox(Element container) {}
+  /**
+   * A widget for displaying information or a description.
+   * 
+   * @param container The DOM element or ID that will contain the widget.
+   */
+  @JsConstructor
+  public InfoBox(Element container) {
+  }
 
-    /**
-     * A widget for displaying information or a description.
-     * @param container The DOM element or ID that will contain the widget.
-     */
-    @JsConstructor
-    public InfoBox(String container) {}
+  /**
+   * A widget for displaying information or a description.
+   * 
+   * @param container The DOM element or ID that will contain the widget.
+   */
+  @JsConstructor
+  public InfoBox(String container) {
+  }
 
-    /**
-     * Destroys the widget. Should be called if permanently removing the widget from layout.
-     */
-    @JsMethod
-    public native void destroy();
+  /**
+   * Destroys the widget. Should be called if permanently removing the widget from
+   * layout.
+   */
+  @JsMethod
+  public native void destroy();
 
-    /**
-     * true if the object has been destroyed, false otherwise.
-     * @return true if the object has been destroyed, false otherwise.
-     */
-    @JsMethod
-    public native boolean isDestroyed();
+  /**
+   * true if the object has been destroyed, false otherwise.
+   * 
+   * @return true if the object has been destroyed, false otherwise.
+   */
+  @JsMethod
+  public native boolean isDestroyed();
 }

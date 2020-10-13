@@ -16,37 +16,43 @@
 
 package org.cesiumjs.cs.datasources.updater;
 
-import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.JulianDate;
 
+import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsType;
+
 /**
- * Defines the interface for a dynamic geometry updater. A {@link DynamicGeometryUpdater} is responsible for handling
- * visualization of a specific type of geometry that needs to be recomputed based on simulation time.
- * This object is never used directly by client code, but is instead created by {@link GeometryUpdater} implementations
- * which contain dynamic geometry. This type defines an interface and cannot be instantiated directly.
+ * Defines the interface for a dynamic geometry updater. A
+ * {@link DynamicGeometryUpdater} is responsible for handling visualization of a
+ * specific type of geometry that needs to be recomputed based on simulation
+ * time. This object is never used directly by client code, but is instead
+ * created by {@link GeometryUpdater} implementations which contain dynamic
+ * geometry. This type defines an interface and cannot be instantiated directly.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "DynamicGeometryUpdater")
 public interface DynamicGeometryUpdater {
-    /**
-     * Destroys and resources used by the object. Once an object is destroyed, it should not be used.
-     */
-    @JsMethod
-    void destroy();
+  /**
+   * Destroys and resources used by the object. Once an object is destroyed, it
+   * should not be used.
+   */
+  @JsMethod
+  void destroy();
 
-    /**
-     * Returns true if this object was destroyed; otherwise, false.
-     * @return True if this object was destroyed; otherwise, false.
-     */
-    @JsMethod
-    boolean isDestroyed();
+  /**
+   * Returns true if this object was destroyed; otherwise, false.
+   * 
+   * @return True if this object was destroyed; otherwise, false.
+   */
+  @JsMethod
+  boolean isDestroyed();
 
-    /**
-     * Updates the geometry to the specified time.
-     * @param time The current time.
-     */
-    @JsMethod
-    void update(JulianDate time);
+  /**
+   * Updates the geometry to the specified time.
+   * 
+   * @param time The current time.
+   */
+  @JsMethod
+  void update(JulianDate time);
 }

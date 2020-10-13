@@ -20,10 +20,10 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true)
 public class viewerCesiumNavigationMixin {
-    @JsProperty(namespace = "Cesium", name = "viewerCesiumNavigationMixin")
-    public static native Object instance();
+  @JsProperty(namespace = "Cesium", name = "viewerCesiumNavigationMixin")
+  public static native Object instance();
 }

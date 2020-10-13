@@ -21,28 +21,33 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * Constants to determine how an interpolated value is extrapolated when querying outside the bounds of available data.
+ * Constants to determine how an interpolated value is extrapolated when
+ * querying outside the bounds of available data.
+ * 
  * @see org.cesiumjs.cs.datasources.properties.SampledProperty
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "ExtrapolationType")
 public class ExtrapolationType {
-    /**
-     * The value is extrapolated.
-     */
-    @JsProperty(name = "EXTRAPOLATE")
-    public static native Number EXTRAPOLATE();
-    /**
-     * The first or last value is used when outside the range of sample data.
-     */
-    @JsProperty(name = "HOLD")
-    public static native Number HOLD();
-    /**
-     * No extrapolation occurs.
-     */
-    @JsProperty(name = "NONE")
-    public static native Number NONE();
+  /**
+   * The value is extrapolated.
+   */
+  @JsProperty(name = "EXTRAPOLATE")
+  public static native Number EXTRAPOLATE();
 
-    @JsConstructor
-    private ExtrapolationType() {}
+  /**
+   * The first or last value is used when outside the range of sample data.
+   */
+  @JsProperty(name = "HOLD")
+  public static native Number HOLD();
+
+  /**
+   * No extrapolation occurs.
+   */
+  @JsProperty(name = "NONE")
+  public static native Number NONE();
+
+  @JsConstructor
+  private ExtrapolationType() {
+  }
 }

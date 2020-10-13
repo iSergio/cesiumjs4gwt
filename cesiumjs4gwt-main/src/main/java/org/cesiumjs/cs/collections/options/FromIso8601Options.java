@@ -16,36 +16,47 @@
 
 package org.cesiumjs.cs.collections.options;
 
-import jsinterop.annotations.*;
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsFunction;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 
 /**
- * Options for {@link org.cesiumjs.cs.collections.TimeIntervalCollection#fromIso8601}.
+ * Options for
+ * {@link org.cesiumjs.cs.collections.TimeIntervalCollection#fromIso8601}.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
+@SuppressWarnings("rawtypes")
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class FromIso8601Options extends FromIso8601OptionsAbstract {
-    /**
-     * An ISO 8601 interval.
-     */
-    @JsProperty
-    public String iso8601;
+  /**
+   * An ISO 8601 interval.
+   */
+  @JsProperty
+  public String iso8601;
 
-    /**
-     * Options for {@link org.cesiumjs.cs.collections.TimeIntervalCollection#fromIso8601}.
-     */
-    @JsConstructor
-    private FromIso8601Options() {}
+  /**
+   * Options for
+   * {@link org.cesiumjs.cs.collections.TimeIntervalCollection#fromIso8601}.
+   */
+  @JsConstructor
+  private FromIso8601Options() {
+  }
 
-    /**
-     * Options for {@link org.cesiumjs.cs.collections.TimeIntervalCollection#fromIso8601}.
-     * @param iso8601 An ISO 8601 interval.
-     */
-    @JsConstructor
-    public FromIso8601Options(String iso8601) {}
+  /**
+   * Options for
+   * {@link org.cesiumjs.cs.collections.TimeIntervalCollection#fromIso8601}.
+   * 
+   * @param iso8601 An ISO 8601 interval.
+   */
+  @JsConstructor
+  public FromIso8601Options(String iso8601) {
+  }
 
-    @JsFunction
-    public interface DataCallback {
-        void function();
-    }
+  @JsFunction
+  public interface DataCallback {
+    void function();
+  }
 }

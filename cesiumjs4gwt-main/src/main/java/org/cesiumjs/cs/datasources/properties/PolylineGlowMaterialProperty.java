@@ -16,62 +16,69 @@
 
 package org.cesiumjs.cs.datasources.properties;
 
+import org.cesiumjs.cs.core.Color;
+import org.cesiumjs.cs.datasources.properties.options.PolylineGlowMaterialPropertyOptions;
+
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.Color;
-import org.cesiumjs.cs.datasources.properties.options.PolylineGlowMaterialPropertyOptions;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "PolylineGlowMaterialProperty")
 public class PolylineGlowMaterialProperty extends MaterialProperty {
-    /**
-     * A Property specifying the Color of the line.
-     * Default: {@link Color#WHITE()}
-     */
-    @JsProperty
-    public Property color;
-    /**
-     * A numeric Property specifying the strength of the glow, as a percentage of the total line width.
-     * Default: 0.25
-     */
-    @JsProperty
-    public Property glowPower;
-    /**
-     * A numeric Property specifying the strength of the tapering effect, as a percentage of the total line length.
-     * If 1.0 or higher, no taper effect is used.
-     * Default: 1.0
-     */
-    @JsProperty
-    public Property taperPower;
+  /**
+   * A Property specifying the Color of the line. Default: {@link Color#WHITE()}
+   */
+  @JsProperty
+  public Property color;
+  /**
+   * A numeric Property specifying the strength of the glow, as a percentage of
+   * the total line width. Default: 0.25
+   */
+  @JsProperty
+  public Property glowPower;
+  /**
+   * A numeric Property specifying the strength of the tapering effect, as a
+   * percentage of the total line length. If 1.0 or higher, no taper effect is
+   * used. Default: 1.0
+   */
+  @JsProperty
+  public Property taperPower;
 
-    /**
-     * A {@link MaterialProperty} that maps to polyline glow {@link org.cesiumjs.cs.scene.Material} uniforms.
-     */
-    @JsConstructor
-    public PolylineGlowMaterialProperty() {}
+  /**
+   * A {@link MaterialProperty} that maps to polyline glow
+   * {@link org.cesiumjs.cs.scene.Material} uniforms.
+   */
+  @JsConstructor
+  public PolylineGlowMaterialProperty() {
+  }
 
-    /**
-     * Simple method for create PolylineGlowMaterialProperty by color and glowPower.
-     * @param color A Property specifying the Color of the line.
-     * @param glowPower A numeric Property specifying the strength of the glow, as a percentage of the total line width.
-     * @return PolylineGlowMaterialProperty
-     */
-    @JsOverlay
-    public static PolylineGlowMaterialProperty create(Color color, double glowPower) {
-        PolylineGlowMaterialPropertyOptions options = new PolylineGlowMaterialPropertyOptions();
-        options.color = new ConstantProperty<>(color);
-        options.glowPower = new ConstantProperty<>(glowPower);
-        return new PolylineGlowMaterialProperty(options);
-    }
+  /**
+   * Simple method for create PolylineGlowMaterialProperty by color and glowPower.
+   * 
+   * @param color     A Property specifying the Color of the line.
+   * @param glowPower A numeric Property specifying the strength of the glow, as a
+   *                  percentage of the total line width.
+   * @return PolylineGlowMaterialProperty
+   */
+  @JsOverlay
+  public static PolylineGlowMaterialProperty create(Color color, double glowPower) {
+    PolylineGlowMaterialPropertyOptions options = new PolylineGlowMaterialPropertyOptions();
+    options.color = new ConstantProperty<>(color);
+    options.glowPower = new ConstantProperty<>(glowPower);
+    return new PolylineGlowMaterialProperty(options);
+  }
 
-    /**
-     * A {@link MaterialProperty} that maps to polyline glow {@link org.cesiumjs.cs.scene.Material} uniforms.
-     * @param options Options
-     */
-    @JsConstructor
-    public PolylineGlowMaterialProperty(PolylineGlowMaterialPropertyOptions options) {}
+  /**
+   * A {@link MaterialProperty} that maps to polyline glow
+   * {@link org.cesiumjs.cs.scene.Material} uniforms.
+   * 
+   * @param options Options
+   */
+  @JsConstructor
+  public PolylineGlowMaterialProperty(PolylineGlowMaterialPropertyOptions options) {
+  }
 }

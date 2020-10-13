@@ -21,24 +21,28 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * A ParticleEmitter that emits particles within a sphere. Particles will be positioned randomly within the sphere
- * and have initial velocities emanating from the center of the sphere.
+ * A ParticleEmitter that emits particles within a sphere. Particles will be
+ * positioned randomly within the sphere and have initial velocities emanating
+ * from the center of the sphere.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "SphereEmitter")
 public class SphereEmitter implements ParticleEmitter {
-    /**
-     * The radius of the sphere in meters.
-     * Default: 1.0
-     */
-    @JsProperty
-    public double radius;
-    /**
-     * A ParticleEmitter that emits particles within a sphere. Particles will be positioned randomly within
-     * the sphere and have initial velocities emanating from the center of the sphere.
-     * @param radius The radius of the sphere in meters. Default: 1
-     */
-    @JsConstructor
-    public SphereEmitter(double radius) {}
+  /**
+   * The radius of the sphere in meters. Default: 1.0
+   */
+  @JsProperty
+  public double radius;
+
+  /**
+   * A ParticleEmitter that emits particles within a sphere. Particles will be
+   * positioned randomly within the sphere and have initial velocities emanating
+   * from the center of the sphere.
+   * 
+   * @param radius The radius of the sphere in meters. Default: 1
+   */
+  @JsConstructor
+  public SphereEmitter(double radius) {
+  }
 }

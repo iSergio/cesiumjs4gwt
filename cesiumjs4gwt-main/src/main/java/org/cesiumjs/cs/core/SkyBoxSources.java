@@ -21,20 +21,20 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class SkyBoxSources<T> {
-    @JsProperty
-    public T positiveX;
-    @JsProperty
-    public T negativeX;
-    @JsProperty
-    public T positiveY;
-    @JsProperty
-    public T negativeY;
-    @JsProperty
-    public T positiveZ;
-    @JsProperty
-    public T negativeZ;
+  @JsProperty
+  public T positiveX;
+  @JsProperty
+  public T negativeX;
+  @JsProperty
+  public T positiveY;
+  @JsProperty
+  public T negativeY;
+  @JsProperty
+  public T positiveZ;
+  @JsProperty
+  public T negativeZ;
 }

@@ -16,37 +16,38 @@
 
 package org.cesiumjs.cs.core.providers.options;
 
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Credit;
 import org.cesiumjs.cs.core.Ellipsoid;
 
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
+
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class VRTheWorldTerrainProviderOptions {
-    /**
-     * The URL of the VR-TheWorld TileMap.
-     */
-    @JsProperty
-    public String url;
-    /**
-     * A proxy to use for requests. This object is expected to have a getURL function which returns the proxied URL, if needed.
-     * Optional
-     */
-    @JsProperty
-    public Object proxy;
-    /**
-     * The ellipsoid. If this parameter is not specified, the WGS84 ellipsoid is used.
-     * Default: {@link Ellipsoid#WGS84()}
-     */
-    @JsProperty
-    public Ellipsoid ellipsoid;
-    /**
-     * A credit for the data source, which is displayed on the canvas.
-     */
-    @JsProperty
-    public Credit credit;
+  /**
+   * The URL of the VR-TheWorld TileMap.
+   */
+  @JsProperty
+  public String url;
+  /**
+   * A proxy to use for requests. This object is expected to have a getURL
+   * function which returns the proxied URL, if needed. Optional
+   */
+  @JsProperty
+  public Object proxy;
+  /**
+   * The ellipsoid. If this parameter is not specified, the WGS84 ellipsoid is
+   * used. Default: {@link Ellipsoid#WGS84()}
+   */
+  @JsProperty
+  public Ellipsoid ellipsoid;
+  /**
+   * A credit for the data source, which is displayed on the canvas.
+   */
+  @JsProperty
+  public Credit credit;
 }

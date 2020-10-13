@@ -16,42 +16,45 @@
 
 package org.cesiumjs.cs.datasources.properties.options;
 
+import org.cesiumjs.cs.core.Color;
+import org.cesiumjs.cs.datasources.properties.Property;
+
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.Color;
-import org.cesiumjs.cs.datasources.properties.Property;
 
 /**
- * Options for {@link org.cesiumjs.cs.datasources.properties.PolylineOutlineMaterialProperty}.
+ * Options for
+ * {@link org.cesiumjs.cs.datasources.properties.PolylineOutlineMaterialProperty}.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class PolylineOutlineMaterialPropertyOptions {
-    /**
-     * A Property specifying the Color of the line.
-     * Default: {@link Color#WHITE()}
-     */
-    @JsProperty
-    public Property color;
-    /**
-     * A Property specifying the Color of the outline.
-     * Default: {@link Color#BLACK()}
-     */
-    @JsProperty
-    public Property outlineColor;
-    /**
-     * A numeric Property specifying the width of the outline, in pixels.
-     * Default: 1.0
-     */
-    @JsProperty
-    public Property outlineWidth;
+  /**
+   * A Property specifying the Color of the line. Default: {@link Color#WHITE()}
+   */
+  @JsProperty
+  public Property color;
+  /**
+   * A Property specifying the Color of the outline. Default:
+   * {@link Color#BLACK()}
+   */
+  @JsProperty
+  public Property outlineColor;
+  /**
+   * A numeric Property specifying the width of the outline, in pixels. Default:
+   * 1.0
+   */
+  @JsProperty
+  public Property outlineWidth;
 
-    /**
-     * Options for {@link org.cesiumjs.cs.datasources.properties.PolylineOutlineMaterialProperty}.
-     */
-    @JsConstructor
-    public PolylineOutlineMaterialPropertyOptions() {}
+  /**
+   * Options for
+   * {@link org.cesiumjs.cs.datasources.properties.PolylineOutlineMaterialProperty}.
+   */
+  @JsConstructor
+  public PolylineOutlineMaterialPropertyOptions() {
+  }
 }

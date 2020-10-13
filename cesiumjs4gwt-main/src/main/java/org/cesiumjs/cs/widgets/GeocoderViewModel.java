@@ -16,106 +16,122 @@
 
 package org.cesiumjs.cs.widgets;
 
-import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.scene.Scene;
 import org.cesiumjs.cs.widgets.options.GeocoderViewModelOptions;
 
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsFunction;
+import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsOverlay;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
+
 /**
  * The view model for the {@link Geocoder} widget.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "GeocoderViewModel")
 public class GeocoderViewModel {
-    /**
-     * True if the geocoder should query as the user types to autocomplete
-     * Default: true
-     */
-    @JsProperty
-    public boolean autoComplete;
-    /**
-     * Gets the event triggered on flight completion.
-     */
-    @JsProperty
-    public Event complete;
-    /**
-     * Gets or sets the the duration of the camera flight in seconds. A value of zero causes the camera to instantly
-     * switch to the geocoding location. The duration will be computed based on the distance when undefined.
-     * Default: undefined
-     */
-    @JsProperty
-    public double flightDuration;
-    /**
-     * Gets a value indicating whether a search is currently in progress. This property is observable.
-     */
-    @JsProperty
-    public boolean isSearchInProgress;
-    /**
-     * Gets or sets a value indicating if this instance should always show its text input field.
-     * Default: false
-     */
-    @JsProperty
-    public boolean keepExpanded;
-    /**
-     * Gets the scene to control.
-     */
-    @JsProperty
-    public Scene scene;
-    /**
-     * Gets the Command that is executed when the button is clicked.
-     */
-    @JsProperty
-    public Command search;
-    /**
-     * Gets or sets the text to search for. The text can be an address, or longitude, latitude, and optional height,
-     * where longitude and latitude are in degrees and height is in meters.
-     */
-    @JsProperty
-    public String searchText;
-    /**
-     * Gets the currently selected geocoder search suggestion
-     */
-    @JsProperty
-    public Object selectedSuggestion;
-    /**
-     * Gets the list of geocoder search suggestions
-     */
-    @JsProperty
-    public Object[] suggestions;
+  /**
+   * True if the geocoder should query as the user types to autocomplete Default:
+   * true
+   */
+  @JsProperty
+  public boolean autoComplete;
+  /**
+   * Gets the event triggered on flight completion.
+   */
+  @JsProperty
+  public Event complete;
+  /**
+   * Gets or sets the the duration of the camera flight in seconds. A value of
+   * zero causes the camera to instantly switch to the geocoding location. The
+   * duration will be computed based on the distance when undefined. Default:
+   * undefined
+   */
+  @JsProperty
+  public double flightDuration;
+  /**
+   * Gets a value indicating whether a search is currently in progress. This
+   * property is observable.
+   */
+  @JsProperty
+  public boolean isSearchInProgress;
+  /**
+   * Gets or sets a value indicating if this instance should always show its text
+   * input field. Default: false
+   */
+  @JsProperty
+  public boolean keepExpanded;
+  /**
+   * Gets the scene to control.
+   */
+  @JsProperty
+  public Scene scene;
+  /**
+   * Gets the Command that is executed when the button is clicked.
+   */
+  @JsProperty
+  public Command search;
+  /**
+   * Gets or sets the text to search for. The text can be an address, or
+   * longitude, latitude, and optional height, where longitude and latitude are in
+   * degrees and height is in meters.
+   */
+  @JsProperty
+  public String searchText;
+  /**
+   * Gets the currently selected geocoder search suggestion
+   */
+  @JsProperty
+  public Object selectedSuggestion;
+  /**
+   * Gets the list of geocoder search suggestions
+   */
+  @JsProperty
+  public Object[] suggestions;
 
-    @JsConstructor
-    private GeocoderViewModel() {}
+  @JsConstructor
+  private GeocoderViewModel() {
+  }
 
-    @JsConstructor
-    public GeocoderViewModel(GeocoderViewModelOptions options) {}
+  @JsConstructor
+  public GeocoderViewModel(GeocoderViewModelOptions options) {
+  }
 
-    /**
-     * Fast create instance of {@link GeocoderViewModel} by mandatory params
-     * @param scene The Scene instance to use.
-     * @return {@link GeocoderViewModel} instance
-     */
-    @JsOverlay
-    public static GeocoderViewModel create(Scene scene) {
-        return new GeocoderViewModel(GeocoderViewModelOptions.create(scene));
-    }
+  /**
+   * Fast create instance of {@link GeocoderViewModel} by mandatory params
+   * 
+   * @param scene The Scene instance to use.
+   * @return {@link GeocoderViewModel} instance
+   */
+  @JsOverlay
+  public static GeocoderViewModel create(Scene scene) {
+    return new GeocoderViewModel(GeocoderViewModelOptions.create(scene));
+  }
 
-    /**
-     * Destroys the widget. Should be called if permanently removing the widget from layout.
-     */
-    @JsMethod
-    public native void destroy();
+  /**
+   * Destroys the widget. Should be called if permanently removing the widget from
+   * layout.
+   */
+  @JsMethod
+  public native void destroy();
 
+  /**
+   * A function that handles the result of a successful geocode.
+   */
+  @JsFunction
+  public interface DestinationFoundFunction {
     /**
      * A function that handles the result of a successful geocode.
+     * 
+     * @param viewModel   The view model.
+     * @param destination {@link org.cesiumjs.cs.core.Cartesian3} |
+     *                    {@link org.cesiumjs.cs.core.Rectangle} The destination
+     *                    result of the geocode.
      */
-    @JsFunction
-    public interface DestinationFoundFunction {
-        /**
-         * A function that handles the result of a successful geocode.
-         * @param viewModel The view model.
-         * @param destination {@link org.cesiumjs.cs.core.Cartesian3} | {@link org.cesiumjs.cs.core.Rectangle} The destination result of the geocode.
-         */
-        void function(GeocoderViewModel viewModel, Object destination);
-    }
+    void function(GeocoderViewModel viewModel, Object destination);
+  }
 }

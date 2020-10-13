@@ -28,25 +28,22 @@ import com.google.gwt.event.shared.SimpleEventBus;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class ShowcaseEventBusImpl implements ShowcaseEventBus {
-    
-    private SimpleEventBus eventBus = new SimpleEventBus();
-    
-    public <T extends EventHandler> HandlerRegistration addHandler(Type<T> type,
-            T handler) {
-        return eventBus.addHandler(type, handler);
-    }
-    
-    public <T extends EventHandler> HandlerRegistration addHandlerToSource(
-            Type<T> type,
-            Object source, T handler) {
-        return eventBus.addHandlerToSource(type, source, handler);
-    }
-    
-    public void fireEvent(GwtEvent<?> event) {
-        eventBus.fireEvent(event);
-    }
-    
-    public void fireEventFromSource(GwtEvent<?> event, Object source) {
-        eventBus.fireEventFromSource(event, source);
-    }
+
+  private SimpleEventBus eventBus = new SimpleEventBus();
+
+  public <T extends EventHandler> HandlerRegistration addHandler(Type<T> type, T handler) {
+    return eventBus.addHandler(type, handler);
+  }
+
+  public <T extends EventHandler> HandlerRegistration addHandlerToSource(Type<T> type, Object source, T handler) {
+    return eventBus.addHandlerToSource(type, source, handler);
+  }
+
+  public void fireEvent(GwtEvent<?> event) {
+    eventBus.fireEvent(event);
+  }
+
+  public void fireEventFromSource(GwtEvent<?> event, Object source) {
+    eventBus.fireEventFromSource(event, source);
+  }
 }

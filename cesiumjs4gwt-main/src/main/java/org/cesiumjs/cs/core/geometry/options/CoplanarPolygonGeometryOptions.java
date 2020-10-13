@@ -16,40 +16,45 @@
 
 package org.cesiumjs.cs.core.geometry.options;
 
-import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.PolygonHierarchy;
-import org.cesiumjs.cs.core.VertexFormat;
+
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsOverlay;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class CoplanarPolygonGeometryOptions {
-    /**
-     * A polygon hierarchy that can include holes.
-     */
-    @JsProperty
-    public PolygonHierarchy polygonHierarchy;
-    /**
-     * The rotation of the texture coordinates, in radians. A positive rotation is counter-clockwise.
-     * Default: 0.0
-     */
-    @JsProperty
-    public double stRotation;
-    /**
-     * The vertex attributes to be computed.
-     * Default: {@link org.cesiumjs.cs.core.VertexFormat#DEFAULT()}
-     */
-    @JsProperty
-    public Number vertexFormat;
+  /**
+   * A polygon hierarchy that can include holes.
+   */
+  @JsProperty
+  public PolygonHierarchy polygonHierarchy;
+  /**
+   * The rotation of the texture coordinates, in radians. A positive rotation is
+   * counter-clockwise. Default: 0.0
+   */
+  @JsProperty
+  public double stRotation;
+  /**
+   * The vertex attributes to be computed. Default:
+   * {@link org.cesiumjs.cs.core.VertexFormat#DEFAULT()}
+   */
+  @JsProperty
+  public Number vertexFormat;
 
-    @JsConstructor
-    private CoplanarPolygonGeometryOptions() {}
+  @JsConstructor
+  private CoplanarPolygonGeometryOptions() {
+  }
 
-    @JsOverlay
-    public static CoplanarPolygonGeometryOptions create(PolygonHierarchy polygonHierarchy) {
-        CoplanarPolygonGeometryOptions options = new CoplanarPolygonGeometryOptions();
-        options.polygonHierarchy = polygonHierarchy;
-        return options;
-    }
+  @JsOverlay
+  public static CoplanarPolygonGeometryOptions create(PolygonHierarchy polygonHierarchy) {
+    CoplanarPolygonGeometryOptions options = new CoplanarPolygonGeometryOptions();
+    options.polygonHierarchy = polygonHierarchy;
+    return options;
+  }
 }

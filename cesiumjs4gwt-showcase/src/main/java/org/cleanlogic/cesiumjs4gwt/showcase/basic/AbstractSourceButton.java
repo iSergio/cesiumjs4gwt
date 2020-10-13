@@ -18,9 +18,14 @@ package org.cleanlogic.cesiumjs4gwt.showcase.basic;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.http.client.*;
+import com.google.gwt.http.client.Request;
+import com.google.gwt.http.client.RequestBuilder;
+import com.google.gwt.http.client.RequestCallback;
+import com.google.gwt.http.client.RequestException;
+import com.google.gwt.http.client.Response;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+
 import org.cleanlogic.cesiumjs4gwt.showcase.components.ShowcaseSearchPanel;
 
 /**
@@ -30,56 +35,55 @@ import org.cleanlogic.cesiumjs4gwt.showcase.components.ShowcaseSearchPanel;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class AbstractSourceButton extends Composite implements
-        ClickHandler {
+public abstract class AbstractSourceButton extends Composite implements ClickHandler {
 
-    protected Button button;
-    private String sourceCodeURL;
+  protected Button button;
+  private String sourceCodeURL;
 
-    public AbstractSourceButton(String source) {
-        this.button = new Button(ShowcaseSearchPanel.I18N.viewSource(source), this);
+  public AbstractSourceButton(String source) {
+    this.button = new Button(ShowcaseSearchPanel.I18N.viewSource(source), this);
 
-        super.initWidget(button);
-    }
+    super.initWidget(button);
+  }
 
-    /**
-     * @param sourceCodeURL the sourceCodeURL to set
-     */
-    public void setSourceCodeURL(String sourceCodeURL) {
-        String[] sourceCodeURLParts = sourceCodeURL.split("/");
-        button.setText(button.getText() + " - " + sourceCodeURLParts[sourceCodeURLParts.length - 1].replace(".txt", ""));
-        this.sourceCodeURL = sourceCodeURL;
-    }
+  /**
+   * @param sourceCodeURL the sourceCodeURL to set
+   */
+  public void setSourceCodeURL(String sourceCodeURL) {
+    String[] sourceCodeURLParts = sourceCodeURL.split("/");
+    button.setText(button.getText() + " - " + sourceCodeURLParts[sourceCodeURLParts.length - 1].replace(".txt", ""));
+    this.sourceCodeURL = sourceCodeURL;
+  }
 
-    /*
-     * (non-Javadoc)
-     * @see com.google.gwt.event.dom.client.ClickHandler#onClick(com.google.gwt.event.dom.client.ClickEvent)
-     */
-    public void onClick(ClickEvent event) {
-        RequestBuilder reqBuilder = new RequestBuilder(RequestBuilder.GET,
-                this.sourceCodeURL);
-        try {
-            reqBuilder.sendRequest("", new RequestCallback() {
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.google.gwt.event.dom.client.ClickHandler#onClick(com.google.gwt.event.dom
+   * .client.ClickEvent)
+   */
+  public void onClick(ClickEvent event) {
+    RequestBuilder reqBuilder = new RequestBuilder(RequestBuilder.GET, this.sourceCodeURL);
+    try {
+      reqBuilder.sendRequest("", new RequestCallback() {
 
-                public void onResponseReceived(Request request,
-                        Response response) {
-                    showSourceCode(response.getText());
-                }
-
-                public void onError(Request request, Throwable exception) {
-                }
-
-            });
-        } catch (RequestException ex) {
+        public void onResponseReceived(Request request, Response response) {
+          showSourceCode(response.getText());
         }
 
+        public void onError(Request request, Throwable exception) {
+        }
 
+      });
+    } catch (RequestException ex) {
     }
 
-    protected native void doFormat() /*-{
-     $wnd.SyntaxHighlighter.highlight();
-     }-*/;
+  }
 
-    protected abstract void showSourceCode(String sourceCode);
+  protected native void doFormat() /*-{
+                                   $wnd.SyntaxHighlighter.highlight();
+                                   }-*/;
+
+  protected abstract void showSourceCode(String sourceCode);
 
 }

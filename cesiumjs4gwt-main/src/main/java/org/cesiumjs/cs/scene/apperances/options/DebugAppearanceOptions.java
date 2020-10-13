@@ -22,45 +22,47 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class DebugAppearanceOptions {
-    /**
-     * The name of the attribute to visualize.
-     */
-    @JsProperty
-    public String attributeName;
-    /**
-     * Boolean that determines whether this attribute is a per-instance geometry attribute.
-     */
-    @JsProperty
-    public boolean perInstanceAttribute;
-    /**
-     * The GLSL datatype of the attribute. Supported datatypes are float, vec2, vec3, and vec4.
-     * Default: vec3
-     */
-    @JsProperty
-    public String glslDatatype;
-    /**
-     * Optional GLSL vertex shader source to override the default vertex shader.
-     */
-    @JsProperty
-    public String vertexShaderSource;
-    /**
-     * Optional GLSL fragment shader source to override the default fragment shader.
-     */
-    @JsProperty
-    public String fragmentShaderSource;
-    /**
-     * Optional render state to override the default render state.
-     */
-    @JsProperty
-    public Object renderState;
+  /**
+   * The name of the attribute to visualize.
+   */
+  @JsProperty
+  public String attributeName;
+  /**
+   * Boolean that determines whether this attribute is a per-instance geometry
+   * attribute.
+   */
+  @JsProperty
+  public boolean perInstanceAttribute;
+  /**
+   * The GLSL datatype of the attribute. Supported datatypes are float, vec2,
+   * vec3, and vec4. Default: vec3
+   */
+  @JsProperty
+  public String glslDatatype;
+  /**
+   * Optional GLSL vertex shader source to override the default vertex shader.
+   */
+  @JsProperty
+  public String vertexShaderSource;
+  /**
+   * Optional GLSL fragment shader source to override the default fragment shader.
+   */
+  @JsProperty
+  public String fragmentShaderSource;
+  /**
+   * Optional render state to override the default render state.
+   */
+  @JsProperty
+  public Object renderState;
 
-    /**
-     * Options for {@link org.cesiumjs.cs.scene.apperances.DebugAppearance}
-     */
-    @JsConstructor
-    public DebugAppearanceOptions() {}
+  /**
+   * Options for {@link org.cesiumjs.cs.scene.apperances.DebugAppearance}
+   */
+  @JsConstructor
+  public DebugAppearanceOptions() {
+  }
 }

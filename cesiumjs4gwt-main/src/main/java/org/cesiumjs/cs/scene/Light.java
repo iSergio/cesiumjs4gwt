@@ -22,24 +22,27 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * A light source. This type describes an interface and is not intended to be instantiated directly.
+ * A light source. This type describes an interface and is not intended to be
+ * instantiated directly.
  */
 @JsType(isNative = true, namespace = "Cesium", name = "Light")
- public class Light {
-     /**
-      * The color of the light.
-      */
-     @JsProperty
-     public Color color;
-     /**
-      * The intensity of the light.
-      */
-     @JsProperty
-     public Number intensity;
+public class Light {
+  /**
+   * The color of the light.
+   */
+  @JsProperty
+  public Color color;
+  /**
+   * The intensity of the light.
+   */
+  @JsProperty
+  public Number intensity;
 
-     /**
-      * A light source. This type describes an interface and is not intended to be instantiated directly.
-      */
-     @JsConstructor
-     public Light() {}
- }
+  /**
+   * A light source. This type describes an interface and is not intended to be
+   * instantiated directly.
+   */
+  @JsConstructor
+  public Light() {
+  }
+}

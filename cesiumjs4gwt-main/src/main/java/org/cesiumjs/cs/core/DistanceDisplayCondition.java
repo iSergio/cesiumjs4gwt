@@ -22,72 +22,82 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "DistanceDisplayCondition")
 public class DistanceDisplayCondition {
-    /**
-     * The largest distance in the interval where the object is visible.
-     * Default: Double#MAX_VALUE
-     */
-    @JsProperty
-    public double far;
-    /**
-     * The smallest distance in the interval where the object is visible.
-     * Default:  0.0
-     */
-    @JsProperty
-    public double near;
+  /**
+   * The largest distance in the interval where the object is visible. Default:
+   * Double#MAX_VALUE
+   */
+  @JsProperty
+  public double far;
+  /**
+   * The smallest distance in the interval where the object is visible. Default:
+   * 0.0
+   */
+  @JsProperty
+  public double near;
 
-    @JsConstructor
-    public DistanceDisplayCondition() {}
+  @JsConstructor
+  public DistanceDisplayCondition() {
+  }
 
-    /**
-     * Determines visibility based on the distance to the camera.
-     * @param near The smallest distance in the interval where the object is visible. Default: 0.0.
-     * @param far The largest distance in the interval where the object is visible. Default: {@link Double#MAX_VALUE}
-     */
-    @JsConstructor
-    public DistanceDisplayCondition(double near, double far) {}
+  /**
+   * Determines visibility based on the distance to the camera.
+   * 
+   * @param near The smallest distance in the interval where the object is
+   *             visible. Default: 0.0.
+   * @param far  The largest distance in the interval where the object is visible.
+   *             Default: {@link Double#MAX_VALUE}
+   */
+  @JsConstructor
+  public DistanceDisplayCondition(double near, double far) {
+  }
 
-    /**
-     * Duplicates a distance display condition instance.
-     * @param value The distance display condition to duplicate.
-     * @param result The result onto which to store the result.
-     * @return The duplicated instance.
-     */
-    @JsMethod
-    public static native DistanceDisplayCondition clone(DistanceDisplayCondition value, DistanceDisplayCondition result);
+  /**
+   * Duplicates a distance display condition instance.
+   * 
+   * @param value  The distance display condition to duplicate.
+   * @param result The result onto which to store the result.
+   * @return The duplicated instance.
+   */
+  @JsMethod
+  public static native DistanceDisplayCondition clone(DistanceDisplayCondition value, DistanceDisplayCondition result);
 
-    /**
-     * Determines if two distance display conditions are equal.
-     * @param left A distance display condition.
-     * @param right Another distance display condition.
-     * @return Whether the two distance display conditions are equal.
-     */
-    @JsMethod
-    public static native boolean equals(DistanceDisplayCondition left, DistanceDisplayCondition right);
+  /**
+   * Determines if two distance display conditions are equal.
+   * 
+   * @param left  A distance display condition.
+   * @param right Another distance display condition.
+   * @return Whether the two distance display conditions are equal.
+   */
+  @JsMethod
+  public static native boolean equals(DistanceDisplayCondition left, DistanceDisplayCondition right);
 
-    /**
-     * Duplicates this instance.
-     * @return The duplicated instance.
-     */
-    @JsMethod
-    public native DistanceDisplayCondition clone();
+  /**
+   * Duplicates this instance.
+   * 
+   * @return The duplicated instance.
+   */
+  @JsMethod
+  public native DistanceDisplayCondition clone();
 
-    /**
-     * Duplicates this instance.
-     * @param result The result onto which to store the result.
-     * @return The duplicated instance.
-     */
-    @JsMethod
-    public native DistanceDisplayCondition clone(DistanceDisplayCondition result);
+  /**
+   * Duplicates this instance.
+   * 
+   * @param result The result onto which to store the result.
+   * @return The duplicated instance.
+   */
+  @JsMethod
+  public native DistanceDisplayCondition clone(DistanceDisplayCondition result);
 
-    /**
-     * Determines if this distance display condition is equal to another.
-     * @param other Another distance display condition.
-     * @return Whether this distance display condition is equal to the other.
-     */
-    @JsMethod
-    public native boolean equals(DistanceDisplayCondition other);
+  /**
+   * Determines if this distance display condition is equal to another.
+   * 
+   * @param other Another distance display condition.
+   * @return Whether this distance display condition is equal to the other.
+   */
+  @JsMethod
+  public native boolean equals(DistanceDisplayCondition other);
 }

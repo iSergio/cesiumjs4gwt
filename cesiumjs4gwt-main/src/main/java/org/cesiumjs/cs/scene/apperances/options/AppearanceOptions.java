@@ -16,54 +16,56 @@
 
 package org.cesiumjs.cs.scene.apperances.options;
 
+import org.cesiumjs.cs.scene.Material;
+
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.scene.Material;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class AppearanceOptions {
-    /**
-     * When true, the geometry is expected to appear translucent so Appearance#renderState has alpha blending enabled.
-     * Default: true
-     */
-    @JsProperty
-    public boolean translucent;
-    /**
-     * When true, the geometry is expected to be closed so Appearance#renderState has backface culling enabled.
-     * Default: false
-     */
-    @JsProperty
-    public boolean closed;
-    /**
-     * The material used to determine the fragment color.
-     * Default: {@link Material#ColorType()}
-     */
-    @JsProperty
-    public Material material;
-    /**
-     * Optional GLSL vertex shader source to override the default vertex shader.
-     */
-    @JsProperty
-    public String vertexShaderSource;
-    /**
-     * Optional GLSL fragment shader source to override the default fragment shader.
-     */
-    @JsProperty
-    public String fragmentShaderSource;
-    /**
-     * Optional render state to override the default render state.
-     */
-    @JsProperty
-    public Object renderState;
+  /**
+   * When true, the geometry is expected to appear translucent so
+   * Appearance#renderState has alpha blending enabled. Default: true
+   */
+  @JsProperty
+  public boolean translucent;
+  /**
+   * When true, the geometry is expected to be closed so Appearance#renderState
+   * has backface culling enabled. Default: false
+   */
+  @JsProperty
+  public boolean closed;
+  /**
+   * The material used to determine the fragment color. Default:
+   * {@link Material#ColorType()}
+   */
+  @JsProperty
+  public Material material;
+  /**
+   * Optional GLSL vertex shader source to override the default vertex shader.
+   */
+  @JsProperty
+  public String vertexShaderSource;
+  /**
+   * Optional GLSL fragment shader source to override the default fragment shader.
+   */
+  @JsProperty
+  public String fragmentShaderSource;
+  /**
+   * Optional render state to override the default render state.
+   */
+  @JsProperty
+  public Object renderState;
 
-    /**
-     * Options for Apperance
-     */
-    @JsConstructor
-    public AppearanceOptions() {}
+  /**
+   * Options for Apperance
+   */
+  @JsConstructor
+  public AppearanceOptions() {
+  }
 }

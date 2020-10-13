@@ -16,33 +16,34 @@
 
 package org.cesiumjs.cs.core.geometry.options;
 
+import org.cesiumjs.cs.core.VertexFormat;
+
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.VertexFormat;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name =  "Object")
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class CircleGeometryOptions extends CircleOutlineGeometryOptions {
-    /**
-     * The vertex attributes to be computed.
-     * Default: {@link VertexFormat#DEFAULT()}
-     */
-    @JsProperty
-    public VertexFormat vertexFormat;
-    /**
-     * The rotation of the texture coordinates, in radians. A positive rotation is counter-clockwise.
-     * Default: 0.0
-     */
-    @JsProperty
-    public double stRotation;
+  /**
+   * The vertex attributes to be computed. Default: {@link VertexFormat#DEFAULT()}
+   */
+  @JsProperty
+  public VertexFormat vertexFormat;
+  /**
+   * The rotation of the texture coordinates, in radians. A positive rotation is
+   * counter-clockwise. Default: 0.0
+   */
+  @JsProperty
+  public double stRotation;
 
-    /**
-     * Options for {@link org.cesiumjs.cs.core.geometry.CircleGeometry}
-     */
-    @JsConstructor
-    public CircleGeometryOptions() {}
+  /**
+   * Options for {@link org.cesiumjs.cs.core.geometry.CircleGeometry}
+   */
+  @JsConstructor
+  public CircleGeometryOptions() {
+  }
 }

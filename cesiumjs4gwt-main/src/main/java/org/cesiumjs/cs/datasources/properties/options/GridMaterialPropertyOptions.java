@@ -16,49 +16,50 @@
 
 package org.cesiumjs.cs.datasources.properties.options;
 
+import org.cesiumjs.cs.core.Color;
+import org.cesiumjs.cs.datasources.properties.Property;
+
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.Color;
-import org.cesiumjs.cs.datasources.properties.Property;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class GridMaterialPropertyOptions {
-    /**
-     * A Property specifying the grid Color.
-     * Default: {@link Color#WHITE()}
-     */
-    @JsProperty
-    public Property color;
-    /**
-     * A numeric Property specifying cell alpha values.
-     * Default: 0.1
-     */
-    @JsProperty
-    public double cellAlpha;
-    /**
-     * A Cartesian2 Property specifying the number of grid lines along each axis.
-     * Default: new Cartesian2(8, 8);
-     */
-    @JsProperty
-    public Property lineCount;
-    /**
-     * A Cartesian2 Property specifying the thickness of grid lines along each axis.
-     * Default: A Cartesian2 Property specifying the thickness of grid lines along each axis.
-     */
-    @JsProperty
-    public Property lineThickness;
-    /**
-     * A Cartesian2 Property specifying starting offset of grid lines along each axis.
-     * Default: new Cartesian2(0.0, 0.0)
-     */
-    @JsProperty
-    public Property lineOffset;
+  /**
+   * A Property specifying the grid Color. Default: {@link Color#WHITE()}
+   */
+  @JsProperty
+  public Property color;
+  /**
+   * A numeric Property specifying cell alpha values. Default: 0.1
+   */
+  @JsProperty
+  public double cellAlpha;
+  /**
+   * A Cartesian2 Property specifying the number of grid lines along each axis.
+   * Default: new Cartesian2(8, 8);
+   */
+  @JsProperty
+  public Property lineCount;
+  /**
+   * A Cartesian2 Property specifying the thickness of grid lines along each axis.
+   * Default: A Cartesian2 Property specifying the thickness of grid lines along
+   * each axis.
+   */
+  @JsProperty
+  public Property lineThickness;
+  /**
+   * A Cartesian2 Property specifying starting offset of grid lines along each
+   * axis. Default: new Cartesian2(0.0, 0.0)
+   */
+  @JsProperty
+  public Property lineOffset;
 
-    @JsConstructor
-    public GridMaterialPropertyOptions() {}
+  @JsConstructor
+  public GridMaterialPropertyOptions() {
+  }
 }

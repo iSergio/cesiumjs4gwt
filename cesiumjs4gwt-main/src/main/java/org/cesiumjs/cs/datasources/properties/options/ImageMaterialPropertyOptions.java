@@ -16,41 +16,44 @@
 
 package org.cesiumjs.cs.datasources.properties.options;
 
+import org.cesiumjs.cs.datasources.properties.Property;
+
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.datasources.properties.Property;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class ImageMaterialPropertyOptions {
-    /**
-     * A Property specifying the Image, URL, Canvas, or Video.
-     */
-    //TODO: Check
-    @JsProperty
-    public Property image;
-    /**
-     * A Cartesian2 Property specifying the number of times the imagery repeats in each direction.
-     * Default: new Cartesian2(1.0, 1.0)
-     */
-    @JsProperty
-    public Property repeat;
-    /**
-     * The color applied to the imagery
-     * Default: {@link org.cesiumjs.cs.core.Color#WHITE()}
-     */
-    @JsProperty
-    public Property color;
-    /**
-     * Set to true when the imagery has transparency (for example, when a png has transparent sections)
-     */
-    @JsProperty
-    public boolean transparent;
+  /**
+   * A Property specifying the Image, URL, Canvas, or Video.
+   */
+  // TODO: Check
+  @JsProperty
+  public Property image;
+  /**
+   * A Cartesian2 Property specifying the number of times the imagery repeats in
+   * each direction. Default: new Cartesian2(1.0, 1.0)
+   */
+  @JsProperty
+  public Property repeat;
+  /**
+   * The color applied to the imagery Default:
+   * {@link org.cesiumjs.cs.core.Color#WHITE()}
+   */
+  @JsProperty
+  public Property color;
+  /**
+   * Set to true when the imagery has transparency (for example, when a png has
+   * transparent sections)
+   */
+  @JsProperty
+  public boolean transparent;
 
-    @JsConstructor
-    public ImageMaterialPropertyOptions() {}
+  @JsConstructor
+  public ImageMaterialPropertyOptions() {
+  }
 }

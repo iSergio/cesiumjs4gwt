@@ -16,25 +16,30 @@
 
 package org.cesiumjs.cs.core.projection;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Ellipsoid;
 
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsType;
+
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "GeographicProjection")
 public class GeographicProjection extends MapProjection {
-    @JsConstructor
-    public GeographicProjection() {}
+  @JsConstructor
+  public GeographicProjection() {
+  }
 
-    /**
-     * A simple map projection where longitude and latitude are linearly mapped to X and Y by multiplying them by the
-     * {@link Ellipsoid#maximumRadius}. This projection is commonly known as geographic, equirectangular,
-     * equidistant cylindrical, or plate carrée. It is also known as EPSG:4326.
-     * @param ellipsoid The ellipsoid. Default: {@link Ellipsoid#WGS84()}
-     * @see WebMercatorProjection
-     */
-    @JsConstructor
-    public GeographicProjection(Ellipsoid ellipsoid) {}
+  /**
+   * A simple map projection where longitude and latitude are linearly mapped to X
+   * and Y by multiplying them by the {@link Ellipsoid#maximumRadius}. This
+   * projection is commonly known as geographic, equirectangular, equidistant
+   * cylindrical, or plate carrée. It is also known as EPSG:4326.
+   * 
+   * @param ellipsoid The ellipsoid. Default: {@link Ellipsoid#WGS84()}
+   * @see WebMercatorProjection
+   */
+  @JsConstructor
+  public GeographicProjection(Ellipsoid ellipsoid) {
+  }
 }

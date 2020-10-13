@@ -22,16 +22,17 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Promise")
 public class Promise<V, E> {
-    @JsConstructor
-    public Promise(Executor<V, E> executor) {}
+  @JsConstructor
+  public Promise(Executor<V, E> executor) {
+  }
 
-    @JsMethod
-    public native Promise<V, E> then(Fulfill<V> fulfill);
+  @JsMethod
+  public native Promise<V, E> then(Fulfill<V> fulfill);
 
-    @JsMethod
-    public native Promise<V, E> then(Fulfill<V> fulfill, Reject<E> reject);
+  @JsMethod
+  public native Promise<V, E> then(Fulfill<V> fulfill, Reject<E> reject);
 }

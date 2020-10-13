@@ -19,8 +19,9 @@ package org.cesiumjs.cs.scene.providers;
 import jsinterop.annotations.JsType;
 
 /**
- * Provides imagery to be displayed on the surface of an ellipsoid.
- * This type describes an interface and is not intended to be instantiated directly.
+ * Provides imagery to be displayed on the surface of an ellipsoid. This type
+ * describes an interface and is not intended to be instantiated directly.
+ * 
  * @see ArcGisMapServerImageryProvider
  * @see SingleTileImageryProvider
  * @see BingMapsImageryProvider
@@ -28,7 +29,7 @@ import jsinterop.annotations.JsType;
  * @see MapboxImageryProvider
  * @see WebMapTileServiceImageryProvider
  * @see WebMapServiceImageryProvider
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "ImageryProvider")
 public interface ImageryProvider {

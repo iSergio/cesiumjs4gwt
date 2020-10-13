@@ -16,10 +16,12 @@
 
 package org.cleanlogic.cesiumjs4gwt.showcase.examples;
 
+import javax.inject.Inject;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.HTML;
-import org.cesiumjs.cs.Cesium;
+
 import org.cesiumjs.cs.collections.ImageryLayerCollection;
 import org.cesiumjs.cs.core.Credit;
 import org.cesiumjs.cs.scene.ImageryLayer;
@@ -35,77 +37,78 @@ import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.Slider;
 import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderEvent;
 import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderListener;
 
-import javax.inject.Inject;
-
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 public class ImageryLayersSplit extends AbstractExample {
 
-    @Inject
-    public ImageryLayersSplit(ShowcaseExampleStore store) {
-        super("Imagery Layers Split", "Use the split property to only show layers on one side of a slider.", new String[]{"Showcase", "Cesium", "3d", "Viewer", "Slider", "Split"}, store);
-    }
+  @Inject
+  public ImageryLayersSplit(ShowcaseExampleStore store) {
+    super("Imagery Layers Split", "Use the split property to only show layers on one side of a slider.",
+        new String[] { "Showcase", "Cesium", "3d", "Viewer", "Slider", "Split" }, store);
+  }
 
-    @Override
-    public void buildPanel() {
-        ViewerOptions viewerOptions = new ViewerOptions();
-        viewerOptions.imageryProvider = ArcGisMapServerImageryProvider.create("https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer");
-        viewerOptions.baseLayerPicker = false;
-        final ViewerPanel csVPanel = new ViewerPanel(viewerOptions);
+  @Override
+  public void buildPanel() {
+    ViewerOptions viewerOptions = new ViewerOptions();
+    viewerOptions.imageryProvider = ArcGisMapServerImageryProvider
+        .create("https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer");
+    viewerOptions.baseLayerPicker = false;
+    final ViewerPanel csVPanel = new ViewerPanel(viewerOptions);
 
-        ImageryLayerCollection layers = csVPanel.getViewer().imageryLayers();
-        TileMapServiceImageryProviderOptions tileMapServiceImageryProviderOptions = new TileMapServiceImageryProviderOptions();
-        tileMapServiceImageryProviderOptions.url = "https://cesiumjs.org/blackmarble";
-        tileMapServiceImageryProviderOptions.credit = Credit.create("Black Marble imagery courtesy NASA Earth Observatory");
-        tileMapServiceImageryProviderOptions.flipXY = true;
-        ImageryLayer blackMarble = layers.addImageryProvider(new TileMapServiceImageryProvider(tileMapServiceImageryProviderOptions));
-        blackMarble.splitDirection = ImagerySplitDirection.LEFT();
+    ImageryLayerCollection layers = csVPanel.getViewer().imageryLayers();
+    TileMapServiceImageryProviderOptions tileMapServiceImageryProviderOptions = new TileMapServiceImageryProviderOptions();
+    tileMapServiceImageryProviderOptions.url = "https://cesiumjs.org/blackmarble";
+    tileMapServiceImageryProviderOptions.credit = Credit.create("Black Marble imagery courtesy NASA Earth Observatory");
+    tileMapServiceImageryProviderOptions.flipXY = true;
+    ImageryLayer blackMarble = layers
+        .addImageryProvider(new TileMapServiceImageryProvider(tileMapServiceImageryProviderOptions));
+    blackMarble.splitDirection = ImagerySplitDirection.LEFT();
 
-        csVPanel.getViewer().scene().imagerySplitPosition = 0.5;
+    csVPanel.getViewer().scene().imagerySplitPosition = 0.5;
 
-        Slider slider = new Slider("Slider", 0, 100, 50);
-        slider.setStep(1);
-        slider.setWidth("100%");
-        slider.addListener(new SliderListener() {
-            @Override
-            public void onStart(SliderEvent e) {
-                //
-            }
+    Slider slider = new Slider("Slider", 0, 100, 50);
+    slider.setStep(1);
+    slider.setWidth("100%");
+    slider.addListener(new SliderListener() {
+      @Override
+      public void onStart(SliderEvent e) {
+        //
+      }
 
-            @Override
-            public boolean onSlide(SliderEvent e) {
-                Slider source = e.getSource();
-                double value = source.getValue() / 100.;
-                csVPanel.getViewer().scene().imagerySplitPosition = value;
-                return true;
-            }
+      @Override
+      public boolean onSlide(SliderEvent e) {
+        Slider source = e.getSource();
+        double value = source.getValue() / 100.;
+        csVPanel.getViewer().scene().imagerySplitPosition = value;
+        return true;
+      }
 
-            @Override
-            public void onChange(SliderEvent e) {
-                //
-            }
+      @Override
+      public void onChange(SliderEvent e) {
+        //
+      }
 
-            @Override
-            public void onStop(SliderEvent e) {
-                //
-            }
-        });
+      @Override
+      public void onStop(SliderEvent e) {
+        //
+      }
+    });
 
-        AbsolutePanel aPanel = new AbsolutePanel();
-        aPanel.add(csVPanel);
-        aPanel.add(slider, 0, 5);
+    AbsolutePanel aPanel = new AbsolutePanel();
+    aPanel.add(csVPanel);
+    aPanel.add(slider, 0, 5);
 
-        contentPanel.add(aPanel);
-        contentPanel.add(new HTML("<p>Use the split property to only show layers on one side of a slider.</p>"));
+    contentPanel.add(aPanel);
+    contentPanel.add(new HTML("<p>Use the split property to only show layers on one side of a slider.</p>"));
 
-        initWidget(contentPanel);
-    }
+    initWidget(contentPanel);
+  }
 
-    @Override
-    public String[] getSourceCodeURLs() {
-        String[] sourceCodeURLs = new String[1];
-        sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "ImageryLayersSplit.txt";
-        return sourceCodeURLs;
-    }
+  @Override
+  public String[] getSourceCodeURLs() {
+    String[] sourceCodeURLs = new String[1];
+    sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "ImageryLayersSplit.txt";
+    return sourceCodeURLs;
+  }
 }

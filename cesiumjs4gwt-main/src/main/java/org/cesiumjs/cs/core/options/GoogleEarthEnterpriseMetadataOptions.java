@@ -16,42 +16,47 @@
 
 package org.cesiumjs.cs.core.options;
 
-import jsinterop.annotations.*;
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsOverlay;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 
 /**
  * Options for {@link org.cesiumjs.cs.core.GoogleEarthEnterpriseMetadata}.
  *
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class GoogleEarthEnterpriseMetadataOptions {
-    /**
-     * The url of the Google Earth Enterprise server hosting the imagery.
-     */
-    @JsProperty
-    public String url;
-    /**
-     * A proxy to use for requests. This object is expected to have a getURL
-     * function which returns the proxied URL, if needed.
-     */
-    @JsProperty
-    public Object proxy;
+  /**
+   * The url of the Google Earth Enterprise server hosting the imagery.
+   */
+  @JsProperty
+  public String url;
+  /**
+   * A proxy to use for requests. This object is expected to have a getURL
+   * function which returns the proxied URL, if needed.
+   */
+  @JsProperty
+  public Object proxy;
 
-    @JsConstructor
-    private GoogleEarthEnterpriseMetadataOptions() {}
+  @JsConstructor
+  private GoogleEarthEnterpriseMetadataOptions() {
+  }
 
-    @JsOverlay
-    public static GoogleEarthEnterpriseMetadataOptions create(String url) {
-        GoogleEarthEnterpriseMetadataOptions options = new GoogleEarthEnterpriseMetadataOptions();
-        options.url = url;
-        return options;
-    }
+  @JsOverlay
+  public static GoogleEarthEnterpriseMetadataOptions create(String url) {
+    GoogleEarthEnterpriseMetadataOptions options = new GoogleEarthEnterpriseMetadataOptions();
+    options.url = url;
+    return options;
+  }
 
-    @JsOverlay
-    public static GoogleEarthEnterpriseMetadataOptions create(String url, Object proxy) {
-        GoogleEarthEnterpriseMetadataOptions options = new GoogleEarthEnterpriseMetadataOptions();
-        options.url = url;
-        options.proxy = proxy;
-        return options;
-    }
+  @JsOverlay
+  public static GoogleEarthEnterpriseMetadataOptions create(String url, Object proxy) {
+    GoogleEarthEnterpriseMetadataOptions options = new GoogleEarthEnterpriseMetadataOptions();
+    options.url = url;
+    options.proxy = proxy;
+    return options;
+  }
 }

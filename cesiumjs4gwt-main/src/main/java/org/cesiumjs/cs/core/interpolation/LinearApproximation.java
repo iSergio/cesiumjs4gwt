@@ -22,49 +22,67 @@ import jsinterop.annotations.JsType;
 
 /**
  * An {@link InterpolationAlgorithm} for performing linear interpolation.
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * 
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true)
 public class LinearApproximation implements InterpolationAlgorithm {
-    /**
-     * Get instance if algorithm. In this moment i don't invented more
-     * @return Instance instance. See example.
-     */
-    @JsProperty(namespace = "Cesium", name = "LinearApproximation")
-    public static native LinearApproximation instance();
+  /**
+   * Get instance if algorithm. In this moment i don't invented more
+   * 
+   * @return Instance instance. See example.
+   */
+  @JsProperty(namespace = "Cesium", name = "LinearApproximation")
+  public static native LinearApproximation instance();
 
-    /**
-     * Given the desired degree, returns the number of data points required for interpolation.
-     * @param degree The desired degree of interpolation.
-     * @return The number of required data points needed for the desired degree of interpolation.
-     */
-    @JsMethod(namespace = "Cesium.LinearApproximation")
-    public static native int getRequiredDataPoints(double degree);
+  /**
+   * Given the desired degree, returns the number of data points required for
+   * interpolation.
+   * 
+   * @param degree The desired degree of interpolation.
+   * @return The number of required data points needed for the desired degree of
+   *         interpolation.
+   */
+  @JsMethod(namespace = "Cesium.LinearApproximation")
+  public static native int getRequiredDataPoints(double degree);
 
-    /**
-     * Interpolates values using Lagrange Polynomial Approximation.
-     * @param x The independent variable for which the dependent variables will be interpolated.
-     * @param xTable The array of independent variables to use to interpolate. The values in this array must be in
-     *               increasing order and the same value must not occur twice in the array.
-     * @param yTable The array of dependent variables to use to interpolate.
-     *               For a set of three dependent values (p,q,w) at time 1 and time 2 this should be as follows: {p1, q1, w1, p2, q2, w2}.
-     * @param yStride The number of dependent variable values in yTable corresponding to each independent variable value in xTable.
-     * @return The array of interpolated values, or the result parameter if one was provided.
-     */
-    @JsMethod(namespace = "Cesium.LinearApproximation")
-    public static native double[] interpolateOrderZero(double x, double[] xTable, double[] yTable, double yStride);
+  /**
+   * Interpolates values using Lagrange Polynomial Approximation.
+   * 
+   * @param x       The independent variable for which the dependent variables
+   *                will be interpolated.
+   * @param xTable  The array of independent variables to use to interpolate. The
+   *                values in this array must be in increasing order and the same
+   *                value must not occur twice in the array.
+   * @param yTable  The array of dependent variables to use to interpolate. For a
+   *                set of three dependent values (p,q,w) at time 1 and time 2
+   *                this should be as follows: {p1, q1, w1, p2, q2, w2}.
+   * @param yStride The number of dependent variable values in yTable
+   *                corresponding to each independent variable value in xTable.
+   * @return The array of interpolated values, or the result parameter if one was
+   *         provided.
+   */
+  @JsMethod(namespace = "Cesium.LinearApproximation")
+  public static native double[] interpolateOrderZero(double x, double[] xTable, double[] yTable, double yStride);
 
-    /**
-     * Interpolates values using Lagrange Polynomial Approximation.
-     * @param x The independent variable for which the dependent variables will be interpolated.
-     * @param xTable The array of independent variables to use to interpolate. The values in this array must be in
-     *               increasing order and the same value must not occur twice in the array.
-     * @param yTable The array of dependent variables to use to interpolate.
-     *               For a set of three dependent values (p,q,w) at time 1 and time 2 this should be as follows: {p1, q1, w1, p2, q2, w2}.
-     * @param yStride The number of dependent variable values in yTable corresponding to each independent variable value in xTable.
-     * @param result An existing array into which to store the result.
-     * @return The array of interpolated values, or the result parameter if one was provided.
-     */
-    @JsMethod(namespace = "Cesium.LinearApproximation")
-    public static native double[] interpolateOrderZero(double x, double[] xTable, double[] yTable, double yStride, double[] result);
+  /**
+   * Interpolates values using Lagrange Polynomial Approximation.
+   * 
+   * @param x       The independent variable for which the dependent variables
+   *                will be interpolated.
+   * @param xTable  The array of independent variables to use to interpolate. The
+   *                values in this array must be in increasing order and the same
+   *                value must not occur twice in the array.
+   * @param yTable  The array of dependent variables to use to interpolate. For a
+   *                set of three dependent values (p,q,w) at time 1 and time 2
+   *                this should be as follows: {p1, q1, w1, p2, q2, w2}.
+   * @param yStride The number of dependent variable values in yTable
+   *                corresponding to each independent variable value in xTable.
+   * @param result  An existing array into which to store the result.
+   * @return The array of interpolated values, or the result parameter if one was
+   *         provided.
+   */
+  @JsMethod(namespace = "Cesium.LinearApproximation")
+  public static native double[] interpolateOrderZero(double x, double[] xTable, double[] yTable, double yStride,
+      double[] result);
 }

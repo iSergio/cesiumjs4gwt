@@ -22,19 +22,20 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class VertexFormatOptions {
-    @JsProperty
-    boolean position;
+  @JsProperty
+  boolean position;
 
-    @JsProperty
-    boolean st;
+  @JsProperty
+  boolean st;
 
-    /**
-     * Options for {@link org.cesiumjs.cs.core.VertexFormat}
-     */
-    @JsConstructor
-    public VertexFormatOptions() {}
+  /**
+   * Options for {@link org.cesiumjs.cs.core.VertexFormat}
+   */
+  @JsConstructor
+  public VertexFormatOptions() {
+  }
 }
