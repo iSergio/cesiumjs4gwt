@@ -43,7 +43,7 @@ compileshowcase:cesiumjs4gwt-showcase:
   script:
     - mvn -pl cesiumjs4gwt-showcase package
 
-deploy:cesiumjs4gwt-main:
+deploy:artifactory:
   stage: deploy
   dependencies:
     - compile:cesiumjs4gwt-main
@@ -73,7 +73,7 @@ deploy:cesiumjs4gwt-main:
   script:
     - echo $CI_JOB_ID
     # Run the MVN command
-    - ./jfrog rt mvn "clean install" configuration.yml --build-name=gitlabci-maven-artifactory --build-number=$CI_JOB_ID
+    - ./jfrog rt mvn "clean -pl cesiumjs4gwt-main install" configuration.yml --build-name=gitlabci-maven-artifactory --build-number=$CI_JOB_ID
     # Collect the environment variables
     - ./jfrog rt bce gitlabci-maven-artifactory $CI_JOB_ID
     # Pass the build information to Artifactory
@@ -83,13 +83,13 @@ deploy:cesiumjs4gwt-main:
     - master
     - tags
 
-deploy:cesiumjs4gwt-showcase:
+deploy:wildfly:
   stage: deploy
   dependencies:
     - compileshowcase:cesiumjs4gwt-showcase
   script:
     - mv cesiumjs4gwt-showcase/target/cesiumjs4gwt-showcase*.war cesiumjs4gwt-showcase/target/cesiumjs4gwt-showcase.war
-    - jboss-cli.sh --controller=127.0.0.1:9999 --user=$WILDFLY_USER --password=$WILDFLY_PASSW --connect --commands="deploy cesiumjs4gwt-showcase/target/cesiumjs4gwt-showcase.war --force"
+    - jboss-cli.sh --controller=127.0.0.1:9999 --user=$WILDFLY_USER --password=$WILDFLY_PASS --connect --commands="deploy cesiumjs4gwt-showcase/target/cesiumjs4gwt-showcase.war --force"
   only:
     - master
     - tags
