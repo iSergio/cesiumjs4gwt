@@ -41,7 +41,7 @@ compileshowcase:cesiumjs4gwt-showcase:
   dependencies:
     - javadoc:cesiumjs4gwt-main
   script:
-    - mvn -pl cesiumjs4gwt-showcase
+    - mvn -pl cesiumjs4gwt-showcase package
 
 deploy:cesiumjs4gwt-main:
   stage: deploy
