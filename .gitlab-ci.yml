@@ -8,6 +8,7 @@ stages:
   - compile
   - junit
   - javadoc
+  - compileshowcase
   - deploy
 
 default:
@@ -35,8 +36,8 @@ javadoc:cesiumjs4gwt-main:
   script:
     - mvn -pl cesiumjs4gwt-main javadoc:javadoc -Dadditionalparam=-Xdoclint:none
 
-compile:cesiumjs4gwt-showcase:
-  stage: compile
+compileshowcase:cesiumjs4gwt-showcase:
+  stage: compileshowcase
   script:
     - mvn -pl cesiumjs4gwt-showcase clean install
 
