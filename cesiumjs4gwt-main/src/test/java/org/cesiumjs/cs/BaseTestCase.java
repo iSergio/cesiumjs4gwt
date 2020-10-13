@@ -21,39 +21,45 @@ import com.google.gwt.core.client.ScriptInjector;
 import com.google.gwt.junit.client.GWTTestCase;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * Base abstract test.
+ * @author Serge Silaev aka iSergio
  */
 public abstract class BaseTestCase extends GWTTestCase {
-    private static boolean loaded = false;
+  private static boolean loaded = false;
 
-    @Override
-    public String getModuleName() {
-        return "org.cesiumjs.CesiumTest";
+  @Override
+  public String getModuleName() {
+    return "org.cesiumjs.CesiumTest";
+  }
+
+  protected void beginTest(final Test test) {
+    if (loaded) {
+      test.execute();
+    } else {
+      ScriptInjector.fromString(
+        "Number.parseFloat = Number.parseFloat || function(v) {return window.parseFloat(v);};"
+        + "Number.parseInt = Number.parseInt || function(v) {return window.parseInt(v);};")
+        .setWindow(ScriptInjector.TOP_WINDOW).inject();
+      ScriptInjector.fromUrl("cs/CesiumUnminified/Cesium.js").setWindow(ScriptInjector.TOP_WINDOW)
+          .setCallback(new Callback<Void, Exception>() {
+
+            @Override
+            public void onFailure(Exception reason) {
+              assertNotNull(reason);
+              fail("Injection failed: " + reason.toString());
+            }
+
+            @Override
+            public void onSuccess(Void result) {
+              loaded = true;
+              test.execute();
+            }
+
+          }).inject();
     }
+  }
 
-    protected void beginTest(final Test test) {
-        if (loaded) {
-            test.execute();
-        } else {
-            ScriptInjector.fromUrl("cs/CesiumUnminified/Cesium.js").setWindow(ScriptInjector.TOP_WINDOW).setCallback(new Callback<Void, Exception>() {
-
-                @Override
-                public void onFailure(Exception reason) {
-                    assertNotNull(reason);
-                    fail("Injection failed: " + reason.toString());
-                }
-
-                @Override
-                public void onSuccess(Void result) {
-                    loaded = true;
-                    test.execute();
-                }
-
-            }).inject();
-        }
-    }
-
-    public interface Test {
-        void execute();
-    }
+  public interface Test {
+    void execute();
+  }
 }
