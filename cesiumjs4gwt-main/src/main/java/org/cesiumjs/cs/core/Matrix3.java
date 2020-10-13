@@ -777,6 +777,15 @@ public class Matrix3 {
   public static native Matrix3 inverse(Matrix3 matrix, Matrix3 result);
 
   /**
+   * Computes the inverse transpose of a matrix.
+   * @param matrix The matrix to transpose and invert.
+   * @param result The object onto which to store the result.
+   * @return The modified result parameter.
+   */
+  @JsMethod
+  public static native Matrix3 inverseTranspose(Matrix3 matrix, Matrix3 result);
+
+  /**
    * Computes the product of two matrices.
    * 
    * @param left   The first matrix.

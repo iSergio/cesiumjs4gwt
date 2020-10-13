@@ -16,14 +16,15 @@
 
 package org.cesiumjs.cs.core;
 
-import org.cesiumjs.cs.scene.Camera;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.scene.Camera;
 
 /**
+ * A 4x4 matrix, indexable as a column-major order array. Constructor parameters are in 
+ * row-major order for code readability.
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "Matrix4")
@@ -882,6 +883,15 @@ public class Matrix4 {
    */
   @JsMethod
   public static native Matrix4 inverseTransformation(Matrix4 matrix, Matrix4 result);
+
+  /**
+   * Computes the inverse transpose of a matrix.
+   * @param matrix The matrix to transpose and invert.
+   * @param result The object onto which to store the result.
+   * @return The modified result parameter.
+   */
+  @JsMethod
+  public static native Matrix4 inverseTranspose(Matrix4 matrix, Matrix4 result);
 
   /**
    * Computes the product of two matrices.
