@@ -1,0 +1,88 @@
+cache:
+  untracked: true
+  key:  "$CI_BUILD_REF_NAME"
+
+stages:
+  - setup
+  # - codequality need refactoring
+  - compile
+  - junit
+  - javadoc
+  - deploy
+
+default:
+  tags:
+    - cesiumjs4gwt
+  interruptible: true
+
+setup:initialize:
+  stage: setup
+  script:
+    - mvn clean
+
+compile:cesiumjs4gwt-main:
+  stage: compile
+  script:
+    - mvn -pl cesiumjs4gwt-main -DskipTests=true clean install
+
+junit:cesiumjs4gwt-main:
+  stage: junit
+  script:
+    - mvn -pl cesiumjs4gwt-main clean test
+
+javadoc:cesiumjs4gwt-main:
+  stage: javadoc
+  script:
+    - mvn -pl cesiumjs4gwt-main javadoc:javadoc -Dadditionalparam=-Xdoclint:none
+
+compile:cesiumjs4gwt-showcase:
+  stage: compile
+  script:
+    - mvn -pl cesiumjs4gwt-showcase clean install
+
+deploy:cesiumjs4gwt-main:
+  stage: deploy
+  before_script: 
+    # Install JFrog CLI
+    -  curl -fL https://getcli.jfrog.io | sh
+    # Configure Artifactory instance with JFrog CLI
+    - ./jfrog rt config --url=$ARTIFACTORY_URL --user=$ARTIFACTORY_USER --password=$ARTIFACTORY_PASS
+    - ./jfrog rt c show
+    # Set the M2_HOME environment variable
+    - export M2_HOME=/usr/share/maven
+    # Определяем версию пакета. Если с коммитом не пришёл тэг, то принудительно снапшотим пакеты
+    - >
+      if [[ "${CI_COMMIT_TAG}" != "" ]]; then
+        mvn versions:set -DnewVersion=${CI_COMMIT_TAG}
+        sed -i 's,MAVEN_REPO_KEY,'"$MAVEN_REPO_KEY"',g' configuration.yml
+      else
+        VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+        if [[ "${VERSION}" == *-SNAPSHOT ]]; then
+          mvn versions:set -DnewVersion=${VERSION}
+        else
+          mvn versions:set -DnewVersion=${VERSION}-SNAPSHOT
+        fi
+        sed -i 's,MAVEN_REPO_KEY,'"$MAVEN_REPO_KEY_SNAPSHOT"',g' configuration.yml
+      fi
+
+  script:
+    - echo $CI_JOB_ID
+    # Run the MVN command
+    - ./jfrog rt mvn "clean install" configuration.yml --build-name=gitlabci-maven-artifactory --build-number=$CI_JOB_ID
+    # Collect the environment variables
+    - ./jfrog rt bce gitlabci-maven-artifactory $CI_JOB_ID
+    # Pass the build information to Artifactory
+    - ./jfrog rt bp gitlabci-maven-artifactory $CI_JOB_ID
+    #- cat report-aggregate/target/site/jacoco-aggregate/index.html
+  only:
+    - master
+    - tags
+
+deploy:cesiumjs4gwt-showcase:
+  stage: deploy
+  script:
+    - mv cesiumjs4gwt-showcase/target/cesiumjs4gwt-showcase*.war cesiumjs4gwt-showcase/target/cesiumjs4gwt-showcase.war
+    - jboss-cli.sh --controller=127.0.0.1:9999 --connect --commands="deploy cesiumjs4gwt-showcase/target/cesiumjs4gwt-showcase.war --force"
+  only:
+    - master
+    - tags
