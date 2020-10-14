@@ -98,7 +98,6 @@ deploy:wildfly:
         else
           VERSION=${VERSION}-SNAPSHOT
         fi
-        sed -i 's,MAVEN_REPO_KEY,'"$MAVEN_REPO_KEY_SNAPSHOT"',g' configuration.yml
       fi
   script:
     - mv cesiumjs4gwt-showcase/target/cesiumjs4gwt-showcase-$VERSION.war cesiumjs4gwt-showcase/target/cesiumjs4gwt-showcase.war
