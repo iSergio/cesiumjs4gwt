@@ -87,8 +87,21 @@ deploy:wildfly:
   stage: deploy
   dependencies:
     - compileshowcase:cesiumjs4gwt-showcase
+  before_script:
+    - >
+      if [[ "${CI_COMMIT_TAG}" != "" ]]; then
+        VERSION=${CI_COMMIT_TAG}
+      else
+        VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+        if [[ "${VERSION}" == *-SNAPSHOT ]]; then
+          VERSION=${VERSION}
+        else
+          VERSION=${VERSION}-SNAPSHOT
+        fi
+        sed -i 's,MAVEN_REPO_KEY,'"$MAVEN_REPO_KEY_SNAPSHOT"',g' configuration.yml
+      fi
   script:
-    - mv cesiumjs4gwt-showcase/target/cesiumjs4gwt-showcase*.war cesiumjs4gwt-showcase/target/cesiumjs4gwt-showcase.war
+    - mv cesiumjs4gwt-showcase/target/cesiumjs4gwt-showcase-$VERSION.war cesiumjs4gwt-showcase/target/cesiumjs4gwt-showcase.war
     - jboss-cli.sh --controller=127.0.0.1:9999 --user=$WILDFLY_USER --password=$WILDFLY_PASS --connect --commands="deploy cesiumjs4gwt-showcase/target/cesiumjs4gwt-showcase.war --force"
   only:
     - master
