@@ -143,20 +143,20 @@ public class EasingFunction {
   /**
    * Quadratic in.
    */
-  @JsProperty(name = "QUADRACTIC_IN")
-  public static native EasingFunction QUADRACTIC_IN();
+  @JsProperty(name = "QUADRATIC_IN")
+  public static native EasingFunction QUADRATIC_IN();
 
   /**
    * Quadratic in then out.
    */
-  @JsProperty(name = "QUADRACTIC_IN_OUT")
-  public static native EasingFunction QUADRACTIC_IN_OUT();
+  @JsProperty(name = "QUADRATIC_IN_OUT")
+  public static native EasingFunction QUADRATIC_IN_OUT();
 
   /**
    * Quadratic out.
    */
-  @JsProperty(name = "QUADRACTIC_OUT")
-  public static native EasingFunction QUADRACTIC_OUT();
+  @JsProperty(name = "QUADRATIC_OUT")
+  public static native EasingFunction QUADRATIC_OUT();
 
   /**
    * Quartic in.
