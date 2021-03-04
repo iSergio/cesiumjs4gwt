@@ -17,15 +17,14 @@
 package org.cesiumjs.cs;
 
 import org.cesiumjs.cs.collections.EntityCollection;
-import org.cesiumjs.cs.core.Cartographic;
-import org.cesiumjs.cs.core.Ellipsoid;
-import org.cesiumjs.cs.core.JulianDate;
-import org.cesiumjs.cs.core.TimeInterval;
+import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.core.providers.CesiumTerrainProvider;
 import org.cesiumjs.cs.core.providers.TerrainProvider;
 import org.cesiumjs.cs.datasources.graphics.ModelGraphics;
 import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.promise.Promise;
+import org.cesiumjs.cs.scene.Material;
+import org.cesiumjs.cs.scene.Scene;
 import org.cesiumjs.cs.widgets.Command;
 
 import jsinterop.annotations.JsConstructor;
@@ -271,6 +270,16 @@ public class Cesium {
   @JsMethod(namespace = "Cesium", name = "exportKml")
   public static native Promise<JsObject, Void> exportKml(ExportKmlOptions options);
 
+  /**
+   * Creates a Material that combines multiple layers of color/gradient bands and maps them to terrain heights.
+   * The shader does a binary search over all the heights to find out which colors are above and below a given height,
+   * and interpolates between them for the final color. This material supports hundreds of entries relatively cheaply.
+   * @param options {@link ElevationBandMaterialOptions} with the following properties
+   * @return A new Material instance.
+   */
+  @JsMethod(namespace = "Cesium", name = "createElevationBandMaterial")
+  public static native Material createElevationBandMaterial(ElevationBandMaterialOptions options);
+
   @JsFunction
   public interface Function {
     Object function(Object... args);
@@ -421,6 +430,34 @@ public class Cesium {
        * @return The URL to use for the href in the KML document.
        */
       String Callback(ModelGraphics model, org.cesiumjs.cs.core.JulianDate time, JsObject externalFiles);
+    }
+  }
+
+  /**
+   * Options for {@link Cesium#createElevationBandMaterial(ElevationBandMaterialOptions)}.
+   */
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+  public static class ElevationBandMaterialOptions {
+    /**
+     * The scene where the visualization is taking place.
+     */
+    @JsProperty
+    public Scene scene;
+    /**
+     * A list of bands ordered from lowest to highest precedence.
+     */
+    @JsProperty
+    public ElevationBandMaterialBand[] layers;
+
+    @JsConstructor
+    protected ElevationBandMaterialOptions() {}
+
+    @JsOverlay
+    public static ElevationBandMaterialOptions create(Scene scene, ElevationBandMaterialBand[] layers) {
+      ElevationBandMaterialOptions options = new ElevationBandMaterialOptions();
+      options.scene = scene;
+      options.layers = layers;
+      return options;
     }
   }
 }
