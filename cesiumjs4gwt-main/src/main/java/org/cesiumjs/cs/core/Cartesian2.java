@@ -181,6 +181,15 @@ public class Cartesian2 implements Packable {
   public static native Cartesian2 clone(Cartesian2 cartesian, Cartesian2 result);
 
   /**
+   * Computes the magnitude of the cross product that would result from implicitly setting the Z coordinate of the input vectors to 0.
+   * @param left The first Cartesian.
+   * @param right The second Cartesian.
+   * @return The cross product.
+   */
+  @JsMethod
+  public static native Double cross(Cartesian2 left, Cartesian2 right);
+
+  /**
    * Computes the distance between two points.
    * 
    * <pre>
