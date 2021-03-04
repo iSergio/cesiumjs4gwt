@@ -28,7 +28,7 @@ public class DebugCameraPrimitive extends Primitive {
   /**
    * User-defined value returned when the primitive is picked. Default: undefined
    * 
-   * @see {org.cesiumjs.cs.scene.Scene#pick}
+   * @see org.cesiumjs.cs.scene.Scene#pick
    */
   @JsProperty
   public Object id;
@@ -42,7 +42,7 @@ public class DebugCameraPrimitive extends Primitive {
   /**
    * Draws the outline of the camera's view frustum.
    * 
-   * @param options object {@see }
+   * @param options object
    */
   @JsConstructor
   public DebugCameraPrimitive(DebugCameraPrimitiveOptions options) {

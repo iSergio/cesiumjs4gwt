@@ -24,7 +24,7 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * Options for {@see org.cesiumjs.cs.scene.DebugCameraPrimitive}
+ * Options for {@link org.cesiumjs.cs.scene.DebugCameraPrimitive}
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class DebugCameraPrimitiveOptions {

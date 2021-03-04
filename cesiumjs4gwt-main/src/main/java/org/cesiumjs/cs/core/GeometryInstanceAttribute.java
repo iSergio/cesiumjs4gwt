@@ -63,9 +63,9 @@ public class GeometryInstanceAttribute {
    * 
    * @param options {@link GeometryInstanceAttributeOptions}
    * @see ColorGeometryInstanceAttribute
-   * @see ShowGeometryInstanceAttribute
    * @see DistanceDisplayConditionGeometryInstanceAttribute
    */
+//  @see ShowGeometryInstanceAttribute
   @JsConstructor
   public GeometryInstanceAttribute(GeometryInstanceAttributeOptions options) {
   }

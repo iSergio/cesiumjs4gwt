@@ -36,10 +36,10 @@ public class DirectionalLightOptions extends SunLightOptions {
   }
 
   /**
-   * Constructor for {@link DirectionLightOptions}
+   * Constructor for {@link org.cesiumjs.cs.scene.DirectionalLight}
    * 
    * @param direction
-   * @return
+   * @return options object
    */
   @JsOverlay
   public static DirectionalLightOptions create(Cartesian3 direction) {

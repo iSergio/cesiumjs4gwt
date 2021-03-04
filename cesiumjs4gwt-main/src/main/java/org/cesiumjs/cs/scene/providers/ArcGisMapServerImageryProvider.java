@@ -195,9 +195,7 @@ public class ArcGisMapServerImageryProvider implements ImageryProvider {
    * @param options Options
    * @see BingMapsImageryProvider
    * @see GoogleEarthEnterpriseImageryProvider
-   * @see Cesium#createOpenStreetMapImageryProvider
    * @see SingleTileImageryProvider
-   * @see Cesium#createTileMapServiceImageryProvider
    * @see WebMapServiceImageryProvider
    * @see WebMapTileServiceImageryProvider
    * @see UrlTemplateImageryProvider
@@ -206,6 +204,8 @@ public class ArcGisMapServerImageryProvider implements ImageryProvider {
    *      Server REST API</a>
    * @see <a gref=\"https://www.w3.org/TR/cors/">Cross-Origin Resource Sharing</a>
    */
+//  @see Cesium#createTileMapServiceImageryProvider
+//  @see Cesium#createOpenStreetMapImageryProvider
   @JsConstructor
   public ArcGisMapServerImageryProvider(ArcGisMapServerImageryProviderOptions options) {
   }
