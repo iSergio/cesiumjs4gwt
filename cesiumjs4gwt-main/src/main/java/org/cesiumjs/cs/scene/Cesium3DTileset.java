@@ -587,11 +587,10 @@ public class Cesium3DTileset {
   public native int totalMemoryUsageInBytes();
 
   /**
-   * The url to a tileset.json file or to a directory containing a tileset.json
-   * file.
+   * The resource used to fetch the tileset JSON file.
    */
-  @JsProperty(name = "url")
-  public native String url();
+  @JsProperty(name = "resource")
+  public native Resource resource();
 
   /**
    * A <a href=
