@@ -571,6 +571,15 @@ public class Math {
   public static native double normalize(double value, double rangeMinimum, double rangeMaximum);
 
   /**
+   * Computes the previous power-of-two integer less than or equal to the provided non-negative integer.
+   * The maximum allowed input is (2^32)-1 due to 32-bit bitwise operator limitation in Javascript.
+   * @param n The integer to test in the range [0, (2^32)-1].
+   * @return The previous power-of-two integer.
+   */
+  @JsMethod
+  public static native double previousPowerOfTwo(double n);
+
+  /**
    * Generates a random number between two numbers.
    * 
    * @param min The minimum value.
