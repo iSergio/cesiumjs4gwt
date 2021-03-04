@@ -68,6 +68,13 @@ public class BillboardCollection extends Collection<Billboard> {
   public Matrix4 modelMatrix;
 
   /**
+   * Determines if the billboards in the collection will be shown.
+   * Default: true
+   */
+  @JsProperty
+  public boolean show;
+
+  /**
    * A renderable collection of billboards. Billboards are viewport-aligned images
    * positioned in the 3D scene. Billboards are added and removed from the
    * collection using {@link BillboardCollection#add} and

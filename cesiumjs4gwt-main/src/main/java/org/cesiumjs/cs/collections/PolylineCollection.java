@@ -53,6 +53,12 @@ public class PolylineCollection extends Collection<Polyline> {
    */
   @JsProperty
   public Matrix4 modelMatrix;
+  /**
+   * Determines if the polylines in the collection will be shown.
+   * Default: true
+   */
+  @JsProperty
+  public boolean show;
 
   /**
    * A renderable collection of polylines. Polylines are added and removed from

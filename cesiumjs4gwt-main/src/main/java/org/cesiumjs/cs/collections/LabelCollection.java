@@ -63,6 +63,12 @@ public class LabelCollection extends Collection<Label> {
   // TODO: examples
   @JsProperty
   public Matrix4 modelMatrix;
+  /**
+   * Determines if the labels in the collection will be shown.
+   * Default: true
+   */
+  @JsProperty
+  public boolean show;
 
   @JsConstructor
   public LabelCollection() {

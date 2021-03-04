@@ -41,6 +41,12 @@ public class PolylineCollectionOptions {
    */
   @JsProperty
   public boolean debugShowBoundingVolume;
+  /**
+   * Determines if the polylines in the collection will be shown.
+   * Default: true
+   */
+  @JsProperty
+  public boolean show;
 
   /**
    * Options for {@link PolylineCollection}.

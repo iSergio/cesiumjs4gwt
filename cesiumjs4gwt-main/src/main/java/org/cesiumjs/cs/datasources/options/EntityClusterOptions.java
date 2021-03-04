@@ -40,4 +40,28 @@ public class EntityClusterOptions {
    */
   @JsProperty
   public int minimumClusterSize;
+  /**
+   * Whether or not to cluster the billboards of an entity.
+   * Default: true
+   */
+  @JsProperty
+  public boolean clusterBillboards;
+  /**
+   * Whether or not to cluster the labels of an entity.
+   * Default: true
+   */
+  @JsProperty
+  public boolean clusterLabels;
+  /**
+   * Whether or not to cluster the points of an entity.
+   * Default: true
+   */
+  @JsProperty
+  public boolean clusterPoints;
+  /**
+   * Determines if the entities in the cluster will be shown.
+   * Default: true
+   */
+  @JsProperty
+  public boolean show;
 }

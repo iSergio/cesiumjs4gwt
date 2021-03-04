@@ -59,6 +59,12 @@ public class LabelCollectionOptions {
    */
   @JsProperty
   public Number blendOption;
+  /**
+   * Determines if the labels in the collection will be shown.
+   * Default: true
+   */
+  @JsProperty
+  public boolean show;
 
   /**
    * Options for LabelCollection.

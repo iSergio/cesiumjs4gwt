@@ -52,6 +52,12 @@ public class PointPrimitiveCollectionOptions {
    */
   @JsProperty
   public Number blendOption;
+  /**
+   * Determines if the primitives in the collection will be shown.
+   * Default: true
+   */
+  @JsProperty
+  public boolean show;
 
   /**
    * Options for {@link org.cesiumjs.cs.collections.PointPrimitiveCollection}.

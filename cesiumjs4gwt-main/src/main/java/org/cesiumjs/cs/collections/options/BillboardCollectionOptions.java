@@ -61,6 +61,13 @@ public class BillboardCollectionOptions {
   public Number blendOption;
 
   /**
+   * Determines if the billboards in the collection will be shown.
+   * Default: true
+   */
+  @JsProperty
+  public boolean show;
+
+  /**
    * Options for {@link BillboardCollection}.
    */
   @JsConstructor

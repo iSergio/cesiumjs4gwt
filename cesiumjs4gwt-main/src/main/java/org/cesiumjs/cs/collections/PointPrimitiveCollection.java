@@ -60,6 +60,12 @@ public class PointPrimitiveCollection extends Collection<PointPrimitive> {
    */
   @JsProperty
   public Matrix4 modelMatrix;
+  /**
+   * Determines if the primitives in the collection will be shown.
+   * Default: true
+   */
+  @JsProperty
+  public boolean show;
 
   /**
    * A renderable collection of points.
