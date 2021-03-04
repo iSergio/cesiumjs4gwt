@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
 
-define(['./when-54c2dc71', './Check-6c0211bc', './Math-850675ea', './Cartesian2-ea28baad', './Transforms-2e98bea0', './RuntimeError-2109023a', './WebGLConstants-76bb35d1', './ComponentDatatype-a26dd044', './GeometryAttribute-90c5fe10', './GeometryAttributes-4fcfcf40', './AttributeCompression-8a649799', './GeometryPipeline-869c813c', './EncodedCartesian3-1e19ea62', './IndexDatatype-66029622', './IntersectionTests-d561f371', './Plane-1577f476', './VertexFormat-4d8b817a', './arrayRemoveDuplicates-d1f2f54f', './BoundingRectangle-163e2ea9', './EllipsoidTangentPlane-38b58c36', './EllipsoidRhumbLine-802489e5', './PolygonPipeline-b54772e1', './PolylineVolumeGeometryLibrary-60333c48', './EllipsoidGeodesic-fadac0dc', './PolylinePipeline-9a630005'], function (when, Check, _Math, Cartesian2, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, GeometryAttributes, AttributeCompression, GeometryPipeline, EncodedCartesian3, IndexDatatype, IntersectionTests, Plane, VertexFormat, arrayRemoveDuplicates, BoundingRectangle, EllipsoidTangentPlane, EllipsoidRhumbLine, PolygonPipeline, PolylineVolumeGeometryLibrary, EllipsoidGeodesic, PolylinePipeline) { 'use strict';
+define(['./when-208fe5b0', './Cartesian2-716c2715', './arrayRemoveDuplicates-28d5a12e', './BoundingRectangle-307ba31b', './Transforms-f1816abc', './ComponentDatatype-549ec0d3', './PolylineVolumeGeometryLibrary-667758da', './Check-d18af7c4', './GeometryAttribute-0ee94cf1', './GeometryAttributes-b0b294d8', './GeometryPipeline-df743242', './IndexDatatype-d9b71b2b', './Math-3ba16bed', './PolygonPipeline-ac89187a', './VertexFormat-24041ad5', './RuntimeError-7f634f5d', './WebGLConstants-76bb35d1', './EllipsoidTangentPlane-8e486e83', './IntersectionTests-680c4e46', './Plane-f5dfabcd', './PolylinePipeline-fe86878e', './EllipsoidGeodesic-4bc5cec5', './EllipsoidRhumbLine-886cd793', './AttributeCompression-69c5b20c', './EncodedCartesian3-7a9c1496'], function (when, Cartesian2, arrayRemoveDuplicates, BoundingRectangle, Transforms, ComponentDatatype, PolylineVolumeGeometryLibrary, Check, GeometryAttribute, GeometryAttributes, GeometryPipeline, IndexDatatype, _Math, PolygonPipeline, VertexFormat, RuntimeError, WebGLConstants, EllipsoidTangentPlane, IntersectionTests, Plane, PolylinePipeline, EllipsoidGeodesic, EllipsoidRhumbLine, AttributeCompression, EncodedCartesian3) { 'use strict';
 
   var warnings = {};
 
@@ -225,7 +225,7 @@ define(['./when-54c2dc71', './Check-6c0211bc', './Math-850675ea', './Cartesian2-
    * @constructor
    *
    * @param {Object} options Object with the following properties:
-   * @param {Cartesian3[]} options.polylinePositions An array of {@link Cartesain3} positions that define the center of the polyline volume.
+   * @param {Cartesian3[]} options.polylinePositions An array of {@link Cartesian3} positions that define the center of the polyline volume.
    * @param {Cartesian2[]} options.shapePositions An array of {@link Cartesian2} positions that define the shape to be extruded along the polyline
    * @param {Ellipsoid} [options.ellipsoid=Ellipsoid.WGS84] The ellipsoid to be used as a reference.
    * @param {Number} [options.granularity=CesiumMath.RADIANS_PER_DEGREE] The distance, in radians, between each latitude and longitude. Determines the number of positions in the buffer.
