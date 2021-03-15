@@ -16,57 +16,56 @@
 
 package org.cesiumjs.cs.core.providers.options;
 
-import org.cesiumjs.cs.core.Credit;
-import org.cesiumjs.cs.core.Ellipsoid;
-import org.cesiumjs.cs.core.TilingScheme;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Credit;
+import org.cesiumjs.cs.core.Ellipsoid;
+import org.cesiumjs.cs.core.TilingScheme;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class ArcGisImageServerTerrainProviderOptions {
-  /**
-   * The URL of the ArcGIS ImageServer service.
-   */
-  @JsProperty
-  public String url;
-  /**
-   * The authorization token to use to connect to the service.
-   */
-  @JsProperty
-  public String token;
-  /**
-   * A proxy to use for requests. This object is expected to have a getURL
-   * function which returns the proxied URL, if needed.
-   */
-  @JsProperty
-  public Object proxy;
-  /**
-   * The tiling scheme specifying how the terrain is broken into tiles. If this
-   * parameter is not provided, a
-   * {@link org.cesiumjs.cs.core.GeographicTilingScheme} is used.
-   */
-  @JsProperty
-  public TilingScheme tilingScheme;
-  /**
-   * The ellipsoid. If the tilingScheme is specified, this parameter is ignored
-   * and the tiling scheme's ellipsoid is used instead. If neither parameter is
-   * specified, the WGS84 ellipsoid is used.
-   */
-  @JsProperty
-  public Ellipsoid ellipsoid;
-  /**
-   * The credit, which will is displayed on the canvas.
-   */
-  @JsProperty
-  public Credit credit;
+    /**
+     * The URL of the ArcGIS ImageServer service.
+     */
+    @JsProperty
+    public String url;
+    /**
+     * The authorization token to use to connect to the service.
+     */
+    @JsProperty
+    public String token;
+    /**
+     * A proxy to use for requests. This object is expected to have a getURL
+     * function which returns the proxied URL, if needed.
+     */
+    @JsProperty
+    public Object proxy;
+    /**
+     * The tiling scheme specifying how the terrain is broken into tiles. If this
+     * parameter is not provided, a
+     * {@link org.cesiumjs.cs.core.GeographicTilingScheme} is used.
+     */
+    @JsProperty
+    public TilingScheme tilingScheme;
+    /**
+     * The ellipsoid. If the tilingScheme is specified, this parameter is ignored
+     * and the tiling scheme's ellipsoid is used instead. If neither parameter is
+     * specified, the WGS84 ellipsoid is used.
+     */
+    @JsProperty
+    public Ellipsoid ellipsoid;
+    /**
+     * The credit, which will is displayed on the canvas.
+     */
+    @JsProperty
+    public Credit credit;
 
-  @JsConstructor
-  public ArcGisImageServerTerrainProviderOptions() {
-  }
+    @JsConstructor
+    public ArcGisImageServerTerrainProviderOptions() {
+    }
 }

@@ -25,22 +25,22 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "ReferenceFrame")
 public class ReferenceFrame {
-  /**
-   * The fixed frame.
-   */
-  @JsProperty(name = "FIXED")
-  public static native Number FIXED();
+    /**
+     * Constants for identifying well-known reference frames.
+     */
+    @JsConstructor
+    private ReferenceFrame() {
+    }
 
-  /**
-   * The inertial frame.
-   */
-  @JsProperty(name = "INTERNAL")
-  public static native Number INERTIAL();
+    /**
+     * The fixed frame.
+     */
+    @JsProperty(name = "FIXED")
+    public static native Number FIXED();
 
-  /**
-   * Constants for identifying well-known reference frames.
-   */
-  @JsConstructor
-  private ReferenceFrame() {
-  }
+    /**
+     * The inertial frame.
+     */
+    @JsProperty(name = "INTERNAL")
+    public static native Number INERTIAL();
 }

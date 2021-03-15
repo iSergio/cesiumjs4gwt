@@ -20,5 +20,5 @@ package org.cesiumjs.cs.scene.interaction;
  * @author Serge Silaev aka iSergio
  */
 public enum MarkerType {
-  BILLBOARD_GRAPHIC, POINT_PRIMITIVE
+    BILLBOARD_GRAPHIC, POINT_PRIMITIVE
 }

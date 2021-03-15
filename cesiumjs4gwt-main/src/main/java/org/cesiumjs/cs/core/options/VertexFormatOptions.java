@@ -26,16 +26,16 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class VertexFormatOptions {
-  @JsProperty
-  boolean position;
+    @JsProperty
+    boolean position;
 
-  @JsProperty
-  boolean st;
+    @JsProperty
+    boolean st;
 
-  /**
-   * Options for {@link org.cesiumjs.cs.core.VertexFormat}
-   */
-  @JsConstructor
-  public VertexFormatOptions() {
-  }
+    /**
+     * Options for {@link org.cesiumjs.cs.core.VertexFormat}
+     */
+    @JsConstructor
+    public VertexFormatOptions() {
+    }
 }

@@ -59,7 +59,7 @@ public class ElevationBandMaterial extends AbstractExample {
     public ElevationBandMaterial(ShowcaseExampleStore store) {
         super("Elevation Band Material",
                 "Apply elevation band material to the globe",
-                new String[] { "Showcase", "Cesium", "3d", "Viewer", "Elevation", "Band", "Material" }, store);
+                new String[]{"Showcase", "Cesium", "3d", "Viewer", "Elevation", "Band", "Material"}, store);
     }
 
     @Override

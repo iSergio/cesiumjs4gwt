@@ -24,7 +24,8 @@ public class ElevationBandMaterialBand {
     public boolean extendUpwards;
 
     @JsConstructor
-    protected ElevationBandMaterialBand() {}
+    protected ElevationBandMaterialBand() {
+    }
 
     @JsOverlay
     public static ElevationBandMaterialBand create(ElevationBandMaterialEntry[] entries) {

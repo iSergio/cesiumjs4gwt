@@ -26,14 +26,14 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class GetFeatureInfoParameters {
-  @JsProperty
-  public String service;
-  @JsProperty
-  public String version;
-  @JsProperty
-  public String request;
+    @JsProperty
+    public String service;
+    @JsProperty
+    public String version;
+    @JsProperty
+    public String request;
 
-  @JsConstructor
-  public GetFeatureInfoParameters() {
-  }
+    @JsConstructor
+    public GetFeatureInfoParameters() {
+    }
 }

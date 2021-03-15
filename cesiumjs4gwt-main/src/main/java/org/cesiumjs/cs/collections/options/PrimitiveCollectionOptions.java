@@ -23,19 +23,20 @@ import org.cesiumjs.cs.collections.PrimitiveCollection;
 
 /**
  * Options for {@link PrimitiveCollection}.
+ *
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class PrimitiveCollectionOptions {
-  /**
-   * Determines if the primitives in the collection will be shown. Default: true
-   */
-  @JsProperty
-  public boolean show;
-  /**
-   * Determines if primitives in the collection are destroyed when they are
-   * removed. Default: true
-   */
-  @JsProperty
-  public boolean destroyPrimitives;
+    /**
+     * Determines if the primitives in the collection will be shown. Default: true
+     */
+    @JsProperty
+    public boolean show;
+    /**
+     * Determines if primitives in the collection are destroyed when they are
+     * removed. Default: true
+     */
+    @JsProperty
+    public boolean destroyPrimitives;
 }

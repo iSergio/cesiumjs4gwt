@@ -25,43 +25,43 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "CameraEventType")
 public class CameraEventType {
-  /**
-   * A left mouse button press followed by moving the mouse and releasing the
-   * button.
-   */
-  @JsProperty(name = "LEFT_DRAG")
-  public static native Number LEFT_DRAG();
+    /**
+     * Enumerates the available input for interacting with the camera.
+     */
+    @JsConstructor
+    private CameraEventType() {
+    }
 
-  /**
-   * A middle mouse button press followed by moving the mouse and releasing the
-   * button.
-   */
-  @JsProperty(name = "MIDDLE_DRAG")
-  public static native Number MIDDLE_DRAG();
+    /**
+     * A left mouse button press followed by moving the mouse and releasing the
+     * button.
+     */
+    @JsProperty(name = "LEFT_DRAG")
+    public static native Number LEFT_DRAG();
 
-  /**
-   * A two-finger touch on a touch surface.
-   */
-  @JsProperty(name = "PINCH")
-  public static native Number PINCH();
+    /**
+     * A middle mouse button press followed by moving the mouse and releasing the
+     * button.
+     */
+    @JsProperty(name = "MIDDLE_DRAG")
+    public static native Number MIDDLE_DRAG();
 
-  /**
-   * A right mouse button press followed by moving the mouse and releasing the
-   * button.
-   */
-  @JsProperty(name = "RIGHT_DRAG")
-  public static native Number RIGHT_DRAG();
+    /**
+     * A two-finger touch on a touch surface.
+     */
+    @JsProperty(name = "PINCH")
+    public static native Number PINCH();
 
-  /**
-   * Scrolling the middle mouse button.
-   */
-  @JsProperty(name = "WHEEL")
-  public static native Number WHEEL();
+    /**
+     * A right mouse button press followed by moving the mouse and releasing the
+     * button.
+     */
+    @JsProperty(name = "RIGHT_DRAG")
+    public static native Number RIGHT_DRAG();
 
-  /**
-   * Enumerates the available input for interacting with the camera.
-   */
-  @JsConstructor
-  private CameraEventType() {
-  }
+    /**
+     * Scrolling the middle mouse button.
+     */
+    @JsProperty(name = "WHEEL")
+    public static native Number WHEEL();
 }

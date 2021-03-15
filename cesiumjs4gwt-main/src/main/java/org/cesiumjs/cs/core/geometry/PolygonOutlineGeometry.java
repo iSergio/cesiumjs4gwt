@@ -16,13 +16,12 @@
 
 package org.cesiumjs.cs.core.geometry;
 
-import org.cesiumjs.cs.core.Packable;
-import org.cesiumjs.cs.core.geometry.options.PolygonOutlineGeometryOptions;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Packable;
+import org.cesiumjs.cs.core.geometry.options.PolygonOutlineGeometryOptions;
 
 /**
  * A description of the outline of a polygon on the ellipsoid. The polygon is
@@ -32,84 +31,84 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "PolygonOutlineGeometry")
 public class PolygonOutlineGeometry extends Geometry implements Packable {
-  /**
-   * The number of elements used to pack the object into an array.
-   */
-  @JsProperty
-  public int packedLength;
+    /**
+     * The number of elements used to pack the object into an array.
+     */
+    @JsProperty
+    public int packedLength;
 
-  @JsConstructor
-  public PolygonOutlineGeometry(PolygonOutlineGeometryOptions options) {
-  }
+    @JsConstructor
+    public PolygonOutlineGeometry(PolygonOutlineGeometryOptions options) {
+    }
 
-  /**
-   * Computes the geometric representation of a polygon outline, including its
-   * vertices, indices, and a bounding sphere.
-   * 
-   * @param polygonGeometry A description of the polygon outline.
-   * @return The computed vertices and indices.
-   */
-  @JsMethod
-  public static native Geometry createGeometry(PolygonOutlineGeometry polygonGeometry);
+    /**
+     * Computes the geometric representation of a polygon outline, including its
+     * vertices, indices, and a bounding sphere.
+     *
+     * @param polygonGeometry A description of the polygon outline.
+     * @return The computed vertices and indices.
+     */
+    @JsMethod
+    public static native Geometry createGeometry(PolygonOutlineGeometry polygonGeometry);
 
-  /**
-   * A description of a polygon outline from an array of positions.
-   * 
-   * @param options {@link PolygonOutlineGeometryOptions}.
-   * @return {@link PolygonOutlineGeometry}
-   */
-  @JsMethod
-  public static native PolygonOutlineGeometry fromPositions(PolygonOutlineGeometryOptions options);
+    /**
+     * A description of a polygon outline from an array of positions.
+     *
+     * @param options {@link PolygonOutlineGeometryOptions}.
+     * @return {@link PolygonOutlineGeometry}
+     */
+    @JsMethod
+    public static native PolygonOutlineGeometry fromPositions(PolygonOutlineGeometryOptions options);
 
-  /**
-   * Stores the provided instance into the provided array.
-   * 
-   * @param value The value to pack.
-   * @param array The array to pack into.
-   * @return The array that was packed into
-   */
-  @JsMethod
-  public static native double[] pack(PolygonOutlineGeometry value, double[] array);
+    /**
+     * Stores the provided instance into the provided array.
+     *
+     * @param value The value to pack.
+     * @param array The array to pack into.
+     * @return The array that was packed into
+     */
+    @JsMethod
+    public static native double[] pack(PolygonOutlineGeometry value, double[] array);
 
-  /**
-   * Stores the provided instance into the provided array.
-   * 
-   * @param value         The value to pack.
-   * @param array         The array to pack into.
-   * @param startingIndex The index into the array at which to start packing the
-   *                      elements.
-   * @return The array that was packed into
-   */
-  @JsMethod
-  public static native double[] pack(PolygonOutlineGeometry value, double[] array, int startingIndex);
+    /**
+     * Stores the provided instance into the provided array.
+     *
+     * @param value         The value to pack.
+     * @param array         The array to pack into.
+     * @param startingIndex The index into the array at which to start packing the
+     *                      elements.
+     * @return The array that was packed into
+     */
+    @JsMethod
+    public static native double[] pack(PolygonOutlineGeometry value, double[] array, int startingIndex);
 
-  /**
-   * Retrieves an instance from a packed array.
-   * 
-   * @param array The packed array.
-   * @return polygon geometry
-   */
-  @JsMethod
-  public static native PolygonOutlineGeometry unpack(double[] array);
+    /**
+     * Retrieves an instance from a packed array.
+     *
+     * @param array The packed array.
+     * @return polygon geometry
+     */
+    @JsMethod
+    public static native PolygonOutlineGeometry unpack(double[] array);
 
-  /**
-   * Retrieves an instance from a packed array.
-   * 
-   * @param array         The packed array.
-   * @param startingIndex The starting index of the element to be unpacked.
-   * @return polygon geometry
-   */
-  @JsMethod
-  public static native PolygonOutlineGeometry unpack(double[] array, int startingIndex);
+    /**
+     * Retrieves an instance from a packed array.
+     *
+     * @param array         The packed array.
+     * @param startingIndex The starting index of the element to be unpacked.
+     * @return polygon geometry
+     */
+    @JsMethod
+    public static native PolygonOutlineGeometry unpack(double[] array, int startingIndex);
 
-  /**
-   * Retrieves an instance from a packed array.
-   * 
-   * @param array         The packed array.
-   * @param startingIndex The starting index of the element to be unpacked.
-   * @param result        The object into which to store the result.
-   * @return polygon geometry
-   */
-  @JsMethod
-  public static native PolygonOutlineGeometry unpack(double[] array, int startingIndex, PolygonOutlineGeometry result);
+    /**
+     * Retrieves an instance from a packed array.
+     *
+     * @param array         The packed array.
+     * @param startingIndex The starting index of the element to be unpacked.
+     * @param result        The object into which to store the result.
+     * @return polygon geometry
+     */
+    @JsMethod
+    public static native PolygonOutlineGeometry unpack(double[] array, int startingIndex, PolygonOutlineGeometry result);
 }

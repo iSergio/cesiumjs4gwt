@@ -17,44 +17,42 @@
 package org.cesiumjs.cs.core.options;
 
 import com.google.gwt.typedarrays.shared.Uint32Array;
-
-import org.cesiumjs.cs.core.BoundingSphere;
-import org.cesiumjs.cs.core.enums.PrimitiveType;
-import org.cesiumjs.cs.core.geometry.GeometryAttributes;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.BoundingSphere;
+import org.cesiumjs.cs.core.enums.PrimitiveType;
+import org.cesiumjs.cs.core.geometry.GeometryAttributes;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class GeometryOptions {
-  /**
-   * Attributes, which make up the geometry's vertices.
-   */
-  @JsProperty
-  public GeometryAttributes attributes;
-  /**
-   * {@link PrimitiveType} The type of primitives in the geometry. Default:
-   * PrimitiveType.TRIANGLES
-   */
-  @JsProperty
-  public Integer primitiveType;
-  /**
-   * Optional index data that determines the primitives in the geometry.
-   */
-  @JsProperty
-  public Uint32Array indices;
-  /**
-   * An optional bounding sphere that fully enclosed the geometry.
-   */
-  @JsProperty
-  public BoundingSphere boundingSphere;
+    /**
+     * Attributes, which make up the geometry's vertices.
+     */
+    @JsProperty
+    public GeometryAttributes attributes;
+    /**
+     * {@link PrimitiveType} The type of primitives in the geometry. Default:
+     * PrimitiveType.TRIANGLES
+     */
+    @JsProperty
+    public Integer primitiveType;
+    /**
+     * Optional index data that determines the primitives in the geometry.
+     */
+    @JsProperty
+    public Uint32Array indices;
+    /**
+     * An optional bounding sphere that fully enclosed the geometry.
+     */
+    @JsProperty
+    public BoundingSphere boundingSphere;
 
-  @JsConstructor
-  public GeometryOptions() {
-  }
+    @JsConstructor
+    public GeometryOptions() {
+    }
 }

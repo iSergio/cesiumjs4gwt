@@ -16,13 +16,8 @@
 
 package org.cesiumjs.cs.core.geometry.options;
 
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.Cartesian3;
-
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsOverlay;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
 
 /**
  * Options for
@@ -32,20 +27,20 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class CoplanarPolygonOutlineGeometryFromPositionsOptions {
-  /**
-   * An array of positions that defined the corner points of the polygon.
-   */
-  @JsProperty
-  public Cartesian3[] positions;
+    /**
+     * An array of positions that defined the corner points of the polygon.
+     */
+    @JsProperty
+    public Cartesian3[] positions;
 
-  @JsConstructor
-  private CoplanarPolygonOutlineGeometryFromPositionsOptions() {
-  }
+    @JsConstructor
+    private CoplanarPolygonOutlineGeometryFromPositionsOptions() {
+    }
 
-  @JsOverlay
-  public static CoplanarPolygonOutlineGeometryFromPositionsOptions create(Cartesian3[] positions) {
-    CoplanarPolygonOutlineGeometryFromPositionsOptions options = new CoplanarPolygonOutlineGeometryFromPositionsOptions();
-    options.positions = positions;
-    return options;
-  }
+    @JsOverlay
+    public static CoplanarPolygonOutlineGeometryFromPositionsOptions create(Cartesian3[] positions) {
+        CoplanarPolygonOutlineGeometryFromPositionsOptions options = new CoplanarPolygonOutlineGeometryFromPositionsOptions();
+        options.positions = positions;
+        return options;
+    }
 }

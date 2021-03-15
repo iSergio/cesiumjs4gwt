@@ -15,10 +15,9 @@
 
 package org.cesiumjs.cs.core;
 
-import org.cesiumjs.cs.js.JsObject;
-
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.js.JsObject;
 
 /**
  * The request scheduler is used to track and constrain the number of active
@@ -32,32 +31,32 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "RequestScheduler")
 public class RequestScheduler {
-  /**
-   * The maximum number of simultaneous active requests. Un-throttled requests do
-   * not observe this limit. Default: 50
-   */
-  @JsProperty
-  public static Number maximumRequests;
+    /**
+     * The maximum number of simultaneous active requests. Un-throttled requests do
+     * not observe this limit. Default: 50
+     */
+    @JsProperty
+    public static Number maximumRequests;
 
-  /**
-   * The maximum number of simultaneous active requests per server. Un-throttled
-   * requests or servers specifically listed in requestsByServer do not observe
-   * this limit. Default Value: 6
-   */
-  @JsProperty
-  public static Number maximumRequestsPerServer;
+    /**
+     * The maximum number of simultaneous active requests per server. Un-throttled
+     * requests or servers specifically listed in requestsByServer do not observe
+     * this limit. Default Value: 6
+     */
+    @JsProperty
+    public static Number maximumRequestsPerServer;
 
-  /**
-   * A per server key list of overrides to use for throttling instead of
-   * maximumRequestsPerServer
-   */
-  @JsProperty
-  public static JsObject requestsByServer;
+    /**
+     * A per server key list of overrides to use for throttling instead of
+     * maximumRequestsPerServer
+     */
+    @JsProperty
+    public static JsObject requestsByServer;
 
-  /**
-   * Specifies if the request scheduler should throttle incoming requests, or let
-   * the browser queue requests under its control. Default: true
-   */
-  @JsProperty
-  public static boolean throttleRequests;
+    /**
+     * Specifies if the request scheduler should throttle incoming requests, or let
+     * the browser queue requests under its control. Default: true
+     */
+    @JsProperty
+    public static boolean throttleRequests;
 }

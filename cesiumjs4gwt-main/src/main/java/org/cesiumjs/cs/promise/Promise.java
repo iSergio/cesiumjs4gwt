@@ -26,13 +26,19 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Promise")
 public class Promise<V, E> {
-  @JsConstructor
-  public Promise(Executor<V, E> executor) {
-  }
+    @JsConstructor
+    public Promise(Executor<V, E> executor) {
+    }
 
-  @JsMethod
-  public native Promise<V, E> then(Fulfill<V> fulfill);
+    @JsMethod
+    public native Promise<V, E> then(Fulfill<V> fulfill);
 
-  @JsMethod
-  public native Promise<V, E> then(Fulfill<V> fulfill, Reject<E> reject);
+    @JsMethod
+    public native Promise<V, E> then(Fulfill<V> fulfill, Reject<E> reject);
+
+    @JsMethod
+    public native Promise<V, E> then(Fulfill<V> fulfill, Reject<E> reject, Progress<?> progress);
+
+    @JsMethod
+    public native Promise<V, E> otherwise(Reject<E> reject);
 }

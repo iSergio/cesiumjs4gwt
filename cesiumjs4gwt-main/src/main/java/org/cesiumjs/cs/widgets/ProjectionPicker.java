@@ -17,13 +17,11 @@
 package org.cesiumjs.cs.widgets;
 
 import com.google.gwt.dom.client.Element;
-
-import org.cesiumjs.cs.scene.Scene;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.scene.Scene;
 
 /**
  * The ProjectionPicker is a single button widget for switching between
@@ -33,51 +31,51 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "ProjectionPicker")
 public class ProjectionPicker {
-  /**
-   * Gets the parent container.
-   */
-  @JsProperty
-  public Element container;
-  /**
-   * Gets the view model.
-   */
-  @JsProperty
-  public ProjectionPickerViewModel viewModel;
+    /**
+     * Gets the parent container.
+     */
+    @JsProperty
+    public Element container;
+    /**
+     * Gets the view model.
+     */
+    @JsProperty
+    public ProjectionPickerViewModel viewModel;
 
-  /**
-   * The ProjectionPicker is a single button widget for switching between
-   * perspective and orthographic projections.
-   * 
-   * @param container The ID that will contain the widget.
-   * @param scene     The Scene instance to use.
-   */
-  @JsConstructor
-  public ProjectionPicker(String container, Scene scene) {
-  }
+    /**
+     * The ProjectionPicker is a single button widget for switching between
+     * perspective and orthographic projections.
+     *
+     * @param container The ID that will contain the widget.
+     * @param scene     The Scene instance to use.
+     */
+    @JsConstructor
+    public ProjectionPicker(String container, Scene scene) {
+    }
 
-  /**
-   * The ProjectionPicker is a single button widget for switching between
-   * perspective and orthographic projections.
-   * 
-   * @param container The DOM element that will contain the widget.
-   * @param scene     The Scene instance to use.
-   */
-  @JsConstructor
-  public ProjectionPicker(Element container, Scene scene) {
-  }
+    /**
+     * The ProjectionPicker is a single button widget for switching between
+     * perspective and orthographic projections.
+     *
+     * @param container The DOM element that will contain the widget.
+     * @param scene     The Scene instance to use.
+     */
+    @JsConstructor
+    public ProjectionPicker(Element container, Scene scene) {
+    }
 
-  /**
-   * Destroys the widget. Should be called if permanently removing the widget from
-   * layout.
-   */
-  @JsMethod
-  public native void destroy();
+    /**
+     * Destroys the widget. Should be called if permanently removing the widget from
+     * layout.
+     */
+    @JsMethod
+    public native void destroy();
 
-  /**
-   * true if the object has been destroyed, false otherwise.
-   * 
-   * @return true if the object has been destroyed, false otherwise.
-   */
-  @JsMethod
-  public native boolean isDestroyed();
+    /**
+     * true if the object has been destroyed, false otherwise.
+     *
+     * @return true if the object has been destroyed, false otherwise.
+     */
+    @JsMethod
+    public native boolean isDestroyed();
 }

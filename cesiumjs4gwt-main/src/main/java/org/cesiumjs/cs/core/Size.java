@@ -26,12 +26,12 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public abstract class Size {
-  @JsProperty
-  public int width;
-  @JsProperty
-  public int height;
+    @JsProperty
+    public int width;
+    @JsProperty
+    public int height;
 
-  @JsConstructor
-  private Size() {
-  }
+    @JsConstructor
+    private Size() {
+    }
 }

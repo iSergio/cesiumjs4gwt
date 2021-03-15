@@ -28,9 +28,9 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class ResourceJsonpOptions extends ResourceOptions {
-  /**
-   * The callback parameter name that the server expects. Default: callback
-   */
-  @JsProperty
-  public String callbackParameterName;
+    /**
+     * The callback parameter name that the server expects. Default: callback
+     */
+    @JsProperty
+    public String callbackParameterName;
 }

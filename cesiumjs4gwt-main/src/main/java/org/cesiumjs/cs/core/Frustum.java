@@ -25,24 +25,24 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "Frustum")
 public class Frustum {
-  /**
-   * The distance of the far plane. Default: 500000000.0;
-   */
-  @JsProperty
-  public double far;
-  /**
-   * The distance of the near plane. Default: 1.0
-   */
-  @JsProperty
-  public double near;
+    /**
+     * The distance of the far plane. Default: 500000000.0;
+     */
+    @JsProperty
+    public double far;
+    /**
+     * The distance of the near plane. Default: 1.0
+     */
+    @JsProperty
+    public double near;
 
-  /**
-   * Gets the perspective projection matrix computed from the view frustum.
-   */
-  @JsProperty(name = "projectionMatrix")
-  public native Matrix4 projectionMatrix();
+    @JsConstructor
+    public Frustum() {
+    }
 
-  @JsConstructor
-  public Frustum() {
-  }
+    /**
+     * Gets the perspective projection matrix computed from the view frustum.
+     */
+    @JsProperty(name = "projectionMatrix")
+    public native Matrix4 projectionMatrix();
 }

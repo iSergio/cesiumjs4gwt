@@ -18,15 +18,8 @@ package org.cesiumjs.cs.core;
 
 import com.google.gwt.typedarrays.shared.ArrayBuffer;
 import com.google.gwt.typedarrays.shared.Uint8Array;
-
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.options.GoogleEarthEnterpriseTerrainDataOptions;
-
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsOverlay;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
 
 /**
  * Terrain data for a single tile from a Google Earth Enterprise server.
@@ -35,22 +28,22 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "GoogleEarthEnterpriseTerrainData")
 public class GoogleEarthEnterpriseTerrainData {
-  /**
-   * The water mask included in this terrain data, if any. A water mask is a
-   * rectangular Uint8Array or image where a value of 255 indicates water and a
-   * value of 0 indicates land. Values in between 0 and 255 are allowed as well to
-   * smoothly blend between land and water.
-   */
-  @JsProperty
-  public Uint8Array waterMask;
+    /**
+     * The water mask included in this terrain data, if any. A water mask is a
+     * rectangular Uint8Array or image where a value of 255 indicates water and a
+     * value of 0 indicates land. Values in between 0 and 255 are allowed as well to
+     * smoothly blend between land and water.
+     */
+    @JsProperty
+    public Uint8Array waterMask;
 
-  @JsConstructor
-  private GoogleEarthEnterpriseTerrainData(GoogleEarthEnterpriseTerrainDataOptions options) {
-  }
+    @JsConstructor
+    private GoogleEarthEnterpriseTerrainData(GoogleEarthEnterpriseTerrainDataOptions options) {
+    }
 
-  @JsOverlay
-  @JsMethod
-  public static GoogleEarthEnterpriseTerrainData create(ArrayBuffer buffer) {
-    return new GoogleEarthEnterpriseTerrainData(GoogleEarthEnterpriseTerrainDataOptions.create(buffer));
-  }
+    @JsOverlay
+    @JsMethod
+    public static GoogleEarthEnterpriseTerrainData create(ArrayBuffer buffer) {
+        return new GoogleEarthEnterpriseTerrainData(GoogleEarthEnterpriseTerrainDataOptions.create(buffer));
+    }
 }

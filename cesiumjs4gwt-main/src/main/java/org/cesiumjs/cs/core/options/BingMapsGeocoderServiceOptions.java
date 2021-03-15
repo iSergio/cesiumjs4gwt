@@ -16,41 +16,37 @@
 
 package org.cesiumjs.cs.core.options;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsOverlay;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import jsinterop.annotations.*;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class BingMapsGeocoderServiceOptions {
-  /**
-   * A key to use with the Bing Maps geocoding service
-   */
-  @JsProperty
-  public String key;
+    /**
+     * A key to use with the Bing Maps geocoding service
+     */
+    @JsProperty
+    public String key;
 
-  /**
-   * Options for {@link org.cesiumjs.cs.core.BingMapsGeocoderService}
-   */
-  @JsConstructor
-  private BingMapsGeocoderServiceOptions() {
-  }
+    /**
+     * Options for {@link org.cesiumjs.cs.core.BingMapsGeocoderService}
+     */
+    @JsConstructor
+    private BingMapsGeocoderServiceOptions() {
+    }
 
-  /**
-   * Fast create {@link BingMapsGeocoderServiceOptions} instance by mandatory
-   * parameter - key
-   * 
-   * @param key A key to use with the Bing Maps geocoding service
-   * @return {@link BingMapsGeocoderServiceOptions} instance.
-   */
-  @JsOverlay
-  public static BingMapsGeocoderServiceOptions create(String key) {
-    BingMapsGeocoderServiceOptions options = new BingMapsGeocoderServiceOptions();
-    options.key = key;
-    return options;
-  }
+    /**
+     * Fast create {@link BingMapsGeocoderServiceOptions} instance by mandatory
+     * parameter - key
+     *
+     * @param key A key to use with the Bing Maps geocoding service
+     * @return {@link BingMapsGeocoderServiceOptions} instance.
+     */
+    @JsOverlay
+    public static BingMapsGeocoderServiceOptions create(String key) {
+        BingMapsGeocoderServiceOptions options = new BingMapsGeocoderServiceOptions();
+        options.key = key;
+        return options;
+    }
 }

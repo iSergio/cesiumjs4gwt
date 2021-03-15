@@ -16,12 +16,11 @@
 
 package org.cesiumjs.cs.widgets;
 
-import org.cesiumjs.cs.scene.Globe;
-import org.cesiumjs.cs.widgets.options.BaseLayerPickerViewModelOptions;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.scene.Globe;
+import org.cesiumjs.cs.widgets.options.BaseLayerPickerViewModelOptions;
 
 /**
  * The view model for {@link BaseLayerPicker}.
@@ -30,63 +29,63 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "BaseLayerPickerViewModel")
 public class BaseLayerPickerViewModel {
-  /**
-   * Gets the button background image. This property is observable.
-   */
-  @JsProperty
-  public String buttonImageUrl;
-  /**
-   * Gets the button tooltip. This property is observable.
-   */
-  @JsProperty
-  public String buttonTooltip;
-  /**
-   * Gets or sets whether the imagery selection drop-down is currently visible.
-   * Default: false
-   */
-  @JsProperty
-  public boolean dropDownVisible;
-  /**
-   * Gets the globe.
-   */
-  @JsProperty
-  public Globe globe;
-  /**
-   * Gets or sets an array of ProviderViewModel instances available for imagery
-   * selection. This property is observable.
-   */
-  @JsProperty
-  public ProviderViewModel[] imageryProviderViewModels;
-  /**
-   * Gets or sets the currently selected imagery. This property is observable.
-   * Default: undefined
-   */
-  @JsProperty
-  public ProviderViewModel selectedImagery;
-  /**
-   * Gets or sets the currently selected terrain. This property is observable.
-   * Default: undefined
-   */
-  @JsProperty
-  public ProviderViewModel selectedTerrain;
-  /**
-   * Gets or sets an array of ProviderViewModel instances available for terrain
-   * selection. This property is observable.
-   */
-  @JsProperty
-  public ProviderViewModel[] terrainProviderViewModels;
-  /**
-   * Gets the command to toggle the visibility of the drop down.
-   */
-  @JsProperty
-  public Command toggleDropDown;
+    /**
+     * Gets the button background image. This property is observable.
+     */
+    @JsProperty
+    public String buttonImageUrl;
+    /**
+     * Gets the button tooltip. This property is observable.
+     */
+    @JsProperty
+    public String buttonTooltip;
+    /**
+     * Gets or sets whether the imagery selection drop-down is currently visible.
+     * Default: false
+     */
+    @JsProperty
+    public boolean dropDownVisible;
+    /**
+     * Gets the globe.
+     */
+    @JsProperty
+    public Globe globe;
+    /**
+     * Gets or sets an array of ProviderViewModel instances available for imagery
+     * selection. This property is observable.
+     */
+    @JsProperty
+    public ProviderViewModel[] imageryProviderViewModels;
+    /**
+     * Gets or sets the currently selected imagery. This property is observable.
+     * Default: undefined
+     */
+    @JsProperty
+    public ProviderViewModel selectedImagery;
+    /**
+     * Gets or sets the currently selected terrain. This property is observable.
+     * Default: undefined
+     */
+    @JsProperty
+    public ProviderViewModel selectedTerrain;
+    /**
+     * Gets or sets an array of ProviderViewModel instances available for terrain
+     * selection. This property is observable.
+     */
+    @JsProperty
+    public ProviderViewModel[] terrainProviderViewModels;
+    /**
+     * Gets the command to toggle the visibility of the drop down.
+     */
+    @JsProperty
+    public Command toggleDropDown;
 
-  /**
-   * The view model for {@link BaseLayerPicker}.
-   * 
-   * @param options object {@link BaseLayerPickerViewModelOptions}
-   */
-  @JsConstructor
-  public BaseLayerPickerViewModel(BaseLayerPickerViewModelOptions options) {
-  }
+    /**
+     * The view model for {@link BaseLayerPicker}.
+     *
+     * @param options object {@link BaseLayerPickerViewModelOptions}
+     */
+    @JsConstructor
+    public BaseLayerPickerViewModel(BaseLayerPickerViewModelOptions options) {
+    }
 }

@@ -24,50 +24,50 @@ import jsinterop.annotations.JsType;
  * Enumerates all possible filters used when minifying WebGL textures, which
  * takes places when zooming out of imagery. Provides the possible values for
  * the {@link org.cesiumjs.cs.scene.ImageryLayer#minificationFilter} property.
- * 
+ *
+ * @author Serge Silaev aka iSergio
  * @see TextureMagnificationFilter
  * @see org.cesiumjs.cs.scene.ImageryLayer#minificationFilter
- * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "TextureMinificationFilter")
 public class TextureMinificationFilter {
-  /**
-   * Bi-linear interpolation of image pixels to texture.
-   */
-  @JsProperty(name = "LINEAR")
-  public static native Number LINEAR();
+    @JsConstructor
+    private TextureMinificationFilter() {
+    }
 
-  /**
-   * WebGL LINEAR_MIPMAP_LINEAR interpolation of image pixels to texture.
-   */
-  @JsProperty(name = "LINEAR_MIPMAP_LINEAR")
-  public static native Number LINEAR_MIPMAP_LINEAR();
+    /**
+     * Bi-linear interpolation of image pixels to texture.
+     */
+    @JsProperty(name = "LINEAR")
+    public static native Number LINEAR();
 
-  /**
-   * WebGL LINEAR_MIPMAP_NEAREST interpolation of image pixels to texture.
-   */
-  @JsProperty(name = "LINEAR_MIPMAP_NEAREST")
-  public static native Number LINEAR_MIPMAP_NEAREST();
+    /**
+     * WebGL LINEAR_MIPMAP_LINEAR interpolation of image pixels to texture.
+     */
+    @JsProperty(name = "LINEAR_MIPMAP_LINEAR")
+    public static native Number LINEAR_MIPMAP_LINEAR();
 
-  /**
-   * Nearest neighbor sampling of image pixels to texture.
-   */
-  @JsProperty(name = "NEAREST")
-  public static native Number NEAREST();
+    /**
+     * WebGL LINEAR_MIPMAP_NEAREST interpolation of image pixels to texture.
+     */
+    @JsProperty(name = "LINEAR_MIPMAP_NEAREST")
+    public static native Number LINEAR_MIPMAP_NEAREST();
 
-  /**
-   * WebGL NEAREST_MIPMAP_LINEAR interpolation of image pixels to texture.
-   */
-  @JsProperty(name = "NEAREST_MIPMAP_LINEAR")
-  public static native Number NEAREST_MIPMAP_LINEAR();
+    /**
+     * Nearest neighbor sampling of image pixels to texture.
+     */
+    @JsProperty(name = "NEAREST")
+    public static native Number NEAREST();
 
-  /**
-   * WebGL NEAREST_MIPMAP_NEAREST interpolation of image pixels to texture.
-   */
-  @JsProperty(name = "NEAREST_MIPMAP_NEAREST")
-  public static native Number NEAREST_MIPMAP_NEAREST();
+    /**
+     * WebGL NEAREST_MIPMAP_LINEAR interpolation of image pixels to texture.
+     */
+    @JsProperty(name = "NEAREST_MIPMAP_LINEAR")
+    public static native Number NEAREST_MIPMAP_LINEAR();
 
-  @JsConstructor
-  private TextureMinificationFilter() {
-  }
+    /**
+     * WebGL NEAREST_MIPMAP_NEAREST interpolation of image pixels to texture.
+     */
+    @JsProperty(name = "NEAREST_MIPMAP_NEAREST")
+    public static native Number NEAREST_MIPMAP_NEAREST();
 }

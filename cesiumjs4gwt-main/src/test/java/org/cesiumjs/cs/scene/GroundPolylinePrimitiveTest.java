@@ -30,33 +30,30 @@ import org.cesiumjs.cs.scene.options.GroundPolylinePrimitiveOptions;
  * @author Serge Silaev aka iSergio
  */
 public class GroundPolylinePrimitiveTest extends BaseTestCase {
-  public void test() {
-    delayTestFinish(10_000);
+    public void test() {
+        delayTestFinish(10_000);
 
-    super.beginTest(new Test() {
-      @Override
-      public void execute() {
-        Cartesian3[] positions = Cartesian3.fromDegreesArray(
-            new double[] { -112.1340164450331, 36.05494287836128, -112.08821010582645, 36.097804071380715 });
-        GroundPolylineGeometryOptions groundPolylineGeometryOptions = GroundPolylineGeometryOptions.create(positions);
-        groundPolylineGeometryOptions.width = 4;
+        super.beginTest(() -> {
+            Cartesian3[] positions = Cartesian3.fromDegreesArray(
+                    new double[]{-112.1340164450331, 36.05494287836128, -112.08821010582645, 36.097804071380715});
+            GroundPolylineGeometryOptions groundPolylineGeometryOptions = GroundPolylineGeometryOptions.create(positions);
+            groundPolylineGeometryOptions.width = 4;
 
-        GeometryInstanceOptions geometryInstanceOptions = new GeometryInstanceOptions();
-        geometryInstanceOptions.geometry = new GroundPolylineGeometry(groundPolylineGeometryOptions);
-        geometryInstanceOptions.id = "object returned when this instance is picked and to get/set per-instance attributes";
+            GeometryInstanceOptions geometryInstanceOptions = new GeometryInstanceOptions();
+            geometryInstanceOptions.geometry = new GroundPolylineGeometry(groundPolylineGeometryOptions);
+            geometryInstanceOptions.id = "object returned when this instance is picked and to get/set per-instance attributes";
 
-        PolylineMaterialAppearanceOptions appearanceOptions = new PolylineMaterialAppearanceOptions();
-        appearanceOptions.material = Material.fromType("Color");
+            PolylineMaterialAppearanceOptions appearanceOptions = new PolylineMaterialAppearanceOptions();
+            appearanceOptions.material = Material.fromType("Color");
 
-        GroundPolylinePrimitiveOptions primitiveOptions = new GroundPolylinePrimitiveOptions();
-        primitiveOptions.geometryInstances = new GeometryInstance[] { new GeometryInstance(geometryInstanceOptions) };
-        primitiveOptions.appearance = new PolylineMaterialAppearance(appearanceOptions);
+            GroundPolylinePrimitiveOptions primitiveOptions = new GroundPolylinePrimitiveOptions();
+            primitiveOptions.geometryInstances = new GeometryInstance[]{new GeometryInstance(geometryInstanceOptions)};
+            primitiveOptions.appearance = new PolylineMaterialAppearance(appearanceOptions);
 
-        GroundPolylinePrimitive groundPolylinePrimitive = new GroundPolylinePrimitive(primitiveOptions);
-        assertNotNull(groundPolylinePrimitive);
+            GroundPolylinePrimitive groundPolylinePrimitive = new GroundPolylinePrimitive(primitiveOptions);
+            assertNotNull(groundPolylinePrimitive);
 
-        finishTest();
-      }
-    });
-  }
+            finishTest();
+        });
+    }
 }

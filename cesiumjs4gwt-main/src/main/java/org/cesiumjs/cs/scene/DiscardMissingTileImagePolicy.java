@@ -16,10 +16,9 @@
 
 package org.cesiumjs.cs.scene;
 
-import org.cesiumjs.cs.scene.options.DiscardMissingTileImagePolicyOptions;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.scene.options.DiscardMissingTileImagePolicyOptions;
 
 /**
  * A policy for discarding tile images that match a known image containing a
@@ -29,7 +28,7 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "DiscardMissingTileImagePolicy")
 public class DiscardMissingTileImagePolicy extends TileDiscardPolicy {
-  @JsConstructor
-  public DiscardMissingTileImagePolicy(DiscardMissingTileImagePolicyOptions options) {
-  }
+    @JsConstructor
+    public DiscardMissingTileImagePolicy(DiscardMissingTileImagePolicyOptions options) {
+    }
 }

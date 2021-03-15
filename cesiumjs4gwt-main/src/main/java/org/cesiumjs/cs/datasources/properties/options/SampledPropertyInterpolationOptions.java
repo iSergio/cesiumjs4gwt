@@ -16,32 +16,31 @@
 
 package org.cesiumjs.cs.datasources.properties.options;
 
-import org.cesiumjs.cs.core.interpolation.InterpolationAlgorithm;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.interpolation.InterpolationAlgorithm;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class SampledPropertyInterpolationOptions {
-  /**
-   * The new interpolation algorithm. If undefined, the existing property will be
-   * unchanged.
-   */
-  @JsProperty
-  public InterpolationAlgorithm interpolationAlgorithm;
-  /**
-   * The new interpolation degree. If undefined, the existing property will be
-   * unchanged.
-   */
-  @JsProperty
-  public double interpolationDegree;
+    /**
+     * The new interpolation algorithm. If undefined, the existing property will be
+     * unchanged.
+     */
+    @JsProperty
+    public InterpolationAlgorithm interpolationAlgorithm;
+    /**
+     * The new interpolation degree. If undefined, the existing property will be
+     * unchanged.
+     */
+    @JsProperty
+    public double interpolationDegree;
 
-  @JsConstructor
-  public SampledPropertyInterpolationOptions() {
-  }
+    @JsConstructor
+    public SampledPropertyInterpolationOptions() {
+    }
 }

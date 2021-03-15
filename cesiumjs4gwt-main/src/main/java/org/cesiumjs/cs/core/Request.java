@@ -16,13 +16,12 @@
 
 package org.cesiumjs.cs.core;
 
-import org.cesiumjs.cs.core.enums.RequestType;
-import org.cesiumjs.cs.core.options.RequestOptions;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.enums.RequestType;
+import org.cesiumjs.cs.core.options.RequestOptions;
 
 /**
  * Stores information for making a request. In general this does not need to be
@@ -32,102 +31,101 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "Request")
 public class Request {
-  /**
-   * The function that is called when the request is cancelled.
-   */
-  @JsProperty
-  public CancelCallback cancelFunction;
-  /**
-   * Priority is a unit-less value where lower values represent higher priority.
-   * For world-based objects, this is usually the distance from the camera. A
-   * request that does not have a priority function defaults to a priority of 0.
-   * If priorityFunction is defined, this value is updated every frame with the
-   * result of that call. Default: 0.0
-   */
-  @JsProperty
-  public double priority;
-  /**
-   * The function that is called to update the request's priority, which occurs
-   * once per frame.
-   */
-  @JsProperty
-  public PriorityCallback priorityFunction;
-  /**
-   * The function that makes the actual data request.
-   */
-  @JsProperty
-  public RequestCallback requestFunction;
-  /**
-   * The current state of the request.
-   * 
-   * @see org.cesiumjs.cs.core.enums.RequestState
-   */
-  @JsProperty
-  public Number readonlystate;
+    /**
+     * The function that is called when the request is cancelled.
+     */
+    @JsProperty
+    public CancelCallback cancelFunction;
+    /**
+     * Priority is a unit-less value where lower values represent higher priority.
+     * For world-based objects, this is usually the distance from the camera. A
+     * request that does not have a priority function defaults to a priority of 0.
+     * If priorityFunction is defined, this value is updated every frame with the
+     * result of that call. Default: 0.0
+     */
+    @JsProperty
+    public double priority;
+    /**
+     * The function that is called to update the request's priority, which occurs
+     * once per frame.
+     */
+    @JsProperty
+    public PriorityCallback priorityFunction;
+    /**
+     * The function that makes the actual data request.
+     */
+    @JsProperty
+    public RequestCallback requestFunction;
+    /**
+     * The current state of the request.
+     *
+     * @see org.cesiumjs.cs.core.enums.RequestState
+     */
+    @JsProperty
+    public Number readonlystate;
+    /**
+     * The URL to request.
+     */
+    @JsProperty
+    public String url;
 
-  /**
-   * Whether to throttle and prioritize the request. If false, the request will be
-   * sent immediately. If true, the request will be throttled and sent based on
-   * priority. Default: false
-   */
-  @JsProperty(name = "throttle")
-  public native boolean throttle();
+    /**
+     * Stores information for making a request. In general this does not need to be
+     * constructed directly.
+     */
+    @JsConstructor
+    public Request() {
+    }
 
-  /**
-   * Whether to throttle the request by server. Browsers typically support about
-   * 6-8 parallel connections for HTTP/1 servers, and an unlimited amount of
-   * connections for HTTP/2 servers. Setting this value to true is preferable for
-   * requests going through HTTP/1 servers. Default: false
-   */
-  @JsProperty(name = "throttleByServer")
-  public native boolean throttleByServer();
+    /**
+     * Stores information for making a request. In general this does not need to be
+     * constructed directly.
+     *
+     * @param options {@link RequestOptions}
+     */
+    @JsConstructor
+    public Request(RequestOptions options) {
+    }
 
-  /**
-   * Type of request.
-   * 
-   * @see org.cesiumjs.cs.core.enums.RequestType Default:
-   *      {@link RequestType#OTHER()}
-   */
-  @SuppressWarnings("unusable-by-js")
-  @JsProperty(name = "type")
-  public native Number type();
+    /**
+     * Whether to throttle and prioritize the request. If false, the request will be
+     * sent immediately. If true, the request will be throttled and sent based on
+     * priority. Default: false
+     */
+    @JsProperty(name = "throttle")
+    public native boolean throttle();
 
-  /**
-   * The URL to request.
-   */
-  @JsProperty
-  public String url;
+    /**
+     * Whether to throttle the request by server. Browsers typically support about
+     * 6-8 parallel connections for HTTP/1 servers, and an unlimited amount of
+     * connections for HTTP/2 servers. Setting this value to true is preferable for
+     * requests going through HTTP/1 servers. Default: false
+     */
+    @JsProperty(name = "throttleByServer")
+    public native boolean throttleByServer();
 
-  /**
-   * Stores information for making a request. In general this does not need to be
-   * constructed directly.
-   */
-  @JsConstructor
-  public Request() {
-  }
+    /**
+     * Type of request.
+     *
+     * @see org.cesiumjs.cs.core.enums.RequestType Default:
+     * {@link RequestType#OTHER()}
+     */
+    @SuppressWarnings("unusable-by-js")
+    @JsProperty(name = "type")
+    public native Number type();
 
-  /**
-   * Stores information for making a request. In general this does not need to be
-   * constructed directly.
-   * 
-   * @param options {@link RequestOptions}
-   */
-  @JsConstructor
-  public Request(RequestOptions options) {
-  }
+    @JsFunction
+    public interface RequestCallback {
+        void function();
+    }
 
-  @JsFunction
-  public interface RequestCallback {
-    void function();
-  }
+    @JsFunction
+    public interface CancelCallback {
+        void function();
+    }
 
-  @JsFunction
-  public interface CancelCallback {
-    void function();
-  }
-
-  @JsFunction
-  public interface PriorityCallback {
-    void function();
-  }
+    @JsFunction
+    public interface PriorityCallback {
+        void function();
+    }
 }

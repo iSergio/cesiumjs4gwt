@@ -16,13 +16,12 @@
 
 package org.cesiumjs.cs.datasources.properties.options;
 
-import org.cesiumjs.cs.core.Color;
-import org.cesiumjs.cs.datasources.properties.Property;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Color;
+import org.cesiumjs.cs.datasources.properties.Property;
 
 /**
  * @author Serge Silaev aka iSergio
@@ -48,9 +47,11 @@ public class PolylineGlowMaterialPropertyOptions {
      */
     @JsProperty
     public Property taperPower;
+
     /**
      * Options for {@link org.cesiumjs.cs.datasources.properties.PolylineGlowMaterialProperty}
      */
     @JsConstructor
-    public PolylineGlowMaterialPropertyOptions() {}
+    public PolylineGlowMaterialPropertyOptions() {
+    }
 }

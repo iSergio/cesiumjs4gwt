@@ -16,100 +16,95 @@
 
 package org.cesiumjs.cs.scene.providers.options;
 
-import org.cesiumjs.cs.core.Credit;
-import org.cesiumjs.cs.core.Ellipsoid;
-import org.cesiumjs.cs.core.Rectangle;
-import org.cesiumjs.cs.core.Resource;
-import org.cesiumjs.cs.core.TilingScheme;
-import org.cesiumjs.cs.promise.Promise;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.*;
+import org.cesiumjs.cs.promise.Promise;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class TileMapServiceImageryProviderOptions {
-  /**
-   * Path to image tiles on server.
-   */
-  @JsProperty
-  public String url;
-  /**
-   * Path to image tiles on server.
-   */
-  @JsProperty(name = "url")
-  public Resource resource;
-  /**
-   * Path to image tiles on server.
-   */
-  @JsProperty(name = "url")
-  public Promise<Resource, Void> promise;
-  /**
-   * The file extension for images on the server. Default: png
-   */
-  @JsProperty
-  public String fileExtension;
-  /**
-   * A credit for the data source, which is displayed on the canvas.
-   */
-  @JsProperty
-  public Credit credit;
-  /**
-   * The minimum level-of-detail supported by the imagery provider. Take care when
-   * specifying this that the number of tiles at the minimum level is small, such
-   * as four or less. A larger number is likely to result in rendering problems.
-   * Default: 0
-   */
-  @JsProperty
-  public int minimumLevel;
-  /**
-   * The maximum level-of-detail supported by the imagery provider, or undefined
-   * if there is no limit.
-   */
-  @JsProperty
-  public int maximumLevel;
-  /**
-   * The rectangle, in radians, covered by the image. Default:
-   * {@link org.cesiumjs.cs.core.Rectangle#MAX_VALUE()}
-   */
-  @JsProperty
-  public Rectangle rectangle;
-  /**
-   * The tiling scheme specifying how the ellipsoidal surface is broken into
-   * tiles. If this parameter is not provided, a WebMercatorTilingScheme is used.
-   */
-  @JsProperty
-  public TilingScheme tilingScheme;
-  /**
-   * The ellipsoid. If the tilingScheme is specified, this parameter is ignored
-   * and the tiling scheme's ellipsoid is used instead. If neither parameter is
-   * specified, the WGS84 ellipsoid is used.
-   */
-  @JsProperty
-  public Ellipsoid ellipsoid;
-  /**
-   * Pixel width of image tiles. Default: 256
-   */
-  @JsProperty
-  public int tileWidth;
-  /**
-   * Pixel height of image tiles. Default: 256
-   */
-  @JsProperty
-  public int tileHeight;
-  /**
-   * Older versions of gdal2tiles.py flipped X and Y values in
-   * tilemapresource.xml. Specifying this option will do the same, allowing for
-   * loading of these incorrect tilesets.
-   */
-  @JsProperty
-  public boolean flipXY;
+    /**
+     * Path to image tiles on server.
+     */
+    @JsProperty
+    public String url;
+    /**
+     * Path to image tiles on server.
+     */
+    @JsProperty(name = "url")
+    public Resource resource;
+    /**
+     * Path to image tiles on server.
+     */
+    @JsProperty(name = "url")
+    public Promise<Resource, Void> promise;
+    /**
+     * The file extension for images on the server. Default: png
+     */
+    @JsProperty
+    public String fileExtension;
+    /**
+     * A credit for the data source, which is displayed on the canvas.
+     */
+    @JsProperty
+    public Credit credit;
+    /**
+     * The minimum level-of-detail supported by the imagery provider. Take care when
+     * specifying this that the number of tiles at the minimum level is small, such
+     * as four or less. A larger number is likely to result in rendering problems.
+     * Default: 0
+     */
+    @JsProperty
+    public int minimumLevel;
+    /**
+     * The maximum level-of-detail supported by the imagery provider, or undefined
+     * if there is no limit.
+     */
+    @JsProperty
+    public int maximumLevel;
+    /**
+     * The rectangle, in radians, covered by the image. Default:
+     * {@link org.cesiumjs.cs.core.Rectangle#MAX_VALUE()}
+     */
+    @JsProperty
+    public Rectangle rectangle;
+    /**
+     * The tiling scheme specifying how the ellipsoidal surface is broken into
+     * tiles. If this parameter is not provided, a WebMercatorTilingScheme is used.
+     */
+    @JsProperty
+    public TilingScheme tilingScheme;
+    /**
+     * The ellipsoid. If the tilingScheme is specified, this parameter is ignored
+     * and the tiling scheme's ellipsoid is used instead. If neither parameter is
+     * specified, the WGS84 ellipsoid is used.
+     */
+    @JsProperty
+    public Ellipsoid ellipsoid;
+    /**
+     * Pixel width of image tiles. Default: 256
+     */
+    @JsProperty
+    public int tileWidth;
+    /**
+     * Pixel height of image tiles. Default: 256
+     */
+    @JsProperty
+    public int tileHeight;
+    /**
+     * Older versions of gdal2tiles.py flipped X and Y values in
+     * tilemapresource.xml. Specifying this option will do the same, allowing for
+     * loading of these incorrect tilesets.
+     */
+    @JsProperty
+    public boolean flipXY;
 
-  @JsConstructor
-  public TileMapServiceImageryProviderOptions() {
-  }
+    @JsConstructor
+    public TileMapServiceImageryProviderOptions() {
+    }
 }

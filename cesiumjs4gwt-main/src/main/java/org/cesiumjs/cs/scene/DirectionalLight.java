@@ -15,37 +15,36 @@
 
 package org.cesiumjs.cs.scene;
 
-import org.cesiumjs.cs.core.Cartesian3;
-import org.cesiumjs.cs.scene.options.DirectionalLightOptions;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Cartesian3;
+import org.cesiumjs.cs.scene.options.DirectionalLightOptions;
 
 /**
  * A light that gets emitted in a single direction from infinitely far away.
  */
 @JsType(isNative = true, namespace = "Cesium", name = "DirectionalLight")
 public class DirectionalLight extends Light {
-  /**
-   * The direction in which light gets emitted.
-   */
-  @JsProperty
-  public Cartesian3 direction;
+    /**
+     * The direction in which light gets emitted.
+     */
+    @JsProperty
+    public Cartesian3 direction;
 
-  @JsConstructor
-  protected DirectionalLight(DirectionalLightOptions options) {
-  }
+    @JsConstructor
+    protected DirectionalLight(DirectionalLightOptions options) {
+    }
 
-  @JsOverlay
-  public static DirectionalLight create(Cartesian3 direction) {
-    DirectionalLightOptions options = DirectionalLightOptions.create(direction);
-    return new DirectionalLight(options);
-  }
+    @JsOverlay
+    public static DirectionalLight create(Cartesian3 direction) {
+        DirectionalLightOptions options = DirectionalLightOptions.create(direction);
+        return new DirectionalLight(options);
+    }
 
-  @JsOverlay
-  public static DirectionalLight create(DirectionalLightOptions options) {
-    return new DirectionalLight(options);
-  }
+    @JsOverlay
+    public static DirectionalLight create(DirectionalLightOptions options) {
+        return new DirectionalLight(options);
+    }
 }

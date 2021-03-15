@@ -23,21 +23,18 @@ import org.cesiumjs.cs.core.Cartesian3;
  * @author Serge Silaev aka iSergio
  */
 public class GroundPolylineGeometryTest extends BaseTestCase {
-  public void testCreate() {
-    delayTestFinish(10_000);
+    public void testCreate() {
+        delayTestFinish(10_000);
 
-    super.beginTest(new Test() {
-      @Override
-      public void execute() {
-        Cartesian3[] positions = Cartesian3.fromDegreesArray(new double[] { -112.1340164450331, 36.05494287836128,
-            -112.08821010582645, 36.097804071380715, -112.13296079730024, 36.168769146801104 });
-        GroundPolylineGeometry geometry = GroundPolylineGeometry.create(positions);
-        assertNotNull(geometry);
-        assertEquals(1.0, geometry.width);
-        assertEquals(9999.0, geometry.granularity);
-        assertFalse(geometry.loop);
-        finishTest();
-      }
-    });
-  }
+        super.beginTest(() -> {
+            Cartesian3[] positions = Cartesian3.fromDegreesArray(new double[]{-112.1340164450331, 36.05494287836128,
+                    -112.08821010582645, 36.097804071380715, -112.13296079730024, 36.168769146801104});
+            GroundPolylineGeometry geometry = GroundPolylineGeometry.create(positions);
+            assertNotNull(geometry);
+            assertEquals(1.0, geometry.width);
+            assertEquals(9999.0, geometry.granularity);
+            assertFalse(geometry.loop);
+            finishTest();
+        });
+    }
 }

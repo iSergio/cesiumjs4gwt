@@ -21,7 +21,8 @@ import jsinterop.annotations.JsFunction;
 /**
  * @author Serge Silaev aka iSergio
  */
+@FunctionalInterface
 @JsFunction
 public interface Fulfill<V> {
-  void onFulfilled(V value);
+    void onFulfilled(V value);
 }

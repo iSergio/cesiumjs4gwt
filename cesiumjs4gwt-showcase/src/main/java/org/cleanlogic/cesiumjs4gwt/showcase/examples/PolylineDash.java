@@ -19,7 +19,6 @@ package org.cleanlogic.cesiumjs4gwt.showcase.examples;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.inject.Inject;
-
 import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.datasources.Entity;
@@ -38,95 +37,95 @@ import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ShowcaseExampleStor
  */
 public class PolylineDash extends AbstractExample {
 
-  @Inject
-  public PolylineDash(ShowcaseExampleStore store) {
-    super("Polyline Dash", "Draw dashed polylines.",
-        new String[] { "Showcase", "Cesium", "3d", "polyline", "PolylineDashMaterialProperty" }, store);
-  }
+    @Inject
+    public PolylineDash(ShowcaseExampleStore store) {
+        super("Polyline Dash", "Draw dashed polylines.",
+                new String[]{"Showcase", "Cesium", "3d", "polyline", "PolylineDashMaterialProperty"}, store);
+    }
 
-  @Override
-  public void buildPanel() {
-    ViewerPanel csVPanel = new ViewerPanel();
-    PolylineDashMaterialPropertyOptions materialPropertyOptions;
-    PolylineGraphicsOptions polylineGraphicsOptions;
-    EntityOptions entityOptions;
+    @Override
+    public void buildPanel() {
+        ViewerPanel csVPanel = new ViewerPanel();
+        PolylineDashMaterialPropertyOptions materialPropertyOptions;
+        PolylineGraphicsOptions polylineGraphicsOptions;
+        EntityOptions entityOptions;
 
-    materialPropertyOptions = new PolylineDashMaterialPropertyOptions();
-    materialPropertyOptions.color = new ConstantProperty<>(Color.RED());
-    polylineGraphicsOptions = new PolylineGraphicsOptions();
-    polylineGraphicsOptions.width = new ConstantProperty<>(5);
-    polylineGraphicsOptions.material = new PolylineDashMaterialProperty(materialPropertyOptions);
-    polylineGraphicsOptions.positions = new ConstantProperty<>(
-        Cartesian3.fromDegreesArrayHeights(new double[] { -75, 38, 250000, -125, 38, 250000 }));
-    entityOptions = new EntityOptions();
-    entityOptions.name = "Red dashed line";
-    entityOptions.polyline = new PolylineGraphics(polylineGraphicsOptions);
-    Entity redLine = csVPanel.getViewer().entities().add(entityOptions);
+        materialPropertyOptions = new PolylineDashMaterialPropertyOptions();
+        materialPropertyOptions.color = new ConstantProperty<>(Color.RED());
+        polylineGraphicsOptions = new PolylineGraphicsOptions();
+        polylineGraphicsOptions.width = new ConstantProperty<>(5);
+        polylineGraphicsOptions.material = new PolylineDashMaterialProperty(materialPropertyOptions);
+        polylineGraphicsOptions.positions = new ConstantProperty<>(
+                Cartesian3.fromDegreesArrayHeights(new double[]{-75, 38, 250000, -125, 38, 250000}));
+        entityOptions = new EntityOptions();
+        entityOptions.name = "Red dashed line";
+        entityOptions.polyline = new PolylineGraphics(polylineGraphicsOptions);
+        Entity redLine = csVPanel.getViewer().entities().add(entityOptions);
 
-    materialPropertyOptions = new PolylineDashMaterialPropertyOptions();
-    materialPropertyOptions.color = new ConstantProperty<>(Color.BLUE());
-    materialPropertyOptions.gapColor = new ConstantProperty<>(Color.YELLOW());
-    polylineGraphicsOptions = new PolylineGraphicsOptions();
-    polylineGraphicsOptions.width = new ConstantProperty<>(30);
-    polylineGraphicsOptions.material = new PolylineDashMaterialProperty(materialPropertyOptions);
-    polylineGraphicsOptions.positions = new ConstantProperty<>(
-        Cartesian3.fromDegreesArrayHeights(new double[] { -75, 40, 250000, -125, 40, 250000 }));
-    entityOptions = new EntityOptions();
-    entityOptions.name = "Wide blue dashed line with a gap color";
-    entityOptions.polyline = new PolylineGraphics(polylineGraphicsOptions);
-    Entity blueLine = csVPanel.getViewer().entities().add(entityOptions);
+        materialPropertyOptions = new PolylineDashMaterialPropertyOptions();
+        materialPropertyOptions.color = new ConstantProperty<>(Color.BLUE());
+        materialPropertyOptions.gapColor = new ConstantProperty<>(Color.YELLOW());
+        polylineGraphicsOptions = new PolylineGraphicsOptions();
+        polylineGraphicsOptions.width = new ConstantProperty<>(30);
+        polylineGraphicsOptions.material = new PolylineDashMaterialProperty(materialPropertyOptions);
+        polylineGraphicsOptions.positions = new ConstantProperty<>(
+                Cartesian3.fromDegreesArrayHeights(new double[]{-75, 40, 250000, -125, 40, 250000}));
+        entityOptions = new EntityOptions();
+        entityOptions.name = "Wide blue dashed line with a gap color";
+        entityOptions.polyline = new PolylineGraphics(polylineGraphicsOptions);
+        Entity blueLine = csVPanel.getViewer().entities().add(entityOptions);
 
-    materialPropertyOptions = new PolylineDashMaterialPropertyOptions();
-    materialPropertyOptions.color = new ConstantProperty<>(Color.ORANGE());
-    materialPropertyOptions.dashLength = new ConstantProperty<>(8.0);
-    polylineGraphicsOptions = new PolylineGraphicsOptions();
-    polylineGraphicsOptions.width = new ConstantProperty<>(5);
-    polylineGraphicsOptions.material = new PolylineDashMaterialProperty(materialPropertyOptions);
-    polylineGraphicsOptions.positions = new ConstantProperty<>(
-        Cartesian3.fromDegreesArrayHeights(new double[] { 75, 42, 250000, -125, 42, 250000 }));
-    entityOptions = new EntityOptions();
-    entityOptions.name = "Orange dashed line with a short dash length";
-    entityOptions.polyline = new PolylineGraphics(polylineGraphicsOptions);
-    Entity orangeLine = csVPanel.getViewer().entities().add(entityOptions);
+        materialPropertyOptions = new PolylineDashMaterialPropertyOptions();
+        materialPropertyOptions.color = new ConstantProperty<>(Color.ORANGE());
+        materialPropertyOptions.dashLength = new ConstantProperty<>(8.0);
+        polylineGraphicsOptions = new PolylineGraphicsOptions();
+        polylineGraphicsOptions.width = new ConstantProperty<>(5);
+        polylineGraphicsOptions.material = new PolylineDashMaterialProperty(materialPropertyOptions);
+        polylineGraphicsOptions.positions = new ConstantProperty<>(
+                Cartesian3.fromDegreesArrayHeights(new double[]{75, 42, 250000, -125, 42, 250000}));
+        entityOptions = new EntityOptions();
+        entityOptions.name = "Orange dashed line with a short dash length";
+        entityOptions.polyline = new PolylineGraphics(polylineGraphicsOptions);
+        Entity orangeLine = csVPanel.getViewer().entities().add(entityOptions);
 
-    materialPropertyOptions = new PolylineDashMaterialPropertyOptions();
-    materialPropertyOptions.color = new ConstantProperty<>(Color.CYAN());
-    materialPropertyOptions.dashPattern = new ConstantProperty<>(Integer.parseInt("110000001111", 2));
-    polylineGraphicsOptions = new PolylineGraphicsOptions();
-    polylineGraphicsOptions.width = new ConstantProperty<>(10);
-    polylineGraphicsOptions.material = new PolylineDashMaterialProperty(materialPropertyOptions);
-    polylineGraphicsOptions.positions = new ConstantProperty<>(
-        Cartesian3.fromDegreesArrayHeights(new double[] { -75, 44, 250000, -125, 44, 250000 }));
-    entityOptions = new EntityOptions();
-    entityOptions.name = "Cyan dashed line with a dash pattern.";
-    entityOptions.polyline = new PolylineGraphics(polylineGraphicsOptions);
-    Entity cyanLine = csVPanel.getViewer().entities().add(entityOptions);
+        materialPropertyOptions = new PolylineDashMaterialPropertyOptions();
+        materialPropertyOptions.color = new ConstantProperty<>(Color.CYAN());
+        materialPropertyOptions.dashPattern = new ConstantProperty<>(Integer.parseInt("110000001111", 2));
+        polylineGraphicsOptions = new PolylineGraphicsOptions();
+        polylineGraphicsOptions.width = new ConstantProperty<>(10);
+        polylineGraphicsOptions.material = new PolylineDashMaterialProperty(materialPropertyOptions);
+        polylineGraphicsOptions.positions = new ConstantProperty<>(
+                Cartesian3.fromDegreesArrayHeights(new double[]{-75, 44, 250000, -125, 44, 250000}));
+        entityOptions = new EntityOptions();
+        entityOptions.name = "Cyan dashed line with a dash pattern.";
+        entityOptions.polyline = new PolylineGraphics(polylineGraphicsOptions);
+        Entity cyanLine = csVPanel.getViewer().entities().add(entityOptions);
 
-    materialPropertyOptions = new PolylineDashMaterialPropertyOptions();
-    materialPropertyOptions.color = new ConstantProperty<>(Color.YELLOW());
-    materialPropertyOptions.dashPattern = new ConstantProperty<>(Integer.parseInt("1010101010101010", 2));
-    polylineGraphicsOptions = new PolylineGraphicsOptions();
-    polylineGraphicsOptions.width = new ConstantProperty<>(10);
-    polylineGraphicsOptions.material = new PolylineDashMaterialProperty(materialPropertyOptions);
-    polylineGraphicsOptions.positions = new ConstantProperty<>(
-        Cartesian3.fromDegreesArrayHeights(new double[] { -75, 46, 250000, -125, 46, 250000 }));
-    entityOptions = new EntityOptions();
-    entityOptions.name = "Yellow dashed line with a dash pattern.";
-    entityOptions.polyline = new PolylineGraphics(polylineGraphicsOptions);
-    Entity yellowLine = csVPanel.getViewer().entities().add(entityOptions);
+        materialPropertyOptions = new PolylineDashMaterialPropertyOptions();
+        materialPropertyOptions.color = new ConstantProperty<>(Color.YELLOW());
+        materialPropertyOptions.dashPattern = new ConstantProperty<>(Integer.parseInt("1010101010101010", 2));
+        polylineGraphicsOptions = new PolylineGraphicsOptions();
+        polylineGraphicsOptions.width = new ConstantProperty<>(10);
+        polylineGraphicsOptions.material = new PolylineDashMaterialProperty(materialPropertyOptions);
+        polylineGraphicsOptions.positions = new ConstantProperty<>(
+                Cartesian3.fromDegreesArrayHeights(new double[]{-75, 46, 250000, -125, 46, 250000}));
+        entityOptions = new EntityOptions();
+        entityOptions.name = "Yellow dashed line with a dash pattern.";
+        entityOptions.polyline = new PolylineGraphics(polylineGraphicsOptions);
+        Entity yellowLine = csVPanel.getViewer().entities().add(entityOptions);
 
-    csVPanel.getViewer().zoomTo(csVPanel.getViewer().entities());
+        csVPanel.getViewer().zoomTo(csVPanel.getViewer().entities());
 
-    contentPanel.add(new HTML("<p>Draw dashed polylines.</p>"));
-    contentPanel.add(csVPanel);
+        contentPanel.add(new HTML("<p>Draw dashed polylines.</p>"));
+        contentPanel.add(csVPanel);
 
-    initWidget(contentPanel);
-  }
+        initWidget(contentPanel);
+    }
 
-  @Override
-  public String[] getSourceCodeURLs() {
-    String[] sourceCodeURLs = new String[1];
-    sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "PolylineDash.txt";
-    return sourceCodeURLs;
-  }
+    @Override
+    public String[] getSourceCodeURLs() {
+        String[] sourceCodeURLs = new String[1];
+        sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "PolylineDash.txt";
+        return sourceCodeURLs;
+    }
 }

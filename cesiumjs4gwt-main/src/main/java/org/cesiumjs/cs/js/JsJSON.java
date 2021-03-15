@@ -25,6 +25,6 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "JSON")
 public class JsJSON {
-  @JsMethod
-  native static public <T> T parse(String json);
+    @JsMethod
+    native static public <T> T parse(String json);
 }

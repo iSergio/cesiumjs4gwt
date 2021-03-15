@@ -16,31 +16,30 @@
 
 package org.cesiumjs.cs.core;
 
-import org.cesiumjs.cs.core.options.EllipsePositionsOptions;
-import org.cesiumjs.cs.js.JsObject;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.options.EllipsePositionsOptions;
+import org.cesiumjs.cs.js.JsObject;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "EllipseGeometryLibrary")
 public class EllipseGeometryLibrary {
-  @JsConstructor
-  private EllipseGeometryLibrary() {
-  }
+    @JsConstructor
+    private EllipseGeometryLibrary() {
+    }
 
-  /**
-   * Returns an array of positions that make up the ellipse.
-   * 
-   * @param options          {@link EllipsePositionsOptions} instance.
-   * @param addFillPositions
-   * @param addEdgePositions
-   * @return array of positions that make up the ellipse.
-   */
-  @JsMethod
-  public static native JsObject computeEllipsePositions(EllipsePositionsOptions options, boolean addFillPositions,
-      boolean addEdgePositions);
+    /**
+     * Returns an array of positions that make up the ellipse.
+     *
+     * @param options          {@link EllipsePositionsOptions} instance.
+     * @param addFillPositions
+     * @param addEdgePositions
+     * @return array of positions that make up the ellipse.
+     */
+    @JsMethod
+    public static native JsObject computeEllipsePositions(EllipsePositionsOptions options, boolean addFillPositions,
+                                                          boolean addEdgePositions);
 }

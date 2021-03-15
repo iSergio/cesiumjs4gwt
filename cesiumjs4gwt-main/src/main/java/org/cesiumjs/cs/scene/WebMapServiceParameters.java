@@ -26,20 +26,20 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class WebMapServiceParameters {
-  @JsProperty
-  public String service;
-  @JsProperty
-  public String version;
-  @JsProperty
-  public String request;
-  @JsProperty
-  public String styles;
-  @JsProperty
-  public String format;
-  @JsProperty
-  public boolean transparent;
+    @JsProperty
+    public String service;
+    @JsProperty
+    public String version;
+    @JsProperty
+    public String request;
+    @JsProperty
+    public String styles;
+    @JsProperty
+    public String format;
+    @JsProperty
+    public boolean transparent;
 
-  @JsConstructor
-  public WebMapServiceParameters() {
-  }
+    @JsConstructor
+    public WebMapServiceParameters() {
+    }
 }

@@ -16,14 +16,13 @@
 
 package org.cesiumjs.cs.datasources.updater;
 
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.datasources.DataSourceDisplay;
 import org.cesiumjs.cs.datasources.Entity;
 import org.cesiumjs.cs.datasources.properties.Property;
 import org.cesiumjs.cs.scene.Scene;
-
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
 
 /**
  * A {@link GeometryUpdater} for planes. Clients do not normally create this
@@ -33,22 +32,22 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "PlaneGeometryUpdater")
 public class PlaneGeometryUpdater extends GeometryUpdater {
-  /**
-   * Gets the property specifying whether the geometry casts or receives shadows
-   * from each light source.
-   */
-  @JsProperty(name = "shadowsProperty")
-  public native Property shadowsProperty();
+    /**
+     * A {@link GeometryUpdater} for planes. Clients do not normally create this
+     * class directly, but instead rely on {@link DataSourceDisplay}.
+     *
+     * @param entity The entity containing the geometry to be visualized.
+     * @param scene  The scene where visualization is taking place.
+     */
+    @JsConstructor
+    public PlaneGeometryUpdater(Entity entity, Scene scene) {
+        super(entity, scene);
+    }
 
-  /**
-   * A {@link GeometryUpdater} for planes. Clients do not normally create this
-   * class directly, but instead rely on {@link DataSourceDisplay}.
-   * 
-   * @param entity The entity containing the geometry to be visualized.
-   * @param scene  The scene where visualization is taking place.
-   */
-  @JsConstructor
-  public PlaneGeometryUpdater(Entity entity, Scene scene) {
-    super(entity, scene);
-  }
+    /**
+     * Gets the property specifying whether the geometry casts or receives shadows
+     * from each light source.
+     */
+    @JsProperty(name = "shadowsProperty")
+    public native Property shadowsProperty();
 }

@@ -25,32 +25,32 @@ import jsinterop.annotations.JsProperty;
  * @author Serge Silaev aka iSergio
  */
 public class ModelMesh {
-  /**
-   * The name of the glTF JSON property for this mesh. This is guaranteed to be
-   * unique among all meshes. It may not match the mesh's name property (@link
-   * ModelMesh#name), which is assigned by the artist when the asset is created.
-   */
-  @JsProperty(name = "id")
-  public native String id();
+    /**
+     * Use {@link Model#getMesh} to create an instance.
+     */
+    @JsConstructor
+    public ModelMesh() {
+    }
 
-  /**
-   * An array of ModelMaterial instances indexed by the mesh's primitive indices.
-   */
-  @JsProperty(name = "materials")
-  public native ModelMaterial[] materials();
+    /**
+     * The name of the glTF JSON property for this mesh. This is guaranteed to be
+     * unique among all meshes. It may not match the mesh's name property (@link
+     * ModelMesh#name), which is assigned by the artist when the asset is created.
+     */
+    @JsProperty(name = "id")
+    public native String id();
 
-  /**
-   * The value of the name property of this mesh. This is the name assigned by the
-   * artist when the asset is created. This can be different than the name of the
-   * mesh property {@link ModelMesh#id}, which is internal to glTF.
-   */
-  @JsProperty(name = "name")
-  public native String name();
+    /**
+     * An array of ModelMaterial instances indexed by the mesh's primitive indices.
+     */
+    @JsProperty(name = "materials")
+    public native ModelMaterial[] materials();
 
-  /**
-   * Use {@link Model#getMesh} to create an instance.
-   */
-  @JsConstructor
-  public ModelMesh() {
-  }
+    /**
+     * The value of the name property of this mesh. This is the name assigned by the
+     * artist when the asset is created. This can be different than the name of the
+     * mesh property {@link ModelMesh#id}, which is internal to glTF.
+     */
+    @JsProperty(name = "name")
+    public native String name();
 }

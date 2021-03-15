@@ -28,42 +28,42 @@ import org.cesiumjs.cs.scene.interaction.options.AbstractPrimitiveOptions;
  * @author Serge Silaev aka iSergio
  */
 public class PolygonPrimitive extends AbstractPrimitive {
-  public PolygonPrimitive(AbstractPrimitiveOptions options) {
-    super(options);
-    super.options = options;
+    public PolygonPrimitive(AbstractPrimitiveOptions options) {
+        super(options);
+        super.options = options;
 
-    ellipsoid = Ellipsoid.WGS84();
-    show = true;
-    debugShowBoundingVolume = false;
+        ellipsoid = Ellipsoid.WGS84();
+        show = true;
+        debugShowBoundingVolume = false;
 
-    appearance = EllipsoidSurfaceAppearance.create(false);
-    // material = Material.fromType(Material.ColorType());
-    // JsObject.setProperty(material.uniforms, "color", options.color);
-    granularity = Math.PI / 180.0;
+        appearance = EllipsoidSurfaceAppearance.create(false);
+        // material = Material.fromType(Material.ColorType());
+        // JsObject.setProperty(material.uniforms, "color", options.color);
+        granularity = Math.PI / 180.0;
 
-    getGeometry = new GetGeometry() {
-      @Override
-      public Geometry function() {
-        if (getPositions() == null || getPositions().length < 3) {
-          return null;
-        }
-        PolygonGeometryOptions geometryOptions = new PolygonGeometryOptions();
-        geometryOptions.positions = getPositions();
-        geometryOptions.vertexFormat = EllipsoidSurfaceAppearance.VERTEX_FORMAT();
-        geometryOptions.ellipsoid = ellipsoid;
-        geometryOptions.granularity = granularity;
-        return PolygonGeometry.fromPositions(geometryOptions);
-      }
-    };
+        getGeometry = new GetGeometry() {
+            @Override
+            public Geometry function() {
+                if (getPositions() == null || getPositions().length < 3) {
+                    return null;
+                }
+                PolygonGeometryOptions geometryOptions = new PolygonGeometryOptions();
+                geometryOptions.positions = getPositions();
+                geometryOptions.vertexFormat = EllipsoidSurfaceAppearance.VERTEX_FORMAT();
+                geometryOptions.ellipsoid = ellipsoid;
+                geometryOptions.granularity = granularity;
+                return PolygonGeometry.fromPositions(geometryOptions);
+            }
+        };
 
-    super.initialize();
-  }
+        super.initialize();
+    }
 
-  public Cartesian3[] getPositions() {
-    return (Cartesian3[]) getAttribute("positions");
-  }
+    public Cartesian3[] getPositions() {
+        return (Cartesian3[]) getAttribute("positions");
+    }
 
-  public void setPositions(Cartesian3[] positions) {
-    setAttribute("positions", positions);
-  }
+    public void setPositions(Cartesian3[] positions) {
+        setAttribute("positions", positions);
+    }
 }

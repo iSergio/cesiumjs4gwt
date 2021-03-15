@@ -20,11 +20,11 @@ package org.cesiumjs.cs.core;
  * @author Serge Silaev aka iSergio
  */
 public class DeveloperError extends RuntimeException {
-  public DeveloperError(String message) {
-    super(message);
-  }
+    public DeveloperError(String message) {
+        super(message);
+    }
 
-  public DeveloperError() {
-    super();
-  }
+    public DeveloperError() {
+        super();
+    }
 }

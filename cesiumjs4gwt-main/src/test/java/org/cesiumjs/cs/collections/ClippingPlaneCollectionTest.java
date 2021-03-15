@@ -23,16 +23,13 @@ import org.cesiumjs.cs.BaseTestCase;
  */
 public class ClippingPlaneCollectionTest extends BaseTestCase {
 
-  public void testIsSupported() {
-    delayTestFinish(10_000);
+    public void testIsSupported() {
+        delayTestFinish(10_000);
 
-    super.beginTest(new Test() {
-      @Override
-      public void execute() {
-        // not supported only under IE
-        assertTrue(true);
-        finishTest();
-      }
-    });
-  }
+        super.beginTest(() -> {
+            // not supported only under IE
+            assertTrue(true);
+            finishTest();
+        });
+    }
 }

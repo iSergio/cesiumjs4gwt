@@ -16,12 +16,11 @@
 
 package org.cesiumjs.cs.datasources.properties;
 
-import org.cesiumjs.cs.core.Event;
-import org.cesiumjs.cs.datasources.properties.options.PolylineDashMaterialPropertyOptions;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Event;
+import org.cesiumjs.cs.datasources.properties.options.PolylineDashMaterialPropertyOptions;
 
 /**
  * A {@link MaterialProperty} that maps to polyline dash Material uniforms.
@@ -30,49 +29,48 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "PolylineDashMaterialProperty")
 public class PolylineDashMaterialProperty extends MaterialProperty {
-  /**
-   * Gets or sets the Property specifying the Color of the line.
-   */
-  @JsProperty
-  public Property color;
-  /**
-   * Gets or sets the numeric Property specifying the length of a dash cycle
-   */
-  @JsProperty
-  public Property dashLength;
-  /**
-   * Gets or sets the numeric Property specifying a dash pattern
-   */
-  @JsProperty
-  public Property dashPattern;
+    /**
+     * Gets or sets the Property specifying the Color of the line.
+     */
+    @JsProperty
+    public Property color;
+    /**
+     * Gets or sets the numeric Property specifying the length of a dash cycle
+     */
+    @JsProperty
+    public Property dashLength;
+    /**
+     * Gets or sets the numeric Property specifying a dash pattern
+     */
+    @JsProperty
+    public Property dashPattern;
+    /**
+     * Gets or sets the Property specifying the Color of the gaps in the line.
+     */
+    @JsProperty
+    public Property gapColor;
 
-  /**
-   * Gets the event that is raised whenever the definition of this property
-   * changes. The definition is considered to have changed if a call to getValue
-   * would return a different result for the same time.
-   */
-  @JsProperty
-  public native Event definitionChanged();
+    @JsConstructor
+    public PolylineDashMaterialProperty() {
+    }
 
-  /**
-   * Gets or sets the Property specifying the Color of the gaps in the line.
-   */
-  @JsProperty
-  public Property gapColor;
+    @JsConstructor
+    public PolylineDashMaterialProperty(PolylineDashMaterialPropertyOptions options) {
+    }
 
-  /**
-   * Gets a value indicating if this property is constant. A property is
-   * considered constant if getValue always returns the same result for the
-   * current definition.
-   */
-  @JsProperty
-  public native boolean isConstant();
+    /**
+     * Gets the event that is raised whenever the definition of this property
+     * changes. The definition is considered to have changed if a call to getValue
+     * would return a different result for the same time.
+     */
+    @JsProperty
+    public native Event definitionChanged();
 
-  @JsConstructor
-  public PolylineDashMaterialProperty() {
-  }
-
-  @JsConstructor
-  public PolylineDashMaterialProperty(PolylineDashMaterialPropertyOptions options) {
-  }
+    /**
+     * Gets a value indicating if this property is constant. A property is
+     * considered constant if getValue always returns the same result for the
+     * current definition.
+     */
+    @JsProperty
+    public native boolean isConstant();
 }

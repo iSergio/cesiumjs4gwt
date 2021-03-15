@@ -27,39 +27,39 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "NavigationHelpButtonViewModel")
 public class NavigationHelpButtonViewModel {
-  /**
-   * Gets the Command that is executed when the button is clicked.
-   */
-  @JsProperty
-  public Command command;
-  /**
-   * Gets the Command that is executed when the mouse instructions should be
-   * shown.
-   */
-  @JsProperty
-  public Command showClick;
-  /**
-   * Gets or sets whether the instructions are currently shown. This property is
-   * observable. Default: false
-   */
-  @JsProperty
-  public boolean showInstructions;
-  /**
-   * Gets the Command that is executed when the touch instructions should be
-   * shown.
-   */
-  @JsProperty
-  public Command showTouch;
-  /**
-   * Gets or sets the tooltip. This property is observable.
-   */
-  @JsProperty
-  public String tooltip;
+    /**
+     * Gets the Command that is executed when the button is clicked.
+     */
+    @JsProperty
+    public Command command;
+    /**
+     * Gets the Command that is executed when the mouse instructions should be
+     * shown.
+     */
+    @JsProperty
+    public Command showClick;
+    /**
+     * Gets or sets whether the instructions are currently shown. This property is
+     * observable. Default: false
+     */
+    @JsProperty
+    public boolean showInstructions;
+    /**
+     * Gets the Command that is executed when the touch instructions should be
+     * shown.
+     */
+    @JsProperty
+    public Command showTouch;
+    /**
+     * Gets or sets the tooltip. This property is observable.
+     */
+    @JsProperty
+    public String tooltip;
 
-  /**
-   * The view model for {@link NavigationHelpButton}.
-   */
-  @JsConstructor
-  public NavigationHelpButtonViewModel() {
-  }
+    /**
+     * The view model for {@link NavigationHelpButton}.
+     */
+    @JsConstructor
+    public NavigationHelpButtonViewModel() {
+    }
 }

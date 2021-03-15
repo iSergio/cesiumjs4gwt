@@ -16,29 +16,26 @@
 
 package org.cesiumjs.cs.core;
 
+import org.cesiumjs.cs.BaseTestCase;
+
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-
-import org.cesiumjs.cs.BaseTestCase;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 public class Cartesian2Test extends BaseTestCase {
-  private static final Logger LOGGER = LogManager.getLogManager().getLogger(Cartesian2Test.class.getName());
+    private static final Logger LOGGER = LogManager.getLogManager().getLogger(Cartesian2Test.class.getName());
 
-  public void testConstructor() {
-    delayTestFinish(10_000);
+    public void testConstructor() {
+        delayTestFinish(10_000);
 
-    super.beginTest(new Test() {
-      @Override
-      public void execute() {
-        Cartesian2 cartesian2 = new Cartesian2(1.0, 2.0);
-        assertNotNull(cartesian2);
-        assertEquals(1.0, cartesian2.x);
-        assertEquals(2.0, cartesian2.y);
-        finishTest();
-      }
-    });
-  }
+        super.beginTest(() -> {
+            Cartesian2 cartesian2 = new Cartesian2(1.0, 2.0);
+            assertNotNull(cartesian2);
+            assertEquals(1.0, cartesian2.x);
+            assertEquals(2.0, cartesian2.y);
+            finishTest();
+        });
+    }
 }

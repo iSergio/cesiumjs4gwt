@@ -16,40 +16,39 @@
 
 package org.cesiumjs.cs.core.enums;
 
-import org.cesiumjs.cs.core.JulianDate;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.JulianDate;
 
 /**
  * Provides the type of time standards which JulianDate can take as input.
- * 
- * @see JulianDate
+ *
  * @author Serge Silaev aka iSergio
+ * @see JulianDate
  */
 @JsType(isNative = true, namespace = "Cesium", name = "TimeStandard")
 public class TimeStandard {
-  /**
-   * Represents the coordinated Universal Time (UTC) time standard. UTC is related
-   * to TAI according to the relationship UTC = TAI - deltaT where deltaT is the
-   * number of leap seconds which have been introduced as of the time in TAI.
-   * 
-   * @return UTC standard
-   */
-  @JsProperty(name = "UTC")
-  public static native Number UTC();
+    @JsConstructor
+    private TimeStandard() {
+    }
 
-  /**
-   * Represents the International Atomic Time (TAI) time standard. TAI is the
-   * principal time standard to which the other time standards are related.
-   * 
-   * @return TAI standard
-   */
-  @JsProperty(name = "TAI")
-  public static native Number TAI();
+    /**
+     * Represents the coordinated Universal Time (UTC) time standard. UTC is related
+     * to TAI according to the relationship UTC = TAI - deltaT where deltaT is the
+     * number of leap seconds which have been introduced as of the time in TAI.
+     *
+     * @return UTC standard
+     */
+    @JsProperty(name = "UTC")
+    public static native Number UTC();
 
-  @JsConstructor
-  private TimeStandard() {
-  }
+    /**
+     * Represents the International Atomic Time (TAI) time standard. TAI is the
+     * principal time standard to which the other time standards are related.
+     *
+     * @return TAI standard
+     */
+    @JsProperty(name = "TAI")
+    public static native Number TAI();
 }

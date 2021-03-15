@@ -23,40 +23,40 @@ import jsinterop.annotations.JsType;
  * Describes a single leap second, which is constructed from a JulianDate and a
  * numerical offset representing the number of seconds TAI is ahead of the UTC
  * time standard.
- * 
+ *
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "LeapSecond")
 public class LeapSecond {
-  /**
-   * Gets or sets the date at which this leap second occurs.
-   */
-  public JulianDate julianDate;
-  /**
-   * Gets or sets the cumulative number of seconds between the UTC and TAI time
-   * standards at the time of this leap second.
-   */
-  public int offset;
+    /**
+     * Gets or sets the date at which this leap second occurs.
+     */
+    public JulianDate julianDate;
+    /**
+     * Gets or sets the cumulative number of seconds between the UTC and TAI time
+     * standards at the time of this leap second.
+     */
+    public int offset;
 
-  /**
-   * Describes a single leap second, which is constructed from a JulianDate and a
-   * numerical offset representing the number of seconds TAI is ahead of the UTC
-   * time standard.
-   */
-  @JsConstructor
-  public LeapSecond() {
-  }
+    /**
+     * Describes a single leap second, which is constructed from a JulianDate and a
+     * numerical offset representing the number of seconds TAI is ahead of the UTC
+     * time standard.
+     */
+    @JsConstructor
+    public LeapSecond() {
+    }
 
-  /**
-   * Describes a single leap second, which is constructed from a JulianDate and a
-   * numerical offset representing the number of seconds TAI is ahead of the UTC
-   * time standard.
-   * 
-   * @param date   A Julian date representing the time of the leap second.
-   * @param offset The cumulative number of seconds that TAI is ahead of UTC at
-   *               the provided date.
-   */
-  @JsConstructor
-  public LeapSecond(JulianDate date, int offset) {
-  }
+    /**
+     * Describes a single leap second, which is constructed from a JulianDate and a
+     * numerical offset representing the number of seconds TAI is ahead of the UTC
+     * time standard.
+     *
+     * @param date   A Julian date representing the time of the leap second.
+     * @param offset The cumulative number of seconds that TAI is ahead of UTC at
+     *               the provided date.
+     */
+    @JsConstructor
+    public LeapSecond(JulianDate date, int offset) {
+    }
 }

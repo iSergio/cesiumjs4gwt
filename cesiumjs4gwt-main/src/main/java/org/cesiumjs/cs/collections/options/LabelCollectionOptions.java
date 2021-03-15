@@ -27,49 +27,50 @@ import org.cesiumjs.cs.scene.enums.BlendOption;
 
 /**
  * Options for {@link LabelCollection}.
+ *
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class LabelCollectionOptions {
-  /**
-   * The 4x4 transformation matrix that transforms each label from model to world
-   * coordinates. Default: {@link Matrix4#IDENTITY()}
-   */
-  @JsProperty
-  public Matrix4 modelMatrix;
-  /**
-   * For debugging only. Determines if this primitive's commands' bounding spheres
-   * are shown. Default: false
-   */
-  @JsProperty
-  public boolean debugShowBoundingVolume;
-  /**
-   * Must be passed in for labels that use the height reference property or will
-   * be depth tested against the globe.
-   */
-  @JsProperty
-  public Scene scene;
-  /**
-   * The billboard blending option. The default is used for rendering both opaque
-   * and translucent billboards. However, if either all of the billboards are
-   * completely opaque or all are completely translucent, setting the technique to
-   * BillboardRenderTechnique.OPAQUE or BillboardRenderTechnique.TRANSLUCENT can
-   * improve performance by up to 2x. Default:
-   * {@link BlendOption#OPAQUE_AND_TRANSLUCENT()}
-   */
-  @JsProperty
-  public Number blendOption;
-  /**
-   * Determines if the labels in the collection will be shown.
-   * Default: true
-   */
-  @JsProperty
-  public boolean show;
+    /**
+     * The 4x4 transformation matrix that transforms each label from model to world
+     * coordinates. Default: {@link Matrix4#IDENTITY()}
+     */
+    @JsProperty
+    public Matrix4 modelMatrix;
+    /**
+     * For debugging only. Determines if this primitive's commands' bounding spheres
+     * are shown. Default: false
+     */
+    @JsProperty
+    public boolean debugShowBoundingVolume;
+    /**
+     * Must be passed in for labels that use the height reference property or will
+     * be depth tested against the globe.
+     */
+    @JsProperty
+    public Scene scene;
+    /**
+     * The billboard blending option. The default is used for rendering both opaque
+     * and translucent billboards. However, if either all of the billboards are
+     * completely opaque or all are completely translucent, setting the technique to
+     * BillboardRenderTechnique.OPAQUE or BillboardRenderTechnique.TRANSLUCENT can
+     * improve performance by up to 2x. Default:
+     * {@link BlendOption#OPAQUE_AND_TRANSLUCENT()}
+     */
+    @JsProperty
+    public Number blendOption;
+    /**
+     * Determines if the labels in the collection will be shown.
+     * Default: true
+     */
+    @JsProperty
+    public boolean show;
 
-  /**
-   * Options for LabelCollection.
-   */
-  @JsConstructor
-  public LabelCollectionOptions() {
-  }
+    /**
+     * Options for LabelCollection.
+     */
+    @JsConstructor
+    public LabelCollectionOptions() {
+    }
 }

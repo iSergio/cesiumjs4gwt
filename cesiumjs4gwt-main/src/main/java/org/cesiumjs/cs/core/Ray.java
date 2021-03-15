@@ -26,96 +26,96 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "Ray")
 public class Ray {
-  /**
-   * The direction of the ray.
-   */
-  @JsProperty
-  public Cartesian3 direction;
-  /**
-   * The origin of the ray. Default: {@link Cartesian3#ZERO()}
-   */
-  public Cartesian3 origin;
+    /**
+     * The direction of the ray.
+     */
+    @JsProperty
+    public Cartesian3 direction;
+    /**
+     * The origin of the ray. Default: {@link Cartesian3#ZERO()}
+     */
+    public Cartesian3 origin;
 
-  /**
-   * Represents a ray that extends infinitely from the provided origin in the
-   * provided direction.
-   */
-  @JsConstructor
-  public Ray() {
-  }
+    /**
+     * Represents a ray that extends infinitely from the provided origin in the
+     * provided direction.
+     */
+    @JsConstructor
+    public Ray() {
+    }
 
-  /**
-   * Represents a ray that extends infinitely from the provided origin in the
-   * provided direction.
-   * 
-   * @param origin    The origin of the ray. Default: {@link Cartesian3#ZERO()}
-   * @param direction The direction of the ray. Default: {@link Cartesian3#ZERO()}
-   */
-  @JsConstructor
-  public Ray(Cartesian3 origin, Cartesian3 direction) {
-  }
+    /**
+     * Represents a ray that extends infinitely from the provided origin in the
+     * provided direction.
+     *
+     * @param origin    The origin of the ray. Default: {@link Cartesian3#ZERO()}
+     * @param direction The direction of the ray. Default: {@link Cartesian3#ZERO()}
+     */
+    @JsConstructor
+    public Ray(Cartesian3 origin, Cartesian3 direction) {
+    }
 
-  /**
-   * Duplicates a Ray instance.
-   * 
-   * @param ray The ray to duplicate.
-   * @return The modified result parameter or a new Ray instance if one was not
-   *         provided. (Returns undefined if ray is undefined)
-   */
-  @JsMethod
-  public static native Ray clone(Ray ray);
+    /**
+     * Duplicates a Ray instance.
+     *
+     * @param ray The ray to duplicate.
+     * @return The modified result parameter or a new Ray instance if one was not
+     * provided. (Returns undefined if ray is undefined)
+     */
+    @JsMethod
+    public static native Ray clone(Ray ray);
 
-  /**
-   * Duplicates a Ray instance.
-   * 
-   * @param ray    The ray to duplicate.
-   * @param result The object onto which to store the result.
-   * @return The modified result parameter or a new Ray instance if one was not
-   *         provided. (Returns undefined if ray is undefined)
-   */
-  @JsMethod
-  public static native Ray clone(Ray ray, Ray result);
+    /**
+     * Duplicates a Ray instance.
+     *
+     * @param ray    The ray to duplicate.
+     * @param result The object onto which to store the result.
+     * @return The modified result parameter or a new Ray instance if one was not
+     * provided. (Returns undefined if ray is undefined)
+     */
+    @JsMethod
+    public static native Ray clone(Ray ray, Ray result);
 
-  /**
-   * Computes the point along the ray given by r(t) = o + t*d, where o is the
-   * origin of the ray and d is the direction.
-   * 
-   * <pre>
-   * Example: {
-   *   &#64;code
-   *   // Get the first intersection point of a ray and an ellipsoid.
-   *   var intersection = Cesium.IntersectionTests.rayEllipsoid(ray, ellipsoid);
-   *   Cartesian3 point = Ray.getPoint(ray, intersection.start);
-   * }
-   * </pre>
-   * 
-   * @param ray The ray.
-   * @param t   A scalar value.
-   * @return The modified result parameter, or a new instance if none was
-   *         provided.
-   */
-  @JsMethod
-  public static native Cartesian3 getPoint(Ray ray, double t);
+    /**
+     * Computes the point along the ray given by r(t) = o + t*d, where o is the
+     * origin of the ray and d is the direction.
+     *
+     * <pre>
+     * Example: {
+     *   &#64;code
+     *   // Get the first intersection point of a ray and an ellipsoid.
+     *   var intersection = Cesium.IntersectionTests.rayEllipsoid(ray, ellipsoid);
+     *   Cartesian3 point = Ray.getPoint(ray, intersection.start);
+     * }
+     * </pre>
+     *
+     * @param ray The ray.
+     * @param t   A scalar value.
+     * @return The modified result parameter, or a new instance if none was
+     * provided.
+     */
+    @JsMethod
+    public static native Cartesian3 getPoint(Ray ray, double t);
 
-  /**
-   * Computes the point along the ray given by r(t) = o + t*d, where o is the
-   * origin of the ray and d is the direction.
-   * 
-   * <pre>
-   * Example: {
-   *   &#64;code
-   *   // Get the first intersection point of a ray and an ellipsoid.
-   *   var intersection = Cesium.IntersectionTests.rayEllipsoid(ray, ellipsoid);
-   *   Cartesian3 point = Ray.getPoint(ray, intersection.start);
-   * }
-   * </pre>
-   * 
-   * @param ray    The ray.
-   * @param t      A scalar value.
-   * @param result The object in which the result will be stored.
-   * @return The modified result parameter, or a new instance if none was
-   *         provided.
-   */
-  @JsMethod
-  public static native Cartesian3 getPoint(Ray ray, double t, Cartesian3 result);
+    /**
+     * Computes the point along the ray given by r(t) = o + t*d, where o is the
+     * origin of the ray and d is the direction.
+     *
+     * <pre>
+     * Example: {
+     *   &#64;code
+     *   // Get the first intersection point of a ray and an ellipsoid.
+     *   var intersection = Cesium.IntersectionTests.rayEllipsoid(ray, ellipsoid);
+     *   Cartesian3 point = Ray.getPoint(ray, intersection.start);
+     * }
+     * </pre>
+     *
+     * @param ray    The ray.
+     * @param t      A scalar value.
+     * @param result The object in which the result will be stored.
+     * @return The modified result parameter, or a new instance if none was
+     * provided.
+     */
+    @JsMethod
+    public static native Cartesian3 getPoint(Ray ray, double t, Cartesian3 result);
 }

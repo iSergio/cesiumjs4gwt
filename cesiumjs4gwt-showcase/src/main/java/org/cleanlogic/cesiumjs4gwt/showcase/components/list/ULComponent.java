@@ -1,18 +1,17 @@
 /**
- *
- *   Copyright 2015 sourceforge.
- *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
- *
- *        http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ * Copyright 2015 sourceforge.
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.cleanlogic.cesiumjs4gwt.showcase.components.list;
 
@@ -29,41 +28,14 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class ULComponent extends ComplexPanel implements InsertPanel {
 
-  public ULComponent() {
-    setElement(Document.get().createULElement());
-  }
+    public ULComponent() {
+        setElement(Document.get().createULElement());
+    }
 
-  private LIComponent wrapWidget(Widget w) {
-    LIComponent li = new LIComponent();
-    li.add(w);
-    return li;
-  }
-
-  /**
-   * Adds a new child widget to the panel.
-   *
-   * @param w the widget to be added
-   */
-  @Override
-  public void add(Widget w) {
-    add(wrapWidget(w), (Element) getElement());
-  }
-
-  /**
-   * Inserts a widget before the specified index.
-   *
-   * @param w           the widget to be inserted
-   * @param beforeIndex the index before which it will be inserted
-   * @throws IndexOutOfBoundsException if <code>beforeIndex</code> is out of range
-   */
-  public void insert(Widget w, int beforeIndex) {
-    insert(wrapWidget(w), (Element) getElement(), beforeIndex, true);
-  }
-
-  private static class LIComponent extends ComplexPanel implements InsertPanel {
-
-    protected LIComponent() {
-      setElement(Document.get().createLIElement());
+    private LIComponent wrapWidget(Widget w) {
+        LIComponent li = new LIComponent();
+        li.add(w);
+        return li;
     }
 
     /**
@@ -73,22 +45,49 @@ public class ULComponent extends ComplexPanel implements InsertPanel {
      */
     @Override
     public void add(Widget w) {
-      add(w, (Element) getElement());
+        add(wrapWidget(w), (Element) getElement());
     }
 
     /**
-     * Inserts a child widget before the specified index. If the widget is already a
-     * child of this panel, it will be moved to the specified index.
+     * Inserts a widget before the specified index.
      *
-     * @param w           the child widget to be inserted
+     * @param w           the widget to be inserted
      * @param beforeIndex the index before which it will be inserted
      * @throws IndexOutOfBoundsException if <code>beforeIndex</code> is out of range
      */
-    @Override
     public void insert(Widget w, int beforeIndex) {
-      insert(w, (Element) getElement(), beforeIndex, true);
+        insert(wrapWidget(w), (Element) getElement(), beforeIndex, true);
     }
 
-  }
+    private static class LIComponent extends ComplexPanel implements InsertPanel {
+
+        protected LIComponent() {
+            setElement(Document.get().createLIElement());
+        }
+
+        /**
+         * Adds a new child widget to the panel.
+         *
+         * @param w the widget to be added
+         */
+        @Override
+        public void add(Widget w) {
+            add(w, (Element) getElement());
+        }
+
+        /**
+         * Inserts a child widget before the specified index. If the widget is already a
+         * child of this panel, it will be moved to the specified index.
+         *
+         * @param w           the child widget to be inserted
+         * @param beforeIndex the index before which it will be inserted
+         * @throws IndexOutOfBoundsException if <code>beforeIndex</code> is out of range
+         */
+        @Override
+        public void insert(Widget w, int beforeIndex) {
+            insert(w, (Element) getElement(), beforeIndex, true);
+        }
+
+    }
 
 }

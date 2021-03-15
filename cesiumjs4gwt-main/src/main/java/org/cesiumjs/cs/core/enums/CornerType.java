@@ -28,28 +28,28 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "CornerType")
 public class CornerType {
-  /**
-   * Corner is clipped.
-   */
-  @JsProperty(name = "BEVELED")
-  private static native Number BEVELED();
+    /**
+     * Style options for corners.
+     */
+    @JsConstructor
+    private CornerType() {
+    }
 
-  /**
-   * Corner point is the intersection of adjacent edges.
-   */
-  @JsProperty(name = "MITERED")
-  private static native Number MITERED();
+    /**
+     * Corner is clipped.
+     */
+    @JsProperty(name = "BEVELED")
+    private static native Number BEVELED();
 
-  /**
-   * Corner has a smooth edge.
-   */
-  @JsProperty(name = "ROUNDED")
-  private static native Number ROUNDED();
+    /**
+     * Corner point is the intersection of adjacent edges.
+     */
+    @JsProperty(name = "MITERED")
+    private static native Number MITERED();
 
-  /**
-   * Style options for corners.
-   */
-  @JsConstructor
-  private CornerType() {
-  }
+    /**
+     * Corner has a smooth edge.
+     */
+    @JsProperty(name = "ROUNDED")
+    private static native Number ROUNDED();
 }

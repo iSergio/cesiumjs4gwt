@@ -17,13 +17,11 @@
 package org.cesiumjs.cs.widgets;
 
 import com.google.gwt.dom.client.Element;
-
-import org.cesiumjs.cs.core.Fullscreen;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Fullscreen;
 
 /**
  * The view model for {@link FullscreenButton}.
@@ -32,73 +30,73 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "FullscreenButtonViewModel")
 public class FullscreenButtonViewModel {
-  /**
-   * Gets the Command to toggle fullscreen mode.
-   */
-  @JsProperty
-  public Command command;
-  /**
-   * Gets or sets the HTML element to place into fullscreen mode when the
-   * corresponding button is pressed.
-   */
-  @JsProperty
-  public Element fullscreenElement;
-  /**
-   * Gets whether or not fullscreen mode is active. This property is observable.
-   */
-  @JsProperty
-  public boolean isFullscreen;
-  /**
-   * Gets or sets whether or not fullscreen functionality should be enabled. This
-   * property is observable.
-   * 
-   * @see Fullscreen#enabled()
-   */
-  @JsProperty
-  public boolean isFullscreenEnabled;
-  /**
-   * Gets the tooltip. This property is observable.
-   */
-  @JsProperty
-  public String tooltip;
+    /**
+     * Gets the Command to toggle fullscreen mode.
+     */
+    @JsProperty
+    public Command command;
+    /**
+     * Gets or sets the HTML element to place into fullscreen mode when the
+     * corresponding button is pressed.
+     */
+    @JsProperty
+    public Element fullscreenElement;
+    /**
+     * Gets whether or not fullscreen mode is active. This property is observable.
+     */
+    @JsProperty
+    public boolean isFullscreen;
+    /**
+     * Gets or sets whether or not fullscreen functionality should be enabled. This
+     * property is observable.
+     *
+     * @see Fullscreen#enabled()
+     */
+    @JsProperty
+    public boolean isFullscreenEnabled;
+    /**
+     * Gets the tooltip. This property is observable.
+     */
+    @JsProperty
+    public String tooltip;
 
-  /**
-   * The view model for {@link FullscreenButton}.
-   */
-  @JsConstructor
-  public FullscreenButtonViewModel() {
-  }
+    /**
+     * The view model for {@link FullscreenButton}.
+     */
+    @JsConstructor
+    public FullscreenButtonViewModel() {
+    }
 
-  /**
-   * The view model for {@link FullscreenButton}.
-   * 
-   * @param fullscreenElement The element or id to be placed into fullscreen mode.
-   */
-  @JsConstructor
-  public FullscreenButtonViewModel(String fullscreenElement) {
-  }
+    /**
+     * The view model for {@link FullscreenButton}.
+     *
+     * @param fullscreenElement The element or id to be placed into fullscreen mode.
+     */
+    @JsConstructor
+    public FullscreenButtonViewModel(String fullscreenElement) {
+    }
 
-  /**
-   * The view model for {@link FullscreenButton}.
-   * 
-   * @param fullscreenElement The element or id to be placed into fullscreen mode.
-   */
-  @JsConstructor
-  public FullscreenButtonViewModel(Element fullscreenElement) {
-  }
+    /**
+     * The view model for {@link FullscreenButton}.
+     *
+     * @param fullscreenElement The element or id to be placed into fullscreen mode.
+     */
+    @JsConstructor
+    public FullscreenButtonViewModel(Element fullscreenElement) {
+    }
 
-  /**
-   * Destroys the view model. Should be called to properly clean up the view model
-   * when it is no longer needed.
-   */
-  @JsMethod
-  public native void destroy();
+    /**
+     * Destroys the view model. Should be called to properly clean up the view model
+     * when it is no longer needed.
+     */
+    @JsMethod
+    public native void destroy();
 
-  /**
-   * true if the object has been destroyed, false otherwise.
-   * 
-   * @return true if the object has been destroyed, false otherwise.
-   */
-  @JsMethod
-  public native boolean isDestroyed();
+    /**
+     * true if the object has been destroyed, false otherwise.
+     *
+     * @return true if the object has been destroyed, false otherwise.
+     */
+    @JsMethod
+    public native boolean isDestroyed();
 }

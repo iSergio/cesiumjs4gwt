@@ -16,50 +16,49 @@
 
 package org.cesiumjs.cs.datasources.properties;
 
-import org.cesiumjs.cs.core.JulianDate;
-import org.cesiumjs.cs.scene.Material;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsOptional;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.JulianDate;
+import org.cesiumjs.cs.scene.Material;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "MaterialProperty")
 public class MaterialProperty extends Property<Material> {
-  /**
-   * The interface for all {@link Property} objects that represent
-   * {@link org.cesiumjs.cs.scene.Material} uniforms. This type defines an
-   * interface and cannot be instantiated directly.
-   * 
-   * @see ColorMaterialProperty
-   * @see CompositeMaterialProperty
-   * @see GridMaterialProperty
-   * @see ImageMaterialProperty
-   * @see PolylineGlowMaterialProperty
-   * @see PolylineOutlineMaterialProperty
-   * @see StripeMaterialProperty
-   */
-  @JsConstructor
-  public MaterialProperty() {
-  }
+    /**
+     * The interface for all {@link Property} objects that represent
+     * {@link org.cesiumjs.cs.scene.Material} uniforms. This type defines an
+     * interface and cannot be instantiated directly.
+     *
+     * @see ColorMaterialProperty
+     * @see CompositeMaterialProperty
+     * @see GridMaterialProperty
+     * @see ImageMaterialProperty
+     * @see PolylineGlowMaterialProperty
+     * @see PolylineOutlineMaterialProperty
+     * @see StripeMaterialProperty
+     */
+    @JsConstructor
+    public MaterialProperty() {
+    }
 
-  /**
-   * Gets the Material type at the provided time.
-   * 
-   * @return The type of material.
-   */
-  @JsMethod
-  public native String getType();
+    /**
+     * Gets the Material type at the provided time.
+     *
+     * @return The type of material.
+     */
+    @JsMethod
+    public native String getType();
 
-  /**
-   * Gets the Material type at the provided time.
-   * 
-   * @param time The time for which to retrieve the type.
-   * @return The type of material.
-   */
-  @JsMethod
-  public native String getType(@JsOptional JulianDate time);
+    /**
+     * Gets the Material type at the provided time.
+     *
+     * @param time The time for which to retrieve the type.
+     * @return The type of material.
+     */
+    @JsMethod
+    public native String getType(@JsOptional JulianDate time);
 }

@@ -16,51 +16,50 @@
 
 package org.cesiumjs.cs.scene.options;
 
-import org.cesiumjs.cs.js.JsObject;
-import org.cesiumjs.cs.scene.enums.TextureMagnificationFilter;
-import org.cesiumjs.cs.scene.enums.TextureMinificationFilter;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.js.JsObject;
+import org.cesiumjs.cs.scene.enums.TextureMagnificationFilter;
+import org.cesiumjs.cs.scene.enums.TextureMinificationFilter;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class MaterialOptions {
-  /**
-   * Throws errors for issues that would normally be ignored, including unused
-   * uniforms or materials. Default: false
-   */
-  @JsProperty
-  public boolean strict;
-  /**
-   * When true or a function that returns true, the geometry with this material is
-   * expected to appear translucent. Default: true
-   */
-  @JsProperty
-  public boolean translucent;
-  /**
-   * The TextureMinificationFilter to apply to this material's textures. Default:
-   * TextureMinificationFilter.LINEAR
-   */
-  @JsProperty
-  public TextureMinificationFilter minificationFilter;
-  /**
-   * The TextureMagnificationFilter to apply to this material's textures. Default:
-   * TextureMagnificationFilter.LINEAR
-   */
-  @JsProperty
-  public TextureMagnificationFilter magnificationFilter;
-  /**
-   * The fabric JSON used to generate the material.
-   */
-  @JsProperty
-  public JsObject fabric;
+    /**
+     * Throws errors for issues that would normally be ignored, including unused
+     * uniforms or materials. Default: false
+     */
+    @JsProperty
+    public boolean strict;
+    /**
+     * When true or a function that returns true, the geometry with this material is
+     * expected to appear translucent. Default: true
+     */
+    @JsProperty
+    public boolean translucent;
+    /**
+     * The TextureMinificationFilter to apply to this material's textures. Default:
+     * TextureMinificationFilter.LINEAR
+     */
+    @JsProperty
+    public TextureMinificationFilter minificationFilter;
+    /**
+     * The TextureMagnificationFilter to apply to this material's textures. Default:
+     * TextureMagnificationFilter.LINEAR
+     */
+    @JsProperty
+    public TextureMagnificationFilter magnificationFilter;
+    /**
+     * The fabric JSON used to generate the material.
+     */
+    @JsProperty
+    public JsObject fabric;
 
-  @JsConstructor
-  public MaterialOptions() {
-  }
+    @JsConstructor
+    public MaterialOptions() {
+    }
 }

@@ -16,75 +16,70 @@
 
 package org.cesiumjs.cs.core.providers.options;
 
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.Credit;
 import org.cesiumjs.cs.core.Ellipsoid;
 import org.cesiumjs.cs.core.GoogleEarthEnterpriseMetadata;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsOverlay;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
-
 /**
  * Options for
  * {@link org.cesiumjs.cs.core.providers.GoogleEarthEnterpriseTerrainProvider}.
- * 
+ *
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class GoogleEarthEnterpriseTerrainProviderOptions {
-  /**
-   * The url of the Google Earth Enterprise server hosting the imagery.
-   */
-  @JsProperty
-  public String url;
-  /**
-   * A metadata object that can be used to share metadata requests with a
-   * GoogleEarthEnterpriseImageryProvider.
-   */
-  @JsProperty
-  public GoogleEarthEnterpriseMetadata metadata;
-  /**
-   * A proxy to use for requests. This object is expected to have a getURL
-   * function which returns the proxied URL, if needed.
-   */
-  @JsProperty
-  public Object proxy;
-  /**
-   * The ellipsoid. If not specified, the WGS84 ellipsoid is used.
-   */
-  @JsProperty
-  public Ellipsoid ellipsoid;
-  /**
-   * A credit for the data source, which is displayed on the canvas.
-   */
-  @JsProperty
-  public Credit credit;
+    /**
+     * The url of the Google Earth Enterprise server hosting the imagery.
+     */
+    @JsProperty
+    public String url;
+    /**
+     * A metadata object that can be used to share metadata requests with a
+     * GoogleEarthEnterpriseImageryProvider.
+     */
+    @JsProperty
+    public GoogleEarthEnterpriseMetadata metadata;
+    /**
+     * A proxy to use for requests. This object is expected to have a getURL
+     * function which returns the proxied URL, if needed.
+     */
+    @JsProperty
+    public Object proxy;
+    /**
+     * The ellipsoid. If not specified, the WGS84 ellipsoid is used.
+     */
+    @JsProperty
+    public Ellipsoid ellipsoid;
+    /**
+     * A credit for the data source, which is displayed on the canvas.
+     */
+    @JsProperty
+    public Credit credit;
 
-  @JsConstructor
-  private GoogleEarthEnterpriseTerrainProviderOptions() {
-  }
+    @JsConstructor
+    private GoogleEarthEnterpriseTerrainProviderOptions() {
+    }
 
-  @JsOverlay
-  public static GoogleEarthEnterpriseTerrainProviderOptions create(String url) {
-    GoogleEarthEnterpriseTerrainProviderOptions options = new GoogleEarthEnterpriseTerrainProviderOptions();
-    options.url = url;
-    return options;
-  }
+    @JsOverlay
+    public static GoogleEarthEnterpriseTerrainProviderOptions create(String url) {
+        GoogleEarthEnterpriseTerrainProviderOptions options = new GoogleEarthEnterpriseTerrainProviderOptions();
+        options.url = url;
+        return options;
+    }
 
-  @JsOverlay
-  public static GoogleEarthEnterpriseTerrainProviderOptions create(GoogleEarthEnterpriseMetadata metadata) {
-    GoogleEarthEnterpriseTerrainProviderOptions options = new GoogleEarthEnterpriseTerrainProviderOptions();
-    options.metadata = metadata;
-    return options;
-  }
+    @JsOverlay
+    public static GoogleEarthEnterpriseTerrainProviderOptions create(GoogleEarthEnterpriseMetadata metadata) {
+        GoogleEarthEnterpriseTerrainProviderOptions options = new GoogleEarthEnterpriseTerrainProviderOptions();
+        options.metadata = metadata;
+        return options;
+    }
 
-  @JsOverlay
-  public static GoogleEarthEnterpriseTerrainProviderOptions create(String url, GoogleEarthEnterpriseMetadata metadata) {
-    GoogleEarthEnterpriseTerrainProviderOptions options = new GoogleEarthEnterpriseTerrainProviderOptions();
-    options.url = url;
-    options.metadata = metadata;
-    return options;
-  }
+    @JsOverlay
+    public static GoogleEarthEnterpriseTerrainProviderOptions create(String url, GoogleEarthEnterpriseMetadata metadata) {
+        GoogleEarthEnterpriseTerrainProviderOptions options = new GoogleEarthEnterpriseTerrainProviderOptions();
+        options.url = url;
+        options.metadata = metadata;
+        return options;
+    }
 }

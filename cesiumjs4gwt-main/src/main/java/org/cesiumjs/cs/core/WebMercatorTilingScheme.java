@@ -16,33 +16,32 @@
 
 package org.cesiumjs.cs.core;
 
-import org.cesiumjs.cs.core.options.WebMercatorTilingSchemeOptions;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.options.WebMercatorTilingSchemeOptions;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "WebMercatorTilingScheme")
 public class WebMercatorTilingScheme extends TilingScheme {
-  /**
-   * A tiling scheme for geometry referenced to a WebMercatorProjection,
-   * EPSG:3857. This is the tiling scheme used by Google Maps, Microsoft Bing
-   * Maps, and most of ESRI ArcGIS Online.
-   */
-  @JsConstructor
-  public WebMercatorTilingScheme() {
-  }
+    /**
+     * A tiling scheme for geometry referenced to a WebMercatorProjection,
+     * EPSG:3857. This is the tiling scheme used by Google Maps, Microsoft Bing
+     * Maps, and most of ESRI ArcGIS Online.
+     */
+    @JsConstructor
+    public WebMercatorTilingScheme() {
+    }
 
-  /**
-   * A tiling scheme for geometry referenced to a WebMercatorProjection,
-   * EPSG:3857. This is the tiling scheme used by Google Maps, Microsoft Bing
-   * Maps, and most of ESRI ArcGIS Online.
-   * 
-   * @param options Options.
-   */
-  @JsConstructor
-  public WebMercatorTilingScheme(WebMercatorTilingSchemeOptions options) {
-  }
+    /**
+     * A tiling scheme for geometry referenced to a WebMercatorProjection,
+     * EPSG:3857. This is the tiling scheme used by Google Maps, Microsoft Bing
+     * Maps, and most of ESRI ArcGIS Online.
+     *
+     * @param options Options.
+     */
+    @JsConstructor
+    public WebMercatorTilingScheme(WebMercatorTilingSchemeOptions options) {
+    }
 }

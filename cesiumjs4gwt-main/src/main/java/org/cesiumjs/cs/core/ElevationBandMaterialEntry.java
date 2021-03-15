@@ -16,7 +16,8 @@ public class ElevationBandMaterialEntry {
     public Color color;
 
     @JsConstructor
-    private ElevationBandMaterialEntry() {}
+    private ElevationBandMaterialEntry() {
+    }
 
     @JsOverlay
     public static ElevationBandMaterialEntry create(Number height, Color color) {

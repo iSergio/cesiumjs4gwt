@@ -16,13 +16,12 @@
 
 package org.cesiumjs.cs.widgets.options;
 
-import org.cesiumjs.cs.widgets.Command;
-import org.cesiumjs.cs.widgets.ProviderViewModel;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.widgets.Command;
+import org.cesiumjs.cs.widgets.ProviderViewModel;
 
 /**
  * Options for {@link org.cesiumjs.cs.widgets.ProviderViewModel}.
@@ -31,50 +30,50 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class ProviderViewModelOptions {
-  /**
-   * The name of the layer.
-   */
-  @JsProperty
-  public String name;
-  /**
-   * The tooltip to show when the item is moused over.
-   */
-  @JsProperty
-  public String tooltip;
-  /**
-   * An icon representing the layer.
-   */
-  @JsProperty
-  public String iconUrl;
-  /**
-   * A category for the layer.
-   */
-  @JsProperty
-  public String category;
-  /**
-   * A function or Command that creates one or more providers which will be added
-   * to the globe when this item is selected.
-   * 
-   * @see org.cesiumjs.cs.widgets.ProviderViewModel.ImageryProviderCreationFunction
-   */
-  @JsProperty(name = "creationFunction")
-  public ProviderViewModel.ImageryProviderCreationFunction imageryProviderCreationFunction;
-  /**
-   * A function or Command that creates one or more providers which will be added
-   * to the globe when this item is selected.
-   * 
-   * @see org.cesiumjs.cs.widgets.ProviderViewModel.TerrainProviderCreationFunction
-   */
-  @JsProperty(name = "creationFunction")
-  public ProviderViewModel.TerrainProviderCreationFunction terrainProviderCreationFunction;
-  /**
-   * A function or Command that creates one or more providers which will be added
-   * to the globe when this item is selected.
-   */
-  @JsProperty
-  public Command createFunctionCommand;
+    /**
+     * The name of the layer.
+     */
+    @JsProperty
+    public String name;
+    /**
+     * The tooltip to show when the item is moused over.
+     */
+    @JsProperty
+    public String tooltip;
+    /**
+     * An icon representing the layer.
+     */
+    @JsProperty
+    public String iconUrl;
+    /**
+     * A category for the layer.
+     */
+    @JsProperty
+    public String category;
+    /**
+     * A function or Command that creates one or more providers which will be added
+     * to the globe when this item is selected.
+     *
+     * @see org.cesiumjs.cs.widgets.ProviderViewModel.ImageryProviderCreationFunction
+     */
+    @JsProperty(name = "creationFunction")
+    public ProviderViewModel.ImageryProviderCreationFunction imageryProviderCreationFunction;
+    /**
+     * A function or Command that creates one or more providers which will be added
+     * to the globe when this item is selected.
+     *
+     * @see org.cesiumjs.cs.widgets.ProviderViewModel.TerrainProviderCreationFunction
+     */
+    @JsProperty(name = "creationFunction")
+    public ProviderViewModel.TerrainProviderCreationFunction terrainProviderCreationFunction;
+    /**
+     * A function or Command that creates one or more providers which will be added
+     * to the globe when this item is selected.
+     */
+    @JsProperty
+    public Command createFunctionCommand;
 
-  @JsConstructor
-  public ProviderViewModelOptions() {
-  }
+    @JsConstructor
+    public ProviderViewModelOptions() {
+    }
 }

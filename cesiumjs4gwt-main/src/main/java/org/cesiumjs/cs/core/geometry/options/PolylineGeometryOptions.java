@@ -16,17 +16,13 @@
 
 package org.cesiumjs.cs.core.geometry.options;
 
-import org.cesiumjs.cs.core.Cartesian3;
-import org.cesiumjs.cs.core.Color;
-import org.cesiumjs.cs.core.Ellipsoid;
-import org.cesiumjs.cs.core.Math;
-import org.cesiumjs.cs.core.VertexFormat;
-import org.cesiumjs.cs.core.enums.ArcType;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Math;
+import org.cesiumjs.cs.core.*;
+import org.cesiumjs.cs.core.enums.ArcType;
 
 /**
  * Options for {@link org.cesiumjs.cs.core.geometry.PolylineGeometry}
@@ -35,62 +31,62 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class PolylineGeometryOptions {
-  /**
-   * An array of Cartesian3 defining the positions in the polyline as a line
-   * strip.
-   */
-  @JsProperty
-  public Cartesian3[] positions;
-  /**
-   * The width in pixels. Default: 1.0
-   */
-  @JsProperty
-  public double width;
-  /**
-   * An Array of Color defining the per vertex or per segment colors.
-   */
-  @JsProperty
-  public Color[] colors;
-  /**
-   * A boolean that determines whether the colors will be flat across each segment
-   * of the line or interpolated across the vertices. Default: false
-   */
-  @JsProperty
-  public boolean colorsPerVertex;
-  /**
-   * The type of line the polyline segments must follow. Default:
-   * {@link org.cesiumjs.cs.core.enums.ArcType#GEODESIC()}
-   */
-  @JsProperty
-  public ArcType arcType;
-  /**
-   * A boolean that determines whether positions will be adjusted to the surface
-   * of the ellipsoid via a great arc. Default: true
-   * 
-   * @deprecated Removed in 1.57
-   */
-  @Deprecated
-  @JsProperty
-  public boolean followSurface;
-  /**
-   * The distance, in radians, between each latitude and longitude if
-   * options.followSurface=true. Determines the number of positions in the buffer.
-   * Default: {@link Math#RADIANS_PER_DEGREE()}
-   */
-  @JsProperty
-  public double granularity;
-  /**
-   * The vertex attributes to be computed. Default: {@link VertexFormat#DEFAULT()}
-   */
-  @JsProperty
-  public VertexFormat vertexFormat;
-  /**
-   * The ellipsoid to be used as a reference. Default: {@link Ellipsoid#WGS84()}
-   */
-  @JsProperty
-  public Ellipsoid ellipsoid;
+    /**
+     * An array of Cartesian3 defining the positions in the polyline as a line
+     * strip.
+     */
+    @JsProperty
+    public Cartesian3[] positions;
+    /**
+     * The width in pixels. Default: 1.0
+     */
+    @JsProperty
+    public double width;
+    /**
+     * An Array of Color defining the per vertex or per segment colors.
+     */
+    @JsProperty
+    public Color[] colors;
+    /**
+     * A boolean that determines whether the colors will be flat across each segment
+     * of the line or interpolated across the vertices. Default: false
+     */
+    @JsProperty
+    public boolean colorsPerVertex;
+    /**
+     * The type of line the polyline segments must follow. Default:
+     * {@link org.cesiumjs.cs.core.enums.ArcType#GEODESIC()}
+     */
+    @JsProperty
+    public ArcType arcType;
+    /**
+     * A boolean that determines whether positions will be adjusted to the surface
+     * of the ellipsoid via a great arc. Default: true
+     *
+     * @deprecated Removed in 1.57
+     */
+    @Deprecated
+    @JsProperty
+    public boolean followSurface;
+    /**
+     * The distance, in radians, between each latitude and longitude if
+     * options.followSurface=true. Determines the number of positions in the buffer.
+     * Default: {@link Math#RADIANS_PER_DEGREE()}
+     */
+    @JsProperty
+    public double granularity;
+    /**
+     * The vertex attributes to be computed. Default: {@link VertexFormat#DEFAULT()}
+     */
+    @JsProperty
+    public VertexFormat vertexFormat;
+    /**
+     * The ellipsoid to be used as a reference. Default: {@link Ellipsoid#WGS84()}
+     */
+    @JsProperty
+    public Ellipsoid ellipsoid;
 
-  @JsConstructor
-  public PolylineGeometryOptions() {
-  }
+    @JsConstructor
+    public PolylineGeometryOptions() {
+    }
 }

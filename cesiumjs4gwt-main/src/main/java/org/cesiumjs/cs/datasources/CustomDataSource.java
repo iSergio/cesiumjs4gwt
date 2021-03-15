@@ -16,116 +16,111 @@
 
 package org.cesiumjs.cs.datasources;
 
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.collections.EntityCollection;
 import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.core.JulianDate;
-
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsIgnore;
-import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "CustomDataSource")
 public class CustomDataSource implements DataSource {
-  /**
-   * Gets an event that will be raised when the underlying data changes.
-   */
-  @JsProperty
-  public Event changedEvent;
-  /**
-   * Gets or sets the clock for this instance.
-   */
-  @JsProperty
-  public DataSourceClock clock;
-  /**
-   * Gets or sets the clustering options for this data source. This object can be
-   * shared between multiple data sources.
-   */
-  @JsProperty
-  public EntityCluster clustering;
-  /**
-   * Gets the collection of Entity instances.
-   */
-  @JsProperty
-  public EntityCollection entities;
-  /**
-   * Gets an event that will be raised if an error is encountered during
-   * processing.
-   */
-  @JsProperty
-  public Event errorEvent;
-  /**
-   * Gets or sets whether the data source is currently loading data.
-   */
-  @JsProperty
-  public boolean isLoading;
-  /**
-   * Gets an event that will be raised when the data source either starts or stops
-   * loading.
-   */
-  @JsProperty
-  public Event loadingEvent;
-  /**
-   * Gets or sets a human-readable name for this instance.
-   */
-  @JsProperty
-  public String name;
-  /**
-   * Gets whether or not this data source should be displayed.
-   */
-  @JsProperty
-  public boolean show;
+    /**
+     * Gets an event that will be raised when the underlying data changes.
+     */
+    @JsProperty
+    public Event changedEvent;
+    /**
+     * Gets or sets the clock for this instance.
+     */
+    @JsProperty
+    public DataSourceClock clock;
+    /**
+     * Gets or sets the clustering options for this data source. This object can be
+     * shared between multiple data sources.
+     */
+    @JsProperty
+    public EntityCluster clustering;
+    /**
+     * Gets the collection of Entity instances.
+     */
+    @JsProperty
+    public EntityCollection entities;
+    /**
+     * Gets an event that will be raised if an error is encountered during
+     * processing.
+     */
+    @JsProperty
+    public Event errorEvent;
+    /**
+     * Gets or sets whether the data source is currently loading data.
+     */
+    @JsProperty
+    public boolean isLoading;
+    /**
+     * Gets an event that will be raised when the data source either starts or stops
+     * loading.
+     */
+    @JsProperty
+    public Event loadingEvent;
+    /**
+     * Gets or sets a human-readable name for this instance.
+     */
+    @JsProperty
+    public String name;
+    /**
+     * Gets whether or not this data source should be displayed.
+     */
+    @JsProperty
+    public boolean show;
 
-  /**
-   * A {@link DataSource} implementation which can be used to manually manage a
-   * group of entities.
-   * 
-   * <pre>
-   * Example: {
-   *   &#64;code
-   *   DataSource dataSource = new CustomDataSource("myData");
-   *   BillboardGraphicsOptions options = new BillboardGraphicsOptions();
-   *   options.image = "image.png";
-   *   EntityOptions entityOptions = new EntityOptions();
-   *   entityOptions.billboard = new BillboardGraphics(options);
-   *   Entity entity = dataSource.entities().add(new Entity(entityOptions));
-   *   viewer.dataSources.add(dataSource);
-   * }
-   * </pre>
-   */
-  @JsConstructor
-  public CustomDataSource() {
-  }
+    /**
+     * A {@link DataSource} implementation which can be used to manually manage a
+     * group of entities.
+     *
+     * <pre>
+     * Example: {
+     *   &#64;code
+     *   DataSource dataSource = new CustomDataSource("myData");
+     *   BillboardGraphicsOptions options = new BillboardGraphicsOptions();
+     *   options.image = "image.png";
+     *   EntityOptions entityOptions = new EntityOptions();
+     *   entityOptions.billboard = new BillboardGraphics(options);
+     *   Entity entity = dataSource.entities().add(new Entity(entityOptions));
+     *   viewer.dataSources.add(dataSource);
+     * }
+     * </pre>
+     */
+    @JsConstructor
+    public CustomDataSource() {
+    }
 
-  /**
-   * A {@link DataSource} implementation which can be used to manually manage a
-   * group of entities.
-   * 
-   * <pre>
-   * Example: {
-   *   &#64;code
-   *   DataSource dataSource = new CustomDataSource("myData");
-   *   BillboardGraphicsOptions options = new BillboardGraphicsOptions();
-   *   options.image = "image.png";
-   *   EntityOptions entityOptions = new EntityOptions();
-   *   entityOptions.billboard = new BillboardGraphics(options);
-   *   Entity entity = dataSource.entities().add(new Entity(entityOptions));
-   *   viewer.dataSources.add(dataSource);
-   * }
-   * </pre>
-   * 
-   * @param name A human-readable name for this instance.
-   */
-  @JsConstructor
-  public CustomDataSource(String name) {
-  }
+    /**
+     * A {@link DataSource} implementation which can be used to manually manage a
+     * group of entities.
+     *
+     * <pre>
+     * Example: {
+     *   &#64;code
+     *   DataSource dataSource = new CustomDataSource("myData");
+     *   BillboardGraphicsOptions options = new BillboardGraphicsOptions();
+     *   options.image = "image.png";
+     *   EntityOptions entityOptions = new EntityOptions();
+     *   entityOptions.billboard = new BillboardGraphics(options);
+     *   Entity entity = dataSource.entities().add(new Entity(entityOptions));
+     *   viewer.dataSources.add(dataSource);
+     * }
+     * </pre>
+     *
+     * @param name A human-readable name for this instance.
+     */
+    @JsConstructor
+    public CustomDataSource(String name) {
+    }
 
-  @Override
-  @JsMethod
-  @JsIgnore
-  public native boolean update(JulianDate time);
+    @Override
+    @JsMethod
+    @JsIgnore
+    public native boolean update(JulianDate time);
 }

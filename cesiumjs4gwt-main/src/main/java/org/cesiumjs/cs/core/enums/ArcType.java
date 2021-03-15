@@ -25,18 +25,18 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "ArcType")
 public class ArcType {
-  /**
-   * Follow geodesic path.
-   */
-  public static native Number GEODESIC();
+    /**
+     * Follow geodesic path.
+     */
+    public static native Number GEODESIC();
 
-  /**
-   * Straight line that does not conform to the surface of the ellipsoid.
-   */
-  public static native Number NONE();
+    /**
+     * Straight line that does not conform to the surface of the ellipsoid.
+     */
+    public static native Number NONE();
 
-  /**
-   * Follow rhumb or loxodrome path.
-   */
-  public static native Number RHUMB();
+    /**
+     * Follow rhumb or loxodrome path.
+     */
+    public static native Number RHUMB();
 }

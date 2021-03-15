@@ -16,21 +16,20 @@
 
 package org.cesiumjs.cs.core;
 
-import org.cesiumjs.cs.core.options.GeographicTilingSchemeOptions;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.options.GeographicTilingSchemeOptions;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "GeographicTilingScheme")
 public class GeographicTilingScheme extends TilingScheme {
-  @JsConstructor
-  public GeographicTilingScheme() {
-  }
+    @JsConstructor
+    public GeographicTilingScheme() {
+    }
 
-  @JsConstructor
-  public GeographicTilingScheme(GeographicTilingSchemeOptions options) {
-  }
+    @JsConstructor
+    public GeographicTilingScheme(GeographicTilingSchemeOptions options) {
+    }
 }

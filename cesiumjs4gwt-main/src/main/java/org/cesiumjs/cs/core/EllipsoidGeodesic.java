@@ -29,113 +29,113 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "EllipsoidGeodesic")
 public class EllipsoidGeodesic {
-  /**
-   * Gets the ellipsoid.
-   */
-  @JsProperty(name = "ellipsoid")
-  public native Ellipsoid ellipsoid();
+    /**
+     * Initializes a geodesic on the ellipsoid connecting the two provided
+     * planetodetic points.
+     */
+    @JsConstructor
+    public EllipsoidGeodesic() {
+    }
 
-  /**
-   * Gets the final planetodetic point on the path.
-   */
-  @JsProperty(name = "end")
-  public native Cartographic end();
+    /**
+     * Initializes a geodesic on the ellipsoid connecting the two provided
+     * planetodetic points.
+     *
+     * @param start The initial planetodetic point on the path.
+     */
+    @JsConstructor
+    public EllipsoidGeodesic(Cartographic start) {
+    }
 
-  /**
-   * Gets the heading at the final point.
-   */
-  @JsProperty(name = "endHeading")
-  public native double endHeading();
+    /**
+     * Initializes a geodesic on the ellipsoid connecting the two provided
+     * planetodetic points.
+     *
+     * @param start The initial planetodetic point on the path.
+     * @param end   The final planetodetic point on the path.
+     */
+    @JsConstructor
+    public EllipsoidGeodesic(Cartographic start, Cartographic end) {
+    }
 
-  /**
-   * Gets the initial planetodetic point on the path.
-   */
-  @JsProperty(name = "start")
-  public native Cartographic start();
+    /**
+     * Initializes a geodesic on the ellipsoid connecting the two provided
+     * planetodetic points.
+     *
+     * @param start     The initial planetodetic point on the path.
+     * @param end       The final planetodetic point on the path.
+     * @param ellipsoid The ellipsoid on which the geodesic lies. Default:
+     *                  {@link Ellipsoid#WGS84()}
+     */
+    @JsConstructor
+    public EllipsoidGeodesic(Cartographic start, Cartographic end, Ellipsoid ellipsoid) {
+    }
 
-  /**
-   * Gets the heading at the initial point.
-   */
-  @JsProperty(name = "startHeading")
-  public native double startHeading();
+    /**
+     * Gets the ellipsoid.
+     */
+    @JsProperty(name = "ellipsoid")
+    public native Ellipsoid ellipsoid();
 
-  /**
-   * Gets the surface distance between the start and end point
-   */
-  @JsProperty(name = "surfaceDistance")
-  public native double surfaceDistance();
+    /**
+     * Gets the final planetodetic point on the path.
+     */
+    @JsProperty(name = "end")
+    public native Cartographic end();
 
-  /**
-   * Initializes a geodesic on the ellipsoid connecting the two provided
-   * planetodetic points.
-   */
-  @JsConstructor
-  public EllipsoidGeodesic() {
-  }
+    /**
+     * Gets the heading at the final point.
+     */
+    @JsProperty(name = "endHeading")
+    public native double endHeading();
 
-  /**
-   * Initializes a geodesic on the ellipsoid connecting the two provided
-   * planetodetic points.
-   * 
-   * @param start The initial planetodetic point on the path.
-   */
-  @JsConstructor
-  public EllipsoidGeodesic(Cartographic start) {
-  }
+    /**
+     * Gets the initial planetodetic point on the path.
+     */
+    @JsProperty(name = "start")
+    public native Cartographic start();
 
-  /**
-   * Initializes a geodesic on the ellipsoid connecting the two provided
-   * planetodetic points.
-   * 
-   * @param start The initial planetodetic point on the path.
-   * @param end   The final planetodetic point on the path.
-   */
-  @JsConstructor
-  public EllipsoidGeodesic(Cartographic start, Cartographic end) {
-  }
+    /**
+     * Gets the heading at the initial point.
+     */
+    @JsProperty(name = "startHeading")
+    public native double startHeading();
 
-  /**
-   * Initializes a geodesic on the ellipsoid connecting the two provided
-   * planetodetic points.
-   * 
-   * @param start     The initial planetodetic point on the path.
-   * @param end       The final planetodetic point on the path.
-   * @param ellipsoid The ellipsoid on which the geodesic lies. Default:
-   *                  {@link Ellipsoid#WGS84()}
-   */
-  @JsConstructor
-  public EllipsoidGeodesic(Cartographic start, Cartographic end, Ellipsoid ellipsoid) {
-  }
+    /**
+     * Gets the surface distance between the start and end point
+     */
+    @JsProperty(name = "surfaceDistance")
+    public native double surfaceDistance();
 
-  /**
-   * Provides the location of a point at the indicated portion along the geodesic.
-   * 
-   * @param fraction The portion of the distance between the initial and final
-   *                 points.
-   * @param result   The object in which to store the result.
-   * @return The location of the point along the geodesic.
-   */
-  @JsMethod
-  public native Cartographic interpolateUsingFraction(double fraction, Cartographic result);
+    /**
+     * Provides the location of a point at the indicated portion along the geodesic.
+     *
+     * @param fraction The portion of the distance between the initial and final
+     *                 points.
+     * @param result   The object in which to store the result.
+     * @return The location of the point along the geodesic.
+     */
+    @JsMethod
+    public native Cartographic interpolateUsingFraction(double fraction, Cartographic result);
 
-  /**
-   * Provides the location of a point at the indicated distance along the
-   * geodesic.
-   * 
-   * @param distance The distance from the inital point to the point of interest
-   *                 along the geodesic
-   * @param result   The object in which to store the result.
-   * @return The location of the point along the geodesic.
-   */
-  @JsMethod
-  public native Cartographic interpolateUsingSurfaceDistance(double distance, Cartographic result);
+    /**
+     * Provides the location of a point at the indicated distance along the
+     * geodesic.
+     *
+     * @param distance The distance from the inital point to the point of interest
+     *                 along the geodesic
+     * @param result   The object in which to store the result.
+     * @return The location of the point along the geodesic.
+     */
+    @JsMethod
+    public native Cartographic interpolateUsingSurfaceDistance(double distance, Cartographic result);
 
-  /**
-   * Sets the start and end points of the geodesic
-   * 
-   * @param start The initial planetodetic point on the path.
-   * @param end   The final planetodetic point on the path.
-   */
-  @JsMethod
-  public native void setEndPoints(Cartographic start, Cartographic end);
+    /**
+     * Sets the start and end points of the geodesic
+     *
+     * @param start The initial planetodetic point on the path.
+     * @param end   The final planetodetic point on the path.
+     */
+    @JsMethod
+    public native void setEndPoints(Cartographic start, Cartographic end);
 }

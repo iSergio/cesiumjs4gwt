@@ -29,25 +29,25 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "Cesium3DTileColorBlendMode")
 public class Cesium3DTileColorBlendMode {
-  /**
-   * Multiplies the source color by the feature color.
-   */
-  @JsProperty(name = "HIGHLIGHT")
-  public static native Number HIGHLIGHT();
+    @JsConstructor
+    private Cesium3DTileColorBlendMode() {
+    }
 
-  /**
-   * Blends the source color and feature color together.
-   */
-  @JsProperty(name = "MIX")
-  public static native Number MIX();
+    /**
+     * Multiplies the source color by the feature color.
+     */
+    @JsProperty(name = "HIGHLIGHT")
+    public static native Number HIGHLIGHT();
 
-  /**
-   * Replaces the source color with the feature color.
-   */
-  @JsProperty(name = "REPLACE")
-  public static native Number REPLACE();
+    /**
+     * Blends the source color and feature color together.
+     */
+    @JsProperty(name = "MIX")
+    public static native Number MIX();
 
-  @JsConstructor
-  private Cesium3DTileColorBlendMode() {
-  }
+    /**
+     * Replaces the source color with the feature color.
+     */
+    @JsProperty(name = "REPLACE")
+    public static native Number REPLACE();
 }

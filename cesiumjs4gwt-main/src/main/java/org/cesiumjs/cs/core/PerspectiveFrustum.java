@@ -26,165 +26,164 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "PerspectiveFrustum")
 public class PerspectiveFrustum extends Frustum {
-  /**
-   * The aspect ratio of the frustum's width to it's height. Default: undefined
-   */
-  @JsProperty
-  public double aspectRatio;
-  // /**
-  // * The distance of the far plane.
-  // * Default: 500000000.0
-  // */
-  // @JsProperty
-  // public double far;
-  /**
-   * The angle of the field of view (FOV), in radians. This angle will be used as
-   * the horizontal FOV if the width is greater than the height, otherwise it will
-   * be the vertical FOV. Default: undefined
-   */
-  @JsProperty
-  public double fov;
+    /**
+     * The aspect ratio of the frustum's width to it's height. Default: undefined
+     */
+    @JsProperty
+    public double aspectRatio;
+    // /**
+    // * The distance of the far plane.
+    // * Default: 500000000.0
+    // */
+    // @JsProperty
+    // public double far;
+    /**
+     * The angle of the field of view (FOV), in radians. This angle will be used as
+     * the horizontal FOV if the width is greater than the height, otherwise it will
+     * be the vertical FOV. Default: undefined
+     */
+    @JsProperty
+    public double fov;
+    /**
+     * Offsets the frustum in the x direction. Default: 0.0
+     */
+    @JsProperty
+    public double xOffset;
+    /**
+     * Offsets the frustum in the y direction. Default: 0.0
+     */
+    @JsProperty
+    public double yOffset;
 
-  /**
-   * Gets the angle of the vertical field of view, in radians. Default: undefined
-   */
-  @JsProperty(name = "fovy")
-  public native double fovy();
+    /**
+     * The viewing frustum is defined by 6 planes. Each plane is represented by a
+     * Cartesian4 object, where the x, y, and z components define the unit vector
+     * normal to the plane, and the w component is the distance of the plane from
+     * the origin/camera position.
+     *
+     * <pre>
+     * Example: {
+     *   &#64;code
+     *   PerspectiveFrustum frustum = new PerspectiveFrustum();
+     *   frustum.aspectRatio = canvas.clientWidth / canvas.clientHeight;
+     *   frustum.fov = Math.PI_OVER_THREE;
+     *   frustum.near = 1.0;
+     *   frustum.far = 2.0;
+     * }
+     * </pre>
+     *
+     * @see PerspectiveOffCenterFrustum
+     */
+    @JsConstructor
+    public PerspectiveFrustum() {
+    }
 
-  /**
-   * The perspective projection matrix computed from the view frustum with an
-   * infinite far plane.
-   * 
-   * @see #projectionMatrix()
-   */
-  @JsProperty(name = "infiniteProjectionMatrix")
-  public native Matrix4 infiniteProjectionMatrix();
+    /**
+     * Gets the angle of the vertical field of view, in radians. Default: undefined
+     */
+    @JsProperty(name = "fovy")
+    public native double fovy();
 
-  /**
-   * Offsets the frustum in the x direction. Default: 0.0
-   */
-  @JsProperty
-  public double xOffset;
-  /**
-   * Offsets the frustum in the y direction. Default: 0.0
-   */
-  @JsProperty
-  public double yOffset;
+    /**
+     * The perspective projection matrix computed from the view frustum with an
+     * infinite far plane.
+     *
+     * @see #projectionMatrix()
+     */
+    @JsProperty(name = "infiniteProjectionMatrix")
+    public native Matrix4 infiniteProjectionMatrix();
 
-  /**
-   * The viewing frustum is defined by 6 planes. Each plane is represented by a
-   * Cartesian4 object, where the x, y, and z components define the unit vector
-   * normal to the plane, and the w component is the distance of the plane from
-   * the origin/camera position.
-   * 
-   * <pre>
-   * Example: {
-   *   &#64;code
-   *   PerspectiveFrustum frustum = new PerspectiveFrustum();
-   *   frustum.aspectRatio = canvas.clientWidth / canvas.clientHeight;
-   *   frustum.fov = Math.PI_OVER_THREE;
-   *   frustum.near = 1.0;
-   *   frustum.far = 2.0;
-   * }
-   * </pre>
-   * 
-   * @see PerspectiveOffCenterFrustum
-   */
-  @JsConstructor
-  public PerspectiveFrustum() {
-  }
+    /**
+     * Returns a duplicate of a PerspectiveFrustum instance.
+     *
+     * @return The modified result parameter or a new PerspectiveFrustum instance if
+     * one was not provided.
+     */
+    @JsMethod
+    public native PerspectiveFrustum clone();
 
-  /**
-   * Returns a duplicate of a PerspectiveFrustum instance.
-   * 
-   * @return The modified result parameter or a new PerspectiveFrustum instance if
-   *         one was not provided.
-   */
-  @JsMethod
-  public native PerspectiveFrustum clone();
+    /**
+     * Returns a duplicate of a PerspectiveFrustum instance.
+     *
+     * @param result The object onto which to store the result.
+     * @return The modified result parameter or a new PerspectiveFrustum instance if
+     * one was not provided.
+     */
+    @JsMethod
+    public native PerspectiveFrustum clone(PerspectiveFrustum result);
 
-  /**
-   * Returns a duplicate of a PerspectiveFrustum instance.
-   * 
-   * @param result The object onto which to store the result.
-   * @return The modified result parameter or a new PerspectiveFrustum instance if
-   *         one was not provided.
-   */
-  @JsMethod
-  public native PerspectiveFrustum clone(PerspectiveFrustum result);
+    /**
+     * Creates a culling volume for this frustum.
+     *
+     * <pre>
+     * Example: {
+     *   &#64;code
+     *   // Check if a bounding volume intersects the frustum.
+     *   CullingVolume cullingVolume = frustum.computeCullingVolume(cameraPosition, cameraDirection, cameraUp);
+     *   Cartesian3 intersect = cullingVolume.computeVisibility(boundingVolume);
+     * }
+     * </pre>
+     *
+     * @param position  The eye position.
+     * @param direction The view direction.
+     * @param up        The up direction.
+     * @return A culling volume at the given position and orientation.
+     */
+    @JsMethod
+    public native CullingVolume computeCullingVolume(Cartesian3 position, Cartesian3 direction, Cartesian3 up);
 
-  /**
-   * Creates a culling volume for this frustum.
-   * 
-   * <pre>
-   * Example: {
-   *   &#64;code
-   *   // Check if a bounding volume intersects the frustum.
-   *   CullingVolume cullingVolume = frustum.computeCullingVolume(cameraPosition, cameraDirection, cameraUp);
-   *   Cartesian3 intersect = cullingVolume.computeVisibility(boundingVolume);
-   * }
-   * </pre>
-   * 
-   * @param position  The eye position.
-   * @param direction The view direction.
-   * @param up        The up direction.
-   * @return A culling volume at the given position and orientation.
-   */
-  @JsMethod
-  public native CullingVolume computeCullingVolume(Cartesian3 position, Cartesian3 direction, Cartesian3 up);
+    /**
+     * Compares the provided PerspectiveFrustum componentwise and returns true if
+     * they are equal, false otherwise.
+     *
+     * @param other The right hand side PerspectiveFrustum.
+     * @return true if they are equal, false otherwise.
+     */
+    @JsMethod
+    public native boolean equals(PerspectiveFrustum other);
 
-  /**
-   * Compares the provided PerspectiveFrustum componentwise and returns true if
-   * they are equal, false otherwise.
-   * 
-   * @param other The right hand side PerspectiveFrustum.
-   * @return true if they are equal, false otherwise.
-   */
-  @JsMethod
-  public native boolean equals(PerspectiveFrustum other);
+    /**
+     * Compares the provided PerspectiveFrustum componentwise and returns true if
+     * they pass an absolute or relative tolerance test, false otherwise.
+     *
+     * @param other           The right hand side PerspectiveFrustum.
+     * @param relativeEpsilon The relative epsilon tolerance to use for equality
+     *                        testing.
+     * @return true if this and other are within the provided epsilon, false
+     * otherwise.
+     */
+    @JsMethod
+    public native boolean equalsEpsilon(PerspectiveFrustum other, double relativeEpsilon);
 
-  /**
-   * Compares the provided PerspectiveFrustum componentwise and returns true if
-   * they pass an absolute or relative tolerance test, false otherwise.
-   * 
-   * @param other           The right hand side PerspectiveFrustum.
-   * @param relativeEpsilon The relative epsilon tolerance to use for equality
-   *                        testing.
-   * @return true if this and other are within the provided epsilon, false
-   *         otherwise.
-   */
-  @JsMethod
-  public native boolean equalsEpsilon(PerspectiveFrustum other, double relativeEpsilon);
+    /**
+     * Compares the provided PerspectiveFrustum componentwise and returns true if
+     * they pass an absolute or relative tolerance test, false otherwise.
+     *
+     * @param other           The right hand side PerspectiveFrustum.
+     * @param relativeEpsilon The relative epsilon tolerance to use for equality
+     *                        testing.
+     * @param absoluteEpsilon The absolute epsilon tolerance to use for equality
+     *                        testing.
+     * @return true if this and other are within the provided epsilon, false
+     * otherwise.
+     */
+    @JsMethod
+    public native boolean equalsEpsilon(PerspectiveFrustum other, double relativeEpsilon, double absoluteEpsilon);
 
-  /**
-   * Compares the provided PerspectiveFrustum componentwise and returns true if
-   * they pass an absolute or relative tolerance test, false otherwise.
-   * 
-   * @param other           The right hand side PerspectiveFrustum.
-   * @param relativeEpsilon The relative epsilon tolerance to use for equality
-   *                        testing.
-   * @param absoluteEpsilon The absolute epsilon tolerance to use for equality
-   *                        testing.
-   * @return true if this and other are within the provided epsilon, false
-   *         otherwise.
-   */
-  @JsMethod
-  public native boolean equalsEpsilon(PerspectiveFrustum other, double relativeEpsilon, double absoluteEpsilon);
-
-  /**
-   * Returns the pixel's width and height in meters.
-   * 
-   * @param drawingBufferWidth  The width of the drawing buffer.
-   * @param drawingBufferHeight The height of the drawing buffer.
-   * @param distance            The distance to the near plane in meters.
-   * @param pixelRatio          The scaling factor from pixel space to coordinate
-   *                            space.
-   * @param result              The object onto which to store the result.
-   * @return The modified result parameter or a new instance of Cartesian2 with
-   *         the pixel's width and height in the x and y properties, respectively.
-   */
-  // TODO: example
-  @JsMethod
-  public native Cartesian2 getPixelDimensions(double drawingBufferWidth, double drawingBufferHeight, double distance,
-      double pixelRatio, Cartesian2 result);
+    /**
+     * Returns the pixel's width and height in meters.
+     *
+     * @param drawingBufferWidth  The width of the drawing buffer.
+     * @param drawingBufferHeight The height of the drawing buffer.
+     * @param distance            The distance to the near plane in meters.
+     * @param pixelRatio          The scaling factor from pixel space to coordinate
+     *                            space.
+     * @param result              The object onto which to store the result.
+     * @return The modified result parameter or a new instance of Cartesian2 with
+     * the pixel's width and height in the x and y properties, respectively.
+     */
+    // TODO: example
+    @JsMethod
+    public native Cartesian2 getPixelDimensions(double drawingBufferWidth, double drawingBufferHeight, double distance,
+                                                double pixelRatio, Cartesian2 result);
 }

@@ -35,42 +35,42 @@ import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ShowcaseExampleStor
  */
 public class Tiles3DInspector extends AbstractExample {
 
-  @Inject
-  public Tiles3DInspector(ShowcaseExampleStore store) {
-    super("3D Tiles Inspector", "Use the 3D Tiles inspector as a debugging tool for different tilesets.",
-        new String[] { "Showcase", "Cesium", "3D Tiles" }, store);
-  }
+    @Inject
+    public Tiles3DInspector(ShowcaseExampleStore store) {
+        super("3D Tiles Inspector", "Use the 3D Tiles inspector as a debugging tool for different tilesets.",
+                new String[]{"Showcase", "Cesium", "3D Tiles"}, store);
+    }
 
-  @Override
-  public void buildPanel() {
-    final ViewerPanel csVPanel = new ViewerPanel();
+    @Override
+    public void buildPanel() {
+        final ViewerPanel csVPanel = new ViewerPanel();
 
-    csVPanel.getViewer().extend(viewerCesium3DTilesInspectorMixin.instance());
+        csVPanel.getViewer().extend(viewerCesium3DTilesInspectorMixin.instance());
 
-    Cesium3DTileset tileset = (Cesium3DTileset) csVPanel.getViewer().scene().primitives().add(Cesium3DTileset.create(
-        "https://beta.cesium.com/api/assets/1461?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJkYWJmM2MzNS02OWM5LTQ3OWItYjEyYS0xZmNlODM5ZDNkMTYiLCJpZCI6NDQsImFzc2V0cyI6WzE0NjFdLCJpYXQiOjE0OTkyNjQ3NDN9.vuR75SqPDKcggvUrG_vpx0Av02jdiAxnnB1fNf-9f7s"));
-    csVPanel.getViewer().cesium3DTilesInspector.viewModel.tileset = tileset;
+        Cesium3DTileset tileset = (Cesium3DTileset) csVPanel.getViewer().scene().primitives().add(Cesium3DTileset.create(
+                "https://beta.cesium.com/api/assets/1461?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJkYWJmM2MzNS02OWM5LTQ3OWItYjEyYS0xZmNlODM5ZDNkMTYiLCJpZCI6NDQsImFzc2V0cyI6WzE0NjFdLCJpYXQiOjE0OTkyNjQ3NDN9.vuR75SqPDKcggvUrG_vpx0Av02jdiAxnnB1fNf-9f7s"));
+        csVPanel.getViewer().cesium3DTilesInspector.viewModel.tileset = tileset;
 
-    tileset.readyPromise().then(new Fulfill<Cesium3DTileset>() {
-      @Override
-      public void onFulfilled(Cesium3DTileset value) {
-        BoundingSphere boundingSphere = value.boundingSphere();
-        csVPanel.getViewer().camera.viewBoundingSphere(boundingSphere,
-            new org.cesiumjs.cs.core.HeadingPitchRange(0.0, -0.5, boundingSphere.radius / 4.0));
-        csVPanel.getViewer().camera.lookAtTransform(Matrix4.IDENTITY());
-      }
-    });
+        tileset.readyPromise().then(new Fulfill<Cesium3DTileset>() {
+            @Override
+            public void onFulfilled(Cesium3DTileset value) {
+                BoundingSphere boundingSphere = value.boundingSphere();
+                csVPanel.getViewer().camera.viewBoundingSphere(boundingSphere,
+                        new org.cesiumjs.cs.core.HeadingPitchRange(0.0, -0.5, boundingSphere.radius / 4.0));
+                csVPanel.getViewer().camera.lookAtTransform(Matrix4.IDENTITY());
+            }
+        });
 
-    contentPanel.add(new HTML("<p>Use the 3D Tiles inspector as a debugging tool for different tilesets.</p>"));
-    contentPanel.add(csVPanel);
+        contentPanel.add(new HTML("<p>Use the 3D Tiles inspector as a debugging tool for different tilesets.</p>"));
+        contentPanel.add(csVPanel);
 
-    initWidget(contentPanel);
-  }
+        initWidget(contentPanel);
+    }
 
-  @Override
-  public String[] getSourceCodeURLs() {
-    String[] sourceCodeURLs = new String[1];
-    sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "Tiles3DInspector.txt";
-    return sourceCodeURLs;
-  }
+    @Override
+    public String[] getSourceCodeURLs() {
+        String[] sourceCodeURLs = new String[1];
+        sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "Tiles3DInspector.txt";
+        return sourceCodeURLs;
+    }
 }

@@ -16,13 +16,12 @@
 
 package org.cesiumjs.cs.datasources.properties;
 
-import org.cesiumjs.cs.collections.TimeIntervalCollection;
-import org.cesiumjs.cs.core.Event;
-import org.cesiumjs.cs.core.enums.ReferenceFrame;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.collections.TimeIntervalCollection;
+import org.cesiumjs.cs.core.Event;
+import org.cesiumjs.cs.core.enums.ReferenceFrame;
 
 /**
  * A {@link TimeIntervalCollectionProperty} which is also a
@@ -32,59 +31,58 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "TimeIntervalCollectionPositionProperty")
 public class TimeIntervalCollectionPositionProperty extends PositionProperty {
-  /**
-   * Gets the event that is raised whenever the definition of this property
-   * changes. The definition is considered to have changed if a call to getValue
-   * would return a different result for the same time.
-   */
-  @JsProperty
-  public native Event definitionChanged();
+    /**
+     * Gets the interval collection.
+     */
+    @JsProperty
+    public TimeIntervalCollection intervals;
+    /**
+     * Gets the reference frame in which the position is defined. Default:
+     * {@link ReferenceFrame#FIXED()}
+     */
+    @JsProperty
+    public ReferenceFrame referenceFrame;
 
-  /**
-   * Gets the interval collection.
-   */
-  @JsProperty
-  public TimeIntervalCollection intervals;
+    /**
+     * A {@link TimeIntervalCollectionProperty} which is also a
+     * {@link PositionProperty}.
+     */
+    @JsConstructor
+    public TimeIntervalCollectionPositionProperty() {
+    }
 
-  /**
-   * Gets a value indicating if this property is constant. A property is
-   * considered constant if getValue always returns the same result for the
-   * current definition.
-   */
-  @JsProperty
-  public native boolean isConstant();
+    /**
+     * A {@link TimeIntervalCollectionProperty} which is also a
+     * {@link PositionProperty}.
+     *
+     * @param referenceFrame The reference frame in which the position is defined.
+     */
+    @JsConstructor
+    public TimeIntervalCollectionPositionProperty(ReferenceFrame referenceFrame) {
+    }
 
-  /**
-   * Gets the reference frame in which the position is defined. Default:
-   * {@link ReferenceFrame#FIXED()}
-   */
-  @JsProperty
-  public ReferenceFrame referenceFrame;
+    /**
+     * Gets the event that is raised whenever the definition of this property
+     * changes. The definition is considered to have changed if a call to getValue
+     * would return a different result for the same time.
+     */
+    @JsProperty
+    public native Event definitionChanged();
 
-  /**
-   * A {@link TimeIntervalCollectionProperty} which is also a
-   * {@link PositionProperty}.
-   */
-  @JsConstructor
-  public TimeIntervalCollectionPositionProperty() {
-  }
+    /**
+     * Gets a value indicating if this property is constant. A property is
+     * considered constant if getValue always returns the same result for the
+     * current definition.
+     */
+    @JsProperty
+    public native boolean isConstant();
 
-  /**
-   * A {@link TimeIntervalCollectionProperty} which is also a
-   * {@link PositionProperty}.
-   * 
-   * @param referenceFrame The reference frame in which the position is defined.
-   */
-  @JsConstructor
-  public TimeIntervalCollectionPositionProperty(ReferenceFrame referenceFrame) {
-  }
-
-  /**
-   * Compares this property to the provided property and returns true if they are
-   * equal, false otherwise.
-   * 
-   * @param other The other property.
-   * @return true if left and right are equal, false otherwise.
-   */
-  public native boolean equals(Property other);
+    /**
+     * Compares this property to the provided property and returns true if they are
+     * equal, false otherwise.
+     *
+     * @param other The other property.
+     * @return true if left and right are equal, false otherwise.
+     */
+    public native boolean equals(Property other);
 }

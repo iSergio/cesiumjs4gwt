@@ -16,33 +16,32 @@
 
 package org.cesiumjs.cs.datasources;
 
-import org.cesiumjs.cs.datasources.properties.StripeMaterialProperty;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.datasources.properties.StripeMaterialProperty;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "StripeOrientation")
 public class StripeOrientation {
-  /**
-   * Horizontal orientation.
-   */
-  @JsProperty(name = "HORIZONTAL")
-  public static native Integer HORIZONTAL();
+    /**
+     * Defined the orientation of stripes in {@link StripeMaterialProperty}.
+     */
+    @JsConstructor
+    private StripeOrientation() {
+    }
 
-  /**
-   * Vertical orientation.
-   */
-  @JsProperty(name = "VERTICAL")
-  public static native Integer VERTICAL();
+    /**
+     * Horizontal orientation.
+     */
+    @JsProperty(name = "HORIZONTAL")
+    public static native Integer HORIZONTAL();
 
-  /**
-   * Defined the orientation of stripes in {@link StripeMaterialProperty}.
-   */
-  @JsConstructor
-  private StripeOrientation() {
-  }
+    /**
+     * Vertical orientation.
+     */
+    @JsProperty(name = "VERTICAL")
+    public static native Integer VERTICAL();
 }

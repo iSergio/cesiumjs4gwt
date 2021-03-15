@@ -16,46 +16,45 @@
 
 package org.cesiumjs.cs.core.geometry.options;
 
-import org.cesiumjs.cs.core.VertexFormat;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.VertexFormat;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class RectangleGeometryOptions extends RectangleOutlineGeometryOptions {
-  /**
-   * The vertex attributes to be computed. Default
-   * {@link org.cesiumjs.cs.core.VertexFormat#DEFAULT()}
-   */
-  @JsProperty
-  public VertexFormat vertexFormat;
-  /**
-   * The rotation of the texture coordinates, in radians. A positive rotation is
-   * counter-clockwise. Default: 0.0
-   */
-  @JsProperty
-  public double stRotation;
-  /**
-   * Specifies whether the rectangle has a top cover when extruded. Default: true
-   */
-  @JsProperty
-  public boolean closeTop;
-  /**
-   * Specifies whether the rectangle has a bottom cover when extruded. Default:
-   * true
-   */
-  @JsProperty
-  public boolean closeBottom;
+    /**
+     * The vertex attributes to be computed. Default
+     * {@link org.cesiumjs.cs.core.VertexFormat#DEFAULT()}
+     */
+    @JsProperty
+    public VertexFormat vertexFormat;
+    /**
+     * The rotation of the texture coordinates, in radians. A positive rotation is
+     * counter-clockwise. Default: 0.0
+     */
+    @JsProperty
+    public double stRotation;
+    /**
+     * Specifies whether the rectangle has a top cover when extruded. Default: true
+     */
+    @JsProperty
+    public boolean closeTop;
+    /**
+     * Specifies whether the rectangle has a bottom cover when extruded. Default:
+     * true
+     */
+    @JsProperty
+    public boolean closeBottom;
 
-  /**
-   * Options for {@link org.cesiumjs.cs.core.geometry.RectangleGeometry}
-   */
-  @JsConstructor
-  public RectangleGeometryOptions() {
-  }
+    /**
+     * Options for {@link org.cesiumjs.cs.core.geometry.RectangleGeometry}
+     */
+    @JsConstructor
+    public RectangleGeometryOptions() {
+    }
 }

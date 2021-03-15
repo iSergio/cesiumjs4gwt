@@ -16,47 +16,46 @@
 
 package org.cesiumjs.cs.core.options;
 
-import org.cesiumjs.cs.core.Cartesian3;
-import org.cesiumjs.cs.core.Ellipsoid;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Cartesian3;
+import org.cesiumjs.cs.core.Ellipsoid;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class PolylinePipelineOptions {
-  /**
-   * The array of type {Cartesian3} representing positions.
-   */
-  @JsProperty
-  public Cartesian3[] positions;
-  /**
-   * A number or array of numbers representing the heights of each position.
-   */
-  @JsProperty
-  public double[] height;
-  /**
-   * The distance, in radians, between each latitude and longitude. Determines the
-   * number of positions in the buffer. Default:
-   * {@link org.cesiumjs.cs.core.Math#RADIANS_PER_DEGREE}
-   */
-  @JsProperty
-  public double granularity;
-  /**
-   * The ellipsoid on which the positions lie. Default: {@link Ellipsoid#WGS84()}
-   */
-  @JsProperty
-  public Ellipsoid ellipsoid;
+    /**
+     * The array of type {Cartesian3} representing positions.
+     */
+    @JsProperty
+    public Cartesian3[] positions;
+    /**
+     * A number or array of numbers representing the heights of each position.
+     */
+    @JsProperty
+    public double[] height;
+    /**
+     * The distance, in radians, between each latitude and longitude. Determines the
+     * number of positions in the buffer. Default:
+     * {@link org.cesiumjs.cs.core.Math#RADIANS_PER_DEGREE}
+     */
+    @JsProperty
+    public double granularity;
+    /**
+     * The ellipsoid on which the positions lie. Default: {@link Ellipsoid#WGS84()}
+     */
+    @JsProperty
+    public Ellipsoid ellipsoid;
 
-  /**
-   * Options for
-   * {@link org.cesiumjs.cs.core.PolylinePipeline#generateCartesianArc(PolylinePipelineOptions)}
-   */
-  @JsConstructor
-  public PolylinePipelineOptions() {
-  }
+    /**
+     * Options for
+     * {@link org.cesiumjs.cs.core.PolylinePipeline#generateCartesianArc(PolylinePipelineOptions)}
+     */
+    @JsConstructor
+    public PolylinePipelineOptions() {
+    }
 }

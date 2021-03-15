@@ -16,8 +16,6 @@
 
 package org.cesiumjs.linker;
 
-import java.util.Set;
-
 import com.google.gwt.core.ext.LinkerContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
@@ -26,34 +24,36 @@ import com.google.gwt.core.ext.linker.ArtifactSet;
 import com.google.gwt.core.ext.linker.EmittedArtifact;
 import com.google.gwt.core.ext.linker.LinkerOrder;
 
+import java.util.Set;
+
 /**
  * @author Serge Silaev aka iSergio
  */
 @LinkerOrder(LinkerOrder.Order.PRE)
 public class CesiumLinker extends AbstractLinker {
-  @Override
-  public String getDescription() {
-    return "Cesium";
-  }
-
-  @Override
-  public ArtifactSet link(TreeLogger logger, LinkerContext context, ArtifactSet artifacts)
-      throws UnableToCompleteException {
-    ArtifactSet toReturn = new ArtifactSet(artifacts);
-
-    Set<EmittedArtifact> emittedArtifacts = artifacts.find(EmittedArtifact.class);
-    for (EmittedArtifact emittedArtifact : emittedArtifacts) {
-      String partialPath = emittedArtifact.getPartialPath();
-      // Add to Cesium.js file, path, where Cesium/Cesium.js stored.
-      // It need for inject css files for example - Viewer
-      if (partialPath.endsWith("/Cesium.js")) {
-        String contents = CesiumLinkerUtils.getContents(emittedArtifact, logger);
-        StringBuffer sb = new StringBuffer(contents);
-        sb.insert(0, "window.CesiumPath = '" + context.getModuleName() + "/js/';\n");
-        toReturn.remove(emittedArtifact);
-        toReturn.add(emitString(logger, sb.toString(), partialPath));
-      }
+    @Override
+    public String getDescription() {
+        return "Cesium";
     }
-    return toReturn;
-  }
+
+    @Override
+    public ArtifactSet link(TreeLogger logger, LinkerContext context, ArtifactSet artifacts)
+            throws UnableToCompleteException {
+        ArtifactSet toReturn = new ArtifactSet(artifacts);
+
+        Set<EmittedArtifact> emittedArtifacts = artifacts.find(EmittedArtifact.class);
+        for (EmittedArtifact emittedArtifact : emittedArtifacts) {
+            String partialPath = emittedArtifact.getPartialPath();
+            // Add to Cesium.js file, path, where Cesium/Cesium.js stored.
+            // It need for inject css files for example - Viewer
+            if (partialPath.endsWith("/Cesium.js")) {
+                String contents = CesiumLinkerUtils.getContents(emittedArtifact, logger);
+                StringBuffer sb = new StringBuffer(contents);
+                sb.insert(0, "window.CesiumPath = '" + context.getModuleName() + "/js/';\n");
+                toReturn.remove(emittedArtifact);
+                toReturn.add(emitString(logger, sb.toString(), partialPath));
+            }
+        }
+        return toReturn;
+    }
 }

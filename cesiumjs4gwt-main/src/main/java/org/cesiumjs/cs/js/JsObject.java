@@ -17,7 +17,6 @@
 package org.cesiumjs.cs.js;
 
 import com.google.gwt.core.client.JavaScriptObject;
-
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 
@@ -25,117 +24,117 @@ import jsinterop.annotations.JsProperty;
  * @author Serge Silaev aka iSergio
  */
 public class JsObject extends JavaScriptObject {
-  protected JsObject() {
-  }
-
-  public static native JsObject create() /*-{
-                                         return {};
-                                         }-*/;
-
-  public static <O> O $(O base, Object... propertyValues) {
-    String propertyName = null;
-
-    for (Object propertyValue : propertyValues) {
-      if (propertyName == null) {
-        propertyName = (String) propertyValue;
-      } else {
-        if (propertyValue instanceof Number) {
-          setProperty(base, propertyName, (Number) propertyValue);
-        } else if (propertyValue instanceof Boolean) {
-          setProperty(base, propertyName, (Boolean) propertyValue);
-        } else {
-          setProperty(base, propertyName, propertyValue);
-        }
-
-        propertyName = null;
-      }
+    protected JsObject() {
     }
-    return base;
-  }
 
-  public final static native void setProperty(Object target, String name, Number value) /*-{
-                                                                                        if (target === undefined) {
-                                                                                        target = {};
-                                                                                        }
-                                                                                        target[name] = value;
-                                                                                        }-*/;
+    public static native JsObject create() /*-{
+        return {};
+    }-*/;
 
-  public final static native void setProperty(Object target, String name, Boolean value) /*-{
-                                                                                         if (target === undefined) {
-                                                                                         target = {};
-                                                                                         }
-                                                                                         target[name] = value;
-                                                                                         }-*/;
+    public static <O> O $(O base, Object... propertyValues) {
+        String propertyName = null;
 
-  public final static native void setProperty(Object target, String name, String value) /*-{
-                                                                                        if (target === undefined) {
-                                                                                        target = {};
-                                                                                        }
-                                                                                        target[name] = value;
-                                                                                        }-*/;
+        for (Object propertyValue : propertyValues) {
+            if (propertyName == null) {
+                propertyName = (String) propertyValue;
+            } else {
+                if (propertyValue instanceof Number) {
+                    setProperty(base, propertyName, (Number) propertyValue);
+                } else if (propertyValue instanceof Boolean) {
+                    setProperty(base, propertyName, (Boolean) propertyValue);
+                } else {
+                    setProperty(base, propertyName, propertyValue);
+                }
 
-  public final static native void setProperty(Object target, String name, Object value) /*-{
-                                                                                        if (target === undefined) {
-                                                                                        target = {};
-                                                                                        }
-                                                                                        target[name] = value;
-                                                                                        }-*/;
+                propertyName = null;
+            }
+        }
+        return base;
+    }
 
-  public final native void setProperty(String name, Number value) /*-{
-                                                                  this[name] = value;
-                                                                  }-*/;
+    public final static native void setProperty(Object target, String name, Number value) /*-{
+        if (target === undefined) {
+            target = {};
+        }
+        target[name] = value;
+    }-*/;
 
-  public final native void setProperty(String name, Boolean value) /*-{
-                                                                   this[name] = value;
-                                                                   }-*/;
+    public final static native void setProperty(Object target, String name, Boolean value) /*-{
+        if (target === undefined) {
+            target = {};
+        }
+        target[name] = value;
+    }-*/;
 
-  public final native void setProperty(String name, String value) /*-{
-                                                                  this[name] = value;
-                                                                  }-*/;
+    public final static native void setProperty(Object target, String name, String value) /*-{
+        if (target === undefined) {
+            target = {};
+        }
+        target[name] = value;
+    }-*/;
 
-  public final native void setProperty(String name, Object value) /*-{
-                                                                  this[name] = value;
-                                                                  }-*/;
+    public final static native void setProperty(Object target, String name, Object value) /*-{
+        if (target === undefined) {
+            target = {};
+        }
+        target[name] = value;
+    }-*/;
 
-  public final static native Number getNumber(Object target, String name) /*-{
-                                                                          return target[name];
-                                                                          }-*/;
+    public final static native Number getNumber(Object target, String name) /*-{
+        return target[name];
+    }-*/;
 
-  public final static native JsObject getObject(Object target, String name) /*-{
-                                                                            return target[name];
-                                                                            }-*/;
+    public final static native JsObject getObject(Object target, String name) /*-{
+        return target[name];
+    }-*/;
 
-  public final static native String getString(Object target, String name) /*-{
-                                                                          return target[name];
-                                                                          }-*/;
+    public final static native String getString(Object target, String name) /*-{
+        return target[name];
+    }-*/;
 
-  public final native Number getNumber(String name) /*-{
-                                                    return this[name];
-                                                    }-*/;
+    public static final native Number getNumber(JsArray<Number> array, int index) /*-{
+        return array[index];
+    }-*/;
 
-  public final native Object getObject(String name) /*-{
-                                                    return this[name];
-                                                    }-*/;
+    public static final native String getString(JsArray<String> array, int index) /*-{
+        return array[index];
+    }-*/;
 
-  public final native String getString(String name) /*-{
-                                                    return this[name];
-                                                    }-*/;
+    /**
+     * In JavaScript null not he same undefined. In example Interpolation, we set
+     * trackedEntity to null, and this method not worked To correct this help
+     * function below.
+     *
+     * @return undefined object
+     */
+    @JsProperty(namespace = JsPackage.GLOBAL, name = "undefined")
+    public static native Object undefined();
 
-  public static final native Number getNumber(JsArray<Number> array, int index) /*-{
-                                                                                return array[index];
-                                                                                }-*/;
+    public final native void setProperty(String name, Number value) /*-{
+        this[name] = value;
+    }-*/;
 
-  public static final native String getString(JsArray<String> array, int index) /*-{
-                                                                                return array[index];
-                                                                                }-*/;
+    public final native void setProperty(String name, Boolean value) /*-{
+        this[name] = value;
+    }-*/;
 
-  /**
-   * In JavaScript null not he same undefined. In example Interpolation, we set
-   * trackedEntity to null, and this method not worked To correct this help
-   * function below.
-   * 
-   * @return undefined object
-   */
-  @JsProperty(namespace = JsPackage.GLOBAL, name = "undefined")
-  public static native Object undefined();
+    public final native void setProperty(String name, String value) /*-{
+        this[name] = value;
+    }-*/;
+
+    public final native void setProperty(String name, Object value) /*-{
+        this[name] = value;
+    }-*/;
+
+    public final native Number getNumber(String name) /*-{
+        return this[name];
+    }-*/;
+
+    public final native Object getObject(String name) /*-{
+        return this[name];
+    }-*/;
+
+    public final native String getString(String name) /*-{
+        return this[name];
+    }-*/;
 }

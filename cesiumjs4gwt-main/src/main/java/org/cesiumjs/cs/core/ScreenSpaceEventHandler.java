@@ -17,148 +17,143 @@
 package org.cesiumjs.cs.core;
 
 import com.google.gwt.dom.client.CanvasElement;
-
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.enums.KeyboardEventModifier;
 import org.cesiumjs.cs.core.enums.ScreenSpaceEventType;
 import org.cesiumjs.cs.promise.Function;
-
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsFunction;
-import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "ScreenSpaceEventHandler")
 public class ScreenSpaceEventHandler {
-  /**
-   * The amount of time, in milliseconds, that mouse events will be disabled after
-   * receiving any touch events, such that any emulated mouse events will be
-   * ignored. Default: 800
-   */
-  @JsProperty
-  public static int mouseEmulationIgnoreMilliseconds;
-  /**
-   * The amount of time, in milliseconds, before a touch on the screen becomes a
-   * touch and hold. Default: 1500
-   */
-  @JsProperty
-  public static int touchHoldDelayMilliseconds;
+    /**
+     * The amount of time, in milliseconds, that mouse events will be disabled after
+     * receiving any touch events, such that any emulated mouse events will be
+     * ignored. Default: 800
+     */
+    @JsProperty
+    public static int mouseEmulationIgnoreMilliseconds;
+    /**
+     * The amount of time, in milliseconds, before a touch on the screen becomes a
+     * touch and hold. Default: 1500
+     */
+    @JsProperty
+    public static int touchHoldDelayMilliseconds;
 
-  /**
-   * Handles user input events. Custom functions can be added to be executed on
-   * when the user enters input.
-   * 
-   * @param element The element to add events to. Default: document
-   */
-  @JsConstructor
-  public ScreenSpaceEventHandler(CanvasElement element) {
-  }
+    /**
+     * Handles user input events. Custom functions can be added to be executed on
+     * when the user enters input.
+     *
+     * @param element The element to add events to. Default: document
+     */
+    @JsConstructor
+    public ScreenSpaceEventHandler(CanvasElement element) {
+    }
 
-  // TODO: Example
-  /**
-   * Removes listeners held by this object.
-   *
-   * Once an object is destroyed, it should not be used; calling any function
-   * other than isDestroyed will result in a DeveloperError exception. Therefore,
-   * assign the return value (undefined) to the object as done in the example.
-   * 
-   * @see #isDestroyed()
-   */
-  @JsMethod
-  public native void destroy();
+    // TODO: Example
 
-  /**
-   * Returns the function to be executed on an input event.
-   * 
-   * @param type The {@link ScreenSpaceEventType} of input event.
-   * @return Returns the function to be executed on an input event.
-   * @see #setInputAction
-   * @see #removeInputAction
-   */
-  @SuppressWarnings("unusable-by-js")
-  @JsMethod
-  public native Function getInputAction(Number type);
+    /**
+     * Removes listeners held by this object.
+     * <p>
+     * Once an object is destroyed, it should not be used; calling any function
+     * other than isDestroyed will result in a DeveloperError exception. Therefore,
+     * assign the return value (undefined) to the object as done in the example.
+     *
+     * @see #isDestroyed()
+     */
+    @JsMethod
+    public native void destroy();
 
-  /**
-   * Returns the function to be executed on an input event.
-   * 
-   * @param type     The {@link ScreenSpaceEventType} of input event.
-   * @param modifier A {@link KeyboardEventModifier} key that is held when a type
-   *                 event occurs.
-   * @return Returns the function to be executed on an input event.
-   * @see #setInputAction
-   * @see #removeInputAction
-   */
-  @SuppressWarnings("unusable-by-js")
-  @JsMethod
-  public native Function getInputAction(Number type, Number modifier);
+    /**
+     * Returns the function to be executed on an input event.
+     *
+     * @param type The {@link ScreenSpaceEventType} of input event.
+     * @return Returns the function to be executed on an input event.
+     * @see #setInputAction
+     * @see #removeInputAction
+     */
+    @SuppressWarnings("unusable-by-js")
+    @JsMethod
+    public native Function getInputAction(Number type);
 
-  /**
-   * Returns true if this object was destroyed; otherwise, false.
-   *
-   * If this object was destroyed, it should not be used; calling any function
-   * other than isDestroyed will result in a DeveloperError exception.
-   * 
-   * @return true if this object was destroyed; otherwise, false.
-   * @see #destroy()
-   */
-  @JsMethod
-  public native boolean isDestroyed();
+    /**
+     * Returns the function to be executed on an input event.
+     *
+     * @param type     The {@link ScreenSpaceEventType} of input event.
+     * @param modifier A {@link KeyboardEventModifier} key that is held when a type
+     *                 event occurs.
+     * @return Returns the function to be executed on an input event.
+     * @see #setInputAction
+     * @see #removeInputAction
+     */
+    @SuppressWarnings("unusable-by-js")
+    @JsMethod
+    public native Function getInputAction(Number type, Number modifier);
 
-  /**
-   * Removes the function to be executed on an input event.
-   * 
-   * @param type The {@link ScreenSpaceEventType} of input event.
-   * @see #setInputAction
-   */
-  @SuppressWarnings("unusable-by-js")
-  @JsMethod
-  public native void removeInputAction(Number type);
+    /**
+     * Returns true if this object was destroyed; otherwise, false.
+     * <p>
+     * If this object was destroyed, it should not be used; calling any function
+     * other than isDestroyed will result in a DeveloperError exception.
+     *
+     * @return true if this object was destroyed; otherwise, false.
+     * @see #destroy()
+     */
+    @JsMethod
+    public native boolean isDestroyed();
 
-  /**
-   * Removes the function to be executed on an input event.
-   * 
-   * @param type     The {@link ScreenSpaceEventType} of input event.
-   * @param modifier A {@link KeyboardEventModifier} key that is held when a type
-   *                 event occurs.
-   * @see #getInputAction
-   * @see #setInputAction
-   */
-  @SuppressWarnings("unusable-by-js")
-  @JsMethod
-  public native void removeInputAction(Number type, Number modifier);
+    /**
+     * Removes the function to be executed on an input event.
+     *
+     * @param type The {@link ScreenSpaceEventType} of input event.
+     * @see #setInputAction
+     */
+    @SuppressWarnings("unusable-by-js")
+    @JsMethod
+    public native void removeInputAction(Number type);
 
-  /**
-   * Set a function to be executed on an input event.
-   * 
-   * @param action Function to be executed when the input event occurs.
-   * @param type   The {@link ScreenSpaceEventType} of input event.
-   * @see #getInputAction
-   * @see #removeInputAction
-   */
-  @SuppressWarnings("unusable-by-js")
-  @JsMethod
-  public native void setInputAction(Listener action, Number type);
+    /**
+     * Removes the function to be executed on an input event.
+     *
+     * @param type     The {@link ScreenSpaceEventType} of input event.
+     * @param modifier A {@link KeyboardEventModifier} key that is held when a type
+     *                 event occurs.
+     * @see #getInputAction
+     * @see #setInputAction
+     */
+    @SuppressWarnings("unusable-by-js")
+    @JsMethod
+    public native void removeInputAction(Number type, Number modifier);
 
-  /**
-   * Set a function to be executed on an input event.
-   * 
-   * @param action   Function to be executed when the input event occurs.
-   * @param type     The {@link ScreenSpaceEventType} of input event.
-   * @param modifier A {@link KeyboardEventModifier} key that is held when a type
-   *                 event occurs.
-   * @see #getInputAction
-   * @see #removeInputAction
-   */
-  @SuppressWarnings("unusable-by-js")
-  @JsMethod
-  public native void setInputAction(Listener action, Number type, Number modifier);
+    /**
+     * Set a function to be executed on an input event.
+     *
+     * @param action Function to be executed when the input event occurs.
+     * @param type   The {@link ScreenSpaceEventType} of input event.
+     * @see #getInputAction
+     * @see #removeInputAction
+     */
+    @SuppressWarnings("unusable-by-js")
+    @JsMethod
+    public native void setInputAction(Listener action, Number type);
 
-  @JsFunction
-  public interface Listener<T> {
-    void function(T event);
-  }
+    /**
+     * Set a function to be executed on an input event.
+     *
+     * @param action   Function to be executed when the input event occurs.
+     * @param type     The {@link ScreenSpaceEventType} of input event.
+     * @param modifier A {@link KeyboardEventModifier} key that is held when a type
+     *                 event occurs.
+     * @see #getInputAction
+     * @see #removeInputAction
+     */
+    @SuppressWarnings("unusable-by-js")
+    @JsMethod
+    public native void setInputAction(Listener action, Number type, Number modifier);
+
+    @JsFunction
+    public interface Listener<T> {
+        void function(T event);
+    }
 }

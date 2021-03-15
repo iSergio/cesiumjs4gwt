@@ -16,6 +16,9 @@
 
 package org.cesiumjs.cs.scene;
 
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Matrix4;
 import org.cesiumjs.cs.core.geometry.GeometryInstance;
 import org.cesiumjs.cs.promise.Promise;
@@ -23,10 +26,6 @@ import org.cesiumjs.cs.scene.apperances.Appearance;
 import org.cesiumjs.cs.scene.enums.ClassificationType;
 import org.cesiumjs.cs.scene.enums.ShadowMode;
 import org.cesiumjs.cs.scene.options.ClassificationPrimitiveOptions;
-
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
 
 /**
  * A classification primitive represents a volume enclosing geometry in the
@@ -38,14 +37,14 @@ import jsinterop.annotations.JsType;
  * characteristics. Decoupling geometry and appearance allows us to mix and
  * match most of them and add a new geometry or appearance independently of each
  * other. Only the PerInstanceColorAppearance is supported at this time.
- *
+ * <p>
  * For correct rendering, this feature requires the EXT_frag_depth WebGL
  * extension. For hardware that do not support this extension, there will be
  * rendering artifacts for some viewing angles.
- *
+ * <p>
  * Valid geometries are BoxGeometry, CylinderGeometry, EllipsoidGeometry,
  * PolylineVolumeGeometry, and SphereGeometry.
- *
+ * <p>
  * Geometries that follow the surface of the ellipsoid, such as CircleGeometry,
  * CorridorGeometry, EllipseGeometry, PolygonGeometry, and RectangleGeometry,
  * are also valid if they are extruded volumes; otherwise, they will not be
@@ -55,144 +54,141 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "ClassificationPrimitive")
 public class ClassificationPrimitive extends Primitive {
-  /**
-   * When true, each geometry instance will only be pickable with Scene#pick. When
-   * false, GPU memory is saved. Default: true
-   */
-  @JsProperty(name = "allowPicking")
-  public native boolean allowPicking();
+    /**
+     * Determines whether terrain, 3D Tiles or both will be classified. Default:
+     * {@link ClassificationType#BOTH()}
+     */
+    @JsProperty
+    public Number classificationType;
+    /**
+     * When true, the renderer frustum culls and horizon culls the primitive's
+     * commands based on their bounding volume. Set this to false for a small
+     * performance gain if you are manually culling the primitive. Default: true
+     */
+    @JsProperty
+    public boolean cull;
+    /**
+     * This property is for debugging only; it is not for production use nor is it
+     * optimized. Draws the bounding sphere for each draw command in the primitive.
+     * <p>
+     * Default: false
+     */
+    @JsProperty
+    public boolean debugShowBoundingVolume;
+    /**
+     * The Appearance used to shade this primitive when it fails the depth test.
+     * Each geometry instance is shaded with the same appearance. Some appearances,
+     * like PerInstanceColorAppearance allow giving each instance unique properties.
+     * When using an appearance that requires a color attribute, like
+     * PerInstanceColorAppearance, add a depthFailColor per-instance attribute
+     * instead.
+     * <p>
+     * Requires the EXT_frag_depth WebGL extension to render properly. If the
+     * extension is not supported, there may be artifacts.
+     * <p>
+     * Default: undefined
+     */
+    @JsProperty
+    public Appearance depthFailAppearance;
+    /**
+     * The 4x4 transformation matrix that transforms the primitive (all geometry
+     * instances) from model to world coordinates. When this is the identity matrix,
+     * the primitive is drawn in world coordinates, i.e., Earth's WGS84 coordinates.
+     * Local reference frames can be used by providing a different transformation
+     * matrix, like that returned by
+     * {@link org.cesiumjs.cs.core.Transforms#eastNorthUpToFixedFrame}. This
+     * property is only supported in 3D mode.
+     * <p>
+     * Default: {@link Matrix4#IDENTITY()}
+     */
+    @JsProperty
+    public Matrix4 modelMatrix;
+    /**
+     * Determines whether this primitive casts or receives shadows from each light
+     * source. Default: {@link ShadowMode#DISABLED()}
+     */
+    @JsProperty
+    public Number shadows;
+    /**
+     * Determines if the primitive will be shown. This affects all geometry
+     * instances in the primitive. Default Value: true
+     */
+    @JsProperty
+    public boolean show;
 
-  /**
-   * Determines if the geometry instances will be created and batched on a web
-   * worker. Default: true
-   */
-  @JsProperty(name = "asynchronous")
-  public native boolean asynchronous();
+    @JsConstructor
+    public ClassificationPrimitive() {
+    }
 
-  /**
-   * Determines whether terrain, 3D Tiles or both will be classified. Default:
-   * {@link ClassificationType#BOTH()}
-   */
-  @JsProperty
-  public Number classificationType;
+    @JsConstructor
+    public ClassificationPrimitive(ClassificationPrimitiveOptions options) {
+    }
 
-  /**
-   * When true, geometry vertices are compressed, which will save memory. Default:
-   * true
-   */
-  @JsProperty(name = "compressVertices")
-  public native boolean compressVertices();
+    /**
+     * When true, each geometry instance will only be pickable with Scene#pick. When
+     * false, GPU memory is saved. Default: true
+     */
+    @JsProperty(name = "allowPicking")
+    public native boolean allowPicking();
 
-  /**
-   * When true, the renderer frustum culls and horizon culls the primitive's
-   * commands based on their bounding volume. Set this to false for a small
-   * performance gain if you are manually culling the primitive. Default: true
-   */
-  @JsProperty
-  public boolean cull;
-  /**
-   * This property is for debugging only; it is not for production use nor is it
-   * optimized. Draws the bounding sphere for each draw command in the primitive.
-   *
-   * Default: false
-   */
-  @JsProperty
-  public boolean debugShowBoundingVolume;
-  /**
-   * The Appearance used to shade this primitive when it fails the depth test.
-   * Each geometry instance is shaded with the same appearance. Some appearances,
-   * like PerInstanceColorAppearance allow giving each instance unique properties.
-   * When using an appearance that requires a color attribute, like
-   * PerInstanceColorAppearance, add a depthFailColor per-instance attribute
-   * instead.
-   *
-   * Requires the EXT_frag_depth WebGL extension to render properly. If the
-   * extension is not supported, there may be artifacts.
-   *
-   * Default: undefined
-   */
-  @JsProperty
-  public Appearance depthFailAppearance;
+    /**
+     * Determines if the geometry instances will be created and batched on a web
+     * worker. Default: true
+     */
+    @JsProperty(name = "asynchronous")
+    public native boolean asynchronous();
 
-  /**
-   * The geometry instances rendered with this primitive. This may be undefined if
-   * options.releaseGeometryInstances is true when the primitive is constructed.
-   * Changing this property after the primitive is rendered has no effect.
-   *
-   * Default: undefined
-   */
-  @JsProperty(name = "geometryInstances")
-  public native GeometryInstance[] geometryInstances();
+    /**
+     * When true, geometry vertices are compressed, which will save memory. Default:
+     * true
+     */
+    @JsProperty(name = "compressVertices")
+    public native boolean compressVertices();
 
-  /**
-   * Determines if geometry vertex attributes are interleaved, which can slightly
-   * improve rendering performance.
-   *
-   * Default: false
-   */
-  @JsProperty(name = "interleave")
-  public native boolean interleave();
+    /**
+     * The geometry instances rendered with this primitive. This may be undefined if
+     * options.releaseGeometryInstances is true when the primitive is constructed.
+     * Changing this property after the primitive is rendered has no effect.
+     * <p>
+     * Default: undefined
+     */
+    @JsProperty(name = "geometryInstances")
+    public native GeometryInstance[] geometryInstances();
 
-  /**
-   * The 4x4 transformation matrix that transforms the primitive (all geometry
-   * instances) from model to world coordinates. When this is the identity matrix,
-   * the primitive is drawn in world coordinates, i.e., Earth's WGS84 coordinates.
-   * Local reference frames can be used by providing a different transformation
-   * matrix, like that returned by
-   * {@link org.cesiumjs.cs.core.Transforms#eastNorthUpToFixedFrame}. This
-   * property is only supported in 3D mode.
-   *
-   * Default: {@link Matrix4#IDENTITY()}
-   */
-  @JsProperty
-  public Matrix4 modelMatrix;
+    /**
+     * Determines if geometry vertex attributes are interleaved, which can slightly
+     * improve rendering performance.
+     * <p>
+     * Default: false
+     */
+    @JsProperty(name = "interleave")
+    public native boolean interleave();
 
-  /**
-   * Determines if the primitive is complete and ready to render. If this property
-   * is true, the primitive will be rendered the next time that Primitive#update
-   * is called.
-   */
-  @JsProperty(name = "ready")
-  public native boolean ready();
+    /**
+     * Determines if the primitive is complete and ready to render. If this property
+     * is true, the primitive will be rendered the next time that Primitive#update
+     * is called.
+     */
+    @JsProperty(name = "ready")
+    public native boolean ready();
 
-  /**
-   * Gets a promise that resolves when the primitive is ready to render.
-   */
-  @JsProperty(name = "readyPromise")
-  public native Promise<Primitive, Void> readyPromise();
+    /**
+     * Gets a promise that resolves when the primitive is ready to render.
+     */
+    @JsProperty(name = "readyPromise")
+    public native Promise<Primitive, Void> readyPromise();
 
-  /**
-   * When true, the primitive does not keep a reference to the input
-   * geometryInstances to save memory. Default: true
-   */
-  @JsProperty(name = "releaseGeometryInstances")
-  public native boolean releaseGeometryInstances();
+    /**
+     * When true, the primitive does not keep a reference to the input
+     * geometryInstances to save memory. Default: true
+     */
+    @JsProperty(name = "releaseGeometryInstances")
+    public native boolean releaseGeometryInstances();
 
-  /**
-   * Determines whether this primitive casts or receives shadows from each light
-   * source. Default: {@link ShadowMode#DISABLED()}
-   */
-  @JsProperty
-  public Number shadows;
-  /**
-   * Determines if the primitive will be shown. This affects all geometry
-   * instances in the primitive. Default Value: true
-   */
-  @JsProperty
-  public boolean show;
-
-  /**
-   * When true, geometry vertices are optimized for the pre and post-vertex-shader
-   * caches. Default: true
-   */
-  @JsProperty(name = "vertexCacheOptimize")
-  public native boolean vertexCacheOptimize();
-
-  @JsConstructor
-  public ClassificationPrimitive() {
-  }
-
-  @JsConstructor
-  public ClassificationPrimitive(ClassificationPrimitiveOptions options) {
-  }
+    /**
+     * When true, geometry vertices are optimized for the pre and post-vertex-shader
+     * caches. Default: true
+     */
+    @JsProperty(name = "vertexCacheOptimize")
+    public native boolean vertexCacheOptimize();
 }

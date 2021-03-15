@@ -16,12 +16,11 @@
 
 package org.cesiumjs.cs.core.geometry;
 
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Packable;
 import org.cesiumjs.cs.core.VertexFormat;
 import org.cesiumjs.cs.core.geometry.options.PlaneGeometryOptions;
-
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsType;
 
 /**
  * Describes geometry representing a plane centered at the origin, with a unit
@@ -31,19 +30,19 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "PlaneGeometry")
 public class PlaneGeometry extends Geometry implements Packable {
-  /**
-   * Describes geometry representing a plane centered at the origin, with a unit
-   * width and length.
-   * 
-   * @param options object {@link PlaneGeometryOptions}.
-   */
-  @JsConstructor
-  public PlaneGeometry(PlaneGeometryOptions options) {
-  }
+    /**
+     * Describes geometry representing a plane centered at the origin, with a unit
+     * width and length.
+     *
+     * @param options object {@link PlaneGeometryOptions}.
+     */
+    @JsConstructor
+    public PlaneGeometry(PlaneGeometryOptions options) {
+    }
 
-  public static PlaneGeometry create(VertexFormat vertexFormat) {
-    PlaneGeometryOptions options = new PlaneGeometryOptions();
-    options.vertexFormat = vertexFormat;
-    return new PlaneGeometry(options);
-  }
+    public static PlaneGeometry create(VertexFormat vertexFormat) {
+        PlaneGeometryOptions options = new PlaneGeometryOptions();
+        options.vertexFormat = vertexFormat;
+        return new PlaneGeometry(options);
+    }
 }

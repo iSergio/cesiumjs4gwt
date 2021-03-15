@@ -16,12 +16,11 @@
 
 package org.cesiumjs.cs.core;
 
-import org.cesiumjs.cs.core.options.OpenCageGeocoderServiceOptions;
-import org.cesiumjs.cs.promise.Promise;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.options.OpenCageGeocoderServiceOptions;
+import org.cesiumjs.cs.promise.Promise;
 
 /**
  * Provides geocoding via a <a href="https://opencagedata.com">OpenCage</a>
@@ -32,48 +31,44 @@ import jsinterop.annotations.JsType;
 @JsType(isNative = true, namespace = "Cesium", name = "OpenCageGeocoderService")
 public class OpenCageGeocoderService implements GeocoderService {
 
-  /**
-   *
-   * @param resource The endpoint to the OpenCage server.
-   * @param apiKey   The OpenCage API Key.
-   */
-  @JsConstructor
-  public OpenCageGeocoderService(String resource, String apiKey) {
-  }
+    /**
+     * @param resource The endpoint to the OpenCage server.
+     * @param apiKey   The OpenCage API Key.
+     */
+    @JsConstructor
+    public OpenCageGeocoderService(String resource, String apiKey) {
+    }
 
-  /**
-   *
-   * @param resource The endpoint to the OpenCage server.
-   * @param apiKey   The OpenCage API Key.
-   */
-  @JsConstructor
-  public OpenCageGeocoderService(String resource, String apiKey, OpenCageGeocoderServiceOptions options) {
-  }
+    /**
+     * @param resource The endpoint to the OpenCage server.
+     * @param apiKey   The OpenCage API Key.
+     */
+    @JsConstructor
+    public OpenCageGeocoderService(String resource, String apiKey, OpenCageGeocoderServiceOptions options) {
+    }
 
-  /**
-   *
-   * @param resource The endpoint to the OpenCage server.
-   * @param apiKey   The OpenCage API Key.
-   */
-  @JsConstructor
-  public OpenCageGeocoderService(Resource resource, String apiKey) {
-  }
+    /**
+     * @param resource The endpoint to the OpenCage server.
+     * @param apiKey   The OpenCage API Key.
+     */
+    @JsConstructor
+    public OpenCageGeocoderService(Resource resource, String apiKey) {
+    }
 
-  /**
-   *
-   * @param resource The endpoint to the OpenCage server.
-   * @param apiKey   The OpenCage API Key.
-   */
-  @JsConstructor
-  public OpenCageGeocoderService(Resource resource, String apiKey, OpenCageGeocoderServiceOptions options) {
-  }
+    /**
+     * @param resource The endpoint to the OpenCage server.
+     * @param apiKey   The OpenCage API Key.
+     */
+    @JsConstructor
+    public OpenCageGeocoderService(Resource resource, String apiKey, OpenCageGeocoderServiceOptions options) {
+    }
 
-  /**
-   * Process query request to service
-   * 
-   * @param query The query to be sent to the geocoder service
-   * @return promise
-   */
-  @JsMethod
-  public native Promise<GeocoderResult[], String> geocode(String query);
+    /**
+     * Process query request to service
+     *
+     * @param query The query to be sent to the geocoder service
+     * @return promise
+     */
+    @JsMethod
+    public native Promise<GeocoderResult[], String> geocode(String query);
 }

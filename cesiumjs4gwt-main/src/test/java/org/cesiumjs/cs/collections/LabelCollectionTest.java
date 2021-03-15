@@ -24,84 +24,78 @@ import org.cesiumjs.cs.scene.options.LabelOptions;
  * @author Serge Silaev aka iSergio
  */
 public class LabelCollectionTest extends BaseTestCase {
-  private static final String VALUE = "LABEL";
+    private static final String VALUE = "LABEL";
 
-  public void testAdd() {
-    delayTestFinish(10_000);
+    public void testAdd() {
+        delayTestFinish(10_000);
 
-    super.beginTest(new Test() {
-      @Override
-      public void execute() {
-        LabelCollection collection = new LabelCollection();
+        super.beginTest(() -> {
+            LabelCollection collection = new LabelCollection();
 
-        LabelOptions options = new LabelOptions();
-        options.text = "ASDDQWEQWEDASDAFQEQWE";
-        collection.add(options);
+            LabelOptions options = new LabelOptions();
+            options.text = "ASDDQWEQWEDASDAFQEQWE";
+            collection.add(options);
 
-        options = new LabelOptions();
-        options.text = VALUE;
-        Label label = collection.add(options);
+            options = new LabelOptions();
+            options.text = VALUE;
+            Label label = collection.add(options);
 
-        options = new LabelOptions();
-        options.text = "ASDDQWEQWEDASDAFQEQWE";
-        collection.add(options);
+            options = new LabelOptions();
+            options.text = "ASDDQWEQWEDASDAFQEQWE";
+            collection.add(options);
 
-        assertNotNull(label);
-        assertEquals(VALUE, label.text);
-        finishTest();
-      }
-    });
-  }
+            assertNotNull(label);
+            assertEquals(VALUE, label.text);
+            finishTest();
+        });
+    }
 
-  public void testContains() {
-    delayTestFinish(10_000);
+    public void testContains() {
+        delayTestFinish(10_000);
 
-    super.beginTest(new Test() {
-      @Override
-      public void execute() {
-        LabelCollection collection = new LabelCollection();
+        super.beginTest(() -> {
+            LabelCollection collection = new LabelCollection();
 
-        LabelOptions options = new LabelOptions();
-        options.text = "ASDDQWEQWEDASDAFQEQWE";
-        collection.add(options);
+            LabelOptions options = new LabelOptions();
+            options.text = "ASDDQWEQWEDASDAFQEQWE";
+            collection.add(options);
 
-        options = new LabelOptions();
-        options.text = VALUE;
-        Label label = collection.add(options);
+            options = new LabelOptions();
+            options.text = VALUE;
+            Label label = collection.add(options);
 
-        options = new LabelOptions();
-        options.text = "ASDDQWEQWEDASDAFQEQWE";
-        collection.add(options);
+            options = new LabelOptions();
+            options.text = "ASDDQWEQWEDASDAFQEQWE";
+            collection.add(options);
 
-        assertTrue(collection.contains(label));
-        finishTest();
-      }
-    });
-  }
+            assertTrue(collection.contains(label));
+            finishTest();
+        });
+    }
 
-  public void testGet() {
-    delayTestFinish(10_000);
+    public void testGet() {
+        delayTestFinish(10_000);
 
-    super.beginTest(new Test() {
-      @Override
-      public void execute() {
-        LabelCollection collection = new LabelCollection();
+        super.beginTest(new Test() {
+            @Override
+            public void execute() {
+                LabelCollection collection = new LabelCollection();
 
-        LabelOptions options = new LabelOptions();
-        options.text = "ASDDQWEQWEDASDAFQEQWE";
-        collection.add(options);
+                LabelOptions options = new LabelOptions();
+                options.text = "ASDDQWEQWEDASDAFQEQWE";
+                collection.add(options);
 
-        options = new LabelOptions();
-        options.text = VALUE;
-        Label label = collection.add(options);
+                options = new LabelOptions();
+                options.text = VALUE;
+                Label label = collection.add(options);
 
-        options = new LabelOptions();
-        options.text = "ASDDQWEQWEDASDAFQEQWE";
-        collection.add(options);
+                options = new LabelOptions();
+                options.text = "ASDDQWEQWEDASDAFQEQWE";
+                collection.add(options);
 
-        assertEquals(label, collection.get(1));
-        finishTest();
-      }
-    });
-  }
+                assertEquals(label, collection.get(1));
+                finishTest();
+            }
+        });
+    }
 }

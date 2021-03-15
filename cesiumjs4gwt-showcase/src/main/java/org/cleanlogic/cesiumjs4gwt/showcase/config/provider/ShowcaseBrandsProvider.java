@@ -5,24 +5,22 @@
  */
 package org.cleanlogic.cesiumjs4gwt.showcase.config.provider;
 
+import com.google.gwt.user.client.ui.Anchor;
+
+import javax.inject.Provider;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Provider;
-
-import com.google.gwt.user.client.ui.Anchor;
-
 /**
- *
  * @author iserge
  */
 public class ShowcaseBrandsProvider implements Provider<List<Anchor>> {
 
-  @Override
-  public List<Anchor> get() {
-    Anchor anchor = new Anchor("Ol3-Cesium");
-    List<Anchor> list = new ArrayList<Anchor>();
-    list.add(anchor);
-    return list;
-  }
+    @Override
+    public List<Anchor> get() {
+        Anchor anchor = new Anchor("Ol3-Cesium");
+        List<Anchor> list = new ArrayList<Anchor>();
+        list.add(anchor);
+        return list;
+    }
 }

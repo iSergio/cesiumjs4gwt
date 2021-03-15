@@ -26,19 +26,19 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class ToggleButtonViewModelOptions {
-  /**
-   * A boolean indicating whether the button should be initially toggled. Default:
-   * false
-   */
-  @JsProperty
-  public boolean toggled;
-  /**
-   * A string containing the button's tooltip. Default: empty string
-   */
-  @JsProperty
-  public String tooltip;
+    /**
+     * A boolean indicating whether the button should be initially toggled. Default:
+     * false
+     */
+    @JsProperty
+    public boolean toggled;
+    /**
+     * A string containing the button's tooltip. Default: empty string
+     */
+    @JsProperty
+    public String tooltip;
 
-  @JsConstructor
-  public ToggleButtonViewModelOptions() {
-  }
+    @JsConstructor
+    public ToggleButtonViewModelOptions() {
+    }
 }

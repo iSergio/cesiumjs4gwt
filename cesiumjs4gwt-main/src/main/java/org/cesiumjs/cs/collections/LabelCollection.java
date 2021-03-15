@@ -27,70 +27,72 @@ import org.cesiumjs.cs.scene.enums.BlendOption;
 import org.cesiumjs.cs.scene.options.LabelOptions;
 
 /**
- * A renderable collection of labels. Labels are viewport-aligned text positioned in the 3D scene. 
- * Each label can have a different font, color, scale, etc. 
+ * A renderable collection of labels. Labels are viewport-aligned text positioned in the 3D scene.
+ * Each label can have a different font, color, scale, etc.
+ *
  * @author Serge Silaev aka iSergio
  */
 // TODO: Example
 @JsType(isNative = true, namespace = "Cesium", name = "LabelCollection")
 public class LabelCollection extends Collection<Label> {
-  /**
-   * The billboard blending option. The default is used for rendering both opaque
-   * and translucent billboards. However, if either all of the billboards are
-   * completely opaque or all are completely translucent, setting the technique to
-   * BillboardRenderTechnique.OPAQUE or BillboardRenderTechnique.TRANSLUCENT can
-   * improve performance by up to 2x. Default:
-   * {@link BlendOption#OPAQUE_AND_TRANSLUCENT()}
-   */
-  @JsProperty
-  public Number blendOption;
-  /**
-   * This property is for debugging only; it is not for production use nor is it
-   * optimized.
-   * <p>Draws the bounding sphere for each draw command in the primitive.</p>
-   * Default: false
-   */
-  @JsProperty
-  public boolean debugShowBoundingVolume;
-  /**
-   * The 4x4 transformation matrix that transforms each label in this collection
-   * from model to world coordinates. When this is the identity matrix, the labels
-   * are drawn in world coordinates, i.e., Earth's WGS84 coordinates. Local
-   * reference frames can be used by providing a different transformation matrix,
-   * like that returned by Transforms.eastNorthUpToFixedFrame. Default:
-   * {@link Matrix4#IDENTITY()}
-   */
-  // TODO: examples
-  @JsProperty
-  public Matrix4 modelMatrix;
-  /**
-   * Determines if the labels in the collection will be shown.
-   * Default: true
-   */
-  @JsProperty
-  public boolean show;
+    /**
+     * The billboard blending option. The default is used for rendering both opaque
+     * and translucent billboards. However, if either all of the billboards are
+     * completely opaque or all are completely translucent, setting the technique to
+     * BillboardRenderTechnique.OPAQUE or BillboardRenderTechnique.TRANSLUCENT can
+     * improve performance by up to 2x. Default:
+     * {@link BlendOption#OPAQUE_AND_TRANSLUCENT()}
+     */
+    @JsProperty
+    public Number blendOption;
+    /**
+     * This property is for debugging only; it is not for production use nor is it
+     * optimized.
+     * <p>Draws the bounding sphere for each draw command in the primitive.</p>
+     * Default: false
+     */
+    @JsProperty
+    public boolean debugShowBoundingVolume;
+    /**
+     * The 4x4 transformation matrix that transforms each label in this collection
+     * from model to world coordinates. When this is the identity matrix, the labels
+     * are drawn in world coordinates, i.e., Earth's WGS84 coordinates. Local
+     * reference frames can be used by providing a different transformation matrix,
+     * like that returned by Transforms.eastNorthUpToFixedFrame. Default:
+     * {@link Matrix4#IDENTITY()}
+     */
+    // TODO: examples
+    @JsProperty
+    public Matrix4 modelMatrix;
+    /**
+     * Determines if the labels in the collection will be shown.
+     * Default: true
+     */
+    @JsProperty
+    public boolean show;
 
-  @JsConstructor
-  public LabelCollection() {
-  }
+    @JsConstructor
+    public LabelCollection() {
+    }
 
-  @JsConstructor
-  public LabelCollection(LabelCollectionOptions options) {
-  }
+    @JsConstructor
+    public LabelCollection(LabelCollectionOptions options) {
+    }
 
-  /**
-   * Creates and adds a label with the specified initial properties to the
-   * collection. The added label is returned so it can be modified or removed from
-   * the collection later.
-   * <p>Calling add is expected constant time. However, the collection's vertex
-   * buffer is rewritten; this operations is O(n) and also incurs CPU to GPU
-   * overhead. For best performance, add as many billboards as possible before
-   * calling update.</p>
-   * @param options A template describing the label's properties.
-   * @return The label that was added to the collection.
-   * @see #remove
-   * @see #removeAll
-   */
-  @JsMethod
-  public native Label add(LabelOptions options);
+    /**
+     * Creates and adds a label with the specified initial properties to the
+     * collection. The added label is returned so it can be modified or removed from
+     * the collection later.
+     * <p>Calling add is expected constant time. However, the collection's vertex
+     * buffer is rewritten; this operations is O(n) and also incurs CPU to GPU
+     * overhead. For best performance, add as many billboards as possible before
+     * calling update.</p>
+     *
+     * @param options A template describing the label's properties.
+     * @return The label that was added to the collection.
+     * @see #remove
+     * @see #removeAll
+     */
+    @JsMethod
+    public native Label add(LabelOptions options);
 }

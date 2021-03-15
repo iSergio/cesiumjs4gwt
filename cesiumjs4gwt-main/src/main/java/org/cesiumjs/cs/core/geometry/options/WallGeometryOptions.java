@@ -16,28 +16,27 @@
 
 package org.cesiumjs.cs.core.geometry.options;
 
-import org.cesiumjs.cs.core.VertexFormat;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.VertexFormat;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class WallGeometryOptions extends WallOutlineGeometryOptions {
-  /**
-   * The vertex attributes to be computed. Default: {@link VertexFormat#DEFAULT()}
-   */
-  @JsProperty
-  public VertexFormat vertexFormat;
+    /**
+     * The vertex attributes to be computed. Default: {@link VertexFormat#DEFAULT()}
+     */
+    @JsProperty
+    public VertexFormat vertexFormat;
 
-  /**
-   * Options for {@link org.cesiumjs.cs.core.geometry.WallGeometry}
-   */
-  @JsConstructor
-  public WallGeometryOptions() {
-  }
+    /**
+     * Options for {@link org.cesiumjs.cs.core.geometry.WallGeometry}
+     */
+    @JsConstructor
+    public WallGeometryOptions() {
+    }
 }

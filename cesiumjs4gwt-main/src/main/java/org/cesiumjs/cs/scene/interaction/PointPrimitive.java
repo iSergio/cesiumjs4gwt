@@ -27,34 +27,34 @@ import org.cesiumjs.cs.scene.interaction.options.AbstractPrimitiveOptions;
  * @author Serge Silaev aka iSergio
  */
 public class PointPrimitive extends AbstractPrimitive {
-  public PointPrimitive(Scene scene, AbstractPrimitiveOptions options) {
-    super(options);
+    public PointPrimitive(Scene scene, AbstractPrimitiveOptions options) {
+        super(options);
 
-    options.minPoints = 1;
-    options.maxPoints = 1;
+        options.minPoints = 1;
+        options.maxPoints = 1;
 
-    ellipsoid = Ellipsoid.WGS84();
-    show = true;
-    debugShowBoundingVolume = false;
+        ellipsoid = Ellipsoid.WGS84();
+        show = true;
+        debugShowBoundingVolume = false;
 
-    appearance = EllipsoidSurfaceAppearance.create(false);
-    granularity = Math.PI / 180.0;
+        appearance = EllipsoidSurfaceAppearance.create(false);
+        granularity = Math.PI / 180.0;
 
-    getGeometry = new GetGeometry() {
-      @Override
-      public Geometry function() {
-        return null;
-      }
-    };
+        getGeometry = new GetGeometry() {
+            @Override
+            public Geometry function() {
+                return null;
+            }
+        };
 
-    super.initialize();
-  }
+        super.initialize();
+    }
 
-  public Cartesian3[] getPositions() {
-    return (Cartesian3[]) getAttribute("positions");
-  }
+    public Cartesian3[] getPositions() {
+        return (Cartesian3[]) getAttribute("positions");
+    }
 
-  public void setPositions(Cartesian3[] positions) {
-    setAttribute("positions", positions);
-  }
+    public void setPositions(Cartesian3[] positions) {
+        setAttribute("positions", positions);
+    }
 }

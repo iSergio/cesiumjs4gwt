@@ -16,99 +16,97 @@
 
 package org.cesiumjs.cs.scene;
 
-import org.cesiumjs.cs.core.BoundingSphere;
-import org.cesiumjs.cs.core.JulianDate;
-import org.cesiumjs.cs.core.Matrix4;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.BoundingSphere;
+import org.cesiumjs.cs.core.JulianDate;
+import org.cesiumjs.cs.core.Matrix4;
 
 /**
  * A tile in a {@link Cesium3DTileset}. When a tile is first created, its
  * content is not loaded; the content is loaded on-demand when needed based on
  * the view. Do not construct this directly, instead access tiles through
  * {@link Cesium3DTileset#tileVisible}.
- * 
+ *
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "Cesium3DTile")
 public class Cesium3DTile {
-  /**
-   * Get the bounding sphere derived from the tile's bounding volume.
-   */
-  @JsProperty(name = "boundingSphere")
-  public native BoundingSphere boundingSphere();
+    /**
+     * The date when the content expires and new content is requested.
+     */
+    @JsProperty
+    public JulianDate expireDate;
+    /**
+     * The time in seconds after the tile's content is ready when the content
+     * expires and new content is requested.
+     */
+    @JsProperty
+    public double expireDuration;
+    /**
+     * The local transform of this tile.
+     */
+    @JsProperty
+    public Matrix4 transform;
 
-  /**
-   * Gets the tile's children.
-   */
-  @JsProperty(name = "children")
-  public native Cesium3DTile[] children();
+    @JsConstructor
+    private Cesium3DTile() {
+    }
 
-  /**
-   * The final computed transform of this tile
-   */
-  @JsProperty(name = "computedTransform")
-  public native Matrix4 computedTransform();
+    /**
+     * Get the bounding sphere derived from the tile's bounding volume.
+     */
+    @JsProperty(name = "boundingSphere")
+    public native BoundingSphere boundingSphere();
 
-  /**
-   * The tile's content. This represents the actual tile's payload, not the
-   * content's metadata in tileset.json.
-   */
-  @JsProperty(name = "content")
-  public native Cesium3DTileContent content();
+    /**
+     * Gets the tile's children.
+     */
+    @JsProperty(name = "children")
+    public native Cesium3DTile[] children();
 
-  /**
-   * The date when the content expires and new content is requested.
-   */
-  @JsProperty
-  public JulianDate expireDate;
-  /**
-   * The time in seconds after the tile's content is ready when the content
-   * expires and new content is requested.
-   */
-  @JsProperty
-  public double expireDuration;
+    /**
+     * The final computed transform of this tile
+     */
+    @JsProperty(name = "computedTransform")
+    public native Matrix4 computedTransform();
 
-  /**
-   * Returns the extras property in the tileset JSON for this tile, which contains
-   * application specific metadata. Returns undefined if extras does not exist.
-   */
-  @JsProperty(name = "extras")
-  public native Object extras();
+    /**
+     * The tile's content. This represents the actual tile's payload, not the
+     * content's metadata in tileset.json.
+     */
+    @JsProperty(name = "content")
+    public native Cesium3DTileContent content();
 
-  /**
-   * The error, in meters, introduced if this tile is rendered and its children
-   * are not. This is used to compute screen space error, i.e., the error measured
-   * in pixels.
-   */
-  @JsProperty(name = "geometricError")
-  public native double geometricError();
+    /**
+     * Returns the extras property in the tileset JSON for this tile, which contains
+     * application specific metadata. Returns undefined if extras does not exist.
+     */
+    @JsProperty(name = "extras")
+    public native Object extras();
 
-  /**
-   * This tile's parent or undefined if this tile is the root. When a tile's
-   * content points to an external tileset.json, the external tileset's root
-   * tile's parent is not undefined; instead, the parent references the tile (with
-   * its content pointing to an external tileset.json) as if the two tilesets were
-   * merged.
-   */
-  @JsProperty(name = "parent")
-  public native Cesium3DTile parent();
+    /**
+     * The error, in meters, introduced if this tile is rendered and its children
+     * are not. This is used to compute screen space error, i.e., the error measured
+     * in pixels.
+     */
+    @JsProperty(name = "geometricError")
+    public native double geometricError();
 
-  /**
-   * The tileset containing this tile.
-   */
-  @JsProperty(name = "tileset")
-  public native Cesium3DTileset tileset();
+    /**
+     * This tile's parent or undefined if this tile is the root. When a tile's
+     * content points to an external tileset.json, the external tileset's root
+     * tile's parent is not undefined; instead, the parent references the tile (with
+     * its content pointing to an external tileset.json) as if the two tilesets were
+     * merged.
+     */
+    @JsProperty(name = "parent")
+    public native Cesium3DTile parent();
 
-  /**
-   * The local transform of this tile.
-   */
-  @JsProperty
-  public Matrix4 transform;
-
-  @JsConstructor
-  private Cesium3DTile() {
-  }
+    /**
+     * The tileset containing this tile.
+     */
+    @JsProperty(name = "tileset")
+    public native Cesium3DTileset tileset();
 }

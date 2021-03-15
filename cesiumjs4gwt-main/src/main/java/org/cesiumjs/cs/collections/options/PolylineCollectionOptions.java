@@ -25,33 +25,34 @@ import org.cesiumjs.cs.core.Matrix4;
 
 /**
  * Options for {@link PolylineCollection}.
+ *
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class PolylineCollectionOptions {
-  /**
-   * The 4x4 transformation matrix that transforms each polyline from model to
-   * world coordinates. Default: {@link org.cesiumjs.cs.core.Matrix4#IDENTITY()}
-   */
-  @JsProperty
-  public Matrix4 modelMatrix;
-  /**
-   * For debugging only. Determines if this primitive's commands' bounding spheres
-   * are shown. Default: false
-   */
-  @JsProperty
-  public boolean debugShowBoundingVolume;
-  /**
-   * Determines if the polylines in the collection will be shown.
-   * Default: true
-   */
-  @JsProperty
-  public boolean show;
+    /**
+     * The 4x4 transformation matrix that transforms each polyline from model to
+     * world coordinates. Default: {@link org.cesiumjs.cs.core.Matrix4#IDENTITY()}
+     */
+    @JsProperty
+    public Matrix4 modelMatrix;
+    /**
+     * For debugging only. Determines if this primitive's commands' bounding spheres
+     * are shown. Default: false
+     */
+    @JsProperty
+    public boolean debugShowBoundingVolume;
+    /**
+     * Determines if the polylines in the collection will be shown.
+     * Default: true
+     */
+    @JsProperty
+    public boolean show;
 
-  /**
-   * Options for {@link PolylineCollection}.
-   */
-  @JsConstructor
-  public PolylineCollectionOptions() {
-  }
+    /**
+     * Options for {@link PolylineCollection}.
+     */
+    @JsConstructor
+    public PolylineCollectionOptions() {
+    }
 }

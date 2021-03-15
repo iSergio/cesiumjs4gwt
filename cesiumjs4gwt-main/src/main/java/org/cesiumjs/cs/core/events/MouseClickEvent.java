@@ -16,17 +16,16 @@
 
 package org.cesiumjs.cs.core.events;
 
-import org.cesiumjs.cs.core.Cartesian2;
-
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Cartesian2;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class MouseClickEvent {
-  @JsProperty
-  public Cartesian2 position;
+    @JsProperty
+    public Cartesian2 position;
 }

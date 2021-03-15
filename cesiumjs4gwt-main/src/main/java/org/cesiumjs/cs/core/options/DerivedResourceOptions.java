@@ -16,11 +16,10 @@
 
 package org.cesiumjs.cs.core.options;
 
-import org.cesiumjs.cs.core.Resource;
-
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Resource;
 
 /**
  * Options for {@link Resource#getDerivedResource}.
@@ -29,11 +28,11 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "DerivedResourceOptions")
 public class DerivedResourceOptions extends ResourceOptions {
-  /**
-   * If true, this will keep all query parameters from the current resource and
-   * derived resource. If false, derived parameters will replace those of the
-   * current resource.
-   */
-  @JsProperty
-  public boolean preserveQueryParameters;
+    /**
+     * If true, this will keep all query parameters from the current resource and
+     * derived resource. If false, derived parameters will replace those of the
+     * current resource.
+     */
+    @JsProperty
+    public boolean preserveQueryParameters;
 }

@@ -25,75 +25,75 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "BingMapsStyle")
 public class BingMapsStyle {
-  /**
-   * Aerial imagery.
-   */
-  @JsProperty(name = "AERIAL")
-  public static native String AERIAL();
+    @JsConstructor
+    private BingMapsStyle() {
+    }
 
-  /**
-   * Aerial imagery with a road overlay.
-   * 
-   * @deprecated See https://github.com/AnalyticalGraphicsInc/cesium/issues/7128.
-   *             Use `BingMapsStyle.AERIAL_WITH_LABELS_ON_DEMAND` instead
-   */
-  @Deprecated
-  @JsProperty(name = "AERIAL_WITH_LABELS")
-  public static native String AERIAL_WITH_LABELS();
+    /**
+     * Aerial imagery.
+     */
+    @JsProperty(name = "AERIAL")
+    public static native String AERIAL();
 
-  /**
-   * Aerial imagery with a road overlay.
-   */
-  @JsProperty(name = "AERIAL_WITH_LABELS_ON_DEMAND")
-  public static native String AERIAL_WITH_LABELS_ON_DEMAND();
+    /**
+     * Aerial imagery with a road overlay.
+     *
+     * @deprecated See https://github.com/AnalyticalGraphicsInc/cesium/issues/7128.
+     * Use `BingMapsStyle.AERIAL_WITH_LABELS_ON_DEMAND` instead
+     */
+    @Deprecated
+    @JsProperty(name = "AERIAL_WITH_LABELS")
+    public static native String AERIAL_WITH_LABELS();
 
-  /**
-   * A dark version of the road maps.
-   */
-  @JsProperty(name = "CANVAS_DARK")
-  public static native String CANVAS_DARK();
+    /**
+     * Aerial imagery with a road overlay.
+     */
+    @JsProperty(name = "AERIAL_WITH_LABELS_ON_DEMAND")
+    public static native String AERIAL_WITH_LABELS_ON_DEMAND();
 
-  /**
-   * A grayscale version of the road maps.
-   */
-  @JsProperty(name = "CANVAS_GRAY")
-  public static native String CANVAS_GRAY();
+    /**
+     * A dark version of the road maps.
+     */
+    @JsProperty(name = "CANVAS_DARK")
+    public static native String CANVAS_DARK();
 
-  /**
-   * A lighter version of the road maps.
-   */
-  @JsProperty(name = "CANVAS_LIGHT")
-  public static native String CANVAS_LIGHT();
+    /**
+     * A grayscale version of the road maps.
+     */
+    @JsProperty(name = "CANVAS_GRAY")
+    public static native String CANVAS_GRAY();
 
-  /**
-   * Roads without additional imagery.
-   * 
-   * @deprecated See https://github.com/AnalyticalGraphicsInc/cesium/issues/7128.
-   *             Use `BingMapsStyle.ROAD_ON_DEMAND` instead
-   */
-  @Deprecated
-  @JsProperty(name = "ROAD")
-  public static native String ROAD();
+    /**
+     * A lighter version of the road maps.
+     */
+    @JsProperty(name = "CANVAS_LIGHT")
+    public static native String CANVAS_LIGHT();
 
-  /**
-   * Roads without additional imagery.
-   */
-  @JsProperty(name = "ROAD_ON_DEMAND")
-  public static native String ROAD_ON_DEMAND();
+    /**
+     * Roads without additional imagery.
+     *
+     * @deprecated See https://github.com/AnalyticalGraphicsInc/cesium/issues/7128.
+     * Use `BingMapsStyle.ROAD_ON_DEMAND` instead
+     */
+    @Deprecated
+    @JsProperty(name = "ROAD")
+    public static native String ROAD();
 
-  /**
-   * Ordnance Survey imagery
-   */
-  @JsProperty(name = "ORDNANCE_SURVEY")
-  public static native String ORDNANCE_SURVEY();
+    /**
+     * Roads without additional imagery.
+     */
+    @JsProperty(name = "ROAD_ON_DEMAND")
+    public static native String ROAD_ON_DEMAND();
 
-  /**
-   * Collins Bart imagery.
-   */
-  @JsProperty(name = "COLLINS_BART")
-  public static native String COLLINS_BART();
+    /**
+     * Ordnance Survey imagery
+     */
+    @JsProperty(name = "ORDNANCE_SURVEY")
+    public static native String ORDNANCE_SURVEY();
 
-  @JsConstructor
-  private BingMapsStyle() {
-  }
+    /**
+     * Collins Bart imagery.
+     */
+    @JsProperty(name = "COLLINS_BART")
+    public static native String COLLINS_BART();
 }

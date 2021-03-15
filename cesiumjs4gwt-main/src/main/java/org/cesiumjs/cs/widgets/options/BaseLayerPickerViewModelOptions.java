@@ -16,14 +16,9 @@
 
 package org.cesiumjs.cs.widgets.options;
 
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.scene.Globe;
 import org.cesiumjs.cs.widgets.ProviderViewModel;
-
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsOverlay;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
 
 /**
  * Options for {@link org.cesiumjs.cs.widgets.BaseLayerPicker}.
@@ -32,48 +27,48 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class BaseLayerPickerViewModelOptions {
-  /**
-   * The Globe to use.
-   */
-  @JsProperty
-  public Globe globe;
-  /**
-   * The array of ProviderViewModel instances to use for imagery.
-   */
-  @JsProperty
-  public ProviderViewModel[] imageryProviderViewModels;
-  /**
-   * The view model for the current base imagery layer, if not supplied the first
-   * available imagery layer is used.
-   */
-  @JsProperty
-  public ProviderViewModel selectedImageryProviderViewModel;
-  /**
-   * The array of ProviderViewModel instances to use for terrain.
-   */
-  @JsProperty
-  public ProviderViewModel[] terrainProviderViewModels;
-  /**
-   * The view model for the current base terrain layer, if not supplied the first
-   * available terrain layer is used.
-   */
-  @JsProperty
-  public ProviderViewModel selectedTerrainProviderViewModel;
+    /**
+     * The Globe to use.
+     */
+    @JsProperty
+    public Globe globe;
+    /**
+     * The array of ProviderViewModel instances to use for imagery.
+     */
+    @JsProperty
+    public ProviderViewModel[] imageryProviderViewModels;
+    /**
+     * The view model for the current base imagery layer, if not supplied the first
+     * available imagery layer is used.
+     */
+    @JsProperty
+    public ProviderViewModel selectedImageryProviderViewModel;
+    /**
+     * The array of ProviderViewModel instances to use for terrain.
+     */
+    @JsProperty
+    public ProviderViewModel[] terrainProviderViewModels;
+    /**
+     * The view model for the current base terrain layer, if not supplied the first
+     * available terrain layer is used.
+     */
+    @JsProperty
+    public ProviderViewModel selectedTerrainProviderViewModel;
 
-  @JsConstructor
-  private BaseLayerPickerViewModelOptions() {
-  }
+    @JsConstructor
+    private BaseLayerPickerViewModelOptions() {
+    }
 
-  /**
-   * Create instance of {@link BaseLayerPickerViewModelOptions}.
-   * 
-   * @param globe The Globe to use
-   * @return instance of {@link BaseLayerPickerViewModelOptions}.
-   */
-  @JsOverlay
-  public static final BaseLayerPickerViewModelOptions create(Globe globe) {
-    BaseLayerPickerViewModelOptions options = new BaseLayerPickerViewModelOptions();
-    options.globe = globe;
-    return options;
-  }
+    /**
+     * Create instance of {@link BaseLayerPickerViewModelOptions}.
+     *
+     * @param globe The Globe to use
+     * @return instance of {@link BaseLayerPickerViewModelOptions}.
+     */
+    @JsOverlay
+    public static final BaseLayerPickerViewModelOptions create(Globe globe) {
+        BaseLayerPickerViewModelOptions options = new BaseLayerPickerViewModelOptions();
+        options.globe = globe;
+        return options;
+    }
 }

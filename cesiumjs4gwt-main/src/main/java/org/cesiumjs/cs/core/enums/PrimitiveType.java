@@ -27,61 +27,61 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "PrimitiveType")
 public class PrimitiveType {
-  /**
-   * Line loop primitive where each vertex (or index) after the first connects a
-   * line to the previous vertex, and the last vertex implicitly connects to the
-   * first.
-   */
-  @JsProperty(name = "LINE_LOOP")
-  public static native Number LINE_LOOP();
+    /**
+     * The type of a geometric primitive, i.e., points, lines, and triangles.
+     */
+    @JsConstructor
+    private PrimitiveType() {
+    }
 
-  /**
-   * Line strip primitive where each vertex (or index) after the first connects a
-   * line to the previous vertex.
-   */
-  @JsProperty(name = "LINE_STRIP")
-  public static native Number LINE_STRIP();
+    /**
+     * Line loop primitive where each vertex (or index) after the first connects a
+     * line to the previous vertex, and the last vertex implicitly connects to the
+     * first.
+     */
+    @JsProperty(name = "LINE_LOOP")
+    public static native Number LINE_LOOP();
 
-  /**
-   * Lines primitive where each two vertices (or indices) is a line segment. Line
-   * segments are not necessarily connected.
-   */
-  @JsProperty(name = "LINES")
-  public static native Number LINES();
+    /**
+     * Line strip primitive where each vertex (or index) after the first connects a
+     * line to the previous vertex.
+     */
+    @JsProperty(name = "LINE_STRIP")
+    public static native Number LINE_STRIP();
 
-  /**
-   * Points primitive where each vertex (or index) is a separate point.
-   */
-  @JsProperty(name = "POINTS")
-  public static native Number POINTS();
+    /**
+     * Lines primitive where each two vertices (or indices) is a line segment. Line
+     * segments are not necessarily connected.
+     */
+    @JsProperty(name = "LINES")
+    public static native Number LINES();
 
-  /**
-   * Triangle fan primitive where each vertex (or index) after the first two
-   * connect to the previous vertex and the first vertex forming a triangle. For
-   * example, this can be used to model a cone or circle.
-   */
-  @JsProperty(name = "TRIANGLE_FAN")
-  public static native Number TRIANGLE_FAN();
+    /**
+     * Points primitive where each vertex (or index) is a separate point.
+     */
+    @JsProperty(name = "POINTS")
+    public static native Number POINTS();
 
-  /**
-   * Triangle strip primitive where each vertex (or index) after the first two
-   * connect to the previous two vertices forming a triangle. For example, this
-   * can be used to model a wall.
-   */
-  @JsProperty(name = "TRIANGLE_STRIP")
-  public static native Number TRIANGLE_STRIP();
+    /**
+     * Triangle fan primitive where each vertex (or index) after the first two
+     * connect to the previous vertex and the first vertex forming a triangle. For
+     * example, this can be used to model a cone or circle.
+     */
+    @JsProperty(name = "TRIANGLE_FAN")
+    public static native Number TRIANGLE_FAN();
 
-  /**
-   * Triangles primitive where each three vertices (or indices) is a triangle.
-   * Triangles do not necessarily share edges.
-   */
-  @JsProperty(name = "TRIANGLES")
-  public static native Number TRIANGLES();
+    /**
+     * Triangle strip primitive where each vertex (or index) after the first two
+     * connect to the previous two vertices forming a triangle. For example, this
+     * can be used to model a wall.
+     */
+    @JsProperty(name = "TRIANGLE_STRIP")
+    public static native Number TRIANGLE_STRIP();
 
-  /**
-   * The type of a geometric primitive, i.e., points, lines, and triangles.
-   */
-  @JsConstructor
-  private PrimitiveType() {
-  }
+    /**
+     * Triangles primitive where each three vertices (or indices) is a triangle.
+     * Triangles do not necessarily share edges.
+     */
+    @JsProperty(name = "TRIANGLES")
+    public static native Number TRIANGLES();
 }

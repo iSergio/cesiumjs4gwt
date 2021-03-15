@@ -16,8 +16,6 @@
 
 package org.cleanlogic.cesiumjs4gwt.showcase.examples;
 
-import javax.inject.Inject;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
@@ -25,7 +23,6 @@ import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTML;
-
 import org.cesiumjs.cs.Cesium;
 import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.Color;
@@ -46,149 +43,151 @@ import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.Slider;
 import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderEvent;
 import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderListener;
 
+import javax.inject.Inject;
+
 /**
  * @author Serge Silaev aka iSergio
  */
 public class PostProcessing extends AbstractExample {
-  private PostProcessStageCollection collection;
-  private PostProcessStageComposite silhouette;
-  private PostProcessStage blackAndWhite;
-  private PostProcessStage brightness;
-  private PostProcessStage nightVision;
+    private PostProcessStageCollection collection;
+    private PostProcessStageComposite silhouette;
+    private PostProcessStage blackAndWhite;
+    private PostProcessStage brightness;
+    private PostProcessStage nightVision;
 
-  private CheckBox silhouetteCBox;
-  private CheckBox blackAndWhiteCBox;
-  private CheckBox brightnessCBox;
-  private CheckBox nightVisionCBox;
+    private CheckBox silhouetteCBox;
+    private CheckBox blackAndWhiteCBox;
+    private CheckBox brightnessCBox;
+    private CheckBox nightVisionCBox;
 
-  private Slider blackAndWhiteSlider;
-  private Slider brightnessSlider;
+    private Slider blackAndWhiteSlider;
+    private Slider brightnessSlider;
 
-  @Inject
-  public PostProcessing(ShowcaseExampleStore store) {
-    super("Post Processing", "Post processing effects", new String[] { "Showcase", "Cesium", "3d", "Post processing" },
-        store);
-  }
-
-  @Override
-  public void buildPanel() {
-    ViewerOptions viewerOptions = new ViewerOptions();
-    viewerOptions.shouldAnimate = true;
-    ViewerPanel csVPanel = new ViewerPanel(viewerOptions);
-
-    ModelGraphicsOptions modelGraphicsOptions = new ModelGraphicsOptions();
-    modelGraphicsOptions.uri = new ConstantProperty<>(
-        GWT.getModuleBaseURL() + "SampleData/models/CesiumMan/Cesium_Man.glb");
-
-    EntityOptions options = new EntityOptions();
-    options.name = GWT.getModuleBaseURL() + "SampleData/models/CesiumMan/Cesium_Man.glb";
-    options.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-123.0744619, 44.0503706));
-    options.model = new ModelGraphics(modelGraphicsOptions);
-    csVPanel.getViewer().trackedEntity = csVPanel.getViewer().entities().add(options);
-
-    collection = csVPanel.getViewer().scene().postProcessStages;
-    silhouette = (PostProcessStageComposite) collection.add(PostProcessStageLibrary.createSilhouetteStage());
-    blackAndWhite = (PostProcessStage) collection.add(PostProcessStageLibrary.createBlackAndWhiteStage());
-    brightness = (PostProcessStage) collection.add(PostProcessStageLibrary.createBrightnessStage());
-    nightVision = (PostProcessStage) collection.add(PostProcessStageLibrary.createNightVisionStage());
-
-    if (!PostProcessStageLibrary.isSilhouetteSupported(csVPanel.getViewer().scene())) {
-      Cesium.log("This browser does not support the silhouette post process.");
-    }
-
-    silhouetteCBox = new CheckBox();
-    silhouetteCBox.setValue(true);
-    silhouetteCBox.addValueChangeHandler(new MValueChangeHandler());
-
-    blackAndWhiteCBox = new CheckBox();
-    blackAndWhiteCBox.addValueChangeHandler(new MValueChangeHandler());
-
-    blackAndWhiteSlider = new Slider("blackAndWhiteSlider", 1, 10, 5);
-    blackAndWhiteSlider.setStep(1);
-    blackAndWhiteSlider.setWidth("150px");
-    blackAndWhiteSlider.addListener(new MSliderListener());
-
-    brightnessCBox = new CheckBox();
-    brightnessCBox.addValueChangeHandler(new MValueChangeHandler());
-
-    brightnessSlider = new Slider("brightnessSlider", 0, 100, 50);
-    brightnessSlider.setStep(1);
-    brightnessSlider.setWidth("150px");
-    brightnessSlider.addListener(new MSliderListener());
-
-    nightVisionCBox = new CheckBox();
-    nightVisionCBox.addValueChangeHandler(new MValueChangeHandler());
-
-    FlexTable flexTable = new FlexTable();
-    flexTable.setHTML(1, 0, "<font color=\"white\">Silhouette</font>");
-    flexTable.setWidget(1, 1, silhouetteCBox);
-    flexTable.setHTML(2, 0, "<font color=\"white\">Black and White</font>");
-    flexTable.setWidget(2, 1, blackAndWhiteCBox);
-    flexTable.setWidget(2, 2, blackAndWhiteSlider);
-    flexTable.setHTML(3, 0, "<font color=\"white\">Brightness</font>");
-    flexTable.setWidget(3, 1, brightnessCBox);
-    flexTable.setWidget(3, 2, brightnessSlider);
-    flexTable.setHTML(4, 0, "<font color=\"white\">Night Vision</font>");
-    flexTable.setWidget(4, 1, nightVisionCBox);
-
-    AbsolutePanel aPanel = new AbsolutePanel();
-    aPanel.add(csVPanel);
-    aPanel.add(flexTable, 20, 20);
-
-    contentPanel.add(new HTML("<p>Post processing effects.</p>"));
-    contentPanel.add(aPanel);
-
-    initWidget(contentPanel);
-    updatePostProcess();
-  }
-
-  private void updatePostProcess() {
-    silhouette.enabled = silhouetteCBox.getValue();
-    silhouette.uniforms.setProperty("color", Color.YELLOW());
-
-    blackAndWhite.enabled = blackAndWhiteCBox.getValue();
-    blackAndWhite.uniforms().setProperty("gradations", blackAndWhiteSlider.getValue());
-
-    brightness.enabled = brightnessCBox.getValue();
-    brightness.uniforms().setProperty("brightness", brightnessSlider.getValue() / 100.0);
-
-    nightVision.enabled = nightVisionCBox.getValue();
-  }
-
-  @Override
-  public String[] getSourceCodeURLs() {
-    String[] sourceCodeURLs = new String[1];
-    sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "PostProcessing.txt";
-    return sourceCodeURLs;
-  }
-
-  private class MValueChangeHandler implements ValueChangeHandler<Boolean> {
-    @Override
-    public void onValueChange(ValueChangeEvent<Boolean> event) {
-      updatePostProcess();
-    }
-  }
-
-  private class MSliderListener implements SliderListener {
-    @Override
-    public void onStart(SliderEvent e) {
-      //
+    @Inject
+    public PostProcessing(ShowcaseExampleStore store) {
+        super("Post Processing", "Post processing effects", new String[]{"Showcase", "Cesium", "3d", "Post processing"},
+                store);
     }
 
     @Override
-    public boolean onSlide(SliderEvent e) {
-      updatePostProcess();
-      return true;
+    public void buildPanel() {
+        ViewerOptions viewerOptions = new ViewerOptions();
+        viewerOptions.shouldAnimate = true;
+        ViewerPanel csVPanel = new ViewerPanel(viewerOptions);
+
+        ModelGraphicsOptions modelGraphicsOptions = new ModelGraphicsOptions();
+        modelGraphicsOptions.uri = new ConstantProperty<>(
+                GWT.getModuleBaseURL() + "SampleData/models/CesiumMan/Cesium_Man.glb");
+
+        EntityOptions options = new EntityOptions();
+        options.name = GWT.getModuleBaseURL() + "SampleData/models/CesiumMan/Cesium_Man.glb";
+        options.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-123.0744619, 44.0503706));
+        options.model = new ModelGraphics(modelGraphicsOptions);
+        csVPanel.getViewer().trackedEntity = csVPanel.getViewer().entities().add(options);
+
+        collection = csVPanel.getViewer().scene().postProcessStages;
+        silhouette = collection.add(PostProcessStageLibrary.createSilhouetteStage());
+        blackAndWhite = collection.add(PostProcessStageLibrary.createBlackAndWhiteStage());
+        brightness = collection.add(PostProcessStageLibrary.createBrightnessStage());
+        nightVision = collection.add(PostProcessStageLibrary.createNightVisionStage());
+
+        if (!PostProcessStageLibrary.isSilhouetteSupported(csVPanel.getViewer().scene())) {
+            Cesium.log("This browser does not support the silhouette post process.");
+        }
+
+        silhouetteCBox = new CheckBox();
+        silhouetteCBox.setValue(true);
+        silhouetteCBox.addValueChangeHandler(new MValueChangeHandler());
+
+        blackAndWhiteCBox = new CheckBox();
+        blackAndWhiteCBox.addValueChangeHandler(new MValueChangeHandler());
+
+        blackAndWhiteSlider = new Slider("blackAndWhiteSlider", 1, 10, 5);
+        blackAndWhiteSlider.setStep(1);
+        blackAndWhiteSlider.setWidth("150px");
+        blackAndWhiteSlider.addListener(new MSliderListener());
+
+        brightnessCBox = new CheckBox();
+        brightnessCBox.addValueChangeHandler(new MValueChangeHandler());
+
+        brightnessSlider = new Slider("brightnessSlider", 0, 100, 50);
+        brightnessSlider.setStep(1);
+        brightnessSlider.setWidth("150px");
+        brightnessSlider.addListener(new MSliderListener());
+
+        nightVisionCBox = new CheckBox();
+        nightVisionCBox.addValueChangeHandler(new MValueChangeHandler());
+
+        FlexTable flexTable = new FlexTable();
+        flexTable.setHTML(1, 0, "<font color=\"white\">Silhouette</font>");
+        flexTable.setWidget(1, 1, silhouetteCBox);
+        flexTable.setHTML(2, 0, "<font color=\"white\">Black and White</font>");
+        flexTable.setWidget(2, 1, blackAndWhiteCBox);
+        flexTable.setWidget(2, 2, blackAndWhiteSlider);
+        flexTable.setHTML(3, 0, "<font color=\"white\">Brightness</font>");
+        flexTable.setWidget(3, 1, brightnessCBox);
+        flexTable.setWidget(3, 2, brightnessSlider);
+        flexTable.setHTML(4, 0, "<font color=\"white\">Night Vision</font>");
+        flexTable.setWidget(4, 1, nightVisionCBox);
+
+        AbsolutePanel aPanel = new AbsolutePanel();
+        aPanel.add(csVPanel);
+        aPanel.add(flexTable, 20, 20);
+
+        contentPanel.add(new HTML("<p>Post processing effects.</p>"));
+        contentPanel.add(aPanel);
+
+        initWidget(contentPanel);
+        updatePostProcess();
+    }
+
+    private void updatePostProcess() {
+        silhouette.enabled = silhouetteCBox.getValue();
+        silhouette.uniforms.setProperty("color", Color.YELLOW());
+
+        blackAndWhite.enabled = blackAndWhiteCBox.getValue();
+        blackAndWhite.uniforms().setProperty("gradations", blackAndWhiteSlider.getValue());
+
+        brightness.enabled = brightnessCBox.getValue();
+        brightness.uniforms().setProperty("brightness", brightnessSlider.getValue() / 100.0);
+
+        nightVision.enabled = nightVisionCBox.getValue();
     }
 
     @Override
-    public void onChange(SliderEvent e) {
-      //
+    public String[] getSourceCodeURLs() {
+        String[] sourceCodeURLs = new String[1];
+        sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "PostProcessing.txt";
+        return sourceCodeURLs;
     }
 
-    @Override
-    public void onStop(SliderEvent e) {
-      //
+    private class MValueChangeHandler implements ValueChangeHandler<Boolean> {
+        @Override
+        public void onValueChange(ValueChangeEvent<Boolean> event) {
+            updatePostProcess();
+        }
     }
-  }
+
+    private class MSliderListener implements SliderListener {
+        @Override
+        public void onStart(SliderEvent e) {
+            //
+        }
+
+        @Override
+        public boolean onSlide(SliderEvent e) {
+            updatePostProcess();
+            return true;
+        }
+
+        @Override
+        public void onChange(SliderEvent e) {
+            //
+        }
+
+        @Override
+        public void onStop(SliderEvent e) {
+            //
+        }
+    }
 }
