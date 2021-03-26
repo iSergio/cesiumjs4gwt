@@ -24,6 +24,19 @@
         <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
     </properties>
 
+    <distributionManagement>
+        <repository>
+            <id>main-releases</id>
+            <name>Gis4Fun Repository</name>
+            <url>https://gis4fun.org/nexus/repository/main-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>main-snapshots</id>
+            <name>Gis4Fun Repository</name>
+            <url>https://gis4fun.org/nexus/repository/main-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
