@@ -1,108 +1,115 @@
+image: gis4fun.org/openjdk:8
+
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
+  MAVEN_CLI_OPTS: "--no-transfer-progress"
+  WILDFLY_VERSION: "20.0.1.Final"
+  WILDFLY_BASE_CLI: "./wildfly-$WILDFLY_VERSION/bin/jboss-cli.sh --controller=$WILDFLY_URL --user=$WILDFLY_USER --password=$WILDFLY_PASS --connect"
+  VERSION: ""
+
 cache:
   untracked: true
-  key:  "$CI_BUILD_REF_NAME"
+  key: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
+  paths:
+    - .m2/repository
 
 stages:
-  - setup
-  # - codequality need refactoring
-  - compile
-  - junit
-  - javadoc
-  - compile_showcase
+  - init
+  - build
+  - test
+  - package
   - deploy
 
 default:
   tags:
-    - cesiumjs4gwt
+    - docker
   interruptible: true
-
-setup:initialize:
-  stage: setup
-  script:
-    - mvn clean
-
-compile:cesiumjs4gwt-main:
-  stage: compile
-  script:
-    - mvn -pl cesiumjs4gwt-main -DskipTests=true install
-
-junit:cesiumjs4gwt-main:
-  stage: junit
-  script:
-    - mvn -pl cesiumjs4gwt-main test
-
-javadoc:cesiumjs4gwt-main:
-  stage: javadoc
-  script:
-    - mvn -pl cesiumjs4gwt-main javadoc:javadoc -Dadditionalparam=-Xdoclint:none
-
-compileshowcase:cesiumjs4gwt-showcase:
-  stage: compile_showcase
-  dependencies:
-    - javadoc:cesiumjs4gwt-main
-  script:
-    - mvn -pl cesiumjs4gwt-showcase -am package
-
-deploy:artifactory:
-  stage: deploy
-  dependencies:
-    - compile:cesiumjs4gwt-main
-  before_script: 
-    # Install JFrog CLI
-    -  curl -fL https://getcli.jfrog.io | sh
-    # Configure Artifactory instance with JFrog CLI
-    - ./jfrog rt config --url=$ARTIFACTORY_URL --user=$ARTIFACTORY_USER --password=$ARTIFACTORY_PASS
-    - ./jfrog rt c show
-    # Set the M2_HOME environment variable
-    - export M2_HOME=/usr/share/maven
-    # Определяем версию пакета. Если с коммитом не пришёл тэг, то принудительно снапшотим пакеты
-    - >
-      if [[ "${CI_COMMIT_TAG}" != "" ]]; then
-        mvn versions:set -DnewVersion=${CI_COMMIT_TAG}
-        sed -i 's,MAVEN_REPO_KEY,'"$MAVEN_REPO_KEY"',g' configuration.yml
-      else
-        VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
-        if [[ "${VERSION}" == *-SNAPSHOT ]]; then
-          mvn versions:set -DnewVersion=${VERSION}
-        else
-          mvn versions:set -DnewVersion=${VERSION}-SNAPSHOT
-        fi
-        sed -i 's,MAVEN_REPO_KEY,'"$MAVEN_REPO_KEY_SNAPSHOT"',g' configuration.yml
-      fi
-
-  script:
-    - echo $CI_JOB_ID
-    # Run the MVN command
-    - ./jfrog rt mvn "clean -pl cesiumjs4gwt-main install" configuration.yml --build-name=gitlabci-maven-artifactory --build-number=$CI_JOB_ID
-    # Collect the environment variables
-    - ./jfrog rt bce gitlabci-maven-artifactory $CI_JOB_ID
-    # Pass the build information to Artifactory
-    - ./jfrog rt bp gitlabci-maven-artifactory $CI_JOB_ID
-    #- cat report-aggregate/target/site/jacoco-aggregate/index.html
-  only:
-    - master
-    - tags
-
-deploy:wildfly:
-  stage: deploy
-  dependencies:
-    - compileshowcase:cesiumjs4gwt-showcase
   before_script:
     - >
-      if [[ "${CI_COMMIT_TAG}" != "" ]]; then
-        VERSION=${CI_COMMIT_TAG}
+      if [[ "${CI_COMMIT_TAG}" != ""  ]]; then
+        mvn $MAVEN_CLI_OPTS versions:set -DnewVersion=${CI_COMMIT_TAG}
       else
-        VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
-        if [[ "${VERSION}" == *-SNAPSHOT ]]; then
-          VERSION=${VERSION}
+        VERSION=$(mvn $MAVEN_CLI_OPTS -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+        if [[ "${VERSION}" == *-SNAPSHOT  ]]; then
+          mvn $MAVEN_CLI_OPTS versions:set -DnewVersion=${VERSION}
         else
+          mvn $MAVEN_CLI_OPTS versions:set -DnewVersion=${VERSION}-SNAPSHOT
           VERSION=${VERSION}-SNAPSHOT
         fi
       fi
+
+compile:cesiumjs4gwt-main:
+  stage: build
   script:
-    - echo $VERSION
-    - mv cesiumjs4gwt-showcase/target/cesiumjs4gwt-showcase-$VERSION.war cesiumjs4gwt-showcase/target/cesiumjs4gwt-showcase.war
-    - jboss-cli.sh --controller=127.0.0.1:9999 --user=$WILDFLY_USER --password=$WILDFLY_PASS --connect --commands="deploy cesiumjs4gwt-showcase/target/cesiumjs4gwt-showcase.war --force"
+    - mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec
+    - mvn $MAVEN_CLI_OPTS -pl cesiumjs4gwt-main -DskipTests=true compile
+
+compile:cesiumjs4gwt-showcase:
+  stage: build
+  script:
+    - mvn $MAVEN_CLI_OPTS -pl cesiumjs4gwt-showcase -DskipTests=true compile -am -DskipTests=true
+
+test:cesiumjs4gwt-main:
+  stage: test
+  script:
+    - mvn $MAVEN_CLI_OPTS -pl cesiumjs4gwt-main test
+
+package:cesiumjs4gwt-main:
+  stage: package
   only:
     - master
+    - develop
     - tags
+  script:
+    - mvn $MAVEN_CLI_OPTS -pl cesiumjs4gwt-main -DskipTests=true package
+      #artifacts:
+      #paths:
+      #- cesiumjs4gwt-main/target/*.jar
+
+deploy:cesiumjs4gwt-main:
+  stage: deploy
+  only:
+    - master
+    - develop
+    - tags
+  script:
+    - mvn $MAVEN_CLI_OPTS -pl cesiumjs4gwt-main -DskipTests=true deploy
+  artifacts:
+    paths:
+      - cesiumjs4gwt-main/target/*.jar
+
+package:cesiumjs4gwt-showcase:
+  stage: package
+  only:
+    - master
+    - develop
+    - tags
+  script:
+    - mvn $MAVEN_CLI_OPTS -pl cesiumjs4gwt-showcase package -am -DskipTests=true
+  artifacts:
+    paths:
+      - cesiumjs4gwt-showcase/target/*.war
+
+deploy:cesiumjs4gwt-showcase:
+    stage: deploy
+    only:
+      - master
+      - develop
+      - tags
+    script:
+      - curl https://gis4fun.org/wildfly/wildfly-$WILDFLY_VERSION.tar.gz --output wildfly.tar.gz && tar -zxf wildfly.tar.gz
+      - >
+        if [[ "${VERSION}" == *-SNAPSHOT ]]; then
+          SUFFIX="-SNAPSHOT"
+        else
+          SUFFIX=""
+        fi
+      - EXISTS=`$WILDFLY_BASE_CLI --commands="deployment-info --server-group=main-server-group --name=cesiumjs4gwt-showcase$SUFFIX.war"`
+      - >
+        if [[ $EXISTS = "" ]]; then
+          echo "empty"
+          $WILDFLY_BASE_CLI --commands="deploy cesiumjs4gwt-showcase/target/cesiumjs4gwt-showcase-$VERSION.war --name=cesiumjs4gwt-showcase$SUFFIX.war --server-groups=main-server-group"
+        else
+          echo "notempty"
+          $WILDFLY_BASE_CLI --commands="deploy cesiumjs4gwt-showcase/target/cesiumjs4gwt-showcase-$VERSION.war --name=cesiumjs4gwt-showcase$SUFFIX.war --force"
+        fi
