@@ -1,3 +1,5 @@
+[![pipeline status](https://gis4fun.org/gitlab/iSergio/cesiumjs4gwt/badges/master/pipeline.svg)](https://gis4fun.org/gitlab/iSergio/cesiumjs4gwt/-/commits/master) [![pipeline status](https://gis4fun.org/gitlab/iSergio/cesiumjs4gwt/badges/develop/pipeline.svg)](https://gis4fun.org/gitlab/iSergio/cesiumjs4gwt/-/commits/develop)
+
 # GWT Cesium Wrapper
 [CesiumJS](http://cesiumjs.org) GWT Wrapper based on JsInterop 1.0.2 for [GWT 2.8.x](http://www.gwtproject.org/release-notes.html#Release_Notes_2_8_2).
 
