@@ -28,6 +28,7 @@ default:
     - >
       if [[ "${CI_COMMIT_TAG}" != ""  ]]; then
         mvn $MAVEN_CLI_OPTS versions:set -DnewVersion=${CI_COMMIT_TAG}
+        VERSION=${CI_COMMIT_TAG}
       else
         VERSION=$(mvn $MAVEN_CLI_OPTS -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
         if [[ "${VERSION}" == *-SNAPSHOT  ]]; then
