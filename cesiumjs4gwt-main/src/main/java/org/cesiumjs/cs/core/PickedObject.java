@@ -16,23 +16,22 @@
 
 package org.cesiumjs.cs.core;
 
-import org.cesiumjs.cs.scene.Primitive;
-
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.scene.Primitive;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class PickedObject<T> {
-  @JsProperty
-  public Primitive primitive;
+    @JsProperty
+    public Primitive primitive;
 
-  @JsProperty
-  public T id;
+    @JsProperty
+    public T id;
 
-  // @JsConstructor
-  // private PickedObject() {}
+    // @JsConstructor
+    // private PickedObject() {}
 }

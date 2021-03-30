@@ -16,13 +16,12 @@
 
 package org.cesiumjs.cs.scene;
 
-import org.cesiumjs.cs.js.JsObject;
-import org.cesiumjs.cs.scene.options.PostProcessStageCompositeOptions;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.js.JsObject;
+import org.cesiumjs.cs.scene.options.PostProcessStageCompositeOptions;
 
 /**
  * A collection of {@link PostProcessStage} or other post-process composite
@@ -38,80 +37,79 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "PostProcessStageComposite")
 public class PostProcessStageComposite implements PostProcess {
-  /**
-   * Whether or not to execute this post-process stage when ready.
-   */
-  @JsProperty
-  public boolean enabled;
+    /**
+     * Whether or not to execute this post-process stage when ready.
+     */
+    @JsProperty
+    public boolean enabled;
+    /**
+     * An alias to the uniform values of the post-process stages. May be undefined;
+     * in which case, get each stage to set uniform values.
+     */
+    @JsProperty
+    public JsObject uniforms;
 
-  /**
-   * All post-process stages are executed in the order of the array. The input
-   * texture changes based on the value of inputPreviousStageTexture. If
-   * inputPreviousStageTexture is true, the input to each stage is the output
-   * texture rendered to by the scene or of the stage that executed before it. If
-   * inputPreviousStageTexture is false, the input texture is the same for each
-   * stage in the composite. The input texture is the texture rendered to by the
-   * scene or the output texture of the previous stage.
-   */
-  @JsProperty(name = "inputPreviousStageTexture")
-  public native boolean inputPreviousStageTexture();
+    @JsConstructor
+    public PostProcessStageComposite(PostProcessStageCompositeOptions options) {
+    }
 
-  /**
-   * The number of post-process stages in this composite.
-   */
-  @JsProperty(name = "length")
-  public native int length();
+    /**
+     * All post-process stages are executed in the order of the array. The input
+     * texture changes based on the value of inputPreviousStageTexture. If
+     * inputPreviousStageTexture is true, the input to each stage is the output
+     * texture rendered to by the scene or of the stage that executed before it. If
+     * inputPreviousStageTexture is false, the input texture is the same for each
+     * stage in the composite. The input texture is the texture rendered to by the
+     * scene or the output texture of the previous stage.
+     */
+    @JsProperty(name = "inputPreviousStageTexture")
+    public native boolean inputPreviousStageTexture();
 
-  /**
-   * The unique name of this post-process stage for reference by other stages in a
-   * PostProcessStageComposite.
-   */
-  @JsProperty(name = "name")
-  public native String name();
+    /**
+     * The number of post-process stages in this composite.
+     */
+    @JsProperty(name = "length")
+    public native int length();
 
-  /**
-   * Determines if this post-process stage is ready to be executed.
-   */
-  @JsProperty(name = "ready")
-  public native boolean ready();
+    /**
+     * The unique name of this post-process stage for reference by other stages in a
+     * PostProcessStageComposite.
+     */
+    @JsProperty(name = "name")
+    public native String name();
 
-  /**
-   * An alias to the uniform values of the post-process stages. May be undefined;
-   * in which case, get each stage to set uniform values.
-   */
-  @JsProperty
-  public JsObject uniforms;
+    /**
+     * Determines if this post-process stage is ready to be executed.
+     */
+    @JsProperty(name = "ready")
+    public native boolean ready();
 
-  @JsConstructor
-  public PostProcessStageComposite(PostProcessStageCompositeOptions options) {
-  }
+    /**
+     * Destroys the WebGL resources held by this object. Destroying an object allows
+     * for deterministic release of WebGL resources, instead of relying on the
+     * garbage collector to destroy this object. Once an object is destroyed, it
+     * should not be used; calling any function other than isDestroyed will result
+     * in a DeveloperError exception. Therefore, assign the return value (undefined)
+     * to the object as done in the example.
+     */
+    @JsMethod
+    public native void destroy();
 
-  /**
-   * Destroys the WebGL resources held by this object. Destroying an object allows
-   * for deterministic release of WebGL resources, instead of relying on the
-   * garbage collector to destroy this object. Once an object is destroyed, it
-   * should not be used; calling any function other than isDestroyed will result
-   * in a DeveloperError exception. Therefore, assign the return value (undefined)
-   * to the object as done in the example.
-   */
-  @JsMethod
-  public native void destroy();
+    /**
+     * Gets the post-process stage at index
+     *
+     * @param index The index of the post-process stage or composite.
+     * @return The post-process stage or composite at index.
+     */
+    public native PostProcess getPostProcessStage(int index);
 
-  /**
-   * Gets the post-process stage at index
-   * 
-   * @param index The index of the post-process stage or composite.
-   * @return The post-process stage or composite at index.
-   */
-  public native PostProcess getPostProcessStage(int index);
-
-  /**
-   * Returns true if this object was destroyed; otherwise, false. If this object
-   * was destroyed, it should not be used; calling any function other than
-   * isDestroyed will result in a DeveloperError exception.
-   * 
-   * @return true if this object was destroyed; otherwise, false.
-   */
-  @JsMethod
-  public native boolean isDestroyed();
+    /**
+     * Returns true if this object was destroyed; otherwise, false. If this object
+     * was destroyed, it should not be used; calling any function other than
+     * isDestroyed will result in a DeveloperError exception.
+     *
+     * @return true if this object was destroyed; otherwise, false.
+     */
+    @JsMethod
+    public native boolean isDestroyed();
 }

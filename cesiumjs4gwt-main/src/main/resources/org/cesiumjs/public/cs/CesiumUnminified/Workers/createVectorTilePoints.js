@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
 
-define(['./when-54c2dc71', './Check-6c0211bc', './Math-850675ea', './Cartesian2-ea28baad', './AttributeCompression-8a649799', './createTaskProcessorWorker'], function (when, Check, _Math, Cartesian2, AttributeCompression, createTaskProcessorWorker) { 'use strict';
+define(['./AttributeCompression-69c5b20c', './Cartesian2-716c2715', './Math-3ba16bed', './createTaskProcessorWorker', './Check-d18af7c4', './when-208fe5b0'], function (AttributeCompression, Cartesian2, _Math, createTaskProcessorWorker, Check, when) { 'use strict';
 
   var maxShort = 32767;
 

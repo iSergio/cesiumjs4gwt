@@ -26,69 +26,69 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class ColorRandomOptions {
-  /**
-   * If specified, the red component to use instead of a randomized value.
-   * Optional.
-   */
-  @JsProperty
-  public float red;
-  /**
-   * The maximum red value to generate if none was specified. Optional.
-   */
-  @JsProperty
-  public float minimumRed;// = 0.0f;
-  /**
-   * The minimum red value to generate if none was specified. Optional.
-   */
-  @JsProperty
-  public float maximumRed;// = 1.0f;
-  /**
-   * If specified, the green component to use instead of a randomized value.
-   */
-  @JsProperty
-  public float green;
-  /**
-   * The maximum green value to generate if none was specified.
-   */
-  @JsProperty
-  public float minimumGreen;// = 0.0f;
-  /**
-   * The minimum green value to generate if none was specified.
-   */
-  @JsProperty
-  public float maximumGreen;// = 1.0f;
-  /**
-   * If specified, the blue component to use instead of a randomized value.
-   */
-  @JsProperty
-  public float blue;
-  /**
-   * The maximum blue value to generate if none was specified.
-   */
-  @JsProperty
-  public float minimumBlue;// = 0.0f;
-  /**
-   * The minimum blue value to generate if none was specified.
-   */
-  @JsProperty
-  public float maximumBlue;// = 1.0f;
-  /**
-   * If specified, the alpha component to use instead of a randomized value.
-   */
-  @JsProperty
-  public float alpha;
-  /**
-   * The maximum alpha value to generate if none was specified.
-   */
-  @JsProperty
-  public float minimumAlpha;// = 0.0f;
-  /**
-   * The minimum alpha value to generate if none was specified.
-   */
-  @JsProperty
-  public float maximumAlpha;// = 1.0f;
+    /**
+     * If specified, the red component to use instead of a randomized value.
+     * Optional.
+     */
+    @JsProperty
+    public float red;
+    /**
+     * The maximum red value to generate if none was specified. Optional.
+     */
+    @JsProperty
+    public float minimumRed;// = 0.0f;
+    /**
+     * The minimum red value to generate if none was specified. Optional.
+     */
+    @JsProperty
+    public float maximumRed;// = 1.0f;
+    /**
+     * If specified, the green component to use instead of a randomized value.
+     */
+    @JsProperty
+    public float green;
+    /**
+     * The maximum green value to generate if none was specified.
+     */
+    @JsProperty
+    public float minimumGreen;// = 0.0f;
+    /**
+     * The minimum green value to generate if none was specified.
+     */
+    @JsProperty
+    public float maximumGreen;// = 1.0f;
+    /**
+     * If specified, the blue component to use instead of a randomized value.
+     */
+    @JsProperty
+    public float blue;
+    /**
+     * The maximum blue value to generate if none was specified.
+     */
+    @JsProperty
+    public float minimumBlue;// = 0.0f;
+    /**
+     * The minimum blue value to generate if none was specified.
+     */
+    @JsProperty
+    public float maximumBlue;// = 1.0f;
+    /**
+     * If specified, the alpha component to use instead of a randomized value.
+     */
+    @JsProperty
+    public float alpha;
+    /**
+     * The maximum alpha value to generate if none was specified.
+     */
+    @JsProperty
+    public float minimumAlpha;// = 0.0f;
+    /**
+     * The minimum alpha value to generate if none was specified.
+     */
+    @JsProperty
+    public float maximumAlpha;// = 1.0f;
 
-  @JsConstructor
-  public ColorRandomOptions() {
-  }
+    @JsConstructor
+    public ColorRandomOptions() {
+    }
 }

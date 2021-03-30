@@ -16,49 +16,48 @@
 
 package org.cesiumjs.cs.scene.apperances;
 
-import org.cesiumjs.cs.core.VertexFormat;
-import org.cesiumjs.cs.scene.apperances.options.PolylineMaterialAppearanceOptions;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.VertexFormat;
+import org.cesiumjs.cs.scene.apperances.options.PolylineMaterialAppearanceOptions;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "PolylineMaterialAppearance")
 public class PolylineMaterialAppearance extends Appearance {
-  /**
-   * The {@link VertexFormat} that all {@link PolylineMaterialAppearance}
-   * instances are compatible with. This requires position and st attributes.
-   */
-  @JsProperty(name = "VERTEX_FORMAT")
-  public static native VertexFormat VERTEX_FORMAT();
+    /**
+     * An appearance for {@link org.cesiumjs.cs.core.geometry.PolylineGeometry} that
+     * supports shading with materials.
+     */
+    @JsConstructor
+    public PolylineMaterialAppearance() {
+    }
 
-  /**
-   * The VertexFormat that this appearance instance is compatible with. A geometry
-   * can have more vertex attributes and still be compatible - at a potential
-   * performance cost - but it can't have less. Default:
-   * {@link PolylineMaterialAppearance#VERTEX_FORMAT()}
-   */
-  @JsProperty(name = "vertexFormat")
-  public native VertexFormat vertexFormat();
+    /**
+     * An appearance for {@link org.cesiumjs.cs.core.geometry.PolylineGeometry} that
+     * supports shading with materials.
+     *
+     * @param options {@link PolylineMaterialAppearanceOptions}
+     */
+    @JsConstructor
+    public PolylineMaterialAppearance(PolylineMaterialAppearanceOptions options) {
+    }
 
-  /**
-   * An appearance for {@link org.cesiumjs.cs.core.geometry.PolylineGeometry} that
-   * supports shading with materials.
-   */
-  @JsConstructor
-  public PolylineMaterialAppearance() {
-  }
+    /**
+     * The {@link VertexFormat} that all {@link PolylineMaterialAppearance}
+     * instances are compatible with. This requires position and st attributes.
+     */
+    @JsProperty(name = "VERTEX_FORMAT")
+    public static native VertexFormat VERTEX_FORMAT();
 
-  /**
-   * An appearance for {@link org.cesiumjs.cs.core.geometry.PolylineGeometry} that
-   * supports shading with materials.
-   * 
-   * @param options {@link PolylineMaterialAppearanceOptions}
-   */
-  @JsConstructor
-  public PolylineMaterialAppearance(PolylineMaterialAppearanceOptions options) {
-  }
+    /**
+     * The VertexFormat that this appearance instance is compatible with. A geometry
+     * can have more vertex attributes and still be compatible - at a potential
+     * performance cost - but it can't have less. Default:
+     * {@link PolylineMaterialAppearance#VERTEX_FORMAT()}
+     */
+    @JsProperty(name = "vertexFormat")
+    public native VertexFormat vertexFormat();
 }

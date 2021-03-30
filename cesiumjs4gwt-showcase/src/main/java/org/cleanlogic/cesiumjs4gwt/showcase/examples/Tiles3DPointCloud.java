@@ -16,11 +16,8 @@
 
 package org.cleanlogic.cesiumjs4gwt.showcase.examples;
 
-import javax.inject.Inject;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.HTML;
-
 import org.cesiumjs.cs.core.BoundingSphere;
 import org.cesiumjs.cs.core.Matrix4;
 import org.cesiumjs.cs.promise.Fulfill;
@@ -29,44 +26,46 @@ import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cleanlogic.cesiumjs4gwt.showcase.basic.AbstractExample;
 import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ShowcaseExampleStore;
 
+import javax.inject.Inject;
+
 /**
  * @author Serge Silaev aka iSergio
  */
 public class Tiles3DPointCloud extends AbstractExample {
 
-  @Inject
-  public Tiles3DPointCloud(ShowcaseExampleStore store) {
-    super("3D Tiles Point Cloud", "Example styles for a point cloud tileset.", new String[] { "Showcase", "3D Tiles" },
-        store);
-  }
+    @Inject
+    public Tiles3DPointCloud(ShowcaseExampleStore store) {
+        super("3D Tiles Point Cloud", "Example styles for a point cloud tileset.", new String[]{"Showcase", "3D Tiles"},
+                store);
+    }
 
-  @Override
-  public void buildPanel() {
-    final ViewerPanel csVPanel = new ViewerPanel();
+    @Override
+    public void buildPanel() {
+        final ViewerPanel csVPanel = new ViewerPanel();
 
-    Cesium3DTileset tileset = (Cesium3DTileset) csVPanel.getViewer().scene().primitives().add(Cesium3DTileset.create(
-        "https://beta.cesium.com/api/assets/1460?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIyMzk2YzJiOS1jZGFmLTRlZmYtYmQ4MS00NTA3NjEwMzViZTkiLCJpZCI6NDQsImFzc2V0cyI6WzE0NjBdLCJpYXQiOjE0OTkyNjQ3NTV9.oWjvN52CRQ-dk3xtvD4e8ZnOHZhoWSpJLlw115mbQJM"));
+        Cesium3DTileset tileset = (Cesium3DTileset) csVPanel.getViewer().scene().primitives().add(Cesium3DTileset.create(
+                "https://beta.cesium.com/api/assets/1460?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIyMzk2YzJiOS1jZGFmLTRlZmYtYmQ4MS00NTA3NjEwMzViZTkiLCJpZCI6NDQsImFzc2V0cyI6WzE0NjBdLCJpYXQiOjE0OTkyNjQ3NTV9.oWjvN52CRQ-dk3xtvD4e8ZnOHZhoWSpJLlw115mbQJM"));
 
-    tileset.readyPromise().then(new Fulfill<Cesium3DTileset>() {
-      @Override
-      public void onFulfilled(Cesium3DTileset value) {
-        BoundingSphere boundingSphere = value.boundingSphere();
-        csVPanel.getViewer().camera.viewBoundingSphere(boundingSphere,
-            new org.cesiumjs.cs.core.HeadingPitchRange(0.0, -0.5, boundingSphere.radius));
-        csVPanel.getViewer().camera.lookAtTransform(Matrix4.IDENTITY());
-      }
-    });
+        tileset.readyPromise().then(new Fulfill<Cesium3DTileset>() {
+            @Override
+            public void onFulfilled(Cesium3DTileset value) {
+                BoundingSphere boundingSphere = value.boundingSphere();
+                csVPanel.getViewer().camera.viewBoundingSphere(boundingSphere,
+                        new org.cesiumjs.cs.core.HeadingPitchRange(0.0, -0.5, boundingSphere.radius));
+                csVPanel.getViewer().camera.lookAtTransform(Matrix4.IDENTITY());
+            }
+        });
 
-    contentPanel.add(new HTML("<p>Example styles for a point cloud tileset.</p>"));
-    contentPanel.add(csVPanel);
+        contentPanel.add(new HTML("<p>Example styles for a point cloud tileset.</p>"));
+        contentPanel.add(csVPanel);
 
-    initWidget(contentPanel);
-  }
+        initWidget(contentPanel);
+    }
 
-  @Override
-  public String[] getSourceCodeURLs() {
-    String[] sourceCodeURLs = new String[1];
-    sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "Tiles3DPointCloud.txt";
-    return sourceCodeURLs;
-  }
+    @Override
+    public String[] getSourceCodeURLs() {
+        String[] sourceCodeURLs = new String[1];
+        sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "Tiles3DPointCloud.txt";
+        return sourceCodeURLs;
+    }
 }

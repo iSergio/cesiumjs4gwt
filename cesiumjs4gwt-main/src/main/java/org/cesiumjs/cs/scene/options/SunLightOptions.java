@@ -15,27 +15,26 @@
 
 package org.cesiumjs.cs.scene.options;
 
-import org.cesiumjs.cs.core.Color;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Color;
 
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class SunLightOptions {
-  /**
-   * The light's color. Default: Color.WHITE
-   */
-  @JsProperty
-  public Color color;
-  /**
-   * The light's intensity. Default: 2.0
-   */
-  @JsProperty
-  public Number intensity;
+    /**
+     * The light's color. Default: Color.WHITE
+     */
+    @JsProperty
+    public Color color;
+    /**
+     * The light's intensity. Default: 2.0
+     */
+    @JsProperty
+    public Number intensity;
 
-  @JsConstructor
-  public SunLightOptions() {
-  }
+    @JsConstructor
+    public SunLightOptions() {
+    }
 }

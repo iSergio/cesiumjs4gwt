@@ -16,52 +16,51 @@
 
 package org.cesiumjs.cs.datasources.properties.options;
 
-import org.cesiumjs.cs.core.Color;
-import org.cesiumjs.cs.datasources.properties.Property;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Color;
+import org.cesiumjs.cs.datasources.properties.Property;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class StripeMaterialPropertyOptions {
-  /**
-   * A Property specifying the first Color. Default: {@link Color#WHITE()}
-   */
-  @JsProperty
-  public Property evenColor;
-  /**
-   * A Property specifying the second Color. Default: {@link Color#BLACK()}
-   */
-  @JsProperty
-  public Property oddColor;
-  /**
-   * A numeric Property specifying how many times the stripes repeat. Default: 1
-   */
-  @JsProperty
-  public Property repeat;
-  /**
-   * A numeric Property specifying how far into the pattern to start the material.
-   * Default: 0
-   */
-  @JsProperty
-  public Property offset;
-  /**
-   * A Property specifying the StripeOrientation. Default:
-   * StripeOrientation.HORIZONTAL
-   */
-  // @JsProperty
-  // public StripeOrientation orientation;
+    /**
+     * A Property specifying the first Color. Default: {@link Color#WHITE()}
+     */
+    @JsProperty
+    public Property evenColor;
+    /**
+     * A Property specifying the second Color. Default: {@link Color#BLACK()}
+     */
+    @JsProperty
+    public Property oddColor;
+    /**
+     * A numeric Property specifying how many times the stripes repeat. Default: 1
+     */
+    @JsProperty
+    public Property repeat;
+    /**
+     * A numeric Property specifying how far into the pattern to start the material.
+     * Default: 0
+     */
+    @JsProperty
+    public Property offset;
+    /**
+     * A Property specifying the StripeOrientation. Default:
+     * StripeOrientation.HORIZONTAL
+     */
+    // @JsProperty
+    // public StripeOrientation orientation;
 
-  /**
-   * Options for
-   * {@link org.cesiumjs.cs.datasources.properties.StripeMaterialProperty}
-   */
-  @JsConstructor
-  public StripeMaterialPropertyOptions() {
-  }
+    /**
+     * Options for
+     * {@link org.cesiumjs.cs.datasources.properties.StripeMaterialProperty}
+     */
+    @JsConstructor
+    public StripeMaterialPropertyOptions() {
+    }
 }

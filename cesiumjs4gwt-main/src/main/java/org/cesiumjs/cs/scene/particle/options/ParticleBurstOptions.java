@@ -16,12 +16,11 @@
 
 package org.cesiumjs.cs.scene.particle.options;
 
-import org.cesiumjs.cs.scene.particle.ParticleBurst;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.scene.particle.ParticleBurst;
 
 /**
  * Options for {@link ParticleBurst}.
@@ -30,24 +29,24 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class ParticleBurstOptions {
-  /**
-   * The time in seconds after the beginning of the particle system's lifetime
-   * that the burst will occur. Default: 0.0
-   */
-  @JsProperty
-  public double time;
-  /**
-   * The minimum number of particles emmitted in the burst. Default: 0.0
-   */
-  @JsProperty
-  public double minimum;
-  /**
-   * The maximum number of particles emitted in the burst. Default: 50.0
-   */
-  @JsProperty
-  public double maximum;
+    /**
+     * The time in seconds after the beginning of the particle system's lifetime
+     * that the burst will occur. Default: 0.0
+     */
+    @JsProperty
+    public double time;
+    /**
+     * The minimum number of particles emmitted in the burst. Default: 0.0
+     */
+    @JsProperty
+    public double minimum;
+    /**
+     * The maximum number of particles emitted in the burst. Default: 50.0
+     */
+    @JsProperty
+    public double maximum;
 
-  @JsConstructor
-  public ParticleBurstOptions() {
-  }
+    @JsConstructor
+    public ParticleBurstOptions() {
+    }
 }

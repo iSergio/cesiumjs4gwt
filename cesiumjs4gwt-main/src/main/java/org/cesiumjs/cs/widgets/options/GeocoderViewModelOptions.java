@@ -16,15 +16,10 @@
 
 package org.cesiumjs.cs.widgets.options;
 
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.GeocoderService;
 import org.cesiumjs.cs.scene.Scene;
 import org.cesiumjs.cs.widgets.GeocoderViewModel;
-
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsOverlay;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
 
 /**
  * Options for {@link org.cesiumjs.cs.widgets.GeocoderViewModel}
@@ -33,46 +28,46 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class GeocoderViewModelOptions {
-  /**
-   * The Scene instance to use.
-   */
-  @JsProperty
-  public Scene scene;
-  /**
-   * Geocoder services to use for geocoding queries. If more than one are
-   * supplied, suggestions will be gathered for the geocoders that support it, and
-   * if no suggestion is selected the result from the first geocoder service wil
-   * be used.
-   */
-  @JsProperty
-  public GeocoderService[] geocoderServices;
-  /**
-   * The duration of the camera flight to an entered location, in seconds.
-   */
-  @JsProperty
-  public double flightDuration;
-  /**
-   * A callback function that is called after a successful geocode. If not
-   * supplied, the default behavior is to fly the camera to the result
-   * destination.
-   */
-  @JsProperty
-  public GeocoderViewModel.DestinationFoundFunction destinationFound;
+    /**
+     * The Scene instance to use.
+     */
+    @JsProperty
+    public Scene scene;
+    /**
+     * Geocoder services to use for geocoding queries. If more than one are
+     * supplied, suggestions will be gathered for the geocoders that support it, and
+     * if no suggestion is selected the result from the first geocoder service wil
+     * be used.
+     */
+    @JsProperty
+    public GeocoderService[] geocoderServices;
+    /**
+     * The duration of the camera flight to an entered location, in seconds.
+     */
+    @JsProperty
+    public double flightDuration;
+    /**
+     * A callback function that is called after a successful geocode. If not
+     * supplied, the default behavior is to fly the camera to the result
+     * destination.
+     */
+    @JsProperty
+    public GeocoderViewModel.DestinationFoundFunction destinationFound;
 
-  @JsConstructor
-  private GeocoderViewModelOptions() {
-  }
+    @JsConstructor
+    private GeocoderViewModelOptions() {
+    }
 
-  /**
-   * Fast create instance of {@link GeocoderViewModelOptions} by mandatory params
-   * 
-   * @param scene The Scene instance to use.
-   * @return {@link GeocoderViewModelOptions} instance.
-   */
-  @JsOverlay
-  public static GeocoderViewModelOptions create(Scene scene) {
-    GeocoderViewModelOptions options = new GeocoderViewModelOptions();
-    options.scene = scene;
-    return options;
-  }
+    /**
+     * Fast create instance of {@link GeocoderViewModelOptions} by mandatory params
+     *
+     * @param scene The Scene instance to use.
+     * @return {@link GeocoderViewModelOptions} instance.
+     */
+    @JsOverlay
+    public static GeocoderViewModelOptions create(Scene scene) {
+        GeocoderViewModelOptions options = new GeocoderViewModelOptions();
+        options.scene = scene;
+        return options;
+    }
 }

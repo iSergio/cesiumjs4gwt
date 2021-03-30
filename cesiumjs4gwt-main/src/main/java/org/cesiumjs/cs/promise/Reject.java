@@ -21,7 +21,8 @@ import jsinterop.annotations.JsFunction;
 /**
  * @author Serge Silaev aka iSergio
  */
+@FunctionalInterface
 @JsFunction
 public interface Reject<E> {
-  void onRejected(E value);
+    void onRejected(E value);
 }

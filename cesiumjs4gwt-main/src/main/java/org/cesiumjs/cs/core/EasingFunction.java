@@ -26,202 +26,202 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "EasingFunction")
 public class EasingFunction {
-  /**
-   * Back in.
-   */
-  @JsProperty(name = "BACK_IN")
-  public static native EasingFunction BACK_IN();
+    /**
+     * Easing functions for use with {@link TweenCollection}. These function are
+     * from Tween.js and Robert Penner. See the Tween.js graphs for each function.
+     */
+    @JsConstructor
+    private EasingFunction() {
+    }
 
-  /**
-   * Back in then out.
-   */
-  @JsProperty(name = "BACK_IN_OUT")
-  public static native EasingFunction BACK_IN_OUT();
+    /**
+     * Back in.
+     */
+    @JsProperty(name = "BACK_IN")
+    public static native EasingFunction BACK_IN();
 
-  /**
-   * Back out.
-   */
-  @JsProperty(name = "BACK_OUT")
-  public static native EasingFunction BACK_OUT();
+    /**
+     * Back in then out.
+     */
+    @JsProperty(name = "BACK_IN_OUT")
+    public static native EasingFunction BACK_IN_OUT();
 
-  /**
-   * Bounce in.
-   */
-  @JsProperty(name = "BOUNCE_IN")
-  public static native EasingFunction BOUNCE_IN();
+    /**
+     * Back out.
+     */
+    @JsProperty(name = "BACK_OUT")
+    public static native EasingFunction BACK_OUT();
 
-  /**
-   * Bounce in then out.
-   */
-  @JsProperty(name = "BOUNCE_IN_OUT")
-  public static native EasingFunction BOUNCE_IN_OUT();
+    /**
+     * Bounce in.
+     */
+    @JsProperty(name = "BOUNCE_IN")
+    public static native EasingFunction BOUNCE_IN();
 
-  /**
-   * Bounce out.
-   */
-  @JsProperty(name = "BOUNCE_OUT")
-  public static native EasingFunction BOUNCE_OUT();
+    /**
+     * Bounce in then out.
+     */
+    @JsProperty(name = "BOUNCE_IN_OUT")
+    public static native EasingFunction BOUNCE_IN_OUT();
 
-  /**
-   * Circular in.
-   */
-  @JsProperty(name = "CIRCULAR_IN")
-  public static native EasingFunction CIRCULAR_IN();
+    /**
+     * Bounce out.
+     */
+    @JsProperty(name = "BOUNCE_OUT")
+    public static native EasingFunction BOUNCE_OUT();
 
-  /**
-   * Circular in then out.
-   */
-  @JsProperty(name = "CIRCULAR_IN_OUT")
-  public static native EasingFunction CIRCULAR_IN_OUT();
+    /**
+     * Circular in.
+     */
+    @JsProperty(name = "CIRCULAR_IN")
+    public static native EasingFunction CIRCULAR_IN();
 
-  /**
-   * Circular out.
-   */
-  @JsProperty(name = "CIRCULAR_OUT")
-  public static native EasingFunction CIRCULAR_OUT();
+    /**
+     * Circular in then out.
+     */
+    @JsProperty(name = "CIRCULAR_IN_OUT")
+    public static native EasingFunction CIRCULAR_IN_OUT();
 
-  /**
-   * Cubic in.
-   */
-  @JsProperty(name = "CUBIC_IN")
-  public static native EasingFunction CUBIC_IN();
+    /**
+     * Circular out.
+     */
+    @JsProperty(name = "CIRCULAR_OUT")
+    public static native EasingFunction CIRCULAR_OUT();
 
-  /**
-   * Cubic in then out.
-   */
-  @JsProperty(name = "CUBIC_IN_OUT")
-  public static native EasingFunction CUBIC_IN_OUT();
+    /**
+     * Cubic in.
+     */
+    @JsProperty(name = "CUBIC_IN")
+    public static native EasingFunction CUBIC_IN();
 
-  /**
-   * Cubic out.
-   */
-  @JsProperty(name = "CUBIC_OUT")
-  public static native EasingFunction CUBIC_OUT();
+    /**
+     * Cubic in then out.
+     */
+    @JsProperty(name = "CUBIC_IN_OUT")
+    public static native EasingFunction CUBIC_IN_OUT();
 
-  /**
-   * Elastic in.
-   */
-  @JsProperty(name = "ELASTIC_IN")
-  public static native EasingFunction ELASTIC_IN();
+    /**
+     * Cubic out.
+     */
+    @JsProperty(name = "CUBIC_OUT")
+    public static native EasingFunction CUBIC_OUT();
 
-  /**
-   * Elastic in then out.
-   */
-  @JsProperty(name = "ELASTIC_IN_OUT")
-  public static native EasingFunction ELASTIC_IN_OUT();
+    /**
+     * Elastic in.
+     */
+    @JsProperty(name = "ELASTIC_IN")
+    public static native EasingFunction ELASTIC_IN();
 
-  /**
-   * Elastic out.
-   */
-  @JsProperty(name = "ELASTIC_OUT")
-  public static native EasingFunction ELASTIC_OUT();
+    /**
+     * Elastic in then out.
+     */
+    @JsProperty(name = "ELASTIC_IN_OUT")
+    public static native EasingFunction ELASTIC_IN_OUT();
 
-  /**
-   * Exponential in.
-   */
-  @JsProperty(name = "EXPONENTIAL_IN")
-  public static native EasingFunction EXPONENTIAL_IN();
+    /**
+     * Elastic out.
+     */
+    @JsProperty(name = "ELASTIC_OUT")
+    public static native EasingFunction ELASTIC_OUT();
 
-  /**
-   * Exponential in then out.
-   */
-  @JsProperty(name = "EXPONENTIAL_IN_OUT")
-  public static native EasingFunction EXPONENTIAL_IN_OUT();
+    /**
+     * Exponential in.
+     */
+    @JsProperty(name = "EXPONENTIAL_IN")
+    public static native EasingFunction EXPONENTIAL_IN();
 
-  /**
-   * Exponential out.
-   */
-  @JsProperty(name = "EXPONENTIAL_OUT")
-  public static native EasingFunction EXPONENTIAL_OUT();
+    /**
+     * Exponential in then out.
+     */
+    @JsProperty(name = "EXPONENTIAL_IN_OUT")
+    public static native EasingFunction EXPONENTIAL_IN_OUT();
 
-  /**
-   * Linear easing.
-   */
-  @JsProperty(name = "LINEAR_NONE")
-  public static native EasingFunction LINEAR_NONE();
+    /**
+     * Exponential out.
+     */
+    @JsProperty(name = "EXPONENTIAL_OUT")
+    public static native EasingFunction EXPONENTIAL_OUT();
 
-  /**
-   * Quadratic in.
-   */
-  @JsProperty(name = "QUADRACTIC_IN")
-  public static native EasingFunction QUADRACTIC_IN();
+    /**
+     * Linear easing.
+     */
+    @JsProperty(name = "LINEAR_NONE")
+    public static native EasingFunction LINEAR_NONE();
 
-  /**
-   * Quadratic in then out.
-   */
-  @JsProperty(name = "QUADRACTIC_IN_OUT")
-  public static native EasingFunction QUADRACTIC_IN_OUT();
+    /**
+     * Quadratic in.
+     */
+    @JsProperty(name = "QUADRATIC_IN")
+    public static native EasingFunction QUADRATIC_IN();
 
-  /**
-   * Quadratic out.
-   */
-  @JsProperty(name = "QUADRACTIC_OUT")
-  public static native EasingFunction QUADRACTIC_OUT();
+    /**
+     * Quadratic in then out.
+     */
+    @JsProperty(name = "QUADRATIC_IN_OUT")
+    public static native EasingFunction QUADRATIC_IN_OUT();
 
-  /**
-   * Quartic in.
-   */
-  @JsProperty(name = "QUARTIC_IN")
-  public static native EasingFunction QUARTIC_IN();
+    /**
+     * Quadratic out.
+     */
+    @JsProperty(name = "QUADRATIC_OUT")
+    public static native EasingFunction QUADRATIC_OUT();
 
-  /**
-   * Quartic in then out.
-   */
-  @JsProperty(name = "QUARTIC_IN_OUT")
-  public static native EasingFunction QUARTIC_IN_OUT();
+    /**
+     * Quartic in.
+     */
+    @JsProperty(name = "QUARTIC_IN")
+    public static native EasingFunction QUARTIC_IN();
 
-  /**
-   * Quartic out.
-   */
-  @JsProperty(name = "QUARTIC_OUT")
-  public static native EasingFunction QUARTIC_OUT();
+    /**
+     * Quartic in then out.
+     */
+    @JsProperty(name = "QUARTIC_IN_OUT")
+    public static native EasingFunction QUARTIC_IN_OUT();
 
-  /**
-   * Quintic in.
-   */
-  @JsProperty(name = "QUINTIC_IN")
-  public static native EasingFunction QUINTIC_IN();
+    /**
+     * Quartic out.
+     */
+    @JsProperty(name = "QUARTIC_OUT")
+    public static native EasingFunction QUARTIC_OUT();
 
-  /**
-   * Quintic in then out.
-   */
-  @JsProperty(name = "QUINTIC_IN_OUT")
-  public static native EasingFunction QUINTIC_IN_OUT();
+    /**
+     * Quintic in.
+     */
+    @JsProperty(name = "QUINTIC_IN")
+    public static native EasingFunction QUINTIC_IN();
 
-  /**
-   * Quintic out.
-   */
-  @JsProperty(name = "QUINTIC_OUT")
-  public static native EasingFunction QUINTIC_OUT();
+    /**
+     * Quintic in then out.
+     */
+    @JsProperty(name = "QUINTIC_IN_OUT")
+    public static native EasingFunction QUINTIC_IN_OUT();
 
-  /**
-   * Sinusoidal in.
-   */
-  @JsProperty(name = "SINUSOIDAL_IN")
-  public static native EasingFunction SINUSOIDAL_IN();
+    /**
+     * Quintic out.
+     */
+    @JsProperty(name = "QUINTIC_OUT")
+    public static native EasingFunction QUINTIC_OUT();
 
-  /**
-   * Sinusoidal in then out.
-   */
-  @JsProperty(name = "SINUSOIDAL_IN_OUT")
-  public static native EasingFunction SINUSOIDAL_IN_OUT();
+    /**
+     * Sinusoidal in.
+     */
+    @JsProperty(name = "SINUSOIDAL_IN")
+    public static native EasingFunction SINUSOIDAL_IN();
 
-  /**
-   * Sinusoidal out.
-   */
-  @JsProperty(name = "SINUSOIDAL_OUT")
-  public static native EasingFunction SINUSOIDAL_OUT();
+    /**
+     * Sinusoidal in then out.
+     */
+    @JsProperty(name = "SINUSOIDAL_IN_OUT")
+    public static native EasingFunction SINUSOIDAL_IN_OUT();
 
-  /**
-   * Easing functions for use with {@link TweenCollection}. These function are
-   * from Tween.js and Robert Penner. See the Tween.js graphs for each function.
-   */
-  @JsConstructor
-  private EasingFunction() {
-  }
+    /**
+     * Sinusoidal out.
+     */
+    @JsProperty(name = "SINUSOIDAL_OUT")
+    public static native EasingFunction SINUSOIDAL_OUT();
 
-  @JsFunction
-  public interface Callback {
-    double function(float time);
-  }
+    @JsFunction
+    public interface Callback {
+        double function(float time);
+    }
 }

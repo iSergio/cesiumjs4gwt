@@ -23,5 +23,5 @@ import jsinterop.annotations.JsFunction;
  */
 @JsFunction
 public interface PromiseCallback<T> {
-  void execute();
+    void execute();
 }

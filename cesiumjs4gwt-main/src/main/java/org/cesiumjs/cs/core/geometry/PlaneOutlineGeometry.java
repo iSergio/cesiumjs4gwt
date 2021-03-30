@@ -16,10 +16,9 @@
 
 package org.cesiumjs.cs.core.geometry;
 
-import org.cesiumjs.cs.core.Packable;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Packable;
 
 /**
  * Describes geometry representing the outline of a plane centered at the
@@ -29,11 +28,11 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "PlaneOutlineGeometry")
 public class PlaneOutlineGeometry extends Geometry implements Packable {
-  /**
-   * Describes geometry representing the outline of a plane centered at the
-   * origin, with a unit width and length.
-   */
-  @JsConstructor
-  public PlaneOutlineGeometry() {
-  }
+    /**
+     * Describes geometry representing the outline of a plane centered at the
+     * origin, with a unit width and length.
+     */
+    @JsConstructor
+    public PlaneOutlineGeometry() {
+    }
 }

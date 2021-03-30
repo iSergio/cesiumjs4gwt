@@ -16,11 +16,10 @@
 
 package org.cesiumjs.cs.datasources.properties;
 
-import org.cesiumjs.cs.core.Cartesian3;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Cartesian3;
 
 /**
  * A {@link Property} which evaluates to a
@@ -31,47 +30,47 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "VelocityVectorProperty")
 public class VelocityVectorProperty<T extends Cartesian3> extends Property<T> {
-  /**
-   * Gets or sets whether the vector produced by this property will be normalized
-   * or not.
-   */
-  @JsProperty
-  public boolean normalize;
-  /**
-   * Gets or sets the position property used to compute the velocity vector.
-   */
-  @JsProperty
-  public Property position;
+    /**
+     * Gets or sets whether the vector produced by this property will be normalized
+     * or not.
+     */
+    @JsProperty
+    public boolean normalize;
+    /**
+     * Gets or sets the position property used to compute the velocity vector.
+     */
+    @JsProperty
+    public Property position;
 
-  /**
-   * A {@link Property} which evaluates to a
-   * {@link org.cesiumjs.cs.core.Cartesian3} vector based on the velocity of the
-   * provided {@link PositionProperty}.
-   */
-  @JsConstructor
-  public VelocityVectorProperty() {
-  }
+    /**
+     * A {@link Property} which evaluates to a
+     * {@link org.cesiumjs.cs.core.Cartesian3} vector based on the velocity of the
+     * provided {@link PositionProperty}.
+     */
+    @JsConstructor
+    public VelocityVectorProperty() {
+    }
 
-  /**
-   * A {@link Property} which evaluates to a
-   * {@link org.cesiumjs.cs.core.Cartesian3} vector based on the velocity of the
-   * provided {@link PositionProperty}.
-   * 
-   * @param position The position property used to compute the velocity.
-   */
-  @JsConstructor
-  public VelocityVectorProperty(Property position) {
-  }
+    /**
+     * A {@link Property} which evaluates to a
+     * {@link org.cesiumjs.cs.core.Cartesian3} vector based on the velocity of the
+     * provided {@link PositionProperty}.
+     *
+     * @param position The position property used to compute the velocity.
+     */
+    @JsConstructor
+    public VelocityVectorProperty(Property position) {
+    }
 
-  /**
-   * A {@link Property} which evaluates to a
-   * {@link org.cesiumjs.cs.core.Cartesian3} vector based on the velocity of the
-   * provided {@link PositionProperty}.
-   * 
-   * @param position  The position property used to compute the velocity.
-   * @param normalize Whether to normalize the computed velocity vector.
-   */
-  @JsConstructor
-  public VelocityVectorProperty(Property position, boolean normalize) {
-  }
+    /**
+     * A {@link Property} which evaluates to a
+     * {@link org.cesiumjs.cs.core.Cartesian3} vector based on the velocity of the
+     * provided {@link PositionProperty}.
+     *
+     * @param position  The position property used to compute the velocity.
+     * @param normalize Whether to normalize the computed velocity vector.
+     */
+    @JsConstructor
+    public VelocityVectorProperty(Property position, boolean normalize) {
+    }
 }

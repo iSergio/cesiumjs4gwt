@@ -27,30 +27,30 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "RequestType")
 public class RequestType {
-  /**
-   * Imagery request.
-   */
-  @JsProperty(name = "IMAGERY")
-  public static native Number IMAGERY();
+    private RequestType() {
+    }
 
-  /**
-   * Other request.
-   */
-  @JsProperty(name = "OTHER")
-  public static native Number OTHER();
+    /**
+     * Imagery request.
+     */
+    @JsProperty(name = "IMAGERY")
+    public static native Number IMAGERY();
 
-  /**
-   * Terrain request.
-   */
-  @JsProperty(name = "TERRAIN")
-  public static native Number TERRAIN();
+    /**
+     * Other request.
+     */
+    @JsProperty(name = "OTHER")
+    public static native Number OTHER();
 
-  /**
-   * 3D Tiles request.
-   */
-  @JsProperty(name = "TILES3D")
-  public static native Number TILES3D();
+    /**
+     * Terrain request.
+     */
+    @JsProperty(name = "TERRAIN")
+    public static native Number TERRAIN();
 
-  private RequestType() {
-  }
+    /**
+     * 3D Tiles request.
+     */
+    @JsProperty(name = "TILES3D")
+    public static native Number TILES3D();
 }

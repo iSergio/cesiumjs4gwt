@@ -16,12 +16,11 @@
 
 package org.cesiumjs.cs.core.geometry.options;
 
-import org.cesiumjs.cs.core.VertexFormat;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.VertexFormat;
 
 /**
  * Options for {@link org.cesiumjs.cs.core.geometry.EllipseGeometry}.
@@ -30,22 +29,22 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class EllipseGeometryOptions extends EllipseOutlineGeometryOptions {
-  /**
-   * The rotation of the texture coordinates counter-clockwise from north.
-   * Default: 0.0
-   */
-  @JsProperty
-  public double stRotation;
-  /**
-   * The vertex attributes to be computed. Default: {@link VertexFormat#DEFAULT()}
-   */
-  @JsProperty
-  public VertexFormat vertexFormat;
+    /**
+     * The rotation of the texture coordinates counter-clockwise from north.
+     * Default: 0.0
+     */
+    @JsProperty
+    public double stRotation;
+    /**
+     * The vertex attributes to be computed. Default: {@link VertexFormat#DEFAULT()}
+     */
+    @JsProperty
+    public VertexFormat vertexFormat;
 
-  /**
-   * Options for {@link org.cesiumjs.cs.core.geometry.EllipseGeometry}
-   */
-  @JsConstructor
-  public EllipseGeometryOptions() {
-  }
+    /**
+     * Options for {@link org.cesiumjs.cs.core.geometry.EllipseGeometry}
+     */
+    @JsConstructor
+    public EllipseGeometryOptions() {
+    }
 }

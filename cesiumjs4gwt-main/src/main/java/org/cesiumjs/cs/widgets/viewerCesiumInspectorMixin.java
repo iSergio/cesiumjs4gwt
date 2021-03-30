@@ -24,13 +24,13 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true)
 public class viewerCesiumInspectorMixin {
-  /**
-   * A mixin which adds the CesiumInspector widget to the Viewer widget. Rather
-   * than being called directly, this function is normally passed as a parameter
-   * to {@link Viewer#extend}, as shown in the example below.
-   * 
-   * @return viewerCesiumInspectorMixin instance function
-   */
-  @JsProperty(namespace = "Cesium", name = "viewerCesiumInspectorMixin")
-  public static native Object instance();
+    /**
+     * A mixin which adds the CesiumInspector widget to the Viewer widget. Rather
+     * than being called directly, this function is normally passed as a parameter
+     * to {@link Viewer#extend}, as shown in the example below.
+     *
+     * @return viewerCesiumInspectorMixin instance function
+     */
+    @JsProperty(namespace = "Cesium", name = "viewerCesiumInspectorMixin")
+    public static native Object instance();
 }

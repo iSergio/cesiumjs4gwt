@@ -14,37 +14,36 @@
  */
 package org.cesiumjs.cs.scene;
 
-import org.cesiumjs.cs.scene.options.DebugCameraPrimitiveOptions;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.scene.options.DebugCameraPrimitiveOptions;
 
 /**
  * Draws the outline of the camera's view frustum.
  */
 @JsType(isNative = true, namespace = "Cesium", name = "DebugCameraPrimitive")
 public class DebugCameraPrimitive extends Primitive {
-  /**
-   * User-defined value returned when the primitive is picked. Default: undefined
-   * 
-   * @see {org.cesiumjs.cs.scene.Scene#pick}
-   */
-  @JsProperty
-  public Object id;
+    /**
+     * User-defined value returned when the primitive is picked. Default: undefined
+     *
+     * @see org.cesiumjs.cs.scene.Scene#pick
+     */
+    @JsProperty
+    public Object id;
 
-  /**
-   * Determines if this primitive will be shown. Default: true
-   */
-  @JsProperty
-  public boolean show;
+    /**
+     * Determines if this primitive will be shown. Default: true
+     */
+    @JsProperty
+    public boolean show;
 
-  /**
-   * Draws the outline of the camera's view frustum.
-   * 
-   * @param options object {@see }
-   */
-  @JsConstructor
-  public DebugCameraPrimitive(DebugCameraPrimitiveOptions options) {
-  }
+    /**
+     * Draws the outline of the camera's view frustum.
+     *
+     * @param options object
+     */
+    @JsConstructor
+    public DebugCameraPrimitive(DebugCameraPrimitiveOptions options) {
+    }
 }

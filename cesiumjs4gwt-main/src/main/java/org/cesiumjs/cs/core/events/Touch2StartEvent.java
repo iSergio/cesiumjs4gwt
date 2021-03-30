@@ -16,20 +16,19 @@
 
 package org.cesiumjs.cs.core.events;
 
-import org.cesiumjs.cs.core.Cartesian2;
-
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Cartesian2;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class Touch2StartEvent {
-  @JsProperty
-  public Cartesian2 position1;
+    @JsProperty
+    public Cartesian2 position1;
 
-  @JsProperty
-  public Cartesian2 position2;
+    @JsProperty
+    public Cartesian2 position2;
 }

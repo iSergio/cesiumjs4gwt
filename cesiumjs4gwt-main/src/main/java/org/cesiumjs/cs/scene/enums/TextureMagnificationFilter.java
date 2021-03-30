@@ -24,26 +24,26 @@ import jsinterop.annotations.JsType;
  * Enumerates all possible filters used when magnifying WebGL textures, which
  * takes places when zooming into imagery. Provides the possible values for the
  * {@link org.cesiumjs.cs.scene.ImageryLayer#magnificationFilter} property.
- * 
+ *
+ * @author Serge Silaev aka iSergio
  * @see TextureMinificationFilter
  * @see org.cesiumjs.cs.scene.ImageryLayer#magnificationFilter
- * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "TextureMagnificationFilter")
 public class TextureMagnificationFilter {
-  /**
-   * Bi-linear interpolation of image pixels to texture.
-   */
-  @JsProperty(name = "LINEAR")
-  public static native Number LINEAR();
+    @JsConstructor
+    private TextureMagnificationFilter() {
+    }
 
-  /**
-   * Nearest neighbor sampling of image pixels to texture.
-   */
-  @JsProperty(name = "NEAREST")
-  public static native Number NEAREST();
+    /**
+     * Bi-linear interpolation of image pixels to texture.
+     */
+    @JsProperty(name = "LINEAR")
+    public static native Number LINEAR();
 
-  @JsConstructor
-  private TextureMagnificationFilter() {
-  }
+    /**
+     * Nearest neighbor sampling of image pixels to texture.
+     */
+    @JsProperty(name = "NEAREST")
+    public static native Number NEAREST();
 }

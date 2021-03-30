@@ -16,11 +16,10 @@
 
 package org.cesiumjs.cs.widgets;
 
-import org.cesiumjs.cs.core.Event;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Event;
 
 /**
  * A Command is a function with an extra canExecute observable property to
@@ -34,30 +33,30 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "Command")
 public abstract class Command {
-  /**
-   * Gets an event which is raised after the command executes, the event is raised
-   * with the return value of the command as its only parameter. Default:
-   * undefined
-   */
-  @JsProperty
-  public Event afterExecute;
-  /**
-   * Gets an event which is raised before the command executes, the event is
-   * raised with an object containing two properties: a cancel property, which if
-   * set to false by the listener will prevent the command from being executed,
-   * and an args property, which is the array of arguments being passed to the
-   * command. Default: undefined
-   */
-  @JsProperty
-  public Event beforeExecute;
-  /**
-   * Gets whether this command can currently be executed. This property is
-   * observable. Default: undefined
-   */
-  @JsProperty
-  public boolean canExecute;
+    /**
+     * Gets an event which is raised after the command executes, the event is raised
+     * with the return value of the command as its only parameter. Default:
+     * undefined
+     */
+    @JsProperty
+    public Event afterExecute;
+    /**
+     * Gets an event which is raised before the command executes, the event is
+     * raised with an object containing two properties: a cancel property, which if
+     * set to false by the listener will prevent the command from being executed,
+     * and an args property, which is the array of arguments being passed to the
+     * command. Default: undefined
+     */
+    @JsProperty
+    public Event beforeExecute;
+    /**
+     * Gets whether this command can currently be executed. This property is
+     * observable. Default: undefined
+     */
+    @JsProperty
+    public boolean canExecute;
 
-  @JsConstructor
-  private Command() {
-  }
+    @JsConstructor
+    private Command() {
+    }
 }

@@ -16,12 +16,11 @@
 
 package org.cesiumjs.cs.core.options;
 
-import org.cesiumjs.cs.core.Resource;
-
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import net.sourceforge.htmlunit.corejs.javascript.annotations.JSConstructor;
+import org.cesiumjs.cs.core.Resource;
 
 /**
  * Options for
@@ -32,25 +31,25 @@ import net.sourceforge.htmlunit.corejs.javascript.annotations.JSConstructor;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class FromAssetIdOptions {
-  /**
-   * The access token to use. Default:
-   * {@link org.cesiumjs.cs.core.Ion#defaultAccessToken}.
-   */
-  @JsProperty
-  public String accessToken;
-  /**
-   * The resource to the Cesium ion API server. Default:
-   * {@link org.cesiumjs.cs.core.Ion#defaultServer}.
-   */
-  @JsProperty
-  public String server;
-  /**
-   * The resource to the Cesium ion API server.
-   */
-  @JsProperty(name = "server")
-  public Resource serverResource;
+    /**
+     * The access token to use. Default:
+     * {@link org.cesiumjs.cs.core.Ion#defaultAccessToken}.
+     */
+    @JsProperty
+    public String accessToken;
+    /**
+     * The resource to the Cesium ion API server. Default:
+     * {@link org.cesiumjs.cs.core.Ion#defaultServer}.
+     */
+    @JsProperty
+    public String server;
+    /**
+     * The resource to the Cesium ion API server.
+     */
+    @JsProperty(name = "server")
+    public Resource serverResource;
 
-  @JSConstructor
-  public FromAssetIdOptions() {
-  }
+    @JSConstructor
+    public FromAssetIdOptions() {
+    }
 }

@@ -16,53 +16,52 @@
 
 package org.cesiumjs.cs.datasources.visualizer;
 
-import org.cesiumjs.cs.collections.EntityCollection;
-import org.cesiumjs.cs.core.JulianDate;
-import org.cesiumjs.cs.datasources.EntityCluster;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.collections.EntityCollection;
+import org.cesiumjs.cs.core.JulianDate;
+import org.cesiumjs.cs.datasources.EntityCluster;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "ModelVisualizer")
 public class ModelVisualizer implements Visualizer {
-  /**
-   * A {@link Visualizer} which maps
-   * {@link org.cesiumjs.cs.datasources.Entity#model} to a Model.
-   * 
-   * @param entityCluster    The entity cluster to manage the collection of
-   *                         billboards and optionally cluster with other
-   *                         entities.
-   * @param entityCollection The entityCollection to visualize.
-   */
-  @JsConstructor
-  public ModelVisualizer(EntityCluster entityCluster, EntityCollection entityCollection) {
-  }
+    /**
+     * A {@link Visualizer} which maps
+     * {@link org.cesiumjs.cs.datasources.Entity#model} to a Model.
+     *
+     * @param entityCluster    The entity cluster to manage the collection of
+     *                         billboards and optionally cluster with other
+     *                         entities.
+     * @param entityCollection The entityCollection to visualize.
+     */
+    @JsConstructor
+    public ModelVisualizer(EntityCluster entityCluster, EntityCollection entityCollection) {
+    }
 
-  /**
-   * Removes and destroys all primitives created by this instance.
-   */
-  @JsMethod
-  public native void destroy();
+    /**
+     * Removes and destroys all primitives created by this instance.
+     */
+    @JsMethod
+    public native void destroy();
 
-  /**
-   * Returns true if this object was destroyed; otherwise, false.
-   * 
-   * @return True if this object was destroyed; otherwise, false.
-   */
-  @JsMethod
-  public native boolean isDestroyed();
+    /**
+     * Returns true if this object was destroyed; otherwise, false.
+     *
+     * @return True if this object was destroyed; otherwise, false.
+     */
+    @JsMethod
+    public native boolean isDestroyed();
 
-  /**
-   * Updates the primitives created by this visualizer to match their Entity
-   * counterpart at the given time.
-   * 
-   * @param time The time to update to.
-   * @return This function always returns true.
-   */
-  @JsMethod
-  public native boolean update(JulianDate time);
+    /**
+     * Updates the primitives created by this visualizer to match their Entity
+     * counterpart at the given time.
+     *
+     * @param time The time to update to.
+     * @return This function always returns true.
+     */
+    @JsMethod
+    public native boolean update(JulianDate time);
 }

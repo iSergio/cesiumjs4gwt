@@ -16,46 +16,45 @@
 
 package org.cesiumjs.cs.scene.apperances;
 
-import org.cesiumjs.cs.scene.apperances.options.DebugAppearanceOptions;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.scene.apperances.options.DebugAppearanceOptions;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "DebugAppearance")
 public class DebugAppearance extends Appearance {
-  /**
-   * The name of the attribute being visualized.
-   */
-  @JsProperty(name = "attributeName")
-  public native String attributeName();
+    /**
+     * Visualizes a vertex attribute by displaying it as a color for debugging.
+     * Components for well-known unit-length vectors, i.e., normal, binormal, and
+     * tangent, are scaled and biased from [-1.0, 1.0] to (-1.0, 1.0).
+     */
+    @JsConstructor
+    public DebugAppearance() {
+    }
 
-  /**
-   * The GLSL datatype of the attribute being visualized.
-   */
-  @JsProperty(name = "glslDatatype")
-  public native String glslDatatype();
+    /**
+     * Visualizes a vertex attribute by displaying it as a color for debugging.
+     * Components for well-known unit-length vectors, i.e., normal, binormal, and
+     * tangent, are scaled and biased from [-1.0, 1.0] to (-1.0, 1.0).
+     *
+     * @param options {@link DebugAppearanceOptions}
+     */
+    @JsConstructor
+    public DebugAppearance(DebugAppearanceOptions options) {
+    }
 
-  /**
-   * Visualizes a vertex attribute by displaying it as a color for debugging.
-   * Components for well-known unit-length vectors, i.e., normal, binormal, and
-   * tangent, are scaled and biased from [-1.0, 1.0] to (-1.0, 1.0).
-   */
-  @JsConstructor
-  public DebugAppearance() {
-  }
+    /**
+     * The name of the attribute being visualized.
+     */
+    @JsProperty(name = "attributeName")
+    public native String attributeName();
 
-  /**
-   * Visualizes a vertex attribute by displaying it as a color for debugging.
-   * Components for well-known unit-length vectors, i.e., normal, binormal, and
-   * tangent, are scaled and biased from [-1.0, 1.0] to (-1.0, 1.0).
-   * 
-   * @param options {@link DebugAppearanceOptions}
-   */
-  @JsConstructor
-  public DebugAppearance(DebugAppearanceOptions options) {
-  }
+    /**
+     * The GLSL datatype of the attribute being visualized.
+     */
+    @JsProperty(name = "glslDatatype")
+    public native String glslDatatype();
 }

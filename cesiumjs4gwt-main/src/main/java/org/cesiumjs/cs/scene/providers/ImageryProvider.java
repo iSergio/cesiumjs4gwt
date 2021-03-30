@@ -21,7 +21,8 @@ import jsinterop.annotations.JsType;
 /**
  * Provides imagery to be displayed on the surface of an ellipsoid. This type
  * describes an interface and is not intended to be instantiated directly.
- * 
+ *
+ * @author Serge Silaev aka iSergio
  * @see ArcGisMapServerImageryProvider
  * @see SingleTileImageryProvider
  * @see BingMapsImageryProvider
@@ -29,7 +30,6 @@ import jsinterop.annotations.JsType;
  * @see MapboxImageryProvider
  * @see WebMapTileServiceImageryProvider
  * @see WebMapServiceImageryProvider
- * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "ImageryProvider")
 public interface ImageryProvider {

@@ -25,7 +25,7 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class GeographicTilingSchemeOptions extends TilingSchemeOptions {
-  @JsConstructor
-  public GeographicTilingSchemeOptions() {
-  }
+    @JsConstructor
+    public GeographicTilingSchemeOptions() {
+    }
 }

@@ -16,11 +16,10 @@
 
 package org.cesiumjs.cs.core.geometry.options;
 
-import org.cesiumjs.cs.core.Cartesian3;
-
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Cartesian3;
 
 /**
  * Options for {@link org.cesiumjs.cs.core.geometry.BoxOutlineGeometry}.
@@ -29,20 +28,20 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class BoxOutlineGeometryOptions {
-  /**
-   * The minimum x, y, and z coordinates of the box.
-   */
-  @JsProperty
-  public Cartesian3 minimum;
-  /**
-   * The maximum x, y, and z coordinates of the box.
-   */
-  @JsProperty
-  public Cartesian3 maximum;
-  /**
-   * The width, depth, and height of the box stored in the x, y, and z coordinates
-   * of the Cartesian3, respectively.
-   */
-  @JsProperty
-  public Cartesian3 dimensions;
+    /**
+     * The minimum x, y, and z coordinates of the box.
+     */
+    @JsProperty
+    public Cartesian3 minimum;
+    /**
+     * The maximum x, y, and z coordinates of the box.
+     */
+    @JsProperty
+    public Cartesian3 maximum;
+    /**
+     * The width, depth, and height of the box stored in the x, y, and z coordinates
+     * of the Cartesian3, respectively.
+     */
+    @JsProperty
+    public Cartesian3 dimensions;
 }

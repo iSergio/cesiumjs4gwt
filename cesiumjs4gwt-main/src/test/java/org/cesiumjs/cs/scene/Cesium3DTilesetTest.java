@@ -18,66 +18,33 @@ package org.cesiumjs.cs.scene;
 
 import org.cesiumjs.cs.BaseTestCase;
 import org.cesiumjs.cs.core.IonResource;
-import org.cesiumjs.cs.promise.Fulfill;
-import org.cesiumjs.cs.promise.Promise;
-import org.cesiumjs.cs.promise.Reject;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 public class Cesium3DTilesetTest extends BaseTestCase {
 
-  public void testCreateResource() {
-    delayTestFinish(10_000);
+    public void testCreateResource() {
+        delayTestFinish(10_000);
 
-    super.beginTest(new Test() {
-      @Override
-      public void execute() {
-        Promise<IonResource, Void> promise = IonResource.fromAssetId(3883);
-        promise.then(new Fulfill<IonResource>() {
-          @Override
-          public void onFulfilled(IonResource resource) {
-            Cesium3DTileset tileset = Cesium3DTileset.create(resource);
-            tileset.readyPromise().then(new Fulfill<Cesium3DTileset>() {
-              @Override
-              public void onFulfilled(Cesium3DTileset value) {
-                assertNotNull(value);
-                finishTest();
-              }
-            }, new Reject<Void>() {
-              @Override
-              public void onRejected(Void value) {
-                finishTest();
-              }
-            });
-          }
-        });
-      }
-    });
-  }
+        super.beginTest(() -> IonResource.fromAssetId(3883)
+                .then(resource -> Cesium3DTileset.create(resource).readyPromise()
+                        .then(tileSet -> {
+                                assertNotNull(tileSet);
+                                finishTest();
+                                }, value -> fail()))
+        );
+    }
 
-  public void testCreatePromise() {
-    delayTestFinish(10_000);
+    public void testCreatePromise() {
+        delayTestFinish(10_000);
 
-    super.beginTest(new Test() {
-      @Override
-      public void execute() {
-        Promise<IonResource, Void> promise = IonResource.fromAssetId(3883);
-        Cesium3DTileset tileset = Cesium3DTileset.create(promise);
-        tileset.readyPromise().then(new Fulfill<Cesium3DTileset>() {
-          @Override
-          public void onFulfilled(Cesium3DTileset value) {
-            assertNotNull(value);
-            finishTest();
-          }
-        }, new Reject<Void>() {
-          @Override
-          public void onRejected(Void value) {
-            assertTrue(false);
-            finishTest();
-          }
-        });
-      }
-    });
-  }
+        super.beginTest(() -> IonResource.fromAssetId(3883)
+                .then(resource -> Cesium3DTileset.create(resource).readyPromise()
+                        .then(tileSet -> {
+                            assertNotNull(tileSet);
+                            finishTest();
+                            }, value -> fail()))
+        );
+    }
 }

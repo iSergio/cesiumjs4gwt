@@ -16,8 +16,6 @@
 
 package org.cleanlogic.cesiumjs4gwt.showcase.examples;
 
-import javax.inject.Inject;
-
 import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.core.client.GWT;
@@ -25,7 +23,6 @@ import com.google.gwt.dom.client.CanvasElement;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.HTML;
-
 import org.cesiumjs.cs.Cesium;
 import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.Color;
@@ -43,144 +40,146 @@ import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cleanlogic.cesiumjs4gwt.showcase.basic.AbstractExample;
 import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ShowcaseExampleStore;
 
+import javax.inject.Inject;
+
 /**
  * @author Serge Silaev aka iSergio
  */
 public class LoadImages extends AbstractExample {
-  private ViewerPanel csVPanel;
+    private ViewerPanel csVPanel;
 
-  @Inject
-  public LoadImages(ShowcaseExampleStore store) {
-    super("LoadImages", "Load images into base64 string and set as image on BillboardGraphics",
-        new String[] { "Showcase", "Cesium", "3d", "Base64" }, store);
-  }
+    @Inject
+    public LoadImages(ShowcaseExampleStore store) {
+        super("LoadImages", "Load images into base64 string and set as image on BillboardGraphics",
+                new String[]{"Showcase", "Cesium", "3d", "Base64"}, store);
+    }
 
-  @Override
-  public void buildPanel() {
-    csVPanel = new ViewerPanel();
+    @Override
+    public void buildPanel() {
+        csVPanel = new ViewerPanel();
 
-    AbsolutePanel aPanel = new AbsolutePanel();
-    aPanel.add(csVPanel);
+        AbsolutePanel aPanel = new AbsolutePanel();
+        aPanel.add(csVPanel);
 
-    org.cesiumjs.cs.core.PinBuilder pinBuilder = new org.cesiumjs.cs.core.PinBuilder();
-    pinBuilder.fromUrlPromise(GWT.getModuleBaseURL() + "images/Cesium_Logo_Color_Overlay.png",
-        Color.WHITE().withAlpha(0.0f), 256).then(new Fulfill<CanvasElement>() {
-          @Override
-          public void onFulfilled(CanvasElement value) {
-            BillboardGraphicsOptions billboardOptions = new BillboardGraphicsOptions();
-            billboardOptions.image = new ConstantProperty<>(value.toDataUrl());
-            EntityOptions entityOptions = new EntityOptions();
-            entityOptions.name = "Pin billboard through fromUrl";
-            entityOptions.billboard = new BillboardGraphics(billboardOptions);
-            entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(35, 35));
-            csVPanel.getViewer().entities().add(new Entity(entityOptions));
-          }
+        org.cesiumjs.cs.core.PinBuilder pinBuilder = new org.cesiumjs.cs.core.PinBuilder();
+        pinBuilder.fromUrlPromise(GWT.getModuleBaseURL() + "images/Cesium_Logo_Color_Overlay.png",
+                Color.WHITE().withAlpha(0.0f), 256).then(new Fulfill<CanvasElement>() {
+            @Override
+            public void onFulfilled(CanvasElement value) {
+                BillboardGraphicsOptions billboardOptions = new BillboardGraphicsOptions();
+                billboardOptions.image = new ConstantProperty<>(value.toDataUrl());
+                EntityOptions entityOptions = new EntityOptions();
+                entityOptions.name = "Pin billboard through fromUrl";
+                entityOptions.billboard = new BillboardGraphics(billboardOptions);
+                entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(35, 35));
+                csVPanel.getViewer().entities().add(new Entity(entityOptions));
+            }
         });
 
-    Resource.fetchImage((ResourceImageOptions) ResourceImageOptions
-        .create(GWT.getModuleBaseURL() + "images/Cesium_Logo_Color_Overlay.png")).then(new Fulfill<JsImage>() {
-          @Override
-          public void onFulfilled(JsImage value) {
-            Canvas canvas = Canvas.createIfSupported();
-            canvas.setWidth(value.width + "px");
-            canvas.setHeight(value.height + "px");
-            Context2d context = canvas.getContext2d();
-            context.scale(0.1, 0.1);
-            context.drawImage((ImageElement) (Object) value, 0, 0);
+        Resource.fetchImage((ResourceImageOptions) ResourceImageOptions
+                .create(GWT.getModuleBaseURL() + "images/Cesium_Logo_Color_Overlay.png")).then(new Fulfill<JsImage>() {
+            @Override
+            public void onFulfilled(JsImage value) {
+                Canvas canvas = Canvas.createIfSupported();
+                canvas.setWidth(value.width + "px");
+                canvas.setHeight(value.height + "px");
+                Context2d context = canvas.getContext2d();
+                context.scale(0.1, 0.1);
+                context.drawImage((ImageElement) (Object) value, 0, 0);
 
-            BillboardGraphicsOptions billboardOptions = new BillboardGraphicsOptions();
-            billboardOptions.image = new ConstantProperty<>(canvas.toDataUrl());
-            EntityOptions entityOptions = new EntityOptions();
-            entityOptions.name = "Pin billboard through canvas";
-            entityOptions.billboard = new BillboardGraphics(billboardOptions);
-            entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(45, 45));
-            csVPanel.getViewer().entities().add(new Entity(entityOptions));
-          }
+                BillboardGraphicsOptions billboardOptions = new BillboardGraphicsOptions();
+                billboardOptions.image = new ConstantProperty<>(canvas.toDataUrl());
+                EntityOptions entityOptions = new EntityOptions();
+                entityOptions.name = "Pin billboard through canvas";
+                entityOptions.billboard = new BillboardGraphics(billboardOptions);
+                entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(45, 45));
+                csVPanel.getViewer().entities().add(new Entity(entityOptions));
+            }
         });
 
-    // CORS not loaded
-    Resource
-        .fetchImage(
-            (ResourceImageOptions) ResourceImageOptions.create("https://www.linux.org.ru/tango/img/games-logo.png"))
-        .then(new Fulfill<JsImage>() {
-          @Override
-          public void onFulfilled(JsImage value) {
-            Canvas canvas = Canvas.createIfSupported();
-            canvas.setWidth(value.width + "px");
-            canvas.setHeight(value.height + "px");
-            Context2d context = canvas.getContext2d();
-            context.scale(0.1, 0.1);
-            context.drawImage((ImageElement) (Object) value, 0, 0);
+        // CORS not loaded
+        Resource
+                .fetchImage(
+                        (ResourceImageOptions) ResourceImageOptions.create("https://www.linux.org.ru/tango/img/games-logo.png"))
+                .then(new Fulfill<JsImage>() {
+                    @Override
+                    public void onFulfilled(JsImage value) {
+                        Canvas canvas = Canvas.createIfSupported();
+                        canvas.setWidth(value.width + "px");
+                        canvas.setHeight(value.height + "px");
+                        Context2d context = canvas.getContext2d();
+                        context.scale(0.1, 0.1);
+                        context.drawImage((ImageElement) (Object) value, 0, 0);
 
-            BillboardGraphicsOptions billboardOptions = new BillboardGraphicsOptions();
-            billboardOptions.image = new ConstantProperty<>(canvas.toDataUrl());
-            EntityOptions entityOptions = new EntityOptions();
-            entityOptions.name = "Pin billboard CORS";
-            entityOptions.billboard = new BillboardGraphics(billboardOptions);
-            entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(55, 55));
-            csVPanel.getViewer().entities().add(new Entity(entityOptions));
-          }
-        });
+                        BillboardGraphicsOptions billboardOptions = new BillboardGraphicsOptions();
+                        billboardOptions.image = new ConstantProperty<>(canvas.toDataUrl());
+                        EntityOptions entityOptions = new EntityOptions();
+                        entityOptions.name = "Pin billboard CORS";
+                        entityOptions.billboard = new BillboardGraphics(billboardOptions);
+                        entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(55, 55));
+                        csVPanel.getViewer().entities().add(new Entity(entityOptions));
+                    }
+                });
 
-    // Cors not loaded!
-    final JsImage imageAmz = new JsImage();
-    imageAmz.crossOrigin = "*";
-    imageAmz.onload = new JsImage.Listener() {
-      @Override
-      public void function() {
-        Cesium.log(imageAmz);
-        /*
-         * Canvas canvas = Canvas.createIfSupported(); canvas.setWidth(imageAmz.width +
-         * "px"); canvas.setHeight(imageAmz.height + "px"); Context2d context =
-         * canvas.getContext2d(); context.scale(0.1, 0.1);
-         * context.drawImage((ImageElement) (Object) imageAmz, 0, 0);
-         */
-        BillboardGraphicsOptions billboardOptions = new BillboardGraphicsOptions();
-        billboardOptions.image = new ConstantProperty<>(imageAmz);
-        // billboardOptions.image = new
-        // ConstantProperty<>(canvas.toDataUrl("image/png"));
-        EntityOptions entityOptions = new EntityOptions();
-        entityOptions.name = "Pin billboard CORS";
-        entityOptions.billboard = new BillboardGraphics(billboardOptions);
-        entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(65, 65));
-        csVPanel.getViewer().entities().add(new Entity(entityOptions));
-      }
-    };
-    imageAmz.src = "https://d1.awsstatic.com/products/cloudfront/cloudfront-100_PoP_600x400.4a1edd6022833c54c41370ad9f615ae818350a23.png";
+        // Cors not loaded!
+        final JsImage imageAmz = new JsImage();
+        imageAmz.crossOrigin = "*";
+        imageAmz.onload = new JsImage.Listener() {
+            @Override
+            public void function() {
+                Cesium.log(imageAmz);
+                /*
+                 * Canvas canvas = Canvas.createIfSupported(); canvas.setWidth(imageAmz.width +
+                 * "px"); canvas.setHeight(imageAmz.height + "px"); Context2d context =
+                 * canvas.getContext2d(); context.scale(0.1, 0.1);
+                 * context.drawImage((ImageElement) (Object) imageAmz, 0, 0);
+                 */
+                BillboardGraphicsOptions billboardOptions = new BillboardGraphicsOptions();
+                billboardOptions.image = new ConstantProperty<>(imageAmz);
+                // billboardOptions.image = new
+                // ConstantProperty<>(canvas.toDataUrl("image/png"));
+                EntityOptions entityOptions = new EntityOptions();
+                entityOptions.name = "Pin billboard CORS";
+                entityOptions.billboard = new BillboardGraphics(billboardOptions);
+                entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(65, 65));
+                csVPanel.getViewer().entities().add(new Entity(entityOptions));
+            }
+        };
+        imageAmz.src = "https://d1.awsstatic.com/products/cloudfront/cloudfront-100_PoP_600x400.4a1edd6022833c54c41370ad9f615ae818350a23.png";
 
-    // Worked, have Access-Control-Allow-Origin: *
-    final JsImage imageWiki = new JsImage();
-    imageWiki.crossOrigin = "*";
-    imageWiki.onload = new JsImage.Listener() {
-      @Override
-      public void function() {
-        Cesium.log(imageWiki);
-        Canvas canvas = Canvas.createIfSupported();
-        canvas.setWidth(imageWiki.width + "px");
-        canvas.setHeight(imageWiki.height + "px");
-        Context2d context = canvas.getContext2d();
-        context.drawImage((ImageElement) (Object) imageWiki, 0, 0);
-        BillboardGraphicsOptions billboardOptions = new BillboardGraphicsOptions();
-        billboardOptions.image = new ConstantProperty<>(canvas.toDataUrl("image/png"));
-        EntityOptions entityOptions = new EntityOptions();
-        entityOptions.name = "Pin billboard CORS";
-        entityOptions.billboard = new BillboardGraphics(billboardOptions);
-        entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(75, 75));
-        csVPanel.getViewer().entities().add(new Entity(entityOptions));
-      }
-    };
-    imageWiki.src = "https://ru.wikipedia.org/static/images/project-logos/ruwiki-2x.png";
+        // Worked, have Access-Control-Allow-Origin: *
+        final JsImage imageWiki = new JsImage();
+        imageWiki.crossOrigin = "*";
+        imageWiki.onload = new JsImage.Listener() {
+            @Override
+            public void function() {
+                Cesium.log(imageWiki);
+                Canvas canvas = Canvas.createIfSupported();
+                canvas.setWidth(imageWiki.width + "px");
+                canvas.setHeight(imageWiki.height + "px");
+                Context2d context = canvas.getContext2d();
+                context.drawImage((ImageElement) (Object) imageWiki, 0, 0);
+                BillboardGraphicsOptions billboardOptions = new BillboardGraphicsOptions();
+                billboardOptions.image = new ConstantProperty<>(canvas.toDataUrl("image/png"));
+                EntityOptions entityOptions = new EntityOptions();
+                entityOptions.name = "Pin billboard CORS";
+                entityOptions.billboard = new BillboardGraphics(billboardOptions);
+                entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(75, 75));
+                csVPanel.getViewer().entities().add(new Entity(entityOptions));
+            }
+        };
+        imageWiki.src = "https://ru.wikipedia.org/static/images/project-logos/ruwiki-2x.png";
 
-    contentPanel.add(new HTML("<p>Cluster labels, billboards and points.</p>"));
-    contentPanel.add(aPanel);
+        contentPanel.add(new HTML("<p>Cluster labels, billboards and points.</p>"));
+        contentPanel.add(aPanel);
 
-    initWidget(contentPanel);
-  }
+        initWidget(contentPanel);
+    }
 
-  @Override
-  public String[] getSourceCodeURLs() {
-    String[] sourceCodeURLs = new String[1];
-    sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "LoadImages.txt";
-    return sourceCodeURLs;
-  }
+    @Override
+    public String[] getSourceCodeURLs() {
+        String[] sourceCodeURLs = new String[1];
+        sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "LoadImages.txt";
+        return sourceCodeURLs;
+    }
 }

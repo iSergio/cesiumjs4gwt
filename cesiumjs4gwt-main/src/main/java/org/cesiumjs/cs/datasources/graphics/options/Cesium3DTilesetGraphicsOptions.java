@@ -15,33 +15,32 @@
 
 package org.cesiumjs.cs.datasources.graphics.options;
 
-import org.cesiumjs.cs.datasources.properties.Property;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.datasources.properties.Property;
 
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class Cesium3DTilesetGraphicsOptions {
-  /**
-   * A boolean Property specifying the visibility of the tileset. Default: true
-   */
-  @JsProperty
-  public Property show;
-  /**
-   * A string or Resource Property specifying the URI of the tileset.
-   */
-  @JsProperty
-  public Property uri;
-  /**
-   * A number or Property specifying the maximum screen space error used to drive
-   * level of detail refinement.
-   */
-  @JsProperty
-  public Property maximumScreenSpaceError;
+    /**
+     * A boolean Property specifying the visibility of the tileset. Default: true
+     */
+    @JsProperty
+    public Property show;
+    /**
+     * A string or Resource Property specifying the URI of the tileset.
+     */
+    @JsProperty
+    public Property uri;
+    /**
+     * A number or Property specifying the maximum screen space error used to drive
+     * level of detail refinement.
+     */
+    @JsProperty
+    public Property maximumScreenSpaceError;
 
-  @JsConstructor
-  public Cesium3DTilesetGraphicsOptions() {
-  }
+    @JsConstructor
+    public Cesium3DTilesetGraphicsOptions() {
+    }
 }

@@ -16,27 +16,26 @@
 
 package org.cesiumjs.cs.core;
 
-import org.cesiumjs.cs.core.options.PolylinePipelineOptions;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.options.PolylinePipelineOptions;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "PolylinePipeline")
 public class PolylinePipeline {
-  @JsConstructor
-  public PolylinePipeline() {
-  }
+    @JsConstructor
+    public PolylinePipeline() {
+    }
 
-  /**
-   * Subdivides polyline and raises all points to the specified height. Returns an
-   * array of new {Cartesian3} positions.
-   * 
-   * @param options {@link PolylinePipelineOptions}
-   * @return A new array of cartesian3 positions that have been subdivided and
-   *         raised to the surface of the ellipsoid.
-   */
-  public static native Cartesian3[] generateCartesianArc(PolylinePipelineOptions options);
+    /**
+     * Subdivides polyline and raises all points to the specified height. Returns an
+     * array of new {Cartesian3} positions.
+     *
+     * @param options {@link PolylinePipelineOptions}
+     * @return A new array of cartesian3 positions that have been subdivided and
+     * raised to the surface of the ellipsoid.
+     */
+    public static native Cartesian3[] generateCartesianArc(PolylinePipelineOptions options);
 }

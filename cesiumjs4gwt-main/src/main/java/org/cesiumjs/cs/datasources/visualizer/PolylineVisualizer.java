@@ -16,13 +16,12 @@
 
 package org.cesiumjs.cs.datasources.visualizer;
 
-import org.cesiumjs.cs.collections.EntityCollection;
-import org.cesiumjs.cs.core.JulianDate;
-import org.cesiumjs.cs.scene.Scene;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.collections.EntityCollection;
+import org.cesiumjs.cs.core.JulianDate;
+import org.cesiumjs.cs.scene.Scene;
 
 /**
  * A visualizer for polylines represented by Primitive instances.
@@ -31,39 +30,39 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "PolylineVisualizer")
 public class PolylineVisualizer implements Visualizer {
-  /**
-   * A visualizer for polylines represented by Primitive instances.
-   * 
-   * @param scene            The scene the primitives will be rendered in.
-   * @param entityCollection The entityCollection to visualize.
-   */
-  @JsConstructor
-  public PolylineVisualizer(Scene scene, EntityCollection entityCollection) {
-  }
+    /**
+     * A visualizer for polylines represented by Primitive instances.
+     *
+     * @param scene            The scene the primitives will be rendered in.
+     * @param entityCollection The entityCollection to visualize.
+     */
+    @JsConstructor
+    public PolylineVisualizer(Scene scene, EntityCollection entityCollection) {
+    }
 
-  /**
-   * Removes and destroys all primitives created by this instance.
-   */
-  @JsMethod
-  public native void destroy();
+    /**
+     * Removes and destroys all primitives created by this instance.
+     */
+    @JsMethod
+    public native void destroy();
 
-  /**
-   * Returns true if this object was destroyed; otherwise, false.
-   * 
-   * @return True if this object was destroyed; otherwise, false.
-   */
-  @JsMethod
-  public native boolean isDestroyed();
+    /**
+     * Returns true if this object was destroyed; otherwise, false.
+     *
+     * @return True if this object was destroyed; otherwise, false.
+     */
+    @JsMethod
+    public native boolean isDestroyed();
 
-  /**
-   * Updates all of the primitives created by this visualizer to match their
-   * Entity counterpart at the given time.
-   * 
-   * @param time The time to update to.
-   * @return True if the visualizer successfully updated to the provided time,
-   *         false if the visualizer is waiting for asynchronous primitives to be
-   *         created.
-   */
-  @JsMethod
-  public native boolean update(JulianDate time);
+    /**
+     * Updates all of the primitives created by this visualizer to match their
+     * Entity counterpart at the given time.
+     *
+     * @param time The time to update to.
+     * @return True if the visualizer successfully updated to the provided time,
+     * false if the visualizer is waiting for asynchronous primitives to be
+     * created.
+     */
+    @JsMethod
+    public native boolean update(JulianDate time);
 }

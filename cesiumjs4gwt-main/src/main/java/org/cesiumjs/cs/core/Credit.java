@@ -17,14 +17,8 @@
 package org.cesiumjs.cs.core;
 
 import com.google.gwt.dom.client.Element;
-
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.options.CreditOptions;
-
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsOverlay;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
 
 /**
  * A credit contains data pertaining to how to display attributions/credits for
@@ -34,134 +28,134 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "Credit")
 public class Credit {
-  /**
-   * Gets the credit element
-   */
-  @JsProperty(name = "element")
-  public native Element element();
+    /**
+     * A credit contains data pertaining to how to display attributions/credits for
+     * certain content on the screen.
+     */
+    @Deprecated
+    @JsConstructor
+    public Credit() {
+    }
 
-  /**
-   * The credit content
-   */
-  @JsProperty(name = "html")
-  public native String html();
+    /**
+     * A credit contains data pertaining to how to display attributions/credits for
+     * certain content on the screen.
+     *
+     * @param options {@link CreditOptions}
+     */
+    @Deprecated
+    @JsConstructor
+    public Credit(CreditOptions options) {
+    }
 
-  /**
-   * The source location for the imagery.
-   */
-  @Deprecated
-  @JsProperty(name = "imageUrl")
-  public native String imageUrl();
+    /**
+     * A credit contains data pertaining to how to display attributions/credits for
+     * certain content on the screen.
+     *
+     * @param html An string representing an html code snippet (can be text only)
+     */
+    @JsConstructor
+    public Credit(String html) {
+    }
 
-  /**
-   * A URL location for the credit hyperlink
-   */
-  @Deprecated
-  @JsProperty(name = "link")
-  public native String link();
+    /**
+     * A credit contains data pertaining to how to display attributions/credits for
+     * certain content on the screen.
+     *
+     * @param html         An string representing an html code snippet (can be text
+     *                     only)
+     * @param showOnScreen If true, the credit will be visible in the main credit
+     *                     container. Otherwise, it will appear in a popover
+     */
+    @JsConstructor
+    public Credit(String html, boolean showOnScreen) {
+    }
 
-  /**
-   * The credit text
-   */
-  @Deprecated
-  @JsProperty(name = "text")
-  public native String text();
+    /**
+     * Simple create {@link Credit} instance.
+     *
+     * @param text {@link CreditOptions#text}.
+     * @return {@link Credit} instance.
+     */
+    @Deprecated
+    @JsOverlay
+    public static Credit create(String text) {
+        CreditOptions options = new CreditOptions();
+        options.text = text;
+        return new Credit(options);
+    }
 
-  /**
-   * A credit contains data pertaining to how to display attributions/credits for
-   * certain content on the screen.
-   */
-  @Deprecated
-  @JsConstructor
-  public Credit() {
-  }
+    /**
+     * Returns true if the credits are equal
+     *
+     * @param left  The first credit
+     * @param right The second credit
+     * @return true if left and right are equal, false otherwise.
+     */
+    @JsMethod
+    public static native boolean equals(Credit left, Credit right);
 
-  /**
-   * A credit contains data pertaining to how to display attributions/credits for
-   * certain content on the screen.
-   * 
-   * @param options {@link CreditOptions}
-   */
-  @Deprecated
-  @JsConstructor
-  public Credit(CreditOptions options) {
-  }
+    /**
+     * Gets the credit element
+     */
+    @JsProperty(name = "element")
+    public native Element element();
 
-  /**
-   * A credit contains data pertaining to how to display attributions/credits for
-   * certain content on the screen.
-   * 
-   * @param html An string representing an html code snippet (can be text only)
-   */
-  @JsConstructor
-  public Credit(String html) {
-  }
+    /**
+     * The credit content
+     */
+    @JsProperty(name = "html")
+    public native String html();
 
-  /**
-   * A credit contains data pertaining to how to display attributions/credits for
-   * certain content on the screen.
-   * 
-   * @param html         An string representing an html code snippet (can be text
-   *                     only)
-   * @param showOnScreen If true, the credit will be visible in the main credit
-   *                     container. Otherwise, it will appear in a popover
-   */
-  @JsConstructor
-  public Credit(String html, boolean showOnScreen) {
-  }
+    /**
+     * The source location for the imagery.
+     */
+    @Deprecated
+    @JsProperty(name = "imageUrl")
+    public native String imageUrl();
 
-  /**
-   * Simple create {@link Credit} instance.
-   * 
-   * @param text {@link CreditOptions#text}.
-   * @return {@link Credit} instance.
-   */
-  @Deprecated
-  @JsOverlay
-  public static Credit create(String text) {
-    CreditOptions options = new CreditOptions();
-    options.text = text;
-    return new Credit(options);
-  }
+    /**
+     * A URL location for the credit hyperlink
+     */
+    @Deprecated
+    @JsProperty(name = "link")
+    public native String link();
 
-  /**
-   * Returns true if the credits are equal
-   * 
-   * @param left  The first credit
-   * @param right The second credit
-   * @return true if left and right are equal, false otherwise.
-   */
-  @JsMethod
-  public static native boolean equals(Credit left, Credit right);
+    /**
+     * The credit text
+     */
+    @Deprecated
+    @JsProperty(name = "text")
+    public native String text();
 
-  /**
-   * Returns true if the credits are equal
-   * 
-   * @param credit The credit to compare to.
-   * @return true if left and right are equal, false otherwise.
-   */
-  @JsMethod
-  public native boolean equals(Credit credit);
+    /**
+     * Returns true if the credits are equal
+     *
+     * @param credit The credit to compare to.
+     * @return true if left and right are equal, false otherwise.
+     */
+    @JsMethod
+    public native boolean equals(Credit credit);
 
-  /**
-   * Returns true if the credit has an imageUrl
-   * 
-   * @deprecated functions have been deprecated and will be removed in Cesium
-   *             1.46.
-   * @return true if the credit has an imageUrl
-   */
-  @Deprecated
-  @JsMethod
-  public native boolean hasImage();
+    /**
+     * Returns true if the credit has an imageUrl
+     *
+     * @return true if the credit has an imageUrl
+     * @deprecated functions have been deprecated and will be removed in Cesium
+     * 1.46.
+     */
+    @Deprecated
+    @JsMethod
+    public native boolean hasImage();
 
-  /**
-   * Returns true if the credit has a link
-   * 
-   * @deprecated functions have been deprecated and will be removed in Cesium
-   *             1.46.
-   * @return true if the credit has a link
-   */
-  @Deprecated
-  @JsMethod
-  public native boolean hasLink();
+    /**
+     * Returns true if the credit has a link
+     *
+     * @return true if the credit has a link
+     * @deprecated functions have been deprecated and will be removed in Cesium
+     * 1.46.
+     */
+    @Deprecated
+    @JsMethod
+    public native boolean hasLink();
 }

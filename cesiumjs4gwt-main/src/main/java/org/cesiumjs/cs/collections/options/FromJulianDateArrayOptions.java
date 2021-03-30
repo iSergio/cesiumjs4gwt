@@ -31,27 +31,27 @@ import org.cesiumjs.cs.core.JulianDate;
 @SuppressWarnings("rawtypes")
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class FromJulianDateArrayOptions extends FromIso8601OptionsAbstract {
-  /**
-   * An array of ISO 8601 dates.
-   */
-  @JsProperty
-  public JulianDate[] julianDates;
+    /**
+     * An array of ISO 8601 dates.
+     */
+    @JsProperty
+    public JulianDate[] julianDates;
 
-  /**
-   * Options for
-   * {@link org.cesiumjs.cs.collections.TimeIntervalCollection#fromJulianDateArray}.
-   */
-  @JsConstructor
-  private FromJulianDateArrayOptions() {
-  }
+    /**
+     * Options for
+     * {@link org.cesiumjs.cs.collections.TimeIntervalCollection#fromJulianDateArray}.
+     */
+    @JsConstructor
+    private FromJulianDateArrayOptions() {
+    }
 
-  /**
-   * Options for
-   * {@link org.cesiumjs.cs.collections.TimeIntervalCollection#fromJulianDateArray}.
-   * 
-   * @param julianDates An array of ISO 8601 dates.
-   */
-  @JsConstructor
-  public FromJulianDateArrayOptions(JulianDate[] julianDates) {
-  }
+    /**
+     * Options for
+     * {@link org.cesiumjs.cs.collections.TimeIntervalCollection#fromJulianDateArray}.
+     *
+     * @param julianDates An array of ISO 8601 dates.
+     */
+    @JsConstructor
+    public FromJulianDateArrayOptions(JulianDate[] julianDates) {
+    }
 }

@@ -16,12 +16,11 @@
 
 package org.cesiumjs.cs.datasources.properties;
 
+import jsinterop.annotations.JsProperty;
 import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.Quaternion;
 import org.cesiumjs.cs.core.TranslationRotationScale;
 import org.cesiumjs.cs.datasources.properties.options.NodeTransformationPropertyOptions;
-
-import jsinterop.annotations.JsProperty;
 
 /**
  * A {@link Property} that produces {@link TranslationRotationScale} data.
@@ -29,25 +28,25 @@ import jsinterop.annotations.JsProperty;
  * @author Serge Silaev aka iSergio
  */
 public class NodeTransformationProperty<T extends TranslationRotationScale> extends Property<T> {
-  /**
-   * Gets or sets the Quaternion Property specifying the (x, y, z, w) rotation to
-   * apply to the node. Default: {@link Quaternion#IDENTITY()}.
-   */
-  @JsProperty
-  public Property<Quaternion> rotation;
-  /**
-   * Gets or sets the Cartesian3 Property specifying the (x, y, z) scaling to
-   * apply to the node. Default: new Cartesian3(1.0, 1.0, 1.0)
-   */
-  @JsProperty
-  public Property<Cartesian3> scale;
-  /**
-   * Gets or sets the Cartesian3 Property specifying the (x, y, z) translation to
-   * apply to the node. Default: {@link Cartesian3#ZERO()}
-   */
-  @JsProperty
-  public Property<Cartesian3> translation;
+    /**
+     * Gets or sets the Quaternion Property specifying the (x, y, z, w) rotation to
+     * apply to the node. Default: {@link Quaternion#IDENTITY()}.
+     */
+    @JsProperty
+    public Property<Quaternion> rotation;
+    /**
+     * Gets or sets the Cartesian3 Property specifying the (x, y, z) scaling to
+     * apply to the node. Default: new Cartesian3(1.0, 1.0, 1.0)
+     */
+    @JsProperty
+    public Property<Cartesian3> scale;
+    /**
+     * Gets or sets the Cartesian3 Property specifying the (x, y, z) translation to
+     * apply to the node. Default: {@link Cartesian3#ZERO()}
+     */
+    @JsProperty
+    public Property<Cartesian3> translation;
 
-  public NodeTransformationProperty(NodeTransformationPropertyOptions options) {
-  }
+    public NodeTransformationProperty(NodeTransformationPropertyOptions options) {
+    }
 }

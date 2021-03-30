@@ -27,18 +27,18 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "Ion")
 public class Ion {
-  /**
-   * Gets or sets the default Cesium ion access token.
-   */
-  @JsProperty
-  public static String defaultAccessToken;
-  /**
-   * Gets or sets the default Cesium ion server. Default: https://api.cesium.com
-   */
-  @JsProperty
-  public static String defaultServer;
+    /**
+     * Gets or sets the default Cesium ion access token.
+     */
+    @JsProperty
+    public static String defaultAccessToken;
+    /**
+     * Gets or sets the default Cesium ion server. Default: https://api.cesium.com
+     */
+    @JsProperty
+    public static String defaultServer;
 
-  @JsConstructor
-  private Ion() {
-  }
+    @JsConstructor
+    private Ion() {
+    }
 }

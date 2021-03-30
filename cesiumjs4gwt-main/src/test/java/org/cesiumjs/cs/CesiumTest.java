@@ -17,52 +17,42 @@
 package org.cesiumjs.cs;
 
 import org.cesiumjs.cs.core.providers.CesiumTerrainProvider;
-import org.cesiumjs.cs.promise.Fulfill;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 public class CesiumTest extends BaseTestCase {
 
-  public void testCreateWorldTerrain() {
-    delayTestFinish(10_000);
+    public void testCreateWorldTerrain() {
+        delayTestFinish(10_000);
 
-    super.beginTest(new Test() {
-      @Override
-      public void execute() {
-        CesiumTerrainProvider terrainProvider = Cesium.createWorldTerrain();
-        assertNotNull(terrainProvider);
-        assertEquals(false, terrainProvider.requestVertexNormals);
-        assertEquals(false, terrainProvider.requestWaterMask);
-        finishTest();
-      }
-    });
-  }
-
-  public void testCreateWorldTerrain1() {
-    delayTestFinish(10_000);
-
-    super.beginTest(new Test() {
-      @Override
-      public void execute() {
-        final Cesium.CreateWorldTerrainOptions options = new Cesium.CreateWorldTerrainOptions();
-        options.requestVertexNormals = true;
-        options.requestWaterMask = true;
-        final CesiumTerrainProvider terrainProvider = Cesium.createWorldTerrain(options);
-        assertNotNull(terrainProvider);
-        assertEquals(options.requestVertexNormals, terrainProvider.requestVertexNormals);
-        assertEquals(options.requestWaterMask, terrainProvider.requestWaterMask);
-        terrainProvider.readyPromise().then(new Fulfill<Boolean>() {
-          @Override
-          public void onFulfilled(Boolean ready) {
-            if (ready) {
-              assertEquals(options.requestVertexNormals, terrainProvider.hasVertexNormals);
-              assertEquals(options.requestWaterMask, terrainProvider.hasWaterMask);
-              finishTest();
-            }
-          }
+        super.beginTest(() -> {
+            CesiumTerrainProvider terrainProvider = Cesium.createWorldTerrain();
+            assertNotNull(terrainProvider);
+            assertEquals(false, terrainProvider.requestVertexNormals);
+            assertEquals(false, terrainProvider.requestWaterMask);
+            finishTest();
         });
-      }
-    });
-  }
+    }
+
+    public void testCreateWorldTerrain1() {
+        delayTestFinish(10_000);
+
+        super.beginTest(() -> {
+            final Cesium.CreateWorldTerrainOptions options = new Cesium.CreateWorldTerrainOptions();
+            options.requestVertexNormals = true;
+            options.requestWaterMask = true;
+            final CesiumTerrainProvider terrainProvider = Cesium.createWorldTerrain(options);
+            assertNotNull(terrainProvider);
+            assertEquals(options.requestVertexNormals, terrainProvider.requestVertexNormals);
+            assertEquals(options.requestWaterMask, terrainProvider.requestWaterMask);
+            terrainProvider.readyPromise().then(ready -> {
+                if (ready) {
+                    assertEquals(options.requestVertexNormals, terrainProvider.hasVertexNormals);
+                    assertEquals(options.requestWaterMask, terrainProvider.hasWaterMask);
+                    finishTest();
+                }
+            });
+        });
+    }
 }

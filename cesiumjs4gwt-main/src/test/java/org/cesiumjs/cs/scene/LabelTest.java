@@ -26,35 +26,29 @@ import org.cesiumjs.cs.scene.options.LabelOptions;
  * @author Serge Silaev aka iSergio
  */
 public class LabelTest extends BaseTestCase {
-  public void testVerticalOrigin() {
-    delayTestFinish(10_000);
+    public void testVerticalOrigin() {
+        delayTestFinish(10_000);
 
-    super.beginTest(new Test() {
-      @Override
-      public void execute() {
-        LabelCollection collection = new LabelCollection();
-        LabelOptions options = new LabelOptions();
-        options.verticalOrigin = VerticalOrigin.TOP();
-        Label label = collection.add(options);
-        assertEquals(VerticalOrigin.TOP(), label.verticalOrigin);
-        finishTest();
-      }
-    });
-  }
+        super.beginTest(() -> {
+            LabelCollection collection = new LabelCollection();
+            LabelOptions options = new LabelOptions();
+            options.verticalOrigin = VerticalOrigin.TOP();
+            Label label = collection.add(options);
+            assertEquals(VerticalOrigin.TOP(), label.verticalOrigin);
+            finishTest();
+        });
+    }
 
-  public void testHorizontalOrigin() {
-    delayTestFinish(10_000);
+    public void testHorizontalOrigin() {
+        delayTestFinish(10_000);
 
-    super.beginTest(new Test() {
-      @Override
-      public void execute() {
-        LabelCollection collection = new LabelCollection();
-        LabelOptions options = new LabelOptions();
-        options.horizontalOrigin = HorizontalOrigin.RIGHT();
-        Label label = collection.add(options);
-        assertEquals(HorizontalOrigin.RIGHT(), label.horizontalOrigin);
-        finishTest();
-      }
-    });
-  }
+        super.beginTest(() -> {
+            LabelCollection collection = new LabelCollection();
+            LabelOptions options = new LabelOptions();
+            options.horizontalOrigin = HorizontalOrigin.RIGHT();
+            Label label = collection.add(options);
+            assertEquals(HorizontalOrigin.RIGHT(), label.horizontalOrigin);
+            finishTest();
+        });
+    }
 }

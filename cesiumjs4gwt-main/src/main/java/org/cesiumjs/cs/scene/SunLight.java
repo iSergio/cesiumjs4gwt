@@ -15,29 +15,28 @@
 
 package org.cesiumjs.cs.scene;
 
-import org.cesiumjs.cs.scene.options.SunLightOptions;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.scene.options.SunLightOptions;
 
 /**
  * A directional light source that originates from the Sun.
  */
 @JsType(isNative = true, namespace = "Cesium", name = "SunLight")
 public class SunLight extends Light {
-  /**
-   * A directional light source that originates from the Sun.
-   */
-  @JsConstructor
-  public SunLight() {
-  }
+    /**
+     * A directional light source that originates from the Sun.
+     */
+    @JsConstructor
+    public SunLight() {
+    }
 
-  /**
-   * A directional light source that originates from the Sun.
-   * 
-   * @param options Options {@link SunLightOptions}
-   */
-  @JsConstructor
-  public SunLight(SunLightOptions options) {
-  }
+    /**
+     * A directional light source that originates from the Sun.
+     *
+     * @param options Options {@link SunLightOptions}
+     */
+    @JsConstructor
+    public SunLight(SunLightOptions options) {
+    }
 }

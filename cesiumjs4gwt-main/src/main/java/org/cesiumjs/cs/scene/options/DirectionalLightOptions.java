@@ -15,36 +15,31 @@
 
 package org.cesiumjs.cs.scene.options;
 
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.Cartesian3;
-
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsOverlay;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
 
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class DirectionalLightOptions extends SunLightOptions {
-  /**
-   * The direction in which light gets emitted.
-   */
-  @JsProperty
-  public Cartesian3 direction;
+    /**
+     * The direction in which light gets emitted.
+     */
+    @JsProperty
+    public Cartesian3 direction;
 
-  @JsConstructor
-  protected DirectionalLightOptions() {
-  }
+    @JsConstructor
+    protected DirectionalLightOptions() {
+    }
 
-  /**
-   * Constructor for {@link DirectionLightOptions}
-   * 
-   * @param direction
-   * @return
-   */
-  @JsOverlay
-  public static DirectionalLightOptions create(Cartesian3 direction) {
-    DirectionalLightOptions options = new DirectionalLightOptions();
-    options.direction = direction;
-    return options;
-  }
+    /**
+     * Constructor for {@link org.cesiumjs.cs.scene.DirectionalLight}
+     *
+     * @param direction
+     * @return options object
+     */
+    @JsOverlay
+    public static DirectionalLightOptions create(Cartesian3 direction) {
+        DirectionalLightOptions options = new DirectionalLightOptions();
+        options.direction = direction;
+        return options;
+    }
 }

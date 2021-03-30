@@ -23,5 +23,5 @@ import jsinterop.annotations.JsFunction;
  */
 @JsFunction
 public interface Function<V, E> {
-  void exec();
+    void exec();
 }

@@ -16,42 +16,41 @@
 
 package org.cleanlogic.cesiumjs4gwt.showcase.examples;
 
-import javax.inject.Inject;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.HTML;
-
 import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cleanlogic.cesiumjs4gwt.showcase.basic.AbstractExample;
 import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ShowcaseExampleStore;
+
+import javax.inject.Inject;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 public class HelloWorld extends AbstractExample {
 
-  @Inject
-  public HelloWorld(ShowcaseExampleStore store) {
-    super("Hello World",
-        "Use Viewer to start building new applications or easily embed Cesium into existing applications",
-        new String[] { "Showcase", "Cesium", "3d", "Viewer" }, store);
-  }
+    @Inject
+    public HelloWorld(ShowcaseExampleStore store) {
+        super("Hello World",
+                "Use Viewer to start building new applications or easily embed Cesium into existing applications",
+                new String[]{"Showcase", "Cesium", "3d", "Viewer"}, store);
+    }
 
-  @Override
-  public void buildPanel() {
-    ViewerPanel csVPanel = new ViewerPanel();
+    @Override
+    public void buildPanel() {
+        ViewerPanel csVPanel = new ViewerPanel();
 
-    contentPanel.add(new HTML(
-        "<p>Use Viewer to start building new applications or easily embed Cesium into existing applications.</p>"));
-    contentPanel.add(csVPanel);
+        contentPanel.add(new HTML(
+                "<p>Use Viewer to start building new applications or easily embed Cesium into existing applications.</p>"));
+        contentPanel.add(csVPanel);
 
-    initWidget(contentPanel);
-  }
+        initWidget(contentPanel);
+    }
 
-  @Override
-  public String[] getSourceCodeURLs() {
-    String[] sourceCodeURLs = new String[1];
-    sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "HelloWorld.txt";
-    return sourceCodeURLs;
-  }
+    @Override
+    public String[] getSourceCodeURLs() {
+        String[] sourceCodeURLs = new String[1];
+        sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "HelloWorld.txt";
+        return sourceCodeURLs;
+    }
 }

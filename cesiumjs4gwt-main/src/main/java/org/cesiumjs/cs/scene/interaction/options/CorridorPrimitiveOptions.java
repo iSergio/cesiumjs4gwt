@@ -20,29 +20,29 @@ package org.cesiumjs.cs.scene.interaction.options;
  * @author Serge Silaev aka iSergio
  */
 public class CorridorPrimitiveOptions extends AbstractPrimitiveOptions {
-  /**
-   * Width in pixels of corridor. This width convert to metres by pixelDistance.
-   */
-  public double width = 1;
+    /**
+     * Width in pixels of corridor. This width convert to metres by pixelDistance.
+     */
+    public double width = 1;
 
-  /**
-   * Default constructor
-   */
-  public CorridorPrimitiveOptions() {
-    super();
-  }
+    /**
+     * Default constructor
+     */
+    public CorridorPrimitiveOptions() {
+        super();
+    }
 
-  /**
-   * Construct {@link CorridorPrimitiveOptions} instance from
-   * {@link DrawInteractionOptions}
-   * 
-   * @param options {@link DrawInteractionOptions}
-   */
-  public CorridorPrimitiveOptions(DrawInteractionOptions options) {
-    super();
+    /**
+     * Construct {@link CorridorPrimitiveOptions} instance from
+     * {@link DrawInteractionOptions}
+     *
+     * @param options {@link DrawInteractionOptions}
+     */
+    public CorridorPrimitiveOptions(DrawInteractionOptions options) {
+        super();
 
-    super.color = options.color;
-    super.outlineColor = options.outlineColor;
-    super.outlineWidth = options.outlineWidth;
-  }
+        super.color = options.color;
+        super.outlineColor = options.outlineColor;
+        super.outlineWidth = options.outlineWidth;
+    }
 }

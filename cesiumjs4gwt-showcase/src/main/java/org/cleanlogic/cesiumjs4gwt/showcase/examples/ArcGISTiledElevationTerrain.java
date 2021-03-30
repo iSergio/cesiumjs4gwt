@@ -16,11 +16,8 @@
 
 package org.cleanlogic.cesiumjs4gwt.showcase.examples;
 
-import javax.inject.Inject;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.HTML;
-
 import org.cesiumjs.cs.core.providers.ArcGISTiledElevationTerrainProvider;
 import org.cesiumjs.cs.core.providers.options.ArcGISTiledElevationTerrainProviderOptions;
 import org.cesiumjs.cs.widgets.ViewerPanel;
@@ -28,34 +25,36 @@ import org.cesiumjs.cs.widgets.options.ViewerOptions;
 import org.cleanlogic.cesiumjs4gwt.showcase.basic.AbstractExample;
 import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ShowcaseExampleStore;
 
+import javax.inject.Inject;
+
 /**
  * @author Serge Silaev aka iSergio
  */
 public class ArcGISTiledElevationTerrain extends AbstractExample {
 
-  @Inject
-  public ArcGISTiledElevationTerrain(ShowcaseExampleStore store) {
-    super("ArcGIS Tiled Elevation Terrain", "Add terrain from an ArcGIS Server.", new String[] { "Terrain", "ArcGIS" },
-        store);
-  }
+    @Inject
+    public ArcGISTiledElevationTerrain(ShowcaseExampleStore store) {
+        super("ArcGIS Tiled Elevation Terrain", "Add terrain from an ArcGIS Server.", new String[]{"Terrain", "ArcGIS"},
+                store);
+    }
 
-  @Override
-  public void buildPanel() {
-    ViewerOptions options = new ViewerOptions();
-    options.terrainProvider = new ArcGISTiledElevationTerrainProvider(ArcGISTiledElevationTerrainProviderOptions
-        .create("https://elevation3d.arcgis.com/arcgis/rest/services/WorldElevation3D/Terrain3D/ImageServer"));
-    ViewerPanel csVPanel = new ViewerPanel(options);
+    @Override
+    public void buildPanel() {
+        ViewerOptions options = new ViewerOptions();
+        options.terrainProvider = new ArcGISTiledElevationTerrainProvider(ArcGISTiledElevationTerrainProviderOptions
+                .create("https://elevation3d.arcgis.com/arcgis/rest/services/WorldElevation3D/Terrain3D/ImageServer"));
+        ViewerPanel csVPanel = new ViewerPanel(options);
 
-    contentPanel.add(new HTML("<p>Add terrain from an ArcGIS Server.</p>"));
-    contentPanel.add(csVPanel);
+        contentPanel.add(new HTML("<p>Add terrain from an ArcGIS Server.</p>"));
+        contentPanel.add(csVPanel);
 
-    initWidget(contentPanel);
-  }
+        initWidget(contentPanel);
+    }
 
-  @Override
-  public String[] getSourceCodeURLs() {
-    String[] sourceCodeURLs = new String[1];
-    sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "ArcGISTiledElevationTerrain.txt";
-    return sourceCodeURLs;
-  }
+    @Override
+    public String[] getSourceCodeURLs() {
+        String[] sourceCodeURLs = new String[1];
+        sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "ArcGISTiledElevationTerrain.txt";
+        return sourceCodeURLs;
+    }
 }

@@ -16,13 +16,8 @@
 
 package org.cesiumjs.cs.core.geometry.options;
 
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.Cartesian3;
-
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsOverlay;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
 
 /**
  * Options for
@@ -32,39 +27,39 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class CoplanarPolygonGeometryFromPositionsOptions {
-  /**
-   * An array of positions that defined the corner points of the polygon.
-   */
-  @JsProperty
-  public Cartesian3[] positions;
-  /**
-   * The vertex attributes to be computed. Default:
-   * {@link org.cesiumjs.cs.core.VertexFormat#DEFAULT()}
-   */
-  @JsProperty
-  public Number vertexFormat;
-  /**
-   * The rotation of the texture coordinates, in radians. A positive rotation is
-   * counter-clockwise. Default: 0.0
-   */
-  @JsProperty
-  public double stRotation;
+    /**
+     * An array of positions that defined the corner points of the polygon.
+     */
+    @JsProperty
+    public Cartesian3[] positions;
+    /**
+     * The vertex attributes to be computed. Default:
+     * {@link org.cesiumjs.cs.core.VertexFormat#DEFAULT()}
+     */
+    @JsProperty
+    public Number vertexFormat;
+    /**
+     * The rotation of the texture coordinates, in radians. A positive rotation is
+     * counter-clockwise. Default: 0.0
+     */
+    @JsProperty
+    public double stRotation;
 
-  @JsConstructor
-  private CoplanarPolygonGeometryFromPositionsOptions() {
-  }
+    @JsConstructor
+    private CoplanarPolygonGeometryFromPositionsOptions() {
+    }
 
-  /**
-   * Create options instance
-   * 
-   * @param positions An array of positions that defined the corner points of the
-   *                  polygon.
-   * @return options object
-   */
-  @JsOverlay
-  public static CoplanarPolygonGeometryFromPositionsOptions create(Cartesian3[] positions) {
-    CoplanarPolygonGeometryFromPositionsOptions options = new CoplanarPolygonGeometryFromPositionsOptions();
-    options.positions = positions;
-    return options;
-  }
+    /**
+     * Create options instance
+     *
+     * @param positions An array of positions that defined the corner points of the
+     *                  polygon.
+     * @return options object
+     */
+    @JsOverlay
+    public static CoplanarPolygonGeometryFromPositionsOptions create(Cartesian3[] positions) {
+        CoplanarPolygonGeometryFromPositionsOptions options = new CoplanarPolygonGeometryFromPositionsOptions();
+        options.positions = positions;
+        return options;
+    }
 }

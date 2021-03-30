@@ -20,5 +20,5 @@ package org.cesiumjs.cs.scene.interaction;
  * @author Serge Silaev aka iSergio
  */
 public enum PrimitiveType {
-  POINT, CORRIDOR, POLYGON, RECTANGLE, CIRCLE
+    POINT, CORRIDOR, POLYGON, RECTANGLE, CIRCLE
 }

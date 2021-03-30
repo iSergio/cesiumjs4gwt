@@ -16,13 +16,12 @@
 
 package org.cesiumjs.cs.datasources.updater;
 
-import org.cesiumjs.cs.datasources.Entity;
-import org.cesiumjs.cs.datasources.properties.Property;
-import org.cesiumjs.cs.scene.Scene;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.datasources.Entity;
+import org.cesiumjs.cs.datasources.properties.Property;
+import org.cesiumjs.cs.scene.Scene;
 
 /**
  * A {@link GeometryUpdater} for rectangles. Clients do not normally create this
@@ -33,29 +32,29 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "RectangleGeometryUpdater")
 public class RectangleGeometryUpdater extends GeometryUpdater {
-  /**
-   * Gets a value indicating if the geometry should be drawn on terrain.
-   */
-  @JsProperty(name = "onTerrain")
-  public native boolean onTerrain();
+    /**
+     * A {@link GeometryUpdater} for rectangles. Clients do not normally create this
+     * class directly, but instead rely on
+     * {@link org.cesiumjs.cs.datasources.DataSourceDisplay}.
+     *
+     * @param entity The entity containing the geometry to be visualized.
+     * @param scene  The scene where visualization is taking place.
+     */
+    @JsConstructor
+    public RectangleGeometryUpdater(Entity entity, Scene scene) {
+        super(entity, scene);
+    }
 
-  /**
-   * Gets the property specifying whether the geometry casts or receives shadows
-   * from each light source.
-   */
-  @JsProperty(name = "shadowsProperty")
-  public native Property shadowsProperty();
+    /**
+     * Gets a value indicating if the geometry should be drawn on terrain.
+     */
+    @JsProperty(name = "onTerrain")
+    public native boolean onTerrain();
 
-  /**
-   * A {@link GeometryUpdater} for rectangles. Clients do not normally create this
-   * class directly, but instead rely on
-   * {@link org.cesiumjs.cs.datasources.DataSourceDisplay}.
-   * 
-   * @param entity The entity containing the geometry to be visualized.
-   * @param scene  The scene where visualization is taking place.
-   */
-  @JsConstructor
-  public RectangleGeometryUpdater(Entity entity, Scene scene) {
-    super(entity, scene);
-  }
+    /**
+     * Gets the property specifying whether the geometry casts or receives shadows
+     * from each light source.
+     */
+    @JsProperty(name = "shadowsProperty")
+    public native Property shadowsProperty();
 }

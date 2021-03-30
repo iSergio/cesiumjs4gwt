@@ -20,11 +20,11 @@ import jsinterop.annotations.JsType;
 
 /**
  * An expression for a style applied to a {@link Cesium3DTileset}.
- *
+ * <p>
  * Derived classes of this interface evaluate expressions in the <a href=
  * "https://github.com/AnalyticalGraphicsInc/3d-tiles/tree/master/Styling">3D
  * Tiles Styling language</a>.
- *
+ * <p>
  * This type describes an interface and is not intended to be instantiated
  * directly.
  *

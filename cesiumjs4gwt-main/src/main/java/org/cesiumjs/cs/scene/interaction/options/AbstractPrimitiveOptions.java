@@ -24,29 +24,29 @@ import org.cesiumjs.cs.core.Color;
  * @author Serge Silaev aka iSergio
  */
 public abstract class AbstractPrimitiveOptions {
-  /**
-   * {@link org.cesiumjs.cs.scene.interaction.AbstractPrimitive} and
-   * {@link org.cesiumjs.cs.scene.interaction.MarkerGroup} fill color.
-   */
-  public Color color = Color.YELLOW().withAlpha(0.5f);
-  /**
-   * {@link org.cesiumjs.cs.scene.interaction.MarkerGroup} outline color.
-   */
-  public Color outlineColor = Color.YELLOW();
-  /**
-   * {@link org.cesiumjs.cs.scene.interaction.MarkerGroup} outline width.
-   */
-  public int outlineWidth = 1;
-  /**
-   * Minimum points of primitive
-   */
-  public int minPoints = 3;
-  /**
-   * Maximum points of primitive.
-   */
-  public int maxPoints = Integer.MAX_VALUE;
+    /**
+     * {@link org.cesiumjs.cs.scene.interaction.AbstractPrimitive} and
+     * {@link org.cesiumjs.cs.scene.interaction.MarkerGroup} fill color.
+     */
+    public Color color = Color.YELLOW().withAlpha(0.5f);
+    /**
+     * {@link org.cesiumjs.cs.scene.interaction.MarkerGroup} outline color.
+     */
+    public Color outlineColor = Color.YELLOW();
+    /**
+     * {@link org.cesiumjs.cs.scene.interaction.MarkerGroup} outline width.
+     */
+    public int outlineWidth = 1;
+    /**
+     * Minimum points of primitive
+     */
+    public int minPoints = 3;
+    /**
+     * Maximum points of primitive.
+     */
+    public int maxPoints = Integer.MAX_VALUE;
 
-  public AbstractPrimitiveOptions() {
-    //
-  }
+    public AbstractPrimitiveOptions() {
+        //
+    }
 }

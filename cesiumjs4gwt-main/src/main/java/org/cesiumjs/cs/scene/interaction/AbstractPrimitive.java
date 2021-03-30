@@ -16,6 +16,7 @@
 
 package org.cesiumjs.cs.scene.interaction;
 
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.Cesium;
 import org.cesiumjs.cs.core.ColorGeometryInstanceAttribute;
 import org.cesiumjs.cs.core.DeveloperError;
@@ -28,13 +29,6 @@ import org.cesiumjs.cs.scene.GroundPrimitive;
 import org.cesiumjs.cs.scene.interaction.options.AbstractPrimitiveOptions;
 import org.cesiumjs.cs.scene.options.GroundPrimitiveOptions;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsFunction;
-import jsinterop.annotations.JsOverlay;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
-
 /**
  * Abstract class used for override Primitive.prototype.update function
  * through @JsFunction
@@ -43,157 +37,153 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public abstract class AbstractPrimitive extends GroundPrimitive {
-  @JsProperty
-  public Ellipsoid ellipsoid;
-  @JsProperty
-  public double granularity;
-  @JsProperty
-  public AbstractPrimitiveOptions options;
+    @JsProperty
+    public Ellipsoid ellipsoid;
+    @JsProperty
+    public double granularity;
+    @JsProperty
+    public AbstractPrimitiveOptions options;
+    /**
+     * Flag for we ned create primitive
+     */
+    @JsProperty
+    protected boolean createPrimitive;
+    /**
+     * Override {@link GroundPrimitive#update(Object)}
+     */
+    @JsProperty
+    protected Update update;
+    /**
+     * Get geometry function to access pure java functional
+     */
+    @JsProperty
+    protected GetGeometry getGeometry;
+    /**
+     * Override {@link GroundPrimitive#destroy()}
+     */
+    @JsProperty
+    protected Destroy destroy;
+    @JsProperty
+    private Ellipsoid _ellipsoid;
+    @JsProperty
+    private double _granularity;
+    @JsProperty
+    private GroundPrimitive _primitive;
 
-  @JsProperty
-  private Ellipsoid _ellipsoid;
-  @JsProperty
-  private double _granularity;
+    @JsConstructor
+    public AbstractPrimitive(AbstractPrimitiveOptions options) {
+    }
 
-  @JsProperty
-  private GroundPrimitive _primitive;
+    @JsOverlay
+    public final void initialize() {
+        createPrimitive = true;
 
-  /**
-   * Flag for we ned create primitive
-   */
-  @JsProperty
-  protected boolean createPrimitive;
+        _ellipsoid = (Ellipsoid) JsObject.undefined();
+        _granularity = Double.MAX_VALUE;
+        _primitive = (GroundPrimitive) JsObject.undefined();
 
-  /**
-   * Override {@link GroundPrimitive#update(Object)}
-   */
-  @JsProperty
-  protected Update update;
-  /**
-   * Get geometry function to access pure java functional
-   */
-  @JsProperty
-  protected GetGeometry getGeometry;
-  /**
-   * Override {@link GroundPrimitive#destroy()}
-   */
-  @JsProperty
-  protected Destroy destroy;
+        update = new Update() {
+            @Override
+            public void function(Object frameState) {
+                if (!Cesium.defined(ellipsoid)) {
+                    throw new DeveloperError("ellipsoid is required option and must be defined.");
+                }
+                if (!Cesium.defined(appearance)) {
+                    throw new DeveloperError("appearance is required option and myst be defined");
+                }
+                if (granularity < 0.0) {
+                    throw new DeveloperError("granularity and scene2D/scene3D overrides must be greater than zero.");
+                }
 
-  @JsConstructor
-  public AbstractPrimitive(AbstractPrimitiveOptions options) {
-  }
+                if (!show) {
+                    return;
+                }
 
-  @JsOverlay
-  public final void initialize() {
-    createPrimitive = true;
+                if (!createPrimitive && !Cesium.defined(_primitive)) {
+                    return;
+                }
 
-    _ellipsoid = (Ellipsoid) JsObject.undefined();
-    _granularity = Double.MAX_VALUE;
-    _primitive = (GroundPrimitive) JsObject.undefined();
+                if (createPrimitive || same()) {
+                    Geometry geometry = getGeometry.function();
+                    if (geometry == null) {
+                        return;
+                    }
 
-    update = new Update() {
-      @Override
-      public void function(Object frameState) {
-        if (!Cesium.defined(ellipsoid)) {
-          throw new DeveloperError("ellipsoid is required option and must be defined.");
-        }
-        if (!Cesium.defined(appearance)) {
-          throw new DeveloperError("appearance is required option and myst be defined");
-        }
-        if (granularity < 0.0) {
-          throw new DeveloperError("granularity and scene2D/scene3D overrides must be greater than zero.");
-        }
+                    createPrimitive = false;
+                    _ellipsoid = ellipsoid;
+                    _granularity = granularity;
 
-        if (!show) {
-          return;
-        }
+                    if (Cesium.defined(_primitive)) {
+                        _primitive.destroy();
+                        _primitive = (GroundPrimitive) JsObject.undefined();
+                    }
 
-        if (!createPrimitive && !Cesium.defined(_primitive)) {
-          return;
-        }
+                    GeometryInstanceOptions instanceOptions = new GeometryInstanceOptions();
+                    instanceOptions.geometry = geometry;
+                    instanceOptions.attributes = new Object();
+                    JsObject.setProperty(instanceOptions.attributes, "color",
+                            ColorGeometryInstanceAttribute.fromColor(options.color));
+                    GroundPrimitiveOptions primitiveOptions = new GroundPrimitiveOptions();
+                    primitiveOptions.geometryInstances = new GeometryInstance[]{new GeometryInstance(instanceOptions)};
+                    primitiveOptions.asynchronous = false;
+                    _primitive = new GroundPrimitive(primitiveOptions);
+                }
+                GroundPrimitive primitive = _primitive;
+                primitive.debugShowBoundingVolume = debugShowBoundingVolume;
+                primitive.update(frameState);
+            }
+        };
 
-        if (createPrimitive || same()) {
-          Geometry geometry = getGeometry.function();
-          if (geometry == null) {
-            return;
-          }
+        destroy = new Destroy() {
+            @Override
+            public void function() {
+                if (Cesium.defined(_primitive)) {
+                    _primitive.destroy();
+                    _primitive = (GroundPrimitive) JsObject.undefined();
+                }
+                Cesium.destroyObject(this);
+            }
+        };
+    }
 
-          createPrimitive = false;
-          _ellipsoid = ellipsoid;
-          _granularity = granularity;
+    @JsOverlay
+    public final void setAttribute(String name, Object value) {
+        JsObject.setProperty(this, name, value);
+        createPrimitive = true;
+    }
 
-          if (Cesium.defined(_primitive)) {
-            _primitive.destroy();
-            _primitive = (GroundPrimitive) JsObject.undefined();
-          }
+    @JsOverlay
+    public final Object getAttribute(String name) {
+        return JsObject.getObject(this, name);
+    }
 
-          GeometryInstanceOptions instanceOptions = new GeometryInstanceOptions();
-          instanceOptions.geometry = geometry;
-          instanceOptions.attributes = new Object();
-          JsObject.setProperty(instanceOptions.attributes, "color",
-              ColorGeometryInstanceAttribute.fromColor(options.color));
-          GroundPrimitiveOptions primitiveOptions = new GroundPrimitiveOptions();
-          primitiveOptions.geometryInstances = new GeometryInstance[] { new GeometryInstance(instanceOptions) };
-          primitiveOptions.asynchronous = false;
-          _primitive = new GroundPrimitive(primitiveOptions);
-        }
-        GroundPrimitive primitive = _primitive;
-        primitive.debugShowBoundingVolume = debugShowBoundingVolume;
-        primitive.update(frameState);
-      }
-    };
+    @JsOverlay
+    public final boolean isDestroyer() {
+        return false;
+    }
 
-    destroy = new Destroy() {
-      @Override
-      public void function() {
-        if (Cesium.defined(_primitive)) {
-          _primitive.destroy();
-          _primitive = (GroundPrimitive) JsObject.undefined();
-        }
-        Cesium.destroyObject(this);
-      }
-    };
-  }
+    @JsOverlay
+    public final Geometry getGeometry() {
+        return getGeometry.function();
+    }
 
-  @JsOverlay
-  public final void setAttribute(String name, Object value) {
-    JsObject.setProperty(this, name, value);
-    createPrimitive = true;
-  }
+    @JsOverlay
+    public final boolean same() {
+        return ((_ellipsoid != ellipsoid) || (_granularity != granularity));
+    }
 
-  @JsOverlay
-  public final Object getAttribute(String name) {
-    return JsObject.getObject(this, name);
-  }
+    @JsFunction
+    public interface Update {
+        void function(Object frameState);
+    }
 
-  @JsOverlay
-  public final boolean isDestroyer() {
-    return false;
-  }
+    @JsFunction
+    public interface GetGeometry {
+        Geometry function();
+    }
 
-  @JsOverlay
-  public final Geometry getGeometry() {
-    return getGeometry.function();
-  }
-
-  @JsOverlay
-  public final boolean same() {
-    return ((_ellipsoid != ellipsoid) || (_granularity != granularity));
-  }
-
-  @JsFunction
-  public interface Update {
-    void function(Object frameState);
-  }
-
-  @JsFunction
-  public interface GetGeometry {
-    Geometry function();
-  }
-
-  @JsFunction
-  public interface Destroy {
-    void function();
-  }
+    @JsFunction
+    public interface Destroy {
+        void function();
+    }
 }

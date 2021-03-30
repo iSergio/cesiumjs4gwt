@@ -16,12 +16,11 @@
 
 package org.cesiumjs.cs.core.projection;
 
-import org.cesiumjs.cs.core.Ellipsoid;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Ellipsoid;
 
 /**
  * The map projection used by Google Maps, Bing Maps, and most of ArcGIS Online,
@@ -33,67 +32,67 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "WebMercatorProjection")
 public class WebMercatorProjection extends MapProjection {
-  /**
-   * The maximum latitude (both North and South) supported by a Web Mercator
-   * (EPSG:3857) projection. Technically, the Mercator projection is defined for
-   * any latitude up to (but not including) 90 degrees, but it makes sense to cut
-   * it off sooner because it grows exponentially with increasing latitude. The
-   * logic behind this particular cutoff value, which is the one used by Google
-   * Maps, Bing Maps, and Esri, is that it makes the projection square. That is,
-   * the rectangle is equal in the X and Y directions. The constant value is
-   * computed by calling: {@link #mercatorAngleToGeodeticLatitude(double)}
-   */
-  @JsProperty(name = "MaximumLatitude")
-  public static native double MaximumLatitude();
+    /**
+     * The map projection used by Google Maps, Bing Maps, and most of ArcGIS Online,
+     * EPSG:3857. This projection use longitude and latitude expressed with the
+     * WGS84 and transforms them to Mercator using the spherical (rather than
+     * ellipsoidal) equations.
+     *
+     * @see GeographicProjection
+     */
+    @JsConstructor
+    public WebMercatorProjection() {
+    }
 
-  /**
-   * Gets the Ellipsoid.
-   */
-  @JsProperty(name = "ellipsoid")
-  public native Ellipsoid ellipsoid();
+    /**
+     * The map projection used by Google Maps, Bing Maps, and most of ArcGIS Online,
+     * EPSG:3857. This projection use longitude and latitude expressed with the
+     * WGS84 and transforms them to Mercator using the spherical (rather than
+     * ellipsoidal) equations.
+     *
+     * @param ellipsoid The ellipsoid.
+     * @see GeographicProjection
+     */
+    @JsConstructor
+    public WebMercatorProjection(Ellipsoid ellipsoid) {
+    }
 
-  /**
-   * The map projection used by Google Maps, Bing Maps, and most of ArcGIS Online,
-   * EPSG:3857. This projection use longitude and latitude expressed with the
-   * WGS84 and transforms them to Mercator using the spherical (rather than
-   * ellipsoidal) equations.
-   * 
-   * @see GeographicProjection
-   */
-  @JsConstructor
-  public WebMercatorProjection() {
-  }
+    /**
+     * The maximum latitude (both North and South) supported by a Web Mercator
+     * (EPSG:3857) projection. Technically, the Mercator projection is defined for
+     * any latitude up to (but not including) 90 degrees, but it makes sense to cut
+     * it off sooner because it grows exponentially with increasing latitude. The
+     * logic behind this particular cutoff value, which is the one used by Google
+     * Maps, Bing Maps, and Esri, is that it makes the projection square. That is,
+     * the rectangle is equal in the X and Y directions. The constant value is
+     * computed by calling: {@link #mercatorAngleToGeodeticLatitude(double)}
+     */
+    @JsProperty(name = "MaximumLatitude")
+    public static native double MaximumLatitude();
 
-  /**
-   * The map projection used by Google Maps, Bing Maps, and most of ArcGIS Online,
-   * EPSG:3857. This projection use longitude and latitude expressed with the
-   * WGS84 and transforms them to Mercator using the spherical (rather than
-   * ellipsoidal) equations.
-   * 
-   * @param ellipsoid The ellipsoid.
-   * @see GeographicProjection
-   */
-  @JsConstructor
-  public WebMercatorProjection(Ellipsoid ellipsoid) {
-  }
+    /**
+     * Converts a geodetic latitude in radians, in the range -PI/2 to PI/2, to a
+     * Mercator angle in the range -PI to PI.
+     *
+     * @param latitude The geodetic latitude in radians.
+     * @return The Mercator angle.
+     */
+    @JsMethod
+    public static native double geodeticLatitudeToMercatorAngle(double latitude);
 
-  /**
-   * Converts a geodetic latitude in radians, in the range -PI/2 to PI/2, to a
-   * Mercator angle in the range -PI to PI.
-   * 
-   * @param latitude The geodetic latitude in radians.
-   * @return The Mercator angle.
-   */
-  @JsMethod
-  public static native double geodeticLatitudeToMercatorAngle(double latitude);
+    /**
+     * Converts a Mercator angle, in the range -PI to PI, to a geodetic latitude in
+     * the range -PI/2 to PI/2.
+     *
+     * @param mercatorAngle The angle to convert.
+     * @return The geodetic latitude in radians.
+     */
+    @JsMethod
+    public static native double mercatorAngleToGeodeticLatitude(double mercatorAngle);
 
-  /**
-   * Converts a Mercator angle, in the range -PI to PI, to a geodetic latitude in
-   * the range -PI/2 to PI/2.
-   * 
-   * @param mercatorAngle The angle to convert.
-   * @return The geodetic latitude in radians.
-   */
-  @JsMethod
-  public static native double mercatorAngleToGeodeticLatitude(double mercatorAngle);
+    /**
+     * Gets the Ellipsoid.
+     */
+    @JsProperty(name = "ellipsoid")
+    public native Ellipsoid ellipsoid();
 }

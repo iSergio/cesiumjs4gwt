@@ -18,32 +18,26 @@ package org.cesiumjs.cs.core.providers;
 
 import com.google.gwt.typedarrays.shared.ArrayBuffer;
 import com.google.gwt.typedarrays.shared.Float32Array;
-
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.Size;
-
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsFunction;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class GeoserverTerrainProviderFormatArray {
-  @JsProperty
-  public String format;
-  @JsProperty
-  public PostProcessArray postProcessArray;
+    @JsProperty
+    public String format;
+    @JsProperty
+    public PostProcessArray postProcessArray;
 
-  @JsConstructor
-  public GeoserverTerrainProviderFormatArray() {
-  }
+    @JsConstructor
+    public GeoserverTerrainProviderFormatArray() {
+    }
 
-  @JsFunction
-  public interface PostProcessArray {
-    @SuppressWarnings("unusable-by-js")
-    Float32Array function(ArrayBuffer bufferIn, Size size, float highest, float lowest, float offset);
-  }
+    @JsFunction
+    public interface PostProcessArray {
+        @SuppressWarnings("unusable-by-js")
+        Float32Array function(ArrayBuffer bufferIn, Size size, float highest, float lowest, float offset);
+    }
 }

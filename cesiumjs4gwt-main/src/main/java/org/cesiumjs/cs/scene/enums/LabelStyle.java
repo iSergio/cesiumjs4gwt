@@ -16,41 +16,40 @@
 
 package org.cesiumjs.cs.scene.enums;
 
-import org.cesiumjs.cs.scene.Label;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.scene.Label;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "LabelStyle")
 public class LabelStyle {
-  /**
-   * Fill the text of the label, but do not outline.
-   */
-  @JsProperty(name = "FILL")
-  public static native Number FILL();
+    /**
+     * Describes how to draw a label.
+     *
+     * @see Label#style
+     */
+    @JsConstructor
+    private LabelStyle() {
+    }
 
-  /**
-   * Fill and outline the text of the label.
-   */
-  @JsProperty(name = "FILL_AND_OUTLINE")
-  public static native Number FILL_AND_OUTLINE();
+    /**
+     * Fill the text of the label, but do not outline.
+     */
+    @JsProperty(name = "FILL")
+    public static native Number FILL();
 
-  /**
-   * Outline the text of the label, but do not fill.
-   */
-  @JsProperty(name = "OUTLINE")
-  public static native Number OUTLINE();
+    /**
+     * Fill and outline the text of the label.
+     */
+    @JsProperty(name = "FILL_AND_OUTLINE")
+    public static native Number FILL_AND_OUTLINE();
 
-  /**
-   * Describes how to draw a label.
-   * 
-   * @see Label#style
-   */
-  @JsConstructor
-  private LabelStyle() {
-  }
+    /**
+     * Outline the text of the label, but do not fill.
+     */
+    @JsProperty(name = "OUTLINE")
+    public static native Number OUTLINE();
 }

@@ -16,104 +16,102 @@
 
 package org.cesiumjs.cs.scene;
 
-import org.cesiumjs.cs.core.Ellipsoid;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Ellipsoid;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "SkyAtmosphere")
 public class SkyAtmosphere {
-  /**
-   * The brightness shift to apply to the atmosphere. Defaults to 0.0 (no shift).
-   * A brightness shift of -1.0 is complete darkness, which will let space show
-   * through. Default: 0.0
-   */
-  @JsProperty
-  public float brightnessShift;
+    /**
+     * The brightness shift to apply to the atmosphere. Defaults to 0.0 (no shift).
+     * A brightness shift of -1.0 is complete darkness, which will let space show
+     * through. Default: 0.0
+     */
+    @JsProperty
+    public float brightnessShift;
+    /**
+     * The hue shift to apply to the atmosphere. Defaults to 0.0 (no shift). A hue
+     * shift of 1.0 indicates a complete rotation of the hues available. Default:
+     * 0.0
+     */
+    @JsProperty
+    public float hueShift;
+    /**
+     * Compute atmosphere per-fragment instead of per-vertex. This produces better
+     * looking atmosphere with a slight performance penalty. Default: false
+     */
+    @JsProperty
+    public boolean perFragmentAtmosphere;
+    /**
+     * The saturation shift to apply to the atmosphere. Defaults to 0.0 (no shift).
+     * A saturation shift of -1.0 is monochrome. Default: 0.0
+     */
+    @JsProperty
+    public float saturationShift;
+    /**
+     * Determines if the atmosphere is shown. Default: true
+     */
+    @JsProperty
+    public boolean show;
 
-  /**
-   * Gets the ellipsoid the atmosphere is drawn around.
-   */
-  @JsProperty(name = "ellipsoid")
-  public native Ellipsoid ellipsoid();
+    /**
+     * An atmosphere drawn around the limb of the provided ellipsoid. Based on
+     * Accurate Atmospheric Scattering in GPU Gems 2. This is only supported in 3D.
+     * atmosphere is faded out when morphing to 2D or Columbus view.
+     *
+     * @see org.cesiumjs.cs.scene.Scene#skyAtmosphere
+     */
+    @JsConstructor
+    public SkyAtmosphere() {
+    }
 
-  /**
-   * The hue shift to apply to the atmosphere. Defaults to 0.0 (no shift). A hue
-   * shift of 1.0 indicates a complete rotation of the hues available. Default:
-   * 0.0
-   */
-  @JsProperty
-  public float hueShift;
-  /**
-   * Compute atmosphere per-fragment instead of per-vertex. This produces better
-   * looking atmosphere with a slight performance penalty. Default: false
-   */
-  @JsProperty
-  public boolean perFragmentAtmosphere;
-  /**
-   * The saturation shift to apply to the atmosphere. Defaults to 0.0 (no shift).
-   * A saturation shift of -1.0 is monochrome. Default: 0.0
-   */
-  @JsProperty
-  public float saturationShift;
-  /**
-   * Determines if the atmosphere is shown. Default: true
-   */
-  @JsProperty
-  public boolean show;
+    /**
+     * An atmosphere drawn around the limb of the provided ellipsoid. Based on
+     * Accurate Atmospheric Scattering in GPU Gems 2. This is only supported in 3D.
+     * atmosphere is faded out when morphing to 2D or Columbus view.
+     *
+     * @param ellipsoid The ellipsoid that the atmosphere is drawn around. Default:
+     *                  {@link Ellipsoid#WGS84()}
+     * @see org.cesiumjs.cs.scene.Scene#skyAtmosphere
+     */
+    @JsConstructor
+    public SkyAtmosphere(Ellipsoid ellipsoid) {
+    }
 
-  /**
-   * An atmosphere drawn around the limb of the provided ellipsoid. Based on
-   * Accurate Atmospheric Scattering in GPU Gems 2. This is only supported in 3D.
-   * atmosphere is faded out when morphing to 2D or Columbus view.
-   * 
-   * @see org.cesiumjs.cs.scene.Scene#skyAtmosphere
-   */
-  @JsConstructor
-  public SkyAtmosphere() {
-  }
+    /**
+     * Gets the ellipsoid the atmosphere is drawn around.
+     */
+    @JsProperty(name = "ellipsoid")
+    public native Ellipsoid ellipsoid();
 
-  /**
-   * An atmosphere drawn around the limb of the provided ellipsoid. Based on
-   * Accurate Atmospheric Scattering in GPU Gems 2. This is only supported in 3D.
-   * atmosphere is faded out when morphing to 2D or Columbus view.
-   * 
-   * @param ellipsoid The ellipsoid that the atmosphere is drawn around. Default:
-   *                  {@link Ellipsoid#WGS84()}
-   * @see org.cesiumjs.cs.scene.Scene#skyAtmosphere
-   */
-  @JsConstructor
-  public SkyAtmosphere(Ellipsoid ellipsoid) {
-  }
+    /**
+     * Destroys the WebGL resources held by this object. Destroying an object allows
+     * for deterministic release of WebGL resources, instead of relying on the
+     * garbage collector to destroy this object.
+     * <p>
+     * Once an object is destroyed, it should not be used; calling any function
+     * other than isDestroyed will result in a DeveloperError exception. Therefore,
+     * assign the return value (undefined) to the object as done in the example.
+     *
+     * @see #isDestroyed()
+     */
+    @JsMethod
+    public native void destroy();
 
-  /**
-   * Destroys the WebGL resources held by this object. Destroying an object allows
-   * for deterministic release of WebGL resources, instead of relying on the
-   * garbage collector to destroy this object.
-   *
-   * Once an object is destroyed, it should not be used; calling any function
-   * other than isDestroyed will result in a DeveloperError exception. Therefore,
-   * assign the return value (undefined) to the object as done in the example.
-   * 
-   * @see #isDestroyed()
-   */
-  @JsMethod
-  public native void destroy();
-
-  /**
-   * Returns true if this object was destroyed; otherwise, false.
-   *
-   * If this object was destroyed, it should not be used; calling any function
-   * other than isDestroyed will result in a DeveloperError exception.
-   * 
-   * @return true if this object was destroyed; otherwise, false.
-   * @see #destroy()
-   */
-  @JsMethod
-  public native boolean isDestroyed();
+    /**
+     * Returns true if this object was destroyed; otherwise, false.
+     * <p>
+     * If this object was destroyed, it should not be used; calling any function
+     * other than isDestroyed will result in a DeveloperError exception.
+     *
+     * @return true if this object was destroyed; otherwise, false.
+     * @see #destroy()
+     */
+    @JsMethod
+    public native boolean isDestroyed();
 }

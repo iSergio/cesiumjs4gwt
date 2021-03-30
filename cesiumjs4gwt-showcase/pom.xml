@@ -1,112 +1,113 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <artifactId>cesiumjs4gwt</artifactId>
-    <groupId>org.cesiumjs</groupId>
-    <version>1.74</version>
-  </parent>
+    <parent>
+        <artifactId>cesiumjs4gwt</artifactId>
+        <groupId>org.cesiumjs</groupId>
+        <version>1.79.1</version>
+    </parent>
 
-  <name>CesiumJS GWT Showcase</name>
-  <artifactId>cesiumjs4gwt-showcase</artifactId>
-  <packaging>war</packaging>
+    <name>CesiumJS GWT Showcase</name>
+    <artifactId>cesiumjs4gwt-showcase</artifactId>
+    <packaging>war</packaging>
 
-  <build>
-    <outputDirectory>${webappDirectory}/WEB-INF/classes</outputDirectory>
+    <build>
+        <outputDirectory>${webappDirectory}/WEB-INF/classes</outputDirectory>
 
-    <resources>
-      <resource>
-        <directory>src/main/resources</directory>
-      </resource>
-    </resources>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
 
-    <plugins>
-      <!-- Skips the GWTTestCases during Junit Testing -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.12</version>
-        <configuration>
-          <skipTests>true</skipTests>
-          <includes>
-            <include>**/*Test.java</include>
-          </includes>
-          <excludes>
-            <exclude>**/*GwtTest.java</exclude>
-          </excludes>
-        </configuration>
-      </plugin>
+        <plugins>
+            <!-- Skips the GWTTestCases during Junit Testing -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.12</version>
+                <configuration>
+                    <skipTests>true</skipTests>
+                    <includes>
+                        <include>**/*Test.java</include>
+                    </includes>
+                    <excludes>
+                        <exclude>**/*GwtTest.java</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
 
-      <!-- GWT -->
-      <!-- 'mvn gwt:run' - runs development mode -->
-      <!-- 'mvn gwt:debug' - runs debug mode -->
-      <!-- 'mvn gwt:compile' - compiles gwt -->
-      <!-- 'mvn gwt:test' or 'mvn integration-test' - runs the gwt tests (*GwtTest.java), (run a suite its faster) -->
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>gwt-maven-plugin</artifactId>
-        <version>${gwt.version}</version>
-        <configuration>
-          <strict>true</strict>
+            <!-- GWT -->
+            <!-- 'mvn gwt:run' - runs development mode -->
+            <!-- 'mvn gwt:debug' - runs debug mode -->
+            <!-- 'mvn gwt:compile' - compiles gwt -->
+            <!-- 'mvn gwt:test' or 'mvn integration-test' - runs the gwt tests (*GwtTest.java), (run a suite its faster) -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>gwt-maven-plugin</artifactId>
+                <version>${gwt.version}</version>
+                <configuration>
+                    <strict>true</strict>
 
-          <testTimeOut>180</testTimeOut>
-          <includes>**/*GwtTestSuite.java</includes>
-          <excludes>**/*GwtTest.java</excludes>
-          <mode>htmlunit</mode>
+                    <testTimeOut>180</testTimeOut>
+                    <includes>**/*GwtTestSuite.java</includes>
+                    <excludes>**/*GwtTest.java</excludes>
+                    <mode>htmlunit</mode>
 
-          <extraJvmArgs>-Xss1024K -Xmx1g</extraJvmArgs>
-          <logLevel>INFO</logLevel>
-          <style>${gwt.style}</style>
+                    <extraJvmArgs>-Xss1024K -Xmx1g</extraJvmArgs>
+                    <logLevel>INFO</logLevel>
+                    <style>${gwt.style}</style>
 
-          <copyWebapp>true</copyWebapp>
-          <hostedWebapp>${webappDirectory}</hostedWebapp>
+                    <copyWebapp>true</copyWebapp>
+                    <hostedWebapp>${webappDirectory}</hostedWebapp>
 
-          <runTarget>Showcase.html</runTarget>
-          <module>org.cleanlogic.cesiumjs4gwt.Showcase</module>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>compile</goal>
-              <goal>test</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
+                    <runTarget>Showcase.html</runTarget>
+                    <module>org.cleanlogic.cesiumjs4gwt.Showcase</module>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>test</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
-  <dependencies>
-    <dependency>
-      <groupId>com.google.gwt.inject</groupId>
-      <artifactId>gin</artifactId>
-      <version>2.1.2</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.google.inject</groupId>
-      <artifactId>guice</artifactId>
-      <version>3.0</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.google.inject.extensions</groupId>
-      <artifactId>guice-assistedinject</artifactId>
-      <version>3.0</version>
-      <scope>provided</scope>
-    </dependency>
+    <dependencies>
+        <dependency>
+            <groupId>com.google.gwt.inject</groupId>
+            <artifactId>gin</artifactId>
+            <version>2.1.2</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>3.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.inject.extensions</groupId>
+            <artifactId>guice-assistedinject</artifactId>
+            <version>3.0</version>
+            <scope>provided</scope>
+        </dependency>
 
-    <dependency>
-      <groupId>com.google.gwt</groupId>
-      <artifactId>gwt-user</artifactId>
-      <scope>compile</scope>
-    </dependency>
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-user</artifactId>
+            <scope>compile</scope>
+        </dependency>
 
-    <dependency>
-      <groupId>org.cesiumjs</groupId>
-      <artifactId>cesiumjs4gwt-main</artifactId>
-      <version>${project.parent.version}</version>
-    </dependency>
-  </dependencies>
+        <dependency>
+            <groupId>org.cesiumjs</groupId>
+            <artifactId>cesiumjs4gwt-main</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+    </dependencies>
 </project>

@@ -1,23 +1,21 @@
 /**
- *
- *   Copyright 2015 sourceforge.
- *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
- *
- *        http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ * Copyright 2015 sourceforge.
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.cleanlogic.cesiumjs4gwt.showcase.components.responsibility;
 
 import com.google.gwt.user.client.ui.RootPanel;
-
 import org.cleanlogic.cesiumjs4gwt.showcase.puregwt.event.ExamplePanelBuildEvent;
 
 /**
@@ -27,19 +25,19 @@ import org.cleanlogic.cesiumjs4gwt.showcase.puregwt.event.ExamplePanelBuildEvent
  */
 public class AllExamplesHandler extends ShowcaseBuilderHandler {
 
-  @Override
-  protected void buildShowcase() {
-    if (canBuildShowcase()) {
-      RootPanel.get().add(injector.getShowcaseTopPanel());
-      RootPanel.get().add(injector.getShowcaseExamplePanel());
+    @Override
+    protected void buildShowcase() {
+        if (canBuildShowcase()) {
+            RootPanel.get().add(injector.getShowcaseTopPanel());
+            RootPanel.get().add(injector.getShowcaseExamplePanel());
 
-      injector.getEventBus().fireEvent(new ExamplePanelBuildEvent(""));
+            injector.getEventBus().fireEvent(new ExamplePanelBuildEvent(""));
+        }
     }
-  }
 
-  @Override
-  protected boolean canBuildShowcase() {
-    return Boolean.TRUE;
-  }
+    @Override
+    protected boolean canBuildShowcase() {
+        return Boolean.TRUE;
+    }
 
 }

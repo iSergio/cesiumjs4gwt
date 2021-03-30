@@ -16,55 +16,54 @@
 
 package org.cesiumjs.cs.datasources.properties;
 
-import org.cesiumjs.cs.core.Ellipsoid;
-import org.cesiumjs.cs.core.Quaternion;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Ellipsoid;
+import org.cesiumjs.cs.core.Quaternion;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "VelocityOrientationProperty")
 public class VelocityOrientationProperty extends Property<Quaternion> {
-  /**
-   * Gets or sets the ellipsoid used to determine which way is up.
-   */
-  @JsProperty
-  public Ellipsoid ellipsoid;
-  /**
-   * Gets or sets the position property used to compute orientation.
-   */
-  @JsProperty
-  public Property position;
+    /**
+     * Gets or sets the ellipsoid used to determine which way is up.
+     */
+    @JsProperty
+    public Ellipsoid ellipsoid;
+    /**
+     * Gets or sets the position property used to compute orientation.
+     */
+    @JsProperty
+    public Property position;
 
-  /**
-   * A {@link Property} which evaluates to a {@link Quaternion} rotation based on
-   * the velocity of the provided {@link PositionProperty}.
-   */
-  @JsConstructor
-  public VelocityOrientationProperty() {
-  }
+    /**
+     * A {@link Property} which evaluates to a {@link Quaternion} rotation based on
+     * the velocity of the provided {@link PositionProperty}.
+     */
+    @JsConstructor
+    public VelocityOrientationProperty() {
+    }
 
-  /**
-   * A {@link Property} which evaluates to a {@link Quaternion} rotation based on
-   * the velocity of the provided {@link PositionProperty}.
-   * 
-   * @param position The position property used to compute the orientation.
-   */
-  @JsConstructor
-  public VelocityOrientationProperty(Property position) {
-  }
+    /**
+     * A {@link Property} which evaluates to a {@link Quaternion} rotation based on
+     * the velocity of the provided {@link PositionProperty}.
+     *
+     * @param position The position property used to compute the orientation.
+     */
+    @JsConstructor
+    public VelocityOrientationProperty(Property position) {
+    }
 
-  /**
-   * A {@link Property} which evaluates to a {@link Quaternion} rotation based on
-   * the velocity of the provided {@link PositionProperty}.
-   * 
-   * @param position  The position property used to compute the orientation.
-   * @param ellipsoid The ellipsoid used to determine which way is up.
-   */
-  @JsConstructor
-  public VelocityOrientationProperty(Property position, Ellipsoid ellipsoid) {
-  }
+    /**
+     * A {@link Property} which evaluates to a {@link Quaternion} rotation based on
+     * the velocity of the provided {@link PositionProperty}.
+     *
+     * @param position  The position property used to compute the orientation.
+     * @param ellipsoid The ellipsoid used to determine which way is up.
+     */
+    @JsConstructor
+    public VelocityOrientationProperty(Property position, Ellipsoid ellipsoid) {
+    }
 }

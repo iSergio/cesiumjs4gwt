@@ -16,30 +16,29 @@
 
 package org.cesiumjs.cs.datasources.options;
 
-import org.cesiumjs.cs.js.JsObject;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.js.JsObject;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class CzmlDataSourceOptions {
-  /**
-   * Overrides the url to use for resolving relative links
-   */
-  @JsProperty
-  public String sourceUri;
-  /**
-   * Key-value pairs which are appended to all URIs in the CZML.
-   */
-  @JsProperty
-  public JsObject query;
+    /**
+     * Overrides the url to use for resolving relative links
+     */
+    @JsProperty
+    public String sourceUri;
+    /**
+     * Key-value pairs which are appended to all URIs in the CZML.
+     */
+    @JsProperty
+    public JsObject query;
 
-  @JsConstructor
-  private CzmlDataSourceOptions() {
-  }
+    @JsConstructor
+    private CzmlDataSourceOptions() {
+    }
 }

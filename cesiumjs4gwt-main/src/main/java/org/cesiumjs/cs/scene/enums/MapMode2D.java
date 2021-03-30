@@ -25,22 +25,22 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "MapMode2D")
 public class MapMode2D {
-  /**
-   * The 2D map can be scrolled infinitely in the horizontal direction.
-   */
-  @JsProperty(name = "INFINITE_SCROLL")
-  public static native Number INFINITE_SCROLL();
+    /**
+     * Describes how the map will operate in 2D.
+     */
+    @JsConstructor
+    private MapMode2D() {
+    }
 
-  /**
-   * The 2D map can be rotated about the z axis.
-   */
-  @JsProperty(name = "ROTATE")
-  public static native Number ROTATE();
+    /**
+     * The 2D map can be scrolled infinitely in the horizontal direction.
+     */
+    @JsProperty(name = "INFINITE_SCROLL")
+    public static native Number INFINITE_SCROLL();
 
-  /**
-   * Describes how the map will operate in 2D.
-   */
-  @JsConstructor
-  private MapMode2D() {
-  }
+    /**
+     * The 2D map can be rotated about the z axis.
+     */
+    @JsProperty(name = "ROTATE")
+    public static native Number ROTATE();
 }

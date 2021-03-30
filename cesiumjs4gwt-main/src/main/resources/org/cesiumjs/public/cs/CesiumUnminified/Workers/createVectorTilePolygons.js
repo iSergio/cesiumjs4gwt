@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
 
-define(['./when-54c2dc71', './Check-6c0211bc', './Math-850675ea', './Cartesian2-ea28baad', './Transforms-2e98bea0', './RuntimeError-2109023a', './WebGLConstants-76bb35d1', './AttributeCompression-8a649799', './IndexDatatype-66029622', './IntersectionTests-d561f371', './Plane-1577f476', './createTaskProcessorWorker', './EllipsoidTangentPlane-38b58c36', './OrientedBoundingBox-26360398', './Color-b1021dc9'], function (when, Check, _Math, Cartesian2, Transforms, RuntimeError, WebGLConstants, AttributeCompression, IndexDatatype, IntersectionTests, Plane, createTaskProcessorWorker, EllipsoidTangentPlane, OrientedBoundingBox, Color) { 'use strict';
+define(['./AttributeCompression-69c5b20c', './Cartesian2-716c2715', './Color-11ac8724', './when-208fe5b0', './IndexDatatype-d9b71b2b', './Math-3ba16bed', './OrientedBoundingBox-45cb4e24', './createTaskProcessorWorker', './Check-d18af7c4', './Transforms-f1816abc', './RuntimeError-7f634f5d', './WebGLConstants-76bb35d1', './EllipsoidTangentPlane-8e486e83', './IntersectionTests-680c4e46', './Plane-f5dfabcd'], function (AttributeCompression, Cartesian2, Color, when, IndexDatatype, _Math, OrientedBoundingBox, createTaskProcessorWorker, Check, Transforms, RuntimeError, WebGLConstants, EllipsoidTangentPlane, IntersectionTests, Plane) { 'use strict';
 
   var scratchCenter = new Cartesian2.Cartesian3();
   var scratchEllipsoid = new Cartesian2.Ellipsoid();

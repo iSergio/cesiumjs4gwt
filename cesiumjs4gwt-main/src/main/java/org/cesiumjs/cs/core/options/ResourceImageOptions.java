@@ -28,22 +28,22 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class ResourceImageOptions extends ResourceOptions {
-  /**
-   * If true, we will load the image via a blob. Default: false
-   */
-  @JsProperty
-  public boolean preferBlob;
-  /**
-   * If true, image will be decoded during fetch and an ImageBitmap is returned.
-   * Default: false
-   */
-  @JsProperty
-  public boolean preferImageBitmap;
-  /**
-   * Whether to vertically flip the image during fetch and decode. Only applies
-   * when requesting an image and the browser supports createImageBitmap. Default:
-   * false
-   */
-  @JsProperty
-  public boolean flipY;
+    /**
+     * If true, we will load the image via a blob. Default: false
+     */
+    @JsProperty
+    public boolean preferBlob;
+    /**
+     * If true, image will be decoded during fetch and an ImageBitmap is returned.
+     * Default: false
+     */
+    @JsProperty
+    public boolean preferImageBitmap;
+    /**
+     * Whether to vertically flip the image during fetch and decode. Only applies
+     * when requesting an image and the browser supports createImageBitmap. Default:
+     * false
+     */
+    @JsProperty
+    public boolean flipY;
 }

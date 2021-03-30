@@ -22,9 +22,9 @@ import jsinterop.annotations.JsType;
  * Provides geocoding through an external service. This type describes an
  * interface and is not intended to be used.
  *
+ * @author Serge Silaev aka iSergio
  * @see BingMapsGeocoderService
  * @see PeliasGeocoderService
- * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "GeocoderService")
 public interface GeocoderService {

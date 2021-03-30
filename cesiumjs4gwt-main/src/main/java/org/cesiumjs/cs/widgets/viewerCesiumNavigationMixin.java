@@ -24,6 +24,6 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true)
 public class viewerCesiumNavigationMixin {
-  @JsProperty(namespace = "Cesium", name = "viewerCesiumNavigationMixin")
-  public static native Object instance();
+    @JsProperty(namespace = "Cesium", name = "viewerCesiumNavigationMixin")
+    public static native Object instance();
 }

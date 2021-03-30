@@ -16,71 +16,70 @@
 
 package org.cesiumjs.cs.scene;
 
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.collections.PolylineCollection;
 import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.DistanceDisplayCondition;
 import org.cesiumjs.cs.scene.options.PolylineOptions;
-
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "Polyline")
 public class Polyline {
-  /**
-   * if this polyline will be shown; otherwise, false. Default: true
-   */
-  @JsProperty
-  public boolean show;
-  /**
-   * The width of the polyline in pixels. Default: 1.0
-   */
-  @JsProperty
-  public double width;
-  /**
-   * Whether a line segment will be added between the last and first line
-   * positions to make this line a loop. Default: false
-   */
-  @JsProperty
-  public boolean loop;
-  /**
-   * The material. Default: {@link Material#ColorType()}
-   */
-  @JsProperty
-  public Material material;
-  /**
-   * The positions.
-   */
-  @JsProperty
-  public Cartesian3[] positions;
-  /**
-   * The user-defined object to be returned when this polyline is picked.
-   */
-  @JsProperty
-  public Object id;
-  /**
-   * The condition specifying at what distance from the camera that this polyline
-   * will be displayed.
-   */
-  @JsProperty
-  public DistanceDisplayCondition distanceDisplayCondition;
+    /**
+     * if this polyline will be shown; otherwise, false. Default: true
+     */
+    @JsProperty
+    public boolean show;
+    /**
+     * The width of the polyline in pixels. Default: 1.0
+     */
+    @JsProperty
+    public double width;
+    /**
+     * Whether a line segment will be added between the last and first line
+     * positions to make this line a loop. Default: false
+     */
+    @JsProperty
+    public boolean loop;
+    /**
+     * The material. Default: {@link Material#ColorType()}
+     */
+    @JsProperty
+    public Material material;
+    /**
+     * The positions.
+     */
+    @JsProperty
+    public Cartesian3[] positions;
+    /**
+     * The user-defined object to be returned when this polyline is picked.
+     */
+    @JsProperty
+    public Object id;
+    /**
+     * The condition specifying at what distance from the camera that this polyline
+     * will be displayed.
+     */
+    @JsProperty
+    public DistanceDisplayCondition distanceDisplayCondition;
 
-  /**
-   * A renderable polyline. Create this by calling {@link PolylineCollection#add}
-   */
-  @JsConstructor
-  public Polyline() {
-  }
+    /**
+     * A renderable polyline. Create this by calling {@link PolylineCollection#add}
+     */
+    @JsConstructor
+    public Polyline() {
+    }
 
-  /**
-   * A renderable polyline. Create this by calling {@link PolylineCollection#add}
-   * 
-   * @param options {@link PolylineOptions}
-   */
-  @JsConstructor
-  public Polyline(PolylineOptions options) {
-  }
+    /**
+     * A renderable polyline. Create this by calling {@link PolylineCollection#add}
+     *
+     * @param options {@link PolylineOptions}
+     */
+    @JsConstructor
+    public Polyline(PolylineOptions options) {
+    }
 }

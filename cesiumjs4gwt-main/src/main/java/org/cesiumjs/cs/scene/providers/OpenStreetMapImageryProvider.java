@@ -16,10 +16,9 @@
 
 package org.cesiumjs.cs.scene.providers;
 
-import org.cesiumjs.cs.scene.providers.options.OpenStreetMapImageryProviderOptions;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.scene.providers.options.OpenStreetMapImageryProviderOptions;
 
 /**
  * An imagery provider that provides tiled imagery hosted by OpenStreetMap or
@@ -30,24 +29,24 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "OpenStreetMapImageryProvider")
 public class OpenStreetMapImageryProvider implements ImageryProvider {
-  /**
-   * An imagery provider that provides tiled imagery hosted by OpenStreetMap or
-   * another provider of Slippy tiles. The default url connects to OpenStreetMap's
-   * volunteer-run servers, so you must conform to their Tile Usage Policy.
-   */
-  @JsConstructor
-  public OpenStreetMapImageryProvider() {
-  }
+    /**
+     * An imagery provider that provides tiled imagery hosted by OpenStreetMap or
+     * another provider of Slippy tiles. The default url connects to OpenStreetMap's
+     * volunteer-run servers, so you must conform to their Tile Usage Policy.
+     */
+    @JsConstructor
+    public OpenStreetMapImageryProvider() {
+    }
 
-  /**
-   * An imagery provider that provides tiled imagery hosted by OpenStreetMap or
-   * another provider of Slippy tiles. The default url connects to OpenStreetMap's
-   * volunteer-run servers, so you must conform to their Tile Usage Policy.
-   * 
-   * @param options Options {@link OpenStreetMapImageryProviderOptions}
-   */
-  @JsConstructor
-  public OpenStreetMapImageryProvider(OpenStreetMapImageryProviderOptions options) {
-  }
+    /**
+     * An imagery provider that provides tiled imagery hosted by OpenStreetMap or
+     * another provider of Slippy tiles. The default url connects to OpenStreetMap's
+     * volunteer-run servers, so you must conform to their Tile Usage Policy.
+     *
+     * @param options Options {@link OpenStreetMapImageryProviderOptions}
+     */
+    @JsConstructor
+    public OpenStreetMapImageryProvider(OpenStreetMapImageryProviderOptions options) {
+    }
 
 }

@@ -16,99 +16,98 @@
 
 package org.cesiumjs.cs.datasources.graphics.options;
 
-import org.cesiumjs.cs.core.Color;
-import org.cesiumjs.cs.datasources.properties.MaterialProperty;
-import org.cesiumjs.cs.datasources.properties.Property;
-import org.cesiumjs.cs.scene.enums.ShadowMode;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Color;
+import org.cesiumjs.cs.datasources.properties.MaterialProperty;
+import org.cesiumjs.cs.datasources.properties.Property;
+import org.cesiumjs.cs.scene.enums.ShadowMode;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class EllipsoidGraphicsOptions {
-  /**
-   * A Property specifying what the height from the entity position is relative
-   * to.
-   */
-  @JsProperty
-  public Property heightReference;
-  /**
-   * A Cartesian3 Property specifying the radii of the ellipsoid.
-   */
-  @JsProperty
-  public Property radii;
-  /**
-   * A boolean Property specifying the visibility of the ellipsoid. Default: true
-   */
-  @JsProperty
-  public Property show;
-  /**
-   * A boolean Property specifying whether the ellipsoid is filled with the
-   * provided material. Default: true
-   */
-  @JsProperty
-  public Property fill;
-  /**
-   * A Property specifying the material used to fill the ellipsoid. Default:
-   * {@link org.cesiumjs.cs.core.Color#WHITE()}
-   */
-  @JsProperty
-  public MaterialProperty material;
-  /**
-   * A boolean Property specifying whether the ellipsoid is outlined. Default:
-   * false
-   */
-  @JsProperty
-  public Property outline;
-  /**
-   * A Property specifying the Color of the outline. Default:
-   * {@link Color#BLACK()}
-   */
-  @JsProperty
-  public Property outlineColor;
-  /**
-   * A numeric Property specifying the width of the outline. Default: 1.0
-   */
-  @JsProperty
-  public Property outlineWidth;
-  /**
-   * A Property specifying the number of samples per outline ring, determining the
-   * granularity of the curvature. Default: 128
-   */
-  @JsProperty
-  public Property subdivisions;
-  /**
-   * A Property specifying the number of stacks. Default: 64
-   */
-  @JsProperty
-  public Property stackPartitions;
-  /**
-   * A Property specifying the number of radial slices. Default: 64
-   */
-  @JsProperty
-  public Property slicePartitions;
-  /**
-   * An enum Property specifying whether the ellipsoid casts or receives shadows
-   * from each light source. Default: {@link ShadowMode#DISABLED()}
-   */
-  @JsProperty
-  public Property shadows;
-  /**
-   * A Property specifying at what distance from the camera that this ellipsoid
-   * will be displayed.
-   */
-  @JsProperty
-  public Property distanceDisplayCondition;
+    /**
+     * A Property specifying what the height from the entity position is relative
+     * to.
+     */
+    @JsProperty
+    public Property heightReference;
+    /**
+     * A Cartesian3 Property specifying the radii of the ellipsoid.
+     */
+    @JsProperty
+    public Property radii;
+    /**
+     * A boolean Property specifying the visibility of the ellipsoid. Default: true
+     */
+    @JsProperty
+    public Property show;
+    /**
+     * A boolean Property specifying whether the ellipsoid is filled with the
+     * provided material. Default: true
+     */
+    @JsProperty
+    public Property fill;
+    /**
+     * A Property specifying the material used to fill the ellipsoid. Default:
+     * {@link org.cesiumjs.cs.core.Color#WHITE()}
+     */
+    @JsProperty
+    public MaterialProperty material;
+    /**
+     * A boolean Property specifying whether the ellipsoid is outlined. Default:
+     * false
+     */
+    @JsProperty
+    public Property outline;
+    /**
+     * A Property specifying the Color of the outline. Default:
+     * {@link Color#BLACK()}
+     */
+    @JsProperty
+    public Property outlineColor;
+    /**
+     * A numeric Property specifying the width of the outline. Default: 1.0
+     */
+    @JsProperty
+    public Property outlineWidth;
+    /**
+     * A Property specifying the number of samples per outline ring, determining the
+     * granularity of the curvature. Default: 128
+     */
+    @JsProperty
+    public Property subdivisions;
+    /**
+     * A Property specifying the number of stacks. Default: 64
+     */
+    @JsProperty
+    public Property stackPartitions;
+    /**
+     * A Property specifying the number of radial slices. Default: 64
+     */
+    @JsProperty
+    public Property slicePartitions;
+    /**
+     * An enum Property specifying whether the ellipsoid casts or receives shadows
+     * from each light source. Default: {@link ShadowMode#DISABLED()}
+     */
+    @JsProperty
+    public Property shadows;
+    /**
+     * A Property specifying at what distance from the camera that this ellipsoid
+     * will be displayed.
+     */
+    @JsProperty
+    public Property distanceDisplayCondition;
 
-  /**
-   * Options for {@link org.cesiumjs.cs.datasources.graphics.EllipsoidGraphics}
-   */
-  @JsConstructor
-  public EllipsoidGraphicsOptions() {
-  }
+    /**
+     * Options for {@link org.cesiumjs.cs.datasources.graphics.EllipsoidGraphics}
+     */
+    @JsConstructor
+    public EllipsoidGraphicsOptions() {
+    }
 }

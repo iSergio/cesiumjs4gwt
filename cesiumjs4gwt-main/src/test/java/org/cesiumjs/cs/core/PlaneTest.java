@@ -23,14 +23,11 @@ import org.cesiumjs.cs.BaseTestCase;
  */
 public class PlaneTest extends BaseTestCase {
 
-  public void testProjectPointOntoPlane() {
-    super.beginTest(new Test() {
-      @Override
-      public void execute() {
-        Cartesian3 point = new Cartesian3(1, 2, 3);
-        Cartesian3 result = Plane.projectPointOntoPlane(Plane.ORIGIN_XY_PLANE(), point);
-        assertNotNull(result);
-      }
-    });
-  }
+    public void testProjectPointOntoPlane() {
+        super.beginTest(() -> {
+            Cartesian3 point = new Cartesian3(1, 2, 3);
+            Cartesian3 result = Plane.projectPointOntoPlane(Plane.ORIGIN_XY_PLANE(), point);
+            assertNotNull(result);
+        });
+    }
 }

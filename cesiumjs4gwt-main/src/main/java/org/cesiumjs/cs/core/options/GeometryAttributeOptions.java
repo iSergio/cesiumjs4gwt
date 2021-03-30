@@ -17,45 +17,43 @@
 package org.cesiumjs.cs.core.options;
 
 import com.google.gwt.typedarrays.shared.TypedArrays;
-
-import org.cesiumjs.cs.core.ComponentDatatype;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.ComponentDatatype;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class GeometryAttributeOptions {
-  /**
-   * {@link ComponentDatatype} The datatype of each component in the attribute,
-   * e.g., individual elements in values.
-   */
-  @JsProperty
-  public int componentDatatype;
-  /**
-   * A number between 1 and 4 that defines the number of components in an
-   * attributes.
-   */
-  @JsProperty
-  public double componentsPerAttribute;
-  /**
-   * When true and componentDatatype is an integer format, indicate that the
-   * components should be mapped to the range [0, 1] (unsigned) or [-1, 1]
-   * (signed) when they are accessed as floating-point for rendering. Default:
-   * false
-   */
-  @JsProperty
-  public boolean normalize;
-  /**
-   * The values for the attributes stored in a typed array.
-   */
-  TypedArrays values;
+    /**
+     * {@link ComponentDatatype} The datatype of each component in the attribute,
+     * e.g., individual elements in values.
+     */
+    @JsProperty
+    public int componentDatatype;
+    /**
+     * A number between 1 and 4 that defines the number of components in an
+     * attributes.
+     */
+    @JsProperty
+    public double componentsPerAttribute;
+    /**
+     * When true and componentDatatype is an integer format, indicate that the
+     * components should be mapped to the range [0, 1] (unsigned) or [-1, 1]
+     * (signed) when they are accessed as floating-point for rendering. Default:
+     * false
+     */
+    @JsProperty
+    public boolean normalize;
+    /**
+     * The values for the attributes stored in a typed array.
+     */
+    TypedArrays values;
 
-  @JsConstructor
-  public GeometryAttributeOptions() {
-  }
+    @JsConstructor
+    public GeometryAttributeOptions() {
+    }
 }

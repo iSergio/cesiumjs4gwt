@@ -24,28 +24,28 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "ColorBlendMode")
 public class ColorBlendMode {
-  /**
-   * Multiplies the source color by the target color
-   */
-  @JsProperty(name = "HIGHLIGHT")
-  public static native Number HIGHLIGHT();
+    /**
+     * Defines different modes for blending between a target color and a primitive's
+     * source color.
+     */
+    private ColorBlendMode() {
+    }
 
-  /**
-   * Replaces the source color with the target color
-   */
-  @JsProperty(name = "REPLACE")
-  public static native Number REPLACE();
+    /**
+     * Multiplies the source color by the target color
+     */
+    @JsProperty(name = "HIGHLIGHT")
+    public static native Number HIGHLIGHT();
 
-  /**
-   * Blends the source color and target color together
-   */
-  @JsProperty(name = "MIX")
-  public static native Number MIX();
+    /**
+     * Replaces the source color with the target color
+     */
+    @JsProperty(name = "REPLACE")
+    public static native Number REPLACE();
 
-  /**
-   * Defines different modes for blending between a target color and a primitive's
-   * source color.
-   */
-  private ColorBlendMode() {
-  }
+    /**
+     * Blends the source color and target color together
+     */
+    @JsProperty(name = "MIX")
+    public static native Number MIX();
 }

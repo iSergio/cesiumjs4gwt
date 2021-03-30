@@ -16,56 +16,55 @@
 
 package org.cesiumjs.cs.datasources.properties;
 
-import org.cesiumjs.cs.datasources.properties.options.ImageMaterialPropertyOptions;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.datasources.properties.options.ImageMaterialPropertyOptions;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "ImageMaterialProperty")
 public class ImageMaterialProperty extends MaterialProperty {
-  /**
-   * Gets or sets the Color Property specifying the desired color applied to the
-   * imagery. Default: 1.0
-   */
-  @JsProperty
-  public Property color;
-  /**
-   * Gets or sets the Property specifying Image, URL, Canvas, or Video to use.
-   */
-  @JsProperty
-  public Property image;
-  /**
-   * Gets or sets the Cartesian2 Property specifying the number of times the
-   * imagery repeats in each direction. Default: new Cartesian2(1, 1)
-   */
-  @JsProperty
-  public Property repeat;
-  /**
-   * Gets or sets the Boolean Property specifying whether the imagery has
-   * transparency Default: 1.0
-   */
-  @JsProperty
-  public Property transparent;
+    /**
+     * Gets or sets the Color Property specifying the desired color applied to the
+     * imagery. Default: 1.0
+     */
+    @JsProperty
+    public Property color;
+    /**
+     * Gets or sets the Property specifying Image, URL, Canvas, or Video to use.
+     */
+    @JsProperty
+    public Property image;
+    /**
+     * Gets or sets the Cartesian2 Property specifying the number of times the
+     * imagery repeats in each direction. Default: new Cartesian2(1, 1)
+     */
+    @JsProperty
+    public Property repeat;
+    /**
+     * Gets or sets the Boolean Property specifying whether the imagery has
+     * transparency Default: 1.0
+     */
+    @JsProperty
+    public Property transparent;
 
-  /**
-   * A {@link MaterialProperty} that maps to imagery
-   * {@link org.cesiumjs.cs.scene.Material} uniforms.
-   */
-  @JsConstructor
-  public ImageMaterialProperty() {
-  }
+    /**
+     * A {@link MaterialProperty} that maps to imagery
+     * {@link org.cesiumjs.cs.scene.Material} uniforms.
+     */
+    @JsConstructor
+    public ImageMaterialProperty() {
+    }
 
-  /**
-   * A {@link MaterialProperty} that maps to imagery
-   * {@link org.cesiumjs.cs.scene.Material} uniforms.
-   * 
-   * @param options Options
-   */
-  @JsConstructor
-  public ImageMaterialProperty(ImageMaterialPropertyOptions options) {
-  }
+    /**
+     * A {@link MaterialProperty} that maps to imagery
+     * {@link org.cesiumjs.cs.scene.Material} uniforms.
+     *
+     * @param options Options
+     */
+    @JsConstructor
+    public ImageMaterialProperty(ImageMaterialPropertyOptions options) {
+    }
 }

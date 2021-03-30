@@ -16,51 +16,50 @@
 
 package org.cesiumjs.cs.core.enums;
 
-import org.cesiumjs.cs.core.Clock;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Clock;
 
 /**
  * Constants to determine how much time advances with each call to
  * {@link Clock#tick}.
- * 
+ *
+ * @author Serge Silaev aka iSergio
  * @see Clock
  * @see ClockRange
- * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "ClockStep")
 public class ClockStep {
-  /**
-   * {@link Clock#tick} sets the clock to the current system time; ignoring all
-   * other settings.
-   */
-  @JsProperty(name = "SYSTEM_CLOCK")
-  public static native Number SYSTEM_CLOCK();
+    /**
+     * Constants to determine how much time advances with each call to
+     * {@link Clock#tick}.
+     *
+     * @see Clock
+     * @see ClockRange
+     */
+    @JsConstructor
+    private ClockStep() {
+    }
 
-  /**
-   * {@link Clock#tick} advances the current time by the amount of system time
-   * elapsed since the previous call multiplied by {@link Clock#multiplier}.
-   */
-  @JsProperty(name = "SYSTEM_CLOCK_MULTIPLIER")
-  public static native Number SYSTEM_CLOCK_MULTIPLIER();
+    /**
+     * {@link Clock#tick} sets the clock to the current system time; ignoring all
+     * other settings.
+     */
+    @JsProperty(name = "SYSTEM_CLOCK")
+    public static native Number SYSTEM_CLOCK();
 
-  /**
-   * {@link Clock#tick} advances the current time by a fixed step, which is the
-   * number of seconds specified by {@link Clock#multiplier}.
-   */
-  @JsProperty(name = "TICK_DEPENDENT")
-  public static native Number TICK_DEPENDENT();
+    /**
+     * {@link Clock#tick} advances the current time by the amount of system time
+     * elapsed since the previous call multiplied by {@link Clock#multiplier}.
+     */
+    @JsProperty(name = "SYSTEM_CLOCK_MULTIPLIER")
+    public static native Number SYSTEM_CLOCK_MULTIPLIER();
 
-  /**
-   * Constants to determine how much time advances with each call to
-   * {@link Clock#tick}.
-   * 
-   * @see Clock
-   * @see ClockRange
-   */
-  @JsConstructor
-  private ClockStep() {
-  }
+    /**
+     * {@link Clock#tick} advances the current time by a fixed step, which is the
+     * number of seconds specified by {@link Clock#multiplier}.
+     */
+    @JsProperty(name = "TICK_DEPENDENT")
+    public static native Number TICK_DEPENDENT();
 }

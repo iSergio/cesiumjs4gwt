@@ -26,32 +26,32 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class PolylineColorAppearanceOptions {
-  /**
-   * When true, the geometry is expected to appear translucent so
-   * PolylineColorAppearance#renderState has alpha blending enabled. Default: true
-   */
-  @JsProperty
-  public boolean translucent;
-  /**
-   * Optional GLSL vertex shader source to override the default vertex shader.
-   */
-  @JsProperty
-  public String vertexShaderSource;
-  /**
-   * Optional GLSL fragment shader source to override the default fragment shader.
-   */
-  @JsProperty
-  public String fragmentShaderSource;
-  /**
-   * Optional render state to override the default render state.
-   */
-  @JsProperty
-  public Object renderState;
+    /**
+     * When true, the geometry is expected to appear translucent so
+     * PolylineColorAppearance#renderState has alpha blending enabled. Default: true
+     */
+    @JsProperty
+    public boolean translucent;
+    /**
+     * Optional GLSL vertex shader source to override the default vertex shader.
+     */
+    @JsProperty
+    public String vertexShaderSource;
+    /**
+     * Optional GLSL fragment shader source to override the default fragment shader.
+     */
+    @JsProperty
+    public String fragmentShaderSource;
+    /**
+     * Optional render state to override the default render state.
+     */
+    @JsProperty
+    public Object renderState;
 
-  /**
-   * Options for {@link org.cesiumjs.cs.scene.apperances.PolylineColorAppearance}
-   */
-  @JsConstructor
-  public PolylineColorAppearanceOptions() {
-  }
+    /**
+     * Options for {@link org.cesiumjs.cs.scene.apperances.PolylineColorAppearance}
+     */
+    @JsConstructor
+    public PolylineColorAppearanceOptions() {
+    }
 }

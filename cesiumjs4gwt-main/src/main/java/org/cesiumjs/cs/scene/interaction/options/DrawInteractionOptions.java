@@ -24,25 +24,25 @@ import org.cesiumjs.cs.scene.interaction.PrimitiveType;
  * @author Serge Silaev aka iSergio
  */
 public class DrawInteractionOptions extends AbstractPrimitiveOptions {
-  public PrimitiveCollection collection;
-  /**
-   * Primitive type for drawing
-   */
-  public PrimitiveType type = PrimitiveType.RECTANGLE;
-  /**
-   * Marker type. May be {@link org.cesiumjs.cs.scene.PointPrimitive} or
-   * {@link org.cesiumjs.cs.scene.Billboard}.
-   */
-  public MarkerType markerType = MarkerType.POINT_PRIMITIVE;
-  /**
-   * Marker primitive size. {@link org.cesiumjs.cs.scene.interaction.MarkerGroup}
-   */
-  public int pixelSize = 5;
+    public PrimitiveCollection collection;
+    /**
+     * Primitive type for drawing
+     */
+    public PrimitiveType type = PrimitiveType.RECTANGLE;
+    /**
+     * Marker type. May be {@link org.cesiumjs.cs.scene.PointPrimitive} or
+     * {@link org.cesiumjs.cs.scene.Billboard}.
+     */
+    public MarkerType markerType = MarkerType.POINT_PRIMITIVE;
+    /**
+     * Marker primitive size. {@link org.cesiumjs.cs.scene.interaction.MarkerGroup}
+     */
+    public int pixelSize = 5;
 
-  /**
-   * Constructor of options
-   */
-  public DrawInteractionOptions() {
-    super();
-  }
+    /**
+     * Constructor of options
+     */
+    public DrawInteractionOptions() {
+        super();
+    }
 }

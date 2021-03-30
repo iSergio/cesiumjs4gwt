@@ -25,40 +25,40 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "VerticalOrigin")
 public class VerticalOrigin {
-  /**
-   * The origin is at the vertical center of the object.
-   */
-  @JsProperty(name = "CENTER")
-  public static native Number CENTER();
+    /**
+     * The vertical location of an origin relative to an object, e.g., a
+     * {@link org.cesiumjs.cs.datasources.graphics.BillboardGraphics}. For example,
+     * the vertical origin is used to display a billboard above or below (in screen
+     * space) of the actual position.
+     *
+     * @see: Billboard#verticalOrigin
+     */
+    @JsConstructor
+    private VerticalOrigin() {
+    }
 
-  /**
-   * The origin is at the bottom of the object.
-   */
-  @JsProperty(name = "BOTTOM")
-  public static native Number BOTTOM();
+    /**
+     * The origin is at the vertical center of the object.
+     */
+    @JsProperty(name = "CENTER")
+    public static native Number CENTER();
 
-  /**
-   * If the object contains text, the origin is at the baseline of the text, else
-   * the origin is at the bottom of the object.
-   */
-  @JsProperty(name = "BASELINE")
-  public static native Number BASELINE();
+    /**
+     * The origin is at the bottom of the object.
+     */
+    @JsProperty(name = "BOTTOM")
+    public static native Number BOTTOM();
 
-  /**
-   * The origin is at the top of the object.
-   */
-  @JsProperty(name = "TOP")
-  public static native Number TOP();
+    /**
+     * If the object contains text, the origin is at the baseline of the text, else
+     * the origin is at the bottom of the object.
+     */
+    @JsProperty(name = "BASELINE")
+    public static native Number BASELINE();
 
-  /**
-   * The vertical location of an origin relative to an object, e.g., a
-   * {@link org.cesiumjs.cs.datasources.graphics.BillboardGraphics}. For example,
-   * the vertical origin is used to display a billboard above or below (in screen
-   * space) of the actual position.
-   * 
-   * @see: Billboard#verticalOrigin
-   */
-  @JsConstructor
-  private VerticalOrigin() {
-  }
+    /**
+     * The origin is at the top of the object.
+     */
+    @JsProperty(name = "TOP")
+    public static native Number TOP();
 }

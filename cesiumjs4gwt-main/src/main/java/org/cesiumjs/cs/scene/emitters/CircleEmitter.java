@@ -29,34 +29,34 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "CircleEmitter")
 public class CircleEmitter implements ParticleEmitter {
-  /**
-   * The angle of the cone in radians. Default: Math.toRadians(30.0)
-   */
-  @JsProperty
-  public double angle;
-  /**
-   * The radius of the circle in meters. Default: 1.0
-   */
-  @JsProperty
-  public double radius;
+    /**
+     * The angle of the cone in radians. Default: Math.toRadians(30.0)
+     */
+    @JsProperty
+    public double angle;
+    /**
+     * The radius of the circle in meters. Default: 1.0
+     */
+    @JsProperty
+    public double radius;
 
-  /**
-   * A ParticleEmitter that emits particles from a circle. Particles will be
-   * positioned within a circle and have initial velocities going along the z
-   * vector.
-   */
-  @JsConstructor
-  public CircleEmitter() {
-  }
+    /**
+     * A ParticleEmitter that emits particles from a circle. Particles will be
+     * positioned within a circle and have initial velocities going along the z
+     * vector.
+     */
+    @JsConstructor
+    public CircleEmitter() {
+    }
 
-  /**
-   * A ParticleEmitter that emits particles from a circle. Particles will be
-   * positioned within a circle and have initial velocities going along the z
-   * vector.
-   * 
-   * @param radius The radius of the circle in meters.
-   */
-  @JsConstructor
-  public CircleEmitter(double radius) {
-  }
+    /**
+     * A ParticleEmitter that emits particles from a circle. Particles will be
+     * positioned within a circle and have initial velocities going along the z
+     * vector.
+     *
+     * @param radius The radius of the circle in meters.
+     */
+    @JsConstructor
+    public CircleEmitter(double radius) {
+    }
 }

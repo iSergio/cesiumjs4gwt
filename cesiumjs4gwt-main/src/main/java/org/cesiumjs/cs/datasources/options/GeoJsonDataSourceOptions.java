@@ -16,91 +16,90 @@
 
 package org.cesiumjs.cs.datasources.options;
 
-import org.cesiumjs.cs.core.Color;
-import org.cesiumjs.cs.core.Credit;
-import org.cesiumjs.cs.datasources.GeoJsonDataSource;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Color;
+import org.cesiumjs.cs.core.Credit;
+import org.cesiumjs.cs.datasources.GeoJsonDataSource;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class GeoJsonDataSourceOptions {
-  /**
-   * Overrides the url to use for resolving relative links.
-   */
-  @JsProperty
-  public String sourceUri;
-  /**
-   * A function which returns a Property object (or just a string), which converts
-   * the properties into an html description.
-   */
-  @JsProperty
-  public GeoJsonDataSource.discribe discribe;
-  /**
-   * The default size of the map pin created for each point, in pixels. Default:
-   * {@link org.cesiumjs.cs.datasources.GeoJsonDataSource#markerSize}
-   */
-  @JsProperty
-  public int markerSize;
-  /**
-   * The default symbol of the map pin created for each point. Default:
-   * {@link org.cesiumjs.cs.datasources.GeoJsonDataSource#markerSymbol}
-   */
-  @JsProperty
-  public String markerSymbol;
-  /**
-   * The default color of the map pin created for each point. Default:
-   * {@link org.cesiumjs.cs.datasources.GeoJsonDataSource#markerColor}
-   */
-  @JsProperty
-  public Color markerColor;
-  /**
-   * The default color of polylines and polygon outlines. Default:
-   * {@link org.cesiumjs.cs.datasources.GeoJsonDataSource#stroke}
-   */
-  @JsProperty
-  public Color stroke;
-  /**
-   * The default width of polylines and polygon outlines. Default:
-   * {@link org.cesiumjs.cs.datasources.GeoJsonDataSource#strokeWidth}
-   */
-  @JsProperty
-  public double strokeWidth;
-  /**
-   * The default color for polygon interiors. Default:
-   * {@link org.cesiumjs.cs.datasources.GeoJsonDataSource#fill}
-   */
-  @JsProperty
-  public Color fill;
-  /**
-   * true if we want the geometry features (polygons or linestrings) clamped to
-   * the ground. If true, lines will use corridors so use Entity.corridor instead
-   * of Entity.polyline. Default:
-   * {@link org.cesiumjs.cs.datasources.GeoJsonDataSource#clampToGround}
-   */
-  @JsProperty
-  public boolean clampToGround;
-  /**
-   * A credit for the data source, which is displayed on the canvas.
-   */
-  @JsProperty
-  public Credit credit;
-  /**
-   * A credit for the data source, which is displayed on the canvas.
-   */
-  @JsProperty(name = "credit")
-  public String creditStr;
+    /**
+     * Overrides the url to use for resolving relative links.
+     */
+    @JsProperty
+    public String sourceUri;
+    /**
+     * A function which returns a Property object (or just a string), which converts
+     * the properties into an html description.
+     */
+    @JsProperty
+    public GeoJsonDataSource.discribe discribe;
+    /**
+     * The default size of the map pin created for each point, in pixels. Default:
+     * {@link org.cesiumjs.cs.datasources.GeoJsonDataSource#markerSize}
+     */
+    @JsProperty
+    public int markerSize;
+    /**
+     * The default symbol of the map pin created for each point. Default:
+     * {@link org.cesiumjs.cs.datasources.GeoJsonDataSource#markerSymbol}
+     */
+    @JsProperty
+    public String markerSymbol;
+    /**
+     * The default color of the map pin created for each point. Default:
+     * {@link org.cesiumjs.cs.datasources.GeoJsonDataSource#markerColor}
+     */
+    @JsProperty
+    public Color markerColor;
+    /**
+     * The default color of polylines and polygon outlines. Default:
+     * {@link org.cesiumjs.cs.datasources.GeoJsonDataSource#stroke}
+     */
+    @JsProperty
+    public Color stroke;
+    /**
+     * The default width of polylines and polygon outlines. Default:
+     * {@link org.cesiumjs.cs.datasources.GeoJsonDataSource#strokeWidth}
+     */
+    @JsProperty
+    public double strokeWidth;
+    /**
+     * The default color for polygon interiors. Default:
+     * {@link org.cesiumjs.cs.datasources.GeoJsonDataSource#fill}
+     */
+    @JsProperty
+    public Color fill;
+    /**
+     * true if we want the geometry features (polygons or linestrings) clamped to
+     * the ground. If true, lines will use corridors so use Entity.corridor instead
+     * of Entity.polyline. Default:
+     * {@link org.cesiumjs.cs.datasources.GeoJsonDataSource#clampToGround}
+     */
+    @JsProperty
+    public boolean clampToGround;
+    /**
+     * A credit for the data source, which is displayed on the canvas.
+     */
+    @JsProperty
+    public Credit credit;
+    /**
+     * A credit for the data source, which is displayed on the canvas.
+     */
+    @JsProperty(name = "credit")
+    public String creditStr;
 
-  /**
-   * Options for
-   * {@link org.cesiumjs.cs.datasources.GeoJsonDataSource#load(String, GeoJsonDataSourceOptions)}
-   */
-  @JsConstructor
-  public GeoJsonDataSourceOptions() {
-  }
+    /**
+     * Options for
+     * {@link org.cesiumjs.cs.datasources.GeoJsonDataSource#load(String, GeoJsonDataSourceOptions)}
+     */
+    @JsConstructor
+    public GeoJsonDataSourceOptions() {
+    }
 }

@@ -16,13 +16,12 @@
 
 package org.cesiumjs.cs.core.geometry.options;
 
-import org.cesiumjs.cs.core.Ellipsoid;
-import org.cesiumjs.cs.core.Rectangle;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Ellipsoid;
+import org.cesiumjs.cs.core.Rectangle;
 
 /**
  * Options for {@link org.cesiumjs.cs.core.geometry.RectangleOutlineGeometry}.
@@ -31,47 +30,47 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class RectangleOutlineGeometryOptions {
-  /**
-   * A cartographic rectangle with north, south, east and west properties in
-   * radians.
-   */
-  @JsProperty
-  public Rectangle rectangle;
-  /**
-   * The ellipsoid on which the rectangle lies. Default: {@link Ellipsoid#WGS84()}
-   */
-  @JsProperty
-  public Ellipsoid ellipsoid;
-  /**
-   * The distance, in radians, between each latitude and longitude. Determines the
-   * number of positions in the buffer. Default:
-   * {@link org.cesiumjs.cs.core.Math#RADIANS_PER_DEGREE()}
-   */
-  @JsProperty
-  public double granularity;
-  /**
-   * The distance in meters between the rectangle and the ellipsoid surface.
-   * Default: 0.0
-   */
-  @JsProperty
-  public double height;
-  /**
-   * The rotation of the rectangle, in radians. A positive rotation is
-   * counter-clockwise. Default: 0.0
-   */
-  @JsProperty
-  public double rotation;
-  /**
-   * The distance in meters between the rectangle's extruded face and the
-   * ellipsoid surface.
-   */
-  @JsProperty
-  public double extrudedHeight;
+    /**
+     * A cartographic rectangle with north, south, east and west properties in
+     * radians.
+     */
+    @JsProperty
+    public Rectangle rectangle;
+    /**
+     * The ellipsoid on which the rectangle lies. Default: {@link Ellipsoid#WGS84()}
+     */
+    @JsProperty
+    public Ellipsoid ellipsoid;
+    /**
+     * The distance, in radians, between each latitude and longitude. Determines the
+     * number of positions in the buffer. Default:
+     * {@link org.cesiumjs.cs.core.Math#RADIANS_PER_DEGREE()}
+     */
+    @JsProperty
+    public double granularity;
+    /**
+     * The distance in meters between the rectangle and the ellipsoid surface.
+     * Default: 0.0
+     */
+    @JsProperty
+    public double height;
+    /**
+     * The rotation of the rectangle, in radians. A positive rotation is
+     * counter-clockwise. Default: 0.0
+     */
+    @JsProperty
+    public double rotation;
+    /**
+     * The distance in meters between the rectangle's extruded face and the
+     * ellipsoid surface.
+     */
+    @JsProperty
+    public double extrudedHeight;
 
-  /**
-   * Options for {@link org.cesiumjs.cs.core.geometry.RectangleOutlineGeometry}
-   */
-  @JsConstructor
-  public RectangleOutlineGeometryOptions() {
-  }
+    /**
+     * Options for {@link org.cesiumjs.cs.core.geometry.RectangleOutlineGeometry}
+     */
+    @JsConstructor
+    public RectangleOutlineGeometryOptions() {
+    }
 }

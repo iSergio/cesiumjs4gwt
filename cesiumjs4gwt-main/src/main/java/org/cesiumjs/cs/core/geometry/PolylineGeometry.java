@@ -16,12 +16,11 @@
 
 package org.cesiumjs.cs.core.geometry;
 
-import org.cesiumjs.cs.core.geometry.options.PolylineGeometryOptions;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.geometry.options.PolylineGeometryOptions;
 
 /**
  * A description of a polyline modeled as a line strip; the first two positions
@@ -34,83 +33,83 @@ import jsinterop.annotations.JsType;
 // TODO: Examples
 @JsType(isNative = true, namespace = "Cesium", name = "PolylineGeometry")
 public class PolylineGeometry {
-  /**
-   * The number of elements used to pack the object into an array.
-   */
-  @JsProperty
-  public int packedLength;
+    /**
+     * The number of elements used to pack the object into an array.
+     */
+    @JsProperty
+    public int packedLength;
 
-  /**
-   * Create instance of PolylineGeometry
-   * 
-   * @param options {@link PolylineGeometryOptions}
-   */
-  @JsConstructor
-  public PolylineGeometry(PolylineGeometryOptions options) {
-  }
+    /**
+     * Create instance of PolylineGeometry
+     *
+     * @param options {@link PolylineGeometryOptions}
+     */
+    @JsConstructor
+    public PolylineGeometry(PolylineGeometryOptions options) {
+    }
 
-  /**
-   * Computes the geometric representation of a polyline, including its vertices,
-   * indices, and a bounding sphere.
-   * 
-   * @param polylineGeometry A description of the polyline.
-   * @return The computed vertices and indices.
-   */
-  @JsMethod
-  public static native Geometry createGeometry(PolylineGeometry polylineGeometry);
+    /**
+     * Computes the geometric representation of a polyline, including its vertices,
+     * indices, and a bounding sphere.
+     *
+     * @param polylineGeometry A description of the polyline.
+     * @return The computed vertices and indices.
+     */
+    @JsMethod
+    public static native Geometry createGeometry(PolylineGeometry polylineGeometry);
 
-  /**
-   * Stores the provided instance into the provided array.
-   * 
-   * @param value The value to pack.
-   * @param array The array to pack into.
-   * @return The array that was packed into
-   */
-  @JsMethod
-  public static native double[] pack(PolylineGeometry value, double[] array);
+    /**
+     * Stores the provided instance into the provided array.
+     *
+     * @param value The value to pack.
+     * @param array The array to pack into.
+     * @return The array that was packed into
+     */
+    @JsMethod
+    public static native double[] pack(PolylineGeometry value, double[] array);
 
-  /**
-   * Stores the provided instance into the provided array.
-   * 
-   * @param value         The value to pack.
-   * @param array         The array to pack into.
-   * @param startingIndex The index into the array at which to start packing the
-   *                      elements.
-   * @return The array that was packed into
-   */
-  @JsMethod
-  public static native double[] pack(PolylineGeometry value, double[] array, int startingIndex);
+    /**
+     * Stores the provided instance into the provided array.
+     *
+     * @param value         The value to pack.
+     * @param array         The array to pack into.
+     * @param startingIndex The index into the array at which to start packing the
+     *                      elements.
+     * @return The array that was packed into
+     */
+    @JsMethod
+    public static native double[] pack(PolylineGeometry value, double[] array, int startingIndex);
 
-  /**
-   * Retrieves an instance from a packed array.
-   * 
-   * @param array The packed array.
-   * @return The modified result parameter or a new PolylineGeometry instance if
-   *         one was not provided.
-   */
-  @JsMethod
-  public static native PolylineGeometry unpack(double[] array);
+    /**
+     * Retrieves an instance from a packed array.
+     *
+     * @param array The packed array.
+     * @return The modified result parameter or a new PolylineGeometry instance if
+     * one was not provided.
+     */
+    @JsMethod
+    public static native PolylineGeometry unpack(double[] array);
 
-  /**
-   * Retrieves an instance from a packed array.
-   * 
-   * @param array         The packed array.
-   * @param startingIndex The starting index of the element to be unpacked.
-   * @return The modified result parameter or a new PolylineGeometry instance if
-   *         one was not provided.
-   */
-  @JsMethod
-  public static native PolylineGeometry unpack(double[] array, int startingIndex);
+    /**
+     * Retrieves an instance from a packed array.
+     *
+     * @param array         The packed array.
+     * @param startingIndex The starting index of the element to be unpacked.
+     * @return The modified result parameter or a new PolylineGeometry instance if
+     * one was not provided.
+     */
+    @JsMethod
+    public static native PolylineGeometry unpack(double[] array, int startingIndex);
 
-  /**
-   * Retrieves an instance from a packed array.
-   * 
-   * @param array         The packed array.
-   * @param startingIndex The starting index of the element to be unpacked.
-   * @param result        The object into which to store the result.
-   * @return The modified result parameter or a new PolylineGeometry instance if
-   *         one was not provided.
-   */
-  @JsMethod
-  public static native PolylineGeometry unpack(double[] array, int startingIndex, PolylineGeometry result);
+    /**
+     * Retrieves an instance from a packed array.
+     *
+     * @param array         The packed array.
+     * @param startingIndex The starting index of the element to be unpacked.
+     * @param result        The object into which to store the result.
+     * @return The modified result parameter or a new PolylineGeometry instance if
+     * one was not provided.
+     */
+    @JsMethod
+    public static native PolylineGeometry unpack(double[] array, int startingIndex, PolylineGeometry result);
 }

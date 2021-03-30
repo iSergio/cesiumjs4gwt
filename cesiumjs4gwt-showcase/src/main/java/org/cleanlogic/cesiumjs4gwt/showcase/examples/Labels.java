@@ -16,15 +16,12 @@
 
 package org.cleanlogic.cesiumjs4gwt.showcase.examples;
 
-import javax.inject.Inject;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.ListBox;
-
 import org.cesiumjs.cs.core.Cartesian2;
 import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.Color;
@@ -45,187 +42,189 @@ import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cleanlogic.cesiumjs4gwt.showcase.basic.AbstractExample;
 import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ShowcaseExampleStore;
 
+import javax.inject.Inject;
+
 /**
  * @author Serge Silaev aka iSergio
  */
 public class Labels extends AbstractExample {
-  private ViewerPanel csVPanel;
+    private ViewerPanel csVPanel;
 
-  @Inject
-  public Labels(ShowcaseExampleStore store) {
-    super("Labels", "Create labels on scene", new String[] { "Showcase", "Cesium", "3d", "labels" }, store);
-  }
+    @Inject
+    public Labels(ShowcaseExampleStore store) {
+        super("Labels", "Create labels on scene", new String[]{"Showcase", "Cesium", "3d", "labels"}, store);
+    }
 
-  @Override
-  public void buildPanel() {
-    csVPanel = new ViewerPanel();
-    addLabel();
+    @Override
+    public void buildPanel() {
+        csVPanel = new ViewerPanel();
+        addLabel();
 
-    ListBox labelsLBox = new ListBox();
-    labelsLBox.addItem("Add label", "0");
-    labelsLBox.addItem("Set font", "1");
-    labelsLBox.addItem("Set properties", "2");
-    labelsLBox.addItem("Offset label by distance", "3");
-    labelsLBox.addItem("Fade label by distance", "4");
-    labelsLBox.addItem("Scale label by distance", "5");
-    labelsLBox.addItem("Set label with right-to-left language", "6");
-    labelsLBox.addChangeHandler(new ChangeHandler() {
-      @Override
-      public void onChange(ChangeEvent event) {
-        ListBox source = (ListBox) event.getSource();
-        reset();
-        switch (source.getSelectedValue()) {
-          case "0":
-            addLabel();
-            break;
-          case "1":
-            setFont();
-            break;
-          case "2":
-            setProperties();
-            break;
-          case "3":
-            offsetByDistance();
-            break;
-          case "4":
-            fadeByDistance();
-            break;
-          case "5":
-            scaleByDistance();
-            break;
-          case "6":
-            setRightToLeft();
-            break;
-          default:
-            break;
-        }
-      }
-    });
+        ListBox labelsLBox = new ListBox();
+        labelsLBox.addItem("Add label", "0");
+        labelsLBox.addItem("Set font", "1");
+        labelsLBox.addItem("Set properties", "2");
+        labelsLBox.addItem("Offset label by distance", "3");
+        labelsLBox.addItem("Fade label by distance", "4");
+        labelsLBox.addItem("Scale label by distance", "5");
+        labelsLBox.addItem("Set label with right-to-left language", "6");
+        labelsLBox.addChangeHandler(new ChangeHandler() {
+            @Override
+            public void onChange(ChangeEvent event) {
+                ListBox source = (ListBox) event.getSource();
+                reset();
+                switch (source.getSelectedValue()) {
+                    case "0":
+                        addLabel();
+                        break;
+                    case "1":
+                        setFont();
+                        break;
+                    case "2":
+                        setProperties();
+                        break;
+                    case "3":
+                        offsetByDistance();
+                        break;
+                    case "4":
+                        fadeByDistance();
+                        break;
+                    case "5":
+                        scaleByDistance();
+                        break;
+                    case "6":
+                        setRightToLeft();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
 
-    AbsolutePanel aPanel = new AbsolutePanel();
-    aPanel.add(csVPanel);
-    aPanel.add(labelsLBox, 20, 20);
+        AbsolutePanel aPanel = new AbsolutePanel();
+        aPanel.add(csVPanel);
+        aPanel.add(labelsLBox, 20, 20);
 
-    contentPanel.add(new HTML("<p>Create Labels</p>"));
-    contentPanel.add(aPanel);
+        contentPanel.add(new HTML("<p>Create Labels</p>"));
+        contentPanel.add(aPanel);
 
-    initWidget(contentPanel);
-  }
+        initWidget(contentPanel);
+    }
 
-  @Override
-  public String[] getSourceCodeURLs() {
-    String[] sourceCodeURLs = new String[1];
-    sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "Labels.txt";
-    return sourceCodeURLs;
-  }
+    @Override
+    public String[] getSourceCodeURLs() {
+        String[] sourceCodeURLs = new String[1];
+        sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "Labels.txt";
+        return sourceCodeURLs;
+    }
 
-  private void reset() {
-    csVPanel.getViewer().entities().removeAll();
-  }
+    private void reset() {
+        csVPanel.getViewer().entities().removeAll();
+    }
 
-  private void addLabel() {
-    LabelGraphicsOptions labelGraphicsOptions = new LabelGraphicsOptions();
-    labelGraphicsOptions.text = new ConstantProperty<>("Philadelphia");
-
-    EntityOptions entityOptions = new EntityOptions();
-    entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-75.1641667, 39.9522222));
-    entityOptions.label = new LabelGraphics(labelGraphicsOptions);
-    csVPanel.getViewer().entities().add(entityOptions);
-  }
-
-  private void setFont() {
-    LabelGraphicsOptions labelGraphicsOptions = new LabelGraphicsOptions();
-    labelGraphicsOptions.text = new ConstantProperty<>("Philadelphia");
-    labelGraphicsOptions.font = new ConstantProperty<>("24px Helvetica");
-    labelGraphicsOptions.fillColor = new ConstantProperty<>(Color.SKYBLUE());
-    labelGraphicsOptions.outlineColor = new ConstantProperty<>(Color.BLACK());
-    labelGraphicsOptions.outlineWidth = new ConstantProperty<>(2);
-    labelGraphicsOptions.style = new ConstantProperty<>(LabelStyle.FILL_AND_OUTLINE());
-
-    EntityOptions entityOptions = new EntityOptions();
-    entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-75.1641667, 39.9522222));
-    entityOptions.label = new LabelGraphics(labelGraphicsOptions);
-    csVPanel.getViewer().entities().add(entityOptions);
-  }
-
-  private void setProperties() {
-    LabelGraphicsOptions labelGraphicsOptions = new LabelGraphicsOptions();
-    labelGraphicsOptions.text = new ConstantProperty<>("Philadelphia");
-
-    EntityOptions entityOptions = new EntityOptions();
-    entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-75.1641667, 39.9522222, 300000.0));
-    entityOptions.label = new LabelGraphics(labelGraphicsOptions);
-    Entity entity = csVPanel.getViewer().entities().add(entityOptions);
-
-    entity.label.scale = new ConstantProperty<>(2.0);
-    entity.label.showBackground = new ConstantProperty<>(true);
-  }
-
-  private void offsetByDistance() {
-    final JsImage image = new JsImage();
-    image.onload = new JsImage.Listener() {
-      @Override
-      public void function() {
-        BillboardGraphicsOptions billboardGraphicsOptions = new BillboardGraphicsOptions();
-        billboardGraphicsOptions.scaleByDistance = new ConstantProperty<>(new NearFarScalar(1.5e2, 5.0, 1.5e7, 0.5));
-        billboardGraphicsOptions.image = new ConstantProperty<>(image);
-
+    private void addLabel() {
         LabelGraphicsOptions labelGraphicsOptions = new LabelGraphicsOptions();
-        labelGraphicsOptions.text = new ConstantProperty<>("Label on top of scaling billboard");
-        labelGraphicsOptions.font = new ConstantProperty<>("20px sans-serif");
-        labelGraphicsOptions.showBackground = new ConstantProperty<>(true);
-        labelGraphicsOptions.horizontalOrigin = new ConstantProperty<>(HorizontalOrigin.CENTER());
-        labelGraphicsOptions.pixelOffset = new ConstantProperty<>(new Cartesian2(0.0, -image.height));
-        labelGraphicsOptions.pixelOffsetScaleByDistance = new ConstantProperty<>(
-            new NearFarScalar(1.5e2, 3.0, 1.5e7, 0.5));
+        labelGraphicsOptions.text = new ConstantProperty<>("Philadelphia");
 
         EntityOptions entityOptions = new EntityOptions();
         entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-75.1641667, 39.9522222));
-        entityOptions.billboard = new BillboardGraphics(billboardGraphicsOptions);
         entityOptions.label = new LabelGraphics(labelGraphicsOptions);
         csVPanel.getViewer().entities().add(entityOptions);
-      }
-    };
-    image.src = GWT.getModuleBaseURL() + "images/facility.gif";
-  }
+    }
 
-  private void fadeByDistance() {
-    LabelGraphicsOptions labelGraphicsOptions = new LabelGraphicsOptions();
-    labelGraphicsOptions.text = new ConstantProperty<>("New York");
-    labelGraphicsOptions.translucencyByDistance = new ConstantProperty<>(new NearFarScalar(1.5e2, 1.0, 1.5e8, 0.0));
+    private void setFont() {
+        LabelGraphicsOptions labelGraphicsOptions = new LabelGraphicsOptions();
+        labelGraphicsOptions.text = new ConstantProperty<>("Philadelphia");
+        labelGraphicsOptions.font = new ConstantProperty<>("24px Helvetica");
+        labelGraphicsOptions.fillColor = new ConstantProperty<>(Color.SKYBLUE());
+        labelGraphicsOptions.outlineColor = new ConstantProperty<>(Color.BLACK());
+        labelGraphicsOptions.outlineWidth = new ConstantProperty<>(2);
+        labelGraphicsOptions.style = new ConstantProperty<>(LabelStyle.FILL_AND_OUTLINE());
 
-    EntityOptions entityOptions = new EntityOptions();
-    entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-73.94, 40.67));
-    entityOptions.label = new LabelGraphics(labelGraphicsOptions);
-    csVPanel.getViewer().entities().add(entityOptions);
+        EntityOptions entityOptions = new EntityOptions();
+        entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-75.1641667, 39.9522222));
+        entityOptions.label = new LabelGraphics(labelGraphicsOptions);
+        csVPanel.getViewer().entities().add(entityOptions);
+    }
 
-    labelGraphicsOptions = new LabelGraphicsOptions();
-    labelGraphicsOptions.text = new ConstantProperty<>("'Atlanta'");
-    labelGraphicsOptions.translucencyByDistance = new ConstantProperty<>(new NearFarScalar(1.5e5, 1.0, 1.5e7, 0.0));
+    private void setProperties() {
+        LabelGraphicsOptions labelGraphicsOptions = new LabelGraphicsOptions();
+        labelGraphicsOptions.text = new ConstantProperty<>("Philadelphia");
 
-    entityOptions = new EntityOptions();
-    entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-84.39, 33.75));
-    entityOptions.label = new LabelGraphics(labelGraphicsOptions);
-    csVPanel.getViewer().entities().add(entityOptions);
-  }
+        EntityOptions entityOptions = new EntityOptions();
+        entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-75.1641667, 39.9522222, 300000.0));
+        entityOptions.label = new LabelGraphics(labelGraphicsOptions);
+        Entity entity = csVPanel.getViewer().entities().add(entityOptions);
 
-  private void scaleByDistance() {
-    LabelGraphicsOptions labelGraphicsOptions = new LabelGraphicsOptions();
-    labelGraphicsOptions.text = new ConstantProperty<>("Philadelphia");
-    labelGraphicsOptions.scaleByDistance = new NearFarScalar(1.5e2, 2.0, 1.5e7, 0.5);
-    EntityOptions entityOptions = new EntityOptions();
-    entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-75.1641667, 39.9522222));
-    entityOptions.label = new LabelGraphics(labelGraphicsOptions);
-    csVPanel.getViewer().entities().add(entityOptions);
-  }
+        entity.label.scale = new ConstantProperty<>(2.0);
+        entity.label.showBackground = new ConstantProperty<>(true);
+    }
 
-  private void setRightToLeft() {
-    Label.enableRightToLeftDetection = true;
-    LabelGraphicsOptions labelGraphicsOptions = new LabelGraphicsOptions();
-    labelGraphicsOptions.text = new ConstantProperty<>("Master (אדון): Hello\nתלמיד (student): שלום");
-    EntityOptions entityOptions = new EntityOptions();
-    entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-75.1641667, 39.9522222));
-    entityOptions.label = new LabelGraphics(labelGraphicsOptions);
-    csVPanel.getViewer().entities().add(entityOptions);
-  }
+    private void offsetByDistance() {
+        final JsImage image = new JsImage();
+        image.onload = new JsImage.Listener() {
+            @Override
+            public void function() {
+                BillboardGraphicsOptions billboardGraphicsOptions = new BillboardGraphicsOptions();
+                billboardGraphicsOptions.scaleByDistance = new ConstantProperty<>(new NearFarScalar(1.5e2, 5.0, 1.5e7, 0.5));
+                billboardGraphicsOptions.image = new ConstantProperty<>(image);
+
+                LabelGraphicsOptions labelGraphicsOptions = new LabelGraphicsOptions();
+                labelGraphicsOptions.text = new ConstantProperty<>("Label on top of scaling billboard");
+                labelGraphicsOptions.font = new ConstantProperty<>("20px sans-serif");
+                labelGraphicsOptions.showBackground = new ConstantProperty<>(true);
+                labelGraphicsOptions.horizontalOrigin = new ConstantProperty<>(HorizontalOrigin.CENTER());
+                labelGraphicsOptions.pixelOffset = new ConstantProperty<>(new Cartesian2(0.0, -image.height));
+                labelGraphicsOptions.pixelOffsetScaleByDistance = new ConstantProperty<>(
+                        new NearFarScalar(1.5e2, 3.0, 1.5e7, 0.5));
+
+                EntityOptions entityOptions = new EntityOptions();
+                entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-75.1641667, 39.9522222));
+                entityOptions.billboard = new BillboardGraphics(billboardGraphicsOptions);
+                entityOptions.label = new LabelGraphics(labelGraphicsOptions);
+                csVPanel.getViewer().entities().add(entityOptions);
+            }
+        };
+        image.src = GWT.getModuleBaseURL() + "images/facility.gif";
+    }
+
+    private void fadeByDistance() {
+        LabelGraphicsOptions labelGraphicsOptions = new LabelGraphicsOptions();
+        labelGraphicsOptions.text = new ConstantProperty<>("New York");
+        labelGraphicsOptions.translucencyByDistance = new ConstantProperty<>(new NearFarScalar(1.5e2, 1.0, 1.5e8, 0.0));
+
+        EntityOptions entityOptions = new EntityOptions();
+        entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-73.94, 40.67));
+        entityOptions.label = new LabelGraphics(labelGraphicsOptions);
+        csVPanel.getViewer().entities().add(entityOptions);
+
+        labelGraphicsOptions = new LabelGraphicsOptions();
+        labelGraphicsOptions.text = new ConstantProperty<>("'Atlanta'");
+        labelGraphicsOptions.translucencyByDistance = new ConstantProperty<>(new NearFarScalar(1.5e5, 1.0, 1.5e7, 0.0));
+
+        entityOptions = new EntityOptions();
+        entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-84.39, 33.75));
+        entityOptions.label = new LabelGraphics(labelGraphicsOptions);
+        csVPanel.getViewer().entities().add(entityOptions);
+    }
+
+    private void scaleByDistance() {
+        LabelGraphicsOptions labelGraphicsOptions = new LabelGraphicsOptions();
+        labelGraphicsOptions.text = new ConstantProperty<>("Philadelphia");
+        labelGraphicsOptions.scaleByDistance = new NearFarScalar(1.5e2, 2.0, 1.5e7, 0.5);
+        EntityOptions entityOptions = new EntityOptions();
+        entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-75.1641667, 39.9522222));
+        entityOptions.label = new LabelGraphics(labelGraphicsOptions);
+        csVPanel.getViewer().entities().add(entityOptions);
+    }
+
+    private void setRightToLeft() {
+        Label.enableRightToLeftDetection = true;
+        LabelGraphicsOptions labelGraphicsOptions = new LabelGraphicsOptions();
+        labelGraphicsOptions.text = new ConstantProperty<>("Master (אדון): Hello\nתלמיד (student): שלום");
+        EntityOptions entityOptions = new EntityOptions();
+        entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-75.1641667, 39.9522222));
+        entityOptions.label = new LabelGraphics(labelGraphicsOptions);
+        csVPanel.getViewer().entities().add(entityOptions);
+    }
 }

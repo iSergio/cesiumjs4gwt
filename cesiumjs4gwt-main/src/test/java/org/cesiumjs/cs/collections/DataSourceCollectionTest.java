@@ -17,43 +17,22 @@
 package org.cesiumjs.cs.collections;
 
 import com.google.gwt.core.client.GWT;
-
+import junit.framework.TestCase;
 import org.cesiumjs.cs.BaseTestCase;
-import org.cesiumjs.cs.Cesium;
-import org.cesiumjs.cs.datasources.DataSource;
 import org.cesiumjs.cs.datasources.GeoJsonDataSource;
-import org.cesiumjs.cs.promise.Fulfill;
-import org.cesiumjs.cs.promise.Reject;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 public class DataSourceCollectionTest extends BaseTestCase {
-  private DataSourceCollection collection;
-  private DataSource geojsonDS;
-  private DataSource topojsonDS;
 
-  public void testLower() {
-    delayTestFinish(10_000);
-
-    super.beginTest(new Test() {
-      @Override
-      public void execute() {
-        GeoJsonDataSource.load(GWT.getModuleBaseURL() + "SampleData/simplestyles.geojson")
-            .then(new Fulfill<GeoJsonDataSource>() {
-              @Override
-              public void onFulfilled(GeoJsonDataSource dataSource) {
-                assertNotNull(dataSource);
-                finishTest();
-              }
-            }, new Reject<String>() {
-              @Override
-              public void onRejected(String value) {
-                Cesium.log("onRejected: " + value);
-                finishTest();
-              }
-            });
-      }
-    });
-  }
+    public void test() {
+        delayTestFinish(10_000);
+        super.beginTest(() -> GeoJsonDataSource.load(GWT.getModuleBaseURL() + "SampleData/ne_10m_us_states.topojson")
+                .then(dataSource -> {
+                    assertNotNull(dataSource);
+                    finishTest();
+                    }, TestCase::fail)
+        );
+    }
 }

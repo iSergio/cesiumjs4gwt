@@ -28,14 +28,14 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class ResourcePutOptions extends ResourceOptions {
-  /**
-   * The type of response. This controls the type of item returned.
-   */
-  @JsProperty
-  public String responseType;
-  /**
-   * Overrides the MIME type returned by the server.
-   */
-  @JsProperty
-  public String overrideMimeType;
+    /**
+     * The type of response. This controls the type of item returned.
+     */
+    @JsProperty
+    public String responseType;
+    /**
+     * Overrides the MIME type returned by the server.
+     */
+    @JsProperty
+    public String overrideMimeType;
 }

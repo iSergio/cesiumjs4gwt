@@ -32,46 +32,46 @@ import org.cesiumjs.cs.scene.options.ModelAnimationOptions;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "ModelAnimationCollection")
 public class ModelAnimationCollection extends Collection<ModelAnimation> {
-  /**
-   * The event fired when an animation is added to the collection. This can be
-   * used, for example, to keep a UI in sync. Default: new Event()
-   */
-  @SuppressWarnings("rawtypes")
-  @JsProperty
-  public Event animationAdded;
-  /**
-   * The event fired when an animation is removed from the collection. This can be
-   * used, for example, to keep a UI in sync. Default: new Event()
-   */
-  @SuppressWarnings("rawtypes")
-  @JsProperty
-  public Event animationRemoved;
+    /**
+     * The event fired when an animation is added to the collection. This can be
+     * used, for example, to keep a UI in sync. Default: new Event()
+     */
+    @SuppressWarnings("rawtypes")
+    @JsProperty
+    public Event animationAdded;
+    /**
+     * The event fired when an animation is removed from the collection. This can be
+     * used, for example, to keep a UI in sync. Default: new Event()
+     */
+    @SuppressWarnings("rawtypes")
+    @JsProperty
+    public Event animationRemoved;
 
-  @JsConstructor
-  public ModelAnimationCollection() {
-  }
+    @JsConstructor
+    public ModelAnimationCollection() {
+    }
 
-  /**
-   * Creates and adds an animation with the specified initial properties to the
-   * collection. This raises the ModelAnimationCollection#animationAdded event so,
-   * for example, a UI can stay in sync.
-   * 
-   * @param options {@link ModelAnimationOptions}
-   * @return The animation that was added to the collection.
-   */
-  @JsMethod
-  public native ModelAnimation add(ModelAnimationOptions options);
+    /**
+     * Creates and adds an animation with the specified initial properties to the
+     * collection. This raises the ModelAnimationCollection#animationAdded event so,
+     * for example, a UI can stay in sync.
+     *
+     * @param options {@link ModelAnimationOptions}
+     * @return The animation that was added to the collection.
+     */
+    @JsMethod
+    public native ModelAnimation add(ModelAnimationOptions options);
 
-  /**
-   * Creates and adds an animation with the specified initial properties to the
-   * collection for each animation in the model. This raises the
-   * ModelAnimationCollection#animationAdded event for each model so, for example,
-   * a UI can stay in sync.
-   * 
-   * @param options {@link ModelAnimationOptions}
-   * @return An array of ModelAnimation objects, one for each animation added to
-   *         the collection. If there are no glTF animations, the array is empty.
-   */
-  @JsMethod
-  public native ModelAnimation[] addAll(ModelAnimationOptions options);
+    /**
+     * Creates and adds an animation with the specified initial properties to the
+     * collection for each animation in the model. This raises the
+     * ModelAnimationCollection#animationAdded event for each model so, for example,
+     * a UI can stay in sync.
+     *
+     * @param options {@link ModelAnimationOptions}
+     * @return An array of ModelAnimation objects, one for each animation added to
+     * the collection. If there are no glTF animations, the array is empty.
+     */
+    @JsMethod
+    public native ModelAnimation[] addAll(ModelAnimationOptions options);
 }

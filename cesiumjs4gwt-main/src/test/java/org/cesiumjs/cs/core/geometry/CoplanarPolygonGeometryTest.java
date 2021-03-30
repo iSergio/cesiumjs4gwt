@@ -24,20 +24,17 @@ import org.cesiumjs.cs.core.geometry.options.CoplanarPolygonGeometryFromPosition
  * @author Serge Silaev aka iSergio
  */
 public class CoplanarPolygonGeometryTest extends BaseTestCase {
-  public void testFromPositions() {
-    delayTestFinish(10_000);
+    public void testFromPositions() {
+        delayTestFinish(10_000);
 
-    super.beginTest(new Test() {
-      @Override
-      public void execute() {
-        Cartesian3[] positions = Cartesian3.fromDegreesArrayHeights(
-            new double[] { -90.0, 30.0, 0.0, -90.0, 30.0, 1000.0, -80.0, 30.0, 1000.0, -80.0, 30.0, 0.0 });
-        CoplanarPolygonGeometryFromPositionsOptions options = CoplanarPolygonGeometryFromPositionsOptions
-            .create(positions);
-        CoplanarPolygonGeometry geometry = CoplanarPolygonGeometry.fromPositions(options);
-
-        finishTest();
-      }
-    });
-  }
+        super.beginTest(() -> {
+            Cartesian3[] positions = Cartesian3.fromDegreesArrayHeights(
+                    new double[]{-90.0, 30.0, 0.0, -90.0, 30.0, 1000.0, -80.0, 30.0, 1000.0, -80.0, 30.0, 0.0});
+            CoplanarPolygonGeometryFromPositionsOptions options = CoplanarPolygonGeometryFromPositionsOptions
+                    .create(positions);
+            CoplanarPolygonGeometry geometry = CoplanarPolygonGeometry.fromPositions(options);
+            assertNotNull(geometry);
+            finishTest();
+        });
+    }
 }

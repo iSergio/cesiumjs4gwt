@@ -16,14 +16,9 @@
 
 package org.cesiumjs.cs.scene.options;
 
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.scene.PostProcessStage;
-
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsOverlay;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
 
 /**
  * Options for {@link org.cesiumjs.cs.scene.PostProcessStageComposite}.
@@ -32,38 +27,38 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class PostProcessStageCompositeOptions {
-  /**
-   * An array of {@link PostProcessStage}'s or composites to be executed in order.
-   */
-  @JsProperty
-  public PostProcessStage[] stages;
-  /**
-   * Whether to execute each post-process stage where the input to one stage is
-   * the output of the previous. Otherwise, the input to each contained stage is
-   * the output of the stage that executed before the composite. Default: true
-   */
-  @JsProperty
-  public boolean inputPreviousStageTexture;
-  /**
-   * The unique name of this post-process stage for reference by other composites.
-   * If a name is not supplied, a GUID will be generated. Default: createGuid()
-   */
-  @JsProperty
-  String name;
-  /**
-   * An alias to the uniforms of post-process stages.
-   */
-  @JsProperty
-  public JsObject uniforms;
+    /**
+     * An array of {@link PostProcessStage}'s or composites to be executed in order.
+     */
+    @JsProperty
+    public PostProcessStage[] stages;
+    /**
+     * Whether to execute each post-process stage where the input to one stage is
+     * the output of the previous. Otherwise, the input to each contained stage is
+     * the output of the stage that executed before the composite. Default: true
+     */
+    @JsProperty
+    public boolean inputPreviousStageTexture;
+    /**
+     * An alias to the uniforms of post-process stages.
+     */
+    @JsProperty
+    public JsObject uniforms;
+    /**
+     * The unique name of this post-process stage for reference by other composites.
+     * If a name is not supplied, a GUID will be generated. Default: createGuid()
+     */
+    @JsProperty
+    String name;
 
-  @JsConstructor
-  private PostProcessStageCompositeOptions() {
-  }
+    @JsConstructor
+    private PostProcessStageCompositeOptions() {
+    }
 
-  @JsOverlay
-  public static PostProcessStageCompositeOptions create(PostProcessStage[] stages) {
-    PostProcessStageCompositeOptions options = new PostProcessStageCompositeOptions();
-    options.stages = stages;
-    return options;
-  }
+    @JsOverlay
+    public static PostProcessStageCompositeOptions create(PostProcessStage[] stages) {
+        PostProcessStageCompositeOptions options = new PostProcessStageCompositeOptions();
+        options.stages = stages;
+        return options;
+    }
 }

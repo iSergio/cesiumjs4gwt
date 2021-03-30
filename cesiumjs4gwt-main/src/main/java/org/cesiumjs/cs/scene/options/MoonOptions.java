@@ -16,35 +16,34 @@
 
 package org.cesiumjs.cs.scene.options;
 
-import org.cesiumjs.cs.core.Ellipsoid;
-
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Ellipsoid;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class MoonOptions {
-  /**
-   * Determines whether the moon will be rendered. Default: true
-   */
-  @JsProperty
-  public boolean show;
-  /**
-   * The moon texture. Default: buildModuleUrl('Assets/Textures/moonSmall.jpg')
-   */
-  @JsProperty
-  public String textureUrl;
-  /**
-   * The moon ellipsoid. Default: {@link Ellipsoid#MOON()}
-   */
-  @JsProperty
-  public Ellipsoid ellipsoid;
-  /**
-   * Use the sun as the only light source. Default: true
-   */
-  @JsProperty
-  public boolean onlySunLighting;
+    /**
+     * Determines whether the moon will be rendered. Default: true
+     */
+    @JsProperty
+    public boolean show;
+    /**
+     * The moon texture. Default: buildModuleUrl('Assets/Textures/moonSmall.jpg')
+     */
+    @JsProperty
+    public String textureUrl;
+    /**
+     * The moon ellipsoid. Default: {@link Ellipsoid#MOON()}
+     */
+    @JsProperty
+    public Ellipsoid ellipsoid;
+    /**
+     * Use the sun as the only light source. Default: true
+     */
+    @JsProperty
+    public boolean onlySunLighting;
 }

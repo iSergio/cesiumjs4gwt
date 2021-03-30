@@ -26,23 +26,23 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class GeocoderResult {
-  /**
-   * The display name for a location
-   */
-  @JsProperty
-  public String displayName;
-  /**
-   * The bounding box for a location
-   */
-  @JsProperty(name = "destination")
-  public Rectangle destinationRectangle;
-  /**
-   * The bounding box for a location
-   */
-  @JsProperty(name = "destination")
-  public Cartesian3 destinationCartesian3;
+    /**
+     * The display name for a location
+     */
+    @JsProperty
+    public String displayName;
+    /**
+     * The bounding box for a location
+     */
+    @JsProperty(name = "destination")
+    public Rectangle destinationRectangle;
+    /**
+     * The bounding box for a location
+     */
+    @JsProperty(name = "destination")
+    public Cartesian3 destinationCartesian3;
 
-  @JsConstructor
-  public GeocoderResult() {
-  }
+    @JsConstructor
+    public GeocoderResult() {
+    }
 }

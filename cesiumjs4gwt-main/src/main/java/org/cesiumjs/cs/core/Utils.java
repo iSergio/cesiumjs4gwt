@@ -26,11 +26,11 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true)
 public class Utils {
-  @JsMethod(name = "setTimeout", namespace = JsPackage.GLOBAL)
-  public static native void setTimeout(TimeoutListener listener, int milliseconds);
+    @JsMethod(name = "setTimeout", namespace = JsPackage.GLOBAL)
+    public static native void setTimeout(TimeoutListener listener, int milliseconds);
 
-  @JsFunction
-  public interface TimeoutListener {
-    void function();
-  }
+    @JsFunction
+    public interface TimeoutListener {
+        void function();
+    }
 }

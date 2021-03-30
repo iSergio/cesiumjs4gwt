@@ -16,143 +16,142 @@
 
 package org.cesiumjs.cs.datasources.graphics.options;
 
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.datasources.properties.Property;
 import org.cesiumjs.cs.scene.enums.ColorBlendMode;
 import org.cesiumjs.cs.scene.enums.HeightReference;
 import org.cesiumjs.cs.scene.enums.ShadowMode;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
-
 /**
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class ModelGraphicsOptions {
-  /**
-   * A string Property specifying the URI of the glTF asset.
-   */
-  @JsProperty
-  public Property uri;
-  /**
-   * A boolean Property specifying the visibility of the model. Default: true
-   */
-  @JsProperty
-  public Property show;
-  /**
-   * A numeric Property specifying a uniform linear scale. Default: 1.0
-   */
-  @JsProperty
-  public Property scale;
-  /**
-   * A numeric Property specifying the approximate minimum pixel size of the model
-   * regardless of zoom. Default: 0.0
-   */
-  @JsProperty
-  public Property minimumPixelSize;
-  /**
-   * The maximum scale size of a model. An upper limit for minimumPixelSize.
-   */
-  @JsProperty
-  public Property maximumScale;
-  /**
-   * Determine if textures may continue to stream in after the model is loaded.
-   * Default: true
-   */
-  @JsProperty
-  public Property incrementallyLoadTextures;
-  /**
-   * A boolean Property specifying if glTF animations specified in the model
-   * should be started. Default: true
-   */
-  @JsProperty
-  public Property runAnimations;
-  /**
-   * Determines if the model's animations should hold a pose over frames where no
-   * keyframes are specified.
-   */
-  @JsProperty
-  public boolean clampAnimations;
-  /**
-   * An object, where keys are names of nodes, and values are
-   * TranslationRotationScale Properties describing the transformation to apply to
-   * that node.
-   */
-  @JsProperty
-  public Property nodeTransformations;
-  /**
-   * An enum Property specifying whether the model casts or receives shadows from
-   * each light source. Default: {@link ShadowMode#ENABLED()}
-   */
-  @JsProperty
-  public Property shadows;
-  /**
-   * A Property specifying what the height is relative to. Default:
-   * {@link HeightReference#NONE()}
-   */
-  @JsProperty
-  public Property heightReference;
-  /**
-   * A Property specifying at what distance from the camera that this model will
-   * be displayed.
-   */
-  @JsProperty
-  public Property distanceDisplayCondition;
-  /**
-   * A Property specifying the Color of the silhouette. Default:
-   * {@link Color#RED()}
-   */
-  @JsProperty
-  public Property silhouetteColor;
-  /**
-   * A numeric Property specifying the size of the silhouette in pixels. Default:
-   * 0.0
-   */
-  @JsProperty
-  public Property silhouetteSize;
-  /**
-   * A Property specifying the Color that blends with the model's rendered color.
-   * Default: Color.WHITE
-   */
-  @JsProperty
-  public Property color;
-  /**
-   * An enum Property specifying how the color blends with the model. Default:
-   * {@link ColorBlendMode#HIGHLIGHT()}
-   */
-  @JsProperty
-  public Property colorBlendMode;
-  /**
-   * A numeric Property specifying the color strength when the colorBlendMode is
-   * MIX. A value of 0.0 results in the model's rendered color while a value of
-   * 1.0 results in a solid color, with any value in-between resulting in a mix of
-   * the two. Default: 0.5
-   */
-  @JsProperty
-  public Property colorBlendAmount;
-  /**
-   * A property specifying the ClippingPlaneCollection used to selectively disable
-   * rendering the model.
-   */
-  @JsProperty
-  public Property clippingPlanes;
-  /**
-   * A property specifying the contribution from diffuse and specular image-based
-   * lighting. Default: new Cartesian2(1.0, 1.0)
-   */
-  @JsProperty
-  public Property imageBasedLightingFactor;
-  /**
-   * A property specifying the light color to use when shading the model. The
-   * default sun light color will be used when undefined.
-   */
-  @JsProperty
-  public Property lightColor;
+    /**
+     * A string Property specifying the URI of the glTF asset.
+     */
+    @JsProperty
+    public Property uri;
+    /**
+     * A boolean Property specifying the visibility of the model. Default: true
+     */
+    @JsProperty
+    public Property show;
+    /**
+     * A numeric Property specifying a uniform linear scale. Default: 1.0
+     */
+    @JsProperty
+    public Property scale;
+    /**
+     * A numeric Property specifying the approximate minimum pixel size of the model
+     * regardless of zoom. Default: 0.0
+     */
+    @JsProperty
+    public Property minimumPixelSize;
+    /**
+     * The maximum scale size of a model. An upper limit for minimumPixelSize.
+     */
+    @JsProperty
+    public Property maximumScale;
+    /**
+     * Determine if textures may continue to stream in after the model is loaded.
+     * Default: true
+     */
+    @JsProperty
+    public Property incrementallyLoadTextures;
+    /**
+     * A boolean Property specifying if glTF animations specified in the model
+     * should be started. Default: true
+     */
+    @JsProperty
+    public Property runAnimations;
+    /**
+     * Determines if the model's animations should hold a pose over frames where no
+     * keyframes are specified.
+     */
+    @JsProperty
+    public boolean clampAnimations;
+    /**
+     * An object, where keys are names of nodes, and values are
+     * TranslationRotationScale Properties describing the transformation to apply to
+     * that node.
+     */
+    @JsProperty
+    public Property nodeTransformations;
+    /**
+     * An enum Property specifying whether the model casts or receives shadows from
+     * each light source. Default: {@link ShadowMode#ENABLED()}
+     */
+    @JsProperty
+    public Property shadows;
+    /**
+     * A Property specifying what the height is relative to. Default:
+     * {@link HeightReference#NONE()}
+     */
+    @JsProperty
+    public Property heightReference;
+    /**
+     * A Property specifying at what distance from the camera that this model will
+     * be displayed.
+     */
+    @JsProperty
+    public Property distanceDisplayCondition;
+    /**
+     * A Property specifying the Color of the silhouette. Default:
+     * {@link Color#RED()}
+     */
+    @JsProperty
+    public Property silhouetteColor;
+    /**
+     * A numeric Property specifying the size of the silhouette in pixels. Default:
+     * 0.0
+     */
+    @JsProperty
+    public Property silhouetteSize;
+    /**
+     * A Property specifying the Color that blends with the model's rendered color.
+     * Default: Color.WHITE
+     */
+    @JsProperty
+    public Property color;
+    /**
+     * An enum Property specifying how the color blends with the model. Default:
+     * {@link ColorBlendMode#HIGHLIGHT()}
+     */
+    @JsProperty
+    public Property colorBlendMode;
+    /**
+     * A numeric Property specifying the color strength when the colorBlendMode is
+     * MIX. A value of 0.0 results in the model's rendered color while a value of
+     * 1.0 results in a solid color, with any value in-between resulting in a mix of
+     * the two. Default: 0.5
+     */
+    @JsProperty
+    public Property colorBlendAmount;
+    /**
+     * A property specifying the ClippingPlaneCollection used to selectively disable
+     * rendering the model.
+     */
+    @JsProperty
+    public Property clippingPlanes;
+    /**
+     * A property specifying the contribution from diffuse and specular image-based
+     * lighting. Default: new Cartesian2(1.0, 1.0)
+     */
+    @JsProperty
+    public Property imageBasedLightingFactor;
+    /**
+     * A property specifying the light color to use when shading the model. The
+     * default sun light color will be used when undefined.
+     */
+    @JsProperty
+    public Property lightColor;
 
-  @JsConstructor
-  public ModelGraphicsOptions() {
-  }
+    @JsConstructor
+    public ModelGraphicsOptions() {
+    }
 }

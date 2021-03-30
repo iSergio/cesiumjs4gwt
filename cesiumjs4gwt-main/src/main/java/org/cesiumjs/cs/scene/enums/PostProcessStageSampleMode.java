@@ -28,20 +28,20 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "PostProcessStageSampleMode")
 public class PostProcessStageSampleMode {
-  /**
-   * Samples the texture through bi-linear interpolation of the four nearest
-   * texels.
-   */
-  @JsProperty(name = "LINEAR")
-  public static native Number LINEAR();
+    @JsConstructor
+    private PostProcessStageSampleMode() {
+    }
 
-  /**
-   * Samples the texture by returning the closest texel.
-   */
-  @JsProperty(name = "NEAREST")
-  public static native Number NEAREST();
+    /**
+     * Samples the texture through bi-linear interpolation of the four nearest
+     * texels.
+     */
+    @JsProperty(name = "LINEAR")
+    public static native Number LINEAR();
 
-  @JsConstructor
-  private PostProcessStageSampleMode() {
-  }
+    /**
+     * Samples the texture by returning the closest texel.
+     */
+    @JsProperty(name = "NEAREST")
+    public static native Number NEAREST();
 }

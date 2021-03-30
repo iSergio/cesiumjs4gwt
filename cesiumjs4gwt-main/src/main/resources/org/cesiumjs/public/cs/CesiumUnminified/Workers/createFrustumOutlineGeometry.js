@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
 
-define(['./when-54c2dc71', './Check-6c0211bc', './Math-850675ea', './Cartesian2-ea28baad', './Transforms-2e98bea0', './RuntimeError-2109023a', './WebGLConstants-76bb35d1', './ComponentDatatype-a26dd044', './GeometryAttribute-90c5fe10', './GeometryAttributes-4fcfcf40', './Plane-1577f476', './VertexFormat-4d8b817a', './FrustumGeometry-e8569508'], function (when, Check, _Math, Cartesian2, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, GeometryAttributes, Plane, VertexFormat, FrustumGeometry) { 'use strict';
+define(['./when-208fe5b0', './Transforms-f1816abc', './Cartesian2-716c2715', './Check-d18af7c4', './ComponentDatatype-549ec0d3', './FrustumGeometry-aec504d2', './GeometryAttribute-0ee94cf1', './GeometryAttributes-b0b294d8', './Math-3ba16bed', './RuntimeError-7f634f5d', './WebGLConstants-76bb35d1', './Plane-f5dfabcd', './VertexFormat-24041ad5'], function (when, Transforms, Cartesian2, Check, ComponentDatatype, FrustumGeometry, GeometryAttribute, GeometryAttributes, _Math, RuntimeError, WebGLConstants, Plane, VertexFormat) { 'use strict';
 
   var PERSPECTIVE = 0;
   var ORTHOGRAPHIC = 1;

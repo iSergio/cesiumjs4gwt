@@ -23,5 +23,5 @@ import jsinterop.annotations.JsFunction;
  */
 @JsFunction
 public interface Executor<V, E> {
-  void function(Fulfill<V> fulfill, Reject<E> reject);
+    void function(Fulfill<V> fulfill, Reject<E> reject);
 }

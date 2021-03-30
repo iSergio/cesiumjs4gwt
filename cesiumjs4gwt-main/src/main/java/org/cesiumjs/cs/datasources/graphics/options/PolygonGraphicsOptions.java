@@ -16,6 +16,10 @@
 
 package org.cesiumjs.cs.datasources.graphics.options;
 
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.core.Math;
 import org.cesiumjs.cs.datasources.properties.ConstantProperty;
@@ -24,135 +28,130 @@ import org.cesiumjs.cs.datasources.properties.Property;
 import org.cesiumjs.cs.scene.enums.ClassificationType;
 import org.cesiumjs.cs.scene.enums.ShadowMode;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
-
 /**
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class PolygonGraphicsOptions {
-  /**
-   * A Property specifying the PolygonHierarchy.
-   */
-  @JsProperty
-  public Property hierarchy;
-  /**
-   * A numeric Property specifying the altitude of the polygon relative to the
-   * ellipsoid surface. Default: 0
-   */
-  @JsProperty
-  public Property height;
-  /**
-   * A Property specifying what the height is relative to.
-   */
-  @JsProperty
-  public Property heightReference;
-  /**
-   * A numeric Property specifying the altitude of the polygon's extruded face
-   * relative to the ellipsoid surface.
-   */
-  @JsProperty
-  public Property extrudedHeight;
-  /**
-   * A Property specifying what the extrudedHeight is relative to.
-   */
-  @JsProperty
-  public Property extrudedHeightReference;
-  /**
-   * A boolean Property specifying the visibility of the polygon. Default: true
-   */
-  @JsProperty
-  public Property show;
-  /**
-   * A boolean Property specifying whether the polygon is filled with the provided
-   * material. Default: true
-   */
-  @JsProperty
-  public Property fill;
-  /**
-   * A Property specifying the material used to fill the polygon. Default:
-   * {@link Color#WHITE()}
-   */
-  @JsProperty
-  public MaterialProperty material;
-  /**
-   * A boolean Property specifying whether the polygon is outlined. Default: false
-   */
-  @JsProperty
-  public Property outline;
-  /**
-   * A Property specifying the Color of the outline. Default:
-   * {@link Color#BLACK()}
-   */
-  @JsProperty
-  public Property outlineColor;
-  /**
-   * A numeric Property specifying the width of the outline. Default: 1.0
-   */
-  @JsProperty
-  public Property outlineWidth;
-  /**
-   * A numeric property specifying the rotation of the polygon texture
-   * counter-clockwise from north. Default: 0.0
-   */
-  @JsProperty
-  public Property stRotation;
-  /**
-   * A numeric Property specifying the angular distance between each latitude and
-   * longitude point. Default: {@link Math#RADIANS_PER_DEGREE()}
-   */
-  @JsProperty
-  public Property granularity;
-  /**
-   * A boolean specifying whether or not the the height of each position is used.
-   * Default: false
-   */
-  @JsProperty
-  public Property perPositionHeight;
-  /**
-   * When false, leaves off the top of an extruded polygon open. Default: true
-   */
-  @JsProperty
-  public boolean closeTop;
-  /**
-   * When false, leaves off the bottom of an extruded polygon open. Default: true
-   */
-  @JsProperty
-  public boolean closeBottom;
-  /**
-   * An enum Property specifying whether the polygon casts or receives shadows
-   * from each light source. Default: {@link ShadowMode#DISABLED()}
-   */
-  @JsProperty
-  public Property shadows;
-  /**
-   * A Property specifying at what distance from the camera that this polygon will
-   * be displayed.
-   */
-  @JsProperty
-  public Property distanceDisplayCondition;
-  /**
-   * A property specifying the zIndex used for ordering ground geometry. Only has
-   * an effect if the polygon is constant and neither height or extrudedHeight are
-   * specified. Default: 0
-   */
-  @JsProperty
-  public ConstantProperty<Integer> zIndex;
-  /**
-   * Gets or sets the {@link ClassificationType#TERRAIN()} Property specifying
-   * whether this polygon will classify terrain, 3D Tiles, or both when on the
-   * ground.
-   */
-  @JsProperty
-  public Property classificationType;
+    /**
+     * A Property specifying the PolygonHierarchy.
+     */
+    @JsProperty
+    public Property hierarchy;
+    /**
+     * A numeric Property specifying the altitude of the polygon relative to the
+     * ellipsoid surface. Default: 0
+     */
+    @JsProperty
+    public Property height;
+    /**
+     * A Property specifying what the height is relative to.
+     */
+    @JsProperty
+    public Property heightReference;
+    /**
+     * A numeric Property specifying the altitude of the polygon's extruded face
+     * relative to the ellipsoid surface.
+     */
+    @JsProperty
+    public Property extrudedHeight;
+    /**
+     * A Property specifying what the extrudedHeight is relative to.
+     */
+    @JsProperty
+    public Property extrudedHeightReference;
+    /**
+     * A boolean Property specifying the visibility of the polygon. Default: true
+     */
+    @JsProperty
+    public Property show;
+    /**
+     * A boolean Property specifying whether the polygon is filled with the provided
+     * material. Default: true
+     */
+    @JsProperty
+    public Property fill;
+    /**
+     * A Property specifying the material used to fill the polygon. Default:
+     * {@link Color#WHITE()}
+     */
+    @JsProperty
+    public MaterialProperty material;
+    /**
+     * A boolean Property specifying whether the polygon is outlined. Default: false
+     */
+    @JsProperty
+    public Property outline;
+    /**
+     * A Property specifying the Color of the outline. Default:
+     * {@link Color#BLACK()}
+     */
+    @JsProperty
+    public Property outlineColor;
+    /**
+     * A numeric Property specifying the width of the outline. Default: 1.0
+     */
+    @JsProperty
+    public Property outlineWidth;
+    /**
+     * A numeric property specifying the rotation of the polygon texture
+     * counter-clockwise from north. Default: 0.0
+     */
+    @JsProperty
+    public Property stRotation;
+    /**
+     * A numeric Property specifying the angular distance between each latitude and
+     * longitude point. Default: {@link Math#RADIANS_PER_DEGREE()}
+     */
+    @JsProperty
+    public Property granularity;
+    /**
+     * A boolean specifying whether or not the the height of each position is used.
+     * Default: false
+     */
+    @JsProperty
+    public Property perPositionHeight;
+    /**
+     * When false, leaves off the top of an extruded polygon open. Default: true
+     */
+    @JsProperty
+    public boolean closeTop;
+    /**
+     * When false, leaves off the bottom of an extruded polygon open. Default: true
+     */
+    @JsProperty
+    public boolean closeBottom;
+    /**
+     * An enum Property specifying whether the polygon casts or receives shadows
+     * from each light source. Default: {@link ShadowMode#DISABLED()}
+     */
+    @JsProperty
+    public Property shadows;
+    /**
+     * A Property specifying at what distance from the camera that this polygon will
+     * be displayed.
+     */
+    @JsProperty
+    public Property distanceDisplayCondition;
+    /**
+     * A property specifying the zIndex used for ordering ground geometry. Only has
+     * an effect if the polygon is constant and neither height or extrudedHeight are
+     * specified. Default: 0
+     */
+    @JsProperty
+    public ConstantProperty<Integer> zIndex;
+    /**
+     * Gets or sets the {@link ClassificationType#TERRAIN()} Property specifying
+     * whether this polygon will classify terrain, 3D Tiles, or both when on the
+     * ground.
+     */
+    @JsProperty
+    public Property classificationType;
 
-  /**
-   * Options for {@link org.cesiumjs.cs.datasources.graphics.PolygonGraphics}
-   */
-  @JsConstructor
-  public PolygonGraphicsOptions() {
-  }
+    /**
+     * Options for {@link org.cesiumjs.cs.datasources.graphics.PolygonGraphics}
+     */
+    @JsConstructor
+    public PolygonGraphicsOptions() {
+    }
 }

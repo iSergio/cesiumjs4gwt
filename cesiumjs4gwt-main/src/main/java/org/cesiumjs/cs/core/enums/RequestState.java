@@ -27,44 +27,44 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "RequestState")
 public class RequestState {
-  /**
-   * Actual http request has been sent.
-   */
-  @JsProperty(name = "ACTIVE")
-  public static native Number ACTIVE();
+    @JsConstructor
+    private RequestState() {
+    }
 
-  /**
-   * Request was cancelled, either explicitly or automatically because of low
-   * priority.
-   */
-  @JsProperty(name = "CANCELLED")
-  public static native Number CANCELLED();
+    /**
+     * Actual http request has been sent.
+     */
+    @JsProperty(name = "ACTIVE")
+    public static native Number ACTIVE();
 
-  /**
-   * Request failed.
-   */
-  @JsProperty(name = "FAILED")
-  public static native Number FAILED();
+    /**
+     * Request was cancelled, either explicitly or automatically because of low
+     * priority.
+     */
+    @JsProperty(name = "CANCELLED")
+    public static native Number CANCELLED();
 
-  /**
-   * Issued but not yet active. Will become active when open slots are available.
-   */
-  @JsProperty(name = "ISSUED")
-  public static native Number ISSUED();
+    /**
+     * Request failed.
+     */
+    @JsProperty(name = "FAILED")
+    public static native Number FAILED();
 
-  /**
-   * Request completed successfully.
-   */
-  @JsProperty(name = "RECEIVED")
-  public static native Number RECEIVED();
+    /**
+     * Issued but not yet active. Will become active when open slots are available.
+     */
+    @JsProperty(name = "ISSUED")
+    public static native Number ISSUED();
 
-  /**
-   * Initial unissued state.
-   */
-  @JsProperty(name = "UNISSUED")
-  public static native Number UNISSUED();
+    /**
+     * Request completed successfully.
+     */
+    @JsProperty(name = "RECEIVED")
+    public static native Number RECEIVED();
 
-  @JsConstructor
-  private RequestState() {
-  }
+    /**
+     * Initial unissued state.
+     */
+    @JsProperty(name = "UNISSUED")
+    public static native Number UNISSUED();
 }

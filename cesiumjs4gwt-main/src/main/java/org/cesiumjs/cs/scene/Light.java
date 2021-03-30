@@ -15,11 +15,10 @@
 
 package org.cesiumjs.cs.scene;
 
-import org.cesiumjs.cs.core.Color;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Color;
 
 /**
  * A light source. This type describes an interface and is not intended to be
@@ -27,22 +26,22 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "Light")
 public class Light {
-  /**
-   * The color of the light.
-   */
-  @JsProperty
-  public Color color;
-  /**
-   * The intensity of the light.
-   */
-  @JsProperty
-  public Number intensity;
+    /**
+     * The color of the light.
+     */
+    @JsProperty
+    public Color color;
+    /**
+     * The intensity of the light.
+     */
+    @JsProperty
+    public Number intensity;
 
-  /**
-   * A light source. This type describes an interface and is not intended to be
-   * instantiated directly.
-   */
-  @JsConstructor
-  public Light() {
-  }
+    /**
+     * A light source. This type describes an interface and is not intended to be
+     * instantiated directly.
+     */
+    @JsConstructor
+    public Light() {
+    }
 }

@@ -25,29 +25,29 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "KeyboardEventModifier")
 public class KeyboardEventModifier {
-  /**
-   * Represents the alt key being held down.
-   */
-  @JsProperty(name = "ALT")
-  public static native Number ALT();
+    /**
+     * This enumerated type is for representing keyboard modifiers. These are keys
+     * that are held down in addition to other event types.
+     */
+    @JsConstructor
+    private KeyboardEventModifier() {
+    }
 
-  /**
-   * Represents the control key being held down.
-   */
-  @JsProperty(name = "CTRL")
-  public static native Number CTRL();
+    /**
+     * Represents the alt key being held down.
+     */
+    @JsProperty(name = "ALT")
+    public static native Number ALT();
 
-  /**
-   * Represents the shift key being held down.
-   */
-  @JsProperty(name = "SHIFT")
-  public static native Number SHIFT();
+    /**
+     * Represents the control key being held down.
+     */
+    @JsProperty(name = "CTRL")
+    public static native Number CTRL();
 
-  /**
-   * This enumerated type is for representing keyboard modifiers. These are keys
-   * that are held down in addition to other event types.
-   */
-  @JsConstructor
-  private KeyboardEventModifier() {
-  }
+    /**
+     * Represents the shift key being held down.
+     */
+    @JsProperty(name = "SHIFT")
+    public static native Number SHIFT();
 }

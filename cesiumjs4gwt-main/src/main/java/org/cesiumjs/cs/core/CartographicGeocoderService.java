@@ -16,31 +16,29 @@
 
 package org.cesiumjs.cs.core;
 
-import org.cesiumjs.cs.promise.Promise;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.promise.Promise;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "CartographicGeocoderService")
 public class CartographicGeocoderService {
-  /**
-   * Geocodes queries containing longitude and latitude coordinates and an
-   * optional height. Query format: `longitude latitude (height)` with
-   * longitude/latitude in degrees and height in meters.
-   */
-  @JsConstructor
-  public CartographicGeocoderService() {
-  }
+    /**
+     * Geocodes queries containing longitude and latitude coordinates and an
+     * optional height. Query format: `longitude latitude (height)` with
+     * longitude/latitude in degrees and height in meters.
+     */
+    @JsConstructor
+    public CartographicGeocoderService() {
+    }
 
-  /**
-   *
-   * @param query The query to be sent to the geocoder service
-   * @return promise
-   */
-  @JsMethod
-  public native Promise<GeocoderResult[], String> geocode(String query);
+    /**
+     * @param query The query to be sent to the geocoder service
+     * @return promise
+     */
+    @JsMethod
+    public native Promise<GeocoderResult[], String> geocode(String query);
 }

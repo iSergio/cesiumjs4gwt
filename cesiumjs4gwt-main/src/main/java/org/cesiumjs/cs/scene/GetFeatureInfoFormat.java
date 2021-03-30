@@ -25,30 +25,30 @@ import jsinterop.annotations.JsType;
 // TODO: Callback
 @JsType(isNative = true, namespace = "Cesium", name = "GetFeatureInfoFormat")
 public class GetFeatureInfoFormat {
-  /**
-   * Describes the format in which to request GetFeatureInfo from a Web Map
-   * Service (WMS) server.
-   * 
-   * @param type The type of response to expect from a GetFeatureInfo request.
-   *             Valid values are 'json', 'xml', 'html', or 'text'.
-   */
-  @JsConstructor
-  public GetFeatureInfoFormat(String type) {
-  }
+    /**
+     * Describes the format in which to request GetFeatureInfo from a Web Map
+     * Service (WMS) server.
+     *
+     * @param type The type of response to expect from a GetFeatureInfo request.
+     *             Valid values are 'json', 'xml', 'html', or 'text'.
+     */
+    @JsConstructor
+    public GetFeatureInfoFormat(String type) {
+    }
 
-  /**
-   * Describes the format in which to request GetFeatureInfo from a Web Map
-   * Service (WMS) server.
-   * 
-   * @param type   The type of response to expect from a GetFeatureInfo request.
-   *               Valid values are 'json', 'xml', 'html', or 'text'.
-   * @param format The info format to request from the WMS server. This is usually
-   *               a MIME type such as 'application/json' or text/xml'. If this
-   *               parameter is not specified, the provider will request 'json'
-   *               using 'application/json', 'xml' using 'text/xml', 'html' using
-   *               'text/html', and 'text' using 'text/plain'.
-   */
-  @JsConstructor
-  public GetFeatureInfoFormat(String type, String format) {
-  }
+    /**
+     * Describes the format in which to request GetFeatureInfo from a Web Map
+     * Service (WMS) server.
+     *
+     * @param type   The type of response to expect from a GetFeatureInfo request.
+     *               Valid values are 'json', 'xml', 'html', or 'text'.
+     * @param format The info format to request from the WMS server. This is usually
+     *               a MIME type such as 'application/json' or text/xml'. If this
+     *               parameter is not specified, the provider will request 'json'
+     *               using 'application/json', 'xml' using 'text/xml', 'html' using
+     *               'text/html', and 'text' using 'text/plain'.
+     */
+    @JsConstructor
+    public GetFeatureInfoFormat(String type, String format) {
+    }
 }

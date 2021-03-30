@@ -16,14 +16,13 @@
 
 package org.cesiumjs.cs.core.geometry.options;
 
-import org.cesiumjs.cs.core.Cartesian3;
-import org.cesiumjs.cs.core.Frustum;
-import org.cesiumjs.cs.core.Quaternion;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Cartesian3;
+import org.cesiumjs.cs.core.Frustum;
+import org.cesiumjs.cs.core.Quaternion;
 
 /**
  * Options for {@link org.cesiumjs.cs.core.geometry.FrustumOutlineGeometry}.
@@ -32,23 +31,23 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class FrustumOutlineGeometryOptions {
-  /**
-   * The frustum.
-   */
-  @JsProperty
-  public Frustum frustum;
-  /**
-   * The origin of the frustum.
-   */
-  @JsProperty
-  public Cartesian3 origin;
-  /**
-   * The orientation of the frustum.
-   */
-  @JsProperty
-  public Quaternion orientation;
+    /**
+     * The frustum.
+     */
+    @JsProperty
+    public Frustum frustum;
+    /**
+     * The origin of the frustum.
+     */
+    @JsProperty
+    public Cartesian3 origin;
+    /**
+     * The orientation of the frustum.
+     */
+    @JsProperty
+    public Quaternion orientation;
 
-  @JsConstructor
-  public FrustumOutlineGeometryOptions() {
-  }
+    @JsConstructor
+    public FrustumOutlineGeometryOptions() {
+    }
 }

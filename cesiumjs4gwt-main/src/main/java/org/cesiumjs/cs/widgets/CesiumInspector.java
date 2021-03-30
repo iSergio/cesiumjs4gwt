@@ -17,60 +17,58 @@
 package org.cesiumjs.cs.widgets;
 
 import com.google.gwt.dom.client.Element;
-
-import org.cesiumjs.cs.scene.Scene;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.scene.Scene;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "CesiumInspector")
 public class CesiumInspector {
-  /**
-   * Gets the parent container.
-   */
-  @JsProperty
-  public Element container;
-  // /**
-  // * Gets the view model.
-  // */
-  // @JsProperty
-  // public CesiumInspectorViewModel viewModel;
+    /**
+     * Gets the parent container.
+     */
+    @JsProperty
+    public Element container;
+    // /**
+    // * Gets the view model.
+    // */
+    // @JsProperty
+    // public CesiumInspectorViewModel viewModel;
 
-  /**
-   * Inspector widget to aid in debugging
-   * 
-   * @param element The DOM element or ID that will contain the widget.
-   * @param scene   The Scene instance to use.
-   */
-  @JsConstructor
-  public CesiumInspector(Element element, Scene scene) {
-  }
+    /**
+     * Inspector widget to aid in debugging
+     *
+     * @param element The DOM element or ID that will contain the widget.
+     * @param scene   The Scene instance to use.
+     */
+    @JsConstructor
+    public CesiumInspector(Element element, Scene scene) {
+    }
 
-  /**
-   * Inspector widget to aid in debugging
-   * 
-   * @param element The DOM element or ID that will contain the widget.
-   * @param scene   The Scene instance to use.
-   */
-  @JsConstructor
-  public CesiumInspector(String element, Scene scene) {
-  }
+    /**
+     * Inspector widget to aid in debugging
+     *
+     * @param element The DOM element or ID that will contain the widget.
+     * @param scene   The Scene instance to use.
+     */
+    @JsConstructor
+    public CesiumInspector(String element, Scene scene) {
+    }
 
-  /**
-   * Destroys the widget. Should be called if permanently removing the widget from
-   * layout.
-   */
-  @JsMethod
-  public native void destroy();
+    /**
+     * Destroys the widget. Should be called if permanently removing the widget from
+     * layout.
+     */
+    @JsMethod
+    public native void destroy();
 
-  /**
-   * @return true if the object has been destroyed, false otherwise.
-   */
-  @JsMethod
-  public native boolean isDestroyed();
+    /**
+     * @return true if the object has been destroyed, false otherwise.
+     */
+    @JsMethod
+    public native boolean isDestroyed();
 }

@@ -16,16 +16,12 @@
 
 package org.cesiumjs.cs.core.geometry.options;
 
-import org.cesiumjs.cs.core.Cartesian3;
-import org.cesiumjs.cs.core.Ellipsoid;
-import org.cesiumjs.cs.core.Math;
-import org.cesiumjs.cs.core.PolygonHierarchy;
-import org.cesiumjs.cs.core.VertexFormat;
-
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Math;
+import org.cesiumjs.cs.core.*;
 
 /**
  * Options for {@link org.cesiumjs.cs.core.geometry.PolygonOutlineGeometry}.
@@ -34,55 +30,55 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class PolygonOutlineGeometryOptions {
-  /**
-   * An array of positions that defined the corner points of the polygon. Used
-   * only in
-   * {@link org.cesiumjs.cs.core.geometry.PolygonGeometry#fromPositions(PolygonGeometryOptions)};
-   */
-  @JsProperty
-  public Cartesian3[] positions;
-  /**
-   * A polygon hierarchy that can include holes.
-   */
-  @JsProperty
-  public PolygonHierarchy polygonHierarchy;
-  /**
-   * The distance in meters between the polygon and the ellipsoid surface.
-   * Default: 0.0
-   */
-  @JsProperty
-  public double height;
-  /**
-   * The distance in meters between the polygon's extruded face and the ellipsoid
-   * surface.
-   */
-  @JsProperty
-  public double extrudedHeight;
-  /**
-   * The vertex attributes to be computed. Default: VertexFormat#DEFAULT()
-   */
-  @JsProperty
-  public VertexFormat vertexFormat;
-  /**
-   * The ellipsoid to be used as a reference. Default:
-   * {@link org.cesiumjs.cs.core.Ellipsoid#WGS84()}
-   */
-  @JsProperty
-  public Ellipsoid ellipsoid;
-  /**
-   * The distance, in radians, between each latitude and longitude. Determines the
-   * number of positions in the buffer. Default: {@link Math#RADIANS_PER_DEGREE()}
-   */
-  @JsProperty
-  public double granularity;
-  /**
-   * Use the height of options.positions for each position instead of using
-   * options.height to determine the height. Default: false
-   */
-  @JsProperty
-  public boolean perPositionHeight;
+    /**
+     * An array of positions that defined the corner points of the polygon. Used
+     * only in
+     * {@link org.cesiumjs.cs.core.geometry.PolygonGeometry#fromPositions(PolygonGeometryOptions)};
+     */
+    @JsProperty
+    public Cartesian3[] positions;
+    /**
+     * A polygon hierarchy that can include holes.
+     */
+    @JsProperty
+    public PolygonHierarchy polygonHierarchy;
+    /**
+     * The distance in meters between the polygon and the ellipsoid surface.
+     * Default: 0.0
+     */
+    @JsProperty
+    public double height;
+    /**
+     * The distance in meters between the polygon's extruded face and the ellipsoid
+     * surface.
+     */
+    @JsProperty
+    public double extrudedHeight;
+    /**
+     * The vertex attributes to be computed. Default: VertexFormat#DEFAULT()
+     */
+    @JsProperty
+    public VertexFormat vertexFormat;
+    /**
+     * The ellipsoid to be used as a reference. Default:
+     * {@link org.cesiumjs.cs.core.Ellipsoid#WGS84()}
+     */
+    @JsProperty
+    public Ellipsoid ellipsoid;
+    /**
+     * The distance, in radians, between each latitude and longitude. Determines the
+     * number of positions in the buffer. Default: {@link Math#RADIANS_PER_DEGREE()}
+     */
+    @JsProperty
+    public double granularity;
+    /**
+     * Use the height of options.positions for each position instead of using
+     * options.height to determine the height. Default: false
+     */
+    @JsProperty
+    public boolean perPositionHeight;
 
-  @JsConstructor
-  public PolygonOutlineGeometryOptions() {
-  }
+    @JsConstructor
+    public PolygonOutlineGeometryOptions() {
+    }
 }
