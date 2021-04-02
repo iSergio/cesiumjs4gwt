@@ -21,14 +21,14 @@
  * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
 
-define(['./AttributeCompression-69c5b20c', './Cartesian2-716c2715', './IndexDatatype-d9b71b2b', './Math-3ba16bed', './createTaskProcessorWorker', './Check-d18af7c4', './when-208fe5b0', './WebGLConstants-76bb35d1'], function (AttributeCompression, Cartesian2, IndexDatatype, _Math, createTaskProcessorWorker, Check, when, WebGLConstants) { 'use strict';
+define(['./Cartesian2-e7502022', './AttributeCompression-9ad7a83d', './Math-34872ab7', './IndexDatatype-a6fe1d66', './createTaskProcessorWorker', './Check-24483042', './when-54335d57', './WebGLConstants-95ceb4e9'], function (Cartesian2, AttributeCompression, _Math, IndexDatatype, createTaskProcessorWorker, Check, when, WebGLConstants) { 'use strict';
 
   var maxShort = 32767;
 
   var scratchBVCartographic = new Cartesian2.Cartographic();
   var scratchEncodedPosition = new Cartesian2.Cartesian3();
 
-  function decodePositions(
+  function decodeVectorPolylinePositions(
     positions,
     rectangle,
     minimumHeight,
@@ -112,7 +112,7 @@ define(['./AttributeCompression-69c5b20c', './Cartesian2-716c2715', './IndexData
     var minimumHeight = scratchMinMaxHeights.min;
     var maximumHeight = scratchMinMaxHeights.max;
 
-    var positions = decodePositions(
+    var positions = decodeVectorPolylinePositions(
       encodedPositions,
       rectangle,
       minimumHeight,
