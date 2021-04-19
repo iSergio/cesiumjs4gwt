@@ -15,7 +15,7 @@
     <packaging>war</packaging>
 
     <properties>
-        <vaadin.version>8.8.5</vaadin.version>
+        <vaadin.version>8.12.4</vaadin.version>
         <vaadin.plugin.version>8.8.5</vaadin.plugin.version>
     </properties>
 
