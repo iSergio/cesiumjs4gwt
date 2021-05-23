@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
 
-define(['./Cartesian2-e7502022', './EllipsoidTangentPlane-6385da14', './Transforms-1ede5d55', './when-54335d57', './Check-24483042', './TerrainEncoding-1382452a', './Math-34872ab7', './OrientedBoundingBox-5c59eedb', './WebMercatorProjection-920f5986', './RuntimeError-88a32665', './createTaskProcessorWorker', './IntersectionTests-94f3c1ad', './Plane-e75c0031', './AttributeCompression-9ad7a83d', './ComponentDatatype-cac6b6fa', './WebGLConstants-95ceb4e9'], function (Cartesian2, EllipsoidTangentPlane, Transforms, when, Check, TerrainEncoding, _Math, OrientedBoundingBox, WebMercatorProjection, RuntimeError, createTaskProcessorWorker, IntersectionTests, Plane, AttributeCompression, ComponentDatatype, WebGLConstants) { 'use strict';
+define(['./Cartesian2-716c2715', './EllipsoidTangentPlane-8e486e83', './Transforms-f1816abc', './when-208fe5b0', './Check-d18af7c4', './TerrainEncoding-54905cbb', './Math-3ba16bed', './OrientedBoundingBox-45cb4e24', './WebMercatorProjection-3b6236c8', './RuntimeError-7f634f5d', './createTaskProcessorWorker', './IntersectionTests-680c4e46', './Plane-f5dfabcd', './AttributeCompression-69c5b20c', './ComponentDatatype-549ec0d3', './WebGLConstants-76bb35d1'], function (Cartesian2, EllipsoidTangentPlane, Transforms, when, Check, TerrainEncoding, _Math, OrientedBoundingBox, WebMercatorProjection, RuntimeError, createTaskProcessorWorker, IntersectionTests, Plane, AttributeCompression, ComponentDatatype, WebGLConstants) { 'use strict';
 
   /**
    * The encoding that is used for a heightmap
