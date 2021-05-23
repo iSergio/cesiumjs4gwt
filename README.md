@@ -1,4 +1,4 @@
-[![pipeline status](https://gis4fun.org/gitlab/iSergio/cesiumjs4gwt/badges/master/pipeline.svg)](https://gis4fun.org/gitlab/iSergio/cesiumjs4gwt/-/commits/master) [![pipeline status](https://gis4fun.org/gitlab/iSergio/cesiumjs4gwt/badges/develop/pipeline.svg)](https://gis4fun.org/gitlab/iSergio/cesiumjs4gwt/-/commits/develop)
+[![pipeline status](https://gis4fun.org/gitlab/iSergio/cesiumjs4gwt/badges/master/pipeline.svg)](https://gis4fun.org/gitlab/iSergio/cesiumjs4gwt/-/commits/master) [![pipeline status](https://gis4fun.org/gitlab/iSergio/cesiumjs4gwt/badges/develop/pipeline.svg?key_text=pipleine-dev&key_width=80)](https://gis4fun.org/gitlab/iSergio/cesiumjs4gwt/-/commits/develop)
 
 # GWT Cesium Wrapper
 [CesiumJS](http://cesiumjs.org) GWT Wrapper based on JsInterop 1.0.2 for [GWT 2.8.x](http://www.gwtproject.org/release-notes.html#Release_Notes_2_8_2).
@@ -8,8 +8,8 @@ What was done:
 - [x] CesiumJS API like as native JavaScript. Based on CesiumJS source code
 - [x] Simple support Promise
 - [x] Simple support Callback functions.
-- [x] Full Cesium documentation in javadoc. You can see they on official [CesiumJS](http://cesiumjs.org/refdoc.html) or on site [cesiumjs4gwt Documentation](https://sergeserver.noip.me/docs/cesiumjs4gwt)
-- [x] [Examples showcase](https://sergeserver.noip.me/cesiumjs4gwt-showcase/).
+- [x] Full Cesium documentation in javadoc. You can see they on official [CesiumJS](http://cesiumjs.org/refdoc.html) or on site [cesiumjs4gwt Documentation](https://gis4fun.org/docs/cesiumjs4gwt)
+- [x] [Examples showcase](https://gis4fun.org/cesiumjs4gwt-showcase/).
 - [x] Integration with [gwt-olcs](https://github.com/iSergio/gwt-olcs)
 
 ### DrawInteraction features:
@@ -37,7 +37,7 @@ What was done:
 ### Getting started
 You not need include JavaScript of Cesium into main html file, injection realised in GWT code.
 Now no need callback for ScriptInjection or AttachOrDetach, all worked "out from box".
-See [Showcase](https://sergeserver.noip.me/cesiumjs4gwt-showcase/) or basic example:
+See [Showcase](https://gis4fun.org/cesiumjs4gwt-showcase/) or basic example:
 ```java
 public class HelloWorld extends AbstractExample {
 

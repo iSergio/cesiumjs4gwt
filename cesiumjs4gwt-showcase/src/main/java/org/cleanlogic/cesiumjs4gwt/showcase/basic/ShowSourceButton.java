@@ -38,7 +38,7 @@ public class ShowSourceButton extends AbstractSourceButton {
     protected void showSourceCode(String sourceCode) {
         sourceCode = sourceCode.replaceAll("<", "&lt,").replace(">", "&gt;");
 
-        final String html = "<pre class=\"brush: java; toolbar: false;\">" + sourceCode + "</pre>";
+        final String html = "<pre><code class=\"java\">" + sourceCode + "</code></pre>";
         ScrollPanel sp = new ScrollPanel();
         sp.setSize((Window.getClientWidth() * 0.6) + "px", (Window.getClientHeight() * 0.7) + "px");
         sp.add(new HTML(html));

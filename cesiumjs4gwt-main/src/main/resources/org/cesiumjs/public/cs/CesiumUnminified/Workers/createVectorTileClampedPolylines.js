@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
 
-define(['./AttributeCompression-9ad7a83d', './Cartesian2-e7502022', './IndexDatatype-a6fe1d66', './Math-34872ab7', './createTaskProcessorWorker', './Check-24483042', './when-54335d57', './WebGLConstants-95ceb4e9'], function (AttributeCompression, Cartesian2, IndexDatatype, _Math, createTaskProcessorWorker, Check, when, WebGLConstants) { 'use strict';
+define(['./AttributeCompression-69c5b20c', './Cartesian2-716c2715', './IndexDatatype-d9b71b2b', './Math-3ba16bed', './createTaskProcessorWorker', './Check-d18af7c4', './when-208fe5b0', './WebGLConstants-76bb35d1'], function (AttributeCompression, Cartesian2, IndexDatatype, _Math, createTaskProcessorWorker, Check, when, WebGLConstants) { 'use strict';
 
   var MAX_SHORT = 32767;
   var MITER_BREAK = Math.cos(_Math.CesiumMath.toRadians(150.0));

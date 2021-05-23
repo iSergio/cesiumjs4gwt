@@ -73,7 +73,7 @@ public abstract class AbstractSourceButton extends Composite implements ClickHan
     }
 
     protected native void doFormat() /*-{
-        $wnd.SyntaxHighlighter.highlight();
+        $wnd.hljs.highlightAll();
     }-*/;
 
     protected abstract void showSourceCode(String sourceCode);
