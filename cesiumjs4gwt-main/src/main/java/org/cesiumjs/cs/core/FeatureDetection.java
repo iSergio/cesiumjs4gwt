@@ -17,6 +17,7 @@
 package org.cesiumjs.cs.core;
 
 import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
 
@@ -35,6 +36,30 @@ public class FeatureDetection {
     @JsConstructor
     private FeatureDetection() {
     }
+
+    /**
+     * Detects whether the current browser supports BigInt.
+     * @return true if the browser supports BigInt, false if not.
+     * @see <a href="https://tc39.es/ecma262/#sec-bigint-objects">BigInt Specification</a>
+     */
+    @JsMethod
+    public static native boolean supportsBigInt();
+
+    /**
+     * Detects whether the current browser supports BigInt64Array typed arrays.
+     * @return true if the browser supports BigInt64Array typed arrays, false if not.
+     * @see <a href="https://tc39.es/ecma262/#sec-typedarray-objects">Typed Array Specification</a>
+     */
+    @JsMethod
+    public static native boolean supportsBigInt64Array();
+
+    /**
+     * Detects whether the current browser supports BigUint64Array typed arrays.
+     * @return true if the browser supports BigUint64Array typed arrays, false if not.
+     * @see <a href="https://tc39.es/ecma262/#sec-typedarray-objects">Typed Array Specification</a>
+     */
+    @JsMethod
+    public static native boolean supportsBigUint64Array();
 
     /**
      * Detects whether the current browser supports the full screen standard.
