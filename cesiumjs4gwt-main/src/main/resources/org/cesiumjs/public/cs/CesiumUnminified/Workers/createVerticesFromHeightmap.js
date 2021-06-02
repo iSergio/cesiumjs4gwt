@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
 
-define(['./Cartesian2-716c2715', './EllipsoidTangentPlane-8e486e83', './Transforms-f1816abc', './when-208fe5b0', './Check-d18af7c4', './TerrainEncoding-54905cbb', './Math-3ba16bed', './OrientedBoundingBox-45cb4e24', './WebMercatorProjection-3b6236c8', './RuntimeError-7f634f5d', './createTaskProcessorWorker', './IntersectionTests-680c4e46', './Plane-f5dfabcd', './AttributeCompression-69c5b20c', './ComponentDatatype-549ec0d3', './WebGLConstants-76bb35d1'], function (Cartesian2, EllipsoidTangentPlane, Transforms, when, Check, TerrainEncoding, _Math, OrientedBoundingBox, WebMercatorProjection, RuntimeError, createTaskProcessorWorker, IntersectionTests, Plane, AttributeCompression, ComponentDatatype, WebGLConstants) { 'use strict';
+define(['./Cartesian2-e9bb1bb3', './EllipsoidTangentPlane-f517eeed', './Transforms-b2c3e401', './when-208fe5b0', './Check-5e798bbf', './TerrainEncoding-00c05ce8', './Math-56f06cd5', './OrientedBoundingBox-df00886d', './WebMercatorProjection-7b54c659', './RuntimeError-7f634f5d', './createTaskProcessorWorker', './IntersectionTests-19697198', './Plane-6fbc10a1', './AttributeCompression-d1cd1d9c', './ComponentDatatype-b3120730', './WebGLConstants-76bb35d1'], function (Cartesian2, EllipsoidTangentPlane, Transforms, when, Check, TerrainEncoding, _Math, OrientedBoundingBox, WebMercatorProjection, RuntimeError, createTaskProcessorWorker, IntersectionTests, Plane, AttributeCompression, ComponentDatatype, WebGLConstants) { 'use strict';
 
   /**
    * The encoding that is used for a heightmap
@@ -2386,9 +2386,7 @@ define(['./Cartesian2-716c2715', './EllipsoidTangentPlane-8e486e83', './Transfor
           data.pixels = {};
 
           // File header
-          if (!Lerc2Helpers.readHeaderInfo(input, data)) {
-            return;
-          }
+          if (!Lerc2Helpers.readHeaderInfo(input, data)) ;
           var headerInfo = data.headerInfo;
           var fileVersion = headerInfo.fileVersion;
           var OutPixelTypeArray = Lerc2Helpers.getDataTypeArray(headerInfo.imageType);

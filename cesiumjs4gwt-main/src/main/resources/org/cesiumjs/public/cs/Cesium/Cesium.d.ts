@@ -6092,6 +6092,21 @@ export namespace FeatureDetection {
      */
     function supportsTypedArrays(): boolean;
     /**
+     * Detects whether the current browser supports BigInt64Array typed arrays.
+     * @returns true if the browser supports BigInt64Array typed arrays, false if not.
+     */
+    function supportsBigInt64Array(): boolean;
+    /**
+     * Detects whether the current browser supports BigUint64Array typed arrays.
+     * @returns true if the browser supports BigUint64Array typed arrays, false if not.
+     */
+    function supportsBigUint64Array(): boolean;
+    /**
+     * Detects whether the current browser supports BigInt.
+     * @returns true if the browser supports BigInt, false if not.
+     */
+    function supportsBigInt(): boolean;
+    /**
      * Detects whether the current browser supports Web Workers.
      * @returns true if the browsers supports Web Workers, false if not.
      */
@@ -7855,6 +7870,11 @@ export class HermiteSpline {
      */
     evaluate(time: number, result?: Cartesian3): Cartesian3;
 }
+
+/**
+ * Hilbert Order helper functions.
+ */
+export namespace HilbertOrder { }
 
 /**
  * Constants for WebGL index datatypes.  These corresponds to the
@@ -26514,8 +26534,7 @@ export class Cesium3DTileContent {
      */
     readonly batchTableByteLength: number;
     /**
-     * Gets the array of {@link Cesium3DTileContent} objects that represent the
-     * content a composite's inner tiles, which can also be composites.
+     * Gets the array of {@link Cesium3DTileContent} objects for contents that contain other contents, such as composite tiles. The inner contents may in turn have inner contents, such as a composite tile that contains a composite tile.
      */
     readonly innerContents: any[];
     /**
@@ -27921,6 +27940,9 @@ export class Cesium3DTileset {
      * <li><code>url</code>: the url of the failed tile.</li>
      * <li><code>message</code>: the error message.</li>
      * </ul>
+     * <p>
+     * If the <code>3DTILES_multiple_contents</code> extension is used, this event is raised once per inner content with errors.
+     * </p>
      * @example
      * tileset.tileFailed.addEventListener(function(error) {
      *     console.log('An error occurred loading tile: ' + error.url);
@@ -42421,6 +42443,7 @@ declare module "cesium/Source/Core/HeightmapEncoding" { import { HeightmapEncodi
 declare module "cesium/Source/Core/HeightmapTerrainData" { import { HeightmapTerrainData } from 'cesium'; export default HeightmapTerrainData; }
 declare module "cesium/Source/Core/HermitePolynomialApproximation" { import { HermitePolynomialApproximation } from 'cesium'; export default HermitePolynomialApproximation; }
 declare module "cesium/Source/Core/HermiteSpline" { import { HermiteSpline } from 'cesium'; export default HermiteSpline; }
+declare module "cesium/Source/Core/HilbertOrder" { import { HilbertOrder } from 'cesium'; export default HilbertOrder; }
 declare module "cesium/Source/Core/IndexDatatype" { import { IndexDatatype } from 'cesium'; export default IndexDatatype; }
 declare module "cesium/Source/Core/InterpolationAlgorithm" { import { InterpolationAlgorithm } from 'cesium'; export default InterpolationAlgorithm; }
 declare module "cesium/Source/Core/Intersect" { import { Intersect } from 'cesium'; export default Intersect; }

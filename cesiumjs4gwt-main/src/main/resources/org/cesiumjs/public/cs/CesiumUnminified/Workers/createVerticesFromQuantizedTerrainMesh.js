@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
 
-define(['./AttributeCompression-69c5b20c', './EllipsoidTangentPlane-8e486e83', './Transforms-f1816abc', './Cartesian2-716c2715', './when-208fe5b0', './TerrainEncoding-54905cbb', './IndexDatatype-d9b71b2b', './Math-3ba16bed', './OrientedBoundingBox-45cb4e24', './Check-d18af7c4', './WebMercatorProjection-3b6236c8', './createTaskProcessorWorker', './IntersectionTests-680c4e46', './Plane-f5dfabcd', './RuntimeError-7f634f5d', './ComponentDatatype-549ec0d3', './WebGLConstants-76bb35d1'], function (AttributeCompression, EllipsoidTangentPlane, Transforms, Cartesian2, when, TerrainEncoding, IndexDatatype, _Math, OrientedBoundingBox, Check, WebMercatorProjection, createTaskProcessorWorker, IntersectionTests, Plane, RuntimeError, ComponentDatatype, WebGLConstants) { 'use strict';
+define(['./AttributeCompression-d1cd1d9c', './EllipsoidTangentPlane-f517eeed', './Transforms-b2c3e401', './Cartesian2-e9bb1bb3', './when-208fe5b0', './TerrainEncoding-00c05ce8', './IndexDatatype-4d4b60a0', './Math-56f06cd5', './OrientedBoundingBox-df00886d', './Check-5e798bbf', './WebMercatorProjection-7b54c659', './createTaskProcessorWorker', './IntersectionTests-19697198', './Plane-6fbc10a1', './RuntimeError-7f634f5d', './ComponentDatatype-b3120730', './WebGLConstants-76bb35d1'], function (AttributeCompression, EllipsoidTangentPlane, Transforms, Cartesian2, when, TerrainEncoding, IndexDatatype, _Math, OrientedBoundingBox, Check, WebMercatorProjection, createTaskProcessorWorker, IntersectionTests, Plane, RuntimeError, ComponentDatatype, WebGLConstants) { 'use strict';
 
   /**
    * Provides terrain or other geometry for the surface of an ellipsoid.  The surface geometry is

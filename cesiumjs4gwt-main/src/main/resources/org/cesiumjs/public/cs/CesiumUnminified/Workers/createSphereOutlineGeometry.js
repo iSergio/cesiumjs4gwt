@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
 
-define(['./when-208fe5b0', './Cartesian2-716c2715', './Check-d18af7c4', './EllipsoidOutlineGeometry-03f4895c', './Math-3ba16bed', './GeometryOffsetAttribute-d63c288d', './Transforms-f1816abc', './RuntimeError-7f634f5d', './ComponentDatatype-549ec0d3', './WebGLConstants-76bb35d1', './GeometryAttribute-0ee94cf1', './GeometryAttributes-b0b294d8', './IndexDatatype-d9b71b2b'], function (when, Cartesian2, Check, EllipsoidOutlineGeometry, _Math, GeometryOffsetAttribute, Transforms, RuntimeError, ComponentDatatype, WebGLConstants, GeometryAttribute, GeometryAttributes, IndexDatatype) { 'use strict';
+define(['./when-208fe5b0', './Cartesian2-e9bb1bb3', './Check-5e798bbf', './EllipsoidOutlineGeometry-91f2c235', './Math-56f06cd5', './GeometryOffsetAttribute-6fce6185', './Transforms-b2c3e401', './RuntimeError-7f634f5d', './ComponentDatatype-b3120730', './WebGLConstants-76bb35d1', './GeometryAttribute-dddfbf98', './GeometryAttributes-b0b294d8', './IndexDatatype-4d4b60a0'], function (when, Cartesian2, Check, EllipsoidOutlineGeometry, _Math, GeometryOffsetAttribute, Transforms, RuntimeError, ComponentDatatype, WebGLConstants, GeometryAttribute, GeometryAttributes, IndexDatatype) { 'use strict';
 
   /**
    * A description of the outline of a sphere.
