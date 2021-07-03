@@ -86,9 +86,25 @@ public class ShadowMapOptions {
      * A camera representing the light source.
      */
     @JsProperty
-    Camera lightCamera;
+    public Camera lightCamera;
+    /**
+     * Whether shadows start to fade out once the light gets closer to the horizon.
+     */
+    @JsProperty
+    public boolean fadingEnabled;
 
     @JsConstructor
-    public ShadowMapOptions() {
+    private ShadowMapOptions() {
+    }
+
+    /**
+     *
+     * @param lightCamera A camera representing the light source.
+     * @return ShadowMapOptions instance.
+     */
+    public static ShadowMapOptions create(Camera lightCamera) {
+        ShadowMapOptions options = new ShadowMapOptions();
+        options.lightCamera = lightCamera;
+        return options;
     }
 }
