@@ -40,7 +40,7 @@ public class ShowcaseTopPanel extends HorizontalPanel {
         logo.setSize("32px", "32px");
         super.add(logo);
         Anchor anchor = new Anchor();
-        String text = "<div class=\"brand\"><a href=\"http://cesiumjs.org\">Cesium</a> on GWT Examples</div>";
+        String text = "<div class=\"brand\"><a href=\"http://cesiumjs.org/\">Cesium</a> on GWT Examples</div>";
         anchor.setHTML(SafeHtmlUtils.fromTrustedString(text));
         super.add(anchor);
         super.add(searchPanel);
