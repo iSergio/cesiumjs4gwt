@@ -53,6 +53,12 @@ public class ShadowMap {
      */
     @JsProperty
     public boolean enabled;
+    /**
+     * Determines whether shadows start to fade out once the light gets closer to the horizon.
+     * Default: true
+     */
+    @JsProperty
+    public boolean fadingEnabled;
 
     /**
      * Creates a shadow map from the provided light camera. The normalOffset bias

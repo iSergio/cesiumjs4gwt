@@ -192,6 +192,23 @@ public class Globe {
     @JsProperty
     public boolean showWaterEffect;
     /**
+     * A scalar used to exaggerate the terrain. Defaults to 1.0 (no exaggeration). A value of 2.0 scales the
+     * terrain by 2x. A value of 0.0 makes the terrain completely flat. Note that terrain exaggeration will not modify
+     * any other primitive as they are positioned relative to the ellipsoid.
+     * Default: 1.0
+     */
+    @JsProperty
+    public Number terrainExaggeration;
+    /**
+     * The height from which terrain is exaggerated. Defaults to 0.0 (scaled relative to ellipsoid surface).
+     * Terrain that is above this height will scale upwards and terrain that is below this height will scale downwards.
+     * Note that terrain exaggeration will not modify any other primitive as they are positioned relative to the ellipsoid.
+     * If Globe#terrainExaggeration is 1.0 this value will have no effect.
+     * Default: 0.0
+     */
+    @JsProperty
+    public Number terrainExaggerationRelativeHeight;
+    /**
      * The terrain provider providing surface geometry for this globe.
      */
     @JsProperty

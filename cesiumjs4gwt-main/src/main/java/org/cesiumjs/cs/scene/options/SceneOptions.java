@@ -22,6 +22,7 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.projection.MapProjection;
+import org.cesiumjs.cs.scene.Globe;
 import org.cesiumjs.cs.scene.enums.MapMode2D;
 
 /**
@@ -67,7 +68,9 @@ public class SceneOptions {
      * A scalar used to exaggerate the terrain. Note that terrain exaggeration will
      * not modify any other primitive as they are positioned relative to the
      * ellipsoid. Default: 1.0
+     * @deprecated will be removed in CesiumJS 1.85. They will be replaced with {@link Globe#terrainExaggeration}.
      */
+    @Deprecated
     @JsProperty
     public double terrainExaggeration;
     /**
