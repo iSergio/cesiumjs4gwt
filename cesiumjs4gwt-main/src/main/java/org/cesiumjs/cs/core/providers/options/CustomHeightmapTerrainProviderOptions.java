@@ -16,9 +16,7 @@
 
 package org.cesiumjs.cs.core.providers.options;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsOverlay;
-import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.Credit;
 import org.cesiumjs.cs.core.Ellipsoid;
 import org.cesiumjs.cs.core.TilingScheme;
@@ -27,6 +25,7 @@ import org.cesiumjs.cs.core.providers.CustomHeightmapTerrainProvider;
 /**
  * Options for {@link CustomHeightmapTerrainProvider}.
  */
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class CustomHeightmapTerrainProviderOptions {
     /**
      * The callback function for requesting tile geometry.

@@ -16,10 +16,10 @@
 
 package org.cesiumjs.cs.core.providers;
 
-import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import com.google.gwt.typedarrays.shared.ArrayBufferView;
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.*;
+import org.cesiumjs.cs.core.providers.options.CustomHeightmapTerrainProviderOptions;
 import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.promise.Promise;
 
@@ -84,6 +84,17 @@ public class CustomHeightmapTerrainProvider implements TerrainProvider {
     @JsProperty(name =  "width")
     public native Number width();
 
+    @JsConstructor
+    private CustomHeightmapTerrainProvider() {}
+
+    @JsConstructor
+    public CustomHeightmapTerrainProvider(CustomHeightmapTerrainProviderOptions options) {}
+
+    @JsOverlay
+    public static CustomHeightmapTerrainProvider create(GeometryCallback callback, int width, int height) {
+        return new CustomHeightmapTerrainProvider(CustomHeightmapTerrainProviderOptions.create(callback, width, height));
+    }
+
     /**
      * Gets the maximum geometric error allowed in a tile at a given level. This
      * function should not be called before {@link GeoserverTerrainProvider#ready}
@@ -137,6 +148,8 @@ public class CustomHeightmapTerrainProvider implements TerrainProvider {
     @JsMethod
     public native Promise<TerrainData, Void> requestTileGeometry(int x, int y, int level, Request request);
 
+    @FunctionalInterface
+    @JsFunction
     public interface GeometryCallback {
         /**
          *
@@ -146,6 +159,6 @@ public class CustomHeightmapTerrainProvider implements TerrainProvider {
          * @return An array or a promise to an array of heights in row-major order. If undefined,
          * the globe will render the parent tile.
          */
-        JsObject callback(int x, int y, int level);
+        ArrayBufferView callback(int x, int y, int level);
     }
 }

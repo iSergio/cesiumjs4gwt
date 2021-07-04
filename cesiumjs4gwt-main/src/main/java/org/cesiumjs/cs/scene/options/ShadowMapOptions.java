@@ -16,10 +16,7 @@
 
 package org.cesiumjs.cs.scene.options;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.scene.Camera;
 
 /**
@@ -102,6 +99,7 @@ public class ShadowMapOptions {
      * @param lightCamera A camera representing the light source.
      * @return ShadowMapOptions instance.
      */
+    @JsOverlay
     public static ShadowMapOptions create(Camera lightCamera) {
         ShadowMapOptions options = new ShadowMapOptions();
         options.lightCamera = lightCamera;
