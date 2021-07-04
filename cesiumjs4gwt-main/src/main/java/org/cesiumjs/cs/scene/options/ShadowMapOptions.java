@@ -16,10 +16,7 @@
 
 package org.cesiumjs.cs.scene.options;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.scene.Camera;
 
 /**
@@ -86,9 +83,26 @@ public class ShadowMapOptions {
      * A camera representing the light source.
      */
     @JsProperty
-    Camera lightCamera;
+    public Camera lightCamera;
+    /**
+     * Whether shadows start to fade out once the light gets closer to the horizon.
+     */
+    @JsProperty
+    public boolean fadingEnabled;
 
     @JsConstructor
-    public ShadowMapOptions() {
+    private ShadowMapOptions() {
+    }
+
+    /**
+     *
+     * @param lightCamera A camera representing the light source.
+     * @return ShadowMapOptions instance.
+     */
+    @JsOverlay
+    public static ShadowMapOptions create(Camera lightCamera) {
+        ShadowMapOptions options = new ShadowMapOptions();
+        options.lightCamera = lightCamera;
+        return options;
     }
 }
