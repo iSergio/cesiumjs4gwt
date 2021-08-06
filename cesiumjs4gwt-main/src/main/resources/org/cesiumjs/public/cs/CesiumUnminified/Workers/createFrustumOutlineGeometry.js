@@ -18,10 +18,10 @@
  * Columbus View (Pat. Pend.)
  *
  * Portions licensed separately.
- * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
+ * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./when-208fe5b0', './Transforms-9651fa9c', './Cartesian2-e9bb1bb3', './Check-5e798bbf', './ComponentDatatype-cc8f5f00', './FrustumGeometry-5186252d', './GeometryAttribute-fbe4b0b6', './GeometryAttributes-b0b294d8', './Math-56f06cd5', './RuntimeError-7f634f5d', './WebGLConstants-5e2a49ab', './Plane-9825d2dd', './VertexFormat-9eeda9f8'], function (when, Transforms, Cartesian2, Check, ComponentDatatype, FrustumGeometry, GeometryAttribute, GeometryAttributes, _Math, RuntimeError, WebGLConstants, Plane, VertexFormat) { 'use strict';
+define(['./when-ad3237a0', './Transforms-a15b18c4', './Cartesian2-80d920df', './Check-be2d5acb', './ComponentDatatype-d313fe31', './FrustumGeometry-ca86e09f', './GeometryAttribute-ecfc6b57', './GeometryAttributes-27dc652d', './Math-ea9609a6', './combine-1510933d', './RuntimeError-767bd866', './WebGLConstants-1c8239cc', './Plane-b1029663', './VertexFormat-16d719d5'], function (when, Transforms, Cartesian2, Check, ComponentDatatype, FrustumGeometry, GeometryAttribute, GeometryAttributes, _Math, combine, RuntimeError, WebGLConstants, Plane, VertexFormat) { 'use strict';
 
   var PERSPECTIVE = 0;
   var ORTHOGRAPHIC = 1;

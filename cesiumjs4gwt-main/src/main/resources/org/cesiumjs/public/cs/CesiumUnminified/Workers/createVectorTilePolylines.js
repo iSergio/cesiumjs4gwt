@@ -18,10 +18,10 @@
  * Columbus View (Pat. Pend.)
  *
  * Portions licensed separately.
- * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
+ * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./Cartesian2-e9bb1bb3', './AttributeCompression-d1cd1d9c', './Math-56f06cd5', './IndexDatatype-3a89c589', './createTaskProcessorWorker', './Check-5e798bbf', './when-208fe5b0', './WebGLConstants-5e2a49ab'], function (Cartesian2, AttributeCompression, _Math, IndexDatatype, createTaskProcessorWorker, Check, when, WebGLConstants) { 'use strict';
+define(['./Cartesian2-80d920df', './combine-1510933d', './AttributeCompression-ff1ddad0', './Math-ea9609a6', './IndexDatatype-b05854cf', './createTaskProcessorWorker', './Check-be2d5acb', './when-ad3237a0', './WebGLConstants-1c8239cc'], function (Cartesian2, combine, AttributeCompression, _Math, IndexDatatype, createTaskProcessorWorker, Check, when, WebGLConstants) { 'use strict';
 
   var maxShort = 32767;
 
@@ -91,6 +91,18 @@ define(['./Cartesian2-e9bb1bb3', './AttributeCompression-d1cd1d9c', './Math-56f0
     offset += Cartesian2.Ellipsoid.packedLength;
 
     Cartesian2.Cartesian3.unpack(packedBuffer, offset, scratchCenter);
+  }
+
+  function getPositionOffsets(counts) {
+    var countsLength = counts.length;
+    var positionOffsets = new Uint32Array(countsLength + 1);
+    var offset = 0;
+    for (var i = 0; i < countsLength; ++i) {
+      positionOffsets[i] = offset;
+      offset += counts[i];
+    }
+    positionOffsets[countsLength] = offset;
+    return positionOffsets;
   }
 
   var scratchP0 = new Cartesian2.Cartesian3();
@@ -230,7 +242,7 @@ define(['./Cartesian2-e9bb1bb3', './AttributeCompression-d1cd1d9c', './Math-56f0
       indices.buffer
     );
 
-    return {
+    var results = {
       indexDatatype:
         indices.BYTES_PER_ELEMENT === 2
           ? IndexDatatype.IndexDatatype.UNSIGNED_SHORT
@@ -242,6 +254,17 @@ define(['./Cartesian2-e9bb1bb3', './AttributeCompression-d1cd1d9c', './Math-56f0
       batchIds: vertexBatchIds.buffer,
       indices: indices.buffer,
     };
+
+    if (parameters.keepDecodedPositions) {
+      var positionOffsets = getPositionOffsets(counts);
+      transferableObjects.push(positions.buffer, positionOffsets.buffer);
+      results = combine.combine(results, {
+        decodedPositions: positions.buffer,
+        decodedPositionOffsets: positionOffsets.buffer,
+      });
+    }
+
+    return results;
   }
   var createVectorTilePolylines$1 = createTaskProcessorWorker(createVectorTilePolylines);
 

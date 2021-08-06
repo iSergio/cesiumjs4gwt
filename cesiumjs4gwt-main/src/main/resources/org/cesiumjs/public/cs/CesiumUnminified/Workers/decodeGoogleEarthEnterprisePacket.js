@@ -18,10 +18,10 @@
  * Columbus View (Pat. Pend.)
  *
  * Portions licensed separately.
- * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
+ * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./Check-5e798bbf', './RuntimeError-7f634f5d', './when-208fe5b0', './createTaskProcessorWorker'], function (Check, RuntimeError, when, createTaskProcessorWorker) { 'use strict';
+define(['./Check-be2d5acb', './RuntimeError-767bd866', './when-ad3237a0', './createTaskProcessorWorker'], function (Check, RuntimeError, when, createTaskProcessorWorker) { 'use strict';
 
   var compressedMagic$1 = 0x7468dead;
   var compressedMagicSwap$1 = 0xadde6874;

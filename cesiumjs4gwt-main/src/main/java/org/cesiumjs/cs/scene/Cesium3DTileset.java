@@ -609,7 +609,18 @@ public class Cesium3DTileset {
      */
     @JsProperty(name = "totalMemoryUsageInBytes")
     public native int totalMemoryUsageInBytes();
-
+    /**
+     * Indicates that only the tileset's vector tiles should be used for classification.
+     * Default: false
+     */
+    @JsProperty
+    public boolean vectorClassificationOnly;
+    /**
+     * Whether vector tiles should keep decoded positions in memory. This is used with Cesium3DTileFeature.getPolylinePositions.
+     * Default: false
+     */
+    @JsProperty
+    public boolean vectorKeepDecodedPositions;
     /**
      * The resource used to fetch the tileset JSON file.
      */

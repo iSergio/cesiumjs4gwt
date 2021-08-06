@@ -18,10 +18,10 @@
  * Columbus View (Pat. Pend.)
  *
  * Portions licensed separately.
- * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
+ * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./when-208fe5b0', './Check-5e798bbf', './WebGLConstants-5e2a49ab', './RuntimeError-7f634f5d', './createTaskProcessorWorker'], function (when, Check, WebGLConstants, RuntimeError, createTaskProcessorWorker) { 'use strict';
+define(['./when-ad3237a0', './Check-be2d5acb', './WebGLConstants-1c8239cc', './RuntimeError-767bd866', './createTaskProcessorWorker'], function (when, Check, WebGLConstants, RuntimeError, createTaskProcessorWorker) { 'use strict';
 
   /**
    * The data type of a pixel.

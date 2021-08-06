@@ -18,10 +18,10 @@
  * Columbus View (Pat. Pend.)
  *
  * Portions licensed separately.
- * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
+ * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./AttributeCompression-d1cd1d9c', './Transforms-9651fa9c', './Cartesian2-e9bb1bb3', './when-208fe5b0', './TerrainEncoding-8d274519', './IndexDatatype-3a89c589', './Check-5e798bbf', './Math-56f06cd5', './OrientedBoundingBox-dfa225d1', './createTaskProcessorWorker', './RuntimeError-7f634f5d', './ComponentDatatype-cc8f5f00', './WebGLConstants-5e2a49ab', './EllipsoidTangentPlane-e79f0327', './AxisAlignedBoundingBox-574d1269', './IntersectionTests-4352af03', './Plane-9825d2dd'], function (AttributeCompression, Transforms, Cartesian2, when, TerrainEncoding, IndexDatatype, Check, _Math, OrientedBoundingBox, createTaskProcessorWorker, RuntimeError, ComponentDatatype, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane) { 'use strict';
+define(['./AttributeCompression-ff1ddad0', './Transforms-a15b18c4', './Cartesian2-80d920df', './when-ad3237a0', './TerrainEncoding-074c1bf4', './IndexDatatype-b05854cf', './Check-be2d5acb', './Math-ea9609a6', './OrientedBoundingBox-353937db', './createTaskProcessorWorker', './combine-1510933d', './RuntimeError-767bd866', './ComponentDatatype-d313fe31', './WebGLConstants-1c8239cc', './EllipsoidTangentPlane-f39e48de', './AxisAlignedBoundingBox-997fde65', './IntersectionTests-38cb74a9', './Plane-b1029663'], function (AttributeCompression, Transforms, Cartesian2, when, TerrainEncoding, IndexDatatype, Check, _Math, OrientedBoundingBox, createTaskProcessorWorker, combine, RuntimeError, ComponentDatatype, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane) { 'use strict';
 
   /**
    * Contains functions for operating on 2D triangles.

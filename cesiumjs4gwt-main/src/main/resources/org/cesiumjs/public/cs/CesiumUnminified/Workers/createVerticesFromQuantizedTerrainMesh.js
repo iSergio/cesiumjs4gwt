@@ -18,10 +18,10 @@
  * Columbus View (Pat. Pend.)
  *
  * Portions licensed separately.
- * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
+ * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./AxisAlignedBoundingBox-574d1269', './Cartesian2-e9bb1bb3', './when-208fe5b0', './TerrainEncoding-8d274519', './IndexDatatype-3a89c589', './Math-56f06cd5', './Transforms-9651fa9c', './Check-5e798bbf', './WebMercatorProjection-7b54c659', './createTaskProcessorWorker', './AttributeCompression-d1cd1d9c', './ComponentDatatype-cc8f5f00', './WebGLConstants-5e2a49ab', './RuntimeError-7f634f5d'], function (AxisAlignedBoundingBox, Cartesian2, when, TerrainEncoding, IndexDatatype, _Math, Transforms, Check, WebMercatorProjection, createTaskProcessorWorker, AttributeCompression, ComponentDatatype, WebGLConstants, RuntimeError) { 'use strict';
+define(['./AxisAlignedBoundingBox-997fde65', './Cartesian2-80d920df', './when-ad3237a0', './TerrainEncoding-074c1bf4', './IndexDatatype-b05854cf', './Math-ea9609a6', './Transforms-a15b18c4', './Check-be2d5acb', './WebMercatorProjection-0a1e040d', './createTaskProcessorWorker', './AttributeCompression-ff1ddad0', './ComponentDatatype-d313fe31', './WebGLConstants-1c8239cc', './combine-1510933d', './RuntimeError-767bd866'], function (AxisAlignedBoundingBox, Cartesian2, when, TerrainEncoding, IndexDatatype, _Math, Transforms, Check, WebMercatorProjection, createTaskProcessorWorker, AttributeCompression, ComponentDatatype, WebGLConstants, combine, RuntimeError) { 'use strict';
 
   /**
    * Provides terrain or other geometry for the surface of an ellipsoid.  The surface geometry is

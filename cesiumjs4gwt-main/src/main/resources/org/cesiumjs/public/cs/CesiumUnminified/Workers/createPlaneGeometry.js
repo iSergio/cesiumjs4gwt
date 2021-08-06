@@ -18,10 +18,10 @@
  * Columbus View (Pat. Pend.)
  *
  * Portions licensed separately.
- * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
+ * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./when-208fe5b0', './Transforms-9651fa9c', './Cartesian2-e9bb1bb3', './Check-5e798bbf', './ComponentDatatype-cc8f5f00', './GeometryAttribute-fbe4b0b6', './GeometryAttributes-b0b294d8', './VertexFormat-9eeda9f8', './Math-56f06cd5', './RuntimeError-7f634f5d', './WebGLConstants-5e2a49ab'], function (when, Transforms, Cartesian2, Check, ComponentDatatype, GeometryAttribute, GeometryAttributes, VertexFormat, _Math, RuntimeError, WebGLConstants) { 'use strict';
+define(['./when-ad3237a0', './Transforms-a15b18c4', './Cartesian2-80d920df', './Check-be2d5acb', './ComponentDatatype-d313fe31', './GeometryAttribute-ecfc6b57', './GeometryAttributes-27dc652d', './VertexFormat-16d719d5', './Math-ea9609a6', './combine-1510933d', './RuntimeError-767bd866', './WebGLConstants-1c8239cc'], function (when, Transforms, Cartesian2, Check, ComponentDatatype, GeometryAttribute, GeometryAttributes, VertexFormat, _Math, combine, RuntimeError, WebGLConstants) { 'use strict';
 
   /**
    * Describes geometry representing a plane centered at the origin, with a unit width and length.

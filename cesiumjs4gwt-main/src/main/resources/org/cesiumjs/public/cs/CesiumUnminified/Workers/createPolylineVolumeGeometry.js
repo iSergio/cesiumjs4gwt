@@ -18,58 +18,10 @@
  * Columbus View (Pat. Pend.)
  *
  * Portions licensed separately.
- * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
+ * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./when-208fe5b0', './Cartesian2-e9bb1bb3', './arrayRemoveDuplicates-89f704e4', './BoundingRectangle-10693d92', './Transforms-9651fa9c', './ComponentDatatype-cc8f5f00', './PolylineVolumeGeometryLibrary-357590d7', './Check-5e798bbf', './GeometryAttribute-fbe4b0b6', './GeometryAttributes-b0b294d8', './GeometryPipeline-a6a68cab', './IndexDatatype-3a89c589', './Math-56f06cd5', './PolygonPipeline-c48540af', './VertexFormat-9eeda9f8', './RuntimeError-7f634f5d', './WebGLConstants-5e2a49ab', './EllipsoidTangentPlane-e79f0327', './AxisAlignedBoundingBox-574d1269', './IntersectionTests-4352af03', './Plane-9825d2dd', './PolylinePipeline-9fd4ed2e', './EllipsoidGeodesic-1c2b601e', './EllipsoidRhumbLine-938626ba', './AttributeCompression-d1cd1d9c', './EncodedCartesian3-099fd63d'], function (when, Cartesian2, arrayRemoveDuplicates, BoundingRectangle, Transforms, ComponentDatatype, PolylineVolumeGeometryLibrary, Check, GeometryAttribute, GeometryAttributes, GeometryPipeline, IndexDatatype, _Math, PolygonPipeline, VertexFormat, RuntimeError, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane, PolylinePipeline, EllipsoidGeodesic, EllipsoidRhumbLine, AttributeCompression, EncodedCartesian3) { 'use strict';
-
-  var warnings = {};
-
-  /**
-   * Logs a one time message to the console.  Use this function instead of
-   * <code>console.log</code> directly since this does not log duplicate messages
-   * unless it is called from multiple workers.
-   *
-   * @function oneTimeWarning
-   *
-   * @param {String} identifier The unique identifier for this warning.
-   * @param {String} [message=identifier] The message to log to the console.
-   *
-   * @example
-   * for(var i=0;i<foo.length;++i) {
-   *    if (!defined(foo[i].bar)) {
-   *       // Something that can be recovered from but may happen a lot
-   *       oneTimeWarning('foo.bar undefined', 'foo.bar is undefined. Setting to 0.');
-   *       foo[i].bar = 0;
-   *       // ...
-   *    }
-   * }
-   *
-   * @private
-   */
-  function oneTimeWarning(identifier, message) {
-    //>>includeStart('debug', pragmas.debug);
-    if (!when.defined(identifier)) {
-      throw new Check.DeveloperError("identifier is required.");
-    }
-    //>>includeEnd('debug');
-
-    if (!when.defined(warnings[identifier])) {
-      warnings[identifier] = true;
-      console.warn(when.defaultValue(message, identifier));
-    }
-  }
-
-  oneTimeWarning.geometryOutlines =
-    "Entity geometry outlines are unsupported on terrain. Outlines will be disabled. To enable outlines, disable geometry terrain clamping by explicitly setting height to 0.";
-
-  oneTimeWarning.geometryZIndex =
-    "Entity geometry with zIndex are unsupported when height or extrudedHeight are defined.  zIndex will be ignored";
-
-  oneTimeWarning.geometryHeightReference =
-    "Entity corridor, ellipse, polygon or rectangle with heightReference must also have a defined height.  heightReference will be ignored";
-  oneTimeWarning.geometryExtrudedHeightReference =
-    "Entity corridor, ellipse, polygon or rectangle with extrudedHeightReference must also have a defined extrudedHeight.  extrudedHeightReference will be ignored";
+define(['./when-ad3237a0', './Cartesian2-80d920df', './arrayRemoveDuplicates-956e66e5', './BoundingRectangle-ccb23b1a', './Transforms-a15b18c4', './ComponentDatatype-d313fe31', './PolylineVolumeGeometryLibrary-97edd379', './Check-be2d5acb', './GeometryAttribute-ecfc6b57', './GeometryAttributes-27dc652d', './GeometryPipeline-22537247', './IndexDatatype-b05854cf', './Math-ea9609a6', './PolygonPipeline-3efca556', './VertexFormat-16d719d5', './combine-1510933d', './RuntimeError-767bd866', './WebGLConstants-1c8239cc', './EllipsoidTangentPlane-f39e48de', './AxisAlignedBoundingBox-997fde65', './IntersectionTests-38cb74a9', './Plane-b1029663', './PolylinePipeline-80605f65', './EllipsoidGeodesic-c536a380', './EllipsoidRhumbLine-f85c13d7', './AttributeCompression-ff1ddad0', './EncodedCartesian3-13336927'], function (when, Cartesian2, arrayRemoveDuplicates, BoundingRectangle, Transforms, ComponentDatatype, PolylineVolumeGeometryLibrary, Check, GeometryAttribute, GeometryAttributes, GeometryPipeline, IndexDatatype, _Math, PolygonPipeline, VertexFormat, combine, RuntimeError, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane, PolylinePipeline, EllipsoidGeodesic, EllipsoidRhumbLine, AttributeCompression, EncodedCartesian3) { 'use strict';
 
   function computeAttributes(
     combinedPositions,
@@ -197,7 +149,7 @@ define(['./when-208fe5b0', './Cartesian2-e9bb1bb3', './arrayRemoveDuplicates-89f
       try {
         geometry = GeometryPipeline.GeometryPipeline.computeTangentAndBitangent(geometry);
       } catch (e) {
-        oneTimeWarning(
+        PolylineVolumeGeometryLibrary.oneTimeWarning(
           "polyline-volume-tangent-bitangent",
           "Unable to compute tangents and bitangents for polyline volume geometry"
         );

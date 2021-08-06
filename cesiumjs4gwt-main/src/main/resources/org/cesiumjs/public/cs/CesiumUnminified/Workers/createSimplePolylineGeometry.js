@@ -18,10 +18,10 @@
  * Columbus View (Pat. Pend.)
  *
  * Portions licensed separately.
- * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
+ * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./when-208fe5b0', './Cartesian2-e9bb1bb3', './ArcType-dc1c5aee', './Transforms-9651fa9c', './Color-63d46c5a', './ComponentDatatype-cc8f5f00', './Check-5e798bbf', './GeometryAttribute-fbe4b0b6', './GeometryAttributes-b0b294d8', './IndexDatatype-3a89c589', './Math-56f06cd5', './PolylinePipeline-9fd4ed2e', './RuntimeError-7f634f5d', './WebGLConstants-5e2a49ab', './EllipsoidGeodesic-1c2b601e', './EllipsoidRhumbLine-938626ba', './IntersectionTests-4352af03', './Plane-9825d2dd'], function (when, Cartesian2, ArcType, Transforms, Color, ComponentDatatype, Check, GeometryAttribute, GeometryAttributes, IndexDatatype, _Math, PolylinePipeline, RuntimeError, WebGLConstants, EllipsoidGeodesic, EllipsoidRhumbLine, IntersectionTests, Plane) { 'use strict';
+define(['./when-ad3237a0', './Cartesian2-80d920df', './ArcType-98ec98bf', './Transforms-a15b18c4', './Color-ae240c0f', './ComponentDatatype-d313fe31', './Check-be2d5acb', './GeometryAttribute-ecfc6b57', './GeometryAttributes-27dc652d', './IndexDatatype-b05854cf', './Math-ea9609a6', './PolylinePipeline-80605f65', './combine-1510933d', './RuntimeError-767bd866', './WebGLConstants-1c8239cc', './EllipsoidGeodesic-c536a380', './EllipsoidRhumbLine-f85c13d7', './IntersectionTests-38cb74a9', './Plane-b1029663'], function (when, Cartesian2, ArcType, Transforms, Color, ComponentDatatype, Check, GeometryAttribute, GeometryAttributes, IndexDatatype, _Math, PolylinePipeline, combine, RuntimeError, WebGLConstants, EllipsoidGeodesic, EllipsoidRhumbLine, IntersectionTests, Plane) { 'use strict';
 
   function interpolateColors(p0, p1, color0, color1, minDistance, array, offset) {
     var numPoints = PolylinePipeline.PolylinePipeline.numberOfPoints(p0, p1, minDistance);
