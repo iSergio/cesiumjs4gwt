@@ -17,6 +17,7 @@
 package org.cesiumjs.cs.collections;
 
 import jsinterop.annotations.*;
+import org.cesiumjs.cs.core.Cartesian2;
 import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.core.Ray;
 import org.cesiumjs.cs.promise.Promise;
@@ -147,8 +148,17 @@ public class ImageryLayerCollection extends Collection<ImageryLayer> {
      * intersect the surface), this function will return undefined.
      */
     @JsMethod
-    public native Promise<ImageryLayerFeatureInfo[], Void>
-    pickImageryLayerFeatures(Ray ray, Scene scene);
+    public native Promise<ImageryLayerFeatureInfo[], Void> pickImageryLayerFeatures(Ray ray, Scene scene);
+
+    /**
+     * Determines the imagery layers that are intersected by a pick ray. To compute a pick ray from a location on the screen,
+     * use {@link org.cesiumjs.cs.scene.Camera#getPickRay}
+     * @param ray The ray to test for intersection.
+     * @param scene The scene.
+     * @return An array that includes all of the layers that are intersected by a given pick ray. Undefined if no layers are selected.
+     */
+    @JsMethod
+    public native ImageryLayer[] pickImageryLayers(Ray ray, Scene scene);
 
     /**
      * Raises a layer up one position in the collection.
