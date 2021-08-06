@@ -18,10 +18,10 @@
  * Columbus View (Pat. Pend.)
  *
  * Portions licensed separately.
- * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
+ * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./ComponentDatatype-cc8f5f00', './when-208fe5b0', './IndexDatatype-3a89c589', './RuntimeError-7f634f5d', './createTaskProcessorWorker', './Check-5e798bbf', './WebGLConstants-5e2a49ab', './Math-56f06cd5'], function (ComponentDatatype, when, IndexDatatype, RuntimeError, createTaskProcessorWorker, Check, WebGLConstants, _Math) { 'use strict';
+define(['./ComponentDatatype-d313fe31', './when-ad3237a0', './IndexDatatype-b05854cf', './RuntimeError-767bd866', './createTaskProcessorWorker', './Check-be2d5acb', './WebGLConstants-1c8239cc', './Math-ea9609a6'], function (ComponentDatatype, when, IndexDatatype, RuntimeError, createTaskProcessorWorker, Check, WebGLConstants, _Math) { 'use strict';
 
   /* global require */
 

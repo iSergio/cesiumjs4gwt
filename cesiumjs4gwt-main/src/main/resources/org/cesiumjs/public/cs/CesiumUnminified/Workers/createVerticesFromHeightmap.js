@@ -18,10 +18,10 @@
  * Columbus View (Pat. Pend.)
  *
  * Portions licensed separately.
- * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
+ * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./Cartesian2-e9bb1bb3', './AxisAlignedBoundingBox-574d1269', './Transforms-9651fa9c', './when-208fe5b0', './Check-5e798bbf', './TerrainEncoding-8d274519', './Math-56f06cd5', './OrientedBoundingBox-dfa225d1', './WebMercatorProjection-7b54c659', './RuntimeError-7f634f5d', './createTaskProcessorWorker', './AttributeCompression-d1cd1d9c', './ComponentDatatype-cc8f5f00', './WebGLConstants-5e2a49ab', './EllipsoidTangentPlane-e79f0327', './IntersectionTests-4352af03', './Plane-9825d2dd'], function (Cartesian2, AxisAlignedBoundingBox, Transforms, when, Check, TerrainEncoding, _Math, OrientedBoundingBox, WebMercatorProjection, RuntimeError, createTaskProcessorWorker, AttributeCompression, ComponentDatatype, WebGLConstants, EllipsoidTangentPlane, IntersectionTests, Plane) { 'use strict';
+define(['./Cartesian2-80d920df', './AxisAlignedBoundingBox-997fde65', './Transforms-a15b18c4', './when-ad3237a0', './Check-be2d5acb', './TerrainEncoding-074c1bf4', './Math-ea9609a6', './OrientedBoundingBox-353937db', './WebMercatorProjection-0a1e040d', './RuntimeError-767bd866', './createTaskProcessorWorker', './combine-1510933d', './AttributeCompression-ff1ddad0', './ComponentDatatype-d313fe31', './WebGLConstants-1c8239cc', './EllipsoidTangentPlane-f39e48de', './IntersectionTests-38cb74a9', './Plane-b1029663'], function (Cartesian2, AxisAlignedBoundingBox, Transforms, when, Check, TerrainEncoding, _Math, OrientedBoundingBox, WebMercatorProjection, RuntimeError, createTaskProcessorWorker, combine, AttributeCompression, ComponentDatatype, WebGLConstants, EllipsoidTangentPlane, IntersectionTests, Plane) { 'use strict';
 
   /**
    * The encoding that is used for a heightmap

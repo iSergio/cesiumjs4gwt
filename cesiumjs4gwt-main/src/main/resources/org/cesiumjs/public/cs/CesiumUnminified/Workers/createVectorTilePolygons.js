@@ -18,10 +18,10 @@
  * Columbus View (Pat. Pend.)
  *
  * Portions licensed separately.
- * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
+ * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./AttributeCompression-d1cd1d9c', './Cartesian2-e9bb1bb3', './Color-63d46c5a', './when-208fe5b0', './IndexDatatype-3a89c589', './Math-56f06cd5', './OrientedBoundingBox-dfa225d1', './createTaskProcessorWorker', './Check-5e798bbf', './Transforms-9651fa9c', './RuntimeError-7f634f5d', './WebGLConstants-5e2a49ab', './EllipsoidTangentPlane-e79f0327', './AxisAlignedBoundingBox-574d1269', './IntersectionTests-4352af03', './Plane-9825d2dd'], function (AttributeCompression, Cartesian2, Color, when, IndexDatatype, _Math, OrientedBoundingBox, createTaskProcessorWorker, Check, Transforms, RuntimeError, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane) { 'use strict';
+define(['./AttributeCompression-ff1ddad0', './Cartesian2-80d920df', './Color-ae240c0f', './when-ad3237a0', './IndexDatatype-b05854cf', './Math-ea9609a6', './OrientedBoundingBox-353937db', './createTaskProcessorWorker', './Check-be2d5acb', './Transforms-a15b18c4', './combine-1510933d', './RuntimeError-767bd866', './WebGLConstants-1c8239cc', './EllipsoidTangentPlane-f39e48de', './AxisAlignedBoundingBox-997fde65', './IntersectionTests-38cb74a9', './Plane-b1029663'], function (AttributeCompression, Cartesian2, Color, when, IndexDatatype, _Math, OrientedBoundingBox, createTaskProcessorWorker, Check, Transforms, combine, RuntimeError, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane) { 'use strict';
 
   var scratchCenter = new Cartesian2.Cartesian3();
   var scratchEllipsoid = new Cartesian2.Ellipsoid();

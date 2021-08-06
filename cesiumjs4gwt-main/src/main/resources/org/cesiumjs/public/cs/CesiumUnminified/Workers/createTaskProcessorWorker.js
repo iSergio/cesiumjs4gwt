@@ -18,10 +18,10 @@
  * Columbus View (Pat. Pend.)
  *
  * Portions licensed separately.
- * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
+ * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./when-208fe5b0'], function (when) { 'use strict';
+define(['./when-ad3237a0'], function (when) { 'use strict';
 
   /**
    * Formats an error object into a String.  If available, uses name, message, and stack
