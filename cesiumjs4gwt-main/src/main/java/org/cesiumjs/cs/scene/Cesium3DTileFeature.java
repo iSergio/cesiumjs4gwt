@@ -16,6 +16,7 @@
 
 package org.cesiumjs.cs.scene;
 
+import com.google.gwt.typedarrays.shared.Float64Array;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -52,6 +53,13 @@ public class Cesium3DTileFeature extends PickedObject {
      */
     @JsProperty
     public Color color;
+    /**
+     * Gets a typed array containing the ECEF positions of the polyline.
+     * Returns undefined if {@link Cesium3DTileset#vectorKeepDecodedPositions} is false or the feature
+     * is not a polyline in a vector tile.
+     */
+    @JsProperty(name = "polylinePositions")
+    public native Float64Array polylinePositions();
     /**
      * Gets or sets if the feature will be shown. This is set for all features when
      * a style's show is evaluated. Default: true
