@@ -18,10 +18,10 @@
  * Columbus View (Pat. Pend.)
  *
  * Portions licensed separately.
- * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
+ * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./when-208fe5b0', './Cartesian2-e9bb1bb3', './Transforms-9651fa9c', './ComponentDatatype-cc8f5f00', './Check-5e798bbf', './GeometryAttribute-fbe4b0b6', './GeometryAttributes-b0b294d8', './IndexDatatype-3a89c589', './Math-56f06cd5', './VertexFormat-9eeda9f8', './WallGeometryLibrary-960059cb', './RuntimeError-7f634f5d', './WebGLConstants-5e2a49ab', './arrayRemoveDuplicates-89f704e4', './PolylinePipeline-9fd4ed2e', './EllipsoidGeodesic-1c2b601e', './EllipsoidRhumbLine-938626ba', './IntersectionTests-4352af03', './Plane-9825d2dd'], function (when, Cartesian2, Transforms, ComponentDatatype, Check, GeometryAttribute, GeometryAttributes, IndexDatatype, _Math, VertexFormat, WallGeometryLibrary, RuntimeError, WebGLConstants, arrayRemoveDuplicates, PolylinePipeline, EllipsoidGeodesic, EllipsoidRhumbLine, IntersectionTests, Plane) { 'use strict';
+define(['./when-ad3237a0', './Cartesian2-80d920df', './Transforms-a15b18c4', './ComponentDatatype-d313fe31', './Check-be2d5acb', './GeometryAttribute-ecfc6b57', './GeometryAttributes-27dc652d', './IndexDatatype-b05854cf', './Math-ea9609a6', './VertexFormat-16d719d5', './WallGeometryLibrary-9129b620', './combine-1510933d', './RuntimeError-767bd866', './WebGLConstants-1c8239cc', './arrayRemoveDuplicates-956e66e5', './PolylinePipeline-80605f65', './EllipsoidGeodesic-c536a380', './EllipsoidRhumbLine-f85c13d7', './IntersectionTests-38cb74a9', './Plane-b1029663'], function (when, Cartesian2, Transforms, ComponentDatatype, Check, GeometryAttribute, GeometryAttributes, IndexDatatype, _Math, VertexFormat, WallGeometryLibrary, combine, RuntimeError, WebGLConstants, arrayRemoveDuplicates, PolylinePipeline, EllipsoidGeodesic, EllipsoidRhumbLine, IntersectionTests, Plane) { 'use strict';
 
   var scratchCartesian3Position1 = new Cartesian2.Cartesian3();
   var scratchCartesian3Position2 = new Cartesian2.Cartesian3();

@@ -18,10 +18,10 @@
  * Columbus View (Pat. Pend.)
  *
  * Portions licensed separately.
- * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
+ * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./when-208fe5b0', './Cartesian2-e9bb1bb3', './ArcType-dc1c5aee', './arrayRemoveDuplicates-89f704e4', './Transforms-9651fa9c', './Color-63d46c5a', './ComponentDatatype-cc8f5f00', './Check-5e798bbf', './GeometryAttribute-fbe4b0b6', './GeometryAttributes-b0b294d8', './IndexDatatype-3a89c589', './Math-56f06cd5', './PolylinePipeline-9fd4ed2e', './VertexFormat-9eeda9f8', './RuntimeError-7f634f5d', './WebGLConstants-5e2a49ab', './EllipsoidGeodesic-1c2b601e', './EllipsoidRhumbLine-938626ba', './IntersectionTests-4352af03', './Plane-9825d2dd'], function (when, Cartesian2, ArcType, arrayRemoveDuplicates, Transforms, Color, ComponentDatatype, Check, GeometryAttribute, GeometryAttributes, IndexDatatype, _Math, PolylinePipeline, VertexFormat, RuntimeError, WebGLConstants, EllipsoidGeodesic, EllipsoidRhumbLine, IntersectionTests, Plane) { 'use strict';
+define(['./when-ad3237a0', './Cartesian2-80d920df', './ArcType-98ec98bf', './arrayRemoveDuplicates-956e66e5', './Transforms-a15b18c4', './Color-ae240c0f', './ComponentDatatype-d313fe31', './Check-be2d5acb', './GeometryAttribute-ecfc6b57', './GeometryAttributes-27dc652d', './IndexDatatype-b05854cf', './Math-ea9609a6', './PolylinePipeline-80605f65', './VertexFormat-16d719d5', './combine-1510933d', './RuntimeError-767bd866', './WebGLConstants-1c8239cc', './EllipsoidGeodesic-c536a380', './EllipsoidRhumbLine-f85c13d7', './IntersectionTests-38cb74a9', './Plane-b1029663'], function (when, Cartesian2, ArcType, arrayRemoveDuplicates, Transforms, Color, ComponentDatatype, Check, GeometryAttribute, GeometryAttributes, IndexDatatype, _Math, PolylinePipeline, VertexFormat, combine, RuntimeError, WebGLConstants, EllipsoidGeodesic, EllipsoidRhumbLine, IntersectionTests, Plane) { 'use strict';
 
   var scratchInterpolateColorsArray = [];
 
@@ -314,10 +314,35 @@ define(['./when-208fe5b0', './Cartesian2-e9bb1bb3', './ArcType-dc1c5aee', './arr
     var j;
     var k;
 
+    var removedIndices = [];
     var positions = arrayRemoveDuplicates.arrayRemoveDuplicates(
       polylineGeometry._positions,
-      Cartesian2.Cartesian3.equalsEpsilon
+      Cartesian2.Cartesian3.equalsEpsilon,
+      false,
+      removedIndices
     );
+
+    if (when.defined(colors) && removedIndices.length > 0) {
+      var removedArrayIndex = 0;
+      var nextRemovedIndex = removedIndices[0];
+      colors = colors.filter(function (color, index) {
+        var remove = false;
+        if (colorsPerVertex) {
+          remove =
+            index === nextRemovedIndex || (index === 0 && nextRemovedIndex === 1);
+        } else {
+          remove = index + 1 === nextRemovedIndex;
+        }
+
+        if (remove) {
+          removedArrayIndex++;
+          nextRemovedIndex = removedIndices[removedArrayIndex];
+          return false;
+        }
+        return true;
+      });
+    }
+
     var positionsLength = positions.length;
 
     // A width of a pixel or less is not a valid geometry, but in order to support external data

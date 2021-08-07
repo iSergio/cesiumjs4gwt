@@ -18,10 +18,10 @@
  * Columbus View (Pat. Pend.)
  *
  * Portions licensed separately.
- * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
+ * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./AttributeCompression-d1cd1d9c', './Cartesian2-e9bb1bb3', './IndexDatatype-3a89c589', './Math-56f06cd5', './createTaskProcessorWorker', './Check-5e798bbf', './when-208fe5b0', './WebGLConstants-5e2a49ab'], function (AttributeCompression, Cartesian2, IndexDatatype, _Math, createTaskProcessorWorker, Check, when, WebGLConstants) { 'use strict';
+define(['./AttributeCompression-ff1ddad0', './Cartesian2-80d920df', './combine-1510933d', './IndexDatatype-b05854cf', './Math-ea9609a6', './createTaskProcessorWorker', './Check-be2d5acb', './when-ad3237a0', './WebGLConstants-1c8239cc'], function (AttributeCompression, Cartesian2, combine, IndexDatatype, _Math, createTaskProcessorWorker, Check, when, WebGLConstants) { 'use strict';
 
   var MAX_SHORT = 32767;
   var MITER_BREAK = Math.cos(_Math.CesiumMath.toRadians(150.0));
@@ -29,18 +29,17 @@ define(['./AttributeCompression-d1cd1d9c', './Cartesian2-e9bb1bb3', './IndexData
   var scratchBVCartographic = new Cartesian2.Cartographic();
   var scratchEncodedPosition = new Cartesian2.Cartesian3();
 
-  function decodePositionsToRtc(
+  function decodePositions(
     uBuffer,
     vBuffer,
     heightBuffer,
     rectangle,
     minimumHeight,
     maximumHeight,
-    ellipsoid,
-    center
+    ellipsoid
   ) {
     var positionsLength = uBuffer.length;
-    var decodedPositions = new Float32Array(positionsLength * 3);
+    var decodedPositions = new Float64Array(positionsLength * 3);
     for (var i = 0; i < positionsLength; ++i) {
       var u = uBuffer[i];
       var v = vBuffer[i];
@@ -60,14 +59,21 @@ define(['./AttributeCompression-d1cd1d9c', './Cartesian2-e9bb1bb3', './IndexData
         cartographic,
         scratchEncodedPosition
       );
-      var rtc = Cartesian2.Cartesian3.subtract(
-        decodedPosition,
-        center,
-        scratchEncodedPosition
-      );
-      Cartesian2.Cartesian3.pack(rtc, decodedPositions, i * 3);
+      Cartesian2.Cartesian3.pack(decodedPosition, decodedPositions, i * 3);
     }
     return decodedPositions;
+  }
+
+  function getPositionOffsets(counts) {
+    var countsLength = counts.length;
+    var positionOffsets = new Uint32Array(countsLength + 1);
+    var offset = 0;
+    for (var i = 0; i < countsLength; ++i) {
+      positionOffsets[i] = offset;
+      offset += counts[i];
+    }
+    positionOffsets[countsLength] = offset;
+    return positionOffsets;
   }
 
   var previousCompressedCartographicScratch = new Cartesian2.Cartographic();
@@ -377,16 +383,22 @@ define(['./AttributeCompression-d1cd1d9c', './Cartesian2-e9bb1bb3', './IndexData
 
     var attribsAndIndices = new VertexAttributesAndIndices(volumesCount);
 
-    var positionsRTC = decodePositionsToRtc(
+    var positions = decodePositions(
       uBuffer,
       vBuffer,
       heightBuffer,
       rectangle,
       minimumHeight,
       maximumHeight,
-      ellipsoid,
-      center
-    );
+      ellipsoid);
+
+    positionsLength = uBuffer.length;
+    var positionsRTC = new Float32Array(positionsLength * 3);
+    for (i = 0; i < positionsLength; ++i) {
+      positionsRTC[i * 3] = positions[i * 3] - center.x;
+      positionsRTC[i * 3 + 1] = positions[i * 3 + 1] - center.y;
+      positionsRTC[i * 3 + 2] = positions[i * 3 + 2] - center.z;
+    }
 
     var currentPositionIndex = 0;
     var currentHeightIndex = 0;
@@ -504,7 +516,7 @@ define(['./AttributeCompression-d1cd1d9c', './Cartesian2-e9bb1bb3', './IndexData
     transferableObjects.push(attribsAndIndices.vertexBatchIds.buffer);
     transferableObjects.push(indices.buffer);
 
-    return {
+    var results = {
       indexDatatype:
         indices.BYTES_PER_ELEMENT === 2
           ? IndexDatatype.IndexDatatype.UNSIGNED_SHORT
@@ -520,6 +532,17 @@ define(['./AttributeCompression-d1cd1d9c', './Cartesian2-e9bb1bb3', './IndexData
       vertexBatchIds: attribsAndIndices.vertexBatchIds.buffer,
       indices: indices.buffer,
     };
+
+    if (parameters.keepDecodedPositions) {
+      var positionOffsets = getPositionOffsets(counts);
+      transferableObjects.push(positions.buffer, positionOffsets.buffer);
+      results = combine.combine(results, {
+        decodedPositions: positions.buffer,
+        decodedPositionOffsets: positionOffsets.buffer,
+      });
+    }
+
+    return results;
   }
   var createVectorTileClampedPolylines$1 = createTaskProcessorWorker(createVectorTileClampedPolylines);
 
