@@ -23,7 +23,9 @@ import org.cesiumjs.cs.core.providers.CesiumTerrainProvider;
 import org.cesiumjs.cs.core.providers.TerrainProvider;
 import org.cesiumjs.cs.datasources.graphics.ModelGraphics;
 import org.cesiumjs.cs.js.JsObject;
+import org.cesiumjs.cs.options.CreateOsmBuildingsOptions;
 import org.cesiumjs.cs.promise.Promise;
+import org.cesiumjs.cs.scene.Cesium3DTileset;
 import org.cesiumjs.cs.scene.Material;
 import org.cesiumjs.cs.scene.Scene;
 import org.cesiumjs.cs.widgets.Command;
@@ -275,6 +277,21 @@ public class Cesium {
      */
     @JsMethod(namespace = "Cesium", name = "createElevationBandMaterial")
     public static native Material createElevationBandMaterial(ElevationBandMaterialOptions options);
+
+    /**
+     * Creates a Cesium3DTileset instance for the Cesium OSM Buildings tileset.
+     * @return Cesium3DTileset instance
+     */
+    @JsMethod(namespace = "Cesium", name = "createOsmBuildings")
+    public static native Cesium3DTileset createOsmBuildings();
+
+    /**
+     * Creates a Cesium3DTileset instance for the Cesium OSM Buildings tileset.
+     * @param options parameters
+     * @return Cesium3DTileset instance
+     */
+    @JsMethod(namespace = "Cesium", name = "createOsmBuildings")
+    public static native Cesium3DTileset createOsmBuildings(CreateOsmBuildingsOptions options);
 
     @JsFunction
     public interface Function {
