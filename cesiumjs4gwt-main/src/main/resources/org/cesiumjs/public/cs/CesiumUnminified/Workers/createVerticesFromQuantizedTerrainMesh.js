@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./AxisAlignedBoundingBox-997fde65', './Cartesian2-80d920df', './when-ad3237a0', './TerrainEncoding-074c1bf4', './IndexDatatype-b05854cf', './Math-ea9609a6', './Transforms-a15b18c4', './Check-be2d5acb', './WebMercatorProjection-0a1e040d', './createTaskProcessorWorker', './AttributeCompression-ff1ddad0', './ComponentDatatype-d313fe31', './WebGLConstants-1c8239cc', './combine-1510933d', './RuntimeError-767bd866'], function (AxisAlignedBoundingBox, Cartesian2, when, TerrainEncoding, IndexDatatype, _Math, Transforms, Check, WebMercatorProjection, createTaskProcessorWorker, AttributeCompression, ComponentDatatype, WebGLConstants, combine, RuntimeError) { 'use strict';
+define(['./AxisAlignedBoundingBox-5fa363ce', './Matrix2-32d4a9a0', './when-4bbc8319', './TerrainEncoding-09ed655e', './IndexDatatype-ee69f1fd', './ComponentDatatype-f194c48b', './RuntimeError-346a3079', './Transforms-b4151f9c', './WebMercatorProjection-8ae73407', './createTaskProcessorWorker', './AttributeCompression-0091b79f', './WebGLConstants-1c8239cc', './combine-83860057'], function (AxisAlignedBoundingBox, Matrix2, when, TerrainEncoding, IndexDatatype, ComponentDatatype, RuntimeError, Transforms, WebMercatorProjection, createTaskProcessorWorker, AttributeCompression, WebGLConstants, combine) { 'use strict';
 
   /**
    * Provides terrain or other geometry for the surface of an ellipsoid.  The surface geometry is
@@ -37,7 +37,7 @@ define(['./AxisAlignedBoundingBox-997fde65', './Cartesian2-80d920df', './when-ad
    * @see GoogleEarthEnterpriseTerrainProvider
    */
   function TerrainProvider() {
-    Check.DeveloperError.throwInstantiationError();
+    RuntimeError.DeveloperError.throwInstantiationError();
   }
 
   Object.defineProperties(TerrainProvider.prototype, {
@@ -50,7 +50,7 @@ define(['./AxisAlignedBoundingBox-997fde65', './Cartesian2-80d920df', './when-ad
      * @readonly
      */
     errorEvent: {
-      get: Check.DeveloperError.throwInstantiationError,
+      get: RuntimeError.DeveloperError.throwInstantiationError,
     },
 
     /**
@@ -62,7 +62,7 @@ define(['./AxisAlignedBoundingBox-997fde65', './Cartesian2-80d920df', './when-ad
      * @readonly
      */
     credit: {
-      get: Check.DeveloperError.throwInstantiationError,
+      get: RuntimeError.DeveloperError.throwInstantiationError,
     },
 
     /**
@@ -73,7 +73,7 @@ define(['./AxisAlignedBoundingBox-997fde65', './Cartesian2-80d920df', './when-ad
      * @readonly
      */
     tilingScheme: {
-      get: Check.DeveloperError.throwInstantiationError,
+      get: RuntimeError.DeveloperError.throwInstantiationError,
     },
 
     /**
@@ -83,7 +83,7 @@ define(['./AxisAlignedBoundingBox-997fde65', './Cartesian2-80d920df', './when-ad
      * @readonly
      */
     ready: {
-      get: Check.DeveloperError.throwInstantiationError,
+      get: RuntimeError.DeveloperError.throwInstantiationError,
     },
 
     /**
@@ -93,7 +93,7 @@ define(['./AxisAlignedBoundingBox-997fde65', './Cartesian2-80d920df', './when-ad
      * @readonly
      */
     readyPromise: {
-      get: Check.DeveloperError.throwInstantiationError,
+      get: RuntimeError.DeveloperError.throwInstantiationError,
     },
 
     /**
@@ -106,7 +106,7 @@ define(['./AxisAlignedBoundingBox-997fde65', './Cartesian2-80d920df', './when-ad
      * @readonly
      */
     hasWaterMask: {
-      get: Check.DeveloperError.throwInstantiationError,
+      get: RuntimeError.DeveloperError.throwInstantiationError,
     },
 
     /**
@@ -117,7 +117,7 @@ define(['./AxisAlignedBoundingBox-997fde65', './Cartesian2-80d920df', './when-ad
      * @readonly
      */
     hasVertexNormals: {
-      get: Check.DeveloperError.throwInstantiationError,
+      get: RuntimeError.DeveloperError.throwInstantiationError,
     },
 
     /**
@@ -130,7 +130,7 @@ define(['./AxisAlignedBoundingBox-997fde65', './Cartesian2-80d920df', './when-ad
      * @readonly
      */
     availability: {
-      get: Check.DeveloperError.throwInstantiationError,
+      get: RuntimeError.DeveloperError.throwInstantiationError,
     },
   });
 
@@ -148,8 +148,8 @@ define(['./AxisAlignedBoundingBox-997fde65', './Cartesian2-80d920df', './when-ad
    */
   TerrainProvider.getRegularGridIndices = function (width, height) {
     //>>includeStart('debug', pragmas.debug);
-    if (width * height >= _Math.CesiumMath.FOUR_GIGABYTES) {
-      throw new Check.DeveloperError(
+    if (width * height >= ComponentDatatype.CesiumMath.FOUR_GIGABYTES) {
+      throw new RuntimeError.DeveloperError(
         "The total number of vertices (width * height) must be less than 4,294,967,296."
       );
     }
@@ -162,7 +162,7 @@ define(['./AxisAlignedBoundingBox-997fde65', './Cartesian2-80d920df', './when-ad
 
     var indices = byWidth[height];
     if (!when.defined(indices)) {
-      if (width * height < _Math.CesiumMath.SIXTY_FOUR_KILOBYTES) {
+      if (width * height < ComponentDatatype.CesiumMath.SIXTY_FOUR_KILOBYTES) {
         indices = byWidth[height] = new Uint16Array(
           (width - 1) * (height - 1) * 6
         );
@@ -184,8 +184,8 @@ define(['./AxisAlignedBoundingBox-997fde65', './Cartesian2-80d920df', './when-ad
    */
   TerrainProvider.getRegularGridIndicesAndEdgeIndices = function (width, height) {
     //>>includeStart('debug', pragmas.debug);
-    if (width * height >= _Math.CesiumMath.FOUR_GIGABYTES) {
-      throw new Check.DeveloperError(
+    if (width * height >= ComponentDatatype.CesiumMath.FOUR_GIGABYTES) {
+      throw new RuntimeError.DeveloperError(
         "The total number of vertices (width * height) must be less than 4,294,967,296."
       );
     }
@@ -228,8 +228,8 @@ define(['./AxisAlignedBoundingBox-997fde65', './Cartesian2-80d920df', './when-ad
     height
   ) {
     //>>includeStart('debug', pragmas.debug);
-    if (width * height >= _Math.CesiumMath.FOUR_GIGABYTES) {
-      throw new Check.DeveloperError(
+    if (width * height >= ComponentDatatype.CesiumMath.FOUR_GIGABYTES) {
+      throw new RuntimeError.DeveloperError(
         "The total number of vertices (width * height) must be less than 4,294,967,296."
       );
     }
@@ -434,7 +434,7 @@ define(['./AxisAlignedBoundingBox-997fde65', './Cartesian2-80d920df', './when-ad
    *          pending and the request will be retried later.
    */
   TerrainProvider.prototype.requestTileGeometry =
-    Check.DeveloperError.throwInstantiationError;
+    RuntimeError.DeveloperError.throwInstantiationError;
 
   /**
    * Gets the maximum geometric error allowed in a tile at a given level.  This function should not be
@@ -445,7 +445,7 @@ define(['./AxisAlignedBoundingBox-997fde65', './Cartesian2-80d920df', './when-ad
    * @returns {Number} The maximum geometric error.
    */
   TerrainProvider.prototype.getLevelMaximumGeometricError =
-    Check.DeveloperError.throwInstantiationError;
+    RuntimeError.DeveloperError.throwInstantiationError;
 
   /**
    * Determines whether data for a tile is available to be loaded.
@@ -457,7 +457,7 @@ define(['./AxisAlignedBoundingBox-997fde65', './Cartesian2-80d920df', './when-ad
    * @returns {Boolean|undefined} Undefined if not supported by the terrain provider, otherwise true or false.
    */
   TerrainProvider.prototype.getTileDataAvailable =
-    Check.DeveloperError.throwInstantiationError;
+    RuntimeError.DeveloperError.throwInstantiationError;
 
   /**
    * Makes sure we load availability data for a tile
@@ -469,15 +469,15 @@ define(['./AxisAlignedBoundingBox-997fde65', './Cartesian2-80d920df', './when-ad
    * @returns {undefined|Promise<void>} Undefined if nothing need to be loaded or a Promise that resolves when all required tiles are loaded
    */
   TerrainProvider.prototype.loadTileDataAvailability =
-    Check.DeveloperError.throwInstantiationError;
+    RuntimeError.DeveloperError.throwInstantiationError;
 
   var maxShort = 32767;
 
-  var cartesian3Scratch = new Cartesian2.Cartesian3();
-  var scratchMinimum = new Cartesian2.Cartesian3();
-  var scratchMaximum = new Cartesian2.Cartesian3();
-  var cartographicScratch = new Cartesian2.Cartographic();
-  var toPack = new Cartesian2.Cartesian2();
+  var cartesian3Scratch = new Matrix2.Cartesian3();
+  var scratchMinimum = new Matrix2.Cartesian3();
+  var scratchMaximum = new Matrix2.Cartesian3();
+  var cartographicScratch = new Matrix2.Cartographic();
+  var toPack = new Matrix2.Cartesian2();
 
   function createVerticesFromQuantizedTerrainMesh(
     parameters,
@@ -498,20 +498,20 @@ define(['./AxisAlignedBoundingBox-997fde65', './Cartesian2-80d920df', './when-ad
     var hasExaggeration = exaggeration !== 1.0;
     var includeGeodeticSurfaceNormals = hasExaggeration;
 
-    var rectangle = Cartesian2.Rectangle.clone(parameters.rectangle);
+    var rectangle = Matrix2.Rectangle.clone(parameters.rectangle);
     var west = rectangle.west;
     var south = rectangle.south;
     var east = rectangle.east;
     var north = rectangle.north;
 
-    var ellipsoid = Cartesian2.Ellipsoid.clone(parameters.ellipsoid);
+    var ellipsoid = Matrix2.Ellipsoid.clone(parameters.ellipsoid);
 
     var minimumHeight = parameters.minimumHeight;
     var maximumHeight = parameters.maximumHeight;
 
     var center = parameters.relativeToCenter;
     var fromENU = Transforms.Transforms.eastNorthUpToFixedFrame(center, ellipsoid);
-    var toENU = Transforms.Matrix4.inverseTransformation(fromENU, new Transforms.Matrix4());
+    var toENU = Matrix2.Matrix4.inverseTransformation(fromENU, new Matrix2.Matrix4());
 
     var southMercatorY;
     var oneOverMercatorHeight;
@@ -567,14 +567,14 @@ define(['./AxisAlignedBoundingBox-997fde65', './Cartesian2-80d920df', './when-ad
 
       var u = rawU / maxShort;
       var v = rawV / maxShort;
-      var height = _Math.CesiumMath.lerp(
+      var height = ComponentDatatype.CesiumMath.lerp(
         minimumHeight,
         maximumHeight,
         heightBuffer[i] / maxShort
       );
 
-      cartographicScratch.longitude = _Math.CesiumMath.lerp(west, east, u);
-      cartographicScratch.latitude = _Math.CesiumMath.lerp(south, north, v);
+      cartographicScratch.longitude = ComponentDatatype.CesiumMath.lerp(west, east, u);
+      cartographicScratch.latitude = ComponentDatatype.CesiumMath.lerp(south, north, v);
       cartographicScratch.height = height;
 
       minLongitude = Math.min(cartographicScratch.longitude, minLongitude);
@@ -584,7 +584,7 @@ define(['./AxisAlignedBoundingBox-997fde65', './Cartesian2-80d920df', './when-ad
 
       var position = ellipsoid.cartographicToCartesian(cartographicScratch);
 
-      uvs[i] = new Cartesian2.Cartesian2(u, v);
+      uvs[i] = new Matrix2.Cartesian2(u, v);
       heights[i] = height;
       positions[i] = position;
 
@@ -601,10 +601,10 @@ define(['./AxisAlignedBoundingBox-997fde65', './Cartesian2-80d920df', './when-ad
         geodeticSurfaceNormals[i] = ellipsoid.geodeticSurfaceNormal(position);
       }
 
-      Transforms.Matrix4.multiplyByPoint(toENU, position, cartesian3Scratch);
+      Matrix2.Matrix4.multiplyByPoint(toENU, position, cartesian3Scratch);
 
-      Cartesian2.Cartesian3.minimumByComponent(cartesian3Scratch, minimum, minimum);
-      Cartesian2.Cartesian3.maximumByComponent(cartesian3Scratch, maximum, maximum);
+      Matrix2.Cartesian3.minimumByComponent(cartesian3Scratch, minimum, minimum);
+      Matrix2.Cartesian3.maximumByComponent(cartesian3Scratch, maximum, maximum);
     }
 
     var westIndicesSouthToNorth = copyAndSort(parameters.westIndices, function (
@@ -877,7 +877,7 @@ define(['./AxisAlignedBoundingBox-997fde65', './Cartesian2-80d920df', './when-ad
     var west = rectangle.west;
 
     if (east < west) {
-      east += _Math.CesiumMath.TWO_PI;
+      east += ComponentDatatype.CesiumMath.TWO_PI;
     }
 
     var length = edgeIndices.length;
@@ -886,18 +886,18 @@ define(['./AxisAlignedBoundingBox-997fde65', './Cartesian2-80d920df', './when-ad
       var h = heights[index];
       var uv = uvs[index];
 
-      cartographicScratch.longitude = _Math.CesiumMath.lerp(west, east, uv.x);
-      cartographicScratch.latitude = _Math.CesiumMath.lerp(south, north, uv.y);
+      cartographicScratch.longitude = ComponentDatatype.CesiumMath.lerp(west, east, uv.x);
+      cartographicScratch.latitude = ComponentDatatype.CesiumMath.lerp(south, north, uv.y);
       cartographicScratch.height = h - edgeHeight;
 
       var position = ellipsoid.cartographicToCartesian(
         cartographicScratch,
         cartesian3Scratch
       );
-      Transforms.Matrix4.multiplyByPoint(toENU, position, position);
+      Matrix2.Matrix4.multiplyByPoint(toENU, position, position);
 
-      Cartesian2.Cartesian3.minimumByComponent(position, minimum, minimum);
-      Cartesian2.Cartesian3.maximumByComponent(position, maximum, maximum);
+      Matrix2.Cartesian3.minimumByComponent(position, minimum, minimum);
+      Matrix2.Cartesian3.maximumByComponent(position, maximum, maximum);
 
       hMin = Math.min(hMin, cartographicScratch.height);
     }
@@ -928,7 +928,7 @@ define(['./AxisAlignedBoundingBox-997fde65', './Cartesian2-80d920df', './when-ad
     var west = rectangle.west;
 
     if (east < west) {
-      east += _Math.CesiumMath.TWO_PI;
+      east += ComponentDatatype.CesiumMath.TWO_PI;
     }
 
     var length = edgeVertices.length;
@@ -938,9 +938,9 @@ define(['./AxisAlignedBoundingBox-997fde65', './Cartesian2-80d920df', './when-ad
       var uv = uvs[index];
 
       cartographicScratch.longitude =
-        _Math.CesiumMath.lerp(west, east, uv.x) + longitudeOffset;
+        ComponentDatatype.CesiumMath.lerp(west, east, uv.x) + longitudeOffset;
       cartographicScratch.latitude =
-        _Math.CesiumMath.lerp(south, north, uv.y) + latitudeOffset;
+        ComponentDatatype.CesiumMath.lerp(south, north, uv.y) + latitudeOffset;
       cartographicScratch.height = h - skirtLength;
 
       var position = ellipsoid.cartographicToCartesian(

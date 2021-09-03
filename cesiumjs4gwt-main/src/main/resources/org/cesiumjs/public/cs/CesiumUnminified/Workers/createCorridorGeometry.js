@@ -21,17 +21,17 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./GeometryOffsetAttribute-bb06a451', './arrayRemoveDuplicates-956e66e5', './Transforms-a15b18c4', './Cartesian2-80d920df', './Check-be2d5acb', './ComponentDatatype-d313fe31', './PolylineVolumeGeometryLibrary-97edd379', './CorridorGeometryLibrary-d1b0fa92', './when-ad3237a0', './GeometryAttribute-ecfc6b57', './GeometryAttributes-27dc652d', './IndexDatatype-b05854cf', './Math-ea9609a6', './PolygonPipeline-3efca556', './VertexFormat-16d719d5', './combine-1510933d', './RuntimeError-767bd866', './WebGLConstants-1c8239cc', './EllipsoidTangentPlane-f39e48de', './AxisAlignedBoundingBox-997fde65', './IntersectionTests-38cb74a9', './Plane-b1029663', './PolylinePipeline-80605f65', './EllipsoidGeodesic-c536a380', './EllipsoidRhumbLine-f85c13d7'], function (GeometryOffsetAttribute, arrayRemoveDuplicates, Transforms, Cartesian2, Check, ComponentDatatype, PolylineVolumeGeometryLibrary, CorridorGeometryLibrary, when, GeometryAttribute, GeometryAttributes, IndexDatatype, _Math, PolygonPipeline, VertexFormat, combine$1, RuntimeError, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane, PolylinePipeline, EllipsoidGeodesic, EllipsoidRhumbLine) { 'use strict';
+define(['./GeometryOffsetAttribute-6a692b56', './arrayRemoveDuplicates-cf5c3227', './Transforms-b4151f9c', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './ComponentDatatype-f194c48b', './PolylineVolumeGeometryLibrary-5052702f', './CorridorGeometryLibrary-03e6fa0d', './when-4bbc8319', './GeometryAttribute-900e07ee', './GeometryAttributes-7827a6c2', './IndexDatatype-ee69f1fd', './PolygonPipeline-c597b314', './VertexFormat-f9c1a155', './combine-83860057', './WebGLConstants-1c8239cc', './EllipsoidTangentPlane-9edb4c29', './AxisAlignedBoundingBox-5fa363ce', './IntersectionTests-4c2a8ace', './Plane-87991fdc', './PolylinePipeline-4b4963b2', './EllipsoidGeodesic-c3b968c7', './EllipsoidRhumbLine-1bebfad1'], function (GeometryOffsetAttribute, arrayRemoveDuplicates, Transforms, Matrix2, RuntimeError, ComponentDatatype, PolylineVolumeGeometryLibrary, CorridorGeometryLibrary, when, GeometryAttribute, GeometryAttributes, IndexDatatype, PolygonPipeline, VertexFormat, combine$1, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane, PolylinePipeline, EllipsoidGeodesic, EllipsoidRhumbLine) { 'use strict';
 
-  var cartesian1 = new Cartesian2.Cartesian3();
-  var cartesian2 = new Cartesian2.Cartesian3();
-  var cartesian3 = new Cartesian2.Cartesian3();
-  var cartesian4 = new Cartesian2.Cartesian3();
-  var cartesian5 = new Cartesian2.Cartesian3();
-  var cartesian6 = new Cartesian2.Cartesian3();
+  var cartesian1 = new Matrix2.Cartesian3();
+  var cartesian2 = new Matrix2.Cartesian3();
+  var cartesian3 = new Matrix2.Cartesian3();
+  var cartesian4 = new Matrix2.Cartesian3();
+  var cartesian5 = new Matrix2.Cartesian3();
+  var cartesian6 = new Matrix2.Cartesian3();
 
-  var scratch1 = new Cartesian2.Cartesian3();
-  var scratch2 = new Cartesian2.Cartesian3();
+  var scratch1 = new Matrix2.Cartesian3();
+  var scratch2 = new Matrix2.Cartesian3();
 
   function scaleToSurface(positions, ellipsoid) {
     for (var i = 0; i < positions.length; i++) {
@@ -44,8 +44,8 @@ define(['./GeometryOffsetAttribute-bb06a451', './arrayRemoveDuplicates-956e66e5'
     var normals = attr.normals;
     var tangents = attr.tangents;
     var bitangents = attr.bitangents;
-    var forward = Cartesian2.Cartesian3.normalize(
-      Cartesian2.Cartesian3.cross(left, normal, scratch1),
+    var forward = Matrix2.Cartesian3.normalize(
+      Matrix2.Cartesian3.cross(left, normal, scratch1),
       scratch1
     );
     if (vertexFormat.normal) {
@@ -128,15 +128,15 @@ define(['./GeometryOffsetAttribute-bb06a451', './arrayRemoveDuplicates-956e66e5'
       leftPos = cartesian3;
       rightPos = cartesian4;
       var firstEndPositions = endPositions[0];
-      normal = Cartesian2.Cartesian3.fromArray(computedNormals, 0, normal);
-      left = Cartesian2.Cartesian3.fromArray(computedLefts, 0, left);
+      normal = Matrix2.Cartesian3.fromArray(computedNormals, 0, normal);
+      left = Matrix2.Cartesian3.fromArray(computedLefts, 0, left);
       for (i = 0; i < halfLength; i++) {
-        leftPos = Cartesian2.Cartesian3.fromArray(
+        leftPos = Matrix2.Cartesian3.fromArray(
           firstEndPositions,
           (halfLength - 1 - i) * 3,
           leftPos
         );
-        rightPos = Cartesian2.Cartesian3.fromArray(
+        rightPos = Matrix2.Cartesian3.fromArray(
           firstEndPositions,
           (halfLength + i) * 3,
           rightPos
@@ -173,21 +173,21 @@ define(['./GeometryOffsetAttribute-bb06a451', './arrayRemoveDuplicates-956e66e5'
     finalPositions.set(rightEdge, front);
     finalPositions.set(leftEdge, back - leftEdge.length + 1);
 
-    left = Cartesian2.Cartesian3.fromArray(computedLefts, compIndex, left);
+    left = Matrix2.Cartesian3.fromArray(computedLefts, compIndex, left);
     var rightNormal;
     var leftNormal;
     length = leftEdge.length - 3;
     for (i = 0; i < length; i += 3) {
       rightNormal = ellipsoid.geodeticSurfaceNormal(
-        Cartesian2.Cartesian3.fromArray(rightEdge, i, scratch1),
+        Matrix2.Cartesian3.fromArray(rightEdge, i, scratch1),
         scratch1
       );
       leftNormal = ellipsoid.geodeticSurfaceNormal(
-        Cartesian2.Cartesian3.fromArray(leftEdge, length - i, scratch2),
+        Matrix2.Cartesian3.fromArray(leftEdge, length - i, scratch2),
         scratch2
       );
-      normal = Cartesian2.Cartesian3.normalize(
-        Cartesian2.Cartesian3.add(rightNormal, leftNormal, normal),
+      normal = Matrix2.Cartesian3.normalize(
+        Matrix2.Cartesian3.add(rightNormal, leftNormal, normal),
         normal
       );
       addNormals(attr, normal, left, front, back, vertexFormat);
@@ -208,15 +208,15 @@ define(['./GeometryOffsetAttribute-bb06a451', './arrayRemoveDuplicates-956e66e5'
     }
 
     rightNormal = ellipsoid.geodeticSurfaceNormal(
-      Cartesian2.Cartesian3.fromArray(rightEdge, length, scratch1),
+      Matrix2.Cartesian3.fromArray(rightEdge, length, scratch1),
       scratch1
     );
     leftNormal = ellipsoid.geodeticSurfaceNormal(
-      Cartesian2.Cartesian3.fromArray(leftEdge, length, scratch2),
+      Matrix2.Cartesian3.fromArray(leftEdge, length, scratch2),
       scratch2
     );
-    normal = Cartesian2.Cartesian3.normalize(
-      Cartesian2.Cartesian3.add(rightNormal, leftNormal, normal),
+    normal = Matrix2.Cartesian3.normalize(
+      Matrix2.Cartesian3.add(rightNormal, leftNormal, normal),
       normal
     );
     compIndex += 3;
@@ -230,14 +230,14 @@ define(['./GeometryOffsetAttribute-bb06a451', './arrayRemoveDuplicates-956e66e5'
       var outsidePoint = cartesian6;
       var previousPoint = cartesian3;
       var nextPoint = cartesian4;
-      normal = Cartesian2.Cartesian3.fromArray(computedNormals, compIndex, normal);
+      normal = Matrix2.Cartesian3.fromArray(computedNormals, compIndex, normal);
       if (when.defined(l)) {
         addNormals(attr, normal, left, undefined, back, vertexFormat);
         back -= 3;
         pivot = LR;
         start = UR;
         for (j = 0; j < l.length / 3; j++) {
-          outsidePoint = Cartesian2.Cartesian3.fromArray(l, j * 3, outsidePoint);
+          outsidePoint = Matrix2.Cartesian3.fromArray(l, j * 3, outsidePoint);
           indices[index++] = pivot;
           indices[index++] = start - j - 1;
           indices[index++] = start - j;
@@ -247,36 +247,36 @@ define(['./GeometryOffsetAttribute-bb06a451', './arrayRemoveDuplicates-956e66e5'
             undefined,
             back
           );
-          previousPoint = Cartesian2.Cartesian3.fromArray(
+          previousPoint = Matrix2.Cartesian3.fromArray(
             finalPositions,
             (start - j - 1) * 3,
             previousPoint
           );
-          nextPoint = Cartesian2.Cartesian3.fromArray(finalPositions, pivot * 3, nextPoint);
-          left = Cartesian2.Cartesian3.normalize(
-            Cartesian2.Cartesian3.subtract(previousPoint, nextPoint, left),
+          nextPoint = Matrix2.Cartesian3.fromArray(finalPositions, pivot * 3, nextPoint);
+          left = Matrix2.Cartesian3.normalize(
+            Matrix2.Cartesian3.subtract(previousPoint, nextPoint, left),
             left
           );
           addNormals(attr, normal, left, undefined, back, vertexFormat);
           back -= 3;
         }
-        outsidePoint = Cartesian2.Cartesian3.fromArray(
+        outsidePoint = Matrix2.Cartesian3.fromArray(
           finalPositions,
           pivot * 3,
           outsidePoint
         );
-        previousPoint = Cartesian2.Cartesian3.subtract(
-          Cartesian2.Cartesian3.fromArray(finalPositions, start * 3, previousPoint),
+        previousPoint = Matrix2.Cartesian3.subtract(
+          Matrix2.Cartesian3.fromArray(finalPositions, start * 3, previousPoint),
           outsidePoint,
           previousPoint
         );
-        nextPoint = Cartesian2.Cartesian3.subtract(
-          Cartesian2.Cartesian3.fromArray(finalPositions, (start - j) * 3, nextPoint),
+        nextPoint = Matrix2.Cartesian3.subtract(
+          Matrix2.Cartesian3.fromArray(finalPositions, (start - j) * 3, nextPoint),
           outsidePoint,
           nextPoint
         );
-        left = Cartesian2.Cartesian3.normalize(
-          Cartesian2.Cartesian3.add(previousPoint, nextPoint, left),
+        left = Matrix2.Cartesian3.normalize(
+          Matrix2.Cartesian3.add(previousPoint, nextPoint, left),
           left
         );
         addNormals(attr, normal, left, front, undefined, vertexFormat);
@@ -287,7 +287,7 @@ define(['./GeometryOffsetAttribute-bb06a451', './arrayRemoveDuplicates-956e66e5'
         pivot = UR;
         start = LR;
         for (j = 0; j < r.length / 3; j++) {
-          outsidePoint = Cartesian2.Cartesian3.fromArray(r, j * 3, outsidePoint);
+          outsidePoint = Matrix2.Cartesian3.fromArray(r, j * 3, outsidePoint);
           indices[index++] = pivot;
           indices[index++] = start + j;
           indices[index++] = start + j + 1;
@@ -296,40 +296,40 @@ define(['./GeometryOffsetAttribute-bb06a451', './arrayRemoveDuplicates-956e66e5'
             outsidePoint,
             front
           );
-          previousPoint = Cartesian2.Cartesian3.fromArray(
+          previousPoint = Matrix2.Cartesian3.fromArray(
             finalPositions,
             pivot * 3,
             previousPoint
           );
-          nextPoint = Cartesian2.Cartesian3.fromArray(
+          nextPoint = Matrix2.Cartesian3.fromArray(
             finalPositions,
             (start + j) * 3,
             nextPoint
           );
-          left = Cartesian2.Cartesian3.normalize(
-            Cartesian2.Cartesian3.subtract(previousPoint, nextPoint, left),
+          left = Matrix2.Cartesian3.normalize(
+            Matrix2.Cartesian3.subtract(previousPoint, nextPoint, left),
             left
           );
           addNormals(attr, normal, left, front, undefined, vertexFormat);
           front += 3;
         }
-        outsidePoint = Cartesian2.Cartesian3.fromArray(
+        outsidePoint = Matrix2.Cartesian3.fromArray(
           finalPositions,
           pivot * 3,
           outsidePoint
         );
-        previousPoint = Cartesian2.Cartesian3.subtract(
-          Cartesian2.Cartesian3.fromArray(finalPositions, (start + j) * 3, previousPoint),
+        previousPoint = Matrix2.Cartesian3.subtract(
+          Matrix2.Cartesian3.fromArray(finalPositions, (start + j) * 3, previousPoint),
           outsidePoint,
           previousPoint
         );
-        nextPoint = Cartesian2.Cartesian3.subtract(
-          Cartesian2.Cartesian3.fromArray(finalPositions, start * 3, nextPoint),
+        nextPoint = Matrix2.Cartesian3.subtract(
+          Matrix2.Cartesian3.fromArray(finalPositions, start * 3, nextPoint),
           outsidePoint,
           nextPoint
         );
-        left = Cartesian2.Cartesian3.normalize(
-          Cartesian2.Cartesian3.negate(Cartesian2.Cartesian3.add(nextPoint, previousPoint, left), left),
+        left = Matrix2.Cartesian3.normalize(
+          Matrix2.Cartesian3.negate(Matrix2.Cartesian3.add(nextPoint, previousPoint, left), left),
           left
         );
         addNormals(attr, normal, left, undefined, back, vertexFormat);
@@ -344,18 +344,18 @@ define(['./GeometryOffsetAttribute-bb06a451', './arrayRemoveDuplicates-956e66e5'
       length = leftEdge.length - 3;
 
       compIndex += 3;
-      left = Cartesian2.Cartesian3.fromArray(computedLefts, compIndex, left);
+      left = Matrix2.Cartesian3.fromArray(computedLefts, compIndex, left);
       for (j = 0; j < leftEdge.length; j += 3) {
         rightNormal = ellipsoid.geodeticSurfaceNormal(
-          Cartesian2.Cartesian3.fromArray(rightEdge, j, scratch1),
+          Matrix2.Cartesian3.fromArray(rightEdge, j, scratch1),
           scratch1
         );
         leftNormal = ellipsoid.geodeticSurfaceNormal(
-          Cartesian2.Cartesian3.fromArray(leftEdge, length - j, scratch2),
+          Matrix2.Cartesian3.fromArray(leftEdge, length - j, scratch2),
           scratch2
         );
-        normal = Cartesian2.Cartesian3.normalize(
-          Cartesian2.Cartesian3.add(rightNormal, leftNormal, normal),
+        normal = Matrix2.Cartesian3.normalize(
+          Matrix2.Cartesian3.add(rightNormal, leftNormal, normal),
           normal
         );
         addNormals(attr, normal, left, front, back, vertexFormat);
@@ -377,7 +377,7 @@ define(['./GeometryOffsetAttribute-bb06a451', './arrayRemoveDuplicates-956e66e5'
       front -= 3;
       back += 3;
     }
-    normal = Cartesian2.Cartesian3.fromArray(
+    normal = Matrix2.Cartesian3.fromArray(
       computedNormals,
       computedNormals.length - 3,
       normal
@@ -392,12 +392,12 @@ define(['./GeometryOffsetAttribute-bb06a451', './arrayRemoveDuplicates-956e66e5'
       rightPos = cartesian4;
       var lastEndPositions = endPositions[1];
       for (i = 0; i < halfLength; i++) {
-        leftPos = Cartesian2.Cartesian3.fromArray(
+        leftPos = Matrix2.Cartesian3.fromArray(
           lastEndPositions,
           (endPositionLength - i - 1) * 3,
           leftPos
         );
-        rightPos = Cartesian2.Cartesian3.fromArray(lastEndPositions, i * 3, rightPos);
+        rightPos = Matrix2.Cartesian3.fromArray(lastEndPositions, i * 3, rightPos);
         CorridorGeometryLibrary.CorridorGeometryLibrary.addAttribute(
           finalPositions,
           leftPos,
@@ -444,7 +444,7 @@ define(['./GeometryOffsetAttribute-bb06a451', './arrayRemoveDuplicates-956e66e5'
         var halfEndPos = endPositionLength / 2;
         for (i = halfEndPos + 1; i < endPositionLength + 1; i++) {
           // lower left rounded end
-          a = _Math.CesiumMath.PI_OVER_TWO + theta * i;
+          a = ComponentDatatype.CesiumMath.PI_OVER_TWO + theta * i;
           st[stIndex++] = rightSt * (1 + Math.cos(a));
           st[stIndex++] = 0.5 * (1 + Math.sin(a));
         }
@@ -455,13 +455,13 @@ define(['./GeometryOffsetAttribute-bb06a451', './arrayRemoveDuplicates-956e66e5'
         }
         for (i = endPositionLength; i > halfEndPos; i--) {
           // lower right rounded end
-          a = _Math.CesiumMath.PI_OVER_TWO - i * theta;
+          a = ComponentDatatype.CesiumMath.PI_OVER_TWO - i * theta;
           st[stIndex++] = 1 - rightSt * (1 + Math.cos(a));
           st[stIndex++] = 0.5 * (1 + Math.sin(a));
         }
         for (i = halfEndPos; i > 0; i--) {
           // upper right rounded end
-          a = _Math.CesiumMath.PI_OVER_TWO - theta * i;
+          a = ComponentDatatype.CesiumMath.PI_OVER_TWO - theta * i;
           st[stIndex++] = 1 - leftSt * (1 + Math.cos(a));
           st[stIndex++] = 0.5 * (1 + Math.sin(a));
         }
@@ -472,7 +472,7 @@ define(['./GeometryOffsetAttribute-bb06a451', './arrayRemoveDuplicates-956e66e5'
         }
         for (i = 1; i < halfEndPos + 1; i++) {
           // upper left rounded end
-          a = _Math.CesiumMath.PI_OVER_TWO + theta * i;
+          a = ComponentDatatype.CesiumMath.PI_OVER_TWO + theta * i;
           st[stIndex++] = leftSt * (1 + Math.cos(a));
           st[stIndex++] = 0.5 * (1 + Math.sin(a));
         }
@@ -570,29 +570,29 @@ define(['./GeometryOffsetAttribute-bb06a451', './arrayRemoveDuplicates-956e66e5'
       var attrIndex = sixSize;
       for (i = 0; i < threeSize; i += 3) {
         var attrIndexOffset = attrIndex + sixSize;
-        topPosition = Cartesian2.Cartesian3.fromArray(positions, i, topPosition);
-        bottomPosition = Cartesian2.Cartesian3.fromArray(
+        topPosition = Matrix2.Cartesian3.fromArray(positions, i, topPosition);
+        bottomPosition = Matrix2.Cartesian3.fromArray(
           positions,
           i + threeSize,
           bottomPosition
         );
-        previousPosition = Cartesian2.Cartesian3.fromArray(
+        previousPosition = Matrix2.Cartesian3.fromArray(
           positions,
           (i + 3) % threeSize,
           previousPosition
         );
-        bottomPosition = Cartesian2.Cartesian3.subtract(
+        bottomPosition = Matrix2.Cartesian3.subtract(
           bottomPosition,
           topPosition,
           bottomPosition
         );
-        previousPosition = Cartesian2.Cartesian3.subtract(
+        previousPosition = Matrix2.Cartesian3.subtract(
           previousPosition,
           topPosition,
           previousPosition
         );
-        normal = Cartesian2.Cartesian3.normalize(
-          Cartesian2.Cartesian3.cross(bottomPosition, previousPosition, normal),
+        normal = Matrix2.Cartesian3.normalize(
+          Matrix2.Cartesian3.cross(bottomPosition, previousPosition, normal),
           normal
         );
         if (vertexFormat.normal) {
@@ -606,7 +606,7 @@ define(['./GeometryOffsetAttribute-bb06a451', './arrayRemoveDuplicates-956e66e5'
           CorridorGeometryLibrary.CorridorGeometryLibrary.addAttribute(normals, normal, attrIndex + 3);
         }
         if (vertexFormat.tangent || vertexFormat.bitangent) {
-          bitangent = Cartesian2.Cartesian3.fromArray(topNormals, i, bitangent);
+          bitangent = Matrix2.Cartesian3.fromArray(topNormals, i, bitangent);
           if (vertexFormat.bitangent) {
             CorridorGeometryLibrary.CorridorGeometryLibrary.addAttribute(
               bitangents,
@@ -631,8 +631,8 @@ define(['./GeometryOffsetAttribute-bb06a451', './arrayRemoveDuplicates-956e66e5'
           }
 
           if (vertexFormat.tangent) {
-            tangent = Cartesian2.Cartesian3.normalize(
-              Cartesian2.Cartesian3.cross(bitangent, normal, tangent),
+            tangent = Matrix2.Cartesian3.normalize(
+              Matrix2.Cartesian3.cross(bitangent, normal, tangent),
               tangent
             );
             CorridorGeometryLibrary.CorridorGeometryLibrary.addAttribute(
@@ -857,9 +857,9 @@ define(['./GeometryOffsetAttribute-bb06a451', './arrayRemoveDuplicates-956e66e5'
     };
   }
 
-  var scratchCartesian1 = new Cartesian2.Cartesian3();
-  var scratchCartesian2 = new Cartesian2.Cartesian3();
-  var scratchCartographic = new Cartesian2.Cartographic();
+  var scratchCartesian1 = new Matrix2.Cartesian3();
+  var scratchCartesian2 = new Matrix2.Cartesian3();
+  var scratchCartographic = new Matrix2.Cartographic();
 
   function computeOffsetPoints(
     position1,
@@ -870,11 +870,11 @@ define(['./GeometryOffsetAttribute-bb06a451', './arrayRemoveDuplicates-956e66e5'
     max
   ) {
     // Compute direction of offset the point
-    var direction = Cartesian2.Cartesian3.subtract(position2, position1, scratchCartesian1);
-    Cartesian2.Cartesian3.normalize(direction, direction);
+    var direction = Matrix2.Cartesian3.subtract(position2, position1, scratchCartesian1);
+    Matrix2.Cartesian3.normalize(direction, direction);
     var normal = ellipsoid.geodeticSurfaceNormal(position1, scratchCartesian2);
-    var offsetDirection = Cartesian2.Cartesian3.cross(direction, normal, scratchCartesian1);
-    Cartesian2.Cartesian3.multiplyByScalar(offsetDirection, halfWidth, offsetDirection);
+    var offsetDirection = Matrix2.Cartesian3.cross(direction, normal, scratchCartesian1);
+    Matrix2.Cartesian3.multiplyByScalar(offsetDirection, halfWidth, offsetDirection);
 
     var minLat = min.latitude;
     var minLon = min.longitude;
@@ -882,7 +882,7 @@ define(['./GeometryOffsetAttribute-bb06a451', './arrayRemoveDuplicates-956e66e5'
     var maxLon = max.longitude;
 
     // Compute 2 offset points
-    Cartesian2.Cartesian3.add(position1, offsetDirection, scratchCartesian2);
+    Matrix2.Cartesian3.add(position1, offsetDirection, scratchCartesian2);
     ellipsoid.cartesianToCartographic(scratchCartesian2, scratchCartographic);
 
     var lat = scratchCartographic.latitude;
@@ -892,7 +892,7 @@ define(['./GeometryOffsetAttribute-bb06a451', './arrayRemoveDuplicates-956e66e5'
     maxLat = Math.max(maxLat, lat);
     maxLon = Math.max(maxLon, lon);
 
-    Cartesian2.Cartesian3.subtract(position1, offsetDirection, scratchCartesian2);
+    Matrix2.Cartesian3.subtract(position1, offsetDirection, scratchCartesian2);
     ellipsoid.cartesianToCartographic(scratchCartesian2, scratchCartographic);
 
     lat = scratchCartographic.latitude;
@@ -908,20 +908,20 @@ define(['./GeometryOffsetAttribute-bb06a451', './arrayRemoveDuplicates-956e66e5'
     max.longitude = maxLon;
   }
 
-  var scratchCartesianOffset = new Cartesian2.Cartesian3();
-  var scratchCartesianEnds = new Cartesian2.Cartesian3();
-  var scratchCartographicMin = new Cartesian2.Cartographic();
-  var scratchCartographicMax = new Cartesian2.Cartographic();
+  var scratchCartesianOffset = new Matrix2.Cartesian3();
+  var scratchCartesianEnds = new Matrix2.Cartesian3();
+  var scratchCartographicMin = new Matrix2.Cartographic();
+  var scratchCartographicMax = new Matrix2.Cartographic();
 
   function computeRectangle(positions, ellipsoid, width, cornerType, result) {
     positions = scaleToSurface(positions, ellipsoid);
     var cleanPositions = arrayRemoveDuplicates.arrayRemoveDuplicates(
       positions,
-      Cartesian2.Cartesian3.equalsEpsilon
+      Matrix2.Cartesian3.equalsEpsilon
     );
     var length = cleanPositions.length;
     if (length < 2 || width <= 0) {
-      return new Cartesian2.Rectangle();
+      return new Matrix2.Rectangle();
     }
     var halfWidth = width * 0.5;
 
@@ -934,14 +934,14 @@ define(['./GeometryOffsetAttribute-bb06a451', './arrayRemoveDuplicates-956e66e5'
     if (cornerType === PolylineVolumeGeometryLibrary.CornerType.ROUNDED) {
       // Compute start cap
       var first = cleanPositions[0];
-      Cartesian2.Cartesian3.subtract(first, cleanPositions[1], scratchCartesianOffset);
-      Cartesian2.Cartesian3.normalize(scratchCartesianOffset, scratchCartesianOffset);
-      Cartesian2.Cartesian3.multiplyByScalar(
+      Matrix2.Cartesian3.subtract(first, cleanPositions[1], scratchCartesianOffset);
+      Matrix2.Cartesian3.normalize(scratchCartesianOffset, scratchCartesianOffset);
+      Matrix2.Cartesian3.multiplyByScalar(
         scratchCartesianOffset,
         halfWidth,
         scratchCartesianOffset
       );
-      Cartesian2.Cartesian3.add(first, scratchCartesianOffset, scratchCartesianEnds);
+      Matrix2.Cartesian3.add(first, scratchCartesianOffset, scratchCartesianEnds);
 
       ellipsoid.cartesianToCartographic(
         scratchCartesianEnds,
@@ -981,14 +981,14 @@ define(['./GeometryOffsetAttribute-bb06a451', './arrayRemoveDuplicates-956e66e5'
 
     // Compute ending point
     var last = cleanPositions[length - 1];
-    Cartesian2.Cartesian3.subtract(last, cleanPositions[length - 2], scratchCartesianOffset);
-    Cartesian2.Cartesian3.normalize(scratchCartesianOffset, scratchCartesianOffset);
-    Cartesian2.Cartesian3.multiplyByScalar(
+    Matrix2.Cartesian3.subtract(last, cleanPositions[length - 2], scratchCartesianOffset);
+    Matrix2.Cartesian3.normalize(scratchCartesianOffset, scratchCartesianOffset);
+    Matrix2.Cartesian3.multiplyByScalar(
       scratchCartesianOffset,
       halfWidth,
       scratchCartesianOffset
     );
-    Cartesian2.Cartesian3.add(last, scratchCartesianOffset, scratchCartesianEnds);
+    Matrix2.Cartesian3.add(last, scratchCartesianOffset, scratchCartesianEnds);
     computeOffsetPoints(
       last,
       scratchCartesianEnds,
@@ -1024,7 +1024,7 @@ define(['./GeometryOffsetAttribute-bb06a451', './arrayRemoveDuplicates-956e66e5'
       );
     }
 
-    var rectangle = when.defined(result) ? result : new Cartesian2.Rectangle();
+    var rectangle = when.defined(result) ? result : new Matrix2.Rectangle();
     rectangle.north = scratchCartographicMax.latitude;
     rectangle.south = scratchCartographicMin.latitude;
     rectangle.east = scratchCartographicMax.longitude;
@@ -1067,16 +1067,16 @@ define(['./GeometryOffsetAttribute-bb06a451', './arrayRemoveDuplicates-956e66e5'
     var width = options.width;
 
     //>>includeStart('debug', pragmas.debug);
-    Check.Check.defined("options.positions", positions);
-    Check.Check.defined("options.width", width);
+    RuntimeError.Check.defined("options.positions", positions);
+    RuntimeError.Check.defined("options.width", width);
     //>>includeEnd('debug');
 
     var height = when.defaultValue(options.height, 0.0);
     var extrudedHeight = when.defaultValue(options.extrudedHeight, height);
 
     this._positions = positions;
-    this._ellipsoid = Cartesian2.Ellipsoid.clone(
-      when.defaultValue(options.ellipsoid, Cartesian2.Ellipsoid.WGS84)
+    this._ellipsoid = Matrix2.Ellipsoid.clone(
+      when.defaultValue(options.ellipsoid, Matrix2.Ellipsoid.WGS84)
     );
     this._vertexFormat = VertexFormat.VertexFormat.clone(
       when.defaultValue(options.vertexFormat, VertexFormat.VertexFormat.DEFAULT)
@@ -1087,7 +1087,7 @@ define(['./GeometryOffsetAttribute-bb06a451', './arrayRemoveDuplicates-956e66e5'
     this._cornerType = when.defaultValue(options.cornerType, PolylineVolumeGeometryLibrary.CornerType.ROUNDED);
     this._granularity = when.defaultValue(
       options.granularity,
-      _Math.CesiumMath.RADIANS_PER_DEGREE
+      ComponentDatatype.CesiumMath.RADIANS_PER_DEGREE
     );
     this._shadowVolume = when.defaultValue(options.shadowVolume, false);
     this._workerName = "createCorridorGeometry";
@@ -1100,8 +1100,8 @@ define(['./GeometryOffsetAttribute-bb06a451', './arrayRemoveDuplicates-956e66e5'
      */
     this.packedLength =
       1 +
-      positions.length * Cartesian2.Cartesian3.packedLength +
-      Cartesian2.Ellipsoid.packedLength +
+      positions.length * Matrix2.Cartesian3.packedLength +
+      Matrix2.Ellipsoid.packedLength +
       VertexFormat.VertexFormat.packedLength +
       7;
   }
@@ -1117,8 +1117,8 @@ define(['./GeometryOffsetAttribute-bb06a451', './arrayRemoveDuplicates-956e66e5'
    */
   CorridorGeometry.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
-    Check.Check.defined("value", value);
-    Check.Check.defined("array", array);
+    RuntimeError.Check.defined("value", value);
+    RuntimeError.Check.defined("array", array);
     //>>includeEnd('debug');
 
     startingIndex = when.defaultValue(startingIndex, 0);
@@ -1127,12 +1127,12 @@ define(['./GeometryOffsetAttribute-bb06a451', './arrayRemoveDuplicates-956e66e5'
     var length = positions.length;
     array[startingIndex++] = length;
 
-    for (var i = 0; i < length; ++i, startingIndex += Cartesian2.Cartesian3.packedLength) {
-      Cartesian2.Cartesian3.pack(positions[i], array, startingIndex);
+    for (var i = 0; i < length; ++i, startingIndex += Matrix2.Cartesian3.packedLength) {
+      Matrix2.Cartesian3.pack(positions[i], array, startingIndex);
     }
 
-    Cartesian2.Ellipsoid.pack(value._ellipsoid, array, startingIndex);
-    startingIndex += Cartesian2.Ellipsoid.packedLength;
+    Matrix2.Ellipsoid.pack(value._ellipsoid, array, startingIndex);
+    startingIndex += Matrix2.Ellipsoid.packedLength;
 
     VertexFormat.VertexFormat.pack(value._vertexFormat, array, startingIndex);
     startingIndex += VertexFormat.VertexFormat.packedLength;
@@ -1148,7 +1148,7 @@ define(['./GeometryOffsetAttribute-bb06a451', './arrayRemoveDuplicates-956e66e5'
     return array;
   };
 
-  var scratchEllipsoid = Cartesian2.Ellipsoid.clone(Cartesian2.Ellipsoid.UNIT_SPHERE);
+  var scratchEllipsoid = Matrix2.Ellipsoid.clone(Matrix2.Ellipsoid.UNIT_SPHERE);
   var scratchVertexFormat = new VertexFormat.VertexFormat();
   var scratchOptions = {
     positions: undefined,
@@ -1173,7 +1173,7 @@ define(['./GeometryOffsetAttribute-bb06a451', './arrayRemoveDuplicates-956e66e5'
    */
   CorridorGeometry.unpack = function (array, startingIndex, result) {
     //>>includeStart('debug', pragmas.debug);
-    Check.Check.defined("array", array);
+    RuntimeError.Check.defined("array", array);
     //>>includeEnd('debug');
 
     startingIndex = when.defaultValue(startingIndex, 0);
@@ -1181,12 +1181,12 @@ define(['./GeometryOffsetAttribute-bb06a451', './arrayRemoveDuplicates-956e66e5'
     var length = array[startingIndex++];
     var positions = new Array(length);
 
-    for (var i = 0; i < length; ++i, startingIndex += Cartesian2.Cartesian3.packedLength) {
-      positions[i] = Cartesian2.Cartesian3.unpack(array, startingIndex);
+    for (var i = 0; i < length; ++i, startingIndex += Matrix2.Cartesian3.packedLength) {
+      positions[i] = Matrix2.Cartesian3.unpack(array, startingIndex);
     }
 
-    var ellipsoid = Cartesian2.Ellipsoid.unpack(array, startingIndex, scratchEllipsoid);
-    startingIndex += Cartesian2.Ellipsoid.packedLength;
+    var ellipsoid = Matrix2.Ellipsoid.unpack(array, startingIndex, scratchEllipsoid);
+    startingIndex += Matrix2.Ellipsoid.packedLength;
 
     var vertexFormat = VertexFormat.VertexFormat.unpack(
       array,
@@ -1218,7 +1218,7 @@ define(['./GeometryOffsetAttribute-bb06a451', './arrayRemoveDuplicates-956e66e5'
     }
 
     result._positions = positions;
-    result._ellipsoid = Cartesian2.Ellipsoid.clone(ellipsoid, result._ellipsoid);
+    result._ellipsoid = Matrix2.Ellipsoid.clone(ellipsoid, result._ellipsoid);
     result._vertexFormat = VertexFormat.VertexFormat.clone(vertexFormat, result._vertexFormat);
     result._width = width;
     result._height = height;
@@ -1250,11 +1250,11 @@ define(['./GeometryOffsetAttribute-bb06a451', './arrayRemoveDuplicates-956e66e5'
     var width = options.width;
 
     //>>includeStart('debug', pragmas.debug);
-    Check.Check.defined("options.positions", positions);
-    Check.Check.defined("options.width", width);
+    RuntimeError.Check.defined("options.positions", positions);
+    RuntimeError.Check.defined("options.width", width);
     //>>includeEnd('debug');
 
-    var ellipsoid = when.defaultValue(options.ellipsoid, Cartesian2.Ellipsoid.WGS84);
+    var ellipsoid = when.defaultValue(options.ellipsoid, Matrix2.Ellipsoid.WGS84);
     var cornerType = when.defaultValue(options.cornerType, PolylineVolumeGeometryLibrary.CornerType.ROUNDED);
 
     return computeRectangle(positions, ellipsoid, width, cornerType, result);
@@ -1274,7 +1274,7 @@ define(['./GeometryOffsetAttribute-bb06a451', './arrayRemoveDuplicates-956e66e5'
     positions = scaleToSurface(positions, ellipsoid);
     var cleanPositions = arrayRemoveDuplicates.arrayRemoveDuplicates(
       positions,
-      Cartesian2.Cartesian3.equalsEpsilon
+      Matrix2.Cartesian3.equalsEpsilon
     );
 
     if (cleanPositions.length < 2 || width <= 0) {
@@ -1283,11 +1283,11 @@ define(['./GeometryOffsetAttribute-bb06a451', './arrayRemoveDuplicates-956e66e5'
 
     var height = corridorGeometry._height;
     var extrudedHeight = corridorGeometry._extrudedHeight;
-    var extrude = !_Math.CesiumMath.equalsEpsilon(
+    var extrude = !ComponentDatatype.CesiumMath.equalsEpsilon(
       height,
       extrudedHeight,
       0,
-      _Math.CesiumMath.EPSILON2
+      ComponentDatatype.CesiumMath.EPSILON2
     );
 
     var vertexFormat = corridorGeometry._vertexFormat;
@@ -1411,7 +1411,7 @@ define(['./GeometryOffsetAttribute-bb06a451', './arrayRemoveDuplicates-956e66e5'
     if (when.defined(offset)) {
       corridorGeometry = CorridorGeometry.unpack(corridorGeometry, offset);
     }
-    corridorGeometry._ellipsoid = Cartesian2.Ellipsoid.clone(corridorGeometry._ellipsoid);
+    corridorGeometry._ellipsoid = Matrix2.Ellipsoid.clone(corridorGeometry._ellipsoid);
     return CorridorGeometry.createGeometry(corridorGeometry);
   }
 

@@ -21,10 +21,10 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./when-ad3237a0', './Cartesian2-80d920df', './ArcType-98ec98bf', './GeometryOffsetAttribute-bb06a451', './BoundingRectangle-ccb23b1a', './Transforms-a15b18c4', './Check-be2d5acb', './ComponentDatatype-d313fe31', './EllipsoidGeodesic-c536a380', './EllipsoidTangentPlane-f39e48de', './GeometryAttribute-ecfc6b57', './GeometryInstance-6b83854f', './GeometryPipeline-22537247', './IndexDatatype-b05854cf', './Math-ea9609a6', './PolygonGeometryLibrary-addce183', './PolygonPipeline-3efca556', './VertexFormat-16d719d5', './combine-1510933d', './RuntimeError-767bd866', './WebGLConstants-1c8239cc', './AxisAlignedBoundingBox-997fde65', './IntersectionTests-38cb74a9', './Plane-b1029663', './AttributeCompression-ff1ddad0', './EncodedCartesian3-13336927', './arrayRemoveDuplicates-956e66e5', './EllipsoidRhumbLine-f85c13d7', './GeometryAttributes-27dc652d'], function (when, Cartesian2, ArcType, GeometryOffsetAttribute, BoundingRectangle, Transforms, Check, ComponentDatatype, EllipsoidGeodesic, EllipsoidTangentPlane, GeometryAttribute, GeometryInstance, GeometryPipeline, IndexDatatype, _Math, PolygonGeometryLibrary, PolygonPipeline, VertexFormat, combine, RuntimeError, WebGLConstants, AxisAlignedBoundingBox, IntersectionTests, Plane, AttributeCompression, EncodedCartesian3, arrayRemoveDuplicates, EllipsoidRhumbLine, GeometryAttributes) { 'use strict';
+define(['./when-4bbc8319', './Matrix2-32d4a9a0', './ArcType-98ec98bf', './GeometryOffsetAttribute-6a692b56', './BoundingRectangle-aa6394c1', './Transforms-b4151f9c', './RuntimeError-346a3079', './ComponentDatatype-f194c48b', './EllipsoidGeodesic-c3b968c7', './EllipsoidTangentPlane-9edb4c29', './GeometryAttribute-900e07ee', './GeometryInstance-33236890', './GeometryPipeline-2b535815', './IndexDatatype-ee69f1fd', './PolygonGeometryLibrary-721cf132', './PolygonPipeline-c597b314', './VertexFormat-f9c1a155', './combine-83860057', './WebGLConstants-1c8239cc', './AxisAlignedBoundingBox-5fa363ce', './IntersectionTests-4c2a8ace', './Plane-87991fdc', './AttributeCompression-0091b79f', './EncodedCartesian3-2c726105', './arrayRemoveDuplicates-cf5c3227', './EllipsoidRhumbLine-1bebfad1', './GeometryAttributes-7827a6c2'], function (when, Matrix2, ArcType, GeometryOffsetAttribute, BoundingRectangle, Transforms, RuntimeError, ComponentDatatype, EllipsoidGeodesic, EllipsoidTangentPlane, GeometryAttribute, GeometryInstance, GeometryPipeline, IndexDatatype, PolygonGeometryLibrary, PolygonPipeline, VertexFormat, combine, WebGLConstants, AxisAlignedBoundingBox, IntersectionTests, Plane, AttributeCompression, EncodedCartesian3, arrayRemoveDuplicates, EllipsoidRhumbLine, GeometryAttributes) { 'use strict';
 
-  var scratchCarto1 = new Cartesian2.Cartographic();
-  var scratchCarto2 = new Cartesian2.Cartographic();
+  var scratchCarto1 = new Matrix2.Cartographic();
+  var scratchCarto2 = new Matrix2.Cartographic();
   function adjustPosHeightsForNormal(position, p1, p2, ellipsoid) {
     var carto1 = ellipsoid.cartesianToCartographic(position, scratchCarto1);
     var height = carto1.height;
@@ -38,22 +38,22 @@ define(['./when-ad3237a0', './Cartesian2-80d920df', './ArcType-98ec98bf', './Geo
   }
 
   var scratchBoundingRectangle = new BoundingRectangle.BoundingRectangle();
-  var scratchPosition = new Cartesian2.Cartesian3();
-  var scratchNormal = new Cartesian2.Cartesian3();
-  var scratchTangent = new Cartesian2.Cartesian3();
-  var scratchBitangent = new Cartesian2.Cartesian3();
-  var p1Scratch = new Cartesian2.Cartesian3();
-  var p2Scratch = new Cartesian2.Cartesian3();
-  var scratchPerPosNormal = new Cartesian2.Cartesian3();
-  var scratchPerPosTangent = new Cartesian2.Cartesian3();
-  var scratchPerPosBitangent = new Cartesian2.Cartesian3();
+  var scratchPosition = new Matrix2.Cartesian3();
+  var scratchNormal = new Matrix2.Cartesian3();
+  var scratchTangent = new Matrix2.Cartesian3();
+  var scratchBitangent = new Matrix2.Cartesian3();
+  var p1Scratch = new Matrix2.Cartesian3();
+  var p2Scratch = new Matrix2.Cartesian3();
+  var scratchPerPosNormal = new Matrix2.Cartesian3();
+  var scratchPerPosTangent = new Matrix2.Cartesian3();
+  var scratchPerPosBitangent = new Matrix2.Cartesian3();
 
-  var appendTextureCoordinatesOrigin = new Cartesian2.Cartesian2();
-  var appendTextureCoordinatesCartesian2 = new Cartesian2.Cartesian2();
-  var appendTextureCoordinatesCartesian3 = new Cartesian2.Cartesian3();
+  var appendTextureCoordinatesOrigin = new Matrix2.Cartesian2();
+  var appendTextureCoordinatesCartesian2 = new Matrix2.Cartesian2();
+  var appendTextureCoordinatesCartesian3 = new Matrix2.Cartesian3();
   var appendTextureCoordinatesQuaternion = new Transforms.Quaternion();
-  var appendTextureCoordinatesMatrix3 = new Transforms.Matrix3();
-  var tangentMatrixScratch = new Transforms.Matrix3();
+  var appendTextureCoordinatesMatrix3 = new Matrix2.Matrix3();
+  var tangentMatrixScratch = new Matrix2.Matrix3();
 
   function computeAttributes(options) {
     var vertexFormat = options.vertexFormat;
@@ -116,21 +116,21 @@ define(['./when-ad3237a0', './Cartesian2-80d920df', './ArcType-98ec98bf', './Geo
           stRotation,
           appendTextureCoordinatesQuaternion
         );
-        textureMatrix = Transforms.Matrix3.fromQuaternion(rotation, textureMatrix);
+        textureMatrix = Matrix2.Matrix3.fromQuaternion(rotation, textureMatrix);
 
         rotation = Transforms.Quaternion.fromAxisAngle(
           tangentPlane._plane.normal,
           -stRotation,
           appendTextureCoordinatesQuaternion
         );
-        tangentRotationMatrix = Transforms.Matrix3.fromQuaternion(
+        tangentRotationMatrix = Matrix2.Matrix3.fromQuaternion(
           rotation,
           tangentRotationMatrix
         );
       } else {
-        textureMatrix = Transforms.Matrix3.clone(Transforms.Matrix3.IDENTITY, textureMatrix);
-        tangentRotationMatrix = Transforms.Matrix3.clone(
-          Transforms.Matrix3.IDENTITY,
+        textureMatrix = Matrix2.Matrix3.clone(Matrix2.Matrix3.IDENTITY, textureMatrix);
+        tangentRotationMatrix = Matrix2.Matrix3.clone(
+          Matrix2.Matrix3.IDENTITY,
           tangentRotationMatrix
         );
       }
@@ -146,14 +146,14 @@ define(['./when-ad3237a0', './Cartesian2-80d920df', './ArcType-98ec98bf', './Geo
       }
 
       for (var i = 0; i < length; i += 3) {
-        var position = Cartesian2.Cartesian3.fromArray(
+        var position = Matrix2.Cartesian3.fromArray(
           flatPositions,
           i,
           appendTextureCoordinatesCartesian3
         );
 
         if (vertexFormat.st) {
-          var p = Transforms.Matrix3.multiplyByVector(
+          var p = Matrix2.Matrix3.multiplyByVector(
             textureMatrix,
             position,
             scratchPosition
@@ -163,10 +163,10 @@ define(['./when-ad3237a0', './Cartesian2-80d920df', './ArcType-98ec98bf', './Geo
             p,
             appendTextureCoordinatesCartesian2
           );
-          Cartesian2.Cartesian2.subtract(st, origin, st);
+          Matrix2.Cartesian2.subtract(st, origin, st);
 
-          var stx = _Math.CesiumMath.clamp(st.x / boundingRectangle.width, 0, 1);
-          var sty = _Math.CesiumMath.clamp(st.y / boundingRectangle.height, 0, 1);
+          var stx = ComponentDatatype.CesiumMath.clamp(st.x / boundingRectangle.width, 0, 1);
+          var sty = ComponentDatatype.CesiumMath.clamp(st.y / boundingRectangle.height, 0, 1);
           if (bottom) {
             textureCoordinates[textureCoordIndex + bottomOffset2] = stx;
             textureCoordinates[textureCoordIndex + 1 + bottomOffset2] = sty;
@@ -190,10 +190,10 @@ define(['./when-ad3237a0', './Cartesian2-80d920df', './ArcType-98ec98bf', './Geo
 
           if (wall) {
             if (i + 3 < length) {
-              var p1 = Cartesian2.Cartesian3.fromArray(flatPositions, i + 3, p1Scratch);
+              var p1 = Matrix2.Cartesian3.fromArray(flatPositions, i + 3, p1Scratch);
 
               if (recomputeNormal) {
-                var p2 = Cartesian2.Cartesian3.fromArray(
+                var p2 = Matrix2.Cartesian3.fromArray(
                   flatPositions,
                   i + length,
                   p2Scratch
@@ -201,16 +201,16 @@ define(['./when-ad3237a0', './Cartesian2-80d920df', './ArcType-98ec98bf', './Geo
                 if (perPositionHeight) {
                   adjustPosHeightsForNormal(position, p1, p2, ellipsoid);
                 }
-                Cartesian2.Cartesian3.subtract(p1, position, p1);
-                Cartesian2.Cartesian3.subtract(p2, position, p2);
-                normal = Cartesian2.Cartesian3.normalize(
-                  Cartesian2.Cartesian3.cross(p2, p1, normal),
+                Matrix2.Cartesian3.subtract(p1, position, p1);
+                Matrix2.Cartesian3.subtract(p2, position, p2);
+                normal = Matrix2.Cartesian3.normalize(
+                  Matrix2.Cartesian3.cross(p2, p1, normal),
                   normal
                 );
                 recomputeNormal = false;
               }
 
-              if (Cartesian2.Cartesian3.equalsEpsilon(p1, position, _Math.CesiumMath.EPSILON10)) {
+              if (Matrix2.Cartesian3.equalsEpsilon(p1, position, ComponentDatatype.CesiumMath.EPSILON10)) {
                 // if we've reached a corner
                 recomputeNormal = true;
               }
@@ -219,8 +219,8 @@ define(['./when-ad3237a0', './Cartesian2-80d920df', './ArcType-98ec98bf', './Geo
             if (vertexFormat.tangent || vertexFormat.bitangent) {
               bitangent = ellipsoid.geodeticSurfaceNormal(position, bitangent);
               if (vertexFormat.tangent) {
-                tangent = Cartesian2.Cartesian3.normalize(
-                  Cartesian2.Cartesian3.cross(bitangent, normal, tangent),
+                tangent = Matrix2.Cartesian3.normalize(
+                  Matrix2.Cartesian3.cross(bitangent, normal, tangent),
                   tangent
                 );
               }
@@ -229,18 +229,18 @@ define(['./when-ad3237a0', './Cartesian2-80d920df', './ArcType-98ec98bf', './Geo
             normal = ellipsoid.geodeticSurfaceNormal(position, normal);
             if (vertexFormat.tangent || vertexFormat.bitangent) {
               if (perPositionHeight) {
-                scratchPerPosNormal = Cartesian2.Cartesian3.fromArray(
+                scratchPerPosNormal = Matrix2.Cartesian3.fromArray(
                   normals,
                   attrIndex,
                   scratchPerPosNormal
                 );
-                scratchPerPosTangent = Cartesian2.Cartesian3.cross(
-                  Cartesian2.Cartesian3.UNIT_Z,
+                scratchPerPosTangent = Matrix2.Cartesian3.cross(
+                  Matrix2.Cartesian3.UNIT_Z,
                   scratchPerPosNormal,
                   scratchPerPosTangent
                 );
-                scratchPerPosTangent = Cartesian2.Cartesian3.normalize(
-                  Transforms.Matrix3.multiplyByVector(
+                scratchPerPosTangent = Matrix2.Cartesian3.normalize(
+                  Matrix2.Matrix3.multiplyByVector(
                     tangentRotationMatrix,
                     scratchPerPosTangent,
                     scratchPerPosTangent
@@ -248,8 +248,8 @@ define(['./when-ad3237a0', './Cartesian2-80d920df', './ArcType-98ec98bf', './Geo
                   scratchPerPosTangent
                 );
                 if (vertexFormat.bitangent) {
-                  scratchPerPosBitangent = Cartesian2.Cartesian3.normalize(
-                    Cartesian2.Cartesian3.cross(
+                  scratchPerPosBitangent = Matrix2.Cartesian3.normalize(
+                    Matrix2.Cartesian3.cross(
                       scratchPerPosNormal,
                       scratchPerPosTangent,
                       scratchPerPosBitangent
@@ -259,14 +259,14 @@ define(['./when-ad3237a0', './Cartesian2-80d920df', './ArcType-98ec98bf', './Geo
                 }
               }
 
-              tangent = Cartesian2.Cartesian3.cross(Cartesian2.Cartesian3.UNIT_Z, normal, tangent);
-              tangent = Cartesian2.Cartesian3.normalize(
-                Transforms.Matrix3.multiplyByVector(tangentRotationMatrix, tangent, tangent),
+              tangent = Matrix2.Cartesian3.cross(Matrix2.Cartesian3.UNIT_Z, normal, tangent);
+              tangent = Matrix2.Cartesian3.normalize(
+                Matrix2.Matrix3.multiplyByVector(tangentRotationMatrix, tangent, tangent),
                 tangent
               );
               if (vertexFormat.bitangent) {
-                bitangent = Cartesian2.Cartesian3.normalize(
-                  Cartesian2.Cartesian3.cross(normal, tangent, bitangent),
+                bitangent = Matrix2.Cartesian3.normalize(
+                  Matrix2.Cartesian3.cross(normal, tangent, bitangent),
                   bitangent
                 );
               }
@@ -413,15 +413,15 @@ define(['./when-ad3237a0', './Cartesian2-80d920df', './ArcType-98ec98bf', './Geo
     return geometry;
   }
 
-  var startCartographicScratch = new Cartesian2.Cartographic();
-  var endCartographicScratch = new Cartesian2.Cartographic();
+  var startCartographicScratch = new Matrix2.Cartographic();
+  var endCartographicScratch = new Matrix2.Cartographic();
   var idlCross = {
     westOverIDL: 0.0,
     eastOverIDL: 0.0,
   };
   var ellipsoidGeodesic = new EllipsoidGeodesic.EllipsoidGeodesic();
   function computeRectangle(positions, ellipsoid, arcType, granularity, result) {
-    result = when.defaultValue(result, new Cartesian2.Rectangle());
+    result = when.defaultValue(result, new Matrix2.Rectangle());
     if (!when.defined(positions) || positions.length < 3) {
       result.west = 0.0;
       result.north = 0.0;
@@ -431,7 +431,7 @@ define(['./when-ad3237a0', './Cartesian2-80d920df', './ArcType-98ec98bf', './Geo
     }
 
     if (arcType === ArcType.ArcType.RHUMB) {
-      return Cartesian2.Rectangle.fromCartesianArray(positions, ellipsoid, result);
+      return Matrix2.Rectangle.fromCartesianArray(positions, ellipsoid, result);
     }
 
     if (!ellipsoidGeodesic.ellipsoid.equals(ellipsoid)) {
@@ -447,7 +447,7 @@ define(['./when-ad3237a0', './Cartesian2-80d920df', './ArcType-98ec98bf', './Geo
     idlCross.eastOverIDL = Number.NEGATIVE_INFINITY;
 
     var inverseChordLength =
-      1.0 / _Math.CesiumMath.chordLength(granularity, ellipsoid.maximumRadius);
+      1.0 / ComponentDatatype.CesiumMath.chordLength(granularity, ellipsoid.maximumRadius);
     var positionsLength = positions.length;
     var endCartographic = ellipsoid.cartesianToCartographic(
       positions[0],
@@ -484,18 +484,18 @@ define(['./when-ad3237a0', './Cartesian2-80d920df', './ArcType-98ec98bf', './Geo
       result.west = idlCross.westOverIDL;
       result.east = idlCross.eastOverIDL;
 
-      if (result.east > _Math.CesiumMath.PI) {
-        result.east = result.east - _Math.CesiumMath.TWO_PI;
+      if (result.east > ComponentDatatype.CesiumMath.PI) {
+        result.east = result.east - ComponentDatatype.CesiumMath.TWO_PI;
       }
-      if (result.west > _Math.CesiumMath.PI) {
-        result.west = result.west - _Math.CesiumMath.TWO_PI;
+      if (result.west > ComponentDatatype.CesiumMath.PI) {
+        result.west = result.west - ComponentDatatype.CesiumMath.TWO_PI;
       }
     }
 
     return result;
   }
 
-  var interpolatedCartographicScratch = new Cartesian2.Cartographic();
+  var interpolatedCartographicScratch = new Matrix2.Cartographic();
   function interpolateAndGrowRectangle(
     ellipsoidGeodesic,
     inverseChordLength,
@@ -524,7 +524,7 @@ define(['./when-ad3237a0', './Cartesian2-80d920df', './ArcType-98ec98bf', './Geo
       result.north = Math.max(result.north, latitude);
 
       var lonAdjusted =
-        longitude >= 0 ? longitude : longitude + _Math.CesiumMath.TWO_PI;
+        longitude >= 0 ? longitude : longitude + ComponentDatatype.CesiumMath.TWO_PI;
       idlCross.westOverIDL = Math.min(idlCross.westOverIDL, lonAdjusted);
       idlCross.eastOverIDL = Math.max(idlCross.eastOverIDL, lonAdjusted);
     }
@@ -764,14 +764,14 @@ define(['./when-ad3237a0', './Cartesian2-80d920df', './ArcType-98ec98bf', './Geo
    */
   function PolygonGeometry(options) {
     //>>includeStart('debug', pragmas.debug);
-    Check.Check.typeOf.object("options", options);
-    Check.Check.typeOf.object("options.polygonHierarchy", options.polygonHierarchy);
+    RuntimeError.Check.typeOf.object("options", options);
+    RuntimeError.Check.typeOf.object("options.polygonHierarchy", options.polygonHierarchy);
     if (
       when.defined(options.perPositionHeight) &&
       options.perPositionHeight &&
       when.defined(options.height)
     ) {
-      throw new Check.DeveloperError(
+      throw new RuntimeError.DeveloperError(
         "Cannot use both options.perPositionHeight and options.height"
       );
     }
@@ -780,7 +780,7 @@ define(['./when-ad3237a0', './Cartesian2-80d920df', './ArcType-98ec98bf', './Geo
       options.arcType !== ArcType.ArcType.GEODESIC &&
       options.arcType !== ArcType.ArcType.RHUMB
     ) {
-      throw new Check.DeveloperError(
+      throw new RuntimeError.DeveloperError(
         "Invalid arcType. Valid options are ArcType.GEODESIC and ArcType.RHUMB."
       );
     }
@@ -788,10 +788,10 @@ define(['./when-ad3237a0', './Cartesian2-80d920df', './ArcType-98ec98bf', './Geo
 
     var polygonHierarchy = options.polygonHierarchy;
     var vertexFormat = when.defaultValue(options.vertexFormat, VertexFormat.VertexFormat.DEFAULT);
-    var ellipsoid = when.defaultValue(options.ellipsoid, Cartesian2.Ellipsoid.WGS84);
+    var ellipsoid = when.defaultValue(options.ellipsoid, Matrix2.Ellipsoid.WGS84);
     var granularity = when.defaultValue(
       options.granularity,
-      _Math.CesiumMath.RADIANS_PER_DEGREE
+      ComponentDatatype.CesiumMath.RADIANS_PER_DEGREE
     );
     var stRotation = when.defaultValue(options.stRotation, 0.0);
     var perPositionHeight = when.defaultValue(options.perPositionHeight, false);
@@ -807,7 +807,7 @@ define(['./when-ad3237a0', './Cartesian2-80d920df', './ArcType-98ec98bf', './Geo
     }
 
     this._vertexFormat = VertexFormat.VertexFormat.clone(vertexFormat);
-    this._ellipsoid = Cartesian2.Ellipsoid.clone(ellipsoid);
+    this._ellipsoid = Matrix2.Ellipsoid.clone(ellipsoid);
     this._granularity = granularity;
     this._stRotation = stRotation;
     this._height = height;
@@ -831,7 +831,7 @@ define(['./when-ad3237a0', './Cartesian2-80d920df', './ArcType-98ec98bf', './Geo
      */
     this.packedLength =
       PolygonGeometryLibrary.PolygonGeometryLibrary.computeHierarchyPackedLength(polygonHierarchy) +
-      Cartesian2.Ellipsoid.packedLength +
+      Matrix2.Ellipsoid.packedLength +
       VertexFormat.VertexFormat.packedLength +
       12;
   }
@@ -873,7 +873,7 @@ define(['./when-ad3237a0', './Cartesian2-80d920df', './ArcType-98ec98bf', './Geo
     options = when.defaultValue(options, when.defaultValue.EMPTY_OBJECT);
 
     //>>includeStart('debug', pragmas.debug);
-    Check.Check.defined("options.positions", options.positions);
+    RuntimeError.Check.defined("options.positions", options.positions);
     //>>includeEnd('debug');
 
     var newOptions = {
@@ -906,8 +906,8 @@ define(['./when-ad3237a0', './Cartesian2-80d920df', './ArcType-98ec98bf', './Geo
    */
   PolygonGeometry.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
-    Check.Check.typeOf.object("value", value);
-    Check.Check.defined("array", array);
+    RuntimeError.Check.typeOf.object("value", value);
+    RuntimeError.Check.defined("array", array);
     //>>includeEnd('debug');
 
     startingIndex = when.defaultValue(startingIndex, 0);
@@ -918,8 +918,8 @@ define(['./when-ad3237a0', './Cartesian2-80d920df', './ArcType-98ec98bf', './Geo
       startingIndex
     );
 
-    Cartesian2.Ellipsoid.pack(value._ellipsoid, array, startingIndex);
-    startingIndex += Cartesian2.Ellipsoid.packedLength;
+    Matrix2.Ellipsoid.pack(value._ellipsoid, array, startingIndex);
+    startingIndex += Matrix2.Ellipsoid.packedLength;
 
     VertexFormat.VertexFormat.pack(value._vertexFormat, array, startingIndex);
     startingIndex += VertexFormat.VertexFormat.packedLength;
@@ -940,7 +940,7 @@ define(['./when-ad3237a0', './Cartesian2-80d920df', './ArcType-98ec98bf', './Geo
     return array;
   };
 
-  var scratchEllipsoid = Cartesian2.Ellipsoid.clone(Cartesian2.Ellipsoid.UNIT_SPHERE);
+  var scratchEllipsoid = Matrix2.Ellipsoid.clone(Matrix2.Ellipsoid.UNIT_SPHERE);
   var scratchVertexFormat = new VertexFormat.VertexFormat();
 
   //Only used to avoid inability to default construct.
@@ -957,7 +957,7 @@ define(['./when-ad3237a0', './Cartesian2-80d920df', './ArcType-98ec98bf', './Geo
    */
   PolygonGeometry.unpack = function (array, startingIndex, result) {
     //>>includeStart('debug', pragmas.debug);
-    Check.Check.defined("array", array);
+    RuntimeError.Check.defined("array", array);
     //>>includeEnd('debug');
 
     startingIndex = when.defaultValue(startingIndex, 0);
@@ -969,8 +969,8 @@ define(['./when-ad3237a0', './Cartesian2-80d920df', './ArcType-98ec98bf', './Geo
     startingIndex = polygonHierarchy.startingIndex;
     delete polygonHierarchy.startingIndex;
 
-    var ellipsoid = Cartesian2.Ellipsoid.unpack(array, startingIndex, scratchEllipsoid);
-    startingIndex += Cartesian2.Ellipsoid.packedLength;
+    var ellipsoid = Matrix2.Ellipsoid.unpack(array, startingIndex, scratchEllipsoid);
+    startingIndex += Matrix2.Ellipsoid.packedLength;
 
     var vertexFormat = VertexFormat.VertexFormat.unpack(
       array,
@@ -997,7 +997,7 @@ define(['./when-ad3237a0', './Cartesian2-80d920df', './ArcType-98ec98bf', './Geo
     }
 
     result._polygonHierarchy = polygonHierarchy;
-    result._ellipsoid = Cartesian2.Ellipsoid.clone(ellipsoid, result._ellipsoid);
+    result._ellipsoid = Matrix2.Ellipsoid.clone(ellipsoid, result._ellipsoid);
     result._vertexFormat = VertexFormat.VertexFormat.clone(vertexFormat, result._vertexFormat);
     result._height = height;
     result._extrudedHeight = extrudedHeight;
@@ -1029,25 +1029,25 @@ define(['./when-ad3237a0', './Cartesian2-80d920df', './ArcType-98ec98bf', './Geo
    */
   PolygonGeometry.computeRectangle = function (options, result) {
     //>>includeStart('debug', pragmas.debug);
-    Check.Check.typeOf.object("options", options);
-    Check.Check.typeOf.object("options.polygonHierarchy", options.polygonHierarchy);
+    RuntimeError.Check.typeOf.object("options", options);
+    RuntimeError.Check.typeOf.object("options.polygonHierarchy", options.polygonHierarchy);
     //>>includeEnd('debug');
 
     var granularity = when.defaultValue(
       options.granularity,
-      _Math.CesiumMath.RADIANS_PER_DEGREE
+      ComponentDatatype.CesiumMath.RADIANS_PER_DEGREE
     );
     var arcType = when.defaultValue(options.arcType, ArcType.ArcType.GEODESIC);
     //>>includeStart('debug', pragmas.debug);
     if (arcType !== ArcType.ArcType.GEODESIC && arcType !== ArcType.ArcType.RHUMB) {
-      throw new Check.DeveloperError(
+      throw new RuntimeError.DeveloperError(
         "Invalid arcType. Valid options are ArcType.GEODESIC and ArcType.RHUMB."
       );
     }
     //>>includeEnd('debug');
 
     var polygonHierarchy = options.polygonHierarchy;
-    var ellipsoid = when.defaultValue(options.ellipsoid, Cartesian2.Ellipsoid.WGS84);
+    var ellipsoid = when.defaultValue(options.ellipsoid, Matrix2.Ellipsoid.WGS84);
 
     return computeRectangle(
       polygonHierarchy.positions,
@@ -1114,7 +1114,7 @@ define(['./when-ad3237a0', './Cartesian2-80d920df', './ArcType-98ec98bf', './Geo
     var extrudedHeight = polygonGeometry._extrudedHeight;
     var extrude =
       polygonGeometry._perPositionHeightExtrude ||
-      !_Math.CesiumMath.equalsEpsilon(height, extrudedHeight, 0, _Math.CesiumMath.EPSILON2);
+      !ComponentDatatype.CesiumMath.equalsEpsilon(height, extrudedHeight, 0, ComponentDatatype.CesiumMath.EPSILON2);
 
     var options = {
       perPositionHeight: perPositionHeight,
@@ -1353,7 +1353,7 @@ define(['./when-ad3237a0', './Cartesian2-80d920df', './ArcType-98ec98bf', './Geo
     if (when.defined(offset)) {
       polygonGeometry = PolygonGeometry.unpack(polygonGeometry, offset);
     }
-    polygonGeometry._ellipsoid = Cartesian2.Ellipsoid.clone(polygonGeometry._ellipsoid);
+    polygonGeometry._ellipsoid = Matrix2.Ellipsoid.clone(polygonGeometry._ellipsoid);
     return PolygonGeometry.createGeometry(polygonGeometry);
   }
 
