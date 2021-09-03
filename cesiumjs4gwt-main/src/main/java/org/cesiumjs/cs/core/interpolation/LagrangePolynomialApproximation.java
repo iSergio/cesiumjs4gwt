@@ -29,13 +29,6 @@ import jsinterop.annotations.JsType;
 @JsType(isNative = true)
 public class LagrangePolynomialApproximation implements InterpolationAlgorithm {
     /**
-     * An {@link InterpolationAlgorithm} for performing Lagrange interpolation.
-     */
-    @JsConstructor
-    private LagrangePolynomialApproximation() {
-    }
-
-    /**
      * Get instance if algorithm. In this moment i don't invented more
      *
      * @return Instance instance. See example.
@@ -93,4 +86,10 @@ public class LagrangePolynomialApproximation implements InterpolationAlgorithm {
     @JsMethod(namespace = "Cesium.LagrangePolynomialApproximation")
     public static native double[] interpolateOrderZero(double x, double[] xTable, double[] yTable, double yStride,
                                                        double[] result);
+
+    /**
+     * An {@link InterpolationAlgorithm} for performing Lagrange interpolation.
+     */
+    @JsConstructor
+    private LagrangePolynomialApproximation() {}
 }
