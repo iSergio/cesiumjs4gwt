@@ -315,13 +315,6 @@ public class Scene {
     @JsProperty
     public boolean sunBloom;
     /**
-     * Gets the scalar used to exaggerate the terrain.
-     * @deprecated will be removed in CesiumJS 1.85. They will be replaced with {@link Globe#terrainExaggeration}.
-     */
-    @Deprecated
-    @JsProperty
-    public double terrainExaggeration;
-    /**
      * The terrain provider providing surface geometry for the globe.
      */
     @JsProperty

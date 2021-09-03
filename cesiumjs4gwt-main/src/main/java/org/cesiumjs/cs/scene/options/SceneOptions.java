@@ -65,15 +65,6 @@ public class SceneOptions {
     @JsProperty
     public boolean scene3DOnly;
     /**
-     * A scalar used to exaggerate the terrain. Note that terrain exaggeration will
-     * not modify any other primitive as they are positioned relative to the
-     * ellipsoid. Default: 1.0
-     * @deprecated will be removed in CesiumJS 1.85. They will be replaced with {@link Globe#terrainExaggeration}.
-     */
-    @Deprecated
-    @JsProperty
-    public double terrainExaggeration;
-    /**
      * Determines if shadows are cast by the sun. Default: false
      */
     @JsProperty
