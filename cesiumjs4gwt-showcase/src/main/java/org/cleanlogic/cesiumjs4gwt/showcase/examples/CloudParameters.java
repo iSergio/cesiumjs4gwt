@@ -40,6 +40,8 @@ public class CloudParameters extends AbstractExample {
     CumulusCloud cloud = null;
 
     CheckBox maxScaleCBox;
+    HorizontalPanel scaleXHPanel;
+    HorizontalPanel scaleYHPanel;
     Slider scaleXSlider;
     TextBox scaleXTBox;
     Slider scaleYSlider;
@@ -55,6 +57,8 @@ public class CloudParameters extends AbstractExample {
     TextBox sliceTBox;
     Slider brightnessSlider;
     TextBox brightnessTBox;
+
+    FlexTable flexTable;
 
     @Inject
     public CloudParameters(ShowcaseExampleStore store) {
@@ -100,8 +104,15 @@ public class CloudParameters extends AbstractExample {
         maxScaleCBox = new CheckBox();
         maxScaleCBox.setWidth("100px");
         maxScaleCBox.setValue(true);
+        maxScaleCBox.addValueChangeHandler(value -> {
+            if (value.getValue()) {
+                cloudParameters.scaleX = cloudParameters.maximumSizeX;
+                cloudParameters.scaleY = cloudParameters.maximumSizeY;
+            }
+            visibleScaleXY(!value.getValue());
+        });
 
-        HorizontalPanel scaleXHPanel = new HorizontalPanel();
+        scaleXHPanel = new HorizontalPanel();
         scaleXHPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
         scaleXHPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
         scaleXHPanel.setSpacing(10);
@@ -116,7 +127,7 @@ public class CloudParameters extends AbstractExample {
         scaleXHPanel.add(scaleXSlider);
         scaleXHPanel.add(scaleXTBox);
 
-        HorizontalPanel scaleYHPanel = new HorizontalPanel();
+        scaleYHPanel = new HorizontalPanel();
         scaleYHPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
         scaleYHPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
         scaleYHPanel.setSpacing(10);
@@ -179,6 +190,10 @@ public class CloudParameters extends AbstractExample {
         renderSliceCBox = new CheckBox();
         renderSliceCBox.setWidth("100px");
         renderSliceCBox.setValue(true);
+        renderSliceCBox.addValueChangeHandler(value -> {
+            flexTable.getWidget(8, 0).setVisible(value.getValue());
+            flexTable.getWidget(8, 1).setVisible(value.getValue());
+        });
 
         HorizontalPanel sliceHPanel = new HorizontalPanel();
         sliceHPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
@@ -210,12 +225,12 @@ public class CloudParameters extends AbstractExample {
         brightnessHPanel.add(brightnessSlider);
         brightnessHPanel.add(brightnessTBox);
 
-        FlexTable flexTable = new FlexTable();
+        flexTable = new FlexTable();
         flexTable.setHTML(1, 0, "<font color=\"white\">Scale with Max Size</font>");
         flexTable.setWidget(1, 1, maxScaleCBox);
-        flexTable.setHTML(2, 0, "<font color=\"white\">Scale X</font>");
+        flexTable.setWidget(2, 0, new HTML("<font color=\"white\">Scale X</font>"));
         flexTable.setWidget(2, 1, scaleXHPanel);
-        flexTable.setHTML(3, 0, "<font color=\"white\">Scale Y</font>");
+        flexTable.setWidget(3, 0, new HTML("<font color=\"white\">Scale Y</font>"));
         flexTable.setWidget(3, 1, scaleYHPanel);
         flexTable.setHTML(4, 0, "<font color=\"white\">Maximum Size X</font>");
         flexTable.setWidget(4, 1, maxSizeXHPanel);
@@ -225,10 +240,12 @@ public class CloudParameters extends AbstractExample {
         flexTable.setWidget(6, 1, maxSizeZHPanel);
         flexTable.setHTML(7, 0, "<font color=\"white\">Render Slice</font>");
         flexTable.setWidget(7, 1, renderSliceCBox);
-        flexTable.setHTML(8, 0, "<font color=\"white\">Slice</font>");
+        flexTable.setWidget(8, 0, new HTML("<font color=\"white\">Slice</font>"));
         flexTable.setWidget(8, 1, sliceHPanel);
         flexTable.setHTML(9, 0, "<font color=\"white\">Brightness</font>");
         flexTable.setWidget(9, 1, brightnessHPanel);
+
+        visibleScaleXY(false);
 
         AbsolutePanel aPanel = new AbsolutePanel();
         aPanel.add(csVPanel);
@@ -239,6 +256,13 @@ public class CloudParameters extends AbstractExample {
         contentPanel.add(aPanel);
 
         initWidget(contentPanel);
+    }
+
+    private void visibleScaleXY(boolean visible) {
+        flexTable.getWidget(2, 0).setVisible(visible);
+        flexTable.getWidget(2, 1).setVisible(visible);
+        flexTable.getWidget(3, 0).setVisible(visible);
+        flexTable.getWidget(3, 1).setVisible(visible);
     }
 
     private class MSliderListener implements SliderListener {
