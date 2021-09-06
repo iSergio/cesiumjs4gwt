@@ -16,15 +16,12 @@
 
 package org.cleanlogic.cesiumjs4gwt.showcase.examples;
 
-import javax.inject.Inject;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.ListBox;
-
 import org.cesiumjs.cs.Cesium;
 import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.Color;
@@ -38,16 +35,13 @@ import org.cesiumjs.cs.datasources.options.EntityOptions;
 import org.cesiumjs.cs.datasources.properties.ConstantPositionProperty;
 import org.cesiumjs.cs.datasources.properties.ConstantProperty;
 import org.cesiumjs.cs.js.JsObject;
-import org.cesiumjs.cs.scene.PostProcess;
-import org.cesiumjs.cs.scene.PostProcessStage;
-import org.cesiumjs.cs.scene.PostProcessStageCollection;
-import org.cesiumjs.cs.scene.PostProcessStageComposite;
-import org.cesiumjs.cs.scene.PostProcessStageLibrary;
-import org.cesiumjs.cs.scene.Primitive;
+import org.cesiumjs.cs.scene.*;
 import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cesiumjs.cs.widgets.options.ViewerOptions;
 import org.cleanlogic.cesiumjs4gwt.showcase.basic.AbstractExample;
 import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ShowcaseExampleStore;
+
+import javax.inject.Inject;
 
 /**
  * @author Serge Silaev aka iSergio
