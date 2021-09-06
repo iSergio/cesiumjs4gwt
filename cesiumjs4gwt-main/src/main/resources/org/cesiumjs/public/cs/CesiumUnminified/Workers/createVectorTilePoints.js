@@ -21,15 +21,15 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./AttributeCompression-ff1ddad0', './Cartesian2-80d920df', './Math-ea9609a6', './createTaskProcessorWorker', './Check-be2d5acb', './when-ad3237a0'], function (AttributeCompression, Cartesian2, _Math, createTaskProcessorWorker, Check, when) { 'use strict';
+define(['./AttributeCompression-0091b79f', './Matrix2-32d4a9a0', './ComponentDatatype-f194c48b', './createTaskProcessorWorker', './RuntimeError-346a3079', './when-4bbc8319', './WebGLConstants-1c8239cc'], function (AttributeCompression, Matrix2, ComponentDatatype, createTaskProcessorWorker, RuntimeError, when, WebGLConstants) { 'use strict';
 
   var maxShort = 32767;
 
-  var scratchBVCartographic = new Cartesian2.Cartographic();
-  var scratchEncodedPosition = new Cartesian2.Cartesian3();
+  var scratchBVCartographic = new Matrix2.Cartographic();
+  var scratchEncodedPosition = new Matrix2.Cartesian3();
 
-  var scratchRectangle = new Cartesian2.Rectangle();
-  var scratchEllipsoid = new Cartesian2.Ellipsoid();
+  var scratchRectangle = new Matrix2.Rectangle();
+  var scratchEllipsoid = new Matrix2.Ellipsoid();
   var scratchMinMaxHeights = {
     min: undefined,
     max: undefined,
@@ -42,10 +42,10 @@ define(['./AttributeCompression-ff1ddad0', './Cartesian2-80d920df', './Math-ea96
     scratchMinMaxHeights.min = packedBuffer[offset++];
     scratchMinMaxHeights.max = packedBuffer[offset++];
 
-    Cartesian2.Rectangle.unpack(packedBuffer, offset, scratchRectangle);
-    offset += Cartesian2.Rectangle.packedLength;
+    Matrix2.Rectangle.unpack(packedBuffer, offset, scratchRectangle);
+    offset += Matrix2.Rectangle.packedLength;
 
-    Cartesian2.Ellipsoid.unpack(packedBuffer, offset, scratchEllipsoid);
+    Matrix2.Ellipsoid.unpack(packedBuffer, offset, scratchEllipsoid);
   }
 
   function createVectorTilePoints(parameters, transferableObjects) {
@@ -72,11 +72,11 @@ define(['./AttributeCompression-ff1ddad0', './Cartesian2-80d920df', './Math-ea96
       var v = vBuffer[i];
       var h = heightBuffer[i];
 
-      var lon = _Math.CesiumMath.lerp(rectangle.west, rectangle.east, u / maxShort);
-      var lat = _Math.CesiumMath.lerp(rectangle.south, rectangle.north, v / maxShort);
-      var alt = _Math.CesiumMath.lerp(minimumHeight, maximumHeight, h / maxShort);
+      var lon = ComponentDatatype.CesiumMath.lerp(rectangle.west, rectangle.east, u / maxShort);
+      var lat = ComponentDatatype.CesiumMath.lerp(rectangle.south, rectangle.north, v / maxShort);
+      var alt = ComponentDatatype.CesiumMath.lerp(minimumHeight, maximumHeight, h / maxShort);
 
-      var cartographic = Cartesian2.Cartographic.fromRadians(
+      var cartographic = Matrix2.Cartographic.fromRadians(
         lon,
         lat,
         alt,
@@ -86,7 +86,7 @@ define(['./AttributeCompression-ff1ddad0', './Cartesian2-80d920df', './Math-ea96
         cartographic,
         scratchEncodedPosition
       );
-      Cartesian2.Cartesian3.pack(decodedPosition, decoded, i * 3);
+      Matrix2.Cartesian3.pack(decodedPosition, decoded, i * 3);
     }
 
     transferableObjects.push(decoded.buffer);

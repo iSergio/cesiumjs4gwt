@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./Cartesian2-80d920df', './Check-be2d5acb', './when-ad3237a0', './EllipseOutlineGeometry-a98525de', './Math-ea9609a6', './GeometryOffsetAttribute-bb06a451', './Transforms-a15b18c4', './combine-1510933d', './RuntimeError-767bd866', './ComponentDatatype-d313fe31', './WebGLConstants-1c8239cc', './EllipseGeometryLibrary-8738f849', './GeometryAttribute-ecfc6b57', './GeometryAttributes-27dc652d', './IndexDatatype-b05854cf'], function (Cartesian2, Check, when, EllipseOutlineGeometry, _Math, GeometryOffsetAttribute, Transforms, combine, RuntimeError, ComponentDatatype, WebGLConstants, EllipseGeometryLibrary, GeometryAttribute, GeometryAttributes, IndexDatatype) { 'use strict';
+define(['./Matrix2-32d4a9a0', './RuntimeError-346a3079', './when-4bbc8319', './EllipseOutlineGeometry-7f7eafbf', './ComponentDatatype-f194c48b', './WebGLConstants-1c8239cc', './GeometryOffsetAttribute-6a692b56', './Transforms-b4151f9c', './combine-83860057', './EllipseGeometryLibrary-20e51de1', './GeometryAttribute-900e07ee', './GeometryAttributes-7827a6c2', './IndexDatatype-ee69f1fd'], function (Matrix2, RuntimeError, when, EllipseOutlineGeometry, ComponentDatatype, WebGLConstants, GeometryOffsetAttribute, Transforms, combine, EllipseGeometryLibrary, GeometryAttribute, GeometryAttributes, IndexDatatype) { 'use strict';
 
   /**
    * A description of the outline of a circle on the ellipsoid.
@@ -57,7 +57,7 @@ define(['./Cartesian2-80d920df', './Check-be2d5acb', './when-ad3237a0', './Ellip
     var radius = options.radius;
 
     //>>includeStart('debug', pragmas.debug);
-    Check.Check.typeOf.number("radius", radius);
+    RuntimeError.Check.typeOf.number("radius", radius);
     //>>includeEnd('debug');
 
     var ellipseGeometryOptions = {
@@ -91,7 +91,7 @@ define(['./Cartesian2-80d920df', './Check-be2d5acb', './when-ad3237a0', './Ellip
    */
   CircleOutlineGeometry.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
-    Check.Check.typeOf.object("value", value);
+    RuntimeError.Check.typeOf.object("value", value);
     //>>includeEnd('debug');
     return EllipseOutlineGeometry.EllipseOutlineGeometry.pack(
       value._ellipseGeometry,
@@ -101,14 +101,14 @@ define(['./Cartesian2-80d920df', './Check-be2d5acb', './when-ad3237a0', './Ellip
   };
 
   var scratchEllipseGeometry = new EllipseOutlineGeometry.EllipseOutlineGeometry({
-    center: new Cartesian2.Cartesian3(),
+    center: new Matrix2.Cartesian3(),
     semiMajorAxis: 1.0,
     semiMinorAxis: 1.0,
   });
   var scratchOptions = {
-    center: new Cartesian2.Cartesian3(),
+    center: new Matrix2.Cartesian3(),
     radius: undefined,
-    ellipsoid: Cartesian2.Ellipsoid.clone(Cartesian2.Ellipsoid.UNIT_SPHERE),
+    ellipsoid: Matrix2.Ellipsoid.clone(Matrix2.Ellipsoid.UNIT_SPHERE),
     height: undefined,
     extrudedHeight: undefined,
     granularity: undefined,
@@ -131,11 +131,11 @@ define(['./Cartesian2-80d920df', './Check-be2d5acb', './when-ad3237a0', './Ellip
       startingIndex,
       scratchEllipseGeometry
     );
-    scratchOptions.center = Cartesian2.Cartesian3.clone(
+    scratchOptions.center = Matrix2.Cartesian3.clone(
       ellipseGeometry._center,
       scratchOptions.center
     );
-    scratchOptions.ellipsoid = Cartesian2.Ellipsoid.clone(
+    scratchOptions.ellipsoid = Matrix2.Ellipsoid.clone(
       ellipseGeometry._ellipsoid,
       scratchOptions.ellipsoid
     );
@@ -169,10 +169,10 @@ define(['./Cartesian2-80d920df', './Check-be2d5acb', './when-ad3237a0', './Ellip
     if (when.defined(offset)) {
       circleGeometry = CircleOutlineGeometry.unpack(circleGeometry, offset);
     }
-    circleGeometry._ellipseGeometry._center = Cartesian2.Cartesian3.clone(
+    circleGeometry._ellipseGeometry._center = Matrix2.Cartesian3.clone(
       circleGeometry._ellipseGeometry._center
     );
-    circleGeometry._ellipseGeometry._ellipsoid = Cartesian2.Ellipsoid.clone(
+    circleGeometry._ellipseGeometry._ellipsoid = Matrix2.Ellipsoid.clone(
       circleGeometry._ellipseGeometry._ellipsoid
     );
     return CircleOutlineGeometry.createGeometry(circleGeometry);

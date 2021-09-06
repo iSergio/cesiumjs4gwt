@@ -16,6 +16,7 @@
 
 package org.cesiumjs.cs.core.interpolation;
 
+import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -147,4 +148,7 @@ public class HermitePolynomialApproximation implements InterpolationAlgorithm {
     @JsMethod(namespace = "Cesium.HermitePolynomialApproximation")
     public static native double[] interpolateOrderZero(double x, double[] xTable, double[] yTable, double yStride,
                                                        double[] result);
+
+    @JsConstructor
+    private HermitePolynomialApproximation() {}
 }
