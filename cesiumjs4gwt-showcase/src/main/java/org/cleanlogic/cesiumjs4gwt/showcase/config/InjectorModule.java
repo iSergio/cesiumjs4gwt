@@ -114,7 +114,9 @@ public class InjectorModule extends AbstractGinModule {
         bind(ArcGISTiledElevationTerrain.class).asEagerSingleton();
         bind(CZMLModelArticulations.class).asEagerSingleton();
         bind(ElevationBandMaterial.class).asEagerSingleton();
-
         bind(ProceduralTerrain.class).asEagerSingleton();
+
+        bind(Clouds.class).asEagerSingleton();
+        bind(CloudParameters.class).asEagerSingleton();
     }
 }

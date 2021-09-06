@@ -549,7 +549,7 @@ public class Math {
      * twister.
      *
      * @return A random number in the range of [0.0, 1.0).
-     * @see #setRandomNumberSeed(int)
+     * @see #setRandomNumberSeed(double)
      * @see <a href="http://en.wikipedia.org/wiki/Mersenne_twister">Mersenne twister
      * on Wikipedia</a>
      */
@@ -597,7 +597,7 @@ public class Math {
      * @param seed An integer used as the seed.
      */
     @JsMethod
-    public static native void setRandomNumberSeed(int seed);
+    public static native void setRandomNumberSeed(double seed);
 
     /**
      * Returns the sign of the value; 1 if the value is positive, -1 if the value is

@@ -6,7 +6,7 @@
     <parent>
         <artifactId>cesiumjs4gwt</artifactId>
         <groupId>org.cesiumjs</groupId>
-        <version>1.84</version>
+        <version>1.85</version>
     </parent>
 
     <name>CesiumJS GWT Showcase</name>
@@ -74,6 +74,21 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.1</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                        </manifest>
+                        <manifestEntries>
+                            <Build-Time>${maven.build.timestamp}</Build-Time>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
             </plugin>
         </plugins>
     </build>

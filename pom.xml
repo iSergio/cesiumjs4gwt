@@ -7,7 +7,7 @@
     <groupId>org.cesiumjs</groupId>
     <artifactId>cesiumjs4gwt</artifactId>
     <packaging>pom</packaging>
-    <version>1.84</version>
+    <version>1.85</version>
     <name>CesiumJS GWT Framework</name>
 
     <properties>
@@ -82,7 +82,6 @@
     <modules>
         <module>cesiumjs4gwt-main</module>
         <module>cesiumjs4gwt-showcase</module>
-        <!--<module>cesiumjs4gwt-vaadin</module>-->
     </modules>
 
 </project>

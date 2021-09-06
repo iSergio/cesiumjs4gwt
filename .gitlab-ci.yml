@@ -16,7 +16,7 @@ cache:
 stages:
   - init
   - build
-  - test
+#  - test
   - package
   - deploy
 
@@ -50,10 +50,10 @@ compile:cesiumjs4gwt-showcase:
   script:
     - mvn $MAVEN_CLI_OPTS -pl cesiumjs4gwt-showcase -DskipTests=true compile -am -DskipTests=true
 
-test:cesiumjs4gwt-main:
-  stage: test
-  script:
-    - mvn $MAVEN_CLI_OPTS -pl cesiumjs4gwt-main test
+#test:cesiumjs4gwt-main:
+#  stage: test
+#  script:
+#    - mvn $MAVEN_CLI_OPTS -pl cesiumjs4gwt-main test
 
 package:cesiumjs4gwt-main:
   stage: package

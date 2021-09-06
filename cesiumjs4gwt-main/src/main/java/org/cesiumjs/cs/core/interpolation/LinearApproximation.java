@@ -16,6 +16,7 @@
 
 package org.cesiumjs.cs.core.interpolation;
 
+import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -85,4 +86,7 @@ public class LinearApproximation implements InterpolationAlgorithm {
     @JsMethod(namespace = "Cesium.LinearApproximation")
     public static native double[] interpolateOrderZero(double x, double[] xTable, double[] yTable, double yStride,
                                                        double[] result);
+
+    @JsConstructor
+    private LinearApproximation() {}
 }

@@ -28,6 +28,11 @@ public class BingMapsGeocoderServiceOptions {
      */
     @JsProperty
     public String key;
+    /**
+     * A Bing Maps Culture Code to return results in a specific culture and language.
+     */
+    @JsProperty
+    public String culture;
 
     /**
      * Options for {@link org.cesiumjs.cs.core.BingMapsGeocoderService}

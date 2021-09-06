@@ -16,11 +16,8 @@
 
 package org.cleanlogic.cesiumjs4gwt.showcase.examples;
 
-import javax.inject.Inject;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.HTML;
-
 import org.cesiumjs.cs.core.BoundingSphere;
 import org.cesiumjs.cs.core.Matrix4;
 import org.cesiumjs.cs.promise.Fulfill;
@@ -29,6 +26,8 @@ import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cesiumjs.cs.widgets.viewerCesium3DTilesInspectorMixin;
 import org.cleanlogic.cesiumjs4gwt.showcase.basic.AbstractExample;
 import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ShowcaseExampleStore;
+
+import javax.inject.Inject;
 
 /**
  * @author Serge Silaev aka iSergio

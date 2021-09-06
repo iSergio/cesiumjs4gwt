@@ -16,8 +16,8 @@
 
 package org.cesiumjs.cs.widgets;
 
+import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsType;
-import net.sourceforge.htmlunit.corejs.javascript.annotations.JSConstructor;
 import org.cesiumjs.cs.widgets.options.ToggleButtonViewModelOptions;
 
 /**
@@ -48,7 +48,7 @@ public class ToggleButtonViewModel {
      *
      * @param command The command which will be executed when the button is toggled.
      */
-    @JSConstructor
+    @JsConstructor
     public ToggleButtonViewModel(Command command) {
     }
 
@@ -58,7 +58,7 @@ public class ToggleButtonViewModel {
      * @param command The command which will be executed when the button is toggled.
      * @param options options object
      */
-    @JSConstructor
+    @JsConstructor
     public ToggleButtonViewModel(Command command, ToggleButtonViewModelOptions options) {
     }
 }

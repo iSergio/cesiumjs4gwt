@@ -16,10 +16,10 @@
 
 package org.cesiumjs.cs.core.options;
 
+import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import net.sourceforge.htmlunit.corejs.javascript.annotations.JSConstructor;
 import org.cesiumjs.cs.core.Resource;
 
 /**
@@ -49,7 +49,7 @@ public class FromAssetIdOptions {
     @JsProperty(name = "server")
     public Resource serverResource;
 
-    @JSConstructor
+    @JsConstructor
     public FromAssetIdOptions() {
     }
 }

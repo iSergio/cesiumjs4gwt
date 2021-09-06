@@ -16,12 +16,9 @@
 
 package org.cleanlogic.cesiumjs4gwt.showcase.examples;
 
-import javax.inject.Inject;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.HTML;
-
 import org.cesiumjs.cs.collections.ImageryLayerCollection;
 import org.cesiumjs.cs.core.Credit;
 import org.cesiumjs.cs.scene.ImageryLayer;
@@ -36,6 +33,8 @@ import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ShowcaseExampleStor
 import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.Slider;
 import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderEvent;
 import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderListener;
+
+import javax.inject.Inject;
 
 /**
  * @author Serge Silaev aka iSergio
