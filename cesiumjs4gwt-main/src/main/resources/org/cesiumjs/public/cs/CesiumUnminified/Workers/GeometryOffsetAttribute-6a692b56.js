@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './RuntimeError-346a3079', './when-4bbc8319'], function (exports, RuntimeError, when) { 'use strict';
+define(['exports', './RuntimeError-346a3079', './when-4bbc8319'], (function (exports, RuntimeError, when) { 'use strict';
 
   /**
    * Fill an array or a portion of an array with a given value.
@@ -86,5 +86,5 @@ define(['exports', './RuntimeError-346a3079', './when-4bbc8319'], function (expo
   exports.GeometryOffsetAttribute = GeometryOffsetAttribute$1;
   exports.arrayFill = arrayFill;
 
-});
+}));
 //# sourceMappingURL=GeometryOffsetAttribute-6a692b56.js.map

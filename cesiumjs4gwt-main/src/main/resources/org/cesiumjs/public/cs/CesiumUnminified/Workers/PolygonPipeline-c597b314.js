@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './ComponentDatatype-f194c48b', './when-4bbc8319', './EllipsoidRhumbLine-1bebfad1', './GeometryAttribute-900e07ee', './WebGLConstants-1c8239cc'], function (exports, Matrix2, RuntimeError, ComponentDatatype, when, EllipsoidRhumbLine, GeometryAttribute, WebGLConstants) { 'use strict';
+define(['exports', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './ComponentDatatype-f194c48b', './when-4bbc8319', './EllipsoidRhumbLine-1bebfad1', './GeometryAttribute-900e07ee', './WebGLConstants-1c8239cc'], (function (exports, Matrix2, RuntimeError, ComponentDatatype, when, EllipsoidRhumbLine, GeometryAttribute, WebGLConstants) { 'use strict';
 
     /* This file is automatically rebuilt by the Cesium build process. */
     var earcut_1 = earcut;
@@ -1239,5 +1239,5 @@ define(['exports', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './Component
     exports.PolygonPipeline = PolygonPipeline;
     exports.WindingOrder = WindingOrder$1;
 
-});
+}));
 //# sourceMappingURL=PolygonPipeline-c597b314.js.map

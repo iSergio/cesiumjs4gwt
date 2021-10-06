@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./when-4bbc8319', './Transforms-b4151f9c', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './ComponentDatatype-f194c48b', './FrustumGeometry-e0b4fd58', './GeometryAttribute-900e07ee', './GeometryAttributes-7827a6c2', './combine-83860057', './WebGLConstants-1c8239cc', './Plane-87991fdc', './VertexFormat-f9c1a155'], function (when, Transforms, Matrix2, RuntimeError, ComponentDatatype, FrustumGeometry, GeometryAttribute, GeometryAttributes, combine, WebGLConstants, Plane, VertexFormat) { 'use strict';
+define(['./when-4bbc8319', './Transforms-b4151f9c', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './ComponentDatatype-f194c48b', './FrustumGeometry-e0b4fd58', './GeometryAttribute-900e07ee', './GeometryAttributes-7827a6c2', './combine-83860057', './WebGLConstants-1c8239cc', './Plane-87991fdc', './VertexFormat-f9c1a155'], (function (when, Transforms, Matrix2, RuntimeError, ComponentDatatype, FrustumGeometry, GeometryAttribute, GeometryAttributes, combine, WebGLConstants, Plane, VertexFormat) { 'use strict';
 
   var PERSPECTIVE = 0;
   var ORTHOGRAPHIC = 1;
@@ -271,5 +271,5 @@ define(['./when-4bbc8319', './Transforms-b4151f9c', './Matrix2-32d4a9a0', './Run
 
   return createFrustumOutlineGeometry;
 
-});
+}));
 //# sourceMappingURL=createFrustumOutlineGeometry.js.map

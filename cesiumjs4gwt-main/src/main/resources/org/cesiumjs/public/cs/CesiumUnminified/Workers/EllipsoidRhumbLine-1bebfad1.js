@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './when-4bbc8319', './ComponentDatatype-f194c48b'], function (exports, Matrix2, RuntimeError, when, ComponentDatatype) { 'use strict';
+define(['exports', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './when-4bbc8319', './ComponentDatatype-f194c48b'], (function (exports, Matrix2, RuntimeError, when, ComponentDatatype) { 'use strict';
 
   function calculateM(ellipticity, major, latitude) {
     if (ellipticity === 0.0) {
@@ -750,5 +750,5 @@ define(['exports', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './when-4bbc
 
   exports.EllipsoidRhumbLine = EllipsoidRhumbLine;
 
-});
+}));
 //# sourceMappingURL=EllipsoidRhumbLine-1bebfad1.js.map

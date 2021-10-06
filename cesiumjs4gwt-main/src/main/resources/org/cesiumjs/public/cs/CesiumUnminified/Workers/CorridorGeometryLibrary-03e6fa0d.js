@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './Matrix2-32d4a9a0', './PolylineVolumeGeometryLibrary-5052702f', './when-4bbc8319', './ComponentDatatype-f194c48b', './PolylinePipeline-4b4963b2', './Transforms-b4151f9c'], function (exports, Matrix2, PolylineVolumeGeometryLibrary, when, ComponentDatatype, PolylinePipeline, Transforms) { 'use strict';
+define(['exports', './Matrix2-32d4a9a0', './PolylineVolumeGeometryLibrary-5052702f', './when-4bbc8319', './ComponentDatatype-f194c48b', './PolylinePipeline-4b4963b2', './Transforms-b4151f9c'], (function (exports, Matrix2, PolylineVolumeGeometryLibrary, when, ComponentDatatype, PolylinePipeline, Transforms) { 'use strict';
 
   /**
    * @private
@@ -517,5 +517,5 @@ define(['exports', './Matrix2-32d4a9a0', './PolylineVolumeGeometryLibrary-505270
 
   exports.CorridorGeometryLibrary = CorridorGeometryLibrary;
 
-});
+}));
 //# sourceMappingURL=CorridorGeometryLibrary-03e6fa0d.js.map

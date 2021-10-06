@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './when-4bbc8319', './WebGLConstants-1c8239cc', './Transforms-b4151f9c'], function (exports, Matrix2, RuntimeError, when, WebGLConstants, Transforms) { 'use strict';
+define(['exports', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './when-4bbc8319', './WebGLConstants-1c8239cc', './Transforms-b4151f9c'], (function (exports, Matrix2, RuntimeError, when, WebGLConstants, Transforms) { 'use strict';
 
   /**
    * @private
@@ -614,5 +614,5 @@ define(['exports', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './when-4bbc
   exports.GeometryType = GeometryType$1;
   exports.PrimitiveType = PrimitiveType$1;
 
-});
+}));
 //# sourceMappingURL=GeometryAttribute-900e07ee.js.map

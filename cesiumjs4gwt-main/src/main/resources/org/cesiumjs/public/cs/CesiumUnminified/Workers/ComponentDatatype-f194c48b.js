@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './RuntimeError-346a3079', './when-4bbc8319', './WebGLConstants-1c8239cc'], function (exports, RuntimeError, when, WebGLConstants) { 'use strict';
+define(['exports', './RuntimeError-346a3079', './when-4bbc8319', './WebGLConstants-1c8239cc'], (function (exports, RuntimeError, when, WebGLConstants) { 'use strict';
 
 	/* This file is automatically rebuilt by the Cesium build process. */
 	/*
@@ -1687,5 +1687,5 @@ define(['exports', './RuntimeError-346a3079', './when-4bbc8319', './WebGLConstan
 	exports.CesiumMath = CesiumMath;
 	exports.ComponentDatatype = ComponentDatatype$1;
 
-});
+}));
 //# sourceMappingURL=ComponentDatatype-f194c48b.js.map

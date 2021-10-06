@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./when-4bbc8319', './Matrix2-32d4a9a0', './GeometryOffsetAttribute-6a692b56', './Transforms-b4151f9c', './RuntimeError-346a3079', './ComponentDatatype-f194c48b', './GeometryAttribute-900e07ee', './GeometryAttributes-7827a6c2', './GeometryInstance-33236890', './GeometryPipeline-2b535815', './IndexDatatype-ee69f1fd', './PolygonPipeline-c597b314', './RectangleGeometryLibrary-918f7ce4', './VertexFormat-f9c1a155', './combine-83860057', './WebGLConstants-1c8239cc', './AttributeCompression-0091b79f', './EncodedCartesian3-2c726105', './IntersectionTests-4c2a8ace', './Plane-87991fdc', './EllipsoidRhumbLine-1bebfad1'], function (when, Matrix2, GeometryOffsetAttribute, Transforms, RuntimeError, ComponentDatatype, GeometryAttribute, GeometryAttributes, GeometryInstance, GeometryPipeline, IndexDatatype, PolygonPipeline, RectangleGeometryLibrary, VertexFormat, combine, WebGLConstants, AttributeCompression, EncodedCartesian3, IntersectionTests, Plane, EllipsoidRhumbLine) { 'use strict';
+define(['./when-4bbc8319', './Matrix2-32d4a9a0', './GeometryOffsetAttribute-6a692b56', './Transforms-b4151f9c', './RuntimeError-346a3079', './ComponentDatatype-f194c48b', './GeometryAttribute-900e07ee', './GeometryAttributes-7827a6c2', './GeometryInstance-33236890', './GeometryPipeline-2b535815', './IndexDatatype-ee69f1fd', './PolygonPipeline-c597b314', './RectangleGeometryLibrary-918f7ce4', './VertexFormat-f9c1a155', './combine-83860057', './WebGLConstants-1c8239cc', './AttributeCompression-0091b79f', './EncodedCartesian3-2c726105', './IntersectionTests-4c2a8ace', './Plane-87991fdc', './EllipsoidRhumbLine-1bebfad1'], (function (when, Matrix2, GeometryOffsetAttribute, Transforms, RuntimeError, ComponentDatatype, GeometryAttribute, GeometryAttributes, GeometryInstance, GeometryPipeline, IndexDatatype, PolygonPipeline, RectangleGeometryLibrary, VertexFormat, combine, WebGLConstants, AttributeCompression, EncodedCartesian3, IntersectionTests, Plane, EllipsoidRhumbLine) { 'use strict';
 
   var positionScratch = new Matrix2.Cartesian3();
   var normalScratch = new Matrix2.Cartesian3();
@@ -1491,5 +1491,5 @@ define(['./when-4bbc8319', './Matrix2-32d4a9a0', './GeometryOffsetAttribute-6a69
 
   return createRectangleGeometry;
 
-});
+}));
 //# sourceMappingURL=createRectangleGeometry.js.map

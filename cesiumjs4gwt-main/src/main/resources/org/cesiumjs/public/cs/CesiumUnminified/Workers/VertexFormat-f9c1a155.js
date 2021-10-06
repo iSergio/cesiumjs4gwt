@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './when-4bbc8319', './RuntimeError-346a3079'], function (exports, when, RuntimeError) { 'use strict';
+define(['exports', './when-4bbc8319', './RuntimeError-346a3079'], (function (exports, when, RuntimeError) { 'use strict';
 
   /**
    * A vertex format defines what attributes make up a vertex.  A VertexFormat can be provided
@@ -332,5 +332,5 @@ define(['exports', './when-4bbc8319', './RuntimeError-346a3079'], function (expo
 
   exports.VertexFormat = VertexFormat;
 
-});
+}));
 //# sourceMappingURL=VertexFormat-f9c1a155.js.map

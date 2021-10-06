@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './OrientedBoundingBox-605888ab'], function (exports, Matrix2, RuntimeError, OrientedBoundingBox) { 'use strict';
+define(['exports', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './OrientedBoundingBox-605888ab'], (function (exports, Matrix2, RuntimeError, OrientedBoundingBox) { 'use strict';
 
   /**
    * @private
@@ -151,5 +151,5 @@ define(['exports', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './OrientedB
 
   exports.CoplanarPolygonGeometryLibrary = CoplanarPolygonGeometryLibrary;
 
-});
+}));
 //# sourceMappingURL=CoplanarPolygonGeometryLibrary-f7a6152e.js.map

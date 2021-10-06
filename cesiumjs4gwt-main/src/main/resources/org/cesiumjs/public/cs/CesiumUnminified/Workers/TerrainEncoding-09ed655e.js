@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './Transforms-b4151f9c', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './when-4bbc8319', './AttributeCompression-0091b79f', './ComponentDatatype-f194c48b'], function (exports, Transforms, Matrix2, RuntimeError, when, AttributeCompression, ComponentDatatype) { 'use strict';
+define(['exports', './Transforms-b4151f9c', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './when-4bbc8319', './AttributeCompression-0091b79f', './ComponentDatatype-f194c48b'], (function (exports, Transforms, Matrix2, RuntimeError, when, AttributeCompression, ComponentDatatype) { 'use strict';
 
   /**
    * Determine whether or not other objects are visible or hidden behind the visible horizon defined by
@@ -1245,5 +1245,5 @@ define(['exports', './Transforms-b4151f9c', './Matrix2-32d4a9a0', './RuntimeErro
   exports.EllipsoidalOccluder = EllipsoidalOccluder;
   exports.TerrainEncoding = TerrainEncoding;
 
-});
+}));
 //# sourceMappingURL=TerrainEncoding-09ed655e.js.map

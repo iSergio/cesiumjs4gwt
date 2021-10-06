@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './Matrix2-32d4a9a0', './EllipsoidTangentPlane-9edb4c29', './ComponentDatatype-f194c48b', './PolylinePipeline-4b4963b2', './Transforms-b4151f9c', './when-4bbc8319', './RuntimeError-346a3079'], function (exports, Matrix2, EllipsoidTangentPlane, ComponentDatatype, PolylinePipeline, Transforms, when, RuntimeError) { 'use strict';
+define(['exports', './Matrix2-32d4a9a0', './EllipsoidTangentPlane-9edb4c29', './ComponentDatatype-f194c48b', './PolylinePipeline-4b4963b2', './Transforms-b4151f9c', './when-4bbc8319', './RuntimeError-346a3079'], (function (exports, Matrix2, EllipsoidTangentPlane, ComponentDatatype, PolylinePipeline, Transforms, when, RuntimeError) { 'use strict';
 
   /**
    * Style options for corners.
@@ -800,5 +800,5 @@ define(['exports', './Matrix2-32d4a9a0', './EllipsoidTangentPlane-9edb4c29', './
   exports.PolylineVolumeGeometryLibrary = PolylineVolumeGeometryLibrary;
   exports.oneTimeWarning = oneTimeWarning;
 
-});
+}));
 //# sourceMappingURL=PolylineVolumeGeometryLibrary-5052702f.js.map

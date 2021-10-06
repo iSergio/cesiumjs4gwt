@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./GeometryOffsetAttribute-6a692b56', './arrayRemoveDuplicates-cf5c3227', './Transforms-b4151f9c', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './ComponentDatatype-f194c48b', './PolylineVolumeGeometryLibrary-5052702f', './CorridorGeometryLibrary-03e6fa0d', './when-4bbc8319', './GeometryAttribute-900e07ee', './GeometryAttributes-7827a6c2', './IndexDatatype-ee69f1fd', './PolygonPipeline-c597b314', './VertexFormat-f9c1a155', './combine-83860057', './WebGLConstants-1c8239cc', './EllipsoidTangentPlane-9edb4c29', './AxisAlignedBoundingBox-5fa363ce', './IntersectionTests-4c2a8ace', './Plane-87991fdc', './PolylinePipeline-4b4963b2', './EllipsoidGeodesic-c3b968c7', './EllipsoidRhumbLine-1bebfad1'], function (GeometryOffsetAttribute, arrayRemoveDuplicates, Transforms, Matrix2, RuntimeError, ComponentDatatype, PolylineVolumeGeometryLibrary, CorridorGeometryLibrary, when, GeometryAttribute, GeometryAttributes, IndexDatatype, PolygonPipeline, VertexFormat, combine$1, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane, PolylinePipeline, EllipsoidGeodesic, EllipsoidRhumbLine) { 'use strict';
+define(['./GeometryOffsetAttribute-6a692b56', './arrayRemoveDuplicates-cf5c3227', './Transforms-b4151f9c', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './ComponentDatatype-f194c48b', './PolylineVolumeGeometryLibrary-5052702f', './CorridorGeometryLibrary-03e6fa0d', './when-4bbc8319', './GeometryAttribute-900e07ee', './GeometryAttributes-7827a6c2', './IndexDatatype-ee69f1fd', './PolygonPipeline-c597b314', './VertexFormat-f9c1a155', './combine-83860057', './WebGLConstants-1c8239cc', './EllipsoidTangentPlane-9edb4c29', './AxisAlignedBoundingBox-5fa363ce', './IntersectionTests-4c2a8ace', './Plane-87991fdc', './PolylinePipeline-4b4963b2', './EllipsoidGeodesic-c3b968c7', './EllipsoidRhumbLine-1bebfad1'], (function (GeometryOffsetAttribute, arrayRemoveDuplicates, Transforms, Matrix2, RuntimeError, ComponentDatatype, PolylineVolumeGeometryLibrary, CorridorGeometryLibrary, when, GeometryAttribute, GeometryAttributes, IndexDatatype, PolygonPipeline, VertexFormat, combine$1, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane, PolylinePipeline, EllipsoidGeodesic, EllipsoidRhumbLine) { 'use strict';
 
   var cartesian1 = new Matrix2.Cartesian3();
   var cartesian2 = new Matrix2.Cartesian3();
@@ -1417,5 +1417,5 @@ define(['./GeometryOffsetAttribute-6a692b56', './arrayRemoveDuplicates-cf5c3227'
 
   return createCorridorGeometry;
 
-});
+}));
 //# sourceMappingURL=createCorridorGeometry.js.map

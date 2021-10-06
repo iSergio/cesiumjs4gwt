@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./when-4bbc8319', './RuntimeError-346a3079', './WebGLConstants-1c8239cc', './createTaskProcessorWorker'], function (when, RuntimeError, WebGLConstants, createTaskProcessorWorker) { 'use strict';
+define(['./when-4bbc8319', './RuntimeError-346a3079', './WebGLConstants-1c8239cc', './createTaskProcessorWorker'], (function (when, RuntimeError, WebGLConstants, createTaskProcessorWorker) { 'use strict';
 
   /**
    * The data type of a pixel.
@@ -1211,5 +1211,5 @@ define(['./when-4bbc8319', './RuntimeError-346a3079', './WebGLConstants-1c8239cc
 
   return transcodeKTX2;
 
-});
+}));
 //# sourceMappingURL=transcodeKTX2.js.map

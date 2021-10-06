@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './GeometryOffsetAttribute-6a692b56', './Transforms-b4151f9c', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './ComponentDatatype-f194c48b', './when-4bbc8319', './EllipseGeometryLibrary-20e51de1', './GeometryAttribute-900e07ee', './GeometryAttributes-7827a6c2', './GeometryInstance-33236890', './GeometryPipeline-2b535815', './IndexDatatype-ee69f1fd', './VertexFormat-f9c1a155'], function (exports, GeometryOffsetAttribute, Transforms, Matrix2, RuntimeError, ComponentDatatype, when, EllipseGeometryLibrary, GeometryAttribute, GeometryAttributes, GeometryInstance, GeometryPipeline, IndexDatatype, VertexFormat) { 'use strict';
+define(['exports', './GeometryOffsetAttribute-6a692b56', './Transforms-b4151f9c', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './ComponentDatatype-f194c48b', './when-4bbc8319', './EllipseGeometryLibrary-20e51de1', './GeometryAttribute-900e07ee', './GeometryAttributes-7827a6c2', './GeometryInstance-33236890', './GeometryPipeline-2b535815', './IndexDatatype-ee69f1fd', './VertexFormat-f9c1a155'], (function (exports, GeometryOffsetAttribute, Transforms, Matrix2, RuntimeError, ComponentDatatype, when, EllipseGeometryLibrary, GeometryAttribute, GeometryAttributes, GeometryInstance, GeometryPipeline, IndexDatatype, VertexFormat) { 'use strict';
 
   var scratchCartesian1 = new Matrix2.Cartesian3();
   var scratchCartesian2 = new Matrix2.Cartesian3();
@@ -1317,5 +1317,5 @@ define(['exports', './GeometryOffsetAttribute-6a692b56', './Transforms-b4151f9c'
 
   exports.EllipseGeometry = EllipseGeometry;
 
-});
+}));
 //# sourceMappingURL=EllipseGeometry-e89c21ae.js.map

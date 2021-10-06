@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './Matrix2-32d4a9a0', './when-4bbc8319', './RuntimeError-346a3079', './ComponentDatatype-f194c48b'], function (exports, Matrix2, when, RuntimeError, ComponentDatatype) { 'use strict';
+define(['exports', './Matrix2-32d4a9a0', './when-4bbc8319', './RuntimeError-346a3079', './ComponentDatatype-f194c48b'], (function (exports, Matrix2, when, RuntimeError, ComponentDatatype) { 'use strict';
 
   /**
    * The map projection used by Google Maps, Bing Maps, and most of ArcGIS Online, EPSG:3857.  This
@@ -171,5 +171,5 @@ define(['exports', './Matrix2-32d4a9a0', './when-4bbc8319', './RuntimeError-346a
 
   exports.WebMercatorProjection = WebMercatorProjection;
 
-});
+}));
 //# sourceMappingURL=WebMercatorProjection-8ae73407.js.map

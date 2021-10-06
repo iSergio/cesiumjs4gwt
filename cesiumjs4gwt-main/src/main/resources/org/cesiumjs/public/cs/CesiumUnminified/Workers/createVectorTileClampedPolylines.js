@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./AttributeCompression-0091b79f', './Matrix2-32d4a9a0', './combine-83860057', './IndexDatatype-ee69f1fd', './ComponentDatatype-f194c48b', './createTaskProcessorWorker', './RuntimeError-346a3079', './when-4bbc8319', './WebGLConstants-1c8239cc'], function (AttributeCompression, Matrix2, combine, IndexDatatype, ComponentDatatype, createTaskProcessorWorker, RuntimeError, when, WebGLConstants) { 'use strict';
+define(['./AttributeCompression-0091b79f', './Matrix2-32d4a9a0', './combine-83860057', './IndexDatatype-ee69f1fd', './ComponentDatatype-f194c48b', './createTaskProcessorWorker', './RuntimeError-346a3079', './when-4bbc8319', './WebGLConstants-1c8239cc'], (function (AttributeCompression, Matrix2, combine, IndexDatatype, ComponentDatatype, createTaskProcessorWorker, RuntimeError, when, WebGLConstants) { 'use strict';
 
   var MAX_SHORT = 32767;
   var MITER_BREAK = Math.cos(ComponentDatatype.CesiumMath.toRadians(150.0));
@@ -548,5 +548,5 @@ define(['./AttributeCompression-0091b79f', './Matrix2-32d4a9a0', './combine-8386
 
   return createVectorTileClampedPolylines$1;
 
-});
+}));
 //# sourceMappingURL=createVectorTileClampedPolylines.js.map

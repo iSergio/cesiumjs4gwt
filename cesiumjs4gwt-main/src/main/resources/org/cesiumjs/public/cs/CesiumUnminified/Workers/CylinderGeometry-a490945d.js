@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './GeometryOffsetAttribute-6a692b56', './Transforms-b4151f9c', './Matrix2-32d4a9a0', './ComponentDatatype-f194c48b', './CylinderGeometryLibrary-c09ae083', './when-4bbc8319', './RuntimeError-346a3079', './GeometryAttribute-900e07ee', './GeometryAttributes-7827a6c2', './IndexDatatype-ee69f1fd', './VertexFormat-f9c1a155'], function (exports, GeometryOffsetAttribute, Transforms, Matrix2, ComponentDatatype, CylinderGeometryLibrary, when, RuntimeError, GeometryAttribute, GeometryAttributes, IndexDatatype, VertexFormat) { 'use strict';
+define(['exports', './GeometryOffsetAttribute-6a692b56', './Transforms-b4151f9c', './Matrix2-32d4a9a0', './ComponentDatatype-f194c48b', './CylinderGeometryLibrary-c09ae083', './when-4bbc8319', './RuntimeError-346a3079', './GeometryAttribute-900e07ee', './GeometryAttributes-7827a6c2', './IndexDatatype-ee69f1fd', './VertexFormat-f9c1a155'], (function (exports, GeometryOffsetAttribute, Transforms, Matrix2, ComponentDatatype, CylinderGeometryLibrary, when, RuntimeError, GeometryAttribute, GeometryAttributes, IndexDatatype, VertexFormat) { 'use strict';
 
   var radiusScratch = new Matrix2.Cartesian2();
   var normalScratch = new Matrix2.Cartesian3();
@@ -488,5 +488,5 @@ define(['exports', './GeometryOffsetAttribute-6a692b56', './Transforms-b4151f9c'
 
   exports.CylinderGeometry = CylinderGeometry;
 
-});
+}));
 //# sourceMappingURL=CylinderGeometry-a490945d.js.map

@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports'], function (exports) { 'use strict';
+define(['exports'], (function (exports) { 'use strict';
 
   /**
    * Enum containing WebGL Constant values by name.
@@ -640,5 +640,5 @@ define(['exports'], function (exports) { 'use strict';
 
   exports.WebGLConstants = WebGLConstants$1;
 
-});
+}));
 //# sourceMappingURL=WebGLConstants-1c8239cc.js.map
