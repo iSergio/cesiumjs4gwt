@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './Matrix2-32d4a9a0', './when-4bbc8319', './RuntimeError-346a3079', './EllipsoidGeodesic-c3b968c7', './EllipsoidRhumbLine-1bebfad1', './IntersectionTests-4c2a8ace', './ComponentDatatype-f194c48b', './Plane-87991fdc'], function (exports, Matrix2, when, RuntimeError, EllipsoidGeodesic, EllipsoidRhumbLine, IntersectionTests, ComponentDatatype, Plane) { 'use strict';
+define(['exports', './Matrix2-32d4a9a0', './when-4bbc8319', './RuntimeError-346a3079', './EllipsoidGeodesic-c3b968c7', './EllipsoidRhumbLine-1bebfad1', './IntersectionTests-4c2a8ace', './ComponentDatatype-f194c48b', './Plane-87991fdc'], (function (exports, Matrix2, when, RuntimeError, EllipsoidGeodesic, EllipsoidRhumbLine, IntersectionTests, ComponentDatatype, Plane) { 'use strict';
 
   /**
    * @private
@@ -583,5 +583,5 @@ define(['exports', './Matrix2-32d4a9a0', './when-4bbc8319', './RuntimeError-346a
 
   exports.PolylinePipeline = PolylinePipeline;
 
-});
+}));
 //# sourceMappingURL=PolylinePipeline-4b4963b2.js.map

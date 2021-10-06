@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './GeometryOffsetAttribute-6a692b56', './Transforms-b4151f9c', './Matrix2-32d4a9a0', './ComponentDatatype-f194c48b', './when-4bbc8319', './RuntimeError-346a3079', './GeometryAttribute-900e07ee', './GeometryAttributes-7827a6c2', './IndexDatatype-ee69f1fd'], function (exports, GeometryOffsetAttribute, Transforms, Matrix2, ComponentDatatype, when, RuntimeError, GeometryAttribute, GeometryAttributes, IndexDatatype) { 'use strict';
+define(['exports', './GeometryOffsetAttribute-6a692b56', './Transforms-b4151f9c', './Matrix2-32d4a9a0', './ComponentDatatype-f194c48b', './when-4bbc8319', './RuntimeError-346a3079', './GeometryAttribute-900e07ee', './GeometryAttributes-7827a6c2', './IndexDatatype-ee69f1fd'], (function (exports, GeometryOffsetAttribute, Transforms, Matrix2, ComponentDatatype, when, RuntimeError, GeometryAttribute, GeometryAttributes, IndexDatatype) { 'use strict';
 
   var defaultRadii = new Matrix2.Cartesian3(1.0, 1.0, 1.0);
   var cos = Math.cos;
@@ -475,5 +475,5 @@ define(['exports', './GeometryOffsetAttribute-6a692b56', './Transforms-b4151f9c'
 
   exports.EllipsoidOutlineGeometry = EllipsoidOutlineGeometry;
 
-});
+}));
 //# sourceMappingURL=EllipsoidOutlineGeometry-cf8614b1.js.map

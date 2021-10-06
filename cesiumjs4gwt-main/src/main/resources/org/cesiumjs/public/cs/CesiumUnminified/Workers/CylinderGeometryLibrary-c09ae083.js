@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './ComponentDatatype-f194c48b'], function (exports, ComponentDatatype) { 'use strict';
+define(['exports', './ComponentDatatype-f194c48b'], (function (exports, ComponentDatatype) { 'use strict';
 
   /**
    * @private
@@ -82,5 +82,5 @@ define(['exports', './ComponentDatatype-f194c48b'], function (exports, Component
 
   exports.CylinderGeometryLibrary = CylinderGeometryLibrary;
 
-});
+}));
 //# sourceMappingURL=CylinderGeometryLibrary-c09ae083.js.map

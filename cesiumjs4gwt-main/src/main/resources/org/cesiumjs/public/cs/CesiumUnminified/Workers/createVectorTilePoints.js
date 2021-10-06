@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./AttributeCompression-0091b79f', './Matrix2-32d4a9a0', './ComponentDatatype-f194c48b', './createTaskProcessorWorker', './RuntimeError-346a3079', './when-4bbc8319', './WebGLConstants-1c8239cc'], function (AttributeCompression, Matrix2, ComponentDatatype, createTaskProcessorWorker, RuntimeError, when, WebGLConstants) { 'use strict';
+define(['./AttributeCompression-0091b79f', './Matrix2-32d4a9a0', './ComponentDatatype-f194c48b', './createTaskProcessorWorker', './RuntimeError-346a3079', './when-4bbc8319', './WebGLConstants-1c8239cc'], (function (AttributeCompression, Matrix2, ComponentDatatype, createTaskProcessorWorker, RuntimeError, when, WebGLConstants) { 'use strict';
 
   var maxShort = 32767;
 
@@ -99,5 +99,5 @@ define(['./AttributeCompression-0091b79f', './Matrix2-32d4a9a0', './ComponentDat
 
   return createVectorTilePoints$1;
 
-});
+}));
 //# sourceMappingURL=createVectorTilePoints.js.map

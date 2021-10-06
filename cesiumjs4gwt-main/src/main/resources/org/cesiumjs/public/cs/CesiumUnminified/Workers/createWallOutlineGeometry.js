@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./when-4bbc8319', './Matrix2-32d4a9a0', './Transforms-b4151f9c', './ComponentDatatype-f194c48b', './RuntimeError-346a3079', './GeometryAttribute-900e07ee', './GeometryAttributes-7827a6c2', './IndexDatatype-ee69f1fd', './WallGeometryLibrary-07ec626a', './combine-83860057', './WebGLConstants-1c8239cc', './arrayRemoveDuplicates-cf5c3227', './PolylinePipeline-4b4963b2', './EllipsoidGeodesic-c3b968c7', './EllipsoidRhumbLine-1bebfad1', './IntersectionTests-4c2a8ace', './Plane-87991fdc'], function (when, Matrix2, Transforms, ComponentDatatype, RuntimeError, GeometryAttribute, GeometryAttributes, IndexDatatype, WallGeometryLibrary, combine, WebGLConstants, arrayRemoveDuplicates, PolylinePipeline, EllipsoidGeodesic, EllipsoidRhumbLine, IntersectionTests, Plane) { 'use strict';
+define(['./when-4bbc8319', './Matrix2-32d4a9a0', './Transforms-b4151f9c', './ComponentDatatype-f194c48b', './RuntimeError-346a3079', './GeometryAttribute-900e07ee', './GeometryAttributes-7827a6c2', './IndexDatatype-ee69f1fd', './WallGeometryLibrary-07ec626a', './combine-83860057', './WebGLConstants-1c8239cc', './arrayRemoveDuplicates-cf5c3227', './PolylinePipeline-4b4963b2', './EllipsoidGeodesic-c3b968c7', './EllipsoidRhumbLine-1bebfad1', './IntersectionTests-4c2a8ace', './Plane-87991fdc'], (function (when, Matrix2, Transforms, ComponentDatatype, RuntimeError, GeometryAttribute, GeometryAttributes, IndexDatatype, WallGeometryLibrary, combine, WebGLConstants, arrayRemoveDuplicates, PolylinePipeline, EllipsoidGeodesic, EllipsoidRhumbLine, IntersectionTests, Plane) { 'use strict';
 
   var scratchCartesian3Position1 = new Matrix2.Cartesian3();
   var scratchCartesian3Position2 = new Matrix2.Cartesian3();
@@ -452,5 +452,5 @@ define(['./when-4bbc8319', './Matrix2-32d4a9a0', './Transforms-b4151f9c', './Com
 
   return createWallOutlineGeometry;
 
-});
+}));
 //# sourceMappingURL=createWallOutlineGeometry.js.map

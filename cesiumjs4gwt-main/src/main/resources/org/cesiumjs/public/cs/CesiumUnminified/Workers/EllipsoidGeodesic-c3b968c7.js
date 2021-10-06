@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './when-4bbc8319', './ComponentDatatype-f194c48b'], function (exports, Matrix2, RuntimeError, when, ComponentDatatype) { 'use strict';
+define(['exports', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './when-4bbc8319', './ComponentDatatype-f194c48b'], (function (exports, Matrix2, RuntimeError, when, ComponentDatatype) { 'use strict';
 
   function setConstants(ellipsoidGeodesic) {
     var uSquared = ellipsoidGeodesic._uSquared;
@@ -537,5 +537,5 @@ define(['exports', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './when-4bbc
 
   exports.EllipsoidGeodesic = EllipsoidGeodesic;
 
-});
+}));
 //# sourceMappingURL=EllipsoidGeodesic-c3b968c7.js.map

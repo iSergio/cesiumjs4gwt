@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./when-4bbc8319', './Matrix2-32d4a9a0', './arrayRemoveDuplicates-cf5c3227', './BoundingRectangle-aa6394c1', './Transforms-b4151f9c', './ComponentDatatype-f194c48b', './PolylineVolumeGeometryLibrary-5052702f', './RuntimeError-346a3079', './GeometryAttribute-900e07ee', './GeometryAttributes-7827a6c2', './IndexDatatype-ee69f1fd', './PolygonPipeline-c597b314', './combine-83860057', './WebGLConstants-1c8239cc', './EllipsoidTangentPlane-9edb4c29', './AxisAlignedBoundingBox-5fa363ce', './IntersectionTests-4c2a8ace', './Plane-87991fdc', './PolylinePipeline-4b4963b2', './EllipsoidGeodesic-c3b968c7', './EllipsoidRhumbLine-1bebfad1'], function (when, Matrix2, arrayRemoveDuplicates, BoundingRectangle, Transforms, ComponentDatatype, PolylineVolumeGeometryLibrary, RuntimeError, GeometryAttribute, GeometryAttributes, IndexDatatype, PolygonPipeline, combine, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane, PolylinePipeline, EllipsoidGeodesic, EllipsoidRhumbLine) { 'use strict';
+define(['./when-4bbc8319', './Matrix2-32d4a9a0', './arrayRemoveDuplicates-cf5c3227', './BoundingRectangle-aa6394c1', './Transforms-b4151f9c', './ComponentDatatype-f194c48b', './PolylineVolumeGeometryLibrary-5052702f', './RuntimeError-346a3079', './GeometryAttribute-900e07ee', './GeometryAttributes-7827a6c2', './IndexDatatype-ee69f1fd', './PolygonPipeline-c597b314', './combine-83860057', './WebGLConstants-1c8239cc', './EllipsoidTangentPlane-9edb4c29', './AxisAlignedBoundingBox-5fa363ce', './IntersectionTests-4c2a8ace', './Plane-87991fdc', './PolylinePipeline-4b4963b2', './EllipsoidGeodesic-c3b968c7', './EllipsoidRhumbLine-1bebfad1'], (function (when, Matrix2, arrayRemoveDuplicates, BoundingRectangle, Transforms, ComponentDatatype, PolylineVolumeGeometryLibrary, RuntimeError, GeometryAttribute, GeometryAttributes, IndexDatatype, PolygonPipeline, combine, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane, PolylinePipeline, EllipsoidGeodesic, EllipsoidRhumbLine) { 'use strict';
 
   function computeAttributes(positions, shape) {
     var attributes = new GeometryAttributes.GeometryAttributes();
@@ -321,5 +321,5 @@ define(['./when-4bbc8319', './Matrix2-32d4a9a0', './arrayRemoveDuplicates-cf5c32
 
   return createPolylineVolumeOutlineGeometry;
 
-});
+}));
 //# sourceMappingURL=createPolylineVolumeOutlineGeometry.js.map

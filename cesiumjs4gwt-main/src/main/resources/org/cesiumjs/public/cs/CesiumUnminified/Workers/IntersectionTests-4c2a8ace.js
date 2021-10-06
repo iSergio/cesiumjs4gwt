@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './Matrix2-32d4a9a0', './when-4bbc8319', './RuntimeError-346a3079', './Transforms-b4151f9c', './ComponentDatatype-f194c48b'], function (exports, Matrix2, when, RuntimeError, Transforms, ComponentDatatype) { 'use strict';
+define(['exports', './Matrix2-32d4a9a0', './when-4bbc8319', './RuntimeError-346a3079', './Transforms-b4151f9c', './ComponentDatatype-f194c48b'], (function (exports, Matrix2, when, RuntimeError, Transforms, ComponentDatatype) { 'use strict';
 
   /**
    * Defines functions for 2nd order polynomial functions of one variable with only real coefficients.
@@ -1837,5 +1837,5 @@ define(['exports', './Matrix2-32d4a9a0', './when-4bbc8319', './RuntimeError-346a
   exports.IntersectionTests = IntersectionTests;
   exports.Ray = Ray;
 
-});
+}));
 //# sourceMappingURL=IntersectionTests-4c2a8ace.js.map

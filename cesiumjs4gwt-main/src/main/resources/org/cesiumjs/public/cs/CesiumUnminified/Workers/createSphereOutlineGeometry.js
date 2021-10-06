@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./when-4bbc8319', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './EllipsoidOutlineGeometry-cf8614b1', './ComponentDatatype-f194c48b', './WebGLConstants-1c8239cc', './GeometryOffsetAttribute-6a692b56', './Transforms-b4151f9c', './combine-83860057', './GeometryAttribute-900e07ee', './GeometryAttributes-7827a6c2', './IndexDatatype-ee69f1fd'], function (when, Matrix2, RuntimeError, EllipsoidOutlineGeometry, ComponentDatatype, WebGLConstants, GeometryOffsetAttribute, Transforms, combine, GeometryAttribute, GeometryAttributes, IndexDatatype) { 'use strict';
+define(['./when-4bbc8319', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './EllipsoidOutlineGeometry-cf8614b1', './ComponentDatatype-f194c48b', './WebGLConstants-1c8239cc', './GeometryOffsetAttribute-6a692b56', './Transforms-b4151f9c', './combine-83860057', './GeometryAttribute-900e07ee', './GeometryAttributes-7827a6c2', './IndexDatatype-ee69f1fd'], (function (when, Matrix2, RuntimeError, EllipsoidOutlineGeometry, ComponentDatatype, WebGLConstants, GeometryOffsetAttribute, Transforms, combine, GeometryAttribute, GeometryAttributes, IndexDatatype) { 'use strict';
 
   /**
    * A description of the outline of a sphere.
@@ -146,5 +146,5 @@ define(['./when-4bbc8319', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './E
 
   return createSphereOutlineGeometry;
 
-});
+}));
 //# sourceMappingURL=createSphereOutlineGeometry.js.map

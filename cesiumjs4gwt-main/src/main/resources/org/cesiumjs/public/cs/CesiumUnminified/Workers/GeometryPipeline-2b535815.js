@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './AttributeCompression-0091b79f', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './when-4bbc8319', './ComponentDatatype-f194c48b', './Transforms-b4151f9c', './EncodedCartesian3-2c726105', './GeometryAttribute-900e07ee', './IndexDatatype-ee69f1fd', './IntersectionTests-4c2a8ace', './Plane-87991fdc'], function (exports, AttributeCompression, Matrix2, RuntimeError, when, ComponentDatatype, Transforms, EncodedCartesian3, GeometryAttribute, IndexDatatype, IntersectionTests, Plane) { 'use strict';
+define(['exports', './AttributeCompression-0091b79f', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './when-4bbc8319', './ComponentDatatype-f194c48b', './Transforms-b4151f9c', './EncodedCartesian3-2c726105', './GeometryAttribute-900e07ee', './IndexDatatype-ee69f1fd', './IntersectionTests-4c2a8ace', './Plane-87991fdc'], (function (exports, AttributeCompression, Matrix2, RuntimeError, when, ComponentDatatype, Transforms, EncodedCartesian3, GeometryAttribute, IndexDatatype, IntersectionTests, Plane) { 'use strict';
 
   var scratchCartesian1 = new Matrix2.Cartesian3();
   var scratchCartesian2$1 = new Matrix2.Cartesian3();
@@ -3704,5 +3704,5 @@ define(['exports', './AttributeCompression-0091b79f', './Matrix2-32d4a9a0', './R
 
   exports.GeometryPipeline = GeometryPipeline;
 
-});
+}));
 //# sourceMappingURL=GeometryPipeline-2b535815.js.map

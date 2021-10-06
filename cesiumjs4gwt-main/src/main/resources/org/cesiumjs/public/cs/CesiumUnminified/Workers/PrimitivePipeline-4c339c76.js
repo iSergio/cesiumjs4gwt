@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './Transforms-b4151f9c', './ComponentDatatype-f194c48b', './when-4bbc8319', './RuntimeError-346a3079', './Matrix2-32d4a9a0', './GeometryAttribute-900e07ee', './GeometryAttributes-7827a6c2', './GeometryPipeline-2b535815', './IndexDatatype-ee69f1fd', './WebMercatorProjection-8ae73407'], function (exports, Transforms, ComponentDatatype, when, RuntimeError, Matrix2, GeometryAttribute, GeometryAttributes, GeometryPipeline, IndexDatatype, WebMercatorProjection) { 'use strict';
+define(['exports', './Transforms-b4151f9c', './ComponentDatatype-f194c48b', './when-4bbc8319', './RuntimeError-346a3079', './Matrix2-32d4a9a0', './GeometryAttribute-900e07ee', './GeometryAttributes-7827a6c2', './GeometryPipeline-2b535815', './IndexDatatype-ee69f1fd', './WebMercatorProjection-8ae73407'], (function (exports, Transforms, ComponentDatatype, when, RuntimeError, Matrix2, GeometryAttribute, GeometryAttributes, GeometryPipeline, IndexDatatype, WebMercatorProjection) { 'use strict';
 
   /**
    * Value and type information for per-instance geometry attribute that determines the geometry instance offset
@@ -980,5 +980,5 @@ define(['exports', './Transforms-b4151f9c', './ComponentDatatype-f194c48b', './w
 
   exports.PrimitivePipeline = PrimitivePipeline;
 
-});
+}));
 //# sourceMappingURL=PrimitivePipeline-4c339c76.js.map

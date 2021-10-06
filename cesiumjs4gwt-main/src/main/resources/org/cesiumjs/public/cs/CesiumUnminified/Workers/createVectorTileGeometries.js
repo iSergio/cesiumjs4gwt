@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./Transforms-b4151f9c', './BoxGeometry-c43b3330', './Matrix2-32d4a9a0', './Color-0a484922', './CylinderGeometry-a490945d', './when-4bbc8319', './EllipsoidGeometry-9dcf5d03', './IndexDatatype-ee69f1fd', './createTaskProcessorWorker', './RuntimeError-346a3079', './ComponentDatatype-f194c48b', './WebGLConstants-1c8239cc', './combine-83860057', './GeometryOffsetAttribute-6a692b56', './GeometryAttribute-900e07ee', './GeometryAttributes-7827a6c2', './VertexFormat-f9c1a155', './CylinderGeometryLibrary-c09ae083'], function (Transforms, BoxGeometry, Matrix2, Color, CylinderGeometry, when, EllipsoidGeometry, IndexDatatype, createTaskProcessorWorker, RuntimeError, ComponentDatatype, WebGLConstants, combine, GeometryOffsetAttribute, GeometryAttribute, GeometryAttributes, VertexFormat, CylinderGeometryLibrary) { 'use strict';
+define(['./Transforms-b4151f9c', './BoxGeometry-c43b3330', './Matrix2-32d4a9a0', './Color-0a484922', './CylinderGeometry-a490945d', './when-4bbc8319', './EllipsoidGeometry-9dcf5d03', './IndexDatatype-ee69f1fd', './createTaskProcessorWorker', './RuntimeError-346a3079', './ComponentDatatype-f194c48b', './WebGLConstants-1c8239cc', './combine-83860057', './GeometryOffsetAttribute-6a692b56', './GeometryAttribute-900e07ee', './GeometryAttributes-7827a6c2', './VertexFormat-f9c1a155', './CylinderGeometryLibrary-c09ae083'], (function (Transforms, BoxGeometry, Matrix2, Color, CylinderGeometry, when, EllipsoidGeometry, IndexDatatype, createTaskProcessorWorker, RuntimeError, ComponentDatatype, WebGLConstants, combine, GeometryOffsetAttribute, GeometryAttribute, GeometryAttributes, VertexFormat, CylinderGeometryLibrary) { 'use strict';
 
   /**
    * Describes a renderable batch of geometry.
@@ -465,5 +465,5 @@ define(['./Transforms-b4151f9c', './BoxGeometry-c43b3330', './Matrix2-32d4a9a0',
 
   return createVectorTileGeometries$1;
 
-});
+}));
 //# sourceMappingURL=createVectorTileGeometries.js.map

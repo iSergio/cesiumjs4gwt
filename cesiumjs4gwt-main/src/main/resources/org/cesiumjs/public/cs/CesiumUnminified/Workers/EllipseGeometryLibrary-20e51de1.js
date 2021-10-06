@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './Matrix2-32d4a9a0', './ComponentDatatype-f194c48b', './Transforms-b4151f9c'], function (exports, Matrix2, ComponentDatatype, Transforms) { 'use strict';
+define(['exports', './Matrix2-32d4a9a0', './ComponentDatatype-f194c48b', './Transforms-b4151f9c'], (function (exports, Matrix2, ComponentDatatype, Transforms) { 'use strict';
 
   var EllipseGeometryLibrary = {};
 
@@ -384,5 +384,5 @@ define(['exports', './Matrix2-32d4a9a0', './ComponentDatatype-f194c48b', './Tran
 
   exports.EllipseGeometryLibrary = EllipseGeometryLibrary;
 
-});
+}));
 //# sourceMappingURL=EllipseGeometryLibrary-20e51de1.js.map

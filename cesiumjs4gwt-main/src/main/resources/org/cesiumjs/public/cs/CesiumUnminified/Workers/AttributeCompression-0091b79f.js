@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './Matrix2-32d4a9a0', './ComponentDatatype-f194c48b', './RuntimeError-346a3079', './when-4bbc8319'], function (exports, Matrix2, ComponentDatatype, RuntimeError, when) { 'use strict';
+define(['exports', './Matrix2-32d4a9a0', './ComponentDatatype-f194c48b', './RuntimeError-346a3079', './when-4bbc8319'], (function (exports, Matrix2, ComponentDatatype, RuntimeError, when) { 'use strict';
 
   /**
    * An enum describing the attribute type for glTF and 3D Tiles.
@@ -657,5 +657,5 @@ define(['exports', './Matrix2-32d4a9a0', './ComponentDatatype-f194c48b', './Runt
 
   exports.AttributeCompression = AttributeCompression;
 
-});
+}));
 //# sourceMappingURL=AttributeCompression-0091b79f.js.map

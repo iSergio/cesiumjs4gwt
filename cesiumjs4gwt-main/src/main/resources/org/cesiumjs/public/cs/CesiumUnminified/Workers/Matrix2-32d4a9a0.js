@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './RuntimeError-346a3079', './when-4bbc8319', './ComponentDatatype-f194c48b'], function (exports, RuntimeError, when, ComponentDatatype) { 'use strict';
+define(['exports', './RuntimeError-346a3079', './when-4bbc8319', './ComponentDatatype-f194c48b'], (function (exports, RuntimeError, when, ComponentDatatype) { 'use strict';
 
   /**
    * A 3D Cartesian point.
@@ -10541,5 +10541,5 @@ define(['exports', './RuntimeError-346a3079', './when-4bbc8319', './ComponentDat
   exports.Matrix4 = Matrix4;
   exports.Rectangle = Rectangle;
 
-});
+}));
 //# sourceMappingURL=Matrix2-32d4a9a0.js.map

@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./ComponentDatatype-f194c48b', './when-4bbc8319', './IndexDatatype-ee69f1fd', './RuntimeError-346a3079', './createTaskProcessorWorker', './WebGLConstants-1c8239cc'], function (ComponentDatatype, when, IndexDatatype, RuntimeError, createTaskProcessorWorker, WebGLConstants) { 'use strict';
+define(['./ComponentDatatype-f194c48b', './when-4bbc8319', './IndexDatatype-ee69f1fd', './RuntimeError-346a3079', './createTaskProcessorWorker', './WebGLConstants-1c8239cc'], (function (ComponentDatatype, when, IndexDatatype, RuntimeError, createTaskProcessorWorker, WebGLConstants) { 'use strict';
 
   /* global require */
 
@@ -295,14 +295,6 @@ define(['./ComponentDatatype-f194c48b', './when-4bbc8319', './IndexDatatype-ee69
   function decodePrimitive(parameters) {
     var dracoDecoder = new draco.Decoder();
 
-    // Skip all parameter types except generic
-    var attributesToSkip = ["POSITION", "NORMAL", "COLOR", "TEX_COORD"];
-    if (parameters.dequantizeInShader) {
-      for (var i = 0; i < attributesToSkip.length; ++i) {
-        dracoDecoder.SkipAttributeTransform(draco[attributesToSkip[i]]);
-      }
-    }
-
     var bufferView = parameters.bufferView;
     var buffer = new draco.DecoderBuffer();
     buffer.Init(parameters.array, bufferView.byteLength);
@@ -389,5 +381,5 @@ define(['./ComponentDatatype-f194c48b', './when-4bbc8319', './IndexDatatype-ee69
 
   return decodeDraco;
 
-});
+}));
 //# sourceMappingURL=decodeDraco.js.map

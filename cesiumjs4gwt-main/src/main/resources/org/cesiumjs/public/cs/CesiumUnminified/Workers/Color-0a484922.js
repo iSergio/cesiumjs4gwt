@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './RuntimeError-346a3079', './when-4bbc8319', './Transforms-b4151f9c', './ComponentDatatype-f194c48b'], function (exports, RuntimeError, when, Transforms, ComponentDatatype) { 'use strict';
+define(['exports', './RuntimeError-346a3079', './when-4bbc8319', './Transforms-b4151f9c', './ComponentDatatype-f194c48b'], (function (exports, RuntimeError, when, Transforms, ComponentDatatype) { 'use strict';
 
   function hue2rgb(m1, m2, h) {
     if (h < 0) {
@@ -2292,5 +2292,5 @@ define(['exports', './RuntimeError-346a3079', './when-4bbc8319', './Transforms-b
 
   exports.Color = Color;
 
-});
+}));
 //# sourceMappingURL=Color-0a484922.js.map
