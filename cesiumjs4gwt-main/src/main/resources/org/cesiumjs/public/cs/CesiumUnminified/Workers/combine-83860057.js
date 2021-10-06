@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './when-4bbc8319'], function (exports, when) { 'use strict';
+define(['exports', './when-4bbc8319'], (function (exports, when) { 'use strict';
 
   /**
    * Merges two objects, copying their properties onto a new combined object. When two objects have the same
@@ -102,5 +102,5 @@ define(['exports', './when-4bbc8319'], function (exports, when) { 'use strict';
 
   exports.combine = combine;
 
-});
+}));
 //# sourceMappingURL=combine-83860057.js.map

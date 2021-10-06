@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports'], function (exports) { 'use strict';
+define(['exports'], (function (exports) { 'use strict';
 
   /**
    * @function
@@ -837,5 +837,5 @@ define(['exports'], function (exports) { 'use strict';
   exports.defined = defined;
   exports.when = when;
 
-});
+}));
 //# sourceMappingURL=when-4bbc8319.js.map

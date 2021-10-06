@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './ArcType-98ec98bf', './arrayRemoveDuplicates-cf5c3227', './Matrix2-32d4a9a0', './ComponentDatatype-f194c48b', './when-4bbc8319', './EllipsoidRhumbLine-1bebfad1', './GeometryAttribute-900e07ee', './GeometryAttributes-7827a6c2', './GeometryPipeline-2b535815', './IndexDatatype-ee69f1fd', './PolygonPipeline-c597b314', './Transforms-b4151f9c'], function (exports, ArcType, arrayRemoveDuplicates, Matrix2, ComponentDatatype, when, EllipsoidRhumbLine, GeometryAttribute, GeometryAttributes, GeometryPipeline, IndexDatatype, PolygonPipeline, Transforms) { 'use strict';
+define(['exports', './ArcType-98ec98bf', './arrayRemoveDuplicates-cf5c3227', './Matrix2-32d4a9a0', './ComponentDatatype-f194c48b', './when-4bbc8319', './EllipsoidRhumbLine-1bebfad1', './GeometryAttribute-900e07ee', './GeometryAttributes-7827a6c2', './GeometryPipeline-2b535815', './IndexDatatype-ee69f1fd', './PolygonPipeline-c597b314', './Transforms-b4151f9c'], (function (exports, ArcType, arrayRemoveDuplicates, Matrix2, ComponentDatatype, when, EllipsoidRhumbLine, GeometryAttribute, GeometryAttributes, GeometryPipeline, IndexDatatype, PolygonPipeline, Transforms) { 'use strict';
 
   /**
    * A queue that can enqueue items at the end, and dequeue items from the front.
@@ -850,5 +850,5 @@ define(['exports', './ArcType-98ec98bf', './arrayRemoveDuplicates-cf5c3227', './
 
   exports.PolygonGeometryLibrary = PolygonGeometryLibrary;
 
-});
+}));
 //# sourceMappingURL=PolygonGeometryLibrary-721cf132.js.map

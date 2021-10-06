@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./RuntimeError-346a3079', './when-4bbc8319', './createTaskProcessorWorker'], function (RuntimeError, when, createTaskProcessorWorker) { 'use strict';
+define(['./RuntimeError-346a3079', './when-4bbc8319', './createTaskProcessorWorker'], (function (RuntimeError, when, createTaskProcessorWorker) { 'use strict';
 
   var compressedMagic$1 = 0x7468dead;
   var compressedMagicSwap$1 = 0xadde6874;
@@ -3796,5 +3796,5 @@ define(['./RuntimeError-346a3079', './when-4bbc8319', './createTaskProcessorWork
 
   return decodeGoogleEarthEnterprisePacket$1;
 
-});
+}));
 //# sourceMappingURL=decodeGoogleEarthEnterprisePacket.js.map

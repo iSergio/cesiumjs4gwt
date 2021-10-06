@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './GeometryOffsetAttribute-6a692b56', './Transforms-b4151f9c', './Matrix2-32d4a9a0', './ComponentDatatype-f194c48b', './when-4bbc8319', './RuntimeError-346a3079', './EllipseGeometryLibrary-20e51de1', './GeometryAttribute-900e07ee', './GeometryAttributes-7827a6c2', './IndexDatatype-ee69f1fd'], function (exports, GeometryOffsetAttribute, Transforms, Matrix2, ComponentDatatype, when, RuntimeError, EllipseGeometryLibrary, GeometryAttribute, GeometryAttributes, IndexDatatype) { 'use strict';
+define(['exports', './GeometryOffsetAttribute-6a692b56', './Transforms-b4151f9c', './Matrix2-32d4a9a0', './ComponentDatatype-f194c48b', './when-4bbc8319', './RuntimeError-346a3079', './EllipseGeometryLibrary-20e51de1', './GeometryAttribute-900e07ee', './GeometryAttributes-7827a6c2', './IndexDatatype-ee69f1fd'], (function (exports, GeometryOffsetAttribute, Transforms, Matrix2, ComponentDatatype, when, RuntimeError, EllipseGeometryLibrary, GeometryAttribute, GeometryAttributes, IndexDatatype) { 'use strict';
 
   var scratchCartesian1 = new Matrix2.Cartesian3();
   var boundingSphereCenter = new Matrix2.Cartesian3();
@@ -464,5 +464,5 @@ define(['exports', './GeometryOffsetAttribute-6a692b56', './Transforms-b4151f9c'
 
   exports.EllipseOutlineGeometry = EllipseOutlineGeometry;
 
-});
+}));
 //# sourceMappingURL=EllipseOutlineGeometry-7f7eafbf.js.map

@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './when-4bbc8319', './Transforms-b4151f9c'], function (exports, Matrix2, RuntimeError, when, Transforms) { 'use strict';
+define(['exports', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './when-4bbc8319', './Transforms-b4151f9c'], (function (exports, Matrix2, RuntimeError, when, Transforms) { 'use strict';
 
   /**
    * Creates an instance of an AxisAlignedBoundingBox from the minimum and maximum points along the x, y, and z axes.
@@ -245,5 +245,5 @@ define(['exports', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './when-4bbc
 
   exports.AxisAlignedBoundingBox = AxisAlignedBoundingBox;
 
-});
+}));
 //# sourceMappingURL=AxisAlignedBoundingBox-5fa363ce.js.map

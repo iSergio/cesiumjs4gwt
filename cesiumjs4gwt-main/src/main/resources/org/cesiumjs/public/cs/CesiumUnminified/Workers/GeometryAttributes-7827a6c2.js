@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './when-4bbc8319'], function (exports, when) { 'use strict';
+define(['exports', './when-4bbc8319'], (function (exports, when) { 'use strict';
 
   /**
    * Attributes, which make up a geometry's vertices.  Each property in this object corresponds to a
@@ -111,5 +111,5 @@ define(['exports', './when-4bbc8319'], function (exports, when) { 'use strict';
 
   exports.GeometryAttributes = GeometryAttributes;
 
-});
+}));
 //# sourceMappingURL=GeometryAttributes-7827a6c2.js.map

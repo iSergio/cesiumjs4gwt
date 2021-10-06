@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './when-4bbc8319', './Transforms-b4151f9c'], function (exports, Matrix2, RuntimeError, when, Transforms) { 'use strict';
+define(['exports', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './when-4bbc8319', './Transforms-b4151f9c'], (function (exports, Matrix2, RuntimeError, when, Transforms) { 'use strict';
 
   /**
    * A bounding rectangle given by a corner, width and height.
@@ -389,5 +389,5 @@ define(['exports', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './when-4bbc
 
   exports.BoundingRectangle = BoundingRectangle;
 
-});
+}));
 //# sourceMappingURL=BoundingRectangle-aa6394c1.js.map

@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './Transforms-b4151f9c', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './when-4bbc8319', './EllipsoidTangentPlane-9edb4c29', './ComponentDatatype-f194c48b', './Plane-87991fdc'], function (exports, Transforms, Matrix2, RuntimeError, when, EllipsoidTangentPlane, ComponentDatatype, Plane) { 'use strict';
+define(['exports', './Transforms-b4151f9c', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './when-4bbc8319', './EllipsoidTangentPlane-9edb4c29', './ComponentDatatype-f194c48b', './Plane-87991fdc'], (function (exports, Transforms, Matrix2, RuntimeError, when, EllipsoidTangentPlane, ComponentDatatype, Plane) { 'use strict';
 
   /**
    * Creates an instance of an OrientedBoundingBox.
@@ -1122,5 +1122,5 @@ define(['exports', './Transforms-b4151f9c', './Matrix2-32d4a9a0', './RuntimeErro
 
   exports.OrientedBoundingBox = OrientedBoundingBox;
 
-});
+}));
 //# sourceMappingURL=OrientedBoundingBox-605888ab.js.map

@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './when-4bbc8319', './RuntimeError-346a3079', './ComponentDatatype-f194c48b', './WebGLConstants-1c8239cc'], function (exports, when, RuntimeError, ComponentDatatype, WebGLConstants) { 'use strict';
+define(['exports', './when-4bbc8319', './RuntimeError-346a3079', './ComponentDatatype-f194c48b', './WebGLConstants-1c8239cc'], (function (exports, when, RuntimeError, ComponentDatatype, WebGLConstants) { 'use strict';
 
   /**
    * Constants for WebGL index datatypes.  These corresponds to the
@@ -195,5 +195,5 @@ define(['exports', './when-4bbc8319', './RuntimeError-346a3079', './ComponentDat
 
   exports.IndexDatatype = IndexDatatype$1;
 
-});
+}));
 //# sourceMappingURL=IndexDatatype-ee69f1fd.js.map

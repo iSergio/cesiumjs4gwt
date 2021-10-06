@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./PrimitivePipeline-4c339c76', './createTaskProcessorWorker', './Transforms-b4151f9c', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './when-4bbc8319', './ComponentDatatype-f194c48b', './WebGLConstants-1c8239cc', './combine-83860057', './GeometryAttribute-900e07ee', './GeometryAttributes-7827a6c2', './GeometryPipeline-2b535815', './AttributeCompression-0091b79f', './EncodedCartesian3-2c726105', './IndexDatatype-ee69f1fd', './IntersectionTests-4c2a8ace', './Plane-87991fdc', './WebMercatorProjection-8ae73407'], function (PrimitivePipeline, createTaskProcessorWorker, Transforms, Matrix2, RuntimeError, when, ComponentDatatype, WebGLConstants, combine, GeometryAttribute, GeometryAttributes, GeometryPipeline, AttributeCompression, EncodedCartesian3, IndexDatatype, IntersectionTests, Plane, WebMercatorProjection) { 'use strict';
+define(['./PrimitivePipeline-4c339c76', './createTaskProcessorWorker', './Transforms-b4151f9c', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './when-4bbc8319', './ComponentDatatype-f194c48b', './WebGLConstants-1c8239cc', './combine-83860057', './GeometryAttribute-900e07ee', './GeometryAttributes-7827a6c2', './GeometryPipeline-2b535815', './AttributeCompression-0091b79f', './EncodedCartesian3-2c726105', './IndexDatatype-ee69f1fd', './IntersectionTests-4c2a8ace', './Plane-87991fdc', './WebMercatorProjection-8ae73407'], (function (PrimitivePipeline, createTaskProcessorWorker, Transforms, Matrix2, RuntimeError, when, ComponentDatatype, WebGLConstants, combine, GeometryAttribute, GeometryAttributes, GeometryPipeline, AttributeCompression, EncodedCartesian3, IndexDatatype, IntersectionTests, Plane, WebMercatorProjection) { 'use strict';
 
   function combineGeometry(packedParameters, transferableObjects) {
     var parameters = PrimitivePipeline.PrimitivePipeline.unpackCombineGeometryParameters(
@@ -37,5 +37,5 @@ define(['./PrimitivePipeline-4c339c76', './createTaskProcessorWorker', './Transf
 
   return combineGeometry$1;
 
-});
+}));
 //# sourceMappingURL=combineGeometry.js.map

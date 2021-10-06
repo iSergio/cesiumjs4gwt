@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './when-4bbc8319'], function (exports, when) { 'use strict';
+define(['exports', './when-4bbc8319'], (function (exports, when) { 'use strict';
 
   /**
    * Constructs an exception object that is thrown due to a developer error, e.g., invalid argument,
@@ -406,5 +406,5 @@ define(['exports', './when-4bbc8319'], function (exports, when) { 'use strict';
   exports.DeveloperError = DeveloperError;
   exports.RuntimeError = RuntimeError;
 
-});
+}));
 //# sourceMappingURL=RuntimeError-346a3079.js.map

@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './when-4bbc8319', './RuntimeError-346a3079', './Matrix2-32d4a9a0'], function (exports, when, RuntimeError, Matrix2) { 'use strict';
+define(['exports', './when-4bbc8319', './RuntimeError-346a3079', './Matrix2-32d4a9a0'], (function (exports, when, RuntimeError, Matrix2) { 'use strict';
 
   /**
    * Geometry instancing allows one {@link Geometry} object to be positions in several
@@ -141,5 +141,5 @@ define(['exports', './when-4bbc8319', './RuntimeError-346a3079', './Matrix2-32d4
 
   exports.GeometryInstance = GeometryInstance;
 
-});
+}));
 //# sourceMappingURL=GeometryInstance-33236890.js.map

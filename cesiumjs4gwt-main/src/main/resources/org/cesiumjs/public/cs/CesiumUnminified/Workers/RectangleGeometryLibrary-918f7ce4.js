@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './Matrix2-32d4a9a0', './when-4bbc8319', './RuntimeError-346a3079', './Transforms-b4151f9c', './ComponentDatatype-f194c48b'], function (exports, Matrix2, when, RuntimeError, Transforms, ComponentDatatype) { 'use strict';
+define(['exports', './Matrix2-32d4a9a0', './when-4bbc8319', './RuntimeError-346a3079', './Transforms-b4151f9c', './ComponentDatatype-f194c48b'], (function (exports, Matrix2, when, RuntimeError, Transforms, ComponentDatatype) { 'use strict';
 
   var cos = Math.cos;
   var sin = Math.sin;
@@ -300,5 +300,5 @@ define(['exports', './Matrix2-32d4a9a0', './when-4bbc8319', './RuntimeError-346a
 
   exports.RectangleGeometryLibrary = RectangleGeometryLibrary;
 
-});
+}));
 //# sourceMappingURL=RectangleGeometryLibrary-918f7ce4.js.map

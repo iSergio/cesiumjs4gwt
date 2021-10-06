@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './when-4bbc8319'], function (exports, Matrix2, RuntimeError, when) { 'use strict';
+define(['exports', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './when-4bbc8319'], (function (exports, Matrix2, RuntimeError, when) { 'use strict';
 
   /**
    * A fixed-point encoding of a {@link Cartesian3} with 64-bit floating-point components, as two {@link Cartesian3}
@@ -191,5 +191,5 @@ define(['exports', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './when-4bbc
 
   exports.EncodedCartesian3 = EncodedCartesian3;
 
-});
+}));
 //# sourceMappingURL=EncodedCartesian3-2c726105.js.map

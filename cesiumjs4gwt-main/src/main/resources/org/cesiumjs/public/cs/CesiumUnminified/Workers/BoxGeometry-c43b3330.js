@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './GeometryOffsetAttribute-6a692b56', './Transforms-b4151f9c', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './ComponentDatatype-f194c48b', './when-4bbc8319', './GeometryAttribute-900e07ee', './GeometryAttributes-7827a6c2', './VertexFormat-f9c1a155'], function (exports, GeometryOffsetAttribute, Transforms, Matrix2, RuntimeError, ComponentDatatype, when, GeometryAttribute, GeometryAttributes, VertexFormat) { 'use strict';
+define(['exports', './GeometryOffsetAttribute-6a692b56', './Transforms-b4151f9c', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './ComponentDatatype-f194c48b', './when-4bbc8319', './GeometryAttribute-900e07ee', './GeometryAttributes-7827a6c2', './VertexFormat-f9c1a155'], (function (exports, GeometryOffsetAttribute, Transforms, Matrix2, RuntimeError, ComponentDatatype, when, GeometryAttribute, GeometryAttributes, VertexFormat) { 'use strict';
 
   var diffScratch = new Matrix2.Cartesian3();
 
@@ -905,5 +905,5 @@ define(['exports', './GeometryOffsetAttribute-6a692b56', './Transforms-b4151f9c'
 
   exports.BoxGeometry = BoxGeometry;
 
-});
+}));
 //# sourceMappingURL=BoxGeometry-c43b3330.js.map

@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './AxisAlignedBoundingBox-5fa363ce', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './when-4bbc8319', './IntersectionTests-4c2a8ace', './Plane-87991fdc', './Transforms-b4151f9c'], function (exports, AxisAlignedBoundingBox, Matrix2, RuntimeError, when, IntersectionTests, Plane, Transforms) { 'use strict';
+define(['exports', './AxisAlignedBoundingBox-5fa363ce', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './when-4bbc8319', './IntersectionTests-4c2a8ace', './Plane-87991fdc', './Transforms-b4151f9c'], (function (exports, AxisAlignedBoundingBox, Matrix2, RuntimeError, when, IntersectionTests, Plane, Transforms) { 'use strict';
 
   var scratchCart4 = new Matrix2.Cartesian4();
   /**
@@ -393,5 +393,5 @@ define(['exports', './AxisAlignedBoundingBox-5fa363ce', './Matrix2-32d4a9a0', '.
 
   exports.EllipsoidTangentPlane = EllipsoidTangentPlane;
 
-});
+}));
 //# sourceMappingURL=EllipsoidTangentPlane-9edb4c29.js.map

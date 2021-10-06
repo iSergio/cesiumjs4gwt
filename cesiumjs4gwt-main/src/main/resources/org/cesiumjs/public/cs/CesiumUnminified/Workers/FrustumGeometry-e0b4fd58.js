@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './Transforms-b4151f9c', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './ComponentDatatype-f194c48b', './when-4bbc8319', './GeometryAttribute-900e07ee', './GeometryAttributes-7827a6c2', './Plane-87991fdc', './VertexFormat-f9c1a155'], function (exports, Transforms, Matrix2, RuntimeError, ComponentDatatype, when, GeometryAttribute, GeometryAttributes, Plane, VertexFormat) { 'use strict';
+define(['exports', './Transforms-b4151f9c', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './ComponentDatatype-f194c48b', './when-4bbc8319', './GeometryAttribute-900e07ee', './GeometryAttributes-7827a6c2', './Plane-87991fdc', './VertexFormat-f9c1a155'], (function (exports, Transforms, Matrix2, RuntimeError, ComponentDatatype, when, GeometryAttribute, GeometryAttributes, Plane, VertexFormat) { 'use strict';
 
   /**
    * The culling volume defined by planes.
@@ -2532,5 +2532,5 @@ define(['exports', './Transforms-b4151f9c', './Matrix2-32d4a9a0', './RuntimeErro
   exports.OrthographicFrustum = OrthographicFrustum;
   exports.PerspectiveFrustum = PerspectiveFrustum;
 
-});
+}));
 //# sourceMappingURL=FrustumGeometry-e0b4fd58.js.map

@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports'], function (exports) { 'use strict';
+define(['exports'], (function (exports) { 'use strict';
 
   /**
    * ArcType defines the path that should be taken connecting vertices.
@@ -57,5 +57,5 @@ define(['exports'], function (exports) { 'use strict';
 
   exports.ArcType = ArcType$1;
 
-});
+}));
 //# sourceMappingURL=ArcType-98ec98bf.js.map

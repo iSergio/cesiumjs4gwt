@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './when-4bbc8319', './ComponentDatatype-f194c48b', './combine-83860057'], function (exports, Matrix2, RuntimeError, when, ComponentDatatype, combine) { 'use strict';
+define(['exports', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './when-4bbc8319', './ComponentDatatype-f194c48b', './combine-83860057'], (function (exports, Matrix2, RuntimeError, when, ComponentDatatype, combine) { 'use strict';
 
   /**
    * A simple map projection where longitude and latitude are linearly mapped to X and Y by multiplying
@@ -14465,5 +14465,5 @@ define(['exports', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './when-4bbc
   exports.Transforms = Transforms;
   exports.buildModuleUrl = buildModuleUrl;
 
-});
+}));
 //# sourceMappingURL=Transforms-b4151f9c.js.map

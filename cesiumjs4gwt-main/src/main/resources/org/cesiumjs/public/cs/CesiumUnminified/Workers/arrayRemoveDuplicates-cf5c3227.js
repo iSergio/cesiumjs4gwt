@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './RuntimeError-346a3079', './when-4bbc8319', './ComponentDatatype-f194c48b'], function (exports, RuntimeError, when, ComponentDatatype) { 'use strict';
+define(['exports', './RuntimeError-346a3079', './when-4bbc8319', './ComponentDatatype-f194c48b'], (function (exports, RuntimeError, when, ComponentDatatype) { 'use strict';
 
   var removeDuplicatesEpsilon = ComponentDatatype.CesiumMath.EPSILON10;
 
@@ -149,5 +149,5 @@ define(['exports', './RuntimeError-346a3079', './when-4bbc8319', './ComponentDat
 
   exports.arrayRemoveDuplicates = arrayRemoveDuplicates;
 
-});
+}));
 //# sourceMappingURL=arrayRemoveDuplicates-cf5c3227.js.map

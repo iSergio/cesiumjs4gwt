@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './arrayRemoveDuplicates-cf5c3227', './Matrix2-32d4a9a0', './when-4bbc8319', './ComponentDatatype-f194c48b', './PolylinePipeline-4b4963b2'], function (exports, arrayRemoveDuplicates, Matrix2, when, ComponentDatatype, PolylinePipeline) { 'use strict';
+define(['exports', './arrayRemoveDuplicates-cf5c3227', './Matrix2-32d4a9a0', './when-4bbc8319', './ComponentDatatype-f194c48b', './PolylinePipeline-4b4963b2'], (function (exports, arrayRemoveDuplicates, Matrix2, when, ComponentDatatype, PolylinePipeline) { 'use strict';
 
   /**
    * @private
@@ -230,5 +230,5 @@ define(['exports', './arrayRemoveDuplicates-cf5c3227', './Matrix2-32d4a9a0', './
 
   exports.WallGeometryLibrary = WallGeometryLibrary;
 
-});
+}));
 //# sourceMappingURL=WallGeometryLibrary-07ec626a.js.map
