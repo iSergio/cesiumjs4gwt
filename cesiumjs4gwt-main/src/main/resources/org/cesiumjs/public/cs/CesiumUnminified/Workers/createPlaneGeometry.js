@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./when-4bbc8319', './Transforms-b4151f9c', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './ComponentDatatype-f194c48b', './GeometryAttribute-900e07ee', './GeometryAttributes-7827a6c2', './VertexFormat-f9c1a155', './combine-83860057', './WebGLConstants-1c8239cc'], (function (when, Transforms, Matrix2, RuntimeError, ComponentDatatype, GeometryAttribute, GeometryAttributes, VertexFormat, combine, WebGLConstants) { 'use strict';
+define(['./when-4bbc8319', './Transforms-86b6fa28', './Matrix2-91d5b6af', './RuntimeError-346a3079', './ComponentDatatype-f194c48b', './GeometryAttribute-e0d0d297', './GeometryAttributes-7827a6c2', './VertexFormat-f9c1a155', './combine-83860057', './WebGLConstants-1c8239cc'], (function (when, Transforms, Matrix2, RuntimeError, ComponentDatatype, GeometryAttribute, GeometryAttributes, VertexFormat, combine, WebGLConstants) { 'use strict';
 
   /**
    * Describes geometry representing a plane centered at the origin, with a unit width and length.

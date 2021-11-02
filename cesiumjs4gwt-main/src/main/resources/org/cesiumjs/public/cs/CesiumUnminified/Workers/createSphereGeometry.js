@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./when-4bbc8319', './Matrix2-32d4a9a0', './RuntimeError-346a3079', './EllipsoidGeometry-9dcf5d03', './VertexFormat-f9c1a155', './ComponentDatatype-f194c48b', './WebGLConstants-1c8239cc', './GeometryOffsetAttribute-6a692b56', './Transforms-b4151f9c', './combine-83860057', './GeometryAttribute-900e07ee', './GeometryAttributes-7827a6c2', './IndexDatatype-ee69f1fd'], (function (when, Matrix2, RuntimeError, EllipsoidGeometry, VertexFormat, ComponentDatatype, WebGLConstants, GeometryOffsetAttribute, Transforms, combine, GeometryAttribute, GeometryAttributes, IndexDatatype) { 'use strict';
+define(['./when-4bbc8319', './Matrix2-91d5b6af', './RuntimeError-346a3079', './EllipsoidGeometry-aa017f9c', './VertexFormat-f9c1a155', './ComponentDatatype-f194c48b', './WebGLConstants-1c8239cc', './GeometryOffsetAttribute-6a692b56', './Transforms-86b6fa28', './combine-83860057', './GeometryAttribute-e0d0d297', './GeometryAttributes-7827a6c2', './IndexDatatype-ee69f1fd'], (function (when, Matrix2, RuntimeError, EllipsoidGeometry, VertexFormat, ComponentDatatype, WebGLConstants, GeometryOffsetAttribute, Transforms, combine, GeometryAttribute, GeometryAttributes, IndexDatatype) { 'use strict';
 
   /**
    * A description of a sphere centered at the origin.
