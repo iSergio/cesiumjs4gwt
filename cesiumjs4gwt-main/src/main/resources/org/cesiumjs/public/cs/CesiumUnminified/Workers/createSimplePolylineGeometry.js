@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./when-4bbc8319', './Matrix2-32d4a9a0', './ArcType-98ec98bf', './Transforms-b4151f9c', './Color-0a484922', './ComponentDatatype-f194c48b', './RuntimeError-346a3079', './GeometryAttribute-900e07ee', './GeometryAttributes-7827a6c2', './IndexDatatype-ee69f1fd', './PolylinePipeline-4b4963b2', './combine-83860057', './WebGLConstants-1c8239cc', './EllipsoidGeodesic-c3b968c7', './EllipsoidRhumbLine-1bebfad1', './IntersectionTests-4c2a8ace', './Plane-87991fdc'], (function (when, Matrix2, ArcType, Transforms, Color, ComponentDatatype, RuntimeError, GeometryAttribute, GeometryAttributes, IndexDatatype, PolylinePipeline, combine, WebGLConstants, EllipsoidGeodesic, EllipsoidRhumbLine, IntersectionTests, Plane) { 'use strict';
+define(['./when-4bbc8319', './Matrix2-91d5b6af', './ArcType-98ec98bf', './Transforms-86b6fa28', './Color-0cb15512', './ComponentDatatype-f194c48b', './RuntimeError-346a3079', './GeometryAttribute-e0d0d297', './GeometryAttributes-7827a6c2', './IndexDatatype-ee69f1fd', './PolylinePipeline-3cab578f', './combine-83860057', './WebGLConstants-1c8239cc', './EllipsoidGeodesic-6a52e412', './EllipsoidRhumbLine-447d6334', './IntersectionTests-26599c5e', './Plane-4f333bc4'], (function (when, Matrix2, ArcType, Transforms, Color, ComponentDatatype, RuntimeError, GeometryAttribute, GeometryAttributes, IndexDatatype, PolylinePipeline, combine, WebGLConstants, EllipsoidGeodesic, EllipsoidRhumbLine, IntersectionTests, Plane) { 'use strict';
 
   function interpolateColors(p0, p1, color0, color1, minDistance, array, offset) {
     var numPoints = PolylinePipeline.PolylinePipeline.numberOfPoints(p0, p1, minDistance);

@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./when-4bbc8319', './Matrix2-32d4a9a0', './GeometryOffsetAttribute-6a692b56', './Transforms-b4151f9c', './ComponentDatatype-f194c48b', './RuntimeError-346a3079', './GeometryAttribute-900e07ee', './GeometryAttributes-7827a6c2', './IndexDatatype-ee69f1fd', './PolygonPipeline-c597b314', './RectangleGeometryLibrary-918f7ce4', './combine-83860057', './WebGLConstants-1c8239cc', './EllipsoidRhumbLine-1bebfad1'], (function (when, Matrix2, GeometryOffsetAttribute, Transforms, ComponentDatatype, RuntimeError, GeometryAttribute, GeometryAttributes, IndexDatatype, PolygonPipeline, RectangleGeometryLibrary, combine, WebGLConstants, EllipsoidRhumbLine) { 'use strict';
+define(['./when-4bbc8319', './Matrix2-91d5b6af', './GeometryOffsetAttribute-6a692b56', './Transforms-86b6fa28', './ComponentDatatype-f194c48b', './RuntimeError-346a3079', './GeometryAttribute-e0d0d297', './GeometryAttributes-7827a6c2', './IndexDatatype-ee69f1fd', './PolygonPipeline-d65e2b8f', './RectangleGeometryLibrary-b2e91b9c', './combine-83860057', './WebGLConstants-1c8239cc', './EllipsoidRhumbLine-447d6334'], (function (when, Matrix2, GeometryOffsetAttribute, Transforms, ComponentDatatype, RuntimeError, GeometryAttribute, GeometryAttributes, IndexDatatype, PolygonPipeline, RectangleGeometryLibrary, combine, WebGLConstants, EllipsoidRhumbLine) { 'use strict';
 
   var bottomBoundingSphere = new Transforms.BoundingSphere();
   var topBoundingSphere = new Transforms.BoundingSphere();

@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./AttributeCompression-0091b79f', './Matrix2-32d4a9a0', './Color-0a484922', './when-4bbc8319', './IndexDatatype-ee69f1fd', './ComponentDatatype-f194c48b', './OrientedBoundingBox-605888ab', './createTaskProcessorWorker', './RuntimeError-346a3079', './Transforms-b4151f9c', './combine-83860057', './WebGLConstants-1c8239cc', './EllipsoidTangentPlane-9edb4c29', './AxisAlignedBoundingBox-5fa363ce', './IntersectionTests-4c2a8ace', './Plane-87991fdc'], (function (AttributeCompression, Matrix2, Color, when, IndexDatatype, ComponentDatatype, OrientedBoundingBox, createTaskProcessorWorker, RuntimeError, Transforms, combine, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane) { 'use strict';
+define(['./AttributeCompression-1f6679e1', './Matrix2-91d5b6af', './Color-0cb15512', './when-4bbc8319', './IndexDatatype-ee69f1fd', './ComponentDatatype-f194c48b', './OrientedBoundingBox-79e3c3fe', './createTaskProcessorWorker', './RuntimeError-346a3079', './Transforms-86b6fa28', './combine-83860057', './WebGLConstants-1c8239cc', './EllipsoidTangentPlane-164dcfc9', './AxisAlignedBoundingBox-4171efdd', './IntersectionTests-26599c5e', './Plane-4f333bc4'], (function (AttributeCompression, Matrix2, Color, when, IndexDatatype, ComponentDatatype, OrientedBoundingBox, createTaskProcessorWorker, RuntimeError, Transforms, combine, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane) { 'use strict';
 
   var scratchCenter = new Matrix2.Cartesian3();
   var scratchEllipsoid = new Matrix2.Ellipsoid();
