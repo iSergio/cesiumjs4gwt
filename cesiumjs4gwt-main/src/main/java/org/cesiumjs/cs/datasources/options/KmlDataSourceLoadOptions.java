@@ -20,6 +20,7 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Credit;
 import org.cesiumjs.cs.core.Ellipsoid;
 
 /**
@@ -48,6 +49,16 @@ public class KmlDataSourceLoadOptions {
      */
     @JsProperty
     public Ellipsoid ellipsoid;
+    /**
+     * A credit for the data source, which is displayed on the canvas.
+     */
+    @JsProperty
+    public Credit credit;
+    /**
+     * A container for ScreenOverlay images.
+     */
+    @JsProperty
+    public String screenOverlayContainer;
 
     /**
      * Options for

@@ -249,6 +249,28 @@ public class Cartographic {
      * the inputted object should be in radians.
      *
      * @param cartographic Input to be converted into a Cartesian3 output.
+     * @return The position
+     */
+    @JsMethod
+    public static native Cartesian3 toCartesian(Cartographic cartographic);
+
+    /**
+     * Creates a new Cartesian3 instance from a Cartographic input. The values in
+     * the inputted object should be in radians.
+     *
+     * @param cartographic Input to be converted into a Cartesian3 output.
+     * @param ellipsoid    The ellipsoid on which the position lies. Default:
+     *                     {@link Ellipsoid#WGS84()}.
+     * @return The position
+     */
+    @JsMethod
+    public static native Cartesian3 toCartesian(Cartographic cartographic, Ellipsoid ellipsoid);
+
+    /**
+     * Creates a new Cartesian3 instance from a Cartographic input. The values in
+     * the inputted object should be in radians.
+     *
+     * @param cartographic Input to be converted into a Cartesian3 output.
      * @param ellipsoid    The ellipsoid on which the position lies. Default:
      *                     {@link Ellipsoid#WGS84()}.
      * @param result       The object onto which to store the result.
