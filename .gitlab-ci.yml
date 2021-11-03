@@ -16,7 +16,6 @@ cache:
 stages:
   - init
   - build
-#  - test
   - package
   - deploy
 
@@ -25,7 +24,7 @@ default:
     - docker
   interruptible: true
   before_script:
-    - >
+    - |
       if [[ "${CI_COMMIT_TAG}" != ""  ]]; then
         mvn $MAVEN_CLI_OPTS versions:set -DnewVersion=${CI_COMMIT_TAG}
         VERSION=${CI_COMMIT_TAG}
@@ -38,22 +37,17 @@ default:
           VERSION=${VERSION}-SNAPSHOT
         fi
       fi
+      echo "Version set to "$VERSION
 
 compile:cesiumjs4gwt-main:
   stage: build
   script:
-    - mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec
     - mvn $MAVEN_CLI_OPTS -pl cesiumjs4gwt-main -DskipTests=true compile
 
 compile:cesiumjs4gwt-showcase:
   stage: build
   script:
     - mvn $MAVEN_CLI_OPTS -pl cesiumjs4gwt-showcase -DskipTests=true compile -am -DskipTests=true
-
-#test:cesiumjs4gwt-main:
-#  stage: test
-#  script:
-#    - mvn $MAVEN_CLI_OPTS -pl cesiumjs4gwt-main test
 
 package:cesiumjs4gwt-main:
   stage: package
@@ -63,9 +57,6 @@ package:cesiumjs4gwt-main:
     - tags
   script:
     - mvn $MAVEN_CLI_OPTS -pl cesiumjs4gwt-main -DskipTests=true package
-      #artifacts:
-      #paths:
-      #- cesiumjs4gwt-main/target/*.jar
 
 deploy:cesiumjs4gwt-main:
   stage: deploy
@@ -92,25 +83,24 @@ package:cesiumjs4gwt-showcase:
       - cesiumjs4gwt-showcase/target/*.war
 
 deploy:cesiumjs4gwt-showcase:
-    stage: deploy
-    only:
-      - master
-      - develop
-      - tags
-    script:
-      - curl https://gis4fun.org/wildfly/wildfly-$WILDFLY_VERSION.tar.gz --output wildfly.tar.gz && tar -zxf wildfly.tar.gz
-      - >
-        if [[ "${VERSION}" == *-SNAPSHOT ]]; then
-          SUFFIX="-SNAPSHOT"
-        else
-          SUFFIX=""
-        fi
-      - EXISTS=`$WILDFLY_BASE_CLI --commands="deployment-info --server-group=main-server-group --name=cesiumjs4gwt-showcase$SUFFIX.war"`
-      - >
-        if [[ $EXISTS = "" ]]; then
-          echo "empty"
-          $WILDFLY_BASE_CLI --commands="deploy cesiumjs4gwt-showcase/target/cesiumjs4gwt-showcase-$VERSION.war --name=cesiumjs4gwt-showcase$SUFFIX.war --server-groups=main-server-group"
-        else
-          echo "notempty"
-          $WILDFLY_BASE_CLI --commands="deploy cesiumjs4gwt-showcase/target/cesiumjs4gwt-showcase-$VERSION.war --name=cesiumjs4gwt-showcase$SUFFIX.war --force"
-        fi
+  stage: deploy
+  only:
+    - master
+    - develop
+    - tags
+  script:
+    - curl https://gis4fun.org/wildfly/wildfly-$WILDFLY_VERSION.tar.gz --output wildfly.tar.gz && tar -zxf wildfly.tar.gz
+    - |
+      if [[ "${VERSION}" == *-SNAPSHOT ]]; then
+        SUFFIX="-SNAPSHOT"
+      else
+        SUFFIX=""
+      fi
+      echo "SUFFIX IS "$SUFFIX
+      EXISTS=`$WILDFLY_BASE_CLI --commands="deployment-info --server-group=main-server-group --name=cesiumjs4gwt-showcase$SUFFIX.war"`
+      echo "$EXISTS"
+      if [[ $EXISTS = "" ]]; then
+        $WILDFLY_BASE_CLI --commands="deploy cesiumjs4gwt-showcase/target/cesiumjs4gwt-showcase-$VERSION.war --name=cesiumjs4gwt-showcase$SUFFIX.war --server-groups=main-server-group"
+      else
+        $WILDFLY_BASE_CLI --commands="deploy cesiumjs4gwt-showcase/target/cesiumjs4gwt-showcase-$VERSION.war --name=cesiumjs4gwt-showcase$SUFFIX.war --force"
+      fi
