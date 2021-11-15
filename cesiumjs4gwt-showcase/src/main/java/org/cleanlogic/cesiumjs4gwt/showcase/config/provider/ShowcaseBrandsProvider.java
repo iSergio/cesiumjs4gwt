@@ -18,7 +18,7 @@ public class ShowcaseBrandsProvider implements Provider<List<Anchor>> {
 
     @Override
     public List<Anchor> get() {
-        Anchor anchor = new Anchor("Ol3-Cesium");
+        Anchor anchor = new Anchor("cesium");
         List<Anchor> list = new ArrayList<Anchor>();
         list.add(anchor);
         return list;

@@ -20,6 +20,7 @@ import com.google.gwt.dom.client.Style.Overflow;
 import com.google.gwt.event.dom.client.*;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
+import org.cesiumjs.cs.Cesium;
 import org.cleanlogic.cesiumjs4gwt.showcase.i18n.I18NMessages;
 
 /**
@@ -64,9 +65,21 @@ public class ExamplePanel extends Composite {
         sp.setWidget(vp);
 
         final Label lblName = new Label(example.getName());
+
+        HorizontalPanel hp = new HorizontalPanel();
+        hp.setVerticalAlignment(HorizontalPanel.ALIGN_MIDDLE);
+        hp.setSpacing(2);
+        if (example.getExample().isNew()) {
+            Image img = new Image(Resources.INSTANCE.icon_new());
+            img.setSize("24px", "24px");
+            hp.add(img);
+        }
+        hp.add(lblName);
+
         final Image lblImage = new Image(GWT.getModuleBaseURL() + "examples/" + example.getName() + ".jpg");
+        lblImage.setSize("225px", "150px");
         final Label lblDescription = new Label(example.getDescription());
-        final StringBuffer sb = new StringBuffer();
+        final StringBuilder sb = new StringBuilder();
         final String[] tags = example.getTags();
         for (String tag : tags) {
             sb.append(tag).append(", ");
@@ -75,7 +88,7 @@ public class ExamplePanel extends Composite {
         lblTags.setStyleName("exampletags");
 
         lblName.setStyleName("examplename");
-        vp.add(lblName);
+        vp.add(hp);
         vp.add(lblImage);
         vp.add(lblDescription);
         vp.add(lblTags);
