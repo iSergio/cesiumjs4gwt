@@ -15,10 +15,12 @@
  */
 package org.cleanlogic.cesiumjs4gwt.showcase.components.store;
 
+import org.cesiumjs.cs.Cesium;
 import org.cleanlogic.cesiumjs4gwt.showcase.ExampleBean;
 
 import javax.inject.Singleton;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -40,6 +42,8 @@ public class ShowcaseExampleStore implements ExampleStore {
     public List<ExampleBean> getExamples() {
         List<ExampleBean> list = new ArrayList<ExampleBean>(examples.values());
         Collections.sort(list);
+        // Sort by new
+        list.sort((e1, e2) -> -Boolean.compare(e1.getExample().isNew(), e2.getExample().isNew()));
         return Collections.unmodifiableList(list);
     }
 
