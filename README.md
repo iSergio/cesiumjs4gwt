@@ -3,6 +3,10 @@
 # GWT Cesium Wrapper
 [CesiumJS](http://cesiumjs.org) GWT Wrapper based on JsInterop 1.0.2 for [GWT 2.8.x](http://www.gwtproject.org/release-notes.html#Release_Notes_2_8_2).
 
+Showcase:
+ - [Release](https://gis4fun.org/cesiumjs4gwt-showcase/)
+ - [Develop](https://gis4fun.org/cesiumjs4gwt-showcase-snapshot/)
+
 Java API looks like as JavaScript.
 What was done:
 - [x] CesiumJS API like as native JavaScript. Based on CesiumJS source code
