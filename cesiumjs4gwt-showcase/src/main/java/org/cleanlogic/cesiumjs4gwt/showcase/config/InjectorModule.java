@@ -35,7 +35,6 @@ public class InjectorModule extends AbstractGinModule {
     @Override
     protected void configure() {
         bind(ShowcaseEventBus.class).to(ShowcaseEventBusImpl.class).in(Singleton.class);
-
         bind(Image.class).toProvider(ShowcaseLogoProvider.class).in(Singleton.class);
         bind(List.class).toProvider(ShowcaseBrandsProvider.class).in(Singleton.class);
 
@@ -115,8 +114,9 @@ public class InjectorModule extends AbstractGinModule {
         bind(CZMLModelArticulations.class).asEagerSingleton();
         bind(ElevationBandMaterial.class).asEagerSingleton();
         bind(ProceduralTerrain.class).asEagerSingleton();
-
         bind(Clouds.class).asEagerSingleton();
         bind(CloudParameters.class).asEagerSingleton();
+
+        bind(CustomShaders3DTiles.class).asEagerSingleton();
     }
 }
