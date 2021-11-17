@@ -16,9 +16,7 @@
 
 package org.cesiumjs.cs.scene.experimental;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsType;
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.scene.experimental.options.CustomShaderOptions;
 
@@ -27,7 +25,6 @@ import org.cesiumjs.cs.scene.experimental.options.CustomShaderOptions;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "CustomShader")
 public class CustomShader {
-
     @JsConstructor
     public CustomShader(CustomShaderOptions options) {}
 
