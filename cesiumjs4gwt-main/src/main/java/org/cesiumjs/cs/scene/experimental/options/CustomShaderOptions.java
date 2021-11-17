@@ -16,10 +16,12 @@
 
 package org.cesiumjs.cs.scene.experimental.options;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import jsinterop.annotations.*;
+import org.cesiumjs.cs.Cesium;
+import org.cesiumjs.cs.js.JsObject;
+import org.cesiumjs.cs.scene.experimental.CustomShader;
+import org.cesiumjs.cs.scene.experimental.enums.CustomShaderMode;
+import org.cesiumjs.cs.scene.experimental.enums.LightingModel;
 
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class CustomShaderOptions {
@@ -40,8 +42,20 @@ public class CustomShaderOptions {
      */
     @JsProperty
     public boolean isTranslucent;
-//    uniforms	Object.<String, UniformSpecifier>		optional A dictionary for user-defined uniforms. The key is the uniform name that will appear in the GLSL code. The value is an object that describes the uniform type and initial value
-//    varyings	Object.<String, VaryingType>		optional A dictionary for declaring additional GLSL varyings used in the shader. The key is the varying name that will appear in the GLSL code. The value is the data type of the varying. For each varying, the declaration will be added to the top of the shader automatically. The caller is responsible for assigning a value in the vertex shader and using the value in the fragment shader.
+    /**
+     * A dictionary for user-defined uniforms. The key is the uniform name that will appear in the GLSL code.
+     * The value is an object that describes the uniform type and initial value
+     */
+    @JsProperty
+    public JsObject uniforms;
+    /**
+     * A dictionary for declaring additional GLSL varyings used in the shader. The key is the varying name that will
+     * appear in the GLSL code. The value is the data type of the varying. For each varying, the declaration will be
+     * added to the top of the shader automatically. The caller is responsible for assigning a value in the vertex
+     * shader and using the value in the fragment shader.
+     */
+    @JsProperty
+    public JsObject varyings;
     /**
      * The custom vertex shader as a string of GLSL code. It must include a GLSL function called vertexMain. See the
      * example for the expected signature. If not specified, the custom vertex shader step will be skipped in
@@ -59,4 +73,58 @@ public class CustomShaderOptions {
 
     @JsConstructor
     public CustomShaderOptions() {}
+
+    @JsOverlay
+    public final CustomShaderOptions setMode(String mode) {
+        this.mode = mode;
+        return this;
+    }
+
+    @JsOverlay
+    public final CustomShaderOptions setLightingModel(Number lightingModel) {
+        this.lightingModel = lightingModel;
+        return this;
+    }
+
+    @JsOverlay
+    public final CustomShaderOptions setTranslucent(boolean isTranslucent) {
+        this.isTranslucent = isTranslucent;
+        return this;
+    }
+
+    @JsOverlay
+    public final CustomShaderOptions addUniform(String name, String type, Object value) {
+        if (this.uniforms == JsObject.undefined()) {
+            this.uniforms = JsObject.create();
+        }
+        JsObject uniform = JsObject.create();
+        uniform.setProperty("type", type);
+        uniform.setProperty("value", value);
+
+        JsObject.setProperty(uniforms, name, uniform);
+
+        return this;
+    }
+
+    @JsOverlay
+    public final CustomShaderOptions addVarying(String name, String type) {
+        if (this.varyings == JsObject.undefined()) {
+            this.varyings = JsObject.create();
+        }
+        JsObject.setProperty(this.varyings, name, type);
+
+        return this;
+    }
+
+    @JsOverlay
+    public final CustomShaderOptions setVertexShaderText(String vertexShaderText) {
+        this.vertexShaderText = vertexShaderText;
+        return this;
+    }
+
+    @JsOverlay
+    public final CustomShaderOptions setFragmentShaderText(String fragmentShaderText) {
+        this.fragmentShaderText = fragmentShaderText;
+        return this;
+    }
 }

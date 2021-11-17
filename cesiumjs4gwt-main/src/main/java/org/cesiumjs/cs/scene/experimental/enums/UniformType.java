@@ -29,83 +29,83 @@ public class UniformType {
      * A single floating point value.
      */
     @JsProperty(name = "FLOAT")
-    public native String FLOAT();
+    public static native String FLOAT();
     /**
      * A vector of 2 floating point values.
      */
     @JsProperty(name = "VEC2")
-    public native String VEC2();
+    public static native String VEC2();
     /**
      * A vector of 3 floating point values.
      */
     @JsProperty(name = "VEC3")
-    public native String VEC3();
+    public static native String VEC3();
     /**
      * A vector of 4 floating point values.
      */
     @JsProperty(name = "VEC4")
-    public native String VEC4();
+    public static native String VEC4();
     /**
      * A single integer value
      */
     @JsProperty(name = "INT")
-    public native String INT();
+    public static native String INT();
     /**
      * A vector of 2 integer values.
      */
     @JsProperty(name = "INT_VEC2")
-    public native String INT_VEC2();
+    public static native String INT_VEC2();
     /**
      * A vector of 3 integer values.
      */
     @JsProperty(name = "INT_VEC3")
-    public native String INT_VEC3();
+    public static native String INT_VEC3();
     /**
      * A vector of 4 integer values.
      */
     @JsProperty(name = "INT_VEC4")
-    public native String INT_VEC4();
+    public static native String INT_VEC4();
     /**
      * A single boolean value.
      */
     @JsProperty(name = "BOOL")
-    public native String BOOL();
+    public static native String BOOL();
     /**
      * A vector of 2 boolean values.
      */
     @JsProperty(name = "BOOL_VEC2")
-    public native String BOOL_VEC2();
+    public static native String BOOL_VEC2();
     /**
      * A vector of 3 boolean values.
      */
     @JsProperty(name = "BOOL_VEC3")
-    public native String BOOL_VEC3();
+    public static native String BOOL_VEC3();
     /**
      * A vector of 4 boolean values.
      */
     @JsProperty(name = "BOOL_VEC4")
-    public native String BOOL_VEC4();
+    public static native String BOOL_VEC4();
     /**
      * A 2x2 matrix of floating point values.
      */
     @JsProperty(name = "MAT2")
-    public native String MAT2();
+    public static native String MAT2();
     /**
      * A 3x3 matrix of floating point values.
      */
     @JsProperty(name = "MAT3")
-    public native String MAT3();
+    public static native String MAT3();
     /**
      * A 3x3 matrix of floating point values.
      */
     @JsProperty(name = "MAT4")
-    public native String MAT4();
+    public static native String MAT4();
     /**
      * A 2D sampled texture.
      */
     @JsProperty(name = "SAMPLER_2D")
-    public native String SAMPLER_2D();
+    public static native String SAMPLER_2D();
 
     @JsProperty(name = "SAMPLER_CUBE")
-    public native String SAMPLER_CUBE();
+    public static native String SAMPLER_CUBE();
 }

@@ -16,10 +16,7 @@
 
 package org.cesiumjs.cs.scene.options;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.scene.Camera;
 
@@ -115,5 +112,89 @@ public class CameraFlyToOptions {
 
     @JsConstructor
     public CameraFlyToOptions() {
+    }
+
+    @JsOverlay
+    public final CameraFlyToOptions setDestination(Cartesian3 destination) {
+        this.destinationPos = destination;
+        return this;
+    }
+
+    @JsOverlay
+    public final CameraFlyToOptions setDestination(Rectangle destination) {
+        this.destinationRec = destination;
+        return this;
+    }
+
+    @JsOverlay
+    public final CameraFlyToOptions setOrientation(HeadingPitchRoll orientation) {
+        this.orientation = orientation;
+        return this;
+    }
+
+    @JsOverlay
+    public final CameraFlyToOptions setDuration(double duration) {
+        this.duration = duration;
+        return this;
+    }
+
+    @JsOverlay
+    public final CameraFlyToOptions setComplete(Camera.FlightCompleteCallback complete) {
+        this.complete = complete;
+        return this;
+    }
+
+    @JsOverlay
+    public final CameraFlyToOptions setCancel(Camera.FlightCancelledCallback cancel) {
+        this.cancel = cancel;
+        return this;
+    }
+
+    @JsOverlay
+    public final CameraFlyToOptions setEndTransform(Matrix4 endTransform) {
+        this.endTransform = endTransform;
+        return this;
+    }
+
+    @JsOverlay
+    public final CameraFlyToOptions setMaximumHeight(double maximumHeight) {
+        this.maximumHeight = maximumHeight;
+        return this;
+    }
+
+    @JsOverlay
+    public final CameraFlyToOptions setPitchAdjustHeight(double pitchAdjustHeight) {
+        this.pitchAdjustHeight = pitchAdjustHeight;
+        return this;
+    }
+
+    @JsOverlay
+    public final CameraFlyToOptions setFlyOverLongitude(double flyOverLongitude) {
+        this.flyOverLongitude = flyOverLongitude;
+        return this;
+    }
+
+    @JsOverlay
+    public final CameraFlyToOptions setFlyOverLongitudeWeight(double flyOverLongitudeWeight) {
+        this.flyOverLongitudeWeight = flyOverLongitudeWeight;
+        return this;
+    }
+
+    @JsOverlay
+    public final CameraFlyToOptions setEasingFunction(EasingFunction easingFunction) {
+        this.easingFunction = easingFunction;
+        return this;
+    }
+
+    @JsOverlay
+    public final CameraFlyToOptions setEasingFunctionCallback(EasingFunction.Callback easingFunctionCallback) {
+        this.easingFunctionCallback = easingFunctionCallback;
+        return this;
+    }
+
+    @JsOverlay
+    public final CameraFlyToOptions setOffset(HeadingPitchRange offset) {
+        this.offset = offset;
+        return this;
     }
 }
