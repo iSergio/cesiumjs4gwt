@@ -28,15 +28,15 @@ public class Axis {
      * Denotes the x-axis.
      */
     @JsProperty(name = "X")
-    public native Number X();
+    public static native Number X();
     /**
      * Denotes the y-axis.
      */
     @JsProperty(name = "Y")
-    public native Number Y();
+    public static native Number Y();
     /**
      * Denotes the z-axis.
      */
     @JsProperty(name = "Z")
-    public native Number Z();
+    public static native Number Z();
 }
