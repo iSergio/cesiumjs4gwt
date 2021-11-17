@@ -117,6 +117,7 @@ public class InjectorModule extends AbstractGinModule {
         bind(Clouds.class).asEagerSingleton();
         bind(CloudParameters.class).asEagerSingleton();
 
+        bind(Tiles3DNextPhotogrammetryClassification.class).asEagerSingleton();
         bind(CustomShaders3DTiles.class).asEagerSingleton();
     }
 }
