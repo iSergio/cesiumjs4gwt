@@ -161,28 +161,28 @@ public class ModelExperimentalFromGltfOptions {
     @JsConstructor
     private ModelExperimentalFromGltfOptions() {}
 
-    @JsMethod
+    @JsOverlay
     public static ModelExperimentalFromGltfOptions create(String gltf) {
         ModelExperimentalFromGltfOptions options = new ModelExperimentalFromGltfOptions();
         options.url = gltf;
         return options;
     }
 
-    @JsMethod
+    @JsOverlay
     public static ModelExperimentalFromGltfOptions create(Resource gltf) {
         ModelExperimentalFromGltfOptions options = new ModelExperimentalFromGltfOptions();
         options.gltf = gltf;
         return options;
     }
 
-    @JsMethod
+    @JsOverlay
     public static ModelExperimentalFromGltfOptions create(Uint8Array gltf) {
         ModelExperimentalFromGltfOptions options = new ModelExperimentalFromGltfOptions();
         options.uarray = gltf;
         return options;
     }
 
-    @JsMethod
+    @JsOverlay
     public static ModelExperimentalFromGltfOptions create(Object gltf) {
         ModelExperimentalFromGltfOptions options = new ModelExperimentalFromGltfOptions();
         options.gltfObj = gltf;

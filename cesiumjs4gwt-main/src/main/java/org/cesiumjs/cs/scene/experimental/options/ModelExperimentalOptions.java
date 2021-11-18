@@ -16,10 +16,7 @@
 
 package org.cesiumjs.cs.scene.experimental.options;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.core.Matrix4;
 import org.cesiumjs.cs.core.Resource;
@@ -111,6 +108,7 @@ public class ModelExperimentalOptions {
     @JsConstructor
     private ModelExperimentalOptions() {}
 
+    @JsOverlay
     public static ModelExperimentalOptions create(Resource resource) {
         ModelExperimentalOptions options = new ModelExperimentalOptions();
         options.resource = resource;
