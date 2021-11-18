@@ -80,6 +80,13 @@ public class JsObject extends JavaScriptObject {
         target[name] = value;
     }-*/;
 
+    public final static native void setProperty(Object target, String name, JsObject value) /*-{
+        if (target === undefined) {
+            target = {};
+        }
+        target[name] = value;
+    }-*/;
+
     public final static native Number getNumber(Object target, String name) /*-{
         return target[name];
     }-*/;
@@ -126,6 +133,10 @@ public class JsObject extends JavaScriptObject {
         this[name] = value;
     }-*/;
 
+    public final native void setProperty(String name, JsObject value) /*-{
+        this[name] = value;
+    }-*/;
+
     public final native Number getNumber(String name) /*-{
         return this[name];
     }-*/;
@@ -135,6 +146,10 @@ public class JsObject extends JavaScriptObject {
     }-*/;
 
     public final native String getString(String name) /*-{
+        return this[name];
+    }-*/;
+
+    public final native JsObject getJsObject(String name) /*-{
         return this[name];
     }-*/;
 }

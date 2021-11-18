@@ -18,6 +18,7 @@ package org.cesiumjs.cs.scene.options;
 
 import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.*;
+import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.scene.Camera;
 
 /**
@@ -37,6 +38,8 @@ public class CameraFlyToOptions {
      */
     @JsProperty(name = "destination")
     public Rectangle destinationRec;
+    @JsProperty(name = "orientation")
+    public JsObject orientationDirectionUp;
     /**
      * An object that contains either direction and up properties or heading, pith
      * and roll properties. By default, the direction will point towards the center
@@ -129,6 +132,16 @@ public class CameraFlyToOptions {
     @JsOverlay
     public final CameraFlyToOptions setOrientation(HeadingPitchRoll orientation) {
         this.orientation = orientation;
+        return this;
+    }
+
+    @JsOverlay
+    public final CameraFlyToOptions setOrientation(Cartesian3 direction, Cartesian3 up) {
+        if (this.orientationDirectionUp == JsObject.undefined()) {
+            this.orientationDirectionUp = JsObject.create();
+        }
+        JsObject.setProperty(this.orientationDirectionUp, "direction", direction);
+        JsObject.setProperty(this.orientationDirectionUp, "up", up);
         return this;
     }
 
