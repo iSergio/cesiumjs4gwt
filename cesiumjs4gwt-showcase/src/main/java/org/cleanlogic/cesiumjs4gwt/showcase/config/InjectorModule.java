@@ -122,5 +122,6 @@ public class InjectorModule extends AbstractGinModule {
         bind(CustomShadersModels.class).asEagerSingleton();
         bind(Tiles3DNextCDBYemen.class).asEagerSingleton();
         bind(Tiles3DNextS2Globe.class).asEagerSingleton();
+        bind(ModelExperimental3DModels.class).asEagerSingleton();
     }
 }
