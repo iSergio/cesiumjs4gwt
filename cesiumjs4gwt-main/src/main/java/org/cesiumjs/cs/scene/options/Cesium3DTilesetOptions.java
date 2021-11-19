@@ -23,6 +23,7 @@ import org.cesiumjs.cs.promise.Promise;
 import org.cesiumjs.cs.scene.Cesium3DTileset;
 import org.cesiumjs.cs.scene.PointCloudShading;
 import org.cesiumjs.cs.scene.enums.ClassificationType;
+import org.cesiumjs.cs.scene.experimental.CustomShader;
 
 /**
  * @author Serge Silaev aka iSergio
@@ -351,6 +352,8 @@ public class Cesium3DTilesetOptions {
      */
     @JsProperty
     public boolean debugShowMemoryUsage;
+    @JsProperty
+    public CustomShader customShader;
 
     @JsConstructor
     private Cesium3DTilesetOptions() {

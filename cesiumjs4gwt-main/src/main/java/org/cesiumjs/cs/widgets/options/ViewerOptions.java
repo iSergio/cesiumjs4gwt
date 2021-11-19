@@ -176,11 +176,15 @@ public class ViewerOptions {
      */
     @JsProperty
     public SkyBox skyBox;
+    @JsProperty(name = "skyBox")
+    public boolean enableSkyBox;
     /**
      * Blue sky, and the glow around the Earth's limb. Set to false to turn it off.
      */
     @JsProperty
     public SkyAtmosphere skyAtmosphere;
+    @JsProperty(name = "skyAtmosphere")
+    public boolean enableSkyAtmosphere;
     /**
      * The element or id to be placed into fullscreen mode when the full screen
      * button is pressed. Default: document.body
@@ -241,6 +245,8 @@ public class ViewerOptions {
      */
     @JsProperty
     public Globe globe;
+    @JsProperty(name = "globe")
+    public boolean enableGlobe;
     /**
      * If true and the configuration supports it, use order independent
      * translucency. Default: true

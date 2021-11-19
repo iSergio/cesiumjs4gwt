@@ -19,6 +19,7 @@ package org.cesiumjs.cs.scene;
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.promise.Promise;
 
 /**
@@ -37,7 +38,13 @@ public class Cesium3DTileStyle {
      * property. The expression must return a Color.
      */
     @JsProperty
-    public StyleExpression color;
+    public String color;
+    /**
+     * Gets or sets the StyleExpression object used to evaluate the style's color
+     * property. The expression must return a Color.
+     */
+    @JsProperty(name = "color")
+    public JsObject colorObject;
     /**
      * Gets or sets the object containing application-specific expression that can
      * be explicitly evaluated, e.g., for display in a UI.
@@ -67,6 +74,9 @@ public class Cesium3DTileStyle {
     @JsConstructor
     public Cesium3DTileStyle(String style) {
     }
+
+    @JsConstructor
+    public Cesium3DTileStyle(JsObject style) {}
 
     /**
      * When true, the style is ready and its expressions can be evaluated. When a

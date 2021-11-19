@@ -23,6 +23,7 @@ import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.promise.Promise;
 import org.cesiumjs.cs.scene.enums.Cesium3DTileColorBlendMode;
 import org.cesiumjs.cs.scene.enums.ClassificationType;
+import org.cesiumjs.cs.scene.experimental.CustomShader;
 import org.cesiumjs.cs.scene.options.Cesium3DTilesetOptions;
 
 /**
@@ -134,6 +135,15 @@ public class Cesium3DTileset {
      */
     @JsProperty
     public double cullRequestsWhileMovingMultiplier;
+    /**
+     * A custom shader to apply to all tiles in the tileset. Only used for contents that use ModelExperimental. Using
+     * custom shaders with a Cesium3DTileStyle may lead to undefined behavior.
+     * To enable ModelExperimental, set ExperimentalFeatures.enableModelExperimental to true.
+     *
+     * Default: undefined
+     */
+    @JsProperty
+    public CustomShader customShader;
     /**
      * For debugging only. Determines if only the tiles from last frame should be
      * used for rendering. Defaule: false;

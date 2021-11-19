@@ -17,6 +17,8 @@ package org.cleanlogic.cesiumjs4gwt.showcase.components;
 
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.user.client.ui.*;
+import org.cesiumjs.cs.Cesium;
+import org.cleanlogic.cesiumjs4gwt.showcase.Resources;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -40,7 +42,8 @@ public class ShowcaseTopPanel extends HorizontalPanel {
         logo.setSize("32px", "32px");
         super.add(logo);
         Anchor anchor = new Anchor();
-        String text = "<div class=\"brand\"><a href=\"http://cesiumjs.org/\">Cesium</a> on GWT Examples</div>";
+        String text = "<div class=\"brand\"><a href=\"https://cesium.com\">CesiumJS "
+                + Cesium.version() + "</a> on GWT Examples</div>";
         anchor.setHTML(SafeHtmlUtils.fromTrustedString(text));
         super.add(anchor);
         super.add(searchPanel);

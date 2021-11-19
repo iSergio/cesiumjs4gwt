@@ -20,9 +20,12 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import org.cesiumjs.cs.Cesium;
 import org.cleanlogic.cesiumjs4gwt.showcase.ExampleBean;
+import org.cleanlogic.cesiumjs4gwt.showcase.Resources;
 import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ExampleStore;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -38,16 +41,23 @@ public abstract class AbstractExample extends Composite {
     protected VerticalPanel contentPanel = new VerticalPanel();
     protected HorizontalPanel horizontalPanel = new HorizontalPanel();
     protected ExampleBean example;
+    protected final String version;
 
     public AbstractExample(String name, String description, String[] tags, ExampleStore store) {
-        this(name, description, tags);
+        this(name, description, tags, "");
+        store.addExample(example);
+    }
+
+    public AbstractExample(String name, String description, String[] tags, ExampleStore store, String version) {
+        this(name, description, tags, version);
         store.addExample(example);
     }
 
     /**
      * The constructor.
      */
-    public AbstractExample(String name, String description, String[] tags) {
+    public AbstractExample(String name, String description, String[] tags, String version) {
+        this.version = version;
         for (String sourceCodeUrl : getSourceCodeURLs()) {
             ShowSourceButton butShowSource = new ShowSourceButton("");
             butShowSource.setSourceCodeURL(sourceCodeUrl);
@@ -73,11 +83,20 @@ public abstract class AbstractExample extends Composite {
         for (ShowSourceButton butShowSource : showSourceButtons) {
             horizontalPanel.add(butShowSource);
         }
+
         contentPanel.setSpacing(5);
         contentPanel.getElement().getStyle().setPadding(10, Unit.PX);
         contentPanel.setWidth("100%");
-        contentPanel.add(new HTML("<H1>" + title + "</H1>"));
+        contentPanel.add(new HTML("<H1>" + title + (isNew() ? " New" : "") + "</H1>"));
         contentPanel.add(horizontalPanel);
+    }
+
+    public boolean isNew() {
+        return Cesium.version().equals(this.version);
+    }
+
+    public String getVersion() {
+        return this.version;
     }
 
     /**
