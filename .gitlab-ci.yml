@@ -1,10 +1,10 @@
-image: gis4fun.org/openjdk:8
+image: gis4fun.org/wildfly:20.0.1
 
 variables:
   MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
   MAVEN_CLI_OPTS: "--no-transfer-progress"
   WILDFLY_VERSION: "20.0.1.Final"
-  WILDFLY_BASE_CLI: "./wildfly-$WILDFLY_VERSION/bin/jboss-cli.sh --controller=$WILDFLY_URL --user=$WILDFLY_USER --password=$WILDFLY_PASS --connect"
+  WILDFLY_BASE_CLI: "/opt/wildfly-$WILDFLY_VERSION/bin/jboss-cli.sh --controller=$WILDFLY_URL --user=$WILDFLY_USER --password=$WILDFLY_PASS --connect"
   VERSION: ""
 
 cache:
@@ -89,7 +89,6 @@ deploy:cesiumjs4gwt-showcase:
     - develop
     - tags
   script:
-    - curl https://gis4fun.org/wildfly/wildfly-$WILDFLY_VERSION.tar.gz --output wildfly.tar.gz && tar -zxf wildfly.tar.gz
     - |
       if [[ "${VERSION}" == *-SNAPSHOT ]]; then
         SUFFIX="-SNAPSHOT"
