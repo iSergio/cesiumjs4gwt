@@ -52,7 +52,7 @@ public class Tiles3DNextCDBYemen extends AbstractExample {
     public Tiles3DNextCDBYemen(ShowcaseExampleStore store) {
         super("3D Tiles Next CDB Yemen",
                 "Load a 3D Tile Next tileset converted from CDB",
-                new String[]{"Showcase", "Cesium", "3d", "Viewer", "experimental"}, store, "1.87.1");
+                new String[]{"Showcase", "Cesium", "3d", "Viewer", "experimental"}, store, "1.88");
     }
 
     @Override

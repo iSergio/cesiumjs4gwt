@@ -42,7 +42,7 @@ public class ModelExperimental3DModels extends AbstractExample {
     public ModelExperimental3DModels(ShowcaseExampleStore store) {
         super("Model Experimental 3D Models",
                 "Load glTF models using Model Experimental",
-                new String[]{"Showcase", "Cesium", "3d", "Viewer", "experimental"}, store, "1.87.1");
+                new String[]{"Showcase", "Cesium", "3d", "Viewer", "experimental"}, store, "1.88");
     }
 
     @Override

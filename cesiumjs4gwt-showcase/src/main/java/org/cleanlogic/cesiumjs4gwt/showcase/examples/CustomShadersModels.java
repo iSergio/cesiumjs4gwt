@@ -71,7 +71,7 @@ public class CustomShadersModels extends AbstractExample {
     public CustomShadersModels(ShowcaseExampleStore store) {
         super("Custom Shaders Models",
                 "Create 3D models using glTF 3D Tiles Next",
-                new String[]{"Showcase", "Cesium", "3d", "Viewer", "experimental"}, store, "1.87.1");
+                new String[]{"Showcase", "Cesium", "3d", "Viewer", "experimental"}, store, "1.88");
     }
 
     @Override
