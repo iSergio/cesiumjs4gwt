@@ -57,7 +57,7 @@ public class Tiles3DNextPhotogrammetryClassification  extends AbstractExample {
     public Tiles3DNextPhotogrammetryClassification(ShowcaseExampleStore store) {
         super("3D Tiles Next Photogrammetry Classification",
                 "Load a photogrammetry dataset with feature ID textures from EXT_mesh_features",
-                new String[]{"Showcase", "Cesium", "3d", "Viewer", "experimental"}, store, "1.87.1");
+                new String[]{"Showcase", "Cesium", "3d", "Viewer", "experimental"}, store, "1.88");
     }
 
     @Override

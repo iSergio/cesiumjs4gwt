@@ -37,7 +37,7 @@ public class CustomShaders3DTiles  extends AbstractExample {
     public CustomShaders3DTiles(ShowcaseExampleStore store) {
         super("Custom Shaders 3D Tiles",
                 "Experimental custom shader",
-                new String[]{"Showcase", "Cesium", "3d", "Viewer", "experimental"}, store, "1.87.1");
+                new String[]{"Showcase", "Cesium", "3d", "Viewer", "experimental"}, store, "1.88");
     }
 
     @Override
