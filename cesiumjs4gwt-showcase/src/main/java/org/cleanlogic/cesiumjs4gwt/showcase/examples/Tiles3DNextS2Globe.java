@@ -48,7 +48,7 @@ public class Tiles3DNextS2Globe extends AbstractExample {
     public Tiles3DNextS2Globe(ShowcaseExampleStore store) {
         super("3D Tiles Next S2 Globe",
                 "Load a global scale 3D Tiles Next tileset that uses 3DTILES_bounding_volume_S2",
-                new String[]{"Showcase", "Cesium", "3d", "Viewer"}, store, "1.87.1");
+                new String[]{"Showcase", "Cesium", "3d", "Viewer"}, store, "1.88");
     }
 
     @Override
