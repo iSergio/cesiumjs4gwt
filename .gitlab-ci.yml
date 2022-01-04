@@ -21,7 +21,7 @@ stages:
 
 default:
   tags:
-    - docker
+    - wildfly
   interruptible: true
   before_script:
     - |
