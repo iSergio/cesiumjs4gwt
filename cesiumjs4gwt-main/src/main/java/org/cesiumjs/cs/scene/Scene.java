@@ -110,14 +110,6 @@ public class Scene {
     @JsProperty
     public boolean debugShowFrustums;
     /**
-     * This property is for debugging only; it is not for production use. Displays
-     * depth information for the indicated frustum
-     * <p>
-     * Default: false
-     */
-    @JsProperty
-    public boolean debugShowGlobeDepth;
-    /**
      * The eye separation distance in meters for use with cardboard or WebVR.
      */
     @JsProperty
