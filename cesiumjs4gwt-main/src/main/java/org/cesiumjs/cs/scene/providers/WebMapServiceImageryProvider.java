@@ -91,6 +91,18 @@ public class WebMapServiceImageryProvider implements ImageryProvider {
     public native Event errorEvent();
 
     /**
+     * Gets the getFeatureInfo URL of the WMS server as {@link Resource}.
+     */
+    @JsProperty(name = "getFeatureInfoUrl")
+    public native Resource getFeatureInfoUrl();
+
+    /**
+     * Gets the getFeatureInfo URL of the WMS server as String.
+     */
+    @JsProperty(name = "getFeatureInfoUrl")
+    public native Resource getFeatureInfoUrlStr();
+
+    /**
      * Gets a value indicating whether or not the images provided by this imagery
      * provider include an alpha channel. If this property is false, an alpha
      * channel, if present, will be ignored. If this property is true, any images

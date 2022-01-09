@@ -55,6 +55,7 @@ public class CustomShadersModels extends AbstractExample {
     private final String pawns = GWT.getModuleBaseURL() + "SampleData/models/CesiumDrone/Pawns.glb";
     private final String milkTruck = GWT.getModuleBaseURL() + "SampleData/models/CesiumMilkTruck/CesiumMilkTruck.glb";
     private final String groundVehicle = GWT.getModuleBaseURL() + "SampleData/models/GroundVehicle/GroundVehicle.glb";
+    private final String pointCloudWave = GWT.getModuleBaseURL() + "SampleData/models/PointCloudWave/PointCloudWave.glb";
 
     private CustomShader expandModelShader;
     private CustomShader textureUniformShader;
@@ -63,6 +64,7 @@ public class CustomShadersModels extends AbstractExample {
     private CustomShader checkerboardHolesShader;
     private CustomShader gradientShader;
     private CustomShader modifyPbrShader;
+    private CustomShader pointCloudWaveShader;
 
     private boolean needsDrag = false;
     private boolean dragActive = false;
@@ -189,11 +191,50 @@ public class CustomShadersModels extends AbstractExample {
                         "}",
                 })));
 
-
+        pointCloudWaveShader = new CustomShader(new CustomShaderOptions()
+                .addUniform("u_time", UniformType.FLOAT(), 0)
+                .setVertexShaderText(String.join("\n", new String[] {
+                        "void vertexMain(VertexInput vsInput, inout czm_modelVertexOutput vsOutput)",
+                        "{",
+                        // This model's x and y coordinates are in the range [0, 1], which
+                        // conveniently doubles as UV coordinates.
+                        "    vec2 uv = vsInput.attributes.positionMC.xy;",
+                        // Make the point cloud undulate in a complex wave that varies in
+                        // both space and time. The amplitude is based on the original shape
+                        // of the point cloud (which already is a wavy surface). The wave
+                        // is computed relative to the center of the model, hence the
+                        // transformations from [0, 1] -> [-1, 1] -> [0, 1]
+                        "    float amplitude = 2.0 * vsInput.attributes.positionMC.z - 1.0;",
+                        "    float wave = amplitude * sin(2.0 * czm_pi * uv.x - 2.0 * u_time) * sin(u_time);",
+                        "    vsOutput.positionMC.z = 0.5 + 0.5 * wave;",
+                        // Make the points pulse in and out by changing their size
+                        "    vsOutput.pointSize = 10.0 + 5.0 * sin(u_time);",
+                        "}",
+                }))
+                .setFragmentShaderText(String.join("\n", new String[] {
+                        "void fragmentMain(FragmentInput fsInput, inout czm_modelMaterial material)",
+                        "{",
+                        // Make the points circular instead of square
+                        "    float distance = length(gl_PointCoord - 0.5);",
+                        "    if (distance > 0.5) {",
+                        "        discard;",
+                        "    }",
+                        // Make a sinusoid color palette that moves in the general direction
+                        // of the wave, but at a different speed.
+                        // Coefficients were chosen arbitrarily
+                        "    vec2 uv = fsInput.attributes.positionMC.xy;",
+                        "    material.diffuse = 0.2 * fsInput.attributes.color_0.rgb;",
+                        "    material.diffuse += vec3(0.2, 0.3, 0.4) + vec3(0.2, 0.3, 0.4) * sin(2.0 * czm_pi * vec3(3.0, 2.0, 1.0) * uv.x - 3.0 * u_time);",
+                        "}",
+                })));
 
         // Event handlers =====================================================
         double startTime = performanceNow();
-        csVPanel.getViewer().scene().postUpdate().addEventListener((Event.Listener) o -> textureUniformShader.setUniform("u_time", (performanceNow() - startTime) / 1000));
+        csVPanel.getViewer().scene().postUpdate().addEventListener((Event.Listener) o -> {
+            double elapsedTimeSeconds = (performanceNow() - startTime) / 1000;
+            textureUniformShader.setUniform("u_time", elapsedTimeSeconds);
+            pointCloudWaveShader.setUniform("u_time", elapsedTimeSeconds);
+        });
 
         Cartesian2 dragCenter = new Cartesian2();
         csVPanel.getViewer().screenSpaceEventHandler().setInputAction(event -> {
@@ -249,6 +290,7 @@ public class CustomShadersModels extends AbstractExample {
         listBox.addItem("Procedural Gradient Texture");
         listBox.addItem("Modify PBR values via Mouse Drag");
         listBox.addItem("Expand Model via Mouse Drag");
+        listBox.addItem("Animated Point Cloud");
         listBox.addChangeHandler(event -> {
             String value = ((ListBox) event.getSource()).getSelectedItemText();
             switch (value) {
@@ -259,6 +301,7 @@ public class CustomShadersModels extends AbstractExample {
                 case "Procedural Gradient Texture": selectModel(balloon, gradientShader); needsDrag = false; break;
                 case "Modify PBR values via Mouse Drag": selectModel(groundVehicle, modifyPbrShader); needsDrag = true; break;
                 case "Expand Model via Mouse Drag": selectModel(milkTruck, expandModelShader); needsDrag = true; break;
+                case "Animated Point Cloud": selectModel(pointCloudWave, pointCloudWaveShader); needsDrag = false; break;
                 default: break;
             }
         });

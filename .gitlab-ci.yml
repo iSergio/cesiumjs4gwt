@@ -41,39 +41,31 @@ default:
 
 compile:cesiumjs4gwt-main:
   stage: build
+  needs: []
   script:
     - mvn $MAVEN_CLI_OPTS -pl cesiumjs4gwt-main -DskipTests=true compile
 
 compile:cesiumjs4gwt-showcase:
   stage: build
+  needs: ["compile:cesiumjs4gwt-main"]
   script:
     - mvn $MAVEN_CLI_OPTS -pl cesiumjs4gwt-showcase -DskipTests=true compile -am -DskipTests=true
 
 package:cesiumjs4gwt-main:
   stage: package
+  needs: ["compile:cesiumjs4gwt-main"]
   only:
-    - master
+#    - master
     - develop
     - tags
   script:
     - mvn $MAVEN_CLI_OPTS -pl cesiumjs4gwt-main -DskipTests=true package
 
-deploy:cesiumjs4gwt-main:
-  stage: deploy
-  only:
-    - master
-    - develop
-    - tags
-  script:
-    - mvn $MAVEN_CLI_OPTS -pl cesiumjs4gwt-main -DskipTests=true deploy
-  artifacts:
-    paths:
-      - cesiumjs4gwt-main/target/*.jar
-
 package:cesiumjs4gwt-showcase:
   stage: package
+  needs: ["package:cesiumjs4gwt-main"]
   only:
-    - master
+#    - master
     - develop
     - tags
   script:
@@ -82,10 +74,24 @@ package:cesiumjs4gwt-showcase:
     paths:
       - cesiumjs4gwt-showcase/target/*.war
 
+deploy:cesiumjs4gwt-main:
+  stage: deploy
+  needs: ["package:cesiumjs4gwt-main"]
+  only:
+#    - master
+    - develop
+    - tags
+  script:
+    - mvn $MAVEN_CLI_OPTS -pl cesiumjs4gwt-main -DskipTests=true deploy
+  artifacts:
+    paths:
+      - cesiumjs4gwt-main/target/*.jar
+
 deploy:cesiumjs4gwt-showcase:
   stage: deploy
+  needs: ["package:cesiumjs4gwt-main", "package:cesiumjs4gwt-showcase"]
   only:
-    - master
+#    - master
     - develop
     - tags
   script:

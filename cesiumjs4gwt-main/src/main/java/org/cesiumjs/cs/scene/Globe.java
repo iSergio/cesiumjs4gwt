@@ -112,6 +112,12 @@ public class Globe {
     @JsProperty
     public ImageryLayerCollection imageryLayers;
     /**
+     * A multiplier to adjust terrain lambert lighting. This number is multiplied by the result of czm_getLambertDiffuse in GlobeFS.glsl. This only takes effect when enableLighting is true.
+     * Default: 0.9
+     */
+    @JsProperty
+    public double lambertDiffuseMultiplier;
+    /**
      * The distance where lighting resumes. This only takes effect when
      * enableLighting is true. Default: 9000000.0
      */
