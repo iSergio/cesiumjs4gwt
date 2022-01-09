@@ -55,7 +55,7 @@ package:cesiumjs4gwt-main:
   stage: package
   needs: ["compile:cesiumjs4gwt-main"]
   only:
-    - master
+#    - master
     - develop
     - tags
   script:
@@ -65,7 +65,7 @@ package:cesiumjs4gwt-showcase:
   stage: package
   needs: ["package:cesiumjs4gwt-main"]
   only:
-    - master
+#    - master
     - develop
     - tags
   script:
@@ -78,7 +78,7 @@ deploy:cesiumjs4gwt-main:
   stage: deploy
   needs: ["package:cesiumjs4gwt-main"]
   only:
-    - master
+#    - master
     - develop
     - tags
   script:
@@ -89,9 +89,9 @@ deploy:cesiumjs4gwt-main:
 
 deploy:cesiumjs4gwt-showcase:
   stage: deploy
-  needs: ["package:cesiumjs4gwt-showcase"]
+  needs: ["package:cesiumjs4gwt-main", "package:cesiumjs4gwt-showcase"]
   only:
-    - master
+#    - master
     - develop
     - tags
   script:
