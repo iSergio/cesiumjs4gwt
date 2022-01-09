@@ -550,6 +550,14 @@ public class Cesium3DTileset {
     public native Ellipsoid ellipsoid();
 
     /**
+     * If true, ModelExperimental will be used instead of {@link Model} for each tile with a glTF or 3D Tiles 1.0
+     * content (where applicable).
+     * The value defaults to {@link org.cesiumjs.cs.Cesium.ExperimentalFeatures#enableModelExperimental}.
+     */
+    @JsProperty
+    public boolean enableModelExperimental;
+
+    /**
      * Gets the tileset's extensions object property.
      */
     @JsProperty(name = "extensions")
