@@ -21,18 +21,18 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./AxisAlignedBoundingBox-4171efdd', './Transforms-86b6fa28', './Matrix2-91d5b6af', './when-4bbc8319', './TerrainEncoding-304a796a', './ComponentDatatype-f194c48b', './OrientedBoundingBox-79e3c3fe', './RuntimeError-346a3079', './WebMercatorProjection-c196164d', './createTaskProcessorWorker', './combine-83860057', './AttributeCompression-1f6679e1', './WebGLConstants-1c8239cc', './EllipsoidTangentPlane-164dcfc9', './IntersectionTests-26599c5e', './Plane-4f333bc4'], (function (AxisAlignedBoundingBox, Transforms, Matrix2, when, TerrainEncoding, ComponentDatatype, OrientedBoundingBox, RuntimeError, WebMercatorProjection, createTaskProcessorWorker, combine, AttributeCompression, WebGLConstants, EllipsoidTangentPlane, IntersectionTests, Plane) { 'use strict';
+define(['./AxisAlignedBoundingBox-b11cd8c8', './Transforms-f5d400d6', './Matrix2-57f130bc', './when-4bbc8319', './TerrainEncoding-b545d35b', './ComponentDatatype-17ffa790', './OrientedBoundingBox-452622af', './RuntimeError-1349fdaf', './WebMercatorProjection-3b4197b5', './createTaskProcessorWorker', './combine-e9466e32', './AttributeCompression-dae39175', './WebGLConstants-508b9636', './EllipsoidTangentPlane-bc59b943', './IntersectionTests-e14e2851', './Plane-0f8ffca6'], (function (AxisAlignedBoundingBox, Transforms, Matrix2, when, TerrainEncoding, ComponentDatatype, OrientedBoundingBox, RuntimeError, WebMercatorProjection, createTaskProcessorWorker, combine, AttributeCompression, WebGLConstants, EllipsoidTangentPlane, IntersectionTests, Plane) { 'use strict';
 
-  var sizeOfUint16 = Uint16Array.BYTES_PER_ELEMENT;
-  var sizeOfInt32 = Int32Array.BYTES_PER_ELEMENT;
-  var sizeOfUint32 = Uint32Array.BYTES_PER_ELEMENT;
-  var sizeOfFloat = Float32Array.BYTES_PER_ELEMENT;
-  var sizeOfDouble = Float64Array.BYTES_PER_ELEMENT;
+  const sizeOfUint16 = Uint16Array.BYTES_PER_ELEMENT;
+  const sizeOfInt32 = Int32Array.BYTES_PER_ELEMENT;
+  const sizeOfUint32 = Uint32Array.BYTES_PER_ELEMENT;
+  const sizeOfFloat = Float32Array.BYTES_PER_ELEMENT;
+  const sizeOfDouble = Float64Array.BYTES_PER_ELEMENT;
 
   function indexOfEpsilon(arr, elem, elemType) {
     elemType = when.defaultValue(elemType, ComponentDatatype.CesiumMath);
-    var count = arr.length;
-    for (var i = 0; i < count; ++i) {
+    const count = arr.length;
+    for (let i = 0; i < count; ++i) {
       if (elemType.equalsEpsilon(arr[i], elem, ComponentDatatype.CesiumMath.EPSILON12)) {
         return i;
       }
@@ -48,7 +48,7 @@ define(['./AxisAlignedBoundingBox-4171efdd', './Transforms-86b6fa28', './Matrix2
     parameters.ellipsoid = Matrix2.Ellipsoid.clone(parameters.ellipsoid);
     parameters.rectangle = Matrix2.Rectangle.clone(parameters.rectangle);
 
-    var statistics = processBuffer(
+    const statistics = processBuffer(
       parameters.buffer,
       parameters.relativeToCenter,
       parameters.ellipsoid,
@@ -61,9 +61,9 @@ define(['./AxisAlignedBoundingBox-4171efdd', './Transforms-86b6fa28', './Matrix2
       parameters.negativeAltitudeExponentBias,
       parameters.negativeElevationThreshold
     );
-    var vertices = statistics.vertices;
+    const vertices = statistics.vertices;
     transferableObjects.push(vertices.buffer);
-    var indices = statistics.indices;
+    const indices = statistics.indices;
     transferableObjects.push(indices.buffer);
 
     return {
@@ -85,11 +85,11 @@ define(['./AxisAlignedBoundingBox-4171efdd', './Transforms-86b6fa28', './Matrix2
     };
   }
 
-  var scratchCartographic = new Matrix2.Cartographic();
-  var scratchCartesian = new Matrix2.Cartesian3();
-  var minimumScratch = new Matrix2.Cartesian3();
-  var maximumScratch = new Matrix2.Cartesian3();
-  var matrix4Scratch = new Matrix2.Matrix4();
+  const scratchCartographic = new Matrix2.Cartographic();
+  const scratchCartesian = new Matrix2.Cartesian3();
+  const minimumScratch = new Matrix2.Cartesian3();
+  const maximumScratch = new Matrix2.Cartesian3();
+  const matrix4Scratch = new Matrix2.Matrix4();
 
   function processBuffer(
     buffer,
@@ -104,11 +104,11 @@ define(['./AxisAlignedBoundingBox-4171efdd', './Transforms-86b6fa28', './Matrix2
     negativeAltitudeExponentBias,
     negativeElevationThreshold
   ) {
-    var geographicWest;
-    var geographicSouth;
-    var geographicEast;
-    var geographicNorth;
-    var rectangleWidth, rectangleHeight;
+    let geographicWest;
+    let geographicSouth;
+    let geographicEast;
+    let geographicNorth;
+    let rectangleWidth, rectangleHeight;
 
     if (!when.defined(rectangle)) {
       geographicWest = ComponentDatatype.CesiumMath.toRadians(nativeRectangle.west);
@@ -127,14 +127,17 @@ define(['./AxisAlignedBoundingBox-4171efdd', './Transforms-86b6fa28', './Matrix2
     }
 
     // Keep track of quad borders so we can remove duplicates around the borders
-    var quadBorderLatitudes = [geographicSouth, geographicNorth];
-    var quadBorderLongitudes = [geographicWest, geographicEast];
+    const quadBorderLatitudes = [geographicSouth, geographicNorth];
+    const quadBorderLongitudes = [geographicWest, geographicEast];
 
-    var fromENU = Transforms.Transforms.eastNorthUpToFixedFrame(relativeToCenter, ellipsoid);
-    var toENU = Matrix2.Matrix4.inverseTransformation(fromENU, matrix4Scratch);
+    const fromENU = Transforms.Transforms.eastNorthUpToFixedFrame(
+      relativeToCenter,
+      ellipsoid
+    );
+    const toENU = Matrix2.Matrix4.inverseTransformation(fromENU, matrix4Scratch);
 
-    var southMercatorY;
-    var oneOverMercatorHeight;
+    let southMercatorY;
+    let oneOverMercatorHeight;
     if (includeWebMercatorT) {
       southMercatorY = WebMercatorProjection.WebMercatorProjection.geodeticLatitudeToMercatorAngle(
         geographicSouth
@@ -145,42 +148,42 @@ define(['./AxisAlignedBoundingBox-4171efdd', './Transforms-86b6fa28', './Matrix2
           southMercatorY);
     }
 
-    var hasExaggeration = exaggeration !== 1.0;
-    var includeGeodeticSurfaceNormals = hasExaggeration;
+    const hasExaggeration = exaggeration !== 1.0;
+    const includeGeodeticSurfaceNormals = hasExaggeration;
 
-    var dv = new DataView(buffer);
+    const dv = new DataView(buffer);
 
-    var minHeight = Number.POSITIVE_INFINITY;
-    var maxHeight = Number.NEGATIVE_INFINITY;
+    let minHeight = Number.POSITIVE_INFINITY;
+    let maxHeight = Number.NEGATIVE_INFINITY;
 
-    var minimum = minimumScratch;
+    const minimum = minimumScratch;
     minimum.x = Number.POSITIVE_INFINITY;
     minimum.y = Number.POSITIVE_INFINITY;
     minimum.z = Number.POSITIVE_INFINITY;
 
-    var maximum = maximumScratch;
+    const maximum = maximumScratch;
     maximum.x = Number.NEGATIVE_INFINITY;
     maximum.y = Number.NEGATIVE_INFINITY;
     maximum.z = Number.NEGATIVE_INFINITY;
 
     // Compute sizes
-    var offset = 0;
-    var size = 0;
-    var indicesSize = 0;
-    var quadSize;
-    var quad;
+    let offset = 0;
+    let size = 0;
+    let indicesSize = 0;
+    let quadSize;
+    let quad;
     for (quad = 0; quad < 4; ++quad) {
-      var o = offset;
+      let o = offset;
       quadSize = dv.getUint32(o, true);
       o += sizeOfUint32;
 
-      var x = ComponentDatatype.CesiumMath.toRadians(dv.getFloat64(o, true) * 180.0);
+      const x = ComponentDatatype.CesiumMath.toRadians(dv.getFloat64(o, true) * 180.0);
       o += sizeOfDouble;
       if (indexOfEpsilon(quadBorderLongitudes, x) === -1) {
         quadBorderLongitudes.push(x);
       }
 
-      var y = ComponentDatatype.CesiumMath.toRadians(dv.getFloat64(o, true) * 180.0);
+      const y = ComponentDatatype.CesiumMath.toRadians(dv.getFloat64(o, true) * 180.0);
       o += sizeOfDouble;
       if (indexOfEpsilon(quadBorderLatitudes, y) === -1) {
         quadBorderLatitudes.push(y);
@@ -188,7 +191,7 @@ define(['./AxisAlignedBoundingBox-4171efdd', './Transforms-86b6fa28', './Matrix2
 
       o += 2 * sizeOfDouble; // stepX + stepY
 
-      var c = dv.getInt32(o, true); // Read point count
+      let c = dv.getInt32(o, true); // Read point count
       o += sizeOfInt32;
       size += c;
 
@@ -199,67 +202,67 @@ define(['./AxisAlignedBoundingBox-4171efdd', './Transforms-86b6fa28', './Matrix2
     }
 
     // Quad Border points to remove duplicates
-    var quadBorderPoints = [];
-    var quadBorderIndices = [];
+    const quadBorderPoints = [];
+    const quadBorderIndices = [];
 
     // Create arrays
-    var positions = new Array(size);
-    var uvs = new Array(size);
-    var heights = new Array(size);
-    var webMercatorTs = includeWebMercatorT ? new Array(size) : [];
-    var geodeticSurfaceNormals = includeGeodeticSurfaceNormals
+    const positions = new Array(size);
+    const uvs = new Array(size);
+    const heights = new Array(size);
+    const webMercatorTs = includeWebMercatorT ? new Array(size) : [];
+    const geodeticSurfaceNormals = includeGeodeticSurfaceNormals
       ? new Array(size)
       : [];
-    var indices = new Array(indicesSize);
+    const indices = new Array(indicesSize);
 
     // Points are laid out in rows starting at SW, so storing border points as we
     //  come across them all points will be adjacent.
-    var westBorder = [];
-    var southBorder = [];
-    var eastBorder = [];
-    var northBorder = [];
+    const westBorder = [];
+    const southBorder = [];
+    const eastBorder = [];
+    const northBorder = [];
 
     // Each tile is split into 4 parts
-    var pointOffset = 0;
-    var indicesOffset = 0;
+    let pointOffset = 0;
+    let indicesOffset = 0;
     offset = 0;
     for (quad = 0; quad < 4; ++quad) {
       quadSize = dv.getUint32(offset, true);
       offset += sizeOfUint32;
-      var startQuad = offset;
+      const startQuad = offset;
 
-      var originX = ComponentDatatype.CesiumMath.toRadians(dv.getFloat64(offset, true) * 180.0);
+      const originX = ComponentDatatype.CesiumMath.toRadians(dv.getFloat64(offset, true) * 180.0);
       offset += sizeOfDouble;
 
-      var originY = ComponentDatatype.CesiumMath.toRadians(dv.getFloat64(offset, true) * 180.0);
+      const originY = ComponentDatatype.CesiumMath.toRadians(dv.getFloat64(offset, true) * 180.0);
       offset += sizeOfDouble;
 
-      var stepX = ComponentDatatype.CesiumMath.toRadians(dv.getFloat64(offset, true) * 180.0);
-      var halfStepX = stepX * 0.5;
+      const stepX = ComponentDatatype.CesiumMath.toRadians(dv.getFloat64(offset, true) * 180.0);
+      const halfStepX = stepX * 0.5;
       offset += sizeOfDouble;
 
-      var stepY = ComponentDatatype.CesiumMath.toRadians(dv.getFloat64(offset, true) * 180.0);
-      var halfStepY = stepY * 0.5;
+      const stepY = ComponentDatatype.CesiumMath.toRadians(dv.getFloat64(offset, true) * 180.0);
+      const halfStepY = stepY * 0.5;
       offset += sizeOfDouble;
 
-      var numPoints = dv.getInt32(offset, true);
+      const numPoints = dv.getInt32(offset, true);
       offset += sizeOfInt32;
 
-      var numFaces = dv.getInt32(offset, true);
+      const numFaces = dv.getInt32(offset, true);
       offset += sizeOfInt32;
 
-      //var level = dv.getInt32(offset, true);
+      //const level = dv.getInt32(offset, true);
       offset += sizeOfInt32;
 
       // Keep track of quad indices to overall tile indices
-      var indicesMapping = new Array(numPoints);
-      for (var i = 0; i < numPoints; ++i) {
-        var longitude = originX + dv.getUint8(offset++) * stepX;
+      const indicesMapping = new Array(numPoints);
+      for (let i = 0; i < numPoints; ++i) {
+        const longitude = originX + dv.getUint8(offset++) * stepX;
         scratchCartographic.longitude = longitude;
-        var latitude = originY + dv.getUint8(offset++) * stepY;
+        const latitude = originY + dv.getUint8(offset++) * stepY;
         scratchCartographic.latitude = latitude;
 
-        var height = dv.getFloat32(offset, true);
+        let height = dv.getFloat32(offset, true);
         offset += sizeOfFloat;
 
         // In order to support old clients, negative altitude values are stored as
@@ -279,7 +282,7 @@ define(['./AxisAlignedBoundingBox-4171efdd', './Transforms-86b6fa28', './Matrix2
           indexOfEpsilon(quadBorderLongitudes, longitude) !== -1 ||
           indexOfEpsilon(quadBorderLatitudes, latitude) !== -1
         ) {
-          var index = indexOfEpsilon(
+          const index = indexOfEpsilon(
             quadBorderPoints,
             scratchCartographic,
             Matrix2.Cartographic
@@ -320,7 +323,7 @@ define(['./AxisAlignedBoundingBox-4171efdd', './Transforms-86b6fa28', './Matrix2
         maxHeight = Math.max(height, maxHeight);
         heights[pointOffset] = height;
 
-        var pos = ellipsoid.cartographicToCartesian(scratchCartographic);
+        const pos = ellipsoid.cartographicToCartesian(scratchCartographic);
         positions[pointOffset] = pos;
 
         if (includeWebMercatorT) {
@@ -331,7 +334,7 @@ define(['./AxisAlignedBoundingBox-4171efdd', './Transforms-86b6fa28', './Matrix2
         }
 
         if (includeGeodeticSurfaceNormals) {
-          var normal = ellipsoid.geodeticSurfaceNormal(pos);
+          const normal = ellipsoid.geodeticSurfaceNormal(pos);
           geodeticSurfaceNormals[pointOffset] = normal;
         }
 
@@ -340,9 +343,9 @@ define(['./AxisAlignedBoundingBox-4171efdd', './Transforms-86b6fa28', './Matrix2
         Matrix2.Cartesian3.minimumByComponent(scratchCartesian, minimum, minimum);
         Matrix2.Cartesian3.maximumByComponent(scratchCartesian, maximum, maximum);
 
-        var u = (longitude - geographicWest) / (geographicEast - geographicWest);
+        let u = (longitude - geographicWest) / (geographicEast - geographicWest);
         u = ComponentDatatype.CesiumMath.clamp(u, 0.0, 1.0);
-        var v =
+        let v =
           (latitude - geographicSouth) / (geographicNorth - geographicSouth);
         v = ComponentDatatype.CesiumMath.clamp(v, 0.0, 1.0);
 
@@ -350,8 +353,8 @@ define(['./AxisAlignedBoundingBox-4171efdd', './Transforms-86b6fa28', './Matrix2
         ++pointOffset;
       }
 
-      var facesElementCount = numFaces * 3;
-      for (var j = 0; j < facesElementCount; ++j, ++indicesOffset) {
+      const facesElementCount = numFaces * 3;
+      for (let j = 0; j < facesElementCount; ++j, ++indicesOffset) {
         indices[indicesOffset] = indicesMapping[dv.getUint16(offset, true)];
         offset += sizeOfUint16;
       }
@@ -371,11 +374,11 @@ define(['./AxisAlignedBoundingBox-4171efdd', './Transforms-86b6fa28', './Matrix2
       geodeticSurfaceNormals.length = pointOffset;
     }
 
-    var vertexCountWithoutSkirts = pointOffset;
-    var indexCountWithoutSkirts = indicesOffset;
+    const vertexCountWithoutSkirts = pointOffset;
+    const indexCountWithoutSkirts = indicesOffset;
 
     // Add skirt points
-    var skirtOptions = {
+    const skirtOptions = {
       hMin: minHeight,
       lastBorderPoint: undefined,
       skirtHeight: skirtHeight,
@@ -400,7 +403,7 @@ define(['./AxisAlignedBoundingBox-4171efdd', './Transforms-86b6fa28', './Matrix2
       return b.cartographic.longitude - a.cartographic.longitude;
     });
 
-    var percentage = 0.00001;
+    const percentage = 0.00001;
     addSkirt(
       positions,
       heights,
@@ -455,10 +458,10 @@ define(['./AxisAlignedBoundingBox-4171efdd', './Transforms-86b6fa28', './Matrix2
     // Since the corner between the north and west sides is in the west array, generate the last
     //  two triangles between the last north vertex and the first west vertex
     if (westBorder.length > 0 && northBorder.length > 0) {
-      var firstBorderIndex = westBorder[0].index;
-      var firstSkirtIndex = vertexCountWithoutSkirts;
-      var lastBorderIndex = northBorder[northBorder.length - 1].index;
-      var lastSkirtIndex = positions.length - 1;
+      const firstBorderIndex = westBorder[0].index;
+      const firstSkirtIndex = vertexCountWithoutSkirts;
+      const lastBorderIndex = northBorder[northBorder.length - 1].index;
+      const lastSkirtIndex = positions.length - 1;
 
       indices.push(
         lastBorderIndex,
@@ -472,8 +475,8 @@ define(['./AxisAlignedBoundingBox-4171efdd', './Transforms-86b6fa28', './Matrix2
 
     size = positions.length; // Get new size with skirt vertices
 
-    var boundingSphere3D = Transforms.BoundingSphere.fromPoints(positions);
-    var orientedBoundingBox;
+    const boundingSphere3D = Transforms.BoundingSphere.fromPoints(positions);
+    let orientedBoundingBox;
     if (when.defined(rectangle)) {
       orientedBoundingBox = OrientedBoundingBox.OrientedBoundingBox.fromRectangle(
         rectangle,
@@ -483,15 +486,15 @@ define(['./AxisAlignedBoundingBox-4171efdd', './Transforms-86b6fa28', './Matrix2
       );
     }
 
-    var occluder = new TerrainEncoding.EllipsoidalOccluder(ellipsoid);
-    var occludeePointInScaledSpace = occluder.computeHorizonCullingPointPossiblyUnderEllipsoid(
+    const occluder = new TerrainEncoding.EllipsoidalOccluder(ellipsoid);
+    const occludeePointInScaledSpace = occluder.computeHorizonCullingPointPossiblyUnderEllipsoid(
       relativeToCenter,
       positions,
       minHeight
     );
 
-    var aaBox = new AxisAlignedBoundingBox.AxisAlignedBoundingBox(minimum, maximum, relativeToCenter);
-    var encoding = new TerrainEncoding.TerrainEncoding(
+    const aaBox = new AxisAlignedBoundingBox.AxisAlignedBoundingBox(minimum, maximum, relativeToCenter);
+    const encoding = new TerrainEncoding.TerrainEncoding(
       relativeToCenter,
       aaBox,
       skirtOptions.hMin,
@@ -503,10 +506,10 @@ define(['./AxisAlignedBoundingBox-4171efdd', './Transforms-86b6fa28', './Matrix2
       exaggeration,
       exaggerationRelativeHeight
     );
-    var vertices = new Float32Array(size * encoding.stride);
+    const vertices = new Float32Array(size * encoding.stride);
 
-    var bufferIndex = 0;
-    for (var k = 0; k < size; ++k) {
+    let bufferIndex = 0;
+    for (let k = 0; k < size; ++k) {
       bufferIndex = encoding.encode(
         vertices,
         bufferIndex,
@@ -519,22 +522,22 @@ define(['./AxisAlignedBoundingBox-4171efdd', './Transforms-86b6fa28', './Matrix2
       );
     }
 
-    var westIndicesSouthToNorth = westBorder
+    const westIndicesSouthToNorth = westBorder
       .map(function (vertex) {
         return vertex.index;
       })
       .reverse();
-    var southIndicesEastToWest = southBorder
+    const southIndicesEastToWest = southBorder
       .map(function (vertex) {
         return vertex.index;
       })
       .reverse();
-    var eastIndicesNorthToSouth = eastBorder
+    const eastIndicesNorthToSouth = eastBorder
       .map(function (vertex) {
         return vertex.index;
       })
       .reverse();
-    var northIndicesWestToEast = northBorder
+    const northIndicesWestToEast = northBorder
       .map(function (vertex) {
         return vertex.index;
       })
@@ -581,21 +584,21 @@ define(['./AxisAlignedBoundingBox-4171efdd', './Transforms-86b6fa28', './Matrix2
     eastOrWest,
     cornerFudge
   ) {
-    var count = borderPoints.length;
-    for (var j = 0; j < count; ++j) {
-      var borderPoint = borderPoints[j];
-      var borderCartographic = borderPoint.cartographic;
-      var borderIndex = borderPoint.index;
-      var currentIndex = positions.length;
+    const count = borderPoints.length;
+    for (let j = 0; j < count; ++j) {
+      const borderPoint = borderPoints[j];
+      const borderCartographic = borderPoint.cartographic;
+      const borderIndex = borderPoint.index;
+      const currentIndex = positions.length;
 
-      var longitude = borderCartographic.longitude;
-      var latitude = borderCartographic.latitude;
+      const longitude = borderCartographic.longitude;
+      let latitude = borderCartographic.latitude;
       latitude = ComponentDatatype.CesiumMath.clamp(
         latitude,
         -ComponentDatatype.CesiumMath.PI_OVER_TWO,
         ComponentDatatype.CesiumMath.PI_OVER_TWO
       ); // Don't go over the poles
-      var height = borderCartographic.height - skirtOptions.skirtHeight;
+      const height = borderCartographic.height - skirtOptions.skirtHeight;
       skirtOptions.hMin = Math.min(skirtOptions.hMin, height);
 
       Matrix2.Cartographic.fromRadians(longitude, latitude, height, scratchCartographic);
@@ -615,7 +618,7 @@ define(['./AxisAlignedBoundingBox-4171efdd', './Transforms-86b6fa28', './Matrix2
         scratchCartographic.latitude -= cornerFudge;
       }
 
-      var pos = skirtOptions.ellipsoid.cartographicToCartesian(
+      const pos = skirtOptions.ellipsoid.cartographicToCartesian(
         scratchCartographic
       );
       positions.push(pos);
@@ -630,14 +633,14 @@ define(['./AxisAlignedBoundingBox-4171efdd', './Transforms-86b6fa28', './Matrix2
 
       Matrix2.Matrix4.multiplyByPoint(skirtOptions.toENU, pos, scratchCartesian);
 
-      var minimum = skirtOptions.minimum;
-      var maximum = skirtOptions.maximum;
+      const minimum = skirtOptions.minimum;
+      const maximum = skirtOptions.maximum;
       Matrix2.Cartesian3.minimumByComponent(scratchCartesian, minimum, minimum);
       Matrix2.Cartesian3.maximumByComponent(scratchCartesian, maximum, maximum);
 
-      var lastBorderPoint = skirtOptions.lastBorderPoint;
+      const lastBorderPoint = skirtOptions.lastBorderPoint;
       if (when.defined(lastBorderPoint)) {
-        var lastBorderIndex = lastBorderPoint.index;
+        const lastBorderIndex = lastBorderPoint.index;
         indices.push(
           lastBorderIndex,
           currentIndex - 1,

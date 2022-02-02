@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./when-4bbc8319', './Matrix2-91d5b6af', './RuntimeError-346a3079', './EllipsoidGeometry-aa017f9c', './VertexFormat-f9c1a155', './ComponentDatatype-f194c48b', './WebGLConstants-1c8239cc', './GeometryOffsetAttribute-6a692b56', './Transforms-86b6fa28', './combine-83860057', './GeometryAttribute-e0d0d297', './GeometryAttributes-7827a6c2', './IndexDatatype-ee69f1fd'], (function (when, Matrix2, RuntimeError, EllipsoidGeometry, VertexFormat, ComponentDatatype, WebGLConstants, GeometryOffsetAttribute, Transforms, combine, GeometryAttribute, GeometryAttributes, IndexDatatype) { 'use strict';
+define(['./when-4bbc8319', './Matrix2-57f130bc', './RuntimeError-1349fdaf', './EllipsoidGeometry-1178107b', './VertexFormat-14204a1d', './ComponentDatatype-17ffa790', './WebGLConstants-508b9636', './GeometryOffsetAttribute-eb3834cd', './Transforms-f5d400d6', './combine-e9466e32', './GeometryAttribute-48d0e89b', './GeometryAttributes-7827a6c2', './IndexDatatype-4ae6decc'], (function (when, Matrix2, RuntimeError, EllipsoidGeometry, VertexFormat, ComponentDatatype, WebGLConstants, GeometryOffsetAttribute, Transforms, combine, GeometryAttribute, GeometryAttributes, IndexDatatype) { 'use strict';
 
   /**
    * A description of a sphere centered at the origin.
@@ -41,16 +41,16 @@ define(['./when-4bbc8319', './Matrix2-91d5b6af', './RuntimeError-346a3079', './E
    * @see SphereGeometry#createGeometry
    *
    * @example
-   * var sphere = new Cesium.SphereGeometry({
+   * const sphere = new Cesium.SphereGeometry({
    *   radius : 100.0,
    *   vertexFormat : Cesium.VertexFormat.POSITION_ONLY
    * });
-   * var geometry = Cesium.SphereGeometry.createGeometry(sphere);
+   * const geometry = Cesium.SphereGeometry.createGeometry(sphere);
    */
   function SphereGeometry(options) {
-    var radius = when.defaultValue(options.radius, 1.0);
-    var radii = new Matrix2.Cartesian3(radius, radius, radius);
-    var ellipsoidOptions = {
+    const radius = when.defaultValue(options.radius, 1.0);
+    const radii = new Matrix2.Cartesian3(radius, radius, radius);
+    const ellipsoidOptions = {
       radii: radii,
       stackPartitions: options.stackPartitions,
       slicePartitions: options.slicePartitions,
@@ -84,8 +84,8 @@ define(['./when-4bbc8319', './Matrix2-91d5b6af', './RuntimeError-346a3079', './E
     return EllipsoidGeometry.EllipsoidGeometry.pack(value._ellipsoidGeometry, array, startingIndex);
   };
 
-  var scratchEllipsoidGeometry = new EllipsoidGeometry.EllipsoidGeometry();
-  var scratchOptions = {
+  const scratchEllipsoidGeometry = new EllipsoidGeometry.EllipsoidGeometry();
+  const scratchOptions = {
     radius: undefined,
     radii: new Matrix2.Cartesian3(),
     vertexFormat: new VertexFormat.VertexFormat(),
@@ -102,7 +102,7 @@ define(['./when-4bbc8319', './Matrix2-91d5b6af', './RuntimeError-346a3079', './E
    * @returns {SphereGeometry} The modified result parameter or a new SphereGeometry instance if one was not provided.
    */
   SphereGeometry.unpack = function (array, startingIndex, result) {
-    var ellipsoidGeometry = EllipsoidGeometry.EllipsoidGeometry.unpack(
+    const ellipsoidGeometry = EllipsoidGeometry.EllipsoidGeometry.unpack(
       array,
       startingIndex,
       scratchEllipsoidGeometry

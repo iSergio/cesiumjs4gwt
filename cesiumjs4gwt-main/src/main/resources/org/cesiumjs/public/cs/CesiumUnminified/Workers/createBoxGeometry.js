@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./BoxGeometry-94a4a0e6', './when-4bbc8319', './GeometryOffsetAttribute-6a692b56', './RuntimeError-346a3079', './Transforms-86b6fa28', './Matrix2-91d5b6af', './ComponentDatatype-f194c48b', './WebGLConstants-1c8239cc', './combine-83860057', './GeometryAttribute-e0d0d297', './GeometryAttributes-7827a6c2', './VertexFormat-f9c1a155'], (function (BoxGeometry, when, GeometryOffsetAttribute, RuntimeError, Transforms, Matrix2, ComponentDatatype, WebGLConstants, combine, GeometryAttribute, GeometryAttributes, VertexFormat) { 'use strict';
+define(['./BoxGeometry-830ab5e6', './when-4bbc8319', './GeometryOffsetAttribute-eb3834cd', './RuntimeError-1349fdaf', './Transforms-f5d400d6', './Matrix2-57f130bc', './ComponentDatatype-17ffa790', './WebGLConstants-508b9636', './combine-e9466e32', './GeometryAttribute-48d0e89b', './GeometryAttributes-7827a6c2', './VertexFormat-14204a1d'], (function (BoxGeometry, when, GeometryOffsetAttribute, RuntimeError, Transforms, Matrix2, ComponentDatatype, WebGLConstants, combine, GeometryAttribute, GeometryAttributes, VertexFormat) { 'use strict';
 
   function createBoxGeometry(boxGeometry, offset) {
     if (when.defined(offset)) {

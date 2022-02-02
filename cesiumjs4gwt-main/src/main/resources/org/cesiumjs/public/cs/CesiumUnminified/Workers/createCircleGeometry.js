@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./Matrix2-91d5b6af', './RuntimeError-346a3079', './when-4bbc8319', './EllipseGeometry-0ca521d0', './VertexFormat-f9c1a155', './ComponentDatatype-f194c48b', './WebGLConstants-1c8239cc', './GeometryOffsetAttribute-6a692b56', './Transforms-86b6fa28', './combine-83860057', './EllipseGeometryLibrary-c30b4a37', './GeometryAttribute-e0d0d297', './GeometryAttributes-7827a6c2', './GeometryInstance-a3cff41c', './GeometryPipeline-4bea2645', './AttributeCompression-1f6679e1', './EncodedCartesian3-882fbcbd', './IndexDatatype-ee69f1fd', './IntersectionTests-26599c5e', './Plane-4f333bc4'], (function (Matrix2, RuntimeError, when, EllipseGeometry, VertexFormat, ComponentDatatype, WebGLConstants, GeometryOffsetAttribute, Transforms, combine, EllipseGeometryLibrary, GeometryAttribute, GeometryAttributes, GeometryInstance, GeometryPipeline, AttributeCompression, EncodedCartesian3, IndexDatatype, IntersectionTests, Plane) { 'use strict';
+define(['./Matrix2-57f130bc', './RuntimeError-1349fdaf', './when-4bbc8319', './EllipseGeometry-7b94f5b7', './VertexFormat-14204a1d', './ComponentDatatype-17ffa790', './WebGLConstants-508b9636', './GeometryOffsetAttribute-eb3834cd', './Transforms-f5d400d6', './combine-e9466e32', './EllipseGeometryLibrary-c915b37b', './GeometryAttribute-48d0e89b', './GeometryAttributes-7827a6c2', './GeometryInstance-0399d228', './GeometryPipeline-1af7af2b', './AttributeCompression-dae39175', './EncodedCartesian3-7b753db7', './IndexDatatype-4ae6decc', './IntersectionTests-e14e2851', './Plane-0f8ffca6'], (function (Matrix2, RuntimeError, when, EllipseGeometry, VertexFormat, ComponentDatatype, WebGLConstants, GeometryOffsetAttribute, Transforms, combine, EllipseGeometryLibrary, GeometryAttribute, GeometryAttributes, GeometryInstance, GeometryPipeline, AttributeCompression, EncodedCartesian3, IndexDatatype, IntersectionTests, Plane) { 'use strict';
 
   /**
    * A description of a circle on the ellipsoid. Circle geometry can be rendered with both {@link Primitive} and {@link GroundPrimitive}.
@@ -47,21 +47,21 @@ define(['./Matrix2-91d5b6af', './RuntimeError-346a3079', './when-4bbc8319', './E
    *
    * @example
    * // Create a circle.
-   * var circle = new Cesium.CircleGeometry({
+   * const circle = new Cesium.CircleGeometry({
    *   center : Cesium.Cartesian3.fromDegrees(-75.59777, 40.03883),
    *   radius : 100000.0
    * });
-   * var geometry = Cesium.CircleGeometry.createGeometry(circle);
+   * const geometry = Cesium.CircleGeometry.createGeometry(circle);
    */
   function CircleGeometry(options) {
     options = when.defaultValue(options, when.defaultValue.EMPTY_OBJECT);
-    var radius = options.radius;
+    const radius = options.radius;
 
     //>>includeStart('debug', pragmas.debug);
     RuntimeError.Check.typeOf.number("radius", radius);
     //>>includeEnd('debug');
 
-    var ellipseGeometryOptions = {
+    const ellipseGeometryOptions = {
       center: options.center,
       semiMajorAxis: radius,
       semiMinorAxis: radius,
@@ -99,12 +99,12 @@ define(['./Matrix2-91d5b6af', './RuntimeError-346a3079', './when-4bbc8319', './E
     return EllipseGeometry.EllipseGeometry.pack(value._ellipseGeometry, array, startingIndex);
   };
 
-  var scratchEllipseGeometry = new EllipseGeometry.EllipseGeometry({
+  const scratchEllipseGeometry = new EllipseGeometry.EllipseGeometry({
     center: new Matrix2.Cartesian3(),
     semiMajorAxis: 1.0,
     semiMinorAxis: 1.0,
   });
-  var scratchOptions = {
+  const scratchOptions = {
     center: new Matrix2.Cartesian3(),
     radius: undefined,
     ellipsoid: Matrix2.Ellipsoid.clone(Matrix2.Ellipsoid.UNIT_SPHERE),
@@ -127,7 +127,7 @@ define(['./Matrix2-91d5b6af', './RuntimeError-346a3079', './when-4bbc8319', './E
    * @returns {CircleGeometry} The modified result parameter or a new CircleGeometry instance if one was not provided.
    */
   CircleGeometry.unpack = function (array, startingIndex, result) {
-    var ellipseGeometry = EllipseGeometry.EllipseGeometry.unpack(
+    const ellipseGeometry = EllipseGeometry.EllipseGeometry.unpack(
       array,
       startingIndex,
       scratchEllipseGeometry
@@ -179,11 +179,11 @@ define(['./Matrix2-91d5b6af', './RuntimeError-346a3079', './when-4bbc8319', './E
     minHeightFunc,
     maxHeightFunc
   ) {
-    var granularity = circleGeometry._ellipseGeometry._granularity;
-    var ellipsoid = circleGeometry._ellipseGeometry._ellipsoid;
+    const granularity = circleGeometry._ellipseGeometry._granularity;
+    const ellipsoid = circleGeometry._ellipseGeometry._ellipsoid;
 
-    var minHeight = minHeightFunc(granularity, ellipsoid);
-    var maxHeight = maxHeightFunc(granularity, ellipsoid);
+    const minHeight = minHeightFunc(granularity, ellipsoid);
+    const maxHeight = maxHeightFunc(granularity, ellipsoid);
 
     return new CircleGeometry({
       center: circleGeometry._ellipseGeometry._center,

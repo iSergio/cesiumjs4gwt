@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./when-4bbc8319', './Transforms-86b6fa28', './Matrix2-91d5b6af', './RuntimeError-346a3079', './ComponentDatatype-f194c48b', './GeometryAttribute-e0d0d297', './GeometryAttributes-7827a6c2', './VertexFormat-f9c1a155', './combine-83860057', './WebGLConstants-1c8239cc'], (function (when, Transforms, Matrix2, RuntimeError, ComponentDatatype, GeometryAttribute, GeometryAttributes, VertexFormat, combine, WebGLConstants) { 'use strict';
+define(['./when-4bbc8319', './Transforms-f5d400d6', './Matrix2-57f130bc', './RuntimeError-1349fdaf', './ComponentDatatype-17ffa790', './GeometryAttribute-48d0e89b', './GeometryAttributes-7827a6c2', './VertexFormat-14204a1d', './combine-e9466e32', './WebGLConstants-508b9636'], (function (when, Transforms, Matrix2, RuntimeError, ComponentDatatype, GeometryAttribute, GeometryAttributes, VertexFormat, combine, WebGLConstants) { 'use strict';
 
   /**
    * Describes geometry representing a plane centered at the origin, with a unit width and length.
@@ -33,14 +33,14 @@ define(['./when-4bbc8319', './Transforms-86b6fa28', './Matrix2-91d5b6af', './Run
    * @param {VertexFormat} [options.vertexFormat=VertexFormat.DEFAULT] The vertex attributes to be computed.
    *
    * @example
-   * var planeGeometry = new Cesium.PlaneGeometry({
+   * const planeGeometry = new Cesium.PlaneGeometry({
    *   vertexFormat : Cesium.VertexFormat.POSITION_ONLY
    * });
    */
   function PlaneGeometry(options) {
     options = when.defaultValue(options, when.defaultValue.EMPTY_OBJECT);
 
-    var vertexFormat = when.defaultValue(options.vertexFormat, VertexFormat.VertexFormat.DEFAULT);
+    const vertexFormat = when.defaultValue(options.vertexFormat, VertexFormat.VertexFormat.DEFAULT);
 
     this._vertexFormat = vertexFormat;
     this._workerName = "createPlaneGeometry";
@@ -74,8 +74,8 @@ define(['./when-4bbc8319', './Transforms-86b6fa28', './Matrix2-91d5b6af', './Run
     return array;
   };
 
-  var scratchVertexFormat = new VertexFormat.VertexFormat();
-  var scratchOptions = {
+  const scratchVertexFormat = new VertexFormat.VertexFormat();
+  const scratchOptions = {
     vertexFormat: scratchVertexFormat,
   };
 
@@ -94,7 +94,7 @@ define(['./when-4bbc8319', './Transforms-86b6fa28', './Matrix2-91d5b6af', './Run
 
     startingIndex = when.defaultValue(startingIndex, 0);
 
-    var vertexFormat = VertexFormat.VertexFormat.unpack(
+    const vertexFormat = VertexFormat.VertexFormat.unpack(
       array,
       startingIndex,
       scratchVertexFormat
@@ -109,8 +109,8 @@ define(['./when-4bbc8319', './Transforms-86b6fa28', './Matrix2-91d5b6af', './Run
     return result;
   };
 
-  var min = new Matrix2.Cartesian3(-0.5, -0.5, 0.0);
-  var max = new Matrix2.Cartesian3(0.5, 0.5, 0.0);
+  const min = new Matrix2.Cartesian3(-0.5, -0.5, 0.0);
+  const max = new Matrix2.Cartesian3(0.5, 0.5, 0.0);
 
   /**
    * Computes the geometric representation of a plane, including its vertices, indices, and a bounding sphere.
@@ -119,11 +119,11 @@ define(['./when-4bbc8319', './Transforms-86b6fa28', './Matrix2-91d5b6af', './Run
    * @returns {Geometry|undefined} The computed vertices and indices.
    */
   PlaneGeometry.createGeometry = function (planeGeometry) {
-    var vertexFormat = planeGeometry._vertexFormat;
+    const vertexFormat = planeGeometry._vertexFormat;
 
-    var attributes = new GeometryAttributes.GeometryAttributes();
-    var indices;
-    var positions;
+    const attributes = new GeometryAttributes.GeometryAttributes();
+    let indices;
+    let positions;
 
     if (vertexFormat.position) {
       // 4 corner points.  Duplicated 3 times each for each incident edge/face.
@@ -150,7 +150,7 @@ define(['./when-4bbc8319', './Transforms-86b6fa28', './Matrix2-91d5b6af', './Run
       });
 
       if (vertexFormat.normal) {
-        var normals = new Float32Array(4 * 3);
+        const normals = new Float32Array(4 * 3);
 
         // +z face
         normals[0] = 0.0;
@@ -174,7 +174,7 @@ define(['./when-4bbc8319', './Transforms-86b6fa28', './Matrix2-91d5b6af', './Run
       }
 
       if (vertexFormat.st) {
-        var texCoords = new Float32Array(4 * 2);
+        const texCoords = new Float32Array(4 * 2);
 
         // +z face
         texCoords[0] = 0.0;
@@ -194,7 +194,7 @@ define(['./when-4bbc8319', './Transforms-86b6fa28', './Matrix2-91d5b6af', './Run
       }
 
       if (vertexFormat.tangent) {
-        var tangents = new Float32Array(4 * 3);
+        const tangents = new Float32Array(4 * 3);
 
         // +z face
         tangents[0] = 1.0;
@@ -218,7 +218,7 @@ define(['./when-4bbc8319', './Transforms-86b6fa28', './Matrix2-91d5b6af', './Run
       }
 
       if (vertexFormat.bitangent) {
-        var bitangents = new Float32Array(4 * 3);
+        const bitangents = new Float32Array(4 * 3);
 
         // +z face
         bitangents[0] = 0.0;

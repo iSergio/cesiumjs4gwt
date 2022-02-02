@@ -33,17 +33,17 @@ define(['./when-4bbc8319'], (function (when) { 'use strict';
    * @returns {String} A string containing the formatted error.
    */
   function formatError(object) {
-    var result;
+    let result;
 
-    var name = object.name;
-    var message = object.message;
+    const name = object.name;
+    const message = object.message;
     if (when.defined(name) && when.defined(message)) {
       result = name + ": " + message;
     } else {
       result = object.toString();
     }
 
-    var stack = object.stack;
+    const stack = object.stack;
     if (when.defined(stack)) {
       result += "\n" + stack;
     }
@@ -56,7 +56,7 @@ define(['./when-4bbc8319'], (function (when) { 'use strict';
   // For fully synchronous functions, just wrapping the function call in a `when` Promise doesn't
   // handle errors correctly, hence try-catch
   function callAndWrap(workerFunction, parameters, transferableObjects) {
-    var resultOrPromise;
+    let resultOrPromise;
     try {
       resultOrPromise = workerFunction(parameters, transferableObjects);
       return resultOrPromise; // errors handled by Promise
@@ -91,13 +91,13 @@ define(['./when-4bbc8319'], (function (when) { 'use strict';
    * @see {@link http://www.w3.org/TR/html5/common-dom-interfaces.html#transferable-objects|Transferable objects}
    */
   function createTaskProcessorWorker(workerFunction) {
-    var postMessage;
+    let postMessage;
 
     return function (event) {
-      var data = event.data;
+      const data = event.data;
 
-      var transferableObjects = [];
-      var responseMessage = {
+      const transferableObjects = [];
+      const responseMessage = {
         id: data.id,
         result: undefined,
         error: undefined,
