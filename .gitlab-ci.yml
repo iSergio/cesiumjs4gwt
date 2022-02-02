@@ -88,9 +88,6 @@ deploy:cesiumjs4gwt-main:
     - tags
   script:
     - mvn $MAVEN_CLI_OPTS -pl cesiumjs4gwt-main -DskipTests=true deploy
-  artifacts:
-    paths:
-      - cesiumjs4gwt-main/target/*.jar
 
 deploy:cesiumjs4gwt-showcase:
   stage: deploy
