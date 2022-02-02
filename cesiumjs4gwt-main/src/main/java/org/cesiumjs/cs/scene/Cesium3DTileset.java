@@ -145,6 +145,29 @@ public class Cesium3DTileset {
     @JsProperty
     public CustomShader customShader;
     /**
+     * The index into the list of primitive feature IDs used for picking and styling. For EXT_feature_metadata,
+     * feature ID attributes are listed before feature ID textures. If both per-primitive and per-instance feature
+     * IDs are present, the instance feature IDs take priority.
+     *
+     * Default: 0
+     */
+    @JsProperty
+    public double featureIdIndex;
+    /**
+     * The index into the list of instance feature IDs used for picking and styling. If both per-primitive and
+     * per-instance feature IDs are present, the instance feature IDs take priority.
+     *
+     * Default: 0
+     */
+    @JsProperty
+    public double instanceFeatureIdIndex;
+    /**
+     * The tile variable to colorize as a heatmap. All rendered tiles will be colorized relative to each other's
+     * specified variable value.
+     */
+    @JsProperty
+    public String debugHeatmapTilePropertyName;
+    /**
      * For debugging only. Determines if only the tiles from last frame should be
      * used for rendering. Defaule: false;
      */

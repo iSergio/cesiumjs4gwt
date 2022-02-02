@@ -74,17 +74,22 @@ public class ModelExperimental {
     @JsProperty
     public boolean debugShowBoundingVolume;
     /**
-     * The index of the feature ID attribute to use for picking features per-instance or per-primitive.
+     * The index into the list of primitive feature IDs used for picking and styling. For EXT_feature_metadata,
+     * feature ID attributes are listed before feature ID textures. If both per-primitive and per-instance feature
+     * IDs are present, the instance feature IDs take priority.
+     *
      * Default: 0
      */
     @JsProperty
-    public Number featureIdAttributeIndex;
+    public double featureIdIndex;
     /**
-     * The index of the feature ID texture to use for picking features per-primitive.
+     * The index into the list of instance feature IDs used for picking and styling. If both per-primitive and
+     * per-instance feature IDs are present, the instance feature IDs take priority.
+     *
      * Default: 0
      */
     @JsProperty
-    public Number featureIdTextureIndex;
+    public double instanceFeatureIdIndex;
     /**
      * When true, this model is ready to render, i.e., the external binary, image, and shader files were downloaded and the WebGL resources were created. This is set to true right before ModelExperimental#readyPromise is resolved.
      * Default: false

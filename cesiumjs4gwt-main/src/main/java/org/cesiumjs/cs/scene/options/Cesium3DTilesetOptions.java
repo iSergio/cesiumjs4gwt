@@ -299,6 +299,52 @@ public class Cesium3DTilesetOptions {
     @JsProperty
     public boolean backFaceCulling;
     /**
+     * 	Whether to display the outline for models using the CESIUM_primitive_outline extension. When true,
+     * 	outlines are displayed. When false, outlines are not displayed.
+     *
+     * 	Default: true
+     */
+    @JsProperty
+    public boolean showOutline;
+    /**
+     * Indicates that only the tileset's vector tiles should be used for classification.
+     *
+     * Default: false
+     */
+    @JsProperty
+    public boolean vectorClassificationOnly;
+    /**
+     * Whether vector tiles should keep decoded positions in memory.
+     * This is used with {@link org.cesiumjs.cs.scene.Cesium3DTileFeature#getPolylinePositions}.
+     *
+     * Default: false
+     */
+    @JsProperty
+    public boolean vectorKeepDecodedPositions;
+    /**
+     * The index into the list of primitive feature IDs used for picking and styling. For EXT_feature_metadata,
+     * feature ID attributes are listed before feature ID textures. If both per-primitive and per-instance feature
+     * IDs are present, the instance feature IDs take priority.
+     *
+     * Default: 0
+     */
+    @JsProperty
+    public double featureIdIndex;
+    /**
+     * The index into the list of instance feature IDs used for picking and styling. If both per-primitive and
+     * per-instance feature IDs are present, the instance feature IDs take priority.
+     *
+     * Default: 0
+     */
+    @JsProperty
+    public double instanceFeatureIdIndex;
+    /**
+     * The tile variable to colorize as a heatmap. All rendered tiles will be colorized relative to each other's
+     * specified variable value.
+     */
+    @JsProperty
+    public String debugHeatmapTilePropertyName;
+    /**
      * For debugging only. Determines if only the tiles from last frame should be
      * used for rendering. Defaule: false;
      */
