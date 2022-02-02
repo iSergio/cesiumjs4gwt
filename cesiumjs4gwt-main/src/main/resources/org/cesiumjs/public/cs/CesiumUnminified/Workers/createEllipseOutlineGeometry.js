@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./Matrix2-91d5b6af', './when-4bbc8319', './EllipseOutlineGeometry-412c7c3f', './RuntimeError-346a3079', './ComponentDatatype-f194c48b', './WebGLConstants-1c8239cc', './GeometryOffsetAttribute-6a692b56', './Transforms-86b6fa28', './combine-83860057', './EllipseGeometryLibrary-c30b4a37', './GeometryAttribute-e0d0d297', './GeometryAttributes-7827a6c2', './IndexDatatype-ee69f1fd'], (function (Matrix2, when, EllipseOutlineGeometry, RuntimeError, ComponentDatatype, WebGLConstants, GeometryOffsetAttribute, Transforms, combine, EllipseGeometryLibrary, GeometryAttribute, GeometryAttributes, IndexDatatype) { 'use strict';
+define(['./Matrix2-57f130bc', './when-4bbc8319', './EllipseOutlineGeometry-c7583a6c', './RuntimeError-1349fdaf', './ComponentDatatype-17ffa790', './WebGLConstants-508b9636', './GeometryOffsetAttribute-eb3834cd', './Transforms-f5d400d6', './combine-e9466e32', './EllipseGeometryLibrary-c915b37b', './GeometryAttribute-48d0e89b', './GeometryAttributes-7827a6c2', './IndexDatatype-4ae6decc'], (function (Matrix2, when, EllipseOutlineGeometry, RuntimeError, ComponentDatatype, WebGLConstants, GeometryOffsetAttribute, Transforms, combine, EllipseGeometryLibrary, GeometryAttribute, GeometryAttributes, IndexDatatype) { 'use strict';
 
   function createEllipseOutlineGeometry(ellipseGeometry, offset) {
     if (when.defined(offset)) {

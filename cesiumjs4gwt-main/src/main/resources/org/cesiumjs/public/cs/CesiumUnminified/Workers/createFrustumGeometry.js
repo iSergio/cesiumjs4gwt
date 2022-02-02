@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./when-4bbc8319', './FrustumGeometry-8664d8ec', './Transforms-86b6fa28', './Matrix2-91d5b6af', './RuntimeError-346a3079', './ComponentDatatype-f194c48b', './WebGLConstants-1c8239cc', './combine-83860057', './GeometryAttribute-e0d0d297', './GeometryAttributes-7827a6c2', './Plane-4f333bc4', './VertexFormat-f9c1a155'], (function (when, FrustumGeometry, Transforms, Matrix2, RuntimeError, ComponentDatatype, WebGLConstants, combine, GeometryAttribute, GeometryAttributes, Plane, VertexFormat) { 'use strict';
+define(['./when-4bbc8319', './FrustumGeometry-8befae58', './Transforms-f5d400d6', './Matrix2-57f130bc', './RuntimeError-1349fdaf', './ComponentDatatype-17ffa790', './WebGLConstants-508b9636', './combine-e9466e32', './GeometryAttribute-48d0e89b', './GeometryAttributes-7827a6c2', './Plane-0f8ffca6', './VertexFormat-14204a1d'], (function (when, FrustumGeometry, Transforms, Matrix2, RuntimeError, ComponentDatatype, WebGLConstants, combine, GeometryAttribute, GeometryAttributes, Plane, VertexFormat) { 'use strict';
 
   function createFrustumGeometry(frustumGeometry, offset) {
     if (when.defined(offset)) {

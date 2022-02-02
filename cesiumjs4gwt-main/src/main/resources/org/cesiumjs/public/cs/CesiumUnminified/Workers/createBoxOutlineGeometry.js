@@ -21,9 +21,9 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./GeometryOffsetAttribute-6a692b56', './Transforms-86b6fa28', './Matrix2-91d5b6af', './RuntimeError-346a3079', './ComponentDatatype-f194c48b', './when-4bbc8319', './GeometryAttribute-e0d0d297', './GeometryAttributes-7827a6c2', './combine-83860057', './WebGLConstants-1c8239cc'], (function (GeometryOffsetAttribute, Transforms, Matrix2, RuntimeError, ComponentDatatype, when, GeometryAttribute, GeometryAttributes, combine, WebGLConstants) { 'use strict';
+define(['./GeometryOffsetAttribute-eb3834cd', './Transforms-f5d400d6', './Matrix2-57f130bc', './RuntimeError-1349fdaf', './ComponentDatatype-17ffa790', './when-4bbc8319', './GeometryAttribute-48d0e89b', './GeometryAttributes-7827a6c2', './combine-e9466e32', './WebGLConstants-508b9636'], (function (GeometryOffsetAttribute, Transforms, Matrix2, RuntimeError, ComponentDatatype, when, GeometryAttribute, GeometryAttributes, combine, WebGLConstants) { 'use strict';
 
-  var diffScratch = new Matrix2.Cartesian3();
+  const diffScratch = new Matrix2.Cartesian3();
 
   /**
    * A description of the outline of a cube centered at the origin.
@@ -40,17 +40,17 @@ define(['./GeometryOffsetAttribute-6a692b56', './Transforms-86b6fa28', './Matrix
    * @see Packable
    *
    * @example
-   * var box = new Cesium.BoxOutlineGeometry({
+   * const box = new Cesium.BoxOutlineGeometry({
    *   maximum : new Cesium.Cartesian3(250000.0, 250000.0, 250000.0),
    *   minimum : new Cesium.Cartesian3(-250000.0, -250000.0, -250000.0)
    * });
-   * var geometry = Cesium.BoxOutlineGeometry.createGeometry(box);
+   * const geometry = Cesium.BoxOutlineGeometry.createGeometry(box);
    */
   function BoxOutlineGeometry(options) {
     options = when.defaultValue(options, when.defaultValue.EMPTY_OBJECT);
 
-    var min = options.minimum;
-    var max = options.maximum;
+    const min = options.minimum;
+    const max = options.maximum;
 
     //>>includeStart('debug', pragmas.debug);
     RuntimeError.Check.typeOf.object("min", min);
@@ -82,16 +82,16 @@ define(['./GeometryOffsetAttribute-6a692b56', './Transforms-86b6fa28', './Matrix
    *
    *
    * @example
-   * var box = Cesium.BoxOutlineGeometry.fromDimensions({
+   * const box = Cesium.BoxOutlineGeometry.fromDimensions({
    *   dimensions : new Cesium.Cartesian3(500000.0, 500000.0, 500000.0)
    * });
-   * var geometry = Cesium.BoxOutlineGeometry.createGeometry(box);
+   * const geometry = Cesium.BoxOutlineGeometry.createGeometry(box);
    *
    * @see BoxOutlineGeometry.createGeometry
    */
   BoxOutlineGeometry.fromDimensions = function (options) {
     options = when.defaultValue(options, when.defaultValue.EMPTY_OBJECT);
-    var dimensions = options.dimensions;
+    const dimensions = options.dimensions;
 
     //>>includeStart('debug', pragmas.debug);
     RuntimeError.Check.typeOf.object("dimensions", dimensions);
@@ -100,7 +100,7 @@ define(['./GeometryOffsetAttribute-6a692b56', './Transforms-86b6fa28', './Matrix
     RuntimeError.Check.typeOf.number.greaterThanOrEquals("dimensions.z", dimensions.z, 0);
     //>>includeEnd('debug');
 
-    var corner = Matrix2.Cartesian3.multiplyByScalar(dimensions, 0.5, new Matrix2.Cartesian3());
+    const corner = Matrix2.Cartesian3.multiplyByScalar(dimensions, 0.5, new Matrix2.Cartesian3());
 
     return new BoxOutlineGeometry({
       minimum: Matrix2.Cartesian3.negate(corner, new Matrix2.Cartesian3()),
@@ -118,14 +118,14 @@ define(['./GeometryOffsetAttribute-6a692b56', './Transforms-86b6fa28', './Matrix
    *
    *
    * @example
-   * var aabb = Cesium.AxisAlignedBoundingBox.fromPoints(Cesium.Cartesian3.fromDegreesArray([
+   * const aabb = Cesium.AxisAlignedBoundingBox.fromPoints(Cesium.Cartesian3.fromDegreesArray([
    *      -72.0, 40.0,
    *      -70.0, 35.0,
    *      -75.0, 30.0,
    *      -70.0, 30.0,
    *      -68.0, 40.0
    * ]));
-   * var box = Cesium.BoxOutlineGeometry.fromAxisAlignedBoundingBox(aabb);
+   * const box = Cesium.BoxOutlineGeometry.fromAxisAlignedBoundingBox(aabb);
    *
    *  @see BoxOutlineGeometry.createGeometry
    */
@@ -173,9 +173,9 @@ define(['./GeometryOffsetAttribute-6a692b56', './Transforms-86b6fa28', './Matrix
     return array;
   };
 
-  var scratchMin = new Matrix2.Cartesian3();
-  var scratchMax = new Matrix2.Cartesian3();
-  var scratchOptions = {
+  const scratchMin = new Matrix2.Cartesian3();
+  const scratchMax = new Matrix2.Cartesian3();
+  const scratchOptions = {
     minimum: scratchMin,
     maximum: scratchMax,
     offsetAttribute: undefined,
@@ -196,13 +196,13 @@ define(['./GeometryOffsetAttribute-6a692b56', './Transforms-86b6fa28', './Matrix
 
     startingIndex = when.defaultValue(startingIndex, 0);
 
-    var min = Matrix2.Cartesian3.unpack(array, startingIndex, scratchMin);
-    var max = Matrix2.Cartesian3.unpack(
+    const min = Matrix2.Cartesian3.unpack(array, startingIndex, scratchMin);
+    const max = Matrix2.Cartesian3.unpack(
       array,
       startingIndex + Matrix2.Cartesian3.packedLength,
       scratchMax
     );
-    var offsetAttribute = array[startingIndex + Matrix2.Cartesian3.packedLength * 2];
+    const offsetAttribute = array[startingIndex + Matrix2.Cartesian3.packedLength * 2];
 
     if (!when.defined(result)) {
       scratchOptions.offsetAttribute =
@@ -225,16 +225,16 @@ define(['./GeometryOffsetAttribute-6a692b56', './Transforms-86b6fa28', './Matrix
    * @returns {Geometry|undefined} The computed vertices and indices.
    */
   BoxOutlineGeometry.createGeometry = function (boxGeometry) {
-    var min = boxGeometry._min;
-    var max = boxGeometry._max;
+    const min = boxGeometry._min;
+    const max = boxGeometry._max;
 
     if (Matrix2.Cartesian3.equals(min, max)) {
       return;
     }
 
-    var attributes = new GeometryAttributes.GeometryAttributes();
-    var indices = new Uint16Array(12 * 2);
-    var positions = new Float64Array(8 * 3);
+    const attributes = new GeometryAttributes.GeometryAttributes();
+    const indices = new Uint16Array(12 * 2);
+    const positions = new Float64Array(8 * 3);
 
     positions[0] = min.x;
     positions[1] = min.y;
@@ -300,13 +300,13 @@ define(['./GeometryOffsetAttribute-6a692b56', './Transforms-86b6fa28', './Matrix
     indices[22] = 3;
     indices[23] = 7;
 
-    var diff = Matrix2.Cartesian3.subtract(max, min, diffScratch);
-    var radius = Matrix2.Cartesian3.magnitude(diff) * 0.5;
+    const diff = Matrix2.Cartesian3.subtract(max, min, diffScratch);
+    const radius = Matrix2.Cartesian3.magnitude(diff) * 0.5;
 
     if (when.defined(boxGeometry._offsetAttribute)) {
-      var length = positions.length;
-      var applyOffset = new Uint8Array(length / 3);
-      var offsetValue =
+      const length = positions.length;
+      const applyOffset = new Uint8Array(length / 3);
+      const offsetValue =
         boxGeometry._offsetAttribute === GeometryOffsetAttribute.GeometryOffsetAttribute.NONE ? 0 : 1;
       GeometryOffsetAttribute.arrayFill(applyOffset, offsetValue);
       attributes.applyOffset = new GeometryAttribute.GeometryAttribute({

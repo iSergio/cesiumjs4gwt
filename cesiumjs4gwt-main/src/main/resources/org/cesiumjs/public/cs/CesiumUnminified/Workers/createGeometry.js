@@ -21,14 +21,14 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./when-4bbc8319', './PrimitivePipeline-0b29d35a', './createTaskProcessorWorker', './Transforms-86b6fa28', './Matrix2-91d5b6af', './RuntimeError-346a3079', './ComponentDatatype-f194c48b', './WebGLConstants-1c8239cc', './combine-83860057', './GeometryAttribute-e0d0d297', './GeometryAttributes-7827a6c2', './GeometryPipeline-4bea2645', './AttributeCompression-1f6679e1', './EncodedCartesian3-882fbcbd', './IndexDatatype-ee69f1fd', './IntersectionTests-26599c5e', './Plane-4f333bc4', './WebMercatorProjection-c196164d'], (function (when, PrimitivePipeline, createTaskProcessorWorker, Transforms, Matrix2, RuntimeError, ComponentDatatype, WebGLConstants, combine, GeometryAttribute, GeometryAttributes, GeometryPipeline, AttributeCompression, EncodedCartesian3, IndexDatatype, IntersectionTests, Plane, WebMercatorProjection) { 'use strict';
+define(['./when-4bbc8319', './PrimitivePipeline-99d9f158', './createTaskProcessorWorker', './Transforms-f5d400d6', './Matrix2-57f130bc', './RuntimeError-1349fdaf', './ComponentDatatype-17ffa790', './WebGLConstants-508b9636', './combine-e9466e32', './GeometryAttribute-48d0e89b', './GeometryAttributes-7827a6c2', './GeometryPipeline-1af7af2b', './AttributeCompression-dae39175', './EncodedCartesian3-7b753db7', './IndexDatatype-4ae6decc', './IntersectionTests-e14e2851', './Plane-0f8ffca6', './WebMercatorProjection-3b4197b5'], (function (when, PrimitivePipeline, createTaskProcessorWorker, Transforms, Matrix2, RuntimeError, ComponentDatatype, WebGLConstants, combine, GeometryAttribute, GeometryAttributes, GeometryPipeline, AttributeCompression, EncodedCartesian3, IndexDatatype, IntersectionTests, Plane, WebMercatorProjection) { 'use strict';
 
   /* global require */
 
-  var moduleCache = {};
+  const moduleCache = {};
 
   function getModule(moduleName) {
-    var module = moduleCache[moduleName];
+    let module = moduleCache[moduleName];
     if (!when.defined(module)) {
       if (typeof exports === "object") {
         // Use CommonJS-style require.
@@ -46,17 +46,17 @@ define(['./when-4bbc8319', './PrimitivePipeline-0b29d35a', './createTaskProcesso
   }
 
   function createGeometry(parameters, transferableObjects) {
-    var subTasks = parameters.subTasks;
-    var length = subTasks.length;
-    var resultsOrPromises = new Array(length);
+    const subTasks = parameters.subTasks;
+    const length = subTasks.length;
+    const resultsOrPromises = new Array(length);
 
-    for (var i = 0; i < length; i++) {
-      var task = subTasks[i];
-      var geometry = task.geometry;
-      var moduleName = task.moduleName;
+    for (let i = 0; i < length; i++) {
+      const task = subTasks[i];
+      const geometry = task.geometry;
+      const moduleName = task.moduleName;
 
       if (when.defined(moduleName)) {
-        var createFunction = getModule(moduleName);
+        const createFunction = getModule(moduleName);
         resultsOrPromises[i] = createFunction(geometry, task.offset);
       } else {
         //Already created geometry
