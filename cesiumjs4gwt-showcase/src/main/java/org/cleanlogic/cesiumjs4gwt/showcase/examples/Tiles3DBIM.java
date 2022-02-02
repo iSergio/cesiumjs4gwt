@@ -19,6 +19,7 @@ package org.cleanlogic.cesiumjs4gwt.showcase.examples;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.HTML;
 import org.cesiumjs.cs.core.BoundingSphere;
+import org.cesiumjs.cs.core.IonResource;
 import org.cesiumjs.cs.core.Matrix4;
 import org.cesiumjs.cs.promise.Fulfill;
 import org.cesiumjs.cs.scene.Cesium3DTileset;
@@ -32,6 +33,7 @@ import javax.inject.Inject;
  * @author Serge Silaev aka iSergio
  */
 public class Tiles3DBIM extends AbstractExample {
+    ViewerPanel csVPanel;
 
     @Inject
     public Tiles3DBIM(ShowcaseExampleStore store) {
@@ -41,25 +43,24 @@ public class Tiles3DBIM extends AbstractExample {
 
     @Override
     public void buildPanel() {
-        final ViewerPanel csVPanel = new ViewerPanel();
+        csVPanel = new ViewerPanel();
 
-        Cesium3DTileset tileset = (Cesium3DTileset) csVPanel.getViewer().scene().primitives().add(Cesium3DTileset.create(
-                "https://beta.cesium.com/api/assets/1459?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIzNjUyM2I5Yy01YmRhLTQ0MjktOGI0Zi02MDdmYzBjMmY0MjYiLCJpZCI6NDQsImFzc2V0cyI6WzE0NTldLCJpYXQiOjE0OTkyNjQ3ODF9.SW_rwY-ic0TwQBeiweXNqFyywoxnnUBtcVjeCmDGef4"));
+        Cesium3DTileset tileset = (Cesium3DTileset) csVPanel.getViewer().scene().primitives()
+                .add(Cesium3DTileset.create(IonResource.fromAssetId(8564)));
 
-        tileset.readyPromise().then(new Fulfill<Cesium3DTileset>() {
-            @Override
-            public void onFulfilled(Cesium3DTileset value) {
-                BoundingSphere boundingSphere = value.boundingSphere();
-                csVPanel.getViewer().camera.viewBoundingSphere(boundingSphere,
-                        new org.cesiumjs.cs.core.HeadingPitchRange(0.5, -0.2, boundingSphere.radius * 4.0));
-                csVPanel.getViewer().camera.lookAtTransform(Matrix4.IDENTITY());
-            }
-        });
+        tileset.readyPromise().then(this::zoomToTileset);
 
         contentPanel.add(new HTML("<p>A sample BIM dataset rendered with 3D Tiles.</p>"));
         contentPanel.add(csVPanel);
 
         initWidget(contentPanel);
+    }
+
+    private void zoomToTileset(Cesium3DTileset tileset) {
+        BoundingSphere boundingSphere = tileset.boundingSphere();
+        csVPanel.getViewer().camera.viewBoundingSphere(boundingSphere,
+                new org.cesiumjs.cs.core.HeadingPitchRange(0.5, -0.2, boundingSphere.radius * 4.0));
+        csVPanel.getViewer().camera.lookAtTransform(Matrix4.IDENTITY());
     }
 
     @Override
