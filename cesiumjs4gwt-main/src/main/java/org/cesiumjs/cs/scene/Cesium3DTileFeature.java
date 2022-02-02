@@ -54,6 +54,12 @@ public class Cesium3DTileFeature extends PickedObject {
     @JsProperty
     public Color color;
     /**
+     * Get the feature ID associated with this feature. For 3D Tiles 1.0, the batch ID is returned. For
+     * EXT_mesh_features, this is the feature ID from the selected feature ID set.
+     */
+    @JsProperty(name = "featureId")
+    public native double featureId();
+    /**
      * Gets a typed array containing the ECEF positions of the polyline.
      * Returns undefined if {@link Cesium3DTileset#vectorKeepDecodedPositions} is false or the feature
      * is not a polyline in a vector tile.
