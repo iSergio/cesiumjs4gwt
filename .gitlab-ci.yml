@@ -61,7 +61,7 @@ package:cesiumjs4gwt-main:
   artifacts:
     name: "cesiumjs4gwt-main"
     paths:
-      - cesium4gwt-main/target/*.jar
+      - cesiumjs4gwt-main/target/*.jar
   script:
     - mvn $MAVEN_CLI_OPTS -pl cesiumjs4gwt-main -DskipTests=true package
 
