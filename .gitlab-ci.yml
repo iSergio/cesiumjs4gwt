@@ -58,6 +58,10 @@ package:cesiumjs4gwt-main:
 #    - master
     - develop
     - tags
+  artifacts:
+    name: "cesiumjs4gwt-main"
+    paths:
+      - cesiumjs4gwt-main/target/*.jar
   script:
     - mvn $MAVEN_CLI_OPTS -pl cesiumjs4gwt-main -DskipTests=true package
 
@@ -71,6 +75,7 @@ package:cesiumjs4gwt-showcase:
   script:
     - mvn $MAVEN_CLI_OPTS -pl cesiumjs4gwt-showcase package -am -DskipTests=true
   artifacts:
+    name: "cesiumjs4gwt-showcase"
     paths:
       - cesiumjs4gwt-showcase/target/*.war
 
@@ -83,9 +88,6 @@ deploy:cesiumjs4gwt-main:
     - tags
   script:
     - mvn $MAVEN_CLI_OPTS -pl cesiumjs4gwt-main -DskipTests=true deploy
-  artifacts:
-    paths:
-      - cesiumjs4gwt-main/target/*.jar
 
 deploy:cesiumjs4gwt-showcase:
   stage: deploy
