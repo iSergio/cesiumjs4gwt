@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./AxisAlignedBoundingBox-b11cd8c8', './Transforms-f5d400d6', './Matrix2-57f130bc', './when-4bbc8319', './TerrainEncoding-b545d35b', './ComponentDatatype-17ffa790', './OrientedBoundingBox-452622af', './RuntimeError-1349fdaf', './WebMercatorProjection-3b4197b5', './createTaskProcessorWorker', './combine-e9466e32', './AttributeCompression-dae39175', './WebGLConstants-508b9636', './EllipsoidTangentPlane-bc59b943', './IntersectionTests-e14e2851', './Plane-0f8ffca6'], (function (AxisAlignedBoundingBox, Transforms, Matrix2, when, TerrainEncoding, ComponentDatatype, OrientedBoundingBox, RuntimeError, WebMercatorProjection, createTaskProcessorWorker, combine, AttributeCompression, WebGLConstants, EllipsoidTangentPlane, IntersectionTests, Plane) { 'use strict';
+define(['./AxisAlignedBoundingBox-2a0ca7ef', './Transforms-8b90e17c', './Matrix2-265d9610', './when-4bbc8319', './TerrainEncoding-82b55fe0', './ComponentDatatype-aad54330', './OrientedBoundingBox-1e433348', './RuntimeError-5b082e8f', './WebMercatorProjection-d67afe4b', './createTaskProcessorWorker', './combine-e9466e32', './AttributeCompression-442278a0', './WebGLConstants-508b9636', './EllipsoidTangentPlane-f1a69a20', './IntersectionTests-596e31ec', './Plane-616c9c0a'], (function (AxisAlignedBoundingBox, Transforms, Matrix2, when, TerrainEncoding, ComponentDatatype, OrientedBoundingBox, RuntimeError, WebMercatorProjection, createTaskProcessorWorker, combine, AttributeCompression, WebGLConstants, EllipsoidTangentPlane, IntersectionTests, Plane) { 'use strict';
 
   const sizeOfUint16 = Uint16Array.BYTES_PER_ELEMENT;
   const sizeOfInt32 = Int32Array.BYTES_PER_ELEMENT;

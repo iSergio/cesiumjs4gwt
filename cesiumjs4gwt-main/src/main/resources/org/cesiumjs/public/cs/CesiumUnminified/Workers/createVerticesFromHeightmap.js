@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./Matrix2-57f130bc', './AxisAlignedBoundingBox-b11cd8c8', './Transforms-f5d400d6', './when-4bbc8319', './RuntimeError-1349fdaf', './TerrainEncoding-b545d35b', './ComponentDatatype-17ffa790', './OrientedBoundingBox-452622af', './WebMercatorProjection-3b4197b5', './createTaskProcessorWorker', './combine-e9466e32', './AttributeCompression-dae39175', './WebGLConstants-508b9636', './EllipsoidTangentPlane-bc59b943', './IntersectionTests-e14e2851', './Plane-0f8ffca6'], (function (Matrix2, AxisAlignedBoundingBox, Transforms, when, RuntimeError, TerrainEncoding, ComponentDatatype, OrientedBoundingBox, WebMercatorProjection, createTaskProcessorWorker, combine, AttributeCompression, WebGLConstants, EllipsoidTangentPlane, IntersectionTests, Plane) { 'use strict';
+define(['./Matrix2-265d9610', './AxisAlignedBoundingBox-2a0ca7ef', './Transforms-8b90e17c', './when-4bbc8319', './RuntimeError-5b082e8f', './TerrainEncoding-82b55fe0', './ComponentDatatype-aad54330', './OrientedBoundingBox-1e433348', './WebMercatorProjection-d67afe4b', './createTaskProcessorWorker', './combine-e9466e32', './AttributeCompression-442278a0', './WebGLConstants-508b9636', './EllipsoidTangentPlane-f1a69a20', './IntersectionTests-596e31ec', './Plane-616c9c0a'], (function (Matrix2, AxisAlignedBoundingBox, Transforms, when, RuntimeError, TerrainEncoding, ComponentDatatype, OrientedBoundingBox, WebMercatorProjection, createTaskProcessorWorker, combine, AttributeCompression, WebGLConstants, EllipsoidTangentPlane, IntersectionTests, Plane) { 'use strict';
 
   /**
    * The encoding that is used for a heightmap

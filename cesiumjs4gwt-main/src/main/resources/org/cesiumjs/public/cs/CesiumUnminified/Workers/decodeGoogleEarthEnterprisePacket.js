@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./RuntimeError-1349fdaf', './when-4bbc8319', './createTaskProcessorWorker'], (function (RuntimeError, when, createTaskProcessorWorker) { 'use strict';
+define(['./RuntimeError-5b082e8f', './when-4bbc8319', './createTaskProcessorWorker'], (function (RuntimeError, when, createTaskProcessorWorker) { 'use strict';
 
   const compressedMagic$1 = 0x7468dead;
   const compressedMagicSwap$1 = 0xadde6874;

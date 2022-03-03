@@ -38,14 +38,14 @@ define(['./when-4bbc8319'], (function (when) { 'use strict';
     const name = object.name;
     const message = object.message;
     if (when.defined(name) && when.defined(message)) {
-      result = name + ": " + message;
+      result = `${name}: ${message}`;
     } else {
       result = object.toString();
     }
 
     const stack = object.stack;
     if (when.defined(stack)) {
-      result += "\n" + stack;
+      result += `\n${stack}`;
     }
 
     return result;
@@ -136,11 +136,9 @@ define(['./when-4bbc8319'], (function (when) { 'use strict';
             // something went wrong trying to post the message, post a simpler
             // error that we can be sure will be cloneable
             responseMessage.result = undefined;
-            responseMessage.error =
-              "postMessage failed with error: " +
-              formatError(e) +
-              "\n  with responseMessage: " +
-              JSON.stringify(responseMessage);
+            responseMessage.error = `postMessage failed with error: ${formatError(
+            e
+          )}\n  with responseMessage: ${JSON.stringify(responseMessage)}`;
             postMessage(responseMessage);
           }
         });

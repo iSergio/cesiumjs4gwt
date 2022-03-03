@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./AttributeCompression-dae39175', './Transforms-f5d400d6', './Matrix2-57f130bc', './when-4bbc8319', './TerrainEncoding-b545d35b', './IndexDatatype-4ae6decc', './RuntimeError-1349fdaf', './ComponentDatatype-17ffa790', './OrientedBoundingBox-452622af', './createTaskProcessorWorker', './combine-e9466e32', './WebGLConstants-508b9636', './EllipsoidTangentPlane-bc59b943', './AxisAlignedBoundingBox-b11cd8c8', './IntersectionTests-e14e2851', './Plane-0f8ffca6'], (function (AttributeCompression, Transforms, Matrix2, when, TerrainEncoding, IndexDatatype, RuntimeError, ComponentDatatype, OrientedBoundingBox, createTaskProcessorWorker, combine, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane) { 'use strict';
+define(['./AttributeCompression-442278a0', './Transforms-8b90e17c', './Matrix2-265d9610', './when-4bbc8319', './TerrainEncoding-82b55fe0', './IndexDatatype-6739e544', './RuntimeError-5b082e8f', './ComponentDatatype-aad54330', './OrientedBoundingBox-1e433348', './createTaskProcessorWorker', './combine-e9466e32', './WebGLConstants-508b9636', './EllipsoidTangentPlane-f1a69a20', './AxisAlignedBoundingBox-2a0ca7ef', './IntersectionTests-596e31ec', './Plane-616c9c0a'], (function (AttributeCompression, Transforms, Matrix2, when, TerrainEncoding, IndexDatatype, RuntimeError, ComponentDatatype, OrientedBoundingBox, createTaskProcessorWorker, combine, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane) { 'use strict';
 
   /**
    * Contains functions for operating on 2D triangles.

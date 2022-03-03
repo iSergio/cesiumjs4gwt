@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./ComponentDatatype-17ffa790', './when-4bbc8319', './IndexDatatype-4ae6decc', './RuntimeError-1349fdaf', './createTaskProcessorWorker', './WebGLConstants-508b9636'], (function (ComponentDatatype, when, IndexDatatype, RuntimeError, createTaskProcessorWorker, WebGLConstants) { 'use strict';
+define(['./ComponentDatatype-aad54330', './when-4bbc8319', './IndexDatatype-6739e544', './RuntimeError-5b082e8f', './createTaskProcessorWorker', './WebGLConstants-508b9636'], (function (ComponentDatatype, when, IndexDatatype, RuntimeError, createTaskProcessorWorker, WebGLConstants) { 'use strict';
 
   /* global require */
 
@@ -262,7 +262,7 @@ define(['./ComponentDatatype-17ffa790', './when-4bbc8319', './IndexDatatype-4ae6
     );
     if (!decodingStatus.ok() || dracoPointCloud.ptr === 0) {
       throw new RuntimeError.RuntimeError(
-        "Error decoding draco point cloud: " + decodingStatus.error_msg()
+        `Error decoding draco point cloud: ${decodingStatus.error_msg()}`
       );
     }
 
@@ -308,17 +308,7 @@ define(['./ComponentDatatype-17ffa790', './when-4bbc8319', './IndexDatatype-4ae6
     const dracoDecoder = new draco.Decoder();
 
     // Skip all parameter types except generic
-    // Note: As a temporary work-around until GetAttributeByUniqueId() works after
-    // calling SkipAttributeTransform(), we will not skip attributes with multiple
-    // sets of data in the glTF.
-    const attributesToSkip = ["POSITION", "NORMAL"];
-    const compressedAttributes = parameters.compressedAttributes;
-    if (!when.defined(compressedAttributes["COLOR_1"])) {
-      attributesToSkip.push("COLOR");
-    }
-    if (!when.defined(compressedAttributes["TEXCOORD_1"])) {
-      attributesToSkip.push("TEX_COORD");
-    }
+    const attributesToSkip = ["POSITION", "NORMAL", "COLOR", "TEX_COORD"];
     if (parameters.dequantizeInShader) {
       for (let i = 0; i < attributesToSkip.length; ++i) {
         dracoDecoder.SkipAttributeTransform(draco[attributesToSkip[i]]);
@@ -338,44 +328,22 @@ define(['./ComponentDatatype-17ffa790', './when-4bbc8319', './IndexDatatype-4ae6
     const decodingStatus = dracoDecoder.DecodeBufferToMesh(buffer, dracoGeometry);
     if (!decodingStatus.ok() || dracoGeometry.ptr === 0) {
       throw new RuntimeError.RuntimeError(
-        "Error decoding draco mesh geometry: " + decodingStatus.error_msg()
+        `Error decoding draco mesh geometry: ${decodingStatus.error_msg()}`
       );
     }
 
     draco.destroy(buffer);
 
     const attributeData = {};
+
+    const compressedAttributes = parameters.compressedAttributes;
     for (const attributeName in compressedAttributes) {
       if (compressedAttributes.hasOwnProperty(attributeName)) {
-        // Since GetAttributeByUniqueId() only works on attributes that we have not called
-        // SkipAttributeTransform() on, we must first store a `dracoAttributeName` in case
-        // we call GetAttributeId() instead.
-        let dracoAttributeName = attributeName;
-        if (attributeName === "TEXCOORD_0") {
-          dracoAttributeName = "TEX_COORD";
-        }
-        if (attributeName === "COLOR_0") {
-          dracoAttributeName = "COLOR";
-        }
-
-        let dracoAttribute;
-        if (attributesToSkip.includes(dracoAttributeName)) {
-          const dracoAttributeId = dracoDecoder.GetAttributeId(
-            dracoGeometry,
-            draco[dracoAttributeName]
-          );
-          dracoAttribute = dracoDecoder.GetAttribute(
-            dracoGeometry,
-            dracoAttributeId
-          );
-        } else {
-          const compressedAttribute = compressedAttributes[attributeName];
-          dracoAttribute = dracoDecoder.GetAttributeByUniqueId(
-            dracoGeometry,
-            compressedAttribute
-          );
-        }
-
+        const compressedAttribute = compressedAttributes[attributeName];
+        const dracoAttribute = dracoDecoder.GetAttributeByUniqueId(
+          dracoGeometry,
+          compressedAttribute
+        );
         attributeData[attributeName] = decodeAttribute(
           dracoGeometry,
           dracoDecoder,

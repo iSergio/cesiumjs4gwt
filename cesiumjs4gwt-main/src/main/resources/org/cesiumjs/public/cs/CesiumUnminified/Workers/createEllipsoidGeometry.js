@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./when-4bbc8319', './EllipsoidGeometry-1178107b', './GeometryOffsetAttribute-eb3834cd', './RuntimeError-1349fdaf', './Transforms-f5d400d6', './Matrix2-57f130bc', './ComponentDatatype-17ffa790', './WebGLConstants-508b9636', './combine-e9466e32', './GeometryAttribute-48d0e89b', './GeometryAttributes-7827a6c2', './IndexDatatype-4ae6decc', './VertexFormat-14204a1d'], (function (when, EllipsoidGeometry, GeometryOffsetAttribute, RuntimeError, Transforms, Matrix2, ComponentDatatype, WebGLConstants, combine, GeometryAttribute, GeometryAttributes, IndexDatatype, VertexFormat) { 'use strict';
+define(['./when-4bbc8319', './EllipsoidGeometry-c1dcbb8c', './GeometryOffsetAttribute-7e016332', './RuntimeError-5b082e8f', './Transforms-8b90e17c', './Matrix2-265d9610', './ComponentDatatype-aad54330', './WebGLConstants-508b9636', './combine-e9466e32', './GeometryAttribute-4bcb785f', './GeometryAttributes-7827a6c2', './IndexDatatype-6739e544', './VertexFormat-07539138'], (function (when, EllipsoidGeometry, GeometryOffsetAttribute, RuntimeError, Transforms, Matrix2, ComponentDatatype, WebGLConstants, combine, GeometryAttribute, GeometryAttributes, IndexDatatype, VertexFormat) { 'use strict';
 
   function createEllipsoidGeometry(ellipsoidGeometry, offset) {
     if (when.defined(offset)) {
