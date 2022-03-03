@@ -142,6 +142,26 @@ public class AxisAlignedBoundingBox {
     public static native boolean equals(AxisAlignedBoundingBox left, AxisAlignedBoundingBox right);
 
     /**
+     * Creates an instance of an AxisAlignedBoundingBox from its corners.
+     * @param minimum The minimum point along the x, y, and z axes.
+     * @param maximum The maximum point along the x, y, and z axes.
+     * @return The modified result parameter or a new AxisAlignedBoundingBox instance if one was not provided.
+     */
+    @JsMethod
+    public static native AxisAlignedBoundingBox fromCorners(Cartesian3 minimum, Cartesian3 maximum);
+
+    /**
+     * Creates an instance of an AxisAlignedBoundingBox from its corners.
+     * @param minimum The minimum point along the x, y, and z axes.
+     * @param maximum The maximum point along the x, y, and z axes.
+     * @param result The object onto which to store the result.
+     * @return The modified result parameter or a new AxisAlignedBoundingBox instance if one was not provided.
+     */
+    @JsMethod
+    public static native AxisAlignedBoundingBox fromCorners(Cartesian3 minimum, Cartesian3 maximum,
+                                                            AxisAlignedBoundingBox result);
+
+    /**
      * Computes an instance of an AxisAlignedBoundingBox. The box is determined by
      * finding the points spaced the farthest apart on the x, y, and z axes.
      *
