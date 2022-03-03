@@ -124,5 +124,6 @@ public class InjectorModule extends AbstractGinModule {
         bind(ModelExperimental3DModels.class).asEagerSingleton();
 
         bind(MSAA.class).asEagerSingleton();
+        bind(GPX.class).asEagerSingleton();
     }
 }
