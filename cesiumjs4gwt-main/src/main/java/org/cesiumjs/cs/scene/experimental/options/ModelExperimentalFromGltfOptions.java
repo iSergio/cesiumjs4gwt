@@ -22,6 +22,7 @@ import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.core.Matrix4;
 import org.cesiumjs.cs.core.Resource;
 import org.cesiumjs.cs.scene.Cesium3DTileContent;
+import org.cesiumjs.cs.scene.PointCloudShading;
 import org.cesiumjs.cs.scene.enums.ColorBlendMode;
 import org.cesiumjs.cs.scene.experimental.CustomShader;
 
@@ -157,6 +158,30 @@ public class ModelExperimentalFromGltfOptions {
      */
     @JsProperty
     public Number featureIdTextureIndex;
+    /**
+     * Options for constructing a PointCloudShading object to control point attenuation
+     * based on geometric error and lighting.
+     */
+    @JsProperty
+    public PointCloudShading pointCloudShading;
+    /**
+     * Whether to cull back-facing geometry. When true, back face culling is determined by the material's doubleSided
+     * property; when false, back face culling is disabled. Back faces are not culled if the model's color is translucent.
+     */
+    @JsProperty
+    public boolean backFaceCulling;
+    /**
+     * Determines whether the model casts or receives shadows from light sources.
+     * Default: {@link org.cesiumjs.cs.scene.enums.ShadowMode#ENABLED()}
+     */
+    @JsProperty
+    public Number shadows;
+    /**
+     * Whether to display the credits of this model on screen
+     * Default: false
+     */
+    @JsProperty
+    public boolean showCreditsOnScreen;
 
     @JsConstructor
     private ModelExperimentalFromGltfOptions() {}
