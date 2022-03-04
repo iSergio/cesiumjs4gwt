@@ -627,6 +627,33 @@ public class Rectangle {
                                                 Cartesian3[] result);
 
     /**
+     * Computes a subsection of a rectangle from normalized coordinates in the range [0.0, 1.0].
+     * @param rectangle The rectangle to subsection.
+     * @param westLerp The west interpolation factor in the range [0.0, 1.0]. Must be less than or equal to eastLerp.
+     * @param southLerp The south interpolation factor in the range [0.0, 1.0]. Must be less than or equal to northLerp.
+     * @param eastLerp The east interpolation factor in the range [0.0, 1.0]. Must be greater than or equal to westLerp.
+     * @param northLerp The north interpolation factor in the range [0.0, 1.0]. Must be greater than or equal to southLerp.
+     * @return The modified result parameter or a new {@link Rectangle} instance if none was provided.
+     */
+    @JsMethod
+    public static native Rectangle subsection(double rectangle, double westLerp, double southLerp,
+                                              double eastLerp, double northLerp);
+
+    /**
+     * Computes a subsection of a rectangle from normalized coordinates in the range [0.0, 1.0].
+     * @param rectangle The rectangle to subsection.
+     * @param westLerp The west interpolation factor in the range [0.0, 1.0]. Must be less than or equal to eastLerp.
+     * @param southLerp The south interpolation factor in the range [0.0, 1.0]. Must be less than or equal to northLerp.
+     * @param eastLerp The east interpolation factor in the range [0.0, 1.0]. Must be greater than or equal to westLerp.
+     * @param northLerp The north interpolation factor in the range [0.0, 1.0]. Must be greater than or equal to southLerp.
+     * @param result The object onto which to store the result.
+     * @return The modified result parameter or a new {@link Rectangle} instance if none was provided.
+     */
+    @JsMethod
+    public static native Rectangle subsection(double rectangle, double westLerp, double southLerp,
+                                              double eastLerp, double northLerp, Rectangle result);
+
+    /**
      * Computes a rectangle that is the union of two rectangles.
      *
      * @param rectangle      A rectangle to enclose in rectangle.

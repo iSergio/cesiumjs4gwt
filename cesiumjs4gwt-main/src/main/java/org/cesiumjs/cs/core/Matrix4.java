@@ -501,6 +501,23 @@ public class Matrix4 {
     public static native Matrix4 fromColumnMajorArray(double[] values, Matrix4 result);
 
     /**
+     * Creates a rotation matrix.
+     * @param rotation The rotation matrix.
+     * @return The modified result parameter, or a new Matrix4 instance if one was not provided.
+     */
+    @JsMethod
+    public static native Matrix4 fromRotation(Matrix3 rotation);
+
+    /**
+     * Creates a rotation matrix.
+     * @param rotation The rotation matrix.
+     * @param result The object in which the result will be stored, if undefined a new instance will be created.
+     * @return The modified result parameter, or a new Matrix4 instance if one was not provided.
+     */
+    @JsMethod
+    public static native Matrix4 fromRotation(Matrix3 rotation, Matrix3 result);
+
+    /**
      * Computes a Matrix4 instance from a Matrix3 representing the rotation and a
      * Cartesian3 representing the translation.
      *
@@ -774,6 +791,23 @@ public class Matrix4 {
      */
     @JsMethod
     public static native Matrix3 getMatrix3(Matrix4 matrix, Matrix3 result);
+
+    /**
+     * Extracts the rotation matrix assuming the matrix is an affine transformation.
+     * @param matrix The matrix.
+     * @return The modified result parameter.
+     */
+    @JsMethod
+    public static native Matrix4 getRotation(Matrix4 matrix);
+
+    /**
+     * Extracts the rotation matrix assuming the matrix is an affine transformation.
+     * @param matrix The matrix.
+     * @param result The object onto which to store the result.
+     * @return The modified result parameter.
+     */
+    @JsMethod
+    public static native Matrix4 getRotation(Matrix4 matrix, Matrix4 result);
 
     /**
      * Retrieves a copy of the matrix row at the provided index as a Cartesian3
@@ -1075,6 +1109,15 @@ public class Matrix4 {
     public static native Matrix4 setColumn(Matrix4 matrix, int index, Cartesian4 cartesian, Matrix4 result);
 
     /**
+     * Sets the rotation assuming the matrix is an affine transformation.
+     * @param matrix The matrix.
+     * @param rotation The rotation matrix.
+     * @return The modified result parameter.
+     */
+    @JsMethod
+    public static native Matrix4 setRotation(Matrix4 matrix, Matrix4 rotation);
+
+    /**
      * Computes a new matrix that replaces the specified row in the provided matrix
      * with the provided Cartesian3 instance.
      *
@@ -1113,6 +1156,27 @@ public class Matrix4 {
      */
     @JsMethod
     public static native Matrix4 setTranslation(Matrix4 matrix, Cartesian4 translation, Cartesian4 result);
+
+    /**
+     * Computes a new matrix that replaces the scale with the provided uniform scale.
+     * This assumes the matrix is an affine transformation.
+     * @param matrix The matrix to use.
+     * @param scale The uniform scale that replaces the scale of the provided matrix.
+     * @return The modified result parameter.
+     */
+    @JsMethod
+    public static native Matrix4 setUniformScale(Matrix4 matrix, double scale);
+
+    /**
+     * Computes a new matrix that replaces the scale with the provided uniform scale.
+     * This assumes the matrix is an affine transformation.
+     * @param matrix The matrix to use.
+     * @param scale The uniform scale that replaces the scale of the provided matrix.
+     * @param result The object onto which to store the result.
+     * @return The modified result parameter.
+     */
+    @JsMethod
+    public static native Matrix4 setUniformScale(Matrix4 matrix, double scale, Matrix4 result);
 
     /**
      * Computes the difference of two matrices.

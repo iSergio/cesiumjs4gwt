@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./when-4bbc8319', './RuntimeError-1349fdaf', './WebGLConstants-508b9636', './createTaskProcessorWorker'], (function (when, RuntimeError, WebGLConstants, createTaskProcessorWorker) { 'use strict';
+define(['./when-4bbc8319', './RuntimeError-5b082e8f', './WebGLConstants-508b9636', './createTaskProcessorWorker'], (function (when, RuntimeError, WebGLConstants, createTaskProcessorWorker) { 'use strict';
 
   /**
    * The data type of a pixel.

@@ -466,7 +466,25 @@ public class BoundingSphere {
      */
     @JsMethod
     public static native BoundingSphere fromRectangleWithHeights2D(Rectangle rectangle, Object projection,
-                                                                   double minimumHeight, double maximumHeight, BoundingSphere result);
+                                                                   double minimumHeight, double maximumHeight,
+                                                                   BoundingSphere result);
+
+    /**
+     * Computes a tight-fitting bounding sphere enclosing the provided affine transformation.
+     * @param transformation The affine transformation.
+     * @return The modified result parameter or a new BoundingSphere instance if none was provided.
+     */
+    @JsMethod
+    public static native BoundingSphere fromTransformation(Matrix4 transformation);
+
+    /**
+     * Computes a tight-fitting bounding sphere enclosing the provided affine transformation.
+     * @param transformation The affine transformation.
+     * @param result The object onto which to store the result.
+     * @return The modified result parameter or a new BoundingSphere instance if none was provided.
+     */
+    @JsMethod
+    public static native BoundingSphere fromTransformation(Matrix4 transformation, BoundingSphere result);
 
     /**
      * Computes a tight-fitting bounding sphere enclosing a list of 3D points, where

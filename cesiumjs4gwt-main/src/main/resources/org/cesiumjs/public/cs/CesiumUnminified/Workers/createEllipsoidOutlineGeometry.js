@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./when-4bbc8319', './EllipsoidOutlineGeometry-39cfdd82', './GeometryOffsetAttribute-eb3834cd', './RuntimeError-1349fdaf', './Transforms-f5d400d6', './Matrix2-57f130bc', './ComponentDatatype-17ffa790', './WebGLConstants-508b9636', './combine-e9466e32', './GeometryAttribute-48d0e89b', './GeometryAttributes-7827a6c2', './IndexDatatype-4ae6decc'], (function (when, EllipsoidOutlineGeometry, GeometryOffsetAttribute, RuntimeError, Transforms, Matrix2, ComponentDatatype, WebGLConstants, combine, GeometryAttribute, GeometryAttributes, IndexDatatype) { 'use strict';
+define(['./when-4bbc8319', './EllipsoidOutlineGeometry-b79bb09f', './GeometryOffsetAttribute-7e016332', './RuntimeError-5b082e8f', './Transforms-8b90e17c', './Matrix2-265d9610', './ComponentDatatype-aad54330', './WebGLConstants-508b9636', './combine-e9466e32', './GeometryAttribute-4bcb785f', './GeometryAttributes-7827a6c2', './IndexDatatype-6739e544'], (function (when, EllipsoidOutlineGeometry, GeometryOffsetAttribute, RuntimeError, Transforms, Matrix2, ComponentDatatype, WebGLConstants, combine, GeometryAttribute, GeometryAttributes, IndexDatatype) { 'use strict';
 
   function createEllipsoidOutlineGeometry(ellipsoidGeometry, offset) {
     if (when.defined(ellipsoidGeometry.buffer)) {

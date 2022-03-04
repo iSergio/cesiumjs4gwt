@@ -686,6 +686,15 @@ public class Matrix3 {
      * Extracts the rotation assuming the matrix is an affine transformation.
      *
      * @param matrix The matrix.
+     * @return The modified result parameter
+     */
+    @JsMethod
+    public static native Matrix3 getRotation(Matrix3 matrix);
+
+    /**
+     * Extracts the rotation assuming the matrix is an affine transformation.
+     *
+     * @param matrix The matrix.
      * @param result The object onto which to store the result.
      * @return The modified result parameter
      */
@@ -781,6 +790,25 @@ public class Matrix3 {
     public static native Matrix3 multiplyByScale(Matrix3 matrix, Cartesian3 scale, Matrix3 result);
 
     /**
+     * Computes the product of a matrix times a uniform scale, as if the scale were a scale matrix.
+     * @param matrix The matrix on the left-hand side.
+     * @param scale The uniform scale on the right-hand side.
+     * @return The modified result parameter.
+     */
+    @JsMethod
+    public static native Matrix3 multiplyByUniformScale(Matrix3 matrix, double scale);
+
+    /**
+     * Computes the product of a matrix times a uniform scale, as if the scale were a scale matrix.
+     * @param matrix The matrix on the left-hand side.
+     * @param scale The uniform scale on the right-hand side.
+     * @param result The object onto which to store the result.
+     * @return The modified result parameter.
+     */
+    @JsMethod
+    public static native Matrix3 multiplyByUniformScale(Matrix3 matrix, double scale, Matrix3 result);
+
+    /**
      * Computes the product of a matrix and a column vector.
      *
      * @param matrix    The matrix.
@@ -838,6 +866,15 @@ public class Matrix3 {
     public static native Matrix3 setColumn(Matrix3 matrix, int index, Cartesian3 cartesian, Matrix3 result);
 
     /**
+     * Sets the rotation assuming the matrix is an affine transformation.
+     * @param matrix The matrix.
+     * @param rotation The rotation matrix.
+     * @return The modified result parameter.
+     */
+    @JsMethod
+    public static native Matrix3 setRotation(Matrix3 matrix, Matrix3 rotation);
+
+    /**
      * Computes a new matrix that replaces the specified row in the provided matrix
      * with the provided Cartesian3 instance.
      *
@@ -850,6 +887,48 @@ public class Matrix3 {
      */
     @JsMethod
     public static native Matrix3 setRow(Matrix3 matrix, int index, Cartesian3 cartesian, Matrix3 result);
+
+    /**
+     * Computes a new matrix that replaces the scale with the provided scale.
+     * This assumes the matrix is an affine transformation.
+     * @param matrix The matrix to use.
+     * @param scale The scale that replaces the scale of the provided matrix.
+     * @return The modified result parameter.
+     */
+    @JsMethod
+    public static native Matrix3 setScale(Matrix3 matrix, Cartesian3 scale);
+
+    /**
+     * Computes a new matrix that replaces the scale with the provided scale.
+     * This assumes the matrix is an affine transformation.
+     * @param matrix The matrix to use.
+     * @param scale The scale that replaces the scale of the provided matrix.
+     * @param result The object onto which to store the result.
+     * @return The modified result parameter.
+     */
+    @JsMethod
+    public static native Matrix3 setScale(Matrix3 matrix, Cartesian3 scale, Matrix3 result);
+
+    /**
+     * Computes a new matrix that replaces the scale with the provided uniform scale.
+     * This assumes the matrix is an affine transformation.
+     * @param matrix The matrix to use.
+     * @param scale The uniform scale that replaces the scale of the provided matrix.
+     * @return The modified result parameter.
+     */
+    @JsMethod
+    public static native Matrix3 setUniformScale(Matrix3 matrix, double scale);
+
+    /**
+     * Computes a new matrix that replaces the scale with the provided uniform scale.
+     * This assumes the matrix is an affine transformation.
+     * @param matrix The matrix to use.
+     * @param scale The uniform scale that replaces the scale of the provided matrix.
+     * @param result The object onto which to store the result.
+     * @return The modified result parameter.
+     */
+    @JsMethod
+    public static native Matrix3 setUniformScale(Matrix3 matrix, double scale, Matrix3 result);
 
     /**
      * Computes the difference of two matrices.
