@@ -559,6 +559,21 @@ public class Scene {
     public native Event terrainProviderChanged();
 
     /**
+     * If provided, this value controls the rate of multisample antialiasing. Typical multisampling rates are 2, 4,
+     * and sometimes 8 samples per pixel. Higher sampling rates of MSAA may impact performance in exchange for
+     * improved visual quality. This value only applies to WebGL2 contexts that support multisample render targets.
+     * Default: 1
+     */
+    @JsProperty
+    public double msaaSamples;
+
+    /**
+     * Returns <code>true</code> if the Scene's context supports MSAA.
+     */
+    @JsProperty(name = "msaaSupported")
+    public native boolean msaaSupported();
+
+    /**
      * Transforms a position in cartesian coordinates to canvas coordinates. This is
      * commonly used to place an HTML element at the same screen position as an
      * object in the scene.

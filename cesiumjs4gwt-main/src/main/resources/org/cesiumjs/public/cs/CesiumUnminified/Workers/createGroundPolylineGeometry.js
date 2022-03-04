@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./Transforms-f5d400d6', './Matrix2-57f130bc', './RuntimeError-1349fdaf', './when-4bbc8319', './ComponentDatatype-17ffa790', './ArcType-fc72c06c', './arrayRemoveDuplicates-04f4e20a', './EllipsoidGeodesic-bd191ae8', './EllipsoidRhumbLine-e39900fb', './EncodedCartesian3-7b753db7', './GeometryAttribute-48d0e89b', './IntersectionTests-e14e2851', './Plane-0f8ffca6', './WebMercatorProjection-3b4197b5', './combine-e9466e32', './WebGLConstants-508b9636'], (function (Transforms, Matrix2, RuntimeError, when, ComponentDatatype, ArcType, arrayRemoveDuplicates, EllipsoidGeodesic, EllipsoidRhumbLine, EncodedCartesian3, GeometryAttribute, IntersectionTests, Plane, WebMercatorProjection, combine, WebGLConstants) { 'use strict';
+define(['./Transforms-8b90e17c', './Matrix2-265d9610', './RuntimeError-5b082e8f', './when-4bbc8319', './ComponentDatatype-aad54330', './ArcType-fc72c06c', './arrayRemoveDuplicates-65de6756', './EllipsoidGeodesic-ed024f16', './EllipsoidRhumbLine-d09d563f', './EncodedCartesian3-da8f96bc', './GeometryAttribute-4bcb785f', './IntersectionTests-596e31ec', './Plane-616c9c0a', './WebMercatorProjection-d67afe4b', './combine-e9466e32', './WebGLConstants-508b9636'], (function (Transforms, Matrix2, RuntimeError, when, ComponentDatatype, ArcType, arrayRemoveDuplicates, EllipsoidGeodesic, EllipsoidRhumbLine, EncodedCartesian3, GeometryAttribute, IntersectionTests, Plane, WebMercatorProjection, combine, WebGLConstants) { 'use strict';
 
   /**
    * A tiling scheme for geometry referenced to a simple {@link GeographicProjection} where
@@ -333,7 +333,7 @@ define(['./Transforms-f5d400d6', './Matrix2-57f130bc', './RuntimeError-1349fdaf'
     let minTerrainHeight = ApproximateTerrainHeights._defaultMinTerrainHeight;
     let maxTerrainHeight = ApproximateTerrainHeights._defaultMaxTerrainHeight;
     if (when.defined(xyLevel)) {
-      const key = xyLevel.level + "-" + xyLevel.x + "-" + xyLevel.y;
+      const key = `${xyLevel.level}-${xyLevel.x}-${xyLevel.y}`;
       const heights = ApproximateTerrainHeights._terrainHeights[key];
       if (when.defined(heights)) {
         minTerrainHeight = heights[0];
@@ -403,7 +403,7 @@ define(['./Transforms-f5d400d6', './Matrix2-57f130bc', './RuntimeError-1349fdaf'
     // Get the terrain max for that tile
     let maxTerrainHeight = ApproximateTerrainHeights._defaultMaxTerrainHeight;
     if (when.defined(xyLevel)) {
-      const key = xyLevel.level + "-" + xyLevel.x + "-" + xyLevel.y;
+      const key = `${xyLevel.level}-${xyLevel.x}-${xyLevel.y}`;
       const heights = ApproximateTerrainHeights._terrainHeights[key];
       if (when.defined(heights)) {
         maxTerrainHeight = heights[1];

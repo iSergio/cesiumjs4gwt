@@ -86,7 +86,29 @@ public class OrientedBoundingBox {
      * @return The modified result parameter or a new OrientedBoundingBox instance
      * if none was provided. (Returns undefined if box is undefined)
      */
+    @JsMethod
     public static native OrientedBoundingBox clone(OrientedBoundingBox box, OrientedBoundingBox result);
+
+    /**
+     * Computes the eight corners of an oriented bounding box.
+     * <p>The corners are ordered by (-X, -Y, -Z), (-X, -Y, +Z), (-X, +Y, -Z), (-X, +Y, +Z), (+X, -Y, -Z),
+     * (+X, -Y, +Z), (+X, +Y, -Z), (+X, +Y, +Z).</p>
+     * @param box The oriented bounding box.
+     * @return The modified result parameter or a new array if none was provided.
+     */
+    @JsMethod
+    public static native Cartesian3[] computeCorners(OrientedBoundingBox box);
+
+    /**
+     * Computes the eight corners of an oriented bounding box.
+     * <p>The corners are ordered by (-X, -Y, -Z), (-X, -Y, +Z), (-X, +Y, -Z), (-X, +Y, +Z), (+X, -Y, -Z),
+     * (+X, -Y, +Z), (+X, +Y, -Z), (+X, +Y, +Z).</p>
+     * @param box The oriented bounding box.
+     * @param result An array of eight Cartesian3 instances onto which to store the corners.
+     * @return The modified result parameter or a new array if none was provided.
+     */
+    @JsMethod
+    public static native Cartesian3[] computeCorners(OrientedBoundingBox box, Cartesian3[] result);
 
     /**
      * The distances calculated by the vector from the center of the bounding box to
@@ -100,6 +122,7 @@ public class OrientedBoundingBox {
      * @return The nearest and farthest distances on the bounding box from position
      * in direction.
      */
+    @JsMethod
     public static native Interval computePlaneDistances(OrientedBoundingBox box, Cartesian3 position,
                                                         Cartesian3 direction);
 
@@ -116,8 +139,26 @@ public class OrientedBoundingBox {
      * @return The nearest and farthest distances on the bounding box from position
      * in direction.
      */
+    @JsMethod
     public static native Interval computePlaneDistances(OrientedBoundingBox box, Cartesian3 position,
                                                         Cartesian3 direction, Interval result);
+
+    /**
+     * Computes a transformation matrix from an oriented bounding box.
+     * @param box The oriented bounding box.
+     * @return The modified result parameter or a new Matrix4 instance if none was provided.
+     */
+    @JsMethod
+    public static native Matrix4 computeTransformation(OrientedBoundingBox box);
+
+    /**
+     * Computes a transformation matrix from an oriented bounding box.
+     * @param box The oriented bounding box.
+     * @param result The object onto which to store the result.
+     * @return The modified result parameter or a new Matrix4 instance if none was provided.
+     */
+    @JsMethod
+    public static native Matrix4 computeTransformation(OrientedBoundingBox box, Matrix4 result);
 
     /**
      * Computes the estimated distance squared from the closest point on a bounding
@@ -127,6 +168,7 @@ public class OrientedBoundingBox {
      * @param cartesian The point.
      * @return The estimated distance squared from the bounding sphere to the point.
      */
+    @JsMethod
     public static native double distanceSquaredTo(OrientedBoundingBox box, Cartesian3 cartesian);
 
     /**
@@ -137,6 +179,7 @@ public class OrientedBoundingBox {
      * @param right The second OrientedBoundingBox.
      * @return true if left and right are equal, false otherwise.
      */
+    @JsMethod
     public static native boolean equals(OrientedBoundingBox left, OrientedBoundingBox right);
 
     /**
@@ -158,6 +201,7 @@ public class OrientedBoundingBox {
      * @return The modified result parameter or a new OrientedBoundingBox instance
      * if one was not provided.
      */
+    @JsMethod
     public static native OrientedBoundingBox fromPoints(Cartesian3[] positions);
 
     /**
@@ -180,6 +224,7 @@ public class OrientedBoundingBox {
      * @return The modified result parameter or a new OrientedBoundingBox instance
      * if one was not provided.
      */
+    @JsMethod
     public static native OrientedBoundingBox fromPoints(Cartesian3[] positions, OrientedBoundingBox result);
 
     /**
@@ -190,6 +235,7 @@ public class OrientedBoundingBox {
      * @return The modified result parameter or a new OrientedBoundingBox instance
      * if none was provided.
      */
+    @JsMethod
     public static native OrientedBoundingBox fromRectangle(Rectangle rectangle);
 
     /**
@@ -207,6 +253,7 @@ public class OrientedBoundingBox {
      * @return The modified result parameter or a new OrientedBoundingBox instance
      * if none was provided.
      */
+    @JsMethod
     public static native OrientedBoundingBox fromRectangle(Rectangle rectangle, double minimumHeight,
                                                            double maximumHeight, Ellipsoid ellipsoid);
 
@@ -226,8 +273,18 @@ public class OrientedBoundingBox {
      * @return The modified result parameter or a new OrientedBoundingBox instance
      * if none was provided.
      */
+    @JsMethod
     public static native OrientedBoundingBox fromRectangle(Rectangle rectangle, double minimumHeight,
                                                            double maximumHeight, Ellipsoid ellipsoid, OrientedBoundingBox result);
+
+    /**
+     * Computes an OrientedBoundingBox that bounds an affine transformation.
+     * @param transformation The affine transformation.
+     * @param result The object onto which to store the result.
+     * @return The modified result parameter or a new {@link OrientedBoundingBox} instance if none was provided.
+     */
+    @JsMethod
+    public static native OrientedBoundingBox fromTransformation(Matrix4 transformation, OrientedBoundingBox result);
 
     /**
      * Determines which side of a plane the oriented bounding box is located.

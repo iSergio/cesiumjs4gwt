@@ -498,6 +498,15 @@ public class Matrix2 {
     public static native double getMaximumScale(Matrix2 matrix);
 
     /**
+     * Extracts the rotation matrix assuming the matrix is an affine transformation.
+     * @param matrix The matrix.
+     * @param result The object onto which to store the result.
+     * @return The modified result parameter.
+     */
+    @JsMethod
+    public static native Matrix2 getRotation(Matrix2 matrix, Matrix2 result);
+
+    /**
      * Retrieves a copy of the matrix row at the provided index as a Cartesian2
      * instance.
      *
@@ -566,6 +575,25 @@ public class Matrix2 {
     public static native Matrix2 multiplyByScale(Matrix2 matrix, Cartesian2 scale, Matrix2 result);
 
     /**
+     * Computes the product of a matrix times a uniform scale, as if the scale were a scale matrix.
+     * @param matrix The matrix on the left-hand side.
+     * @param scale The uniform scale on the right-hand side.
+     * @return The modified result parameter.
+     */
+    @JsMethod
+    public static native Matrix2 multiplyByUniformScale(Matrix2 matrix, double scale);
+
+    /**
+     * Computes the product of a matrix times a uniform scale, as if the scale were a scale matrix.
+     * @param matrix The matrix on the left-hand side.
+     * @param scale The uniform scale on the right-hand side.
+     * @param result The object onto which to store the result.
+     * @return The modified result parameter.
+     */
+    @JsMethod
+    public static native Matrix2 multiplyByUniformScale(Matrix2 matrix, double scale, Matrix2 result);
+
+    /**
      * Computes the product of a matrix and a column vector.
      *
      * @param matrix    The matrix.
@@ -623,6 +651,15 @@ public class Matrix2 {
     public static native Matrix2 setColumn(Matrix2 matrix, int index, Cartesian2 cartesian, Matrix2 result);
 
     /**
+     * Sets the rotation assuming the matrix is an affine transformation.
+     * @param matrix The matrix.
+     * @param rotation The rotation matrix.
+     * @return The modified result parameter.
+     */
+    @JsMethod
+    public static native Matrix2 setRotation(Matrix2 matrix, Matrix2 rotation);
+
+    /**
      * Computes a new matrix that replaces the specified row in the provided matrix
      * with the provided Cartesian2 instance.
      *
@@ -635,6 +672,48 @@ public class Matrix2 {
      */
     @JsMethod
     public static native Matrix2 setRow(Matrix2 matrix, int index, Cartesian2 cartesian, Matrix2 result);
+
+    /**
+     * Computes a new matrix that replaces the scale with the provided scale.
+     * This assumes the matrix is an affine transformation.
+     * @param matrix The matrix to use.
+     * @param scale The scale that replaces the scale of the provided matrix.
+     * @return The modified result parameter.
+     */
+    @JsMethod
+    public static native Matrix2 setScale(Matrix2 matrix, Cartesian2 scale);
+
+    /**
+     * Computes a new matrix that replaces the scale with the provided scale.
+     * This assumes the matrix is an affine transformation.
+     * @param matrix The matrix to use.
+     * @param scale The scale that replaces the scale of the provided matrix.
+     * @param result The object onto which to store the result.
+     * @return The modified result parameter.
+     */
+    @JsMethod
+    public static native Matrix2 setScale(Matrix2 matrix, Cartesian2 scale, Matrix2 result);
+
+    /**
+     * Computes a new matrix that replaces the scale with the provided uniform scale.
+     * This assumes the matrix is an affine transformation.
+     * @param matrix The matrix to use.
+     * @param scale The uniform scale that replaces the scale of the provided matrix.
+     * @return The modified result parameter.
+     */
+    @JsMethod
+    public static native Matrix2 setUniformScale(Matrix2 matrix, double scale);
+
+    /**
+     * Computes a new matrix that replaces the scale with the provided uniform scale.
+     * This assumes the matrix is an affine transformation.
+     * @param matrix The matrix to use.
+     * @param scale The uniform scale that replaces the scale of the provided matrix.
+     * @param result The object onto which to store the result.
+     * @return The modified result parameter.
+     */
+    @JsMethod
+    public static native Matrix2 setUniformScale(Matrix2 matrix, double scale, Matrix2 result);
 
     /**
      * Computes the difference of two matrices.

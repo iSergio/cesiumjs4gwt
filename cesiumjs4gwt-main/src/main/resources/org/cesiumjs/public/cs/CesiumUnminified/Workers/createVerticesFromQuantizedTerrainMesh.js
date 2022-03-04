@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./AxisAlignedBoundingBox-b11cd8c8', './Matrix2-57f130bc', './when-4bbc8319', './TerrainEncoding-b545d35b', './IndexDatatype-4ae6decc', './ComponentDatatype-17ffa790', './RuntimeError-1349fdaf', './Transforms-f5d400d6', './WebMercatorProjection-3b4197b5', './createTaskProcessorWorker', './AttributeCompression-dae39175', './WebGLConstants-508b9636', './combine-e9466e32'], (function (AxisAlignedBoundingBox, Matrix2, when, TerrainEncoding, IndexDatatype, ComponentDatatype, RuntimeError, Transforms, WebMercatorProjection, createTaskProcessorWorker, AttributeCompression, WebGLConstants, combine) { 'use strict';
+define(['./AxisAlignedBoundingBox-2a0ca7ef', './Matrix2-265d9610', './when-4bbc8319', './TerrainEncoding-82b55fe0', './IndexDatatype-6739e544', './ComponentDatatype-aad54330', './RuntimeError-5b082e8f', './Transforms-8b90e17c', './WebMercatorProjection-d67afe4b', './createTaskProcessorWorker', './AttributeCompression-442278a0', './WebGLConstants-508b9636', './combine-e9466e32'], (function (AxisAlignedBoundingBox, Matrix2, when, TerrainEncoding, IndexDatatype, ComponentDatatype, RuntimeError, Transforms, WebMercatorProjection, createTaskProcessorWorker, AttributeCompression, WebGLConstants, combine) { 'use strict';
 
   /**
    * Provides terrain or other geometry for the surface of an ellipsoid.  The surface geometry is

@@ -92,4 +92,18 @@ public class SceneOptions {
      */
     @JsProperty
     public double maximumRenderTimeChange;
+    /**
+     * Adjust the DepthPlane to address rendering artefacts below ellipsoid zero elevation.
+     * Default: 0.0
+     */
+    @JsProperty
+    public double depthPlaneEllipsoidOffset;
+    /**
+     * If provided, this value controls the rate of multisample antialiasing. Typical multisampling rates are 2, 4,
+     * and sometimes 8 samples per pixel. Higher sampling rates of MSAA may impact performance in exchange for
+     * improved visual quality. This value only applies to WebGL2 contexts that support multisample render targets.
+     * Default: 1
+     */
+    @JsProperty
+    public double msaaSamples;
 }
