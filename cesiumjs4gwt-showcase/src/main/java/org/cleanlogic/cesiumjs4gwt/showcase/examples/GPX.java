@@ -17,7 +17,9 @@
 package org.cleanlogic.cesiumjs4gwt.showcase.examples;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Document;
 import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.DomEvent;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -69,10 +71,7 @@ public class GPX extends AbstractExample {
 
         initWidget(contentPanel);
 
-        csVPanel.getViewer().dataSources().add(
-                GpxDataSource.load(GWT.getModuleBaseURL() + "SampleData/gpx/lamina.gpx",
-                        new GpxDataSourceOptions().setClampToGround(true))
-        ).then(dataSource -> csVPanel.getViewer().flyTo(((GpxDataSource) dataSource).entities));
+        DomEvent.fireNativeEvent(Document.get().createChangeEvent(), modelLBox);
     }
 
     @SuppressWarnings("unchecked")
