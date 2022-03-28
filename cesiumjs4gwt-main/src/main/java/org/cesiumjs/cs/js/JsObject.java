@@ -52,39 +52,44 @@ public class JsObject extends JavaScriptObject {
         return base;
     }
 
-    public final static native void setProperty(Object target, String name, Number value) /*-{
+    public static native JsObject setProperty(Object target, String name, Number value) /*-{
         if (target === undefined) {
             target = {};
         }
         target[name] = value;
+        return target;
     }-*/;
 
-    public final static native void setProperty(Object target, String name, Boolean value) /*-{
+    public static native JsObject setProperty(Object target, String name, Boolean value) /*-{
         if (target === undefined) {
             target = {};
         }
         target[name] = value;
+        return target;
     }-*/;
 
-    public final static native void setProperty(Object target, String name, String value) /*-{
+    public static native JsObject setProperty(Object target, String name, String value) /*-{
         if (target === undefined) {
             target = {};
         }
         target[name] = value;
+        return target;
     }-*/;
 
-    public final static native void setProperty(Object target, String name, Object value) /*-{
+    public static native JsObject setProperty(Object target, String name, Object value) /*-{
         if (target === undefined) {
             target = {};
         }
         target[name] = value;
+        return target;
     }-*/;
 
-    public final static native void setProperty(Object target, String name, JsObject value) /*-{
+    public static native JsObject setProperty(Object target, String name, JsObject value) /*-{
         if (target === undefined) {
             target = {};
         }
         target[name] = value;
+        return target;
     }-*/;
 
     public final static native Number getNumber(Object target, String name) /*-{
@@ -117,24 +122,29 @@ public class JsObject extends JavaScriptObject {
     @JsProperty(namespace = JsPackage.GLOBAL, name = "undefined")
     public static native Object undefined();
 
-    public final native void setProperty(String name, Number value) /*-{
+    public final native JsObject setProperty(String name, Number value) /*-{
         this[name] = value;
+        return this;
     }-*/;
 
-    public final native void setProperty(String name, Boolean value) /*-{
+    public final native JsObject setProperty(String name, Boolean value) /*-{
         this[name] = value;
+        return this;
     }-*/;
 
-    public final native void setProperty(String name, String value) /*-{
+    public final native JsObject setProperty(String name, String value) /*-{
         this[name] = value;
+        return this;
     }-*/;
 
-    public final native void setProperty(String name, Object value) /*-{
+    public final native JsObject setProperty(String name, Object value) /*-{
         this[name] = value;
+        return this;
     }-*/;
 
-    public final native void setProperty(String name, JsObject value) /*-{
+    public final native JsObject setProperty(String name, JsObject value) /*-{
         this[name] = value;
+        return this;
     }-*/;
 
     public final native Number getNumber(String name) /*-{
