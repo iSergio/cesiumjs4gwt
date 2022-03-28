@@ -1,7 +1,10 @@
 package org.cleanlogic.cesiumjs4gwt.showcase.examples;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Document;
 import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.DomEvent;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -18,10 +21,9 @@ import org.cesiumjs.cs.datasources.graphics.options.ModelGraphicsOptions;
 import org.cesiumjs.cs.datasources.options.EntityOptions;
 import org.cesiumjs.cs.datasources.properties.ConstantPositionProperty;
 import org.cesiumjs.cs.datasources.properties.ConstantProperty;
-import org.cesiumjs.cs.datasources.properties.Property;
+import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.scene.Cesium3DTileset;
 import org.cesiumjs.cs.scene.Scene;
-import org.cesiumjs.cs.scene.options.ModelOptions;
 import org.cesiumjs.cs.scene.options.ViewOptions;
 import org.cesiumjs.cs.widgets.Viewer;
 import org.cesiumjs.cs.widgets.ViewerPanel;
@@ -42,7 +44,14 @@ public class MSAA extends AbstractExample {
 
     @Override
     public void buildPanel() {
-        csVPanel = new ViewerPanel();
+        ViewerOptions options = new ViewerOptions();
+        options.terrainProvider = Cesium.createWorldTerrain();
+        options.contextOptions = JsObject.create().setProperty("requestWebgl2", true);
+        csVPanel = new ViewerPanel(options);
+
+        if (!csVPanel.getViewer().scene().msaaSupported()) {
+            Window.alert("This browser does not support MSAA.");
+        }
 
         ListBox modelLBox = new ListBox();
         modelLBox.addItem("Statue of Liberty", "0");
@@ -70,6 +79,8 @@ public class MSAA extends AbstractExample {
         contentPanel.add(aPanel);
 
         initWidget(contentPanel);
+
+        DomEvent.fireNativeEvent(Document.get().createChangeEvent(), modelLBox);
     }
 
     private void setModel(ChangeEvent event) {
