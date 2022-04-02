@@ -17,6 +17,7 @@
 package org.cesiumjs.cs.scene.experimental.options;
 
 import jsinterop.annotations.*;
+import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.core.Matrix4;
 import org.cesiumjs.cs.core.Resource;
@@ -134,6 +135,11 @@ public class ModelExperimentalOptions {
      */
     @JsProperty
     public PointCloudShading pointCloudShading;
+    /**
+     * The light color when shading the model. When undefined the scene's light color is used instead.
+     */
+    @JsProperty
+    public Cartesian3 lightColor;
     /**
      * Whether to cull back-facing geometry. When true, back face culling is determined by the material's doubleSided
      * property; when false, back face culling is disabled. Back faces are not culled if the model's color is translucent.
