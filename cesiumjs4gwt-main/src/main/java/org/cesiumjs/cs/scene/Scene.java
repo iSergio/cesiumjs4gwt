@@ -140,7 +140,9 @@ public class Scene {
     /**
      * Gets or sets the position of the Imagery splitter within the viewport. Valid
      * values are between 0.0 and 1.0.
+     * @deprecated Use splitPosition instead.
      */
+    @Deprecated
     @JsProperty
     public double imagerySplitPosition;
     /**
@@ -302,6 +304,11 @@ public class Scene {
      */
     @JsProperty
     public Cartesian3[] sphericalHarmonicCoefficients;
+    /**
+     * Gets or sets the position of the splitter within the viewport. Valid values are between 0.0 and 1.0.
+     */
+    @JsProperty
+    public double splitPosition;
     /**
      * The Sun. Default: undefined
      */
