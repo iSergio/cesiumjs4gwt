@@ -20,6 +20,7 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.collections.ClippingPlaneCollection;
 import org.cesiumjs.cs.core.BoundingSphere;
 import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.Color;
@@ -43,6 +44,11 @@ public class ModelExperimental {
      */
     @JsProperty(name = "boundingSphere")
     public native BoundingSphere boundingSphere();
+    /**
+     * The {@link ClippingPlaneCollection} used to selectively disable rendering the model.
+     */
+    @JsProperty
+    public ClippingPlaneCollection clippingPlanes;
     /**
      * The color to blend with the model's rendered color.
      */

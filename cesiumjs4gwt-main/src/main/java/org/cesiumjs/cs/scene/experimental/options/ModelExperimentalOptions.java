@@ -17,6 +17,7 @@
 package org.cesiumjs.cs.scene.experimental.options;
 
 import jsinterop.annotations.*;
+import org.cesiumjs.cs.collections.ClippingPlaneCollection;
 import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.core.Matrix4;
@@ -136,6 +137,11 @@ public class ModelExperimentalOptions {
      */
     @JsProperty
     public PointCloudShading pointCloudShading;
+    /**
+     * The ClippingPlaneCollection used to selectively disable rendering the model.
+     */
+    @JsProperty
+    public ClippingPlaneCollection clippingPlanes;
     /**
      * The light color when shading the model. When undefined the scene's light color is used instead.
      */
