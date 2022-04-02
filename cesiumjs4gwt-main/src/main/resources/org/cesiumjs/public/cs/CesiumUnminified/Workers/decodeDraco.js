@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./ComponentDatatype-aad54330', './when-4bbc8319', './IndexDatatype-6739e544', './RuntimeError-5b082e8f', './createTaskProcessorWorker', './WebGLConstants-508b9636'], (function (ComponentDatatype, when, IndexDatatype, RuntimeError, createTaskProcessorWorker, WebGLConstants) { 'use strict';
+define(['./ComponentDatatype-9e86ac8f', './defaultValue-81eec7ed', './IndexDatatype-bed3935d', './RuntimeError-8952249c', './createTaskProcessorWorker', './WebGLConstants-508b9636'], (function (ComponentDatatype, defaultValue, IndexDatatype, RuntimeError, createTaskProcessorWorker, WebGLConstants) { 'use strict';
 
   /* global require */
 
@@ -206,7 +206,7 @@ define(['./ComponentDatatype-aad54330', './when-4bbc8319', './IndexDatatype-6739
 
     const vertexArrayLength = numPoints * numComponents;
     let vertexArray;
-    if (when.defined(quantization)) {
+    if (defaultValue.defined(quantization)) {
       vertexArray = decodeQuantizedDracoTypedArray(
         dracoGeometry,
         dracoDecoder,
@@ -364,7 +364,7 @@ define(['./ComponentDatatype-aad54330', './when-4bbc8319', './IndexDatatype-6739
   }
 
   function decode(parameters) {
-    if (when.defined(parameters.bufferView)) {
+    if (defaultValue.defined(parameters.bufferView)) {
       return decodePrimitive(parameters);
     }
     return decodePointCloud(parameters);
@@ -381,11 +381,11 @@ define(['./ComponentDatatype-aad54330', './when-4bbc8319', './IndexDatatype-6739
 
     // Expect the first message to be to load a web assembly module
     const wasmConfig = data.webAssemblyConfig;
-    if (when.defined(wasmConfig)) {
+    if (defaultValue.defined(wasmConfig)) {
       // Require and compile WebAssembly module, or use fallback if not supported
       return require([wasmConfig.modulePath], function (dracoModule) {
-        if (when.defined(wasmConfig.wasmBinaryFile)) {
-          if (!when.defined(dracoModule)) {
+        if (defaultValue.defined(wasmConfig.wasmBinaryFile)) {
+          if (!defaultValue.defined(dracoModule)) {
             dracoModule = self.DracoDecoderModule;
           }
 

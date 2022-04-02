@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./when-4bbc8319', './Matrix2-265d9610', './GeometryOffsetAttribute-7e016332', './Transforms-8b90e17c', './ComponentDatatype-aad54330', './RuntimeError-5b082e8f', './GeometryAttribute-4bcb785f', './GeometryAttributes-7827a6c2', './IndexDatatype-6739e544', './PolygonPipeline-5fd67ae2', './RectangleGeometryLibrary-80323cc0', './combine-e9466e32', './WebGLConstants-508b9636', './EllipsoidRhumbLine-d09d563f'], (function (when, Matrix2, GeometryOffsetAttribute, Transforms, ComponentDatatype, RuntimeError, GeometryAttribute, GeometryAttributes, IndexDatatype, PolygonPipeline, RectangleGeometryLibrary, combine, WebGLConstants, EllipsoidRhumbLine) { 'use strict';
+define(['./defaultValue-81eec7ed', './Matrix2-c430e55a', './GeometryOffsetAttribute-2bff0974', './Transforms-4ee811db', './ComponentDatatype-9e86ac8f', './RuntimeError-8952249c', './GeometryAttribute-51ed9bde', './GeometryAttributes-32b29525', './IndexDatatype-bed3935d', './PolygonPipeline-0605b100', './RectangleGeometryLibrary-385a2cdd', './_commonjsHelpers-3aae1032-26891ab7', './combine-3c023bda', './WebGLConstants-508b9636', './EllipsoidRhumbLine-c86f0674'], (function (defaultValue, Matrix2, GeometryOffsetAttribute, Transforms, ComponentDatatype, RuntimeError, GeometryAttribute, GeometryAttributes, IndexDatatype, PolygonPipeline, RectangleGeometryLibrary, _commonjsHelpers3aae1032, combine, WebGLConstants, EllipsoidRhumbLine) { 'use strict';
 
   const bottomBoundingSphere = new Transforms.BoundingSphere();
   const topBoundingSphere = new Transforms.BoundingSphere();
@@ -278,18 +278,18 @@ define(['./when-4bbc8319', './Matrix2-265d9610', './GeometryOffsetAttribute-7e01
    * const geometry = Cesium.RectangleOutlineGeometry.createGeometry(rectangle);
    */
   function RectangleOutlineGeometry(options) {
-    options = when.defaultValue(options, when.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
 
     const rectangle = options.rectangle;
-    const granularity = when.defaultValue(
+    const granularity = defaultValue.defaultValue(
       options.granularity,
       ComponentDatatype.CesiumMath.RADIANS_PER_DEGREE
     );
-    const ellipsoid = when.defaultValue(options.ellipsoid, Matrix2.Ellipsoid.WGS84);
-    const rotation = when.defaultValue(options.rotation, 0.0);
+    const ellipsoid = defaultValue.defaultValue(options.ellipsoid, Matrix2.Ellipsoid.WGS84);
+    const rotation = defaultValue.defaultValue(options.rotation, 0.0);
 
     //>>includeStart('debug', pragmas.debug);
-    if (!when.defined(rectangle)) {
+    if (!defaultValue.defined(rectangle)) {
       throw new RuntimeError.DeveloperError("rectangle is required.");
     }
     Matrix2.Rectangle.validate(rectangle);
@@ -300,8 +300,8 @@ define(['./when-4bbc8319', './Matrix2-265d9610', './GeometryOffsetAttribute-7e01
     }
     //>>includeEnd('debug');
 
-    const height = when.defaultValue(options.height, 0.0);
-    const extrudedHeight = when.defaultValue(options.extrudedHeight, height);
+    const height = defaultValue.defaultValue(options.height, 0.0);
+    const extrudedHeight = defaultValue.defaultValue(options.extrudedHeight, height);
 
     this._rectangle = Matrix2.Rectangle.clone(rectangle);
     this._granularity = granularity;
@@ -331,16 +331,16 @@ define(['./when-4bbc8319', './Matrix2-265d9610', './GeometryOffsetAttribute-7e01
    */
   RectangleOutlineGeometry.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
-    if (!when.defined(value)) {
+    if (!defaultValue.defined(value)) {
       throw new RuntimeError.DeveloperError("value is required");
     }
 
-    if (!when.defined(array)) {
+    if (!defaultValue.defined(array)) {
       throw new RuntimeError.DeveloperError("array is required");
     }
     //>>includeEnd('debug');
 
-    startingIndex = when.defaultValue(startingIndex, 0);
+    startingIndex = defaultValue.defaultValue(startingIndex, 0);
 
     Matrix2.Rectangle.pack(value._rectangle, array, startingIndex);
     startingIndex += Matrix2.Rectangle.packedLength;
@@ -352,7 +352,7 @@ define(['./when-4bbc8319', './Matrix2-265d9610', './GeometryOffsetAttribute-7e01
     array[startingIndex++] = value._surfaceHeight;
     array[startingIndex++] = value._rotation;
     array[startingIndex++] = value._extrudedHeight;
-    array[startingIndex] = when.defaultValue(value._offsetAttribute, -1);
+    array[startingIndex] = defaultValue.defaultValue(value._offsetAttribute, -1);
 
     return array;
   };
@@ -379,12 +379,12 @@ define(['./when-4bbc8319', './Matrix2-265d9610', './GeometryOffsetAttribute-7e01
    */
   RectangleOutlineGeometry.unpack = function (array, startingIndex, result) {
     //>>includeStart('debug', pragmas.debug);
-    if (!when.defined(array)) {
+    if (!defaultValue.defined(array)) {
       throw new RuntimeError.DeveloperError("array is required");
     }
     //>>includeEnd('debug');
 
-    startingIndex = when.defaultValue(startingIndex, 0);
+    startingIndex = defaultValue.defaultValue(startingIndex, 0);
 
     const rectangle = Matrix2.Rectangle.unpack(array, startingIndex, scratchRectangle);
     startingIndex += Matrix2.Rectangle.packedLength;
@@ -398,7 +398,7 @@ define(['./when-4bbc8319', './Matrix2-265d9610', './GeometryOffsetAttribute-7e01
     const extrudedHeight = array[startingIndex++];
     const offsetAttribute = array[startingIndex];
 
-    if (!when.defined(result)) {
+    if (!defaultValue.defined(result)) {
       scratchOptions.granularity = granularity;
       scratchOptions.height = height;
       scratchOptions.rotation = rotation;
@@ -470,7 +470,7 @@ define(['./when-4bbc8319', './Matrix2-265d9610', './GeometryOffsetAttribute-7e01
     let offsetValue;
     if (extrude) {
       geometry = constructExtrudedRectangle(rectangleGeometry, computedOptions);
-      if (when.defined(rectangleGeometry._offsetAttribute)) {
+      if (defaultValue.defined(rectangleGeometry._offsetAttribute)) {
         const size = geometry.attributes.position.values.length / 3;
         let offsetAttribute = new Uint8Array(size);
         if (rectangleGeometry._offsetAttribute === GeometryOffsetAttribute.GeometryOffsetAttribute.TOP) {
@@ -511,7 +511,7 @@ define(['./when-4bbc8319', './Matrix2-265d9610', './GeometryOffsetAttribute-7e01
         false
       );
 
-      if (when.defined(rectangleGeometry._offsetAttribute)) {
+      if (defaultValue.defined(rectangleGeometry._offsetAttribute)) {
         const length = geometry.attributes.position.values.length;
         const applyOffset = new Uint8Array(length / 3);
         offsetValue =
@@ -543,7 +543,7 @@ define(['./when-4bbc8319', './Matrix2-265d9610', './GeometryOffsetAttribute-7e01
   };
 
   function createRectangleOutlineGeometry(rectangleGeometry, offset) {
-    if (when.defined(offset)) {
+    if (defaultValue.defined(offset)) {
       rectangleGeometry = RectangleOutlineGeometry.unpack(
         rectangleGeometry,
         offset

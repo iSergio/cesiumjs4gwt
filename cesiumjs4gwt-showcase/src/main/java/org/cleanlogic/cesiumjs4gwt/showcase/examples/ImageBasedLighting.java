@@ -66,7 +66,11 @@ public class ImageBasedLighting extends AbstractExample {
         ViewerPanel csVPanel = new ViewerPanel();
         viewer = csVPanel.getViewer();
 
-        environmentMapURL = GWT.getModuleBaseURL() + "SampleData/EnvironmentMap/kiara_6_afternoon_2k_ibl.ktx";
+        if (!viewer.scene().specularEnvironmentMapsSupported()) {
+            Window.alert("This browser does not support specular environment maps.");
+        }
+
+        environmentMapURL = "https://cesium.com/public/SandcastleSampleData/kiara_6_afternoon_2k_ibl.ktx2";
         String modelURL = GWT.getModuleBaseURL() + "SampleData/models/Pawns/Pawns.glb";
 
         // This environment map was processed using Google's Filament project. To

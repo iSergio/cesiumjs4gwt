@@ -28,7 +28,7 @@ import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderListener;
 import javax.inject.Inject;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 public class ImageBasedLighting extends AbstractExample {
     public Viewer viewer;
@@ -38,9 +38,11 @@ public class ImageBasedLighting extends AbstractExample {
 
     private Slider luminanceAtZenithSlider;
     private TextBox luminanceAtZenithTBox;
+
     @Inject
     public ImageBasedLighting(ShowcaseExampleStore store) {
-        super("Image-Based Lighting", "Use image-based lighting to light a model", new String[]{"Model", "lighting"}, store);
+        super("Image-Based Lighting", "Use image-based lighting to light a model", new String[]{"Model", "lighting"},
+                store);
     }
 
     @Override
@@ -48,24 +50,32 @@ public class ImageBasedLighting extends AbstractExample {
         ViewerPanel csVPanel = new ViewerPanel();
         viewer = csVPanel.getViewer();
 
-        environmentMapURL = GWT.getModuleBaseURL() + "SampleData/EnvironmentMap/kiara_6_afternoon_2k_ibl.ktx";
+        if (!viewer.scene().specularEnvironmentMapsSupported()) {
+            Window.alert("This browser does not support specular environment maps.");
+        }
+
+        environmentMapURL = "https://cesium.com/public/SandcastleSampleData/kiara_6_afternoon_2k_ibl.ktx2";
         String modelURL = GWT.getModuleBaseURL() + "SampleData/models/Pawns/Pawns.glb";
 
-        // This environment map was processed using Google's Filament project. To process your own:
-        // 1 - Download the Filament release (https://github.com/google/filament/releases).
-        // 2 - Run `cmgen --type=ktx --deploy=/path/to/output /path/to/image.hdr`. Other formats are also supported. Run `cmgen --help` for all options.
-        // 3 - Take the generated coefficients and the KTX file and load them in CesiumJS as shown below.
+        // This environment map was processed using Google's Filament project. To
+        // process your own:
+        // 1 - Download the Filament release
+        // (https://github.com/google/filament/releases).
+        // 2 - Run `cmgen --type=ktx --deploy=/path/to/output /path/to/image.hdr`. Other
+        // formats are also supported. Run `cmgen --help` for all options.
+        // 3 - Take the generated coefficients and the KTX file and load them in
+        // CesiumJS as shown below.
 
-        Cartesian3 L00  = new Cartesian3( 0.170455150831422,  0.163151083190219,  0.196966760289763);
-        Cartesian3 L1_1 = new Cartesian3(-0.066550267689383, -0.022088055746048,  0.078835009246127);
-        Cartesian3 L10  = new Cartesian3( 0.038364097478591,  0.045714300098753,  0.063498904606215);
-        Cartesian3 L11  = new Cartesian3(-0.014365363312810, -0.026490613715151, -0.050189404066020);
+        Cartesian3 L00 = new Cartesian3(0.170455150831422, 0.163151083190219, 0.196966760289763);
+        Cartesian3 L1_1 = new Cartesian3(-0.066550267689383, -0.022088055746048, 0.078835009246127);
+        Cartesian3 L10 = new Cartesian3(0.038364097478591, 0.045714300098753, 0.063498904606215);
+        Cartesian3 L11 = new Cartesian3(-0.014365363312810, -0.026490613715151, -0.050189404066020);
         Cartesian3 L2_2 = new Cartesian3(-0.051532786917890, -0.050777795729986, -0.056449044453032);
-        Cartesian3 L2_1 = new Cartesian3( 0.043454596136534,  0.046672590104157,  0.057530107646610);
-        Cartesian3 L20  = new Cartesian3(-0.001640466274110,  0.001286638231156,  0.007228908989616);
-        Cartesian3 L21  = new Cartesian3(-0.042260855700641, -0.046394335094707, -0.057562936365585);
-        Cartesian3 L22  = new Cartesian3(-0.004953478914091, -0.000479681664876,  0.008508150106928);
-        coefficients = new Cartesian3[] {L00, L1_1, L10, L11, L2_2, L2_1, L20, L21, L22};
+        Cartesian3 L2_1 = new Cartesian3(0.043454596136534, 0.046672590104157, 0.057530107646610);
+        Cartesian3 L20 = new Cartesian3(-0.001640466274110, 0.001286638231156, 0.007228908989616);
+        Cartesian3 L21 = new Cartesian3(-0.042260855700641, -0.046394335094707, -0.057562936365585);
+        Cartesian3 L22 = new Cartesian3(-0.004953478914091, -0.000479681664876, 0.008508150106928);
+        coefficients = new Cartesian3[]{L00, L1_1, L10, L11, L2_2, L2_1, L20, L21, L22};
 
         double height = 0.0;
         org.cesiumjs.cs.core.HeadingPitchRoll hpr = new org.cesiumjs.cs.core.HeadingPitchRoll(0.0, 0.0, 0.0);

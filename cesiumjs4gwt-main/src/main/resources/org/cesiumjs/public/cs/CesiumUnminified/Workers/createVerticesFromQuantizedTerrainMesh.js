@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./AxisAlignedBoundingBox-2a0ca7ef', './Matrix2-265d9610', './when-4bbc8319', './TerrainEncoding-82b55fe0', './IndexDatatype-6739e544', './ComponentDatatype-aad54330', './RuntimeError-5b082e8f', './Transforms-8b90e17c', './WebMercatorProjection-d67afe4b', './createTaskProcessorWorker', './AttributeCompression-442278a0', './WebGLConstants-508b9636', './combine-e9466e32'], (function (AxisAlignedBoundingBox, Matrix2, when, TerrainEncoding, IndexDatatype, ComponentDatatype, RuntimeError, Transforms, WebMercatorProjection, createTaskProcessorWorker, AttributeCompression, WebGLConstants, combine) { 'use strict';
+define(['./AxisAlignedBoundingBox-52bc7e5b', './Matrix2-c430e55a', './defaultValue-81eec7ed', './TerrainEncoding-7b2c3643', './IndexDatatype-bed3935d', './ComponentDatatype-9e86ac8f', './RuntimeError-8952249c', './Transforms-4ee811db', './WebMercatorProjection-04357f64', './createTaskProcessorWorker', './AttributeCompression-046b70bd', './WebGLConstants-508b9636', './_commonjsHelpers-3aae1032-26891ab7', './combine-3c023bda'], (function (AxisAlignedBoundingBox, Matrix2, defaultValue, TerrainEncoding, IndexDatatype, ComponentDatatype, RuntimeError, Transforms, WebMercatorProjection, createTaskProcessorWorker, AttributeCompression, WebGLConstants, _commonjsHelpers3aae1032, combine) { 'use strict';
 
   /**
    * Provides terrain or other geometry for the surface of an ellipsoid.  The surface geometry is
@@ -156,12 +156,12 @@ define(['./AxisAlignedBoundingBox-2a0ca7ef', './Matrix2-265d9610', './when-4bbc8
     //>>includeEnd('debug');
 
     let byWidth = regularGridIndicesCache[width];
-    if (!when.defined(byWidth)) {
+    if (!defaultValue.defined(byWidth)) {
       regularGridIndicesCache[width] = byWidth = [];
     }
 
     let indices = byWidth[height];
-    if (!when.defined(indices)) {
+    if (!defaultValue.defined(indices)) {
       if (width * height < ComponentDatatype.CesiumMath.SIXTY_FOUR_KILOBYTES) {
         indices = byWidth[height] = new Uint16Array(
           (width - 1) * (height - 1) * 6
@@ -192,12 +192,12 @@ define(['./AxisAlignedBoundingBox-2a0ca7ef', './Matrix2-265d9610', './when-4bbc8
     //>>includeEnd('debug');
 
     let byWidth = regularGridAndEdgeIndicesCache[width];
-    if (!when.defined(byWidth)) {
+    if (!defaultValue.defined(byWidth)) {
       regularGridAndEdgeIndicesCache[width] = byWidth = [];
     }
 
     let indicesAndEdges = byWidth[height];
-    if (!when.defined(indicesAndEdges)) {
+    if (!defaultValue.defined(indicesAndEdges)) {
       const indices = TerrainProvider.getRegularGridIndices(width, height);
 
       const edgeIndices = getEdgeIndices(width, height);
@@ -236,12 +236,12 @@ define(['./AxisAlignedBoundingBox-2a0ca7ef', './Matrix2-265d9610', './when-4bbc8
     //>>includeEnd('debug');
 
     let byWidth = regularGridAndSkirtAndEdgeIndicesCache[width];
-    if (!when.defined(byWidth)) {
+    if (!defaultValue.defined(byWidth)) {
       regularGridAndSkirtAndEdgeIndicesCache[width] = byWidth = [];
     }
 
     let indicesAndEdges = byWidth[height];
-    if (!when.defined(indicesAndEdges)) {
+    if (!defaultValue.defined(indicesAndEdges)) {
       const gridVertexCount = width * height;
       const gridIndexCount = (width - 1) * (height - 1) * 6;
       const edgeVertexCount = width * 2 + height * 2;
@@ -534,7 +534,7 @@ define(['./AxisAlignedBoundingBox-2a0ca7ef', './Matrix2-265d9610', './when-4bbc8
       quantizedVertexCount * 2,
       3 * quantizedVertexCount
     );
-    const hasVertexNormals = when.defined(octEncodedNormals);
+    const hasVertexNormals = defaultValue.defined(octEncodedNormals);
 
     const uvs = new Array(quantizedVertexCount);
     const heights = new Array(quantizedVertexCount);
@@ -920,7 +920,7 @@ define(['./AxisAlignedBoundingBox-2a0ca7ef', './Matrix2-265d9610', './when-4bbc8
     longitudeOffset,
     latitudeOffset
   ) {
-    const hasVertexNormals = when.defined(octEncodedNormals);
+    const hasVertexNormals = defaultValue.defined(octEncodedNormals);
 
     const north = rectangle.north;
     const south = rectangle.south;
@@ -992,7 +992,7 @@ define(['./AxisAlignedBoundingBox-2a0ca7ef', './Matrix2-265d9610', './when-4bbc8
       }
     }
 
-    if (!when.defined(copy)) {
+    if (!defaultValue.defined(copy)) {
       copy = Array.prototype.slice.call(typedArray);
     }
 

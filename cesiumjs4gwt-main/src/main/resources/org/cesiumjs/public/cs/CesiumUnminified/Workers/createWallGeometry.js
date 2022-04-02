@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./when-4bbc8319', './Matrix2-265d9610', './Transforms-8b90e17c', './ComponentDatatype-aad54330', './RuntimeError-5b082e8f', './GeometryAttribute-4bcb785f', './GeometryAttributes-7827a6c2', './IndexDatatype-6739e544', './VertexFormat-07539138', './WallGeometryLibrary-a5c492d8', './combine-e9466e32', './WebGLConstants-508b9636', './arrayRemoveDuplicates-65de6756', './PolylinePipeline-b9913663', './EllipsoidGeodesic-ed024f16', './EllipsoidRhumbLine-d09d563f', './IntersectionTests-596e31ec', './Plane-616c9c0a'], (function (when, Matrix2, Transforms, ComponentDatatype, RuntimeError, GeometryAttribute, GeometryAttributes, IndexDatatype, VertexFormat, WallGeometryLibrary, combine, WebGLConstants, arrayRemoveDuplicates, PolylinePipeline, EllipsoidGeodesic, EllipsoidRhumbLine, IntersectionTests, Plane) { 'use strict';
+define(['./defaultValue-81eec7ed', './Matrix2-c430e55a', './Transforms-4ee811db', './ComponentDatatype-9e86ac8f', './RuntimeError-8952249c', './GeometryAttribute-51ed9bde', './GeometryAttributes-32b29525', './IndexDatatype-bed3935d', './VertexFormat-7df34ea5', './WallGeometryLibrary-7330e8e1', './_commonjsHelpers-3aae1032-26891ab7', './combine-3c023bda', './WebGLConstants-508b9636', './arrayRemoveDuplicates-1a15bd09', './PolylinePipeline-b3067570', './EllipsoidGeodesic-22d2f504', './EllipsoidRhumbLine-c86f0674', './IntersectionTests-4d132f79', './Plane-7e828ad8'], (function (defaultValue, Matrix2, Transforms, ComponentDatatype, RuntimeError, GeometryAttribute, GeometryAttributes, IndexDatatype, VertexFormat, WallGeometryLibrary, _commonjsHelpers3aae1032, combine, WebGLConstants, arrayRemoveDuplicates, PolylinePipeline, EllipsoidGeodesic, EllipsoidRhumbLine, IntersectionTests, Plane) { 'use strict';
 
   const scratchCartesian3Position1 = new Matrix2.Cartesian3();
   const scratchCartesian3Position2 = new Matrix2.Cartesian3();
@@ -71,18 +71,18 @@ define(['./when-4bbc8319', './Matrix2-265d9610', './Transforms-8b90e17c', './Com
    * const geometry = Cesium.WallGeometry.createGeometry(wall);
    */
   function WallGeometry(options) {
-    options = when.defaultValue(options, when.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
 
     const wallPositions = options.positions;
     const maximumHeights = options.maximumHeights;
     const minimumHeights = options.minimumHeights;
 
     //>>includeStart('debug', pragmas.debug);
-    if (!when.defined(wallPositions)) {
+    if (!defaultValue.defined(wallPositions)) {
       throw new RuntimeError.DeveloperError("options.positions is required.");
     }
     if (
-      when.defined(maximumHeights) &&
+      defaultValue.defined(maximumHeights) &&
       maximumHeights.length !== wallPositions.length
     ) {
       throw new RuntimeError.DeveloperError(
@@ -90,7 +90,7 @@ define(['./when-4bbc8319', './Matrix2-265d9610', './Transforms-8b90e17c', './Com
       );
     }
     if (
-      when.defined(minimumHeights) &&
+      defaultValue.defined(minimumHeights) &&
       minimumHeights.length !== wallPositions.length
     ) {
       throw new RuntimeError.DeveloperError(
@@ -99,12 +99,12 @@ define(['./when-4bbc8319', './Matrix2-265d9610', './Transforms-8b90e17c', './Com
     }
     //>>includeEnd('debug');
 
-    const vertexFormat = when.defaultValue(options.vertexFormat, VertexFormat.VertexFormat.DEFAULT);
-    const granularity = when.defaultValue(
+    const vertexFormat = defaultValue.defaultValue(options.vertexFormat, VertexFormat.VertexFormat.DEFAULT);
+    const granularity = defaultValue.defaultValue(
       options.granularity,
       ComponentDatatype.CesiumMath.RADIANS_PER_DEGREE
     );
-    const ellipsoid = when.defaultValue(options.ellipsoid, Matrix2.Ellipsoid.WGS84);
+    const ellipsoid = defaultValue.defaultValue(options.ellipsoid, Matrix2.Ellipsoid.WGS84);
 
     this._positions = wallPositions;
     this._minimumHeights = minimumHeights;
@@ -115,10 +115,10 @@ define(['./when-4bbc8319', './Matrix2-265d9610', './Transforms-8b90e17c', './Com
     this._workerName = "createWallGeometry";
 
     let numComponents = 1 + wallPositions.length * Matrix2.Cartesian3.packedLength + 2;
-    if (when.defined(minimumHeights)) {
+    if (defaultValue.defined(minimumHeights)) {
       numComponents += minimumHeights.length;
     }
-    if (when.defined(maximumHeights)) {
+    if (defaultValue.defined(maximumHeights)) {
       numComponents += maximumHeights.length;
     }
 
@@ -141,15 +141,15 @@ define(['./when-4bbc8319', './Matrix2-265d9610', './Transforms-8b90e17c', './Com
    */
   WallGeometry.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
-    if (!when.defined(value)) {
+    if (!defaultValue.defined(value)) {
       throw new RuntimeError.DeveloperError("value is required");
     }
-    if (!when.defined(array)) {
+    if (!defaultValue.defined(array)) {
       throw new RuntimeError.DeveloperError("array is required");
     }
     //>>includeEnd('debug');
 
-    startingIndex = when.defaultValue(startingIndex, 0);
+    startingIndex = defaultValue.defaultValue(startingIndex, 0);
 
     let i;
 
@@ -162,20 +162,20 @@ define(['./when-4bbc8319', './Matrix2-265d9610', './Transforms-8b90e17c', './Com
     }
 
     const minimumHeights = value._minimumHeights;
-    length = when.defined(minimumHeights) ? minimumHeights.length : 0;
+    length = defaultValue.defined(minimumHeights) ? minimumHeights.length : 0;
     array[startingIndex++] = length;
 
-    if (when.defined(minimumHeights)) {
+    if (defaultValue.defined(minimumHeights)) {
       for (i = 0; i < length; ++i) {
         array[startingIndex++] = minimumHeights[i];
       }
     }
 
     const maximumHeights = value._maximumHeights;
-    length = when.defined(maximumHeights) ? maximumHeights.length : 0;
+    length = defaultValue.defined(maximumHeights) ? maximumHeights.length : 0;
     array[startingIndex++] = length;
 
-    if (when.defined(maximumHeights)) {
+    if (defaultValue.defined(maximumHeights)) {
       for (i = 0; i < length; ++i) {
         array[startingIndex++] = maximumHeights[i];
       }
@@ -213,12 +213,12 @@ define(['./when-4bbc8319', './Matrix2-265d9610', './Transforms-8b90e17c', './Com
    */
   WallGeometry.unpack = function (array, startingIndex, result) {
     //>>includeStart('debug', pragmas.debug);
-    if (!when.defined(array)) {
+    if (!defaultValue.defined(array)) {
       throw new RuntimeError.DeveloperError("array is required");
     }
     //>>includeEnd('debug');
 
-    startingIndex = when.defaultValue(startingIndex, 0);
+    startingIndex = defaultValue.defaultValue(startingIndex, 0);
 
     let i;
 
@@ -261,7 +261,7 @@ define(['./when-4bbc8319', './Matrix2-265d9610', './Transforms-8b90e17c', './Com
 
     const granularity = array[startingIndex];
 
-    if (!when.defined(result)) {
+    if (!defaultValue.defined(result)) {
       scratchOptions.positions = positions;
       scratchOptions.minimumHeights = minimumHeights;
       scratchOptions.maximumHeights = maximumHeights;
@@ -312,11 +312,11 @@ define(['./when-4bbc8319', './Matrix2-265d9610', './Transforms-8b90e17c', './Com
    * @see WallGeometry#createGeometry
    */
   WallGeometry.fromConstantHeights = function (options) {
-    options = when.defaultValue(options, when.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
     const positions = options.positions;
 
     //>>includeStart('debug', pragmas.debug);
-    if (!when.defined(positions)) {
+    if (!defaultValue.defined(positions)) {
       throw new RuntimeError.DeveloperError("options.positions is required.");
     }
     //>>includeEnd('debug');
@@ -327,8 +327,8 @@ define(['./when-4bbc8319', './Matrix2-265d9610', './Transforms-8b90e17c', './Com
     const min = options.minimumHeight;
     const max = options.maximumHeight;
 
-    const doMin = when.defined(min);
-    const doMax = when.defined(max);
+    const doMin = defaultValue.defined(min);
+    const doMax = defaultValue.defined(max);
     if (doMin || doMax) {
       const length = positions.length;
       minHeights = doMin ? new Array(length) : undefined;
@@ -377,7 +377,7 @@ define(['./when-4bbc8319', './Matrix2-265d9610', './Transforms-8b90e17c', './Com
       granularity,
       true
     );
-    if (!when.defined(pos)) {
+    if (!defaultValue.defined(pos)) {
       return;
     }
 
@@ -634,7 +634,7 @@ define(['./when-4bbc8319', './Matrix2-265d9610', './Transforms-8b90e17c', './Com
   };
 
   function createWallGeometry(wallGeometry, offset) {
-    if (when.defined(offset)) {
+    if (defaultValue.defined(offset)) {
       wallGeometry = WallGeometry.unpack(wallGeometry, offset);
     }
     wallGeometry._ellipsoid = Matrix2.Ellipsoid.clone(wallGeometry._ellipsoid);

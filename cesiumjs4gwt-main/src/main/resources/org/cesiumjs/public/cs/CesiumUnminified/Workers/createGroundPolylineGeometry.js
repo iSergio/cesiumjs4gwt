@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./Transforms-8b90e17c', './Matrix2-265d9610', './RuntimeError-5b082e8f', './when-4bbc8319', './ComponentDatatype-aad54330', './ArcType-fc72c06c', './arrayRemoveDuplicates-65de6756', './EllipsoidGeodesic-ed024f16', './EllipsoidRhumbLine-d09d563f', './EncodedCartesian3-da8f96bc', './GeometryAttribute-4bcb785f', './IntersectionTests-596e31ec', './Plane-616c9c0a', './WebMercatorProjection-d67afe4b', './combine-e9466e32', './WebGLConstants-508b9636'], (function (Transforms, Matrix2, RuntimeError, when, ComponentDatatype, ArcType, arrayRemoveDuplicates, EllipsoidGeodesic, EllipsoidRhumbLine, EncodedCartesian3, GeometryAttribute, IntersectionTests, Plane, WebMercatorProjection, combine, WebGLConstants) { 'use strict';
+define(['./Transforms-4ee811db', './Matrix2-c430e55a', './RuntimeError-8952249c', './defaultValue-81eec7ed', './ComponentDatatype-9e86ac8f', './ArcType-fc72c06c', './arrayRemoveDuplicates-1a15bd09', './EllipsoidGeodesic-22d2f504', './EllipsoidRhumbLine-c86f0674', './EncodedCartesian3-a57a8b60', './GeometryAttribute-51ed9bde', './IntersectionTests-4d132f79', './Plane-7e828ad8', './WebMercatorProjection-04357f64', './_commonjsHelpers-3aae1032-26891ab7', './combine-3c023bda', './WebGLConstants-508b9636'], (function (Transforms, Matrix2, RuntimeError, defaultValue, ComponentDatatype, ArcType, arrayRemoveDuplicates, EllipsoidGeodesic, EllipsoidRhumbLine, EncodedCartesian3, GeometryAttribute, IntersectionTests, Plane, WebMercatorProjection, _commonjsHelpers3aae1032, combine, WebGLConstants) { 'use strict';
 
   /**
    * A tiling scheme for geometry referenced to a simple {@link GeographicProjection} where
@@ -41,16 +41,16 @@ define(['./Transforms-8b90e17c', './Matrix2-265d9610', './RuntimeError-5b082e8f'
    * the tile tree.
    */
   function GeographicTilingScheme(options) {
-    options = when.defaultValue(options, when.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
 
-    this._ellipsoid = when.defaultValue(options.ellipsoid, Matrix2.Ellipsoid.WGS84);
-    this._rectangle = when.defaultValue(options.rectangle, Matrix2.Rectangle.MAX_VALUE);
+    this._ellipsoid = defaultValue.defaultValue(options.ellipsoid, Matrix2.Ellipsoid.WGS84);
+    this._rectangle = defaultValue.defaultValue(options.rectangle, Matrix2.Rectangle.MAX_VALUE);
     this._projection = new Transforms.GeographicProjection(this._ellipsoid);
-    this._numberOfLevelZeroTilesX = when.defaultValue(
+    this._numberOfLevelZeroTilesX = defaultValue.defaultValue(
       options.numberOfLevelZeroTilesX,
       2
     );
-    this._numberOfLevelZeroTilesY = when.defaultValue(
+    this._numberOfLevelZeroTilesY = defaultValue.defaultValue(
       options.numberOfLevelZeroTilesY,
       1
     );
@@ -134,7 +134,7 @@ define(['./Transforms-8b90e17c', './Matrix2-265d9610', './RuntimeError-5b082e8f'
     const east = ComponentDatatype.CesiumMath.toDegrees(rectangle.east);
     const north = ComponentDatatype.CesiumMath.toDegrees(rectangle.north);
 
-    if (!when.defined(result)) {
+    if (!defaultValue.defined(result)) {
       return new Matrix2.Rectangle(west, south, east, north);
     }
 
@@ -201,7 +201,7 @@ define(['./Transforms-8b90e17c', './Matrix2-265d9610', './RuntimeError-5b082e8f'
     const north = rectangle.north - y * yTileHeight;
     const south = rectangle.north - (y + 1) * yTileHeight;
 
-    if (!when.defined(result)) {
+    if (!defaultValue.defined(result)) {
       result = new Matrix2.Rectangle(west, south, east, north);
     }
 
@@ -256,7 +256,7 @@ define(['./Transforms-8b90e17c', './Matrix2-265d9610', './RuntimeError-5b082e8f'
       yTileCoordinate = yTiles - 1;
     }
 
-    if (!when.defined(result)) {
+    if (!defaultValue.defined(result)) {
       return new Matrix2.Cartesian2(xTileCoordinate, yTileCoordinate);
     }
 
@@ -293,7 +293,7 @@ define(['./Transforms-8b90e17c', './Matrix2-265d9610', './RuntimeError-5b082e8f'
    */
   ApproximateTerrainHeights.initialize = function () {
     let initPromise = ApproximateTerrainHeights._initPromise;
-    if (when.defined(initPromise)) {
+    if (defaultValue.defined(initPromise)) {
       return initPromise;
     }
 
@@ -319,23 +319,23 @@ define(['./Transforms-8b90e17c', './Matrix2-265d9610', './RuntimeError-5b082e8f'
   ) {
     //>>includeStart('debug', pragmas.debug);
     RuntimeError.Check.defined("rectangle", rectangle);
-    if (!when.defined(ApproximateTerrainHeights._terrainHeights)) {
+    if (!defaultValue.defined(ApproximateTerrainHeights._terrainHeights)) {
       throw new RuntimeError.DeveloperError(
         "You must call ApproximateTerrainHeights.initialize and wait for the promise to resolve before using this function"
       );
     }
     //>>includeEnd('debug');
-    ellipsoid = when.defaultValue(ellipsoid, Matrix2.Ellipsoid.WGS84);
+    ellipsoid = defaultValue.defaultValue(ellipsoid, Matrix2.Ellipsoid.WGS84);
 
     const xyLevel = getTileXYLevel(rectangle);
 
     // Get the terrain min/max for that tile
     let minTerrainHeight = ApproximateTerrainHeights._defaultMinTerrainHeight;
     let maxTerrainHeight = ApproximateTerrainHeights._defaultMaxTerrainHeight;
-    if (when.defined(xyLevel)) {
+    if (defaultValue.defined(xyLevel)) {
       const key = `${xyLevel.level}-${xyLevel.x}-${xyLevel.y}`;
       const heights = ApproximateTerrainHeights._terrainHeights[key];
-      if (when.defined(heights)) {
+      if (defaultValue.defined(heights)) {
         minTerrainHeight = heights[0];
         maxTerrainHeight = heights[1];
       }
@@ -359,7 +359,7 @@ define(['./Transforms-8b90e17c', './Matrix2-265d9610', './RuntimeError-5b082e8f'
         scratchCenterCartesian,
         scratchSurfaceCartesian
       );
-      if (when.defined(surfacePosition)) {
+      if (defaultValue.defined(surfacePosition)) {
         const distance = Matrix2.Cartesian3.distance(
           scratchCenterCartesian,
           surfacePosition
@@ -390,22 +390,22 @@ define(['./Transforms-8b90e17c', './Matrix2-265d9610', './RuntimeError-5b082e8f'
   ApproximateTerrainHeights.getBoundingSphere = function (rectangle, ellipsoid) {
     //>>includeStart('debug', pragmas.debug);
     RuntimeError.Check.defined("rectangle", rectangle);
-    if (!when.defined(ApproximateTerrainHeights._terrainHeights)) {
+    if (!defaultValue.defined(ApproximateTerrainHeights._terrainHeights)) {
       throw new RuntimeError.DeveloperError(
         "You must call ApproximateTerrainHeights.initialize and wait for the promise to resolve before using this function"
       );
     }
     //>>includeEnd('debug');
-    ellipsoid = when.defaultValue(ellipsoid, Matrix2.Ellipsoid.WGS84);
+    ellipsoid = defaultValue.defaultValue(ellipsoid, Matrix2.Ellipsoid.WGS84);
 
     const xyLevel = getTileXYLevel(rectangle);
 
     // Get the terrain max for that tile
     let maxTerrainHeight = ApproximateTerrainHeights._defaultMaxTerrainHeight;
-    if (when.defined(xyLevel)) {
+    if (defaultValue.defined(xyLevel)) {
       const key = `${xyLevel.level}-${xyLevel.x}-${xyLevel.y}`;
       const heights = ApproximateTerrainHeights._terrainHeights[key];
-      if (when.defined(heights)) {
+      if (defaultValue.defined(heights)) {
         maxTerrainHeight = heights[1];
       }
     }
@@ -503,7 +503,7 @@ define(['./Transforms-8b90e17c', './Matrix2-265d9610', './RuntimeError-5b082e8f'
      */
     initialized: {
       get: function () {
-        return when.defined(ApproximateTerrainHeights._terrainHeights);
+        return defaultValue.defined(ApproximateTerrainHeights._terrainHeights);
       },
     },
   });
@@ -556,15 +556,15 @@ define(['./Transforms-8b90e17c', './Matrix2-265d9610', './RuntimeError-5b082e8f'
    * });
    */
   function GroundPolylineGeometry(options) {
-    options = when.defaultValue(options, when.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
     const positions = options.positions;
 
     //>>includeStart('debug', pragmas.debug);
-    if (!when.defined(positions) || positions.length < 2) {
+    if (!defaultValue.defined(positions) || positions.length < 2) {
       throw new RuntimeError.DeveloperError("At least two positions are required.");
     }
     if (
-      when.defined(options.arcType) &&
+      defaultValue.defined(options.arcType) &&
       options.arcType !== ArcType.ArcType.GEODESIC &&
       options.arcType !== ArcType.ArcType.RHUMB
     ) {
@@ -578,7 +578,7 @@ define(['./Transforms-8b90e17c', './Matrix2-265d9610', './RuntimeError-5b082e8f'
      * The screen space width in pixels.
      * @type {Number}
      */
-    this.width = when.defaultValue(options.width, 1.0); // Doesn't get packed, not necessary for computing geometry.
+    this.width = defaultValue.defaultValue(options.width, 1.0); // Doesn't get packed, not necessary for computing geometry.
 
     this._positions = positions;
 
@@ -588,7 +588,7 @@ define(['./Transforms-8b90e17c', './Matrix2-265d9610', './RuntimeError-5b082e8f'
      * @type {Boolean}
      * @default 9999.0
      */
-    this.granularity = when.defaultValue(options.granularity, 9999.0);
+    this.granularity = defaultValue.defaultValue(options.granularity, 9999.0);
 
     /**
      * Whether during geometry creation a line segment will be added between the last and first line positions to make this Polyline a loop.
@@ -596,14 +596,14 @@ define(['./Transforms-8b90e17c', './Matrix2-265d9610', './RuntimeError-5b082e8f'
      * @type {Boolean}
      * @default false
      */
-    this.loop = when.defaultValue(options.loop, false);
+    this.loop = defaultValue.defaultValue(options.loop, false);
 
     /**
      * The type of path the polyline must follow. Valid options are {@link ArcType.GEODESIC} and {@link ArcType.RHUMB}.
      * @type {ArcType}
      * @default ArcType.GEODESIC
      */
-    this.arcType = when.defaultValue(options.arcType, ArcType.ArcType.GEODESIC);
+    this.arcType = defaultValue.defaultValue(options.arcType, ArcType.ArcType.GEODESIC);
 
     this._ellipsoid = Matrix2.Ellipsoid.WGS84;
 
@@ -780,7 +780,7 @@ define(['./Transforms-8b90e17c', './Matrix2-265d9610', './RuntimeError-5b082e8f'
     RuntimeError.Check.defined("array", array);
     //>>includeEnd('debug');
 
-    let index = when.defaultValue(startingIndex, 0);
+    let index = defaultValue.defaultValue(startingIndex, 0);
 
     const positions = value._positions;
     const positionsLength = positions.length;
@@ -818,7 +818,7 @@ define(['./Transforms-8b90e17c', './Matrix2-265d9610', './RuntimeError-5b082e8f'
     RuntimeError.Check.defined("array", array);
     //>>includeEnd('debug');
 
-    let index = when.defaultValue(startingIndex, 0);
+    let index = defaultValue.defaultValue(startingIndex, 0);
     const positionsLength = array[index++];
     const positions = new Array(positionsLength);
 
@@ -837,7 +837,7 @@ define(['./Transforms-8b90e17c', './Matrix2-265d9610', './RuntimeError-5b082e8f'
     const projectionIndex = array[index++];
     const scene3DOnly = array[index++] === 1.0;
 
-    if (!when.defined(result)) {
+    if (!defaultValue.defined(result)) {
       result = new GroundPolylineGeometry({
         positions: positions,
       });
@@ -984,7 +984,7 @@ define(['./Transforms-8b90e17c', './Matrix2-265d9610', './RuntimeError-5b082e8f'
         intersectionScratch
       );
       if (
-        when.defined(intersection) &&
+        defaultValue.defined(intersection) &&
         !Matrix2.Cartesian3.equalsEpsilon(intersection, p0, ComponentDatatype.CesiumMath.EPSILON7) &&
         !Matrix2.Cartesian3.equalsEpsilon(intersection, p1, ComponentDatatype.CesiumMath.EPSILON7)
       ) {
@@ -1007,7 +1007,7 @@ define(['./Transforms-8b90e17c', './Matrix2-265d9610', './RuntimeError-5b082e8f'
             intersectionScratch
           );
           if (
-            when.defined(intersection) &&
+            defaultValue.defined(intersection) &&
             !Matrix2.Cartesian3.equalsEpsilon(intersection, p0, ComponentDatatype.CesiumMath.EPSILON7) &&
             !Matrix2.Cartesian3.equalsEpsilon(intersection, p1, ComponentDatatype.CesiumMath.EPSILON7)
           ) {
@@ -1028,7 +1028,7 @@ define(['./Transforms-8b90e17c', './Matrix2-265d9610', './RuntimeError-5b082e8f'
         intersectionScratch
       );
       if (
-        when.defined(intersection) &&
+        defaultValue.defined(intersection) &&
         !Matrix2.Cartesian3.equalsEpsilon(intersection, p0, ComponentDatatype.CesiumMath.EPSILON7) &&
         !Matrix2.Cartesian3.equalsEpsilon(intersection, p1, ComponentDatatype.CesiumMath.EPSILON7)
       ) {
@@ -1051,7 +1051,7 @@ define(['./Transforms-8b90e17c', './Matrix2-265d9610', './RuntimeError-5b082e8f'
             intersectionScratch
           );
           if (
-            when.defined(intersection) &&
+            defaultValue.defined(intersection) &&
             !Matrix2.Cartesian3.equalsEpsilon(intersection, p0, ComponentDatatype.CesiumMath.EPSILON7) &&
             !Matrix2.Cartesian3.equalsEpsilon(intersection, p1, ComponentDatatype.CesiumMath.EPSILON7)
           ) {
@@ -2142,7 +2142,7 @@ define(['./Transforms-8b90e17c', './Matrix2-265d9610', './RuntimeError-5b082e8f'
 
   function createGroundPolylineGeometry(groundPolylineGeometry, offset) {
     return ApproximateTerrainHeights.initialize().then(function () {
-      if (when.defined(offset)) {
+      if (defaultValue.defined(offset)) {
         groundPolylineGeometry = GroundPolylineGeometry.unpack(
           groundPolylineGeometry,
           offset

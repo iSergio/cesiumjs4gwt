@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./AttributeCompression-442278a0', './Matrix2-265d9610', './Color-cc989747', './when-4bbc8319', './IndexDatatype-6739e544', './ComponentDatatype-aad54330', './OrientedBoundingBox-1e433348', './createTaskProcessorWorker', './RuntimeError-5b082e8f', './Transforms-8b90e17c', './combine-e9466e32', './WebGLConstants-508b9636', './EllipsoidTangentPlane-f1a69a20', './AxisAlignedBoundingBox-2a0ca7ef', './IntersectionTests-596e31ec', './Plane-616c9c0a'], (function (AttributeCompression, Matrix2, Color, when, IndexDatatype, ComponentDatatype, OrientedBoundingBox, createTaskProcessorWorker, RuntimeError, Transforms, combine, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane) { 'use strict';
+define(['./AttributeCompression-046b70bd', './Matrix2-c430e55a', './Color-8d08a55c', './defaultValue-81eec7ed', './IndexDatatype-bed3935d', './ComponentDatatype-9e86ac8f', './OrientedBoundingBox-e31a0f8a', './createTaskProcessorWorker', './RuntimeError-8952249c', './Transforms-4ee811db', './_commonjsHelpers-3aae1032-26891ab7', './combine-3c023bda', './WebGLConstants-508b9636', './EllipsoidTangentPlane-0152c019', './AxisAlignedBoundingBox-52bc7e5b', './IntersectionTests-4d132f79', './Plane-7e828ad8'], (function (AttributeCompression, Matrix2, Color, defaultValue, IndexDatatype, ComponentDatatype, OrientedBoundingBox, createTaskProcessorWorker, RuntimeError, Transforms, _commonjsHelpers3aae1032, combine, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane) { 'use strict';
 
   const scratchCenter = new Matrix2.Cartesian3();
   const scratchEllipsoid = new Matrix2.Ellipsoid();
@@ -140,7 +140,7 @@ define(['./AttributeCompression-442278a0', './Matrix2-265d9610', './Color-cc9897
 
     let minimumHeights = parameters.minimumHeights;
     let maximumHeights = parameters.maximumHeights;
-    if (when.defined(minimumHeights) && when.defined(maximumHeights)) {
+    if (defaultValue.defined(minimumHeights) && defaultValue.defined(maximumHeights)) {
       minimumHeights = new Float32Array(minimumHeights);
       maximumHeights = new Float32Array(maximumHeights);
     }
@@ -192,7 +192,7 @@ define(['./AttributeCompression-442278a0', './Matrix2-265d9610', './Color-cc9897
     const colorToBuffers = {};
     for (i = 0; i < countsLength; ++i) {
       rgba = batchTableColors[i];
-      if (!when.defined(colorToBuffers[rgba])) {
+      if (!defaultValue.defined(colorToBuffers[rgba])) {
         colorToBuffers[rgba] = {
           positionLength: counts[i],
           indexLength: indexCounts[i],
@@ -256,7 +256,7 @@ define(['./AttributeCompression-442278a0', './Matrix2-265d9610', './Color-cc9897
 
       let polygonMinimumHeight = minHeight;
       let polygonMaximumHeight = maxHeight;
-      if (when.defined(minimumHeights) && when.defined(maximumHeights)) {
+      if (defaultValue.defined(minimumHeights) && defaultValue.defined(maximumHeights)) {
         polygonMinimumHeight = minimumHeights[i];
         polygonMaximumHeight = maximumHeights[i];
       }

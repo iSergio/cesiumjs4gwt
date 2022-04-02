@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./RuntimeError-5b082e8f', './when-4bbc8319', './createTaskProcessorWorker'], (function (RuntimeError, when, createTaskProcessorWorker) { 'use strict';
+define(['./RuntimeError-8952249c', './defaultValue-81eec7ed', './_commonjsHelpers-3aae1032-26891ab7', './createTaskProcessorWorker'], (function (RuntimeError, defaultValue, _commonjsHelpers3aae1032, createTaskProcessorWorker) { 'use strict';
 
   const compressedMagic$1 = 0x7468dead;
   const compressedMagicSwap$1 = 0xadde6874;
@@ -165,7 +165,7 @@ define(['./RuntimeError-5b082e8f', './when-4bbc8319', './createTaskProcessorWork
    * @returns {GoogleEarthEnterpriseTileInformation} The modified result parameter or a new GoogleEarthEnterpriseTileInformation instance if none was provided.
    */
   GoogleEarthEnterpriseTileInformation.clone = function (info, result) {
-    if (!when.defined(result)) {
+    if (!defaultValue.defined(result)) {
       result = new GoogleEarthEnterpriseTileInformation(
         info._bits,
         info.cnodeVersion,
@@ -255,7 +255,7 @@ define(['./RuntimeError-5b082e8f', './when-4bbc8319', './createTaskProcessorWork
 
   /* This file is automatically rebuilt by the Cesium build process. */
 
-  var common = when.createCommonjsModule(function (module, exports) {
+  var common = _commonjsHelpers3aae1032.createCommonjsModule(function (module, exports) {
 
 
   var TYPED_OK =  (typeof Uint8Array !== 'undefined') &&

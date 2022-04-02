@@ -131,6 +131,17 @@ public class Cartesian4 implements Packable {
     public static native Cartesian4 add(Cartesian4 left, Cartesian4 right, Cartesian4 result);
 
     /**
+     * Constrain a value to lie between two values.
+     * @param value The value to clamp.
+     * @param min The minimum bound.
+     * @param max The maximum bound.
+     * @param result The object into which to store the result.
+     * @return The clamped value such that min <= result <= max.
+     */
+    @JsMethod
+    public static native Cartesian4 clamp(Cartesian4 value, Cartesian4 min, Cartesian4 max, Cartesian4 result);
+
+    /**
      * Duplicates a Cartesian4 instance.
      *
      * @param cartesian The Cartesian to duplicate.

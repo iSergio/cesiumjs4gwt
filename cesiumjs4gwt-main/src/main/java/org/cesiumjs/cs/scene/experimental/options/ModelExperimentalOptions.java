@@ -17,10 +17,13 @@
 package org.cesiumjs.cs.scene.experimental.options;
 
 import jsinterop.annotations.*;
+import org.cesiumjs.cs.collections.ClippingPlaneCollection;
+import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.core.Matrix4;
 import org.cesiumjs.cs.core.Resource;
 import org.cesiumjs.cs.scene.Cesium3DTileContent;
+import org.cesiumjs.cs.scene.ImageBasedLighting;
 import org.cesiumjs.cs.scene.PointCloudShading;
 import org.cesiumjs.cs.scene.enums.ShadowMode;
 import org.cesiumjs.cs.scene.experimental.CustomShader;
@@ -39,6 +42,23 @@ public class ModelExperimentalOptions {
      */
     @JsProperty
     public Matrix4 modelMatrix;
+    /**
+     * A uniform scale applied to this model.
+     * Default: 1.0
+     */
+    @JsProperty
+    public double scale;
+    /**
+     * The approximate minimum pixel size of the model regardless of zoom.
+     * Default: 0
+     */
+    @JsProperty
+    public double minimumPixelSize;
+    /**
+     * The maximum scale size of a model. An upper limit for minimumPixelSize.
+     */
+    @JsProperty
+    public double maximumScale;
     /**
      * For debugging only. Draws the bounding sphere for each draw command in the model.
      */
@@ -102,7 +122,7 @@ public class ModelExperimentalOptions {
      * Default: 0
      */
     @JsProperty
-    public double featureIdIndex;
+    public double featureIdLabel;
     /**
      * The index into the list of instance feature IDs used for picking and styling. If both per-primitive and
      * per-instance feature IDs are present, the instance feature IDs take priority.
@@ -110,13 +130,28 @@ public class ModelExperimentalOptions {
      * Default: 0
      */
     @JsProperty
-    public double instanceFeatureIdIndex;
+    public double instanceFeatureIdLabel;
     /**
      * Options for constructing a PointCloudShading object to control point attenuation
      * based on geometric error and lighting.
      */
     @JsProperty
     public PointCloudShading pointCloudShading;
+    /**
+     * The ClippingPlaneCollection used to selectively disable rendering the model.
+     */
+    @JsProperty
+    public ClippingPlaneCollection clippingPlanes;
+    /**
+     * The light color when shading the model. When undefined the scene's light color is used instead.
+     */
+    @JsProperty
+    public Cartesian3 lightColor;
+    /**
+     * The properties for managing image-based lighting on this model.
+     */
+    @JsProperty
+    public ImageBasedLighting imageBasedLighting;
     /**
      * Whether to cull back-facing geometry. When true, back face culling is determined by the material's doubleSided
      * property; when false, back face culling is disabled. Back faces are not culled if the model's color is translucent.
