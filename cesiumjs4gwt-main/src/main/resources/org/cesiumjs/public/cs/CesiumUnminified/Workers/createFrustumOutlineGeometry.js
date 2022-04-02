@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./when-4bbc8319', './Transforms-8b90e17c', './Matrix2-265d9610', './RuntimeError-5b082e8f', './ComponentDatatype-aad54330', './FrustumGeometry-a0a0f5aa', './GeometryAttribute-4bcb785f', './GeometryAttributes-7827a6c2', './combine-e9466e32', './WebGLConstants-508b9636', './Plane-616c9c0a', './VertexFormat-07539138'], (function (when, Transforms, Matrix2, RuntimeError, ComponentDatatype, FrustumGeometry, GeometryAttribute, GeometryAttributes, combine, WebGLConstants, Plane, VertexFormat) { 'use strict';
+define(['./defaultValue-81eec7ed', './Transforms-4ee811db', './Matrix2-c430e55a', './RuntimeError-8952249c', './ComponentDatatype-9e86ac8f', './FrustumGeometry-1ba08d45', './GeometryAttribute-51ed9bde', './GeometryAttributes-32b29525', './_commonjsHelpers-3aae1032-26891ab7', './combine-3c023bda', './WebGLConstants-508b9636', './Plane-7e828ad8', './VertexFormat-7df34ea5'], (function (defaultValue, Transforms, Matrix2, RuntimeError, ComponentDatatype, FrustumGeometry, GeometryAttribute, GeometryAttributes, _commonjsHelpers3aae1032, combine, WebGLConstants, Plane, VertexFormat) { 'use strict';
 
   const PERSPECTIVE = 0;
   const ORTHOGRAPHIC = 1;
@@ -52,7 +52,7 @@ define(['./when-4bbc8319', './Transforms-8b90e17c', './Matrix2-265d9610', './Run
     // This is private because it is used by DebugCameraPrimitive to draw a multi-frustum by
     // creating multiple FrustumOutlineGeometrys. This way the near plane of one frustum doesn't overlap
     // the far plane of another.
-    const drawNearPlane = when.defaultValue(options._drawNearPlane, true);
+    const drawNearPlane = defaultValue.defaultValue(options._drawNearPlane, true);
 
     let frustumType;
     let frustumPackedLength;
@@ -94,7 +94,7 @@ define(['./when-4bbc8319', './Transforms-8b90e17c', './Matrix2-265d9610', './Run
     RuntimeError.Check.defined("array", array);
     //>>includeEnd('debug');
 
-    startingIndex = when.defaultValue(startingIndex, 0);
+    startingIndex = defaultValue.defaultValue(startingIndex, 0);
 
     const frustumType = value._frustumType;
     const frustum = value._frustum;
@@ -135,7 +135,7 @@ define(['./when-4bbc8319', './Transforms-8b90e17c', './Matrix2-265d9610', './Run
     RuntimeError.Check.defined("array", array);
     //>>includeEnd('debug');
 
-    startingIndex = when.defaultValue(startingIndex, 0);
+    startingIndex = defaultValue.defaultValue(startingIndex, 0);
 
     const frustumType = array[startingIndex++];
 
@@ -166,7 +166,7 @@ define(['./when-4bbc8319', './Transforms-8b90e17c', './Matrix2-265d9610', './Run
     startingIndex += Transforms.Quaternion.packedLength;
     const drawNearPlane = array[startingIndex] === 1.0;
 
-    if (!when.defined(result)) {
+    if (!defaultValue.defined(result)) {
       return new FrustumOutlineGeometry({
         frustum: frustum,
         origin: origin,
@@ -263,7 +263,7 @@ define(['./when-4bbc8319', './Transforms-8b90e17c', './Matrix2-265d9610', './Run
   };
 
   function createFrustumOutlineGeometry(frustumGeometry, offset) {
-    if (when.defined(offset)) {
+    if (defaultValue.defined(offset)) {
       frustumGeometry = FrustumOutlineGeometry.unpack(frustumGeometry, offset);
     }
     return FrustumOutlineGeometry.createGeometry(frustumGeometry);

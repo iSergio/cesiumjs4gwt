@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./when-4bbc8319', './Matrix2-265d9610', './RuntimeError-5b082e8f', './EllipsoidOutlineGeometry-b79bb09f', './ComponentDatatype-aad54330', './WebGLConstants-508b9636', './GeometryOffsetAttribute-7e016332', './Transforms-8b90e17c', './combine-e9466e32', './GeometryAttribute-4bcb785f', './GeometryAttributes-7827a6c2', './IndexDatatype-6739e544'], (function (when, Matrix2, RuntimeError, EllipsoidOutlineGeometry, ComponentDatatype, WebGLConstants, GeometryOffsetAttribute, Transforms, combine, GeometryAttribute, GeometryAttributes, IndexDatatype) { 'use strict';
+define(['./defaultValue-81eec7ed', './Matrix2-c430e55a', './RuntimeError-8952249c', './EllipsoidOutlineGeometry-3396a282', './ComponentDatatype-9e86ac8f', './WebGLConstants-508b9636', './GeometryOffsetAttribute-2bff0974', './Transforms-4ee811db', './_commonjsHelpers-3aae1032-26891ab7', './combine-3c023bda', './GeometryAttribute-51ed9bde', './GeometryAttributes-32b29525', './IndexDatatype-bed3935d'], (function (defaultValue, Matrix2, RuntimeError, EllipsoidOutlineGeometry, ComponentDatatype, WebGLConstants, GeometryOffsetAttribute, Transforms, _commonjsHelpers3aae1032, combine, GeometryAttribute, GeometryAttributes, IndexDatatype) { 'use strict';
 
   /**
    * A description of the outline of a sphere.
@@ -48,7 +48,7 @@ define(['./when-4bbc8319', './Matrix2-265d9610', './RuntimeError-5b082e8f', './E
    * const geometry = Cesium.SphereOutlineGeometry.createGeometry(sphere);
    */
   function SphereOutlineGeometry(options) {
-    const radius = when.defaultValue(options.radius, 1.0);
+    const radius = defaultValue.defaultValue(options.radius, 1.0);
     const radii = new Matrix2.Cartesian3(radius, radius, radius);
     const ellipsoidOptions = {
       radii: radii,
@@ -115,7 +115,7 @@ define(['./when-4bbc8319', './Matrix2-265d9610', './RuntimeError-5b082e8f', './E
     scratchOptions.slicePartitions = ellipsoidGeometry._slicePartitions;
     scratchOptions.subdivisions = ellipsoidGeometry._subdivisions;
 
-    if (!when.defined(result)) {
+    if (!defaultValue.defined(result)) {
       scratchOptions.radius = ellipsoidGeometry._radii.x;
       return new SphereOutlineGeometry(scratchOptions);
     }
@@ -138,7 +138,7 @@ define(['./when-4bbc8319', './Matrix2-265d9610', './RuntimeError-5b082e8f', './E
   };
 
   function createSphereOutlineGeometry(sphereGeometry, offset) {
-    if (when.defined(offset)) {
+    if (defaultValue.defined(offset)) {
       sphereGeometry = SphereOutlineGeometry.unpack(sphereGeometry, offset);
     }
     return SphereOutlineGeometry.createGeometry(sphereGeometry);

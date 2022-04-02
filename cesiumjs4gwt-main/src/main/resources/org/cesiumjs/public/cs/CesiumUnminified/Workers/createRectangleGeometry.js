@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./when-4bbc8319', './Matrix2-265d9610', './GeometryOffsetAttribute-7e016332', './Transforms-8b90e17c', './RuntimeError-5b082e8f', './ComponentDatatype-aad54330', './GeometryAttribute-4bcb785f', './GeometryAttributes-7827a6c2', './GeometryInstance-d57564f8', './GeometryPipeline-e93f6439', './IndexDatatype-6739e544', './PolygonPipeline-5fd67ae2', './RectangleGeometryLibrary-80323cc0', './VertexFormat-07539138', './combine-e9466e32', './WebGLConstants-508b9636', './AttributeCompression-442278a0', './EncodedCartesian3-da8f96bc', './IntersectionTests-596e31ec', './Plane-616c9c0a', './EllipsoidRhumbLine-d09d563f'], (function (when, Matrix2, GeometryOffsetAttribute, Transforms, RuntimeError, ComponentDatatype, GeometryAttribute, GeometryAttributes, GeometryInstance, GeometryPipeline, IndexDatatype, PolygonPipeline, RectangleGeometryLibrary, VertexFormat, combine, WebGLConstants, AttributeCompression, EncodedCartesian3, IntersectionTests, Plane, EllipsoidRhumbLine) { 'use strict';
+define(['./defaultValue-81eec7ed', './Matrix2-c430e55a', './GeometryOffsetAttribute-2bff0974', './Transforms-4ee811db', './RuntimeError-8952249c', './ComponentDatatype-9e86ac8f', './GeometryAttribute-51ed9bde', './GeometryAttributes-32b29525', './GeometryInstance-68d87064', './GeometryPipeline-7b7ac762', './IndexDatatype-bed3935d', './PolygonPipeline-0605b100', './RectangleGeometryLibrary-385a2cdd', './VertexFormat-7df34ea5', './_commonjsHelpers-3aae1032-26891ab7', './combine-3c023bda', './WebGLConstants-508b9636', './AttributeCompression-046b70bd', './EncodedCartesian3-a57a8b60', './IntersectionTests-4d132f79', './Plane-7e828ad8', './EllipsoidRhumbLine-c86f0674'], (function (defaultValue, Matrix2, GeometryOffsetAttribute, Transforms, RuntimeError, ComponentDatatype, GeometryAttribute, GeometryAttributes, GeometryInstance, GeometryPipeline, IndexDatatype, PolygonPipeline, RectangleGeometryLibrary, VertexFormat, _commonjsHelpers3aae1032, combine, WebGLConstants, AttributeCompression, EncodedCartesian3, IntersectionTests, Plane, EllipsoidRhumbLine) { 'use strict';
 
   const positionScratch = new Matrix2.Cartesian3();
   const normalScratch = new Matrix2.Cartesian3();
@@ -538,7 +538,7 @@ define(['./when-4bbc8319', './Matrix2-265d9610', './GeometryOffsetAttribute-7e01
     }
 
     let offsetValue;
-    const hasOffsets = when.defined(offsetAttributeValue);
+    const hasOffsets = defaultValue.defined(offsetAttributeValue);
     if (hasOffsets) {
       const size = (length / 3) * 2;
       let offsetAttribute = new Uint8Array(size);
@@ -1012,7 +1012,7 @@ define(['./when-4bbc8319', './Matrix2-265d9610', './GeometryOffsetAttribute-7e01
    * const geometry = Cesium.RectangleGeometry.createGeometry(rectangle);
    */
   function RectangleGeometry(options) {
-    options = when.defaultValue(options, when.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
 
     const rectangle = options.rectangle;
 
@@ -1026,25 +1026,25 @@ define(['./when-4bbc8319', './Matrix2-265d9610', './GeometryOffsetAttribute-7e01
     }
     //>>includeEnd('debug');
 
-    const height = when.defaultValue(options.height, 0.0);
-    const extrudedHeight = when.defaultValue(options.extrudedHeight, height);
+    const height = defaultValue.defaultValue(options.height, 0.0);
+    const extrudedHeight = defaultValue.defaultValue(options.extrudedHeight, height);
 
     this._rectangle = Matrix2.Rectangle.clone(rectangle);
-    this._granularity = when.defaultValue(
+    this._granularity = defaultValue.defaultValue(
       options.granularity,
       ComponentDatatype.CesiumMath.RADIANS_PER_DEGREE
     );
     this._ellipsoid = Matrix2.Ellipsoid.clone(
-      when.defaultValue(options.ellipsoid, Matrix2.Ellipsoid.WGS84)
+      defaultValue.defaultValue(options.ellipsoid, Matrix2.Ellipsoid.WGS84)
     );
     this._surfaceHeight = Math.max(height, extrudedHeight);
-    this._rotation = when.defaultValue(options.rotation, 0.0);
-    this._stRotation = when.defaultValue(options.stRotation, 0.0);
+    this._rotation = defaultValue.defaultValue(options.rotation, 0.0);
+    this._stRotation = defaultValue.defaultValue(options.stRotation, 0.0);
     this._vertexFormat = VertexFormat.VertexFormat.clone(
-      when.defaultValue(options.vertexFormat, VertexFormat.VertexFormat.DEFAULT)
+      defaultValue.defaultValue(options.vertexFormat, VertexFormat.VertexFormat.DEFAULT)
     );
     this._extrudedHeight = Math.min(height, extrudedHeight);
-    this._shadowVolume = when.defaultValue(options.shadowVolume, false);
+    this._shadowVolume = defaultValue.defaultValue(options.shadowVolume, false);
     this._workerName = "createRectangleGeometry";
     this._offsetAttribute = options.offsetAttribute;
     this._rotatedRectangle = undefined;
@@ -1077,7 +1077,7 @@ define(['./when-4bbc8319', './Matrix2-265d9610', './GeometryOffsetAttribute-7e01
     RuntimeError.Check.defined("array", array);
     //>>includeEnd('debug');
 
-    startingIndex = when.defaultValue(startingIndex, 0);
+    startingIndex = defaultValue.defaultValue(startingIndex, 0);
 
     Matrix2.Rectangle.pack(value._rectangle, array, startingIndex);
     startingIndex += Matrix2.Rectangle.packedLength;
@@ -1094,7 +1094,7 @@ define(['./when-4bbc8319', './Matrix2-265d9610', './GeometryOffsetAttribute-7e01
     array[startingIndex++] = value._stRotation;
     array[startingIndex++] = value._extrudedHeight;
     array[startingIndex++] = value._shadowVolume ? 1.0 : 0.0;
-    array[startingIndex] = when.defaultValue(value._offsetAttribute, -1);
+    array[startingIndex] = defaultValue.defaultValue(value._offsetAttribute, -1);
 
     return array;
   };
@@ -1127,7 +1127,7 @@ define(['./when-4bbc8319', './Matrix2-265d9610', './GeometryOffsetAttribute-7e01
     RuntimeError.Check.defined("array", array);
     //>>includeEnd('debug');
 
-    startingIndex = when.defaultValue(startingIndex, 0);
+    startingIndex = defaultValue.defaultValue(startingIndex, 0);
 
     const rectangle = Matrix2.Rectangle.unpack(array, startingIndex, scratchRectangle);
     startingIndex += Matrix2.Rectangle.packedLength;
@@ -1150,7 +1150,7 @@ define(['./when-4bbc8319', './Matrix2-265d9610', './GeometryOffsetAttribute-7e01
     const shadowVolume = array[startingIndex++] === 1.0;
     const offsetAttribute = array[startingIndex];
 
-    if (!when.defined(result)) {
+    if (!defaultValue.defined(result)) {
       scratchOptions.granularity = granularity;
       scratchOptions.height = surfaceHeight;
       scratchOptions.rotation = rotation;
@@ -1191,7 +1191,7 @@ define(['./when-4bbc8319', './Matrix2-265d9610', './GeometryOffsetAttribute-7e01
    * @returns {Rectangle} The result rectangle
    */
   RectangleGeometry.computeRectangle = function (options, result) {
-    options = when.defaultValue(options, when.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
 
     const rectangle = options.rectangle;
 
@@ -1205,12 +1205,12 @@ define(['./when-4bbc8319', './Matrix2-265d9610', './GeometryOffsetAttribute-7e01
     }
     //>>includeEnd('debug');
 
-    const granularity = when.defaultValue(
+    const granularity = defaultValue.defaultValue(
       options.granularity,
       ComponentDatatype.CesiumMath.RADIANS_PER_DEGREE
     );
-    const ellipsoid = when.defaultValue(options.ellipsoid, Matrix2.Ellipsoid.WGS84);
-    const rotation = when.defaultValue(options.rotation, 0.0);
+    const ellipsoid = defaultValue.defaultValue(options.ellipsoid, Matrix2.Ellipsoid.WGS84);
+    const rotation = defaultValue.defaultValue(options.rotation, 0.0);
 
     return computeRectangle(rectangle, granularity, rotation, ellipsoid, result);
   };
@@ -1308,7 +1308,7 @@ define(['./when-4bbc8319', './Matrix2-265d9610', './GeometryOffsetAttribute-7e01
         false
       );
 
-      if (when.defined(rectangleGeometry._offsetAttribute)) {
+      if (defaultValue.defined(rectangleGeometry._offsetAttribute)) {
         const length = geometry.attributes.position.values.length;
         const applyOffset = new Uint8Array(length / 3);
         const offsetValue =
@@ -1456,7 +1456,7 @@ define(['./when-4bbc8319', './Matrix2-265d9610', './GeometryOffsetAttribute-7e01
      */
     rectangle: {
       get: function () {
-        if (!when.defined(this._rotatedRectangle)) {
+        if (!defaultValue.defined(this._rotatedRectangle)) {
           this._rotatedRectangle = computeRectangle(
             this._rectangle,
             this._granularity,
@@ -1476,7 +1476,7 @@ define(['./when-4bbc8319', './Matrix2-265d9610', './GeometryOffsetAttribute-7e01
      */
     textureCoordinateRotationPoints: {
       get: function () {
-        if (!when.defined(this._textureCoordinateRotationPoints)) {
+        if (!defaultValue.defined(this._textureCoordinateRotationPoints)) {
           this._textureCoordinateRotationPoints = textureCoordinateRotationPoints(
             this
           );
@@ -1487,7 +1487,7 @@ define(['./when-4bbc8319', './Matrix2-265d9610', './GeometryOffsetAttribute-7e01
   });
 
   function createRectangleGeometry(rectangleGeometry, offset) {
-    if (when.defined(offset)) {
+    if (defaultValue.defined(offset)) {
       rectangleGeometry = RectangleGeometry.unpack(rectangleGeometry, offset);
     }
     rectangleGeometry._ellipsoid = Matrix2.Ellipsoid.clone(rectangleGeometry._ellipsoid);

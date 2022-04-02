@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./when-4bbc8319'], (function (when) { 'use strict';
+define(['./defaultValue-81eec7ed'], (function (defaultValue) { 'use strict';
 
   /**
    * Formats an error object into a String.  If available, uses name, message, and stack
@@ -37,14 +37,14 @@ define(['./when-4bbc8319'], (function (when) { 'use strict';
 
     const name = object.name;
     const message = object.message;
-    if (when.defined(name) && when.defined(message)) {
+    if (defaultValue.defined(name) && defaultValue.defined(message)) {
       result = `${name}: ${message}`;
     } else {
       result = object.toString();
     }
 
     const stack = object.stack;
-    if (when.defined(stack)) {
+    if (defaultValue.defined(stack)) {
       result += `\n${stack}`;
     }
 
@@ -53,7 +53,7 @@ define(['./when-4bbc8319'], (function (when) { 'use strict';
 
   // createXXXGeometry functions may return Geometry or a Promise that resolves to Geometry
   // if the function requires access to ApproximateTerrainHeights.
-  // For fully synchronous functions, just wrapping the function call in a `when` Promise doesn't
+  // For fully synchronous functions, just wrapping the function call in a Promise doesn't
   // handle errors correctly, hence try-catch
   function callAndWrap(workerFunction, parameters, transferableObjects) {
     let resultOrPromise;
@@ -61,7 +61,7 @@ define(['./when-4bbc8319'], (function (when) { 'use strict';
       resultOrPromise = workerFunction(parameters, transferableObjects);
       return resultOrPromise; // errors handled by Promise
     } catch (e) {
-      return when.when.reject(e);
+      return Promise.reject(e);
     }
   }
 
@@ -103,13 +103,13 @@ define(['./when-4bbc8319'], (function (when) { 'use strict';
         error: undefined,
       };
 
-      return when.when(
+      return Promise.resolve(
         callAndWrap(workerFunction, data.parameters, transferableObjects)
       )
         .then(function (result) {
           responseMessage.result = result;
         })
-        .otherwise(function (e) {
+        .catch(function (e) {
           if (e instanceof Error) {
             // Errors can't be posted in a message, copy the properties
             responseMessage.error = {
@@ -121,9 +121,9 @@ define(['./when-4bbc8319'], (function (when) { 'use strict';
             responseMessage.error = e;
           }
         })
-        .always(function () {
-          if (!when.defined(postMessage)) {
-            postMessage = when.defaultValue(self.webkitPostMessage, self.postMessage);
+        .finally(function () {
+          if (!defaultValue.defined(postMessage)) {
+            postMessage = defaultValue.defaultValue(self.webkitPostMessage, self.postMessage);
           }
 
           if (!data.canTransferArrayBuffer) {
