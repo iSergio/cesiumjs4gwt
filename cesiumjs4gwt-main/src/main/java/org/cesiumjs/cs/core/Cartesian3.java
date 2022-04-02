@@ -873,6 +873,17 @@ public class Cartesian3 implements Packable {
     public static native Cartesian3[] unpackArray(JsArrayNumber array, Cartesian3[] result);
 
     /**
+     * Constrain a value to lie between two values.
+     * @param cartesian The value to clamp.
+     * @param min The minimum bound.
+     * @param max The maximum bound.
+     * @param result The object into which to store the result.
+     * @return The clamped value such that min <= value <= max.
+     */
+    @JsMethod
+    public static native Cartesian3 clamp(Cartesian3 cartesian, Cartesian3 min, Cartesian3 max, Cartesian3 result);
+
+    /**
      * Duplicates this Cartesian3 instance.
      *
      * @param result The object onto which to store the result. Optional.
