@@ -40,6 +40,23 @@ public class ModelExperimentalOptions {
     @JsProperty
     public Matrix4 modelMatrix;
     /**
+     * A uniform scale applied to this model.
+     * Default: 1.0
+     */
+    @JsProperty
+    public double scale;
+    /**
+     * The approximate minimum pixel size of the model regardless of zoom.
+     * Default: 0
+     */
+    @JsProperty
+    public double minimumPixelSize;
+    /**
+     * The maximum scale size of a model. An upper limit for minimumPixelSize.
+     */
+    @JsProperty
+    public double maximumScale;
+    /**
      * For debugging only. Draws the bounding sphere for each draw command in the model.
      */
     @JsProperty
@@ -102,7 +119,7 @@ public class ModelExperimentalOptions {
      * Default: 0
      */
     @JsProperty
-    public double featureIdIndex;
+    public double featureIdLabel;
     /**
      * The index into the list of instance feature IDs used for picking and styling. If both per-primitive and
      * per-instance feature IDs are present, the instance feature IDs take priority.
@@ -110,7 +127,7 @@ public class ModelExperimentalOptions {
      * Default: 0
      */
     @JsProperty
-    public double instanceFeatureIdIndex;
+    public double instanceFeatureIdLabel;
     /**
      * Options for constructing a PointCloudShading object to control point attenuation
      * based on geometric error and lighting.
