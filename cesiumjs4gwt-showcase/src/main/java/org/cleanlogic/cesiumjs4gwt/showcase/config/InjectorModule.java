@@ -126,5 +126,6 @@ public class InjectorModule extends AbstractGinModule {
         bind(GPX.class).asEagerSingleton();
 
         bind(Tiles3DCompare.class).asEagerSingleton();
+        bind(CustomShadersPropertyTextures.class).asEagerSingleton();
     }
 }
