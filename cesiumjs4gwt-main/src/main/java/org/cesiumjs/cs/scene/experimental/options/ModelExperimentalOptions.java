@@ -22,6 +22,7 @@ import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.core.Matrix4;
 import org.cesiumjs.cs.core.Resource;
 import org.cesiumjs.cs.scene.Cesium3DTileContent;
+import org.cesiumjs.cs.scene.ImageBasedLighting;
 import org.cesiumjs.cs.scene.PointCloudShading;
 import org.cesiumjs.cs.scene.enums.ShadowMode;
 import org.cesiumjs.cs.scene.experimental.CustomShader;
@@ -140,6 +141,11 @@ public class ModelExperimentalOptions {
      */
     @JsProperty
     public Cartesian3 lightColor;
+    /**
+     * The properties for managing image-based lighting on this model.
+     */
+    @JsProperty
+    public ImageBasedLighting imageBasedLighting;
     /**
      * Whether to cull back-facing geometry. When true, back face culling is determined by the material's doubleSided
      * property; when false, back face culling is disabled. Back faces are not culled if the model's color is translucent.
