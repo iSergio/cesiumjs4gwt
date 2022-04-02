@@ -28,7 +28,7 @@ public class CesiumEntryPoint implements EntryPoint {
         Cesium.fixSmartGWT();
         GWT.log("Cesium GTW module loaded");
         if (!Cesium.isInitialized()) {
-            String message = "The Core of Cesium (Cesium.js) JavaScript libraryes not loaded.\n"
+            String message = "The Core of Cesium (Cesium.js) JavaScript libraries not loaded.\n"
                     + "If you inherit Cesium from NoScript gwt.xml, \nyou need include <script src='..../Cesium.js'> "
                     + "to load Cesium, \nalso you need include necessary css (Example: <link type=\"text/css\" href=\".../Cesium/Widgets/widget.css\">.\n"
                     + "By default Cesium path is [GWT App Name]/js/Cesium";
