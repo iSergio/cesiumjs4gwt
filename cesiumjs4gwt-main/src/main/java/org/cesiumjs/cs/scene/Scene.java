@@ -292,6 +292,12 @@ public class Scene {
     @JsProperty
     public String specularEnvironmentMaps;
     /**
+     * Returns true if specular environment maps are supported.
+     * @see Scene#specularEnvironmentMaps
+     */
+    @JsProperty(name = "specularEnvironmentMapsSupported")
+    public native boolean specularEnvironmentMapsSupported();
+    /**
      * The spherical harmonic coefficients for image-based lighting of PBR models.
      */
     @JsProperty
