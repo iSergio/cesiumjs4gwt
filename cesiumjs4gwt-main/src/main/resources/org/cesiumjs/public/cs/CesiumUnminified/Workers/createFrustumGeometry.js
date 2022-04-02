@@ -21,10 +21,10 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./when-4bbc8319', './FrustumGeometry-a0a0f5aa', './Transforms-8b90e17c', './Matrix2-265d9610', './RuntimeError-5b082e8f', './ComponentDatatype-aad54330', './WebGLConstants-508b9636', './combine-e9466e32', './GeometryAttribute-4bcb785f', './GeometryAttributes-7827a6c2', './Plane-616c9c0a', './VertexFormat-07539138'], (function (when, FrustumGeometry, Transforms, Matrix2, RuntimeError, ComponentDatatype, WebGLConstants, combine, GeometryAttribute, GeometryAttributes, Plane, VertexFormat) { 'use strict';
+define(['./defaultValue-81eec7ed', './FrustumGeometry-1ba08d45', './Transforms-4ee811db', './Matrix2-c430e55a', './RuntimeError-8952249c', './ComponentDatatype-9e86ac8f', './WebGLConstants-508b9636', './_commonjsHelpers-3aae1032-26891ab7', './combine-3c023bda', './GeometryAttribute-51ed9bde', './GeometryAttributes-32b29525', './Plane-7e828ad8', './VertexFormat-7df34ea5'], (function (defaultValue, FrustumGeometry, Transforms, Matrix2, RuntimeError, ComponentDatatype, WebGLConstants, _commonjsHelpers3aae1032, combine, GeometryAttribute, GeometryAttributes, Plane, VertexFormat) { 'use strict';
 
   function createFrustumGeometry(frustumGeometry, offset) {
-    if (when.defined(offset)) {
+    if (defaultValue.defined(offset)) {
       frustumGeometry = FrustumGeometry.FrustumGeometry.unpack(frustumGeometry, offset);
     }
     return FrustumGeometry.FrustumGeometry.createGeometry(frustumGeometry);

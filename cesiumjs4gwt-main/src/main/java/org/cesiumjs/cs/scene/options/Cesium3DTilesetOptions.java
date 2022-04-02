@@ -23,6 +23,7 @@ import org.cesiumjs.cs.promise.Promise;
 import org.cesiumjs.cs.scene.Cesium3DTileset;
 import org.cesiumjs.cs.scene.PointCloudShading;
 import org.cesiumjs.cs.scene.enums.ClassificationType;
+import org.cesiumjs.cs.scene.enums.SplitDirection;
 import org.cesiumjs.cs.scene.experimental.CustomShader;
 
 /**
@@ -329,7 +330,7 @@ public class Cesium3DTilesetOptions {
      * Default: 0
      */
     @JsProperty
-    public double featureIdIndex;
+    public double featureIdLabel;
     /**
      * The index into the list of instance feature IDs used for picking and styling. If both per-primitive and
      * per-instance feature IDs are present, the instance feature IDs take priority.
@@ -337,7 +338,19 @@ public class Cesium3DTilesetOptions {
      * Default: 0
      */
     @JsProperty
-    public double instanceFeatureIdIndex;
+    public double instanceFeatureIdLabel;
+    /**
+     * Whether to display the credits of this tileset on screen.
+     * Default: false
+     */
+    @JsProperty
+    public boolean showCreditsOnScreen;
+    /**
+     * The SplitDirection split to apply to this tileset.
+     * Default: {@link SplitDirection#NONE()}
+     */
+    @JsProperty
+    public Number splitDirection;
     /**
      * The tile variable to colorize as a heatmap. All rendered tiles will be colorized relative to each other's
      * specified variable value.

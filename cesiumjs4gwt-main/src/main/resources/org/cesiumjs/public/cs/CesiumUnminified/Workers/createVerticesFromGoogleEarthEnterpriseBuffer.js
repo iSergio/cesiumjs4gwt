@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./AxisAlignedBoundingBox-2a0ca7ef', './Transforms-8b90e17c', './Matrix2-265d9610', './when-4bbc8319', './TerrainEncoding-82b55fe0', './ComponentDatatype-aad54330', './OrientedBoundingBox-1e433348', './RuntimeError-5b082e8f', './WebMercatorProjection-d67afe4b', './createTaskProcessorWorker', './combine-e9466e32', './AttributeCompression-442278a0', './WebGLConstants-508b9636', './EllipsoidTangentPlane-f1a69a20', './IntersectionTests-596e31ec', './Plane-616c9c0a'], (function (AxisAlignedBoundingBox, Transforms, Matrix2, when, TerrainEncoding, ComponentDatatype, OrientedBoundingBox, RuntimeError, WebMercatorProjection, createTaskProcessorWorker, combine, AttributeCompression, WebGLConstants, EllipsoidTangentPlane, IntersectionTests, Plane) { 'use strict';
+define(['./AxisAlignedBoundingBox-52bc7e5b', './Transforms-4ee811db', './Matrix2-c430e55a', './defaultValue-81eec7ed', './TerrainEncoding-7b2c3643', './ComponentDatatype-9e86ac8f', './OrientedBoundingBox-e31a0f8a', './RuntimeError-8952249c', './WebMercatorProjection-04357f64', './createTaskProcessorWorker', './_commonjsHelpers-3aae1032-26891ab7', './combine-3c023bda', './AttributeCompression-046b70bd', './WebGLConstants-508b9636', './EllipsoidTangentPlane-0152c019', './IntersectionTests-4d132f79', './Plane-7e828ad8'], (function (AxisAlignedBoundingBox, Transforms, Matrix2, defaultValue, TerrainEncoding, ComponentDatatype, OrientedBoundingBox, RuntimeError, WebMercatorProjection, createTaskProcessorWorker, _commonjsHelpers3aae1032, combine, AttributeCompression, WebGLConstants, EllipsoidTangentPlane, IntersectionTests, Plane) { 'use strict';
 
   const sizeOfUint16 = Uint16Array.BYTES_PER_ELEMENT;
   const sizeOfInt32 = Int32Array.BYTES_PER_ELEMENT;
@@ -30,7 +30,7 @@ define(['./AxisAlignedBoundingBox-2a0ca7ef', './Transforms-8b90e17c', './Matrix2
   const sizeOfDouble = Float64Array.BYTES_PER_ELEMENT;
 
   function indexOfEpsilon(arr, elem, elemType) {
-    elemType = when.defaultValue(elemType, ComponentDatatype.CesiumMath);
+    elemType = defaultValue.defaultValue(elemType, ComponentDatatype.CesiumMath);
     const count = arr.length;
     for (let i = 0; i < count; ++i) {
       if (elemType.equalsEpsilon(arr[i], elem, ComponentDatatype.CesiumMath.EPSILON12)) {
@@ -110,7 +110,7 @@ define(['./AxisAlignedBoundingBox-2a0ca7ef', './Transforms-8b90e17c', './Matrix2
     let geographicNorth;
     let rectangleWidth, rectangleHeight;
 
-    if (!when.defined(rectangle)) {
+    if (!defaultValue.defined(rectangle)) {
       geographicWest = ComponentDatatype.CesiumMath.toRadians(nativeRectangle.west);
       geographicSouth = ComponentDatatype.CesiumMath.toRadians(nativeRectangle.south);
       geographicEast = ComponentDatatype.CesiumMath.toRadians(nativeRectangle.east);
@@ -477,7 +477,7 @@ define(['./AxisAlignedBoundingBox-2a0ca7ef', './Transforms-8b90e17c', './Matrix2
 
     const boundingSphere3D = Transforms.BoundingSphere.fromPoints(positions);
     let orientedBoundingBox;
-    if (when.defined(rectangle)) {
+    if (defaultValue.defined(rectangle)) {
       orientedBoundingBox = OrientedBoundingBox.OrientedBoundingBox.fromRectangle(
         rectangle,
         minHeight,
@@ -639,7 +639,7 @@ define(['./AxisAlignedBoundingBox-2a0ca7ef', './Transforms-8b90e17c', './Matrix2
       Matrix2.Cartesian3.maximumByComponent(scratchCartesian, maximum, maximum);
 
       const lastBorderPoint = skirtOptions.lastBorderPoint;
-      if (when.defined(lastBorderPoint)) {
+      if (defaultValue.defined(lastBorderPoint)) {
         const lastBorderIndex = lastBorderPoint.index;
         indices.push(
           lastBorderIndex,

@@ -54,8 +54,7 @@ public class CesiumScriptInjector extends AbstractLinker {
         for (String binding : pathBindings) {
             String[] parts = binding.split("=");
             if (parts.length == 2 && moduleName.equals(parts[0])) {
-                System.out
-                        .println("      Setting page-relative module path for module '" + moduleName + "' using gwt.xml config");
+                System.out.println("      Setting page-relative module path for module '" + moduleName + "' using gwt.xml config");
                 return parts[1];
             }
         }
@@ -73,7 +72,7 @@ public class CesiumScriptInjector extends AbstractLinker {
                         TreeLogger.class, String.class);
                 module = (ModuleDef) getModuleDef.invoke(null, logger, moduleName);
             } else if (gwtVersion < 2.8f) {
-                Class compilerContextClass = Class.forName("com.google.gwt.dev.CompilerContext");
+                Class<?> compilerContextClass = Class.forName("com.google.gwt.dev.CompilerContext");
                 Object context = compilerContextClass.getDeclaredConstructor().newInstance();
 
                 getModuleDef = ModuleDefLoader.class.getDeclaredMethod("loadFromClassPath",
@@ -102,17 +101,19 @@ public class CesiumScriptInjector extends AbstractLinker {
     }
 
     private String getScriptLoadJS(Set<ScriptReference> scriptsToLoad, String pageRelativeModulePath) {
-        String result = "if (!window." + LOADED_SCRIPTS + ") window." + LOADED_SCRIPTS + " = {};\n";
+        StringBuilder result = new StringBuilder("if (!window." + LOADED_SCRIPTS + ") window." + LOADED_SCRIPTS + " = {};\n");
         for (ScriptReference script : scriptsToLoad) {
             String src = script.getSrc();
             if (!src.startsWith("cs/")) {
                 continue;
             }
-            result += "if (!" + LOADED_SCRIPTS + "['" + src + "']) {\n  " + LOADED_SCRIPTS + "['" + src + "'] = true;\n  "
-                    + "document.write('<script src=\"" + pageRelativeModulePath + "/" + src + "\">" + "</script>');\n}\n";
-            System.out.println(src);
+            result.append("if (!" + LOADED_SCRIPTS + "['").append(src).append("']) {\n  ")
+                    .append(LOADED_SCRIPTS).append("['").append(src).append("'] = true;\n  ")
+                    .append("document.write('<script src=\"").append(pageRelativeModulePath)
+                    .append("/").append(src).append("\">").append("</script>');\n}\n");
+//            System.out.println(src);
         }
-        return result;
+        return result.toString();
     }
 
     @Override
@@ -131,14 +132,14 @@ public class CesiumScriptInjector extends AbstractLinker {
     @Override
     public ArtifactSet link(TreeLogger logger, LinkerContext context, ArtifactSet artifacts, boolean permutation)
             throws UnableToCompleteException {
-        Float gwtVersion = Float.parseFloat(About.getGwtVersionNum().replaceFirst("([0-9]+\\.[0-9]+).*", "$1"));
+        float gwtVersion = Float.parseFloat(About.getGwtVersionNum().replaceFirst("([0-9]+\\.[0-9]+).*", "$1"));
         String moduleName = context.getModuleName();
 
         if (permutation) {
             return artifacts;
         }
 
-        Artifact scriptLoader = emitString(logger, "", SCRIPT_LOADER);
+        Artifact<EmittedArtifact> scriptLoader = emitString(logger, "", SCRIPT_LOADER);
         ArtifactSet result = new ArtifactSet(artifacts);
         result.add(scriptLoader);
 

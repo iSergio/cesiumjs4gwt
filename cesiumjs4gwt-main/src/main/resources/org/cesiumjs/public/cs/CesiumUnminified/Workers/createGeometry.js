@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./when-4bbc8319', './PrimitivePipeline-ffc4dd1c', './createTaskProcessorWorker', './Transforms-8b90e17c', './Matrix2-265d9610', './RuntimeError-5b082e8f', './ComponentDatatype-aad54330', './WebGLConstants-508b9636', './combine-e9466e32', './GeometryAttribute-4bcb785f', './GeometryAttributes-7827a6c2', './GeometryPipeline-e93f6439', './AttributeCompression-442278a0', './EncodedCartesian3-da8f96bc', './IndexDatatype-6739e544', './IntersectionTests-596e31ec', './Plane-616c9c0a', './WebMercatorProjection-d67afe4b'], (function (when, PrimitivePipeline, createTaskProcessorWorker, Transforms, Matrix2, RuntimeError, ComponentDatatype, WebGLConstants, combine, GeometryAttribute, GeometryAttributes, GeometryPipeline, AttributeCompression, EncodedCartesian3, IndexDatatype, IntersectionTests, Plane, WebMercatorProjection) { 'use strict';
+define(['./defaultValue-81eec7ed', './PrimitivePipeline-cfd7046c', './createTaskProcessorWorker', './Transforms-4ee811db', './Matrix2-c430e55a', './RuntimeError-8952249c', './ComponentDatatype-9e86ac8f', './WebGLConstants-508b9636', './_commonjsHelpers-3aae1032-26891ab7', './combine-3c023bda', './GeometryAttribute-51ed9bde', './GeometryAttributes-32b29525', './GeometryPipeline-7b7ac762', './AttributeCompression-046b70bd', './EncodedCartesian3-a57a8b60', './IndexDatatype-bed3935d', './IntersectionTests-4d132f79', './Plane-7e828ad8', './WebMercatorProjection-04357f64'], (function (defaultValue, PrimitivePipeline, createTaskProcessorWorker, Transforms, Matrix2, RuntimeError, ComponentDatatype, WebGLConstants, _commonjsHelpers3aae1032, combine, GeometryAttribute, GeometryAttributes, GeometryPipeline, AttributeCompression, EncodedCartesian3, IndexDatatype, IntersectionTests, Plane, WebMercatorProjection) { 'use strict';
 
   /* global require */
 
@@ -29,7 +29,7 @@ define(['./when-4bbc8319', './PrimitivePipeline-ffc4dd1c', './createTaskProcesso
 
   function getModule(moduleName) {
     let module = moduleCache[moduleName];
-    if (!when.defined(module)) {
+    if (!defaultValue.defined(module)) {
       if (typeof exports === "object") {
         // Use CommonJS-style require.
         moduleCache[module] = module = require(`Workers/${moduleName}`);
@@ -55,7 +55,7 @@ define(['./when-4bbc8319', './PrimitivePipeline-ffc4dd1c', './createTaskProcesso
       const geometry = task.geometry;
       const moduleName = task.moduleName;
 
-      if (when.defined(moduleName)) {
+      if (defaultValue.defined(moduleName)) {
         const createFunction = getModule(moduleName);
         resultsOrPromises[i] = createFunction(geometry, task.offset);
       } else {
@@ -64,7 +64,7 @@ define(['./when-4bbc8319', './PrimitivePipeline-ffc4dd1c', './createTaskProcesso
       }
     }
 
-    return when.when.all(resultsOrPromises, function (results) {
+    return Promise.all(resultsOrPromises).then(function (results) {
       return PrimitivePipeline.PrimitivePipeline.packCreateGeometryResults(
         results,
         transferableObjects

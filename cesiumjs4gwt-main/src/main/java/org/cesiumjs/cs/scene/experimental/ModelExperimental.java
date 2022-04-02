@@ -20,9 +20,13 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.collections.ClippingPlaneCollection;
 import org.cesiumjs.cs.core.BoundingSphere;
+import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.promise.Promise;
+import org.cesiumjs.cs.scene.ImageBasedLighting;
+import org.cesiumjs.cs.scene.PointCloudShading;
 import org.cesiumjs.cs.scene.enums.ColorBlendMode;
 import org.cesiumjs.cs.scene.experimental.options.ModelExperimentalFromGltfOptions;
 import org.cesiumjs.cs.scene.experimental.options.ModelExperimentalOptions;
@@ -40,6 +44,11 @@ public class ModelExperimental {
      */
     @JsProperty(name = "boundingSphere")
     public native BoundingSphere boundingSphere();
+    /**
+     * The {@link ClippingPlaneCollection} used to selectively disable rendering the model.
+     */
+    @JsProperty
+    public ClippingPlaneCollection clippingPlanes;
     /**
      * The color to blend with the model's rendered color.
      */
@@ -81,7 +90,7 @@ public class ModelExperimental {
      * Default: 0
      */
     @JsProperty
-    public double featureIdIndex;
+    public double featureIdLabel;
     /**
      * The index into the list of instance feature IDs used for picking and styling. If both per-primitive and
      * per-instance feature IDs are present, the instance feature IDs take priority.
@@ -89,7 +98,41 @@ public class ModelExperimental {
      * Default: 0
      */
     @JsProperty
-    public double instanceFeatureIdIndex;
+    public double instanceFeatureIdLabel;
+    /**
+     * The properties for managing image-based lighting on this model.
+     */
+    @JsProperty
+    public ImageBasedLighting imageBasedLighting;
+    /**
+     * The light color when shading the model. When undefined the scene's light color is used instead.
+     * Disabling additional light sources by setting model.imageBasedLightingFactor = new Cartesian2(0.0, 0.0)
+     * will make the model much darker. Here, increasing the intensity of the light source will make the model
+     * brighter.
+     *
+     * Default: undefined
+     */
+    @JsProperty
+    public Cartesian3 lightColor;
+    /**
+     * The maximum scale size for a model. This can be used to give an upper limit to the Model#minimumPixelSize,
+     * ensuring that the model is never an unreasonable scale.
+     */
+    @JsProperty
+    public double maximumScale;
+    /**
+     * The approximate minimum pixel size of the model regardless of zoom. This can be used to ensure that a model
+     * is visible even when the viewer zooms out. When 0.0, no minimum size is enforced.
+     * Default: 0.0
+     */
+    @JsProperty
+    public double minimumPixelSize;
+    /**
+     * Point cloud shading settings for controlling point cloud attenuation and lighting. For 3D Tiles,
+     * this is inherited from the Cesium3DTileset.
+     */
+    @JsProperty
+    public PointCloudShading pointCloudShading;
     /**
      * When true, this model is ready to render, i.e., the external binary, image, and shader files were downloaded and the WebGL resources were created. This is set to true right before ModelExperimental#readyPromise is resolved.
      * Default: false

@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./GeometryOffsetAttribute-7e016332', './arrayRemoveDuplicates-65de6756', './Transforms-8b90e17c', './Matrix2-265d9610', './RuntimeError-5b082e8f', './ComponentDatatype-aad54330', './PolylineVolumeGeometryLibrary-738776c0', './CorridorGeometryLibrary-f2773d55', './when-4bbc8319', './GeometryAttribute-4bcb785f', './GeometryAttributes-7827a6c2', './IndexDatatype-6739e544', './PolygonPipeline-5fd67ae2', './combine-e9466e32', './WebGLConstants-508b9636', './EllipsoidTangentPlane-f1a69a20', './AxisAlignedBoundingBox-2a0ca7ef', './IntersectionTests-596e31ec', './Plane-616c9c0a', './PolylinePipeline-b9913663', './EllipsoidGeodesic-ed024f16', './EllipsoidRhumbLine-d09d563f'], (function (GeometryOffsetAttribute, arrayRemoveDuplicates, Transforms, Matrix2, RuntimeError, ComponentDatatype, PolylineVolumeGeometryLibrary, CorridorGeometryLibrary, when, GeometryAttribute, GeometryAttributes, IndexDatatype, PolygonPipeline, combine$1, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane, PolylinePipeline, EllipsoidGeodesic, EllipsoidRhumbLine) { 'use strict';
+define(['./GeometryOffsetAttribute-2bff0974', './arrayRemoveDuplicates-1a15bd09', './Transforms-4ee811db', './Matrix2-c430e55a', './RuntimeError-8952249c', './ComponentDatatype-9e86ac8f', './PolylineVolumeGeometryLibrary-d36d4567', './CorridorGeometryLibrary-4ded89a5', './defaultValue-81eec7ed', './GeometryAttribute-51ed9bde', './GeometryAttributes-32b29525', './IndexDatatype-bed3935d', './PolygonPipeline-0605b100', './_commonjsHelpers-3aae1032-26891ab7', './combine-3c023bda', './WebGLConstants-508b9636', './EllipsoidTangentPlane-0152c019', './AxisAlignedBoundingBox-52bc7e5b', './IntersectionTests-4d132f79', './Plane-7e828ad8', './PolylinePipeline-b3067570', './EllipsoidGeodesic-22d2f504', './EllipsoidRhumbLine-c86f0674'], (function (GeometryOffsetAttribute, arrayRemoveDuplicates, Transforms, Matrix2, RuntimeError, ComponentDatatype, PolylineVolumeGeometryLibrary, CorridorGeometryLibrary, defaultValue, GeometryAttribute, GeometryAttributes, IndexDatatype, PolygonPipeline, _commonjsHelpers3aae1032, combine$1, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane, PolylinePipeline, EllipsoidGeodesic, EllipsoidRhumbLine) { 'use strict';
 
   const cartesian1 = new Matrix2.Cartesian3();
   const cartesian2 = new Matrix2.Cartesian3();
@@ -57,7 +57,7 @@ define(['./GeometryOffsetAttribute-7e016332', './arrayRemoveDuplicates-65de6756'
     for (i = 0; i < corners.length; i++) {
       corner = corners[i];
       const leftSide = corners[i].leftPositions;
-      if (when.defined(leftSide)) {
+      if (defaultValue.defined(leftSide)) {
         length = leftSide.length;
         leftCount += length;
         indicesLength += (length / 3) * 2;
@@ -68,7 +68,7 @@ define(['./GeometryOffsetAttribute-7e016332', './arrayRemoveDuplicates-65de6756'
       }
     }
 
-    const addEndPositions = when.defined(endPositions);
+    const addEndPositions = defaultValue.defined(endPositions);
     let endPositionLength;
     if (addEndPositions) {
       endPositionLength = endPositions[0].length - 3;
@@ -158,7 +158,7 @@ define(['./GeometryOffsetAttribute-7e016332', './arrayRemoveDuplicates-65de6756'
       const r = corner.rightPositions;
       let start;
       let outsidePoint = cartesian3;
-      if (when.defined(l)) {
+      if (defaultValue.defined(l)) {
         back -= 3;
         start = UR;
         wallIndices.push(LR);
@@ -310,7 +310,7 @@ define(['./GeometryOffsetAttribute-7e016332', './arrayRemoveDuplicates-65de6756'
     attributes.position.values = newPositions;
 
     length /= 3;
-    if (when.defined(params.offsetAttribute)) {
+    if (defaultValue.defined(params.offsetAttribute)) {
       let applyOffset = new Uint8Array(length * 2);
       if (params.offsetAttribute === GeometryOffsetAttribute.GeometryOffsetAttribute.TOP) {
         applyOffset = GeometryOffsetAttribute.arrayFill(applyOffset, 1, 0, length);
@@ -382,7 +382,7 @@ define(['./GeometryOffsetAttribute-7e016332', './arrayRemoveDuplicates-65de6756'
    * });
    */
   function CorridorOutlineGeometry(options) {
-    options = when.defaultValue(options, when.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
     const positions = options.positions;
     const width = options.width;
 
@@ -391,18 +391,18 @@ define(['./GeometryOffsetAttribute-7e016332', './arrayRemoveDuplicates-65de6756'
     RuntimeError.Check.typeOf.number("options.width", width);
     //>>includeEnd('debug');
 
-    const height = when.defaultValue(options.height, 0.0);
-    const extrudedHeight = when.defaultValue(options.extrudedHeight, height);
+    const height = defaultValue.defaultValue(options.height, 0.0);
+    const extrudedHeight = defaultValue.defaultValue(options.extrudedHeight, height);
 
     this._positions = positions;
     this._ellipsoid = Matrix2.Ellipsoid.clone(
-      when.defaultValue(options.ellipsoid, Matrix2.Ellipsoid.WGS84)
+      defaultValue.defaultValue(options.ellipsoid, Matrix2.Ellipsoid.WGS84)
     );
     this._width = width;
     this._height = Math.max(height, extrudedHeight);
     this._extrudedHeight = Math.min(height, extrudedHeight);
-    this._cornerType = when.defaultValue(options.cornerType, PolylineVolumeGeometryLibrary.CornerType.ROUNDED);
-    this._granularity = when.defaultValue(
+    this._cornerType = defaultValue.defaultValue(options.cornerType, PolylineVolumeGeometryLibrary.CornerType.ROUNDED);
+    this._granularity = defaultValue.defaultValue(
       options.granularity,
       ComponentDatatype.CesiumMath.RADIANS_PER_DEGREE
     );
@@ -432,7 +432,7 @@ define(['./GeometryOffsetAttribute-7e016332', './arrayRemoveDuplicates-65de6756'
     RuntimeError.Check.typeOf.object("array", array);
     //>>includeEnd('debug');
 
-    startingIndex = when.defaultValue(startingIndex, 0);
+    startingIndex = defaultValue.defaultValue(startingIndex, 0);
 
     const positions = value._positions;
     const length = positions.length;
@@ -450,7 +450,7 @@ define(['./GeometryOffsetAttribute-7e016332', './arrayRemoveDuplicates-65de6756'
     array[startingIndex++] = value._extrudedHeight;
     array[startingIndex++] = value._cornerType;
     array[startingIndex++] = value._granularity;
-    array[startingIndex] = when.defaultValue(value._offsetAttribute, -1);
+    array[startingIndex] = defaultValue.defaultValue(value._offsetAttribute, -1);
 
     return array;
   };
@@ -480,7 +480,7 @@ define(['./GeometryOffsetAttribute-7e016332', './arrayRemoveDuplicates-65de6756'
     RuntimeError.Check.typeOf.object("array", array);
     //>>includeEnd('debug');
 
-    startingIndex = when.defaultValue(startingIndex, 0);
+    startingIndex = defaultValue.defaultValue(startingIndex, 0);
 
     const length = array[startingIndex++];
     const positions = new Array(length);
@@ -499,7 +499,7 @@ define(['./GeometryOffsetAttribute-7e016332', './arrayRemoveDuplicates-65de6756'
     const granularity = array[startingIndex++];
     const offsetAttribute = array[startingIndex];
 
-    if (!when.defined(result)) {
+    if (!defaultValue.defined(result)) {
       scratchOptions.positions = positions;
       scratchOptions.width = width;
       scratchOptions.height = height;
@@ -577,7 +577,7 @@ define(['./GeometryOffsetAttribute-7e016332', './arrayRemoveDuplicates-65de6756'
         ellipsoid
       );
 
-      if (when.defined(corridorOutlineGeometry._offsetAttribute)) {
+      if (defaultValue.defined(corridorOutlineGeometry._offsetAttribute)) {
         const length = attr.attributes.position.values.length;
         const applyOffset = new Uint8Array(length / 3);
         const offsetValue =
@@ -610,7 +610,7 @@ define(['./GeometryOffsetAttribute-7e016332', './arrayRemoveDuplicates-65de6756'
   };
 
   function createCorridorOutlineGeometry(corridorOutlineGeometry, offset) {
-    if (when.defined(offset)) {
+    if (defaultValue.defined(offset)) {
       corridorOutlineGeometry = CorridorOutlineGeometry.unpack(
         corridorOutlineGeometry,
         offset

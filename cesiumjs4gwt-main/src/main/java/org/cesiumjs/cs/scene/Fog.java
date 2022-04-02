@@ -43,6 +43,20 @@ public class Fog {
     @JsProperty
     public boolean enabled;
     /**
+     * The minimum brightness of the fog color from lighting. A value of 0.0 can cause the fog to be
+     * completely black. A value of 1.0 will not affect the brightness at all.
+     * Default: 0.03
+     */
+    @JsProperty
+    public double minimumBrightness;
+    /**
+     * true if fog is renderable in shaders, false otherwise. This allows to benefits from optimized
+     * tile loading strategy based on fog density without the actual visual rendering.
+     * Default: true
+     */
+    @JsProperty
+    public boolean renderable;
+    /**
      * A factor used to increase the screen space error of terrain tiles when they
      * are partially in fog. The effect is to reduce the number of terrain tiles
      * requested for rendering. If set to zero, the feature will be disabled. If the

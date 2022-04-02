@@ -48,7 +48,7 @@ public class CesiumLinker extends AbstractLinker {
             // It need for inject css files for example - Viewer
             if (partialPath.endsWith("/Cesium.js")) {
                 String contents = CesiumLinkerUtils.getContents(emittedArtifact, logger);
-                StringBuffer sb = new StringBuffer(contents);
+                StringBuilder sb = new StringBuilder(contents);
                 sb.insert(0, "window.CesiumPath = '" + context.getModuleName() + "/js/';\n");
                 toReturn.remove(emittedArtifact);
                 toReturn.add(emitString(logger, sb.toString(), partialPath));

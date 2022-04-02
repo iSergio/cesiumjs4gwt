@@ -23,6 +23,7 @@ import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.promise.Promise;
 import org.cesiumjs.cs.scene.enums.Cesium3DTileColorBlendMode;
 import org.cesiumjs.cs.scene.enums.ClassificationType;
+import org.cesiumjs.cs.scene.enums.SplitDirection;
 import org.cesiumjs.cs.scene.experimental.CustomShader;
 import org.cesiumjs.cs.scene.options.Cesium3DTilesetOptions;
 
@@ -423,6 +424,12 @@ public class Cesium3DTileset {
      */
     @JsProperty
     public Cartesian3[] sphericalHarmonicCoefficients;
+    /**
+     * The SplitDirection to apply to this tileset.
+     * Default: {@link SplitDirection#NONE()}
+     */
+    @JsProperty
+    public Number splitDirection;
     /**
      * The style, defined using the 3D Tiles Styling language, applied to each
      * feature in the tileset. Assign undefined to remove the style, which will
