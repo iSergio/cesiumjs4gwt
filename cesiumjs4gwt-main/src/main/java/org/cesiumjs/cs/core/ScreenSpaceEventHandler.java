@@ -17,6 +17,7 @@
 package org.cesiumjs.cs.core;
 
 import com.google.gwt.dom.client.CanvasElement;
+import com.google.gwt.dom.client.Element;
 import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.enums.KeyboardEventModifier;
 import org.cesiumjs.cs.core.enums.ScreenSpaceEventType;
@@ -40,6 +41,9 @@ public class ScreenSpaceEventHandler {
      */
     @JsProperty
     public static int touchHoldDelayMilliseconds;
+
+    @JsConstructor
+    public ScreenSpaceEventHandler(Element element) {}
 
     /**
      * Handles user input events. Custom functions can be added to be executed on
