@@ -111,7 +111,7 @@ public class CesiumScriptInjector extends AbstractLinker {
                     .append(LOADED_SCRIPTS).append("['").append(src).append("'] = true;\n  ")
                     .append("document.write('<script src=\"").append(pageRelativeModulePath)
                     .append("/").append(src).append("\">").append("</script>');\n}\n");
-            System.out.println(src);
+//            System.out.println(src);
         }
         return result.toString();
     }
