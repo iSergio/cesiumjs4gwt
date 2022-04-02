@@ -17,14 +17,11 @@
 package org.cesiumjs.cs.scene.enums;
 
 import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
  * The direction to display a primitive or ImageryLayer relative to the {@link org.cesiumjs.cs.scene.Scene#splitPosition}.
- *
- * @enum {Number}
  *
  * @see org.cesiumjs.cs.scene.ImageryLayer#splitDirection
  * @see org.cesiumjs.cs.scene.Cesium3DTileset#splitDirection
@@ -35,18 +32,17 @@ public class SplitDirection {
      * Display the primitive or ImageryLayer to the left of the {@link org.cesiumjs.cs.scene.Scene#splitPosition}.
      */
     @JsProperty(name = "LEFT")
-    public final native Number LEFT();
+    public static native Number LEFT();
     /**
      *  Always display the primitive or ImageryLayer.
      */
     @JsProperty(name = "NONE")
-    public final native Number NONE();
-
+    public static native Number NONE();
     /**
      * Display the primitive or ImageryLayer to the right of the {@link org.cesiumjs.cs.scene.Scene#splitPosition}.
      */
     @JsProperty(name = "RIGHT")
-    public final native Number RIGHT();
+    public static native Number RIGHT();
 
     @JsConstructor
     private SplitDirection() {}
