@@ -50,6 +50,7 @@ public class KmlDataSourceOptions {
     protected KmlDataSourceOptions() {
     }
 
+    @JsOverlay
     private static KmlDataSourceOptions create() {
         return new KmlDataSourceOptions();
     }
