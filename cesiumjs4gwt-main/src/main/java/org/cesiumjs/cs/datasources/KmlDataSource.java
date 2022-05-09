@@ -16,6 +16,7 @@
 
 package org.cesiumjs.cs.datasources;
 
+import com.google.gwt.canvas.client.Canvas;
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
@@ -28,6 +29,7 @@ import org.cesiumjs.cs.datasources.options.KmlDataSourceLoadOptions;
 import org.cesiumjs.cs.datasources.options.KmlDataSourceLoadStaticOptions;
 import org.cesiumjs.cs.datasources.options.KmlDataSourceOptions;
 import org.cesiumjs.cs.promise.Promise;
+import org.cesiumjs.cs.scene.Camera;
 
 /**
  * @author Serge Silaev aka iSergio
@@ -35,6 +37,17 @@ import org.cesiumjs.cs.promise.Promise;
 // TODO: Examples, Blobs, Documents
 @JsType(isNative = true, namespace = "Cesium", name = "KmlDataSource")
 public class KmlDataSource implements DataSource {
+    /**
+     * The position and orientation of this Camera will be used to populate various camera parameters when making
+     * network requests. Camera movement will determine when to trigger NetworkLink refresh if viewRefreshMode is onStop.
+     */
+    @JsProperty
+    public Camera camera;
+    /**
+     * The current size of this Canvas will be used to populate the Link parameters for client height and width.
+     */
+    @JsProperty
+    public Canvas canvas;
     /**
      * Gets an event that will be raised when the underlying data changes.
      */
