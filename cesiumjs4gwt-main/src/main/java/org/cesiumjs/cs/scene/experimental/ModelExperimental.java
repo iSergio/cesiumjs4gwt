@@ -83,6 +83,14 @@ public class ModelExperimental {
     @JsProperty
     public boolean debugShowBoundingVolume;
     /**
+     * This property is for debugging only; it is not for production use nor is it optimized.
+     * Draws the model in wireframe.
+     *
+     * Default: false
+     */
+    @JsProperty
+    public boolean debugWireframe;
+    /**
      * The index into the list of primitive feature IDs used for picking and styling. For EXT_feature_metadata,
      * feature ID attributes are listed before feature ID textures. If both per-primitive and per-instance feature
      * IDs are present, the instance feature IDs take priority.

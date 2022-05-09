@@ -65,6 +65,14 @@ public class ModelExperimentalOptions {
     @JsProperty
     public boolean debugShowBoundingVolume;
     /**
+     * This property is for debugging only; it is not for production use nor is it optimized.
+     * Draws the model in wireframe.
+     *
+     * Default: false
+     */
+    @JsProperty
+    public boolean debugWireframe;
+    /**
      * Whether or not to cull the model using frustum/horizon culling. If the model is part of a 3D Tiles tileset,
      * this property will always be false, since the 3D Tiles culling system is used.
      */
