@@ -244,6 +244,57 @@ public class GeoJsonDataSource implements DataSource {
     @JsMethod
     public static native Promise<GeoJsonDataSource, String> load(Resource data);
 
+    /**
+     * Asynchronously loads the provided GeoJSON or TopoJSON data, without replacing any existing data.
+     * @param data resource to be loaded
+     * @param options An object specifying configuration options
+     * @return a promise that will resolve when the GeoJSON is loaded.
+     */
+    @JsMethod
+    public static native Promise<GeoJsonDataSource, String> process(Resource data, GeoJsonDataSourceOptions options);
+
+    /**
+     * Asynchronously loads the provided GeoJSON or TopoJSON data, without replacing any existing data.
+     * @param data url to be loaded
+     * @param options An object specifying configuration options
+     * @return a promise that will resolve when the GeoJSON is loaded.
+     */
+    @JsMethod
+    public static native Promise<GeoJsonDataSource, String> process(String data, GeoJsonDataSourceOptions options);
+
+    /**
+     * Asynchronously loads the provided GeoJSON or TopoJSON data, without replacing any existing data.
+     * @param data GeoJSON object, or TopoJSON object to be loaded
+     * @param options An object specifying configuration options
+     * @return a promise that will resolve when the GeoJSON is loaded.
+     */
+    @JsMethod
+    public static native Promise<GeoJsonDataSource, String> process(JsObject data, GeoJsonDataSourceOptions options);
+
+    /**
+     * Asynchronously loads the provided GeoJSON or TopoJSON data, without replacing any existing data.
+     * @param data resource to be loaded
+     * @return a promise that will resolve when the GeoJSON is loaded.
+     */
+    @JsMethod
+    public static native Promise<GeoJsonDataSource, String> process(Resource data);
+
+    /**
+     * Asynchronously loads the provided GeoJSON or TopoJSON data, without replacing any existing data.
+     * @param data url to be loaded
+     * @return a promise that will resolve when the GeoJSON is loaded.
+     */
+    @JsMethod
+    public static native Promise<GeoJsonDataSource, String> process(String data);
+
+    /**
+     * Asynchronously loads the provided GeoJSON or TopoJSON data, without replacing any existing data.
+     * @param data GeoJSON object, or TopoJSON object to be loaded
+     * @return a promise that will resolve when the GeoJSON is loaded.
+     */
+    @JsMethod
+    public static native Promise<GeoJsonDataSource, String> process(JsObject data);
+
     @Override
     @JsMethod
     @JsIgnore
