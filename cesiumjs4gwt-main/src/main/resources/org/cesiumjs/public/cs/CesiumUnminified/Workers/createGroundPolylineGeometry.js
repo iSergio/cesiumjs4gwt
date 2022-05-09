@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./Transforms-4ee811db', './Matrix2-c430e55a', './RuntimeError-8952249c', './defaultValue-81eec7ed', './ComponentDatatype-9e86ac8f', './ArcType-fc72c06c', './arrayRemoveDuplicates-1a15bd09', './EllipsoidGeodesic-22d2f504', './EllipsoidRhumbLine-c86f0674', './EncodedCartesian3-a57a8b60', './GeometryAttribute-51ed9bde', './IntersectionTests-4d132f79', './Plane-7e828ad8', './WebMercatorProjection-04357f64', './_commonjsHelpers-3aae1032-26891ab7', './combine-3c023bda', './WebGLConstants-508b9636'], (function (Transforms, Matrix2, RuntimeError, defaultValue, ComponentDatatype, ArcType, arrayRemoveDuplicates, EllipsoidGeodesic, EllipsoidRhumbLine, EncodedCartesian3, GeometryAttribute, IntersectionTests, Plane, WebMercatorProjection, _commonjsHelpers3aae1032, combine, WebGLConstants) { 'use strict';
+define(['./Transforms-f0a54c7b', './Matrix2-d35cf4b5', './RuntimeError-8952249c', './defaultValue-81eec7ed', './ComponentDatatype-9e86ac8f', './ArcType-fc72c06c', './arrayRemoveDuplicates-1a15bd09', './EllipsoidGeodesic-924f7301', './EllipsoidRhumbLine-d049f903', './EncodedCartesian3-530d5328', './GeometryAttribute-eeb38987', './IntersectionTests-a25e058d', './Plane-24f22488', './WebMercatorProjection-2d464b74', './_commonjsHelpers-3aae1032-26891ab7', './combine-3c023bda', './WebGLConstants-508b9636'], (function (Transforms, Matrix2, RuntimeError, defaultValue, ComponentDatatype, ArcType, arrayRemoveDuplicates, EllipsoidGeodesic, EllipsoidRhumbLine, EncodedCartesian3, GeometryAttribute, IntersectionTests, Plane, WebMercatorProjection, _commonjsHelpers3aae1032, combine, WebGLConstants) { 'use strict';
 
   /**
    * A tiling scheme for geometry referenced to a simple {@link GeographicProjection} where
@@ -289,7 +289,7 @@ define(['./Transforms-4ee811db', './Matrix2-c430e55a', './RuntimeError-8952249c'
 
   /**
    * Initializes the minimum and maximum terrain heights
-   * @return {Promise<void>}
+   * @return {Promise.<void>}
    */
   ApproximateTerrainHeights.initialize = function () {
     let initPromise = ApproximateTerrainHeights._initPromise;

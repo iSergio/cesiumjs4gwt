@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./AxisAlignedBoundingBox-52bc7e5b', './Matrix2-c430e55a', './defaultValue-81eec7ed', './TerrainEncoding-7b2c3643', './IndexDatatype-bed3935d', './ComponentDatatype-9e86ac8f', './RuntimeError-8952249c', './Transforms-4ee811db', './WebMercatorProjection-04357f64', './createTaskProcessorWorker', './AttributeCompression-046b70bd', './WebGLConstants-508b9636', './_commonjsHelpers-3aae1032-26891ab7', './combine-3c023bda'], (function (AxisAlignedBoundingBox, Matrix2, defaultValue, TerrainEncoding, IndexDatatype, ComponentDatatype, RuntimeError, Transforms, WebMercatorProjection, createTaskProcessorWorker, AttributeCompression, WebGLConstants, _commonjsHelpers3aae1032, combine) { 'use strict';
+define(['./AxisAlignedBoundingBox-7b93960a', './Matrix2-d35cf4b5', './defaultValue-81eec7ed', './TerrainEncoding-a8a1f120', './IndexDatatype-bed3935d', './ComponentDatatype-9e86ac8f', './RuntimeError-8952249c', './Transforms-f0a54c7b', './WebMercatorProjection-2d464b74', './createTaskProcessorWorker', './AttributeCompression-d0b97a83', './WebGLConstants-508b9636', './_commonjsHelpers-3aae1032-26891ab7', './combine-3c023bda'], (function (AxisAlignedBoundingBox, Matrix2, defaultValue, TerrainEncoding, IndexDatatype, ComponentDatatype, RuntimeError, Transforms, WebMercatorProjection, createTaskProcessorWorker, AttributeCompression, WebGLConstants, _commonjsHelpers3aae1032, combine) { 'use strict';
 
   /**
    * Provides terrain or other geometry for the surface of an ellipsoid.  The surface geometry is
@@ -46,7 +46,7 @@ define(['./AxisAlignedBoundingBox-52bc7e5b', './Matrix2-c430e55a', './defaultVal
      * to the event, you will be notified of the error and can potentially recover from it.  Event listeners
      * are passed an instance of {@link TileProviderError}.
      * @memberof TerrainProvider.prototype
-     * @type {Event}
+     * @type {Event<TerrainProvider.ErrorEvent>}
      * @readonly
      */
     errorEvent: {
@@ -470,6 +470,14 @@ define(['./AxisAlignedBoundingBox-52bc7e5b', './Matrix2-c430e55a', './defaultVal
    */
   TerrainProvider.prototype.loadTileDataAvailability =
     RuntimeError.DeveloperError.throwInstantiationError;
+
+  /**
+   * A function that is called when an error occurs.
+   * @callback TerrainProvider.ErrorEvent
+   *
+   * @this TerrainProvider
+   * @param {TileProviderError} err An object holding details about the error that occurred.
+   */
 
   const maxShort = 32767;
 

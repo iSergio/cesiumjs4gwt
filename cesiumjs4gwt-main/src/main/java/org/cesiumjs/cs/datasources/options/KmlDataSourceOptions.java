@@ -50,6 +50,11 @@ public class KmlDataSourceOptions {
     protected KmlDataSourceOptions() {
     }
 
+    @JsOverlay
+    private static KmlDataSourceOptions create() {
+        return new KmlDataSourceOptions();
+    }
+
     /**
      * Create instance options for {@link org.cesiumjs.cs.datasources.KmlDataSource}
      *
