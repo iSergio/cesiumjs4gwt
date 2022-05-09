@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./GeometryOffsetAttribute-2bff0974', './Transforms-4ee811db', './Matrix2-c430e55a', './RuntimeError-8952249c', './ComponentDatatype-9e86ac8f', './CylinderGeometryLibrary-0fa93765', './defaultValue-81eec7ed', './GeometryAttribute-51ed9bde', './GeometryAttributes-32b29525', './IndexDatatype-bed3935d', './_commonjsHelpers-3aae1032-26891ab7', './combine-3c023bda', './WebGLConstants-508b9636'], (function (GeometryOffsetAttribute, Transforms, Matrix2, RuntimeError, ComponentDatatype, CylinderGeometryLibrary, defaultValue, GeometryAttribute, GeometryAttributes, IndexDatatype, _commonjsHelpers3aae1032, combine, WebGLConstants) { 'use strict';
+define(['./GeometryOffsetAttribute-2bff0974', './Transforms-f0a54c7b', './Matrix2-d35cf4b5', './RuntimeError-8952249c', './ComponentDatatype-9e86ac8f', './CylinderGeometryLibrary-0fa93765', './defaultValue-81eec7ed', './GeometryAttribute-eeb38987', './GeometryAttributes-32b29525', './IndexDatatype-bed3935d', './_commonjsHelpers-3aae1032-26891ab7', './combine-3c023bda', './WebGLConstants-508b9636'], (function (GeometryOffsetAttribute, Transforms, Matrix2, RuntimeError, ComponentDatatype, CylinderGeometryLibrary, defaultValue, GeometryAttribute, GeometryAttributes, IndexDatatype, _commonjsHelpers3aae1032, combine, WebGLConstants) { 'use strict';
 
   const radiusScratch = new Matrix2.Cartesian2();
 
