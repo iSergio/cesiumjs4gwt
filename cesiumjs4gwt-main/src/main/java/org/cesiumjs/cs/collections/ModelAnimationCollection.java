@@ -33,6 +33,14 @@ import org.cesiumjs.cs.scene.options.ModelAnimationOptions;
 @JsType(isNative = true, namespace = "Cesium", name = "ModelAnimationCollection")
 public class ModelAnimationCollection extends Collection<ModelAnimation> {
     /**
+     * When true, the animation will play even when the scene time is paused. However, whether animation takes
+     * place will depend on the animationTime functions assigned to the model's animations. By default, this is
+     * based on scene time, so models using the default will not animate regardless of this setting.
+     * Default: false
+     */
+    @JsProperty
+    public boolean animateWhilePaused;
+    /**
      * The event fired when an animation is added to the collection. This can be
      * used, for example, to keep a UI in sync. Default: new Event()
      */
