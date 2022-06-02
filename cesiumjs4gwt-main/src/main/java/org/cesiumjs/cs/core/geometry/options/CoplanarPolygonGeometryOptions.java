@@ -17,6 +17,7 @@
 package org.cesiumjs.cs.core.geometry.options;
 
 import jsinterop.annotations.*;
+import org.cesiumjs.cs.core.Cartesian2;
 import org.cesiumjs.cs.core.PolygonHierarchy;
 
 /**
@@ -41,6 +42,11 @@ public class CoplanarPolygonGeometryOptions {
      */
     @JsProperty
     public Number vertexFormat;
+    /**
+     * Texture coordinates as a {@link PolygonHierarchy} of {@link Cartesian2} points.
+     */
+    @JsProperty
+    public PolygonHierarchy textureCoordinates;
 
     @JsConstructor
     private CoplanarPolygonGeometryOptions() {
