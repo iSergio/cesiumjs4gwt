@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./defaultValue-81eec7ed', './Matrix2-d35cf4b5', './ArcType-fc72c06c', './GeometryOffsetAttribute-2bff0974', './Transforms-f0a54c7b', './RuntimeError-8952249c', './ComponentDatatype-9e86ac8f', './EllipsoidTangentPlane-2abe082d', './GeometryAttribute-eeb38987', './GeometryAttributes-32b29525', './GeometryInstance-d60d0ef4', './GeometryPipeline-55e02a41', './IndexDatatype-bed3935d', './PolygonGeometryLibrary-6e68e6b6', './PolygonPipeline-a3c0d57c', './_commonjsHelpers-3aae1032-26891ab7', './combine-3c023bda', './WebGLConstants-508b9636', './AxisAlignedBoundingBox-7b93960a', './IntersectionTests-a25e058d', './Plane-24f22488', './AttributeCompression-d0b97a83', './EncodedCartesian3-530d5328', './arrayRemoveDuplicates-1a15bd09', './EllipsoidRhumbLine-d049f903'], (function (defaultValue, Matrix2, ArcType, GeometryOffsetAttribute, Transforms, RuntimeError, ComponentDatatype, EllipsoidTangentPlane, GeometryAttribute, GeometryAttributes, GeometryInstance, GeometryPipeline, IndexDatatype, PolygonGeometryLibrary, PolygonPipeline, _commonjsHelpers3aae1032, combine, WebGLConstants, AxisAlignedBoundingBox, IntersectionTests, Plane, AttributeCompression, EncodedCartesian3, arrayRemoveDuplicates, EllipsoidRhumbLine) { 'use strict';
+define(['./defaultValue-81eec7ed', './Matrix2-e0921750', './ArcType-fc72c06c', './GeometryOffsetAttribute-2bff0974', './Transforms-38070b06', './RuntimeError-8952249c', './ComponentDatatype-0f8fc942', './EllipsoidTangentPlane-19768649', './GeometryAttribute-0fe2ec20', './GeometryAttributes-32b29525', './GeometryInstance-4161c0b6', './GeometryPipeline-8ec6816a', './IndexDatatype-2261ba8d', './PolygonGeometryLibrary-84bd401d', './PolygonPipeline-4229a1ef', './_commonjsHelpers-3aae1032-26891ab7', './combine-3c023bda', './WebGLConstants-508b9636', './AxisAlignedBoundingBox-982e50b2', './IntersectionTests-12725781', './Plane-e7da25b6', './AttributeCompression-a65cf082', './EncodedCartesian3-4e052475', './arrayRemoveDuplicates-9877adc7', './EllipsoidRhumbLine-ac050b55'], (function (defaultValue, Matrix2, ArcType, GeometryOffsetAttribute, Transforms, RuntimeError, ComponentDatatype, EllipsoidTangentPlane, GeometryAttribute, GeometryAttributes, GeometryInstance, GeometryPipeline, IndexDatatype, PolygonGeometryLibrary, PolygonPipeline, _commonjsHelpers3aae1032, combine, WebGLConstants, AxisAlignedBoundingBox, IntersectionTests, Plane, AttributeCompression, EncodedCartesian3, arrayRemoveDuplicates, EllipsoidRhumbLine) { 'use strict';
 
   const createGeometryFromPositionsPositions = [];
   const createGeometryFromPositionsSubdivided = [];
@@ -408,7 +408,10 @@ define(['./defaultValue-81eec7ed', './Matrix2-d35cf4b5', './ArcType-fc72c06c', '
      * @type {Number}
      */
     this.packedLength =
-      PolygonGeometryLibrary.PolygonGeometryLibrary.computeHierarchyPackedLength(polygonHierarchy) +
+      PolygonGeometryLibrary.PolygonGeometryLibrary.computeHierarchyPackedLength(
+        polygonHierarchy,
+        Matrix2.Cartesian3
+      ) +
       Matrix2.Ellipsoid.packedLength +
       8;
   }
@@ -433,7 +436,8 @@ define(['./defaultValue-81eec7ed', './Matrix2-d35cf4b5', './ArcType-fc72c06c', '
     startingIndex = PolygonGeometryLibrary.PolygonGeometryLibrary.packPolygonHierarchy(
       value._polygonHierarchy,
       array,
-      startingIndex
+      startingIndex,
+      Matrix2.Cartesian3
     );
 
     Matrix2.Ellipsoid.pack(value._ellipsoid, array, startingIndex);
@@ -473,7 +477,8 @@ define(['./defaultValue-81eec7ed', './Matrix2-d35cf4b5', './ArcType-fc72c06c', '
 
     const polygonHierarchy = PolygonGeometryLibrary.PolygonGeometryLibrary.unpackPolygonHierarchy(
       array,
-      startingIndex
+      startingIndex,
+      Matrix2.Cartesian3
     );
     startingIndex = polygonHierarchy.startingIndex;
     delete polygonHierarchy.startingIndex;
