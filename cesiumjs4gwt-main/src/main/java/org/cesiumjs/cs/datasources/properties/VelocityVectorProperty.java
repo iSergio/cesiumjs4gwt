@@ -40,7 +40,7 @@ public class VelocityVectorProperty<T extends Cartesian3> extends Property<T> {
      * Gets or sets the position property used to compute the velocity vector.
      */
     @JsProperty
-    public Property position;
+    public Property<T> position;
 
     /**
      * A {@link Property} which evaluates to a
@@ -59,7 +59,7 @@ public class VelocityVectorProperty<T extends Cartesian3> extends Property<T> {
      * @param position The position property used to compute the velocity.
      */
     @JsConstructor
-    public VelocityVectorProperty(Property position) {
+    public VelocityVectorProperty(Property<T> position) {
     }
 
     /**
@@ -71,6 +71,6 @@ public class VelocityVectorProperty<T extends Cartesian3> extends Property<T> {
      * @param normalize Whether to normalize the computed velocity vector.
      */
     @JsConstructor
-    public VelocityVectorProperty(Property position, boolean normalize) {
+    public VelocityVectorProperty(Property<T> position, boolean normalize) {
     }
 }
