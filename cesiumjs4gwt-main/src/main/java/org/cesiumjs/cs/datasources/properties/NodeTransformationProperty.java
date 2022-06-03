@@ -16,7 +16,9 @@
 
 package org.cesiumjs.cs.datasources.properties;
 
+import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.Quaternion;
 import org.cesiumjs.cs.core.TranslationRotationScale;
@@ -27,6 +29,7 @@ import org.cesiumjs.cs.datasources.properties.options.NodeTransformationProperty
  *
  * @author Serge Silaev aka iSergio
  */
+@JsType(isNative = true, namespace = "Cesium", name = "NodeTransformationProperty")
 public class NodeTransformationProperty<T extends TranslationRotationScale> extends Property<T> {
     /**
      * Gets or sets the Quaternion Property specifying the (x, y, z, w) rotation to
@@ -47,6 +50,10 @@ public class NodeTransformationProperty<T extends TranslationRotationScale> exte
     @JsProperty
     public Property<Cartesian3> translation;
 
+    @JsConstructor
+    public NodeTransformationProperty() {}
+
+    @JsConstructor
     public NodeTransformationProperty(NodeTransformationPropertyOptions options) {
     }
 }

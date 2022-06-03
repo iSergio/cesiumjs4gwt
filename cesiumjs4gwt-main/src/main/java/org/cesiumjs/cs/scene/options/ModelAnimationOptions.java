@@ -21,6 +21,7 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.JulianDate;
+import org.cesiumjs.cs.scene.ModelAnimation;
 import org.cesiumjs.cs.scene.enums.ModelAnimationLoop;
 
 /**
@@ -33,6 +34,11 @@ public class ModelAnimationOptions {
      */
     @JsProperty
     public String name;
+    /**
+     * The glTF animation index that identifies the animation. Must be defined if options.name is undefined.
+     */
+    @JsProperty
+    public int index;
     /**
      * The delay, in seconds, from ModelAnimation#startTime to start playing.
      * Default: undefined
@@ -77,6 +83,11 @@ public class ModelAnimationOptions {
      */
     @JsProperty
     public double multiplier;
+    /**
+     * If defined, computes the local animation time for this animation.
+     */
+    @JsProperty
+    public ModelAnimation.AnimationTimeCallback animationTime;
 
     /**
      * Options for

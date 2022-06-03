@@ -109,6 +109,12 @@ public class PolygonGraphics {
     @JsProperty
     public Property stRotation;
     /**
+     * A Property specifying texture coordinates as a {@link org.cesiumjs.cs.core.PolygonHierarchy}
+     * of {@link org.cesiumjs.cs.core.Cartesian2} points. Has no effect for ground primitives.
+     */
+    @JsProperty
+    public Property textureCoordinates;
+    /**
      * A numeric Property specifying the angular distance between each latitude and
      * longitude point. Default: {@link Math#RADIANS_PER_DEGREE()}
      */

@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./GeometryOffsetAttribute-2bff0974', './Transforms-f0a54c7b', './Matrix2-d35cf4b5', './RuntimeError-8952249c', './ComponentDatatype-9e86ac8f', './defaultValue-81eec7ed', './GeometryAttribute-eeb38987', './GeometryAttributes-32b29525', './_commonjsHelpers-3aae1032-26891ab7', './combine-3c023bda', './WebGLConstants-508b9636'], (function (GeometryOffsetAttribute, Transforms, Matrix2, RuntimeError, ComponentDatatype, defaultValue, GeometryAttribute, GeometryAttributes, _commonjsHelpers3aae1032, combine, WebGLConstants) { 'use strict';
+define(['./GeometryOffsetAttribute-2bff0974', './Transforms-38070b06', './Matrix2-e0921750', './RuntimeError-8952249c', './ComponentDatatype-0f8fc942', './defaultValue-81eec7ed', './GeometryAttribute-0fe2ec20', './GeometryAttributes-32b29525', './_commonjsHelpers-3aae1032-26891ab7', './combine-3c023bda', './WebGLConstants-508b9636'], (function (GeometryOffsetAttribute, Transforms, Matrix2, RuntimeError, ComponentDatatype, defaultValue, GeometryAttribute, GeometryAttributes, _commonjsHelpers3aae1032, combine, WebGLConstants) { 'use strict';
 
   const diffScratch = new Matrix2.Cartesian3();
 
