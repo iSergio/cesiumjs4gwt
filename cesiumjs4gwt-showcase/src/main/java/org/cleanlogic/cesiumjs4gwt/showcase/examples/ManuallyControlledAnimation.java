@@ -111,7 +111,7 @@ public class ManuallyControlledAnimation  extends AbstractExample {
         // Automatically set the model's orientation to the direction it's facing.
         entityOptions.orientation = new VelocityOrientationProperty(position);
         LabelGraphicsOptions labelOptions = new LabelGraphicsOptions();
-        labelOptions.text = new CallbackProperty(this::updateSpeedLabel, false);
+        labelOptions.text = new CallbackProperty<>(this::updateSpeedLabel, false);
         labelOptions.font = new ConstantProperty<>( "20px sans-serif");
         labelOptions.showBackground = new ConstantProperty<>(true);
         labelOptions.distanceDisplayCondition = new ConstantProperty<>(new DistanceDisplayCondition(0.0, 100.0));

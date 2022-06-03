@@ -22,6 +22,8 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.datasources.properties.Property;
+import org.cesiumjs.cs.datasources.properties.PropertyBag;
+import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.scene.enums.ColorBlendMode;
 import org.cesiumjs.cs.scene.enums.HeightReference;
 import org.cesiumjs.cs.scene.enums.ShadowMode;
@@ -81,7 +83,14 @@ public class ModelGraphicsOptions {
      * that node.
      */
     @JsProperty
-    public Property nodeTransformations;
+    public PropertyBag nodeTransformations;
+    /**
+     * An object, where keys are names of nodes, and values are
+     * TranslationRotationScale Properties describing the transformation to apply to
+     * that node.
+     */
+    @JsProperty(name = "nodeTransformations")
+    public JsObject nodeTransformationsObject;
     /**
      * An enum Property specifying whether the model casts or receives shadows from
      * each light source. Default: {@link ShadowMode#ENABLED()}
