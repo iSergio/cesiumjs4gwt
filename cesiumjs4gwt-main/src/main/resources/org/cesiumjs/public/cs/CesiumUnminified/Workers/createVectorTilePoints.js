@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./AttributeCompression-d0b97a83', './Matrix2-d35cf4b5', './ComponentDatatype-9e86ac8f', './createTaskProcessorWorker', './RuntimeError-8952249c', './defaultValue-81eec7ed', './WebGLConstants-508b9636'], (function (AttributeCompression, Matrix2, ComponentDatatype, createTaskProcessorWorker, RuntimeError, defaultValue, WebGLConstants) { 'use strict';
+define(['./AttributeCompression-a65cf082', './Matrix2-e0921750', './ComponentDatatype-0f8fc942', './createTaskProcessorWorker', './RuntimeError-8952249c', './defaultValue-81eec7ed', './WebGLConstants-508b9636'], (function (AttributeCompression, Matrix2, ComponentDatatype, createTaskProcessorWorker, RuntimeError, defaultValue, WebGLConstants) { 'use strict';
 
   const maxShort = 32767;
 

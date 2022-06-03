@@ -117,7 +117,7 @@ public class JulianDate {
      * @param result     An existing instance to use for the result.
      * @return The modified result parameter.
      */
-    public static native JulianDate addDays(JulianDate julianDate, int days, JulianDate result);
+    public static native JulianDate addDays(JulianDate julianDate, double days, JulianDate result);
 
     /**
      * Adds the provided number of hours to the provided date instance.
@@ -127,7 +127,7 @@ public class JulianDate {
      * @param result     An existing instance to use for the result.
      * @return The modified result parameter.
      */
-    public static native JulianDate addHours(JulianDate julianDate, int hours, JulianDate result);
+    public static native JulianDate addHours(JulianDate julianDate, double hours, JulianDate result);
 
     /**
      * Adds the provided number of minutes to the provided date instance.
@@ -137,7 +137,7 @@ public class JulianDate {
      * @param result     An existing instance to use for the result.
      * @return The modified result parameter.
      */
-    public static native JulianDate addMinutes(JulianDate julianDate, int minutes, JulianDate result);
+    public static native JulianDate addMinutes(JulianDate julianDate, double minutes, JulianDate result);
 
     /**
      * Adds the provided number of seconds to the provided date instance.
@@ -147,7 +147,7 @@ public class JulianDate {
      * @param result     An existing instance to use for the result.
      * @return The modified result parameter.
      */
-    public static native JulianDate addSeconds(JulianDate julianDate, int seconds, JulianDate result);
+    public static native JulianDate addSeconds(JulianDate julianDate, double seconds, JulianDate result);
 
     /**
      * Duplicates a JulianDate instance.

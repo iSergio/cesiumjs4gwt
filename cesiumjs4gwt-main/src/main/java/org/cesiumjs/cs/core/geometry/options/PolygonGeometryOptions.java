@@ -20,6 +20,7 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.PolygonHierarchy;
 
 /**
  * Options for {@link org.cesiumjs.cs.core.geometry.PolygonGeometry}.
@@ -44,6 +45,11 @@ public class PolygonGeometryOptions extends PolygonOutlineGeometryOptions {
      */
     @JsProperty
     public boolean closeBottom;
+    /**
+     * Texture coordinates as a PolygonHierarchy of Cartesian2 points. Has no effect for ground primitives.
+     */
+    @JsProperty
+    public PolygonHierarchy textureCoordinates;
 
     /**
      * Options for {@link org.cesiumjs.cs.core.geometry.PolygonGeometry}

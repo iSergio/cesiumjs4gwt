@@ -17,6 +17,7 @@
 package org.cesiumjs.cs.scene;
 
 import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.collections.ModelAnimationCollection;
@@ -38,6 +39,12 @@ import org.cesiumjs.cs.scene.options.ModelAnimationOptions;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "ModelAnimation")
 public class ModelAnimation {
+    /**
+     * If this is defined, it will be used to compute the local animation time instead of the scene's time.
+     * Default: undefined
+     */
+    @JsProperty
+    public AnimationTimeCallback animationTime;
     /**
      * When true, the animation is removed after it stops playing. This is slightly
      * more efficient that not removing it, but if, for example, time is reversed,
@@ -70,6 +77,51 @@ public class ModelAnimation {
      */
     @JsProperty
     public Event update;
+    /**
+     * The delay, in seconds, from ModelAnimation#startTime to start playing.
+     * Default: undefined
+     */
+    @JsProperty(name = "delay")
+    public native double delay();
+    /**
+     * Determines if and how the animation is looped. Default:
+     * {@link ModelAnimationLoop#NONE()}
+     */
+    @SuppressWarnings("unusable-by-js")
+    @JsProperty(name = "loop")
+    public native Number loop();
+    /**
+     * The glTF animation name that identifies this animation.
+     */
+    @JsProperty(name = "name")
+    public native String name();
+    /**
+     * When true, the animation is played in reverse. Default: false
+     */
+    @JsProperty(name = "reverse")
+    public native boolean reverse();
+    /**
+     * Values greater than 1.0 increase the speed that the animation is played
+     * relative to the scene clock speed; values less than 1.0 decrease the speed. A
+     * value of 1.0 plays the animation at the speed in the glTF animation mapped to
+     * the scene clock speed. For example, if the scene is played at 2x real-time, a
+     * two-second glTF animation will play in one second even if multiplier is 1.0.
+     */
+    @JsProperty(name = "multiplier")
+    public native double multiplier();
+    /**
+     * The scene time to start playing this animation. When this is undefined, the
+     * animation starts at the next frame. Default: undefined
+     */
+    @JsProperty(name = "startTime")
+    public native JulianDate startTime();
+    /**
+     * The scene time to stop playing this animation. When this is undefined, the
+     * animation is played for its full duration and perhaps repeated depending on
+     * ModelAnimation#loop. Default: undefined
+     */
+    @JsProperty(name = "stopTime")
+    public native JulianDate stopTime();
 
     /**
      * An active glTF animation. A glTF asset can contain animations. An active
@@ -86,54 +138,17 @@ public class ModelAnimation {
     }
 
     /**
-     * The delay, in seconds, from ModelAnimation#startTime to start playing.
-     * Default: undefined
+     * A function used to compute the local animation time for a ModelAnimation.
      */
-    @JsProperty(name = "delay")
-    public native double delay();
-
-    /**
-     * Determines if and how the animation is looped. Default:
-     * {@link ModelAnimationLoop#NONE()}
-     */
-    @SuppressWarnings("unusable-by-js")
-    @JsProperty(name = "loop")
-    public native Number loop();
-
-    /**
-     * The glTF animation name that identifies this animation.
-     */
-    @JsProperty(name = "name")
-    public native String name();
-
-    /**
-     * When true, the animation is played in reverse. Default: false
-     */
-    @JsProperty(name = "reverse")
-    public native boolean reverse();
-
-    /**
-     * Values greater than 1.0 increase the speed that the animation is played
-     * relative to the scene clock speed; values less than 1.0 decrease the speed. A
-     * value of 1.0 plays the animation at the speed in the glTF animation mapped to
-     * the scene clock speed. For example, if the scene is played at 2x real-time, a
-     * two-second glTF animation will play in one second even if multiplier is 1.0.
-     */
-    @JsProperty(name = "multiplier")
-    public native double multiplier();
-
-    /**
-     * The scene time to start playing this animation. When this is undefined, the
-     * animation starts at the next frame. Default: undefined
-     */
-    @JsProperty(name = "startTime")
-    public native JulianDate startTime();
-
-    /**
-     * The scene time to stop playing this animation. When this is undefined, the
-     * animation is played for its full duration and perhaps repeated depending on
-     * ModelAnimation#loop. Default: undefined
-     */
-    @JsProperty(name = "stopTime")
-    public native JulianDate stopTime();
+    @JsFunction
+    @FunctionalInterface
+    public interface AnimationTimeCallback {
+        /**
+         * A function used to compute the local animation time for a ModelAnimation.
+         * @param duration The animation's original duration in seconds.
+         * @param seconds The seconds since the animation started, in scene time.
+         * @return Returns the local animation time.
+         */
+        double function(double duration, double seconds);
+    }
 }
