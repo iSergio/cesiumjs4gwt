@@ -1,7 +1,9 @@
 /**
+ * @license
  * Cesium - https://github.com/CesiumGS/cesium
+ * Version 1.95
  *
- * Copyright 2011-2020 Cesium Contributors
+ * Copyright 2011-2022 Cesium Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./defaultValue-81eec7ed', './RuntimeError-8952249c', './WebGLConstants-508b9636', './createTaskProcessorWorker'], (function (defaultValue, RuntimeError, WebGLConstants, createTaskProcessorWorker) { 'use strict';
+define(['./defaultValue-97284df2', './RuntimeError-4f8ec8a2', './WebGLConstants-6da700a2', './createTaskProcessorWorker'], (function (defaultValue, RuntimeError, WebGLConstants, createTaskProcessorWorker) { 'use strict';
 
   /**
    * The data type of a pixel.

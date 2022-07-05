@@ -1,7 +1,9 @@
 /**
+ * @license
  * Cesium - https://github.com/CesiumGS/cesium
+ * Version 1.95
  *
- * Copyright 2011-2020 Cesium Contributors
+ * Copyright 2011-2022 Cesium Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./Matrix2-e0921750', './AxisAlignedBoundingBox-982e50b2', './Transforms-38070b06', './defaultValue-81eec7ed', './RuntimeError-8952249c', './TerrainEncoding-f2c8fa47', './ComponentDatatype-0f8fc942', './OrientedBoundingBox-0325d230', './WebMercatorProjection-3c291906', './_commonjsHelpers-3aae1032-26891ab7', './createTaskProcessorWorker', './combine-3c023bda', './AttributeCompression-a65cf082', './WebGLConstants-508b9636', './EllipsoidTangentPlane-19768649', './IntersectionTests-12725781', './Plane-e7da25b6'], (function (Matrix2, AxisAlignedBoundingBox, Transforms, defaultValue, RuntimeError, TerrainEncoding, ComponentDatatype, OrientedBoundingBox, WebMercatorProjection, _commonjsHelpers3aae1032, createTaskProcessorWorker, combine, AttributeCompression, WebGLConstants, EllipsoidTangentPlane, IntersectionTests, Plane) { 'use strict';
+define(['./Matrix2-9e1c22e2', './AxisAlignedBoundingBox-1aaf78c2', './Transforms-273eeb44', './defaultValue-97284df2', './RuntimeError-4f8ec8a2', './TerrainEncoding-8fbe9124', './ComponentDatatype-4eeb6d9b', './OrientedBoundingBox-a82b3552', './WebMercatorProjection-3b121d41', './_commonjsHelpers-3aae1032-65601a27', './createTaskProcessorWorker', './combine-d11b1f00', './AttributeCompression-f202be44', './WebGLConstants-6da700a2', './EllipsoidTangentPlane-d42ee682', './IntersectionTests-ea138127', './Plane-76b84425'], (function (Matrix2, AxisAlignedBoundingBox, Transforms, defaultValue, RuntimeError, TerrainEncoding, ComponentDatatype, OrientedBoundingBox, WebMercatorProjection, _commonjsHelpers3aae1032, createTaskProcessorWorker, combine, AttributeCompression, WebGLConstants, EllipsoidTangentPlane, IntersectionTests, Plane) { 'use strict';
 
   /**
    * The encoding that is used for a heightmap
