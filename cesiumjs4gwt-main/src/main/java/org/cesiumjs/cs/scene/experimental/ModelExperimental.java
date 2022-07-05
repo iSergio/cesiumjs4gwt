@@ -28,6 +28,7 @@ import org.cesiumjs.cs.promise.Promise;
 import org.cesiumjs.cs.scene.ImageBasedLighting;
 import org.cesiumjs.cs.scene.PointCloudShading;
 import org.cesiumjs.cs.scene.enums.ColorBlendMode;
+import org.cesiumjs.cs.scene.enums.HeightReference;
 import org.cesiumjs.cs.scene.experimental.options.ModelExperimentalFromGltfOptions;
 import org.cesiumjs.cs.scene.experimental.options.ModelExperimentalOptions;
 
@@ -99,6 +100,12 @@ public class ModelExperimental {
      */
     @JsProperty
     public double featureIdLabel;
+    /**
+     * The height reference of the model, which determines how the model is drawn relative to terrain.
+     * Default: {@link HeightReference#NONE()}
+     */
+    @JsProperty
+    public HeightReference heightReference;
     /**
      * The index into the list of instance feature IDs used for picking and styling. If both per-primitive and
      * per-instance feature IDs are present, the instance feature IDs take priority.

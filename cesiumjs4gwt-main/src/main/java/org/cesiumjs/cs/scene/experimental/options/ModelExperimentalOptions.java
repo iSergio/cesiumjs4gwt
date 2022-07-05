@@ -25,6 +25,7 @@ import org.cesiumjs.cs.core.Resource;
 import org.cesiumjs.cs.scene.Cesium3DTileContent;
 import org.cesiumjs.cs.scene.ImageBasedLighting;
 import org.cesiumjs.cs.scene.PointCloudShading;
+import org.cesiumjs.cs.scene.enums.HeightReference;
 import org.cesiumjs.cs.scene.enums.ShadowMode;
 import org.cesiumjs.cs.scene.experimental.CustomShader;
 import org.cesiumjs.cs.scene.enums.ColorBlendMode;
@@ -100,6 +101,12 @@ public class ModelExperimentalOptions {
      */
     @JsProperty
     public Cesium3DTileContent content;
+    /**
+     * Determines how the model is drawn relative to terrain.
+     * Default: {@link HeightReference#NONE()}
+     */
+    @JsProperty
+    public HeightReference heightReference;
     /**
      * Whether or not to render the model.
      */
