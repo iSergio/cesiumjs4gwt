@@ -24,11 +24,16 @@ import org.cesiumjs.cs.collections.ClippingPlaneCollection;
 import org.cesiumjs.cs.core.BoundingSphere;
 import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.Color;
+import org.cesiumjs.cs.core.Credit;
+import org.cesiumjs.cs.core.DistanceDisplayCondition;
 import org.cesiumjs.cs.promise.Promise;
+import org.cesiumjs.cs.scene.Cesium3DTileStyle;
 import org.cesiumjs.cs.scene.ImageBasedLighting;
 import org.cesiumjs.cs.scene.PointCloudShading;
 import org.cesiumjs.cs.scene.enums.ColorBlendMode;
 import org.cesiumjs.cs.scene.enums.HeightReference;
+import org.cesiumjs.cs.scene.enums.ShadowMode;
+import org.cesiumjs.cs.scene.enums.SplitDirection;
 import org.cesiumjs.cs.scene.experimental.options.ModelExperimentalFromGltfOptions;
 import org.cesiumjs.cs.scene.experimental.options.ModelExperimentalOptions;
 
@@ -41,10 +46,27 @@ import org.cesiumjs.cs.scene.experimental.options.ModelExperimentalOptions;
 @JsType(isNative = true, namespace = "Cesium", name = "ModelExperimental")
 public class ModelExperimental {
     /**
+     * The currently playing glTF animations.
+     */
+    @JsProperty(name = "")
+    public native ModelExperimentalAnimationCollection activeAnimations();
+    /**
+     * Whether to cull back-facing geometry. When true, back face culling is determined by the material's doubleSided property; when false, back face culling is disabled. Back faces are not culled if ModelExperimental#color is translucent or ModelExperimental#silhouetteSize is greater than 0.0.
+     * Default: true
+     */
+    @JsProperty
+    public boolean backFaceCulling;
+    /**
      * Gets the model's bounding sphere.
      */
     @JsProperty(name = "boundingSphere")
     public native BoundingSphere boundingSphere();
+    /**
+     * Determines if the model's animations should hold a pose over frames where no keyframes are specified.
+     * Default: true
+     */
+    @JsProperty
+    public boolean clampAnimations;
     /**
      * The {@link ClippingPlaneCollection} used to selectively disable rendering the model.
      */
@@ -70,6 +92,11 @@ public class ModelExperimental {
     @JsProperty
     public ColorBlendMode colorBlendMode;
     /**
+     * Gets the credit that will be displayed for the model
+     */
+    @JsProperty(name = "credit")
+    public native Credit credit();
+    /**
      * The model's custom shader, if it exists. Using custom shaders with a Cesium3DTileStyle may
      * lead to undefined behavior.
      */
@@ -91,6 +118,13 @@ public class ModelExperimental {
      */
     @JsProperty
     public boolean debugWireframe;
+    /**
+     * Gets or sets the distance display condition, which specifies at what distance from the camera
+     * this model will be displayed.
+     * Default: undefined
+     */
+    @JsProperty
+    public DistanceDisplayCondition distanceDisplayCondition;
     /**
      * The index into the list of primitive feature IDs used for picking and styling. For EXT_feature_metadata,
      * feature ID attributes are listed before feature ID textures. If both per-primitive and per-instance feature
@@ -162,11 +196,53 @@ public class ModelExperimental {
     @JsProperty(name = "readyPromise")
     public native Promise<ModelExperimental, Void> readyPromise();
     /**
+     * A uniform scale applied to this model before the Model#modelMatrix. Values greater than 1.0 increase the size
+     * of the model; values less than 1.0 decrease.
+     * Default: 1.0
+     */
+    @JsProperty
+    public double scale;
+    /**
+     * Determines whether the model casts or receives shadows from light sources.
+     * Default: {@link ShadowMode#ENABLED()}
+     */
+    @JsProperty
+    public Number shadows;
+    /**
      * Whether or not to render the model.
      * Default: true
      */
     @JsProperty
     public boolean show;
+    /**
+     * Gets or sets whether the credits of the model will be displayed on the screen
+     * Default: false
+     */
+    @JsProperty
+    public boolean showCreditsOnScreen;
+    /**
+     * The silhouette color.
+     * Default: {@link Color#RED()}
+     */
+    @JsProperty
+    public Color silhouetteColor;
+    /**
+     * The size of the silhouette in pixels.
+     * Default: 0.0
+     */
+    @JsProperty
+    public double silhouetteSize;
+    /**
+     * The SplitDirection to apply to this model.
+     * Default: {@link SplitDirection#NONE()}
+     */
+    @JsProperty
+    public Number splitDirection;
+    /**
+     * The style to apply the to the features in the model. Cannot be applied if a CustomShader is also applied.
+     */
+    @JsProperty
+    public Cesium3DTileStyle style;
 
     @JsConstructor
     public ModelExperimental(ModelExperimentalOptions options) {}
@@ -183,6 +259,13 @@ public class ModelExperimental {
      */
     @JsMethod
     public static native ModelExperimental fromGltf(ModelExperimentalFromGltfOptions options);
+
+    /**
+     * Applies any modified articulation stages to the matrix of each node that participates in any articulation.
+     * Note that this will overwrite any node transformations on participating nodes.
+     */
+    @JsMethod
+    public native void applyArticulations();
 
     /**
      * Destroys the WebGL resources held by this object. Destroying an object allows for deterministic release of WebGL
@@ -207,6 +290,15 @@ public class ModelExperimental {
      */
     @JsMethod
     public native boolean isDestroyed();
+
+    /**
+     * Sets the current value of an articulation stage. After setting one or multiple stage values, call
+     * ModelExperimental.applyArticulations() to cause the node matrices to be recalculated.
+     * @param articulationStageKey The name of the articulation, a space, and the name of the stage.
+     * @param value The numeric value of this stage of the articulation.
+     */
+    @JsMethod
+    public native void setArticulationStage(String articulationStageKey, double value);
 
     /**
      * Called when Viewer or CesiumWidget render the scene to get the draw commands needed to render this primitive.

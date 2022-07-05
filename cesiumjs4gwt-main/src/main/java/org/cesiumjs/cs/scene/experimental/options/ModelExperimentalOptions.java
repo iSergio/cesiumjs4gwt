@@ -130,6 +130,18 @@ public class ModelExperimentalOptions {
     @JsProperty
     public double colorBlendAmount;
     /**
+     * The silhouette color. If more than 256 models have silhouettes enabled, there is a small chance that overlapping models will have minor artifacts.
+     * Default: {@link Color#RED()}
+     */
+    @JsProperty
+    public Color silhouetteColor;
+    /**
+     * The size of the silhouette in pixels.
+     * Default: 0.0
+     */
+    @JsProperty
+    public double silhouetteSize;
+    /**
      * The index into the list of primitive feature IDs used for picking and styling. For EXT_feature_metadata,
      * feature ID attributes are listed before feature ID textures. If both per-primitive and per-instance feature
      * IDs are present, the instance feature IDs take priority.
