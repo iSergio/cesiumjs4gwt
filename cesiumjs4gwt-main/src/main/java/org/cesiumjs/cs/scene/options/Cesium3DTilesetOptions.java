@@ -22,6 +22,7 @@ import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.promise.Promise;
 import org.cesiumjs.cs.scene.Cesium3DTileset;
 import org.cesiumjs.cs.scene.PointCloudShading;
+import org.cesiumjs.cs.scene.enums.Axis;
 import org.cesiumjs.cs.scene.enums.ClassificationType;
 import org.cesiumjs.cs.scene.enums.SplitDirection;
 import org.cesiumjs.cs.scene.experimental.CustomShader;
@@ -52,6 +53,18 @@ public class Cesium3DTilesetOptions {
      */
     @JsProperty
     public Matrix4 modelMatrix;
+    /**
+     * Which axis is considered up when loading models for tile contents.
+     * Default: {@link Axis#Y()}
+     */
+    @JsProperty
+    public Axis modelUpAxis;
+    /**
+     * Which axis is considered forward when loading models for tile contents.
+     * Default: {@link Axis#X()}
+     */
+    @JsProperty
+    public Axis modelForwardAxis;
     /**
      * Determines whether the tileset casts or receives shadows from each light
      * source. Default: {@link org.cesiumjs.cs.scene.enums.ShadowMode#ENABLED()}
