@@ -1,0 +1,145 @@
+/*
+ * Copyright 2022 iSergio, Gis4Fun.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package org.cesiumjs.cs.scene.experimental;
+
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsFunction;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Event;
+import org.cesiumjs.cs.core.JulianDate;
+import org.cesiumjs.cs.scene.enums.ModelAnimationLoop;
+
+/**
+ * An active animation derived from a glTF asset. An active animation is an animation that is either currently playing
+ * or scheduled to be played due to being added to a model's {@link ModelExperimentalAnimationCollection}. An active
+ * animation is an instance of an animation; for example, there can be multiple active animations for the same glTF
+ * animation, each with a different start time.
+ * Create this by calling {@link ModelExperimentalAnimationCollection#add}.
+ */
+@JsType(isNative = true, namespace = "Cesium", name = "ModelExperimentalAnimation")
+public class ModelExperimentalAnimation {
+    /**
+     * If this is defined, it will be used to compute the local animation time instead of the scene's time.
+     * Default: undefined
+     */
+    @JsProperty
+    public AnimationTimeCallback animationTime;
+    /**
+     * The delay, in seconds, from ModelExperimentalAnimation#startTime to start playing.
+     * Default: undefined
+     */
+    @JsProperty(name = "delay")
+    public native double delay();
+    /**
+     * Determines if and how the animation is looped.
+     * Default: {@link ModelAnimationLoop#NONE()}
+     */
+    @JsProperty(name = "loop")
+    public native Number loop();
+    /**
+     * Values greater than 1.0 increase the speed that the animation is played relative to the scene clock speed;
+     * values less than 1.0 decrease the speed. A value of 1.0 plays the animation at the speed in the
+     * glTF animation mapped to the scene clock speed. For example, if the scene is played at 2x real-time,
+     * a two-second glTF animation will play in one second even if multiplier is 1.0.
+     * Default: 1.0
+     */
+    @JsProperty(name = "multiplier")
+    public native double multiplier();
+    /**
+     * The name that identifies this animation in the model, if it exists.
+     */
+    @JsProperty(name = "name")
+    public native String name();
+
+    /**
+     * When true, the animation is removed after it stops playing. This is slightly more efficient that not
+     * removing it, but if, for example, time is reversed, the animation is not played again.
+     * Default: false
+     */
+    @JsProperty
+    public boolean removeOnStop;
+    /**
+     * When true, the animation is played in reverse.
+     * Default: false
+     */
+    @JsProperty(name = "reverse")
+    public native boolean reverse();
+    /**
+     * The event fired when this animation is started. This can be used, for example, to play a sound or start a particle system, when the animation starts.
+     * This event is fired at the end of the frame after the scene is rendered.
+     *
+     * Default: new Event()
+     */
+    @JsProperty
+    public Event<?> start;
+    /**
+     * The scene time to start playing this animation. When this is undefined, the animation starts at the next frame.
+     * Default: undefined
+     */
+    @JsProperty
+    public native JulianDate startTime();
+    /**
+     * The event fired when this animation is stopped. This can be used, for example, to play a sound or start a
+     * particle system, when the animation stops.
+     * This event is fired at the end of the frame after the scene is rendered.
+     *
+     * Default: new Event()
+     */
+    @JsProperty
+    public Event<?> stop;
+    /**
+     * The scene time to stop playing this animation. When this is undefined, the animation is played for its full
+     * duration and perhaps repeated depending on ModelExperimentalAnimation#loop.
+     *  Default: undefined
+     */
+    @JsProperty(name = "stopTime")
+    public native JulianDate stopTime();
+
+    /**
+     * The event fired when on each frame when this animation is updated. The current time of the animation,
+     * relative to the glTF animation time span, is passed to the event, which allows, for example, starting
+     * new animations at a specific time relative to a playing animation.
+     * This event is fired at the end of the frame after the scene is rendered.
+     *
+     * Default Value: new Event()
+     */
+    @JsProperty
+    public Event<?> update;
+
+    /**
+     * An active animation derived from a glTF asset. An active animation is an animation that is either currently playing
+     * or scheduled to be played due to being added to a model's {@link ModelExperimentalAnimationCollection}. An active
+     * animation is an instance of an animation; for example, there can be multiple active animations for the same glTF
+     * animation, each with a different start time.
+     * Create this by calling {@link ModelExperimentalAnimationCollection#add}.
+     */
+    @JsConstructor
+    private ModelExperimentalAnimation() {}
+
+    @JsFunction
+    @FunctionalInterface
+    public interface AnimationTimeCallback {
+        /**
+         * A function used to compute the local animation time for a ModelExperimentalAnimation.
+         * @param duration The animation's original duration in seconds.
+         * @param seconds The seconds since the animation started, in scene time.
+         * @return Returns the local animation time.
+         */
+        double function(double duration, double seconds);
+    }
+}
