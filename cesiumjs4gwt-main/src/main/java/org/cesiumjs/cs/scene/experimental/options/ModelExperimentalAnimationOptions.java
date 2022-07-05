@@ -17,12 +17,14 @@
 package org.cesiumjs.cs.scene.experimental.options;
 
 import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.JulianDate;
 import org.cesiumjs.cs.js.JsArray;
 import org.cesiumjs.cs.scene.enums.ModelAnimationLoop;
+import org.cesiumjs.cs.scene.experimental.ModelExperimental;
 import org.cesiumjs.cs.scene.experimental.ModelExperimentalAnimation;
 
 /**
@@ -89,4 +91,64 @@ public class ModelExperimentalAnimationOptions {
 
     @JsConstructor
     public ModelExperimentalAnimationOptions() {}
+
+    @JsOverlay
+    public final ModelExperimentalAnimationOptions setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    @JsOverlay
+    public final ModelExperimentalAnimationOptions setIndex(int index) {
+        this.index = index;
+        return this;
+    }
+
+    @JsOverlay
+    public final ModelExperimentalAnimationOptions setStartTime(JulianDate startTime) {
+        this.startTime = startTime;
+        return this;
+    }
+
+    @JsOverlay
+    public final ModelExperimentalAnimationOptions setDelay(double delay) {
+        this.delay = delay;
+        return this;
+    }
+
+    @JsOverlay
+    public final ModelExperimentalAnimationOptions setStopTime(JulianDate stopTime) {
+        this.stopTime = stopTime;
+        return this;
+    }
+
+    @JsOverlay
+    public final ModelExperimentalAnimationOptions setRemoveOnStop(boolean removeOnStop) {
+        this.removeOnStop = removeOnStop;
+        return this;
+    }
+
+    @JsOverlay
+    public final ModelExperimentalAnimationOptions setMultiplier(double multiplier) {
+        this.multiplier = multiplier;
+        return this;
+    }
+
+    @JsOverlay
+    public final ModelExperimentalAnimationOptions setReverse(boolean reverse) {
+        this.reverse = reverse;
+        return this;
+    }
+
+    @JsOverlay
+    public final ModelExperimentalAnimationOptions setLoop(Number loop) {
+        this.loop = loop;
+        return this;
+    }
+
+    @JsOverlay
+    public final ModelExperimentalAnimationOptions setAnimationTime(ModelExperimentalAnimation.AnimationTimeCallback animationTime) {
+        this.animationTime = animationTime;
+        return this;
+    }
 }

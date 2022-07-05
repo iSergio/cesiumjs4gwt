@@ -91,7 +91,7 @@ public class ModelExperimentalAnimation {
      * The scene time to start playing this animation. When this is undefined, the animation starts at the next frame.
      * Default: undefined
      */
-    @JsProperty
+    @JsProperty(name = "startTime")
     public native JulianDate startTime();
     /**
      * The event fired when this animation is stopped. This can be used, for example, to play a sound or start a

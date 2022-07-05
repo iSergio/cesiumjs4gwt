@@ -48,7 +48,7 @@ public class ModelExperimental {
     /**
      * The currently playing glTF animations.
      */
-    @JsProperty(name = "")
+    @JsProperty(name = "activeAnimations")
     public native ModelExperimentalAnimationCollection activeAnimations();
     /**
      * Whether to cull back-facing geometry. When true, back face culling is determined by the material's doubleSided property; when false, back face culling is disabled. Back faces are not culled if ModelExperimental#color is translucent or ModelExperimental#silhouetteSize is greater than 0.0.
