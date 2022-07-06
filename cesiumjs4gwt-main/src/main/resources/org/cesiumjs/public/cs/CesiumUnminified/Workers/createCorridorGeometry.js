@@ -1,7 +1,9 @@
 /**
+ * @license
  * Cesium - https://github.com/CesiumGS/cesium
+ * Version 1.95
  *
- * Copyright 2011-2020 Cesium Contributors
+ * Copyright 2011-2022 Cesium Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./GeometryOffsetAttribute-2bff0974', './arrayRemoveDuplicates-9877adc7', './Transforms-38070b06', './Matrix2-e0921750', './RuntimeError-8952249c', './ComponentDatatype-0f8fc942', './PolylineVolumeGeometryLibrary-0d7f2da5', './CorridorGeometryLibrary-deac1c0b', './defaultValue-81eec7ed', './GeometryAttribute-0fe2ec20', './GeometryAttributes-32b29525', './IndexDatatype-2261ba8d', './PolygonPipeline-4229a1ef', './VertexFormat-7df34ea5', './_commonjsHelpers-3aae1032-26891ab7', './combine-3c023bda', './WebGLConstants-508b9636', './EllipsoidTangentPlane-19768649', './AxisAlignedBoundingBox-982e50b2', './IntersectionTests-12725781', './Plane-e7da25b6', './PolylinePipeline-ea70d5a8', './EllipsoidGeodesic-ca8d04b3', './EllipsoidRhumbLine-ac050b55'], (function (GeometryOffsetAttribute, arrayRemoveDuplicates, Transforms, Matrix2, RuntimeError, ComponentDatatype, PolylineVolumeGeometryLibrary, CorridorGeometryLibrary, defaultValue, GeometryAttribute, GeometryAttributes, IndexDatatype, PolygonPipeline, VertexFormat, _commonjsHelpers3aae1032, combine$1, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane, PolylinePipeline, EllipsoidGeodesic, EllipsoidRhumbLine) { 'use strict';
+define(['./arrayRemoveDuplicates-1af79ba4', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './ComponentDatatype-4eeb6d9b', './PolylineVolumeGeometryLibrary-00b304ef', './CorridorGeometryLibrary-33b2ba75', './defaultValue-97284df2', './GeometryAttribute-9be2d2e5', './GeometryAttributes-734a3446', './GeometryOffsetAttribute-59b14f45', './IndexDatatype-f228f5fd', './PolygonPipeline-db21de21', './VertexFormat-563ab2cc', './_commonjsHelpers-3aae1032-65601a27', './combine-d11b1f00', './WebGLConstants-6da700a2', './EllipsoidTangentPlane-d42ee682', './AxisAlignedBoundingBox-1aaf78c2', './IntersectionTests-ea138127', './Plane-76b84425', './PolylinePipeline-e67c0760', './EllipsoidGeodesic-72f01b70', './EllipsoidRhumbLine-7bc7dfce'], (function (arrayRemoveDuplicates, Transforms, Matrix2, RuntimeError, ComponentDatatype, PolylineVolumeGeometryLibrary, CorridorGeometryLibrary, defaultValue, GeometryAttribute, GeometryAttributes, GeometryOffsetAttribute, IndexDatatype, PolygonPipeline, VertexFormat, _commonjsHelpers3aae1032, combine$1, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane, PolylinePipeline, EllipsoidGeodesic, EllipsoidRhumbLine) { 'use strict';
 
   const cartesian1 = new Matrix2.Cartesian3();
   const cartesian2 = new Matrix2.Cartesian3();
@@ -805,12 +807,13 @@ define(['./GeometryOffsetAttribute-2bff0974', './arrayRemoveDuplicates-9877adc7'
     if (defaultValue.defined(params.offsetAttribute)) {
       let applyOffset = new Uint8Array(size * 6);
       if (params.offsetAttribute === GeometryOffsetAttribute.GeometryOffsetAttribute.TOP) {
-        applyOffset = GeometryOffsetAttribute.arrayFill(applyOffset, 1, 0, size); // top face
-        applyOffset = GeometryOffsetAttribute.arrayFill(applyOffset, 1, size * 2, size * 4); // top wall
+        applyOffset = applyOffset
+          .fill(1, 0, size) // top face
+          .fill(1, size * 2, size * 4); // top wall
       } else {
         const applyOffsetValue =
           params.offsetAttribute === GeometryOffsetAttribute.GeometryOffsetAttribute.NONE ? 0 : 1;
-        applyOffset = GeometryOffsetAttribute.arrayFill(applyOffset, applyOffsetValue);
+        applyOffset = applyOffset.fill(applyOffsetValue);
       }
       attributes.applyOffset = new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.UNSIGNED_BYTE,
@@ -1331,8 +1334,7 @@ define(['./GeometryOffsetAttribute-2bff0974', './arrayRemoveDuplicates-9877adc7'
             ? 0
             : 1;
         const length = attr.attributes.position.values.length;
-        const applyOffset = new Uint8Array(length / 3);
-        GeometryOffsetAttribute.arrayFill(applyOffset, applyOffsetValue);
+        const applyOffset = new Uint8Array(length / 3).fill(applyOffsetValue);
         attr.attributes.applyOffset = new GeometryAttribute.GeometryAttribute({
           componentDatatype: ComponentDatatype.ComponentDatatype.UNSIGNED_BYTE,
           componentsPerAttribute: 1,

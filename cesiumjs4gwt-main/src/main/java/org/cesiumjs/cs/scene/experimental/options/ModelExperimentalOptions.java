@@ -25,6 +25,7 @@ import org.cesiumjs.cs.core.Resource;
 import org.cesiumjs.cs.scene.Cesium3DTileContent;
 import org.cesiumjs.cs.scene.ImageBasedLighting;
 import org.cesiumjs.cs.scene.PointCloudShading;
+import org.cesiumjs.cs.scene.enums.HeightReference;
 import org.cesiumjs.cs.scene.enums.ShadowMode;
 import org.cesiumjs.cs.scene.experimental.CustomShader;
 import org.cesiumjs.cs.scene.enums.ColorBlendMode;
@@ -101,6 +102,12 @@ public class ModelExperimentalOptions {
     @JsProperty
     public Cesium3DTileContent content;
     /**
+     * Determines how the model is drawn relative to terrain.
+     * Default: {@link HeightReference#NONE()}
+     */
+    @JsProperty
+    public HeightReference heightReference;
+    /**
      * Whether or not to render the model.
      */
     @JsProperty
@@ -122,6 +129,18 @@ public class ModelExperimentalOptions {
      */
     @JsProperty
     public double colorBlendAmount;
+    /**
+     * The silhouette color. If more than 256 models have silhouettes enabled, there is a small chance that overlapping models will have minor artifacts.
+     * Default: {@link Color#RED()}
+     */
+    @JsProperty
+    public Color silhouetteColor;
+    /**
+     * The size of the silhouette in pixels.
+     * Default: 0.0
+     */
+    @JsProperty
+    public double silhouetteSize;
     /**
      * The index into the list of primitive feature IDs used for picking and styling. For EXT_feature_metadata,
      * feature ID attributes are listed before feature ID textures. If both per-primitive and per-instance feature

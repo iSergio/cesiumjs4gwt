@@ -1,7 +1,9 @@
 /**
+ * @license
  * Cesium - https://github.com/CesiumGS/cesium
+ * Version 1.95
  *
- * Copyright 2011-2020 Cesium Contributors
+ * Copyright 2011-2022 Cesium Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./RuntimeError-8952249c', './defaultValue-81eec7ed', './_commonjsHelpers-3aae1032-26891ab7', './createTaskProcessorWorker'], (function (RuntimeError, defaultValue, _commonjsHelpers3aae1032, createTaskProcessorWorker) { 'use strict';
+define(['./RuntimeError-4f8ec8a2', './defaultValue-97284df2', './_commonjsHelpers-3aae1032-65601a27', './createTaskProcessorWorker'], (function (RuntimeError, defaultValue, _commonjsHelpers3aae1032, createTaskProcessorWorker) { 'use strict';
 
   const compressedMagic$1 = 0x7468dead;
   const compressedMagicSwap$1 = 0xadde6874;

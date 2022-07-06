@@ -1,7 +1,9 @@
 /**
+ * @license
  * Cesium - https://github.com/CesiumGS/cesium
+ * Version 1.95
  *
- * Copyright 2011-2020 Cesium Contributors
+ * Copyright 2011-2022 Cesium Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./defaultValue-81eec7ed', './Matrix2-e0921750', './ArcType-fc72c06c', './arrayRemoveDuplicates-9877adc7', './Transforms-38070b06', './Color-ddcf2eb3', './ComponentDatatype-0f8fc942', './RuntimeError-8952249c', './GeometryAttribute-0fe2ec20', './GeometryAttributes-32b29525', './IndexDatatype-2261ba8d', './PolylinePipeline-ea70d5a8', './VertexFormat-7df34ea5', './_commonjsHelpers-3aae1032-26891ab7', './combine-3c023bda', './WebGLConstants-508b9636', './EllipsoidGeodesic-ca8d04b3', './EllipsoidRhumbLine-ac050b55', './IntersectionTests-12725781', './Plane-e7da25b6'], (function (defaultValue, Matrix2, ArcType, arrayRemoveDuplicates, Transforms, Color, ComponentDatatype, RuntimeError, GeometryAttribute, GeometryAttributes, IndexDatatype, PolylinePipeline, VertexFormat, _commonjsHelpers3aae1032, combine, WebGLConstants, EllipsoidGeodesic, EllipsoidRhumbLine, IntersectionTests, Plane) { 'use strict';
+define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './ArcType-de5d8777', './arrayRemoveDuplicates-1af79ba4', './Transforms-273eeb44', './Color-4a982256', './ComponentDatatype-4eeb6d9b', './RuntimeError-4f8ec8a2', './GeometryAttribute-9be2d2e5', './GeometryAttributes-734a3446', './IndexDatatype-f228f5fd', './PolylinePipeline-e67c0760', './VertexFormat-563ab2cc', './_commonjsHelpers-3aae1032-65601a27', './combine-d11b1f00', './WebGLConstants-6da700a2', './EllipsoidGeodesic-72f01b70', './EllipsoidRhumbLine-7bc7dfce', './IntersectionTests-ea138127', './Plane-76b84425'], (function (defaultValue, Matrix2, ArcType, arrayRemoveDuplicates, Transforms, Color, ComponentDatatype, RuntimeError, GeometryAttribute, GeometryAttributes, IndexDatatype, PolylinePipeline, VertexFormat, _commonjsHelpers3aae1032, combine, WebGLConstants, EllipsoidGeodesic, EllipsoidRhumbLine, IntersectionTests, Plane) { 'use strict';
 
   const scratchInterpolateColorsArray = [];
 

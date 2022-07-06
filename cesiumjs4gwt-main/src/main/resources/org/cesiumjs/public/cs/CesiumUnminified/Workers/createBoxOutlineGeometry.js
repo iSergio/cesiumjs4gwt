@@ -1,7 +1,9 @@
 /**
+ * @license
  * Cesium - https://github.com/CesiumGS/cesium
+ * Version 1.95
  *
- * Copyright 2011-2020 Cesium Contributors
+ * Copyright 2011-2022 Cesium Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./GeometryOffsetAttribute-2bff0974', './Transforms-38070b06', './Matrix2-e0921750', './RuntimeError-8952249c', './ComponentDatatype-0f8fc942', './defaultValue-81eec7ed', './GeometryAttribute-0fe2ec20', './GeometryAttributes-32b29525', './_commonjsHelpers-3aae1032-26891ab7', './combine-3c023bda', './WebGLConstants-508b9636'], (function (GeometryOffsetAttribute, Transforms, Matrix2, RuntimeError, ComponentDatatype, defaultValue, GeometryAttribute, GeometryAttributes, _commonjsHelpers3aae1032, combine, WebGLConstants) { 'use strict';
+define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './ComponentDatatype-4eeb6d9b', './defaultValue-97284df2', './GeometryAttribute-9be2d2e5', './GeometryAttributes-734a3446', './GeometryOffsetAttribute-59b14f45', './_commonjsHelpers-3aae1032-65601a27', './combine-d11b1f00', './WebGLConstants-6da700a2'], (function (Transforms, Matrix2, RuntimeError, ComponentDatatype, defaultValue, GeometryAttribute, GeometryAttributes, GeometryOffsetAttribute, _commonjsHelpers3aae1032, combine, WebGLConstants) { 'use strict';
 
   const diffScratch = new Matrix2.Cartesian3();
 
@@ -305,10 +307,9 @@ define(['./GeometryOffsetAttribute-2bff0974', './Transforms-38070b06', './Matrix
 
     if (defaultValue.defined(boxGeometry._offsetAttribute)) {
       const length = positions.length;
-      const applyOffset = new Uint8Array(length / 3);
       const offsetValue =
         boxGeometry._offsetAttribute === GeometryOffsetAttribute.GeometryOffsetAttribute.NONE ? 0 : 1;
-      GeometryOffsetAttribute.arrayFill(applyOffset, offsetValue);
+      const applyOffset = new Uint8Array(length / 3).fill(offsetValue);
       attributes.applyOffset = new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.UNSIGNED_BYTE,
         componentsPerAttribute: 1,

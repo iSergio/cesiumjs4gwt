@@ -1,7 +1,9 @@
 /**
+ * @license
  * Cesium - https://github.com/CesiumGS/cesium
+ * Version 1.95
  *
- * Copyright 2011-2020 Cesium Contributors
+ * Copyright 2011-2022 Cesium Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./AttributeCompression-a65cf082', './Transforms-38070b06', './Matrix2-e0921750', './defaultValue-81eec7ed', './TerrainEncoding-f2c8fa47', './IndexDatatype-2261ba8d', './RuntimeError-8952249c', './ComponentDatatype-0f8fc942', './OrientedBoundingBox-0325d230', './createTaskProcessorWorker', './_commonjsHelpers-3aae1032-26891ab7', './combine-3c023bda', './WebGLConstants-508b9636', './EllipsoidTangentPlane-19768649', './AxisAlignedBoundingBox-982e50b2', './IntersectionTests-12725781', './Plane-e7da25b6'], (function (AttributeCompression, Transforms, Matrix2, defaultValue, TerrainEncoding, IndexDatatype, RuntimeError, ComponentDatatype, OrientedBoundingBox, createTaskProcessorWorker, _commonjsHelpers3aae1032, combine, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane) { 'use strict';
+define(['./AttributeCompression-f202be44', './Transforms-273eeb44', './Matrix2-9e1c22e2', './defaultValue-97284df2', './TerrainEncoding-8fbe9124', './IndexDatatype-f228f5fd', './RuntimeError-4f8ec8a2', './ComponentDatatype-4eeb6d9b', './OrientedBoundingBox-a82b3552', './createTaskProcessorWorker', './_commonjsHelpers-3aae1032-65601a27', './combine-d11b1f00', './WebGLConstants-6da700a2', './EllipsoidTangentPlane-d42ee682', './AxisAlignedBoundingBox-1aaf78c2', './IntersectionTests-ea138127', './Plane-76b84425'], (function (AttributeCompression, Transforms, Matrix2, defaultValue, TerrainEncoding, IndexDatatype, RuntimeError, ComponentDatatype, OrientedBoundingBox, createTaskProcessorWorker, _commonjsHelpers3aae1032, combine, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane) { 'use strict';
 
   /**
    * Contains functions for operating on 2D triangles.
