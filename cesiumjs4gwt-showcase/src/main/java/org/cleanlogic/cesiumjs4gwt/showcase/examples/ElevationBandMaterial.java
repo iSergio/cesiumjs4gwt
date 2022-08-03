@@ -28,9 +28,8 @@ import org.cesiumjs.cs.scene.options.ViewOptions;
 import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cleanlogic.cesiumjs4gwt.showcase.basic.AbstractExample;
 import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ShowcaseExampleStore;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.Slider;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderEvent;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderListener;
+import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.InputEvent;
+import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderBox;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -47,12 +46,12 @@ public class ElevationBandMaterial extends AbstractExample {
 
     private ViewerPanel csVPanel;
 
-    private Slider backgroundTransparencySlider;
-    private Slider bandTransparencySlider;
-    private Slider bandThicknessSlider;
-    private Slider band1PositionSlider;
-    private Slider band2PositionSlider;
-    private Slider band3PositionSlider;
+    private SliderBox backgroundTransparencySlider;
+    private SliderBox bandTransparencySlider;
+    private SliderBox bandThicknessSlider;
+    private SliderBox band1PositionSlider;
+    private SliderBox band2PositionSlider;
+    private SliderBox band3PositionSlider;
     private CheckBox gradientCBox;
 
     @Inject
@@ -73,35 +72,29 @@ public class ElevationBandMaterial extends AbstractExample {
         cameraViewOptions.orientation = new HeadingPitchRoll(4.747266966349747, -0.2206998858596192, 6.280340554587955);
         csVPanel.getViewer().camera.setView(cameraViewOptions);
 
-        backgroundTransparencySlider = new Slider("backgroundTransparency", 1, 100, 75);
-        backgroundTransparencySlider.setStep(1);
+        backgroundTransparencySlider = new SliderBox(0.1, 0.75, 1.0, 0.01);
         backgroundTransparencySlider.setWidth("150px");
-        backgroundTransparencySlider.addListener(new MSliderListener());
+        backgroundTransparencySlider.addInputHandler(this::onInput);
 
-        bandTransparencySlider = new Slider("bandTransparency", 1, 100, 50);
-        bandTransparencySlider.setStep(1);
+        bandTransparencySlider = new SliderBox(0.1, 0.5, 1.0, 0.01);
         bandTransparencySlider.setWidth("150px");
-        bandTransparencySlider.addListener(new MSliderListener());
+        bandTransparencySlider.addInputHandler(this::onInput);
 
-        bandThicknessSlider = new Slider("bandThickness", 10, 1000, 100);
-        bandThicknessSlider.setStep(1);
+        bandThicknessSlider = new SliderBox(10.0, 100.0, 1000.0, 1.0);
         bandThicknessSlider.setWidth("150px");
-        bandThicknessSlider.addListener(new MSliderListener());
+        bandThicknessSlider.addInputHandler(this::onInput);
 
-        band1PositionSlider = new Slider("band1Position", 4000, 8848, 7000);
-        band1PositionSlider.setStep(1);
+        band1PositionSlider = new SliderBox(4000.0, 7000.0, 8848.0, 1.0);
         band1PositionSlider.setWidth("150px");
-        band1PositionSlider.addListener(new MSliderListener());
+        band1PositionSlider.addInputHandler(this::onInput);
 
-        band2PositionSlider = new Slider("band2Position", 4000, 8848, 7500);
-        band2PositionSlider.setStep(1);
+        band2PositionSlider = new SliderBox(4000.0, 7500.0, 8848.0, 1.0);
         band2PositionSlider.setWidth("150px");
-        band2PositionSlider.addListener(new MSliderListener());
+        band2PositionSlider.addInputHandler(this::onInput);
 
-        band3PositionSlider = new Slider("band3Position", 4000, 8848, 8000);
-        band3PositionSlider.setStep(1);
+        band3PositionSlider = new SliderBox(4000.0, 8000.0, 8848.0, 1.0);
         band3PositionSlider.setWidth("150px");
-        band3PositionSlider.addListener(new MSliderListener());
+        band3PositionSlider.addInputHandler(this::onInput);
 
         gradientCBox = new CheckBox();
         gradientCBox.setValue(false);
@@ -137,13 +130,6 @@ public class ElevationBandMaterial extends AbstractExample {
         initWidget(contentPanel);
 
         updateMaterial();
-    }
-
-    @Override
-    public String[] getSourceCodeURLs() {
-        String[] sourceCodeURLs = new String[1];
-        sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "ElevationBandMaterial.txt";
-        return sourceCodeURLs;
     }
 
     public void updateMaterial() {
@@ -231,44 +217,30 @@ public class ElevationBandMaterial extends AbstractExample {
         ));
     }
 
-    private class MSliderListener implements SliderListener {
-
-        @Override
-        public void onStart(SliderEvent e) {
-
+    private void onInput(InputEvent event) {
+        SliderBox source = (SliderBox) event.getSource();
+        double value = Double.parseDouble(source.getValue());
+        if (source == backgroundTransparencySlider) {
+            backgroundTransparency = value;
+        } else if (source == bandTransparencySlider) {
+            bandTransparency = value;
+        } else if (source == bandThicknessSlider) {
+            bandThickness = value;
+        } else if (source == band1PositionSlider) {
+            band1Position = value;
+        } else if (source == band2PositionSlider) {
+            band2Position = value;
+        } else if (source == band3PositionSlider) {
+            band3Position = value;
         }
 
-        @Override
-        public boolean onSlide(SliderEvent e) {
-            Slider source = e.getSource();
-            double value = source.getValue();
-            if (source == backgroundTransparencySlider) {
-                backgroundTransparency = value / 100.;
-            } else if (source == bandTransparencySlider) {
-                bandTransparency = value / 100.;
-            } else if (source == bandThicknessSlider) {
-                bandThickness = value;
-            } else if (source == band1PositionSlider) {
-                band1Position = value;
-            } else if (source == band2PositionSlider) {
-                band2Position = value;
-            } else if (source == band3PositionSlider) {
-                band3Position = value;
-            }
+        updateMaterial();
+    }
 
-            updateMaterial();
-
-            return true;
-        }
-
-        @Override
-        public void onChange(SliderEvent e) {
-
-        }
-
-        @Override
-        public void onStop(SliderEvent e) {
-
-        }
+    @Override
+    public String[] getSourceCodeURLs() {
+        String[] sourceCodeURLs = new String[1];
+        sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "ElevationBandMaterial.txt";
+        return sourceCodeURLs;
     }
 }

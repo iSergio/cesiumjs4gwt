@@ -38,9 +38,8 @@ import org.cesiumjs.cs.scene.enums.VerticalOrigin;
 import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cleanlogic.cesiumjs4gwt.showcase.basic.AbstractExample;
 import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ShowcaseExampleStore;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.Slider;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderEvent;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderListener;
+import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.InputEvent;
+import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderBox;
 
 import javax.inject.Inject;
 
@@ -49,13 +48,13 @@ import javax.inject.Inject;
  */
 public class Clustering extends AbstractExample {
     private ViewerPanel csVPanel;
-    private Slider pixelRangeSlider;
+    private SliderBox pixelRangeSlider;
     private TextBox pixelRangeTBox;
-    private Slider minimumClusterSizeSlider;
+    private SliderBox minimumClusterSizeSlider;
     private TextBox minimumClusterSizeTBox;
 
     private Event.RemoveCallback removeListener;
-    private KmlDataSource _dataSource;
+    private KmlDataSource dataSource;
 
     private String pin50;
     private String pin40;
@@ -102,14 +101,13 @@ public class Clustering extends AbstractExample {
                 // start with custom style
                 customStyle(dataSource);
 
-                _dataSource = dataSource;
+                dataSource = dataSource;
             }
         });
 
-        pixelRangeSlider = new Slider("pixelRange", 1, 200, 15);
-        pixelRangeSlider.setStep(1);
+        pixelRangeSlider = new SliderBox(1, 15, 200, 1);
         pixelRangeSlider.setWidth("150px");
-        pixelRangeSlider.addListener(new MSliderListener());
+        pixelRangeSlider.addInputHandler(this::onInput);
         pixelRangeTBox = new TextBox();
         pixelRangeTBox.addChangeHandler(new MChangeHandler());
         pixelRangeTBox.setText("" + 15);
@@ -122,10 +120,10 @@ public class Clustering extends AbstractExample {
         pixelRangeHPanel.add(pixelRangeSlider);
         pixelRangeHPanel.add(pixelRangeTBox);
 
-        minimumClusterSizeSlider = new Slider("minimumClusterSize", 1, 20, 3);
+        minimumClusterSizeSlider = new SliderBox(2, 3, 20, 1);
         minimumClusterSizeSlider.setStep(1);
         minimumClusterSizeSlider.setWidth("150px");
-        minimumClusterSizeSlider.addListener(new MSliderListener());
+        minimumClusterSizeSlider.addInputHandler(this::onInput);
         minimumClusterSizeTBox = new TextBox();
         pixelRangeTBox.addChangeHandler(new MChangeHandler());
         minimumClusterSizeTBox.setText("" + 3);
@@ -143,7 +141,7 @@ public class Clustering extends AbstractExample {
         enabledCBox.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
             @Override
             public void onValueChange(ValueChangeEvent<Boolean> valueChangeEvent) {
-                _dataSource.clustering.enabled = valueChangeEvent.getValue();
+                dataSource.clustering.enabled = valueChangeEvent.getValue();
             }
         });
 
@@ -152,7 +150,7 @@ public class Clustering extends AbstractExample {
         customStyleCBox.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
             @Override
             public void onValueChange(ValueChangeEvent<Boolean> valueChangeEvent) {
-                customStyle(_dataSource);
+                customStyle(dataSource);
             }
         });
 
@@ -188,25 +186,22 @@ public class Clustering extends AbstractExample {
             removeListener.function();
             removeListener = (Event.RemoveCallback) JsObject.undefined();
         } else {
-            removeListener = dataSource.clustering.clusterEvent.addEventListener(new EntityCluster.newClusterCallback() {
-                @Override
-                public void function(Entity[] clusteredEntities, EntityClusterObject cluster) {
-                    cluster.label.show = false;
-                    cluster.billboard.show = true;
-                    cluster.billboard.verticalOrigin = VerticalOrigin.BOTTOM();
-                    if (clusteredEntities.length >= 50) {
-                        cluster.billboard.image = pin50;
-                    } else if (clusteredEntities.length >= 40) {
-                        cluster.billboard.image = pin40;
-                    } else if (clusteredEntities.length >= 30) {
-                        cluster.billboard.image = pin30;
-                    } else if (clusteredEntities.length >= 20) {
-                        cluster.billboard.image = pin20;
-                    } else if (clusteredEntities.length >= 10) {
-                        cluster.billboard.image = pin10;
-                    } else {
-                        cluster.billboard.image = singleDigitPins[clusteredEntities.length - 2];
-                    }
+            removeListener = dataSource.clustering.clusterEvent.addEventListener((EntityCluster.newClusterCallback) (clusteredEntities, cluster) -> {
+                cluster.label.show = false;
+                cluster.billboard.show = true;
+                cluster.billboard.verticalOrigin = VerticalOrigin.BOTTOM();
+                if (clusteredEntities.length >= 50) {
+                    cluster.billboard.image = pin50;
+                } else if (clusteredEntities.length >= 40) {
+                    cluster.billboard.image = pin40;
+                } else if (clusteredEntities.length >= 30) {
+                    cluster.billboard.image = pin30;
+                } else if (clusteredEntities.length >= 20) {
+                    cluster.billboard.image = pin20;
+                } else if (clusteredEntities.length >= 10) {
+                    cluster.billboard.image = pin10;
+                } else {
+                    cluster.billboard.image = singleDigitPins[clusteredEntities.length - 2];
                 }
             });
         }
@@ -216,35 +211,15 @@ public class Clustering extends AbstractExample {
         dataSource.clustering.pixelRange = pixelRange;
     }
 
-    private class MSliderListener implements SliderListener {
-
-        @Override
-        public void onStart(SliderEvent e) {
-
-        }
-
-        @Override
-        public boolean onSlide(SliderEvent e) {
-            Slider source = e.getSource();
-            int value = source.getValue();
-            if (source.getElement().getId().equalsIgnoreCase("pixelRange")) {
-                _dataSource.clustering.pixelRange = value;
-                pixelRangeTBox.setValue("" + value);
-            } else if (source.getElement().getId().equalsIgnoreCase("minimumClusterSize")) {
-                _dataSource.clustering.minimumClusterSize = value;
-                minimumClusterSizeTBox.setValue("" + value);
-            }
-            return true;
-        }
-
-        @Override
-        public void onChange(SliderEvent e) {
-
-        }
-
-        @Override
-        public void onStop(SliderEvent e) {
-
+    private void onInput(InputEvent event) {
+        SliderBox source = (SliderBox) event.getSource();
+        double value = Double.parseDouble(source.getValue());
+        if (source.getElement().getId().equalsIgnoreCase("pixelRange")) {
+            dataSource.clustering.pixelRange = (int) value;
+            pixelRangeTBox.setValue("" + value);
+        } else if (source.getElement().getId().equalsIgnoreCase("minimumClusterSize")) {
+            dataSource.clustering.minimumClusterSize = (int) value;
+            minimumClusterSizeTBox.setValue("" + value);
         }
     }
 

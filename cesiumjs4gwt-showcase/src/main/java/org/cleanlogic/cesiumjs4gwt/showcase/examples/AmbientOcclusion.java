@@ -32,9 +32,8 @@ import org.cesiumjs.cs.scene.PostProcessStageLibrary;
 import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cleanlogic.cesiumjs4gwt.showcase.basic.AbstractExample;
 import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ShowcaseExampleStore;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.Slider;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderEvent;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderListener;
+import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.InputEvent;
+import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderBox;
 
 import javax.inject.Inject;
 
@@ -46,16 +45,16 @@ public class AmbientOcclusion extends AbstractExample {
 
     private CheckBox ambientOcclusionCBox;
     private CheckBox ambientOcclusionOnlyCBox;
-    private Slider intensitySlider;
-    private Slider lengthCapSlider;
-    private Slider stepSizeSlider;
-    private Slider biasSlider;
-    private Slider blurStepSize;
+    private SliderBox intensitySlider;
+    private SliderBox lengthCapSlider;
+//    private SliderBox stepSizeSlider;
+//    private SliderBox biasSlider;
+//    private SliderBox blurStepSize;
 
     @Inject
     public AmbientOcclusion(ShowcaseExampleStore store) {
         super("Ambient Occlusion", "Ambient Occlusion", new String[]{
-                "Showcase", "Cesium", "3d", "Post processing"
+                "Showcase", "Cesium", "3d", "Post processing", "ambient occlusion"
         }, store);
     }
 
@@ -82,30 +81,25 @@ public class AmbientOcclusion extends AbstractExample {
         ambientOcclusionOnlyCBox.setValue(false);
         ambientOcclusionOnlyCBox.addValueChangeHandler(new MValueChangeHandler());
 
-        intensitySlider = new Slider("intensitySlider", 1, 10, 3);
-        intensitySlider.setStep(1);
+        intensitySlider = new SliderBox(1.0, 3.0, 10.0, 1.0);
         intensitySlider.setWidth("150px");
-        intensitySlider.addListener(new MSliderListener());
+        intensitySlider.addInputHandler(this::updatePostProcess);
 
-        lengthCapSlider = new Slider("lengthCapSlider", 0, 100, 3);
-        lengthCapSlider.setStep(1);
+        lengthCapSlider = new SliderBox(0.0, 0.03, 1.0, 0.01);
         lengthCapSlider.setWidth("150px");
-        lengthCapSlider.addListener(new MSliderListener());
+        lengthCapSlider.addInputHandler(this::updatePostProcess);
 
-        stepSizeSlider = new Slider("stepSizeSlider", 100, 1000, 1);
-        stepSizeSlider.setStep(1);
-        stepSizeSlider.setWidth("150px");
-        stepSizeSlider.addListener(new MSliderListener());
-
-        biasSlider = new Slider("biasSlider", 0, 100, 1);
-        biasSlider.setStep(1);
-        biasSlider.setWidth("150px");
-        biasSlider.addListener(new MSliderListener());
-
-        blurStepSize = new Slider("blurStepSize", 0, 400, 86);
-        blurStepSize.setStep(1);
-        blurStepSize.setWidth("150px");
-        blurStepSize.addListener(new MSliderListener());
+//        stepSizeSlider = new SliderBox(1.0, 1.0, 10.0, 0.01);
+//        stepSizeSlider.setWidth("150px");
+//        stepSizeSlider.addInputHandler(this::updatePostProcess);
+//
+//        biasSlider = new SliderBox(0.0, 0.1, 1.0, 0.01);
+//        biasSlider.setWidth("150px");
+//        biasSlider.addInputHandler(this::updatePostProcess);
+//
+//        blurStepSize = new SliderBox(0.0, 0.86, 4.0, 0.01);
+//        blurStepSize.setWidth("150px");
+//        blurStepSize.addInputHandler(this::updatePostProcess);
 
         FlexTable flexTable = new FlexTable();
         flexTable.setHTML(1, 0, "<font color=\"white\">Ambient Occlusion</font>");
@@ -116,12 +110,12 @@ public class AmbientOcclusion extends AbstractExample {
         flexTable.setWidget(3, 1, intensitySlider);
         flexTable.setHTML(4, 0, "<font color=\"white\">Length Cap</font>");
         flexTable.setWidget(4, 1, lengthCapSlider);
-        flexTable.setHTML(5, 0, "<font color=\"white\">Step Size</font>");
-        flexTable.setWidget(5, 1, stepSizeSlider);
-        flexTable.setHTML(6, 0, "<font color=\"white\">Bias</font>");
-        flexTable.setWidget(6, 1, biasSlider);
-        flexTable.setHTML(7, 0, "<font color=\"white\">Blur Step Size</font>");
-        flexTable.setWidget(7, 1, blurStepSize);
+//        flexTable.setHTML(5, 0, "<font color=\"white\">Step Size</font>");
+//        flexTable.setWidget(5, 1, stepSizeSlider);
+//        flexTable.setHTML(6, 0, "<font color=\"white\">Bias</font>");
+//        flexTable.setWidget(6, 1, biasSlider);
+//        flexTable.setHTML(7, 0, "<font color=\"white\">Blur Step Size</font>");
+//        flexTable.setWidget(7, 1, blurStepSize);
 
         AbsolutePanel absPanel = new AbsolutePanel();
         absPanel.add(csVPanel);
@@ -131,24 +125,33 @@ public class AmbientOcclusion extends AbstractExample {
         contentPanel.add(absPanel);
 
         initWidget(contentPanel);
-        updatePostProcess();
 
         org.cesiumjs.cs.scene.Camera camera = csVPanel.getViewer().scene().camera();
         camera.position = new Cartesian3(1234127.2294710164, -5086011.666443127, 3633337.0413351045);
         camera.direction = new Cartesian3(-0.5310064396211631, -0.30299013818088416, -0.7913464078682514);
         camera.right = new Cartesian3(-0.8468592075426076, 0.1574051185945647, 0.507989282604011);
         camera.up = Cartesian3.cross(camera.right, camera.direction, new Cartesian3());
+
+        updatePostProcess(null);
     }
 
-    private void updatePostProcess() {
+    private void updatePostProcess(InputEvent event) {
+//        if (event != null) {
+//            SliderBox source = (SliderBox) event.getSource();
+//            double value = Double.parseDouble(source.getValue());
+//            GWT.log(value + " - " + intensitySlider.getValue());
+//            return;
+//        }
+//        GWT.log(intensitySlider.getValue() + " - " + lengthCapSlider.getValue() + " - " + blurStepSize.getValue());
+
         PostProcessStageComposite ambientOcclusion = csVPanel.getViewer().scene().postProcessStages.ambientOcclusion();
         ambientOcclusion.enabled = ambientOcclusionCBox.getValue() || ambientOcclusionOnlyCBox.getValue();
         ambientOcclusion.uniforms.setProperty("ambientOcclusionOnly", ambientOcclusionOnlyCBox.getValue());
-        ambientOcclusion.uniforms.setProperty("intensity", intensitySlider.getValue());
-        ambientOcclusion.uniforms.setProperty("bias", biasSlider.getValue() / 100.0);
-        ambientOcclusion.uniforms.setProperty("lengthCap", lengthCapSlider.getValue() / 100.0);
-        ambientOcclusion.uniforms.setProperty("stepSize", stepSizeSlider.getValue() / 100.0);
-        ambientOcclusion.uniforms.setProperty("blurStepSize", blurStepSize.getValue() / 100.0);
+        ambientOcclusion.uniforms.setProperty("intensity", Double.parseDouble(intensitySlider.getValue()));
+//        ambientOcclusion.uniforms.setProperty("bias", Double.parseDouble(biasSlider.getValue()));
+        ambientOcclusion.uniforms.setProperty("lengthCap", Double.parseDouble(lengthCapSlider.getValue()));
+//        ambientOcclusion.uniforms.setProperty("stepSize", Double.parseDouble(stepSizeSlider.getValue()));
+//        ambientOcclusion.uniforms.setProperty("blurStepSize", Double.parseDouble(blurStepSize.getValue()));
     }
 
     @Override
@@ -161,30 +164,7 @@ public class AmbientOcclusion extends AbstractExample {
     private class MValueChangeHandler implements ValueChangeHandler<Boolean> {
         @Override
         public void onValueChange(ValueChangeEvent<Boolean> event) {
-            updatePostProcess();
-        }
-    }
-
-    private class MSliderListener implements SliderListener {
-        @Override
-        public void onStart(SliderEvent e) {
-            //
-        }
-
-        @Override
-        public boolean onSlide(SliderEvent e) {
-            updatePostProcess();
-            return true;
-        }
-
-        @Override
-        public void onChange(SliderEvent e) {
-            //
-        }
-
-        @Override
-        public void onStop(SliderEvent e) {
-            //
+            updatePostProcess(null);
         }
     }
 }

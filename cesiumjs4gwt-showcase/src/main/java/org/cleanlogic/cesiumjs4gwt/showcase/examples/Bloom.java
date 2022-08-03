@@ -34,27 +34,21 @@ import org.cesiumjs.cs.scene.PostProcessStageComposite;
 import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cleanlogic.cesiumjs4gwt.showcase.basic.AbstractExample;
 import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ShowcaseExampleStore;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.Slider;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderEvent;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderListener;
+import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.InputEvent;
+import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderBox;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 public class Bloom extends AbstractExample {
-    private final int numberOfBalloons = 13;
-    private final double lonIncrement = 0.00025;
-    private final double initialLon = -122.99875;
-    private final double lat = 44.0503706;
-    private final double height = 100.0;
     private ViewerPanel csVPanel;
     private CheckBox bloomCBox;
     private CheckBox glowOnlyCBox;
-    private Slider contrastSlider;
-    private Slider brightnessSlider;
-    private Slider deltaSlider;
-    private Slider sigmaSlider;
-    private Slider stepSizeSlider;
+    private SliderBox contrastSlider;
+    private SliderBox brightnessSlider;
+    private SliderBox deltaSlider;
+    private SliderBox sigmaSlider;
+    private SliderBox stepSizeSlider;
 
     @Inject
     public Bloom(ShowcaseExampleStore store) {
@@ -66,6 +60,11 @@ public class Bloom extends AbstractExample {
     public void buildPanel() {
         csVPanel = new ViewerPanel();
 
+        int numberOfBalloons = 13;
+        double lonIncrement = 0.00025;
+        double initialLon = -122.99875;
+        double lat = 44.0503706;
+        double height = 100.0;
         for (int i = 0; i < numberOfBalloons; i++) {
             double lon = initialLon + i * lonIncrement;
             createModel(lon, lat, height);
@@ -79,30 +78,25 @@ public class Bloom extends AbstractExample {
         glowOnlyCBox.setValue(false);
         glowOnlyCBox.addValueChangeHandler(new MValueChangeHandler());
 
-        contrastSlider = new Slider("contrastSlider", -25500, 25500, 12800);
-        contrastSlider.setStep(1);
+        contrastSlider = new SliderBox(-255, 128, 255, 0.01);
         contrastSlider.setWidth("150px");
-        contrastSlider.addListener(new MSliderListener());
+        contrastSlider.addInputHandler(this::updatePostProcess);
 
-        brightnessSlider = new Slider("brightnessSlider", -100, 100, -30);
-        brightnessSlider.setStep(1);
+        brightnessSlider = new SliderBox(-1, -0.3, 1, 0.01);
         brightnessSlider.setWidth("150px");
-        brightnessSlider.addListener(new MSliderListener());
+        brightnessSlider.addInputHandler(this::updatePostProcess);
 
-        deltaSlider = new Slider("deltaSlider", 100, 500, 100);
-        deltaSlider.setStep(1);
+        deltaSlider = new SliderBox(1, 1, 5, 0.01);
         deltaSlider.setWidth("150px");
-        deltaSlider.addListener(new MSliderListener());
+        deltaSlider.addInputHandler(this::updatePostProcess);
 
-        sigmaSlider = new Slider("sigmaSlider", 100, 1000, 378);
-        sigmaSlider.setStep(1);
+        sigmaSlider = new SliderBox(1, 3.78, 10, 0.01);
         sigmaSlider.setWidth("150px");
-        sigmaSlider.addListener(new MSliderListener());
+        sigmaSlider.addInputHandler(this::updatePostProcess);
 
-        stepSizeSlider = new Slider("stepSizeSlider", 0, 700, 500);
-        stepSizeSlider.setStep(1);
+        stepSizeSlider = new SliderBox(0, 5, 7, 0.01);
         stepSizeSlider.setWidth("150px");
-        stepSizeSlider.addListener(new MSliderListener());
+        stepSizeSlider.addInputHandler(this::updatePostProcess);
 
         FlexTable flexTable = new FlexTable();
         flexTable.setHTML(1, 0, "<font color=\"white\">Bloom</font>");
@@ -128,7 +122,7 @@ public class Bloom extends AbstractExample {
         contentPanel.add(absPanel);
 
         initWidget(contentPanel);
-        updatePostProcess();
+        updatePostProcess(null);
 
         Cartesian3 target = Cartesian3.fromDegrees(initialLon + lonIncrement, lat, height + 7.5);
         Cartesian3 offset = new Cartesian3(-37.048378684557974, -24.852967044804245, 4.352023653686047);
@@ -148,15 +142,15 @@ public class Bloom extends AbstractExample {
         csVPanel.getViewer().entities().add(options);
     }
 
-    private void updatePostProcess() {
+    private void updatePostProcess(InputEvent event) {
         PostProcessStageComposite bloom = csVPanel.getViewer().scene().postProcessStages.bloom();
         bloom.enabled = bloomCBox.getValue();
         bloom.uniforms.setProperty("glowOnly", glowOnlyCBox.getValue());
-        bloom.uniforms.setProperty("contrast", contrastSlider.getValue() / 100.0);
-        bloom.uniforms.setProperty("brightness", brightnessSlider.getValue() / 100.0);
-        bloom.uniforms.setProperty("delta", deltaSlider.getValue() / 100.0);
-        bloom.uniforms.setProperty("sigma", sigmaSlider.getValue() / 100.0);
-        bloom.uniforms.setProperty("stepSize", stepSizeSlider.getValue() / 100.0);
+        bloom.uniforms.setProperty("contrast", Double.parseDouble(contrastSlider.getValue()));
+        bloom.uniforms.setProperty("brightness", Double.parseDouble(brightnessSlider.getValue()));
+        bloom.uniforms.setProperty("delta", Double.parseDouble(deltaSlider.getValue()));
+        bloom.uniforms.setProperty("sigma", Double.parseDouble(sigmaSlider.getValue()));
+        bloom.uniforms.setProperty("stepSize", Double.parseDouble(stepSizeSlider.getValue()));
     }
 
     @Override
@@ -169,30 +163,7 @@ public class Bloom extends AbstractExample {
     private class MValueChangeHandler implements ValueChangeHandler<Boolean> {
         @Override
         public void onValueChange(ValueChangeEvent<Boolean> event) {
-            updatePostProcess();
-        }
-    }
-
-    private class MSliderListener implements SliderListener {
-        @Override
-        public void onStart(SliderEvent e) {
-            //
-        }
-
-        @Override
-        public boolean onSlide(SliderEvent e) {
-            updatePostProcess();
-            return true;
-        }
-
-        @Override
-        public void onChange(SliderEvent e) {
-            //
-        }
-
-        @Override
-        public void onStop(SliderEvent e) {
-            //
+            updatePostProcess(null);
         }
     }
 }

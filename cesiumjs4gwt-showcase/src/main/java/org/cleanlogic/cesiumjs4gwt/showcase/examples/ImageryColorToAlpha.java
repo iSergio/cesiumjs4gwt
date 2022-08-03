@@ -30,9 +30,7 @@ import org.cesiumjs.cs.scene.providers.options.SingleTileImageryProviderOptions;
 import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cleanlogic.cesiumjs4gwt.showcase.basic.AbstractExample;
 import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ShowcaseExampleStore;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.Slider;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderEvent;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderListener;
+import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderBox;
 
 /**
  * @author Serge Silaev aka iSergio
@@ -65,10 +63,12 @@ public class ImageryColorToAlpha extends AbstractExample {
         singleTileLayer.colorToAlpha = new Color(0.0, 0.0, 0.0, 1.0);
         singleTileLayer.colorToAlphaThreshold = 0.1;
 
-        Slider thresholdSlider = new Slider("thresholdSlider", 0, 100, 10);
-        thresholdSlider.setStep(1);
+        SliderBox thresholdSlider = new SliderBox(0, 0.1, 1, 0.01);
         thresholdSlider.setWidth("150px");
-        thresholdSlider.addListener(new MSliderListener());
+        thresholdSlider.addInputHandler(event -> {
+            SliderBox source = (SliderBox) event.getSource();
+            singleTileLayer.colorToAlphaThreshold = Double.parseDouble(source.getValue());
+        });
 
         FlexTable flexTable = new FlexTable();
         flexTable.setHTML(1, 0, "<font color=\"white\">Threshold</font>");
@@ -89,30 +89,5 @@ public class ImageryColorToAlpha extends AbstractExample {
         String[] sourceCodeURLs = new String[1];
         sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "ImageryColorToAlpha.txt";
         return sourceCodeURLs;
-    }
-
-    private class MSliderListener implements SliderListener {
-        @Override
-        public void onStart(SliderEvent e) {
-
-        }
-
-        @Override
-        public boolean onSlide(SliderEvent e) {
-            Slider source = e.getSource();
-            int value = source.getValue();
-            singleTileLayer.colorToAlphaThreshold = value / 100.0f;
-            return true;
-        }
-
-        @Override
-        public void onChange(SliderEvent e) {
-
-        }
-
-        @Override
-        public void onStop(SliderEvent e) {
-
-        }
     }
 }

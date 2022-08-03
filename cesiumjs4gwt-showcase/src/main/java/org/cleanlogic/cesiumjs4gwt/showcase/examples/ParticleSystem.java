@@ -46,9 +46,8 @@ import org.cesiumjs.cs.scene.particle.options.ParticleSystemOptions;
 import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cleanlogic.cesiumjs4gwt.showcase.basic.AbstractExample;
 import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ShowcaseExampleStore;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.Slider;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderEvent;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderListener;
+import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.InputEvent;
+import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderBox;
 
 import javax.inject.Inject;
 
@@ -58,31 +57,31 @@ import javax.inject.Inject;
 public class ParticleSystem extends AbstractExample {
     private final ViewModel viewModel = new ViewModel();
 
-    private Slider rateSlider;
+    private SliderBox rateSlider;
     private TextBox rateTBox;
 
-    private Slider sizeSlider;
+    private SliderBox sizeSlider;
     private TextBox sizeTBox;
 
-    private Slider minLifeSlider;
+    private SliderBox minLifeSlider;
     private TextBox minLifeTBox;
 
-    private Slider maxLifeSlider;
+    private SliderBox maxLifeSlider;
     private TextBox maxLifeTBox;
 
-    private Slider minSpeedSlider;
+    private SliderBox minSpeedSlider;
     private TextBox minSpeedTBox;
 
-    private Slider maxSpeedSlider;
+    private SliderBox maxSpeedSlider;
     private TextBox maxSpeedTBox;
 
-    private Slider startScaleSlider;
+    private SliderBox startScaleSlider;
     private TextBox startScaleTBox;
 
-    private Slider endScaleSlider;
+    private SliderBox endScaleSlider;
     private TextBox endScaleTBox;
 
-    private Slider gravitySlider;
+    private SliderBox gravitySlider;
     private TextBox gravityTBox;
 
     private TextBox translationXTBox;
@@ -242,85 +241,75 @@ public class ParticleSystem extends AbstractExample {
     }
 
     public FlexTable createWidget() {
-        MSliderListener sliderListener = new MSliderListener();
         MChangeHandler tboxListener = new MChangeHandler();
 
-        rateSlider = new Slider("rate", 0, 100, (int) viewModel.emissionRate);
-        rateSlider.setStep(1);
+        rateSlider = new SliderBox(0, viewModel.emissionRate, 100, 1);
         rateSlider.setWidth("150px");
-        rateSlider.addListener(sliderListener);
+        rateSlider.addInputHandler(this::onSliderInput);
         rateTBox = new TextBox();
         rateTBox.setValue("" + (int) viewModel.emissionRate);
         rateTBox.setSize("30px", "12px");
         rateTBox.addChangeHandler(tboxListener);
 
-        sizeSlider = new Slider("size", 2, 60, (int) viewModel.particleSize);
-        sizeSlider.setStep(1);
+        sizeSlider = new SliderBox(2, viewModel.particleSize, 60, 1);
         sizeSlider.setWidth("150px");
-        sizeSlider.addListener(sliderListener);
+        sizeSlider.addInputHandler(this::onSliderInput);
         sizeTBox = new TextBox();
         sizeTBox.setValue("" + (int) viewModel.particleSize);
         sizeTBox.setSize("30px", "12px");
         sizeTBox.addChangeHandler(tboxListener);
 
-        minLifeSlider = new Slider("minLife", 1, 30, (int) viewModel.minimumParticleLife);
-        minLifeSlider.setStep(1);
+        minLifeSlider = new SliderBox(0.1, viewModel.minimumParticleLife, 30, 1);
         minLifeSlider.setWidth("150px");
-        minLifeSlider.addListener(sliderListener);
+        minLifeSlider.addInputHandler(this::onSliderInput);
         minLifeTBox = new TextBox();
         minLifeTBox.setValue("" + (int) viewModel.minimumParticleLife);
         minLifeTBox.setSize("30px", "12px");
         minLifeTBox.addChangeHandler(tboxListener);
 
-        maxLifeSlider = new Slider("maxLife", 1, 30, (int) viewModel.maximumParticleLife);
-        maxLifeSlider.setStep(1);
+        maxLifeSlider = new SliderBox(0.1, viewModel.maximumParticleLife, 30, 1);
         maxLifeSlider.setWidth("150px");
-        maxLifeSlider.addListener(sliderListener);
+        maxLifeSlider.addInputHandler(this::onSliderInput);
         maxLifeTBox = new TextBox();
         maxLifeTBox.setValue("" + (int) viewModel.maximumParticleLife);
         maxLifeTBox.setSize("30px", "12px");
         maxLifeTBox.addChangeHandler(tboxListener);
 
-        minSpeedSlider = new Slider("minSpeed", 0, 30, (int) viewModel.minimumSpeed);
-        minSpeedSlider.setStep(1);
+        minSpeedSlider = new SliderBox(0, viewModel.minimumSpeed, 30, 1);
         minSpeedSlider.setWidth("150px");
-        minSpeedSlider.addListener(sliderListener);
+        minSpeedSlider.addInputHandler(this::onSliderInput);
         minSpeedTBox = new TextBox();
         minSpeedTBox.setValue("" + (int) viewModel.minimumSpeed);
         minSpeedTBox.setSize("30px", "12px");
         minSpeedTBox.addChangeHandler(tboxListener);
 
-        maxSpeedSlider = new Slider("maxSpeed", 0, 30, (int) viewModel.maximumSpeed);
-        maxSpeedSlider.setStep(1);
+        maxSpeedSlider = new SliderBox(0, viewModel.maximumSpeed, 30, 1);
         maxSpeedSlider.setWidth("150px");
-        maxSpeedSlider.addListener(sliderListener);
+        maxSpeedSlider.addInputHandler(this::onSliderInput);
         maxSpeedTBox = new TextBox();
         maxSpeedTBox.setValue("" + (int) viewModel.maximumSpeed);
         maxSpeedTBox.setSize("30px", "12px");
         maxSpeedTBox.addChangeHandler(tboxListener);
 
-        startScaleSlider = new Slider("startScale", 0, 10, (int) viewModel.startScale);
-        startScaleSlider.setStep(1);
+        startScaleSlider = new SliderBox(0, viewModel.startScale, 10, 1);
         startScaleSlider.setWidth("150px");
-        startScaleSlider.addListener(sliderListener);
+        startScaleSlider.addInputHandler(this::onSliderInput);
         startScaleTBox = new TextBox();
         startScaleTBox.setValue("" + (int) viewModel.startScale);
         startScaleTBox.setSize("30px", "12px");
         startScaleTBox.addChangeHandler(tboxListener);
 
-        endScaleSlider = new Slider("endScale", 0, 10, (int) viewModel.endScale);
-        endScaleSlider.setStep(1);
+        endScaleSlider = new SliderBox(0, viewModel.startScale, 10, 1);
         endScaleSlider.setWidth("150px");
-        endScaleSlider.addListener(sliderListener);
+        endScaleSlider.addInputHandler(this::onSliderInput);
         endScaleTBox = new TextBox();
         endScaleTBox.setValue("" + (int) viewModel.endScale);
         endScaleTBox.setSize("30px", "12px");
         endScaleTBox.addChangeHandler(tboxListener);
 
-        gravitySlider = new Slider("gravity", -20, 20, (int) viewModel.gravity);
-        gravitySlider.setStep(1);
+        gravitySlider = new SliderBox(-20, viewModel.gravity, 20, 1);
         gravitySlider.setWidth("150px");
-        gravitySlider.addListener(sliderListener);
+        gravitySlider.addInputHandler(this::onSliderInput);
         gravityTBox = new TextBox();
         gravityTBox.setValue("" + (int) viewModel.gravity);
         gravityTBox.setSize("30px", "12px");
@@ -467,6 +456,42 @@ public class ParticleSystem extends AbstractExample {
         return flexTable;
     }
 
+    private void onSliderInput(InputEvent event) {
+        SliderBox source = (SliderBox) event.getSource();
+        double value = Double.parseDouble(source.getValue());
+        if (source == rateSlider) {
+            particleSystem.emissionRate = value;
+            rateTBox.setValue("" + value);
+        } else if (source == sizeSlider) {
+            particleSystem.minimumImageSize.x = value;
+            particleSystem.minimumImageSize.y = value;
+            particleSystem.maximumImageSize.x = value;
+            particleSystem.maximumImageSize.y = value;
+            sizeTBox.setValue("" + value);
+        } else if (source == minLifeSlider) {
+            particleSystem.minimumParticleLife = value;
+            minLifeTBox.setValue("" + value);
+        } else if (source == maxLifeSlider) {
+            particleSystem.maximumParticleLife = value;
+            maxLifeTBox.setValue("" + value);
+        } else if (source == minSpeedSlider) {
+            particleSystem.minimumSpeed = value;
+            minSpeedTBox.setValue("" + value);
+        } else if (source == maxSpeedSlider) {
+            particleSystem.maximumSpeed = value;
+            maxSpeedTBox.setValue("" + value);
+        } else if (source == startScaleSlider) {
+            particleSystem.startScale = value;
+            startScaleTBox.setValue("" + value);
+        } else if (source == endScaleSlider) {
+            particleSystem.endScale = value;
+            endScaleTBox.setValue("" + value);
+        } else if (source == gravitySlider) {
+            viewModel.gravity = value;
+            gravityTBox.setValue("" + value);
+        }
+    }
+
     @Override
     public String[] getSourceCodeURLs() {
         String[] sourceCodeURLs = new String[1];
@@ -531,62 +556,6 @@ public class ParticleSystem extends AbstractExample {
         boolean fly = true;
         boolean spin = true;
         boolean show = true;
-    }
-
-    private class MSliderListener implements SliderListener {
-
-        @Override
-        public void onStart(SliderEvent e) {
-
-        }
-
-        @Override
-        public boolean onSlide(SliderEvent e) {
-            Slider source = e.getSource();
-            int value = source.getValue();
-            if (source == rateSlider) {
-                particleSystem.emissionRate = value;
-                rateTBox.setValue("" + value);
-            } else if (source == sizeSlider) {
-                particleSystem.minimumImageSize.x = value;
-                particleSystem.minimumImageSize.y = value;
-                particleSystem.maximumImageSize.x = value;
-                particleSystem.maximumImageSize.y = value;
-                sizeTBox.setValue("" + value);
-            } else if (source == minLifeSlider) {
-                particleSystem.minimumParticleLife = value;
-                minLifeTBox.setValue("" + value);
-            } else if (source == maxLifeSlider) {
-                particleSystem.maximumParticleLife = value;
-                maxLifeTBox.setValue("" + value);
-            } else if (source == minSpeedSlider) {
-                particleSystem.minimumSpeed = value;
-                minSpeedTBox.setValue("" + value);
-            } else if (source == maxSpeedSlider) {
-                particleSystem.maximumSpeed = value;
-                maxSpeedTBox.setValue("" + value);
-            } else if (source == startScaleSlider) {
-                particleSystem.startScale = value;
-                startScaleTBox.setValue("" + value);
-            } else if (source == endScaleSlider) {
-                particleSystem.endScale = value;
-                endScaleTBox.setValue("" + value);
-            } else if (source == gravitySlider) {
-                viewModel.gravity = value;
-                gravityTBox.setValue("" + value);
-            }
-            return true;
-        }
-
-        @Override
-        public void onChange(SliderEvent e) {
-
-        }
-
-        @Override
-        public void onStop(SliderEvent e) {
-
-        }
     }
 
     private class MChangeHandler implements ChangeHandler {

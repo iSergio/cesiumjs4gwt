@@ -39,9 +39,8 @@ import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cesiumjs.cs.widgets.options.ViewerOptions;
 import org.cleanlogic.cesiumjs4gwt.showcase.basic.AbstractExample;
 import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ShowcaseExampleStore;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.Slider;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderEvent;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderListener;
+import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.InputEvent;
+import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderBox;
 
 import javax.inject.Inject;
 
@@ -49,7 +48,6 @@ import javax.inject.Inject;
  * @author Serge Silaev aka iSergio
  */
 public class PostProcessing extends AbstractExample {
-    private PostProcessStageCollection collection;
     private PostProcessStageComposite silhouette;
     private PostProcessStage blackAndWhite;
     private PostProcessStage brightness;
@@ -60,8 +58,8 @@ public class PostProcessing extends AbstractExample {
     private CheckBox brightnessCBox;
     private CheckBox nightVisionCBox;
 
-    private Slider blackAndWhiteSlider;
-    private Slider brightnessSlider;
+    private SliderBox blackAndWhiteSlider;
+    private SliderBox brightnessSlider;
 
     @Inject
     public PostProcessing(ShowcaseExampleStore store) {
@@ -85,7 +83,7 @@ public class PostProcessing extends AbstractExample {
         options.model = new ModelGraphics(modelGraphicsOptions);
         csVPanel.getViewer().trackedEntity = csVPanel.getViewer().entities().add(options);
 
-        collection = csVPanel.getViewer().scene().postProcessStages;
+        PostProcessStageCollection collection = csVPanel.getViewer().scene().postProcessStages;
         silhouette = collection.add(PostProcessStageLibrary.createSilhouetteStage());
         blackAndWhite = collection.add(PostProcessStageLibrary.createBlackAndWhiteStage());
         brightness = collection.add(PostProcessStageLibrary.createBrightnessStage());
@@ -102,18 +100,16 @@ public class PostProcessing extends AbstractExample {
         blackAndWhiteCBox = new CheckBox();
         blackAndWhiteCBox.addValueChangeHandler(new MValueChangeHandler());
 
-        blackAndWhiteSlider = new Slider("blackAndWhiteSlider", 1, 10, 5);
-        blackAndWhiteSlider.setStep(1);
+        blackAndWhiteSlider = new SliderBox(1, 5, 10, 1);
         blackAndWhiteSlider.setWidth("150px");
-        blackAndWhiteSlider.addListener(new MSliderListener());
+        blackAndWhiteSlider.addInputHandler(this::updatePostProcess);
 
         brightnessCBox = new CheckBox();
         brightnessCBox.addValueChangeHandler(new MValueChangeHandler());
 
-        brightnessSlider = new Slider("brightnessSlider", 0, 100, 50);
-        brightnessSlider.setStep(1);
+        brightnessSlider = new SliderBox(0, 0.5, 1, 0.01);
         brightnessSlider.setWidth("150px");
-        brightnessSlider.addListener(new MSliderListener());
+        brightnessSlider.addInputHandler(this::updatePostProcess);
 
         nightVisionCBox = new CheckBox();
         nightVisionCBox.addValueChangeHandler(new MValueChangeHandler());
@@ -138,10 +134,10 @@ public class PostProcessing extends AbstractExample {
         contentPanel.add(aPanel);
 
         initWidget(contentPanel);
-        updatePostProcess();
+        updatePostProcess(null);
     }
 
-    private void updatePostProcess() {
+    private void updatePostProcess(InputEvent event) {
         silhouette.enabled = silhouetteCBox.getValue();
         silhouette.uniforms.setProperty("color", Color.YELLOW());
 
@@ -149,7 +145,7 @@ public class PostProcessing extends AbstractExample {
         blackAndWhite.uniforms().setProperty("gradations", blackAndWhiteSlider.getValue());
 
         brightness.enabled = brightnessCBox.getValue();
-        brightness.uniforms().setProperty("brightness", brightnessSlider.getValue() / 100.0);
+        brightness.uniforms().setProperty("brightness", brightnessSlider.getValue());
 
         nightVision.enabled = nightVisionCBox.getValue();
     }
@@ -164,30 +160,7 @@ public class PostProcessing extends AbstractExample {
     private class MValueChangeHandler implements ValueChangeHandler<Boolean> {
         @Override
         public void onValueChange(ValueChangeEvent<Boolean> event) {
-            updatePostProcess();
-        }
-    }
-
-    private class MSliderListener implements SliderListener {
-        @Override
-        public void onStart(SliderEvent e) {
-            //
-        }
-
-        @Override
-        public boolean onSlide(SliderEvent e) {
-            updatePostProcess();
-            return true;
-        }
-
-        @Override
-        public void onChange(SliderEvent e) {
-            //
-        }
-
-        @Override
-        public void onStop(SliderEvent e) {
-            //
+            updatePostProcess(null);
         }
     }
 }

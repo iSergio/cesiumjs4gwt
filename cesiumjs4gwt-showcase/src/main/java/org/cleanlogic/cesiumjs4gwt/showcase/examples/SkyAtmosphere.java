@@ -30,9 +30,8 @@ import org.cesiumjs.cs.scene.options.ViewOptions;
 import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cleanlogic.cesiumjs4gwt.showcase.basic.AbstractExample;
 import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ShowcaseExampleStore;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.Slider;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderEvent;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderListener;
+import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.InputEvent;
+import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderBox;
 
 import javax.inject.Inject;
 
@@ -40,15 +39,15 @@ import javax.inject.Inject;
  * @author Serge Silaev aka iSergio
  */
 public class SkyAtmosphere extends AbstractExample {
-    private ViewerPanel _csVPanel;
+    private ViewerPanel csVPanel;
 
-    private Slider _hueShiftSlider;
-    private Slider _saturationShiftSlider;
-    private Slider _brightnessShiftSlider;
+    private SliderBox hueShiftSlider;
+    private SliderBox saturationShiftSlider;
+    private SliderBox brightnessShiftSlider;
 
-    private TextBox _hueShiftTBox;
-    private TextBox _saturationShiftTBox;
-    private TextBox _brightnessShiftTBox;
+    private TextBox hueShiftTBox;
+    private TextBox saturationShiftTBox;
+    private TextBox brightnessShiftTBox;
 
     @Inject
     public SkyAtmosphere(ShowcaseExampleStore store) {
@@ -59,8 +58,8 @@ public class SkyAtmosphere extends AbstractExample {
 
     @Override
     public void buildPanel() {
-        _csVPanel = new ViewerPanel();
-        Camera camera = _csVPanel.getViewer().camera;
+        csVPanel = new ViewerPanel();
+        Camera camera = csVPanel.getViewer().camera;
         ViewOptions viewOptions = new ViewOptions();
         viewOptions.destinationPos = Cartesian3.fromDegrees(-75.5847, 40.0397, 1000.0);
         viewOptions.orientation = new HeadingPitchRoll(-Math.PI_OVER_TWO(), 0.2, 0.0);
@@ -70,46 +69,44 @@ public class SkyAtmosphere extends AbstractExample {
         hueShiftHPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
         hueShiftHPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
         hueShiftHPanel.setSpacing(10);
-        _hueShiftSlider = new Slider("hueShift", -100, 100, 0);
-        _hueShiftSlider.setStep(1);
-        _hueShiftSlider.setWidth("150px");
-        _hueShiftSlider.addListener(new MSliderListener());
-        _hueShiftTBox = new TextBox();
-        _hueShiftTBox.addChangeHandler(new MChangeHandler());
-        _hueShiftTBox.setText("0");
-        _hueShiftTBox.setSize("30px", "12px");
-        hueShiftHPanel.add(_hueShiftSlider);
-        hueShiftHPanel.add(_hueShiftTBox);
+        hueShiftSlider = new SliderBox(-1, 0.5, 1, 0.01);
+        hueShiftSlider.setWidth("150px");
+        hueShiftSlider.addInputHandler(this::onSliderInput);
+        hueShiftTBox = new TextBox();
+        hueShiftTBox.addChangeHandler(new MChangeHandler());
+        hueShiftTBox.setText("0");
+        hueShiftTBox.setSize("30px", "12px");
+        hueShiftHPanel.add(hueShiftSlider);
+        hueShiftHPanel.add(hueShiftTBox);
 
         HorizontalPanel saturationShiftHPanel = new HorizontalPanel();
         saturationShiftHPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
         saturationShiftHPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
         saturationShiftHPanel.setSpacing(10);
-        _saturationShiftSlider = new Slider("saturationShift", -100, 100, 0);
-        _saturationShiftSlider.setStep(1);
-        _saturationShiftSlider.setWidth("150px");
-        _saturationShiftSlider.addListener(new MSliderListener());
-        _saturationShiftTBox = new TextBox();
-        _saturationShiftTBox.addChangeHandler(new MChangeHandler());
-        _saturationShiftTBox.setText("0");
-        _saturationShiftTBox.setSize("30px", "12px");
-        saturationShiftHPanel.add(_saturationShiftSlider);
-        saturationShiftHPanel.add(_saturationShiftTBox);
+        saturationShiftSlider = new SliderBox(-1, 0.5, 1, 0.01);
+        saturationShiftSlider.setStep(1);
+        saturationShiftSlider.setWidth("150px");
+        saturationShiftSlider.addInputHandler(this::onSliderInput);
+        saturationShiftTBox = new TextBox();
+        saturationShiftTBox.addChangeHandler(new MChangeHandler());
+        saturationShiftTBox.setText("0");
+        saturationShiftTBox.setSize("30px", "12px");
+        saturationShiftHPanel.add(saturationShiftSlider);
+        saturationShiftHPanel.add(saturationShiftTBox);
 
         HorizontalPanel brightnessShiftHPanel = new HorizontalPanel();
         brightnessShiftHPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
         brightnessShiftHPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
         brightnessShiftHPanel.setSpacing(10);
-        _brightnessShiftSlider = new Slider("brightnessShift", -100, 100, 0);
-        _brightnessShiftSlider.setStep(1);
-        _brightnessShiftSlider.setWidth("150px");
-        _brightnessShiftSlider.addListener(new MSliderListener());
-        _brightnessShiftTBox = new TextBox();
-        _brightnessShiftTBox.addChangeHandler(new MChangeHandler());
-        _brightnessShiftTBox.setText("0");
-        _brightnessShiftTBox.setSize("30px", "12px");
-        brightnessShiftHPanel.add(_brightnessShiftSlider);
-        brightnessShiftHPanel.add(_brightnessShiftTBox);
+        brightnessShiftSlider = new SliderBox(-1, 0.5, 1, 0.01);
+        brightnessShiftSlider.setWidth("150px");
+        brightnessShiftSlider.addInputHandler(this::onSliderInput);
+        brightnessShiftTBox = new TextBox();
+        brightnessShiftTBox.addChangeHandler(new MChangeHandler());
+        brightnessShiftTBox.setText("0");
+        brightnessShiftTBox.setSize("30px", "12px");
+        brightnessShiftHPanel.add(brightnessShiftSlider);
+        brightnessShiftHPanel.add(brightnessShiftTBox);
 
         CheckBox lightingCBox = new CheckBox();
         lightingCBox.setWidth("100px");
@@ -117,7 +114,7 @@ public class SkyAtmosphere extends AbstractExample {
         lightingCBox.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
             @Override
             public void onValueChange(ValueChangeEvent<Boolean> valueChangeEvent) {
-                _csVPanel.getViewer().scene().globe.enableLighting = !_csVPanel.getViewer().scene().globe.enableLighting;
+                csVPanel.getViewer().scene().globe.enableLighting = !csVPanel.getViewer().scene().globe.enableLighting;
             }
         });
 
@@ -127,7 +124,7 @@ public class SkyAtmosphere extends AbstractExample {
         fogCBox.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
             @Override
             public void onValueChange(ValueChangeEvent<Boolean> valueChangeEvent) {
-                _csVPanel.getViewer().scene().fog.enabled = !_csVPanel.getViewer().scene().fog.enabled;
+                csVPanel.getViewer().scene().fog.enabled = !csVPanel.getViewer().scene().fog.enabled;
             }
         });
 
@@ -144,13 +141,28 @@ public class SkyAtmosphere extends AbstractExample {
         flexTable.setWidget(5, 1, fogCBox);
 
         AbsolutePanel aPanel = new AbsolutePanel();
-        aPanel.add(_csVPanel);
+        aPanel.add(csVPanel);
         aPanel.add(flexTable, 20, 20);
 
         contentPanel.add(new HTML("<p>Adjust hue, saturation, and brightness of the sky/atmosphere.</p>"));
         contentPanel.add(aPanel);
 
         initWidget(contentPanel);
+    }
+
+    private void onSliderInput(InputEvent event) {
+        SliderBox source = (SliderBox) event.getSource();
+        double value = Double.parseDouble(source.getValue());
+        if (source == hueShiftSlider) {
+            csVPanel.getViewer().scene().skyAtmosphere.hueShift = (float) value;
+            hueShiftTBox.setText(value + "");
+        } else if (source == saturationShiftSlider) {
+            csVPanel.getViewer().scene().skyAtmosphere.saturationShift = (float) value;
+            saturationShiftTBox.setText(value + "");
+        } else if (source == brightnessShiftSlider) {
+            csVPanel.getViewer().scene().skyAtmosphere.brightnessShift = (float) value;
+            brightnessShiftTBox.setText(value + "");
+        }
     }
 
     @Override
@@ -160,55 +172,20 @@ public class SkyAtmosphere extends AbstractExample {
         return sourceCodeURLs;
     }
 
-    private class MSliderListener implements SliderListener {
-
-        @Override
-        public void onStart(SliderEvent e) {
-
-        }
-
-        @Override
-        public boolean onSlide(SliderEvent e) {
-            Slider source = e.getSource();
-            double value = source.getValue() / 100.;
-            if (source == _hueShiftSlider) {
-                _csVPanel.getViewer().scene().skyAtmosphere.hueShift = (float) value;
-                _hueShiftTBox.setText(value + "");
-            } else if (source == _saturationShiftSlider) {
-                _csVPanel.getViewer().scene().skyAtmosphere.saturationShift = (float) value;
-                _saturationShiftTBox.setText(value + "");
-            } else if (source == _brightnessShiftSlider) {
-                _csVPanel.getViewer().scene().skyAtmosphere.brightnessShift = (float) value;
-                _brightnessShiftTBox.setText(value + "");
-            }
-            return true;
-        }
-
-        @Override
-        public void onChange(SliderEvent e) {
-
-        }
-
-        @Override
-        public void onStop(SliderEvent e) {
-
-        }
-    }
-
     private class MChangeHandler implements ChangeHandler {
         @Override
         public void onChange(ChangeEvent changeEvent) {
             TextBox source = (TextBox) changeEvent.getSource();
             double value = Double.parseDouble(source.getValue());
-            if (source == _hueShiftTBox) {
-                _csVPanel.getViewer().scene().skyAtmosphere.hueShift = (float) value;
-                _hueShiftSlider.setValue((int) (value * 100));
-            } else if (source == _saturationShiftTBox) {
-                _csVPanel.getViewer().scene().skyAtmosphere.saturationShift = (float) value;
-                _saturationShiftSlider.setValue((int) (value * 100));
-            } else if (source == _brightnessShiftTBox) {
-                _csVPanel.getViewer().scene().skyAtmosphere.brightnessShift = (float) value;
-                _brightnessShiftSlider.setValue((int) (value * 100));
+            if (source == hueShiftTBox) {
+                csVPanel.getViewer().scene().skyAtmosphere.hueShift = (float) value;
+                hueShiftSlider.setValue((int) (value * 100));
+            } else if (source == saturationShiftTBox) {
+                csVPanel.getViewer().scene().skyAtmosphere.saturationShift = (float) value;
+                saturationShiftSlider.setValue((int) (value * 100));
+            } else if (source == brightnessShiftTBox) {
+                csVPanel.getViewer().scene().skyAtmosphere.brightnessShift = (float) value;
+                brightnessShiftSlider.setValue((int) (value * 100));
             }
         }
     }

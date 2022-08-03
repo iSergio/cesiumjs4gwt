@@ -32,9 +32,7 @@ import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cesiumjs.cs.widgets.options.ViewerOptions;
 import org.cleanlogic.cesiumjs4gwt.showcase.basic.AbstractExample;
 import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ShowcaseExampleStore;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.Slider;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderEvent;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderListener;
+import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderBox;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -82,9 +80,12 @@ public class ImageryLayersManipulation extends AbstractExample {
         final ListBox baseLayersLBox = new ListBox();
         baseLayersHPanel.add(baseLayersLBox);
 
-        Slider baseLayersSlider = new Slider("baseLayersAlpha", 0, 100, 100);
+        SliderBox baseLayersSlider = new SliderBox(0, 1, 1, 0.01);
         baseLayersSlider.setWidth("200px");
-        baseLayersSlider.addListener(new MSliderListener());
+        baseLayersSlider.addInputHandler(event -> {
+            SliderBox source = (SliderBox) event.getSource();
+            selectedLayer.alpha = Float.parseFloat(source.getValue());
+        });
         baseLayersHPanel.add(baseLayersSlider);
 
         baseLayersLBox.addChangeHandler(new ChangeHandler() {
@@ -253,29 +254,5 @@ public class ImageryLayersManipulation extends AbstractExample {
 
     public void addCallback(Callback<Void, Void> callback) {
         _callback = callback;
-    }
-
-    private class MSliderListener implements SliderListener {
-        @Override
-        public void onStart(SliderEvent e) {
-
-        }
-
-        @Override
-        public boolean onSlide(SliderEvent e) {
-            Slider source = e.getSource();
-            selectedLayer.alpha = (float) source.getValue() / 100.0f;
-            return true;
-        }
-
-        @Override
-        public void onChange(SliderEvent e) {
-
-        }
-
-        @Override
-        public void onStop(SliderEvent e) {
-
-        }
     }
 }
