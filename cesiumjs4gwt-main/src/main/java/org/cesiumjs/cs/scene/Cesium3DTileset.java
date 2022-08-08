@@ -318,6 +318,12 @@ public class Cesium3DTileset {
     @JsProperty
     public Matrix4 modelMatrix;
     /**
+     * The color to use when rendering outlines. This option is only used when enableModelExperimental is set to true.
+     * Default: {@link Color#BLACK()}
+     */
+    @JsProperty
+    public Color outlineColor;
+    /**
      * Options for controlling point size based on geometric error and eye dome
      * lighting.
      */
@@ -380,6 +386,21 @@ public class Cesium3DTileset {
      */
     @JsProperty
     public boolean show;
+    /**
+     * Determines whether the credits of the tileset will be displayed on the screen
+     * Default: false
+     */
+    @JsProperty
+    public boolean showCreditsOnScreen;
+    /**
+     * Whether to display the outline for models using the CESIUM_primitive_outline extension. When true,
+     * outlines are displayed. When false, outlines are not displayed.
+     * When enableModelExperimental is set to true, this property can be toggled at runtime. However,
+     * when enableModelExperimental is false, this property is readonly (it can only be set in the constructor).
+     * Default: true
+     */
+    @JsProperty
+    public boolean showOutline;
     /**
      * Optimization option. Determines if level of detail skipping should be applied
      * during the traversal. Defaule: true
