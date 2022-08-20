@@ -142,6 +142,27 @@ public class ModelExperimentalOptions {
     @JsProperty
     public double silhouetteSize;
     /**
+     * Whether to enable outlines for models using the CESIUM_primitive_outline extension. This can be set to false to
+     * avoid the additional processing of geometry at load time. When false, the showOutlines and outlineColor
+     * options are ignored.
+     * Default: true
+     */
+    @JsProperty
+    public boolean enableShowOutline;
+    /**
+     * Whether to display the outline for models using the CESIUM_primitive_outline extension. When true,
+     * outlines are displayed. When false, outlines are not displayed.
+     * Default: true
+     */
+    @JsProperty
+    public boolean showOutline;
+    /**
+     * The color to use when rendering outlines.
+     * Default: {@link Color#BLACK()}
+     */
+    @JsProperty
+    public Color outlineColor;
+    /**
      * The index into the list of primitive feature IDs used for picking and styling. For EXT_feature_metadata,
      * feature ID attributes are listed before feature ID textures. If both per-primitive and per-instance feature
      * IDs are present, the instance feature IDs take priority.
