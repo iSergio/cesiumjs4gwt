@@ -116,12 +116,6 @@ public class Model {
     @JsProperty
     public DistanceDisplayCondition distanceDisplayCondition;
     /**
-     * The object for the glTF JSON, including properties with default values
-     * omitted from the JSON provided to this model. Default: undefined
-     */
-    @JsProperty
-    public Object gltf;
-    /**
      * User-defined object returned when the model is picked. Default: undefined.
      *
      * @see Scene#pick
@@ -285,15 +279,6 @@ public class Model {
     public native boolean asynchronous();
 
     /**
-     * The base path that paths in the glTF JSON are relative to. The base path is
-     * the same path as the path containing the .gltf file minus the .gltf file,
-     * when binary, image, and shader files are in the same directory as the .gltf.
-     * When this is '', the app's base path is used. Default: empty.
-     */
-    @JsProperty(name = "basePath")
-    public native String basePath();
-
-    /**
      * The model's bounding sphere in its local coordinate system. This does not
      * take into account glTF animations and skins nor does it take into account
      * Model#minimumPixelSize. Default: undefined
@@ -301,12 +286,6 @@ public class Model {
     // TODO: example
     @JsProperty(name = "boundingSphere")
     public native BoundingSphere boundingSphere();
-
-    /**
-     * Return the number of pending texture loads.
-     */
-    @JsProperty(name = "pendingTextureLoads")
-    public native double pendingTextureLoads();
 
     /**
      * When true, this model is ready to render, i.e., the external binary, image,

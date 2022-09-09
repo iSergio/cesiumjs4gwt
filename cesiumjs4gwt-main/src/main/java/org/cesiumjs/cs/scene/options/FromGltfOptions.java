@@ -117,12 +117,6 @@ public class FromGltfOptions {
      */
     @JsProperty
     public Number heightReference;
-    /**
-     * Determines if a Draco encoded model is dequantized on the GPU. This decreases
-     * total memory usage for encoded models. Default: true
-     */
-    @JsProperty
-    public boolean dequantizeInShader;
 
     @JsConstructor
     public FromGltfOptions() {
