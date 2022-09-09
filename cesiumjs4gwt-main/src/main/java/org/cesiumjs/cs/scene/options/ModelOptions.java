@@ -25,6 +25,7 @@ import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.collections.ClippingPlaneCollection;
 import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.scene.Scene;
+import org.cesiumjs.cs.scene.enums.ClassificationType;
 
 /**
  * Options for {@link org.cesiumjs.cs.scene.Model}.
@@ -219,7 +220,13 @@ public class ModelOptions {
      * keyframes are specified. Default: true
      */
     @JsProperty
-    boolean clampAnimations;
+    public boolean clampAnimations;
+
+    /**
+     * Determines whether terrain, 3D Tiles or both will be classified by this model. This cannot be
+     */
+    @JsProperty
+    public ClassificationType classificationType;
 
     @JsConstructor
     public ModelOptions() {

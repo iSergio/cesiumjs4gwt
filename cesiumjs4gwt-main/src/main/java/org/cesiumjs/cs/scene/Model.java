@@ -24,6 +24,7 @@ import org.cesiumjs.cs.collections.ClippingPlaneCollection;
 import org.cesiumjs.cs.collections.ModelAnimationCollection;
 import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.promise.Promise;
+import org.cesiumjs.cs.scene.enums.ClassificationType;
 import org.cesiumjs.cs.scene.enums.ColorBlendMode;
 import org.cesiumjs.cs.scene.enums.ShadowMode;
 import org.cesiumjs.cs.scene.options.FromGltfOptions;
@@ -286,6 +287,13 @@ public class Model {
     // TODO: example
     @JsProperty(name = "boundingSphere")
     public native BoundingSphere boundingSphere();
+
+    /**
+     * Gets the model's classification type. This determines whether terrain, 3D Tiles,
+     * or both will be classified by this model.
+     */
+    @JsProperty(name = "classificationType")
+    public native ClassificationType classificationType();
 
     /**
      * When true, this model is ready to render, i.e., the external binary, image,
