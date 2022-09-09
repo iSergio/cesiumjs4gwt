@@ -322,25 +322,6 @@ public class Model {
     public native void destroy();
 
     /**
-     * Returns the glTF material with the given name property.
-     *
-     * @param name The glTF name of the material.
-     * @return The material or undefined if no material with name exists.
-     */
-    @JsMethod
-    public native ModelMaterial getMaterial(String name);
-
-    /**
-     * Returns the glTF mesh with the given name property.
-     *
-     * @param name The glTF name of the mesh.
-     * @return The mesh or undefined if no mesh with name exists.
-     */
-    @SuppressWarnings("unusable-by-js")
-    @JsMethod
-    public native ModelMesh getMesh(String name);
-
-    /**
      * Returns the glTF node with the given name property. This is used to modify a
      * node's transform for animation outside of glTF animations.
      *
