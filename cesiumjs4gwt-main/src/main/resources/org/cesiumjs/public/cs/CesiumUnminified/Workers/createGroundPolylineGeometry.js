@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.96
+ * Version 1.97
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./Transforms-fc8266a1', './Matrix2-46dc0d7f', './RuntimeError-cef79f54', './defaultValue-4607806f', './ComponentDatatype-1ef49b14', './ArcType-f5af12f9', './arrayRemoveDuplicates-1f0fa8fd', './EllipsoidGeodesic-70578277', './EllipsoidRhumbLine-c4e2c591', './EncodedCartesian3-67ce8bc4', './GeometryAttribute-0c65674d', './IntersectionTests-f3daffbb', './Plane-e8eab25b', './WebMercatorProjection-60cca281', './_commonjsHelpers-a32ac251', './combine-fc59ba59', './WebGLConstants-f100e3dd'], (function (Transforms, Matrix2, RuntimeError, defaultValue, ComponentDatatype, ArcType, arrayRemoveDuplicates, EllipsoidGeodesic, EllipsoidRhumbLine, EncodedCartesian3, GeometryAttribute, IntersectionTests, Plane, WebMercatorProjection, _commonjsHelpers, combine, WebGLConstants) { 'use strict';
+define(['./Transforms-c78c4637', './Matrix2-ab676047', './RuntimeError-1088cc64', './defaultValue-a6eb9f34', './ComponentDatatype-e06f4e16', './ArcType-b714639b', './arrayRemoveDuplicates-63722a6f', './EllipsoidGeodesic-f7721517', './EllipsoidRhumbLine-34574f75', './EncodedCartesian3-7959a913', './GeometryAttribute-4f02e2ad', './IntersectionTests-f96cd46d', './Plane-c985a1d2', './WebMercatorProjection-0d64470e', './_commonjsHelpers-89c9b271', './combine-7cf28d88', './WebGLConstants-d81b330d'], (function (Transforms, Matrix2, RuntimeError, defaultValue, ComponentDatatype, ArcType, arrayRemoveDuplicates, EllipsoidGeodesic, EllipsoidRhumbLine, EncodedCartesian3, GeometryAttribute, IntersectionTests, Plane, WebMercatorProjection, _commonjsHelpers, combine, WebGLConstants) { 'use strict';
 
   /**
    * A tiling scheme for geometry referenced to a simple {@link GeographicProjection} where
@@ -509,6 +509,7 @@ define(['./Transforms-fc8266a1', './Matrix2-46dc0d7f', './RuntimeError-cef79f54'
       },
     },
   });
+  var ApproximateTerrainHeights$1 = ApproximateTerrainHeights;
 
   const PROJECTIONS = [Transforms.GeographicProjection, WebMercatorProjection.WebMercatorProjection];
   const PROJECTION_COUNT = PROJECTIONS.length;
@@ -1956,7 +1957,7 @@ define(['./Transforms-fc8266a1', './Matrix2-46dc0d7f', './RuntimeError-cef79f54'
         getHeightCartographics,
         getHeightRectangleScratch
       );
-      const minMaxHeights = ApproximateTerrainHeights.getMinimumMaximumHeights(
+      const minMaxHeights = ApproximateTerrainHeights$1.getMinimumMaximumHeights(
         getHeightsRectangle,
         ellipsoid
       );
@@ -2143,7 +2144,7 @@ define(['./Transforms-fc8266a1', './Matrix2-46dc0d7f', './RuntimeError-cef79f54'
   GroundPolylineGeometry._projectNormal = projectNormal;
 
   function createGroundPolylineGeometry(groundPolylineGeometry, offset) {
-    return ApproximateTerrainHeights.initialize().then(function () {
+    return ApproximateTerrainHeights$1.initialize().then(function () {
       if (defaultValue.defined(offset)) {
         groundPolylineGeometry = GroundPolylineGeometry.unpack(
           groundPolylineGeometry,

@@ -25,6 +25,7 @@ import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.collections.ClippingPlaneCollection;
 import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.scene.Scene;
+import org.cesiumjs.cs.scene.enums.ClassificationType;
 
 /**
  * Options for {@link org.cesiumjs.cs.scene.Model}.
@@ -38,12 +39,6 @@ public class ModelOptions {
      * KHR_binary_glTF extension.
      */
     @JsProperty
-    public Object gltf;
-    /**
-     * The object for the glTF JSON or an arraybuffer of Binary glTF defined by the
-     * KHR_binary_glTF extension.
-     */
-    @JsProperty
     public ArrayBuffer gltfArrayBuffer;
     /**
      * The object for the glTF JSON or an arraybuffer of Binary glTF defined by the
@@ -51,11 +46,6 @@ public class ModelOptions {
      */
     @JsProperty
     public Uint8Array gltfUint8Array;
-    /**
-     * The base path that paths in the glTF JSON are relative to. Default: empty.
-     */
-    @JsProperty
-    public String basePath;
     /**
      * Determines if the model primitive will be shown. Default: true.
      */
@@ -180,12 +170,6 @@ public class ModelOptions {
     @JsProperty
     public ClippingPlaneCollection clippingPlanes;
     /**
-     * Determines if a Draco encoded model is dequantized on the GPU. This decreases
-     * total memory usage for encoded models. Default: true
-     */
-    @JsProperty
-    public boolean dequantizeInShader;
-    /**
      * Scales diffuse and specular image-based lighting from the earth, sky,
      * atmosphere and star skybox. Default: new Cartesian2(1.0, 1.0)
      */
@@ -236,7 +220,13 @@ public class ModelOptions {
      * keyframes are specified. Default: true
      */
     @JsProperty
-    boolean clampAnimations;
+    public boolean clampAnimations;
+
+    /**
+     * Determines whether terrain, 3D Tiles or both will be classified by this model. This cannot be
+     */
+    @JsProperty
+    public ClassificationType classificationType;
 
     @JsConstructor
     public ModelOptions() {

@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.96
+ * Version 1.97
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./RuntimeError-cef79f54', './defaultValue-4607806f', './_commonjsHelpers-a32ac251', './createTaskProcessorWorker'], (function (RuntimeError, defaultValue, _commonjsHelpers, createTaskProcessorWorker) { 'use strict';
+define(['./RuntimeError-1088cc64', './defaultValue-a6eb9f34', './_commonjsHelpers-89c9b271', './createTaskProcessorWorker'], (function (RuntimeError, defaultValue, _commonjsHelpers, createTaskProcessorWorker) { 'use strict';
 
   const compressedMagic$1 = 0x7468dead;
   const compressedMagicSwap$1 = 0xadde6874;
