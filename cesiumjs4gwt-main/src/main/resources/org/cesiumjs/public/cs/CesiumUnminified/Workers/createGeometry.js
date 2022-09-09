@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.96
+ * Version 1.97
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./defaultValue-4607806f', './PrimitivePipeline-e055216c', './createTaskProcessorWorker', './Transforms-fc8266a1', './Matrix2-46dc0d7f', './RuntimeError-cef79f54', './ComponentDatatype-1ef49b14', './WebGLConstants-f100e3dd', './_commonjsHelpers-a32ac251', './combine-fc59ba59', './GeometryAttribute-0c65674d', './GeometryAttributes-acac33d2', './GeometryPipeline-e00ed69b', './AttributeCompression-e3844002', './EncodedCartesian3-67ce8bc4', './IndexDatatype-790b4297', './IntersectionTests-f3daffbb', './Plane-e8eab25b', './WebMercatorProjection-60cca281'], (function (defaultValue, PrimitivePipeline, createTaskProcessorWorker, Transforms, Matrix2, RuntimeError, ComponentDatatype, WebGLConstants, _commonjsHelpers, combine, GeometryAttribute, GeometryAttributes, GeometryPipeline, AttributeCompression, EncodedCartesian3, IndexDatatype, IntersectionTests, Plane, WebMercatorProjection) { 'use strict';
+define(['./defaultValue-a6eb9f34', './PrimitivePipeline-c8fc30b4', './createTaskProcessorWorker', './Transforms-c78c4637', './Matrix2-ab676047', './RuntimeError-1088cc64', './ComponentDatatype-e06f4e16', './WebGLConstants-d81b330d', './_commonjsHelpers-89c9b271', './combine-7cf28d88', './GeometryAttribute-4f02e2ad', './GeometryAttributes-aff51037', './GeometryPipeline-5a61c463', './AttributeCompression-8033f934', './EncodedCartesian3-7959a913', './IndexDatatype-c2232ebd', './IntersectionTests-f96cd46d', './Plane-c985a1d2', './WebMercatorProjection-0d64470e'], (function (defaultValue, PrimitivePipeline, createTaskProcessorWorker, Transforms, Matrix2, RuntimeError, ComponentDatatype, WebGLConstants, _commonjsHelpers, combine, GeometryAttribute, GeometryAttributes, GeometryPipeline, AttributeCompression, EncodedCartesian3, IndexDatatype, IntersectionTests, Plane, WebMercatorProjection) { 'use strict';
 
   /* global require */
 

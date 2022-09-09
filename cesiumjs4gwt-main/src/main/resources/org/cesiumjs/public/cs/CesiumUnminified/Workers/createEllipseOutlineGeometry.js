@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.96
+ * Version 1.97
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./Matrix2-46dc0d7f', './defaultValue-4607806f', './EllipseOutlineGeometry-57c70f62', './RuntimeError-cef79f54', './ComponentDatatype-1ef49b14', './WebGLConstants-f100e3dd', './Transforms-fc8266a1', './_commonjsHelpers-a32ac251', './combine-fc59ba59', './EllipseGeometryLibrary-464629fe', './GeometryAttribute-0c65674d', './GeometryAttributes-acac33d2', './GeometryOffsetAttribute-3e5f3e97', './IndexDatatype-790b4297'], (function (Matrix2, defaultValue, EllipseOutlineGeometry, RuntimeError, ComponentDatatype, WebGLConstants, Transforms, _commonjsHelpers, combine, EllipseGeometryLibrary, GeometryAttribute, GeometryAttributes, GeometryOffsetAttribute, IndexDatatype) { 'use strict';
+define(['./Matrix2-ab676047', './defaultValue-a6eb9f34', './EllipseOutlineGeometry-cfe46a59', './RuntimeError-1088cc64', './ComponentDatatype-e06f4e16', './WebGLConstants-d81b330d', './Transforms-c78c4637', './_commonjsHelpers-89c9b271', './combine-7cf28d88', './EllipseGeometryLibrary-b13c13df', './GeometryAttribute-4f02e2ad', './GeometryAttributes-aff51037', './GeometryOffsetAttribute-102da468', './IndexDatatype-c2232ebd'], (function (Matrix2, defaultValue, EllipseOutlineGeometry, RuntimeError, ComponentDatatype, WebGLConstants, Transforms, _commonjsHelpers, combine, EllipseGeometryLibrary, GeometryAttribute, GeometryAttributes, GeometryOffsetAttribute, IndexDatatype) { 'use strict';
 
   function createEllipseOutlineGeometry(ellipseGeometry, offset) {
     if (defaultValue.defined(offset)) {

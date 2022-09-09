@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.96
+ * Version 1.97
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./AxisAlignedBoundingBox-8c885262', './Transforms-fc8266a1', './Matrix2-46dc0d7f', './defaultValue-4607806f', './TerrainEncoding-541a49e1', './ComponentDatatype-1ef49b14', './OrientedBoundingBox-7072d624', './RuntimeError-cef79f54', './WebMercatorProjection-60cca281', './createTaskProcessorWorker', './_commonjsHelpers-a32ac251', './combine-fc59ba59', './AttributeCompression-e3844002', './WebGLConstants-f100e3dd', './EllipsoidTangentPlane-daffc3d5', './IntersectionTests-f3daffbb', './Plane-e8eab25b'], (function (AxisAlignedBoundingBox, Transforms, Matrix2, defaultValue, TerrainEncoding, ComponentDatatype, OrientedBoundingBox, RuntimeError, WebMercatorProjection, createTaskProcessorWorker, _commonjsHelpers, combine, AttributeCompression, WebGLConstants, EllipsoidTangentPlane, IntersectionTests, Plane) { 'use strict';
+define(['./AxisAlignedBoundingBox-51d5a498', './Transforms-c78c4637', './Matrix2-ab676047', './defaultValue-a6eb9f34', './TerrainEncoding-74a00123', './ComponentDatatype-e06f4e16', './OrientedBoundingBox-28f77441', './RuntimeError-1088cc64', './WebMercatorProjection-0d64470e', './createTaskProcessorWorker', './_commonjsHelpers-89c9b271', './combine-7cf28d88', './AttributeCompression-8033f934', './WebGLConstants-d81b330d', './EllipsoidTangentPlane-6691e012', './IntersectionTests-f96cd46d', './Plane-c985a1d2'], (function (AxisAlignedBoundingBox, Transforms, Matrix2, defaultValue, TerrainEncoding, ComponentDatatype, OrientedBoundingBox, RuntimeError, WebMercatorProjection, createTaskProcessorWorker, _commonjsHelpers, combine, AttributeCompression, WebGLConstants, EllipsoidTangentPlane, IntersectionTests, Plane) { 'use strict';
 
   const sizeOfUint16 = Uint16Array.BYTES_PER_ELEMENT;
   const sizeOfInt32 = Int32Array.BYTES_PER_ELEMENT;
