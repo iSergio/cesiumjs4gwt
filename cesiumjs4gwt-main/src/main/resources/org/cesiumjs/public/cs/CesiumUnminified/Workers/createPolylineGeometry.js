@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.96
+ * Version 1.97
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./defaultValue-4607806f', './Matrix2-46dc0d7f', './ArcType-f5af12f9', './arrayRemoveDuplicates-1f0fa8fd', './Transforms-fc8266a1', './Color-2bc33577', './ComponentDatatype-1ef49b14', './RuntimeError-cef79f54', './GeometryAttribute-0c65674d', './GeometryAttributes-acac33d2', './IndexDatatype-790b4297', './PolylinePipeline-043c23e2', './VertexFormat-a06c2122', './_commonjsHelpers-a32ac251', './combine-fc59ba59', './WebGLConstants-f100e3dd', './EllipsoidGeodesic-70578277', './EllipsoidRhumbLine-c4e2c591', './IntersectionTests-f3daffbb', './Plane-e8eab25b'], (function (defaultValue, Matrix2, ArcType, arrayRemoveDuplicates, Transforms, Color, ComponentDatatype, RuntimeError, GeometryAttribute, GeometryAttributes, IndexDatatype, PolylinePipeline, VertexFormat, _commonjsHelpers, combine, WebGLConstants, EllipsoidGeodesic, EllipsoidRhumbLine, IntersectionTests, Plane) { 'use strict';
+define(['./defaultValue-a6eb9f34', './Matrix2-ab676047', './ArcType-b714639b', './arrayRemoveDuplicates-63722a6f', './Transforms-c78c4637', './Color-a393f044', './ComponentDatatype-e06f4e16', './RuntimeError-1088cc64', './GeometryAttribute-4f02e2ad', './GeometryAttributes-aff51037', './IndexDatatype-c2232ebd', './PolylinePipeline-3b0ed402', './VertexFormat-65fd4be5', './_commonjsHelpers-89c9b271', './combine-7cf28d88', './WebGLConstants-d81b330d', './EllipsoidGeodesic-f7721517', './EllipsoidRhumbLine-34574f75', './IntersectionTests-f96cd46d', './Plane-c985a1d2'], (function (defaultValue, Matrix2, ArcType, arrayRemoveDuplicates, Transforms, Color, ComponentDatatype, RuntimeError, GeometryAttribute, GeometryAttributes, IndexDatatype, PolylinePipeline, VertexFormat, _commonjsHelpers, combine, WebGLConstants, EllipsoidGeodesic, EllipsoidRhumbLine, IntersectionTests, Plane) { 'use strict';
 
   const scratchInterpolateColorsArray = [];
 

@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.96
+ * Version 1.97
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./AttributeCompression-e3844002', './Transforms-fc8266a1', './Matrix2-46dc0d7f', './defaultValue-4607806f', './TerrainEncoding-541a49e1', './IndexDatatype-790b4297', './RuntimeError-cef79f54', './ComponentDatatype-1ef49b14', './OrientedBoundingBox-7072d624', './createTaskProcessorWorker', './_commonjsHelpers-a32ac251', './combine-fc59ba59', './WebGLConstants-f100e3dd', './EllipsoidTangentPlane-daffc3d5', './AxisAlignedBoundingBox-8c885262', './IntersectionTests-f3daffbb', './Plane-e8eab25b'], (function (AttributeCompression, Transforms, Matrix2, defaultValue, TerrainEncoding, IndexDatatype, RuntimeError, ComponentDatatype, OrientedBoundingBox, createTaskProcessorWorker, _commonjsHelpers, combine, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane) { 'use strict';
+define(['./AttributeCompression-8033f934', './Transforms-c78c4637', './Matrix2-ab676047', './defaultValue-a6eb9f34', './TerrainEncoding-74a00123', './IndexDatatype-c2232ebd', './RuntimeError-1088cc64', './ComponentDatatype-e06f4e16', './OrientedBoundingBox-28f77441', './createTaskProcessorWorker', './_commonjsHelpers-89c9b271', './combine-7cf28d88', './WebGLConstants-d81b330d', './EllipsoidTangentPlane-6691e012', './AxisAlignedBoundingBox-51d5a498', './IntersectionTests-f96cd46d', './Plane-c985a1d2'], (function (AttributeCompression, Transforms, Matrix2, defaultValue, TerrainEncoding, IndexDatatype, RuntimeError, ComponentDatatype, OrientedBoundingBox, createTaskProcessorWorker, _commonjsHelpers, combine, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane) { 'use strict';
 
   /**
    * Contains functions for operating on 2D triangles.
@@ -376,6 +376,7 @@ define(['./AttributeCompression-e3844002', './Transforms-fc8266a1', './Matrix2-4
       return result;
     }
   };
+  var Intersections2D$1 = Intersections2D;
 
   const maxShort = 32767;
   const halfMaxShort = (maxShort / 2) | 0;
@@ -557,7 +558,7 @@ define(['./AttributeCompression-e3844002', './Transforms-fc8266a1', './Matrix2-4
       );
 
       // Clip triangle on the east-west boundary.
-      const clipped = Intersections2D.clipTriangleAtAxisAlignedThreshold(
+      const clipped = Intersections2D$1.clipTriangleAtAxisAlignedThreshold(
         halfMaxShort,
         isEastChild,
         u0,
@@ -597,7 +598,7 @@ define(['./AttributeCompression-e3844002', './Transforms-fc8266a1', './Matrix2-4
       );
 
       // Clip the triangle against the North-south boundary.
-      clipped2 = Intersections2D.clipTriangleAtAxisAlignedThreshold(
+      clipped2 = Intersections2D$1.clipTriangleAtAxisAlignedThreshold(
         halfMaxShort,
         isNorthChild,
         clippedTriangleVertices[0].getV(),
@@ -627,7 +628,7 @@ define(['./AttributeCompression-e3844002', './Transforms-fc8266a1', './Matrix2-4
           triangleVertices
         );
 
-        clipped2 = Intersections2D.clipTriangleAtAxisAlignedThreshold(
+        clipped2 = Intersections2D$1.clipTriangleAtAxisAlignedThreshold(
           halfMaxShort,
           isNorthChild,
           clippedTriangleVertices[0].getV(),

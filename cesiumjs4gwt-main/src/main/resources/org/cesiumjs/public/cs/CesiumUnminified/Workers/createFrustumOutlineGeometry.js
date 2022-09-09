@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.96
+ * Version 1.97
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./defaultValue-4607806f', './Transforms-fc8266a1', './Matrix2-46dc0d7f', './RuntimeError-cef79f54', './ComponentDatatype-1ef49b14', './FrustumGeometry-32c1594f', './GeometryAttribute-0c65674d', './GeometryAttributes-acac33d2', './_commonjsHelpers-a32ac251', './combine-fc59ba59', './WebGLConstants-f100e3dd', './Plane-e8eab25b', './VertexFormat-a06c2122'], (function (defaultValue, Transforms, Matrix2, RuntimeError, ComponentDatatype, FrustumGeometry, GeometryAttribute, GeometryAttributes, _commonjsHelpers, combine, WebGLConstants, Plane, VertexFormat) { 'use strict';
+define(['./defaultValue-a6eb9f34', './Transforms-c78c4637', './Matrix2-ab676047', './RuntimeError-1088cc64', './ComponentDatatype-e06f4e16', './FrustumGeometry-947bc56f', './GeometryAttribute-4f02e2ad', './GeometryAttributes-aff51037', './_commonjsHelpers-89c9b271', './combine-7cf28d88', './WebGLConstants-d81b330d', './Plane-c985a1d2', './VertexFormat-65fd4be5'], (function (defaultValue, Transforms, Matrix2, RuntimeError, ComponentDatatype, FrustumGeometry, GeometryAttribute, GeometryAttributes, _commonjsHelpers, combine, WebGLConstants, Plane, VertexFormat) { 'use strict';
 
   const PERSPECTIVE = 0;
   const ORTHOGRAPHIC = 1;

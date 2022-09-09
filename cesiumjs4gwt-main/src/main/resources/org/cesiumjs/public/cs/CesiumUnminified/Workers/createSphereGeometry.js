@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.96
+ * Version 1.97
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./defaultValue-4607806f', './Matrix2-46dc0d7f', './RuntimeError-cef79f54', './EllipsoidGeometry-92f81f87', './VertexFormat-a06c2122', './ComponentDatatype-1ef49b14', './WebGLConstants-f100e3dd', './Transforms-fc8266a1', './_commonjsHelpers-a32ac251', './combine-fc59ba59', './GeometryAttribute-0c65674d', './GeometryAttributes-acac33d2', './GeometryOffsetAttribute-3e5f3e97', './IndexDatatype-790b4297'], (function (defaultValue, Matrix2, RuntimeError, EllipsoidGeometry, VertexFormat, ComponentDatatype, WebGLConstants, Transforms, _commonjsHelpers, combine, GeometryAttribute, GeometryAttributes, GeometryOffsetAttribute, IndexDatatype) { 'use strict';
+define(['./defaultValue-a6eb9f34', './Matrix2-ab676047', './RuntimeError-1088cc64', './EllipsoidGeometry-ac5c767c', './VertexFormat-65fd4be5', './ComponentDatatype-e06f4e16', './WebGLConstants-d81b330d', './Transforms-c78c4637', './_commonjsHelpers-89c9b271', './combine-7cf28d88', './GeometryAttribute-4f02e2ad', './GeometryAttributes-aff51037', './GeometryOffsetAttribute-102da468', './IndexDatatype-c2232ebd'], (function (defaultValue, Matrix2, RuntimeError, EllipsoidGeometry, VertexFormat, ComponentDatatype, WebGLConstants, Transforms, _commonjsHelpers, combine, GeometryAttribute, GeometryAttributes, GeometryOffsetAttribute, IndexDatatype) { 'use strict';
 
   /**
    * A description of a sphere centered at the origin.

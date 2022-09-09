@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.96
+ * Version 1.97
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./defaultValue-4607806f', './Matrix2-46dc0d7f', './Transforms-fc8266a1', './ComponentDatatype-1ef49b14', './RuntimeError-cef79f54', './GeometryAttribute-0c65674d', './GeometryAttributes-acac33d2', './GeometryOffsetAttribute-3e5f3e97', './IndexDatatype-790b4297', './PolygonPipeline-8d44637f', './RectangleGeometryLibrary-8b2d599a', './_commonjsHelpers-a32ac251', './combine-fc59ba59', './WebGLConstants-f100e3dd', './EllipsoidRhumbLine-c4e2c591'], (function (defaultValue, Matrix2, Transforms, ComponentDatatype, RuntimeError, GeometryAttribute, GeometryAttributes, GeometryOffsetAttribute, IndexDatatype, PolygonPipeline, RectangleGeometryLibrary, _commonjsHelpers, combine, WebGLConstants, EllipsoidRhumbLine) { 'use strict';
+define(['./defaultValue-a6eb9f34', './Matrix2-ab676047', './Transforms-c78c4637', './ComponentDatatype-e06f4e16', './RuntimeError-1088cc64', './GeometryAttribute-4f02e2ad', './GeometryAttributes-aff51037', './GeometryOffsetAttribute-102da468', './IndexDatatype-c2232ebd', './PolygonPipeline-dd4a5392', './RectangleGeometryLibrary-ef977e90', './_commonjsHelpers-89c9b271', './combine-7cf28d88', './WebGLConstants-d81b330d', './EllipsoidRhumbLine-34574f75'], (function (defaultValue, Matrix2, Transforms, ComponentDatatype, RuntimeError, GeometryAttribute, GeometryAttributes, GeometryOffsetAttribute, IndexDatatype, PolygonPipeline, RectangleGeometryLibrary, _commonjsHelpers, combine, WebGLConstants, EllipsoidRhumbLine) { 'use strict';
 
   const bottomBoundingSphere = new Transforms.BoundingSphere();
   const topBoundingSphere = new Transforms.BoundingSphere();

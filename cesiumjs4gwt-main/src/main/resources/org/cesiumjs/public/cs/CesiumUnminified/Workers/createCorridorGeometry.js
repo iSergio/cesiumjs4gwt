@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.96
+ * Version 1.97
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./arrayRemoveDuplicates-1f0fa8fd', './Transforms-fc8266a1', './Matrix2-46dc0d7f', './RuntimeError-cef79f54', './ComponentDatatype-1ef49b14', './PolylineVolumeGeometryLibrary-52ea7e9d', './CorridorGeometryLibrary-e05868c2', './defaultValue-4607806f', './GeometryAttribute-0c65674d', './GeometryAttributes-acac33d2', './GeometryOffsetAttribute-3e5f3e97', './IndexDatatype-790b4297', './PolygonPipeline-8d44637f', './VertexFormat-a06c2122', './_commonjsHelpers-a32ac251', './combine-fc59ba59', './WebGLConstants-f100e3dd', './EllipsoidTangentPlane-daffc3d5', './AxisAlignedBoundingBox-8c885262', './IntersectionTests-f3daffbb', './Plane-e8eab25b', './PolylinePipeline-043c23e2', './EllipsoidGeodesic-70578277', './EllipsoidRhumbLine-c4e2c591'], (function (arrayRemoveDuplicates, Transforms, Matrix2, RuntimeError, ComponentDatatype, PolylineVolumeGeometryLibrary, CorridorGeometryLibrary, defaultValue, GeometryAttribute, GeometryAttributes, GeometryOffsetAttribute, IndexDatatype, PolygonPipeline, VertexFormat, _commonjsHelpers, combine$1, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane, PolylinePipeline, EllipsoidGeodesic, EllipsoidRhumbLine) { 'use strict';
+define(['./arrayRemoveDuplicates-63722a6f', './Transforms-c78c4637', './Matrix2-ab676047', './RuntimeError-1088cc64', './ComponentDatatype-e06f4e16', './PolylineVolumeGeometryLibrary-f654b9e2', './CorridorGeometryLibrary-3cfb8ebf', './defaultValue-a6eb9f34', './GeometryAttribute-4f02e2ad', './GeometryAttributes-aff51037', './GeometryOffsetAttribute-102da468', './IndexDatatype-c2232ebd', './PolygonPipeline-dd4a5392', './VertexFormat-65fd4be5', './_commonjsHelpers-89c9b271', './combine-7cf28d88', './WebGLConstants-d81b330d', './EllipsoidTangentPlane-6691e012', './AxisAlignedBoundingBox-51d5a498', './IntersectionTests-f96cd46d', './Plane-c985a1d2', './PolylinePipeline-3b0ed402', './EllipsoidGeodesic-f7721517', './EllipsoidRhumbLine-34574f75'], (function (arrayRemoveDuplicates, Transforms, Matrix2, RuntimeError, ComponentDatatype, PolylineVolumeGeometryLibrary, CorridorGeometryLibrary, defaultValue, GeometryAttribute, GeometryAttributes, GeometryOffsetAttribute, IndexDatatype, PolygonPipeline, VertexFormat, _commonjsHelpers, combine$1, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane, PolylinePipeline, EllipsoidGeodesic, EllipsoidRhumbLine) { 'use strict';
 
   const cartesian1 = new Matrix2.Cartesian3();
   const cartesian2 = new Matrix2.Cartesian3();

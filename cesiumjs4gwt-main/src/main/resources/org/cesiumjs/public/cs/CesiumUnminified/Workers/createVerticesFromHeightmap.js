@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.96
+ * Version 1.97
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./Matrix2-46dc0d7f', './AxisAlignedBoundingBox-8c885262', './Transforms-fc8266a1', './defaultValue-4607806f', './RuntimeError-cef79f54', './TerrainEncoding-541a49e1', './ComponentDatatype-1ef49b14', './OrientedBoundingBox-7072d624', './WebMercatorProjection-60cca281', './_commonjsHelpers-a32ac251', './createTaskProcessorWorker', './combine-fc59ba59', './AttributeCompression-e3844002', './WebGLConstants-f100e3dd', './EllipsoidTangentPlane-daffc3d5', './IntersectionTests-f3daffbb', './Plane-e8eab25b'], (function (Matrix2, AxisAlignedBoundingBox, Transforms, defaultValue, RuntimeError, TerrainEncoding, ComponentDatatype, OrientedBoundingBox, WebMercatorProjection, _commonjsHelpers, createTaskProcessorWorker, combine, AttributeCompression, WebGLConstants, EllipsoidTangentPlane, IntersectionTests, Plane) { 'use strict';
+define(['./Matrix2-ab676047', './AxisAlignedBoundingBox-51d5a498', './Transforms-c78c4637', './defaultValue-a6eb9f34', './RuntimeError-1088cc64', './TerrainEncoding-74a00123', './ComponentDatatype-e06f4e16', './OrientedBoundingBox-28f77441', './WebMercatorProjection-0d64470e', './_commonjsHelpers-89c9b271', './createTaskProcessorWorker', './combine-7cf28d88', './AttributeCompression-8033f934', './WebGLConstants-d81b330d', './EllipsoidTangentPlane-6691e012', './IntersectionTests-f96cd46d', './Plane-c985a1d2'], (function (Matrix2, AxisAlignedBoundingBox, Transforms, defaultValue, RuntimeError, TerrainEncoding, ComponentDatatype, OrientedBoundingBox, WebMercatorProjection, _commonjsHelpers, createTaskProcessorWorker, combine, AttributeCompression, WebGLConstants, EllipsoidTangentPlane, IntersectionTests, Plane) { 'use strict';
 
   /**
    * The encoding that is used for a heightmap
@@ -568,6 +568,7 @@ define(['./Matrix2-46dc0d7f', './AxisAlignedBoundingBox-8c885262', './Transforms
       occludeePointInScaledSpace: occludeePointInScaledSpace,
     };
   };
+  var HeightmapTessellator$1 = HeightmapTessellator;
 
   var LercDecode = _commonjsHelpers.createCommonjsModule(function (module) {
   /* jshint forin: false, bitwise: false */
@@ -2698,7 +2699,7 @@ define(['./Matrix2-46dc0d7f', './AxisAlignedBoundingBox-8c885262', './Transforms
     parameters.ellipsoid = Matrix2.Ellipsoid.clone(parameters.ellipsoid);
     parameters.rectangle = Matrix2.Rectangle.clone(parameters.rectangle);
 
-    const statistics = HeightmapTessellator.computeVertices(parameters);
+    const statistics = HeightmapTessellator$1.computeVertices(parameters);
     const vertices = statistics.vertices;
     transferableObjects.push(vertices.buffer);
 

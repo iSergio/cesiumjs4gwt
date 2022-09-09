@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.96
+ * Version 1.97
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./arrayRemoveDuplicates-1f0fa8fd', './BoundingRectangle-41860583', './Transforms-fc8266a1', './Matrix2-46dc0d7f', './RuntimeError-cef79f54', './ComponentDatatype-1ef49b14', './CoplanarPolygonGeometryLibrary-392b179d', './defaultValue-4607806f', './GeometryAttribute-0c65674d', './GeometryAttributes-acac33d2', './GeometryInstance-a75a729d', './GeometryPipeline-e00ed69b', './IndexDatatype-790b4297', './PolygonGeometryLibrary-c4474e3f', './PolygonPipeline-8d44637f', './VertexFormat-a06c2122', './_commonjsHelpers-a32ac251', './combine-fc59ba59', './WebGLConstants-f100e3dd', './OrientedBoundingBox-7072d624', './EllipsoidTangentPlane-daffc3d5', './AxisAlignedBoundingBox-8c885262', './IntersectionTests-f3daffbb', './Plane-e8eab25b', './AttributeCompression-e3844002', './EncodedCartesian3-67ce8bc4', './ArcType-f5af12f9', './EllipsoidRhumbLine-c4e2c591'], (function (arrayRemoveDuplicates, BoundingRectangle, Transforms, Matrix2, RuntimeError, ComponentDatatype, CoplanarPolygonGeometryLibrary, defaultValue, GeometryAttribute, GeometryAttributes, GeometryInstance, GeometryPipeline, IndexDatatype, PolygonGeometryLibrary, PolygonPipeline, VertexFormat, _commonjsHelpers, combine, WebGLConstants, OrientedBoundingBox, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane, AttributeCompression, EncodedCartesian3, ArcType, EllipsoidRhumbLine) { 'use strict';
+define(['./arrayRemoveDuplicates-63722a6f', './BoundingRectangle-66558952', './Transforms-c78c4637', './Matrix2-ab676047', './RuntimeError-1088cc64', './ComponentDatatype-e06f4e16', './CoplanarPolygonGeometryLibrary-a1408391', './defaultValue-a6eb9f34', './GeometryAttribute-4f02e2ad', './GeometryAttributes-aff51037', './GeometryInstance-6f541616', './GeometryPipeline-5a61c463', './IndexDatatype-c2232ebd', './PolygonGeometryLibrary-5dd88675', './PolygonPipeline-dd4a5392', './VertexFormat-65fd4be5', './_commonjsHelpers-89c9b271', './combine-7cf28d88', './WebGLConstants-d81b330d', './OrientedBoundingBox-28f77441', './EllipsoidTangentPlane-6691e012', './AxisAlignedBoundingBox-51d5a498', './IntersectionTests-f96cd46d', './Plane-c985a1d2', './AttributeCompression-8033f934', './EncodedCartesian3-7959a913', './ArcType-b714639b', './EllipsoidRhumbLine-34574f75'], (function (arrayRemoveDuplicates, BoundingRectangle, Transforms, Matrix2, RuntimeError, ComponentDatatype, CoplanarPolygonGeometryLibrary, defaultValue, GeometryAttribute, GeometryAttributes, GeometryInstance, GeometryPipeline, IndexDatatype, PolygonGeometryLibrary, PolygonPipeline, VertexFormat, _commonjsHelpers, combine, WebGLConstants, OrientedBoundingBox, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane, AttributeCompression, EncodedCartesian3, ArcType, EllipsoidRhumbLine) { 'use strict';
 
   const scratchPosition = new Matrix2.Cartesian3();
   const scratchBR = new BoundingRectangle.BoundingRectangle();

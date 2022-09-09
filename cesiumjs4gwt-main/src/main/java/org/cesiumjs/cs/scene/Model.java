@@ -24,6 +24,7 @@ import org.cesiumjs.cs.collections.ClippingPlaneCollection;
 import org.cesiumjs.cs.collections.ModelAnimationCollection;
 import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.promise.Promise;
+import org.cesiumjs.cs.scene.enums.ClassificationType;
 import org.cesiumjs.cs.scene.enums.ColorBlendMode;
 import org.cesiumjs.cs.scene.enums.ShadowMode;
 import org.cesiumjs.cs.scene.options.FromGltfOptions;
@@ -115,12 +116,6 @@ public class Model {
      */
     @JsProperty
     public DistanceDisplayCondition distanceDisplayCondition;
-    /**
-     * The object for the glTF JSON, including properties with default values
-     * omitted from the JSON provided to this model. Default: undefined
-     */
-    @JsProperty
-    public Object gltf;
     /**
      * User-defined object returned when the model is picked. Default: undefined.
      *
@@ -285,15 +280,6 @@ public class Model {
     public native boolean asynchronous();
 
     /**
-     * The base path that paths in the glTF JSON are relative to. The base path is
-     * the same path as the path containing the .gltf file minus the .gltf file,
-     * when binary, image, and shader files are in the same directory as the .gltf.
-     * When this is '', the app's base path is used. Default: empty.
-     */
-    @JsProperty(name = "basePath")
-    public native String basePath();
-
-    /**
      * The model's bounding sphere in its local coordinate system. This does not
      * take into account glTF animations and skins nor does it take into account
      * Model#minimumPixelSize. Default: undefined
@@ -303,10 +289,11 @@ public class Model {
     public native BoundingSphere boundingSphere();
 
     /**
-     * Return the number of pending texture loads.
+     * Gets the model's classification type. This determines whether terrain, 3D Tiles,
+     * or both will be classified by this model.
      */
-    @JsProperty(name = "pendingTextureLoads")
-    public native double pendingTextureLoads();
+    @JsProperty(name = "classificationType")
+    public native ClassificationType classificationType();
 
     /**
      * When true, this model is ready to render, i.e., the external binary, image,
@@ -341,25 +328,6 @@ public class Model {
      */
     @JsMethod
     public native void destroy();
-
-    /**
-     * Returns the glTF material with the given name property.
-     *
-     * @param name The glTF name of the material.
-     * @return The material or undefined if no material with name exists.
-     */
-    @JsMethod
-    public native ModelMaterial getMaterial(String name);
-
-    /**
-     * Returns the glTF mesh with the given name property.
-     *
-     * @param name The glTF name of the mesh.
-     * @return The mesh or undefined if no mesh with name exists.
-     */
-    @SuppressWarnings("unusable-by-js")
-    @JsMethod
-    public native ModelMesh getMesh(String name);
 
     /**
      * Returns the glTF node with the given name property. This is used to modify a

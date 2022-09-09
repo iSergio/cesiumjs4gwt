@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.96
+ * Version 1.97
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./AttributeCompression-e3844002', './Matrix2-46dc0d7f', './Color-2bc33577', './defaultValue-4607806f', './IndexDatatype-790b4297', './ComponentDatatype-1ef49b14', './OrientedBoundingBox-7072d624', './createTaskProcessorWorker', './RuntimeError-cef79f54', './Transforms-fc8266a1', './_commonjsHelpers-a32ac251', './combine-fc59ba59', './WebGLConstants-f100e3dd', './EllipsoidTangentPlane-daffc3d5', './AxisAlignedBoundingBox-8c885262', './IntersectionTests-f3daffbb', './Plane-e8eab25b'], (function (AttributeCompression, Matrix2, Color, defaultValue, IndexDatatype, ComponentDatatype, OrientedBoundingBox, createTaskProcessorWorker, RuntimeError, Transforms, _commonjsHelpers, combine, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane) { 'use strict';
+define(['./AttributeCompression-8033f934', './Matrix2-ab676047', './Color-a393f044', './defaultValue-a6eb9f34', './IndexDatatype-c2232ebd', './ComponentDatatype-e06f4e16', './OrientedBoundingBox-28f77441', './createTaskProcessorWorker', './RuntimeError-1088cc64', './Transforms-c78c4637', './_commonjsHelpers-89c9b271', './combine-7cf28d88', './WebGLConstants-d81b330d', './EllipsoidTangentPlane-6691e012', './AxisAlignedBoundingBox-51d5a498', './IntersectionTests-f96cd46d', './Plane-c985a1d2'], (function (AttributeCompression, Matrix2, Color, defaultValue, IndexDatatype, ComponentDatatype, OrientedBoundingBox, createTaskProcessorWorker, RuntimeError, Transforms, _commonjsHelpers, combine, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane) { 'use strict';
 
   const scratchCenter = new Matrix2.Cartesian3();
   const scratchEllipsoid = new Matrix2.Ellipsoid();
