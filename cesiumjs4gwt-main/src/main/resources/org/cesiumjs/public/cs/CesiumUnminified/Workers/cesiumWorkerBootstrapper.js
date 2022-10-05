@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.97
+ * Version 1.98
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -30,7 +30,7 @@ self.onmessage = function(event) {
   var data = event.data;
   require(data.loaderConfig, [data.workerModule], function(workerModule) {
     self.onmessage = workerModule;
-    CESIUM_BASE_URL = data.loaderConfig.baseUrl;
+    self.CESIUM_BASE_URL = data.loaderConfig.baseUrl;
   });
 };
 function setTimeout(fn) {

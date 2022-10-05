@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.97
+ * Version 1.98
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./Transforms-c78c4637', './BoxGeometry-eeb0f067', './Matrix2-ab676047', './Color-a393f044', './CylinderGeometry-53695cce', './defaultValue-a6eb9f34', './EllipsoidGeometry-ac5c767c', './IndexDatatype-c2232ebd', './createTaskProcessorWorker', './RuntimeError-1088cc64', './ComponentDatatype-e06f4e16', './WebGLConstants-d81b330d', './_commonjsHelpers-89c9b271', './combine-7cf28d88', './GeometryAttribute-4f02e2ad', './GeometryAttributes-aff51037', './GeometryOffsetAttribute-102da468', './VertexFormat-65fd4be5', './CylinderGeometryLibrary-4e1a4cee'], (function (Transforms, BoxGeometry, Matrix2, Color, CylinderGeometry, defaultValue, EllipsoidGeometry, IndexDatatype, createTaskProcessorWorker, RuntimeError, ComponentDatatype, WebGLConstants, _commonjsHelpers, combine, GeometryAttribute, GeometryAttributes, GeometryOffsetAttribute, VertexFormat, CylinderGeometryLibrary) { 'use strict';
+define(['./Transforms-318b929f', './BoxGeometry-e586a0c5', './Matrix2-cae5ed62', './Color-2ae49520', './CylinderGeometry-67cf2f61', './defaultValue-50f7432c', './EllipsoidGeometry-d10fc493', './IndexDatatype-3480a65d', './createTaskProcessorWorker', './RuntimeError-6b9130a9', './ComponentDatatype-0b8ce457', './WebGLConstants-58abc51a', './combine-8462e002', './GeometryAttribute-a14260ea', './GeometryAttributes-8bab1b25', './GeometryOffsetAttribute-490bc2c9', './VertexFormat-29aad777', './CylinderGeometryLibrary-c59008db'], (function (Transforms, BoxGeometry, Matrix2, Color, CylinderGeometry, defaultValue, EllipsoidGeometry, IndexDatatype, createTaskProcessorWorker, RuntimeError, ComponentDatatype, WebGLConstants, combine, GeometryAttribute, GeometryAttributes, GeometryOffsetAttribute, VertexFormat, CylinderGeometryLibrary) { 'use strict';
 
   /**
    * Describes a renderable batch of geometry.

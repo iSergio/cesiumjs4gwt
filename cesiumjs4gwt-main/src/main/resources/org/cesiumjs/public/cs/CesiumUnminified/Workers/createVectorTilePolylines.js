@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.97
+ * Version 1.98
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./Matrix2-ab676047', './combine-7cf28d88', './AttributeCompression-8033f934', './ComponentDatatype-e06f4e16', './IndexDatatype-c2232ebd', './createTaskProcessorWorker', './RuntimeError-1088cc64', './defaultValue-a6eb9f34', './WebGLConstants-d81b330d'], (function (Matrix2, combine, AttributeCompression, ComponentDatatype, IndexDatatype, createTaskProcessorWorker, RuntimeError, defaultValue, WebGLConstants) { 'use strict';
+define(['./Matrix2-cae5ed62', './combine-8462e002', './AttributeCompression-b61f6b08', './ComponentDatatype-0b8ce457', './IndexDatatype-3480a65d', './createTaskProcessorWorker', './RuntimeError-6b9130a9', './defaultValue-50f7432c', './WebGLConstants-58abc51a'], (function (Matrix2, combine, AttributeCompression, ComponentDatatype, IndexDatatype, createTaskProcessorWorker, RuntimeError, defaultValue, WebGLConstants) { 'use strict';
 
   const maxShort = 32767;
 
