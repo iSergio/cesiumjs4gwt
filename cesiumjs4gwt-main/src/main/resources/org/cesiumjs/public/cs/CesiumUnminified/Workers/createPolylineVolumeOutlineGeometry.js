@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.97
+ * Version 1.98
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./defaultValue-a6eb9f34', './Matrix2-ab676047', './arrayRemoveDuplicates-63722a6f', './BoundingRectangle-66558952', './Transforms-c78c4637', './ComponentDatatype-e06f4e16', './PolylineVolumeGeometryLibrary-f654b9e2', './RuntimeError-1088cc64', './GeometryAttribute-4f02e2ad', './GeometryAttributes-aff51037', './IndexDatatype-c2232ebd', './PolygonPipeline-dd4a5392', './_commonjsHelpers-89c9b271', './combine-7cf28d88', './WebGLConstants-d81b330d', './EllipsoidTangentPlane-6691e012', './AxisAlignedBoundingBox-51d5a498', './IntersectionTests-f96cd46d', './Plane-c985a1d2', './PolylinePipeline-3b0ed402', './EllipsoidGeodesic-f7721517', './EllipsoidRhumbLine-34574f75'], (function (defaultValue, Matrix2, arrayRemoveDuplicates, BoundingRectangle, Transforms, ComponentDatatype, PolylineVolumeGeometryLibrary, RuntimeError, GeometryAttribute, GeometryAttributes, IndexDatatype, PolygonPipeline, _commonjsHelpers, combine, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane, PolylinePipeline, EllipsoidGeodesic, EllipsoidRhumbLine) { 'use strict';
+define(['./defaultValue-50f7432c', './Matrix2-cae5ed62', './arrayRemoveDuplicates-39c0a681', './BoundingRectangle-d5aaf1b6', './Transforms-318b929f', './ComponentDatatype-0b8ce457', './PolylineVolumeGeometryLibrary-c2543798', './RuntimeError-6b9130a9', './GeometryAttribute-a14260ea', './GeometryAttributes-8bab1b25', './IndexDatatype-3480a65d', './PolygonPipeline-c2095797', './combine-8462e002', './WebGLConstants-58abc51a', './EllipsoidTangentPlane-a17a02f5', './AxisAlignedBoundingBox-0b031c9f', './IntersectionTests-77ed1e84', './Plane-a03160e2', './PolylinePipeline-f14d2db3', './EllipsoidGeodesic-68722bdc', './EllipsoidRhumbLine-5546dbaf'], (function (defaultValue, Matrix2, arrayRemoveDuplicates, BoundingRectangle, Transforms, ComponentDatatype, PolylineVolumeGeometryLibrary, RuntimeError, GeometryAttribute, GeometryAttributes, IndexDatatype, PolygonPipeline, combine, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane, PolylinePipeline, EllipsoidGeodesic, EllipsoidRhumbLine) { 'use strict';
 
   function computeAttributes(positions, shape) {
     const attributes = new GeometryAttributes.GeometryAttributes();

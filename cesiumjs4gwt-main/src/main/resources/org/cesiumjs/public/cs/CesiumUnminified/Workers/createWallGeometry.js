@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.97
+ * Version 1.98
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./defaultValue-a6eb9f34', './Matrix2-ab676047', './Transforms-c78c4637', './ComponentDatatype-e06f4e16', './RuntimeError-1088cc64', './GeometryAttribute-4f02e2ad', './GeometryAttributes-aff51037', './IndexDatatype-c2232ebd', './VertexFormat-65fd4be5', './WallGeometryLibrary-483f681f', './_commonjsHelpers-89c9b271', './combine-7cf28d88', './WebGLConstants-d81b330d', './arrayRemoveDuplicates-63722a6f', './PolylinePipeline-3b0ed402', './EllipsoidGeodesic-f7721517', './EllipsoidRhumbLine-34574f75', './IntersectionTests-f96cd46d', './Plane-c985a1d2'], (function (defaultValue, Matrix2, Transforms, ComponentDatatype, RuntimeError, GeometryAttribute, GeometryAttributes, IndexDatatype, VertexFormat, WallGeometryLibrary, _commonjsHelpers, combine, WebGLConstants, arrayRemoveDuplicates, PolylinePipeline, EllipsoidGeodesic, EllipsoidRhumbLine, IntersectionTests, Plane) { 'use strict';
+define(['./defaultValue-50f7432c', './Matrix2-cae5ed62', './Transforms-318b929f', './ComponentDatatype-0b8ce457', './RuntimeError-6b9130a9', './GeometryAttribute-a14260ea', './GeometryAttributes-8bab1b25', './IndexDatatype-3480a65d', './VertexFormat-29aad777', './WallGeometryLibrary-3f2ec4d5', './combine-8462e002', './WebGLConstants-58abc51a', './arrayRemoveDuplicates-39c0a681', './PolylinePipeline-f14d2db3', './EllipsoidGeodesic-68722bdc', './EllipsoidRhumbLine-5546dbaf', './IntersectionTests-77ed1e84', './Plane-a03160e2'], (function (defaultValue, Matrix2, Transforms, ComponentDatatype, RuntimeError, GeometryAttribute, GeometryAttributes, IndexDatatype, VertexFormat, WallGeometryLibrary, combine, WebGLConstants, arrayRemoveDuplicates, PolylinePipeline, EllipsoidGeodesic, EllipsoidRhumbLine, IntersectionTests, Plane) { 'use strict';
 
   const scratchCartesian3Position1 = new Matrix2.Cartesian3();
   const scratchCartesian3Position2 = new Matrix2.Cartesian3();

@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.97
+ * Version 1.98
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./Transforms-c78c4637', './Matrix2-ab676047', './RuntimeError-1088cc64', './defaultValue-a6eb9f34', './ComponentDatatype-e06f4e16', './ArcType-b714639b', './arrayRemoveDuplicates-63722a6f', './EllipsoidGeodesic-f7721517', './EllipsoidRhumbLine-34574f75', './EncodedCartesian3-7959a913', './GeometryAttribute-4f02e2ad', './IntersectionTests-f96cd46d', './Plane-c985a1d2', './WebMercatorProjection-0d64470e', './_commonjsHelpers-89c9b271', './combine-7cf28d88', './WebGLConstants-d81b330d'], (function (Transforms, Matrix2, RuntimeError, defaultValue, ComponentDatatype, ArcType, arrayRemoveDuplicates, EllipsoidGeodesic, EllipsoidRhumbLine, EncodedCartesian3, GeometryAttribute, IntersectionTests, Plane, WebMercatorProjection, _commonjsHelpers, combine, WebGLConstants) { 'use strict';
+define(['./Transforms-318b929f', './Matrix2-cae5ed62', './RuntimeError-6b9130a9', './defaultValue-50f7432c', './ComponentDatatype-0b8ce457', './ArcType-24f44850', './arrayRemoveDuplicates-39c0a681', './EllipsoidGeodesic-68722bdc', './EllipsoidRhumbLine-5546dbaf', './EncodedCartesian3-a8cb9052', './GeometryAttribute-a14260ea', './IntersectionTests-77ed1e84', './Plane-a03160e2', './WebMercatorProjection-0197b2e8', './combine-8462e002', './WebGLConstants-58abc51a'], (function (Transforms, Matrix2, RuntimeError, defaultValue, ComponentDatatype, ArcType, arrayRemoveDuplicates, EllipsoidGeodesic, EllipsoidRhumbLine, EncodedCartesian3, GeometryAttribute, IntersectionTests, Plane, WebMercatorProjection, combine, WebGLConstants) { 'use strict';
 
   /**
    * A tiling scheme for geometry referenced to a simple {@link GeographicProjection} where
