@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.97
+ * Version 1.98
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./AxisAlignedBoundingBox-51d5a498', './Matrix2-ab676047', './defaultValue-a6eb9f34', './TerrainEncoding-74a00123', './IndexDatatype-c2232ebd', './ComponentDatatype-e06f4e16', './RuntimeError-1088cc64', './Transforms-c78c4637', './WebMercatorProjection-0d64470e', './createTaskProcessorWorker', './AttributeCompression-8033f934', './WebGLConstants-d81b330d', './_commonjsHelpers-89c9b271', './combine-7cf28d88'], (function (AxisAlignedBoundingBox, Matrix2, defaultValue, TerrainEncoding, IndexDatatype, ComponentDatatype, RuntimeError, Transforms, WebMercatorProjection, createTaskProcessorWorker, AttributeCompression, WebGLConstants, _commonjsHelpers, combine) { 'use strict';
+define(['./AxisAlignedBoundingBox-0b031c9f', './Matrix2-cae5ed62', './defaultValue-50f7432c', './TerrainEncoding-777b8539', './IndexDatatype-3480a65d', './ComponentDatatype-0b8ce457', './RuntimeError-6b9130a9', './Transforms-318b929f', './WebMercatorProjection-0197b2e8', './createTaskProcessorWorker', './AttributeCompression-b61f6b08', './WebGLConstants-58abc51a', './combine-8462e002'], (function (AxisAlignedBoundingBox, Matrix2, defaultValue, TerrainEncoding, IndexDatatype, ComponentDatatype, RuntimeError, Transforms, WebMercatorProjection, createTaskProcessorWorker, AttributeCompression, WebGLConstants, combine) { 'use strict';
 
   /**
    * Provides terrain or other geometry for the surface of an ellipsoid.  The surface geometry is

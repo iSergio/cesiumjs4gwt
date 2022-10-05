@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.97
+ * Version 1.98
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-typeof self>"u"&&(self={}),self.onmessage=function(r){var a=r.data;require(a.loaderConfig,[a.workerModule],function(c){self.onmessage=c,CESIUM_BASE_URL=a.loaderConfig.baseUrl})};function setTimeout(r){r()}/** vim: et:ts=4:sw=4:sts=4
+typeof self>"u"&&(self={}),self.onmessage=function(r){var a=r.data;require(a.loaderConfig,[a.workerModule],function(c){self.onmessage=c,self.CESIUM_BASE_URL=a.loaderConfig.baseUrl})};function setTimeout(r){r()}/** vim: et:ts=4:sw=4:sts=4
  * @license RequireJS 2.1.20 Copyright (c) 2010-2015, The Dojo Foundation All Rights Reserved.
  * Available via the MIT or new BSD license.
  * see: http://github.com/jrburke/requirejs for details

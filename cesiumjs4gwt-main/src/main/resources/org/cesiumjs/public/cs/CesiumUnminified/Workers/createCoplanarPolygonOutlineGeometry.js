@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.97
+ * Version 1.98
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./arrayRemoveDuplicates-63722a6f', './Transforms-c78c4637', './Matrix2-ab676047', './RuntimeError-1088cc64', './ComponentDatatype-e06f4e16', './CoplanarPolygonGeometryLibrary-a1408391', './defaultValue-a6eb9f34', './GeometryAttribute-4f02e2ad', './GeometryAttributes-aff51037', './GeometryInstance-6f541616', './GeometryPipeline-5a61c463', './IndexDatatype-c2232ebd', './PolygonGeometryLibrary-5dd88675', './_commonjsHelpers-89c9b271', './combine-7cf28d88', './WebGLConstants-d81b330d', './OrientedBoundingBox-28f77441', './EllipsoidTangentPlane-6691e012', './AxisAlignedBoundingBox-51d5a498', './IntersectionTests-f96cd46d', './Plane-c985a1d2', './AttributeCompression-8033f934', './EncodedCartesian3-7959a913', './ArcType-b714639b', './EllipsoidRhumbLine-34574f75', './PolygonPipeline-dd4a5392'], (function (arrayRemoveDuplicates, Transforms, Matrix2, RuntimeError, ComponentDatatype, CoplanarPolygonGeometryLibrary, defaultValue, GeometryAttribute, GeometryAttributes, GeometryInstance, GeometryPipeline, IndexDatatype, PolygonGeometryLibrary, _commonjsHelpers, combine, WebGLConstants, OrientedBoundingBox, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane, AttributeCompression, EncodedCartesian3, ArcType, EllipsoidRhumbLine, PolygonPipeline) { 'use strict';
+define(['./arrayRemoveDuplicates-39c0a681', './Transforms-318b929f', './Matrix2-cae5ed62', './RuntimeError-6b9130a9', './ComponentDatatype-0b8ce457', './CoplanarPolygonGeometryLibrary-26aaf75f', './defaultValue-50f7432c', './GeometryAttribute-a14260ea', './GeometryAttributes-8bab1b25', './GeometryInstance-ef91d372', './GeometryPipeline-58a6c637', './IndexDatatype-3480a65d', './PolygonGeometryLibrary-2439c5c3', './combine-8462e002', './WebGLConstants-58abc51a', './OrientedBoundingBox-05a06145', './EllipsoidTangentPlane-a17a02f5', './AxisAlignedBoundingBox-0b031c9f', './IntersectionTests-77ed1e84', './Plane-a03160e2', './AttributeCompression-b61f6b08', './EncodedCartesian3-a8cb9052', './ArcType-24f44850', './EllipsoidRhumbLine-5546dbaf', './PolygonPipeline-c2095797'], (function (arrayRemoveDuplicates, Transforms, Matrix2, RuntimeError, ComponentDatatype, CoplanarPolygonGeometryLibrary, defaultValue, GeometryAttribute, GeometryAttributes, GeometryInstance, GeometryPipeline, IndexDatatype, PolygonGeometryLibrary, combine, WebGLConstants, OrientedBoundingBox, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane, AttributeCompression, EncodedCartesian3, ArcType, EllipsoidRhumbLine, PolygonPipeline) { 'use strict';
 
   function createGeometryFromPositions(positions) {
     const length = positions.length;

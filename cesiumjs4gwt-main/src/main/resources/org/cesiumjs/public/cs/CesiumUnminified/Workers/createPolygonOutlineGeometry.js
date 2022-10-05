@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.97
+ * Version 1.98
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./defaultValue-a6eb9f34', './Matrix2-ab676047', './ArcType-b714639b', './Transforms-c78c4637', './RuntimeError-1088cc64', './ComponentDatatype-e06f4e16', './EllipsoidTangentPlane-6691e012', './GeometryAttribute-4f02e2ad', './GeometryAttributes-aff51037', './GeometryInstance-6f541616', './GeometryOffsetAttribute-102da468', './GeometryPipeline-5a61c463', './IndexDatatype-c2232ebd', './PolygonGeometryLibrary-5dd88675', './PolygonPipeline-dd4a5392', './_commonjsHelpers-89c9b271', './combine-7cf28d88', './WebGLConstants-d81b330d', './AxisAlignedBoundingBox-51d5a498', './IntersectionTests-f96cd46d', './Plane-c985a1d2', './AttributeCompression-8033f934', './EncodedCartesian3-7959a913', './arrayRemoveDuplicates-63722a6f', './EllipsoidRhumbLine-34574f75'], (function (defaultValue, Matrix2, ArcType, Transforms, RuntimeError, ComponentDatatype, EllipsoidTangentPlane, GeometryAttribute, GeometryAttributes, GeometryInstance, GeometryOffsetAttribute, GeometryPipeline, IndexDatatype, PolygonGeometryLibrary, PolygonPipeline, _commonjsHelpers, combine, WebGLConstants, AxisAlignedBoundingBox, IntersectionTests, Plane, AttributeCompression, EncodedCartesian3, arrayRemoveDuplicates, EllipsoidRhumbLine) { 'use strict';
+define(['./defaultValue-50f7432c', './Matrix2-cae5ed62', './ArcType-24f44850', './Transforms-318b929f', './RuntimeError-6b9130a9', './ComponentDatatype-0b8ce457', './EllipsoidTangentPlane-a17a02f5', './GeometryAttribute-a14260ea', './GeometryAttributes-8bab1b25', './GeometryInstance-ef91d372', './GeometryOffsetAttribute-490bc2c9', './GeometryPipeline-58a6c637', './IndexDatatype-3480a65d', './PolygonGeometryLibrary-2439c5c3', './PolygonPipeline-c2095797', './combine-8462e002', './WebGLConstants-58abc51a', './AxisAlignedBoundingBox-0b031c9f', './IntersectionTests-77ed1e84', './Plane-a03160e2', './AttributeCompression-b61f6b08', './EncodedCartesian3-a8cb9052', './arrayRemoveDuplicates-39c0a681', './EllipsoidRhumbLine-5546dbaf'], (function (defaultValue, Matrix2, ArcType, Transforms, RuntimeError, ComponentDatatype, EllipsoidTangentPlane, GeometryAttribute, GeometryAttributes, GeometryInstance, GeometryOffsetAttribute, GeometryPipeline, IndexDatatype, PolygonGeometryLibrary, PolygonPipeline, combine, WebGLConstants, AxisAlignedBoundingBox, IntersectionTests, Plane, AttributeCompression, EncodedCartesian3, arrayRemoveDuplicates, EllipsoidRhumbLine) { 'use strict';
 
   const createGeometryFromPositionsPositions = [];
   const createGeometryFromPositionsSubdivided = [];

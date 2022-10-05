@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.97
+ * Version 1.98
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./AttributeCompression-8033f934', './Transforms-c78c4637', './Matrix2-ab676047', './defaultValue-a6eb9f34', './TerrainEncoding-74a00123', './IndexDatatype-c2232ebd', './RuntimeError-1088cc64', './ComponentDatatype-e06f4e16', './OrientedBoundingBox-28f77441', './createTaskProcessorWorker', './_commonjsHelpers-89c9b271', './combine-7cf28d88', './WebGLConstants-d81b330d', './EllipsoidTangentPlane-6691e012', './AxisAlignedBoundingBox-51d5a498', './IntersectionTests-f96cd46d', './Plane-c985a1d2'], (function (AttributeCompression, Transforms, Matrix2, defaultValue, TerrainEncoding, IndexDatatype, RuntimeError, ComponentDatatype, OrientedBoundingBox, createTaskProcessorWorker, _commonjsHelpers, combine, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane) { 'use strict';
+define(['./AttributeCompression-b61f6b08', './Transforms-318b929f', './Matrix2-cae5ed62', './defaultValue-50f7432c', './TerrainEncoding-777b8539', './IndexDatatype-3480a65d', './RuntimeError-6b9130a9', './ComponentDatatype-0b8ce457', './OrientedBoundingBox-05a06145', './createTaskProcessorWorker', './combine-8462e002', './WebGLConstants-58abc51a', './EllipsoidTangentPlane-a17a02f5', './AxisAlignedBoundingBox-0b031c9f', './IntersectionTests-77ed1e84', './Plane-a03160e2'], (function (AttributeCompression, Transforms, Matrix2, defaultValue, TerrainEncoding, IndexDatatype, RuntimeError, ComponentDatatype, OrientedBoundingBox, createTaskProcessorWorker, combine, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane) { 'use strict';
 
   /**
    * Contains functions for operating on 2D triangles.
