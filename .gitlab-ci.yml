@@ -102,7 +102,7 @@ deploy:cesiumjs4gwt-main:
     - develop
     - tags
   script:
-    - mvn $MAVEN_CLI_OPTS -pl '!cesium4gwt-showcase' -DskipTests=true deploy
+    - mvn $MAVEN_CLI_OPTS -pl :cesiumjs4gwt,:cesiumjs4gwt-main -DskipTests=true deploy
 
 deploy:cesiumjs4gwt-showcase:
   stage: deploy
