@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.98
+ * Version 1.99
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./defaultValue-50f7432c', './Transforms-318b929f', './Matrix2-cae5ed62', './RuntimeError-6b9130a9', './ComponentDatatype-0b8ce457', './GeometryAttribute-a14260ea', './GeometryAttributes-8bab1b25', './VertexFormat-29aad777', './combine-8462e002', './WebGLConstants-58abc51a'], (function (defaultValue, Transforms, Matrix2, RuntimeError, ComponentDatatype, GeometryAttribute, GeometryAttributes, VertexFormat, combine, WebGLConstants) { 'use strict';
+define(['./defaultValue-135942ca', './Transforms-ac2d28a9', './Matrix3-ea964448', './Check-40d84a28', './ComponentDatatype-ebdce3ba', './GeometryAttribute-51d61732', './GeometryAttributes-899f8bd0', './VertexFormat-1d6950e1', './Math-efde0c7b', './Matrix2-f9f1b94b', './RuntimeError-f0dada00', './combine-462d91dd', './WebGLConstants-fcb70ee3'], (function (defaultValue, Transforms, Matrix3, Check, ComponentDatatype, GeometryAttribute, GeometryAttributes, VertexFormat, Math$1, Matrix2, RuntimeError, combine, WebGLConstants) { 'use strict';
 
   /**
    * Describes geometry representing a plane centered at the origin, with a unit width and length.
@@ -65,8 +65,8 @@ define(['./defaultValue-50f7432c', './Transforms-318b929f', './Matrix2-cae5ed62'
    */
   PlaneGeometry.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("value", value);
-    RuntimeError.Check.defined("array", array);
+    Check.Check.typeOf.object("value", value);
+    Check.Check.defined("array", array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -91,7 +91,7 @@ define(['./defaultValue-50f7432c', './Transforms-318b929f', './Matrix2-cae5ed62'
    */
   PlaneGeometry.unpack = function (array, startingIndex, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("array", array);
+    Check.Check.defined("array", array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -111,8 +111,8 @@ define(['./defaultValue-50f7432c', './Transforms-318b929f', './Matrix2-cae5ed62'
     return result;
   };
 
-  const min = new Matrix2.Cartesian3(-0.5, -0.5, 0.0);
-  const max = new Matrix2.Cartesian3(0.5, 0.5, 0.0);
+  const min = new Matrix3.Cartesian3(-0.5, -0.5, 0.0);
+  const max = new Matrix3.Cartesian3(0.5, 0.5, 0.0);
 
   /**
    * Computes the geometric representation of a plane, including its vertices, indices, and a bounding sphere.
@@ -259,7 +259,7 @@ define(['./defaultValue-50f7432c', './Transforms-318b929f', './Matrix2-cae5ed62'
       attributes: attributes,
       indices: indices,
       primitiveType: GeometryAttribute.PrimitiveType.TRIANGLES,
-      boundingSphere: new Transforms.BoundingSphere(Matrix2.Cartesian3.ZERO, Math.sqrt(2.0)),
+      boundingSphere: new Transforms.BoundingSphere(Matrix3.Cartesian3.ZERO, Math.sqrt(2.0)),
     });
   };
 

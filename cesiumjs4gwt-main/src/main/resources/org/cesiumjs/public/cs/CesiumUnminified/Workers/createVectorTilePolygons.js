@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.98
+ * Version 1.99
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,10 +23,10 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./AttributeCompression-b61f6b08', './Matrix2-cae5ed62', './Color-2ae49520', './defaultValue-50f7432c', './IndexDatatype-3480a65d', './ComponentDatatype-0b8ce457', './OrientedBoundingBox-05a06145', './createTaskProcessorWorker', './RuntimeError-6b9130a9', './Transforms-318b929f', './combine-8462e002', './WebGLConstants-58abc51a', './EllipsoidTangentPlane-a17a02f5', './AxisAlignedBoundingBox-0b031c9f', './IntersectionTests-77ed1e84', './Plane-a03160e2'], (function (AttributeCompression, Matrix2, Color, defaultValue, IndexDatatype, ComponentDatatype, OrientedBoundingBox, createTaskProcessorWorker, RuntimeError, Transforms, combine, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane) { 'use strict';
+define(['./AttributeCompression-53c7fda2', './Matrix3-ea964448', './Color-7ea3613e', './defaultValue-135942ca', './IndexDatatype-fa75fe25', './Math-efde0c7b', './OrientedBoundingBox-14c97a6c', './Matrix2-f9f1b94b', './createTaskProcessorWorker', './ComponentDatatype-ebdce3ba', './Check-40d84a28', './WebGLConstants-fcb70ee3', './Transforms-ac2d28a9', './combine-462d91dd', './RuntimeError-f0dada00', './EllipsoidTangentPlane-244dda7a', './AxisAlignedBoundingBox-48df2a2e', './IntersectionTests-4ab30dca', './Plane-93af52b2'], (function (AttributeCompression, Matrix3, Color, defaultValue, IndexDatatype, Math$1, OrientedBoundingBox, Matrix2, createTaskProcessorWorker, ComponentDatatype, Check, WebGLConstants, Transforms, combine, RuntimeError, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane) { 'use strict';
 
-  const scratchCenter = new Matrix2.Cartesian3();
-  const scratchEllipsoid = new Matrix2.Ellipsoid();
+  const scratchCenter = new Matrix3.Cartesian3();
+  const scratchEllipsoid = new Matrix3.Ellipsoid();
   const scratchRectangle = new Matrix2.Rectangle();
   const scratchScalars = {
     min: undefined,
@@ -43,11 +43,11 @@ define(['./AttributeCompression-b61f6b08', './Matrix2-cae5ed62', './Color-2ae495
     scratchScalars.min = packedBuffer[offset++];
     scratchScalars.max = packedBuffer[offset++];
 
-    Matrix2.Cartesian3.unpack(packedBuffer, offset, scratchCenter);
-    offset += Matrix2.Cartesian3.packedLength;
+    Matrix3.Cartesian3.unpack(packedBuffer, offset, scratchCenter);
+    offset += Matrix3.Cartesian3.packedLength;
 
-    Matrix2.Ellipsoid.unpack(packedBuffer, offset, scratchEllipsoid);
-    offset += Matrix2.Ellipsoid.packedLength;
+    Matrix3.Ellipsoid.unpack(packedBuffer, offset, scratchEllipsoid);
+    offset += Matrix3.Ellipsoid.packedLength;
 
     Matrix2.Rectangle.unpack(packedBuffer, offset, scratchRectangle);
   }
@@ -107,12 +107,12 @@ define(['./AttributeCompression-b61f6b08', './Matrix2-cae5ed62', './Color-2ae495
 
   const maxShort = 32767;
 
-  const scratchEncodedPosition = new Matrix2.Cartesian3();
-  const scratchNormal = new Matrix2.Cartesian3();
-  const scratchScaledNormal = new Matrix2.Cartesian3();
-  const scratchMinHeightPosition = new Matrix2.Cartesian3();
-  const scratchMaxHeightPosition = new Matrix2.Cartesian3();
-  const scratchBVCartographic = new Matrix2.Cartographic();
+  const scratchEncodedPosition = new Matrix3.Cartesian3();
+  const scratchNormal = new Matrix3.Cartesian3();
+  const scratchScaledNormal = new Matrix3.Cartesian3();
+  const scratchMinHeightPosition = new Matrix3.Cartesian3();
+  const scratchMaxHeightPosition = new Matrix3.Cartesian3();
+  const scratchBVCartographic = new Matrix3.Cartographic();
   const scratchBVRectangle = new Matrix2.Rectangle();
 
   function createVectorTilePolygons(parameters, transferableObjects) {
@@ -161,15 +161,15 @@ define(['./AttributeCompression-b61f6b08', './Matrix2-cae5ed62', './Color-2ae495
       const u = uBuffer[i];
       const v = vBuffer[i];
 
-      const x = ComponentDatatype.CesiumMath.lerp(rectangle.west, rectangle.east, u / maxShort);
-      const y = ComponentDatatype.CesiumMath.lerp(rectangle.south, rectangle.north, v / maxShort);
+      const x = Math$1.CesiumMath.lerp(rectangle.west, rectangle.east, u / maxShort);
+      const y = Math$1.CesiumMath.lerp(rectangle.south, rectangle.north, v / maxShort);
 
-      const cart = Matrix2.Cartographic.fromRadians(x, y, 0.0, scratchBVCartographic);
+      const cart = Matrix3.Cartographic.fromRadians(x, y, 0.0, scratchBVCartographic);
       const decodedPosition = ellipsoid.cartographicToCartesian(
         cart,
         scratchEncodedPosition
       );
-      Matrix2.Cartesian3.pack(decodedPosition, decodedPositions, i * 3);
+      Matrix3.Cartesian3.pack(decodedPosition, decodedPositions, i * 3);
     }
 
     const countsLength = counts.length;
@@ -269,7 +269,7 @@ define(['./AttributeCompression-b61f6b08', './Matrix2-cae5ed62', './Color-2ae495
       let maxLon = Number.NEGATIVE_INFINITY;
 
       for (j = 0; j < polygonCount; ++j) {
-        const position = Matrix2.Cartesian3.unpack(
+        const position = Matrix3.Cartesian3.unpack(
           decodedPositions,
           polygonOffset * 3 + j * 3,
           scratchEncodedPosition
@@ -289,33 +289,33 @@ define(['./AttributeCompression-b61f6b08', './Matrix2-cae5ed62', './Color-2ae495
         maxLon = Math.max(lon, maxLon);
 
         const normal = ellipsoid.geodeticSurfaceNormal(position, scratchNormal);
-        let scaledNormal = Matrix2.Cartesian3.multiplyByScalar(
+        let scaledNormal = Matrix3.Cartesian3.multiplyByScalar(
           normal,
           polygonMinimumHeight,
           scratchScaledNormal
         );
-        const minHeightPosition = Matrix2.Cartesian3.add(
+        const minHeightPosition = Matrix3.Cartesian3.add(
           position,
           scaledNormal,
           scratchMinHeightPosition
         );
 
-        scaledNormal = Matrix2.Cartesian3.multiplyByScalar(
+        scaledNormal = Matrix3.Cartesian3.multiplyByScalar(
           normal,
           polygonMaximumHeight,
           scaledNormal
         );
-        const maxHeightPosition = Matrix2.Cartesian3.add(
+        const maxHeightPosition = Matrix3.Cartesian3.add(
           position,
           scaledNormal,
           scratchMaxHeightPosition
         );
 
-        Matrix2.Cartesian3.subtract(maxHeightPosition, center, maxHeightPosition);
-        Matrix2.Cartesian3.subtract(minHeightPosition, center, minHeightPosition);
+        Matrix3.Cartesian3.subtract(maxHeightPosition, center, maxHeightPosition);
+        Matrix3.Cartesian3.subtract(minHeightPosition, center, minHeightPosition);
 
-        Matrix2.Cartesian3.pack(maxHeightPosition, batchedPositions, positionIndex);
-        Matrix2.Cartesian3.pack(minHeightPosition, batchedPositions, positionIndex + 3);
+        Matrix3.Cartesian3.pack(maxHeightPosition, batchedPositions, positionIndex);
+        Matrix3.Cartesian3.pack(minHeightPosition, batchedPositions, positionIndex + 3);
 
         batchedIds[batchIdIndex] = batchId;
         batchedIds[batchIdIndex + 1] = batchId;

@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.98
+ * Version 1.99
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,14 +23,14 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./Matrix2-cae5ed62', './defaultValue-50f7432c', './EllipseGeometry-700562a3', './RuntimeError-6b9130a9', './ComponentDatatype-0b8ce457', './WebGLConstants-58abc51a', './Transforms-318b929f', './combine-8462e002', './EllipseGeometryLibrary-9214016d', './GeometryAttribute-a14260ea', './GeometryAttributes-8bab1b25', './GeometryInstance-ef91d372', './GeometryOffsetAttribute-490bc2c9', './GeometryPipeline-58a6c637', './AttributeCompression-b61f6b08', './EncodedCartesian3-a8cb9052', './IndexDatatype-3480a65d', './IntersectionTests-77ed1e84', './Plane-a03160e2', './VertexFormat-29aad777'], (function (Matrix2, defaultValue, EllipseGeometry, RuntimeError, ComponentDatatype, WebGLConstants, Transforms, combine, EllipseGeometryLibrary, GeometryAttribute, GeometryAttributes, GeometryInstance, GeometryOffsetAttribute, GeometryPipeline, AttributeCompression, EncodedCartesian3, IndexDatatype, IntersectionTests, Plane, VertexFormat) { 'use strict';
+define(['./Matrix3-ea964448', './defaultValue-135942ca', './EllipseGeometry-08ba4483', './Check-40d84a28', './Math-efde0c7b', './Transforms-ac2d28a9', './Matrix2-f9f1b94b', './RuntimeError-f0dada00', './combine-462d91dd', './ComponentDatatype-ebdce3ba', './WebGLConstants-fcb70ee3', './EllipseGeometryLibrary-61eaea89', './GeometryAttribute-51d61732', './GeometryAttributes-899f8bd0', './GeometryInstance-bb34b63f', './GeometryOffsetAttribute-d3a42805', './GeometryPipeline-576f16cd', './AttributeCompression-53c7fda2', './EncodedCartesian3-4040c81e', './IndexDatatype-fa75fe25', './IntersectionTests-4ab30dca', './Plane-93af52b2', './VertexFormat-1d6950e1'], (function (Matrix3, defaultValue, EllipseGeometry, Check, Math, Transforms, Matrix2, RuntimeError, combine, ComponentDatatype, WebGLConstants, EllipseGeometryLibrary, GeometryAttribute, GeometryAttributes, GeometryInstance, GeometryOffsetAttribute, GeometryPipeline, AttributeCompression, EncodedCartesian3, IndexDatatype, IntersectionTests, Plane, VertexFormat) { 'use strict';
 
   function createEllipseGeometry(ellipseGeometry, offset) {
     if (defaultValue.defined(offset)) {
       ellipseGeometry = EllipseGeometry.EllipseGeometry.unpack(ellipseGeometry, offset);
     }
-    ellipseGeometry._center = Matrix2.Cartesian3.clone(ellipseGeometry._center);
-    ellipseGeometry._ellipsoid = Matrix2.Ellipsoid.clone(ellipseGeometry._ellipsoid);
+    ellipseGeometry._center = Matrix3.Cartesian3.clone(ellipseGeometry._center);
+    ellipseGeometry._ellipsoid = Matrix3.Ellipsoid.clone(ellipseGeometry._ellipsoid);
     return EllipseGeometry.EllipseGeometry.createGeometry(ellipseGeometry);
   }
 
