@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.98
+ * Version 1.99
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./Matrix2-cae5ed62', './AxisAlignedBoundingBox-0b031c9f', './Transforms-318b929f', './defaultValue-50f7432c', './RuntimeError-6b9130a9', './TerrainEncoding-777b8539', './ComponentDatatype-0b8ce457', './OrientedBoundingBox-05a06145', './WebMercatorProjection-0197b2e8', './createTaskProcessorWorker', './combine-8462e002', './AttributeCompression-b61f6b08', './WebGLConstants-58abc51a', './EllipsoidTangentPlane-a17a02f5', './IntersectionTests-77ed1e84', './Plane-a03160e2'], (function (Matrix2, AxisAlignedBoundingBox, Transforms, defaultValue, RuntimeError, TerrainEncoding, ComponentDatatype, OrientedBoundingBox, WebMercatorProjection, createTaskProcessorWorker, combine, AttributeCompression, WebGLConstants, EllipsoidTangentPlane, IntersectionTests, Plane) { 'use strict';
+define(['./Matrix3-ea964448', './AxisAlignedBoundingBox-48df2a2e', './Transforms-ac2d28a9', './Matrix2-f9f1b94b', './defaultValue-135942ca', './Check-40d84a28', './TerrainEncoding-3edd4345', './Math-efde0c7b', './OrientedBoundingBox-14c97a6c', './WebMercatorProjection-7dd32693', './RuntimeError-f0dada00', './createTaskProcessorWorker', './combine-462d91dd', './AttributeCompression-53c7fda2', './ComponentDatatype-ebdce3ba', './WebGLConstants-fcb70ee3', './EllipsoidTangentPlane-244dda7a', './IntersectionTests-4ab30dca', './Plane-93af52b2'], (function (Matrix3, AxisAlignedBoundingBox, Transforms, Matrix2, defaultValue, Check, TerrainEncoding, Math$1, OrientedBoundingBox, WebMercatorProjection, RuntimeError, createTaskProcessorWorker, combine, AttributeCompression, ComponentDatatype, WebGLConstants, EllipsoidTangentPlane, IntersectionTests, Plane) { 'use strict';
 
   /**
    * The encoding that is used for a heightmap
@@ -74,10 +74,10 @@ define(['./Matrix2-cae5ed62', './AxisAlignedBoundingBox-0b031c9f', './Transforms
     isBigEndian: false,
   });
 
-  const cartesian3Scratch = new Matrix2.Cartesian3();
+  const cartesian3Scratch = new Matrix3.Cartesian3();
   const matrix4Scratch = new Matrix2.Matrix4();
-  const minimumScratch = new Matrix2.Cartesian3();
-  const maximumScratch = new Matrix2.Cartesian3();
+  const minimumScratch = new Matrix3.Cartesian3();
+  const maximumScratch = new Matrix3.Cartesian3();
 
   /**
    * Fills an array of vertices from a heightmap image.
@@ -152,16 +152,16 @@ define(['./Matrix2-cae5ed62', './AxisAlignedBoundingBox-0b031c9f', './Transforms
   HeightmapTessellator.computeVertices = function (options) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(options) || !defaultValue.defined(options.heightmap)) {
-      throw new RuntimeError.DeveloperError("options.heightmap is required.");
+      throw new Check.DeveloperError("options.heightmap is required.");
     }
     if (!defaultValue.defined(options.width) || !defaultValue.defined(options.height)) {
-      throw new RuntimeError.DeveloperError("options.width and options.height are required.");
+      throw new Check.DeveloperError("options.width and options.height are required.");
     }
     if (!defaultValue.defined(options.nativeRectangle)) {
-      throw new RuntimeError.DeveloperError("options.nativeRectangle is required.");
+      throw new Check.DeveloperError("options.nativeRectangle is required.");
     }
     if (!defaultValue.defined(options.skirtHeight)) {
-      throw new RuntimeError.DeveloperError("options.skirtHeight is required.");
+      throw new Check.DeveloperError("options.skirtHeight is required.");
     }
     //>>includeEnd('debug');
 
@@ -175,8 +175,8 @@ define(['./Matrix2-cae5ed62', './AxisAlignedBoundingBox-0b031c9f', './Transforms
     const sqrt = Math.sqrt;
     const atan = Math.atan;
     const exp = Math.exp;
-    const piOverTwo = ComponentDatatype.CesiumMath.PI_OVER_TWO;
-    const toRadians = ComponentDatatype.CesiumMath.toRadians;
+    const piOverTwo = Math$1.CesiumMath.PI_OVER_TWO;
+    const toRadians = Math$1.CesiumMath.toRadians;
 
     const heightmap = options.heightmap;
     const width = options.width;
@@ -185,7 +185,7 @@ define(['./Matrix2-cae5ed62', './AxisAlignedBoundingBox-0b031c9f', './Transforms
     const hasSkirts = skirtHeight > 0.0;
 
     const isGeographic = defaultValue.defaultValue(options.isGeographic, true);
-    const ellipsoid = defaultValue.defaultValue(options.ellipsoid, Matrix2.Ellipsoid.WGS84);
+    const ellipsoid = defaultValue.defaultValue(options.ellipsoid, Matrix3.Ellipsoid.WGS84);
 
     const oneOverGlobeSemimajorAxis = 1.0 / ellipsoid.maximumRadius;
 
@@ -222,7 +222,7 @@ define(['./Matrix2-cae5ed62', './AxisAlignedBoundingBox-0b031c9f', './Transforms
 
     let relativeToCenter = options.relativeToCenter;
     const hasRelativeToCenter = defaultValue.defined(relativeToCenter);
-    relativeToCenter = hasRelativeToCenter ? relativeToCenter : Matrix2.Cartesian3.ZERO;
+    relativeToCenter = hasRelativeToCenter ? relativeToCenter : Matrix3.Cartesian3.ZERO;
     const includeWebMercatorT = defaultValue.defaultValue(options.includeWebMercatorT, false);
 
     const exaggeration = defaultValue.defaultValue(options.exaggeration, 1.0);
@@ -356,7 +356,7 @@ define(['./Matrix2-cae5ed62', './AxisAlignedBoundingBox-0b031c9f', './Transforms
       }
 
       let v = (latitude - geographicSouth) / (geographicNorth - geographicSouth);
-      v = ComponentDatatype.CesiumMath.clamp(v, 0.0, 1.0);
+      v = Math$1.CesiumMath.clamp(v, 0.0, 1.0);
 
       const isNorthEdge = rowIndex === startRow;
       const isSouthEdge = rowIndex === endRow - 1;
@@ -435,7 +435,7 @@ define(['./Matrix2-cae5ed62', './AxisAlignedBoundingBox-0b031c9f', './Transforms
         }
 
         let u = (longitude - geographicWest) / (geographicEast - geographicWest);
-        u = ComponentDatatype.CesiumMath.clamp(u, 0.0, 1.0);
+        u = Math$1.CesiumMath.clamp(u, 0.0, 1.0);
 
         let index = row * width + col;
 
@@ -482,14 +482,14 @@ define(['./Matrix2-cae5ed62', './AxisAlignedBoundingBox-0b031c9f', './Transforms
         const rSurfaceY = kY * oneOverGamma;
         const rSurfaceZ = kZ * oneOverGamma;
 
-        const position = new Matrix2.Cartesian3();
+        const position = new Matrix3.Cartesian3();
         position.x = rSurfaceX + nX * heightSample;
         position.y = rSurfaceY + nY * heightSample;
         position.z = rSurfaceZ + nZ * heightSample;
 
         Matrix2.Matrix4.multiplyByPoint(toENU, position, cartesian3Scratch);
-        Matrix2.Cartesian3.minimumByComponent(cartesian3Scratch, minimum, minimum);
-        Matrix2.Cartesian3.maximumByComponent(cartesian3Scratch, maximum, maximum);
+        Matrix3.Cartesian3.minimumByComponent(cartesian3Scratch, minimum, minimum);
+        Matrix3.Cartesian3.maximumByComponent(cartesian3Scratch, maximum, maximum);
         hMin = Math.min(hMin, heightSample);
 
         positions[index] = position;
@@ -2701,7 +2701,7 @@ define(['./Matrix2-cae5ed62', './AxisAlignedBoundingBox-0b031c9f', './Transforms
       parameters.height = result.height;
     }
 
-    parameters.ellipsoid = Matrix2.Ellipsoid.clone(parameters.ellipsoid);
+    parameters.ellipsoid = Matrix3.Ellipsoid.clone(parameters.ellipsoid);
     parameters.rectangle = Matrix2.Rectangle.clone(parameters.rectangle);
 
     const statistics = HeightmapTessellator$1.computeVertices(parameters);

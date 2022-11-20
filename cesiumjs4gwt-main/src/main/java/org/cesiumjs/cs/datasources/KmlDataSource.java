@@ -83,6 +83,11 @@ public class KmlDataSource implements DataSource {
     @JsProperty
     public boolean isLoading;
     /**
+     * Gets the KML Tours that are used to guide the camera to specified destinations on given time intervals.
+     */
+    @JsProperty
+    public KmlTour[] kmlTours;
+    /**
      * Gets an event that will be raised when the data source either starts or stops
      * loading.
      */

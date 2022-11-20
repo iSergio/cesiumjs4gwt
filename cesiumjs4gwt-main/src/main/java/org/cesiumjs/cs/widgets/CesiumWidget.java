@@ -34,7 +34,7 @@ import org.cesiumjs.cs.widgets.options.CesiumWidgetOptions;
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "CesiumWidget")
-public class CesiumWidget {
+public class CesiumWidget implements Widget {
     /**
      * Gets the canvas.
      */

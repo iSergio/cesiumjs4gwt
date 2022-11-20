@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.98
+ * Version 1.99
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,15 +23,15 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./AttributeCompression-b61f6b08', './Matrix2-cae5ed62', './ComponentDatatype-0b8ce457', './createTaskProcessorWorker', './RuntimeError-6b9130a9', './defaultValue-50f7432c', './WebGLConstants-58abc51a'], (function (AttributeCompression, Matrix2, ComponentDatatype, createTaskProcessorWorker, RuntimeError, defaultValue, WebGLConstants) { 'use strict';
+define(['./AttributeCompression-53c7fda2', './Matrix3-ea964448', './Math-efde0c7b', './Matrix2-f9f1b94b', './createTaskProcessorWorker', './ComponentDatatype-ebdce3ba', './defaultValue-135942ca', './Check-40d84a28', './WebGLConstants-fcb70ee3', './RuntimeError-f0dada00'], (function (AttributeCompression, Matrix3, Math, Matrix2, createTaskProcessorWorker, ComponentDatatype, defaultValue, Check, WebGLConstants, RuntimeError) { 'use strict';
 
   const maxShort = 32767;
 
-  const scratchBVCartographic = new Matrix2.Cartographic();
-  const scratchEncodedPosition = new Matrix2.Cartesian3();
+  const scratchBVCartographic = new Matrix3.Cartographic();
+  const scratchEncodedPosition = new Matrix3.Cartesian3();
 
   const scratchRectangle = new Matrix2.Rectangle();
-  const scratchEllipsoid = new Matrix2.Ellipsoid();
+  const scratchEllipsoid = new Matrix3.Ellipsoid();
   const scratchMinMaxHeights = {
     min: undefined,
     max: undefined,
@@ -47,7 +47,7 @@ define(['./AttributeCompression-b61f6b08', './Matrix2-cae5ed62', './ComponentDat
     Matrix2.Rectangle.unpack(packedBuffer, offset, scratchRectangle);
     offset += Matrix2.Rectangle.packedLength;
 
-    Matrix2.Ellipsoid.unpack(packedBuffer, offset, scratchEllipsoid);
+    Matrix3.Ellipsoid.unpack(packedBuffer, offset, scratchEllipsoid);
   }
 
   function createVectorTilePoints(parameters, transferableObjects) {
@@ -74,11 +74,11 @@ define(['./AttributeCompression-b61f6b08', './Matrix2-cae5ed62', './ComponentDat
       const v = vBuffer[i];
       const h = heightBuffer[i];
 
-      const lon = ComponentDatatype.CesiumMath.lerp(rectangle.west, rectangle.east, u / maxShort);
-      const lat = ComponentDatatype.CesiumMath.lerp(rectangle.south, rectangle.north, v / maxShort);
-      const alt = ComponentDatatype.CesiumMath.lerp(minimumHeight, maximumHeight, h / maxShort);
+      const lon = Math.CesiumMath.lerp(rectangle.west, rectangle.east, u / maxShort);
+      const lat = Math.CesiumMath.lerp(rectangle.south, rectangle.north, v / maxShort);
+      const alt = Math.CesiumMath.lerp(minimumHeight, maximumHeight, h / maxShort);
 
-      const cartographic = Matrix2.Cartographic.fromRadians(
+      const cartographic = Matrix3.Cartographic.fromRadians(
         lon,
         lat,
         alt,
@@ -88,7 +88,7 @@ define(['./AttributeCompression-b61f6b08', './Matrix2-cae5ed62', './ComponentDat
         cartographic,
         scratchEncodedPosition
       );
-      Matrix2.Cartesian3.pack(decodedPosition, decoded, i * 3);
+      Matrix3.Cartesian3.pack(decodedPosition, decoded, i * 3);
     }
 
     transferableObjects.push(decoded.buffer);

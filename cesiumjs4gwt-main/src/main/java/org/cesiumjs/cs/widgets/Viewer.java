@@ -47,7 +47,7 @@ import org.cesiumjs.cs.widgets.options.ViewerOptions;
  * @author Serge Silaev aka iSergio
  */
 @JsType(isNative = true, namespace = "Cesium", name = "Viewer")
-public class Viewer {
+public class Viewer implements Widget {
     /**
      * Gets or sets whether or not data sources can temporarily pause animation in
      * order to avoid showing an incomplete picture to the user. For example, if
