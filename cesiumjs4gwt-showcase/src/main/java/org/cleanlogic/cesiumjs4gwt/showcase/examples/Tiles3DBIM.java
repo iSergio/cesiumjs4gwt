@@ -46,7 +46,7 @@ public class Tiles3DBIM extends AbstractExample {
         csVPanel = new ViewerPanel();
 
         Cesium3DTileset tileset = (Cesium3DTileset) csVPanel.getViewer().scene().primitives()
-                .add(Cesium3DTileset.create(IonResource.fromAssetId(8564)));
+                .add(Cesium3DTileset.create(IonResource.fromAssetId(1240402)));
 
         tileset.readyPromise().then(this::zoomToTileset);
 
