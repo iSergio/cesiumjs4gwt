@@ -73,9 +73,10 @@ public class Tiles3DClippingPlanes extends AbstractExample {
     private Cesium3DTileset tileset;
     private ClippingPlaneCollection modelEntityClippingPlanes;
 
-    private final Promise<IonResource, Void> bimUrl = IonResource.fromAssetId(3837);
-    private final Promise<IonResource, Void> pointCloudUrl = IonResource.fromAssetId(3838);
-    private final Promise<IonResource, Void> instancedUrl = IonResource.fromAssetId(3876);
+    private final Promise<IonResource, Void> bimUrl = IonResource.fromAssetId(1240402);
+    private final Promise<IonResource, Void> pointCloudUrl = IonResource.fromAssetId(16421);
+    private final String instancedUrl = GWT.getModuleBaseURL() + "SampleData/Cesium3DTiles/Instanced/InstancedOrientation/tileset.json";
+//    private final Promise<IonResource, Void> instancedUrl = IonResource.fromAssetId(3876);
     private final String modelUrl = GWT.getModuleBaseURL() + "SampleData/models/CesiumAir/Cesium_Air.glb";
 
     @Inject
@@ -254,6 +255,59 @@ public class Tiles3DClippingPlanes extends AbstractExample {
                 double radius = boundingSphere.radius;
 
                 csVPanel.getViewer().zoomTo(tileset, new HeadingPitchRange(0.5, -0.2, radius * 4.0));
+
+                for (final ClippingPlane plane : clippingPlanes) {
+                    PlaneGraphicsOptions planeGraphicsOptions = new PlaneGraphicsOptions();
+                    planeGraphicsOptions.dimensions = new ConstantProperty<>(new Cartesian2(radius * 2.5, radius * 2.5));
+                    planeGraphicsOptions.material = new ColorMaterialProperty(Color.WHITE().withAlpha(0.1f));
+                    planeGraphicsOptions.plane = new CallbackProperty(new CallbackProperty.Callback() {
+                        @Override
+                        public Object function(JulianDate time, Object result) {
+                            plane.distance = targetY;
+                            return ClippingPlane.transform(plane, tileset.modelMatrix, scratchPlane);
+                        }
+                    }, false);
+                    planeGraphicsOptions.outline = new ConstantProperty<>(true);
+                    planeGraphicsOptions.outlineColor = new ConstantProperty<>(Color.WHITE());
+
+                    EntityOptions entityOptions = new EntityOptions();
+                    entityOptions.position = new ConstantPositionProperty(boundingSphere.center);
+                    entityOptions.plane = new PlaneGraphics(planeGraphicsOptions);
+                    planeEntities.add(csVPanel.getViewer().entities().add(entityOptions));
+                }
+            }
+        });
+    }
+
+    private void loadTileset(String url) {
+        final ClippingPlane[] clippingPlanes = new ClippingPlane[] {
+                new ClippingPlane(new Cartesian3(0.0, 0.0, -1.0), -100.0)};
+        ClippingPlaneCollectionOptions clippingPlaneCollectionOptions = new ClippingPlaneCollectionOptions();
+        clippingPlaneCollectionOptions.planes = clippingPlanes;
+        clippingPlaneCollectionOptions.edgeWidth = edgeStylingCBox.getValue() ? 1.0 : 0.0;
+
+        Cesium3DTilesetOptions tilesetOptions = Cesium3DTilesetOptions.create(url);
+        tilesetOptions.clippingPlanes = new ClippingPlaneCollection(clippingPlaneCollectionOptions);
+
+        tileset = (Cesium3DTileset) csVPanel.getViewer().scene().primitives().add(new Cesium3DTileset(tilesetOptions));
+        tileset.debugShowBoundingVolume = boundingVolumeCBox.getValue();
+        tileset.readyPromise().then(new Fulfill<Cesium3DTileset>() {
+            @Override
+            public void onFulfilled(Cesium3DTileset value) {
+                BoundingSphere boundingSphere = tileset.boundingSphere();
+                double radius = boundingSphere.radius;
+
+                csVPanel.getViewer().zoomTo(tileset, new HeadingPitchRange(0.5, -0.2, radius * 4.0));
+
+                if (!Matrix4.equals(tileset.root().transform, Matrix4.IDENTITY())) {
+                    // The clipping plane is initially positioned at the tileset's root transform.
+                    // Apply an additional matrix to center the clipping plane on the bounding sphere center.
+                    Cartesian3 transformCenter = Matrix4.getTranslation(tileset.root().transform, new Cartesian3());
+                    Cartographic transformCartographic = Cartographic.fromCartesian(transformCenter);
+                    Cartographic boundingSphereCartographic = Cartographic.fromCartesian(tileset.boundingSphere().center);
+                    double height = boundingSphereCartographic.height - transformCartographic.height;
+                    tilesetOptions.clippingPlanes.modelMatrix = Matrix4.fromTranslation(new Cartesian3(0.0, 0.0, height));
+                }
 
                 for (final ClippingPlane plane : clippingPlanes) {
                     PlaneGraphicsOptions planeGraphicsOptions = new PlaneGraphicsOptions();
