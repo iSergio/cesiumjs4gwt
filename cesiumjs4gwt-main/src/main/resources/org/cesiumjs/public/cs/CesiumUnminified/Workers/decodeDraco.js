@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.98
+ * Version 1.99
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./ComponentDatatype-0b8ce457', './defaultValue-50f7432c', './IndexDatatype-3480a65d', './RuntimeError-6b9130a9', './createTaskProcessorWorker', './WebGLConstants-58abc51a'], (function (ComponentDatatype, defaultValue, IndexDatatype, RuntimeError, createTaskProcessorWorker, WebGLConstants) { 'use strict';
+define(['./ComponentDatatype-ebdce3ba', './defaultValue-135942ca', './IndexDatatype-fa75fe25', './RuntimeError-f0dada00', './createTaskProcessorWorker', './Check-40d84a28', './WebGLConstants-fcb70ee3', './Math-efde0c7b'], (function (ComponentDatatype, defaultValue, IndexDatatype, RuntimeError, createTaskProcessorWorker, Check, WebGLConstants, Math) { 'use strict';
 
   /* global require */
 

@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.98
+ * Version 1.99
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,14 +23,14 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./Matrix2-cae5ed62', './defaultValue-50f7432c', './EllipseOutlineGeometry-efb58572', './RuntimeError-6b9130a9', './ComponentDatatype-0b8ce457', './WebGLConstants-58abc51a', './Transforms-318b929f', './combine-8462e002', './EllipseGeometryLibrary-9214016d', './GeometryAttribute-a14260ea', './GeometryAttributes-8bab1b25', './GeometryOffsetAttribute-490bc2c9', './IndexDatatype-3480a65d'], (function (Matrix2, defaultValue, EllipseOutlineGeometry, RuntimeError, ComponentDatatype, WebGLConstants, Transforms, combine, EllipseGeometryLibrary, GeometryAttribute, GeometryAttributes, GeometryOffsetAttribute, IndexDatatype) { 'use strict';
+define(['./Matrix3-ea964448', './defaultValue-135942ca', './EllipseOutlineGeometry-576d3671', './Check-40d84a28', './Math-efde0c7b', './Transforms-ac2d28a9', './Matrix2-f9f1b94b', './RuntimeError-f0dada00', './combine-462d91dd', './ComponentDatatype-ebdce3ba', './WebGLConstants-fcb70ee3', './EllipseGeometryLibrary-61eaea89', './GeometryAttribute-51d61732', './GeometryAttributes-899f8bd0', './GeometryOffsetAttribute-d3a42805', './IndexDatatype-fa75fe25'], (function (Matrix3, defaultValue, EllipseOutlineGeometry, Check, Math, Transforms, Matrix2, RuntimeError, combine, ComponentDatatype, WebGLConstants, EllipseGeometryLibrary, GeometryAttribute, GeometryAttributes, GeometryOffsetAttribute, IndexDatatype) { 'use strict';
 
   function createEllipseOutlineGeometry(ellipseGeometry, offset) {
     if (defaultValue.defined(offset)) {
       ellipseGeometry = EllipseOutlineGeometry.EllipseOutlineGeometry.unpack(ellipseGeometry, offset);
     }
-    ellipseGeometry._center = Matrix2.Cartesian3.clone(ellipseGeometry._center);
-    ellipseGeometry._ellipsoid = Matrix2.Ellipsoid.clone(ellipseGeometry._ellipsoid);
+    ellipseGeometry._center = Matrix3.Cartesian3.clone(ellipseGeometry._center);
+    ellipseGeometry._ellipsoid = Matrix3.Ellipsoid.clone(ellipseGeometry._ellipsoid);
     return EllipseOutlineGeometry.EllipseOutlineGeometry.createGeometry(ellipseGeometry);
   }
 

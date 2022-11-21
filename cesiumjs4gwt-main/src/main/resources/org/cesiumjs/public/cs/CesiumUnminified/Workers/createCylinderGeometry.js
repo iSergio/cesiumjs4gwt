@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.98
+ * Version 1.99
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./CylinderGeometry-67cf2f61', './defaultValue-50f7432c', './Transforms-318b929f', './Matrix2-cae5ed62', './RuntimeError-6b9130a9', './ComponentDatatype-0b8ce457', './WebGLConstants-58abc51a', './combine-8462e002', './CylinderGeometryLibrary-c59008db', './GeometryAttribute-a14260ea', './GeometryAttributes-8bab1b25', './GeometryOffsetAttribute-490bc2c9', './IndexDatatype-3480a65d', './VertexFormat-29aad777'], (function (CylinderGeometry, defaultValue, Transforms, Matrix2, RuntimeError, ComponentDatatype, WebGLConstants, combine, CylinderGeometryLibrary, GeometryAttribute, GeometryAttributes, GeometryOffsetAttribute, IndexDatatype, VertexFormat) { 'use strict';
+define(['./CylinderGeometry-6ab4de6a', './defaultValue-135942ca', './Transforms-ac2d28a9', './Matrix3-ea964448', './Check-40d84a28', './Math-efde0c7b', './Matrix2-f9f1b94b', './RuntimeError-f0dada00', './combine-462d91dd', './ComponentDatatype-ebdce3ba', './WebGLConstants-fcb70ee3', './CylinderGeometryLibrary-c7bef0a3', './GeometryAttribute-51d61732', './GeometryAttributes-899f8bd0', './GeometryOffsetAttribute-d3a42805', './IndexDatatype-fa75fe25', './VertexFormat-1d6950e1'], (function (CylinderGeometry, defaultValue, Transforms, Matrix3, Check, Math, Matrix2, RuntimeError, combine, ComponentDatatype, WebGLConstants, CylinderGeometryLibrary, GeometryAttribute, GeometryAttributes, GeometryOffsetAttribute, IndexDatatype, VertexFormat) { 'use strict';
 
   function createCylinderGeometry(cylinderGeometry, offset) {
     if (defaultValue.defined(offset)) {

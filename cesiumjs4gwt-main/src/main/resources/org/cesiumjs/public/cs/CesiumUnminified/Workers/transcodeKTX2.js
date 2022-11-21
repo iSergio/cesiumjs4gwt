@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.98
+ * Version 1.99
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./defaultValue-50f7432c', './RuntimeError-6b9130a9', './WebGLConstants-58abc51a', './createTaskProcessorWorker'], (function (defaultValue, RuntimeError, WebGLConstants, createTaskProcessorWorker) { 'use strict';
+define(['./defaultValue-135942ca', './Check-40d84a28', './WebGLConstants-fcb70ee3', './RuntimeError-f0dada00', './createTaskProcessorWorker'], (function (defaultValue, Check, WebGLConstants, RuntimeError, createTaskProcessorWorker) { 'use strict';
 
   /**
    * The data type of a pixel.
@@ -1246,7 +1246,7 @@ define(['./defaultValue-50f7432c', './RuntimeError-6b9130a9', './WebGLConstants-
   let transcoderModule;
   function transcode(parameters, transferableObjects) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("transcoderModule", transcoderModule);
+    Check.Check.typeOf.object("transcoderModule", transcoderModule);
     //>>includeEnd('debug');
 
     const data = parameters.ktx2Buffer;

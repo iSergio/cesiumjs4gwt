@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.98
+ * Version 1.99
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./RuntimeError-6b9130a9', './defaultValue-50f7432c', './createTaskProcessorWorker'], (function (RuntimeError, defaultValue, createTaskProcessorWorker) { 'use strict';
+define(['./Check-40d84a28', './RuntimeError-f0dada00', './defaultValue-135942ca', './createTaskProcessorWorker'], (function (Check, RuntimeError, defaultValue, createTaskProcessorWorker) { 'use strict';
 
   const compressedMagic$1 = 0x7468dead;
   const compressedMagicSwap$1 = 0xadde6874;
@@ -42,8 +42,8 @@ define(['./RuntimeError-6b9130a9', './defaultValue-50f7432c', './createTaskProce
     }
 
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("key", key);
-    RuntimeError.Check.typeOf.object("data", data);
+    Check.Check.typeOf.object("key", key);
+    Check.Check.typeOf.object("data", data);
     //>>includeEnd('debug');
 
     const keyLength = key.byteLength;

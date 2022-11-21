@@ -442,7 +442,7 @@ public class Cesium3DTilesetOptions {
     public CustomShader customShader;
 
     @JsConstructor
-    private Cesium3DTilesetOptions() {
+    public Cesium3DTilesetOptions() {
     }
 
     @JsOverlay

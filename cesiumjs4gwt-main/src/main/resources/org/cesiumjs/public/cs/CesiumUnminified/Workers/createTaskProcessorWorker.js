@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.98
+ * Version 1.99
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./defaultValue-50f7432c'], (function (defaultValue) { 'use strict';
+define(['./defaultValue-135942ca'], (function (defaultValue) { 'use strict';
 
   /**
    * Formats an error object into a String.  If available, uses name, message, and stack

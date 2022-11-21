@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.98
+ * Version 1.99
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -22,4 +22,4 @@
  * Portions licensed separately.
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
-define(["./defaultValue-50f7432c","./FrustumGeometry-984a179b","./Transforms-f305a473","./Matrix2-7dfd434a","./ComponentDatatype-9b23164a","./WebGLConstants-58abc51a","./RuntimeError-48e1f06d","./combine-8462e002","./GeometryAttribute-4d82fade","./GeometryAttributes-8bab1b25","./Plane-3d30b188","./VertexFormat-fa0c27e8"],(function(e,t,r,a,n,u,o,m,f,b,d,i){"use strict";return function(r,a){return e.defined(a)&&(r=t.FrustumGeometry.unpack(r,a)),t.FrustumGeometry.createGeometry(r)}}));
+define(["./defaultValue-135942ca","./FrustumGeometry-7317a8d4","./Transforms-3ea76111","./Matrix3-edb29a7e","./Math-a304e2d6","./Matrix2-7a2bab7e","./RuntimeError-f0dada00","./combine-462d91dd","./ComponentDatatype-e86a9f87","./WebGLConstants-fcb70ee3","./GeometryAttribute-dacddb3f","./GeometryAttributes-899f8bd0","./Plane-5bea24eb","./VertexFormat-7d5b4d7e"],(function(e,t,r,a,d,n,u,o,m,b,f,i,s,c){"use strict";return function(r,a){return e.defined(a)&&(r=t.FrustumGeometry.unpack(r,a)),t.FrustumGeometry.createGeometry(r)}}));
