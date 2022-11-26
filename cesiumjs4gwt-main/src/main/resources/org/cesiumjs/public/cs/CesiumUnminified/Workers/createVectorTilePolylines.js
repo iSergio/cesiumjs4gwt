@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.95
+ * Version 1.99
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,12 +23,12 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./Matrix2-9e1c22e2', './combine-d11b1f00', './AttributeCompression-f202be44', './ComponentDatatype-4eeb6d9b', './IndexDatatype-f228f5fd', './createTaskProcessorWorker', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './WebGLConstants-6da700a2'], (function (Matrix2, combine, AttributeCompression, ComponentDatatype, IndexDatatype, createTaskProcessorWorker, RuntimeError, defaultValue, WebGLConstants) { 'use strict';
+define(['./Matrix3-ea964448', './combine-462d91dd', './AttributeCompression-53c7fda2', './Math-efde0c7b', './IndexDatatype-fa75fe25', './Matrix2-f9f1b94b', './createTaskProcessorWorker', './Check-40d84a28', './defaultValue-135942ca', './ComponentDatatype-ebdce3ba', './WebGLConstants-fcb70ee3', './RuntimeError-f0dada00'], (function (Matrix3, combine, AttributeCompression, Math, IndexDatatype, Matrix2, createTaskProcessorWorker, Check, defaultValue, ComponentDatatype, WebGLConstants, RuntimeError) { 'use strict';
 
   const maxShort = 32767;
 
-  const scratchBVCartographic = new Matrix2.Cartographic();
-  const scratchEncodedPosition = new Matrix2.Cartesian3();
+  const scratchBVCartographic = new Matrix3.Cartographic();
+  const scratchEncodedPosition = new Matrix3.Cartesian3();
 
   function decodeVectorPolylinePositions(
     positions,
@@ -52,11 +52,11 @@ define(['./Matrix2-9e1c22e2', './combine-d11b1f00', './AttributeCompression-f202
       const v = vBuffer[i];
       const h = heightBuffer[i];
 
-      const lon = ComponentDatatype.CesiumMath.lerp(rectangle.west, rectangle.east, u / maxShort);
-      const lat = ComponentDatatype.CesiumMath.lerp(rectangle.south, rectangle.north, v / maxShort);
-      const alt = ComponentDatatype.CesiumMath.lerp(minimumHeight, maximumHeight, h / maxShort);
+      const lon = Math.CesiumMath.lerp(rectangle.west, rectangle.east, u / maxShort);
+      const lat = Math.CesiumMath.lerp(rectangle.south, rectangle.north, v / maxShort);
+      const alt = Math.CesiumMath.lerp(minimumHeight, maximumHeight, h / maxShort);
 
-      const cartographic = Matrix2.Cartographic.fromRadians(
+      const cartographic = Matrix3.Cartographic.fromRadians(
         lon,
         lat,
         alt,
@@ -66,14 +66,14 @@ define(['./Matrix2-9e1c22e2', './combine-d11b1f00', './AttributeCompression-f202
         cartographic,
         scratchEncodedPosition
       );
-      Matrix2.Cartesian3.pack(decodedPosition, decoded, i * 3);
+      Matrix3.Cartesian3.pack(decodedPosition, decoded, i * 3);
     }
     return decoded;
   }
 
   const scratchRectangle = new Matrix2.Rectangle();
-  const scratchEllipsoid = new Matrix2.Ellipsoid();
-  const scratchCenter = new Matrix2.Cartesian3();
+  const scratchEllipsoid = new Matrix3.Ellipsoid();
+  const scratchCenter = new Matrix3.Cartesian3();
   const scratchMinMaxHeights = {
     min: undefined,
     max: undefined,
@@ -89,10 +89,10 @@ define(['./Matrix2-9e1c22e2', './combine-d11b1f00', './AttributeCompression-f202
     Matrix2.Rectangle.unpack(packedBuffer, offset, scratchRectangle);
     offset += Matrix2.Rectangle.packedLength;
 
-    Matrix2.Ellipsoid.unpack(packedBuffer, offset, scratchEllipsoid);
-    offset += Matrix2.Ellipsoid.packedLength;
+    Matrix3.Ellipsoid.unpack(packedBuffer, offset, scratchEllipsoid);
+    offset += Matrix3.Ellipsoid.packedLength;
 
-    Matrix2.Cartesian3.unpack(packedBuffer, offset, scratchCenter);
+    Matrix3.Cartesian3.unpack(packedBuffer, offset, scratchCenter);
   }
 
   function getPositionOffsets(counts) {
@@ -107,11 +107,11 @@ define(['./Matrix2-9e1c22e2', './combine-d11b1f00', './AttributeCompression-f202
     return positionOffsets;
   }
 
-  const scratchP0 = new Matrix2.Cartesian3();
-  const scratchP1 = new Matrix2.Cartesian3();
-  const scratchPrev = new Matrix2.Cartesian3();
-  const scratchCur = new Matrix2.Cartesian3();
-  const scratchNext = new Matrix2.Cartesian3();
+  const scratchP0 = new Matrix3.Cartesian3();
+  const scratchP1 = new Matrix3.Cartesian3();
+  const scratchPrev = new Matrix3.Cartesian3();
+  const scratchCur = new Matrix3.Cartesian3();
+  const scratchNext = new Matrix3.Cartesian3();
 
   function createVectorTilePolylines(parameters, transferableObjects) {
     const encodedPositions = new Uint16Array(parameters.positions);
@@ -159,20 +159,20 @@ define(['./Matrix2-9e1c22e2', './combine-d11b1f00', './AttributeCompression-f202
       for (let j = 0; j < count; ++j) {
         let previous;
         if (j === 0) {
-          const p0 = Matrix2.Cartesian3.unpack(positions, offset * 3, scratchP0);
-          const p1 = Matrix2.Cartesian3.unpack(positions, (offset + 1) * 3, scratchP1);
+          const p0 = Matrix3.Cartesian3.unpack(positions, offset * 3, scratchP0);
+          const p1 = Matrix3.Cartesian3.unpack(positions, (offset + 1) * 3, scratchP1);
 
-          previous = Matrix2.Cartesian3.subtract(p0, p1, scratchPrev);
-          Matrix2.Cartesian3.add(p0, previous, previous);
+          previous = Matrix3.Cartesian3.subtract(p0, p1, scratchPrev);
+          Matrix3.Cartesian3.add(p0, previous, previous);
         } else {
-          previous = Matrix2.Cartesian3.unpack(
+          previous = Matrix3.Cartesian3.unpack(
             positions,
             (offset + j - 1) * 3,
             scratchPrev
           );
         }
 
-        const current = Matrix2.Cartesian3.unpack(
+        const current = Matrix3.Cartesian3.unpack(
           positions,
           (offset + j) * 3,
           scratchCur
@@ -180,34 +180,34 @@ define(['./Matrix2-9e1c22e2', './combine-d11b1f00', './AttributeCompression-f202
 
         let next;
         if (j === count - 1) {
-          const p2 = Matrix2.Cartesian3.unpack(
+          const p2 = Matrix3.Cartesian3.unpack(
             positions,
             (offset + count - 1) * 3,
             scratchP0
           );
-          const p3 = Matrix2.Cartesian3.unpack(
+          const p3 = Matrix3.Cartesian3.unpack(
             positions,
             (offset + count - 2) * 3,
             scratchP1
           );
 
-          next = Matrix2.Cartesian3.subtract(p2, p3, scratchNext);
-          Matrix2.Cartesian3.add(p2, next, next);
+          next = Matrix3.Cartesian3.subtract(p2, p3, scratchNext);
+          Matrix3.Cartesian3.add(p2, next, next);
         } else {
-          next = Matrix2.Cartesian3.unpack(positions, (offset + j + 1) * 3, scratchNext);
+          next = Matrix3.Cartesian3.unpack(positions, (offset + j + 1) * 3, scratchNext);
         }
 
-        Matrix2.Cartesian3.subtract(previous, center, previous);
-        Matrix2.Cartesian3.subtract(current, center, current);
-        Matrix2.Cartesian3.subtract(next, center, next);
+        Matrix3.Cartesian3.subtract(previous, center, previous);
+        Matrix3.Cartesian3.subtract(current, center, current);
+        Matrix3.Cartesian3.subtract(next, center, next);
 
         const startK = j === 0 ? 2 : 0;
         const endK = j === count - 1 ? 2 : 4;
 
         for (let k = startK; k < endK; ++k) {
-          Matrix2.Cartesian3.pack(current, curPositions, positionIndex);
-          Matrix2.Cartesian3.pack(previous, prevPositions, positionIndex);
-          Matrix2.Cartesian3.pack(next, nextPositions, positionIndex);
+          Matrix3.Cartesian3.pack(current, curPositions, positionIndex);
+          Matrix3.Cartesian3.pack(previous, prevPositions, positionIndex);
+          Matrix3.Cartesian3.pack(next, nextPositions, positionIndex);
           positionIndex += 3;
 
           const direction = k - 2 < 0 ? -1.0 : 1.0;
@@ -277,4 +277,3 @@ define(['./Matrix2-9e1c22e2', './combine-d11b1f00', './AttributeCompression-f202
   return createVectorTilePolylines$1;
 
 }));
-//# sourceMappingURL=createVectorTilePolylines.js.map

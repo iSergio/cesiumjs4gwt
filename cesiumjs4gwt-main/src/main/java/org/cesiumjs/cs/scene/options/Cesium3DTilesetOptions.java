@@ -313,6 +313,14 @@ public class Cesium3DTilesetOptions {
     @JsProperty
     public boolean backFaceCulling;
     /**
+     * Whether to enable outlines for models using the CESIUM_primitive_outline extension. This can be set to false to
+     * avoid the additional processing of geometry at load time. When false, the showOutlines and outlineColor options
+     * are ignored.
+     * Default: true
+     */
+    @JsProperty
+    public boolean enableShowOutline;
+    /**
      * 	Whether to display the outline for models using the CESIUM_primitive_outline extension. When true,
      * 	outlines are displayed. When false, outlines are not displayed.
      *
@@ -320,6 +328,12 @@ public class Cesium3DTilesetOptions {
      */
     @JsProperty
     public boolean showOutline;
+    /**
+     * The color to use when rendering outlines.
+     * Default: {@link Color#BLACK()}
+     */
+    @JsProperty
+    public Color outlineColor;
     /**
      * Indicates that only the tileset's vector tiles should be used for classification.
      *
@@ -428,7 +442,7 @@ public class Cesium3DTilesetOptions {
     public CustomShader customShader;
 
     @JsConstructor
-    private Cesium3DTilesetOptions() {
+    public Cesium3DTilesetOptions() {
     }
 
     @JsOverlay

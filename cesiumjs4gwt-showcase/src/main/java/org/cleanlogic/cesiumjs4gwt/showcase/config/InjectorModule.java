@@ -126,7 +126,12 @@ public class InjectorModule extends AbstractGinModule {
         bind(GPX.class).asEagerSingleton();
         bind(Tiles3DCompare.class).asEagerSingleton();
         bind(CustomShadersPropertyTextures.class).asEagerSingleton();
-
         bind(ManuallyControlledAnimation.class).asEagerSingleton();
+        bind(SceneRenderingPerformance.class).asEagerSingleton();
+        bind(KMLTours.class).asEagerSingleton();
+
+        bind(I3SIntegratedMeshLayer.class).asEagerSingleton();
+        bind(I3S3DObjectLayer.class).asEagerSingleton();
+        bind(I3SFeaturePicking.class).asEagerSingleton();
     }
 }

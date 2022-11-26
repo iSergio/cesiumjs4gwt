@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.95
+ * Version 1.99
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,10 +23,10 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './ArcType-de5d8777', './BoundingRectangle-4974cee9', './Transforms-273eeb44', './RuntimeError-4f8ec8a2', './ComponentDatatype-4eeb6d9b', './EllipsoidGeodesic-72f01b70', './EllipsoidTangentPlane-d42ee682', './GeometryAttribute-9be2d2e5', './GeometryInstance-3db1d31b', './GeometryOffsetAttribute-59b14f45', './GeometryPipeline-d7363877', './IndexDatatype-f228f5fd', './PolygonGeometryLibrary-c2f9eee8', './PolygonPipeline-db21de21', './VertexFormat-563ab2cc', './_commonjsHelpers-3aae1032-65601a27', './combine-d11b1f00', './WebGLConstants-6da700a2', './AxisAlignedBoundingBox-1aaf78c2', './IntersectionTests-ea138127', './Plane-76b84425', './AttributeCompression-f202be44', './EncodedCartesian3-491ac596', './arrayRemoveDuplicates-1af79ba4', './EllipsoidRhumbLine-7bc7dfce', './GeometryAttributes-734a3446'], (function (defaultValue, Matrix2, ArcType, BoundingRectangle, Transforms, RuntimeError, ComponentDatatype, EllipsoidGeodesic, EllipsoidTangentPlane, GeometryAttribute, GeometryInstance, GeometryOffsetAttribute, GeometryPipeline, IndexDatatype, PolygonGeometryLibrary, PolygonPipeline, VertexFormat, _commonjsHelpers3aae1032, combine, WebGLConstants, AxisAlignedBoundingBox, IntersectionTests, Plane, AttributeCompression, EncodedCartesian3, arrayRemoveDuplicates, EllipsoidRhumbLine, GeometryAttributes) { 'use strict';
+define(['./defaultValue-135942ca', './Matrix3-ea964448', './ArcType-89067bf8', './BoundingRectangle-02351bff', './Transforms-ac2d28a9', './Matrix2-f9f1b94b', './Check-40d84a28', './ComponentDatatype-ebdce3ba', './EllipsoidGeodesic-08772132', './EllipsoidTangentPlane-244dda7a', './GeometryAttribute-51d61732', './GeometryInstance-bb34b63f', './GeometryOffsetAttribute-d3a42805', './GeometryPipeline-576f16cd', './IndexDatatype-fa75fe25', './Math-efde0c7b', './PolygonGeometryLibrary-81e6c436', './PolygonPipeline-cf232713', './VertexFormat-1d6950e1', './combine-462d91dd', './RuntimeError-f0dada00', './WebGLConstants-fcb70ee3', './AxisAlignedBoundingBox-48df2a2e', './IntersectionTests-4ab30dca', './Plane-93af52b2', './AttributeCompression-53c7fda2', './EncodedCartesian3-4040c81e', './arrayRemoveDuplicates-3fb00ed2', './EllipsoidRhumbLine-6161ec8c', './GeometryAttributes-899f8bd0'], (function (defaultValue, Matrix3, ArcType, BoundingRectangle, Transforms, Matrix2, Check, ComponentDatatype, EllipsoidGeodesic, EllipsoidTangentPlane, GeometryAttribute, GeometryInstance, GeometryOffsetAttribute, GeometryPipeline, IndexDatatype, Math$1, PolygonGeometryLibrary, PolygonPipeline, VertexFormat, combine, RuntimeError, WebGLConstants, AxisAlignedBoundingBox, IntersectionTests, Plane, AttributeCompression, EncodedCartesian3, arrayRemoveDuplicates, EllipsoidRhumbLine, GeometryAttributes) { 'use strict';
 
-  const scratchCarto1 = new Matrix2.Cartographic();
-  const scratchCarto2 = new Matrix2.Cartographic();
+  const scratchCarto1 = new Matrix3.Cartographic();
+  const scratchCarto2 = new Matrix3.Cartographic();
   function adjustPosHeightsForNormal(position, p1, p2, ellipsoid) {
     const carto1 = ellipsoid.cartesianToCartographic(position, scratchCarto1);
     const height = carto1.height;
@@ -40,22 +40,22 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './ArcType-de5d8777', '
   }
 
   const scratchBoundingRectangle = new BoundingRectangle.BoundingRectangle();
-  const scratchPosition = new Matrix2.Cartesian3();
-  const scratchNormal = new Matrix2.Cartesian3();
-  const scratchTangent = new Matrix2.Cartesian3();
-  const scratchBitangent = new Matrix2.Cartesian3();
-  const p1Scratch = new Matrix2.Cartesian3();
-  const p2Scratch = new Matrix2.Cartesian3();
-  let scratchPerPosNormal = new Matrix2.Cartesian3();
-  let scratchPerPosTangent = new Matrix2.Cartesian3();
-  let scratchPerPosBitangent = new Matrix2.Cartesian3();
+  const scratchPosition = new Matrix3.Cartesian3();
+  const scratchNormal = new Matrix3.Cartesian3();
+  const scratchTangent = new Matrix3.Cartesian3();
+  const scratchBitangent = new Matrix3.Cartesian3();
+  const p1Scratch = new Matrix3.Cartesian3();
+  const p2Scratch = new Matrix3.Cartesian3();
+  let scratchPerPosNormal = new Matrix3.Cartesian3();
+  let scratchPerPosTangent = new Matrix3.Cartesian3();
+  let scratchPerPosBitangent = new Matrix3.Cartesian3();
 
   const appendTextureCoordinatesOrigin = new Matrix2.Cartesian2();
   const appendTextureCoordinatesCartesian2 = new Matrix2.Cartesian2();
-  const appendTextureCoordinatesCartesian3 = new Matrix2.Cartesian3();
+  const appendTextureCoordinatesCartesian3 = new Matrix3.Cartesian3();
   const appendTextureCoordinatesQuaternion = new Transforms.Quaternion();
-  const appendTextureCoordinatesMatrix3 = new Matrix2.Matrix3();
-  const tangentMatrixScratch = new Matrix2.Matrix3();
+  const appendTextureCoordinatesMatrix3 = new Matrix3.Matrix3();
+  const tangentMatrixScratch = new Matrix3.Matrix3();
 
   function computeAttributes(options) {
     const vertexFormat = options.vertexFormat;
@@ -124,21 +124,21 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './ArcType-de5d8777', '
           stRotation,
           appendTextureCoordinatesQuaternion
         );
-        textureMatrix = Matrix2.Matrix3.fromQuaternion(rotation, textureMatrix);
+        textureMatrix = Matrix3.Matrix3.fromQuaternion(rotation, textureMatrix);
 
         rotation = Transforms.Quaternion.fromAxisAngle(
           tangentPlane._plane.normal,
           -stRotation,
           appendTextureCoordinatesQuaternion
         );
-        tangentRotationMatrix = Matrix2.Matrix3.fromQuaternion(
+        tangentRotationMatrix = Matrix3.Matrix3.fromQuaternion(
           rotation,
           tangentRotationMatrix
         );
       } else {
-        textureMatrix = Matrix2.Matrix3.clone(Matrix2.Matrix3.IDENTITY, textureMatrix);
-        tangentRotationMatrix = Matrix2.Matrix3.clone(
-          Matrix2.Matrix3.IDENTITY,
+        textureMatrix = Matrix3.Matrix3.clone(Matrix3.Matrix3.IDENTITY, textureMatrix);
+        tangentRotationMatrix = Matrix3.Matrix3.clone(
+          Matrix3.Matrix3.IDENTITY,
           tangentRotationMatrix
         );
       }
@@ -154,7 +154,7 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './ArcType-de5d8777', '
       }
 
       for (let i = 0; i < length; i += 3) {
-        const position = Matrix2.Cartesian3.fromArray(
+        const position = Matrix3.Cartesian3.fromArray(
           flatPositions,
           i,
           appendTextureCoordinatesCartesian3
@@ -162,7 +162,7 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './ArcType-de5d8777', '
 
         if (vertexFormat.st) {
           if (!defaultValue.defined(flatTexcoords)) {
-            let p = Matrix2.Matrix3.multiplyByVector(
+            let p = Matrix3.Matrix3.multiplyByVector(
               textureMatrix,
               position,
               scratchPosition
@@ -174,8 +174,8 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './ArcType-de5d8777', '
             );
             Matrix2.Cartesian2.subtract(st, origin, st);
 
-            const stx = ComponentDatatype.CesiumMath.clamp(st.x / boundingRectangle.width, 0, 1);
-            const sty = ComponentDatatype.CesiumMath.clamp(st.y / boundingRectangle.height, 0, 1);
+            const stx = Math$1.CesiumMath.clamp(st.x / boundingRectangle.width, 0, 1);
+            const sty = Math$1.CesiumMath.clamp(st.y / boundingRectangle.height, 0, 1);
             if (bottom) {
               textureCoordinates[textureCoordIndex + bottomOffset2] = stx;
               textureCoordinates[textureCoordIndex + 1 + bottomOffset2] = sty;
@@ -200,10 +200,10 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './ArcType-de5d8777', '
 
           if (wall) {
             if (i + 3 < length) {
-              const p1 = Matrix2.Cartesian3.fromArray(flatPositions, i + 3, p1Scratch);
+              const p1 = Matrix3.Cartesian3.fromArray(flatPositions, i + 3, p1Scratch);
 
               if (recomputeNormal) {
-                const p2 = Matrix2.Cartesian3.fromArray(
+                const p2 = Matrix3.Cartesian3.fromArray(
                   flatPositions,
                   i + length,
                   p2Scratch
@@ -211,16 +211,16 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './ArcType-de5d8777', '
                 if (perPositionHeight) {
                   adjustPosHeightsForNormal(position, p1, p2, ellipsoid);
                 }
-                Matrix2.Cartesian3.subtract(p1, position, p1);
-                Matrix2.Cartesian3.subtract(p2, position, p2);
-                normal = Matrix2.Cartesian3.normalize(
-                  Matrix2.Cartesian3.cross(p2, p1, normal),
+                Matrix3.Cartesian3.subtract(p1, position, p1);
+                Matrix3.Cartesian3.subtract(p2, position, p2);
+                normal = Matrix3.Cartesian3.normalize(
+                  Matrix3.Cartesian3.cross(p2, p1, normal),
                   normal
                 );
                 recomputeNormal = false;
               }
 
-              if (Matrix2.Cartesian3.equalsEpsilon(p1, position, ComponentDatatype.CesiumMath.EPSILON10)) {
+              if (Matrix3.Cartesian3.equalsEpsilon(p1, position, Math$1.CesiumMath.EPSILON10)) {
                 // if we've reached a corner
                 recomputeNormal = true;
               }
@@ -229,8 +229,8 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './ArcType-de5d8777', '
             if (vertexFormat.tangent || vertexFormat.bitangent) {
               bitangent = ellipsoid.geodeticSurfaceNormal(position, bitangent);
               if (vertexFormat.tangent) {
-                tangent = Matrix2.Cartesian3.normalize(
-                  Matrix2.Cartesian3.cross(bitangent, normal, tangent),
+                tangent = Matrix3.Cartesian3.normalize(
+                  Matrix3.Cartesian3.cross(bitangent, normal, tangent),
                   tangent
                 );
               }
@@ -239,18 +239,18 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './ArcType-de5d8777', '
             normal = ellipsoid.geodeticSurfaceNormal(position, normal);
             if (vertexFormat.tangent || vertexFormat.bitangent) {
               if (perPositionHeight) {
-                scratchPerPosNormal = Matrix2.Cartesian3.fromArray(
+                scratchPerPosNormal = Matrix3.Cartesian3.fromArray(
                   normals,
                   attrIndex,
                   scratchPerPosNormal
                 );
-                scratchPerPosTangent = Matrix2.Cartesian3.cross(
-                  Matrix2.Cartesian3.UNIT_Z,
+                scratchPerPosTangent = Matrix3.Cartesian3.cross(
+                  Matrix3.Cartesian3.UNIT_Z,
                   scratchPerPosNormal,
                   scratchPerPosTangent
                 );
-                scratchPerPosTangent = Matrix2.Cartesian3.normalize(
-                  Matrix2.Matrix3.multiplyByVector(
+                scratchPerPosTangent = Matrix3.Cartesian3.normalize(
+                  Matrix3.Matrix3.multiplyByVector(
                     tangentRotationMatrix,
                     scratchPerPosTangent,
                     scratchPerPosTangent
@@ -258,8 +258,8 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './ArcType-de5d8777', '
                   scratchPerPosTangent
                 );
                 if (vertexFormat.bitangent) {
-                  scratchPerPosBitangent = Matrix2.Cartesian3.normalize(
-                    Matrix2.Cartesian3.cross(
+                  scratchPerPosBitangent = Matrix3.Cartesian3.normalize(
+                    Matrix3.Cartesian3.cross(
                       scratchPerPosNormal,
                       scratchPerPosTangent,
                       scratchPerPosBitangent
@@ -269,14 +269,14 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './ArcType-de5d8777', '
                 }
               }
 
-              tangent = Matrix2.Cartesian3.cross(Matrix2.Cartesian3.UNIT_Z, normal, tangent);
-              tangent = Matrix2.Cartesian3.normalize(
-                Matrix2.Matrix3.multiplyByVector(tangentRotationMatrix, tangent, tangent),
+              tangent = Matrix3.Cartesian3.cross(Matrix3.Cartesian3.UNIT_Z, normal, tangent);
+              tangent = Matrix3.Cartesian3.normalize(
+                Matrix3.Matrix3.multiplyByVector(tangentRotationMatrix, tangent, tangent),
                 tangent
               );
               if (vertexFormat.bitangent) {
-                bitangent = Matrix2.Cartesian3.normalize(
-                  Matrix2.Cartesian3.cross(normal, tangent, bitangent),
+                bitangent = Matrix3.Cartesian3.normalize(
+                  Matrix3.Cartesian3.cross(normal, tangent, bitangent),
                   bitangent
                 );
               }
@@ -423,8 +423,8 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './ArcType-de5d8777', '
     return geometry;
   }
 
-  const startCartographicScratch = new Matrix2.Cartographic();
-  const endCartographicScratch = new Matrix2.Cartographic();
+  const startCartographicScratch = new Matrix3.Cartographic();
+  const endCartographicScratch = new Matrix3.Cartographic();
   const idlCross = {
     westOverIDL: 0.0,
     eastOverIDL: 0.0,
@@ -457,7 +457,7 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './ArcType-de5d8777', '
     idlCross.eastOverIDL = Number.NEGATIVE_INFINITY;
 
     const inverseChordLength =
-      1.0 / ComponentDatatype.CesiumMath.chordLength(granularity, ellipsoid.maximumRadius);
+      1.0 / Math$1.CesiumMath.chordLength(granularity, ellipsoid.maximumRadius);
     const positionsLength = positions.length;
     let endCartographic = ellipsoid.cartesianToCartographic(
       positions[0],
@@ -494,18 +494,18 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './ArcType-de5d8777', '
       result.west = idlCross.westOverIDL;
       result.east = idlCross.eastOverIDL;
 
-      if (result.east > ComponentDatatype.CesiumMath.PI) {
-        result.east = result.east - ComponentDatatype.CesiumMath.TWO_PI;
+      if (result.east > Math$1.CesiumMath.PI) {
+        result.east = result.east - Math$1.CesiumMath.TWO_PI;
       }
-      if (result.west > ComponentDatatype.CesiumMath.PI) {
-        result.west = result.west - ComponentDatatype.CesiumMath.TWO_PI;
+      if (result.west > Math$1.CesiumMath.PI) {
+        result.west = result.west - Math$1.CesiumMath.TWO_PI;
       }
     }
 
     return result;
   }
 
-  const interpolatedCartographicScratch = new Matrix2.Cartographic();
+  const interpolatedCartographicScratch = new Matrix3.Cartographic();
   function interpolateAndGrowRectangle(
     ellipsoidGeodesic,
     inverseChordLength,
@@ -534,7 +534,7 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './ArcType-de5d8777', '
       result.north = Math.max(result.north, latitude);
 
       const lonAdjusted =
-        longitude >= 0 ? longitude : longitude + ComponentDatatype.CesiumMath.TWO_PI;
+        longitude >= 0 ? longitude : longitude + Math$1.CesiumMath.TWO_PI;
       idlCross.westOverIDL = Math.min(idlCross.westOverIDL, lonAdjusted);
       idlCross.eastOverIDL = Math.max(idlCross.eastOverIDL, lonAdjusted);
     }
@@ -786,14 +786,14 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './ArcType-de5d8777', '
    */
   function PolygonGeometry(options) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("options", options);
-    RuntimeError.Check.typeOf.object("options.polygonHierarchy", options.polygonHierarchy);
+    Check.Check.typeOf.object("options", options);
+    Check.Check.typeOf.object("options.polygonHierarchy", options.polygonHierarchy);
     if (
       defaultValue.defined(options.perPositionHeight) &&
       options.perPositionHeight &&
       defaultValue.defined(options.height)
     ) {
-      throw new RuntimeError.DeveloperError(
+      throw new Check.DeveloperError(
         "Cannot use both options.perPositionHeight and options.height"
       );
     }
@@ -802,7 +802,7 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './ArcType-de5d8777', '
       options.arcType !== ArcType.ArcType.GEODESIC &&
       options.arcType !== ArcType.ArcType.RHUMB
     ) {
-      throw new RuntimeError.DeveloperError(
+      throw new Check.DeveloperError(
         "Invalid arcType. Valid options are ArcType.GEODESIC and ArcType.RHUMB."
       );
     }
@@ -810,10 +810,10 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './ArcType-de5d8777', '
 
     const polygonHierarchy = options.polygonHierarchy;
     const vertexFormat = defaultValue.defaultValue(options.vertexFormat, VertexFormat.VertexFormat.DEFAULT);
-    const ellipsoid = defaultValue.defaultValue(options.ellipsoid, Matrix2.Ellipsoid.WGS84);
+    const ellipsoid = defaultValue.defaultValue(options.ellipsoid, Matrix3.Ellipsoid.WGS84);
     const granularity = defaultValue.defaultValue(
       options.granularity,
-      ComponentDatatype.CesiumMath.RADIANS_PER_DEGREE
+      Math$1.CesiumMath.RADIANS_PER_DEGREE
     );
     const stRotation = defaultValue.defaultValue(options.stRotation, 0.0);
     const textureCoordinates = options.textureCoordinates;
@@ -830,7 +830,7 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './ArcType-de5d8777', '
     }
 
     this._vertexFormat = VertexFormat.VertexFormat.clone(vertexFormat);
-    this._ellipsoid = Matrix2.Ellipsoid.clone(ellipsoid);
+    this._ellipsoid = Matrix3.Ellipsoid.clone(ellipsoid);
     this._granularity = granularity;
     this._stRotation = stRotation;
     this._height = height;
@@ -856,9 +856,9 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './ArcType-de5d8777', '
     this.packedLength =
       PolygonGeometryLibrary.PolygonGeometryLibrary.computeHierarchyPackedLength(
         polygonHierarchy,
-        Matrix2.Cartesian3
+        Matrix3.Cartesian3
       ) +
-      Matrix2.Ellipsoid.packedLength +
+      Matrix3.Ellipsoid.packedLength +
       VertexFormat.VertexFormat.packedLength +
       (textureCoordinates
         ? PolygonGeometryLibrary.PolygonGeometryLibrary.computeHierarchyPackedLength(
@@ -906,7 +906,7 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './ArcType-de5d8777', '
     options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
 
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("options.positions", options.positions);
+    Check.Check.defined("options.positions", options.positions);
     //>>includeEnd('debug');
 
     const newOptions = {
@@ -940,8 +940,8 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './ArcType-de5d8777', '
    */
   PolygonGeometry.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("value", value);
-    RuntimeError.Check.defined("array", array);
+    Check.Check.typeOf.object("value", value);
+    Check.Check.defined("array", array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -950,11 +950,11 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './ArcType-de5d8777', '
       value._polygonHierarchy,
       array,
       startingIndex,
-      Matrix2.Cartesian3
+      Matrix3.Cartesian3
     );
 
-    Matrix2.Ellipsoid.pack(value._ellipsoid, array, startingIndex);
-    startingIndex += Matrix2.Ellipsoid.packedLength;
+    Matrix3.Ellipsoid.pack(value._ellipsoid, array, startingIndex);
+    startingIndex += Matrix3.Ellipsoid.packedLength;
 
     VertexFormat.VertexFormat.pack(value._vertexFormat, array, startingIndex);
     startingIndex += VertexFormat.VertexFormat.packedLength;
@@ -984,7 +984,7 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './ArcType-de5d8777', '
     return array;
   };
 
-  const scratchEllipsoid = Matrix2.Ellipsoid.clone(Matrix2.Ellipsoid.UNIT_SPHERE);
+  const scratchEllipsoid = Matrix3.Ellipsoid.clone(Matrix3.Ellipsoid.UNIT_SPHERE);
   const scratchVertexFormat = new VertexFormat.VertexFormat();
 
   //Only used to avoid inability to default construct.
@@ -1001,7 +1001,7 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './ArcType-de5d8777', '
    */
   PolygonGeometry.unpack = function (array, startingIndex, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("array", array);
+    Check.Check.defined("array", array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -1009,13 +1009,13 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './ArcType-de5d8777', '
     const polygonHierarchy = PolygonGeometryLibrary.PolygonGeometryLibrary.unpackPolygonHierarchy(
       array,
       startingIndex,
-      Matrix2.Cartesian3
+      Matrix3.Cartesian3
     );
     startingIndex = polygonHierarchy.startingIndex;
     delete polygonHierarchy.startingIndex;
 
-    const ellipsoid = Matrix2.Ellipsoid.unpack(array, startingIndex, scratchEllipsoid);
-    startingIndex += Matrix2.Ellipsoid.packedLength;
+    const ellipsoid = Matrix3.Ellipsoid.unpack(array, startingIndex, scratchEllipsoid);
+    startingIndex += Matrix3.Ellipsoid.packedLength;
 
     const vertexFormat = VertexFormat.VertexFormat.unpack(
       array,
@@ -1056,7 +1056,7 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './ArcType-de5d8777', '
     }
 
     result._polygonHierarchy = polygonHierarchy;
-    result._ellipsoid = Matrix2.Ellipsoid.clone(ellipsoid, result._ellipsoid);
+    result._ellipsoid = Matrix3.Ellipsoid.clone(ellipsoid, result._ellipsoid);
     result._vertexFormat = VertexFormat.VertexFormat.clone(vertexFormat, result._vertexFormat);
     result._height = height;
     result._extrudedHeight = extrudedHeight;
@@ -1090,25 +1090,25 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './ArcType-de5d8777', '
    */
   PolygonGeometry.computeRectangle = function (options, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("options", options);
-    RuntimeError.Check.typeOf.object("options.polygonHierarchy", options.polygonHierarchy);
+    Check.Check.typeOf.object("options", options);
+    Check.Check.typeOf.object("options.polygonHierarchy", options.polygonHierarchy);
     //>>includeEnd('debug');
 
     const granularity = defaultValue.defaultValue(
       options.granularity,
-      ComponentDatatype.CesiumMath.RADIANS_PER_DEGREE
+      Math$1.CesiumMath.RADIANS_PER_DEGREE
     );
     const arcType = defaultValue.defaultValue(options.arcType, ArcType.ArcType.GEODESIC);
     //>>includeStart('debug', pragmas.debug);
     if (arcType !== ArcType.ArcType.GEODESIC && arcType !== ArcType.ArcType.RHUMB) {
-      throw new RuntimeError.DeveloperError(
+      throw new Check.DeveloperError(
         "Invalid arcType. Valid options are ArcType.GEODESIC and ArcType.RHUMB."
       );
     }
     //>>includeEnd('debug');
 
     const polygonHierarchy = options.polygonHierarchy;
-    const ellipsoid = defaultValue.defaultValue(options.ellipsoid, Matrix2.Ellipsoid.WGS84);
+    const ellipsoid = defaultValue.defaultValue(options.ellipsoid, Matrix3.Ellipsoid.WGS84);
 
     return computeRectangle(
       polygonHierarchy.positions,
@@ -1192,7 +1192,7 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './ArcType-de5d8777', '
     const extrudedHeight = polygonGeometry._extrudedHeight;
     const extrude =
       polygonGeometry._perPositionHeightExtrude ||
-      !ComponentDatatype.CesiumMath.equalsEpsilon(height, extrudedHeight, 0, ComponentDatatype.CesiumMath.EPSILON2);
+      !Math$1.CesiumMath.equalsEpsilon(height, extrudedHeight, 0, Math$1.CesiumMath.EPSILON2);
 
     const options = {
       perPositionHeight: perPositionHeight,
@@ -1436,11 +1436,10 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './ArcType-de5d8777', '
     if (defaultValue.defined(offset)) {
       polygonGeometry = PolygonGeometry.unpack(polygonGeometry, offset);
     }
-    polygonGeometry._ellipsoid = Matrix2.Ellipsoid.clone(polygonGeometry._ellipsoid);
+    polygonGeometry._ellipsoid = Matrix3.Ellipsoid.clone(polygonGeometry._ellipsoid);
     return PolygonGeometry.createGeometry(polygonGeometry);
   }
 
   return createPolygonGeometry;
 
 }));
-//# sourceMappingURL=createPolygonGeometry.js.map

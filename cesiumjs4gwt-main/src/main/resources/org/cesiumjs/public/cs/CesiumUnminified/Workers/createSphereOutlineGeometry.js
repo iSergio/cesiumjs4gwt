@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.95
+ * Version 1.99
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './EllipsoidOutlineGeometry-2f8770f8', './ComponentDatatype-4eeb6d9b', './WebGLConstants-6da700a2', './Transforms-273eeb44', './_commonjsHelpers-3aae1032-65601a27', './combine-d11b1f00', './GeometryAttribute-9be2d2e5', './GeometryAttributes-734a3446', './GeometryOffsetAttribute-59b14f45', './IndexDatatype-f228f5fd'], (function (defaultValue, Matrix2, RuntimeError, EllipsoidOutlineGeometry, ComponentDatatype, WebGLConstants, Transforms, _commonjsHelpers3aae1032, combine, GeometryAttribute, GeometryAttributes, GeometryOffsetAttribute, IndexDatatype) { 'use strict';
+define(['./defaultValue-135942ca', './Matrix3-ea964448', './Check-40d84a28', './EllipsoidOutlineGeometry-b2ff16b8', './Math-efde0c7b', './Transforms-ac2d28a9', './Matrix2-f9f1b94b', './RuntimeError-f0dada00', './combine-462d91dd', './ComponentDatatype-ebdce3ba', './WebGLConstants-fcb70ee3', './GeometryAttribute-51d61732', './GeometryAttributes-899f8bd0', './GeometryOffsetAttribute-d3a42805', './IndexDatatype-fa75fe25'], (function (defaultValue, Matrix3, Check, EllipsoidOutlineGeometry, Math, Transforms, Matrix2, RuntimeError, combine, ComponentDatatype, WebGLConstants, GeometryAttribute, GeometryAttributes, GeometryOffsetAttribute, IndexDatatype) { 'use strict';
 
   /**
    * A description of the outline of a sphere.
@@ -51,7 +51,7 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a
    */
   function SphereOutlineGeometry(options) {
     const radius = defaultValue.defaultValue(options.radius, 1.0);
-    const radii = new Matrix2.Cartesian3(radius, radius, radius);
+    const radii = new Matrix3.Cartesian3(radius, radius, radius);
     const ellipsoidOptions = {
       radii: radii,
       stackPartitions: options.stackPartitions,
@@ -80,7 +80,7 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a
    */
   SphereOutlineGeometry.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("value", value);
+    Check.Check.typeOf.object("value", value);
     //>>includeEnd('debug');
 
     return EllipsoidOutlineGeometry.EllipsoidOutlineGeometry.pack(
@@ -93,7 +93,7 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a
   const scratchEllipsoidGeometry = new EllipsoidOutlineGeometry.EllipsoidOutlineGeometry();
   const scratchOptions = {
     radius: undefined,
-    radii: new Matrix2.Cartesian3(),
+    radii: new Matrix3.Cartesian3(),
     stackPartitions: undefined,
     slicePartitions: undefined,
     subdivisions: undefined,
@@ -122,7 +122,7 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a
       return new SphereOutlineGeometry(scratchOptions);
     }
 
-    Matrix2.Cartesian3.clone(ellipsoidGeometry._radii, scratchOptions.radii);
+    Matrix3.Cartesian3.clone(ellipsoidGeometry._radii, scratchOptions.radii);
     result._ellipsoidGeometry = new EllipsoidOutlineGeometry.EllipsoidOutlineGeometry(scratchOptions);
     return result;
   };
@@ -149,4 +149,3 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a
   return createSphereOutlineGeometry;
 
 }));
-//# sourceMappingURL=createSphereOutlineGeometry.js.map

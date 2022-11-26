@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.95
+ * Version 1.99
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './ComponentDatatype-4eeb6d9b', './ArcType-de5d8777', './arrayRemoveDuplicates-1af79ba4', './EllipsoidGeodesic-72f01b70', './EllipsoidRhumbLine-7bc7dfce', './EncodedCartesian3-491ac596', './GeometryAttribute-9be2d2e5', './IntersectionTests-ea138127', './Plane-76b84425', './WebMercatorProjection-3b121d41', './_commonjsHelpers-3aae1032-65601a27', './combine-d11b1f00', './WebGLConstants-6da700a2'], (function (Transforms, Matrix2, RuntimeError, defaultValue, ComponentDatatype, ArcType, arrayRemoveDuplicates, EllipsoidGeodesic, EllipsoidRhumbLine, EncodedCartesian3, GeometryAttribute, IntersectionTests, Plane, WebMercatorProjection, _commonjsHelpers3aae1032, combine, WebGLConstants) { 'use strict';
+define(['./Transforms-ac2d28a9', './Matrix2-f9f1b94b', './Matrix3-ea964448', './Check-40d84a28', './defaultValue-135942ca', './Math-efde0c7b', './ArcType-89067bf8', './arrayRemoveDuplicates-3fb00ed2', './ComponentDatatype-ebdce3ba', './EllipsoidGeodesic-08772132', './EllipsoidRhumbLine-6161ec8c', './EncodedCartesian3-4040c81e', './GeometryAttribute-51d61732', './IntersectionTests-4ab30dca', './Plane-93af52b2', './WebMercatorProjection-7dd32693', './combine-462d91dd', './RuntimeError-f0dada00', './WebGLConstants-fcb70ee3'], (function (Transforms, Matrix2, Matrix3, Check, defaultValue, Math$1, ArcType, arrayRemoveDuplicates, ComponentDatatype, EllipsoidGeodesic, EllipsoidRhumbLine, EncodedCartesian3, GeometryAttribute, IntersectionTests, Plane, WebMercatorProjection, combine, RuntimeError, WebGLConstants) { 'use strict';
 
   /**
    * A tiling scheme for geometry referenced to a simple {@link GeographicProjection} where
@@ -45,7 +45,7 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
   function GeographicTilingScheme(options) {
     options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
 
-    this._ellipsoid = defaultValue.defaultValue(options.ellipsoid, Matrix2.Ellipsoid.WGS84);
+    this._ellipsoid = defaultValue.defaultValue(options.ellipsoid, Matrix3.Ellipsoid.WGS84);
     this._rectangle = defaultValue.defaultValue(options.rectangle, Matrix2.Rectangle.MAX_VALUE);
     this._projection = new Transforms.GeographicProjection(this._ellipsoid);
     this._numberOfLevelZeroTilesX = defaultValue.defaultValue(
@@ -128,13 +128,13 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
     result
   ) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("rectangle", rectangle);
+    Check.Check.defined("rectangle", rectangle);
     //>>includeEnd('debug');
 
-    const west = ComponentDatatype.CesiumMath.toDegrees(rectangle.west);
-    const south = ComponentDatatype.CesiumMath.toDegrees(rectangle.south);
-    const east = ComponentDatatype.CesiumMath.toDegrees(rectangle.east);
-    const north = ComponentDatatype.CesiumMath.toDegrees(rectangle.north);
+    const west = Math$1.CesiumMath.toDegrees(rectangle.west);
+    const south = Math$1.CesiumMath.toDegrees(rectangle.south);
+    const east = Math$1.CesiumMath.toDegrees(rectangle.east);
+    const north = Math$1.CesiumMath.toDegrees(rectangle.north);
 
     if (!defaultValue.defined(result)) {
       return new Matrix2.Rectangle(west, south, east, north);
@@ -166,10 +166,10 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
     result
   ) {
     const rectangleRadians = this.tileXYToRectangle(x, y, level, result);
-    rectangleRadians.west = ComponentDatatype.CesiumMath.toDegrees(rectangleRadians.west);
-    rectangleRadians.south = ComponentDatatype.CesiumMath.toDegrees(rectangleRadians.south);
-    rectangleRadians.east = ComponentDatatype.CesiumMath.toDegrees(rectangleRadians.east);
-    rectangleRadians.north = ComponentDatatype.CesiumMath.toDegrees(rectangleRadians.north);
+    rectangleRadians.west = Math$1.CesiumMath.toDegrees(rectangleRadians.west);
+    rectangleRadians.south = Math$1.CesiumMath.toDegrees(rectangleRadians.south);
+    rectangleRadians.east = Math$1.CesiumMath.toDegrees(rectangleRadians.east);
+    rectangleRadians.north = Math$1.CesiumMath.toDegrees(rectangleRadians.north);
     return rectangleRadians;
   };
 
@@ -244,7 +244,7 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
 
     let longitude = position.longitude;
     if (rectangle.east < rectangle.west) {
-      longitude += ComponentDatatype.CesiumMath.TWO_PI;
+      longitude += Math$1.CesiumMath.TWO_PI;
     }
 
     let xTileCoordinate = ((longitude - rectangle.west) / xTileWidth) | 0;
@@ -267,19 +267,19 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
     return result;
   };
 
-  const scratchDiagonalCartesianNE = new Matrix2.Cartesian3();
-  const scratchDiagonalCartesianSW = new Matrix2.Cartesian3();
-  const scratchDiagonalCartographic = new Matrix2.Cartographic();
-  const scratchCenterCartesian = new Matrix2.Cartesian3();
-  const scratchSurfaceCartesian = new Matrix2.Cartesian3();
+  const scratchDiagonalCartesianNE = new Matrix3.Cartesian3();
+  const scratchDiagonalCartesianSW = new Matrix3.Cartesian3();
+  const scratchDiagonalCartographic = new Matrix3.Cartographic();
+  const scratchCenterCartesian = new Matrix3.Cartesian3();
+  const scratchSurfaceCartesian = new Matrix3.Cartesian3();
 
   const scratchBoundingSphere = new Transforms.BoundingSphere();
   const tilingScheme = new GeographicTilingScheme();
   const scratchCorners = [
-    new Matrix2.Cartographic(),
-    new Matrix2.Cartographic(),
-    new Matrix2.Cartographic(),
-    new Matrix2.Cartographic(),
+    new Matrix3.Cartographic(),
+    new Matrix3.Cartographic(),
+    new Matrix3.Cartographic(),
+    new Matrix3.Cartographic(),
   ];
   const scratchTileXY = new Matrix2.Cartesian2();
 
@@ -320,14 +320,14 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
     ellipsoid
   ) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("rectangle", rectangle);
+    Check.Check.defined("rectangle", rectangle);
     if (!defaultValue.defined(ApproximateTerrainHeights._terrainHeights)) {
-      throw new RuntimeError.DeveloperError(
+      throw new Check.DeveloperError(
         "You must call ApproximateTerrainHeights.initialize and wait for the promise to resolve before using this function"
       );
     }
     //>>includeEnd('debug');
-    ellipsoid = defaultValue.defaultValue(ellipsoid, Matrix2.Ellipsoid.WGS84);
+    ellipsoid = defaultValue.defaultValue(ellipsoid, Matrix3.Ellipsoid.WGS84);
 
     const xyLevel = getTileXYLevel(rectangle);
 
@@ -352,7 +352,7 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
         scratchDiagonalCartesianSW
       );
 
-      Matrix2.Cartesian3.midpoint(
+      Matrix3.Cartesian3.midpoint(
         scratchDiagonalCartesianSW,
         scratchDiagonalCartesianNE,
         scratchCenterCartesian
@@ -362,7 +362,7 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
         scratchSurfaceCartesian
       );
       if (defaultValue.defined(surfacePosition)) {
-        const distance = Matrix2.Cartesian3.distance(
+        const distance = Matrix3.Cartesian3.distance(
           scratchCenterCartesian,
           surfacePosition
         );
@@ -391,14 +391,14 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
    */
   ApproximateTerrainHeights.getBoundingSphere = function (rectangle, ellipsoid) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("rectangle", rectangle);
+    Check.Check.defined("rectangle", rectangle);
     if (!defaultValue.defined(ApproximateTerrainHeights._terrainHeights)) {
-      throw new RuntimeError.DeveloperError(
+      throw new Check.DeveloperError(
         "You must call ApproximateTerrainHeights.initialize and wait for the promise to resolve before using this function"
       );
     }
     //>>includeEnd('debug');
-    ellipsoid = defaultValue.defaultValue(ellipsoid, Matrix2.Ellipsoid.WGS84);
+    ellipsoid = defaultValue.defaultValue(ellipsoid, Matrix3.Ellipsoid.WGS84);
 
     const xyLevel = getTileXYLevel(rectangle);
 
@@ -424,25 +424,25 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
   };
 
   function getTileXYLevel(rectangle) {
-    Matrix2.Cartographic.fromRadians(
+    Matrix3.Cartographic.fromRadians(
       rectangle.east,
       rectangle.north,
       0.0,
       scratchCorners[0]
     );
-    Matrix2.Cartographic.fromRadians(
+    Matrix3.Cartographic.fromRadians(
       rectangle.west,
       rectangle.north,
       0.0,
       scratchCorners[1]
     );
-    Matrix2.Cartographic.fromRadians(
+    Matrix3.Cartographic.fromRadians(
       rectangle.east,
       rectangle.south,
       0.0,
       scratchCorners[2]
     );
-    Matrix2.Cartographic.fromRadians(
+    Matrix3.Cartographic.fromRadians(
       rectangle.west,
       rectangle.south,
       0.0,
@@ -509,12 +509,13 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
       },
     },
   });
+  var ApproximateTerrainHeights$1 = ApproximateTerrainHeights;
 
   const PROJECTIONS = [Transforms.GeographicProjection, WebMercatorProjection.WebMercatorProjection];
   const PROJECTION_COUNT = PROJECTIONS.length;
 
-  const MITER_BREAK_SMALL = Math.cos(ComponentDatatype.CesiumMath.toRadians(30.0));
-  const MITER_BREAK_LARGE = Math.cos(ComponentDatatype.CesiumMath.toRadians(150.0));
+  const MITER_BREAK_SMALL = Math.cos(Math$1.CesiumMath.toRadians(30.0));
+  const MITER_BREAK_LARGE = Math.cos(Math$1.CesiumMath.toRadians(150.0));
 
   // Initial heights for constructing the wall.
   // Keeping WALL_INITIAL_MIN_HEIGHT near the ellipsoid surface helps
@@ -563,14 +564,14 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
 
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(positions) || positions.length < 2) {
-      throw new RuntimeError.DeveloperError("At least two positions are required.");
+      throw new Check.DeveloperError("At least two positions are required.");
     }
     if (
       defaultValue.defined(options.arcType) &&
       options.arcType !== ArcType.ArcType.GEODESIC &&
       options.arcType !== ArcType.ArcType.RHUMB
     ) {
-      throw new RuntimeError.DeveloperError(
+      throw new Check.DeveloperError(
         "Valid options for arcType are ArcType.GEODESIC and ArcType.RHUMB."
       );
     }
@@ -607,7 +608,7 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
      */
     this.arcType = defaultValue.defaultValue(options.arcType, ArcType.ArcType.GEODESIC);
 
-    this._ellipsoid = Matrix2.Ellipsoid.WGS84;
+    this._ellipsoid = Matrix3.Ellipsoid.WGS84;
 
     // MapProjections can't be packed, so store the index to a known MapProjection.
     this._projectionIndex = 0;
@@ -633,7 +634,7 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
           1.0 +
           1.0 +
           1.0 +
-          Matrix2.Ellipsoid.packedLength +
+          Matrix3.Ellipsoid.packedLength +
           1.0 +
           1.0
         );
@@ -665,9 +666,9 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
     groundPolylineGeometry._ellipsoid = mapProjection.ellipsoid;
   };
 
-  const cart3Scratch1 = new Matrix2.Cartesian3();
-  const cart3Scratch2 = new Matrix2.Cartesian3();
-  const cart3Scratch3 = new Matrix2.Cartesian3();
+  const cart3Scratch1 = new Matrix3.Cartesian3();
+  const cart3Scratch2 = new Matrix3.Cartesian3();
+  const cart3Scratch3 = new Matrix3.Cartesian3();
   function computeRightNormal(start, end, maxHeight, ellipsoid, result) {
     const startBottom = getPosition(ellipsoid, start, 0.0, cart3Scratch1);
     const startTop = getPosition(ellipsoid, start, maxHeight, cart3Scratch2);
@@ -676,14 +677,14 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
     const up = direction(startTop, startBottom, cart3Scratch2);
     const forward = direction(endBottom, startBottom, cart3Scratch3);
 
-    Matrix2.Cartesian3.cross(forward, up, result);
-    return Matrix2.Cartesian3.normalize(result, result);
+    Matrix3.Cartesian3.cross(forward, up, result);
+    return Matrix3.Cartesian3.normalize(result, result);
   }
 
-  const interpolatedCartographicScratch = new Matrix2.Cartographic();
-  const interpolatedBottomScratch = new Matrix2.Cartesian3();
-  const interpolatedTopScratch = new Matrix2.Cartesian3();
-  const interpolatedNormalScratch = new Matrix2.Cartesian3();
+  const interpolatedCartographicScratch = new Matrix3.Cartographic();
+  const interpolatedBottomScratch = new Matrix3.Cartesian3();
+  const interpolatedTopScratch = new Matrix3.Cartesian3();
+  const interpolatedNormalScratch = new Matrix3.Cartesian3();
   function interpolateSegment(
     start,
     end,
@@ -745,9 +746,9 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
         interpolatedTopScratch
       );
 
-      Matrix2.Cartesian3.pack(interpolatedNormal, normalsArray, packIndex);
-      Matrix2.Cartesian3.pack(interpolatedBottom, bottomPositionsArray, packIndex);
-      Matrix2.Cartesian3.pack(interpolatedTop, topPositionsArray, packIndex);
+      Matrix3.Cartesian3.pack(interpolatedNormal, normalsArray, packIndex);
+      Matrix3.Cartesian3.pack(interpolatedBottom, bottomPositionsArray, packIndex);
+      Matrix3.Cartesian3.pack(interpolatedTop, topPositionsArray, packIndex);
       cartographicsArray.push(interpolatedCartographic.latitude);
       cartographicsArray.push(interpolatedCartographic.longitude);
 
@@ -756,11 +757,11 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
     }
   }
 
-  const heightlessCartographicScratch = new Matrix2.Cartographic();
+  const heightlessCartographicScratch = new Matrix3.Cartographic();
   function getPosition(ellipsoid, cartographic, height, result) {
-    Matrix2.Cartographic.clone(cartographic, heightlessCartographicScratch);
+    Matrix3.Cartographic.clone(cartographic, heightlessCartographicScratch);
     heightlessCartographicScratch.height = height;
-    return Matrix2.Cartographic.toCartesian(
+    return Matrix3.Cartographic.toCartesian(
       heightlessCartographicScratch,
       ellipsoid,
       result
@@ -778,8 +779,8 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
    */
   GroundPolylineGeometry.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("value", value);
-    RuntimeError.Check.defined("array", array);
+    Check.Check.typeOf.object("value", value);
+    Check.Check.defined("array", array);
     //>>includeEnd('debug');
 
     let index = defaultValue.defaultValue(startingIndex, 0);
@@ -791,7 +792,7 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
 
     for (let i = 0; i < positionsLength; ++i) {
       const cartesian = positions[i];
-      Matrix2.Cartesian3.pack(cartesian, array, index);
+      Matrix3.Cartesian3.pack(cartesian, array, index);
       index += 3;
     }
 
@@ -799,8 +800,8 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
     array[index++] = value.loop ? 1.0 : 0.0;
     array[index++] = value.arcType;
 
-    Matrix2.Ellipsoid.pack(value._ellipsoid, array, index);
-    index += Matrix2.Ellipsoid.packedLength;
+    Matrix3.Ellipsoid.pack(value._ellipsoid, array, index);
+    index += Matrix3.Ellipsoid.packedLength;
 
     array[index++] = value._projectionIndex;
     array[index++] = value._scene3DOnly ? 1.0 : 0.0;
@@ -817,7 +818,7 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
    */
   GroundPolylineGeometry.unpack = function (array, startingIndex, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("array", array);
+    Check.Check.defined("array", array);
     //>>includeEnd('debug');
 
     let index = defaultValue.defaultValue(startingIndex, 0);
@@ -825,7 +826,7 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
     const positions = new Array(positionsLength);
 
     for (let i = 0; i < positionsLength; i++) {
-      positions[i] = Matrix2.Cartesian3.unpack(array, index);
+      positions[i] = Matrix3.Cartesian3.unpack(array, index);
       index += 3;
     }
 
@@ -833,8 +834,8 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
     const loop = array[index++] === 1.0;
     const arcType = array[index++];
 
-    const ellipsoid = Matrix2.Ellipsoid.unpack(array, index);
-    index += Matrix2.Ellipsoid.packedLength;
+    const ellipsoid = Matrix3.Ellipsoid.unpack(array, index);
+    index += Matrix3.Ellipsoid.packedLength;
 
     const projectionIndex = array[index++];
     const scene3DOnly = array[index++] === 1.0;
@@ -857,8 +858,8 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
   };
 
   function direction(target, origin, result) {
-    Matrix2.Cartesian3.subtract(target, origin, result);
-    Matrix2.Cartesian3.normalize(result, result);
+    Matrix3.Cartesian3.subtract(target, origin, result);
+    Matrix3.Cartesian3.normalize(result, result);
     return result;
   }
 
@@ -866,16 +867,16 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
     result = direction(target, origin, result);
 
     // orthogonalize
-    result = Matrix2.Cartesian3.cross(result, up, result);
-    result = Matrix2.Cartesian3.normalize(result, result);
-    result = Matrix2.Cartesian3.cross(up, result, result);
+    result = Matrix3.Cartesian3.cross(result, up, result);
+    result = Matrix3.Cartesian3.normalize(result, result);
+    result = Matrix3.Cartesian3.cross(up, result, result);
     return result;
   }
 
-  const toPreviousScratch = new Matrix2.Cartesian3();
-  const toNextScratch = new Matrix2.Cartesian3();
-  const forwardScratch = new Matrix2.Cartesian3();
-  const vertexUpScratch = new Matrix2.Cartesian3();
+  const toPreviousScratch = new Matrix3.Cartesian3();
+  const toNextScratch = new Matrix3.Cartesian3();
+  const forwardScratch = new Matrix3.Cartesian3();
+  const vertexUpScratch = new Matrix3.Cartesian3();
   const cosine90 = 0.0;
   const cosine180 = -1.0;
   function computeVertexMiterNormal(
@@ -898,41 +899,41 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
 
     // Check if tangents are almost opposite - if so, no need to miter.
     if (
-      ComponentDatatype.CesiumMath.equalsEpsilon(
-        Matrix2.Cartesian3.dot(toPrevious, toNext),
+      Math$1.CesiumMath.equalsEpsilon(
+        Matrix3.Cartesian3.dot(toPrevious, toNext),
         cosine180,
-        ComponentDatatype.CesiumMath.EPSILON5
+        Math$1.CesiumMath.EPSILON5
       )
     ) {
-      result = Matrix2.Cartesian3.cross(up, toPrevious, result);
-      result = Matrix2.Cartesian3.normalize(result, result);
+      result = Matrix3.Cartesian3.cross(up, toPrevious, result);
+      result = Matrix3.Cartesian3.normalize(result, result);
       return result;
     }
 
     // Average directions to previous and to next in the plane of Up
-    result = Matrix2.Cartesian3.add(toNext, toPrevious, result);
-    result = Matrix2.Cartesian3.normalize(result, result);
+    result = Matrix3.Cartesian3.add(toNext, toPrevious, result);
+    result = Matrix3.Cartesian3.normalize(result, result);
 
     // Flip the normal if it isn't pointing roughly bound right (aka if forward is pointing more "backwards")
-    const forward = Matrix2.Cartesian3.cross(up, result, forwardScratch);
-    if (Matrix2.Cartesian3.dot(toNext, forward) < cosine90) {
-      result = Matrix2.Cartesian3.negate(result, result);
+    const forward = Matrix3.Cartesian3.cross(up, result, forwardScratch);
+    if (Matrix3.Cartesian3.dot(toNext, forward) < cosine90) {
+      result = Matrix3.Cartesian3.negate(result, result);
     }
 
     return result;
   }
 
-  const XZ_PLANE = Plane.Plane.fromPointNormal(Matrix2.Cartesian3.ZERO, Matrix2.Cartesian3.UNIT_Y);
+  const XZ_PLANE = Plane.Plane.fromPointNormal(Matrix3.Cartesian3.ZERO, Matrix3.Cartesian3.UNIT_Y);
 
-  const previousBottomScratch = new Matrix2.Cartesian3();
-  const vertexBottomScratch = new Matrix2.Cartesian3();
-  const vertexTopScratch = new Matrix2.Cartesian3();
-  const nextBottomScratch = new Matrix2.Cartesian3();
-  const vertexNormalScratch = new Matrix2.Cartesian3();
-  const intersectionScratch = new Matrix2.Cartesian3();
-  const cartographicScratch0 = new Matrix2.Cartographic();
-  const cartographicScratch1 = new Matrix2.Cartographic();
-  const cartographicIntersectionScratch = new Matrix2.Cartographic();
+  const previousBottomScratch = new Matrix3.Cartesian3();
+  const vertexBottomScratch = new Matrix3.Cartesian3();
+  const vertexTopScratch = new Matrix3.Cartesian3();
+  const nextBottomScratch = new Matrix3.Cartesian3();
+  const vertexNormalScratch = new Matrix3.Cartesian3();
+  const intersectionScratch = new Matrix3.Cartesian3();
+  const cartographicScratch0 = new Matrix3.Cartographic();
+  const cartographicScratch1 = new Matrix3.Cartographic();
+  const cartographicIntersectionScratch = new Matrix3.Cartographic();
   /**
    * Computes shadow volumes for the ground polyline, consisting of its vertices, indices, and a bounding sphere.
    * Vertices are "fat," packing all the data needed in each volume to describe a line on terrain or 3D Tiles.
@@ -987,11 +988,11 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
       );
       if (
         defaultValue.defined(intersection) &&
-        !Matrix2.Cartesian3.equalsEpsilon(intersection, p0, ComponentDatatype.CesiumMath.EPSILON7) &&
-        !Matrix2.Cartesian3.equalsEpsilon(intersection, p1, ComponentDatatype.CesiumMath.EPSILON7)
+        !Matrix3.Cartesian3.equalsEpsilon(intersection, p0, Math$1.CesiumMath.EPSILON7) &&
+        !Matrix3.Cartesian3.equalsEpsilon(intersection, p1, Math$1.CesiumMath.EPSILON7)
       ) {
         if (groundPolylineGeometry.arcType === ArcType.ArcType.GEODESIC) {
-          splitPositions.push(Matrix2.Cartesian3.clone(intersection));
+          splitPositions.push(Matrix3.Cartesian3.clone(intersection));
         } else if (groundPolylineGeometry.arcType === ArcType.ArcType.RHUMB) {
           intersectionLongitude = ellipsoid.cartesianToCartographic(
             intersection,
@@ -1010,10 +1011,10 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
           );
           if (
             defaultValue.defined(intersection) &&
-            !Matrix2.Cartesian3.equalsEpsilon(intersection, p0, ComponentDatatype.CesiumMath.EPSILON7) &&
-            !Matrix2.Cartesian3.equalsEpsilon(intersection, p1, ComponentDatatype.CesiumMath.EPSILON7)
+            !Matrix3.Cartesian3.equalsEpsilon(intersection, p0, Math$1.CesiumMath.EPSILON7) &&
+            !Matrix3.Cartesian3.equalsEpsilon(intersection, p1, Math$1.CesiumMath.EPSILON7)
           ) {
-            splitPositions.push(Matrix2.Cartesian3.clone(intersection));
+            splitPositions.push(Matrix3.Cartesian3.clone(intersection));
           }
         }
       }
@@ -1031,11 +1032,11 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
       );
       if (
         defaultValue.defined(intersection) &&
-        !Matrix2.Cartesian3.equalsEpsilon(intersection, p0, ComponentDatatype.CesiumMath.EPSILON7) &&
-        !Matrix2.Cartesian3.equalsEpsilon(intersection, p1, ComponentDatatype.CesiumMath.EPSILON7)
+        !Matrix3.Cartesian3.equalsEpsilon(intersection, p0, Math$1.CesiumMath.EPSILON7) &&
+        !Matrix3.Cartesian3.equalsEpsilon(intersection, p1, Math$1.CesiumMath.EPSILON7)
       ) {
         if (groundPolylineGeometry.arcType === ArcType.ArcType.GEODESIC) {
-          splitPositions.push(Matrix2.Cartesian3.clone(intersection));
+          splitPositions.push(Matrix3.Cartesian3.clone(intersection));
         } else if (groundPolylineGeometry.arcType === ArcType.ArcType.RHUMB) {
           intersectionLongitude = ellipsoid.cartesianToCartographic(
             intersection,
@@ -1054,10 +1055,10 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
           );
           if (
             defaultValue.defined(intersection) &&
-            !Matrix2.Cartesian3.equalsEpsilon(intersection, p0, ComponentDatatype.CesiumMath.EPSILON7) &&
-            !Matrix2.Cartesian3.equalsEpsilon(intersection, p1, ComponentDatatype.CesiumMath.EPSILON7)
+            !Matrix3.Cartesian3.equalsEpsilon(intersection, p0, Math$1.CesiumMath.EPSILON7) &&
+            !Matrix3.Cartesian3.equalsEpsilon(intersection, p1, Math$1.CesiumMath.EPSILON7)
           ) {
-            splitPositions.push(Matrix2.Cartesian3.clone(intersection));
+            splitPositions.push(Matrix3.Cartesian3.clone(intersection));
           }
         }
       }
@@ -1066,7 +1067,7 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
 
     let cartographics = new Array(cartographicsLength);
     for (i = 0; i < cartographicsLength; i++) {
-      const cartographic = Matrix2.Cartographic.fromCartesian(
+      const cartographic = Matrix3.Cartographic.fromCartesian(
         splitPositions[i],
         ellipsoid
       );
@@ -1076,7 +1077,7 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
 
     cartographics = arrayRemoveDuplicates.arrayRemoveDuplicates(
       cartographics,
-      Matrix2.Cartographic.equalsEpsilon
+      Matrix3.Cartographic.equalsEpsilon
     );
     cartographicsLength = cartographics.length;
 
@@ -1138,9 +1139,9 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
       );
     }
 
-    Matrix2.Cartesian3.pack(vertexNormal, normalsArray, 0);
-    Matrix2.Cartesian3.pack(vertexBottom, bottomPositionsArray, 0);
-    Matrix2.Cartesian3.pack(vertexTop, topPositionsArray, 0);
+    Matrix3.Cartesian3.pack(vertexNormal, normalsArray, 0);
+    Matrix3.Cartesian3.pack(vertexBottom, bottomPositionsArray, 0);
+    Matrix3.Cartesian3.pack(vertexTop, topPositionsArray, 0);
     cartographicsArray.push(startCartographic.latitude);
     cartographicsArray.push(startCartographic.longitude);
 
@@ -1160,8 +1161,8 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
 
     // All inbetween points
     for (i = 1; i < cartographicsLength - 1; ++i) {
-      previousBottom = Matrix2.Cartesian3.clone(vertexBottom, previousBottom);
-      vertexBottom = Matrix2.Cartesian3.clone(nextBottom, vertexBottom);
+      previousBottom = Matrix3.Cartesian3.clone(vertexBottom, previousBottom);
+      vertexBottom = Matrix3.Cartesian3.clone(nextBottom, vertexBottom);
       const vertexCartographic = cartographics[i];
       getPosition(ellipsoid, vertexCartographic, maxHeight, vertexTop);
       getPosition(ellipsoid, cartographics[i + 1], minHeight, nextBottom);
@@ -1175,9 +1176,9 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
       );
 
       index = normalsArray.length;
-      Matrix2.Cartesian3.pack(vertexNormal, normalsArray, index);
-      Matrix2.Cartesian3.pack(vertexBottom, bottomPositionsArray, index);
-      Matrix2.Cartesian3.pack(vertexTop, topPositionsArray, index);
+      Matrix3.Cartesian3.pack(vertexNormal, normalsArray, index);
+      Matrix3.Cartesian3.pack(vertexBottom, bottomPositionsArray, index);
+      Matrix3.Cartesian3.pack(vertexTop, topPositionsArray, index);
       cartographicsArray.push(vertexCartographic.latitude);
       cartographicsArray.push(vertexCartographic.longitude);
 
@@ -1241,9 +1242,9 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
     }
 
     index = normalsArray.length;
-    Matrix2.Cartesian3.pack(vertexNormal, normalsArray, index);
-    Matrix2.Cartesian3.pack(vertexBottom, bottomPositionsArray, index);
-    Matrix2.Cartesian3.pack(vertexTop, topPositionsArray, index);
+    Matrix3.Cartesian3.pack(vertexNormal, normalsArray, index);
+    Matrix3.Cartesian3.pack(vertexBottom, bottomPositionsArray, index);
+    Matrix3.Cartesian3.pack(vertexTop, topPositionsArray, index);
     cartographicsArray.push(endCartographic.latitude);
     cartographicsArray.push(endCartographic.longitude);
 
@@ -1285,26 +1286,26 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
   // If the end normal angle is too steep compared to the direction of the line segment,
   // "break" the miter by rotating the normal 90 degrees around the "up" direction at the point
   // For ultra precision we would want to project into a plane, but in practice this is sufficient.
-  const lineDirectionScratch = new Matrix2.Cartesian3();
-  const matrix3Scratch = new Matrix2.Matrix3();
+  const lineDirectionScratch = new Matrix3.Cartesian3();
+  const matrix3Scratch = new Matrix3.Matrix3();
   const quaternionScratch = new Transforms.Quaternion();
   function breakMiter(endGeometryNormal, startBottom, endBottom, endTop) {
     const lineDirection = direction(endBottom, startBottom, lineDirectionScratch);
 
-    const dot = Matrix2.Cartesian3.dot(lineDirection, endGeometryNormal);
+    const dot = Matrix3.Cartesian3.dot(lineDirection, endGeometryNormal);
     if (dot > MITER_BREAK_SMALL || dot < MITER_BREAK_LARGE) {
       const vertexUp = direction(endTop, endBottom, vertexUpScratch);
       const angle =
         dot < MITER_BREAK_LARGE
-          ? ComponentDatatype.CesiumMath.PI_OVER_TWO
-          : -ComponentDatatype.CesiumMath.PI_OVER_TWO;
+          ? Math$1.CesiumMath.PI_OVER_TWO
+          : -Math$1.CesiumMath.PI_OVER_TWO;
       const quaternion = Transforms.Quaternion.fromAxisAngle(
         vertexUp,
         angle,
         quaternionScratch
       );
-      const rotationMatrix = Matrix2.Matrix3.fromQuaternion(quaternion, matrix3Scratch);
-      Matrix2.Matrix3.multiplyByVector(
+      const rotationMatrix = Matrix3.Matrix3.fromQuaternion(quaternion, matrix3Scratch);
+      Matrix3.Matrix3.multiplyByVector(
         rotationMatrix,
         endGeometryNormal,
         endGeometryNormal
@@ -1314,9 +1315,9 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
     return false;
   }
 
-  const endPosCartographicScratch = new Matrix2.Cartographic();
-  const normalStartpointScratch = new Matrix2.Cartesian3();
-  const normalEndpointScratch = new Matrix2.Cartesian3();
+  const endPosCartographicScratch = new Matrix3.Cartographic();
+  const normalStartpointScratch = new Matrix3.Cartesian3();
+  const normalEndpointScratch = new Matrix3.Cartesian3();
   function projectNormal(
     projection,
     cartographic,
@@ -1324,12 +1325,12 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
     projectedPosition,
     result
   ) {
-    const position = Matrix2.Cartographic.toCartesian(
+    const position = Matrix3.Cartographic.toCartesian(
       cartographic,
       projection._ellipsoid,
       normalStartpointScratch
     );
-    let normalEndpoint = Matrix2.Cartesian3.add(position, normal, normalEndpointScratch);
+    let normalEndpoint = Matrix3.Cartesian3.add(position, normal, normalEndpointScratch);
     let flipNormal = false;
 
     const ellipsoid = projection._ellipsoid;
@@ -1343,10 +1344,10 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
     // of the IDL and slightly away from the IDL.
     if (
       Math.abs(cartographic.longitude - normalEndpointCartographic.longitude) >
-      ComponentDatatype.CesiumMath.PI_OVER_TWO
+      Math$1.CesiumMath.PI_OVER_TWO
     ) {
       flipNormal = true;
-      normalEndpoint = Matrix2.Cartesian3.subtract(
+      normalEndpoint = Matrix3.Cartesian3.subtract(
         position,
         normal,
         normalEndpointScratch
@@ -1362,21 +1363,21 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
       normalEndpointCartographic,
       result
     );
-    result = Matrix2.Cartesian3.subtract(
+    result = Matrix3.Cartesian3.subtract(
       normalEndpointProjected,
       projectedPosition,
       result
     );
     result.z = 0.0;
-    result = Matrix2.Cartesian3.normalize(result, result);
+    result = Matrix3.Cartesian3.normalize(result, result);
     if (flipNormal) {
-      Matrix2.Cartesian3.negate(result, result);
+      Matrix3.Cartesian3.negate(result, result);
     }
     return result;
   }
 
-  const adjustHeightNormalScratch = new Matrix2.Cartesian3();
-  const adjustHeightOffsetScratch = new Matrix2.Cartesian3();
+  const adjustHeightNormalScratch = new Matrix3.Cartesian3();
+  const adjustHeightOffsetScratch = new Matrix3.Cartesian3();
   function adjustHeights(
     bottom,
     top,
@@ -1386,46 +1387,46 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
     adjustHeightTop
   ) {
     // bottom and top should be at WALL_INITIAL_MIN_HEIGHT and WALL_INITIAL_MAX_HEIGHT, respectively
-    const adjustHeightNormal = Matrix2.Cartesian3.subtract(
+    const adjustHeightNormal = Matrix3.Cartesian3.subtract(
       top,
       bottom,
       adjustHeightNormalScratch
     );
-    Matrix2.Cartesian3.normalize(adjustHeightNormal, adjustHeightNormal);
+    Matrix3.Cartesian3.normalize(adjustHeightNormal, adjustHeightNormal);
 
     const distanceForBottom = minHeight - WALL_INITIAL_MIN_HEIGHT;
-    let adjustHeightOffset = Matrix2.Cartesian3.multiplyByScalar(
+    let adjustHeightOffset = Matrix3.Cartesian3.multiplyByScalar(
       adjustHeightNormal,
       distanceForBottom,
       adjustHeightOffsetScratch
     );
-    Matrix2.Cartesian3.add(bottom, adjustHeightOffset, adjustHeightBottom);
+    Matrix3.Cartesian3.add(bottom, adjustHeightOffset, adjustHeightBottom);
 
     const distanceForTop = maxHeight - WALL_INITIAL_MAX_HEIGHT;
-    adjustHeightOffset = Matrix2.Cartesian3.multiplyByScalar(
+    adjustHeightOffset = Matrix3.Cartesian3.multiplyByScalar(
       adjustHeightNormal,
       distanceForTop,
       adjustHeightOffsetScratch
     );
-    Matrix2.Cartesian3.add(top, adjustHeightOffset, adjustHeightTop);
+    Matrix3.Cartesian3.add(top, adjustHeightOffset, adjustHeightTop);
   }
 
-  const nudgeDirectionScratch = new Matrix2.Cartesian3();
+  const nudgeDirectionScratch = new Matrix3.Cartesian3();
   function nudgeXZ(start, end) {
     const startToXZdistance = Plane.Plane.getPointDistance(XZ_PLANE, start);
     const endToXZdistance = Plane.Plane.getPointDistance(XZ_PLANE, end);
     let offset = nudgeDirectionScratch;
     // Larger epsilon than what's used in GeometryPipeline, a centimeter in world space
-    if (ComponentDatatype.CesiumMath.equalsEpsilon(startToXZdistance, 0.0, ComponentDatatype.CesiumMath.EPSILON2)) {
+    if (Math$1.CesiumMath.equalsEpsilon(startToXZdistance, 0.0, Math$1.CesiumMath.EPSILON2)) {
       offset = direction(end, start, offset);
-      Matrix2.Cartesian3.multiplyByScalar(offset, ComponentDatatype.CesiumMath.EPSILON2, offset);
-      Matrix2.Cartesian3.add(start, offset, start);
+      Matrix3.Cartesian3.multiplyByScalar(offset, Math$1.CesiumMath.EPSILON2, offset);
+      Matrix3.Cartesian3.add(start, offset, start);
     } else if (
-      ComponentDatatype.CesiumMath.equalsEpsilon(endToXZdistance, 0.0, ComponentDatatype.CesiumMath.EPSILON2)
+      Math$1.CesiumMath.equalsEpsilon(endToXZdistance, 0.0, Math$1.CesiumMath.EPSILON2)
     ) {
       offset = direction(start, end, offset);
-      Matrix2.Cartesian3.multiplyByScalar(offset, ComponentDatatype.CesiumMath.EPSILON2, offset);
-      Matrix2.Cartesian3.add(end, offset, end);
+      Matrix3.Cartesian3.multiplyByScalar(offset, Math$1.CesiumMath.EPSILON2, offset);
+      Matrix3.Cartesian3.add(end, offset, end);
     }
   }
 
@@ -1436,30 +1437,30 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
     const absStartLon = Math.abs(start.longitude);
     const absEndLon = Math.abs(end.longitude);
     if (
-      ComponentDatatype.CesiumMath.equalsEpsilon(absStartLon, ComponentDatatype.CesiumMath.PI, ComponentDatatype.CesiumMath.EPSILON11)
+      Math$1.CesiumMath.equalsEpsilon(absStartLon, Math$1.CesiumMath.PI, Math$1.CesiumMath.EPSILON11)
     ) {
-      const endSign = ComponentDatatype.CesiumMath.sign(end.longitude);
-      start.longitude = endSign * (absStartLon - ComponentDatatype.CesiumMath.EPSILON11);
+      const endSign = Math$1.CesiumMath.sign(end.longitude);
+      start.longitude = endSign * (absStartLon - Math$1.CesiumMath.EPSILON11);
       return 1;
     } else if (
-      ComponentDatatype.CesiumMath.equalsEpsilon(absEndLon, ComponentDatatype.CesiumMath.PI, ComponentDatatype.CesiumMath.EPSILON11)
+      Math$1.CesiumMath.equalsEpsilon(absEndLon, Math$1.CesiumMath.PI, Math$1.CesiumMath.EPSILON11)
     ) {
-      const startSign = ComponentDatatype.CesiumMath.sign(start.longitude);
-      end.longitude = startSign * (absEndLon - ComponentDatatype.CesiumMath.EPSILON11);
+      const startSign = Math$1.CesiumMath.sign(start.longitude);
+      end.longitude = startSign * (absEndLon - Math$1.CesiumMath.EPSILON11);
       return 2;
     }
     return 0;
   }
 
-  const startCartographicScratch = new Matrix2.Cartographic();
-  const endCartographicScratch = new Matrix2.Cartographic();
+  const startCartographicScratch = new Matrix3.Cartographic();
+  const endCartographicScratch = new Matrix3.Cartographic();
 
-  const segmentStartTopScratch = new Matrix2.Cartesian3();
-  const segmentEndTopScratch = new Matrix2.Cartesian3();
-  const segmentStartBottomScratch = new Matrix2.Cartesian3();
-  const segmentEndBottomScratch = new Matrix2.Cartesian3();
-  const segmentStartNormalScratch = new Matrix2.Cartesian3();
-  const segmentEndNormalScratch = new Matrix2.Cartesian3();
+  const segmentStartTopScratch = new Matrix3.Cartesian3();
+  const segmentEndTopScratch = new Matrix3.Cartesian3();
+  const segmentStartBottomScratch = new Matrix3.Cartesian3();
+  const segmentEndBottomScratch = new Matrix3.Cartesian3();
+  const segmentStartNormalScratch = new Matrix3.Cartesian3();
+  const segmentEndNormalScratch = new Matrix3.Cartesian3();
 
   const getHeightCartographics = [
     startCartographicScratch,
@@ -1467,29 +1468,29 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
   ];
   const getHeightRectangleScratch = new Matrix2.Rectangle();
 
-  const adjustHeightStartTopScratch = new Matrix2.Cartesian3();
-  const adjustHeightEndTopScratch = new Matrix2.Cartesian3();
-  const adjustHeightStartBottomScratch = new Matrix2.Cartesian3();
-  const adjustHeightEndBottomScratch = new Matrix2.Cartesian3();
+  const adjustHeightStartTopScratch = new Matrix3.Cartesian3();
+  const adjustHeightEndTopScratch = new Matrix3.Cartesian3();
+  const adjustHeightStartBottomScratch = new Matrix3.Cartesian3();
+  const adjustHeightEndBottomScratch = new Matrix3.Cartesian3();
 
-  const segmentStart2DScratch = new Matrix2.Cartesian3();
-  const segmentEnd2DScratch = new Matrix2.Cartesian3();
-  const segmentStartNormal2DScratch = new Matrix2.Cartesian3();
-  const segmentEndNormal2DScratch = new Matrix2.Cartesian3();
+  const segmentStart2DScratch = new Matrix3.Cartesian3();
+  const segmentEnd2DScratch = new Matrix3.Cartesian3();
+  const segmentStartNormal2DScratch = new Matrix3.Cartesian3();
+  const segmentEndNormal2DScratch = new Matrix3.Cartesian3();
 
-  const offsetScratch = new Matrix2.Cartesian3();
-  const startUpScratch = new Matrix2.Cartesian3();
-  const endUpScratch = new Matrix2.Cartesian3();
-  const rightScratch = new Matrix2.Cartesian3();
-  const startPlaneNormalScratch = new Matrix2.Cartesian3();
-  const endPlaneNormalScratch = new Matrix2.Cartesian3();
+  const offsetScratch = new Matrix3.Cartesian3();
+  const startUpScratch = new Matrix3.Cartesian3();
+  const endUpScratch = new Matrix3.Cartesian3();
+  const rightScratch = new Matrix3.Cartesian3();
+  const startPlaneNormalScratch = new Matrix3.Cartesian3();
+  const endPlaneNormalScratch = new Matrix3.Cartesian3();
   const encodeScratch = new EncodedCartesian3.EncodedCartesian3();
 
   const encodeScratch2D = new EncodedCartesian3.EncodedCartesian3();
-  const forwardOffset2DScratch = new Matrix2.Cartesian3();
-  const right2DScratch = new Matrix2.Cartesian3();
+  const forwardOffset2DScratch = new Matrix3.Cartesian3();
+  const right2DScratch = new Matrix3.Cartesian3();
 
-  const normalNudgeScratch = new Matrix2.Cartesian3();
+  const normalNudgeScratch = new Matrix3.Cartesian3();
 
   const scratchBoundingSpheres = [new Transforms.BoundingSphere(), new Transforms.BoundingSphere()];
 
@@ -1615,7 +1616,7 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
           endCartographic,
           segmentEndCartesian
         );
-        length2D += Matrix2.Cartesian3.distance(
+        length2D += Matrix3.Cartesian3.distance(
           segmentStartCartesian,
           segmentEndCartesian
         );
@@ -1625,7 +1626,7 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
 
     // 3D
     const positionsLength = topPositionsArray.length / 3;
-    segmentEndCartesian = Matrix2.Cartesian3.unpack(
+    segmentEndCartesian = Matrix3.Cartesian3.unpack(
       topPositionsArray,
       0,
       segmentEndCartesian
@@ -1634,16 +1635,16 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
 
     index = 3;
     for (i = 1; i < positionsLength; i++) {
-      segmentStartCartesian = Matrix2.Cartesian3.clone(
+      segmentStartCartesian = Matrix3.Cartesian3.clone(
         segmentEndCartesian,
         segmentStartCartesian
       );
-      segmentEndCartesian = Matrix2.Cartesian3.unpack(
+      segmentEndCartesian = Matrix3.Cartesian3.unpack(
         topPositionsArray,
         index,
         segmentEndCartesian
       );
-      length3D += Matrix2.Cartesian3.distance(segmentStartCartesian, segmentEndCartesian);
+      length3D += Matrix3.Cartesian3.distance(segmentStartCartesian, segmentEndCartesian);
       index += 3;
     }
 
@@ -1656,27 +1657,27 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
     let vec4sWriteIndex = 0;
     let miterBroken = false;
 
-    let endBottom = Matrix2.Cartesian3.unpack(
+    let endBottom = Matrix3.Cartesian3.unpack(
       bottomPositionsArray,
       0,
       segmentEndBottomScratch
     );
-    let endTop = Matrix2.Cartesian3.unpack(topPositionsArray, 0, segmentEndTopScratch);
-    let endGeometryNormal = Matrix2.Cartesian3.unpack(
+    let endTop = Matrix3.Cartesian3.unpack(topPositionsArray, 0, segmentEndTopScratch);
+    let endGeometryNormal = Matrix3.Cartesian3.unpack(
       normalsArray,
       0,
       segmentEndNormalScratch
     );
 
     if (loop) {
-      const preEndBottom = Matrix2.Cartesian3.unpack(
+      const preEndBottom = Matrix3.Cartesian3.unpack(
         bottomPositionsArray,
         bottomPositionsArray.length - 6,
         segmentStartBottomScratch
       );
       if (breakMiter(endGeometryNormal, preEndBottom, endBottom, endTop)) {
         // Miter broken as if for the last point in the loop, needs to be inverted for first point (clone of endBottom)
-        endGeometryNormal = Matrix2.Cartesian3.negate(
+        endGeometryNormal = Matrix3.Cartesian3.negate(
           endGeometryNormal,
           endGeometryNormal
         );
@@ -1690,27 +1691,27 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
     let sumHeights = 0.0;
 
     for (i = 0; i < segmentCount; i++) {
-      const startBottom = Matrix2.Cartesian3.clone(endBottom, segmentStartBottomScratch);
-      const startTop = Matrix2.Cartesian3.clone(endTop, segmentStartTopScratch);
-      let startGeometryNormal = Matrix2.Cartesian3.clone(
+      const startBottom = Matrix3.Cartesian3.clone(endBottom, segmentStartBottomScratch);
+      const startTop = Matrix3.Cartesian3.clone(endTop, segmentStartTopScratch);
+      let startGeometryNormal = Matrix3.Cartesian3.clone(
         endGeometryNormal,
         segmentStartNormalScratch
       );
 
       if (miterBroken) {
-        startGeometryNormal = Matrix2.Cartesian3.negate(
+        startGeometryNormal = Matrix3.Cartesian3.negate(
           startGeometryNormal,
           startGeometryNormal
         );
       }
 
-      endBottom = Matrix2.Cartesian3.unpack(
+      endBottom = Matrix3.Cartesian3.unpack(
         bottomPositionsArray,
         index,
         segmentEndBottomScratch
       );
-      endTop = Matrix2.Cartesian3.unpack(topPositionsArray, index, segmentEndTopScratch);
-      endGeometryNormal = Matrix2.Cartesian3.unpack(
+      endTop = Matrix3.Cartesian3.unpack(topPositionsArray, index, segmentEndTopScratch);
+      endGeometryNormal = Matrix3.Cartesian3.unpack(
         normalsArray,
         index,
         segmentEndNormalScratch
@@ -1739,7 +1740,7 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
         endGeometryNormal2D = segmentEndNormal2DScratch;
         if (
           nudgeResult === 0 ||
-          Matrix2.Cartesian3.dot(direction2D, Matrix2.Cartesian3.UNIT_Y) > MITER_BREAK_SMALL
+          Matrix3.Cartesian3.dot(direction2D, Matrix3.Cartesian3.UNIT_Y) > MITER_BREAK_SMALL
         ) {
           // No nudge - project the original normal
           // Or, if the line's angle relative to the IDL is very acute,
@@ -1770,7 +1771,7 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
           startGeometryNormal2D.x = 0.0;
           // If start longitude is negative and end longitude is less negative, relative right is unit -Y
           // If start longitude is positive and end longitude is less positive, relative right is unit +Y
-          startGeometryNormal2D.y = ComponentDatatype.CesiumMath.sign(
+          startGeometryNormal2D.y = Math$1.CesiumMath.sign(
             startCartographic.longitude - Math.abs(endCartographic.longitude)
           );
           startGeometryNormal2D.z = 0.0;
@@ -1786,7 +1787,7 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
           endGeometryNormal2D.x = 0.0;
           // If end longitude is negative and start longitude is less negative, relative right is unit Y
           // If end longitude is positive and start longitude is less positive, relative right is unit -Y
-          endGeometryNormal2D.y = ComponentDatatype.CesiumMath.sign(
+          endGeometryNormal2D.y = Math$1.CesiumMath.sign(
             startCartographic.longitude - endCartographic.longitude
           );
           endGeometryNormal2D.z = 0.0;
@@ -1803,39 +1804,39 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
        ****************************************/
 
       /* 3D */
-      const segmentLength3D = Matrix2.Cartesian3.distance(startTop, endTop);
+      const segmentLength3D = Matrix3.Cartesian3.distance(startTop, endTop);
 
       const encodedStart = EncodedCartesian3.EncodedCartesian3.fromCartesian(
         startBottom,
         encodeScratch
       );
-      const forwardOffset = Matrix2.Cartesian3.subtract(
+      const forwardOffset = Matrix3.Cartesian3.subtract(
         endBottom,
         startBottom,
         offsetScratch
       );
-      const forward = Matrix2.Cartesian3.normalize(forwardOffset, rightScratch);
+      const forward = Matrix3.Cartesian3.normalize(forwardOffset, rightScratch);
 
-      let startUp = Matrix2.Cartesian3.subtract(startTop, startBottom, startUpScratch);
-      startUp = Matrix2.Cartesian3.normalize(startUp, startUp);
-      let rightNormal = Matrix2.Cartesian3.cross(forward, startUp, rightScratch);
-      rightNormal = Matrix2.Cartesian3.normalize(rightNormal, rightNormal);
+      let startUp = Matrix3.Cartesian3.subtract(startTop, startBottom, startUpScratch);
+      startUp = Matrix3.Cartesian3.normalize(startUp, startUp);
+      let rightNormal = Matrix3.Cartesian3.cross(forward, startUp, rightScratch);
+      rightNormal = Matrix3.Cartesian3.normalize(rightNormal, rightNormal);
 
-      let startPlaneNormal = Matrix2.Cartesian3.cross(
+      let startPlaneNormal = Matrix3.Cartesian3.cross(
         startUp,
         startGeometryNormal,
         startPlaneNormalScratch
       );
-      startPlaneNormal = Matrix2.Cartesian3.normalize(startPlaneNormal, startPlaneNormal);
+      startPlaneNormal = Matrix3.Cartesian3.normalize(startPlaneNormal, startPlaneNormal);
 
-      let endUp = Matrix2.Cartesian3.subtract(endTop, endBottom, endUpScratch);
-      endUp = Matrix2.Cartesian3.normalize(endUp, endUp);
-      let endPlaneNormal = Matrix2.Cartesian3.cross(
+      let endUp = Matrix3.Cartesian3.subtract(endTop, endBottom, endUpScratch);
+      endUp = Matrix3.Cartesian3.normalize(endUp, endUp);
+      let endPlaneNormal = Matrix3.Cartesian3.cross(
         endGeometryNormal,
         endUp,
         endPlaneNormalScratch
       );
-      endPlaneNormal = Matrix2.Cartesian3.normalize(endPlaneNormal, endPlaneNormal);
+      endPlaneNormal = Matrix3.Cartesian3.normalize(endPlaneNormal, endPlaneNormal);
 
       const texcoordNormalization3DX = segmentLength3D / length3D;
       const texcoordNormalization3DY = lengthSoFar3D / length3D;
@@ -1848,13 +1849,13 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
       let texcoordNormalization2DX = 0.0;
       let texcoordNormalization2DY = 0.0;
       if (compute2dAttributes) {
-        segmentLength2D = Matrix2.Cartesian3.distance(start2D, end2D);
+        segmentLength2D = Matrix3.Cartesian3.distance(start2D, end2D);
 
         encodedStart2D = EncodedCartesian3.EncodedCartesian3.fromCartesian(
           start2D,
           encodeScratch2D
         );
-        forwardOffset2D = Matrix2.Cartesian3.subtract(
+        forwardOffset2D = Matrix3.Cartesian3.subtract(
           end2D,
           start2D,
           forwardOffset2DScratch
@@ -1862,7 +1863,7 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
 
         // Right direction is just forward direction rotated by -90 degrees around Z
         // Similarly with plane normals
-        right2D = Matrix2.Cartesian3.normalize(forwardOffset2D, right2DScratch);
+        right2D = Matrix3.Cartesian3.normalize(forwardOffset2D, right2DScratch);
         const swap = right2D.x;
         right2D.x = right2D.y;
         right2D.y = -swap;
@@ -1883,20 +1884,20 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
           j === 2 || j === 3 || j === 6 || j === 7 ? 1.0 : -1.0;
 
         // 3D
-        Matrix2.Cartesian3.pack(encodedStart.high, startHiAndForwardOffsetX, vec4Index);
+        Matrix3.Cartesian3.pack(encodedStart.high, startHiAndForwardOffsetX, vec4Index);
         startHiAndForwardOffsetX[wIndex] = forwardOffset.x;
 
-        Matrix2.Cartesian3.pack(encodedStart.low, startLoAndForwardOffsetY, vec4Index);
+        Matrix3.Cartesian3.pack(encodedStart.low, startLoAndForwardOffsetY, vec4Index);
         startLoAndForwardOffsetY[wIndex] = forwardOffset.y;
 
-        Matrix2.Cartesian3.pack(
+        Matrix3.Cartesian3.pack(
           startPlaneNormal,
           startNormalAndForwardOffsetZ,
           vec4Index
         );
         startNormalAndForwardOffsetZ[wIndex] = forwardOffset.z;
 
-        Matrix2.Cartesian3.pack(
+        Matrix3.Cartesian3.pack(
           endPlaneNormal,
           endNormalAndTextureCoordinateNormalizationX,
           vec4Index
@@ -1904,7 +1905,7 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
         endNormalAndTextureCoordinateNormalizationX[wIndex] =
           texcoordNormalization3DX * rightPlaneSide;
 
-        Matrix2.Cartesian3.pack(
+        Matrix3.Cartesian3.pack(
           rightNormal,
           rightNormalAndTextureCoordinateNormalizationY,
           vec4Index
@@ -1956,7 +1957,7 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
         getHeightCartographics,
         getHeightRectangleScratch
       );
-      const minMaxHeights = ApproximateTerrainHeights.getMinimumMaximumHeights(
+      const minMaxHeights = ApproximateTerrainHeights$1.getMinimumMaximumHeights(
         getHeightsRectangle,
         ellipsoid
       );
@@ -1984,58 +1985,58 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
       );
 
       // Nudge the positions away from the "polyline" a little bit to prevent errors in GeometryPipeline
-      let normalNudge = Matrix2.Cartesian3.multiplyByScalar(
+      let normalNudge = Matrix3.Cartesian3.multiplyByScalar(
         rightNormal,
-        ComponentDatatype.CesiumMath.EPSILON5,
+        Math$1.CesiumMath.EPSILON5,
         normalNudgeScratch
       );
-      Matrix2.Cartesian3.add(
+      Matrix3.Cartesian3.add(
         adjustHeightStartBottom,
         normalNudge,
         adjustHeightStartBottom
       );
-      Matrix2.Cartesian3.add(adjustHeightEndBottom, normalNudge, adjustHeightEndBottom);
-      Matrix2.Cartesian3.add(adjustHeightStartTop, normalNudge, adjustHeightStartTop);
-      Matrix2.Cartesian3.add(adjustHeightEndTop, normalNudge, adjustHeightEndTop);
+      Matrix3.Cartesian3.add(adjustHeightEndBottom, normalNudge, adjustHeightEndBottom);
+      Matrix3.Cartesian3.add(adjustHeightStartTop, normalNudge, adjustHeightStartTop);
+      Matrix3.Cartesian3.add(adjustHeightEndTop, normalNudge, adjustHeightEndTop);
 
       // If the segment is very close to the XZ plane, nudge the vertices slightly to avoid touching it.
       nudgeXZ(adjustHeightStartBottom, adjustHeightEndBottom);
       nudgeXZ(adjustHeightStartTop, adjustHeightEndTop);
 
-      Matrix2.Cartesian3.pack(adjustHeightStartBottom, positionsArray, vec3sWriteIndex);
-      Matrix2.Cartesian3.pack(adjustHeightEndBottom, positionsArray, vec3sWriteIndex + 3);
-      Matrix2.Cartesian3.pack(adjustHeightEndTop, positionsArray, vec3sWriteIndex + 6);
-      Matrix2.Cartesian3.pack(adjustHeightStartTop, positionsArray, vec3sWriteIndex + 9);
+      Matrix3.Cartesian3.pack(adjustHeightStartBottom, positionsArray, vec3sWriteIndex);
+      Matrix3.Cartesian3.pack(adjustHeightEndBottom, positionsArray, vec3sWriteIndex + 3);
+      Matrix3.Cartesian3.pack(adjustHeightEndTop, positionsArray, vec3sWriteIndex + 6);
+      Matrix3.Cartesian3.pack(adjustHeightStartTop, positionsArray, vec3sWriteIndex + 9);
 
-      normalNudge = Matrix2.Cartesian3.multiplyByScalar(
+      normalNudge = Matrix3.Cartesian3.multiplyByScalar(
         rightNormal,
-        -2.0 * ComponentDatatype.CesiumMath.EPSILON5,
+        -2.0 * Math$1.CesiumMath.EPSILON5,
         normalNudgeScratch
       );
-      Matrix2.Cartesian3.add(
+      Matrix3.Cartesian3.add(
         adjustHeightStartBottom,
         normalNudge,
         adjustHeightStartBottom
       );
-      Matrix2.Cartesian3.add(adjustHeightEndBottom, normalNudge, adjustHeightEndBottom);
-      Matrix2.Cartesian3.add(adjustHeightStartTop, normalNudge, adjustHeightStartTop);
-      Matrix2.Cartesian3.add(adjustHeightEndTop, normalNudge, adjustHeightEndTop);
+      Matrix3.Cartesian3.add(adjustHeightEndBottom, normalNudge, adjustHeightEndBottom);
+      Matrix3.Cartesian3.add(adjustHeightStartTop, normalNudge, adjustHeightStartTop);
+      Matrix3.Cartesian3.add(adjustHeightEndTop, normalNudge, adjustHeightEndTop);
 
       nudgeXZ(adjustHeightStartBottom, adjustHeightEndBottom);
       nudgeXZ(adjustHeightStartTop, adjustHeightEndTop);
 
-      Matrix2.Cartesian3.pack(
+      Matrix3.Cartesian3.pack(
         adjustHeightStartBottom,
         positionsArray,
         vec3sWriteIndex + 12
       );
-      Matrix2.Cartesian3.pack(
+      Matrix3.Cartesian3.pack(
         adjustHeightEndBottom,
         positionsArray,
         vec3sWriteIndex + 15
       );
-      Matrix2.Cartesian3.pack(adjustHeightEndTop, positionsArray, vec3sWriteIndex + 18);
-      Matrix2.Cartesian3.pack(adjustHeightStartTop, positionsArray, vec3sWriteIndex + 21);
+      Matrix3.Cartesian3.pack(adjustHeightEndTop, positionsArray, vec3sWriteIndex + 18);
+      Matrix3.Cartesian3.pack(adjustHeightStartTop, positionsArray, vec3sWriteIndex + 21);
 
       cartographicsIndex += 2;
       index += 3;
@@ -2061,13 +2062,13 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
     const boundingSpheres = scratchBoundingSpheres;
     Transforms.BoundingSphere.fromVertices(
       bottomPositionsArray,
-      Matrix2.Cartesian3.ZERO,
+      Matrix3.Cartesian3.ZERO,
       3,
       boundingSpheres[0]
     );
     Transforms.BoundingSphere.fromVertices(
       topPositionsArray,
-      Matrix2.Cartesian3.ZERO,
+      Matrix3.Cartesian3.ZERO,
       3,
       boundingSpheres[1]
     );
@@ -2143,7 +2144,7 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
   GroundPolylineGeometry._projectNormal = projectNormal;
 
   function createGroundPolylineGeometry(groundPolylineGeometry, offset) {
-    return ApproximateTerrainHeights.initialize().then(function () {
+    return ApproximateTerrainHeights$1.initialize().then(function () {
       if (defaultValue.defined(offset)) {
         groundPolylineGeometry = GroundPolylineGeometry.unpack(
           groundPolylineGeometry,
@@ -2157,4 +2158,3 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
   return createGroundPolylineGeometry;
 
 }));
-//# sourceMappingURL=createGroundPolylineGeometry.js.map

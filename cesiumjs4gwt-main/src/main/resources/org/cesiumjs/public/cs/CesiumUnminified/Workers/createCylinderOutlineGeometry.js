@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.95
+ * Version 1.99
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './ComponentDatatype-4eeb6d9b', './CylinderGeometryLibrary-365438d7', './defaultValue-97284df2', './GeometryAttribute-9be2d2e5', './GeometryAttributes-734a3446', './GeometryOffsetAttribute-59b14f45', './IndexDatatype-f228f5fd', './_commonjsHelpers-3aae1032-65601a27', './combine-d11b1f00', './WebGLConstants-6da700a2'], (function (Transforms, Matrix2, RuntimeError, ComponentDatatype, CylinderGeometryLibrary, defaultValue, GeometryAttribute, GeometryAttributes, GeometryOffsetAttribute, IndexDatatype, _commonjsHelpers3aae1032, combine, WebGLConstants) { 'use strict';
+define(['./Transforms-ac2d28a9', './Matrix2-f9f1b94b', './Matrix3-ea964448', './Check-40d84a28', './ComponentDatatype-ebdce3ba', './CylinderGeometryLibrary-c7bef0a3', './defaultValue-135942ca', './GeometryAttribute-51d61732', './GeometryAttributes-899f8bd0', './GeometryOffsetAttribute-d3a42805', './IndexDatatype-fa75fe25', './Math-efde0c7b', './combine-462d91dd', './RuntimeError-f0dada00', './WebGLConstants-fcb70ee3'], (function (Transforms, Matrix2, Matrix3, Check, ComponentDatatype, CylinderGeometryLibrary, defaultValue, GeometryAttribute, GeometryAttributes, GeometryOffsetAttribute, IndexDatatype, Math$1, combine, RuntimeError, WebGLConstants) { 'use strict';
 
   const radiusScratch = new Matrix2.Cartesian2();
 
@@ -70,15 +70,15 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
     );
 
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.number("options.positions", length);
-    RuntimeError.Check.typeOf.number("options.topRadius", topRadius);
-    RuntimeError.Check.typeOf.number("options.bottomRadius", bottomRadius);
-    RuntimeError.Check.typeOf.number.greaterThanOrEquals("options.slices", slices, 3);
+    Check.Check.typeOf.number("options.positions", length);
+    Check.Check.typeOf.number("options.topRadius", topRadius);
+    Check.Check.typeOf.number("options.bottomRadius", bottomRadius);
+    Check.Check.typeOf.number.greaterThanOrEquals("options.slices", slices, 3);
     if (
       defaultValue.defined(options.offsetAttribute) &&
       options.offsetAttribute === GeometryOffsetAttribute.GeometryOffsetAttribute.TOP
     ) {
-      throw new RuntimeError.DeveloperError(
+      throw new Check.DeveloperError(
         "GeometryOffsetAttribute.TOP is not a supported options.offsetAttribute for this geometry."
       );
     }
@@ -110,8 +110,8 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
    */
   CylinderOutlineGeometry.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("value", value);
-    RuntimeError.Check.defined("array", array);
+    Check.Check.typeOf.object("value", value);
+    Check.Check.defined("array", array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -145,7 +145,7 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
    */
   CylinderOutlineGeometry.unpack = function (array, startingIndex, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("array", array);
+    Check.Check.defined("array", array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -251,7 +251,7 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
     radiusScratch.y = Math.max(bottomRadius, topRadius);
 
     const boundingSphere = new Transforms.BoundingSphere(
-      Matrix2.Cartesian3.ZERO,
+      Matrix3.Cartesian3.ZERO,
       Matrix2.Cartesian2.magnitude(radiusScratch)
     );
 
@@ -288,4 +288,3 @@ define(['./Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2'
   return createCylinderOutlineGeometry;
 
 }));
-//# sourceMappingURL=createCylinderOutlineGeometry.js.map

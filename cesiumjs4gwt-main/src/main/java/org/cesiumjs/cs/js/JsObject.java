@@ -17,6 +17,7 @@
 package org.cesiumjs.cs.js;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArrayString;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 
@@ -112,6 +113,10 @@ public class JsObject extends JavaScriptObject {
         return array[index];
     }-*/;
 
+    public static native boolean hasOwnProperty(Object object, String property) /*-{
+        return object.hasOwnProperty(property);
+    }-*/;
+
     /**
      * In JavaScript null not he same undefined. In example Interpolation, we set
      * trackedEntity to null, and this method not worked To correct this help
@@ -161,5 +166,13 @@ public class JsObject extends JavaScriptObject {
 
     public final native JsObject getJsObject(String name) /*-{
         return this[name];
+    }-*/;
+
+    public static native JsArrayString keys(JsObject object) /*-{
+        return Object.keys(object)
+    }-*/;
+
+    public final native boolean hasOwnProperty(String property) /*-{
+        return this.hasOwnProperty(property);
     }-*/;
 }

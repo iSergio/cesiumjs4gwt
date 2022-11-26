@@ -280,6 +280,15 @@ public class ModelExperimental {
     public native void destroy();
 
     /**
+     * Returns the node with the given name in the glTF. This is used to modify a node's
+     * transform for user-defined animation.
+     * @param name The name of the node in the glTF.
+     * @return The node, or undefined if no node with the name exists.
+     */
+    @JsMethod
+    public native ModelExperimentalNode getNode(String name);
+
+    /**
      * Returns true if this object was destroyed; otherwise, false.
      *
      * If this object was destroyed, it should not be used; calling any function other than isDestroyed will

@@ -296,6 +296,14 @@ public class ViewerOptions {
     @JsProperty
     public boolean projectionPicker;
     /**
+     * If true, the active element will blur when the viewer's canvas is clicked. Setting this to false is useful for
+     * cases when the canvas is clicked only for retrieving position or an entity data without actually meaning to set
+     * the canvas to be the active element.
+     * Default: true
+     */
+    @JsProperty
+    public boolean blurActiveElementOnCanvasFocus;
+    /**
      * If true, rendering a frame will only occur when needed as determined by
      * changes within the scene. Enabling improves performance of the application,
      * but requires using {@link Scene#requestRender()} to render a new frame

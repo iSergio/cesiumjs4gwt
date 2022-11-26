@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.95
+ * Version 1.99
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./defaultValue-97284df2', './RuntimeError-4f8ec8a2', './WebGLConstants-6da700a2', './createTaskProcessorWorker'], (function (defaultValue, RuntimeError, WebGLConstants, createTaskProcessorWorker) { 'use strict';
+define(['./defaultValue-135942ca', './Check-40d84a28', './WebGLConstants-fcb70ee3', './RuntimeError-f0dada00', './createTaskProcessorWorker'], (function (defaultValue, Check, WebGLConstants, RuntimeError, createTaskProcessorWorker) { 'use strict';
 
   /**
    * The data type of a pixel.
@@ -900,8 +900,333 @@ define(['./defaultValue-97284df2', './RuntimeError-4f8ec8a2', './WebGLConstants-
   };
   var VulkanConstants$1 = Object.freeze(VulkanConstants);
 
-  /* This file is automatically rebuilt by the Cesium build process. */
-  const e=[171,75,84,88,32,50,48,187,13,10,26,10];var n,i,s,a,r,o,l,f;!function(t){t[t.NONE=0]="NONE",t[t.BASISLZ=1]="BASISLZ",t[t.ZSTD=2]="ZSTD",t[t.ZLIB=3]="ZLIB";}(n||(n={})),function(t){t[t.BASICFORMAT=0]="BASICFORMAT";}(i||(i={})),function(t){t[t.UNSPECIFIED=0]="UNSPECIFIED",t[t.ETC1S=163]="ETC1S",t[t.UASTC=166]="UASTC";}(s||(s={})),function(t){t[t.UNSPECIFIED=0]="UNSPECIFIED",t[t.SRGB=1]="SRGB";}(a||(a={})),function(t){t[t.UNSPECIFIED=0]="UNSPECIFIED",t[t.LINEAR=1]="LINEAR",t[t.SRGB=2]="SRGB",t[t.ITU=3]="ITU",t[t.NTSC=4]="NTSC",t[t.SLOG=5]="SLOG",t[t.SLOG2=6]="SLOG2";}(r||(r={})),function(t){t[t.ALPHA_STRAIGHT=0]="ALPHA_STRAIGHT",t[t.ALPHA_PREMULTIPLIED=1]="ALPHA_PREMULTIPLIED";}(o||(o={})),function(t){t[t.RGB=0]="RGB",t[t.RRR=3]="RRR",t[t.GGG=4]="GGG",t[t.AAA=15]="AAA";}(l||(l={})),function(t){t[t.RGB=0]="RGB",t[t.RGBA=3]="RGBA",t[t.RRR=4]="RRR",t[t.RRRG=5]="RRRG";}(f||(f={}));class U{constructor(){this.vkFormat=0,this.typeSize=1,this.pixelWidth=0,this.pixelHeight=0,this.pixelDepth=0,this.layerCount=0,this.faceCount=1,this.supercompressionScheme=n.NONE,this.levels=[],this.dataFormatDescriptor=[{vendorId:0,descriptorType:i.BASICFORMAT,versionNumber:2,descriptorBlockSize:40,colorModel:s.UNSPECIFIED,colorPrimaries:a.SRGB,transferFunction:a.SRGB,flags:o.ALPHA_STRAIGHT,texelBlockDimension:{x:4,y:4,z:1,w:1},bytesPlane:[],samples:[]}],this.keyValue={},this.globalData=null;}}class c{constructor(t,e,n,i){this._dataView=new DataView(t.buffer,t.byteOffset+e,n),this._littleEndian=i,this._offset=0;}_nextUint8(){const t=this._dataView.getUint8(this._offset);return this._offset+=1,t}_nextUint16(){const t=this._dataView.getUint16(this._offset,this._littleEndian);return this._offset+=2,t}_nextUint32(){const t=this._dataView.getUint32(this._offset,this._littleEndian);return this._offset+=4,t}_nextUint64(){const t=this._dataView.getUint32(this._offset,this._littleEndian)+2**32*this._dataView.getUint32(this._offset+4,this._littleEndian);return this._offset+=8,t}_skip(t){return this._offset+=t,this}_scan(t,e=0){const n=this._offset;let i=0;for(;this._dataView.getUint8(this._offset)!==e&&i<t;)i++,this._offset++;return i<t&&this._offset++,new Uint8Array(this._dataView.buffer,this._dataView.byteOffset+n,i)}}function _(t){return "undefined"!=typeof TextDecoder?(new TextDecoder).decode(t):Buffer.from(t).toString("utf8")}function p(t){const n=new Uint8Array(t.buffer,t.byteOffset,e.length);if(n[0]!==e[0]||n[1]!==e[1]||n[2]!==e[2]||n[3]!==e[3]||n[4]!==e[4]||n[5]!==e[5]||n[6]!==e[6]||n[7]!==e[7]||n[8]!==e[8]||n[9]!==e[9]||n[10]!==e[10]||n[11]!==e[11])throw new Error("Missing KTX 2.0 identifier.");const i=new U,s=17*Uint32Array.BYTES_PER_ELEMENT,a=new c(t,e.length,s,!0);i.vkFormat=a._nextUint32(),i.typeSize=a._nextUint32(),i.pixelWidth=a._nextUint32(),i.pixelHeight=a._nextUint32(),i.pixelDepth=a._nextUint32(),i.layerCount=a._nextUint32(),i.faceCount=a._nextUint32();const r=a._nextUint32();i.supercompressionScheme=a._nextUint32();const o=a._nextUint32(),l=a._nextUint32(),f=a._nextUint32(),h=a._nextUint32(),g=a._nextUint64(),p=a._nextUint64(),x=new c(t,e.length+s,3*r*8,!0);for(let e=0;e<r;e++)i.levels.push({levelData:new Uint8Array(t.buffer,t.byteOffset+x._nextUint64(),x._nextUint64()),uncompressedByteLength:x._nextUint64()});const u=new c(t,o,l,!0),y={vendorId:u._skip(4)._nextUint16(),descriptorType:u._nextUint16(),versionNumber:u._nextUint16(),descriptorBlockSize:u._nextUint16(),colorModel:u._nextUint8(),colorPrimaries:u._nextUint8(),transferFunction:u._nextUint8(),flags:u._nextUint8(),texelBlockDimension:{x:u._nextUint8()+1,y:u._nextUint8()+1,z:u._nextUint8()+1,w:u._nextUint8()+1},bytesPlane:[u._nextUint8(),u._nextUint8(),u._nextUint8(),u._nextUint8(),u._nextUint8(),u._nextUint8(),u._nextUint8(),u._nextUint8()],samples:[]},D=(y.descriptorBlockSize/4-6)/4;for(let t=0;t<D;t++)y.samples[t]={bitOffset:u._nextUint16(),bitLength:u._nextUint8(),channelID:u._nextUint8(),samplePosition:[u._nextUint8(),u._nextUint8(),u._nextUint8(),u._nextUint8()],sampleLower:u._nextUint32(),sampleUpper:u._nextUint32()};i.dataFormatDescriptor.length=0,i.dataFormatDescriptor.push(y);const b=new c(t,f,h,!0);for(;b._offset<h;){const t=b._nextUint32(),e=b._scan(t),n=_(e),s=b._scan(t-e.byteLength);i.keyValue[n]=n.match(/^ktx/i)?_(s):s,b._offset%4&&b._skip(4-b._offset%4);}if(p<=0)return i;const d=new c(t,g,p,!0),B=d._nextUint16(),w=d._nextUint16(),A=d._nextUint32(),S=d._nextUint32(),m=d._nextUint32(),L=d._nextUint32(),I=[];for(let t=0;t<r;t++)I.push({imageFlags:d._nextUint32(),rgbSliceByteOffset:d._nextUint32(),rgbSliceByteLength:d._nextUint32(),alphaSliceByteOffset:d._nextUint32(),alphaSliceByteLength:d._nextUint32()});const R=g+d._offset,E=R+A,T=E+S,O=T+m,P=new Uint8Array(t.buffer,t.byteOffset+R,A),C=new Uint8Array(t.buffer,t.byteOffset+E,S),F=new Uint8Array(t.buffer,t.byteOffset+T,m),G=new Uint8Array(t.buffer,t.byteOffset+O,L);return i.globalData={endpointCount:B,selectorCount:w,imageDescs:I,endpointsData:P,selectorsData:C,tablesData:F,extendedData:G},i}
+  ///////////////////////////////////////////////////
+  // KTX2 Header.
+  ///////////////////////////////////////////////////
+  const KHR_SUPERCOMPRESSION_NONE = 0;
+  // Data Format Descriptor (DFD).
+  ///////////////////////////////////////////////////
+
+  const KHR_DF_KHR_DESCRIPTORTYPE_BASICFORMAT = 0;
+  const KHR_DF_VENDORID_KHRONOS = 0;
+  const KHR_DF_VERSION = 2;
+  const KHR_DF_MODEL_UNSPECIFIED = 0;
+  const KHR_DF_FLAG_ALPHA_STRAIGHT = 0;
+  const KHR_DF_TRANSFER_SRGB = 2;
+  const KHR_DF_PRIMARIES_BT709 = 1;
+  const KHR_DF_SAMPLE_DATATYPE_SIGNED = 0x40;
+  // VK FORMAT.
+  ///////////////////////////////////////////////////
+
+  const VK_FORMAT_UNDEFINED = 0;
+
+  /**
+   * Represents an unpacked KTX 2.0 texture container. Data for individual mip levels are stored in
+   * the `.levels` array, typically compressed in Basis Universal formats. Additional properties
+   * provide metadata required to process, transcode, and upload these textures.
+   */
+
+  class KTX2Container {
+    constructor() {
+      this.vkFormat = VK_FORMAT_UNDEFINED;
+      this.typeSize = 1;
+      this.pixelWidth = 0;
+      this.pixelHeight = 0;
+      this.pixelDepth = 0;
+      this.layerCount = 0;
+      this.faceCount = 1;
+      this.supercompressionScheme = KHR_SUPERCOMPRESSION_NONE;
+      this.levels = [];
+      this.dataFormatDescriptor = [{
+        vendorId: KHR_DF_VENDORID_KHRONOS,
+        descriptorType: KHR_DF_KHR_DESCRIPTORTYPE_BASICFORMAT,
+        descriptorBlockSize: 0,
+        versionNumber: KHR_DF_VERSION,
+        colorModel: KHR_DF_MODEL_UNSPECIFIED,
+        colorPrimaries: KHR_DF_PRIMARIES_BT709,
+        transferFunction: KHR_DF_TRANSFER_SRGB,
+        flags: KHR_DF_FLAG_ALPHA_STRAIGHT,
+        texelBlockDimension: [0, 0, 0, 0],
+        bytesPlane: [0, 0, 0, 0, 0, 0, 0, 0],
+        samples: []
+      }];
+      this.keyValue = {};
+      this.globalData = null;
+    }
+
+  }
+
+  class BufferReader {
+    constructor(data, byteOffset, byteLength, littleEndian) {
+      this._dataView = void 0;
+      this._littleEndian = void 0;
+      this._offset = void 0;
+      this._dataView = new DataView(data.buffer, data.byteOffset + byteOffset, byteLength);
+      this._littleEndian = littleEndian;
+      this._offset = 0;
+    }
+
+    _nextUint8() {
+      const value = this._dataView.getUint8(this._offset);
+
+      this._offset += 1;
+      return value;
+    }
+
+    _nextUint16() {
+      const value = this._dataView.getUint16(this._offset, this._littleEndian);
+
+      this._offset += 2;
+      return value;
+    }
+
+    _nextUint32() {
+      const value = this._dataView.getUint32(this._offset, this._littleEndian);
+
+      this._offset += 4;
+      return value;
+    }
+
+    _nextUint64() {
+      const left = this._dataView.getUint32(this._offset, this._littleEndian);
+
+      const right = this._dataView.getUint32(this._offset + 4, this._littleEndian); // TODO(cleanup): Just test this...
+      // const value = this._littleEndian ? left + (2 ** 32 * right) : (2 ** 32 * left) + right;
+
+
+      const value = left + 2 ** 32 * right;
+      this._offset += 8;
+      return value;
+    }
+
+    _nextInt32() {
+      const value = this._dataView.getInt32(this._offset, this._littleEndian);
+
+      this._offset += 4;
+      return value;
+    }
+
+    _skip(bytes) {
+      this._offset += bytes;
+      return this;
+    }
+
+    _scan(maxByteLength, term = 0x00) {
+      const byteOffset = this._offset;
+      let byteLength = 0;
+
+      while (this._dataView.getUint8(this._offset) !== term && byteLength < maxByteLength) {
+        byteLength++;
+        this._offset++;
+      }
+
+      if (byteLength < maxByteLength) this._offset++;
+      return new Uint8Array(this._dataView.buffer, this._dataView.byteOffset + byteOffset, byteLength);
+    }
+
+  }
+  // KTX2 Header.
+  ///////////////////////////////////////////////////
+
+  const KTX2_ID = [// '´', 'K', 'T', 'X', '2', '0', 'ª', '\r', '\n', '\x1A', '\n'
+  0xab, 0x4b, 0x54, 0x58, 0x20, 0x32, 0x30, 0xbb, 0x0d, 0x0a, 0x1a, 0x0a];
+  /** Decodes an ArrayBuffer to text. */
+
+  function decodeText(buffer) {
+    if (typeof TextDecoder !== 'undefined') {
+      return new TextDecoder().decode(buffer);
+    }
+
+    return Buffer.from(buffer).toString('utf8');
+  }
+
+  /**
+   * Parses a KTX 2.0 file, returning an unpacked {@link KTX2Container} instance with all associated
+   * data. The container's mip levels and other binary data are pointers into the original file, not
+   * copies, so the original file should not be overwritten after reading.
+   *
+   * @param data Bytes of KTX 2.0 file, as Uint8Array or Buffer.
+   */
+
+  function read(data) {
+    ///////////////////////////////////////////////////
+    // KTX 2.0 Identifier.
+    ///////////////////////////////////////////////////
+    const id = new Uint8Array(data.buffer, data.byteOffset, KTX2_ID.length);
+
+    if (id[0] !== KTX2_ID[0] || // '´'
+    id[1] !== KTX2_ID[1] || // 'K'
+    id[2] !== KTX2_ID[2] || // 'T'
+    id[3] !== KTX2_ID[3] || // 'X'
+    id[4] !== KTX2_ID[4] || // ' '
+    id[5] !== KTX2_ID[5] || // '2'
+    id[6] !== KTX2_ID[6] || // '0'
+    id[7] !== KTX2_ID[7] || // 'ª'
+    id[8] !== KTX2_ID[8] || // '\r'
+    id[9] !== KTX2_ID[9] || // '\n'
+    id[10] !== KTX2_ID[10] || // '\x1A'
+    id[11] !== KTX2_ID[11] // '\n'
+    ) {
+      throw new Error('Missing KTX 2.0 identifier.');
+    }
+
+    const container = new KTX2Container(); ///////////////////////////////////////////////////
+    // Header.
+    ///////////////////////////////////////////////////
+
+    const headerByteLength = 17 * Uint32Array.BYTES_PER_ELEMENT;
+    const headerReader = new BufferReader(data, KTX2_ID.length, headerByteLength, true);
+    container.vkFormat = headerReader._nextUint32();
+    container.typeSize = headerReader._nextUint32();
+    container.pixelWidth = headerReader._nextUint32();
+    container.pixelHeight = headerReader._nextUint32();
+    container.pixelDepth = headerReader._nextUint32();
+    container.layerCount = headerReader._nextUint32();
+    container.faceCount = headerReader._nextUint32();
+
+    const levelCount = headerReader._nextUint32();
+
+    container.supercompressionScheme = headerReader._nextUint32();
+
+    const dfdByteOffset = headerReader._nextUint32();
+
+    const dfdByteLength = headerReader._nextUint32();
+
+    const kvdByteOffset = headerReader._nextUint32();
+
+    const kvdByteLength = headerReader._nextUint32();
+
+    const sgdByteOffset = headerReader._nextUint64();
+
+    const sgdByteLength = headerReader._nextUint64(); ///////////////////////////////////////////////////
+    // Level Index.
+    ///////////////////////////////////////////////////
+
+
+    const levelByteLength = levelCount * 3 * 8;
+    const levelReader = new BufferReader(data, KTX2_ID.length + headerByteLength, levelByteLength, true);
+
+    for (let i = 0; i < levelCount; i++) {
+      container.levels.push({
+        levelData: new Uint8Array(data.buffer, data.byteOffset + levelReader._nextUint64(), levelReader._nextUint64()),
+        uncompressedByteLength: levelReader._nextUint64()
+      });
+    } ///////////////////////////////////////////////////
+    // Data Format Descriptor (DFD).
+    ///////////////////////////////////////////////////
+
+
+    const dfdReader = new BufferReader(data, dfdByteOffset, dfdByteLength, true);
+    const dfd = {
+      vendorId: dfdReader._skip(4
+      /* totalSize */
+      )._nextUint16(),
+      descriptorType: dfdReader._nextUint16(),
+      versionNumber: dfdReader._nextUint16(),
+      descriptorBlockSize: dfdReader._nextUint16(),
+      colorModel: dfdReader._nextUint8(),
+      colorPrimaries: dfdReader._nextUint8(),
+      transferFunction: dfdReader._nextUint8(),
+      flags: dfdReader._nextUint8(),
+      texelBlockDimension: [dfdReader._nextUint8(), dfdReader._nextUint8(), dfdReader._nextUint8(), dfdReader._nextUint8()],
+      bytesPlane: [dfdReader._nextUint8(), dfdReader._nextUint8(), dfdReader._nextUint8(), dfdReader._nextUint8(), dfdReader._nextUint8(), dfdReader._nextUint8(), dfdReader._nextUint8(), dfdReader._nextUint8()],
+      samples: []
+    };
+    const sampleStart = 6;
+    const sampleWords = 4;
+    const numSamples = (dfd.descriptorBlockSize / 4 - sampleStart) / sampleWords;
+
+    for (let i = 0; i < numSamples; i++) {
+      const sample = {
+        bitOffset: dfdReader._nextUint16(),
+        bitLength: dfdReader._nextUint8(),
+        channelType: dfdReader._nextUint8(),
+        samplePosition: [dfdReader._nextUint8(), dfdReader._nextUint8(), dfdReader._nextUint8(), dfdReader._nextUint8()],
+        sampleLower: -Infinity,
+        sampleUpper: Infinity
+      };
+
+      if (sample.channelType & KHR_DF_SAMPLE_DATATYPE_SIGNED) {
+        sample.sampleLower = dfdReader._nextInt32();
+        sample.sampleUpper = dfdReader._nextInt32();
+      } else {
+        sample.sampleLower = dfdReader._nextUint32();
+        sample.sampleUpper = dfdReader._nextUint32();
+      }
+
+      dfd.samples[i] = sample;
+    }
+
+    container.dataFormatDescriptor.length = 0;
+    container.dataFormatDescriptor.push(dfd); ///////////////////////////////////////////////////
+    // Key/Value Data (KVD).
+    ///////////////////////////////////////////////////
+
+    const kvdReader = new BufferReader(data, kvdByteOffset, kvdByteLength, true);
+
+    while (kvdReader._offset < kvdByteLength) {
+      const keyValueByteLength = kvdReader._nextUint32();
+
+      const keyData = kvdReader._scan(keyValueByteLength);
+
+      const key = decodeText(keyData);
+
+      const valueData = kvdReader._scan(keyValueByteLength - keyData.byteLength);
+
+      container.keyValue[key] = key.match(/^ktx/i) ? decodeText(valueData) : valueData; // 4-byte alignment.
+
+      if (kvdReader._offset % 4) kvdReader._skip(4 - kvdReader._offset % 4);
+    } ///////////////////////////////////////////////////
+    // Supercompression Global Data (SGD).
+    ///////////////////////////////////////////////////
+
+
+    if (sgdByteLength <= 0) return container;
+    const sgdReader = new BufferReader(data, sgdByteOffset, sgdByteLength, true);
+
+    const endpointCount = sgdReader._nextUint16();
+
+    const selectorCount = sgdReader._nextUint16();
+
+    const endpointsByteLength = sgdReader._nextUint32();
+
+    const selectorsByteLength = sgdReader._nextUint32();
+
+    const tablesByteLength = sgdReader._nextUint32();
+
+    const extendedByteLength = sgdReader._nextUint32();
+
+    const imageDescs = [];
+
+    for (let i = 0; i < levelCount; i++) {
+      imageDescs.push({
+        imageFlags: sgdReader._nextUint32(),
+        rgbSliceByteOffset: sgdReader._nextUint32(),
+        rgbSliceByteLength: sgdReader._nextUint32(),
+        alphaSliceByteOffset: sgdReader._nextUint32(),
+        alphaSliceByteLength: sgdReader._nextUint32()
+      });
+    }
+
+    const endpointsByteOffset = sgdByteOffset + sgdReader._offset;
+    const selectorsByteOffset = endpointsByteOffset + endpointsByteLength;
+    const tablesByteOffset = selectorsByteOffset + selectorsByteLength;
+    const extendedByteOffset = tablesByteOffset + tablesByteLength;
+    const endpointsData = new Uint8Array(data.buffer, data.byteOffset + endpointsByteOffset, endpointsByteLength);
+    const selectorsData = new Uint8Array(data.buffer, data.byteOffset + selectorsByteOffset, selectorsByteLength);
+    const tablesData = new Uint8Array(data.buffer, data.byteOffset + tablesByteOffset, tablesByteLength);
+    const extendedData = new Uint8Array(data.buffer, data.byteOffset + extendedByteOffset, extendedByteLength);
+    container.globalData = {
+      endpointCount,
+      selectorCount,
+      imageDescs,
+      endpointsData,
+      selectorsData,
+      tablesData,
+      extendedData
+    };
+    return container;
+  }
 
   /* global require */
 
@@ -921,14 +1246,14 @@ define(['./defaultValue-97284df2', './RuntimeError-4f8ec8a2', './WebGLConstants-
   let transcoderModule;
   function transcode(parameters, transferableObjects) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("transcoderModule", transcoderModule);
+    Check.Check.typeOf.object("transcoderModule", transcoderModule);
     //>>includeEnd('debug');
 
     const data = parameters.ktx2Buffer;
     const supportedTargetFormats = parameters.supportedTargetFormats;
     let header;
     try {
-      header = p(data);
+      header = read(data);
     } catch (e) {
       throw new RuntimeError.RuntimeError("Invalid KTX2 file.");
     }
@@ -1214,4 +1539,3 @@ define(['./defaultValue-97284df2', './RuntimeError-4f8ec8a2', './WebGLConstants-
   return transcodeKTX2;
 
 }));
-//# sourceMappingURL=transcodeKTX2.js.map

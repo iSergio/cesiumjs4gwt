@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.95
+ * Version 1.99
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,15 +23,15 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './Transforms-273eeb44', './ComponentDatatype-4eeb6d9b', './RuntimeError-4f8ec8a2', './GeometryAttribute-9be2d2e5', './GeometryAttributes-734a3446', './IndexDatatype-f228f5fd', './VertexFormat-563ab2cc', './WallGeometryLibrary-3933dbde', './_commonjsHelpers-3aae1032-65601a27', './combine-d11b1f00', './WebGLConstants-6da700a2', './arrayRemoveDuplicates-1af79ba4', './PolylinePipeline-e67c0760', './EllipsoidGeodesic-72f01b70', './EllipsoidRhumbLine-7bc7dfce', './IntersectionTests-ea138127', './Plane-76b84425'], (function (defaultValue, Matrix2, Transforms, ComponentDatatype, RuntimeError, GeometryAttribute, GeometryAttributes, IndexDatatype, VertexFormat, WallGeometryLibrary, _commonjsHelpers3aae1032, combine, WebGLConstants, arrayRemoveDuplicates, PolylinePipeline, EllipsoidGeodesic, EllipsoidRhumbLine, IntersectionTests, Plane) { 'use strict';
+define(['./defaultValue-135942ca', './Matrix3-ea964448', './Transforms-ac2d28a9', './ComponentDatatype-ebdce3ba', './Check-40d84a28', './GeometryAttribute-51d61732', './GeometryAttributes-899f8bd0', './IndexDatatype-fa75fe25', './Math-efde0c7b', './VertexFormat-1d6950e1', './WallGeometryLibrary-5d02f2d8', './Matrix2-f9f1b94b', './RuntimeError-f0dada00', './combine-462d91dd', './WebGLConstants-fcb70ee3', './arrayRemoveDuplicates-3fb00ed2', './PolylinePipeline-b636012e', './EllipsoidGeodesic-08772132', './EllipsoidRhumbLine-6161ec8c', './IntersectionTests-4ab30dca', './Plane-93af52b2'], (function (defaultValue, Matrix3, Transforms, ComponentDatatype, Check, GeometryAttribute, GeometryAttributes, IndexDatatype, Math, VertexFormat, WallGeometryLibrary, Matrix2, RuntimeError, combine, WebGLConstants, arrayRemoveDuplicates, PolylinePipeline, EllipsoidGeodesic, EllipsoidRhumbLine, IntersectionTests, Plane) { 'use strict';
 
-  const scratchCartesian3Position1 = new Matrix2.Cartesian3();
-  const scratchCartesian3Position2 = new Matrix2.Cartesian3();
-  const scratchCartesian3Position4 = new Matrix2.Cartesian3();
-  const scratchCartesian3Position5 = new Matrix2.Cartesian3();
-  const scratchBitangent = new Matrix2.Cartesian3();
-  const scratchTangent = new Matrix2.Cartesian3();
-  const scratchNormal = new Matrix2.Cartesian3();
+  const scratchCartesian3Position1 = new Matrix3.Cartesian3();
+  const scratchCartesian3Position2 = new Matrix3.Cartesian3();
+  const scratchCartesian3Position4 = new Matrix3.Cartesian3();
+  const scratchCartesian3Position5 = new Matrix3.Cartesian3();
+  const scratchBitangent = new Matrix3.Cartesian3();
+  const scratchTangent = new Matrix3.Cartesian3();
+  const scratchNormal = new Matrix3.Cartesian3();
 
   /**
    * A description of a wall, which is similar to a KML line string. A wall is defined by a series of points,
@@ -81,13 +81,13 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './Transforms-273eeb44'
 
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(wallPositions)) {
-      throw new RuntimeError.DeveloperError("options.positions is required.");
+      throw new Check.DeveloperError("options.positions is required.");
     }
     if (
       defaultValue.defined(maximumHeights) &&
       maximumHeights.length !== wallPositions.length
     ) {
-      throw new RuntimeError.DeveloperError(
+      throw new Check.DeveloperError(
         "options.positions and options.maximumHeights must have the same length."
       );
     }
@@ -95,7 +95,7 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './Transforms-273eeb44'
       defaultValue.defined(minimumHeights) &&
       minimumHeights.length !== wallPositions.length
     ) {
-      throw new RuntimeError.DeveloperError(
+      throw new Check.DeveloperError(
         "options.positions and options.minimumHeights must have the same length."
       );
     }
@@ -104,19 +104,19 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './Transforms-273eeb44'
     const vertexFormat = defaultValue.defaultValue(options.vertexFormat, VertexFormat.VertexFormat.DEFAULT);
     const granularity = defaultValue.defaultValue(
       options.granularity,
-      ComponentDatatype.CesiumMath.RADIANS_PER_DEGREE
+      Math.CesiumMath.RADIANS_PER_DEGREE
     );
-    const ellipsoid = defaultValue.defaultValue(options.ellipsoid, Matrix2.Ellipsoid.WGS84);
+    const ellipsoid = defaultValue.defaultValue(options.ellipsoid, Matrix3.Ellipsoid.WGS84);
 
     this._positions = wallPositions;
     this._minimumHeights = minimumHeights;
     this._maximumHeights = maximumHeights;
     this._vertexFormat = VertexFormat.VertexFormat.clone(vertexFormat);
     this._granularity = granularity;
-    this._ellipsoid = Matrix2.Ellipsoid.clone(ellipsoid);
+    this._ellipsoid = Matrix3.Ellipsoid.clone(ellipsoid);
     this._workerName = "createWallGeometry";
 
-    let numComponents = 1 + wallPositions.length * Matrix2.Cartesian3.packedLength + 2;
+    let numComponents = 1 + wallPositions.length * Matrix3.Cartesian3.packedLength + 2;
     if (defaultValue.defined(minimumHeights)) {
       numComponents += minimumHeights.length;
     }
@@ -129,7 +129,7 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './Transforms-273eeb44'
      * @type {Number}
      */
     this.packedLength =
-      numComponents + Matrix2.Ellipsoid.packedLength + VertexFormat.VertexFormat.packedLength + 1;
+      numComponents + Matrix3.Ellipsoid.packedLength + VertexFormat.VertexFormat.packedLength + 1;
   }
 
   /**
@@ -144,10 +144,10 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './Transforms-273eeb44'
   WallGeometry.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(value)) {
-      throw new RuntimeError.DeveloperError("value is required");
+      throw new Check.DeveloperError("value is required");
     }
     if (!defaultValue.defined(array)) {
-      throw new RuntimeError.DeveloperError("array is required");
+      throw new Check.DeveloperError("array is required");
     }
     //>>includeEnd('debug');
 
@@ -159,8 +159,8 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './Transforms-273eeb44'
     let length = positions.length;
     array[startingIndex++] = length;
 
-    for (i = 0; i < length; ++i, startingIndex += Matrix2.Cartesian3.packedLength) {
-      Matrix2.Cartesian3.pack(positions[i], array, startingIndex);
+    for (i = 0; i < length; ++i, startingIndex += Matrix3.Cartesian3.packedLength) {
+      Matrix3.Cartesian3.pack(positions[i], array, startingIndex);
     }
 
     const minimumHeights = value._minimumHeights;
@@ -183,8 +183,8 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './Transforms-273eeb44'
       }
     }
 
-    Matrix2.Ellipsoid.pack(value._ellipsoid, array, startingIndex);
-    startingIndex += Matrix2.Ellipsoid.packedLength;
+    Matrix3.Ellipsoid.pack(value._ellipsoid, array, startingIndex);
+    startingIndex += Matrix3.Ellipsoid.packedLength;
 
     VertexFormat.VertexFormat.pack(value._vertexFormat, array, startingIndex);
     startingIndex += VertexFormat.VertexFormat.packedLength;
@@ -194,7 +194,7 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './Transforms-273eeb44'
     return array;
   };
 
-  const scratchEllipsoid = Matrix2.Ellipsoid.clone(Matrix2.Ellipsoid.UNIT_SPHERE);
+  const scratchEllipsoid = Matrix3.Ellipsoid.clone(Matrix3.Ellipsoid.UNIT_SPHERE);
   const scratchVertexFormat = new VertexFormat.VertexFormat();
   const scratchOptions = {
     positions: undefined,
@@ -216,7 +216,7 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './Transforms-273eeb44'
   WallGeometry.unpack = function (array, startingIndex, result) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(array)) {
-      throw new RuntimeError.DeveloperError("array is required");
+      throw new Check.DeveloperError("array is required");
     }
     //>>includeEnd('debug');
 
@@ -227,8 +227,8 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './Transforms-273eeb44'
     let length = array[startingIndex++];
     const positions = new Array(length);
 
-    for (i = 0; i < length; ++i, startingIndex += Matrix2.Cartesian3.packedLength) {
-      positions[i] = Matrix2.Cartesian3.unpack(array, startingIndex);
+    for (i = 0; i < length; ++i, startingIndex += Matrix3.Cartesian3.packedLength) {
+      positions[i] = Matrix3.Cartesian3.unpack(array, startingIndex);
     }
 
     length = array[startingIndex++];
@@ -251,8 +251,8 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './Transforms-273eeb44'
       }
     }
 
-    const ellipsoid = Matrix2.Ellipsoid.unpack(array, startingIndex, scratchEllipsoid);
-    startingIndex += Matrix2.Ellipsoid.packedLength;
+    const ellipsoid = Matrix3.Ellipsoid.unpack(array, startingIndex, scratchEllipsoid);
+    startingIndex += Matrix3.Ellipsoid.packedLength;
 
     const vertexFormat = VertexFormat.VertexFormat.unpack(
       array,
@@ -274,7 +274,7 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './Transforms-273eeb44'
     result._positions = positions;
     result._minimumHeights = minimumHeights;
     result._maximumHeights = maximumHeights;
-    result._ellipsoid = Matrix2.Ellipsoid.clone(ellipsoid, result._ellipsoid);
+    result._ellipsoid = Matrix3.Ellipsoid.clone(ellipsoid, result._ellipsoid);
     result._vertexFormat = VertexFormat.VertexFormat.clone(vertexFormat, result._vertexFormat);
     result._granularity = granularity;
 
@@ -319,7 +319,7 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './Transforms-273eeb44'
 
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(positions)) {
-      throw new RuntimeError.DeveloperError("options.positions is required.");
+      throw new Check.DeveloperError("options.positions is required.");
     }
     //>>includeEnd('debug');
 
@@ -418,12 +418,12 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './Transforms-273eeb44'
     const ds = 1 / (length - numCorners - 1);
     for (i = 0; i < length; ++i) {
       const i3 = i * 3;
-      const topPosition = Matrix2.Cartesian3.fromArray(
+      const topPosition = Matrix3.Cartesian3.fromArray(
         topPositions,
         i3,
         scratchCartesian3Position1
       );
-      const bottomPosition = Matrix2.Cartesian3.fromArray(
+      const bottomPosition = Matrix3.Cartesian3.fromArray(
         bottomPositions,
         i3,
         scratchCartesian3Position2
@@ -449,11 +449,11 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './Transforms-273eeb44'
       }
 
       if (vertexFormat.normal || vertexFormat.tangent || vertexFormat.bitangent) {
-        let nextTop = Matrix2.Cartesian3.clone(
-          Matrix2.Cartesian3.ZERO,
+        let nextTop = Matrix3.Cartesian3.clone(
+          Matrix3.Cartesian3.ZERO,
           scratchCartesian3Position5
         );
-        const groundPosition = Matrix2.Cartesian3.subtract(
+        const groundPosition = Matrix3.Cartesian3.subtract(
           topPosition,
           ellipsoid.geodeticSurfaceNormal(
             topPosition,
@@ -462,7 +462,7 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './Transforms-273eeb44'
           scratchCartesian3Position2
         );
         if (i + 1 < length) {
-          nextTop = Matrix2.Cartesian3.fromArray(
+          nextTop = Matrix3.Cartesian3.fromArray(
             topPositions,
             i3 + 3,
             scratchCartesian3Position5
@@ -470,38 +470,38 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './Transforms-273eeb44'
         }
 
         if (recomputeNormal) {
-          const scalednextPosition = Matrix2.Cartesian3.subtract(
+          const scalednextPosition = Matrix3.Cartesian3.subtract(
             nextTop,
             topPosition,
             scratchCartesian3Position4
           );
-          const scaledGroundPosition = Matrix2.Cartesian3.subtract(
+          const scaledGroundPosition = Matrix3.Cartesian3.subtract(
             groundPosition,
             topPosition,
             scratchCartesian3Position1
           );
-          normal = Matrix2.Cartesian3.normalize(
-            Matrix2.Cartesian3.cross(scaledGroundPosition, scalednextPosition, normal),
+          normal = Matrix3.Cartesian3.normalize(
+            Matrix3.Cartesian3.cross(scaledGroundPosition, scalednextPosition, normal),
             normal
           );
           recomputeNormal = false;
         }
 
         if (
-          Matrix2.Cartesian3.equalsEpsilon(topPosition, nextTop, ComponentDatatype.CesiumMath.EPSILON10)
+          Matrix3.Cartesian3.equalsEpsilon(topPosition, nextTop, Math.CesiumMath.EPSILON10)
         ) {
           recomputeNormal = true;
         } else {
           s += ds;
           if (vertexFormat.tangent) {
-            tangent = Matrix2.Cartesian3.normalize(
-              Matrix2.Cartesian3.subtract(nextTop, topPosition, tangent),
+            tangent = Matrix3.Cartesian3.normalize(
+              Matrix3.Cartesian3.subtract(nextTop, topPosition, tangent),
               tangent
             );
           }
           if (vertexFormat.bitangent) {
-            bitangent = Matrix2.Cartesian3.normalize(
-              Matrix2.Cartesian3.cross(normal, tangent, bitangent),
+            bitangent = Matrix3.Cartesian3.normalize(
+              Matrix3.Cartesian3.cross(normal, tangent, bitangent),
               bitangent
             );
           }
@@ -603,17 +603,17 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './Transforms-273eeb44'
     for (i = 0; i < numVertices - 2; i += 2) {
       const LL = i;
       const LR = i + 2;
-      const pl = Matrix2.Cartesian3.fromArray(
+      const pl = Matrix3.Cartesian3.fromArray(
         positions,
         LL * 3,
         scratchCartesian3Position1
       );
-      const pr = Matrix2.Cartesian3.fromArray(
+      const pr = Matrix3.Cartesian3.fromArray(
         positions,
         LR * 3,
         scratchCartesian3Position2
       );
-      if (Matrix2.Cartesian3.equalsEpsilon(pl, pr, ComponentDatatype.CesiumMath.EPSILON10)) {
+      if (Matrix3.Cartesian3.equalsEpsilon(pl, pr, Math.CesiumMath.EPSILON10)) {
         continue;
       }
       const UL = i + 1;
@@ -639,11 +639,10 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './Transforms-273eeb44'
     if (defaultValue.defined(offset)) {
       wallGeometry = WallGeometry.unpack(wallGeometry, offset);
     }
-    wallGeometry._ellipsoid = Matrix2.Ellipsoid.clone(wallGeometry._ellipsoid);
+    wallGeometry._ellipsoid = Matrix3.Ellipsoid.clone(wallGeometry._ellipsoid);
     return WallGeometry.createGeometry(wallGeometry);
   }
 
   return createWallGeometry;
 
 }));
-//# sourceMappingURL=createWallGeometry.js.map

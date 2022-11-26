@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.95
+ * Version 1.99
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,7 +23,7 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./AttributeCompression-f202be44', './Transforms-273eeb44', './Matrix2-9e1c22e2', './defaultValue-97284df2', './TerrainEncoding-8fbe9124', './IndexDatatype-f228f5fd', './RuntimeError-4f8ec8a2', './ComponentDatatype-4eeb6d9b', './OrientedBoundingBox-a82b3552', './createTaskProcessorWorker', './_commonjsHelpers-3aae1032-65601a27', './combine-d11b1f00', './WebGLConstants-6da700a2', './EllipsoidTangentPlane-d42ee682', './AxisAlignedBoundingBox-1aaf78c2', './IntersectionTests-ea138127', './Plane-76b84425'], (function (AttributeCompression, Transforms, Matrix2, defaultValue, TerrainEncoding, IndexDatatype, RuntimeError, ComponentDatatype, OrientedBoundingBox, createTaskProcessorWorker, _commonjsHelpers3aae1032, combine, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane) { 'use strict';
+define(['./AttributeCompression-53c7fda2', './Transforms-ac2d28a9', './Matrix2-f9f1b94b', './Matrix3-ea964448', './defaultValue-135942ca', './TerrainEncoding-3edd4345', './IndexDatatype-fa75fe25', './Check-40d84a28', './Math-efde0c7b', './OrientedBoundingBox-14c97a6c', './createTaskProcessorWorker', './ComponentDatatype-ebdce3ba', './WebGLConstants-fcb70ee3', './combine-462d91dd', './RuntimeError-f0dada00', './EllipsoidTangentPlane-244dda7a', './AxisAlignedBoundingBox-48df2a2e', './IntersectionTests-4ab30dca', './Plane-93af52b2'], (function (AttributeCompression, Transforms, Matrix2, Matrix3, defaultValue, TerrainEncoding, IndexDatatype, Check, Math$1, OrientedBoundingBox, createTaskProcessorWorker, ComponentDatatype, WebGLConstants, combine, RuntimeError, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane) { 'use strict';
 
   /**
    * Contains functions for operating on 2D triangles.
@@ -68,19 +68,19 @@ define(['./AttributeCompression-f202be44', './Transforms-273eeb44', './Matrix2-9
   ) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(threshold)) {
-      throw new RuntimeError.DeveloperError("threshold is required.");
+      throw new Check.DeveloperError("threshold is required.");
     }
     if (!defaultValue.defined(keepAbove)) {
-      throw new RuntimeError.DeveloperError("keepAbove is required.");
+      throw new Check.DeveloperError("keepAbove is required.");
     }
     if (!defaultValue.defined(u0)) {
-      throw new RuntimeError.DeveloperError("u0 is required.");
+      throw new Check.DeveloperError("u0 is required.");
     }
     if (!defaultValue.defined(u1)) {
-      throw new RuntimeError.DeveloperError("u1 is required.");
+      throw new Check.DeveloperError("u1 is required.");
     }
     if (!defaultValue.defined(u2)) {
-      throw new RuntimeError.DeveloperError("u2 is required.");
+      throw new Check.DeveloperError("u2 is required.");
     }
     //>>includeEnd('debug');
 
@@ -267,28 +267,28 @@ define(['./AttributeCompression-f202be44', './Transforms-273eeb44', './Matrix2-9
   ) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(x)) {
-      throw new RuntimeError.DeveloperError("x is required.");
+      throw new Check.DeveloperError("x is required.");
     }
     if (!defaultValue.defined(y)) {
-      throw new RuntimeError.DeveloperError("y is required.");
+      throw new Check.DeveloperError("y is required.");
     }
     if (!defaultValue.defined(x1)) {
-      throw new RuntimeError.DeveloperError("x1 is required.");
+      throw new Check.DeveloperError("x1 is required.");
     }
     if (!defaultValue.defined(y1)) {
-      throw new RuntimeError.DeveloperError("y1 is required.");
+      throw new Check.DeveloperError("y1 is required.");
     }
     if (!defaultValue.defined(x2)) {
-      throw new RuntimeError.DeveloperError("x2 is required.");
+      throw new Check.DeveloperError("x2 is required.");
     }
     if (!defaultValue.defined(y2)) {
-      throw new RuntimeError.DeveloperError("y2 is required.");
+      throw new Check.DeveloperError("y2 is required.");
     }
     if (!defaultValue.defined(x3)) {
-      throw new RuntimeError.DeveloperError("x3 is required.");
+      throw new Check.DeveloperError("x3 is required.");
     }
     if (!defaultValue.defined(y3)) {
-      throw new RuntimeError.DeveloperError("y3 is required.");
+      throw new Check.DeveloperError("y3 is required.");
     }
     //>>includeEnd('debug');
 
@@ -309,7 +309,7 @@ define(['./AttributeCompression-f202be44', './Transforms-273eeb44', './Matrix2-9
       result.z = l3;
       return result;
     }
-    return new Matrix2.Cartesian3(l1, l2, l3);
+    return new Matrix3.Cartesian3(l1, l2, l3);
   };
 
   /**
@@ -343,14 +343,14 @@ define(['./AttributeCompression-f202be44', './Transforms-273eeb44', './Matrix2-9
     result
   ) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.number("x00", x00);
-    RuntimeError.Check.typeOf.number("y00", y00);
-    RuntimeError.Check.typeOf.number("x01", x01);
-    RuntimeError.Check.typeOf.number("y01", y01);
-    RuntimeError.Check.typeOf.number("x10", x10);
-    RuntimeError.Check.typeOf.number("y10", y10);
-    RuntimeError.Check.typeOf.number("x11", x11);
-    RuntimeError.Check.typeOf.number("y11", y11);
+    Check.Check.typeOf.number("x00", x00);
+    Check.Check.typeOf.number("y00", y00);
+    Check.Check.typeOf.number("x01", x01);
+    Check.Check.typeOf.number("y01", y01);
+    Check.Check.typeOf.number("x10", x10);
+    Check.Check.typeOf.number("y10", y10);
+    Check.Check.typeOf.number("x11", x11);
+    Check.Check.typeOf.number("y11", y11);
     //>>includeEnd('debug');
 
     const numerator1A = (x11 - x10) * (y00 - y10) - (y11 - y10) * (x00 - x10);
@@ -376,6 +376,7 @@ define(['./AttributeCompression-f202be44', './Transforms-273eeb44', './Matrix2-9
       return result;
     }
   };
+  var Intersections2D$1 = Intersections2D;
 
   const maxShort = 32767;
   const halfMaxShort = (maxShort / 2) | 0;
@@ -383,18 +384,18 @@ define(['./AttributeCompression-f202be44', './Transforms-273eeb44', './Matrix2-9
   const clipScratch = [];
   const clipScratch2 = [];
   const verticesScratch = [];
-  const cartographicScratch = new Matrix2.Cartographic();
-  let cartesian3Scratch = new Matrix2.Cartesian3();
+  const cartographicScratch = new Matrix3.Cartographic();
+  let cartesian3Scratch = new Matrix3.Cartesian3();
   const uScratch = [];
   const vScratch = [];
   const heightScratch = [];
   const indicesScratch = [];
   const normalsScratch = [];
-  const horizonOcclusionPointScratch = new Matrix2.Cartesian3();
+  const horizonOcclusionPointScratch = new Matrix3.Cartesian3();
   const boundingSphereScratch = new Transforms.BoundingSphere();
   const orientedBoundingBoxScratch = new OrientedBoundingBox.OrientedBoundingBox();
   const decodeTexCoordsScratch = new Matrix2.Cartesian2();
-  const octEncodedNormalScratch = new Matrix2.Cartesian3();
+  const octEncodedNormalScratch = new Matrix3.Cartesian3();
 
   function upsampleQuantizedTerrainMesh(parameters, transferableObjects) {
     const isEastChild = parameters.isEastChild;
@@ -453,9 +454,9 @@ define(['./AttributeCompression-f202be44', './Transforms-273eeb44', './Matrix2-9
       );
       height = encoding.decodeHeight(parentVertices, i);
 
-      u = ComponentDatatype.CesiumMath.clamp((texCoords.x * maxShort) | 0, 0, maxShort);
-      v = ComponentDatatype.CesiumMath.clamp((texCoords.y * maxShort) | 0, 0, maxShort);
-      parentHeightBuffer[i] = ComponentDatatype.CesiumMath.clamp(
+      u = Math$1.CesiumMath.clamp((texCoords.x * maxShort) | 0, 0, maxShort);
+      v = Math$1.CesiumMath.clamp((texCoords.y * maxShort) | 0, 0, maxShort);
+      parentHeightBuffer[i] = Math$1.CesiumMath.clamp(
         (((height - parentMinimumHeight) /
           (parentMaximumHeight - parentMinimumHeight)) *
           maxShort) |
@@ -557,7 +558,7 @@ define(['./AttributeCompression-f202be44', './Transforms-273eeb44', './Matrix2-9
       );
 
       // Clip triangle on the east-west boundary.
-      const clipped = Intersections2D.clipTriangleAtAxisAlignedThreshold(
+      const clipped = Intersections2D$1.clipTriangleAtAxisAlignedThreshold(
         halfMaxShort,
         isEastChild,
         u0,
@@ -597,7 +598,7 @@ define(['./AttributeCompression-f202be44', './Transforms-273eeb44', './Matrix2-9
       );
 
       // Clip the triangle against the North-south boundary.
-      clipped2 = Intersections2D.clipTriangleAtAxisAlignedThreshold(
+      clipped2 = Intersections2D$1.clipTriangleAtAxisAlignedThreshold(
         halfMaxShort,
         isNorthChild,
         clippedTriangleVertices[0].getV(),
@@ -627,7 +628,7 @@ define(['./AttributeCompression-f202be44', './Transforms-273eeb44', './Matrix2-9
           triangleVertices
         );
 
-        clipped2 = Intersections2D.clipTriangleAtAxisAlignedThreshold(
+        clipped2 = Intersections2D$1.clipTriangleAtAxisAlignedThreshold(
           halfMaxShort,
           isNorthChild,
           clippedTriangleVertices[0].getV(),
@@ -663,7 +664,7 @@ define(['./AttributeCompression-f202be44', './Transforms-273eeb44', './Matrix2-9
     const cartesianVertices = verticesScratch;
     cartesianVertices.length = 0;
 
-    const ellipsoid = Matrix2.Ellipsoid.clone(parameters.ellipsoid);
+    const ellipsoid = Matrix3.Ellipsoid.clone(parameters.ellipsoid);
     const rectangle = Matrix2.Rectangle.clone(parameters.childRectangle);
 
     const north = rectangle.north;
@@ -672,7 +673,7 @@ define(['./AttributeCompression-f202be44', './Transforms-273eeb44', './Matrix2-9
     const west = rectangle.west;
 
     if (east < west) {
-      east += ComponentDatatype.CesiumMath.TWO_PI;
+      east += Math$1.CesiumMath.TWO_PI;
     }
 
     for (i = 0; i < uBuffer.length; ++i) {
@@ -702,7 +703,7 @@ define(['./AttributeCompression-f202be44', './Transforms-273eeb44', './Matrix2-9
 
       vBuffer[i] = v;
 
-      height = ComponentDatatype.CesiumMath.lerp(
+      height = Math$1.CesiumMath.lerp(
         parentMinimumHeight,
         parentMaximumHeight,
         heightBuffer[i] / maxShort
@@ -716,8 +717,8 @@ define(['./AttributeCompression-f202be44', './Transforms-273eeb44', './Matrix2-9
 
       heightBuffer[i] = height;
 
-      cartographicScratch.longitude = ComponentDatatype.CesiumMath.lerp(west, east, u / maxShort);
-      cartographicScratch.latitude = ComponentDatatype.CesiumMath.lerp(south, north, v / maxShort);
+      cartographicScratch.longitude = Math$1.CesiumMath.lerp(west, east, u / maxShort);
+      cartographicScratch.latitude = Math$1.CesiumMath.lerp(south, north, v / maxShort);
       cartographicScratch.height = height;
 
       ellipsoid.cartographicToCartesian(cartographicScratch, cartesian3Scratch);
@@ -729,7 +730,7 @@ define(['./AttributeCompression-f202be44', './Transforms-273eeb44', './Matrix2-9
 
     const boundingSphere = Transforms.BoundingSphere.fromVertices(
       cartesianVertices,
-      Matrix2.Cartesian3.ZERO,
+      Matrix3.Cartesian3.ZERO,
       3,
       boundingSphereScratch
     );
@@ -892,29 +893,29 @@ define(['./AttributeCompression-f202be44', './Transforms-273eeb44', './Matrix2-9
     if (defaultValue.defined(this.index)) {
       return this.heightBuffer[this.index];
     }
-    return ComponentDatatype.CesiumMath.lerp(this.first.getH(), this.second.getH(), this.ratio);
+    return Math$1.CesiumMath.lerp(this.first.getH(), this.second.getH(), this.ratio);
   };
 
   Vertex.prototype.getU = function () {
     if (defaultValue.defined(this.index)) {
       return this.uBuffer[this.index];
     }
-    return ComponentDatatype.CesiumMath.lerp(this.first.getU(), this.second.getU(), this.ratio);
+    return Math$1.CesiumMath.lerp(this.first.getU(), this.second.getU(), this.ratio);
   };
 
   Vertex.prototype.getV = function () {
     if (defaultValue.defined(this.index)) {
       return this.vBuffer[this.index];
     }
-    return ComponentDatatype.CesiumMath.lerp(this.first.getV(), this.second.getV(), this.ratio);
+    return Math$1.CesiumMath.lerp(this.first.getV(), this.second.getV(), this.ratio);
   };
 
   let encodedScratch = new Matrix2.Cartesian2();
   // An upsampled triangle may be clipped twice before it is assigned an index
   // In this case, we need a buffer to handle the recursion of getNormalX() and getNormalY().
   let depth = -1;
-  const cartesianScratch1 = [new Matrix2.Cartesian3(), new Matrix2.Cartesian3()];
-  const cartesianScratch2 = [new Matrix2.Cartesian3(), new Matrix2.Cartesian3()];
+  const cartesianScratch1 = [new Matrix3.Cartesian3(), new Matrix3.Cartesian3()];
+  const cartesianScratch2 = [new Matrix3.Cartesian3(), new Matrix3.Cartesian3()];
   function lerpOctEncodedNormal(vertex, result) {
     ++depth;
 
@@ -931,13 +932,13 @@ define(['./AttributeCompression-f202be44', './Transforms-273eeb44', './Matrix2-9
       vertex.second.getNormalY(),
       second
     );
-    cartesian3Scratch = Matrix2.Cartesian3.lerp(
+    cartesian3Scratch = Matrix3.Cartesian3.lerp(
       first,
       second,
       vertex.ratio,
       cartesian3Scratch
     );
-    Matrix2.Cartesian3.normalize(cartesian3Scratch, cartesian3Scratch);
+    Matrix3.Cartesian3.normalize(cartesian3Scratch, cartesian3Scratch);
 
     AttributeCompression.AttributeCompression.octEncode(cartesian3Scratch, result);
 
@@ -1045,4 +1046,3 @@ define(['./AttributeCompression-f202be44', './Transforms-273eeb44', './Matrix2-9
   return upsampleQuantizedTerrainMesh$1;
 
 }));
-//# sourceMappingURL=upsampleQuantizedTerrainMesh.js.map

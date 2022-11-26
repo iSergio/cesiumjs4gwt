@@ -7,7 +7,7 @@
     <groupId>org.cesiumjs</groupId>
     <artifactId>cesiumjs4gwt</artifactId>
     <packaging>pom</packaging>
-    <version>1.95.0</version>
+    <version>1.99.0</version>
     <name>CesiumJS GWT Framework</name>
 
     <properties>
@@ -22,6 +22,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
+
+        <sonar.qualitygate.wait>true</sonar.qualitygate.wait>
     </properties>
 
     <distributionManagement>

@@ -17,6 +17,7 @@
 package org.cesiumjs.cs.scene.options;
 
 import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -60,5 +61,29 @@ public class ViewOptions {
 
     @JsConstructor
     public ViewOptions() {
+    }
+
+    @JsOverlay
+    public final ViewOptions setDestination(Cartesian3 destination) {
+        this.destinationPos = destination;
+        return this;
+    }
+
+    @JsOverlay
+    public final ViewOptions setDestination(Rectangle destination) {
+        this.destinationRec = destination;
+        return this;
+    }
+
+    @JsOverlay
+    public final ViewOptions setOrientation(HeadingPitchRoll orientation) {
+        this.orientation = orientation;
+        return this;
+    }
+
+    @JsOverlay
+    public final ViewOptions setEndTransform(Matrix4 endTransform) {
+        this.endTransform = endTransform;
+        return this;
     }
 }
