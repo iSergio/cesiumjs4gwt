@@ -1,8 +1,22 @@
+/*
+ * Copyright 2018 iserge.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package org.cleanlogic.cesiumjs4gwt.showcase.examples;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.FlexTable;
@@ -23,17 +37,15 @@ import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cesiumjs.cs.widgets.options.ViewerOptions;
 import org.cleanlogic.cesiumjs4gwt.showcase.basic.AbstractExample;
 import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ShowcaseExampleStore;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.Slider;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderEvent;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderListener;
+import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.InputEvent;
+import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderBox;
 
 import javax.inject.Inject;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 public class PostProcessing extends AbstractExample {
-    private PostProcessStageCollection collection;
     private PostProcessStageComposite silhouette;
     private PostProcessStage blackAndWhite;
     private PostProcessStage brightness;
@@ -44,12 +56,13 @@ public class PostProcessing extends AbstractExample {
     private CheckBox brightnessCBox;
     private CheckBox nightVisionCBox;
 
-    private Slider blackAndWhiteSlider;
-    private Slider brightnessSlider;
+    private SliderBox blackAndWhiteSlider;
+    private SliderBox brightnessSlider;
 
     @Inject
     public PostProcessing(ShowcaseExampleStore store) {
-        super("Post Processing", "Post processing effects", new String[]{"Showcase", "Cesium", "3d", "Post processing"}, store);
+        super("Post Processing", "Post processing effects", new String[]{"Showcase", "Cesium", "3d", "Post processing"},
+                store);
     }
 
     @Override
@@ -59,7 +72,8 @@ public class PostProcessing extends AbstractExample {
         ViewerPanel csVPanel = new ViewerPanel(viewerOptions);
 
         ModelGraphicsOptions modelGraphicsOptions = new ModelGraphicsOptions();
-        modelGraphicsOptions.uri = new ConstantProperty<>(GWT.getModuleBaseURL() + "SampleData/models/CesiumMan/Cesium_Man.glb");
+        modelGraphicsOptions.uri = new ConstantProperty<>(
+                GWT.getModuleBaseURL() + "SampleData/models/CesiumMan/Cesium_Man.glb");
 
         EntityOptions options = new EntityOptions();
         options.name = GWT.getModuleBaseURL() + "SampleData/models/CesiumMan/Cesium_Man.glb";
@@ -67,38 +81,36 @@ public class PostProcessing extends AbstractExample {
         options.model = new ModelGraphics(modelGraphicsOptions);
         csVPanel.getViewer().trackedEntity = csVPanel.getViewer().entities().add(options);
 
-        collection = csVPanel.getViewer().scene().postProcessStages;
-        silhouette = (PostProcessStageComposite) collection.add(PostProcessStageLibrary.createSilhouetteStage());
-        blackAndWhite = (PostProcessStage) collection.add(PostProcessStageLibrary.createBlackAndWhiteStage());
-        brightness = (PostProcessStage) collection.add(PostProcessStageLibrary.createBrightnessStage());
-        nightVision = (PostProcessStage) collection.add(PostProcessStageLibrary.createNightVisionStage());
+        PostProcessStageCollection collection = csVPanel.getViewer().scene().postProcessStages;
+        silhouette = collection.add(PostProcessStageLibrary.createSilhouetteStage());
+        blackAndWhite = collection.add(PostProcessStageLibrary.createBlackAndWhiteStage());
+        brightness = collection.add(PostProcessStageLibrary.createBrightnessStage());
+        nightVision = collection.add(PostProcessStageLibrary.createNightVisionStage());
 
-        if (silhouette.isSupported(csVPanel.getViewer().scene())) {
+        if (!PostProcessStageLibrary.isSilhouetteSupported(csVPanel.getViewer().scene())) {
             Cesium.log("This browser does not support the silhouette post process.");
         }
 
         silhouetteCBox = new CheckBox();
         silhouetteCBox.setValue(true);
-        silhouetteCBox.addValueChangeHandler(new MValueChangeHandler());
+        silhouetteCBox.addValueChangeHandler(event -> updatePostProcess(null));
 
         blackAndWhiteCBox = new CheckBox();
-        blackAndWhiteCBox.addValueChangeHandler(new MValueChangeHandler());
+        blackAndWhiteCBox.addValueChangeHandler(event -> updatePostProcess(null));
 
-        blackAndWhiteSlider = new Slider("blackAndWhiteSlider", 1, 10, 5);
-        blackAndWhiteSlider.setStep(1);
+        blackAndWhiteSlider = new SliderBox(1, 5, 10, 1);
         blackAndWhiteSlider.setWidth("150px");
-        blackAndWhiteSlider.addListener(new MSliderListener());
+        blackAndWhiteSlider.addInputHandler(this::updatePostProcess);
 
         brightnessCBox = new CheckBox();
-        brightnessCBox.addValueChangeHandler(new MValueChangeHandler());
+        brightnessCBox.addValueChangeHandler(event -> updatePostProcess(null));
 
-        brightnessSlider = new Slider("brightnessSlider", 0, 100, 50);
-        brightnessSlider.setStep(1);
+        brightnessSlider = new SliderBox(0, 0.5, 1, 0.01);
         brightnessSlider.setWidth("150px");
-        brightnessSlider.addListener(new MSliderListener());
+        brightnessSlider.addInputHandler(this::updatePostProcess);
 
         nightVisionCBox = new CheckBox();
-        nightVisionCBox.addValueChangeHandler(new MValueChangeHandler());
+        nightVisionCBox.addValueChangeHandler(event -> updatePostProcess(null));
 
         FlexTable flexTable = new FlexTable();
         flexTable.setHTML(1, 0, "<font color=\"white\">Silhouette</font>");
@@ -120,18 +132,18 @@ public class PostProcessing extends AbstractExample {
         contentPanel.add(aPanel);
 
         initWidget(contentPanel);
-        updatePostProcess();
+        updatePostProcess(null);
     }
 
-    private void updatePostProcess() {
+    private void updatePostProcess(InputEvent event) {
         silhouette.enabled = silhouetteCBox.getValue();
         silhouette.uniforms.setProperty("color", Color.YELLOW());
 
         blackAndWhite.enabled = blackAndWhiteCBox.getValue();
-        blackAndWhite.uniforms().setProperty("gradations", blackAndWhiteSlider.getValue());
+        blackAndWhite.uniforms().setProperty("gradations", Double.parseDouble(blackAndWhiteSlider.getValue()));
 
         brightness.enabled = brightnessCBox.getValue();
-        brightness.uniforms().setProperty("brightness", brightnessSlider.getValue() / 100.0);
+        brightness.uniforms().setProperty("brightness", Double.parseDouble(brightnessSlider.getValue()));
 
         nightVision.enabled = nightVisionCBox.getValue();
     }
@@ -141,35 +153,5 @@ public class PostProcessing extends AbstractExample {
         String[] sourceCodeURLs = new String[1];
         sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "PostProcessing.txt";
         return sourceCodeURLs;
-    }
-
-    private class MValueChangeHandler implements ValueChangeHandler<Boolean> {
-        @Override
-        public void onValueChange(ValueChangeEvent<Boolean> event) {
-            updatePostProcess();
-        }
-    }
-
-    private class MSliderListener implements SliderListener {
-        @Override
-        public void onStart(SliderEvent e) {
-            //
-        }
-
-        @Override
-        public boolean onSlide(SliderEvent e) {
-            updatePostProcess();
-            return true;
-        }
-
-        @Override
-        public void onChange(SliderEvent e) {
-            //
-        }
-
-        @Override
-        public void onStop(SliderEvent e) {
-            //
-        }
     }
 }

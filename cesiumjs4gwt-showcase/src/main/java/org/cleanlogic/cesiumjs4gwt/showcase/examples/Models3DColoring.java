@@ -57,7 +57,7 @@ public class Models3DColoring extends AbstractExample {
     private String colorStr = "red";
     private float alpha = 1.0f;
     private Number colorBlendMode = ColorBlendMode.HIGHLIGHT();
-    private float colorBlendAmount = 0.5f;
+    private double colorBlendAmount = 0.5f;
 
     private Color silhouetteColor = Color.RED();
     private String silhouetteColorStr = "red";
@@ -76,6 +76,7 @@ public class Models3DColoring extends AbstractExample {
         csViewerOptions.infoBox = false;
         csViewerOptions.selectionIndicator = false;
         csViewerOptions.shadows = false;
+        csViewerOptions.shouldAnimate = true;
         csVPanel = new ViewerPanel(csViewerOptions);
 
         ModelGraphicsOptions modelGraphicsOptions = new ModelGraphicsOptions();
@@ -245,7 +246,7 @@ public class Models3DColoring extends AbstractExample {
         if (source == alphaSlider) {
             onAlphaInput(value);
         } else if (source == mixSlider) {
-            onMixInput(value);
+            onMixInput((double) value);
         } else if (source == silhouetteAlphaSlider) {
             onSilhouetteAlphaInput(value);
         } else if (source == silhouetteSizeSlider) {
@@ -259,7 +260,7 @@ public class Models3DColoring extends AbstractExample {
         csVPanel.getViewer().trackedEntity.model.color = new ConstantProperty<>(getColor(colorStr, alpha));
     }
 
-    private void onMixInput(float value) {
+    private void onMixInput(double value) {
         mixTBox.setValue(String.valueOf(value));
         colorBlendAmount = value;
         csVPanel.getViewer().trackedEntity.model.colorBlendAmount = new ConstantProperty<>(colorBlendAmount);
@@ -354,13 +355,13 @@ public class Models3DColoring extends AbstractExample {
                 createModel(GWT.getModuleBaseURL() + "SampleData/models/CesiumAir/Cesium_Air.glb", 5000.0);
                 break;
             case "1":
-                createModel(GWT.getModuleBaseURL() + "SampleData/models/CesiumGround/Cesium_Ground.glb", 0);
+                createModel(GWT.getModuleBaseURL() + "SampleData/models/GroundVehicle/GroundVehicle.glb", 0);
                 break;
             case "2":
                 createModel(GWT.getModuleBaseURL() + "SampleData/models/CesiumBalloon/CesiumBalloon.glb", 1000.0);
                 break;
             case "3":
-                createModel(GWT.getModuleBaseURL() + "SampleData/models/CesiumMilkTruck/CesiumMilkTruck-kmc.glb", 0);
+                createModel(GWT.getModuleBaseURL() + "SampleData/models/CesiumMilkTruck/CesiumMilkTruck.glb", 0);
                 break;
             case "4":
                 createModel(GWT.getModuleBaseURL() + "SampleData/models/CesiumMan/Cesium_Man.glb", 0);

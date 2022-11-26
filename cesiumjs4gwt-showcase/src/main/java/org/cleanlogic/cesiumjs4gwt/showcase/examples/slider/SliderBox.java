@@ -22,6 +22,8 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.InputElement;
 import com.google.gwt.event.shared.HandlerRegistration;
 
+import java.util.UUID;
+
 public class SliderBox extends SliderBoxBase {
     public SliderBox() {
         this(Document.get().createElement("input"), "gwt-RangeBox");
@@ -43,6 +45,7 @@ public class SliderBox extends SliderBoxBase {
     SliderBox(Element element, String styleName) {
         super(element);
         super.getElement().setAttribute("type", "range");
+//        super.getElement().setId("gwt-rangebox-" + UUID.randomUUID());
     }
 
     public HandlerRegistration addInputHandler(InputHandler handler) {

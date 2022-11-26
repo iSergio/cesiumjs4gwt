@@ -17,8 +17,6 @@
 package org.cleanlogic.cesiumjs4gwt.showcase.examples;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.FlexTable;
@@ -95,24 +93,24 @@ public class PostProcessing extends AbstractExample {
 
         silhouetteCBox = new CheckBox();
         silhouetteCBox.setValue(true);
-        silhouetteCBox.addValueChangeHandler(new MValueChangeHandler());
+        silhouetteCBox.addValueChangeHandler(event -> updatePostProcess(null));
 
         blackAndWhiteCBox = new CheckBox();
-        blackAndWhiteCBox.addValueChangeHandler(new MValueChangeHandler());
+        blackAndWhiteCBox.addValueChangeHandler(event -> updatePostProcess(null));
 
         blackAndWhiteSlider = new SliderBox(1, 5, 10, 1);
         blackAndWhiteSlider.setWidth("150px");
         blackAndWhiteSlider.addInputHandler(this::updatePostProcess);
 
         brightnessCBox = new CheckBox();
-        brightnessCBox.addValueChangeHandler(new MValueChangeHandler());
+        brightnessCBox.addValueChangeHandler(event -> updatePostProcess(null));
 
         brightnessSlider = new SliderBox(0, 0.5, 1, 0.01);
         brightnessSlider.setWidth("150px");
         brightnessSlider.addInputHandler(this::updatePostProcess);
 
         nightVisionCBox = new CheckBox();
-        nightVisionCBox.addValueChangeHandler(new MValueChangeHandler());
+        nightVisionCBox.addValueChangeHandler(event -> updatePostProcess(null));
 
         FlexTable flexTable = new FlexTable();
         flexTable.setHTML(1, 0, "<font color=\"white\">Silhouette</font>");
@@ -142,10 +140,10 @@ public class PostProcessing extends AbstractExample {
         silhouette.uniforms.setProperty("color", Color.YELLOW());
 
         blackAndWhite.enabled = blackAndWhiteCBox.getValue();
-        blackAndWhite.uniforms().setProperty("gradations", blackAndWhiteSlider.getValue());
+        blackAndWhite.uniforms().setProperty("gradations", Double.parseDouble(blackAndWhiteSlider.getValue()));
 
         brightness.enabled = brightnessCBox.getValue();
-        brightness.uniforms().setProperty("brightness", brightnessSlider.getValue());
+        brightness.uniforms().setProperty("brightness", Double.parseDouble(brightnessSlider.getValue()));
 
         nightVision.enabled = nightVisionCBox.getValue();
     }
@@ -155,12 +153,5 @@ public class PostProcessing extends AbstractExample {
         String[] sourceCodeURLs = new String[1];
         sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "PostProcessing.txt";
         return sourceCodeURLs;
-    }
-
-    private class MValueChangeHandler implements ValueChangeHandler<Boolean> {
-        @Override
-        public void onValueChange(ValueChangeEvent<Boolean> event) {
-            updatePostProcess(null);
-        }
     }
 }
