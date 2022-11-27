@@ -62,7 +62,6 @@ public class Tiles3DNextPhotogrammetryClassification  extends AbstractExample {
 
     @Override
     public void buildPanel() {
-        Cesium.ExperimentalFeatures.enableModelExperimental = true;
         ViewerOptions options = new ViewerOptions();
         options.terrainProvider = Cesium.createWorldTerrain();
         options.infoBox = false;

@@ -53,9 +53,6 @@ public class Tiles3DNextS2Globe extends AbstractExample {
 
     @Override
     public void buildPanel() {
-        // One World Terrain Base Globe provided by Maxar
-        Cesium.ExperimentalFeatures.enableModelExperimental = true;
-
         ViewerOptions options = new ViewerOptions();
         options.enableGlobe = false;
         ViewerPanel csVPanel = new ViewerPanel(options);

@@ -57,8 +57,6 @@ public class Tiles3DNextCDBYemen extends AbstractExample {
 
     @Override
     public void buildPanel() {
-        Cesium.ExperimentalFeatures.enableModelExperimental = true;
-
         ViewerPanel csVPanel = new ViewerPanel();
         viewer = csVPanel.getViewer();
 

@@ -42,8 +42,6 @@ public class CustomShaders3DTiles  extends AbstractExample {
 
     @Override
     public void buildPanel() {
-        Cesium.ExperimentalFeatures.enableModelExperimental = true;
-
         ViewerPanel csVPanel = new ViewerPanel();
 
         CustomShaderOptions customShaderOptions = new CustomShaderOptions();

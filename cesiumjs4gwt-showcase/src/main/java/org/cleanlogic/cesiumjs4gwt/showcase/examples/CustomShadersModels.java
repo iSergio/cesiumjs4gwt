@@ -78,8 +78,6 @@ public class CustomShadersModels extends AbstractExample {
 
     @Override
     public void buildPanel() {
-        Cesium.ExperimentalFeatures.enableModelExperimental = true;
-
         ViewerOptions options = new ViewerOptions();
         options.orderIndependentTranslucency = false;
         csVPanel = new ViewerPanel(options);
