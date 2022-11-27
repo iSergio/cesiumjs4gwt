@@ -19,6 +19,7 @@ package org.cesiumjs.cs.scene;
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.js.JsArray;
 
 /**
  * Contains functions for creating common post-process stages.
@@ -84,6 +85,19 @@ public class PostProcessStageLibrary {
     public static native PostProcessStageComposite createDepthOfFieldStage();
 
     /**
+     * Creates a post-process stage that detects edges.
+     *
+     * <p>Writes the color to the output texture with alpha set to 1.0 when it is on an edge.</p>
+     * <p>This stage has the following uniforms: color and length</p>
+     * <p>color is the color of the highlighted edge. The default is Color#BLACK.
+     * length is the length of the edges in pixels. The default is 0.5.
+     * This stage is not supported in 2D.</p>
+     * @return A post-process stage that applies an edge detection effect.
+     */
+    @JsMethod
+    public static native PostProcessStage createEdgeDetectionStage();
+
+    /**
      * Creates a post-process stage that applies an effect simulating light flaring
      * a camera lens. This stage has the following uniforms: dirtTexture,
      * starTexture, intensity, distortion, ghostDispersal, haloWidth, and
@@ -125,6 +139,9 @@ public class PostProcessStageLibrary {
      */
     @JsMethod
     public static native PostProcessStageComposite createSilhouetteStage();
+
+    @JsMethod
+    public static native PostProcessStageComposite createSilhouetteStage(JsArray<PostProcessStage> array);
 
     /**
      * Whether or not an ambient occlusion stage is supported. This stage requires

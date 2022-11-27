@@ -19,8 +19,10 @@ package org.cesiumjs.cs.scene;
 import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.BoundingRectangle;
 import org.cesiumjs.cs.core.Color;
+import org.cesiumjs.cs.core.PickedObject;
 import org.cesiumjs.cs.core.enums.PixelDatatype;
 import org.cesiumjs.cs.core.enums.PixelFormat;
+import org.cesiumjs.cs.js.JsArray;
 import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.scene.enums.PostProcessStageSampleMode;
 import org.cesiumjs.cs.scene.options.PostProcessStageOptions;
@@ -117,6 +119,12 @@ public class PostProcessStage implements PostProcess {
      */
     @JsProperty(name = "scissorRectangle")
     public native BoundingRectangle scissorRectangle();
+
+    /**
+     * The features selected for applying the post-process.
+     */
+    @JsProperty
+    public JsArray<PickedObject<?>> selected;
 
     /**
      * A number in the range (0.0, 1.0] used to scale the output texture dimensions.
