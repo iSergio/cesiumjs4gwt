@@ -84,7 +84,8 @@ public class ConditionsExpression implements StyleExpression {
      * @return The result of evaluating the expression.
      */
     @JsMethod
-    public native Object evaluate(Cesium3DTileFeature feature);
+    @Override
+    public native JsObject evaluate(Cesium3DTileFeature feature);
 
     /**
      * Evaluates the result of an expression, optionally using the provided
@@ -102,7 +103,8 @@ public class ConditionsExpression implements StyleExpression {
      * @return The result of evaluating the expression.
      */
     @JsMethod
-    public native Object evaluate(Cesium3DTileFeature feature, Object result);
+    @Override
+    public native JsObject evaluate(Cesium3DTileFeature feature, JsObject result);
 
     /**
      * Evaluates the result of a Color expression, optionally using the provided
@@ -115,6 +117,7 @@ public class ConditionsExpression implements StyleExpression {
      * provided.
      */
     @JsMethod
+    @Override
     public native Color evaluateColor(Cesium3DTileFeature feature);
 
     /**
@@ -129,5 +132,6 @@ public class ConditionsExpression implements StyleExpression {
      * provided.
      */
     @JsMethod
+    @Override
     public native Color evaluateColor(Cesium3DTileFeature feature, Color result);
 }

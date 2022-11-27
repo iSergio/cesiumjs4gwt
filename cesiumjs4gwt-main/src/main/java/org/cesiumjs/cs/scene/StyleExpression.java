@@ -16,7 +16,10 @@
 
 package org.cesiumjs.cs.scene;
 
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Color;
+import org.cesiumjs.cs.js.JsObject;
 
 /**
  * An expression for a style applied to a {@link Cesium3DTileset}.
@@ -32,4 +35,14 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "StyleExpression")
 public interface StyleExpression {
+    JsObject evaluate(Cesium3DTileFeature feature);
+
+    @JsMethod
+    JsObject evaluate(Cesium3DTileFeature feature, JsObject result);
+
+    @JsMethod
+    Color evaluateColor(Cesium3DTileFeature feature);
+
+    @JsMethod
+    Color evaluateColor(Cesium3DTileFeature feature, Color result);
 }
