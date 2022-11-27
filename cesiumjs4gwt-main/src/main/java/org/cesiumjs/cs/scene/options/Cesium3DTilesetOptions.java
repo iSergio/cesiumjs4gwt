@@ -397,6 +397,12 @@ public class Cesium3DTilesetOptions {
     @JsProperty
     public boolean debugColorizeTiles;
     /**
+     * For debugging only. This must be true for debugWireframe to work in WebGL1. This cannot be set after the
+     * tileset has loaded.
+     */
+    @JsProperty
+    public boolean enableDebugWireframe;
+    /**
      * For debugging only. When true, render's each tile's content as a wireframe.
      * Defaule: false;
      */
