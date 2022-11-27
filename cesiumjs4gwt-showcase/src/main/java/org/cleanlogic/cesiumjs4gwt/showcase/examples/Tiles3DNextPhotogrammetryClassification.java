@@ -25,6 +25,7 @@ import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.core.enums.ScreenSpaceEventType;
 import org.cesiumjs.cs.core.events.MouseClickEvent;
 import org.cesiumjs.cs.core.events.MouseMoveEvent;
+import org.cesiumjs.cs.js.JsArray;
 import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.scene.Cesium3DTileFeature;
 import org.cesiumjs.cs.scene.Cesium3DTileStyle;
@@ -48,9 +49,10 @@ public class Tiles3DNextPhotogrammetryClassification  extends AbstractExample {
     private Cesium3DTileset tileset;
     private CustomShader unlitShader;
     private Cesium3DTileStyle classificationStyle;
-    private CustomShader translucentWindowsShader;
+    private Cesium3DTileStyle translucentWindowsStyle;
     private CustomShader materialShader;
     private CustomShader selectFeatureShader;
+    private CustomShader multipleFeatureIdsShader;
     private boolean enablePicking = true;
 
     @Inject
@@ -73,7 +75,7 @@ public class Tiles3DNextPhotogrammetryClassification  extends AbstractExample {
 
         Scene scene = csVPanel.getViewer().scene();
 
-        tileset = Cesium3DTileset.create(IonResource.fromAssetId(666297));
+        tileset = Cesium3DTileset.create(IonResource.fromAssetId(775877));
 
         Cartesian3 translation = new Cartesian3(-1.398521324920626, 0.7823052871729486, 0.7015244410592609);
         tileset.modelMatrix = Matrix4.fromTranslation(translation);
@@ -95,6 +97,14 @@ public class Tiles3DNextPhotogrammetryClassification  extends AbstractExample {
         classificationStyle = new Cesium3DTileStyle();
         JsObject.setProperty(classificationStyle, "color", "color(${color})");
 
+        JsObject color = JsObject.create();
+        JsArray<JsArray<String>> conditions = new JsArray<>();
+        JsArray<String> condition = new JsArray<>();
+        condition.push("${component} === 'Windows'", "color('gray', 0.7)");
+        conditions.push(condition);
+        color.setProperty("conditions", conditions);
+        translucentWindowsStyle = new Cesium3DTileStyle(JsObject.create().setProperty("color", color));
+
         // Shaders ============================================================================
 
         // Dummy shader that sets the UNLIT lighting mode. For use with the classification style
@@ -102,90 +112,92 @@ public class Tiles3DNextPhotogrammetryClassification  extends AbstractExample {
         unlitShader = new CustomShader(new CustomShaderOptions()
                 .setLightingModel(LightingModel.UNLIT()).setFragmentShaderText(emptyFragmentShader));
 
-        translucentWindowsShader = new CustomShader(new CustomShaderOptions().setLightingModel(LightingModel.UNLIT())
-                .setTranslucent(true).setFragmentShaderText(String.join("\n", new String[] {
-                        "const float WINDOW = 0.0;",
-                        "const float SKYLIGHT = 4.0;",
-                        "const float TOTAL_FEATURES = 12.0;",
-                        "",
-                        "void fragmentMain(FragmentInput fsInput, inout czm_modelMaterial material) {",
-                        "  // NOTE: This is exposing internal details of the shader. It would be better if this was added to fsInput somewhere...",
-                        "  float featureId = floor(texture2D(FEATURE_ID_TEXTURE, FEATURE_ID_TEXCOORD).FEATURE_ID_CHANNEL * 255.0 + 0.5);",
-                        "",
-                        "  if (featureId == WINDOW || featureId == SKYLIGHT) {",
-                        "    material.alpha = 0.4;",
-                        "    material.roughness = 0.1;",
-                        "  }",
-                        "}",
-                })));
-
         materialShader = new CustomShader(new CustomShaderOptions().setLightingModel(LightingModel.PBR())
-                .setTranslucent(true).setFragmentShaderText(String.join("\n", new String[] {
-                        "const float WINDOW = 0.0;",
-                        "const float FRAME = 1.0;",
-                        "const float WALL = 2.0;",
-                        "const float ROOF = 3.0;",
-                        "const float SKYLIGHT = 4.0;",
-                        "const float AIR_CONDITIONER_WHITE = 5.0;",
-                        "const float AIR_CONDITIONER_BLACK = 6.0;",
-                        "const float AIR_CONDITIONER_TALL = 7.0;",
-                        "const float CLOCK = 8.0;",
-                        "const float PILLARS = 9.0;",
-                        "const float STREET_LIGHT = 10.0;",
-                        "const float TRAFFIC_LIGHT = 11.0;",
-                        "",
-                        "void fragmentMain(FragmentInput fsInput, inout czm_modelMaterial material) {",
-                        "  // NOTE: This is exposing internal details of the shader. It would be better if this was added to fsInput somewhere...",
-                        "  float featureId = floor(texture2D(FEATURE_ID_TEXTURE, FEATURE_ID_TEXCOORD).FEATURE_ID_CHANNEL * 255.0 + 0.5);",
-                        "",
-                        "  if (featureId == CLOCK) {",
-                        "    // Shiny brass",
-                        "    material.specular = vec3(0.98, 0.90, 0.59);",
-                        "    material.roughness = 0.3;",
-                        "  } else if (",
-                        "    featureId == STREET_LIGHT ||",
-                        "    featureId == AIR_CONDITIONER_BLACK ||",
-                        "    featureId == AIR_CONDITIONER_WHITE ||",
-                        "    featureId == AIR_CONDITIONER_TALL ||",
-                        "    featureId == ROOF",
-                        "  ) {",
-                        "    // dull aluminum",
-                        "    material.specular = vec3(0.91, 0.92, 0.92);",
-                        "    material.roughness = 0.5;",
-                        "  } else if (featureId == WINDOW || featureId == SKYLIGHT) {",
-                        "    // make translucent, but also set an orange emissive color so it looks like",
-                        "    // it's lit from inside",
-                        "    material.emissive = vec3(1.0, 0.3, 0.0);",
-                        "    material.alpha = 0.5;",
-                        "  } else if (featureId == WALL || featureId == FRAME || featureId == PILLARS) {",
-                        "    // paint the walls and pillars white to contrast the brass clock",
-                        "    material.diffuse = mix(material.diffuse, vec3(1.0), 0.8);",
-                        "    material.roughness = 0.9;",
-                        "  } else {",
-                        "    // brighten everything else",
-                        "    material.diffuse += 0.05;",
-                        "    material.roughness = 0.9;",
-                        "  }",
-                        "}",
-                })));
+                .setTranslucent(true).setFragmentShaderText("const int WINDOW = 0;\n" +
+                        "            const int FRAME = 1;\n" +
+                        "            const int WALL = 2;\n" +
+                        "            const int ROOF = 3;\n" +
+                        "            const int SKYLIGHT = 4;\n" +
+                        "            const int AIR_CONDITIONER_WHITE = 5;\n" +
+                        "            const int AIR_CONDITIONER_BLACK = 6;\n" +
+                        "            const int AIR_CONDITIONER_TALL = 7;\n" +
+                        "            const int CLOCK = 8;\n" +
+                        "            const int PILLARS = 9;\n" +
+                        "            const int STREET_LIGHT = 10;\n" +
+                        "            const int TRAFFIC_LIGHT = 11;\n" +
+                        "            \n" +
+                        "            void fragmentMain(FragmentInput fsInput, inout czm_modelMaterial material) {\n" +
+                        "              int featureId = fsInput.featureIds.featureId_0;\n" +
+                        "            \n" +
+                        "              if (featureId == CLOCK) {\n" +
+                        "                // Shiny brass\n" +
+                        "                material.specular = vec3(0.98, 0.90, 0.59);\n" +
+                        "                material.roughness = 0.1;\n" +
+                        "              } else if (\n" +
+                        "                featureId == STREET_LIGHT ||\n" +
+                        "                featureId == AIR_CONDITIONER_BLACK ||\n" +
+                        "                featureId == AIR_CONDITIONER_WHITE ||\n" +
+                        "                featureId == AIR_CONDITIONER_TALL ||\n" +
+                        "                featureId == ROOF\n" +
+                        "              ) {\n" +
+                        "                // dull aluminum\n" +
+                        "                material.specular = vec3(0.91, 0.92, 0.92);\n" +
+                        "                material.roughness = 0.5;\n" +
+                        "              } else if (featureId == WINDOW || featureId == SKYLIGHT) {\n" +
+                        "                // make translucent, but also set an orange emissive color so it looks like\n" +
+                        "                // it's lit from inside\n" +
+                        "                material.emissive = vec3(1.0, 0.3, 0.0);\n" +
+                        "                material.alpha = 0.5;\n" +
+                        "              } else if (featureId == WALL || featureId == FRAME || featureId == PILLARS) {\n" +
+                        "                // paint the walls and pillars white to contrast the brass clock\n" +
+                        "                material.diffuse = mix(material.diffuse, vec3(1.0), 0.8);\n" +
+                        "                material.roughness = 0.9;\n" +
+                        "              } else {\n" +
+                        "                // brighten everything else\n" +
+                        "                material.diffuse += 0.05;\n" +
+                        "                material.roughness = 0.9;\n" +
+                        "              }\n" +
+                        "            }"));
 
         Number NOTHING_SELECTED = 12;
         selectFeatureShader = new CustomShader(new CustomShaderOptions()
                 .setLightingModel(LightingModel.PBR())
-                .addUniform("u_selectedFeature", UniformType.FLOAT(), NOTHING_SELECTED)
-                .setFragmentShaderText(String.join("\n", new String[] {
-                        "const float NOTHING_SELECTED = 12.0;",
-                        "void fragmentMain(FragmentInput fsInput, inout czm_modelMaterial material) {",
-                        "  // NOTE: This is exposing internal details of the shader. It would be better if this was added to fsInput somewhere...",
-                        "  float featureId = floor(texture2D(FEATURE_ID_TEXTURE, FEATURE_ID_TEXCOORD).FEATURE_ID_CHANNEL * 255.0 + 0.5);",
-                        "",
-                        "  if (u_selectedFeature < NOTHING_SELECTED && featureId == u_selectedFeature) {",
-                        "    material.specular = vec3(1.00, 0.85, 0.57);",
-                        "    material.roughness = 0.3;",
-                        "  }",
-                        "}",
-                })));
+                .addUniform("u_selectedFeature", UniformType.INT(), NOTHING_SELECTED)
+                .setFragmentShaderText("const int NOTHING_SELECTED = 12;\n" +
+                        "            void fragmentMain(FragmentInput fsInput, inout czm_modelMaterial material) {\n" +
+                        "              int featureId = fsInput.featureIds.featureId_0;\n" +
+                        "            \n" +
+                        "              if (u_selectedFeature < NOTHING_SELECTED && featureId == u_selectedFeature) {\n" +
+                        "                material.specular = vec3(1.00, 0.85, 0.57);\n" +
+                        "                material.roughness = 0.1;\n" +
+                        "              }\n" +
+                        "            }"));
 
+        multipleFeatureIdsShader = new CustomShader(new CustomShaderOptions()
+                .setLightingModel(LightingModel.UNLIT())
+                .addUniform("u_selectedFeature", UniformType.FLOAT(), NOTHING_SELECTED)
+                .setFragmentShaderText("const int IDS0_WINDOW = 0;\n" +
+                        "            const int IDS1_FACADE = 2;\n" +
+                        "            const int IDS1_ROOF = 3;\n" +
+                        "            const vec3 PURPLE = vec3(0.5, 0.0, 1.0);\n" +
+                        "            const vec3 YELLOW = vec3(1.0, 1.0, 0.0);\n" +
+                        "            const vec3 NO_TINT = vec3(1.0);\n" +
+                        "            \n" +
+                        "            void fragmentMain(FragmentInput fsInput, inout czm_modelMaterial material) {\n" +
+                        "              int featureId0 = fsInput.featureIds.featureId_0; // fine features\n" +
+                        "              int featureId1 = fsInput.featureIds.featureId_1; // coarse features\n" +
+                        "            \n" +
+                        "              // use both feature ID sets to determine where the features are\n" +
+                        "              float isWindow = float(featureId0 == IDS0_WINDOW);\n" +
+                        "              float isFacade = float(featureId1 == IDS1_FACADE);\n" +
+                        "              float isRoof = float(featureId1 == IDS1_ROOF);\n" +
+                        "            \n" +
+                        "              // Tint the roof windows yellow and facade windows purple\n" +
+                        "              vec3 tint = NO_TINT;\n" +
+                        "              tint = mix(tint, YELLOW, isWindow * isRoof);\n" +
+                        "              tint = mix(tint, PURPLE, isWindow * isFacade);\n" +
+                        "              material.diffuse *= tint;\n" +
+                        "            }"));
         tileset.style = classificationStyle;
         tileset.colorBlendMode = Cesium3DTileColorBlendMode.MIX();
 
@@ -249,17 +261,21 @@ public class Tiles3DNextPhotogrammetryClassification  extends AbstractExample {
         ListBox listBox = new ListBox();
         listBox.addItem("Photogrammetry");
         listBox.addItem("Show Classification");
+        listBox.addItem("Show Alternative Classification");
         listBox.addItem("Translucent Windows");
         listBox.addItem("Stylized PBR Materials");
         listBox.addItem("Golden Touch");
+        listBox.addItem("Multiple Feature ID Sets");
         listBox.addChangeHandler(event -> {
             String value = ((ListBox) event.getSource()).getSelectedItemText();
             switch (value) {
                 case "Photogrammetry": defaults(); break;
                 case "Show Classification": showClassification(); break;
+                case "Show Alternative Classification": showAlternativeClassification(); break;
                 case "Translucent Windows": translucentWindows(); break;
                 case "Stylized PBR Materials": pbrMaterials(); break;
                 case "Golden Touch": goldenTouch(); break;
+                case "Multiple Feature ID Sets": multipleFeatureIds(); break;
                 default: break;
             }
         });
@@ -301,9 +317,15 @@ public class Tiles3DNextPhotogrammetryClassification  extends AbstractExample {
         tileset.colorBlendMode = Cesium3DTileColorBlendMode.MIX();
     }
 
+    private void showAlternativeClassification() {
+        showClassification();
+        // This dataset has a second feature ID texture.
+        tileset.featureIdLabel = 1;
+    }
+
     private void translucentWindows() {
         defaults();
-        tileset.customShader = translucentWindowsShader;
+        tileset.style = translucentWindowsStyle;
     }
 
     private void pbrMaterials() {
@@ -314,5 +336,10 @@ public class Tiles3DNextPhotogrammetryClassification  extends AbstractExample {
     private void goldenTouch() {
         defaults();
         tileset.customShader = selectFeatureShader;
+    }
+
+    private void multipleFeatureIds() {
+        defaults();
+        tileset.customShader = multipleFeatureIdsShader;
     }
 }
