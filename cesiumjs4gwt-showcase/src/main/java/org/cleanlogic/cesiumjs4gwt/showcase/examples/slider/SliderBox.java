@@ -21,8 +21,8 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.InputElement;
 import com.google.gwt.event.shared.HandlerRegistration;
-
-import java.util.UUID;
+import com.google.gwt.i18n.client.NumberFormat;
+import org.cesiumjs.cs.Cesium;
 
 public class SliderBox extends SliderBoxBase {
     public SliderBox() {
@@ -31,21 +31,20 @@ public class SliderBox extends SliderBoxBase {
 
     public SliderBox(double min, double value, double max, double step) {
         this();
-        setMin(min);
-        setValue(value);
-        setMax(max);
-        setStep(step);
+        this.setMin(min);
+        this.setValue(value);
+        this.setMax(max);
+        this.setStep(step);
+        super.setText(String.valueOf(value));
     }
 
     protected SliderBox(Element element) {
         super(element);
-        assert InputElement.as(element).getType().equalsIgnoreCase("range");
     }
 
     SliderBox(Element element, String styleName) {
         super(element);
         super.getElement().setAttribute("type", "range");
-//        super.getElement().setId("gwt-rangebox-" + UUID.randomUUID());
     }
 
     public HandlerRegistration addInputHandler(InputHandler handler) {
@@ -53,12 +52,12 @@ public class SliderBox extends SliderBoxBase {
     }
 
     public void setValue(double value) {
-        super.getElement().setPropertyString("value", String.valueOf(value));
+        super.getElement().setPropertyDouble("value", value);
     }
 
     @Override
-    public String getValue() {
-        return super.getElement().getPropertyString("value");
+    public Double getValue() {
+        return super.getElement().getPropertyDouble("value");
     }
 
     public double getMin() {

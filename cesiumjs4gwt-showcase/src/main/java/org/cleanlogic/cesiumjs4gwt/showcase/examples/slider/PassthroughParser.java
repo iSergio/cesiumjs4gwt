@@ -16,11 +16,27 @@
 
 package org.cleanlogic.cesiumjs4gwt.showcase.examples.slider;
 
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.user.client.ui.ValueBoxBase;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.text.shared.Parser;
 
-public class SliderBoxBase extends ValueBoxBase<Double> {
-    protected SliderBoxBase(Element elem) {
-        super(elem, PassthroughRenderer.instance(), PassthroughParser.instance());
+public class PassthroughParser implements Parser<Double> {
+
+    private static PassthroughParser INSTANCE;
+
+    /**
+     * Returns the instance of the no-op renderer.
+     */
+    public static Parser<Double> instance() {
+        if (INSTANCE == null) {
+            INSTANCE = new PassthroughParser();
+        }
+        return INSTANCE;
+    }
+
+    protected PassthroughParser() {
+    }
+
+    public Double parse(CharSequence object) {
+        return Double.valueOf(object.toString());
     }
 }

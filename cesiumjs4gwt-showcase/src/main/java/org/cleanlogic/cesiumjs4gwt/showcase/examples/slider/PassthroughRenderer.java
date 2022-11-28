@@ -16,11 +16,28 @@
 
 package org.cleanlogic.cesiumjs4gwt.showcase.examples.slider;
 
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.user.client.ui.ValueBoxBase;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.text.shared.AbstractRenderer;
+import com.google.gwt.text.shared.Renderer;
 
-public class SliderBoxBase extends ValueBoxBase<Double> {
-    protected SliderBoxBase(Element elem) {
-        super(elem, PassthroughRenderer.instance(), PassthroughParser.instance());
+public class PassthroughRenderer extends AbstractRenderer<Double> {
+
+    private static PassthroughRenderer INSTANCE;
+
+    /**
+     * Returns the instance of the no-op renderer.
+     */
+    public static Renderer<Double> instance() {
+        if (INSTANCE == null) {
+            INSTANCE = new PassthroughRenderer();
+        }
+        return INSTANCE;
+    }
+
+    protected PassthroughRenderer() {
+    }
+
+    public String render(Double object) {
+        return String.valueOf(object);
     }
 }
