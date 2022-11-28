@@ -309,6 +309,7 @@ public class Tiles3DNextPhotogrammetryClassification  extends AbstractExample {
         tileset.customShader = unlitShader;
         tileset.colorBlendMode = Cesium3DTileColorBlendMode.HIGHLIGHT();
         tileset.colorBlendAmount = 0.5;
+        tileset.featureIdLabel = 0;
     }
 
     private void showClassification() {
