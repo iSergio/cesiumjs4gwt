@@ -152,16 +152,16 @@ public class SkyAtmosphere extends AbstractExample {
 
     private void onSliderInput(InputEvent event) {
         SliderBox source = (SliderBox) event.getSource();
-        double value = Double.parseDouble(source.getValue());
+        double value = source.getValue();
         if (source == hueShiftSlider) {
             csVPanel.getViewer().scene().skyAtmosphere.hueShift = (float) value;
-            hueShiftTBox.setText(value + "");
+            hueShiftTBox.setText(String.valueOf(value));
         } else if (source == saturationShiftSlider) {
             csVPanel.getViewer().scene().skyAtmosphere.saturationShift = (float) value;
-            saturationShiftTBox.setText(value + "");
+            saturationShiftTBox.setText(String.valueOf(value));
         } else if (source == brightnessShiftSlider) {
             csVPanel.getViewer().scene().skyAtmosphere.brightnessShift = (float) value;
-            brightnessShiftTBox.setText(value + "");
+            brightnessShiftTBox.setText(String.valueOf(value));
         }
     }
 

@@ -146,11 +146,11 @@ public class Bloom extends AbstractExample {
         PostProcessStageComposite bloom = csVPanel.getViewer().scene().postProcessStages.bloom();
         bloom.enabled = bloomCBox.getValue();
         bloom.uniforms.setProperty("glowOnly", glowOnlyCBox.getValue());
-        bloom.uniforms.setProperty("contrast", Double.parseDouble(contrastSlider.getValue()));
-        bloom.uniforms.setProperty("brightness", Double.parseDouble(brightnessSlider.getValue()));
-        bloom.uniforms.setProperty("delta", Double.parseDouble(deltaSlider.getValue()));
-        bloom.uniforms.setProperty("sigma", Double.parseDouble(sigmaSlider.getValue()));
-        bloom.uniforms.setProperty("stepSize", Double.parseDouble(stepSizeSlider.getValue()));
+        bloom.uniforms.setProperty("contrast", contrastSlider.getValue());
+        bloom.uniforms.setProperty("brightness", brightnessSlider.getValue());
+        bloom.uniforms.setProperty("delta", deltaSlider.getValue());
+        bloom.uniforms.setProperty("sigma", sigmaSlider.getValue());
+        bloom.uniforms.setProperty("stepSize", stepSizeSlider.getValue());
     }
 
     @Override

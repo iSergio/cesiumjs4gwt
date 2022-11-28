@@ -1,24 +1,37 @@
+/*
+ * Copyright 2021 iserge.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package org.cleanlogic.cesiumjs4gwt.showcase.examples;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.user.client.ui.*;
-import org.cesiumjs.cs.Cesium;
 import org.cesiumjs.cs.collections.CloudCollection;
 import org.cesiumjs.cs.collections.options.CloudCollectionOptions;
 import org.cesiumjs.cs.collections.options.CumulusCloudAddOptions;
 import org.cesiumjs.cs.core.Cartesian2;
 import org.cesiumjs.cs.core.Cartesian3;
-import org.cesiumjs.cs.js.JsObject;
+import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.scene.CumulusCloud;
 import org.cesiumjs.cs.scene.Scene;
 import org.cesiumjs.cs.widgets.Viewer;
 import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cleanlogic.cesiumjs4gwt.showcase.basic.AbstractExample;
 import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ShowcaseExampleStore;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.Slider;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderEvent;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderListener;
+import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.InputEvent;
+import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderBox;
 
 import javax.inject.Inject;
 
@@ -39,26 +52,20 @@ public class CloudParameters extends AbstractExample {
 
     CumulusCloud cloud = null;
 
-    CheckBox maxScaleCBox;
-    HorizontalPanel scaleXHPanel;
-    HorizontalPanel scaleYHPanel;
-    Slider scaleXSlider;
-    TextBox scaleXTBox;
-    Slider scaleYSlider;
-    TextBox scaleYTBox;
-    Slider maxSizeXSlider;
-    TextBox maxSizeXTBox;
-    Slider maxSizeYSlider;
-    TextBox maxSizeYTBox;
-    Slider maxSizeZSlider;
-    TextBox maxSizeZTBox;
-    CheckBox renderSliceCBox;
-    Slider sliceSlider;
-    TextBox sliceTBox;
-    Slider brightnessSlider;
-    TextBox brightnessTBox;
-
-    FlexTable flexTable;
+    private SliderBox scaleXSlider;
+    private TextBox scaleXTBox;
+    private SliderBox scaleYSlider;
+    private TextBox scaleYTBox;
+    private SliderBox maxSizeXSlider;
+    private TextBox maxSizeXTBox;
+    private SliderBox maxSizeYSlider;
+    private TextBox maxSizeYTBox;
+    private SliderBox maxSizeZSlider;
+    private TextBox maxSizeZTBox;
+    private SliderBox sliceSlider;
+    private TextBox sliceTBox;
+    private SliderBox brightnessSlider;
+    private TextBox brightnessTBox;
 
     @Inject
     public CloudParameters(ShowcaseExampleStore store) {
@@ -82,10 +89,6 @@ public class CloudParameters extends AbstractExample {
         cloudCollectionOptions.noiseDetail = 16.0;
         cloudCollectionOptions.noiseOffset = Cartesian3.ZERO();
         CloudCollection clouds = (CloudCollection) scene.primitives().add(new CloudCollection(cloudCollectionOptions));
-        // Fix texture size
-        // TODO: remove this fix after Cesium fixed them in core
-        ((JsObject) (Object) clouds).setProperty("_noiseTextureLength", 64.0);
-        Cesium.log(((JsObject) (Object) clouds).getNumber("_noiseTextureLength"));
 
         CumulusCloudAddOptions options = new CumulusCloudAddOptions();
         options.position = position;
@@ -97,11 +100,7 @@ public class CloudParameters extends AbstractExample {
 
         viewer.camera.lookAt(position, new Cartesian3(30, 30, -10));
 
-        ChangeHandler handler = (event) -> {
-
-        };
-
-        maxScaleCBox = new CheckBox();
+        CheckBox maxScaleCBox = new CheckBox();
         maxScaleCBox.setWidth("100px");
         maxScaleCBox.setValue(true);
         maxScaleCBox.addValueChangeHandler(value -> {
@@ -109,34 +108,31 @@ public class CloudParameters extends AbstractExample {
                 cloudParameters.scaleX = cloudParameters.maximumSizeX;
                 cloudParameters.scaleY = cloudParameters.maximumSizeY;
             }
-            visibleScaleXY(!value.getValue());
+            enableScaleXY(!value.getValue());
         });
 
-        scaleXHPanel = new HorizontalPanel();
+        HorizontalPanel scaleXHPanel = new HorizontalPanel();
         scaleXHPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
         scaleXHPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
         scaleXHPanel.setSpacing(10);
-        scaleXSlider = new Slider("scaleX", 5, 50, (int) cloudParameters.scaleX);
+        scaleXSlider = new SliderBox(5., cloudParameters.scaleX, 50., 1.);
         scaleXSlider.setStep(1);
         scaleXSlider.setWidth("150px");
-        scaleXSlider.addListener(new MSliderListener());
+        scaleXSlider.addInputHandler(this::onSliderInput);
         scaleXTBox = new TextBox();
-        scaleXTBox.addChangeHandler(handler);
         scaleXTBox.setText(cloudParameters.scaleX + "");
         scaleXTBox.setSize("30px", "12px");
         scaleXHPanel.add(scaleXSlider);
         scaleXHPanel.add(scaleXTBox);
 
-        scaleYHPanel = new HorizontalPanel();
+        HorizontalPanel scaleYHPanel = new HorizontalPanel();
         scaleYHPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
         scaleYHPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
         scaleYHPanel.setSpacing(10);
-        scaleYSlider = new Slider("scaleY", 5, 50, (int) cloudParameters.scaleY);
-        scaleYSlider.setStep(1);
+        scaleYSlider = new SliderBox(5., cloudParameters.scaleY, 50., 1.);
         scaleYSlider.setWidth("150px");
-        scaleYSlider.addListener(new MSliderListener());
+        scaleYSlider.addInputHandler(this::onSliderInput);
         scaleYTBox = new TextBox();
-        scaleXTBox.addChangeHandler(handler);
         scaleYTBox.setText(cloudParameters.scaleY + "");
         scaleYTBox.setSize("30px", "12px");
         scaleYHPanel.add(scaleYSlider);
@@ -146,12 +142,10 @@ public class CloudParameters extends AbstractExample {
         maxSizeXHPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
         maxSizeXHPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
         maxSizeXHPanel.setSpacing(10);
-        maxSizeXSlider = new Slider("maxSizeX", 5, 50, (int) cloudParameters.maximumSizeX);
-        maxSizeXSlider.setStep(1);
+        maxSizeXSlider = new SliderBox(5., cloudParameters.maximumSizeX, 50., 1.);
         maxSizeXSlider.setWidth("150px");
-        maxSizeXSlider.addListener(new MSliderListener());
+        maxSizeXSlider.addInputHandler(this::onSliderInput);
         maxSizeXTBox = new TextBox();
-        maxSizeXTBox.addChangeHandler(handler);
         maxSizeXTBox.setText(cloudParameters.maximumSizeX + "");
         maxSizeXTBox.setSize("30px", "12px");
         maxSizeXHPanel.add(maxSizeXSlider);
@@ -161,12 +155,10 @@ public class CloudParameters extends AbstractExample {
         maxSizeYHPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
         maxSizeYHPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
         maxSizeYHPanel.setSpacing(10);
-        maxSizeYSlider = new Slider("maxSizeY", 5, 50, (int) cloudParameters.maximumSizeY);
-        maxSizeYSlider.setStep(1);
+        maxSizeYSlider = new SliderBox(5., cloudParameters.maximumSizeY, 50., 1.0);
         maxSizeYSlider.setWidth("150px");
-        maxSizeYSlider.addListener(new MSliderListener());
+        maxSizeYSlider.addInputHandler(this::onSliderInput);
         maxSizeYTBox = new TextBox();
-        maxSizeYTBox.addChangeHandler(handler);
         maxSizeYTBox.setText(cloudParameters.maximumSizeY + "");
         maxSizeYTBox.setSize("30px", "12px");
         maxSizeYHPanel.add(maxSizeYSlider);
@@ -176,56 +168,67 @@ public class CloudParameters extends AbstractExample {
         maxSizeZHPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
         maxSizeZHPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
         maxSizeZHPanel.setSpacing(10);
-        maxSizeZSlider = new Slider("maxSizeZ", 5, 50, (int) cloudParameters.maximumSizeZ);
-        maxSizeZSlider.setStep(1);
+        maxSizeZSlider = new SliderBox(5., cloudParameters.maximumSizeZ, 50., 1.);
         maxSizeZSlider.setWidth("150px");
-        maxSizeZSlider.addListener(new MSliderListener());
+        maxSizeZSlider.addInputHandler(this::onSliderInput);
         maxSizeZTBox = new TextBox();
-        maxSizeZTBox.addChangeHandler(handler);
         maxSizeZTBox.setText(cloudParameters.maximumSizeZ + "");
         maxSizeZTBox.setSize("30px", "12px");
         maxSizeZHPanel.add(maxSizeZSlider);
         maxSizeZHPanel.add(maxSizeZTBox);
 
-        renderSliceCBox = new CheckBox();
+        CheckBox renderSliceCBox = new CheckBox();
         renderSliceCBox.setWidth("100px");
         renderSliceCBox.setValue(true);
-        renderSliceCBox.addValueChangeHandler(value -> {
-            flexTable.getWidget(8, 0).setVisible(value.getValue());
-            flexTable.getWidget(8, 1).setVisible(value.getValue());
+        renderSliceCBox.addValueChangeHandler(event -> {
+            if (event.getValue()) {
+                sliceSlider.setEnabled(event.getValue());
+                sliceTBox.setEnabled(event.getValue());
+                cloud.slice = (float) cloudParameters.slice;
+            } else {
+                cloud.slice = -1.0f;
+            }
         });
 
         HorizontalPanel sliceHPanel = new HorizontalPanel();
         sliceHPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
         sliceHPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
         sliceHPanel.setSpacing(10);
-        sliceSlider = new Slider("slice", 0, 100, (int) (cloudParameters.slice * 100));
-        sliceSlider.setStep(1);
+        sliceSlider = new SliderBox(0., cloudParameters.slice, 1., 0.01);
         sliceSlider.setWidth("150px");
-        sliceSlider.addListener(new MSliderListener());
+        sliceSlider.addInputHandler(this::onSliderInput);
         sliceTBox = new TextBox();
-        sliceTBox.addChangeHandler(handler);
         sliceTBox.setText(cloudParameters.slice + "");
         sliceTBox.setSize("30px", "12px");
         sliceHPanel.add(sliceSlider);
         sliceHPanel.add(sliceTBox);
 
+        ListBox colorsLBox = new ListBox();
+        colorsLBox.addItem("White", Color.WHITE().toCssHexString());
+        colorsLBox.addItem("Red", Color.RED().toCssColorString());
+        colorsLBox.addItem("Green", Color.GREEN().toCssHexString());
+        colorsLBox.addItem("Blue", Color.BLUE().toCssHexString());
+        colorsLBox.addItem("Yellow", Color.YELLOW().toCssHexString());
+        colorsLBox.addItem("Gray", Color.GRAY().toCssHexString());
+        colorsLBox.addChangeHandler(event -> {
+            ListBox source = (ListBox) event.getSource();
+            String value = source.getSelectedValue();
+            cloud.color = Color.fromCssColorString(value, new Color());
+        });
+
         HorizontalPanel brightnessHPanel = new HorizontalPanel();
         brightnessHPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
         brightnessHPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
         brightnessHPanel.setSpacing(10);
-        brightnessSlider = new Slider("brightness", 0, 100, (int) (cloudParameters.brightness * 100));
-        brightnessSlider.setStep(1);
-        brightnessSlider.setWidth("150px");
-        brightnessSlider.addListener(new MSliderListener());
+        brightnessSlider = new SliderBox(0, 1, 1, 0.01);
+        brightnessSlider.addInputHandler(this::onSliderInput);
         brightnessTBox = new TextBox();
-        brightnessTBox.addChangeHandler(handler);
         brightnessTBox.setText(cloudParameters.brightness + "");
         brightnessTBox.setSize("30px", "12px");
         brightnessHPanel.add(brightnessSlider);
         brightnessHPanel.add(brightnessTBox);
 
-        flexTable = new FlexTable();
+        FlexTable flexTable = new FlexTable();
         flexTable.setHTML(1, 0, "<font color=\"white\">Scale with Max Size</font>");
         flexTable.setWidget(1, 1, maxScaleCBox);
         flexTable.setWidget(2, 0, new HTML("<font color=\"white\">Scale X</font>"));
@@ -242,10 +245,12 @@ public class CloudParameters extends AbstractExample {
         flexTable.setWidget(7, 1, renderSliceCBox);
         flexTable.setWidget(8, 0, new HTML("<font color=\"white\">Slice</font>"));
         flexTable.setWidget(8, 1, sliceHPanel);
-        flexTable.setHTML(9, 0, "<font color=\"white\">Brightness</font>");
-        flexTable.setWidget(9, 1, brightnessHPanel);
+        flexTable.setHTML(9, 0, "<font color=\"white\">Color</font>");
+        flexTable.setWidget(9, 1, colorsLBox);
+        flexTable.setHTML(10, 0, "<font color=\"white\">Brightness</font>");
+        flexTable.setWidget(10, 1, brightnessHPanel);
 
-        visibleScaleXY(false);
+        enableScaleXY(false);
 
         AbsolutePanel aPanel = new AbsolutePanel();
         aPanel.add(csVPanel);
@@ -258,66 +263,73 @@ public class CloudParameters extends AbstractExample {
         initWidget(contentPanel);
     }
 
-    private void visibleScaleXY(boolean visible) {
-        flexTable.getWidget(2, 0).setVisible(visible);
-        flexTable.getWidget(2, 1).setVisible(visible);
-        flexTable.getWidget(3, 0).setVisible(visible);
-        flexTable.getWidget(3, 1).setVisible(visible);
+    private void enableScaleXY(boolean enable) {
+        scaleXSlider.setEnabled(enable);
+        scaleXTBox.setEnabled(enable);
+        scaleYSlider.setEnabled(enable);
+        scaleYTBox.setEnabled(enable);
     }
 
-    private class MSliderListener implements SliderListener {
-
-        @Override
-        public void onStart(SliderEvent e) {
-            //
+    private void onSliderInput(InputEvent event) {
+        SliderBox source = (SliderBox) event.getSource();
+        double value = source.getValue();
+        if (source.equals(scaleXSlider)) {
+            onScaleXInput(String.valueOf(value));
+        } else if (source.equals(scaleYSlider)) {
+            onScaleYInput(String.valueOf(value));
+        } else if (source.equals(maxSizeXSlider)) {
+            onMaxSizeXInput(String.valueOf(value));
+        } else if (source.equals(maxSizeYSlider)) {
+            onMaxSizeYInput(String.valueOf(value));
+        } else if (source.equals(maxSizeZSlider)) {
+            onMaxSizeZInput(String.valueOf(value));
+        } else if (source.equals(sliceSlider)) {
+            onSliceInput(String.valueOf(value));
+        } else if (source.equals(brightnessSlider)) {
+            onBrightnessInput(String.valueOf(value));
         }
+    }
 
-        @Override
-        public boolean onSlide(SliderEvent e) {
-            Slider source = e.getSource();
-            double value = source.getValue();
-            if (source.equals(scaleXSlider)) {
-                scaleXTBox.setText(String.valueOf(value));
-                cloud.scale = new Cartesian2(value, cloud.scale.y);
-            } else if (source.equals(scaleYSlider)) {
-                scaleYTBox.setText(String.valueOf(value));
-                cloud.scale = new Cartesian2(cloud.scale.x, value);
-            } else if (source.equals(maxSizeXSlider)) {
-                maxSizeXTBox.setText(String.valueOf(value));
-                cloud.maximumSize = new Cartesian3(value, cloud.maximumSize.y, cloud.maximumSize.z);
-                if (cloudParameters.scaleWithMaximumSize) {
-                    cloud.scale = new Cartesian2(value, cloud.scale.y);
-                }
-            } else if (source.equals(maxSizeYSlider)) {
-                maxSizeYTBox.setText(String.valueOf(value));
-                cloud.maximumSize = new Cartesian3(cloud.maximumSize.x, value, cloud.maximumSize.z);
-                if (cloudParameters.scaleWithMaximumSize) {
-                    cloud.scale = new Cartesian2(cloud.scale.x, value);
-                }
-            } else if (source.equals(maxSizeZSlider)) {
-                maxSizeZTBox.setText(String.valueOf(value));
-                cloud.maximumSize = new Cartesian3(cloud.maximumSize.x, cloud.maximumSize.y, value);
-            } else if (source.equals(sliceSlider)) {
-                value /= 100;
-                sliceTBox.setText(String.valueOf(value));
-                cloud.slice = (float) value;
-            } else if (source.equals(brightnessSlider)) {
-                value /= 100;
-                brightnessTBox.setText(String.valueOf(value));
-                cloud.brightness = (float) value;
-            }
-            return true;
-        }
+    private void onScaleXInput(String value) {
+        cloud.scale = new Cartesian2(Double.parseDouble(value), cloud.scale.y);
+        scaleXTBox.setText(value);
+    }
 
-        @Override
-        public void onChange(SliderEvent e) {
-            //
-        }
+    private void onScaleYInput(String value) {
+        cloud.scale = new Cartesian2(cloud.scale.x, Double.parseDouble(value));
+        scaleYTBox.setText(value);
+    }
 
-        @Override
-        public void onStop(SliderEvent e) {
-            //
+    private void onMaxSizeXInput(String value) {
+        cloud.maximumSize = new Cartesian3(Double.parseDouble(value), cloud.maximumSize.y, cloud.maximumSize.z);
+        if (cloudParameters.scaleWithMaximumSize) {
+            cloud.scale = new Cartesian2(Double.parseDouble(value), cloud.scale.y);
         }
+        maxSizeXTBox.setText(value);
+    }
+
+    private void onMaxSizeYInput(String value) {
+        cloud.maximumSize = new Cartesian3(cloud.maximumSize.x, Double.parseDouble(value), cloud.maximumSize.z);
+        if (cloudParameters.scaleWithMaximumSize) {
+            cloud.scale = new Cartesian2(cloud.scale.x, Double.parseDouble(value));
+        }
+        maxSizeYTBox.setText(value);
+    }
+
+    private void onMaxSizeZInput(String value) {
+        cloud.maximumSize = new Cartesian3(cloud.maximumSize.x, cloud.maximumSize.y, Double.parseDouble(value));
+        maxSizeZTBox.setText(value);
+    }
+
+    private void onSliceInput(String value) {
+        cloud.slice = Float.parseFloat(value);
+        cloudParameters.slice = cloud.slice;
+        sliceTBox.setText(value);
+    }
+
+    private void onBrightnessInput(String value) {
+        cloud.brightness = Float.parseFloat(value);;
+        brightnessTBox.setText(value);
     }
 
     @Override

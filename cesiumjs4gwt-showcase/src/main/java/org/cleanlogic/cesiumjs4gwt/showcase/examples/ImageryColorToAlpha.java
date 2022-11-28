@@ -67,7 +67,7 @@ public class ImageryColorToAlpha extends AbstractExample {
         thresholdSlider.setWidth("150px");
         thresholdSlider.addInputHandler(event -> {
             SliderBox source = (SliderBox) event.getSource();
-            singleTileLayer.colorToAlphaThreshold = Double.parseDouble(source.getValue());
+            singleTileLayer.colorToAlphaThreshold = source.getValue();
         });
 
         FlexTable flexTable = new FlexTable();

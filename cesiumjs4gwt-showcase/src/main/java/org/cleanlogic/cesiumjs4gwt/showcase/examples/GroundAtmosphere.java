@@ -277,19 +277,19 @@ public class GroundAtmosphere extends AbstractExample {
 
     private void onInput(InputEvent event) {
         SliderBox source = (SliderBox) event.getSource();
-        double value = Double.parseDouble(source.getValue());
+        double value = source.getValue();
         if (source == lightingFadeOutDistanceSlider) {
             globe.lightingFadeOutDistance = value;
-            lightingFadeOutDistanceTBox.setText("" + value);
+            lightingFadeOutDistanceTBox.setText(String.valueOf(value));
         } else if (source == lightingFadeInDistanceSlider) {
             globe.lightingFadeInDistance = value;
-            lightingFadeInDistanceTBox.setText("" + value);
+            lightingFadeInDistanceTBox.setText(String.valueOf(value));
         } else if (source == nightFadeOutDistanceSlider) {
             globe.nightFadeOutDistance = value;
-            nightFadeOutDistanceTBox.setText("" + value);
+            nightFadeOutDistanceTBox.setText(String.valueOf(value));
         } else if (source == nightFadeInDistanceSlider) {
             globe.nightFadeInDistance = value;
-            nightFadeInDistanceTBox.setText("" + value);
+            nightFadeInDistanceTBox.setText(String.valueOf(value));
         }
     }
 

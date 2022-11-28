@@ -26,9 +26,7 @@ import org.cesiumjs.cs.Cesium;
 import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.core.Event;
 import org.cesiumjs.cs.core.PinBuilder;
-import org.cesiumjs.cs.datasources.Entity;
 import org.cesiumjs.cs.datasources.EntityCluster;
-import org.cesiumjs.cs.datasources.EntityClusterObject;
 import org.cesiumjs.cs.datasources.KmlDataSource;
 import org.cesiumjs.cs.datasources.options.KmlDataSourceLoadStaticOptions;
 import org.cesiumjs.cs.js.JsObject;
@@ -213,7 +211,7 @@ public class Clustering extends AbstractExample {
 
     private void onInput(InputEvent event) {
         SliderBox source = (SliderBox) event.getSource();
-        double value = Double.parseDouble(source.getValue());
+        double value = source.getValue();
         if (source.getElement().getId().equalsIgnoreCase("pixelRange")) {
             dataSource.clustering.pixelRange = (int) value;
             pixelRangeTBox.setValue("" + value);

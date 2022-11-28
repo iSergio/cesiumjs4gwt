@@ -140,10 +140,10 @@ public class PostProcessing extends AbstractExample {
         silhouette.uniforms.setProperty("color", Color.YELLOW());
 
         blackAndWhite.enabled = blackAndWhiteCBox.getValue();
-        blackAndWhite.uniforms().setProperty("gradations", Double.parseDouble(blackAndWhiteSlider.getValue()));
+        blackAndWhite.uniforms().setProperty("gradations", blackAndWhiteSlider.getValue());
 
         brightness.enabled = brightnessCBox.getValue();
-        brightness.uniforms().setProperty("brightness", Double.parseDouble(brightnessSlider.getValue()));
+        brightness.uniforms().setProperty("brightness", brightnessSlider.getValue());
 
         nightVision.enabled = nightVisionCBox.getValue();
     }

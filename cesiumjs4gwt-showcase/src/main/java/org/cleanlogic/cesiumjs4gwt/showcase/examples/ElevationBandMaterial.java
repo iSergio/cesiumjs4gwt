@@ -219,7 +219,7 @@ public class ElevationBandMaterial extends AbstractExample {
 
     private void onInput(InputEvent event) {
         SliderBox source = (SliderBox) event.getSource();
-        double value = Double.parseDouble(source.getValue());
+        double value = source.getValue();
         if (source == backgroundTransparencySlider) {
             backgroundTransparency = value;
         } else if (source == bandTransparencySlider) {

@@ -242,11 +242,11 @@ public class Models3DColoring extends AbstractExample {
 
     private void onSliderInput(InputEvent event) {
         SliderBox source = (SliderBox) event.getSource();
-        float value = Float.parseFloat(source.getValue());
+        float value = source.getValue().floatValue();
         if (source == alphaSlider) {
             onAlphaInput(value);
         } else if (source == mixSlider) {
-            onMixInput((double) value);
+            onMixInput(value);
         } else if (source == silhouetteAlphaSlider) {
             onSilhouetteAlphaInput(value);
         } else if (source == silhouetteSizeSlider) {

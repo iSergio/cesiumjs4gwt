@@ -168,22 +168,22 @@ public class ImageryAdjustment extends AbstractExample {
 
     private void onInput(InputEvent event) {
         SliderBox source = (SliderBox) event.getSource();
-        float value = Float.parseFloat(source.getValue());
+        float value = source.getValue().floatValue();
         if (source.getElement().getId().equalsIgnoreCase("brightness")) {
             csVPanel.getViewer().imageryLayers().get(0).brightness = value;
-            brightnessTBox.setValue("" + value);
+            brightnessTBox.setValue(String.valueOf(value));
         } else if (source.getElement().getId().equalsIgnoreCase("contrast")) {
             csVPanel.getViewer().imageryLayers().get(0).contrast = value;
-            contrastTBox.setValue("" + value);
+            contrastTBox.setValue(String.valueOf(value));
         } else if (source.getElement().getId().equalsIgnoreCase("hue")) {
             csVPanel.getViewer().imageryLayers().get(0).hue = value;
-            hueTBox.setValue("" + value);
+            hueTBox.setValue(String.valueOf(value));
         } else if (source.getElement().getId().equalsIgnoreCase("saturation")) {
             csVPanel.getViewer().imageryLayers().get(0).saturation = value;
-            saturationTBox.setValue("" + value);
+            saturationTBox.setValue(String.valueOf(value));
         } else if (source.getElement().getId().equalsIgnoreCase("gamma")) {
             csVPanel.getViewer().imageryLayers().get(0).gamma = value;
-            gammaTBox.setValue("" + value);
+            gammaTBox.setValue(String.valueOf(value));
         }
     }
 

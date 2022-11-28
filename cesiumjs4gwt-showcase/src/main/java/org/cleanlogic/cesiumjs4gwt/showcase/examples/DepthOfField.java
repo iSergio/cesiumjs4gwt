@@ -141,9 +141,9 @@ public class DepthOfField extends AbstractExample {
     private void updatePostProcess(InputEvent event) {
         depthOfField.enabled = depthOfFieldCBox.getValue();
         depthOfField.uniforms.setProperty("focalDistance", focalDistanceSlider.getValue());
-        depthOfField.uniforms.setProperty("delta", Double.parseDouble(deltaSlider.getValue()));
-        depthOfField.uniforms.setProperty("sigma", Double.parseDouble(sigmaSlider.getValue()));
-        depthOfField.uniforms.setProperty("stepSize", Double.parseDouble(stepSizeSlider.getValue()));
+        depthOfField.uniforms.setProperty("delta", deltaSlider.getValue());
+        depthOfField.uniforms.setProperty("sigma", sigmaSlider.getValue());
+        depthOfField.uniforms.setProperty("stepSize", stepSizeSlider.getValue());
     }
 
     private class MValueChangeHandler implements ValueChangeHandler<Boolean> {

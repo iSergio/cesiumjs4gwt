@@ -84,34 +84,31 @@ public class ImageryLayersManipulation extends AbstractExample {
         baseLayersSlider.setWidth("200px");
         baseLayersSlider.addInputHandler(event -> {
             SliderBox source = (SliderBox) event.getSource();
-            selectedLayer.alpha = Float.parseFloat(source.getValue());
+            selectedLayer.alpha = source.getValue().floatValue();
         });
         baseLayersHPanel.add(baseLayersSlider);
 
-        baseLayersLBox.addChangeHandler(new ChangeHandler() {
-            @Override
-            public void onChange(ChangeEvent changeEvent) {
-                ListBox source = (ListBox) changeEvent.getSource();
-                ImageryLayer baseLayer = baseLayers.get(source.getSelectedValue());
+        baseLayersLBox.addChangeHandler(changeEvent -> {
+            ListBox source = (ListBox) changeEvent.getSource();
+            ImageryLayer baseLayer = baseLayers.get(source.getSelectedValue());
 
-                int activeLayerIndex = 0;
-                int numLayers = layers.size();
-                for (int i = 0; i < numLayers; ++i) {
-                    if (baseLayers.containsValue(layers.get(i))) {
-                        activeLayerIndex = i;
-                    }
+            int activeLayerIndex = 0;
+            int numLayers = layers.size();
+            for (int i = 0; i < numLayers; ++i) {
+                if (baseLayers.containsValue(layers.get(i))) {
+                    activeLayerIndex = i;
                 }
-                ImageryLayer activeLayer = layers.get(activeLayerIndex);
-                float alpha = activeLayer.alpha;
-                boolean show = activeLayer.show;
-                imageryLayers.remove(activeLayer, false);
-                imageryLayers.add(baseLayer, numLayers - activeLayerIndex - 1);
-                baseLayer.show = show;
-                baseLayer.alpha = alpha;
-                updateLayerList();
-
-                selectedLayer = baseLayer;
             }
+            ImageryLayer activeLayer = layers.get(activeLayerIndex);
+            float alpha = activeLayer.alpha;
+            boolean show = activeLayer.show;
+            imageryLayers.remove(activeLayer, false);
+            imageryLayers.add(baseLayer, numLayers - activeLayerIndex - 1);
+            baseLayer.show = show;
+            baseLayer.alpha = alpha;
+            updateLayerList();
+
+            selectedLayer = baseLayer;
         });
 
         Callback<Void, Void> cesiumCreated = new Callback<Void, Void>() {

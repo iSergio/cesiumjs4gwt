@@ -272,21 +272,21 @@ public class CloudParameters extends AbstractExample {
 
     private void onSliderInput(InputEvent event) {
         SliderBox source = (SliderBox) event.getSource();
-        String value = source.getValue();
+        double value = source.getValue();
         if (source.equals(scaleXSlider)) {
-            onScaleXInput(value);
+            onScaleXInput(String.valueOf(value));
         } else if (source.equals(scaleYSlider)) {
-            onScaleYInput(value);
+            onScaleYInput(String.valueOf(value));
         } else if (source.equals(maxSizeXSlider)) {
-            onMaxSizeXInput(value);
+            onMaxSizeXInput(String.valueOf(value));
         } else if (source.equals(maxSizeYSlider)) {
-            onMaxSizeYInput(value);
+            onMaxSizeYInput(String.valueOf(value));
         } else if (source.equals(maxSizeZSlider)) {
-            onMaxSizeZInput(value);
+            onMaxSizeZInput(String.valueOf(value));
         } else if (source.equals(sliceSlider)) {
-            onSliceInput(value);
+            onSliceInput(String.valueOf(value));
         } else if (source.equals(brightnessSlider)) {
-            onBrightnessInput(value);
+            onBrightnessInput(String.valueOf(value));
         }
     }
 

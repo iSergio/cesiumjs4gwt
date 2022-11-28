@@ -47,9 +47,9 @@ public class AmbientOcclusion extends AbstractExample {
     private CheckBox ambientOcclusionOnlyCBox;
     private SliderBox intensitySlider;
     private SliderBox lengthCapSlider;
-//    private SliderBox stepSizeSlider;
-//    private SliderBox biasSlider;
-//    private SliderBox blurStepSize;
+    private SliderBox stepSizeSlider;
+    private SliderBox biasSlider;
+    private SliderBox blurStepSize;
 
     @Inject
     public AmbientOcclusion(ShowcaseExampleStore store) {
@@ -67,7 +67,7 @@ public class AmbientOcclusion extends AbstractExample {
         }
 
         // Power Plant design model provided by Bentley Systems
-        Cesium3DTileset tileset = Cesium3DTileset.create(IonResource.fromAssetId(3837));
+        Cesium3DTileset tileset = Cesium3DTileset.create(IonResource.fromAssetId(1240402));
         tileset.readyPromise().then(
                 value -> csVPanel.getViewer().scene().primitives().add(value),
                 value -> Cesium.log("Error load tileset")
@@ -89,17 +89,17 @@ public class AmbientOcclusion extends AbstractExample {
         lengthCapSlider.setWidth("150px");
         lengthCapSlider.addInputHandler(this::updatePostProcess);
 
-//        stepSizeSlider = new SliderBox(1.0, 1.0, 10.0, 0.01);
-//        stepSizeSlider.setWidth("150px");
-//        stepSizeSlider.addInputHandler(this::updatePostProcess);
-//
-//        biasSlider = new SliderBox(0.0, 0.1, 1.0, 0.01);
-//        biasSlider.setWidth("150px");
-//        biasSlider.addInputHandler(this::updatePostProcess);
-//
-//        blurStepSize = new SliderBox(0.0, 0.86, 4.0, 0.01);
-//        blurStepSize.setWidth("150px");
-//        blurStepSize.addInputHandler(this::updatePostProcess);
+        stepSizeSlider = new SliderBox(1.0, 1.0, 10.0, 0.01);
+        stepSizeSlider.setWidth("150px");
+        stepSizeSlider.addInputHandler(this::updatePostProcess);
+
+        biasSlider = new SliderBox(0.0, 0.1, 1.0, 0.01);
+        biasSlider.setWidth("150px");
+        biasSlider.addInputHandler(this::updatePostProcess);
+
+        blurStepSize = new SliderBox(0.0, 0.86, 4.0, 0.01);
+        blurStepSize.setWidth("150px");
+        blurStepSize.addInputHandler(this::updatePostProcess);
 
         FlexTable flexTable = new FlexTable();
         flexTable.setHTML(1, 0, "<font color=\"white\">Ambient Occlusion</font>");
@@ -110,12 +110,12 @@ public class AmbientOcclusion extends AbstractExample {
         flexTable.setWidget(3, 1, intensitySlider);
         flexTable.setHTML(4, 0, "<font color=\"white\">Length Cap</font>");
         flexTable.setWidget(4, 1, lengthCapSlider);
-//        flexTable.setHTML(5, 0, "<font color=\"white\">Step Size</font>");
-//        flexTable.setWidget(5, 1, stepSizeSlider);
-//        flexTable.setHTML(6, 0, "<font color=\"white\">Bias</font>");
-//        flexTable.setWidget(6, 1, biasSlider);
-//        flexTable.setHTML(7, 0, "<font color=\"white\">Blur Step Size</font>");
-//        flexTable.setWidget(7, 1, blurStepSize);
+        flexTable.setHTML(5, 0, "<font color=\"white\">Step Size</font>");
+        flexTable.setWidget(5, 1, stepSizeSlider);
+        flexTable.setHTML(6, 0, "<font color=\"white\">Bias</font>");
+        flexTable.setWidget(6, 1, biasSlider);
+        flexTable.setHTML(7, 0, "<font color=\"white\">Blur Step Size</font>");
+        flexTable.setWidget(7, 1, blurStepSize);
 
         AbsolutePanel absPanel = new AbsolutePanel();
         absPanel.add(csVPanel);
@@ -136,22 +136,14 @@ public class AmbientOcclusion extends AbstractExample {
     }
 
     private void updatePostProcess(InputEvent event) {
-//        if (event != null) {
-//            SliderBox source = (SliderBox) event.getSource();
-//            double value = Double.parseDouble(source.getValue());
-//            GWT.log(value + " - " + intensitySlider.getValue());
-//            return;
-//        }
-//        GWT.log(intensitySlider.getValue() + " - " + lengthCapSlider.getValue() + " - " + blurStepSize.getValue());
-
         PostProcessStageComposite ambientOcclusion = csVPanel.getViewer().scene().postProcessStages.ambientOcclusion();
         ambientOcclusion.enabled = ambientOcclusionCBox.getValue() || ambientOcclusionOnlyCBox.getValue();
         ambientOcclusion.uniforms.setProperty("ambientOcclusionOnly", ambientOcclusionOnlyCBox.getValue());
-        ambientOcclusion.uniforms.setProperty("intensity", Double.parseDouble(intensitySlider.getValue()));
-//        ambientOcclusion.uniforms.setProperty("bias", Double.parseDouble(biasSlider.getValue()));
-        ambientOcclusion.uniforms.setProperty("lengthCap", Double.parseDouble(lengthCapSlider.getValue()));
-//        ambientOcclusion.uniforms.setProperty("stepSize", Double.parseDouble(stepSizeSlider.getValue()));
-//        ambientOcclusion.uniforms.setProperty("blurStepSize", Double.parseDouble(blurStepSize.getValue()));
+        ambientOcclusion.uniforms.setProperty("intensity", intensitySlider.getValue());
+        ambientOcclusion.uniforms.setProperty("bias", biasSlider.getValue());
+        ambientOcclusion.uniforms.setProperty("lengthCap", lengthCapSlider.getValue());
+        ambientOcclusion.uniforms.setProperty("stepSize", stepSizeSlider.getValue());
+        ambientOcclusion.uniforms.setProperty("blurStepSize", blurStepSize.getValue());
     }
 
     @Override

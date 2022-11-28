@@ -323,7 +323,7 @@ public class SceneRenderingPerformance  extends AbstractExample {
     }
 
     private void setMaxDeltaTime(InputEvent event) {
-        double value = Double.parseDouble(((SliderBox) event.getSource()).getValue());
+        double value = ((SliderBox) event.getSource()).getValue();
         maxDeltaTimeIBox.setValue((int) value);
         scene.maximumRenderTimeChange = value;
     }

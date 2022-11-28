@@ -458,7 +458,7 @@ public class ParticleSystem extends AbstractExample {
 
     private void onSliderInput(InputEvent event) {
         SliderBox source = (SliderBox) event.getSource();
-        double value = Double.parseDouble(source.getValue());
+        double value = source.getValue();
         if (source == rateSlider) {
             particleSystem.emissionRate = value;
             rateTBox.setValue("" + value);
