@@ -25,7 +25,7 @@ import org.cesiumjs.cs.scene.PointCloudShading;
 import org.cesiumjs.cs.scene.enums.Axis;
 import org.cesiumjs.cs.scene.enums.ClassificationType;
 import org.cesiumjs.cs.scene.enums.SplitDirection;
-import org.cesiumjs.cs.scene.experimental.CustomShader;
+import org.cesiumjs.cs.scene.CustomShader;
 
 /**
  * @author Serge Silaev aka iSergio

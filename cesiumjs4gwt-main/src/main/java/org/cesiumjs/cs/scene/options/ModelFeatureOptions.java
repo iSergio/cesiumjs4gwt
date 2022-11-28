@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 iserge, Gis4Fun.
+ * Copyright 2022 iSergio, Gis4Fun.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package org.cesiumjs.cs.scene.experimental.options;
+package org.cesiumjs.cs.scene.options;
 
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.scene.experimental.ModelExperimental;
+import org.cesiumjs.cs.scene.Model;
 
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class ModelFeatureOptions {
@@ -28,7 +28,7 @@ public class ModelFeatureOptions {
      * The model the feature belongs to.
      */
     @JsProperty
-    public ModelExperimental model;
+    public Model model;
     /**
      * The unique integral identifier for this feature.
      */
@@ -38,7 +38,7 @@ public class ModelFeatureOptions {
     private ModelFeatureOptions() {}
 
     @JsOverlay
-    public static ModelFeatureOptions create(ModelExperimental model, double featureId) {
+    public static ModelFeatureOptions create(Model model, double featureId) {
         ModelFeatureOptions options = new ModelFeatureOptions();
         options.model = model;
         options.featureId = featureId;

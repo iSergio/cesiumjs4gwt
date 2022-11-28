@@ -24,7 +24,6 @@ import org.cesiumjs.cs.promise.Promise;
 import org.cesiumjs.cs.scene.enums.Cesium3DTileColorBlendMode;
 import org.cesiumjs.cs.scene.enums.ClassificationType;
 import org.cesiumjs.cs.scene.enums.SplitDirection;
-import org.cesiumjs.cs.scene.experimental.CustomShader;
 import org.cesiumjs.cs.scene.options.Cesium3DTilesetOptions;
 
 /**
