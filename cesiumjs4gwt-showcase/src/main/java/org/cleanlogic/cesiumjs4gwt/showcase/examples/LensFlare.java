@@ -17,8 +17,6 @@
 package org.cleanlogic.cesiumjs4gwt.showcase.examples;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.FlexTable;
@@ -31,9 +29,8 @@ import org.cesiumjs.cs.scene.PostProcessStageLibrary;
 import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cleanlogic.cesiumjs4gwt.showcase.basic.AbstractExample;
 import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ShowcaseExampleStore;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.Slider;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderEvent;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderListener;
+import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.InputEvent;
+import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderBox;
 
 import javax.inject.Inject;
 
@@ -44,10 +41,11 @@ public class LensFlare extends AbstractExample {
     private ViewerPanel csVPanel;
 
     private CheckBox lensFlareCBox;
-    private Slider intensitySlider;
-    private Slider distortionSlider;
-    private Slider dispersionSlider;
-    private Slider haloWidthSlider;
+    private SliderBox intensitySlider;
+    private SliderBox distortionSlider;
+    private SliderBox dispersionSlider;
+    private SliderBox haloWidthSlider;
+    private SliderBox dirtAmountSlider;
 
     private PostProcessStage lensFlare;
 
@@ -62,27 +60,27 @@ public class LensFlare extends AbstractExample {
 
         lensFlareCBox = new CheckBox();
         lensFlareCBox.setValue(false);
-        lensFlareCBox.addValueChangeHandler(new MValueChangeHandler());
+        lensFlareCBox.addValueChangeHandler(event -> updatePostProcess(null));
 
-        intensitySlider = new Slider("intensitySlider", 0, 1000, 200);
-        intensitySlider.setStep(1);
+        intensitySlider = new SliderBox(0, 2, 10, 0.01);
         intensitySlider.setWidth("150px");
-        intensitySlider.addListener(new MSliderListener());
+        intensitySlider.addInputHandler(this::updatePostProcess);
 
-        distortionSlider = new Slider("distortionSlider", 100, 2000, 1000);
-        distortionSlider.setStep(1);
+        distortionSlider = new SliderBox(1, 10, 20, 0.01);
         distortionSlider.setWidth("150px");
-        distortionSlider.addListener(new MSliderListener());
+        distortionSlider.addInputHandler(this::updatePostProcess);
 
-        dispersionSlider = new Slider("dispersionSlider", 0, 100, 40);
-        dispersionSlider.setStep(1);
+        dispersionSlider = new SliderBox(0, 0.4, 1, 0.01);
         dispersionSlider.setWidth("150px");
-        dispersionSlider.addListener(new MSliderListener());
+        dispersionSlider.addInputHandler(this::updatePostProcess);
 
-        haloWidthSlider = new Slider("haloWidthSlider", 0, 100, 40);
-        haloWidthSlider.setStep(1);
+        haloWidthSlider = new SliderBox(0, 0.4, 1, 0.01);
         haloWidthSlider.setWidth("150px");
-        haloWidthSlider.addListener(new MSliderListener());
+        haloWidthSlider.addInputHandler(this::updatePostProcess);
+
+        dirtAmountSlider = new SliderBox(0, 0.4, 1, 0.01);
+        dirtAmountSlider.setWidth("150px");
+        dirtAmountSlider.addInputHandler(this::updatePostProcess);
 
         FlexTable flexTable = new FlexTable();
         flexTable.setHTML(1, 0, "<font color=\"white\">Lens Flare</font>");
@@ -108,7 +106,7 @@ public class LensFlare extends AbstractExample {
         lensFlare = csVPanel.getViewer().scene().postProcessStages
                 .add(PostProcessStageLibrary.createLensFlareStage());
 
-        updatePostProcess();
+        updatePostProcess(null);
 
         org.cesiumjs.cs.scene.Camera camera = csVPanel.getViewer().scene().camera();
         camera.position = new Cartesian3(40010447.97500168, 56238683.46406788, 20776576.752223067);
@@ -119,12 +117,13 @@ public class LensFlare extends AbstractExample {
         csVPanel.getViewer().clock().currentTime = new JulianDate(2458047, 27399.860215000022);
     }
 
-    private void updatePostProcess() {
+    private void updatePostProcess(InputEvent event) {
         lensFlare.enabled = lensFlareCBox.getValue();
-        lensFlare.uniforms().setProperty("intensity", intensitySlider.getValue() / 100.);
-        lensFlare.uniforms().setProperty("distortion", distortionSlider.getValue() / 100.);
-        lensFlare.uniforms().setProperty("ghostDispersal", dispersionSlider.getValue() / 100.);
-        lensFlare.uniforms().setProperty("haloWidth", haloWidthSlider.getValue() / 100.);
+        lensFlare.uniforms().setProperty("intensity", intensitySlider.getValue());
+        lensFlare.uniforms().setProperty("distortion", distortionSlider.getValue());
+        lensFlare.uniforms().setProperty("ghostDispersal", dispersionSlider.getValue());
+        lensFlare.uniforms().setProperty("haloWidth", haloWidthSlider.getValue());
+        lensFlare.uniforms().setProperty("dirtAmount", dirtAmountSlider.getValue());
         lensFlare.uniforms().setProperty("earthRadius", Ellipsoid.WGS84().maximumRadius());
     }
 
@@ -133,35 +132,5 @@ public class LensFlare extends AbstractExample {
         String[] sourceCodeURLs = new String[1];
         sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "LensFlare.txt";
         return sourceCodeURLs;
-    }
-
-    private class MValueChangeHandler implements ValueChangeHandler<Boolean> {
-        @Override
-        public void onValueChange(ValueChangeEvent<Boolean> event) {
-            updatePostProcess();
-        }
-    }
-
-    private class MSliderListener implements SliderListener {
-        @Override
-        public void onStart(SliderEvent e) {
-            //
-        }
-
-        @Override
-        public boolean onSlide(SliderEvent e) {
-            updatePostProcess();
-            return true;
-        }
-
-        @Override
-        public void onChange(SliderEvent e) {
-            //
-        }
-
-        @Override
-        public void onStop(SliderEvent e) {
-            //
-        }
     }
 }

@@ -21,6 +21,7 @@ import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.collections.CloudCollection;
 import org.cesiumjs.cs.core.Cartesian2;
 import org.cesiumjs.cs.core.Cartesian3;
+import org.cesiumjs.cs.core.Color;
 
 /**
  * A cumulus cloud billboard positioned in the 3D scene, that is created and rendered using a CloudCollection.
@@ -41,6 +42,12 @@ public class CumulusCloud {
      */
     @JsProperty
     public float brightness;
+    /**
+     * Sets the color of the cloud.
+     * Default: {@link Color#WHITE()}
+     */
+    @JsProperty
+    public Color color;
     /**
      * Gets or sets the maximum size of the cumulus cloud rendered on the billboard. This defines a maximum ellipsoid
      * volume that the cloud can appear in. Rather than guaranteeing a specific size, this specifies a boundary for

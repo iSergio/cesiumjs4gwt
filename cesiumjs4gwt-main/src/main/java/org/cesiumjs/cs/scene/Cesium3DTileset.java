@@ -24,7 +24,6 @@ import org.cesiumjs.cs.promise.Promise;
 import org.cesiumjs.cs.scene.enums.Cesium3DTileColorBlendMode;
 import org.cesiumjs.cs.scene.enums.ClassificationType;
 import org.cesiumjs.cs.scene.enums.SplitDirection;
-import org.cesiumjs.cs.scene.experimental.CustomShader;
 import org.cesiumjs.cs.scene.options.Cesium3DTilesetOptions;
 
 /**
@@ -59,6 +58,18 @@ public class Cesium3DTileset {
      */
     @JsProperty
     public double baseScreenSpaceError;
+    /**
+     * Label of the feature ID set to use for picking and styling.
+     * For EXT_mesh_features, this is the feature ID's label property, or "featureId_N" (where N is the index in the
+     * featureIds array) when not specified. EXT_feature_metadata did not have a label field, so such feature ID sets
+     * are always labeled "featureId_N" where N is the index in the list of all feature Ids, where feature ID attributes
+     * are listed before feature ID textures.
+     * <p>
+     * If featureIdLabel is set to an integer N, it is converted to the string "featureId_N" automatically. If both
+     * per-primitive and per-instance feature IDs are present, the instance feature IDs take priority.
+     */
+    @JsProperty
+    public int featureIdLabel;
     /**
      * Optimization option. Used when
      * {@link org.cesiumjs.cs.scene.Cesium3DTileset#foveatedScreenSpaceError} is

@@ -78,7 +78,7 @@ public class CZMLModelArticulations extends AbstractExample {
         articulationsCZML.setProperty("Fairing Drop", fairingDropCZML);
 
         JsObject modelCZML = JsObject.create();
-        modelCZML.setProperty("gltf", "https://assets.agi.com/models/launchvehicle.glb");
+        modelCZML.setProperty("gltf", "https://cesium.com/public/SandcastleSampleData/launchvehicle.glb");
         modelCZML.setProperty("scale", 2.0);
         modelCZML.setProperty("minimumPixelSize", 128);
         modelCZML.setProperty("runAnimations", false);

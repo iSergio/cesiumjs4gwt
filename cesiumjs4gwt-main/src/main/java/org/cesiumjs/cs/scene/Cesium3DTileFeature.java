@@ -104,29 +104,21 @@ public class Cesium3DTileFeature extends PickedObject {
     public native JsObject getProperty(String name);
 
     /**
-     * Returns an array of property names for the feature. This includes properties
-     * from this feature's class and inherited classes when using a batch table
-     * hierarchy.
-     *
-     * @return The names of the feature's properties.
-     * @see <a href=
-     * "https://github.com/AnalyticalGraphicsInc/3d-tiles/tree/master/TileFormats/BatchTable#batch-table-hierarchy">link</a>
+     * Returns an array of property IDs for the feature. This includes properties from this feature's class and
+     * inherited classes when using a batch table hierarchy.
+     * @return The IDs of the feature's properties.
      */
     @JsMethod
-    public native String[] getPropertyNames();
+    public native String[] getPropertyIds();
 
     /**
-     * Returns an array of property names for the feature. This includes properties
-     * from this feature's class and inherited classes when using a batch table
-     * hierarchy.
-     *
+     * Returns an array of property IDs for the feature. This includes properties from this feature's class and
+     * inherited classes when using a batch table hierarchy.
      * @param results An array into which to store the results.
-     * @return The names of the feature's properties.
-     * @see <a href=
-     * "https://github.com/AnalyticalGraphicsInc/3d-tiles/tree/master/TileFormats/BatchTable#batch-table-hierarchy">link</a>
+     * @return The IDs of the feature's properties.
      */
     @JsMethod
-    public native String[] getPropertyNames(String[] results);
+    public native String[] getPropertyIds(String[] results);
 
     /**
      * Returns whether the feature contains this property. This includes properties

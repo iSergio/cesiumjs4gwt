@@ -35,9 +35,8 @@ import org.cesiumjs.cs.scene.PostProcessStageLibrary;
 import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cleanlogic.cesiumjs4gwt.showcase.basic.AbstractExample;
 import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ShowcaseExampleStore;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.Slider;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderEvent;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderListener;
+import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.InputEvent;
+import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderBox;
 
 import javax.inject.Inject;
 
@@ -45,17 +44,12 @@ import javax.inject.Inject;
  * @author Serge Silaev aka iSergio
  */
 public class DepthOfField extends AbstractExample {
-    private final int numberOfBalloons = 13;
-    private final double lonIncrement = 0.00025;
-    private final double initialLon = -122.99875;
-    private final double lat = 44.0503706;
-    private final double height = 100.0;
     private ViewerPanel csVPanel;
     private CheckBox depthOfFieldCBox;
-    private Slider focalDistanceSlider;
-    private Slider deltaSlider;
-    private Slider sigmaSlider;
-    private Slider stepSizeSlider;
+    private SliderBox focalDistanceSlider;
+    private SliderBox deltaSlider;
+    private SliderBox sigmaSlider;
+    private SliderBox stepSizeSlider;
     private PostProcessStageComposite depthOfField;
 
     @Inject
@@ -67,6 +61,11 @@ public class DepthOfField extends AbstractExample {
     public void buildPanel() {
         csVPanel = new ViewerPanel();
 
+        int numberOfBalloons = 13;
+        double lonIncrement = 0.00025;
+        double initialLon = -122.99875;
+        double lat = 44.0503706;
+        double height = 100.0;
         for (int i = 0; i < numberOfBalloons; i++) {
             double lon = initialLon + i * lonIncrement;
             createModel(lon, lat, height);
@@ -76,25 +75,21 @@ public class DepthOfField extends AbstractExample {
         depthOfFieldCBox.setValue(true);
         depthOfFieldCBox.addValueChangeHandler(new MValueChangeHandler());
 
-        focalDistanceSlider = new Slider("focalDistanceSlider", 0, 500, 87);
-        focalDistanceSlider.setStep(1);
+        focalDistanceSlider = new SliderBox(0, 87, 500, 1);
         focalDistanceSlider.setWidth("150px");
-        focalDistanceSlider.addListener(new MSliderListener());
+        focalDistanceSlider.addInputHandler(this::updatePostProcess);
 
-        deltaSlider = new Slider("deltaSlider", 10, 200, 100);
-        deltaSlider.setStep(1);
+        deltaSlider = new SliderBox(0.1, 1, 2, 0.01);
         deltaSlider.setWidth("150px");
-        deltaSlider.addListener(new MSliderListener());
+        deltaSlider.addInputHandler(this::updatePostProcess);
 
-        sigmaSlider = new Slider("sigmaSlider", 50, 500, 378);
-        sigmaSlider.setStep(1);
+        sigmaSlider = new SliderBox(0.5, 3.78, 5, 0.01);
         sigmaSlider.setWidth("150px");
-        sigmaSlider.addListener(new MSliderListener());
+        sigmaSlider.addInputHandler(this::updatePostProcess);
 
-        stepSizeSlider = new Slider("stepSizeSlider", 0, 700, 246);
-        stepSizeSlider.setStep(1);
+        stepSizeSlider = new SliderBox(0, 2.46, 7, 0.01);
         stepSizeSlider.setWidth("150px");
-        stepSizeSlider.addListener(new MSliderListener());
+        stepSizeSlider.addInputHandler(this::updatePostProcess);
 
         FlexTable flexTable = new FlexTable();
         flexTable.setHTML(1, 0, "<font color=\"white\">Depth Of Field</font>");
@@ -123,7 +118,7 @@ public class DepthOfField extends AbstractExample {
             Cesium.log("This browser does not support the depth of field post process.");
         }
 
-        updatePostProcess();
+        updatePostProcess(null);
 
         Cartesian3 target = Cartesian3.fromDegrees(initialLon + lonIncrement, lat, height + 7.5);
         Cartesian3 offset = new Cartesian3(-37.048378684557974, -24.852967044804245, 4.352023653686047);
@@ -143,12 +138,19 @@ public class DepthOfField extends AbstractExample {
         csVPanel.getViewer().entities().add(options);
     }
 
-    private void updatePostProcess() {
+    private void updatePostProcess(InputEvent event) {
         depthOfField.enabled = depthOfFieldCBox.getValue();
         depthOfField.uniforms.setProperty("focalDistance", focalDistanceSlider.getValue());
-        depthOfField.uniforms.setProperty("delta", deltaSlider.getValue() / 100.);
-        depthOfField.uniforms.setProperty("sigma", sigmaSlider.getValue() / 100.);
-        depthOfField.uniforms.setProperty("stepSize", stepSizeSlider.getValue() / 100.);
+        depthOfField.uniforms.setProperty("delta", deltaSlider.getValue());
+        depthOfField.uniforms.setProperty("sigma", sigmaSlider.getValue());
+        depthOfField.uniforms.setProperty("stepSize", stepSizeSlider.getValue());
+    }
+
+    private class MValueChangeHandler implements ValueChangeHandler<Boolean> {
+        @Override
+        public void onValueChange(ValueChangeEvent<Boolean> event) {
+            updatePostProcess(null);
+        }
     }
 
     @Override
@@ -156,35 +158,5 @@ public class DepthOfField extends AbstractExample {
         String[] sourceCodeURLs = new String[1];
         sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "DepthOfField.txt";
         return sourceCodeURLs;
-    }
-
-    private class MValueChangeHandler implements ValueChangeHandler<Boolean> {
-        @Override
-        public void onValueChange(ValueChangeEvent<Boolean> event) {
-            updatePostProcess();
-        }
-    }
-
-    private class MSliderListener implements SliderListener {
-        @Override
-        public void onStart(SliderEvent e) {
-            //
-        }
-
-        @Override
-        public boolean onSlide(SliderEvent e) {
-            updatePostProcess();
-            return true;
-        }
-
-        @Override
-        public void onChange(SliderEvent e) {
-            //
-        }
-
-        @Override
-        public void onStop(SliderEvent e) {
-            //
-        }
     }
 }

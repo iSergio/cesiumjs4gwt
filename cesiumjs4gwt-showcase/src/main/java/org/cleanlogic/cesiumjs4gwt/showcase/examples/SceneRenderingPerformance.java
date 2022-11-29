@@ -18,12 +18,13 @@ package org.cleanlogic.cesiumjs4gwt.showcase.examples;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.IntegerBox;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.PushButton;
 import org.cesiumjs.cs.Cesium;
@@ -55,7 +56,8 @@ import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cesiumjs.cs.widgets.options.ViewerOptions;
 import org.cleanlogic.cesiumjs4gwt.showcase.basic.AbstractExample;
 import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ShowcaseExampleStore;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.Slider;
+import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.InputEvent;
+import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderBox;
 
 import javax.inject.Inject;
 
@@ -65,7 +67,10 @@ public class SceneRenderingPerformance  extends AbstractExample {
     private Cesium3DTileset tileset;
     private ScreenSpaceEventHandler handler;
     private CheckBox timeChangeEnabledCBox;
-    private Slider maxDeltaTimeSlider;
+    private SliderBox maxDeltaTimeSlider;
+    private Label maxDeltaTimeLbl;
+    private Label autoRenderInfoLbl;
+    private IntegerBox maxDeltaTimeIBox;
 
     @Inject
     public SceneRenderingPerformance(ShowcaseExampleStore store) {
@@ -87,7 +92,7 @@ public class SceneRenderingPerformance  extends AbstractExample {
 
         PushButton renderButton = new PushButton();
         renderButton.setHTML("<font color=\"white\">Render new frame</font>");
-        renderButton.addClickHandler(handler -> scene.requestRender());
+        renderButton.addClickHandler(clickHandler -> scene.requestRender());
 
         CheckBox requestRenderModeCBox = new CheckBox();
         requestRenderModeCBox.setHTML("<font color=\"white\">requestRenderMode enabled</font>");
@@ -109,9 +114,23 @@ public class SceneRenderingPerformance  extends AbstractExample {
         timeChangeEnabledCBox = new CheckBox();
         timeChangeEnabledCBox.setHTML("<font color=\"white\">Render when simulation time changes</font>");
         timeChangeEnabledCBox.setEnabled(false);
+        timeChangeEnabledCBox.setVisible(false);
 
-        maxDeltaTimeSlider = new Slider("maxDeltaTime", 0, 200, 0);
+        maxDeltaTimeSlider = new SliderBox(0, 10, 20, 1);
         maxDeltaTimeSlider.setStep(1);
+        maxDeltaTimeSlider.addInputHandler(this::setMaxDeltaTime);
+        maxDeltaTimeSlider.setVisible(false);
+
+        maxDeltaTimeIBox = new IntegerBox();
+        maxDeltaTimeIBox.setWidth("22px");
+        maxDeltaTimeIBox.setValue(10);
+        maxDeltaTimeIBox.setVisible(false);
+
+        maxDeltaTimeLbl = new Label();
+        maxDeltaTimeLbl.getElement().setInnerHTML("<font color=\"white\">Max delta time</font>");
+
+        autoRenderInfoLbl = new Label();
+        autoRenderInfoLbl.getElement().setInnerHTML("<i><font size=\"-2\" color=\"white\">Automatically render when the simulation time<br> changes by \"Max delta time\". Adjust the<br> simulation time on the animation widget and<br> \"Max delta time\" value to see their relationship.</font></i>");
 
         FlexTable flexTable = new FlexTable();
         flexTable.setHTML(1, 0, "<font color=\"white\"></font>");
@@ -121,9 +140,13 @@ public class SceneRenderingPerformance  extends AbstractExample {
         flexTable.setHTML(5, 0, "<i><font size=\"-2\" color=\"white\">When enabled, a new frame is only rendered<br> when scene updates occur, or a new frame is<br> explicitly rendered.</font></t>");
         flexTable.setWidget(6, 0, scenariosLBox);
         flexTable.setWidget(7, 0, timeChangeEnabledCBox);
-        flexTable.setHTML(8, 0, "<i><font size=\"-2\" color=\"white\">Automatically render when the simulation time<br> changes by \"Max delta time\". Adjust the<br> simulation time on the animation widget and<br> \"Max delta time\" value to see their relationship.</font></i>");
-        flexTable.setHTML(9, 0, "<font color=\"white\">Max delta time</font>");
+        flexTable.setWidget(8, 0, autoRenderInfoLbl);
+        flexTable.setWidget(9, 0, maxDeltaTimeLbl);
         flexTable.setWidget(10, 0, maxDeltaTimeSlider);
+        flexTable.setWidget(10, 1, maxDeltaTimeIBox);
+
+        maxDeltaTimeLbl.setVisible(false);
+        autoRenderInfoLbl.setVisible(false);
 
         AbsolutePanel aPanel = new AbsolutePanel();
         aPanel.add(csVPanel);
@@ -181,6 +204,12 @@ public class SceneRenderingPerformance  extends AbstractExample {
         timeChangeEnabledCBox.setEnabled(false);
         timeChangeEnabledCBox.setValue(false);
         maxDeltaTimeSlider.setValue(0);
+
+        timeChangeEnabledCBox.setVisible(false);
+        maxDeltaTimeSlider.setVisible(false);
+        maxDeltaTimeIBox.setVisible(false);
+        maxDeltaTimeLbl.setVisible(false);
+        autoRenderInfoLbl.setVisible(false);
     }
 
     // Load a tileset and set the view.
@@ -201,6 +230,13 @@ public class SceneRenderingPerformance  extends AbstractExample {
         resetScene();
         timeChangeEnabledCBox.setEnabled(true);
         timeChangeEnabledCBox.setValue(true);
+        maxDeltaTimeSlider.setValue(0);
+        maxDeltaTimeLbl.setVisible(true);
+        autoRenderInfoLbl.setVisible(true);
+        maxDeltaTimeSlider.setVisible(true);
+        maxDeltaTimeIBox.setVisible(true);
+        maxDeltaTimeIBox.setValue(0);
+        scene.maximumRenderTimeChange = 0;
 
         ModelGraphicsOptions modelOptions = new ModelGraphicsOptions();
         modelOptions.uri = new ConstantProperty<>(GWT.getModuleBaseURL() + "SampleData/models/CesiumAir/Cesium_Air.glb");
@@ -213,7 +249,6 @@ public class SceneRenderingPerformance  extends AbstractExample {
         entityOptions.model = new ModelGraphics(modelOptions);
         csVPanel.getViewer().trackedEntity = csVPanel.getViewer().entities().add(entityOptions);
         csVPanel.getViewer().clock().shouldAnimate = true;
-        scene.requestRender();
     }
 
     // Load CZML DataSource with a model and set the trackedEntity.
@@ -224,7 +259,11 @@ public class SceneRenderingPerformance  extends AbstractExample {
         resetScene();
         timeChangeEnabledCBox.setEnabled(true);
         timeChangeEnabledCBox.setValue(true);
-        maxDeltaTimeSlider.setValue(100);
+        maxDeltaTimeSlider.setValue(10);
+        maxDeltaTimeLbl.setVisible(true);
+        autoRenderInfoLbl.setVisible(true);
+        maxDeltaTimeSlider.setVisible(true);
+        maxDeltaTimeIBox.setVisible(true);
 
         scene.maximumRenderTimeChange = 10.;
 
@@ -281,5 +320,11 @@ public class SceneRenderingPerformance  extends AbstractExample {
         scene.skyBox.show = false;
         scene.backgroundColor = Color.CORNFLOWERBLUE();
         scene.requestRender();
+    }
+
+    private void setMaxDeltaTime(InputEvent event) {
+        double value = ((SliderBox) event.getSource()).getValue();
+        maxDeltaTimeIBox.setValue((int) value);
+        scene.maximumRenderTimeChange = value;
     }
 }

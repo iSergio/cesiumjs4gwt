@@ -17,12 +17,13 @@
 package org.cleanlogic.cesiumjs4gwt.showcase.examples;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
+import org.cesiumjs.cs.core.HeadingPitchRoll;
 import org.cesiumjs.cs.core.Math;
 import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.datasources.Entity;
@@ -89,51 +90,67 @@ public class Camera extends AbstractExample {
         listBox.addItem("View in ICRF", "9");
         listBox.addItem("Move events", "10");
         listBox.addItem("Camera changed event", "11");
-        listBox.addChangeHandler(new ChangeHandler() {
-            @Override
-            public void onChange(ChangeEvent changeEvent) {
-                reset();
-                ListBox source = (ListBox) changeEvent.getSource();
-                switch (source.getSelectedValue()) {
-                    case "1":
-                        flyInACity();
-                        break;
-                    case "2":
-                        flyToSanDiego();
-                        break;
-                    case "3":
-                        flyToHeadingPitchRoll();
-                        break;
-                    case "5":
-                        flyToRectangle();
-                        break;
-                    case "6":
-                        viewRectangle();
-                        break;
-                    case "7":
-                        setReferenceFrame();
-                        break;
-                    case "8":
-                        setHeadingPitchRoll();
-                        break;
-                    case "9":
-                        viewInICRF();
-                        break;
-                    case "10":
-                        cameraEvents();
-                        break;
-                    case "11":
-                        cameraChanges();
-                        break;
-                    default:
-                        break;
-                }
+        listBox.addItem("Fly from Los Angeles to Tokyo via Europe", "12");
+        listBox.addItem("Look down during exaggerated flight", "13");
+        listBox.addChangeHandler(changeEvent -> {
+            reset();
+            ListBox source = (ListBox) changeEvent.getSource();
+            switch (source.getSelectedValue()) {
+                case "1":
+                    flyInACity();
+                    break;
+                case "2":
+                    flyToSanDiego();
+                    break;
+                case "3":
+                    flyToHeadingPitchRoll();
+                    break;
+                case "5":
+                    flyToRectangle();
+                    break;
+                case "6":
+                    viewRectangle();
+                    break;
+                case "7":
+                    setReferenceFrame();
+                    break;
+                case "8":
+                    setHeadingPitchRoll();
+                    break;
+                case "9":
+                    viewInICRF();
+                    break;
+                case "10":
+                    cameraEvents();
+                    break;
+                case "11":
+                    cameraChanges();
+                    break;
+                case "12":
+                    flyOverLongitude(false);
+                    break;
+                case "13":
+                    flyOverLongitude(true);
+                    break;
+                default:
+                    break;
             }
         });
 
+        Button completeFlightBtn = new Button("Complete flight");
+        completeFlightBtn.addClickHandler(event -> csVPanel.getViewer().camera.completeFlight());
+
+        Button cancelFlightBtn = new Button("Cancel flight");
+        cancelFlightBtn.addClickHandler(event -> csVPanel.getViewer().camera.cancelFlight());
+
+        HorizontalPanel hPanel = new HorizontalPanel();
+        hPanel.add(listBox);
+        hPanel.add(completeFlightBtn);
+        hPanel.add(cancelFlightBtn);
+
         AbsolutePanel absPanel = new AbsolutePanel();
         absPanel.add(csVPanel);
-        absPanel.add(listBox, 20, 20);
+        absPanel.add(hPanel, 20, 20);
 
         contentPanel.add(
                 new HTML("<p>Fly to a specified location or view a geographic rectangle.</p>"));
@@ -155,20 +172,15 @@ public class Camera extends AbstractExample {
         final CameraFlyToOptions cameraFlyToOptions = new CameraFlyToOptions();
         cameraFlyToOptions.destinationPos = Cartesian3.fromDegrees(-73.98580932617188,
                 40.74843406689482, 363.34038727246224);
-        cameraFlyToOptions.complete = new org.cesiumjs.cs.scene.Camera.FlightCompleteCallback() {
-            @Override
-            public void on() {
-                Utils.setTimeout(() -> {
-                    CameraFlyToOptions cameraFlyToOptions = new CameraFlyToOptions();
-                    cameraFlyToOptions.destinationPos = Cartesian3.fromDegrees(-73.98585975679403,
-                            40.75759944127251, 186.50838555841779);
-                    cameraFlyToOptions.orientation = new org.cesiumjs.cs.core.HeadingPitchRoll(
-                            Math.toRadians(200.0), Math.toRadians(-50.0));
-                    cameraFlyToOptions.easingFunction = EasingFunction.LINEAR_NONE();
-                    csVPanel.getViewer().camera.flyTo(cameraFlyToOptions);
-                }, 1000);
-            }
-        };
+        cameraFlyToOptions.complete = () -> Utils.setTimeout(() -> {
+            CameraFlyToOptions flyToOptions = new CameraFlyToOptions();
+            flyToOptions.destinationPos = Cartesian3.fromDegrees(-73.98585975679403,
+                    40.75759944127251, 186.50838555841779);
+            flyToOptions.orientation = new org.cesiumjs.cs.core.HeadingPitchRoll(
+                    Math.toRadians(200.0), Math.toRadians(-50.0));
+            flyToOptions.easingFunction = EasingFunction.LINEAR_NONE();
+            csVPanel.getViewer().camera.flyTo(flyToOptions);
+        }, 1000);
         csVPanel.getViewer().camera.flyTo(cameraFlyToOptions);
     }
 
@@ -186,16 +198,16 @@ public class Camera extends AbstractExample {
         csVPanel.getViewer().camera.flyTo(cameraFlyToOptions);
     }
 
-    private void viewRectangle() {
+    private void flyToRectangle() {
         double west = -90.0;
         double south = 38.0;
         double east = -87.0;
         double north = 40.0;
         Rectangle rectangle = Rectangle.fromDegrees(west, south, east, north);
 
-        ViewOptions viewOptions = new ViewOptions();
-        viewOptions.destinationRec = rectangle;
-        csVPanel.getViewer().camera.setView(viewOptions);
+        CameraFlyToOptions cameraFlyToOptions = new CameraFlyToOptions();
+        cameraFlyToOptions.destinationRec = rectangle;
+        csVPanel.getViewer().camera.flyTo(cameraFlyToOptions);
 
         RectangleGraphicsOptions rectangleGraphicsOptions = new RectangleGraphicsOptions();
         rectangleGraphicsOptions.coordinates = new ConstantProperty<>(rectangle);
@@ -207,16 +219,16 @@ public class Camera extends AbstractExample {
         csVPanel.getViewer().entities().add(new Entity(entityOptions));
     }
 
-    private void flyToRectangle() {
-        double west = -90.0;
+    private void viewRectangle() {
+        double west = -77.0;
         double south = 38.0;
-        double east = -87.0;
-        double north = 40.0;
+        double east = -72.0;
+        double north = 42.0;
         Rectangle rectangle = Rectangle.fromDegrees(west, south, east, north);
 
-        CameraFlyToOptions cameraFlyToOptions = new CameraFlyToOptions();
-        cameraFlyToOptions.destinationRec = rectangle;
-        csVPanel.getViewer().camera.flyTo(cameraFlyToOptions);
+        ViewOptions viewOptions = new ViewOptions();
+        viewOptions.destinationRec = rectangle;
+        csVPanel.getViewer().camera.setView(viewOptions);
 
         RectangleGraphicsOptions rectangleGraphicsOptions = new RectangleGraphicsOptions();
         rectangleGraphicsOptions.coordinates = new ConstantProperty<>(rectangle);
@@ -272,39 +284,48 @@ public class Camera extends AbstractExample {
 
     public void cameraEvents() {
         _removeStart = csVPanel.getViewer().camera.moveStart()
-                .addEventListener(new org.cesiumjs.cs.scene.Camera.MoveListener() {
-                    @Override
-                    public void function() {
-                        _eventsLbl.setVisible(true);
-                    }
-                });
+                .addEventListener((org.cesiumjs.cs.scene.Camera.MoveListener) () -> _eventsLbl.setVisible(true));
         _removeEnd = csVPanel.getViewer().camera.moveEnd()
-                .addEventListener(new org.cesiumjs.cs.scene.Camera.MoveListener() {
-                    @Override
-                    public void function() {
-                        _eventsLbl.setVisible(false);
-                    }
-                });
+                .addEventListener((org.cesiumjs.cs.scene.Camera.MoveListener) () -> _eventsLbl.setVisible(false));
     }
 
     private void cameraChanges() {
         _removeChanged = csVPanel.getViewer().camera.changed()
-                .addEventListener(new org.cesiumjs.cs.scene.Camera.ChangedListener() {
-                    @Override
-                    public void function(double percentage) {
-                        ++_i;
-                        _changesLbl.setText("Camera Changed: " + _i + ", "
-                                + new BigDecimal(percentage).setScale(6, RoundingMode.HALF_EVEN).toString());
-                        _changesLbl.setVisible(true);
-                    }
+                .addEventListener((org.cesiumjs.cs.scene.Camera.ChangedListener) percentage -> {
+                    ++_i;
+                    _changesLbl.setText("Camera Changed: " + _i + ", "
+                            + new BigDecimal(percentage).setScale(6, RoundingMode.HALF_EVEN).toString());
+                    _changesLbl.setVisible(true);
                 });
+    }
+
+    private void flyOverLongitude(boolean adjustPitch) {
+        org.cesiumjs.cs.scene.Camera camera = csVPanel.getViewer().scene().camera();
+
+        CameraFlyToOptions tokyoOptions = new CameraFlyToOptions()
+                .setDestination(Cartesian3.fromDegrees(139.8148, 35.7142, 20000.0))
+                .setOrientation(new HeadingPitchRoll(Math.toRadians(15.0), Math.toRadians(-60), 0.0))
+                .setDuration(20.).setFlyOverLongitude(Math.toRadians(60.0));
+
+        CameraFlyToOptions laOptions = new CameraFlyToOptions()
+                .setDestination(Cartesian3.fromDegrees(-117.729, 34.457, 10000.0))
+                .setOrientation(new HeadingPitchRoll(Math.toRadians(-15.0), -Math.PI_OVER_FOUR(), 0.0))
+                .setDuration(5);
+        laOptions.complete = () -> Utils.setTimeout(() -> camera.flyTo(tokyoOptions), 1000);
+
+        if (adjustPitch) {
+            tokyoOptions.pitchAdjustHeight = 1000;
+            laOptions.pitchAdjustHeight = 1000;
+        }
+
+        camera.flyTo(laOptions);
     }
 
     private void reset() {
         csVPanel.getViewer().scene().completeMorph();
         csVPanel.getViewer().entities().removeAll();
-        csVPanel.getViewer().scene().primitives().removeAll();
-        // csVPanel.getViewer().scene().tweens().removeAll();
+//        csVPanel.getViewer().scene().primitives().remove(referenceFramePrimitive);
+//         csVPanel.getViewer().scene().tweens().removeAll();
 
         if (_removeStart != null) {
             _removeStart.function();

@@ -18,11 +18,12 @@ package org.cleanlogic.cesiumjs4gwt.showcase.examples;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.ListBox;
 import org.cesiumjs.cs.core.Cartesian3;
+import org.cesiumjs.cs.core.FeatureDetection;
 import org.cesiumjs.cs.core.Math;
 import org.cesiumjs.cs.core.Quaternion;
 import org.cesiumjs.cs.core.Transforms;
@@ -55,7 +56,8 @@ public class Models3D extends AbstractExample {
         ViewerOptions csViewerOptions = new ViewerOptions();
         csViewerOptions.infoBox = false;
         csViewerOptions.selectionIndicator = false;
-        csViewerOptions.shadows = false;
+        csViewerOptions.shadows = true;
+        csViewerOptions.shouldAnimate = true;
         csVPanel = new ViewerPanel(csViewerOptions);
 
         ModelGraphicsOptions modelGraphicsOptions = new ModelGraphicsOptions();
@@ -80,35 +82,16 @@ public class Models3D extends AbstractExample {
 
         final ListBox modelsLBox = new ListBox();
         modelsLBox.addItem("Aircraft", "0");
-        modelsLBox.addItem("Ground vehicle", "1");
-        modelsLBox.addItem("Hot Air Balloon", "2");
-        modelsLBox.addItem("Milk truck", "3");
-        modelsLBox.addItem("Skinned character", "4");
-        modelsLBox.addChangeHandler(new ChangeHandler() {
-            @Override
-            public void onChange(ChangeEvent changeEvent) {
-                csVPanel.getViewer().entities().removeAll();
-                switch (modelsLBox.getSelectedValue()) {
-                    case "0":
-                        createModel(GWT.getModuleBaseURL() + "SampleData/models/CesiumAir/Cesium_Air.glb", 5000.0);
-                        break;
-                    case "1":
-                        createModel(GWT.getModuleBaseURL() + "SampleData/models/CesiumGround/Cesium_Ground.glb", 0);
-                        break;
-                    case "2":
-                        createModel(GWT.getModuleBaseURL() + "SampleData/models/CesiumBalloon/CesiumBalloon.glb", 1000.0);
-                        break;
-                    case "3":
-                        createModel(GWT.getModuleBaseURL() + "SampleData/models/CesiumMilkTruck/CesiumMilkTruck-kmc.glb", 0);
-                        break;
-                    case "4":
-                        createModel(GWT.getModuleBaseURL() + "SampleData/models/CesiumMan/Cesium_Man.glb", 0);
-                        break;
-                    default:
-                        break;
-                }
-            }
-        });
+        modelsLBox.addItem("Drone", "1");
+        modelsLBox.addItem("Ground vehicle", "2");
+        modelsLBox.addItem("Hot Air Balloon", "3");
+        modelsLBox.addItem("Milk truck", "4");
+        modelsLBox.addItem("Skinned character", "5");
+        modelsLBox.addItem("Unlit Box", "6");
+        modelsLBox.addItem("Draco Compressed Model", "7");
+        modelsLBox.addItem("KTX2 Compressed Balloon", "8");
+        modelsLBox.addItem("Instanced Box", "9");
+        modelsLBox.addChangeHandler(this::onChange);
 
         AbsolutePanel aPanel = new AbsolutePanel();
         aPanel.add(csVPanel);
@@ -125,6 +108,48 @@ public class Models3D extends AbstractExample {
         String[] sourceCodeURLs = new String[1];
         sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "Models3D.txt";
         return sourceCodeURLs;
+    }
+
+    private void onChange(ChangeEvent event) {
+        csVPanel.getViewer().entities().removeAll();
+        ListBox source = (ListBox) event.getSource();
+        switch (source.getSelectedValue()) {
+            case "0":
+                createModel(GWT.getModuleBaseURL() + "SampleData/models/CesiumAir/Cesium_Air.glb", 5000.0);
+                break;
+            case "1":
+                createModel(GWT.getModuleBaseURL() + "SampleData/models/CesiumDrone/CesiumDrone.glb", 150.0);
+                break;
+            case "2":
+                createModel(GWT.getModuleBaseURL() + "SampleData/models/GroundVehicle/GroundVehicle.glb", 0);
+                break;
+            case "3":
+                createModel(GWT.getModuleBaseURL() + "SampleData/models/CesiumBalloon/CesiumBalloon.glb", 1000.0);
+                break;
+            case "4":
+                createModel(GWT.getModuleBaseURL() + "SampleData/models/CesiumMilkTruck/CesiumMilkTruck.glb", 0);
+                break;
+            case "5":
+                createModel(GWT.getModuleBaseURL() + "SampleData/models/CesiumMan/Cesium_Man.glb", 0);
+                break;
+            case "6":
+                createModel(GWT.getModuleBaseURL() + "SampleData/models/BoxUnlit/BoxUnlit.gltf", 10.0);
+                break;
+            case "7":
+                createModel(GWT.getModuleBaseURL() + "SampleData/models/DracoCompressed/CesiumMilkTruck.gltf", 0);
+                break;
+            case "8":
+                if (!FeatureDetection.supportsBasis(csVPanel.getViewer().scene())) {
+                    Window.alert("This browser does not support Basis Universal compressed textures");
+                }
+                createModel(GWT.getModuleBaseURL() + "SampleData/models/CesiumBalloonKTX2/CesiumBalloonKTX2.glb", 1000.0);
+                break;
+            case "9":
+                createModel(GWT.getModuleBaseURL() + "SampleData/models/BoxInstanced/BoxInstanced.gltf", 15);
+                break;
+            default:
+                break;
+        }
     }
 
     private void createModel(String url, double height) {

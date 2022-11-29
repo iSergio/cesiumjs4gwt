@@ -20,7 +20,6 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.user.client.ui.*;
-import org.cesiumjs.cs.Cesium;
 import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.core.enums.ScreenSpaceEventType;
 import org.cesiumjs.cs.core.events.MouseMoveEvent;
@@ -29,9 +28,9 @@ import org.cesiumjs.cs.scene.Cesium3DTileFeature;
 import org.cesiumjs.cs.scene.Cesium3DTileStyle;
 import org.cesiumjs.cs.scene.Cesium3DTileset;
 import org.cesiumjs.cs.scene.Scene;
-import org.cesiumjs.cs.scene.experimental.CustomShader;
-import org.cesiumjs.cs.scene.experimental.enums.UniformType;
-import org.cesiumjs.cs.scene.experimental.options.CustomShaderOptions;
+import org.cesiumjs.cs.scene.CustomShader;
+import org.cesiumjs.cs.scene.enums.UniformType;
+import org.cesiumjs.cs.scene.options.CustomShaderOptions;
 import org.cesiumjs.cs.scene.options.CameraFlyToOptions;
 import org.cesiumjs.cs.widgets.Viewer;
 import org.cesiumjs.cs.widgets.ViewerPanel;
@@ -53,9 +52,6 @@ public class Tiles3DNextS2Globe extends AbstractExample {
 
     @Override
     public void buildPanel() {
-        // One World Terrain Base Globe provided by Maxar
-        Cesium.ExperimentalFeatures.enableModelExperimental = true;
-
         ViewerOptions options = new ViewerOptions();
         options.enableGlobe = false;
         ViewerPanel csVPanel = new ViewerPanel(options);
@@ -71,7 +67,8 @@ public class Tiles3DNextS2Globe extends AbstractExample {
                 .setEasingFunction(EasingFunction.QUADRATIC_IN_OUT()));
 
         // MAXAR OWT WFF 1.2 Base Globe
-        Cesium3DTileset tileset = (Cesium3DTileset) scene.primitives().add(Cesium3DTileset.create(IonResource.fromAssetId(666330)));
+        Cesium3DTileset tileset = (Cesium3DTileset) scene.primitives().add(
+                Cesium3DTileset.create(IonResource.fromAssetId(691510)));
         tileset.maximumScreenSpaceError =  4;
 
         // --- Style ---
@@ -81,29 +78,25 @@ public class Tiles3DNextS2Globe extends AbstractExample {
         jsStyle.getJsObject("defines").setProperty("LandCoverColor", "rgb(${color}[0], ${color}[1], ${color}[2])");
         jsStyle.setProperty("color", "${LandCoverColor} === vec4(1.0) ? rgb(254, 254, 254) : ${LandCoverColor}");
         Cesium3DTileStyle style = new Cesium3DTileStyle(jsStyle);
-        Cesium.log(style);
 
         // --- Custom Shader ---
 
         CustomShader customShader = new CustomShader(new CustomShaderOptions()
                 .addUniform("u_time", UniformType.FLOAT(), 0)
-                .setFragmentShaderText(String.join("\n", new String[] {
-                        "void fragmentMain(FragmentInput fsInput, inout czm_modelMaterial material)",
-                        "{",
-                        "  // NOTE: this is exposing internal details of the shader.",
-                        "  float featureId = floor(texture2D(FEATURE_ID_TEXTURE, FEATURE_ID_TEXCOORD).FEATURE_ID_CHANNEL * 255.0 + 0.5);",
-                        "  // Use cartesian coordinates but scale to be roughly [-1, 1]",
-                        "  vec3 positionWC = fsInput.attributes.positionWC / 6.3e6;",
-                        "  if (featureId == 60.0)",
-                        "  {",
-                        "    // Something like FM synthesis to make irregularly spaced waves",
-                        "    float wave = sin(14.0 * positionWC.z - u_time);",
-                        "    wave = 0.5 + 0.5 * sin(10.0 * wave * positionWC.z - u_time);",
-                        "    // mix in an over-saturated version of the diffuse to make shimmering bands of color",
-                        "    material.diffuse = mix(material.diffuse, material.diffuse * 3.0, wave);",
-                        "  }",
-                        "}",
-                })));
+                .setFragmentShaderText("void fragmentMain(FragmentInput fsInput, inout czm_modelMaterial material)\n" +
+                        "            {\n" +
+                        "              int featureId = fsInput.featureIds.featureId_0;\n" +
+                        "              // Use cartesian coordinates but scale to be roughly [-1, 1]\n" +
+                        "              vec3 positionWC = fsInput.attributes.positionWC / 6.3e6;\n" +
+                        "              if (featureId == 60)\n" +
+                        "              {\n" +
+                        "                // Something like FM synthesis to make irregularly spaced waves\n" +
+                        "                float wave = sin(14.0 * positionWC.z - u_time);\n" +
+                        "                wave = 0.5 + 0.5 * sin(10.0 * wave * positionWC.z - u_time);\n" +
+                        "                // mix in an over-saturated version of the diffuse to make shimmering bands of color\n" +
+                        "                material.diffuse = mix(material.diffuse, material.diffuse * 3.0, wave);\n" +
+                        "              }\n" +
+                        "            }"));
 
         final double startTime = performanceNow();
         scene.postUpdate().addEventListener((Event.Listener) o -> customShaderUpdate(customShader, startTime));
@@ -136,11 +129,10 @@ public class Tiles3DNextS2Globe extends AbstractExample {
 
                     StringBuilder tableHtmlScratch = new StringBuilder("<table><thead><tr><th><tt>Property</tt></th><th><tt>Value</tt></th></tr></thead><tbody>");
 
-                    String[] propertyNames = ((Cesium3DTileFeature) feature).getPropertyNames();
-                    int length = propertyNames.length;
-                    for (String propertyName : propertyNames) {
-                        JsObject propertyValue = ((Cesium3DTileFeature) feature).getProperty(propertyName);
-                        tableHtmlScratch.append("<tr><td><tt>").append(propertyName).append("</tt></td><td><tt>").append(propertyValue).append("</tt></td></tr>");
+                    String[] propertyIds = ((Cesium3DTileFeature) feature).getPropertyIds();
+                    for (String propertyId : propertyIds) {
+                        JsObject propertyValue = ((Cesium3DTileFeature) feature).getProperty(propertyId);
+                        tableHtmlScratch.append("<tr><td><tt>").append(propertyId).append("</tt></td><td><tt>").append(propertyValue).append("</tt></td></tr>");
                     }
                     tableHtmlScratch.append("</tbody></table>");
                     metadataOverlay.setInnerHTML(tableHtmlScratch.toString());

@@ -33,28 +33,26 @@ import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cesiumjs.cs.widgets.options.ViewerOptions;
 import org.cleanlogic.cesiumjs4gwt.showcase.basic.AbstractExample;
 import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ShowcaseExampleStore;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.Slider;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderEvent;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderListener;
+import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.InputEvent;
+import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderBox;
 
 /**
  * @author Serge Silaev aka iSergio
  */
 public class GroundAtmosphere extends AbstractExample {
     private ViewerPanel csVPanel;
-    private Scene scene;
     private Globe globe;
 
-    private Slider lightingFadeOutDistanceSlider;
+    private SliderBox lightingFadeOutDistanceSlider;
     private TextBox lightingFadeOutDistanceTBox;
 
-    private Slider lightingFadeInDistanceSlider;
+    private SliderBox lightingFadeInDistanceSlider;
     private TextBox lightingFadeInDistanceTBox;
 
-    private Slider nightFadeOutDistanceSlider;
+    private SliderBox nightFadeOutDistanceSlider;
     private TextBox nightFadeOutDistanceTBox;
 
-    private Slider nightFadeInDistanceSlider;
+    private SliderBox nightFadeInDistanceSlider;
     private TextBox nightFadeInDistanceTBox;
 
     private double lightingFadeOutDistance;
@@ -74,7 +72,7 @@ public class GroundAtmosphere extends AbstractExample {
         viewerOptions.sceneModePicker = false;
         csVPanel = new ViewerPanel(viewerOptions);
 
-        scene = csVPanel.getViewer().scene();
+        Scene scene = csVPanel.getViewer().scene();
         globe = scene.globe;
 
         lightingFadeOutDistance = globe.lightingFadeOutDistance;
@@ -86,10 +84,10 @@ public class GroundAtmosphere extends AbstractExample {
         lightingFadeOutDistanceHPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
         lightingFadeOutDistanceHPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
         lightingFadeOutDistanceHPanel.setSpacing(10);
-        lightingFadeOutDistanceSlider = new Slider("lightingFadeOutDistance", 1, 100, 10);
+        lightingFadeOutDistanceSlider = new SliderBox(1e6, 10000000, 1e8, 1e6);
         lightingFadeOutDistanceSlider.setStep(1);
         lightingFadeOutDistanceSlider.setWidth("150px");
-        lightingFadeOutDistanceSlider.addListener(new MSliderListener());
+        lightingFadeOutDistanceSlider.addInputHandler(this::onInput);
         lightingFadeOutDistanceTBox = new TextBox();
         lightingFadeOutDistanceTBox.addChangeHandler(new MChangeHandler());
         lightingFadeOutDistanceTBox.setText("" + 10 * 1e6);
@@ -101,10 +99,10 @@ public class GroundAtmosphere extends AbstractExample {
         lightingFadeInDistanceHPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
         lightingFadeInDistanceHPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
         lightingFadeInDistanceHPanel.setSpacing(10);
-        lightingFadeInDistanceSlider = new Slider("lightingFadeInDistance", 1, 100, 20);
+        lightingFadeInDistanceSlider = new SliderBox(1e6, 20000000, 1e8, 1e6);
         lightingFadeInDistanceSlider.setStep(1);
         lightingFadeInDistanceSlider.setWidth("150px");
-        lightingFadeInDistanceSlider.addListener(new MSliderListener());
+        lightingFadeInDistanceSlider.addInputHandler(this::onInput);
         lightingFadeInDistanceTBox = new TextBox();
         lightingFadeInDistanceTBox.addChangeHandler(new MChangeHandler());
         lightingFadeInDistanceTBox.setText("" + 20 * 1e6);
@@ -116,10 +114,10 @@ public class GroundAtmosphere extends AbstractExample {
         nightFadeOutDistanceHPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
         nightFadeOutDistanceHPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
         nightFadeOutDistanceHPanel.setSpacing(10);
-        nightFadeOutDistanceSlider = new Slider("nightFadeOutDistance", 1, 100, 10);
+        nightFadeOutDistanceSlider = new SliderBox(1e6, 10000000, 1e8, 1e6);
         nightFadeOutDistanceSlider.setStep(1);
         nightFadeOutDistanceSlider.setWidth("150px");
-        nightFadeOutDistanceSlider.addListener(new MSliderListener());
+        nightFadeOutDistanceSlider.addInputHandler(this::onInput);
         nightFadeOutDistanceTBox = new TextBox();
         nightFadeOutDistanceTBox.addChangeHandler(new MChangeHandler());
         nightFadeOutDistanceTBox.setText("" + 10 * 1e6);
@@ -131,10 +129,10 @@ public class GroundAtmosphere extends AbstractExample {
         nightFadeInDistanceHPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
         nightFadeInDistanceHPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
         nightFadeInDistanceHPanel.setSpacing(10);
-        nightFadeInDistanceSlider = new Slider("nightFadeInDistance", 1, 100, 50);
+        nightFadeInDistanceSlider = new SliderBox(1e6, 50000000, 1e8, 1e6);
         nightFadeInDistanceSlider.setStep(1);
         nightFadeInDistanceSlider.setWidth("150px");
-        nightFadeInDistanceSlider.addListener(new MSliderListener());
+        nightFadeInDistanceSlider.addInputHandler(this::onInput);
         nightFadeInDistanceTBox = new TextBox();
         nightFadeInDistanceTBox.addChangeHandler(new MChangeHandler());
         nightFadeInDistanceTBox.setText("" + 50 * 1e6);
@@ -256,51 +254,6 @@ public class GroundAtmosphere extends AbstractExample {
         initWidget(contentPanel);
     }
 
-    @Override
-    public String[] getSourceCodeURLs() {
-        String[] sourceCodeURLs = new String[1];
-        sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "GroundAtmosphere.txt";
-        return sourceCodeURLs;
-    }
-
-    private class MSliderListener implements SliderListener {
-
-        @Override
-        public void onStart(SliderEvent e) {
-
-        }
-
-        @Override
-        public boolean onSlide(SliderEvent e) {
-            Slider source = e.getSource();
-            double value = source.getValue() * 1e6;
-            if (source == lightingFadeOutDistanceSlider) {
-                globe.lightingFadeOutDistance = value;
-                lightingFadeOutDistanceTBox.setText("" + value);
-            } else if (source == lightingFadeInDistanceSlider) {
-                globe.lightingFadeInDistance = value;
-                lightingFadeInDistanceTBox.setText("" + value);
-            } else if (source == nightFadeOutDistanceSlider) {
-                globe.nightFadeOutDistance = value;
-                nightFadeOutDistanceTBox.setText("" + value);
-            } else if (source == nightFadeInDistanceSlider) {
-                globe.nightFadeInDistance = value;
-                nightFadeInDistanceTBox.setText("" + value);
-            }
-            return true;
-        }
-
-        @Override
-        public void onChange(SliderEvent e) {
-
-        }
-
-        @Override
-        public void onStop(SliderEvent e) {
-
-        }
-    }
-
     private class MChangeHandler implements ChangeHandler {
         @Override
         public void onChange(ChangeEvent changeEvent) {
@@ -320,5 +273,30 @@ public class GroundAtmosphere extends AbstractExample {
                 nightFadeInDistanceSlider.setValue((int) (value / 1e6));
             }
         }
+    }
+
+    private void onInput(InputEvent event) {
+        SliderBox source = (SliderBox) event.getSource();
+        double value = source.getValue();
+        if (source == lightingFadeOutDistanceSlider) {
+            globe.lightingFadeOutDistance = value;
+            lightingFadeOutDistanceTBox.setText(String.valueOf(value));
+        } else if (source == lightingFadeInDistanceSlider) {
+            globe.lightingFadeInDistance = value;
+            lightingFadeInDistanceTBox.setText(String.valueOf(value));
+        } else if (source == nightFadeOutDistanceSlider) {
+            globe.nightFadeOutDistance = value;
+            nightFadeOutDistanceTBox.setText(String.valueOf(value));
+        } else if (source == nightFadeInDistanceSlider) {
+            globe.nightFadeInDistance = value;
+            nightFadeInDistanceTBox.setText(String.valueOf(value));
+        }
+    }
+
+    @Override
+    public String[] getSourceCodeURLs() {
+        String[] sourceCodeURLs = new String[1];
+        sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "GroundAtmosphere.txt";
+        return sourceCodeURLs;
     }
 }

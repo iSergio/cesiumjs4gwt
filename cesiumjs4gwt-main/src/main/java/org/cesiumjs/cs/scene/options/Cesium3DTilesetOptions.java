@@ -25,7 +25,7 @@ import org.cesiumjs.cs.scene.PointCloudShading;
 import org.cesiumjs.cs.scene.enums.Axis;
 import org.cesiumjs.cs.scene.enums.ClassificationType;
 import org.cesiumjs.cs.scene.enums.SplitDirection;
-import org.cesiumjs.cs.scene.experimental.CustomShader;
+import org.cesiumjs.cs.scene.CustomShader;
 
 /**
  * @author Serge Silaev aka iSergio
@@ -396,6 +396,12 @@ public class Cesium3DTilesetOptions {
      */
     @JsProperty
     public boolean debugColorizeTiles;
+    /**
+     * For debugging only. This must be true for debugWireframe to work in WebGL1. This cannot be set after the
+     * tileset has loaded.
+     */
+    @JsProperty
+    public boolean enableDebugWireframe;
     /**
      * For debugging only. When true, render's each tile's content as a wireframe.
      * Defaule: false;

@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 iserge, Gis4Fun.
+ * Copyright 2022 iSergio, Gis4Fun.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,19 +14,18 @@
  * limitations under the License.
  */
 
-package org.cesiumjs.cs.scene.experimental;
+package org.cesiumjs.cs.scene;
 
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.Cartesian2;
 import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.js.JsArray;
-import org.cesiumjs.cs.scene.experimental.options.ModelFeatureOptions;
+import org.cesiumjs.cs.scene.options.ModelFeatureOptions;
 
 /**
- * A feature of a {@link ModelExperimental}.
+ * A feature of a {@link Model}.
  * Provides access to a feature's properties stored in the model's feature table.
  *
  * Modifications to a ModelFeature object have the lifetime of the model.

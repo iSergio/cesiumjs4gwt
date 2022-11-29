@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 iserge, Gis4Fun.
+ * Copyright 2022 iSergio, Gis4Fun.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,18 +14,19 @@
  * limitations under the License.
  */
 
-package org.cesiumjs.cs.scene.experimental.options;
+package org.cesiumjs.cs.scene.options;
 
 import com.google.gwt.typedarrays.shared.Uint8Array;
 import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.Resource;
 import org.cesiumjs.cs.core.enums.PixelDatatype;
 import org.cesiumjs.cs.core.enums.PixelFormat;
+import org.cesiumjs.cs.scene.TextureUniform;
 import org.cesiumjs.cs.scene.enums.TextureMagnificationFilter;
 import org.cesiumjs.cs.scene.enums.TextureMinificationFilter;
 
 /**
- * Options for {@link org.cesiumjs.cs.scene.experimental.TextureUniform}.
+ * Options for {@link TextureUniform}.
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class TextureUniformOptions {

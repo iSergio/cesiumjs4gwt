@@ -27,11 +27,12 @@ import com.google.gwt.user.client.ui.*;
 import org.cesiumjs.cs.Cesium;
 import org.cesiumjs.cs.core.Math;
 import org.cesiumjs.cs.core.*;
+import org.cesiumjs.cs.core.providers.ArcGISTiledElevationTerrainProvider;
 import org.cesiumjs.cs.core.providers.CesiumTerrainProvider;
 import org.cesiumjs.cs.core.providers.EllipsoidTerrainProvider;
 import org.cesiumjs.cs.core.providers.GeoserverTerrainProvider;
 import org.cesiumjs.cs.core.providers.VRTheWorldTerrainProvider;
-import org.cesiumjs.cs.core.providers.options.CesiumTerrainProviderOptions;
+import org.cesiumjs.cs.core.providers.options.ArcGISTiledElevationTerrainProviderOptions;
 import org.cesiumjs.cs.core.providers.options.GeoserverTerrainProviderOptions;
 import org.cesiumjs.cs.core.providers.options.VRTheWorldTerrainProviderOptions;
 import org.cesiumjs.cs.datasources.Entity;
@@ -74,12 +75,9 @@ public class Terrain extends AbstractExample {
     public void buildPanel() {
         csVPanel = new ViewerPanel();
 
-        CesiumTerrainProviderOptions cesiumTerrainProviderOptions = new CesiumTerrainProviderOptions();
-        cesiumTerrainProviderOptions.url = "https://assets.agi.com/stk-terrain/world";
-        cesiumTerrainProviderOptions.requestWaterMask = true;
-        cesiumTerrainProviderOptions.requestVertexNormals = true;
-        cesiumTerrainProviderMeshes = new CesiumTerrainProvider(cesiumTerrainProviderOptions);
-        csVPanel.getViewer().terrainProvider = cesiumTerrainProviderMeshes;
+        CesiumTerrainProvider worldTerrain = Cesium.createWorldTerrain(Cesium.CreateWorldTerrainOptions.create(true, true));
+
+        csVPanel.getViewer().terrainProvider = Cesium.createWorldTerrain();
 
         Cartesian3 target = new Cartesian3(300770.50872389384, 5634912.131394585, 2978152.2865545116);
         Cartesian3 offset = new Cartesian3(6344.974098678562, -793.3419798081741, 2499.9508860763162);
@@ -94,7 +92,9 @@ public class Terrain extends AbstractExample {
         terrainsLBox.addItem("CesiumTerrainProvider - STK World Terrain w/ Water", "3");
         terrainsLBox.addItem("EllipsoidTerrainProvider", "4");
         terrainsLBox.addItem("VRTheWorldTerrainProvider", "5");
-        terrainsLBox.addItem("GeoserverTerrainProvider", "6");
+        terrainsLBox.addItem("GeoserverTerrainProvider SRTM30", "6");
+        terrainsLBox.addItem("GeoserverTerrainProvider SRTM90", "7");
+        terrainsLBox.addItem("ArcGISTerrainProvider", "8");
 
         terrainsLBox.addChangeHandler(new ChangeHandler() {
             @Override
@@ -102,29 +102,23 @@ public class Terrain extends AbstractExample {
                 ListBox source = (ListBox) changeEvent.getSource();
                 switch (source.getSelectedValue()) {
                     case "0": {
-                        csVPanel.getViewer().terrainProvider = cesiumTerrainProviderMeshes;
+                        csVPanel.getViewer().terrainProvider = worldTerrain;
                         csVPanel.getViewer().scene().globe.enableLighting = true;
                     }
                     break;
                     case "1": {
-                        CesiumTerrainProviderOptions options = new CesiumTerrainProviderOptions();
-                        options.url = "https://assets.agi.com/stk-terrain/world";
-                        csVPanel.getViewer().terrainProvider = new CesiumTerrainProvider(options);
+                        csVPanel.getViewer().terrainProvider = Cesium.createWorldTerrain();
                     }
                     break;
                     case "2": {
-                        CesiumTerrainProviderOptions options = new CesiumTerrainProviderOptions();
-                        options.url = "https://assets.agi.com/stk-terrain/world";
-                        options.requestVertexNormals = true;
-                        csVPanel.getViewer().terrainProvider = new CesiumTerrainProvider(options);
+                        csVPanel.getViewer().terrainProvider = Cesium.createWorldTerrain(Cesium.CreateWorldTerrainOptions.create(true));
                         csVPanel.getViewer().scene().globe.enableLighting = true;
                     }
                     break;
                     case "3": {
-                        CesiumTerrainProviderOptions options = new CesiumTerrainProviderOptions();
-                        options.url = "https://assets.agi.com/stk-terrain/world";
-                        options.requestWaterMask = true;
-                        csVPanel.getViewer().terrainProvider = new CesiumTerrainProvider(options);
+                        Cesium.CreateWorldTerrainOptions worldTerrainOptions = new Cesium.CreateWorldTerrainOptions();
+                        worldTerrainOptions.requestWaterMask = true;
+                        csVPanel.getViewer().terrainProvider = Cesium.createWorldTerrain(worldTerrainOptions);
                         csVPanel.getViewer().scene().globe.enableLighting = true;
                     }
                     break;
@@ -140,12 +134,24 @@ public class Terrain extends AbstractExample {
                     break;
                     case "6": {
                         GeoserverTerrainProviderOptions options = new GeoserverTerrainProviderOptions();
-                        options.url = "http://sergeserver.noip.me/geobase-portal/ows";
-                        options.layerName = "geoserver:geobase:SRTM90";
-                        options.styleName = "geobase:grayToColor";
+                        options.url = "https://gis4fun.org/geoserver/ows";
+                        options.layerName = "elevation:SRTM30";
+                        options.styleName = "elevation:grayToColor";
                         csVPanel.getViewer().terrainProvider = new GeoserverTerrainProvider(options);
+                        break;
                     }
-                    break;
+                    case "7": {
+                        GeoserverTerrainProviderOptions options = new GeoserverTerrainProviderOptions();
+                        options.url = "https://gis4fun.org/geoserver/ows";
+                        options.layerName = "elevation:SRTM90";
+                        options.styleName = "elevation:grayToColor";
+                        csVPanel.getViewer().terrainProvider = new GeoserverTerrainProvider(options);
+                        break;
+                    }
+                    case "8": {
+                        csVPanel.getViewer().terrainProvider = new ArcGISTiledElevationTerrainProvider(ArcGISTiledElevationTerrainProviderOptions.create("https://elevation3d.arcgis.com/arcgis/rest/services/WorldElevation3D/Terrain3D/ImageServer"));
+                        break;
+                    }
                     default:
                         break;
                 }
