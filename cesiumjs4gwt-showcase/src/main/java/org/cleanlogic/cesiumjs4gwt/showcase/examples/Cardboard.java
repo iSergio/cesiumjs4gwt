@@ -25,8 +25,6 @@ import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.core.enums.ClockRange;
 import org.cesiumjs.cs.core.interpolation.HermitePolynomialApproximation;
 import org.cesiumjs.cs.core.options.TimeIntervalOptions;
-import org.cesiumjs.cs.core.providers.CesiumTerrainProvider;
-import org.cesiumjs.cs.core.providers.options.CesiumTerrainProviderOptions;
 import org.cesiumjs.cs.datasources.Entity;
 import org.cesiumjs.cs.datasources.graphics.ModelGraphics;
 import org.cesiumjs.cs.datasources.graphics.options.ModelGraphicsOptions;
@@ -61,15 +59,11 @@ public class Cardboard extends AbstractExample {
     public void buildPanel() {
         ViewerOptions viewerOptions = new ViewerOptions();
         viewerOptions.vrButton = true;
+        viewerOptions.terrainProvider = Cesium.createWorldTerrain();
 
         ViewerPanel csVPanel = new ViewerPanel(viewerOptions);
 
         csVPanel.getViewer().scene().globe.enableLighting = true;
-
-        CesiumTerrainProviderOptions cesiumTerrainProviderOptions = new CesiumTerrainProviderOptions();
-        cesiumTerrainProviderOptions.url = "https://assets.agi.com/stk-terrain/world";
-        cesiumTerrainProviderOptions.requestVertexNormals = true;
-        csVPanel.getViewer().terrainProvider = new CesiumTerrainProvider(cesiumTerrainProviderOptions);
 
         csVPanel.getViewer().scene().globe.depthTestAgainstTerrain = true;
 
@@ -116,41 +110,38 @@ public class Cardboard extends AbstractExample {
         camera.up = new Cartesian3(0.0, 0.0, 1.0);
         camera.right = new Cartesian3(0.0, -1.0, 0.0);
 
-        csVPanel.getViewer().scene().preRender().addEventListener(new Scene.Listener() {
-            @Override
-            public void function(Scene scene, JulianDate time) {
-                Cartesian3 position = entity.position.getValue(time);
-                if (position == null || !Cesium.defined(position)) {
+        csVPanel.getViewer().scene().preRender().addEventListener((Scene.Listener) (scene, time) -> {
+            Cartesian3 position = entity.position.getValue(time);
+            if (position == null || !Cesium.defined(position)) {
+                return;
+            }
+
+            Matrix4 transform;
+            if (!Cesium.defined(entity.orientation)) {
+                transform = Transforms.eastNorthUpToFixedFrame(position);
+            } else {
+                Quaternion orientation = (Quaternion) entity.orientation.getValue(time);
+                if (!Cesium.defined(orientation)) {
                     return;
                 }
 
-                Matrix4 transform;
-                if (!Cesium.defined(entity.orientation)) {
-                    transform = Transforms.eastNorthUpToFixedFrame(position);
-                } else {
-                    Quaternion orientation = (Quaternion) entity.orientation.getValue(time);
-                    if (!Cesium.defined(orientation)) {
-                        return;
-                    }
-
-                    transform = Matrix4.fromRotationTranslation(Matrix3.fromQuaternion(orientation), position);
-                }
-
-                // Save camera state
-                Cartesian3 offset = camera.position.clone();
-                Cartesian3 direction = camera.direction.clone();
-                Cartesian3 up = camera.up.clone();
-
-                // Set camera to be in model's reference frame.
-                camera.lookAtTransform(transform);
-
-                // Reset the camera state to the saved state so it appears fixed in the model's
-                // frame.
-                offset.clone(camera.position);
-                direction.clone(camera.direction);
-                up.clone(camera.up);
-                Cartesian3.cross(direction, up, camera.right);
+                transform = Matrix4.fromRotationTranslation(Matrix3.fromQuaternion(orientation), position);
             }
+
+            // Save camera state
+            Cartesian3 offset = camera.position.clone();
+            Cartesian3 direction = camera.direction.clone();
+            Cartesian3 up = camera.up.clone();
+
+            // Set camera to be in model's reference frame.
+            camera.lookAtTransform(transform);
+
+            // Reset the camera state to the saved state so it appears fixed in the model's
+            // frame.
+            offset.clone(camera.position);
+            direction.clone(camera.direction);
+            up.clone(camera.up);
+            Cartesian3.cross(direction, up, camera.right);
         });
 
         // Add a few more balloons flying with the one the viewer is in.

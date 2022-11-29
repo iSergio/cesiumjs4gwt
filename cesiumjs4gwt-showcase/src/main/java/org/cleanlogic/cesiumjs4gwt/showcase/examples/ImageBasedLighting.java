@@ -97,8 +97,7 @@ public class ImageBasedLighting extends AbstractExample {
         Cartesian3 origin = Cartesian3.fromDegrees(-123.0744619, 44.0503706, height);
         Matrix4 modelMatrix = Transforms.headingPitchRollToFixedFrame(origin, hpr);
 
-        FromGltfOptions fromGltfOptions = new FromGltfOptions();
-        fromGltfOptions.url = modelURL;
+        FromGltfOptions fromGltfOptions = FromGltfOptions.create(modelURL);
         fromGltfOptions.modelMatrix = modelMatrix;
         fromGltfOptions.minimumPixelSize = 128.0;
         model = (Model) csVPanel.getViewer().scene().primitives().add(Model.fromGltf(fromGltfOptions));

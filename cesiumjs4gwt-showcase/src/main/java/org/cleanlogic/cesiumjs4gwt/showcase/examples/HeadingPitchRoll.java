@@ -97,8 +97,7 @@ public class HeadingPitchRoll extends AbstractExample {
         final Transforms.LocalFrameToFixedFrame fixedFrameTransform = Transforms.localFrameToFixedFrameGenerator("north",
                 "west");
 
-        FromGltfOptions fromGltfOptions = new FromGltfOptions();
-        fromGltfOptions.url = GWT.getModuleBaseURL() + "SampleData/models/CesiumAir/Cesium_Air.glb";
+        FromGltfOptions fromGltfOptions = FromGltfOptions.create(GWT.getModuleBaseURL() + "SampleData/models/CesiumAir/Cesium_Air.glb");
         fromGltfOptions.modelMatrix = Transforms.headingPitchRollToFixedFrame(position, hpRoll, Ellipsoid.WGS84());// ,
         // fixedFrameTransform);
         fromGltfOptions.minimumPixelSize = 128;

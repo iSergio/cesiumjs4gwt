@@ -32,10 +32,10 @@ import org.cesiumjs.cs.scene.Cesium3DTileStyle;
 import org.cesiumjs.cs.scene.Cesium3DTileset;
 import org.cesiumjs.cs.scene.Scene;
 import org.cesiumjs.cs.scene.enums.Cesium3DTileColorBlendMode;
-import org.cesiumjs.cs.scene.experimental.CustomShader;
-import org.cesiumjs.cs.scene.experimental.enums.LightingModel;
-import org.cesiumjs.cs.scene.experimental.enums.UniformType;
-import org.cesiumjs.cs.scene.experimental.options.CustomShaderOptions;
+import org.cesiumjs.cs.scene.CustomShader;
+import org.cesiumjs.cs.scene.enums.LightingModel;
+import org.cesiumjs.cs.scene.enums.UniformType;
+import org.cesiumjs.cs.scene.options.CustomShaderOptions;
 import org.cesiumjs.cs.scene.options.CameraFlyToOptions;
 import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cesiumjs.cs.widgets.options.ViewerOptions;
@@ -112,8 +112,9 @@ public class Tiles3DNextPhotogrammetryClassification  extends AbstractExample {
         unlitShader = new CustomShader(new CustomShaderOptions()
                 .setLightingModel(LightingModel.UNLIT()).setFragmentShaderText(emptyFragmentShader));
 
-        materialShader = new CustomShader(new CustomShaderOptions().setLightingModel(LightingModel.PBR())
-                .setTranslucent(true).setFragmentShaderText("const int WINDOW = 0;\n" +
+        materialShader = new CustomShader(new CustomShaderOptions()
+                .setLightingModel(LightingModel.PBR())
+                .setFragmentShaderText("const int WINDOW = 0;\n" +
                         "            const int FRAME = 1;\n" +
                         "            const int WALL = 2;\n" +
                         "            const int ROOF = 3;\n" +

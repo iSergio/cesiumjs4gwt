@@ -27,15 +27,16 @@ import org.cesiumjs.cs.core.enums.PixelFormat;
 import org.cesiumjs.cs.core.enums.ScreenSpaceEventType;
 import org.cesiumjs.cs.core.events.MouseClickEvent;
 import org.cesiumjs.cs.core.events.MouseMoveEvent;
+import org.cesiumjs.cs.scene.Model;
+import org.cesiumjs.cs.scene.enums.CustomShaderTranslucencyMode;
 import org.cesiumjs.cs.scene.enums.TextureMagnificationFilter;
 import org.cesiumjs.cs.scene.enums.TextureMinificationFilter;
-import org.cesiumjs.cs.scene.experimental.CustomShader;
-import org.cesiumjs.cs.scene.experimental.ModelExperimental;
-import org.cesiumjs.cs.scene.experimental.TextureUniform;
-import org.cesiumjs.cs.scene.experimental.enums.UniformType;
-import org.cesiumjs.cs.scene.experimental.options.CustomShaderOptions;
-import org.cesiumjs.cs.scene.experimental.options.ModelExperimentalFromGltfOptions;
-import org.cesiumjs.cs.scene.experimental.options.TextureUniformOptions;
+import org.cesiumjs.cs.scene.CustomShader;
+import org.cesiumjs.cs.scene.TextureUniform;
+import org.cesiumjs.cs.scene.enums.UniformType;
+import org.cesiumjs.cs.scene.options.CustomShaderOptions;
+import org.cesiumjs.cs.scene.options.FromGltfOptions;
+import org.cesiumjs.cs.scene.options.TextureUniformOptions;
 import org.cesiumjs.cs.scene.options.CameraFlyToOptions;
 import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cesiumjs.cs.widgets.options.ViewerOptions;
@@ -95,136 +96,124 @@ public class CustomShadersModels extends AbstractExample {
         // Dragging the mouse will expand/shrink the model.
         expandModelShader = new CustomShader(new CustomShaderOptions()
                 .addUniform("u_drag", UniformType.VEC2(), new Cartesian2(0.0, 0.0))
-                .setVertexShaderText(String.join("\n", new String[] {
-                        // If the mouse is dragged to the right, the model grows
-                        // If the mouse is dragged to the left, the model shrinks
-                        "void vertexMain(VertexInput vsInput, inout vec3 positionMC)",
-                        "{",
-                        "    positionMC += 0.01 * u_drag.x * vsInput.attributes.normalMC;",
-                        "}",
-                })));
+                .setVertexShaderText(
+                        "    // If the mouse is dragged to the right, the model grows\n" +
+                        "    // If the mouse is dragged to the left, the model shrinks\n" +
+                        "    void vertexMain(VertexInput vsInput, inout czm_modelVertexOutput vsOutput)\n" +
+                        "    {\n" +
+                        "        vsOutput.positionMC += 0.01 * u_drag.x * vsInput.attributes.normalMC;\n" +
+                        "    }"));
 
         textureUniformShader = new CustomShader(new CustomShaderOptions()
                 .addUniform("u_time", UniformType.FLOAT(), 0)
                 .addUniform("u_stripes", UniformType.SAMPLER_2D(), TextureUniform.create(GWT.getModuleBaseURL() + "SampleData/cesium_stripes.png"))
-                .setFragmentShaderText(String.join("\n", new String[] {
-                        "void fragmentMain(FragmentInput fsInput, inout czm_modelMaterial material)",
-                        "{",
-                        "    vec2 texCoord = fsInput.attributes.texCoord_0 + 0.1 * vec2(u_time, 0.0);",
-                        "    material.diffuse = texture2D(u_stripes, texCoord).rgb;",
-                        "}",
-                })));
+                .setFragmentShaderText(
+                        "    void fragmentMain(FragmentInput fsInput, inout czm_modelMaterial material)\n" +
+                        "    {\n" +
+                        "        vec2 texCoord = fsInput.attributes.texCoord_0 + 0.1 * vec2(u_time, 0.0);\n" +
+                        "        material.diffuse = texture2D(u_stripes, texCoord).rgb;\n" +
+                        "    }"));
 
         TextureUniform checkerboardTexture = makeCheckerboardTexture(8);
-        Cesium.log(checkerboardTexture.typedArray());
-        Cesium.log(checkerboardTexture.height());
-        Cesium.log(checkerboardTexture.pixelDatatype());
 
         // Use the checkerboard red channel as a mask
         checkerboardMaskShader = new CustomShader(new CustomShaderOptions()
                 .addUniform("u_checkerboard", UniformType.SAMPLER_2D(), checkerboardTexture)
-                .setFragmentShaderText(String.join("\n", new String[] {
-                        "void fragmentMain(FragmentInput fsInput, inout czm_modelMaterial material)",
-                        "{",
-                        "    vec2 texCoord = fsInput.attributes.texCoord_0;",
-                        "    vec4 checkerboard = texture2D(u_checkerboard, texCoord);",
-                        "    material.diffuse = mix(material.diffuse, vec3(0.0), checkerboard.r);",
-                        "}",
-                })));
+                .setFragmentShaderText(
+                        "    void fragmentMain(FragmentInput fsInput, inout czm_modelMaterial material)\n" +
+                        "    {\n" +
+                        "        vec2 texCoord = fsInput.attributes.texCoord_0;\n" +
+                        "        vec4 checkerboard = texture2D(u_checkerboard, texCoord);\n" +
+                        "        material.diffuse = mix(material.diffuse, vec3(0.0), checkerboard.r);\n" +
+                        "    }"));
 
         // Color like a checkerboard but make the transparency vary with
         // the diagonal
         checkerboardAlphaShader = new CustomShader(new CustomShaderOptions()
                 .addUniform("u_checkerboard", UniformType.SAMPLER_2D(), checkerboardTexture)
-                .setTranslucent(true)
-                .setFragmentShaderText(String.join("\n", new String[] {
-                        "void fragmentMain(FragmentInput fsInput, inout czm_modelMaterial material)",
-                        "{",
-                        "    vec2 texCoord = fsInput.attributes.texCoord_0;",
-                        "    vec4 checkerboard = texture2D(u_checkerboard, texCoord);",
-                        "    material.diffuse = checkerboard.rgb;",
-                        "    material.alpha = checkerboard.a;",
-                        "}",
-                })));
-
+                .setTranslucencyMode(CustomShaderTranslucencyMode.TRANSLUCENT())
+                .setFragmentShaderText(
+                        "    void fragmentMain(FragmentInput fsInput, inout czm_modelMaterial material)\n" +
+                        "    {\n" +
+                        "        vec2 texCoord = fsInput.attributes.texCoord_0;\n" +
+                        "        vec4 checkerboard = texture2D(u_checkerboard, texCoord);\n" +
+                        "        material.diffuse = checkerboard.rgb;\n" +
+                        "        material.alpha = checkerboard.a;\n" +
+                        "    }"));
         // Use the checkerboard to cut holes in the model
         checkerboardHolesShader = new CustomShader(new CustomShaderOptions()
                 .addUniform("u_checkerboard", UniformType.SAMPLER_2D(), checkerboardTexture)
-                .setFragmentShaderText(String.join("\n", new String[] {
-                        "void fragmentMain(FragmentInput fsInput, inout czm_modelMaterial material)",
-                        "{",
-                        "    vec2 texCoord = fsInput.attributes.texCoord_0;",
-                        "    vec4 checkerboard = texture2D(u_checkerboard, texCoord);",
-                        "    if (checkerboard.r > 0.0) {",
-                        "        discard;",
-                        "    }",
-                        "}",
-                })));
+                .setFragmentShaderText(
+                        "    void fragmentMain(FragmentInput fsInput, inout czm_modelMaterial material)\n" +
+                        "    {\n" +
+                        "        vec2 texCoord = fsInput.attributes.texCoord_0;\n" +
+                        "        vec4 checkerboard = texture2D(u_checkerboard, texCoord);\n" +
+                        "        if (checkerboard.r > 0.0) {\n" +
+                        "            discard;\n" +
+                        "        }\n" +
+                        "    }"));
 
         TextureUniform gradientTexture = makeGradientTexture();
         // Color the texture along its UV coordinates.
         gradientShader = new CustomShader(new CustomShaderOptions()
                 .addUniform("u_gradient", UniformType.SAMPLER_2D(), gradientTexture)
-                .setFragmentShaderText(String.join("\n", new String[] {
-                        "void fragmentMain(FragmentInput fsInput, inout czm_modelMaterial material)",
-                        "{",
-                        "    material.diffuse = texture2D(u_gradient, fsInput.attributes.texCoord_0).rgb;",
-                        "}",
-                })));
+                .setFragmentShaderText(
+                        "    void fragmentMain(FragmentInput fsInput, inout czm_modelMaterial material)\n" +
+                        "    {\n" +
+                        "        material.diffuse = texture2D(u_gradient, fsInput.attributes.texCoord_0).rgb;\n" +
+                        "    }"));
 
         // Dragging the mouse will modify the PBR values
         modifyPbrShader = new CustomShader(new CustomShaderOptions()
                 .addUniform("u_drag", UniformType.VEC2(), new Cartesian2(0., 0.))
-                .setFragmentShaderText(String.join("\n", new String[] {
-                        "void fragmentMain(FragmentInput vsInput, inout czm_modelMaterial material)",
-                        "{",
-                        "    float dragDistance = length(u_drag);",
-                        "    float variation = smoothstep(0.0, 300.0, dragDistance);",
-                        // variation adds an golden tint to the specular highlights
-                        "    material.specular = mix(material.specular, vec3(0.8, 0.5, 0.1), variation);",
-                        // variation makes the material glossier
-                        "    material.roughness = clamp(1.0 - variation, 0.01, 1.0);",
-                        // variation mixes some red into the diffuse color
-                        "    material.diffuse += vec3(0.5, 0.0, 0.0) * variation;",
-                        "}",
-                })));
+                .setFragmentShaderText(
+                        "    // Click and drag to vary the PBR values\n" +
+                        "    void fragmentMain(FragmentInput vsInput, inout czm_modelMaterial material)\n" +
+                        "    {\n" +
+                        "        float dragDistance = length(u_drag);\n" +
+                        "        float variation = smoothstep(0.0, 300.0, dragDistance);\n" +
+                        "    // variation adds an golden tint to the specular highlights\n" +
+                        "        material.specular = mix(material.specular, vec3(0.8, 0.5, 0.1), variation);\n" +
+                        "    // variation makes the material glossier\n" +
+                        "        material.roughness = clamp(1.0 - variation, 0.01, 1.0);\n" +
+                        "    // variation mixes some red into the diffuse color\n" +
+                        "        material.diffuse += vec3(0.5, 0.0, 0.0) * variation;\n" +
+                        "    }"));
 
         pointCloudWaveShader = new CustomShader(new CustomShaderOptions()
                 .addUniform("u_time", UniformType.FLOAT(), 0)
-                .setVertexShaderText(String.join("\n", new String[] {
-                        "void vertexMain(VertexInput vsInput, inout czm_modelVertexOutput vsOutput)",
-                        "{",
-                        // This model's x and y coordinates are in the range [0, 1], which
-                        // conveniently doubles as UV coordinates.
-                        "    vec2 uv = vsInput.attributes.positionMC.xy;",
-                        // Make the point cloud undulate in a complex wave that varies in
-                        // both space and time. The amplitude is based on the original shape
-                        // of the point cloud (which already is a wavy surface). The wave
-                        // is computed relative to the center of the model, hence the
-                        // transformations from [0, 1] -> [-1, 1] -> [0, 1]
-                        "    float amplitude = 2.0 * vsInput.attributes.positionMC.z - 1.0;",
-                        "    float wave = amplitude * sin(2.0 * czm_pi * uv.x - 2.0 * u_time) * sin(u_time);",
-                        "    vsOutput.positionMC.z = 0.5 + 0.5 * wave;",
-                        // Make the points pulse in and out by changing their size
-                        "    vsOutput.pointSize = 10.0 + 5.0 * sin(u_time);",
-                        "}",
-                }))
-                .setFragmentShaderText(String.join("\n", new String[] {
-                        "void fragmentMain(FragmentInput fsInput, inout czm_modelMaterial material)",
-                        "{",
-                        // Make the points circular instead of square
-                        "    float distance = length(gl_PointCoord - 0.5);",
-                        "    if (distance > 0.5) {",
-                        "        discard;",
-                        "    }",
-                        // Make a sinusoid color palette that moves in the general direction
-                        // of the wave, but at a different speed.
-                        // Coefficients were chosen arbitrarily
-                        "    vec2 uv = fsInput.attributes.positionMC.xy;",
-                        "    material.diffuse = 0.2 * fsInput.attributes.color_0.rgb;",
-                        "    material.diffuse += vec3(0.2, 0.3, 0.4) + vec3(0.2, 0.3, 0.4) * sin(2.0 * czm_pi * vec3(3.0, 2.0, 1.0) * uv.x - 3.0 * u_time);",
-                        "}",
-                })));
+                .setVertexShaderText(
+                        "    void vertexMain(VertexInput vsInput, inout czm_modelVertexOutput vsOutput)\n" +
+                        "    {\n" +
+                        "    // This model's x and y coordinates are in the range [0, 1], which\n" +
+                        "    // conveniently doubles as UV coordinates.\n" +
+                        "        vec2 uv = vsInput.attributes.positionMC.xy;\n" +
+                        "    // Make the point cloud undulate in a complex wave that varies in\n" +
+                        "    // both space and time. The amplitude is based on the original shape\n" +
+                        "    // of the point cloud (which already is a wavy surface). The wave\n" +
+                        "    // is computed relative to the center of the model, hence the\n" +
+                        "    // transformations from [0, 1] -> [-1, 1] -> [0, 1]\n" +
+                        "        float amplitude = 2.0 * vsInput.attributes.positionMC.z - 1.0;\n" +
+                        "        float wave = amplitude * sin(2.0 * czm_pi * uv.x - 2.0 * u_time) * sin(u_time);\n" +
+                        "        vsOutput.positionMC.z = 0.5 + 0.5 * wave;\n" +
+                        "    // Make the points pulse in and out by changing their size\n" +
+                        "        vsOutput.pointSize = 10.0 + 5.0 * sin(u_time);\n" +
+                        "    }")
+                .setFragmentShaderText(
+                        "    void fragmentMain(FragmentInput fsInput, inout czm_modelMaterial material)\n" +
+                        "    {\n" +
+                        "    // Make the points circular instead of square\n" +
+                        "        float distance = length(gl_PointCoord - 0.5);\n" +
+                        "        if (distance > 0.5) {\n" +
+                        "            discard;\n" +
+                        "        }\n" +
+                        "    // Make a sinusoid color palette that moves in the general direction\n" +
+                        "    // of the wave, but at a different speed.\n" +
+                        "    // Coefficients were chosen arbitrarily\n" +
+                        "        vec2 uv = fsInput.attributes.positionMC.xy;\n" +
+                        "        material.diffuse = 0.2 * fsInput.attributes.color_0.rgb;\n" +
+                        "        material.diffuse += vec3(0.2, 0.3, 0.4) + vec3(0.2, 0.3, 0.4) * sin(2.0 * czm_pi * vec3(3.0, 2.0, 1.0) * uv.x - 3.0 * u_time);\n" +
+                        "    }"));
 
         // Event handlers =====================================================
         double startTime = performanceNow();
@@ -387,12 +376,11 @@ public class CustomShadersModels extends AbstractExample {
 
     private void selectModel(String url, CustomShader customShader) {
         csVPanel.getViewer().scene().primitives().removeAll();
-        ModelExperimentalFromGltfOptions options = ModelExperimentalFromGltfOptions.create(url);
-        options.customShader = customShader;
-        options.modelMatrix = Transforms.headingPitchRollToFixedFrame(position, hpr, Ellipsoid.WGS84(), fixedFrameTransform);
-        ModelExperimental model = (ModelExperimental) csVPanel.getViewer().scene().primitives().add(ModelExperimental.fromGltf(options));
-
-        model.readyPromise().then(value -> csVPanel.getViewer().camera.flyToBoundingSphere(value.boundingSphere(), new CameraFlyToOptions().setDuration(0.5)));
+        FromGltfOptions fromGltfOptions = FromGltfOptions.create(url);
+        fromGltfOptions.customShader = customShader;
+        fromGltfOptions.modelMatrix = Transforms.headingPitchRollToFixedFrame(position, hpr, Ellipsoid.WGS84(), fixedFrameTransform);
+        Model model = (Model) csVPanel.getViewer().scene().primitives().add(Model.fromGltf(fromGltfOptions));
+        model.readyPromise().then(m -> csVPanel.getViewer().camera.flyToBoundingSphere(m.boundingSphere(), new CameraFlyToOptions().setDuration(0.5)));
     }
 
     private static native double performanceNow() /*-{

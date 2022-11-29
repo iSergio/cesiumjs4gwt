@@ -30,7 +30,6 @@ import org.cesiumjs.cs.datasources.EntityCluster;
 import org.cesiumjs.cs.datasources.KmlDataSource;
 import org.cesiumjs.cs.datasources.options.KmlDataSourceLoadStaticOptions;
 import org.cesiumjs.cs.js.JsObject;
-import org.cesiumjs.cs.promise.Fulfill;
 import org.cesiumjs.cs.promise.Promise;
 import org.cesiumjs.cs.scene.enums.VerticalOrigin;
 import org.cesiumjs.cs.widgets.ViewerPanel;
@@ -74,33 +73,30 @@ public class Clustering extends AbstractExample {
                 .create(csVPanel.getViewer().camera, csVPanel.getViewer().canvas());
         Promise<KmlDataSource, Void> dataSourcePromise = csVPanel.getViewer().dataSources().add(
                 KmlDataSource.load(GWT.getModuleBaseURL() + "SampleData/kml/facilities/facilities.kml", kmlDataSourceOptions));
-        dataSourcePromise.then(new Fulfill<KmlDataSource>() {
-            @Override
-            public void onFulfilled(KmlDataSource dataSource) {
-                int pixelRange = 25;
-                int minimumClusterSize = 3;
-                boolean enabled = true;
+        dataSourcePromise.then(ds -> {
+            int pixelRange = 25;
+            int minimumClusterSize = 3;
+            boolean enabled = true;
 
-                dataSource.clustering.enabled = enabled;
-                dataSource.clustering.pixelRange = pixelRange;
-                dataSource.clustering.minimumClusterSize = minimumClusterSize;
+            ds.clustering.enabled = enabled;
+            ds.clustering.pixelRange = pixelRange;
+            ds.clustering.minimumClusterSize = minimumClusterSize;
 
-                PinBuilder pinBuilder = new PinBuilder();
-                pin50 = pinBuilder.fromText("50+", Color.RED(), 48).toDataUrl();
-                pin40 = pinBuilder.fromText("40+", Color.ORANGE(), 48).toDataUrl();
-                pin30 = pinBuilder.fromText("30+", Color.YELLOW(), 48).toDataUrl();
-                pin20 = pinBuilder.fromText("20+", Color.GREEN(), 48).toDataUrl();
-                pin10 = pinBuilder.fromText("10+", Color.BLUE(), 48).toDataUrl();
+            PinBuilder pinBuilder = new PinBuilder();
+            pin50 = pinBuilder.fromText("50+", Color.RED(), 48).toDataUrl();
+            pin40 = pinBuilder.fromText("40+", Color.ORANGE(), 48).toDataUrl();
+            pin30 = pinBuilder.fromText("30+", Color.YELLOW(), 48).toDataUrl();
+            pin20 = pinBuilder.fromText("20+", Color.GREEN(), 48).toDataUrl();
+            pin10 = pinBuilder.fromText("10+", Color.BLUE(), 48).toDataUrl();
 
-                singleDigitPins = new String[8];
-                for (int i = 0; i < singleDigitPins.length; ++i) {
-                    singleDigitPins[i] = pinBuilder.fromText("" + (i + 2), Color.VIOLET(), 48).toDataUrl();
-                }
-                // start with custom style
-                customStyle(dataSource);
-
-                dataSource = dataSource;
+            singleDigitPins = new String[8];
+            for (int i = 0; i < singleDigitPins.length; ++i) {
+                singleDigitPins[i] = pinBuilder.fromText("" + (i + 2), Color.VIOLET(), 48).toDataUrl();
             }
+            // start with custom style
+            customStyle(ds);
+
+            dataSource = ds;
         });
 
         pixelRangeSlider = new SliderBox(1, 15, 200, 1);

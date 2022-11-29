@@ -1,7 +1,24 @@
+/*
+ * Copyright 2017 iserge.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package org.cleanlogic.cesiumjs4gwt.showcase.examples;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.HTML;
+import org.cesiumjs.cs.Cesium;
 import org.cesiumjs.cs.collections.BillboardCollection;
 import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.core.geometry.BoxGeometry;
@@ -10,9 +27,8 @@ import org.cesiumjs.cs.core.geometry.RectangleGeometry;
 import org.cesiumjs.cs.core.geometry.options.BoxGeometryOptions;
 import org.cesiumjs.cs.core.geometry.options.RectangleGeometryOptions;
 import org.cesiumjs.cs.core.options.GeometryInstanceOptions;
-import org.cesiumjs.cs.core.providers.CesiumTerrainProvider;
-import org.cesiumjs.cs.core.providers.options.CesiumTerrainProviderOptions;
 import org.cesiumjs.cs.js.JsObject;
+import org.cesiumjs.cs.scene.Globe;
 import org.cesiumjs.cs.scene.Primitive;
 import org.cesiumjs.cs.scene.Scene;
 import org.cesiumjs.cs.scene.apperances.PerInstanceColorAppearance;
@@ -27,12 +43,13 @@ import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ShowcaseExampleStor
 import javax.inject.Inject;
 
 /**
- * @author Serge Silaev aka iSergio <s.serge.b@gmail.com>
+ * @author Serge Silaev aka iSergio
  */
 public class CesiumInspector extends AbstractExample {
     @Inject
     public CesiumInspector(ShowcaseExampleStore store) {
-        super("Cesium Inspector", "Use the cesium inspector as a debugging tool for different primitives.", new String[]{"Showcase", "Cesium", "3d", "Viewer", "Debug", "Primitives"}, store);
+        super("Cesium Inspector", "Use the cesium inspector as a debugging tool for different primitives.",
+                new String[]{"Showcase", "Cesium", "3d", "Viewer", "Debug", "Primitives"}, store);
     }
 
     @Override
@@ -41,17 +58,12 @@ public class CesiumInspector extends AbstractExample {
         Scene scene = csVPanel.getViewer().scene();
         Globe globe = csVPanel.getViewer().scene().globe;
         globe.depthTestAgainstTerrain = true;
+        globe.terrainProvider = Cesium.createWorldTerrain();
 
-        CesiumTerrainProviderOptions cesiumTerrainProviderOptions = new CesiumTerrainProviderOptions();
-        cesiumTerrainProviderOptions.url = "https://assets.agi.com/stk-terrain/world";
-        cesiumTerrainProviderOptions.requestVertexNormals = true;
-        cesiumTerrainProviderOptions.requestWaterMask = true;
-        csVPanel.getViewer().terrainProvider = new CesiumTerrainProvider(cesiumTerrainProviderOptions);
-
-        //Add Cesium Inspector
+        // Add Cesium Inspector
         csVPanel.getViewer().extend(viewerCesiumInspectorMixin.instance());
 
-        //Add Primitives
+        // Add Primitives
         PrimitiveOptions primitiveOptions = new PrimitiveOptions();
         primitiveOptions.asynchronous = false;
         GeometryInstanceOptions geometryInstanceOptions = new GeometryInstanceOptions();
@@ -61,11 +73,14 @@ public class CesiumInspector extends AbstractExample {
         boxGeometryOptions.dimensions = new Cartesian3(400000.0, 300000.0, 500000.0);
         geometryInstanceOptions.geometry = BoxGeometry.createGeometry(BoxGeometry.fromDimensions(boxGeometryOptions));
 
-        geometryInstanceOptions.modelMatrix = Matrix4.multiplyByTranslation(Transforms.eastNorthUpToFixedFrame(Cartesian3.fromDegrees(-105.0, 45.0)), new Cartesian3(0.0, 0.0, 250000), new Matrix4());
+        geometryInstanceOptions.modelMatrix = Matrix4.multiplyByTranslation(
+                Transforms.eastNorthUpToFixedFrame(Cartesian3.fromDegrees(-105.0, 45.0)), new Cartesian3(0.0, 0.0, 250000),
+                new Matrix4());
         geometryInstanceOptions.attributes = JsObject.createObject().cast();
-        JsObject.$(geometryInstanceOptions.attributes, "color", ColorGeometryInstanceAttribute.fromColor(Color.RED().withAlpha(0.5f)));
+        JsObject.$(geometryInstanceOptions.attributes, "color",
+                ColorGeometryInstanceAttribute.fromColor(Color.RED().withAlpha(0.5f)));
 
-        primitiveOptions.geometryInstances = new GeometryInstance[] {new GeometryInstance(geometryInstanceOptions)};
+        primitiveOptions.geometryInstances = new GeometryInstance[]{new GeometryInstance(geometryInstanceOptions)};
         PerInstanceColorAppearanceOptions perInstanceColorAppearanceOptions = new PerInstanceColorAppearanceOptions();
         perInstanceColorAppearanceOptions.closed = true;
         primitiveOptions.appearance = new PerInstanceColorAppearance(perInstanceColorAppearanceOptions);
@@ -79,12 +94,13 @@ public class CesiumInspector extends AbstractExample {
         rectangleGeometryOptions.rectangle = Rectangle.fromDegrees(-100.0, 30.0, -93.0, 37.0);
         rectangleGeometryOptions.height = 100000;
         rectangleGeometryOptions.vertexFormat = PerInstanceColorAppearance.VERTEX_FORMAT();
-        geometryInstanceOptions.geometry = RectangleGeometry.createGeometry(new RectangleGeometry(rectangleGeometryOptions));
+        geometryInstanceOptions.geometry = RectangleGeometry
+                .createGeometry(new RectangleGeometry(rectangleGeometryOptions));
 
         geometryInstanceOptions.attributes = JsObject.createObject().cast();
         JsObject.$(geometryInstanceOptions.attributes, "color", ColorGeometryInstanceAttribute.fromColor(Color.BLUE()));
 
-        primitiveOptions.geometryInstances = new GeometryInstance[] {new GeometryInstance(geometryInstanceOptions)};
+        primitiveOptions.geometryInstances = new GeometryInstance[]{new GeometryInstance(geometryInstanceOptions)};
         primitiveOptions.appearance = new PerInstanceColorAppearance();
         scene.primitives().add(new Primitive(primitiveOptions));
 

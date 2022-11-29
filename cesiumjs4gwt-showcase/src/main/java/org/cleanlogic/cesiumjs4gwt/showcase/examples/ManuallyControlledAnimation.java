@@ -101,8 +101,7 @@ public class ManuallyControlledAnimation  extends AbstractExample {
         }
 
         // Add our model.
-        FromGltfOptions gltfOptions = new FromGltfOptions();
-        gltfOptions.url = GWT.getModuleBaseURL() + "SampleData/models/CesiumMan/Cesium_Man.glb";
+        FromGltfOptions gltfOptions = FromGltfOptions.create(GWT.getModuleBaseURL() + "SampleData/models/CesiumMan/Cesium_Man.glb");
         gltfOptions.scale = 4;
         Model modelPrimitive = (Model) viewer.scene().primitives().add(Model.fromGltf(gltfOptions));
 
