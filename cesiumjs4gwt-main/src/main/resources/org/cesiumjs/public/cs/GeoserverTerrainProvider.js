@@ -195,7 +195,7 @@
             if (Cesium.defined(description.proxy)) {
                 urlGetCapabilities = description.proxy.getURL(urlGetCapabilities);
             }
-            resultat = Cesium.when(loadXML(urlGetCapabilities), function(xml) {
+            resultat = loadXML(urlGetCapabilities).then(function(xml) {
                 return OGCHelper.WMSParser.getMetaDatafromXML(xml, description);
             });
         } else if (Cesium.defined(description.xml)) {
@@ -480,11 +480,11 @@
                 if (Cesium.defined(description.proxy)) {
                     url = description.proxy.getURL(url);
                 }
-                return Cesium.when(loadXML(url), function(xml) {
+                return loadXML(url).then(function(xml) {
                     return OGCHelper.TMSParser.getMetaDatafromXML(xml, description);
                 });
             });
-            var promise = Cesium.when.all(promises).then(function(tabResult) {
+            var promise = Promise.all(promises).then(function (tabResult) {
                 var retour;
                 for (var i = 0; i < tabResult.length && !Cesium.defined(retour); i++) {
                     if (Cesium.defined(tabResult[i])) {
@@ -492,10 +492,23 @@
                     }
                 }
                 return retour;
-            });
+            })
             resultat = promise.then(function(retour) {
                 return retour;
             });
+
+            // var promise = Cesium.when.all(promises).then(function(tabResult) {
+            //     var retour;
+            //     for (var i = 0; i < tabResult.length && !Cesium.defined(retour); i++) {
+            //         if (Cesium.defined(tabResult[i])) {
+            //             retour = tabResult[i];
+            //         }
+            //     }
+            //     return retour;
+            // });
+            // resultat = promise.then(function(retour) {
+            //     return retour;
+            // });
         } else {
             resultat = OGCHelper.TMSParser.getMetaDatafromXML(xml, description);
         }
@@ -881,9 +894,10 @@
         }
 
         this.ready = false;
-        this._readyPromise = Cesium.when.defer();
+        // this._readyPromise = Cesium.when.defer();
+        // this._readyPromise = new Promise();
 
-        Cesium.defineProperties(this, {
+        Object.defineProperties(this, {
             errorEvent: {
                 get: function() {
                     return errorEvent;
@@ -1022,7 +1036,7 @@
     };
 
     function TerrainParser(promise, provider) {
-        Cesium.when(promise, function(resultat) {
+        promise.then(function(resultat) {
             console.log(resultat);
             if (Cesium.defined(resultat) && (resultat.ready)) {
                 resultat.levelZeroMaximumGeometricError = Cesium.TerrainProvider.getEstimatedLevelZeroGeometricErrorForAHeightmap(
@@ -1041,12 +1055,12 @@
                             var hasChildren = terrainChildrenMask(x, y, level, provider);
                             var promise = loadImage(urlArray);
                             if (Cesium.defined(promise)) {
-                                retour = Cesium.when(promise, function(image) {
+                                retour = promise.then(function(image) {
                                     return GeoserverTerrainProvider.imageToHeightmapTerrainData(image, limitations, {
                                         width: resultat.heightMapWidth,
                                         height: resultat.heightMapHeight
                                     }, resultat.waterMask, hasChildren, resultat.hasStyledImage);
-                                }).otherwise(function() {
+                                }).catch(function() {
                                     return new Cesium.HeightmapTerrainData({
                                         buffer: new Uint16Array(
                                             resultat.heightMapWidth *
@@ -1079,14 +1093,13 @@
 
                             var promise = loadArrayBuffer(urlArray);
                             if (Cesium.defined(promise)) {
-                                retour = Cesium.when(promise,
-                                    function(arrayBuffer) {
+                                retour = promise.then(function(arrayBuffer) {
                                         return GeoserverTerrainProvider.arrayToHeightmapTerrainData(arrayBuffer, limitations, {
                                             width: resultat.heightMapWidth,
                                             height: resultat.heightMapHeight
                                         }, resultat.formatArray, resultat.waterMask, hasChildren);
                                     }
-                                ).otherwise(
+                                ).catch(
                                     function() {
                                         if (Cesium.defined(resultat.getHeightmapTerrainDataImage)) {
                                             return resultat.getHeightmapTerrainDataImage(x, y, level);
@@ -1125,7 +1138,7 @@
                     return retour;
                 }
 
-                Cesium.defineProperties(provider, {
+                Object.defineProperties(provider, {
                     tilingScheme: {
                         get: function() {
                             return resultat.tilingScheme;
@@ -1158,7 +1171,9 @@
                     }
                 });
             }
-            provider._readyPromise.resolve(resultat.ready);
+            console.log(resultat);
+            provider._readyPromise = Promise.resolve(resultat.ready);
+            // provider._readyPromise.resolve(resultat.ready);
         });
     }
 
