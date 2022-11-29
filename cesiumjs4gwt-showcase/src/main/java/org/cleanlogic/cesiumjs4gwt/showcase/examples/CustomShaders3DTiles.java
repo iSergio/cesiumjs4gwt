@@ -18,12 +18,11 @@ package org.cleanlogic.cesiumjs4gwt.showcase.examples;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.HTML;
-import org.cesiumjs.cs.Cesium;
 import org.cesiumjs.cs.core.IonResource;
 import org.cesiumjs.cs.scene.Cesium3DTileset;
-import org.cesiumjs.cs.scene.experimental.CustomShader;
-import org.cesiumjs.cs.scene.experimental.enums.LightingModel;
-import org.cesiumjs.cs.scene.experimental.options.CustomShaderOptions;
+import org.cesiumjs.cs.scene.CustomShader;
+import org.cesiumjs.cs.scene.enums.LightingModel;
+import org.cesiumjs.cs.scene.options.CustomShaderOptions;
 import org.cesiumjs.cs.scene.options.Cesium3DTilesetOptions;
 import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cleanlogic.cesiumjs4gwt.showcase.basic.AbstractExample;
@@ -42,8 +41,6 @@ public class CustomShaders3DTiles  extends AbstractExample {
 
     @Override
     public void buildPanel() {
-        Cesium.ExperimentalFeatures.enableModelExperimental = true;
-
         ViewerPanel csVPanel = new ViewerPanel();
 
         CustomShaderOptions customShaderOptions = new CustomShaderOptions();

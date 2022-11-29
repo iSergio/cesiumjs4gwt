@@ -17,9 +17,9 @@
 package org.cesiumjs.cs.core;
 
 import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.scene.Scene;
 
 /**
  * A set of functions to detect whether the current browser supports various
@@ -36,6 +36,14 @@ public class FeatureDetection {
     @JsConstructor
     private FeatureDetection() {
     }
+
+    /**
+     * Detects whether the current browser supports Basis Universal textures and the web assembly modules needed
+     * to transcode them.
+     * @param scene Scene
+     * @return true if the browser supports web assembly modules and the scene supports Basis Universal textures, false if not.
+     */
+    public static native boolean supportsBasis(Scene scene);
 
     /**
      * Detects whether the current browser supports BigInt.

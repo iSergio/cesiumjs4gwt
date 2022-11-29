@@ -33,6 +33,9 @@ public class JsArray<T extends Object> {
     @JsProperty(name = "length")
     public native int length();
 
+    @JsMethod
+    public native T at(int index);
+
     /**
      * Fills all the elements of an array from a start index to an end index with a
      * static value.

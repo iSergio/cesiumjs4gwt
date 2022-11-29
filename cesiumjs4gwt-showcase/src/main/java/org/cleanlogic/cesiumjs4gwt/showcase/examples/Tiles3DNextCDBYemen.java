@@ -57,8 +57,6 @@ public class Tiles3DNextCDBYemen extends AbstractExample {
 
     @Override
     public void buildPanel() {
-        Cesium.ExperimentalFeatures.enableModelExperimental = true;
-
         ViewerPanel csVPanel = new ViewerPanel();
         viewer = csVPanel.getViewer();
 
@@ -238,10 +236,10 @@ public class Tiles3DNextCDBYemen extends AbstractExample {
                 StringBuilder tableHtmlScratch = new StringBuilder("<table class='cesium-infoBox-defaultTable'>");
                 tableHtmlScratch.append("<tr><th colspan=2>Property Name</th><th>ID</th><th>Type</th><th>Value</th></tr><tbody>");
                 JsObject metadataClass = JsObject.getObject(feature, "content").getJsObject("batchTable").getJsObject("_propertyTable").getJsObject("class");
-                String[] propertyNames = ((Cesium3DTileFeature) feature).getPropertyNames();
-                int length = propertyNames.length;
+                String[] propertyIds = ((Cesium3DTileFeature) feature).getPropertyIds();
+                int length = propertyIds.length;
                 for (int i = 0; i < length; ++i) {
-                    String propertyName = propertyNames[i];
+                    String propertyName = propertyIds[i];
 
                     // Skip these properties, since they are always empty.
                     if (propertyName.equals("APID") || propertyName.equals("FACC") || propertyName.equals("RWID")) {

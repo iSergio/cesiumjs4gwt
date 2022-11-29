@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 iserge, Gis4Fun.
+ * Copyright 2022 iSergio, Gis4Fun.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.cesiumjs.cs.scene.experimental;
+package org.cesiumjs.cs.scene;
 
 import com.google.gwt.typedarrays.shared.Uint8Array;
 import jsinterop.annotations.JsConstructor;
@@ -24,7 +24,7 @@ import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.core.Resource;
 import org.cesiumjs.cs.core.enums.PixelDatatype;
 import org.cesiumjs.cs.core.enums.PixelFormat;
-import org.cesiumjs.cs.scene.experimental.options.TextureUniformOptions;
+import org.cesiumjs.cs.scene.options.TextureUniformOptions;
 
 /**
  * A simple struct that serves as a value of a sampler2D-valued uniform.

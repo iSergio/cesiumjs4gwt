@@ -37,9 +37,8 @@ import org.cesiumjs.cs.widgets.Viewer;
 import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cleanlogic.cesiumjs4gwt.showcase.basic.AbstractExample;
 import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ShowcaseExampleStore;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.Slider;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderEvent;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderListener;
+import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.InputEvent;
+import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderBox;
 
 import javax.inject.Inject;
 
@@ -52,7 +51,7 @@ public class ImageBasedLighting extends AbstractExample {
     private String environmentMapURL;
     private Cartesian3[] coefficients;
 
-    private Slider luminanceAtZenithSlider;
+    private SliderBox luminanceAtZenithSlider;
     private TextBox luminanceAtZenithTBox;
 
     @Inject
@@ -98,8 +97,7 @@ public class ImageBasedLighting extends AbstractExample {
         Cartesian3 origin = Cartesian3.fromDegrees(-123.0744619, 44.0503706, height);
         Matrix4 modelMatrix = Transforms.headingPitchRollToFixedFrame(origin, hpr);
 
-        FromGltfOptions fromGltfOptions = new FromGltfOptions();
-        fromGltfOptions.url = modelURL;
+        FromGltfOptions fromGltfOptions = FromGltfOptions.create(modelURL);
         fromGltfOptions.modelMatrix = modelMatrix;
         fromGltfOptions.minimumPixelSize = 128.0;
         model = (Model) csVPanel.getViewer().scene().primitives().add(Model.fromGltf(fromGltfOptions));
@@ -129,33 +127,9 @@ public class ImageBasedLighting extends AbstractExample {
             }
         });
 
-        luminanceAtZenithSlider = new Slider("LuminanceAtZenith", 0, 200, 50);
+        luminanceAtZenithSlider = new SliderBox(0, 0.5, 2, 0.01);
         luminanceAtZenithSlider.setStep(1);
-        luminanceAtZenithSlider.addListener(new SliderListener() {
-            @Override
-            public void onStart(SliderEvent e) {
-                //
-            }
-
-            @Override
-            public boolean onSlide(SliderEvent e) {
-                Slider source = e.getSource();
-                double value = source.getValue() / 100.0;
-                model.luminanceAtZenith = value;
-                luminanceAtZenithTBox.setValue(value + "");
-                return true;
-            }
-
-            @Override
-            public void onChange(SliderEvent e) {
-                //
-            }
-
-            @Override
-            public void onStop(SliderEvent e) {
-                //
-            }
-        });
+        luminanceAtZenithSlider.addInputHandler(this::onInput);
         luminanceAtZenithTBox = new TextBox();
         luminanceAtZenithTBox.setSize("30px", "12px");
         luminanceAtZenithTBox.setValue("" + 0.5);
@@ -200,6 +174,13 @@ public class ImageBasedLighting extends AbstractExample {
         contentPanel.add(aPanel);
 
         initWidget(contentPanel);
+    }
+
+    private void onInput(InputEvent event) {
+        SliderBox source = (SliderBox) event.getSource();
+        double value = source.getValue();
+        model.luminanceAtZenith = value;
+        luminanceAtZenithTBox.setValue(String.valueOf(value));
     }
 
     @Override

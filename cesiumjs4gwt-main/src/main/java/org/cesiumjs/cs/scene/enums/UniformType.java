@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 iserge, Gis4Fun.
+ * Copyright 2022 iSergio, Gis4Fun.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,14 +14,15 @@
  * limitations under the License.
  */
 
-package org.cesiumjs.cs.scene.experimental.enums;
+package org.cesiumjs.cs.scene.enums;
 
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.scene.CustomShader;
 
 /**
  * An enum of the basic GLSL uniform types. These can be used with
- * {@link org.cesiumjs.cs.scene.experimental.CustomShader} to declare user-defined uniforms.
+ * {@link CustomShader} to declare user-defined uniforms.
  */
 @JsType(isNative = true, namespace = "Cesium", name = "UniformType")
 public class UniformType {

@@ -18,6 +18,7 @@ package org.cleanlogic.cesiumjs4gwt.showcase.examples;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.HTML;
+import org.cesiumjs.cs.Cesium;
 import org.cesiumjs.cs.collections.BillboardCollection;
 import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.core.geometry.BoxGeometry;
@@ -26,8 +27,6 @@ import org.cesiumjs.cs.core.geometry.RectangleGeometry;
 import org.cesiumjs.cs.core.geometry.options.BoxGeometryOptions;
 import org.cesiumjs.cs.core.geometry.options.RectangleGeometryOptions;
 import org.cesiumjs.cs.core.options.GeometryInstanceOptions;
-import org.cesiumjs.cs.core.providers.CesiumTerrainProvider;
-import org.cesiumjs.cs.core.providers.options.CesiumTerrainProviderOptions;
 import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.scene.Globe;
 import org.cesiumjs.cs.scene.Primitive;
@@ -59,12 +58,7 @@ public class CesiumInspector extends AbstractExample {
         Scene scene = csVPanel.getViewer().scene();
         Globe globe = csVPanel.getViewer().scene().globe;
         globe.depthTestAgainstTerrain = true;
-
-        CesiumTerrainProviderOptions cesiumTerrainProviderOptions = new CesiumTerrainProviderOptions();
-        cesiumTerrainProviderOptions.url = "https://assets.agi.com/stk-terrain/world";
-        cesiumTerrainProviderOptions.requestVertexNormals = true;
-        cesiumTerrainProviderOptions.requestWaterMask = true;
-        csVPanel.getViewer().terrainProvider = new CesiumTerrainProvider(cesiumTerrainProviderOptions);
+        globe.terrainProvider = Cesium.createWorldTerrain();
 
         // Add Cesium Inspector
         csVPanel.getViewer().extend(viewerCesiumInspectorMixin.instance());

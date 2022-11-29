@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 iserge, Gis4Fun.
+ * Copyright 2022 iSergio, Gis4Fun.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,20 +14,18 @@
  * limitations under the License.
  */
 
-package org.cesiumjs.cs.scene.experimental.options;
+package org.cesiumjs.cs.scene.options;
 
 import jsinterop.annotations.*;
-import org.cesiumjs.cs.Cesium;
 import org.cesiumjs.cs.js.JsObject;
-import org.cesiumjs.cs.scene.experimental.CustomShader;
-import org.cesiumjs.cs.scene.experimental.enums.CustomShaderMode;
-import org.cesiumjs.cs.scene.experimental.enums.LightingModel;
+import org.cesiumjs.cs.scene.enums.CustomShaderMode;
+import org.cesiumjs.cs.scene.enums.CustomShaderTranslucencyMode;
 
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class CustomShaderOptions {
     /**
      * The custom shader mode, which determines how the custom shader code is inserted into the fragment shader.
-     * Default: {@link org.cesiumjs.cs.scene.experimental.enums.CustomShaderMode#MODIFY_MATERIAL()}
+     * Default: {@link CustomShaderMode#MODIFY_MATERIAL()}
      */
     @JsProperty
     public String mode;
@@ -37,11 +35,13 @@ public class CustomShaderOptions {
     @JsProperty
     public Number lightingModel;
     /**
-     * If set, the model will be rendered as translucent. This overrides the default settings for the model.
-     * Default: false
+     * The translucency mode, which determines how the custom shader will be applied. If the value
+     * is {@link CustomShaderTranslucencyMode#OPAQUE} or {@link CustomShaderTranslucencyMode#TRANSLUCENT}, the custom shader will
+     * override settings from the model's material. If the value is {@link CustomShaderTranslucencyMode#INHERIT}, the custom shader will render as either opaque or translucent depending on the primitive's material settings.
+     * Default: {@link CustomShaderTranslucencyMode#INHERIT()}
      */
     @JsProperty
-    public boolean isTranslucent;
+    public Number translucencyMode;
     /**
      * A dictionary for user-defined uniforms. The key is the uniform name that will appear in the GLSL code.
      * The value is an object that describes the uniform type and initial value
@@ -87,8 +87,8 @@ public class CustomShaderOptions {
     }
 
     @JsOverlay
-    public final CustomShaderOptions setTranslucent(boolean isTranslucent) {
-        this.isTranslucent = isTranslucent;
+    public final CustomShaderOptions setTranslucencyMode(Number translucencyMode) {
+        this.translucencyMode = translucencyMode;
         return this;
     }
 

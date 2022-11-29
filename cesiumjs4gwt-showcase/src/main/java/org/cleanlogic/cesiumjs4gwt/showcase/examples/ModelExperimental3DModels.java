@@ -22,15 +22,13 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.ListBox;
 import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.core.HeadingPitchRoll;
-import org.cesiumjs.cs.scene.experimental.ModelExperimental;
-import org.cesiumjs.cs.scene.experimental.options.ModelExperimentalFromGltfOptions;
+import org.cesiumjs.cs.core.Math;
 import org.cesiumjs.cs.widgets.Viewer;
 import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cleanlogic.cesiumjs4gwt.showcase.basic.AbstractExample;
 import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ShowcaseExampleStore;
 
 import javax.inject.Inject;
-import java.lang.Math;
 
 public class ModelExperimental3DModels extends AbstractExample {
     private Viewer viewer;
@@ -98,12 +96,12 @@ public class ModelExperimental3DModels extends AbstractExample {
     private void selectModel(String url, double height) {
         Cartesian3 position = Cartesian3.fromDegrees(-123.0744619, 44.0503706, height);
 
-        viewer.scene().primitives().removeAll();
-        ModelExperimentalFromGltfOptions options = ModelExperimentalFromGltfOptions.create(url);
-        options.modelMatrix = Transforms.headingPitchRollToFixedFrame(position, hpr, Ellipsoid.WGS84(), fixedFrameTransform);
-        ModelExperimental model = (ModelExperimental) viewer.scene().primitives().add(ModelExperimental.fromGltf(options));
-
-        model.readyPromise().then(nModel -> viewer.camera.lookAt(position,
-                new HeadingPitchRange(Math.toRadians(45), Math.toRadians(-15), model.boundingSphere().radius * 5)));
+//        viewer.scene().primitives().removeAll();
+//        ModelExperimentalFromGltfOptions options = ModelExperimentalFromGltfOptions.create(url);
+//        options.modelMatrix = Transforms.headingPitchRollToFixedFrame(position, hpr, Ellipsoid.WGS84(), fixedFrameTransform);
+//        ModelExperimental model = (ModelExperimental) viewer.scene().primitives().add(ModelExperimental.fromGltf(options));
+//
+//        model.readyPromise().then(nModel -> viewer.camera.lookAt(position,
+//                new HeadingPitchRange(Math.toRadians(45), Math.toRadians(-15), model.boundingSphere().radius * 5)));
     }
 }

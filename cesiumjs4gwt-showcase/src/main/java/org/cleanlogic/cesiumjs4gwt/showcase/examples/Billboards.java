@@ -17,13 +17,14 @@
 package org.cleanlogic.cesiumjs4gwt.showcase.examples;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.ListBox;
+import org.cesiumjs.cs.Cesium;
+import org.cesiumjs.cs.core.HeadingPitchRoll;
 import org.cesiumjs.cs.core.Math;
 import org.cesiumjs.cs.core.*;
+import org.cesiumjs.cs.core.providers.TerrainProvider;
 import org.cesiumjs.cs.datasources.Entity;
 import org.cesiumjs.cs.datasources.graphics.BillboardGraphics;
 import org.cesiumjs.cs.datasources.graphics.options.BillboardGraphicsOptions;
@@ -31,8 +32,10 @@ import org.cesiumjs.cs.datasources.options.EntityOptions;
 import org.cesiumjs.cs.datasources.properties.ConstantPositionProperty;
 import org.cesiumjs.cs.datasources.properties.ConstantProperty;
 import org.cesiumjs.cs.js.JsImage;
+import org.cesiumjs.cs.scene.enums.HeightReference;
 import org.cesiumjs.cs.scene.enums.HorizontalOrigin;
 import org.cesiumjs.cs.scene.enums.VerticalOrigin;
+import org.cesiumjs.cs.scene.options.ViewOptions;
 import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cleanlogic.cesiumjs4gwt.showcase.basic.AbstractExample;
 import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ShowcaseExampleStore;
@@ -43,7 +46,8 @@ import javax.inject.Inject;
  * @author Serge Silaev aka iSergio
  */
 public class Billboards extends AbstractExample {
-    ViewerPanel csVPanel;
+    private ViewerPanel csVPanel = null;
+    private TerrainProvider terrainProvider = null;
 
     @Inject
     public Billboards(ShowcaseExampleStore store) {
@@ -66,41 +70,43 @@ public class Billboards extends AbstractExample {
         billboardsLBox.addItem("Fade by viewer distance", "6");
         billboardsLBox.addItem("Offset by viewer distance", "7");
         billboardsLBox.addItem("Add marker billboards", "8");
-        billboardsLBox.addChangeHandler(new ChangeHandler() {
-            @Override
-            public void onChange(ChangeEvent changeEvent) {
-                ListBox source = (ListBox) changeEvent.getSource();
-                reset();
-                switch (source.getSelectedValue()) {
-                    case "0":
-                        addBillboard();
-                        break;
-                    case "1":
-                        setBillboardProperties();
-                        break;
-                    case "2":
-                        changeBillboardProperties();
-                        break;
-                    case "3":
-                        sizeBillboardInMeters();
-                        break;
-                    case "4":
-                        addMultipleBillboards();
-                        break;
-                    case "5":
-                        scaleByDistance();
-                        break;
-                    case "6":
-                        fadeByDistance();
-                        break;
-                    case "7":
-                        offsetByDistance();
-                        break;
-                    case "8":
-                        addMarkerBillboards();
-                    default:
-                        break;
-                }
+        billboardsLBox.addItem("Disable the depth test when clamped to ground", "9");
+        billboardsLBox.addChangeHandler(changeEvent -> {
+            ListBox source = (ListBox) changeEvent.getSource();
+            reset();
+            switch (source.getSelectedValue()) {
+                case "0":
+                    addBillboard();
+                    break;
+                case "1":
+                    setBillboardProperties();
+                    break;
+                case "2":
+                    changeBillboardProperties();
+                    break;
+                case "3":
+                    sizeBillboardInMeters();
+                    break;
+                case "4":
+                    addMultipleBillboards();
+                    break;
+                case "5":
+                    scaleByDistance();
+                    break;
+                case "6":
+                    fadeByDistance();
+                    break;
+                case "7":
+                    offsetByDistance();
+                    break;
+                case "8":
+                    addMarkerBillboards();
+                    break;
+                case "9":
+                    disableDepthTest();
+                    break;
+                default:
+                    break;
             }
         });
 
@@ -144,8 +150,8 @@ public class Billboards extends AbstractExample {
         billboardGraphicsOptions.color = new ConstantProperty<>(Color.LIME()); // default: WHITE
         billboardGraphicsOptions.rotation = new ConstantProperty<>(Math.PI_OVER_FOUR()); // default: 0.0
         billboardGraphicsOptions.alignedAxis = new ConstantProperty<>(Cartesian3.ZERO()); // default
-        billboardGraphicsOptions.width = new ConstantProperty<>(100); // default: undefined
-        billboardGraphicsOptions.height = new ConstantProperty<>(25); // default: undefined
+        billboardGraphicsOptions.width = new ConstantProperty<>(100.); // default: undefined
+        billboardGraphicsOptions.height = new ConstantProperty<>(25.); // default: undefined
         EntityOptions entityOptions = new EntityOptions();
         entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-75.59777, 40.03883));
         entityOptions.billboard = new BillboardGraphics(billboardGraphicsOptions);
@@ -291,6 +297,11 @@ public class Billboards extends AbstractExample {
     private void reset() {
         csVPanel.getViewer().camera.flyHome(0);
         csVPanel.getViewer().entities().removeAll();
+        if (terrainProvider != null) {
+            csVPanel.getViewer().scene().globe.terrainProvider = terrainProvider;
+            terrainProvider = null;
+            csVPanel.getViewer().scene().globe.depthTestAgainstTerrain = false;
+        }
     }
 
     private void createFacility(JsImage logoImg, JsImage facilityImg) {
@@ -320,5 +331,24 @@ public class Billboards extends AbstractExample {
         entityOptions.billboard = billboardGraphics;
         entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-75.59777, 40.03883));
         csVPanel.getViewer().entities().add(new Entity(entityOptions));
+    }
+
+    private void disableDepthTest() {
+        terrainProvider = csVPanel.getViewer().terrainProvider;
+        csVPanel.getViewer().terrainProvider = Cesium.createWorldTerrain();
+        csVPanel.getViewer().scene().globe.depthTestAgainstTerrain = true;
+
+        EntityOptions entityOptions = new EntityOptions();
+        entityOptions.position = new ConstantPositionProperty(Cartesian3.fromDegrees(-122.1958, 46.1915));
+        BillboardGraphicsOptions graphicsOptions = new BillboardGraphicsOptions();
+        graphicsOptions.image = new ConstantProperty<>(GWT.getModuleBaseURL() + "images/facility.gif");
+        graphicsOptions.heightReference = new ConstantProperty<>(HeightReference.CLAMP_TO_GROUND());
+        graphicsOptions.disableDepthTestDistance = new ConstantProperty<>(Double.POSITIVE_INFINITY);
+        entityOptions.billboard = new BillboardGraphics(graphicsOptions);
+        csVPanel.getViewer().entities().add(entityOptions);
+
+        csVPanel.getViewer().scene().camera().setView(new ViewOptions()
+                .setDestination(new Cartesian3(-2357576.243142461, -3744417.5604860787, 4581807.855903771))
+                .setOrientation(new HeadingPitchRoll(5.9920811504170475, -0.6032820429886212, 6.28201303164098)));
     }
 }

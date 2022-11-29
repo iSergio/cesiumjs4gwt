@@ -25,9 +25,8 @@ import org.cesiumjs.cs.scene.ImageryLayer;
 import org.cesiumjs.cs.widgets.ViewerPanel;
 import org.cleanlogic.cesiumjs4gwt.showcase.basic.AbstractExample;
 import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ShowcaseExampleStore;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.Slider;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderEvent;
-import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderListener;
+import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.InputEvent;
+import org.cleanlogic.cesiumjs4gwt.showcase.examples.slider.SliderBox;
 
 import javax.inject.Inject;
 
@@ -35,11 +34,11 @@ import javax.inject.Inject;
  * @author Serge Silaev aka iSergio
  */
 public class ImageryAdjustment extends AbstractExample {
-    Slider brightnessSlider;
-    Slider contrastSlider;
-    Slider hueSlider;
-    Slider saturationSlider;
-    Slider gammaSlider;
+    private SliderBox brightnessSlider;
+    private SliderBox contrastSlider;
+    private SliderBox hueSlider;
+    private SliderBox saturationSlider;
+    private SliderBox gammaSlider;
 
     TextBox brightnessTBox;
     TextBox contrastTBox;
@@ -68,10 +67,9 @@ public class ImageryAdjustment extends AbstractExample {
         csVPanel.getViewer().imageryLayers().layerRemoved.addEventListener(new UpdateViewModel());
         csVPanel.getViewer().imageryLayers().layerMoved.addEventListener(new UpdateViewModel());
 
-        brightnessSlider = new Slider("brightness", 0, 300, 100);
-        brightnessSlider.setStep(1);
+        brightnessSlider = new SliderBox(0, 1, 3, 0.02);
         brightnessSlider.setWidth("150px");
-        brightnessSlider.addListener(new MSliderListener());
+        brightnessSlider.addInputHandler(this::onInput);
         brightnessTBox = new TextBox();
         brightnessTBox.addChangeHandler(new MChangeHandler());
         brightnessTBox.setText("" + 1);
@@ -84,10 +82,9 @@ public class ImageryAdjustment extends AbstractExample {
         brightnessHPanel.add(brightnessSlider);
         brightnessHPanel.add(brightnessTBox);
 
-        contrastSlider = new Slider("contrast", 0, 300, 100);
-        contrastSlider.setStep(1);
+        contrastSlider = new SliderBox(0, 1, 3, 0.02);
         contrastSlider.setWidth("150px");
-        contrastSlider.addListener(new MSliderListener());
+        contrastSlider.addInputHandler(this::onInput);
         contrastTBox = new TextBox();
         contrastTBox.addChangeHandler(new MChangeHandler());
         contrastTBox.setText("" + 1);
@@ -100,10 +97,9 @@ public class ImageryAdjustment extends AbstractExample {
         contrastHPanel.add(contrastSlider);
         contrastHPanel.add(contrastTBox);
 
-        hueSlider = new Slider("hue", 0, 300, 0);
-        hueSlider.setStep(1);
+        hueSlider = new SliderBox(0, 0, 3, 0.02);
         hueSlider.setWidth("150px");
-        hueSlider.addListener(new MSliderListener());
+        hueSlider.addInputHandler(this::onInput);
         hueTBox = new TextBox();
         hueTBox.addChangeHandler(new MChangeHandler());
         hueTBox.setText("" + 0);
@@ -116,10 +112,9 @@ public class ImageryAdjustment extends AbstractExample {
         hueHPanel.add(hueSlider);
         hueHPanel.add(hueTBox);
 
-        saturationSlider = new Slider("saturation", 0, 300, 100);
-        saturationSlider.setStep(1);
+        saturationSlider = new SliderBox(0, 1, 3, 0.02);
         saturationSlider.setWidth("150px");
-        saturationSlider.addListener(new MSliderListener());
+        saturationSlider.addInputHandler(this::onInput);
         saturationTBox = new TextBox();
         saturationTBox.addChangeHandler(new MChangeHandler());
         saturationTBox.setText("" + 1);
@@ -132,10 +127,9 @@ public class ImageryAdjustment extends AbstractExample {
         saturationHPanel.add(saturationSlider);
         saturationHPanel.add(saturationTBox);
 
-        gammaSlider = new Slider("gamma", 0, 300, 100);
-        gammaSlider.setStep(1);
+        gammaSlider = new SliderBox(0, 1, 3, 0.02);
         gammaSlider.setWidth("150px");
-        gammaSlider.addListener(new MSliderListener());
+        gammaSlider.addInputHandler(this::onInput);
         gammaTBox = new TextBox();
         gammaTBox.addChangeHandler(new MChangeHandler());
         gammaTBox.setText("" + 1);
@@ -172,55 +166,28 @@ public class ImageryAdjustment extends AbstractExample {
         initWidget(contentPanel);
     }
 
-    @Override
-    public String[] getSourceCodeURLs() {
-        String[] sourceCodeURLs = new String[1];
-        sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "ImageryAdjustment.txt";
-        return sourceCodeURLs;
-    }
-
-    private class MSliderListener implements SliderListener {
-        @Override
-        public void onStart(SliderEvent e) {
-
-        }
-
-        @Override
-        public boolean onSlide(SliderEvent e) {
-            Slider source = e.getSource();
-            float value = source.getValue() / 100.f;
-            if (source.getElement().getId().equalsIgnoreCase("brightness")) {
-                csVPanel.getViewer().imageryLayers().get(0).brightness = value;
-                brightnessTBox.setValue("" + value);
-            } else if (source.getElement().getId().equalsIgnoreCase("contrast")) {
-                csVPanel.getViewer().imageryLayers().get(0).contrast = value;
-                contrastTBox.setValue("" + value);
-            } else if (source.getElement().getId().equalsIgnoreCase("hue")) {
-                csVPanel.getViewer().imageryLayers().get(0).hue = value;
-                hueTBox.setValue("" + value);
-            } else if (source.getElement().getId().equalsIgnoreCase("saturation")) {
-                csVPanel.getViewer().imageryLayers().get(0).saturation = value;
-                saturationTBox.setValue("" + value);
-            } else if (source.getElement().getId().equalsIgnoreCase("gamma")) {
-                csVPanel.getViewer().imageryLayers().get(0).gamma = value;
-                gammaTBox.setValue("" + value);
-            }
-            return true;
-        }
-
-        @Override
-        public void onChange(SliderEvent e) {
-
-        }
-
-        @Override
-        public void onStop(SliderEvent e) {
-
+    private void onInput(InputEvent event) {
+        SliderBox source = (SliderBox) event.getSource();
+        float value = source.getValue().floatValue();
+        if (source.getElement().getId().equalsIgnoreCase("brightness")) {
+            csVPanel.getViewer().imageryLayers().get(0).brightness = value;
+            brightnessTBox.setValue(String.valueOf(value));
+        } else if (source.getElement().getId().equalsIgnoreCase("contrast")) {
+            csVPanel.getViewer().imageryLayers().get(0).contrast = value;
+            contrastTBox.setValue(String.valueOf(value));
+        } else if (source.getElement().getId().equalsIgnoreCase("hue")) {
+            csVPanel.getViewer().imageryLayers().get(0).hue = value;
+            hueTBox.setValue(String.valueOf(value));
+        } else if (source.getElement().getId().equalsIgnoreCase("saturation")) {
+            csVPanel.getViewer().imageryLayers().get(0).saturation = value;
+            saturationTBox.setValue(String.valueOf(value));
+        } else if (source.getElement().getId().equalsIgnoreCase("gamma")) {
+            csVPanel.getViewer().imageryLayers().get(0).gamma = value;
+            gammaTBox.setValue(String.valueOf(value));
         }
     }
 
-    private class MChangeHandler implements ChangeHandler {
-
+    private final class MChangeHandler implements ChangeHandler {
         @Override
         public void onChange(ChangeEvent changeEvent) {
             TextBox source = (TextBox) changeEvent.getSource();
@@ -268,5 +235,12 @@ public class ImageryAdjustment extends AbstractExample {
                 }
             }
         }
+    }
+
+    @Override
+    public String[] getSourceCodeURLs() {
+        String[] sourceCodeURLs = new String[1];
+        sourceCodeURLs[0] = GWT.getModuleBaseURL() + "examples/" + "ImageryAdjustment.txt";
+        return sourceCodeURLs;
     }
 }

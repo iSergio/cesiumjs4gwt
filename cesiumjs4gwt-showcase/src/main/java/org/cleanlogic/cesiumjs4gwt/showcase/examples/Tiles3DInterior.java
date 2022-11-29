@@ -19,6 +19,7 @@ package org.cleanlogic.cesiumjs4gwt.showcase.examples;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.HTML;
 import org.cesiumjs.cs.core.Cartesian3;
+import org.cesiumjs.cs.core.IonResource;
 import org.cesiumjs.cs.core.Matrix4;
 import org.cesiumjs.cs.scene.Cesium3DTileset;
 import org.cesiumjs.cs.scene.options.ViewOptions;
@@ -43,8 +44,7 @@ public class Tiles3DInterior extends AbstractExample {
     public void buildPanel() {
         ViewerPanel csVPanel = new ViewerPanel();
 
-        csVPanel.getViewer().scene().primitives().add(Cesium3DTileset.create(
-                "https://beta.cesium.com/api/assets/1463?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI5ZGExZTdmMS0xZjA5LTQxODAtOThmYi04MWU1YjZkMWZjNjgiLCJpZCI6NDQsImFzc2V0cyI6WzE0NjNdLCJpYXQiOjE0OTkyNzYwNzV9.eTEtaAEBUehNIZushZQnp0On9BPRtZYS7XEWFwneSRU"));
+        csVPanel.getViewer().scene().primitives().add(Cesium3DTileset.create(IonResource.fromAssetId(125737)));
 
         Cartesian3 initialPosition = new Cartesian3(-1111583.3721328347, -5855888.151574568, 2262561.444696748);
         org.cesiumjs.cs.core.HeadingPitchRoll initialOrientation = org.cesiumjs.cs.core.HeadingPitchRoll.fromDegrees(100.0,
