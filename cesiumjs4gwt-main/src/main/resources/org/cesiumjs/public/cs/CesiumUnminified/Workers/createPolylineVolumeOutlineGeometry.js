@@ -1,29 +1,4 @@
-/**
- * @license
- * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.99
- *
- * Copyright 2011-2022 Cesium Contributors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * Columbus View (Pat. Pend.)
- *
- * Portions licensed separately.
- * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
- */
-
-define(['./defaultValue-135942ca', './Matrix3-ea964448', './arrayRemoveDuplicates-3fb00ed2', './BoundingRectangle-02351bff', './Transforms-ac2d28a9', './Matrix2-f9f1b94b', './ComponentDatatype-ebdce3ba', './PolylineVolumeGeometryLibrary-e460dd46', './Check-40d84a28', './GeometryAttribute-51d61732', './GeometryAttributes-899f8bd0', './IndexDatatype-fa75fe25', './Math-efde0c7b', './PolygonPipeline-cf232713', './combine-462d91dd', './RuntimeError-f0dada00', './WebGLConstants-fcb70ee3', './EllipsoidTangentPlane-244dda7a', './AxisAlignedBoundingBox-48df2a2e', './IntersectionTests-4ab30dca', './Plane-93af52b2', './PolylinePipeline-b636012e', './EllipsoidGeodesic-08772132', './EllipsoidRhumbLine-6161ec8c'], (function (defaultValue, Matrix3, arrayRemoveDuplicates, BoundingRectangle, Transforms, Matrix2, ComponentDatatype, PolylineVolumeGeometryLibrary, Check, GeometryAttribute, GeometryAttributes, IndexDatatype, Math, PolygonPipeline, combine, RuntimeError, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane, PolylinePipeline, EllipsoidGeodesic, EllipsoidRhumbLine) { 'use strict';
+define(['./defaultValue-0a909f67', './Matrix3-4f4df527', './arrayRemoveDuplicates-c2038105', './BoundingRectangle-7ffc2153', './Transforms-2f755df8', './Matrix2-ce637455', './ComponentDatatype-f7b11d02', './PolylineVolumeGeometryLibrary-7ee1d449', './Check-666ab1a0', './GeometryAttribute-df5f473e', './GeometryAttributes-f06a2792', './IndexDatatype-a55ceaa1', './Math-2dbd6b93', './PolygonPipeline-774a8aaf', './combine-ca22a614', './RuntimeError-06c93819', './WebGLConstants-a8cc3e8c', './EllipsoidTangentPlane-bfc674bf', './AxisAlignedBoundingBox-bfb1234f', './IntersectionTests-9de29d51', './Plane-b81241c2', './PolylinePipeline-2e2b015c', './EllipsoidGeodesic-16de63ea', './EllipsoidRhumbLine-ae5e65e0'], (function (defaultValue, Matrix3, arrayRemoveDuplicates, BoundingRectangle, Transforms, Matrix2, ComponentDatatype, PolylineVolumeGeometryLibrary, Check, GeometryAttribute, GeometryAttributes, IndexDatatype, Math, PolygonPipeline, combine, RuntimeError, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane, PolylinePipeline, EllipsoidGeodesic, EllipsoidRhumbLine) { 'use strict';
 
   function computeAttributes(positions, shape) {
     const attributes = new GeometryAttributes.GeometryAttributes();

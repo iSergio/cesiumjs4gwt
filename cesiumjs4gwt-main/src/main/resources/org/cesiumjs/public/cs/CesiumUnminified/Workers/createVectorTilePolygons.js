@@ -1,29 +1,4 @@
-/**
- * @license
- * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.99
- *
- * Copyright 2011-2022 Cesium Contributors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * Columbus View (Pat. Pend.)
- *
- * Portions licensed separately.
- * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
- */
-
-define(['./AttributeCompression-53c7fda2', './Matrix3-ea964448', './Color-7ea3613e', './defaultValue-135942ca', './IndexDatatype-fa75fe25', './Math-efde0c7b', './OrientedBoundingBox-14c97a6c', './Matrix2-f9f1b94b', './createTaskProcessorWorker', './ComponentDatatype-ebdce3ba', './Check-40d84a28', './WebGLConstants-fcb70ee3', './Transforms-ac2d28a9', './combine-462d91dd', './RuntimeError-f0dada00', './EllipsoidTangentPlane-244dda7a', './AxisAlignedBoundingBox-48df2a2e', './IntersectionTests-4ab30dca', './Plane-93af52b2'], (function (AttributeCompression, Matrix3, Color, defaultValue, IndexDatatype, Math$1, OrientedBoundingBox, Matrix2, createTaskProcessorWorker, ComponentDatatype, Check, WebGLConstants, Transforms, combine, RuntimeError, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane) { 'use strict';
+define(['./AttributeCompression-4589338a', './Matrix3-4f4df527', './Color-0c5aaf47', './defaultValue-0a909f67', './IndexDatatype-a55ceaa1', './Math-2dbd6b93', './OrientedBoundingBox-d3ff3d4d', './Matrix2-ce637455', './createTaskProcessorWorker', './ComponentDatatype-f7b11d02', './Check-666ab1a0', './WebGLConstants-a8cc3e8c', './Transforms-2f755df8', './combine-ca22a614', './RuntimeError-06c93819', './EllipsoidTangentPlane-bfc674bf', './AxisAlignedBoundingBox-bfb1234f', './IntersectionTests-9de29d51', './Plane-b81241c2'], (function (AttributeCompression, Matrix3, Color, defaultValue, IndexDatatype, Math$1, OrientedBoundingBox, Matrix2, createTaskProcessorWorker, ComponentDatatype, Check, WebGLConstants, Transforms, combine, RuntimeError, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane) { 'use strict';
 
   const scratchCenter = new Matrix3.Cartesian3();
   const scratchEllipsoid = new Matrix3.Ellipsoid();

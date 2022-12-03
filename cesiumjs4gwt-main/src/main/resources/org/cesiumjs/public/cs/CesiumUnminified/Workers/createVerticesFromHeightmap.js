@@ -1,29 +1,4 @@
-/**
- * @license
- * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.99
- *
- * Copyright 2011-2022 Cesium Contributors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * Columbus View (Pat. Pend.)
- *
- * Portions licensed separately.
- * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
- */
-
-define(['./Matrix3-ea964448', './AxisAlignedBoundingBox-48df2a2e', './Transforms-ac2d28a9', './Matrix2-f9f1b94b', './defaultValue-135942ca', './Check-40d84a28', './TerrainEncoding-3edd4345', './Math-efde0c7b', './OrientedBoundingBox-14c97a6c', './WebMercatorProjection-7dd32693', './RuntimeError-f0dada00', './createTaskProcessorWorker', './combine-462d91dd', './AttributeCompression-53c7fda2', './ComponentDatatype-ebdce3ba', './WebGLConstants-fcb70ee3', './EllipsoidTangentPlane-244dda7a', './IntersectionTests-4ab30dca', './Plane-93af52b2'], (function (Matrix3, AxisAlignedBoundingBox, Transforms, Matrix2, defaultValue, Check, TerrainEncoding, Math$1, OrientedBoundingBox, WebMercatorProjection, RuntimeError, createTaskProcessorWorker, combine, AttributeCompression, ComponentDatatype, WebGLConstants, EllipsoidTangentPlane, IntersectionTests, Plane) { 'use strict';
+define(['./Matrix3-4f4df527', './AxisAlignedBoundingBox-bfb1234f', './Transforms-2f755df8', './Matrix2-ce637455', './defaultValue-0a909f67', './Check-666ab1a0', './TerrainEncoding-b52dcfc5', './Math-2dbd6b93', './OrientedBoundingBox-d3ff3d4d', './WebMercatorProjection-9f25de49', './RuntimeError-06c93819', './createTaskProcessorWorker', './combine-ca22a614', './AttributeCompression-4589338a', './ComponentDatatype-f7b11d02', './WebGLConstants-a8cc3e8c', './EllipsoidTangentPlane-bfc674bf', './IntersectionTests-9de29d51', './Plane-b81241c2'], (function (Matrix3, AxisAlignedBoundingBox, Transforms, Matrix2, defaultValue, Check, TerrainEncoding, Math$1, OrientedBoundingBox, WebMercatorProjection, RuntimeError, createTaskProcessorWorker, combine, AttributeCompression, ComponentDatatype, WebGLConstants, EllipsoidTangentPlane, IntersectionTests, Plane) { 'use strict';
 
   /**
    * The encoding that is used for a heightmap

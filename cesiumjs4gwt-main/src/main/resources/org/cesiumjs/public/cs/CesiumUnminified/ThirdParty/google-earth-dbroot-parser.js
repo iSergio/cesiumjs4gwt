@@ -1,5 +1,5 @@
 (() => {
-  // Source/ThirdParty/google-earth-dbroot-parser.js
+  // packages/engine/Source/ThirdParty/google-earth-dbroot-parser.js
   window.cesiumGoogleEarthDbRootParser = function($protobuf) {
     "use strict";
     var $Reader = $protobuf.Reader, $util = $protobuf.util;
