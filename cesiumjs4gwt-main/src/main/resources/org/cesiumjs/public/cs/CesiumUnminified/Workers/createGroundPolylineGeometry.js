@@ -1,29 +1,4 @@
-/**
- * @license
- * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.99
- *
- * Copyright 2011-2022 Cesium Contributors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * Columbus View (Pat. Pend.)
- *
- * Portions licensed separately.
- * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
- */
-
-define(['./Transforms-ac2d28a9', './Matrix2-f9f1b94b', './Matrix3-ea964448', './Check-40d84a28', './defaultValue-135942ca', './Math-efde0c7b', './ArcType-89067bf8', './arrayRemoveDuplicates-3fb00ed2', './ComponentDatatype-ebdce3ba', './EllipsoidGeodesic-08772132', './EllipsoidRhumbLine-6161ec8c', './EncodedCartesian3-4040c81e', './GeometryAttribute-51d61732', './IntersectionTests-4ab30dca', './Plane-93af52b2', './WebMercatorProjection-7dd32693', './combine-462d91dd', './RuntimeError-f0dada00', './WebGLConstants-fcb70ee3'], (function (Transforms, Matrix2, Matrix3, Check, defaultValue, Math$1, ArcType, arrayRemoveDuplicates, ComponentDatatype, EllipsoidGeodesic, EllipsoidRhumbLine, EncodedCartesian3, GeometryAttribute, IntersectionTests, Plane, WebMercatorProjection, combine, RuntimeError, WebGLConstants) { 'use strict';
+define(['./Transforms-2f755df8', './Matrix2-ce637455', './Matrix3-4f4df527', './Check-666ab1a0', './defaultValue-0a909f67', './Math-2dbd6b93', './ArcType-ce2e50ab', './arrayRemoveDuplicates-c2038105', './ComponentDatatype-f7b11d02', './EllipsoidGeodesic-16de63ea', './EllipsoidRhumbLine-ae5e65e0', './EncodedCartesian3-f473ea18', './GeometryAttribute-df5f473e', './IntersectionTests-9de29d51', './Plane-b81241c2', './WebMercatorProjection-9f25de49', './combine-ca22a614', './RuntimeError-06c93819', './WebGLConstants-a8cc3e8c'], (function (Transforms, Matrix2, Matrix3, Check, defaultValue, Math$1, ArcType, arrayRemoveDuplicates, ComponentDatatype, EllipsoidGeodesic, EllipsoidRhumbLine, EncodedCartesian3, GeometryAttribute, IntersectionTests, Plane, WebMercatorProjection, combine, RuntimeError, WebGLConstants) { 'use strict';
 
   /**
    * A tiling scheme for geometry referenced to a simple {@link GeographicProjection} where
@@ -298,7 +273,6 @@ define(['./Transforms-ac2d28a9', './Matrix2-f9f1b94b', './Matrix3-ea964448', './
     if (defaultValue.defined(initPromise)) {
       return initPromise;
     }
-
     initPromise = Transforms.Resource.fetchJson(
       Transforms.buildModuleUrl("Assets/approximateTerrainHeights.json")
     ).then(function (json) {

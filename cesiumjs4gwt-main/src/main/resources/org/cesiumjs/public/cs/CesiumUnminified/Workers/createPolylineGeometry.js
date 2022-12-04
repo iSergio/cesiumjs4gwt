@@ -1,29 +1,4 @@
-/**
- * @license
- * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.99
- *
- * Copyright 2011-2022 Cesium Contributors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * Columbus View (Pat. Pend.)
- *
- * Portions licensed separately.
- * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
- */
-
-define(['./defaultValue-135942ca', './Matrix3-ea964448', './ArcType-89067bf8', './arrayRemoveDuplicates-3fb00ed2', './Transforms-ac2d28a9', './Color-7ea3613e', './ComponentDatatype-ebdce3ba', './Check-40d84a28', './GeometryAttribute-51d61732', './GeometryAttributes-899f8bd0', './IndexDatatype-fa75fe25', './Math-efde0c7b', './PolylinePipeline-b636012e', './VertexFormat-1d6950e1', './Matrix2-f9f1b94b', './RuntimeError-f0dada00', './combine-462d91dd', './WebGLConstants-fcb70ee3', './EllipsoidGeodesic-08772132', './EllipsoidRhumbLine-6161ec8c', './IntersectionTests-4ab30dca', './Plane-93af52b2'], (function (defaultValue, Matrix3, ArcType, arrayRemoveDuplicates, Transforms, Color, ComponentDatatype, Check, GeometryAttribute, GeometryAttributes, IndexDatatype, Math$1, PolylinePipeline, VertexFormat, Matrix2, RuntimeError, combine, WebGLConstants, EllipsoidGeodesic, EllipsoidRhumbLine, IntersectionTests, Plane) { 'use strict';
+define(['./defaultValue-0a909f67', './Matrix3-4f4df527', './ArcType-ce2e50ab', './arrayRemoveDuplicates-c2038105', './Transforms-2f755df8', './Color-0c5aaf47', './ComponentDatatype-f7b11d02', './Check-666ab1a0', './GeometryAttribute-df5f473e', './GeometryAttributes-f06a2792', './IndexDatatype-a55ceaa1', './Math-2dbd6b93', './PolylinePipeline-2e2b015c', './VertexFormat-6b480673', './Matrix2-ce637455', './RuntimeError-06c93819', './combine-ca22a614', './WebGLConstants-a8cc3e8c', './EllipsoidGeodesic-16de63ea', './EllipsoidRhumbLine-ae5e65e0', './IntersectionTests-9de29d51', './Plane-b81241c2'], (function (defaultValue, Matrix3, ArcType, arrayRemoveDuplicates, Transforms, Color, ComponentDatatype, Check, GeometryAttribute, GeometryAttributes, IndexDatatype, Math$1, PolylinePipeline, VertexFormat, Matrix2, RuntimeError, combine, WebGLConstants, EllipsoidGeodesic, EllipsoidRhumbLine, IntersectionTests, Plane) { 'use strict';
 
   const scratchInterpolateColorsArray = [];
 

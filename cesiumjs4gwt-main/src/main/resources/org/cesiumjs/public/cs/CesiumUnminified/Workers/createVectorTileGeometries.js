@@ -1,29 +1,4 @@
-/**
- * @license
- * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.99
- *
- * Copyright 2011-2022 Cesium Contributors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * Columbus View (Pat. Pend.)
- *
- * Portions licensed separately.
- * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
- */
-
-define(['./Transforms-ac2d28a9', './BoxGeometry-a1d96334', './Matrix3-ea964448', './Color-7ea3613e', './CylinderGeometry-6ab4de6a', './defaultValue-135942ca', './EllipsoidGeometry-fb52d895', './IndexDatatype-fa75fe25', './Matrix2-f9f1b94b', './createTaskProcessorWorker', './Check-40d84a28', './Math-efde0c7b', './combine-462d91dd', './RuntimeError-f0dada00', './ComponentDatatype-ebdce3ba', './WebGLConstants-fcb70ee3', './GeometryAttribute-51d61732', './GeometryAttributes-899f8bd0', './GeometryOffsetAttribute-d3a42805', './VertexFormat-1d6950e1', './CylinderGeometryLibrary-c7bef0a3'], (function (Transforms, BoxGeometry, Matrix3, Color, CylinderGeometry, defaultValue, EllipsoidGeometry, IndexDatatype, Matrix2, createTaskProcessorWorker, Check, Math$1, combine, RuntimeError, ComponentDatatype, WebGLConstants, GeometryAttribute, GeometryAttributes, GeometryOffsetAttribute, VertexFormat, CylinderGeometryLibrary) { 'use strict';
+define(['./Transforms-2f755df8', './BoxGeometry-93f344a3', './Matrix3-4f4df527', './Color-0c5aaf47', './CylinderGeometry-f9503c6d', './defaultValue-0a909f67', './EllipsoidGeometry-95c0330e', './IndexDatatype-a55ceaa1', './Matrix2-ce637455', './createTaskProcessorWorker', './Check-666ab1a0', './Math-2dbd6b93', './combine-ca22a614', './RuntimeError-06c93819', './ComponentDatatype-f7b11d02', './WebGLConstants-a8cc3e8c', './GeometryAttribute-df5f473e', './GeometryAttributes-f06a2792', './GeometryOffsetAttribute-04332ce7', './VertexFormat-6b480673', './CylinderGeometryLibrary-372c07d8'], (function (Transforms, BoxGeometry, Matrix3, Color, CylinderGeometry, defaultValue, EllipsoidGeometry, IndexDatatype, Matrix2, createTaskProcessorWorker, Check, Math$1, combine, RuntimeError, ComponentDatatype, WebGLConstants, GeometryAttribute, GeometryAttributes, GeometryOffsetAttribute, VertexFormat, CylinderGeometryLibrary) { 'use strict';
 
   /**
    * Describes a renderable batch of geometry.

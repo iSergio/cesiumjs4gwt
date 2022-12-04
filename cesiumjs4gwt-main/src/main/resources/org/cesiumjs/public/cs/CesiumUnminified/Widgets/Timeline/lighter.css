@@ -1,4 +1,4 @@
-/* Source/Widgets/Timeline/lighter.css */
+/* packages/widgets/Source/Timeline/lighter.css */
 .cesium-lighter .cesium-timeline-bar {
   background: linear-gradient(to bottom, #eeeeee 0%, #ffffff 50%, #fafafa 100%);
 }

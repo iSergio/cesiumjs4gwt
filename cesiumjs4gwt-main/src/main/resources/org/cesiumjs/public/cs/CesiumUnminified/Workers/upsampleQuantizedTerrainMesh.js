@@ -1,29 +1,4 @@
-/**
- * @license
- * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.99
- *
- * Copyright 2011-2022 Cesium Contributors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * Columbus View (Pat. Pend.)
- *
- * Portions licensed separately.
- * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
- */
-
-define(['./AttributeCompression-53c7fda2', './Transforms-ac2d28a9', './Matrix2-f9f1b94b', './Matrix3-ea964448', './defaultValue-135942ca', './TerrainEncoding-3edd4345', './IndexDatatype-fa75fe25', './Check-40d84a28', './Math-efde0c7b', './OrientedBoundingBox-14c97a6c', './createTaskProcessorWorker', './ComponentDatatype-ebdce3ba', './WebGLConstants-fcb70ee3', './combine-462d91dd', './RuntimeError-f0dada00', './EllipsoidTangentPlane-244dda7a', './AxisAlignedBoundingBox-48df2a2e', './IntersectionTests-4ab30dca', './Plane-93af52b2'], (function (AttributeCompression, Transforms, Matrix2, Matrix3, defaultValue, TerrainEncoding, IndexDatatype, Check, Math$1, OrientedBoundingBox, createTaskProcessorWorker, ComponentDatatype, WebGLConstants, combine, RuntimeError, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane) { 'use strict';
+define(['./AttributeCompression-4589338a', './Transforms-2f755df8', './Matrix2-ce637455', './Matrix3-4f4df527', './defaultValue-0a909f67', './TerrainEncoding-b52dcfc5', './IndexDatatype-a55ceaa1', './Check-666ab1a0', './Math-2dbd6b93', './OrientedBoundingBox-d3ff3d4d', './createTaskProcessorWorker', './ComponentDatatype-f7b11d02', './WebGLConstants-a8cc3e8c', './combine-ca22a614', './RuntimeError-06c93819', './EllipsoidTangentPlane-bfc674bf', './AxisAlignedBoundingBox-bfb1234f', './IntersectionTests-9de29d51', './Plane-b81241c2'], (function (AttributeCompression, Transforms, Matrix2, Matrix3, defaultValue, TerrainEncoding, IndexDatatype, Check, Math$1, OrientedBoundingBox, createTaskProcessorWorker, ComponentDatatype, WebGLConstants, combine, RuntimeError, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane) { 'use strict';
 
   /**
    * Contains functions for operating on 2D triangles.
