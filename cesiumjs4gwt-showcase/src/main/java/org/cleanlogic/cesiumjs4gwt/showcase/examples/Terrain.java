@@ -92,8 +92,8 @@ public class Terrain extends AbstractExample {
         terrainsLBox.addItem("CesiumTerrainProvider - STK World Terrain w/ Water", "3");
         terrainsLBox.addItem("EllipsoidTerrainProvider", "4");
         terrainsLBox.addItem("VRTheWorldTerrainProvider", "5");
-        terrainsLBox.addItem("GeoserverTerrainProvider SRTM30", "6");
-        terrainsLBox.addItem("GeoserverTerrainProvider SRTM90", "7");
+        terrainsLBox.addItem("GeoserverTerrainProvider SRTM90", "6");
+        terrainsLBox.addItem("GeoserverTerrainProvider SRTM30", "7");
         terrainsLBox.addItem("ArcGISTerrainProvider", "8");
 
         terrainsLBox.addChangeHandler(new ChangeHandler() {
@@ -135,16 +135,18 @@ public class Terrain extends AbstractExample {
                     case "6": {
                         GeoserverTerrainProviderOptions options = new GeoserverTerrainProviderOptions();
                         options.url = "https://gis4fun.org/geoserver/ows";
-                        options.layerName = "elevation:SRTM30";
+                        options.layerName = "elevation:SRTM90";
                         options.styleName = "elevation:grayToColor";
+                        options.maxLevel = 11;
                         csVPanel.getViewer().terrainProvider = new GeoserverTerrainProvider(options);
                         break;
                     }
                     case "7": {
                         GeoserverTerrainProviderOptions options = new GeoserverTerrainProviderOptions();
                         options.url = "https://gis4fun.org/geoserver/ows";
-                        options.layerName = "elevation:SRTM90";
+                        options.layerName = "elevation:SRTM30";
                         options.styleName = "elevation:grayToColor";
+                        options.maxLevel = 13;
                         csVPanel.getViewer().terrainProvider = new GeoserverTerrainProvider(options);
                         break;
                     }

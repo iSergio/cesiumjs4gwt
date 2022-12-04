@@ -1,4 +1,4 @@
-/* Source/Widgets/lighterShared.css */
+/* packages/widgets/Source/lighterShared.css */
 .cesium-lighter .cesium-button {
   color: #111;
   fill: #111;
@@ -45,7 +45,7 @@
   color: #ea4;
 }
 
-/* Source/Widgets/Animation/lighter.css */
+/* packages/widgets/Source/Animation/lighter.css */
 .cesium-lighter .cesium-animation-themeNormal {
   color: #e5f2fe;
 }
@@ -116,7 +116,7 @@
   stroke: #a5a5a5;
 }
 
-/* Source/Widgets/BaseLayerPicker/lighter.css */
+/* packages/widgets/Source/BaseLayerPicker/lighter.css */
 .cesium-lighter .cesium-baseLayerPicker-itemIcon {
   border-color: #759dc0;
 }
@@ -139,7 +139,7 @@
   border: double 4px rgb(0, 61, 168);
 }
 
-/* Source/Widgets/CesiumWidget/lighter.css */
+/* packages/engine/Source/Widget/lighter.css */
 .cesium-lighter .cesium-widget-errorPanel {
   background: rgba(255, 255, 255, 0.7);
 }
@@ -153,7 +153,7 @@
   color: #b87d00;
 }
 
-/* Source/Widgets/Geocoder/lighter.css */
+/* packages/widgets/Source/Geocoder/lighter.css */
 .cesium-lighter .cesium-geocoder-input {
   border: solid 1px #759dc0;
   background-color: rgba(240, 240, 240, 0.9);
@@ -171,7 +171,7 @@
   background-color: #a6d2ff;
 }
 
-/* Source/Widgets/Timeline/lighter.css */
+/* packages/widgets/Source/Timeline/lighter.css */
 .cesium-lighter .cesium-timeline-bar {
   background: linear-gradient(to bottom, #eeeeee 0%, #ffffff 50%, #fafafa 100%);
 }
@@ -190,7 +190,7 @@
   background: #444;
 }
 
-/* Source/Widgets/NavigationHelpButton/lighter.css */
+/* packages/widgets/Source/NavigationHelpButton/lighter.css */
 .cesium-lighter .cesium-navigation-help-instructions {
   border: 1px solid #759dc0;
   background-color: rgba(255, 255, 255, 0.9);
@@ -229,4 +229,4 @@
   background-color: rgba(166, 210, 255, 0.9);
 }
 
-/* Source/Widgets/lighter.css */
+/* packages/widgets/Source/lighter.css */

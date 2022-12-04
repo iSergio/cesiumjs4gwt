@@ -1,29 +1,4 @@
-/**
- * @license
- * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.99
- *
- * Copyright 2011-2022 Cesium Contributors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * Columbus View (Pat. Pend.)
- *
- * Portions licensed separately.
- * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
- */
-
-define(['./defaultValue-135942ca', './Matrix3-ea964448', './ArcType-89067bf8', './BoundingRectangle-02351bff', './Transforms-ac2d28a9', './Matrix2-f9f1b94b', './Check-40d84a28', './ComponentDatatype-ebdce3ba', './EllipsoidGeodesic-08772132', './EllipsoidTangentPlane-244dda7a', './GeometryAttribute-51d61732', './GeometryInstance-bb34b63f', './GeometryOffsetAttribute-d3a42805', './GeometryPipeline-576f16cd', './IndexDatatype-fa75fe25', './Math-efde0c7b', './PolygonGeometryLibrary-81e6c436', './PolygonPipeline-cf232713', './VertexFormat-1d6950e1', './combine-462d91dd', './RuntimeError-f0dada00', './WebGLConstants-fcb70ee3', './AxisAlignedBoundingBox-48df2a2e', './IntersectionTests-4ab30dca', './Plane-93af52b2', './AttributeCompression-53c7fda2', './EncodedCartesian3-4040c81e', './arrayRemoveDuplicates-3fb00ed2', './EllipsoidRhumbLine-6161ec8c', './GeometryAttributes-899f8bd0'], (function (defaultValue, Matrix3, ArcType, BoundingRectangle, Transforms, Matrix2, Check, ComponentDatatype, EllipsoidGeodesic, EllipsoidTangentPlane, GeometryAttribute, GeometryInstance, GeometryOffsetAttribute, GeometryPipeline, IndexDatatype, Math$1, PolygonGeometryLibrary, PolygonPipeline, VertexFormat, combine, RuntimeError, WebGLConstants, AxisAlignedBoundingBox, IntersectionTests, Plane, AttributeCompression, EncodedCartesian3, arrayRemoveDuplicates, EllipsoidRhumbLine, GeometryAttributes) { 'use strict';
+define(['./defaultValue-0a909f67', './Matrix3-4f4df527', './ArcType-ce2e50ab', './BoundingRectangle-7ffc2153', './Transforms-2f755df8', './Matrix2-ce637455', './Check-666ab1a0', './ComponentDatatype-f7b11d02', './EllipsoidGeodesic-16de63ea', './EllipsoidTangentPlane-bfc674bf', './GeometryAttribute-df5f473e', './GeometryInstance-aa75b4cf', './GeometryOffsetAttribute-04332ce7', './GeometryPipeline-f0e46c42', './IndexDatatype-a55ceaa1', './Math-2dbd6b93', './PolygonGeometryLibrary-6f4937bb', './PolygonPipeline-774a8aaf', './VertexFormat-6b480673', './combine-ca22a614', './RuntimeError-06c93819', './WebGLConstants-a8cc3e8c', './AxisAlignedBoundingBox-bfb1234f', './IntersectionTests-9de29d51', './Plane-b81241c2', './AttributeCompression-4589338a', './EncodedCartesian3-f473ea18', './arrayRemoveDuplicates-c2038105', './EllipsoidRhumbLine-ae5e65e0', './GeometryAttributes-f06a2792'], (function (defaultValue, Matrix3, ArcType, BoundingRectangle, Transforms, Matrix2, Check, ComponentDatatype, EllipsoidGeodesic, EllipsoidTangentPlane, GeometryAttribute, GeometryInstance, GeometryOffsetAttribute, GeometryPipeline, IndexDatatype, Math$1, PolygonGeometryLibrary, PolygonPipeline, VertexFormat, combine, RuntimeError, WebGLConstants, AxisAlignedBoundingBox, IntersectionTests, Plane, AttributeCompression, EncodedCartesian3, arrayRemoveDuplicates, EllipsoidRhumbLine, GeometryAttributes) { 'use strict';
 
   const scratchCarto1 = new Matrix3.Cartographic();
   const scratchCarto2 = new Matrix3.Cartographic();

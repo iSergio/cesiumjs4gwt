@@ -1,29 +1,4 @@
-/**
- * @license
- * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.99
- *
- * Copyright 2011-2022 Cesium Contributors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * Columbus View (Pat. Pend.)
- *
- * Portions licensed separately.
- * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
- */
-
-define(['./AxisAlignedBoundingBox-48df2a2e', './Matrix2-f9f1b94b', './Matrix3-ea964448', './defaultValue-135942ca', './TerrainEncoding-3edd4345', './IndexDatatype-fa75fe25', './Math-efde0c7b', './Check-40d84a28', './Transforms-ac2d28a9', './WebMercatorProjection-7dd32693', './createTaskProcessorWorker', './RuntimeError-f0dada00', './AttributeCompression-53c7fda2', './ComponentDatatype-ebdce3ba', './WebGLConstants-fcb70ee3', './combine-462d91dd'], (function (AxisAlignedBoundingBox, Matrix2, Matrix3, defaultValue, TerrainEncoding, IndexDatatype, Math$1, Check, Transforms, WebMercatorProjection, createTaskProcessorWorker, RuntimeError, AttributeCompression, ComponentDatatype, WebGLConstants, combine) { 'use strict';
+define(['./AxisAlignedBoundingBox-bfb1234f', './Matrix2-ce637455', './Matrix3-4f4df527', './defaultValue-0a909f67', './TerrainEncoding-b52dcfc5', './IndexDatatype-a55ceaa1', './Math-2dbd6b93', './Check-666ab1a0', './Transforms-2f755df8', './WebMercatorProjection-9f25de49', './createTaskProcessorWorker', './RuntimeError-06c93819', './AttributeCompression-4589338a', './ComponentDatatype-f7b11d02', './WebGLConstants-a8cc3e8c', './combine-ca22a614'], (function (AxisAlignedBoundingBox, Matrix2, Matrix3, defaultValue, TerrainEncoding, IndexDatatype, Math$1, Check, Transforms, WebMercatorProjection, createTaskProcessorWorker, RuntimeError, AttributeCompression, ComponentDatatype, WebGLConstants, combine) { 'use strict';
 
   /**
    * Provides terrain or other geometry for the surface of an ellipsoid.  The surface geometry is
