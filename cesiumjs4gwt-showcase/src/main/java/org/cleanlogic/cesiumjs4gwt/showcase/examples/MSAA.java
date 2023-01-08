@@ -62,7 +62,7 @@ public class MSAA extends AbstractExample {
     public void buildPanel() {
         ViewerOptions options = new ViewerOptions();
         options.terrainProvider = Cesium.createWorldTerrain();
-        options.contextOptions = JsObject.create().setProperty("requestWebgl2", true);
+        options.contextOptions.requestWebgl2 = true;
         csVPanel = new ViewerPanel(options);
 
         if (!csVPanel.getViewer().scene().msaaSupported()) {

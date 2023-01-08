@@ -226,7 +226,7 @@ public class ViewerOptions {
      * Scene.
      */
     @JsProperty
-    public Object contextOptions;
+    public ContextOptions contextOptions = new ContextOptions();
     /**
      * SceneMode SceneMode.SCENE3D optional The initial scene mode. Default:
      * {@link SceneMode#SCENE3D()}
