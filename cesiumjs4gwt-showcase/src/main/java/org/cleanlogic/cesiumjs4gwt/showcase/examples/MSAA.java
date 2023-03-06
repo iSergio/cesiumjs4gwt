@@ -43,6 +43,7 @@ import org.cesiumjs.cs.scene.Scene;
 import org.cesiumjs.cs.scene.options.ViewOptions;
 import org.cesiumjs.cs.widgets.Viewer;
 import org.cesiumjs.cs.widgets.ViewerPanel;
+import org.cesiumjs.cs.widgets.options.ContextOptions;
 import org.cesiumjs.cs.widgets.options.ViewerOptions;
 import org.cleanlogic.cesiumjs4gwt.showcase.basic.AbstractExample;
 import org.cleanlogic.cesiumjs4gwt.showcase.components.store.ShowcaseExampleStore;
@@ -62,7 +63,8 @@ public class MSAA extends AbstractExample {
     public void buildPanel() {
         ViewerOptions options = new ViewerOptions();
         options.terrainProvider = Cesium.createWorldTerrain();
-        options.contextOptions = JsObject.create().setProperty("requestWebgl2", true);
+        options.contextOptions = new ContextOptions();
+        options.contextOptions.requestWebgl2 = true;
         csVPanel = new ViewerPanel(options);
 
         if (!csVPanel.getViewer().scene().msaaSupported()) {
