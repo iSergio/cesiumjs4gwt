@@ -229,6 +229,26 @@ public class Globe {
     @JsProperty
     public int tileCacheSize;
     /**
+     * Properties for controlling globe translucency.
+     */
+    @JsProperty
+    public GlobeTranslucency translucency;
+    /**
+     * The color to render the back side of the globe when the camera is underground or the globe is translucent,
+     * blended with the globe color based on the camera's distance.
+     * <p>To disable underground coloring, set undergroundColor to undefined.</p>
+     * Default: {@link Color#BLACK()}
+     */
+    @JsProperty
+    public Color undergroundColor;
+    /**
+     * When the camera is above the ellipsoid the distance is computed from the nearest point on the ellipsoid instead
+     * of the camera's position.
+     * @see Globe#undergroundColor
+     */
+    @JsProperty
+    public NearFarScalar undergroundColorAlphaByDistance;
+    /**
      * Gets an event that's raised when the length of the tile load queue has
      * changed since the last render frame. When the load queue is empty, all
      * terrain and imagery for the current view have been loaded. The event passes
@@ -236,6 +256,13 @@ public class Globe {
      */
     @JsProperty
     public Event tileLoadProgressEvent;
+
+    /**
+     * Determines the darkness of the vertex shadow. This only takes effect when enableLighting is true.
+     * Default: 0.3
+     */
+    @JsProperty
+    public double vertexShadowDarkness;
 
     @JsConstructor
     public Globe() {

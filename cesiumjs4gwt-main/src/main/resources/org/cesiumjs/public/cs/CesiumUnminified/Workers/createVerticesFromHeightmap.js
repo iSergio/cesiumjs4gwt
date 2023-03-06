@@ -1,4 +1,4 @@
-define(['./Matrix3-4f4df527', './AxisAlignedBoundingBox-bfb1234f', './Transforms-2f755df8', './Matrix2-ce637455', './defaultValue-0a909f67', './Check-666ab1a0', './TerrainEncoding-b52dcfc5', './Math-2dbd6b93', './OrientedBoundingBox-d3ff3d4d', './WebMercatorProjection-9f25de49', './RuntimeError-06c93819', './createTaskProcessorWorker', './combine-ca22a614', './AttributeCompression-4589338a', './ComponentDatatype-f7b11d02', './WebGLConstants-a8cc3e8c', './EllipsoidTangentPlane-bfc674bf', './IntersectionTests-9de29d51', './Plane-b81241c2'], (function (Matrix3, AxisAlignedBoundingBox, Transforms, Matrix2, defaultValue, Check, TerrainEncoding, Math$1, OrientedBoundingBox, WebMercatorProjection, RuntimeError, createTaskProcessorWorker, combine, AttributeCompression, ComponentDatatype, WebGLConstants, EllipsoidTangentPlane, IntersectionTests, Plane) { 'use strict';
+define(['./Matrix3-315394f6', './AxisAlignedBoundingBox-a4321399', './Transforms-26539bce', './Matrix2-13178034', './defaultValue-0a909f67', './Check-666ab1a0', './TerrainEncoding-06470d7f', './Math-2dbd6b93', './OrientedBoundingBox-b450cb61', './WebMercatorProjection-13a90d41', './RuntimeError-06c93819', './createTaskProcessorWorker', './combine-ca22a614', './AttributeCompression-b646d393', './ComponentDatatype-f7b11d02', './WebGLConstants-a8cc3e8c', './EllipsoidTangentPlane-cfb50678', './IntersectionTests-a93d3de9', './Plane-900aa728'], (function (Matrix3, AxisAlignedBoundingBox, Transforms, Matrix2, defaultValue, Check, TerrainEncoding, Math$1, OrientedBoundingBox, WebMercatorProjection, RuntimeError, createTaskProcessorWorker, combine, AttributeCompression, ComponentDatatype, WebGLConstants, EllipsoidTangentPlane, IntersectionTests, Plane) { 'use strict';
 
   /**
    * The encoding that is used for a heightmap
@@ -545,7 +545,11 @@ define(['./Matrix3-4f4df527', './AxisAlignedBoundingBox-bfb1234f', './Transforms
   };
   var HeightmapTessellator$1 = HeightmapTessellator;
 
-  var LercDecode = {exports: {}};
+  var LercDecodeExports = {};
+  var LercDecode = {
+    get exports(){ return LercDecodeExports; },
+    set exports(v){ LercDecodeExports = v; },
+  };
 
   /* jshint forin: false, bitwise: false */
 
@@ -2654,7 +2658,7 @@ define(['./Matrix3-4f4df527', './AxisAlignedBoundingBox-bfb1234f', './Transforms
   	})();
   } (LercDecode));
 
-  var Lerc = LercDecode.exports;
+  var Lerc = LercDecodeExports;
 
   function createVerticesFromHeightmap(parameters, transferableObjects) {
     // LERC encoded buffers must be decoded, then we can process them like normal
