@@ -102,6 +102,14 @@ public class FeatureDetection {
     public static native boolean supportsWebAssembly();
 
     /**
+     * Detects whether the current browser supports a WebGL2 rendering context for the specified scene.
+     * @param scene the Cesium scene specifying the rendering context
+     * @return true if the browser supports a WebGL2 rendering context, false if not.
+     */
+    @JsMethod
+    public static native boolean supportsWebgl2(Scene scene);
+
+    /**
      * Detects whether the current browser supports Web Workers.
      *
      * @return true if the browsers supports Web Workers, false if not.
