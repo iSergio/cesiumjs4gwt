@@ -128,6 +128,22 @@ define(['./defaultValue-0a909f67', './Check-666ab1a0', './WebGLConstants-a8cc3e8
     ALPHA: WebGLConstants.WebGLConstants.ALPHA,
 
     /**
+     * A pixel format containing a red channel
+     *
+     * @type {Number}
+     * @constant
+     */
+    RED: WebGLConstants.WebGLConstants.RED,
+
+    /**
+     * A pixel format containing red and green channels.
+     *
+     * @type {Number}
+     * @constant
+     */
+    RG: WebGLConstants.WebGLConstants.RG,
+
+    /**
      * A pixel format containing red, green, and blue channels.
      *
      * @type {Number}
@@ -274,8 +290,10 @@ define(['./defaultValue-0a909f67', './Check-666ab1a0', './WebGLConstants-a8cc3e8
       case PixelFormat.RGBA:
         return 4;
       case PixelFormat.LUMINANCE_ALPHA:
+      case PixelFormat.RG:
         return 2;
       case PixelFormat.ALPHA:
+      case PixelFormat.RED:
       case PixelFormat.LUMINANCE:
         return 1;
       default:
@@ -291,6 +309,8 @@ define(['./defaultValue-0a909f67', './Check-666ab1a0', './WebGLConstants-a8cc3e8
       pixelFormat === PixelFormat.DEPTH_COMPONENT ||
       pixelFormat === PixelFormat.DEPTH_STENCIL ||
       pixelFormat === PixelFormat.ALPHA ||
+      pixelFormat === PixelFormat.RED ||
+      pixelFormat === PixelFormat.RG ||
       pixelFormat === PixelFormat.RGB ||
       pixelFormat === PixelFormat.RGBA ||
       pixelFormat === PixelFormat.LUMINANCE ||
@@ -565,7 +585,7 @@ define(['./defaultValue-0a909f67', './Check-666ab1a0', './WebGLConstants-a8cc3e8
           return WebGLConstants.WebGLConstants.RGB32F;
         case PixelFormat.RG:
           return WebGLConstants.WebGLConstants.RG32F;
-        case PixelFormat.R:
+        case PixelFormat.RED:
           return WebGLConstants.WebGLConstants.R32F;
       }
     }
@@ -578,7 +598,7 @@ define(['./defaultValue-0a909f67', './Check-666ab1a0', './WebGLConstants-a8cc3e8
           return WebGLConstants.WebGLConstants.RGB16F;
         case PixelFormat.RG:
           return WebGLConstants.WebGLConstants.RG16F;
-        case PixelFormat.R:
+        case PixelFormat.RED:
           return WebGLConstants.WebGLConstants.R16F;
       }
     }

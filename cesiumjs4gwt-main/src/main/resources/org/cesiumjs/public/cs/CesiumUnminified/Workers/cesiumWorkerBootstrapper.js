@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.101
+ * Version 1.102
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -149,6 +149,9 @@ var requirejs, require, define;
   }
   function newContext(contextName) {
     var inCheckLoaded, Module, context, handlers, checkLoadedTimeoutId, config = {
+      //Defaults. Do not set a default for map
+      //config to speed up normalize(), which
+      //will run faster if there is no default.
       waitSeconds: 7,
       baseUrl: "./",
       paths: {},
@@ -531,6 +534,11 @@ var requirejs, require, define;
           context.load(this.map.id, url);
         }
       },
+      /**
+       * Checks if the module is ready to define itself, and if so,
+       * define it.
+       * @private
+       */
       check: function() {
         if (!this.enabled || this.enabling) {
           return;
@@ -840,6 +848,11 @@ var requirejs, require, define;
       makeModuleMap,
       nextTick: req.nextTick,
       onError,
+      /**
+       * @private
+       * Set a configuration for the context.
+       * @param {Object} cfg config object to integrate.
+       */
       configure: function(cfg2) {
         if (cfg2.baseUrl) {
           if (cfg2.baseUrl.charAt(cfg2.baseUrl.length - 1) !== "/") {
@@ -962,6 +975,11 @@ var requirejs, require, define;
         }
         mixin(localRequire, {
           isBrowser,
+          /**
+           * Converts a module name + .extension into an URL path.
+           * *Requires* the use of a module name. It does not support using
+           * plain URLs like nameToUrl.
+           */
           toUrl: function(moduleNamePlusExt) {
             var ext, index = moduleNamePlusExt.lastIndexOf("."), segment = moduleNamePlusExt.split("/")[0], isRelative = segment === "." || segment === "..";
             if (index !== -1 && (!isRelative || index > 1)) {
@@ -1010,12 +1028,26 @@ var requirejs, require, define;
         }
         return localRequire;
       },
+      /**
+       * @private
+       * Called to enable a module if it is still in the registry
+       * awaiting enablement. A second arg, parent, the parent module,
+       * is passed in for context, when this method is overridden by
+       * the optimizer. Not shown here to keep code compact.
+       */
       enable: function(depMap) {
         var mod = getOwn(registry, depMap.id);
         if (mod) {
           getModule(depMap).enable();
         }
       },
+      /**
+       * Internal method used by environment adapters to complete a load event.
+       * A load event could be a script load or just a load pass from a synchronous
+       * load call.
+       * @param {String} moduleName the name of the module to potentially complete.
+       * @private
+       */
       completeLoad: function(moduleName) {
         var found, args, mod, shim = getOwn(config.shim, moduleName) || {}, shExports = shim.exports;
         takeGlobalQueue();
@@ -1054,6 +1086,14 @@ var requirejs, require, define;
         }
         checkLoaded();
       },
+      /**
+       * @private
+       * Converts a module name to a file path. Supports cases where
+       * moduleName may actually be just an URL.
+       * Note that it **does not** call normalize on the moduleName,
+       * it is assumed to have already been normalized. This is an
+       * internal API, not a public one. Use toUrl for the public API.
+       */
       nameToUrl: function(moduleName, ext, skipExt) {
         var paths, syms, i, parentModule, url, parentPath, bundleId, pkgMain = getOwn(config.pkgs, moduleName);
         if (pkgMain) {
@@ -1085,12 +1125,27 @@ var requirejs, require, define;
         }
         return config.urlArgs ? url + ((url.indexOf("?") === -1 ? "?" : "&") + config.urlArgs) : url;
       },
+      //Delegates to req.load. Broken out as a separate function to
+      //allow overriding in the optimizer.
       load: function(id, url) {
         req.load(context, id, url);
       },
+      /**
+       * Executes a module callback function. Broken out as a separate function
+       * solely to allow the build system to sequence the files in the built
+       * layer in the right sequence.
+       *
+       * @private
+       */
       execCb: function(name, callback, args, exports) {
         return callback.apply(exports, args);
       },
+      /**
+       * callback for script loads, used to check status of loading.
+       * @private
+       * @param {Event} evt the event from the browser for the script
+       * that was loaded.
+       */
       onScriptLoad: function(evt) {
         if (evt.type === "load" || readyRegExp.test((evt.currentTarget || evt.srcElement).readyState)) {
           interactiveScript = null;
@@ -1098,6 +1153,10 @@ var requirejs, require, define;
           context.completeLoad(data.id);
         }
       },
+      /**
+       * @private
+       * Callback for script errors.
+       */
       onScriptError: function(evt) {
         var data = getScriptData(evt);
         if (!hasPathFallback(data.id)) {
@@ -1185,7 +1244,14 @@ var requirejs, require, define;
       }
       node.setAttribute("data-requirecontext", context.contextName);
       node.setAttribute("data-requiremodule", moduleName);
-      if (node.attachEvent && !(node.attachEvent.toString && node.attachEvent.toString().indexOf("[native code") < 0) && !isOpera) {
+      if (node.attachEvent && //Check if node.attachEvent is artificially added by custom script or
+      //natively supported by browser
+      //read https://github.com/jrburke/requirejs/issues/187
+      //if we can NOT find [native code] then it must NOT natively supported.
+      //in IE8, node.attachEvent does not have toString()
+      //Note the test for "[native code" with no closing brace, see:
+      //https://github.com/jrburke/requirejs/issues/273
+      !(node.attachEvent.toString && node.attachEvent.toString().indexOf("[native code") < 0) && !isOpera) {
         useInteractive = true;
         node.attachEvent("onreadystatechange", context.onScriptLoad);
       } else {
