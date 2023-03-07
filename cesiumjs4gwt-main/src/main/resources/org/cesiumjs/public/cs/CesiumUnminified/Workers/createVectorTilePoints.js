@@ -1,4 +1,4 @@
-define(['./AttributeCompression-b646d393', './Matrix3-315394f6', './Math-2dbd6b93', './Matrix2-13178034', './createTaskProcessorWorker', './ComponentDatatype-f7b11d02', './defaultValue-0a909f67', './Check-666ab1a0', './WebGLConstants-a8cc3e8c', './RuntimeError-06c93819'], (function (AttributeCompression, Matrix3, Math, Matrix2, createTaskProcessorWorker, ComponentDatatype, defaultValue, Check, WebGLConstants, RuntimeError) { 'use strict';
+define(['./AttributeCompression-8a5a065e', './Matrix3-fa806b97', './Math-dad82b4d', './Matrix2-1e403d0e', './createTaskProcessorWorker', './ComponentDatatype-cf1fa08e', './defaultValue-fe22d8c0', './Check-6ede7e26', './WebGLConstants-0b1ce7ba', './RuntimeError-ef395448'], (function (AttributeCompression, Matrix3, Math, Matrix2, createTaskProcessorWorker, ComponentDatatype, defaultValue, Check, WebGLConstants, RuntimeError) { 'use strict';
 
   const maxShort = 32767;
 

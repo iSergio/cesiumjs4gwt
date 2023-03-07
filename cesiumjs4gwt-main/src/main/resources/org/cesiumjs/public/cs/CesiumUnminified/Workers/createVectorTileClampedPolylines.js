@@ -1,4 +1,4 @@
-define(['./AttributeCompression-b646d393', './Matrix3-315394f6', './combine-ca22a614', './IndexDatatype-a55ceaa1', './Math-2dbd6b93', './Matrix2-13178034', './createTaskProcessorWorker', './ComponentDatatype-f7b11d02', './defaultValue-0a909f67', './Check-666ab1a0', './WebGLConstants-a8cc3e8c', './RuntimeError-06c93819'], (function (AttributeCompression, Matrix3, combine, IndexDatatype, Math$1, Matrix2, createTaskProcessorWorker, ComponentDatatype, defaultValue, Check, WebGLConstants, RuntimeError) { 'use strict';
+define(['./AttributeCompression-8a5a065e', './Matrix3-fa806b97', './combine-d9581036', './IndexDatatype-b8f3e09d', './Math-dad82b4d', './Matrix2-1e403d0e', './createTaskProcessorWorker', './ComponentDatatype-cf1fa08e', './defaultValue-fe22d8c0', './Check-6ede7e26', './WebGLConstants-0b1ce7ba', './RuntimeError-ef395448'], (function (AttributeCompression, Matrix3, combine, IndexDatatype, Math$1, Matrix2, createTaskProcessorWorker, ComponentDatatype, defaultValue, Check, WebGLConstants, RuntimeError) { 'use strict';
 
   const MAX_SHORT = 32767;
   const MITER_BREAK = Math.cos(Math$1.CesiumMath.toRadians(150.0));
