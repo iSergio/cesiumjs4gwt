@@ -1,4 +1,4 @@
-define(['./Matrix3-315394f6', './Check-666ab1a0', './defaultValue-0a909f67', './EllipseGeometry-a9c9b3be', './VertexFormat-6b480673', './Math-2dbd6b93', './Transforms-a05e5e6e', './Matrix2-13178034', './RuntimeError-06c93819', './combine-ca22a614', './ComponentDatatype-f7b11d02', './WebGLConstants-a8cc3e8c', './EllipseGeometryLibrary-855d4681', './GeometryAttribute-334718f8', './GeometryAttributes-f06a2792', './GeometryInstance-451dc1cd', './GeometryOffsetAttribute-04332ce7', './GeometryPipeline-8fb0db69', './AttributeCompression-b646d393', './EncodedCartesian3-81f70735', './IndexDatatype-a55ceaa1', './IntersectionTests-27d49265', './Plane-900aa728'], (function (Matrix3, Check, defaultValue, EllipseGeometry, VertexFormat, Math, Transforms, Matrix2, RuntimeError, combine, ComponentDatatype, WebGLConstants, EllipseGeometryLibrary, GeometryAttribute, GeometryAttributes, GeometryInstance, GeometryOffsetAttribute, GeometryPipeline, AttributeCompression, EncodedCartesian3, IndexDatatype, IntersectionTests, Plane) { 'use strict';
+define(['./Matrix3-fa806b97', './Check-6ede7e26', './defaultValue-fe22d8c0', './EllipseGeometry-a49f8449', './VertexFormat-030f11ff', './Math-dad82b4d', './Transforms-9e9df299', './Matrix2-1e403d0e', './RuntimeError-ef395448', './combine-d9581036', './ComponentDatatype-cf1fa08e', './WebGLConstants-0b1ce7ba', './EllipseGeometryLibrary-cba7edde', './GeometryAttribute-780af4fa', './GeometryAttributes-ad136444', './GeometryInstance-3fb607b7', './GeometryOffsetAttribute-9ad0019c', './GeometryPipeline-36b61c99', './AttributeCompression-8a5a065e', './EncodedCartesian3-e8bbca36', './IndexDatatype-b8f3e09d', './IntersectionTests-e889fcf0', './Plane-c27e1ac6'], (function (Matrix3, Check, defaultValue, EllipseGeometry, VertexFormat, Math, Transforms, Matrix2, RuntimeError, combine, ComponentDatatype, WebGLConstants, EllipseGeometryLibrary, GeometryAttribute, GeometryAttributes, GeometryInstance, GeometryOffsetAttribute, GeometryPipeline, AttributeCompression, EncodedCartesian3, IndexDatatype, IntersectionTests, Plane) { 'use strict';
 
   /**
    * A description of a circle on the ellipsoid. Circle geometry can be rendered with both {@link Primitive} and {@link GroundPrimitive}.
@@ -6,15 +6,15 @@ define(['./Matrix3-315394f6', './Check-666ab1a0', './defaultValue-0a909f67', './
    * @alias CircleGeometry
    * @constructor
    *
-   * @param {Object} options Object with the following properties:
+   * @param {object} options Object with the following properties:
    * @param {Cartesian3} options.center The circle's center point in the fixed frame.
-   * @param {Number} options.radius The radius in meters.
+   * @param {number} options.radius The radius in meters.
    * @param {Ellipsoid} [options.ellipsoid=Ellipsoid.WGS84] The ellipsoid the circle will be on.
-   * @param {Number} [options.height=0.0] The distance in meters between the circle and the ellipsoid surface.
-   * @param {Number} [options.granularity=0.02] The angular distance between points on the circle in radians.
+   * @param {number} [options.height=0.0] The distance in meters between the circle and the ellipsoid surface.
+   * @param {number} [options.granularity=0.02] The angular distance between points on the circle in radians.
    * @param {VertexFormat} [options.vertexFormat=VertexFormat.DEFAULT] The vertex attributes to be computed.
-   * @param {Number} [options.extrudedHeight=0.0] The distance in meters between the circle's extruded face and the ellipsoid surface.
-   * @param {Number} [options.stRotation=0.0] The rotation of the texture coordinates, in radians. A positive rotation is counter-clockwise.
+   * @param {number} [options.extrudedHeight=0.0] The distance in meters between the circle's extruded face and the ellipsoid surface.
+   * @param {number} [options.stRotation=0.0] The rotation of the texture coordinates, in radians. A positive rotation is counter-clockwise.
    *
    * @exception {DeveloperError} radius must be greater than zero.
    * @exception {DeveloperError} granularity must be greater than zero.
@@ -56,7 +56,7 @@ define(['./Matrix3-315394f6', './Check-666ab1a0', './defaultValue-0a909f67', './
 
   /**
    * The number of elements used to pack the object into an array.
-   * @type {Number}
+   * @type {number}
    */
   CircleGeometry.packedLength = EllipseGeometry.EllipseGeometry.packedLength;
 
@@ -64,10 +64,10 @@ define(['./Matrix3-315394f6', './Check-666ab1a0', './defaultValue-0a909f67', './
    * Stores the provided instance into the provided array.
    *
    * @param {CircleGeometry} value The value to pack.
-   * @param {Number[]} array The array to pack into.
-   * @param {Number} [startingIndex=0] The index into the array at which to start packing the elements.
+   * @param {number[]} array The array to pack into.
+   * @param {number} [startingIndex=0] The index into the array at which to start packing the elements.
    *
-   * @returns {Number[]} The array that was packed into
+   * @returns {number[]} The array that was packed into
    */
   CircleGeometry.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
@@ -98,8 +98,8 @@ define(['./Matrix3-315394f6', './Check-666ab1a0', './defaultValue-0a909f67', './
   /**
    * Retrieves an instance from a packed array.
    *
-   * @param {Number[]} array The packed array.
-   * @param {Number} [startingIndex=0] The starting index of the element to be unpacked.
+   * @param {number[]} array The packed array.
+   * @param {number} [startingIndex=0] The starting index of the element to be unpacked.
    * @param {CircleGeometry} [result] The object into which to store the result.
    * @returns {CircleGeometry} The modified result parameter or a new CircleGeometry instance if one was not provided.
    */

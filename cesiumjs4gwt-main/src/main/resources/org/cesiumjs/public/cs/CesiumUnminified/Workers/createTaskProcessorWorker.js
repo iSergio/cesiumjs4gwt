@@ -1,4 +1,4 @@
-define(['./defaultValue-0a909f67'], (function (defaultValue) { 'use strict';
+define(['./defaultValue-fe22d8c0'], (function (defaultValue) { 'use strict';
 
   /**
    * Formats an error object into a String.  If available, uses name, message, and stack
@@ -7,7 +7,7 @@ define(['./defaultValue-0a909f67'], (function (defaultValue) { 'use strict';
    * @function
    *
    * @param {*} object The item to find in the array.
-   * @returns {String} A string containing the formatted error.
+   * @returns {string} A string containing the formatted error.
    */
   function formatError(object) {
     let result;
