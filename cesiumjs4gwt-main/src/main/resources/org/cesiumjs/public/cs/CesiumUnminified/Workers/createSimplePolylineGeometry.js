@@ -1,4 +1,4 @@
-define(['./defaultValue-0a909f67', './Matrix3-315394f6', './ArcType-ce2e50ab', './Transforms-a05e5e6e', './Color-52c60ed7', './ComponentDatatype-f7b11d02', './Check-666ab1a0', './GeometryAttribute-334718f8', './GeometryAttributes-f06a2792', './IndexDatatype-a55ceaa1', './Math-2dbd6b93', './PolylinePipeline-5e2e1b21', './Matrix2-13178034', './RuntimeError-06c93819', './combine-ca22a614', './WebGLConstants-a8cc3e8c', './EllipsoidGeodesic-98c62a56', './EllipsoidRhumbLine-19756602', './IntersectionTests-27d49265', './Plane-900aa728'], (function (defaultValue, Matrix3, ArcType, Transforms, Color, ComponentDatatype, Check, GeometryAttribute, GeometryAttributes, IndexDatatype, Math, PolylinePipeline, Matrix2, RuntimeError, combine, WebGLConstants, EllipsoidGeodesic, EllipsoidRhumbLine, IntersectionTests, Plane) { 'use strict';
+define(['./defaultValue-fe22d8c0', './Matrix3-fa806b97', './ArcType-2d9abbbc', './Transforms-9e9df299', './Color-f85df1be', './ComponentDatatype-cf1fa08e', './Check-6ede7e26', './GeometryAttribute-780af4fa', './GeometryAttributes-ad136444', './IndexDatatype-b8f3e09d', './Math-dad82b4d', './PolylinePipeline-30e4cec9', './Matrix2-1e403d0e', './RuntimeError-ef395448', './combine-d9581036', './WebGLConstants-0b1ce7ba', './EllipsoidGeodesic-dcff5cbd', './EllipsoidRhumbLine-b672d507', './IntersectionTests-e889fcf0', './Plane-c27e1ac6'], (function (defaultValue, Matrix3, ArcType, Transforms, Color, ComponentDatatype, Check, GeometryAttribute, GeometryAttributes, IndexDatatype, Math, PolylinePipeline, Matrix2, RuntimeError, combine, WebGLConstants, EllipsoidGeodesic, EllipsoidRhumbLine, IntersectionTests, Plane) { 'use strict';
 
   function interpolateColors(p0, p1, color0, color1, minDistance, array, offset) {
     const numPoints = PolylinePipeline.PolylinePipeline.numberOfPoints(p0, p1, minDistance);
@@ -47,12 +47,12 @@ define(['./defaultValue-0a909f67', './Matrix3-315394f6', './ArcType-ce2e50ab', '
    * @alias SimplePolylineGeometry
    * @constructor
    *
-   * @param {Object} options Object with the following properties:
+   * @param {object} options Object with the following properties:
    * @param {Cartesian3[]} options.positions An array of {@link Cartesian3} defining the positions in the polyline as a line strip.
    * @param {Color[]} [options.colors] An Array of {@link Color} defining the per vertex or per segment colors.
-   * @param {Boolean} [options.colorsPerVertex=false] A boolean that determines whether the colors will be flat across each segment of the line or interpolated across the vertices.
+   * @param {boolean} [options.colorsPerVertex=false] A boolean that determines whether the colors will be flat across each segment of the line or interpolated across the vertices.
    * @param {ArcType} [options.arcType=ArcType.GEODESIC] The type of line the polyline segments must follow.
-   * @param {Number} [options.granularity=CesiumMath.RADIANS_PER_DEGREE] The distance, in radians, between each latitude and longitude if options.arcType is not ArcType.NONE. Determines the number of positions in the buffer.
+   * @param {number} [options.granularity=CesiumMath.RADIANS_PER_DEGREE] The distance, in radians, between each latitude and longitude if options.arcType is not ArcType.NONE. Determines the number of positions in the buffer.
    * @param {Ellipsoid} [options.ellipsoid=Ellipsoid.WGS84] The ellipsoid to be used as a reference.
    *
    * @exception {DeveloperError} At least two positions are required.
@@ -107,7 +107,7 @@ define(['./defaultValue-0a909f67', './Matrix3-315394f6', './ArcType-ce2e50ab', '
 
     /**
      * The number of elements used to pack the object into an array.
-     * @type {Number}
+     * @type {number}
      */
     this.packedLength = numComponents + Matrix3.Ellipsoid.packedLength + 3;
   }
@@ -116,10 +116,10 @@ define(['./defaultValue-0a909f67', './Matrix3-315394f6', './ArcType-ce2e50ab', '
    * Stores the provided instance into the provided array.
    *
    * @param {SimplePolylineGeometry} value The value to pack.
-   * @param {Number[]} array The array to pack into.
-   * @param {Number} [startingIndex=0] The index into the array at which to start packing the elements.
+   * @param {number[]} array The array to pack into.
+   * @param {number} [startingIndex=0] The index into the array at which to start packing the elements.
    *
-   * @returns {Number[]} The array that was packed into
+   * @returns {number[]} The array that was packed into
    */
   SimplePolylineGeometry.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
@@ -164,8 +164,8 @@ define(['./defaultValue-0a909f67', './Matrix3-315394f6', './ArcType-ce2e50ab', '
   /**
    * Retrieves an instance from a packed array.
    *
-   * @param {Number[]} array The packed array.
-   * @param {Number} [startingIndex=0] The starting index of the element to be unpacked.
+   * @param {number[]} array The packed array.
+   * @param {number} [startingIndex=0] The starting index of the element to be unpacked.
    * @param {SimplePolylineGeometry} [result] The object into which to store the result.
    * @returns {SimplePolylineGeometry} The modified result parameter or a new SimplePolylineGeometry instance if one was not provided.
    */

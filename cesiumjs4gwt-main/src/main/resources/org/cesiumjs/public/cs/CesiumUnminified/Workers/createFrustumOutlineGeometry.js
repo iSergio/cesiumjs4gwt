@@ -1,4 +1,4 @@
-define(['./defaultValue-0a909f67', './Transforms-a05e5e6e', './Matrix3-315394f6', './Check-666ab1a0', './ComponentDatatype-f7b11d02', './FrustumGeometry-9f1ee4d8', './GeometryAttribute-334718f8', './GeometryAttributes-f06a2792', './Math-2dbd6b93', './Matrix2-13178034', './RuntimeError-06c93819', './combine-ca22a614', './WebGLConstants-a8cc3e8c', './Plane-900aa728', './VertexFormat-6b480673'], (function (defaultValue, Transforms, Matrix3, Check, ComponentDatatype, FrustumGeometry, GeometryAttribute, GeometryAttributes, Math, Matrix2, RuntimeError, combine, WebGLConstants, Plane, VertexFormat) { 'use strict';
+define(['./defaultValue-fe22d8c0', './Transforms-9e9df299', './Matrix3-fa806b97', './Check-6ede7e26', './ComponentDatatype-cf1fa08e', './FrustumGeometry-b62db3e3', './GeometryAttribute-780af4fa', './GeometryAttributes-ad136444', './Math-dad82b4d', './Matrix2-1e403d0e', './RuntimeError-ef395448', './combine-d9581036', './WebGLConstants-0b1ce7ba', './Plane-c27e1ac6', './VertexFormat-030f11ff'], (function (defaultValue, Transforms, Matrix3, Check, ComponentDatatype, FrustumGeometry, GeometryAttribute, GeometryAttributes, Math, Matrix2, RuntimeError, combine, WebGLConstants, Plane, VertexFormat) { 'use strict';
 
   const PERSPECTIVE = 0;
   const ORTHOGRAPHIC = 1;
@@ -9,7 +9,7 @@ define(['./defaultValue-0a909f67', './Transforms-a05e5e6e', './Matrix3-315394f6'
    * @alias FrustumOutlineGeometry
    * @constructor
    *
-   * @param {Object} options Object with the following properties:
+   * @param {object} options Object with the following properties:
    * @param {PerspectiveFrustum|OrthographicFrustum} options.frustum The frustum.
    * @param {Cartesian3} options.origin The origin of the frustum.
    * @param {Quaternion} options.orientation The orientation of the frustum.
@@ -50,7 +50,7 @@ define(['./defaultValue-0a909f67', './Transforms-a05e5e6e', './Matrix3-315394f6'
 
     /**
      * The number of elements used to pack the object into an array.
-     * @type {Number}
+     * @type {number}
      */
     this.packedLength =
       2 + frustumPackedLength + Matrix3.Cartesian3.packedLength + Transforms.Quaternion.packedLength;
@@ -60,10 +60,10 @@ define(['./defaultValue-0a909f67', './Transforms-a05e5e6e', './Matrix3-315394f6'
    * Stores the provided instance into the provided array.
    *
    * @param {FrustumOutlineGeometry} value The value to pack.
-   * @param {Number[]} array The array to pack into.
-   * @param {Number} [startingIndex=0] The index into the array at which to start packing the elements.
+   * @param {number[]} array The array to pack into.
+   * @param {number} [startingIndex=0] The index into the array at which to start packing the elements.
    *
-   * @returns {Number[]} The array that was packed into
+   * @returns {number[]} The array that was packed into
    */
   FrustumOutlineGeometry.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
@@ -103,8 +103,8 @@ define(['./defaultValue-0a909f67', './Transforms-a05e5e6e', './Matrix3-315394f6'
   /**
    * Retrieves an instance from a packed array.
    *
-   * @param {Number[]} array The packed array.
-   * @param {Number} [startingIndex=0] The starting index of the element to be unpacked.
+   * @param {number[]} array The packed array.
+   * @param {number} [startingIndex=0] The starting index of the element to be unpacked.
    * @param {FrustumOutlineGeometry} [result] The object into which to store the result.
    */
   FrustumOutlineGeometry.unpack = function (array, startingIndex, result) {

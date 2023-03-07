@@ -1,4 +1,4 @@
-define(['./arrayRemoveDuplicates-c2038105', './Transforms-a05e5e6e', './Matrix3-315394f6', './Check-666ab1a0', './ComponentDatatype-f7b11d02', './PolylineVolumeGeometryLibrary-97f0b94e', './CorridorGeometryLibrary-5039cd8e', './defaultValue-0a909f67', './GeometryAttribute-334718f8', './GeometryAttributes-f06a2792', './GeometryOffsetAttribute-04332ce7', './IndexDatatype-a55ceaa1', './Math-2dbd6b93', './PolygonPipeline-21668b3f', './Matrix2-13178034', './VertexFormat-6b480673', './combine-ca22a614', './RuntimeError-06c93819', './WebGLConstants-a8cc3e8c', './EllipsoidTangentPlane-ed9443a1', './AxisAlignedBoundingBox-47525601', './IntersectionTests-27d49265', './Plane-900aa728', './PolylinePipeline-5e2e1b21', './EllipsoidGeodesic-98c62a56', './EllipsoidRhumbLine-19756602'], (function (arrayRemoveDuplicates, Transforms, Matrix3, Check, ComponentDatatype, PolylineVolumeGeometryLibrary, CorridorGeometryLibrary, defaultValue, GeometryAttribute, GeometryAttributes, GeometryOffsetAttribute, IndexDatatype, Math$1, PolygonPipeline, Matrix2, VertexFormat, combine$1, RuntimeError, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane, PolylinePipeline, EllipsoidGeodesic, EllipsoidRhumbLine) { 'use strict';
+define(['./arrayRemoveDuplicates-fac118a8', './Transforms-9e9df299', './Matrix3-fa806b97', './Check-6ede7e26', './ComponentDatatype-cf1fa08e', './PolylineVolumeGeometryLibrary-90551d26', './CorridorGeometryLibrary-5d5d3b3a', './defaultValue-fe22d8c0', './GeometryAttribute-780af4fa', './GeometryAttributes-ad136444', './GeometryOffsetAttribute-9ad0019c', './IndexDatatype-b8f3e09d', './Math-dad82b4d', './PolygonPipeline-d31ff61c', './Matrix2-1e403d0e', './VertexFormat-030f11ff', './combine-d9581036', './RuntimeError-ef395448', './WebGLConstants-0b1ce7ba', './EllipsoidTangentPlane-7ae1aa9a', './AxisAlignedBoundingBox-a6f9f0e5', './IntersectionTests-e889fcf0', './Plane-c27e1ac6', './PolylinePipeline-30e4cec9', './EllipsoidGeodesic-dcff5cbd', './EllipsoidRhumbLine-b672d507'], (function (arrayRemoveDuplicates, Transforms, Matrix3, Check, ComponentDatatype, PolylineVolumeGeometryLibrary, CorridorGeometryLibrary, defaultValue, GeometryAttribute, GeometryAttributes, GeometryOffsetAttribute, IndexDatatype, Math$1, PolygonPipeline, Matrix2, VertexFormat, combine$1, RuntimeError, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane, PolylinePipeline, EllipsoidGeodesic, EllipsoidRhumbLine) { 'use strict';
 
   const cartesian1 = new Matrix3.Cartesian3();
   const cartesian2 = new Matrix3.Cartesian3();
@@ -1027,13 +1027,13 @@ define(['./arrayRemoveDuplicates-c2038105', './Transforms-a05e5e6e', './Matrix3-
    * @alias CorridorGeometry
    * @constructor
    *
-   * @param {Object} options Object with the following properties:
+   * @param {object} options Object with the following properties:
    * @param {Cartesian3[]} options.positions An array of positions that define the center of the corridor.
-   * @param {Number} options.width The distance between the edges of the corridor in meters.
+   * @param {number} options.width The distance between the edges of the corridor in meters.
    * @param {Ellipsoid} [options.ellipsoid=Ellipsoid.WGS84] The ellipsoid to be used as a reference.
-   * @param {Number} [options.granularity=CesiumMath.RADIANS_PER_DEGREE] The distance, in radians, between each latitude and longitude. Determines the number of positions in the buffer.
-   * @param {Number} [options.height=0] The distance in meters between the ellipsoid surface and the positions.
-   * @param {Number} [options.extrudedHeight] The distance in meters between the ellipsoid surface and the extruded face.
+   * @param {number} [options.granularity=CesiumMath.RADIANS_PER_DEGREE] The distance, in radians, between each latitude and longitude. Determines the number of positions in the buffer.
+   * @param {number} [options.height=0] The distance in meters between the ellipsoid surface and the positions.
+   * @param {number} [options.extrudedHeight] The distance in meters between the ellipsoid surface and the extruded face.
    * @param {VertexFormat} [options.vertexFormat=VertexFormat.DEFAULT] The vertex attributes to be computed.
    * @param {CornerType} [options.cornerType=CornerType.ROUNDED] Determines the style of the corners.
    *
@@ -1084,7 +1084,7 @@ define(['./arrayRemoveDuplicates-c2038105', './Transforms-a05e5e6e', './Matrix3-
 
     /**
      * The number of elements used to pack the object into an array.
-     * @type {Number}
+     * @type {number}
      */
     this.packedLength =
       1 +
@@ -1098,10 +1098,10 @@ define(['./arrayRemoveDuplicates-c2038105', './Transforms-a05e5e6e', './Matrix3-
    * Stores the provided instance into the provided array.
    *
    * @param {CorridorGeometry} value The value to pack.
-   * @param {Number[]} array The array to pack into.
-   * @param {Number} [startingIndex=0] The index into the array at which to start packing the elements.
+   * @param {number[]} array The array to pack into.
+   * @param {number} [startingIndex=0] The index into the array at which to start packing the elements.
    *
-   * @returns {Number[]} The array that was packed into
+   * @returns {number[]} The array that was packed into
    */
   CorridorGeometry.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
@@ -1154,8 +1154,8 @@ define(['./arrayRemoveDuplicates-c2038105', './Transforms-a05e5e6e', './Matrix3-
   /**
    * Retrieves an instance from a packed array.
    *
-   * @param {Number[]} array The packed array.
-   * @param {Number} [startingIndex=0] The starting index of the element to be unpacked.
+   * @param {number[]} array The packed array.
+   * @param {number} [startingIndex=0] The starting index of the element to be unpacked.
    * @param {CorridorGeometry} [result] The object into which to store the result.
    * @returns {CorridorGeometry} The modified result parameter or a new CorridorGeometry instance if one was not provided.
    */
@@ -1223,9 +1223,9 @@ define(['./arrayRemoveDuplicates-c2038105', './Transforms-a05e5e6e', './Matrix3-
   /**
    * Computes the bounding rectangle given the provided options
    *
-   * @param {Object} options Object with the following properties:
+   * @param {object} options Object with the following properties:
    * @param {Cartesian3[]} options.positions An array of positions that define the center of the corridor.
-   * @param {Number} options.width The distance between the edges of the corridor in meters.
+   * @param {number} options.width The distance between the edges of the corridor in meters.
    * @param {Ellipsoid} [options.ellipsoid=Ellipsoid.WGS84] The ellipsoid to be used as a reference.
    * @param {CornerType} [options.cornerType=CornerType.ROUNDED] Determines the style of the corners.
    * @param {Rectangle} [result] An object in which to store the result.

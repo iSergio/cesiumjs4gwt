@@ -1,4 +1,4 @@
-define(['./defaultValue-0a909f67', './Matrix3-315394f6', './arrayRemoveDuplicates-c2038105', './BoundingRectangle-93b263ac', './Transforms-a05e5e6e', './Matrix2-13178034', './ComponentDatatype-f7b11d02', './PolylineVolumeGeometryLibrary-97f0b94e', './Check-666ab1a0', './GeometryAttribute-334718f8', './GeometryAttributes-f06a2792', './GeometryPipeline-8fb0db69', './IndexDatatype-a55ceaa1', './Math-2dbd6b93', './PolygonPipeline-21668b3f', './VertexFormat-6b480673', './combine-ca22a614', './RuntimeError-06c93819', './WebGLConstants-a8cc3e8c', './EllipsoidTangentPlane-ed9443a1', './AxisAlignedBoundingBox-47525601', './IntersectionTests-27d49265', './Plane-900aa728', './PolylinePipeline-5e2e1b21', './EllipsoidGeodesic-98c62a56', './EllipsoidRhumbLine-19756602', './AttributeCompression-b646d393', './EncodedCartesian3-81f70735'], (function (defaultValue, Matrix3, arrayRemoveDuplicates, BoundingRectangle, Transforms, Matrix2, ComponentDatatype, PolylineVolumeGeometryLibrary, Check, GeometryAttribute, GeometryAttributes, GeometryPipeline, IndexDatatype, Math, PolygonPipeline, VertexFormat, combine, RuntimeError, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane, PolylinePipeline, EllipsoidGeodesic, EllipsoidRhumbLine, AttributeCompression, EncodedCartesian3) { 'use strict';
+define(['./defaultValue-fe22d8c0', './Matrix3-fa806b97', './arrayRemoveDuplicates-fac118a8', './BoundingRectangle-b0a68595', './Transforms-9e9df299', './Matrix2-1e403d0e', './ComponentDatatype-cf1fa08e', './PolylineVolumeGeometryLibrary-90551d26', './Check-6ede7e26', './GeometryAttribute-780af4fa', './GeometryAttributes-ad136444', './GeometryPipeline-36b61c99', './IndexDatatype-b8f3e09d', './Math-dad82b4d', './PolygonPipeline-d31ff61c', './VertexFormat-030f11ff', './combine-d9581036', './RuntimeError-ef395448', './WebGLConstants-0b1ce7ba', './EllipsoidTangentPlane-7ae1aa9a', './AxisAlignedBoundingBox-a6f9f0e5', './IntersectionTests-e889fcf0', './Plane-c27e1ac6', './PolylinePipeline-30e4cec9', './EllipsoidGeodesic-dcff5cbd', './EllipsoidRhumbLine-b672d507', './AttributeCompression-8a5a065e', './EncodedCartesian3-e8bbca36'], (function (defaultValue, Matrix3, arrayRemoveDuplicates, BoundingRectangle, Transforms, Matrix2, ComponentDatatype, PolylineVolumeGeometryLibrary, Check, GeometryAttribute, GeometryAttributes, GeometryPipeline, IndexDatatype, Math, PolygonPipeline, VertexFormat, combine, RuntimeError, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane, PolylinePipeline, EllipsoidGeodesic, EllipsoidRhumbLine, AttributeCompression, EncodedCartesian3) { 'use strict';
 
   function computeAttributes(
     combinedPositions,
@@ -153,11 +153,11 @@ define(['./defaultValue-0a909f67', './Matrix3-315394f6', './arrayRemoveDuplicate
    * @alias PolylineVolumeGeometry
    * @constructor
    *
-   * @param {Object} options Object with the following properties:
+   * @param {object} options Object with the following properties:
    * @param {Cartesian3[]} options.polylinePositions An array of {@link Cartesian3} positions that define the center of the polyline volume.
    * @param {Cartesian2[]} options.shapePositions An array of {@link Cartesian2} positions that define the shape to be extruded along the polyline
    * @param {Ellipsoid} [options.ellipsoid=Ellipsoid.WGS84] The ellipsoid to be used as a reference.
-   * @param {Number} [options.granularity=CesiumMath.RADIANS_PER_DEGREE] The distance, in radians, between each latitude and longitude. Determines the number of positions in the buffer.
+   * @param {number} [options.granularity=CesiumMath.RADIANS_PER_DEGREE] The distance, in radians, between each latitude and longitude. Determines the number of positions in the buffer.
    * @param {VertexFormat} [options.vertexFormat=VertexFormat.DEFAULT] The vertex attributes to be computed.
    * @param {CornerType} [options.cornerType=CornerType.ROUNDED] Determines the style of the corners.
    *
@@ -218,7 +218,7 @@ define(['./defaultValue-0a909f67', './Matrix3-315394f6', './arrayRemoveDuplicate
 
     /**
      * The number of elements used to pack the object into an array.
-     * @type {Number}
+     * @type {number}
      */
     this.packedLength =
       numComponents + Matrix3.Ellipsoid.packedLength + VertexFormat.VertexFormat.packedLength + 2;
@@ -228,10 +228,10 @@ define(['./defaultValue-0a909f67', './Matrix3-315394f6', './arrayRemoveDuplicate
    * Stores the provided instance into the provided array.
    *
    * @param {PolylineVolumeGeometry} value The value to pack.
-   * @param {Number[]} array The array to pack into.
-   * @param {Number} [startingIndex=0] The index into the array at which to start packing the elements.
+   * @param {number[]} array The array to pack into.
+   * @param {number} [startingIndex=0] The index into the array at which to start packing the elements.
    *
-   * @returns {Number[]} The array that was packed into
+   * @returns {number[]} The array that was packed into
    */
   PolylineVolumeGeometry.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
@@ -289,8 +289,8 @@ define(['./defaultValue-0a909f67', './Matrix3-315394f6', './arrayRemoveDuplicate
   /**
    * Retrieves an instance from a packed array.
    *
-   * @param {Number[]} array The packed array.
-   * @param {Number} [startingIndex=0] The starting index of the element to be unpacked.
+   * @param {number[]} array The packed array.
+   * @param {number} [startingIndex=0] The starting index of the element to be unpacked.
    * @param {PolylineVolumeGeometry} [result] The object into which to store the result.
    * @returns {PolylineVolumeGeometry} The modified result parameter or a new PolylineVolumeGeometry instance if one was not provided.
    */

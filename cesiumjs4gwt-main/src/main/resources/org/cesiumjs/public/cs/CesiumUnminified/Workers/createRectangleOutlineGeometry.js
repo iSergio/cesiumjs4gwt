@@ -1,4 +1,4 @@
-define(['./defaultValue-0a909f67', './Matrix3-315394f6', './Matrix2-13178034', './Transforms-a05e5e6e', './ComponentDatatype-f7b11d02', './Check-666ab1a0', './GeometryAttribute-334718f8', './GeometryAttributes-f06a2792', './GeometryOffsetAttribute-04332ce7', './IndexDatatype-a55ceaa1', './Math-2dbd6b93', './PolygonPipeline-21668b3f', './RectangleGeometryLibrary-d5457f7b', './RuntimeError-06c93819', './combine-ca22a614', './WebGLConstants-a8cc3e8c', './EllipsoidRhumbLine-19756602'], (function (defaultValue, Matrix3, Matrix2, Transforms, ComponentDatatype, Check, GeometryAttribute, GeometryAttributes, GeometryOffsetAttribute, IndexDatatype, Math$1, PolygonPipeline, RectangleGeometryLibrary, RuntimeError, combine, WebGLConstants, EllipsoidRhumbLine) { 'use strict';
+define(['./defaultValue-fe22d8c0', './Matrix3-fa806b97', './Matrix2-1e403d0e', './Transforms-9e9df299', './ComponentDatatype-cf1fa08e', './Check-6ede7e26', './GeometryAttribute-780af4fa', './GeometryAttributes-ad136444', './GeometryOffsetAttribute-9ad0019c', './IndexDatatype-b8f3e09d', './Math-dad82b4d', './PolygonPipeline-d31ff61c', './RectangleGeometryLibrary-815c68df', './RuntimeError-ef395448', './combine-d9581036', './WebGLConstants-0b1ce7ba', './EllipsoidRhumbLine-b672d507'], (function (defaultValue, Matrix3, Matrix2, Transforms, ComponentDatatype, Check, GeometryAttribute, GeometryAttributes, GeometryOffsetAttribute, IndexDatatype, Math$1, PolygonPipeline, RectangleGeometryLibrary, RuntimeError, combine, WebGLConstants, EllipsoidRhumbLine) { 'use strict';
 
   const bottomBoundingSphere = new Transforms.BoundingSphere();
   const topBoundingSphere = new Transforms.BoundingSphere();
@@ -230,13 +230,13 @@ define(['./defaultValue-0a909f67', './Matrix3-315394f6', './Matrix2-13178034', '
    * @alias RectangleOutlineGeometry
    * @constructor
    *
-   * @param {Object} options Object with the following properties:
+   * @param {object} options Object with the following properties:
    * @param {Rectangle} options.rectangle A cartographic rectangle with north, south, east and west properties in radians.
    * @param {Ellipsoid} [options.ellipsoid=Ellipsoid.WGS84] The ellipsoid on which the rectangle lies.
-   * @param {Number} [options.granularity=CesiumMath.RADIANS_PER_DEGREE] The distance, in radians, between each latitude and longitude. Determines the number of positions in the buffer.
-   * @param {Number} [options.height=0.0] The distance in meters between the rectangle and the ellipsoid surface.
-   * @param {Number} [options.rotation=0.0] The rotation of the rectangle, in radians. A positive rotation is counter-clockwise.
-   * @param {Number} [options.extrudedHeight] The distance in meters between the rectangle's extruded face and the ellipsoid surface.
+   * @param {number} [options.granularity=CesiumMath.RADIANS_PER_DEGREE] The distance, in radians, between each latitude and longitude. Determines the number of positions in the buffer.
+   * @param {number} [options.height=0.0] The distance in meters between the rectangle and the ellipsoid surface.
+   * @param {number} [options.rotation=0.0] The rotation of the rectangle, in radians. A positive rotation is counter-clockwise.
+   * @param {number} [options.extrudedHeight] The distance in meters between the rectangle's extruded face and the ellipsoid surface.
    *
    * @exception {DeveloperError} <code>options.rectangle.north</code> must be in the interval [<code>-Pi/2</code>, <code>Pi/2</code>].
    * @exception {DeveloperError} <code>options.rectangle.south</code> must be in the interval [<code>-Pi/2</code>, <code>Pi/2</code>].
@@ -292,7 +292,7 @@ define(['./defaultValue-0a909f67', './Matrix3-315394f6', './Matrix2-13178034', '
 
   /**
    * The number of elements used to pack the object into an array.
-   * @type {Number}
+   * @type {number}
    */
   RectangleOutlineGeometry.packedLength =
     Matrix2.Rectangle.packedLength + Matrix3.Ellipsoid.packedLength + 5;
@@ -301,10 +301,10 @@ define(['./defaultValue-0a909f67', './Matrix3-315394f6', './Matrix2-13178034', '
    * Stores the provided instance into the provided array.
    *
    * @param {RectangleOutlineGeometry} value The value to pack.
-   * @param {Number[]} array The array to pack into.
-   * @param {Number} [startingIndex=0] The index into the array at which to start packing the elements.
+   * @param {number[]} array The array to pack into.
+   * @param {number} [startingIndex=0] The index into the array at which to start packing the elements.
    *
-   * @returns {Number[]} The array that was packed into
+   * @returns {number[]} The array that was packed into
    */
   RectangleOutlineGeometry.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
@@ -349,8 +349,8 @@ define(['./defaultValue-0a909f67', './Matrix3-315394f6', './Matrix2-13178034', '
   /**
    * Retrieves an instance from a packed array.
    *
-   * @param {Number[]} array The packed array.
-   * @param {Number} [startingIndex=0] The starting index of the element to be unpacked.
+   * @param {number[]} array The packed array.
+   * @param {number} [startingIndex=0] The starting index of the element to be unpacked.
    * @param {RectangleOutlineGeometry} [result] The object into which to store the result.
    * @returns {RectangleOutlineGeometry} The modified result parameter or a new Quaternion instance if one was not provided.
    */
