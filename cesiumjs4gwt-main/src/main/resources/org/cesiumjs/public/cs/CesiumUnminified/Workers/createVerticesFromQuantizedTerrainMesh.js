@@ -1,4 +1,4 @@
-define(['./AxisAlignedBoundingBox-a6f9f0e5', './Matrix2-1e403d0e', './Matrix3-fa806b97', './defaultValue-fe22d8c0', './TerrainEncoding-341ead52', './IndexDatatype-b8f3e09d', './Math-dad82b4d', './Check-6ede7e26', './Transforms-9e9df299', './WebMercatorProjection-76a3fcc0', './createTaskProcessorWorker', './RuntimeError-ef395448', './AttributeCompression-8a5a065e', './ComponentDatatype-cf1fa08e', './WebGLConstants-0b1ce7ba', './combine-d9581036'], (function (AxisAlignedBoundingBox, Matrix2, Matrix3, defaultValue, TerrainEncoding, IndexDatatype, Math$1, Check, Transforms, WebMercatorProjection, createTaskProcessorWorker, RuntimeError, AttributeCompression, ComponentDatatype, WebGLConstants, combine) { 'use strict';
+define(['./AxisAlignedBoundingBox-379015ef', './Matrix2-1e403d0e', './Matrix3-fa806b97', './defaultValue-fe22d8c0', './TerrainEncoding-82882059', './IndexDatatype-b8f3e09d', './Math-dad82b4d', './Check-6ede7e26', './Transforms-9052372a', './WebMercatorProjection-76a3fcc0', './createTaskProcessorWorker', './RuntimeError-ef395448', './AttributeCompression-8a5a065e', './ComponentDatatype-cf1fa08e', './WebGLConstants-0b1ce7ba', './combine-d9581036'], (function (AxisAlignedBoundingBox, Matrix2, Matrix3, defaultValue, TerrainEncoding, IndexDatatype, Math$1, Check, Transforms, WebMercatorProjection, createTaskProcessorWorker, RuntimeError, AttributeCompression, ComponentDatatype, WebGLConstants, combine) { 'use strict';
 
   /**
    * Provides terrain or other geometry for the surface of an ellipsoid.  The surface geometry is
@@ -19,7 +19,7 @@ define(['./AxisAlignedBoundingBox-a6f9f0e5', './Matrix2-1e403d0e', './Matrix3-fa
 
   Object.defineProperties(TerrainProvider.prototype, {
     /**
-     * Gets an event that is raised when the terrain provider encounters an asynchronous error..  By subscribing
+     * Gets an event that is raised when the terrain provider encounters an asynchronous error.  By subscribing
      * to the event, you will be notified of the error and can potentially recover from it.  Event listeners
      * are passed an instance of {@link TileProviderError}.
      * @memberof TerrainProvider.prototype
@@ -32,8 +32,7 @@ define(['./AxisAlignedBoundingBox-a6f9f0e5', './Matrix2-1e403d0e', './Matrix3-fa
 
     /**
      * Gets the credit to display when this terrain provider is active.  Typically this is used to credit
-     * the source of the terrain. This function should
-     * not be called before {@link TerrainProvider#ready} returns true.
+     * the source of the terrain.
      * @memberof TerrainProvider.prototype
      * @type {Credit}
      * @readonly
@@ -43,8 +42,7 @@ define(['./AxisAlignedBoundingBox-a6f9f0e5', './Matrix2-1e403d0e', './Matrix3-fa
     },
 
     /**
-     * Gets the tiling scheme used by the provider.  This function should
-     * not be called before {@link TerrainProvider#ready} returns true.
+     * Gets the tiling scheme used by the provider.
      * @memberof TerrainProvider.prototype
      * @type {TilingScheme}
      * @readonly
@@ -58,6 +56,7 @@ define(['./AxisAlignedBoundingBox-a6f9f0e5', './Matrix2-1e403d0e', './Matrix3-fa
      * @memberof TerrainProvider.prototype
      * @type {boolean}
      * @readonly
+     * @deprecated
      */
     ready: {
       get: Check.DeveloperError.throwInstantiationError,
@@ -68,6 +67,7 @@ define(['./AxisAlignedBoundingBox-a6f9f0e5', './Matrix2-1e403d0e', './Matrix3-fa
      * @memberof TerrainProvider.prototype
      * @type {Promise<boolean>}
      * @readonly
+     * @deprecated
      */
     readyPromise: {
       get: Check.DeveloperError.throwInstantiationError,
@@ -76,8 +76,7 @@ define(['./AxisAlignedBoundingBox-a6f9f0e5', './Matrix2-1e403d0e', './Matrix3-fa
     /**
      * Gets a value indicating whether or not the provider includes a water mask.  The water mask
      * indicates which areas of the globe are water rather than land, so they can be rendered
-     * as a reflective surface with animated waves.  This function should not be
-     * called before {@link TerrainProvider#ready} returns true.
+     * as a reflective surface with animated waves.
      * @memberof TerrainProvider.prototype
      * @type {boolean}
      * @readonly
@@ -88,7 +87,6 @@ define(['./AxisAlignedBoundingBox-a6f9f0e5', './Matrix2-1e403d0e', './Matrix3-fa
 
     /**
      * Gets a value indicating whether or not the requested tiles include vertex normals.
-     * This function should not be called before {@link TerrainProvider#ready} returns true.
      * @memberof TerrainProvider.prototype
      * @type {boolean}
      * @readonly
@@ -99,8 +97,7 @@ define(['./AxisAlignedBoundingBox-a6f9f0e5', './Matrix2-1e403d0e', './Matrix3-fa
 
     /**
      * Gets an object that can be used to determine availability of terrain from this provider, such as
-     * at points and in rectangles.  This function should not be called before
-     * {@link TerrainProvider#ready} returns true.  This property may be undefined if availability
+     * at points and in rectangles. This property may be undefined if availability
      * information is not available.
      * @memberof TerrainProvider.prototype
      * @type {TileAvailability}
@@ -396,8 +393,7 @@ define(['./AxisAlignedBoundingBox-a6f9f0e5', './Matrix2-1e403d0e', './Matrix3-fa
   };
 
   /**
-   * Requests the geometry for a given tile.  This function should not be called before
-   * {@link TerrainProvider#ready} returns true.  The result must include terrain data and
+   * Requests the geometry for a given tile. The result must include terrain data and
    * may optionally include a water mask and an indication of which child tiles are available.
    * @function
    *
@@ -414,8 +410,7 @@ define(['./AxisAlignedBoundingBox-a6f9f0e5', './Matrix2-1e403d0e', './Matrix3-fa
     Check.DeveloperError.throwInstantiationError;
 
   /**
-   * Gets the maximum geometric error allowed in a tile at a given level.  This function should not be
-   * called before {@link TerrainProvider#ready} returns true.
+   * Gets the maximum geometric error allowed in a tile at a given level.
    * @function
    *
    * @param {number} level The tile level for which to get the maximum geometric error.
