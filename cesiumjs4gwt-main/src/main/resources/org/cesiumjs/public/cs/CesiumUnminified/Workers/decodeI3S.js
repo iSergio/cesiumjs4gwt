@@ -1,4 +1,4 @@
-define(['./createTaskProcessorWorker', './defaultValue-fe22d8c0', './WebMercatorProjection-76a3fcc0', './Matrix3-fa806b97', './Math-dad82b4d', './Check-6ede7e26'], (function (createTaskProcessorWorker, defaultValue, WebMercatorProjection, Matrix3, Math$1, Check) { 'use strict';
+define(['./createTaskProcessorWorker', './defaultValue-fe22d8c0', './WebMercatorProjection-13ed1a6e', './Matrix3-41c58dde', './Math-0a2ac845', './Check-6ede7e26'], (function (createTaskProcessorWorker, defaultValue, WebMercatorProjection, Matrix3, Math$1, Check) { 'use strict';
 
   /* global require */
 

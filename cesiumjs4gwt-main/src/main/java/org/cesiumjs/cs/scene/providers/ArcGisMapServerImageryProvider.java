@@ -84,6 +84,42 @@ public class ArcGisMapServerImageryProvider implements ImageryProvider {
     }
 
     /**
+     * Creates an ImageryProvider which provides tiled imagery from an ArcGIS base map.
+     * @param style The style of the ArcGIS base map imagery. Valid options are {@link org.cesiumjs.cs.scene.enums.ArcGisBaseMapType#SATELLITE},
+     *              {@link org.cesiumjs.cs.scene.enums.ArcGisBaseMapType#OCEANS}, and {@link org.cesiumjs.cs.scene.enums.ArcGisBaseMapType#HILLSHADE}.
+     * @return A promise that resolves to the created ArcGisMapServerImageryProvider.
+     */
+    @JsMethod
+    public static native Promise<ArcGisMapServerImageryProvider, Void> fromBasemapType(Number style);
+
+    /**
+     * Creates an ImageryProvider which provides tiled imagery from an ArcGIS base map.
+     * @param style The style of the ArcGIS base map imagery. Valid options are {@link org.cesiumjs.cs.scene.enums.ArcGisBaseMapType#SATELLITE},
+     *              {@link org.cesiumjs.cs.scene.enums.ArcGisBaseMapType#OCEANS}, and {@link org.cesiumjs.cs.scene.enums.ArcGisBaseMapType#HILLSHADE}.
+     * @param options Object describing initialization options.
+     * @return A promise that resolves to the created ArcGisMapServerImageryProvider.
+     */
+    @JsMethod
+    public static native Promise<ArcGisMapServerImageryProvider, Void> fromBasemapType(Number style, ArcGisMapServerImageryProviderOptions options);
+
+    /**
+     * Creates an ImageryProvider which provides tiled imagery hosted by an ArcGIS MapServer. By default, the server's pre-cached tiles are used, if available.
+     * @param url The URL of the ArcGIS MapServer service.
+     * @return A promise that resolves to the created ArcGisMapServerImageryProvider.
+     */
+    @JsMethod
+    public static native Promise<ArcGisMapServerImageryProvider, Void> fromUrl(String url);
+
+    /**
+     * Creates an ImageryProvider which provides tiled imagery hosted by an ArcGIS MapServer. By default, the server's pre-cached tiles are used, if available.
+     * @param url The URL of the ArcGIS MapServer service.
+     * @param options Object describing initialization options.
+     * @return A promise that resolves to the created ArcGisMapServerImageryProvider.
+     */
+    @JsMethod
+    public static native Promise<ArcGisMapServerImageryProvider, Void> fromUrl(String url, ArcGisMapServerImageryProviderOptions options);
+
+    /**
      * Gets the credit to display when this imagery provider is active. Typically
      * this is used to credit the source of the imagery. This function should not be
      * called before ArcGisMapServerImageryProvider#ready returns true.
