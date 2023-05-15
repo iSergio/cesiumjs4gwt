@@ -16,10 +16,7 @@
 
 package org.cesiumjs.cs.core;
 
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsOverlay;
-import jsinterop.annotations.JsType;
+import jsinterop.annotations.*;
 import org.cesiumjs.cs.core.options.BingMapsGeocoderServiceOptions;
 import org.cesiumjs.cs.promise.Promise;
 
@@ -30,6 +27,24 @@ import org.cesiumjs.cs.promise.Promise;
  */
 @JsType(isNative = true, namespace = "Cesium", name = "BingMapsGeocoderService")
 public class BingMapsGeocoderService implements GeocoderService {
+    /**
+     * Gets the credit to display after a geocode is performed. Typically this is used to credit the geocoder service.
+     */
+    @JsProperty(name = "credit")
+    public native Credit credit();
+
+    /**
+     * The key for the Bing geocoder service
+     */
+    @JsProperty(name = "key")
+    public native String key();
+
+    /**
+     * The URL endpoint for the Bing geocoder service
+     */
+    @JsProperty(name = "url")
+    public native String url();
+
     @JsConstructor
     private BingMapsGeocoderService() {
     }

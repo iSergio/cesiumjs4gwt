@@ -27,6 +27,7 @@ import org.cesiumjs.cs.core.Clock;
 import org.cesiumjs.cs.core.ScreenSpaceEventHandler;
 import org.cesiumjs.cs.core.providers.TerrainProvider;
 import org.cesiumjs.cs.scene.Camera;
+import org.cesiumjs.cs.scene.CreditDisplay;
 import org.cesiumjs.cs.scene.Scene;
 import org.cesiumjs.cs.widgets.options.CesiumWidgetOptions;
 
@@ -55,6 +56,16 @@ public class CesiumWidget implements Widget {
      */
     @JsProperty
     public Element creditContainer;
+    /**
+     * Manages the list of credits to display on screen and in the lightbox.
+     */
+    @JsProperty
+    public CreditDisplay creditDisplay;
+    /**
+     * Gets the credit viewport
+     */
+    @JsProperty
+    public Element creditViewport;
     /**
      * Gets or sets a scaling factor for rendering resolution. Values less than 1.0
      * can improve performance on less powerful devices while values greater than

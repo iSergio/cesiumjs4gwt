@@ -28,7 +28,9 @@ import org.cesiumjs.cs.core.Resource;
 import org.cesiumjs.cs.scene.Cesium3DTileContent;
 import org.cesiumjs.cs.scene.CustomShader;
 import org.cesiumjs.cs.scene.PointCloudShading;
+import org.cesiumjs.cs.scene.enums.ClassificationType;
 import org.cesiumjs.cs.scene.enums.ColorBlendMode;
+import org.cesiumjs.cs.scene.enums.SplitDirection;
 
 /**
  * @author Serge Silaev aka iSergio
@@ -210,9 +212,46 @@ public class FromGltfOptions {
      */
     @JsProperty
     public boolean showCreditsOnScreen;
+    /**
+     * The SplitDirection split to apply to this model.
+     * Default: {@link SplitDirection#NONE()}
+     */
+    @JsProperty
+    public Number splitDirection;
+    /**
+     * Whether to accurately project the model's positions in 2D. If this is true, the model will be projected accurately
+     * to 2D, but it will use more memory to do so. If this is false, the model will use less memory and will still
+     * render in 2D / CV mode, but its positions may be inaccurate. This disables minimumPixelSize and prevents future
+     * modification to the model matrix. This also cannot be set after the model has loaded.
+     * Default: false
+     */
+    @JsProperty
+    public boolean projectTo2D;
+    /**
+     * Label of the feature ID set to use for picking and styling. For EXT_mesh_features, this is the feature ID's label property,
+     * or "featureId_N" (where N is the index in the featureIds array) when not specified. EXT_feature_metadata did
+     * not have a label field, so such feature ID sets are always labeled "featureId_N" where N is the index in the
+     * list of all feature Ids, where feature ID attributes are listed before feature ID textures. If featureIdLabel is
+     * an integer N, it is converted to the string "featureId_N" automatically. If both per-primitive and per-instance
+     * feature IDs are present, the instance feature IDs take priority.
+     */
+    @JsProperty
+    public String featureIdLabel;
+    /**
+     * Label of the instance feature ID set used for picking and styling. If instanceFeatureIdLabel is set to an
+     * integer N, it is converted to the string "instanceFeatureId_N" automatically. If both per-primitive and
+     * per-instance feature IDs are present, the instance feature IDs take priority.
+     */
+    @JsProperty
+    public String instanceFeatureIdLabel;
+    /**
+     * Determines whether terrain, 3D Tiles or both will be classified by this model. This cannot be set after the model has loaded.
+     */
+    @JsProperty
+    public ClassificationType classificationType;
 
     @JsConstructor
-    private FromGltfOptions() {}
+    public FromGltfOptions() {}
 
     @JsOverlay
     public static FromGltfOptions create(String gltf) {

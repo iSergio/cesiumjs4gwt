@@ -88,6 +88,13 @@ public class CreditDisplay {
     public native void addDefaultCredit(Credit credit);
 
     /**
+     * Adds a Credit that will show on screen or in the lightbox until removed with CreditDisplay.removeStaticCredit.
+     * @param credit Credit	The credit to added
+     */
+    @JsMethod
+    public native void addStaticCredit(Credit credit);
+
+    /**
      * Resets the credit display to a beginning of frame state, clearing out current
      * credits.
      */
@@ -128,6 +135,13 @@ public class CreditDisplay {
      */
     @JsMethod
     public native void removeDefaultCredit(Credit credit);
+
+    /**
+     * Removes a static credit shown on screen or in the lightbox.
+     * @param credit Credit	The credit to be removed.
+     */
+    @JsMethod
+    public native void removeStaticCredit(Credit credit);
 
     /**
      * Updates the credit display before a new frame is rendered.

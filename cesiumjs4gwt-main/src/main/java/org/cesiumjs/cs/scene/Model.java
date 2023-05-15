@@ -27,6 +27,7 @@ import org.cesiumjs.cs.promise.Promise;
 import org.cesiumjs.cs.scene.enums.ClassificationType;
 import org.cesiumjs.cs.scene.enums.ColorBlendMode;
 import org.cesiumjs.cs.scene.enums.ShadowMode;
+import org.cesiumjs.cs.scene.options.FromGltfAsyncOptions;
 import org.cesiumjs.cs.scene.options.FromGltfOptions;
 import org.cesiumjs.cs.scene.options.ModelOptions;
 
@@ -254,6 +255,18 @@ public class Model {
     @JsMethod
     // TODO: Example
     public static native Model fromGltf(FromGltfOptions options);
+
+    /**
+     * Asynchronously creates a model from a glTF asset. This function returns a promise that resolves when the model is
+     * ready to render, i.e., when the external binary, image, and shader files are downloaded and the WebGL
+     * resources are created.
+     *
+     * <p>The model can be a traditional glTF asset with a .gltf extension or a Binary glTF using the .glb extension.</p>
+     * @param options options
+     * @return A promise that resolves to the created model when it is ready to render.
+     */
+    @JsMethod
+    public static native Promise<Model, Void> fromGltfAsync(FromGltfAsyncOptions options);
 
     /**
      * Determines if silhouettes are supported.
