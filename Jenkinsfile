@@ -9,6 +9,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                sh 'uname -a'
+                sh 'whoami'
                 sh 'mvn clean package'
             }
         }
