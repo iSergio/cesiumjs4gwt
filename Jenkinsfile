@@ -11,7 +11,7 @@ pipeline {
             steps {
                 sh 'uname -a'
                 sh 'whoami'
-                sh 'mvn clean package'
+                sh 'mvn --version'
             }
         }
     }
