@@ -135,5 +135,6 @@ public class InjectorModule extends AbstractGinModule {
         bind(AerometrexSanFrancisco.class).asEagerSingleton();
 
         bind(GooglePhotorealistic3DTiles.class).asEagerSingleton();
+        bind(GooglePhotorealistic3DTilesWithBuildingInsert.class).asEagerSingleton();
     }
 }
