@@ -555,6 +555,57 @@ public class Cesium3DTileset {
     }
 
     /**
+     * Creates a 3D Tiles tileset, used for streaming massive heterogeneous 3D geospatial datasets, from a Cesium ion asset ID.
+     * @param assetId The Cesium ion asset id.
+     * @return Cesium3DTileset
+     */
+    @JsMethod
+    public static native Promise<Cesium3DTileset, Void> fromIonAssetId(Number assetId);
+
+    /**
+     * Creates a 3D Tiles tileset, used for streaming massive heterogeneous 3D geospatial datasets, from a Cesium ion asset ID.
+     * @param assetId The Cesium ion asset id.
+     * @param options An object describing initialization options
+     * @return Cesium3DTileset
+     */
+    @JsMethod
+    public static native Promise<Cesium3DTileset, Void> fromIonAssetId(Number assetId, Cesium3DTilesetOptions options);
+
+    /**
+     * Creates a 3D Tiles tileset, used for streaming massive heterogeneous 3D geospatial datasets.
+     * @param resource The url to a tileset JSON file.
+     * @return Cesium3DTileset
+     */
+    @JsMethod
+    public static native Promise<Cesium3DTileset, Void> fromUrl(Resource resource);
+
+    /**
+     * Creates a 3D Tiles tileset, used for streaming massive heterogeneous 3D geospatial datasets.
+     * @param resource The url to a tileset JSON file.
+     * @param options An object describing initialization options
+     * @return Cesium3DTileset
+     */
+    @JsMethod
+    public static native Promise<Cesium3DTileset, Void> fromUrl(Resource resource, Cesium3DTilesetOptions options);
+
+    /**
+     * Creates a 3D Tiles tileset, used for streaming massive heterogeneous 3D geospatial datasets.
+     * @param url The url to a tileset JSON file.
+     * @return Cesium3DTileset
+     */
+    @JsMethod
+    public static native Promise<Cesium3DTileset, Void> fromUrl(String url);
+
+    /**
+     * Creates a 3D Tiles tileset, used for streaming massive heterogeneous 3D geospatial datasets.
+     * @param url The url to a tileset JSON file.
+     * @param options An object describing initialization options
+     * @return Cesium3DTileset
+     */
+    @JsMethod
+    public static native Promise<Cesium3DTileset, Void> fromUrl(String url, Cesium3DTilesetOptions options);
+
+    /**
      * Provides a hook to override the method used to request the tileset json
      * useful when fetching tilesets from remote servers
      *

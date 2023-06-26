@@ -28,6 +28,7 @@ import org.cesiumjs.cs.promise.Promise;
 import org.cesiumjs.cs.scene.Cesium3DTileset;
 import org.cesiumjs.cs.scene.Material;
 import org.cesiumjs.cs.scene.Scene;
+import org.cesiumjs.cs.scene.options.Cesium3DTilesetOptions;
 import org.cesiumjs.cs.widgets.Command;
 
 /**
@@ -292,6 +293,34 @@ public class Cesium {
      */
     @JsMethod(namespace = "Cesium", name = "createOsmBuildings")
     public static native Cesium3DTileset createOsmBuildings(CreateOsmBuildingsOptions options);
+
+    /**
+     *  Creates a Cesium3DTileset instance for the Google Photorealistic 3D Tiles tileset.
+     * @return Cesium3DTileset instance
+     */
+    @JsMethod(namespace = "Cesium", name = "createGooglePhotorealistic3DTileset")
+    public static native Promise<Cesium3DTileset, Void> createGooglePhotorealistic3DTileset();
+
+    /**
+     *  Creates a Cesium3DTileset instance for the Google Photorealistic 3D Tiles tileset.
+     * @param key Your API key to access Google Photorealistic 3D Tiles. See
+     *            https://developers.google.com/maps/documentation/javascript/get-api-key for instructions on how to
+     *            create your own key.
+     * @return Cesium3DTileset instance
+     */
+    @JsMethod(namespace = "Cesium", name = "createGooglePhotorealistic3DTileset")
+    public static native Promise<Cesium3DTileset, Void> createGooglePhotorealistic3DTileset(String key);
+
+    /**
+     *  Creates a Cesium3DTileset instance for the Google Photorealistic 3D Tiles tileset.
+     * @param key Your API key to access Google Photorealistic 3D Tiles. See
+     *            https://developers.google.com/maps/documentation/javascript/get-api-key for instructions on how to
+     *            create your own key.
+     * @param options An object describing initialization options.
+     * @return Cesium3DTileset instance
+     */
+    @JsMethod(namespace = "Cesium", name = "createGooglePhotorealistic3DTileset")
+    public static native Promise<Cesium3DTileset, Void> createGooglePhotorealistic3DTileset(String key, Cesium3DTilesetOptions options);
 
     @JsFunction
     public interface Function {
