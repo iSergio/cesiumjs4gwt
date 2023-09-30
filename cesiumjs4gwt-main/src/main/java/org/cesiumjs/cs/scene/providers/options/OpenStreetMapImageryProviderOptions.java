@@ -39,6 +39,12 @@ public class OpenStreetMapImageryProviderOptions {
      */
     @JsProperty
     public String fileExtension;
+    /**
+     * When true, request tiles at the 2x resolution for retina displays.
+     * Default: false
+     */
+    @JsProperty
+    public boolean retinaTiles;
     // TODO: Proxy
     // /**
     // * A proxy to use for requests. This object is expected to have a getURL
