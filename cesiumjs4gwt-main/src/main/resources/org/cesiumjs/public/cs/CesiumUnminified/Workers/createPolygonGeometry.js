@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.109
+ * Version 1.110
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -25,83 +25,266 @@
 
 import {
   BoundingRectangle_default
-} from "./chunk-EQ6ZAP37.js";
+} from "./chunk-PMDLIBEQ.js";
 import {
   PolygonGeometryLibrary_default
-} from "./chunk-7IMAWM6A.js";
+} from "./chunk-7N67FBLW.js";
 import {
   ArcType_default
-} from "./chunk-2C65EKYA.js";
+} from "./chunk-IQN2LMGD.js";
 import {
   GeometryInstance_default
-} from "./chunk-V2LKNJGT.js";
+} from "./chunk-EHJQEARC.js";
 import {
   GeometryPipeline_default
-} from "./chunk-HCZR75II.js";
-import "./chunk-P7PWX5HR.js";
-import "./chunk-I5MQWHBR.js";
+} from "./chunk-P32XMW4I.js";
+import "./chunk-QUCJGBCK.js";
+import "./chunk-4QGPYV3W.js";
+import {
+  oneTimeWarning_default
+} from "./chunk-J2FHYK2Z.js";
 import {
   EllipsoidGeodesic_default
-} from "./chunk-7CZEWQWE.js";
+} from "./chunk-Y24CDOJC.js";
 import {
   GeometryOffsetAttribute_default
-} from "./chunk-A6EA6KIE.js";
+} from "./chunk-UMLTOPAE.js";
 import {
   VertexFormat_default
-} from "./chunk-2NLMZNJI.js";
+} from "./chunk-MRCFDEKH.js";
 import {
   EllipsoidTangentPlane_default
-} from "./chunk-4V6RCTVH.js";
-import "./chunk-G3MOT7BZ.js";
+} from "./chunk-K3VEWONC.js";
+import "./chunk-PEVZYZBQ.js";
 import {
   PolygonPipeline_default,
   WindingOrder_default
-} from "./chunk-RDM3BKNC.js";
-import "./chunk-XZVQMPWG.js";
-import "./chunk-RRUPTJ6P.js";
-import "./chunk-QIS3NB7U.js";
-import "./chunk-PGB3EFR7.js";
+} from "./chunk-QDUOGCCO.js";
+import "./chunk-X2KIWBTW.js";
+import "./chunk-RCI7BSOM.js";
+import {
+  IntersectionTests_default,
+  Ray_default
+} from "./chunk-UFIT5XDI.js";
+import "./chunk-6I22NWKQ.js";
 import {
   IndexDatatype_default
-} from "./chunk-TF5D2H7B.js";
-import "./chunk-N5MMDSD2.js";
+} from "./chunk-CROU4RHL.js";
+import "./chunk-YLMDWSXO.js";
 import {
   GeometryAttribute_default,
   Geometry_default
-} from "./chunk-UGZGTV5K.js";
+} from "./chunk-HV67ARO7.js";
 import {
   BoundingSphere_default,
   Quaternion_default
-} from "./chunk-5U4UHRZ2.js";
-import "./chunk-FE2XG3SS.js";
+} from "./chunk-V5S5N2IS.js";
+import "./chunk-ULLMQNFQ.js";
 import {
   Cartesian2_default,
   Rectangle_default
-} from "./chunk-PW5CA4MJ.js";
+} from "./chunk-MYDS6HBL.js";
 import {
   ComponentDatatype_default
-} from "./chunk-KAFF2QX3.js";
+} from "./chunk-CTJCECTX.js";
 import {
   Cartesian3_default,
   Cartographic_default,
   Ellipsoid_default,
   Matrix3_default
-} from "./chunk-XJCTFTBM.js";
+} from "./chunk-HIDSEUWS.js";
 import {
   Math_default
-} from "./chunk-PWDYKCNC.js";
-import "./chunk-527JG4D7.js";
-import "./chunk-FVDTKX3F.js";
+} from "./chunk-4HN3N5SE.js";
+import "./chunk-TXYJOVQK.js";
+import "./chunk-2ZI7FZ3Q.js";
 import {
   defaultValue_default
-} from "./chunk-BT6YIL2N.js";
+} from "./chunk-GPO47TW4.js";
 import {
   Check_default,
   DeveloperError_default
-} from "./chunk-UN7AK64D.js";
+} from "./chunk-6EHT6GS3.js";
 import {
   defined_default
-} from "./chunk-QVJ6IRKV.js";
+} from "./chunk-TXOGSFHZ.js";
+
+// packages/engine/Source/Core/deprecationWarning.js
+function deprecationWarning(identifier, message) {
+  if (!defined_default(identifier) || !defined_default(message)) {
+    throw new DeveloperError_default("identifier and message are required.");
+  }
+  oneTimeWarning_default(identifier, message);
+}
+var deprecationWarning_default = deprecationWarning;
+
+// packages/engine/Source/Core/Stereographic.js
+function Stereographic(position, tangentPlane) {
+  this.position = position;
+  if (!defined_default(this.position)) {
+    this.position = new Cartesian2_default();
+  }
+  this.tangentPlane = tangentPlane;
+  if (!defined_default(this.tangentPlane)) {
+    this.tangentPlane = Stereographic.NORTH_POLE_TANGENT_PLANE;
+  }
+}
+Object.defineProperties(Stereographic.prototype, {
+  /**
+   * Gets the ellipsoid.
+   * @memberof Stereographic.prototype
+   * @type {Ellipsoid}
+   */
+  ellipsoid: {
+    get: function() {
+      return this.tangentPlane.ellipsoid;
+    }
+  },
+  /**
+   * Gets the x coordinate
+   * @memberof Stereographic.prototype
+   * @type {number}
+   */
+  x: {
+    get: function() {
+      return this.position.x;
+    }
+  },
+  /**
+   * Gets the y coordinate
+   * @memberof Stereographic.prototype
+   * @type {number}
+   */
+  y: {
+    get: function() {
+      return this.position.y;
+    }
+  },
+  /**
+   * Computes the conformal latitude, or the ellipsoidal latitude projected onto an arbitrary sphere.
+   * @memberof Stereographic.prototype
+   * @type {number}
+   */
+  conformalLatitude: {
+    get: function() {
+      const r = Cartesian2_default.magnitude(this.position);
+      const d = 2 * this.ellipsoid.maximumRadius;
+      const sign = this.tangentPlane.plane.normal.z;
+      return sign * (Math_default.PI_OVER_TWO - 2 * Math.atan2(r, d));
+    }
+  },
+  /**
+   * Computes the longitude
+   * @memberof Stereographic.prototype
+   * @type {number}
+   */
+  longitude: {
+    get: function() {
+      let longitude = Math_default.PI_OVER_TWO + Math.atan2(this.y, this.x);
+      if (longitude > Math.PI) {
+        longitude -= Math_default.TWO_PI;
+      }
+      return longitude;
+    }
+  }
+});
+var scratchCartographic = new Cartographic_default();
+var scratchCartesian = new Cartesian3_default();
+Stereographic.prototype.getLatitude = function(ellipsoid) {
+  if (!defined_default(ellipsoid)) {
+    ellipsoid = Ellipsoid_default.WGS84;
+  }
+  scratchCartographic.latitude = this.conformalLatitude;
+  scratchCartographic.longitude = this.longitude;
+  scratchCartographic.height = 0;
+  const cartesian = this.ellipsoid.cartographicToCartesian(
+    scratchCartographic,
+    scratchCartesian
+  );
+  ellipsoid.cartesianToCartographic(cartesian, scratchCartographic);
+  return scratchCartographic.latitude;
+};
+var scratchProjectPointOntoPlaneRay = new Ray_default();
+var scratchProjectPointOntoPlaneRayDirection = new Cartesian3_default();
+var scratchProjectPointOntoPlaneCartesian3 = new Cartesian3_default();
+Stereographic.fromCartesian = function(cartesian, result) {
+  Check_default.defined("cartesian", cartesian);
+  const sign = Math_default.signNotZero(cartesian.z);
+  let tangentPlane = Stereographic.NORTH_POLE_TANGENT_PLANE;
+  let origin = Stereographic.SOUTH_POLE;
+  if (sign < 0) {
+    tangentPlane = Stereographic.SOUTH_POLE_TANGENT_PLANE;
+    origin = Stereographic.NORTH_POLE;
+  }
+  const ray = scratchProjectPointOntoPlaneRay;
+  ray.origin = tangentPlane.ellipsoid.scaleToGeocentricSurface(
+    cartesian,
+    ray.origin
+  );
+  ray.direction = Cartesian3_default.subtract(
+    ray.origin,
+    origin,
+    scratchProjectPointOntoPlaneRayDirection
+  );
+  Cartesian3_default.normalize(ray.direction, ray.direction);
+  const intersectionPoint = IntersectionTests_default.rayPlane(
+    ray,
+    tangentPlane.plane,
+    scratchProjectPointOntoPlaneCartesian3
+  );
+  const v = Cartesian3_default.subtract(intersectionPoint, origin, intersectionPoint);
+  const x = Cartesian3_default.dot(tangentPlane.xAxis, v);
+  const y = sign * Cartesian3_default.dot(tangentPlane.yAxis, v);
+  if (!defined_default(result)) {
+    return new Stereographic(new Cartesian2_default(x, y), tangentPlane);
+  }
+  result.position = new Cartesian2_default(x, y);
+  result.tangentPlane = tangentPlane;
+  return result;
+};
+Stereographic.fromCartesianArray = function(cartesians, result) {
+  Check_default.defined("cartesians", cartesians);
+  const length = cartesians.length;
+  if (!defined_default(result)) {
+    result = new Array(length);
+  } else {
+    result.length = length;
+  }
+  for (let i = 0; i < length; i++) {
+    result[i] = Stereographic.fromCartesian(cartesians[i], result[i]);
+  }
+  return result;
+};
+Stereographic.clone = function(stereographic, result) {
+  if (!defined_default(stereographic)) {
+    return void 0;
+  }
+  if (!defined_default(result)) {
+    return new Stereographic(
+      stereographic.position,
+      stereographic.tangentPlane
+    );
+  }
+  result.position = stereographic.position;
+  result.tangentPlane = stereographic.tangentPlane;
+  return result;
+};
+Stereographic.HALF_UNIT_SPHERE = Object.freeze(new Ellipsoid_default(0.5, 0.5, 0.5));
+Stereographic.NORTH_POLE = Object.freeze(new Cartesian3_default(0, 0, 0.5));
+Stereographic.SOUTH_POLE = Object.freeze(new Cartesian3_default(0, 0, -0.5));
+Stereographic.NORTH_POLE_TANGENT_PLANE = Object.freeze(
+  new EllipsoidTangentPlane_default(
+    Stereographic.NORTH_POLE,
+    Stereographic.HALF_UNIT_SPHERE
+  )
+);
+Stereographic.SOUTH_POLE_TANGENT_PLANE = Object.freeze(
+  new EllipsoidTangentPlane_default(
+    Stereographic.SOUTH_POLE,
+    Stereographic.HALF_UNIT_SPHERE
+  )
+);
+var Stereographic_default = Stereographic;
 
 // packages/engine/Source/Core/PolygonGeometry.js
 var scratchCarto1 = new Cartographic_default();
@@ -144,7 +327,8 @@ function computeAttributes(options) {
   const bottom = options.bottom || wall;
   if (vertexFormat.st || vertexFormat.normal || vertexFormat.tangent || vertexFormat.bitangent || shadowVolume) {
     const boundingRectangle = options.boundingRectangle;
-    const tangentPlane = options.tangentPlane;
+    const rotationAxis = options.rotationAxis;
+    const projectTo2d = options.projectTo2d;
     const ellipsoid = options.ellipsoid;
     const stRotation = options.stRotation;
     const perPositionHeight = options.perPositionHeight;
@@ -173,13 +357,13 @@ function computeAttributes(options) {
     let tangentRotationMatrix = tangentMatrixScratch;
     if (stRotation !== 0) {
       let rotation = Quaternion_default.fromAxisAngle(
-        tangentPlane._plane.normal,
+        rotationAxis,
         stRotation,
         appendTextureCoordinatesQuaternion
       );
       textureMatrix = Matrix3_default.fromQuaternion(rotation, textureMatrix);
       rotation = Quaternion_default.fromAxisAngle(
-        tangentPlane._plane.normal,
+        rotationAxis,
         -stRotation,
         appendTextureCoordinatesQuaternion
       );
@@ -215,10 +399,7 @@ function computeAttributes(options) {
             scratchPosition
           );
           p = ellipsoid.scaleToGeodeticSurface(p, p);
-          const st = tangentPlane.projectPointOntoPlane(
-            p,
-            appendTextureCoordinatesCartesian2
-          );
+          const st = projectTo2d(p, appendTextureCoordinatesCartesian2);
           Cartesian2_default.subtract(st, origin, st);
           const stx = Math_default.clamp(st.x / boundingRectangle.width, 0, 1);
           const sty = Math_default.clamp(st.y / boundingRectangle.height, 0, 1);
@@ -533,7 +714,7 @@ function interpolateAndGrowRectangle(ellipsoidGeodesic2, inverseChordLength, res
   }
 }
 var createGeometryFromPositionsExtrudedPositions = [];
-function createGeometryFromPositionsExtruded(ellipsoid, polygon, textureCoordinates, granularity, hierarchy, perPositionHeight, closeTop, closeBottom, vertexFormat, arcType) {
+function createGeometryFromPositionsExtruded(ellipsoid, polygon2, textureCoordinates, granularity, hierarchy, perPositionHeight, closeTop, closeBottom, vertexFormat, arcType) {
   const geos = {
     walls: []
   };
@@ -541,7 +722,7 @@ function createGeometryFromPositionsExtruded(ellipsoid, polygon, textureCoordina
   if (closeTop || closeBottom) {
     const topGeo = PolygonGeometryLibrary_default.createGeometryFromPositions(
       ellipsoid,
-      polygon,
+      polygon2,
       textureCoordinates,
       granularity,
       perPositionHeight,
@@ -833,9 +1014,144 @@ PolygonGeometry.unpack = function(array, startingIndex, result) {
   result.packedLength = packedLength;
   return result;
 };
+var scratchCartesian0 = new Cartesian2_default();
+var scratchCartesian1 = new Cartesian2_default();
+var scratchPolarClosest = new Stereographic_default();
+function expandRectangle(polar, lastPolar, ellipsoid, arcType, polygon2, result) {
+  const longitude = polar.longitude;
+  const lonAdjusted = longitude >= 0 ? longitude : longitude + Math_default.TWO_PI;
+  polygon2.westOverIdl = Math.min(polygon2.westOverIdl, lonAdjusted);
+  polygon2.eastOverIdl = Math.max(polygon2.eastOverIdl, lonAdjusted);
+  result.west = Math.min(result.west, longitude);
+  result.east = Math.max(result.east, longitude);
+  const latitude = polar.getLatitude(ellipsoid);
+  let segmentLatitude = latitude;
+  result.south = Math.min(result.south, latitude);
+  result.north = Math.max(result.north, latitude);
+  if (arcType !== ArcType_default.RHUMB) {
+    const segment = Cartesian2_default.subtract(
+      lastPolar.position,
+      polar.position,
+      scratchCartesian0
+    );
+    const t = Cartesian2_default.dot(lastPolar.position, segment) / Cartesian2_default.dot(segment, segment);
+    if (t > 0 && t < 1) {
+      const projected = Cartesian2_default.add(
+        lastPolar.position,
+        Cartesian2_default.multiplyByScalar(segment, -t, segment),
+        scratchCartesian1
+      );
+      const closestPolar = Stereographic_default.clone(lastPolar, scratchPolarClosest);
+      closestPolar.position = projected;
+      const adjustedLatitude = closestPolar.getLatitude(ellipsoid);
+      result.south = Math.min(result.south, adjustedLatitude);
+      result.north = Math.max(result.north, adjustedLatitude);
+      if (Math.abs(latitude) > Math.abs(adjustedLatitude)) {
+        segmentLatitude = adjustedLatitude;
+      }
+    }
+  }
+  const direction = lastPolar.x * polar.y - polar.x * lastPolar.y;
+  let angle = Math.sign(direction);
+  if (angle !== 0) {
+    angle *= Cartesian2_default.angleBetween(lastPolar.position, polar.position);
+  }
+  if (segmentLatitude >= 0) {
+    polygon2.northAngle += angle;
+  }
+  if (segmentLatitude <= 0) {
+    polygon2.southAngle += angle;
+  }
+}
+var scratchPolar = new Stereographic_default();
+var scratchPolarPrevious = new Stereographic_default();
+var polygon = {
+  northAngle: 0,
+  southAngle: 0,
+  westOverIdl: 0,
+  eastOverIdl: 0
+};
+PolygonGeometry.computeRectangleFromPositions = function(positions, ellipsoid, arcType, result) {
+  Check_default.defined("positions", positions);
+  if (!defined_default(result)) {
+    result = new Rectangle_default();
+  }
+  if (positions.length < 3) {
+    return result;
+  }
+  result.west = Number.POSITIVE_INFINITY;
+  result.east = Number.NEGATIVE_INFINITY;
+  result.south = Number.POSITIVE_INFINITY;
+  result.north = Number.NEGATIVE_INFINITY;
+  polygon.northAngle = 0;
+  polygon.southAngle = 0;
+  polygon.westOverIdl = Number.POSITIVE_INFINITY;
+  polygon.eastOverIdl = Number.NEGATIVE_INFINITY;
+  const positionsLength = positions.length;
+  let lastPolarPosition = Stereographic_default.fromCartesian(
+    positions[0],
+    scratchPolarPrevious
+  );
+  for (let i = 1; i < positionsLength; i++) {
+    const polarPosition = Stereographic_default.fromCartesian(
+      positions[i],
+      scratchPolar
+    );
+    expandRectangle(
+      polarPosition,
+      lastPolarPosition,
+      ellipsoid,
+      arcType,
+      polygon,
+      result
+    );
+    lastPolarPosition = Stereographic_default.clone(polarPosition, lastPolarPosition);
+  }
+  expandRectangle(
+    Stereographic_default.fromCartesian(positions[0], scratchPolar),
+    lastPolarPosition,
+    ellipsoid,
+    arcType,
+    polygon,
+    result
+  );
+  if (result.east - result.west > polygon.eastOverIdl - polygon.westOverIdl) {
+    result.west = polygon.westOverIdl;
+    result.east = polygon.eastOverIdl;
+    if (result.east > Math_default.PI) {
+      result.east = result.east - Math_default.TWO_PI;
+    }
+    if (result.west > Math_default.PI) {
+      result.west = result.west - Math_default.TWO_PI;
+    }
+  }
+  if (Math_default.equalsEpsilon(
+    Math.abs(polygon.northAngle),
+    Math_default.TWO_PI,
+    Math_default.EPSILON10
+  )) {
+    result.north = Math_default.PI_OVER_TWO;
+    result.east = Math_default.PI;
+    result.west = -Math_default.PI;
+  }
+  if (Math_default.equalsEpsilon(
+    Math.abs(polygon.southAngle),
+    Math_default.TWO_PI,
+    Math_default.EPSILON10
+  )) {
+    result.south = -Math_default.PI_OVER_TWO;
+    result.east = Math_default.PI;
+    result.west = -Math_default.PI;
+  }
+  return result;
+};
 PolygonGeometry.computeRectangle = function(options, result) {
   Check_default.typeOf.object("options", options);
   Check_default.typeOf.object("options.polygonHierarchy", options.polygonHierarchy);
+  deprecationWarning_default(
+    "PolygonGeometry.computeRectangle",
+    "PolygonGeometry.computeRectangle was deprecated in CesiumJS 1.110.  It will be removed in CesiumJS 1.112. Use PolygonGeometry.computeRectangleFromPositions instead."
+  );
   const granularity = defaultValue_default(
     options.granularity,
     Math_default.RADIANS_PER_DEGREE
@@ -856,6 +1172,101 @@ PolygonGeometry.computeRectangle = function(options, result) {
     result
   );
 };
+var scratchPolarForPlane = new Stereographic_default();
+function getTangentPlane(rectangle, positions, ellipsoid) {
+  if (rectangle.height >= Math_default.PI || rectangle.width >= Math_default.PI) {
+    const polar = Stereographic_default.fromCartesian(
+      positions[0],
+      scratchPolarForPlane
+    );
+    return polar.tangentPlane;
+  }
+  return EllipsoidTangentPlane_default.fromPoints(positions, ellipsoid);
+}
+var scratchCartographicCyllindrical = new Cartographic_default();
+function createProjectTo2d(rectangle, ellipsoid) {
+  return (positions, results) => {
+    if (rectangle.height >= Math_default.PI || rectangle.width >= Math_default.PI) {
+      if (rectangle.south < 0 && rectangle.north > 0) {
+        if (!defined_default(results)) {
+          results = [];
+        }
+        for (let i = 0; i < positions.length; ++i) {
+          const cartographic = ellipsoid.cartesianToCartographic(
+            positions[i],
+            scratchCartographicCyllindrical
+          );
+          results[i] = new Cartesian2_default(
+            cartographic.longitude / Math_default.PI,
+            cartographic.latitude / Math_default.PI_OVER_TWO
+          );
+        }
+        results.length = positions.length;
+        return results;
+      }
+      return Stereographic_default.fromCartesianArray(positions, results);
+    }
+    const tangentPlane = EllipsoidTangentPlane_default.fromPoints(positions, ellipsoid);
+    return tangentPlane.projectPointsOntoPlane(positions, results);
+  };
+}
+function createProjectPositionTo2d(rectangle, outerRing, ellipsoid) {
+  if (rectangle.height >= Math_default.PI || rectangle.width >= Math_default.PI) {
+    return (position, result) => {
+      if (rectangle.south < 0 && rectangle.north > 0) {
+        const cartographic = ellipsoid.cartesianToCartographic(
+          position,
+          scratchCartographicCyllindrical
+        );
+        if (!defined_default(result)) {
+          result = new Cartesian2_default();
+        }
+        result.x = cartographic.longitude / Math_default.PI;
+        result.y = cartographic.latitude / Math_default.PI_OVER_TWO;
+        return result;
+      }
+      return Stereographic_default.fromCartesian(position, result);
+    };
+  }
+  const tangentPlane = EllipsoidTangentPlane_default.fromPoints(outerRing, ellipsoid);
+  return (position, result) => {
+    return tangentPlane.projectPointsOntoPlane(position, result);
+  };
+}
+function createSplitPolygons(rectangle, ellipsoid, arcType, perPositionHeight) {
+  return (polygons, results) => {
+    if (!perPositionHeight && (rectangle.height >= Math_default.PI_OVER_TWO || rectangle.width >= 2 * Math_default.PI_OVER_THREE)) {
+      return PolygonGeometryLibrary_default.splitPolygonsOnEquator(
+        polygons,
+        ellipsoid,
+        arcType,
+        results
+      );
+    }
+    return polygons;
+  };
+}
+function computeBoundingRectangle(outerRing, rectangle, ellipsoid, stRotation) {
+  if (rectangle.height >= Math_default.PI || rectangle.width >= Math_default.PI) {
+    return BoundingRectangle_default.fromRectangle(
+      rectangle,
+      void 0,
+      scratchBoundingRectangle
+    );
+  }
+  const outerPositions = outerRing;
+  const tangentPlane = EllipsoidTangentPlane_default.fromPoints(
+    outerPositions,
+    ellipsoid
+  );
+  return PolygonGeometryLibrary_default.computeBoundingRectangle(
+    tangentPlane.plane.normal,
+    tangentPlane.projectPointOntoPlane.bind(tangentPlane),
+    outerPositions,
+    stRotation,
+    scratchBoundingRectangle
+  );
+}
 PolygonGeometry.createGeometry = function(polygonGeometry) {
   const vertexFormat = polygonGeometry._vertexFormat;
   const ellipsoid = polygonGeometry._ellipsoid;
@@ -868,20 +1279,18 @@ PolygonGeometry.createGeometry = function(polygonGeometry) {
   const arcType = polygonGeometry._arcType;
   const textureCoordinates = polygonGeometry._textureCoordinates;
   const hasTextureCoordinates = defined_default(textureCoordinates);
-  let outerPositions = polygonHierarchy.positions;
+  const outerPositions = polygonHierarchy.positions;
   if (outerPositions.length < 3) {
     return;
   }
-  const tangentPlane = EllipsoidTangentPlane_default.fromPoints(
-    outerPositions,
-    ellipsoid
-  );
+  const rectangle = polygonGeometry.rectangle;
   const results = PolygonGeometryLibrary_default.polygonsFromHierarchy(
     polygonHierarchy,
     hasTextureCoordinates,
-    tangentPlane.projectPointsOntoPlane.bind(tangentPlane),
+    createProjectTo2d(rectangle, ellipsoid),
     !perPositionHeight,
-    ellipsoid
+    ellipsoid,
+    createSplitPolygons(rectangle, ellipsoid, arcType, perPositionHeight)
   );
   const hierarchy = results.hierarchy;
   const polygons = results.polygons;
@@ -892,18 +1301,18 @@ PolygonGeometry.createGeometry = function(polygonGeometry) {
     textureCoordinates,
     true,
     dummyFunction,
-    false
+    false,
+    ellipsoid
   ).polygons : void 0;
   if (hierarchy.length === 0) {
     return;
   }
-  outerPositions = hierarchy[0].outerRing;
-  const boundingRectangle = PolygonGeometryLibrary_default.computeBoundingRectangle(
-    tangentPlane.plane.normal,
-    tangentPlane.projectPointOntoPlane.bind(tangentPlane),
-    outerPositions,
-    stRotation,
-    scratchBoundingRectangle
+  const outerRing = hierarchy[0].outerRing;
+  const boundingRectangle = computeBoundingRectangle(
+    outerRing,
+    rectangle,
+    ellipsoid,
+    stRotation
   );
   const geometries = [];
   const height = polygonGeometry._height;
@@ -913,7 +1322,8 @@ PolygonGeometry.createGeometry = function(polygonGeometry) {
     perPositionHeight,
     vertexFormat,
     geometry: void 0,
-    tangentPlane,
+    rotationAxis: getTangentPlane(rectangle, outerRing, ellipsoid).plane.normal,
+    projectTo2d: createProjectPositionTo2d(rectangle, outerRing, ellipsoid),
     boundingRectangle,
     ellipsoid,
     stRotation,
@@ -1093,11 +1503,10 @@ Object.defineProperties(PolygonGeometry.prototype, {
     get: function() {
       if (!defined_default(this._rectangle)) {
         const positions = this._polygonHierarchy.positions;
-        this._rectangle = computeRectangle(
+        this._rectangle = PolygonGeometry.computeRectangleFromPositions(
           positions,
           this._ellipsoid,
-          this._arcType,
-          this._granularity
+          this._arcType
         );
       }
       return this._rectangle;
