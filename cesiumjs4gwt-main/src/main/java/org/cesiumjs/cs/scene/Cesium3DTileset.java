@@ -302,6 +302,21 @@ public class Cesium3DTileset {
      */
     @JsProperty
     public boolean loadSiblings;
+
+    /**
+     * The maximum additional amount of GPU memory (in bytes) that will be used to cache tiles.
+     * <p>
+     *     If tiles sized more than cacheBytes plus maximumCacheOverflowBytes are needed to meet the desired screen
+     *     space error, determined by Cesium3DTileset#maximumScreenSpaceError for the current view, then
+     *     Cesium3DTileset#memoryAdjustedScreenSpaceError will be adjusted until the tiles required to meet the
+     *     adjusted screen space error use less than cacheBytes plus maximumCacheOverflowBytes.
+     * </p>
+     *
+     * Default: 536870912
+     */
+    @JsProperty
+    public double maximumCacheOverflowBytes;
+
     /**
      * The sun's luminance at the zenith in kilo candela per meter squared to use
      * for this model's procedural environment map. This is used when
@@ -316,12 +331,6 @@ public class Cesium3DTileset {
      */
     @JsProperty
     public double maximumScreenSpaceError;
-    /**
-     * The maximum amount of memory in MB that can be used by the tileset. Default:
-     * 512
-     */
-    @JsProperty
-    public double maximumMemoryUsage;
     /**
      * A 4x4 transformation matrix that transforms the tileset's root tile. Default:
      * {@link org.cesiumjs.cs.core.Matrix4#IDENTITY()}
@@ -634,6 +643,24 @@ public class Cesium3DTileset {
      */
     @JsProperty(name = "boundingSphere")
     public native BoundingSphere boundingSphere();
+
+    /**
+     * The amount of GPU memory (in bytes) used to cache tiles. This memory usage is estimated from geometry, textures,
+     * and batch table textures of loaded tiles. For point clouds, this value also includes per-point metadata.
+     * Tiles not in view are unloaded to enforce this.
+     * <p>
+     * If decreasing this value results in unloading tiles, the tiles are unloaded the next frame.
+     * <p>
+     * If tiles sized more than cacheBytes are needed to meet the desired screen space error, determined by
+     * Cesium3DTileset#maximumScreenSpaceError, for the current view, then the memory usage of the tiles loaded will
+     * exceed cacheBytes by up to maximumCacheOverflowBytes. For example, if cacheBytes is 500000, but 600000 bytes of
+     * tiles are needed to meet the screen space error, then 600000 bytes of tiles may be loaded
+     * (if maximumCacheOverflowBytes is at least 100000). When these tiles go out of view, they will be unloaded.
+     * <p>
+     * Default: 536870912
+     */
+    @JsProperty
+    public double cacheBytes;
 
     /**
      * Determines whether terrain, 3D Tiles or both will be classified by this
