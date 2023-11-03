@@ -20,7 +20,10 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.cesiumjs.cs.core.Cartesian3;
+import org.cesiumjs.cs.core.Ellipsoid;
 import org.cesiumjs.cs.core.Packable;
+import org.cesiumjs.cs.core.Rectangle;
 import org.cesiumjs.cs.core.geometry.options.PolygonGeometryOptions;
 
 /**
@@ -38,6 +41,44 @@ public class PolygonGeometry extends Geometry implements Packable {
     @JsConstructor
     public PolygonGeometry(PolygonGeometryOptions options) {
     }
+
+    /**
+     * Computes a rectangle which encloses the polygon defined by the list of positions, including cases over the international date line and the poles.
+     * @param positions A linear ring defining the outer boundary of the polygon.
+     * @return The result rectangle
+     */
+    @JsMethod
+    public static native Rectangle computeRectangleFromPositions(Cartesian3[] positions);
+
+    /**
+     * Computes a rectangle which encloses the polygon defined by the list of positions, including cases over the international date line and the poles.
+     * @param positions A linear ring defining the outer boundary of the polygon.
+     * @param ellipsoid The ellipsoid to be used as a reference.
+     * @return The result rectangle
+     */
+    @JsMethod
+    public static native Rectangle computeRectangleFromPositions(Cartesian3[] positions, Ellipsoid ellipsoid);
+
+    /**
+     * Computes a rectangle which encloses the polygon defined by the list of positions, including cases over the international date line and the poles.
+     * @param positions A linear ring defining the outer boundary of the polygon.
+     * @param ellipsoid The ellipsoid to be used as a reference.
+     * @param arcType The type of line the polygon edges must follow. Valid options are ArcType.GEODESIC and ArcType.RHUMB.
+     * @return The result rectangle
+     */
+    @JsMethod
+    public static native Rectangle computeRectangleFromPositions(Cartesian3[] positions, Ellipsoid ellipsoid, Number arcType);
+
+    /**
+     * Computes a rectangle which encloses the polygon defined by the list of positions, including cases over the international date line and the poles.
+     * @param positions A linear ring defining the outer boundary of the polygon.
+     * @param ellipsoid The ellipsoid to be used as a reference.
+     * @param arcType The type of line the polygon edges must follow. Valid options are ArcType.GEODESIC and ArcType.RHUMB.
+     * @param result An object in which to store the result.
+     * @return The result rectangle
+     */
+    @JsMethod
+    public static native Rectangle computeRectangleFromPositions(Cartesian3[] positions, Ellipsoid ellipsoid, Number arcType, Rectangle result);
 
     /**
      * Computes the geometric representation of a polygon, including its vertices,
