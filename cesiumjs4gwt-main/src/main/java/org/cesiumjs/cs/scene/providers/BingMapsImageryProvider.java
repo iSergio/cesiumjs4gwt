@@ -20,10 +20,7 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.cesiumjs.cs.core.Credit;
-import org.cesiumjs.cs.core.Event;
-import org.cesiumjs.cs.core.Rectangle;
-import org.cesiumjs.cs.core.TilingScheme;
+import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.js.JsImage;
 import org.cesiumjs.cs.promise.Promise;
 import org.cesiumjs.cs.scene.ImageryLayerFeatureInfo;
@@ -62,6 +59,24 @@ public class BingMapsImageryProvider implements ImageryProvider {
     @JsConstructor
     public BingMapsImageryProvider(BingMapsImageryProviderOptions options) {
     }
+
+    /**
+     * Creates an ImageryProvider which provides tiled imagery using the Bing Maps Imagery REST API.
+     * @param url The url of the Bing Maps server hosting the imagery.
+     * @param options Object describing initialization options
+     * @return A promise that resolves to the created BingMapsImageryProvider
+     */
+    @JsMethod
+    public static native Promise<BingMapsImageryProvider, Void> fromUrl(String url, BingMapsImageryProviderOptions options);
+
+    /**
+     * Creates an ImageryProvider which provides tiled imagery using the Bing Maps Imagery REST API.
+     * @param url The url of the Bing Maps server hosting the imagery.
+     * @param options Object describing initialization options
+     * @return A promise that resolves to the created BingMapsImageryProvider
+     */
+    @JsMethod
+    public static native Promise<BingMapsImageryProvider, Void> fromUrl(Resource url, BingMapsImageryProviderOptions options);
 
     /**
      * Converts a tile's quadkey used to request an image from a Bing Maps server
