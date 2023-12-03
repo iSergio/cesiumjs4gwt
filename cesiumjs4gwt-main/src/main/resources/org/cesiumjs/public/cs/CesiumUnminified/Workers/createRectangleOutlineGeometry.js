@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.110
+ * Version 1.111
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -25,54 +25,54 @@
 
 import {
   RectangleGeometryLibrary_default
-} from "./chunk-Z2MP3UBE.js";
+} from "./chunk-CHGQXPF3.js";
 import {
   GeometryOffsetAttribute_default
-} from "./chunk-UMLTOPAE.js";
+} from "./chunk-ZERWARDV.js";
 import {
   PolygonPipeline_default
-} from "./chunk-QDUOGCCO.js";
-import "./chunk-RCI7BSOM.js";
+} from "./chunk-I5XKU3UZ.js";
+import "./chunk-IDAL54EF.js";
 import {
   IndexDatatype_default
-} from "./chunk-CROU4RHL.js";
+} from "./chunk-CKOGHQ6J.js";
 import {
   GeometryAttributes_default
-} from "./chunk-YLMDWSXO.js";
+} from "./chunk-EH2PEDWL.js";
 import {
   GeometryAttribute_default,
   Geometry_default,
   PrimitiveType_default
-} from "./chunk-HV67ARO7.js";
+} from "./chunk-3R5RPSYS.js";
 import {
   BoundingSphere_default
-} from "./chunk-V5S5N2IS.js";
-import "./chunk-ULLMQNFQ.js";
+} from "./chunk-XKGSTUQO.js";
+import "./chunk-DNCKFFNR.js";
 import {
   Rectangle_default
-} from "./chunk-MYDS6HBL.js";
+} from "./chunk-IQCBK4CE.js";
 import {
   ComponentDatatype_default
-} from "./chunk-CTJCECTX.js";
+} from "./chunk-UJ76JVUZ.js";
 import {
   Cartesian3_default,
   Cartographic_default,
   Ellipsoid_default
-} from "./chunk-HIDSEUWS.js";
+} from "./chunk-54GSYZWT.js";
 import {
   Math_default
-} from "./chunk-4HN3N5SE.js";
-import "./chunk-TXYJOVQK.js";
-import "./chunk-2ZI7FZ3Q.js";
+} from "./chunk-A3TYRSRJ.js";
+import "./chunk-XNRYWRVT.js";
+import "./chunk-YK5RU5AO.js";
 import {
   defaultValue_default
-} from "./chunk-GPO47TW4.js";
+} from "./chunk-N73NY3KY.js";
 import {
   DeveloperError_default
-} from "./chunk-6EHT6GS3.js";
+} from "./chunk-WYMW5NZB.js";
 import {
   defined_default
-} from "./chunk-TXOGSFHZ.js";
+} from "./chunk-FMN2NHBU.js";
 
 // packages/engine/Source/Core/RectangleOutlineGeometry.js
 var bottomBoundingSphere = new BoundingSphere_default();
