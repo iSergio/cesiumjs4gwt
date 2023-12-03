@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.110
+ * Version 1.111
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -25,53 +25,53 @@
 
 import {
   WallGeometryLibrary_default
-} from "./chunk-5E3V7Y4R.js";
-import "./chunk-IC7G4BX2.js";
-import "./chunk-Y24CDOJC.js";
+} from "./chunk-HX5XY3NH.js";
+import "./chunk-4JETNOH2.js";
+import "./chunk-LID3UUML.js";
 import {
   VertexFormat_default
-} from "./chunk-MRCFDEKH.js";
-import "./chunk-X2KIWBTW.js";
-import "./chunk-RCI7BSOM.js";
-import "./chunk-UFIT5XDI.js";
-import "./chunk-6I22NWKQ.js";
+} from "./chunk-N7FIYNQV.js";
+import "./chunk-E5HIGWSZ.js";
+import "./chunk-IDAL54EF.js";
+import "./chunk-R5NOUYKW.js";
+import "./chunk-PNAD2XAN.js";
 import {
   IndexDatatype_default
-} from "./chunk-CROU4RHL.js";
+} from "./chunk-CKOGHQ6J.js";
 import {
   GeometryAttributes_default
-} from "./chunk-YLMDWSXO.js";
+} from "./chunk-EH2PEDWL.js";
 import {
   GeometryAttribute_default,
   Geometry_default,
   PrimitiveType_default
-} from "./chunk-HV67ARO7.js";
+} from "./chunk-3R5RPSYS.js";
 import {
   BoundingSphere_default
-} from "./chunk-V5S5N2IS.js";
-import "./chunk-ULLMQNFQ.js";
-import "./chunk-MYDS6HBL.js";
+} from "./chunk-XKGSTUQO.js";
+import "./chunk-DNCKFFNR.js";
+import "./chunk-IQCBK4CE.js";
 import {
   ComponentDatatype_default
-} from "./chunk-CTJCECTX.js";
+} from "./chunk-UJ76JVUZ.js";
 import {
   Cartesian3_default,
   Ellipsoid_default
-} from "./chunk-HIDSEUWS.js";
+} from "./chunk-54GSYZWT.js";
 import {
   Math_default
-} from "./chunk-4HN3N5SE.js";
-import "./chunk-TXYJOVQK.js";
-import "./chunk-2ZI7FZ3Q.js";
+} from "./chunk-A3TYRSRJ.js";
+import "./chunk-XNRYWRVT.js";
+import "./chunk-YK5RU5AO.js";
 import {
   defaultValue_default
-} from "./chunk-GPO47TW4.js";
+} from "./chunk-N73NY3KY.js";
 import {
   DeveloperError_default
-} from "./chunk-6EHT6GS3.js";
+} from "./chunk-WYMW5NZB.js";
 import {
   defined_default
-} from "./chunk-TXOGSFHZ.js";
+} from "./chunk-FMN2NHBU.js";
 
 // packages/engine/Source/Core/WallGeometry.js
 var scratchCartesian3Position1 = new Cartesian3_default();
