@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.111
+ * Version 1.112
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -26,56 +26,56 @@
 import {
   EllipsoidalOccluder_default,
   TerrainEncoding_default
-} from "./chunk-KFCTEEBD.js";
+} from "./chunk-SEFDWMCW.js";
 import {
   createTaskProcessorWorker_default
-} from "./chunk-MMNPUV23.js";
+} from "./chunk-AI3KSNM6.js";
 import {
   WebMercatorProjection_default
-} from "./chunk-BLXANKPB.js";
+} from "./chunk-K6Q5IRBK.js";
 import {
   OrientedBoundingBox_default
-} from "./chunk-P2BTKBVY.js";
-import "./chunk-4EXWKTY2.js";
-import "./chunk-AI2FOC47.js";
+} from "./chunk-QY2WY5XJ.js";
+import "./chunk-I6TVJ6T7.js";
+import "./chunk-MOLGJDJV.js";
 import {
   AxisAlignedBoundingBox_default
-} from "./chunk-5HUDPV54.js";
-import "./chunk-R5NOUYKW.js";
-import "./chunk-PNAD2XAN.js";
+} from "./chunk-FGUP2QEP.js";
+import "./chunk-HEROVJML.js";
+import "./chunk-4EYB62WJ.js";
 import {
   BoundingSphere_default,
   Transforms_default
-} from "./chunk-XKGSTUQO.js";
-import "./chunk-DNCKFFNR.js";
+} from "./chunk-D4YHO4NZ.js";
+import "./chunk-HSW63JN4.js";
 import {
   Cartesian2_default,
   Matrix4_default,
   Rectangle_default
-} from "./chunk-IQCBK4CE.js";
-import "./chunk-UJ76JVUZ.js";
+} from "./chunk-RSWBNJPT.js";
+import "./chunk-Z6LPXA7S.js";
 import {
   Cartesian3_default,
   Ellipsoid_default
-} from "./chunk-54GSYZWT.js";
+} from "./chunk-PHQVHDVI.js";
 import {
   Math_default
-} from "./chunk-A3TYRSRJ.js";
-import "./chunk-XNRYWRVT.js";
+} from "./chunk-IZED7ODV.js";
+import "./chunk-VNRUVNIK.js";
 import {
   RuntimeError_default
-} from "./chunk-YK5RU5AO.js";
+} from "./chunk-66CXKODF.js";
 import {
   defaultValue_default
-} from "./chunk-N73NY3KY.js";
+} from "./chunk-C53JYYKX.js";
 import {
   DeveloperError_default
-} from "./chunk-WYMW5NZB.js";
+} from "./chunk-7FEGZO3D.js";
 import {
   __commonJS,
   __toESM,
   defined_default
-} from "./chunk-FMN2NHBU.js";
+} from "./chunk-YS4KPNLC.js";
 
 // node_modules/lerc/LercDecode.js
 var require_LercDecode = __commonJS({

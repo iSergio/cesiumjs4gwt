@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.111
+ * Version 1.112
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -25,64 +25,64 @@
 
 import {
   CorridorGeometryLibrary_default
-} from "./chunk-4MPXTOW6.js";
+} from "./chunk-ZGMOBRTG.js";
 import {
   CornerType_default
-} from "./chunk-VIAGIVGP.js";
-import "./chunk-2GWOHAWL.js";
-import "./chunk-4JETNOH2.js";
-import "./chunk-LID3UUML.js";
+} from "./chunk-D325WRAY.js";
+import "./chunk-7ONRI7T4.js";
+import "./chunk-3FCUUN6M.js";
+import "./chunk-LSGUCCKJ.js";
 import {
   GeometryOffsetAttribute_default
-} from "./chunk-ZERWARDV.js";
-import "./chunk-AI2FOC47.js";
-import "./chunk-5HUDPV54.js";
+} from "./chunk-W7F5VTH6.js";
+import "./chunk-MOLGJDJV.js";
+import "./chunk-FGUP2QEP.js";
 import {
   PolygonPipeline_default
-} from "./chunk-I5XKU3UZ.js";
+} from "./chunk-ZVUAJKAL.js";
 import {
   arrayRemoveDuplicates_default
-} from "./chunk-E5HIGWSZ.js";
-import "./chunk-IDAL54EF.js";
-import "./chunk-R5NOUYKW.js";
-import "./chunk-PNAD2XAN.js";
+} from "./chunk-DTNN3ODA.js";
+import "./chunk-6PWSSCRA.js";
+import "./chunk-HEROVJML.js";
+import "./chunk-4EYB62WJ.js";
 import {
   IndexDatatype_default
-} from "./chunk-CKOGHQ6J.js";
+} from "./chunk-J3U6Z5YQ.js";
 import {
   GeometryAttributes_default
-} from "./chunk-EH2PEDWL.js";
+} from "./chunk-SJDXMQSP.js";
 import {
   GeometryAttribute_default,
   Geometry_default,
   PrimitiveType_default
-} from "./chunk-3R5RPSYS.js";
+} from "./chunk-OTBRPBCC.js";
 import {
   BoundingSphere_default
-} from "./chunk-XKGSTUQO.js";
-import "./chunk-DNCKFFNR.js";
-import "./chunk-IQCBK4CE.js";
+} from "./chunk-D4YHO4NZ.js";
+import "./chunk-HSW63JN4.js";
+import "./chunk-RSWBNJPT.js";
 import {
   ComponentDatatype_default
-} from "./chunk-UJ76JVUZ.js";
+} from "./chunk-Z6LPXA7S.js";
 import {
   Cartesian3_default,
   Ellipsoid_default
-} from "./chunk-54GSYZWT.js";
+} from "./chunk-PHQVHDVI.js";
 import {
   Math_default
-} from "./chunk-A3TYRSRJ.js";
-import "./chunk-XNRYWRVT.js";
-import "./chunk-YK5RU5AO.js";
+} from "./chunk-IZED7ODV.js";
+import "./chunk-VNRUVNIK.js";
+import "./chunk-66CXKODF.js";
 import {
   defaultValue_default
-} from "./chunk-N73NY3KY.js";
+} from "./chunk-C53JYYKX.js";
 import {
   Check_default
-} from "./chunk-WYMW5NZB.js";
+} from "./chunk-7FEGZO3D.js";
 import {
   defined_default
-} from "./chunk-FMN2NHBU.js";
+} from "./chunk-YS4KPNLC.js";
 
 // packages/engine/Source/Core/CorridorOutlineGeometry.js
 var cartesian1 = new Cartesian3_default();

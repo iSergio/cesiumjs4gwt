@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.111
+ * Version 1.112
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -26,50 +26,50 @@
 import {
   EllipsoidalOccluder_default,
   TerrainEncoding_default
-} from "./chunk-KFCTEEBD.js";
+} from "./chunk-SEFDWMCW.js";
 import {
   createTaskProcessorWorker_default
-} from "./chunk-MMNPUV23.js";
+} from "./chunk-AI3KSNM6.js";
 import {
   OrientedBoundingBox_default
-} from "./chunk-P2BTKBVY.js";
+} from "./chunk-QY2WY5XJ.js";
 import {
   AttributeCompression_default
-} from "./chunk-4EXWKTY2.js";
-import "./chunk-AI2FOC47.js";
-import "./chunk-5HUDPV54.js";
-import "./chunk-R5NOUYKW.js";
-import "./chunk-PNAD2XAN.js";
+} from "./chunk-I6TVJ6T7.js";
+import "./chunk-MOLGJDJV.js";
+import "./chunk-FGUP2QEP.js";
+import "./chunk-HEROVJML.js";
+import "./chunk-4EYB62WJ.js";
 import {
   IndexDatatype_default
-} from "./chunk-CKOGHQ6J.js";
+} from "./chunk-J3U6Z5YQ.js";
 import {
   BoundingSphere_default
-} from "./chunk-XKGSTUQO.js";
-import "./chunk-DNCKFFNR.js";
+} from "./chunk-D4YHO4NZ.js";
+import "./chunk-HSW63JN4.js";
 import {
   Cartesian2_default,
   Rectangle_default
-} from "./chunk-IQCBK4CE.js";
-import "./chunk-UJ76JVUZ.js";
+} from "./chunk-RSWBNJPT.js";
+import "./chunk-Z6LPXA7S.js";
 import {
   Cartesian3_default,
   Cartographic_default,
   Ellipsoid_default
-} from "./chunk-54GSYZWT.js";
+} from "./chunk-PHQVHDVI.js";
 import {
   Math_default
-} from "./chunk-A3TYRSRJ.js";
-import "./chunk-XNRYWRVT.js";
-import "./chunk-YK5RU5AO.js";
-import "./chunk-N73NY3KY.js";
+} from "./chunk-IZED7ODV.js";
+import "./chunk-VNRUVNIK.js";
+import "./chunk-66CXKODF.js";
+import "./chunk-C53JYYKX.js";
 import {
   Check_default,
   DeveloperError_default
-} from "./chunk-WYMW5NZB.js";
+} from "./chunk-7FEGZO3D.js";
 import {
   defined_default
-} from "./chunk-FMN2NHBU.js";
+} from "./chunk-YS4KPNLC.js";
 
 // packages/engine/Source/Core/Intersections2D.js
 var Intersections2D = {};
