@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.111
+ * Version 1.112
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -25,68 +25,68 @@
 
 import {
   WebMercatorProjection_default
-} from "./chunk-BLXANKPB.js";
+} from "./chunk-K6Q5IRBK.js";
 import {
   ArcType_default
-} from "./chunk-DHO4HQHW.js";
+} from "./chunk-235MRXLH.js";
 import {
   EncodedCartesian3_default
-} from "./chunk-EEL3YC6V.js";
+} from "./chunk-VOAZN4IP.js";
 import {
   EllipsoidGeodesic_default
-} from "./chunk-LID3UUML.js";
+} from "./chunk-LSGUCCKJ.js";
 import {
   arrayRemoveDuplicates_default
-} from "./chunk-E5HIGWSZ.js";
+} from "./chunk-DTNN3ODA.js";
 import {
   EllipsoidRhumbLine_default
-} from "./chunk-IDAL54EF.js";
+} from "./chunk-6PWSSCRA.js";
 import {
   IntersectionTests_default
-} from "./chunk-R5NOUYKW.js";
+} from "./chunk-HEROVJML.js";
 import {
   Plane_default
-} from "./chunk-PNAD2XAN.js";
+} from "./chunk-4EYB62WJ.js";
 import {
   GeometryAttribute_default,
   Geometry_default
-} from "./chunk-3R5RPSYS.js";
+} from "./chunk-OTBRPBCC.js";
 import {
   BoundingSphere_default,
   GeographicProjection_default,
   Quaternion_default,
   Resource_default,
   buildModuleUrl_default
-} from "./chunk-XKGSTUQO.js";
-import "./chunk-DNCKFFNR.js";
+} from "./chunk-D4YHO4NZ.js";
+import "./chunk-HSW63JN4.js";
 import {
   Cartesian2_default,
   Rectangle_default
-} from "./chunk-IQCBK4CE.js";
+} from "./chunk-RSWBNJPT.js";
 import {
   ComponentDatatype_default
-} from "./chunk-UJ76JVUZ.js";
+} from "./chunk-Z6LPXA7S.js";
 import {
   Cartesian3_default,
   Cartographic_default,
   Ellipsoid_default,
   Matrix3_default
-} from "./chunk-54GSYZWT.js";
+} from "./chunk-PHQVHDVI.js";
 import {
   Math_default
-} from "./chunk-A3TYRSRJ.js";
-import "./chunk-XNRYWRVT.js";
-import "./chunk-YK5RU5AO.js";
+} from "./chunk-IZED7ODV.js";
+import "./chunk-VNRUVNIK.js";
+import "./chunk-66CXKODF.js";
 import {
   defaultValue_default
-} from "./chunk-N73NY3KY.js";
+} from "./chunk-C53JYYKX.js";
 import {
   Check_default,
   DeveloperError_default
-} from "./chunk-WYMW5NZB.js";
+} from "./chunk-7FEGZO3D.js";
 import {
   defined_default
-} from "./chunk-FMN2NHBU.js";
+} from "./chunk-YS4KPNLC.js";
 
 // packages/engine/Source/Core/GeographicTilingScheme.js
 function GeographicTilingScheme(options) {

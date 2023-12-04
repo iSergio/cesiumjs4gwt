@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.111
+ * Version 1.112
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -25,25 +25,25 @@
 
 import {
   createTaskProcessorWorker_default
-} from "./chunk-MMNPUV23.js";
+} from "./chunk-AI3KSNM6.js";
 import {
   WebGLConstants_default
-} from "./chunk-XNRYWRVT.js";
+} from "./chunk-VNRUVNIK.js";
 import {
   RuntimeError_default
-} from "./chunk-YK5RU5AO.js";
+} from "./chunk-66CXKODF.js";
 import {
   defaultValue_default
-} from "./chunk-N73NY3KY.js";
+} from "./chunk-C53JYYKX.js";
 import {
   Check_default
-} from "./chunk-WYMW5NZB.js";
+} from "./chunk-7FEGZO3D.js";
 import {
   __commonJS,
   __require,
   __toESM,
   defined_default
-} from "./chunk-FMN2NHBU.js";
+} from "./chunk-YS4KPNLC.js";
 
 // packages/engine/Source/ThirdParty/Workers/basis_transcoder.js
 var require_basis_transcoder = __commonJS({
@@ -2011,9 +2011,9 @@ var require_basis_transcoder = __commonJS({
           if (typeof globalThis === "object") {
             return globalThis;
           }
-          return function() {
+          return (/* @__PURE__ */ function() {
             return Function;
-          }()("return this")();
+          }())("return this")();
         }
         function __emval_get_global(name) {
           if (name === 0) {

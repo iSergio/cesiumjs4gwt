@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.111
+ * Version 1.112
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -27,41 +27,41 @@ import {
   FrustumGeometry_default,
   OrthographicFrustum_default,
   PerspectiveFrustum_default
-} from "./chunk-N3OQDJDV.js";
-import "./chunk-N7FIYNQV.js";
-import "./chunk-PNAD2XAN.js";
+} from "./chunk-N7TYCDTR.js";
+import "./chunk-ZTYE74E2.js";
+import "./chunk-4EYB62WJ.js";
 import {
   GeometryAttributes_default
-} from "./chunk-EH2PEDWL.js";
+} from "./chunk-SJDXMQSP.js";
 import {
   GeometryAttribute_default,
   Geometry_default,
   PrimitiveType_default
-} from "./chunk-3R5RPSYS.js";
+} from "./chunk-OTBRPBCC.js";
 import {
   BoundingSphere_default,
   Quaternion_default
-} from "./chunk-XKGSTUQO.js";
-import "./chunk-DNCKFFNR.js";
-import "./chunk-IQCBK4CE.js";
+} from "./chunk-D4YHO4NZ.js";
+import "./chunk-HSW63JN4.js";
+import "./chunk-RSWBNJPT.js";
 import {
   ComponentDatatype_default
-} from "./chunk-UJ76JVUZ.js";
+} from "./chunk-Z6LPXA7S.js";
 import {
   Cartesian3_default
-} from "./chunk-54GSYZWT.js";
-import "./chunk-A3TYRSRJ.js";
-import "./chunk-XNRYWRVT.js";
-import "./chunk-YK5RU5AO.js";
+} from "./chunk-PHQVHDVI.js";
+import "./chunk-IZED7ODV.js";
+import "./chunk-VNRUVNIK.js";
+import "./chunk-66CXKODF.js";
 import {
   defaultValue_default
-} from "./chunk-N73NY3KY.js";
+} from "./chunk-C53JYYKX.js";
 import {
   Check_default
-} from "./chunk-WYMW5NZB.js";
+} from "./chunk-7FEGZO3D.js";
 import {
   defined_default
-} from "./chunk-FMN2NHBU.js";
+} from "./chunk-YS4KPNLC.js";
 
 // packages/engine/Source/Core/FrustumOutlineGeometry.js
 var PERSPECTIVE = 0;
