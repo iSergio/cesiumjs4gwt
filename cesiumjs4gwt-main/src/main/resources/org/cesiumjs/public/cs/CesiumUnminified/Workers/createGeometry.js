@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.111
+ * Version 1.112
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -25,34 +25,34 @@
 
 import {
   PrimitivePipeline_default
-} from "./chunk-CZFGXAMG.js";
+} from "./chunk-R22RQAAM.js";
 import {
   createTaskProcessorWorker_default
-} from "./chunk-MMNPUV23.js";
-import "./chunk-BLXANKPB.js";
-import "./chunk-TIEL2RYB.js";
-import "./chunk-4EXWKTY2.js";
-import "./chunk-EEL3YC6V.js";
-import "./chunk-R5NOUYKW.js";
-import "./chunk-PNAD2XAN.js";
-import "./chunk-CKOGHQ6J.js";
-import "./chunk-EH2PEDWL.js";
-import "./chunk-3R5RPSYS.js";
-import "./chunk-XKGSTUQO.js";
-import "./chunk-DNCKFFNR.js";
-import "./chunk-IQCBK4CE.js";
-import "./chunk-UJ76JVUZ.js";
-import "./chunk-54GSYZWT.js";
-import "./chunk-A3TYRSRJ.js";
-import "./chunk-XNRYWRVT.js";
-import "./chunk-YK5RU5AO.js";
-import "./chunk-N73NY3KY.js";
-import "./chunk-WYMW5NZB.js";
+} from "./chunk-AI3KSNM6.js";
+import "./chunk-K6Q5IRBK.js";
+import "./chunk-36ESDRIZ.js";
+import "./chunk-I6TVJ6T7.js";
+import "./chunk-VOAZN4IP.js";
+import "./chunk-HEROVJML.js";
+import "./chunk-4EYB62WJ.js";
+import "./chunk-J3U6Z5YQ.js";
+import "./chunk-SJDXMQSP.js";
+import "./chunk-OTBRPBCC.js";
+import "./chunk-D4YHO4NZ.js";
+import "./chunk-HSW63JN4.js";
+import "./chunk-RSWBNJPT.js";
+import "./chunk-Z6LPXA7S.js";
+import "./chunk-PHQVHDVI.js";
+import "./chunk-IZED7ODV.js";
+import "./chunk-VNRUVNIK.js";
+import "./chunk-66CXKODF.js";
+import "./chunk-C53JYYKX.js";
+import "./chunk-7FEGZO3D.js";
 import {
   __glob,
   __require,
   defined_default
-} from "./chunk-FMN2NHBU.js";
+} from "./chunk-YS4KPNLC.js";
 
 // import("./**/*.js") in packages/engine/Source/Workers/createGeometry.js
 var globImport_js = __glob({
