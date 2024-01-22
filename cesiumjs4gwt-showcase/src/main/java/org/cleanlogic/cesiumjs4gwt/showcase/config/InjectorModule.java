@@ -133,8 +133,9 @@ public class InjectorModule extends AbstractGinModule {
         bind(I3S3DObjectLayer.class).asEagerSingleton();
         bind(I3SFeaturePicking.class).asEagerSingleton();
         bind(AerometrexSanFrancisco.class).asEagerSingleton();
-
         bind(GooglePhotorealistic3DTiles.class).asEagerSingleton();
         bind(GooglePhotorealistic3DTilesWithBuildingInsert.class).asEagerSingleton();
+
+        bind(Tiles3DVerticalExaggeration.class).asEagerSingleton();
     }
 }

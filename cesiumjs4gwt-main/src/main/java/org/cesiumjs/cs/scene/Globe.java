@@ -197,21 +197,27 @@ public class Globe {
      */
     @JsProperty
     public boolean showWaterEffect;
+
     /**
+     * @deprecated deprecated in CesiumJS 1.113. They will be removed in 1.116. Use Scene.verticalExaggeration and Scene.verticalExaggerationRelativeHeight instead
      * A scalar used to exaggerate the terrain. Defaults to 1.0 (no exaggeration). A value of 2.0 scales the
      * terrain by 2x. A value of 0.0 makes the terrain completely flat. Note that terrain exaggeration will not modify
      * any other primitive as they are positioned relative to the ellipsoid.
      * Default: 1.0
      */
+    @Deprecated
     @JsProperty
     public Number terrainExaggeration;
+
     /**
+     * @deprecated deprecated in CesiumJS 1.113. They will be removed in 1.116. Use Scene.verticalExaggeration and Scene.verticalExaggerationRelativeHeight instead
      * The height from which terrain is exaggerated. Defaults to 0.0 (scaled relative to ellipsoid surface).
      * Terrain that is above this height will scale upwards and terrain that is below this height will scale downwards.
      * Note that terrain exaggeration will not modify any other primitive as they are positioned relative to the ellipsoid.
      * If Globe#terrainExaggeration is 1.0 this value will have no effect.
      * Default: 0.0
      */
+    @Deprecated
     @JsProperty
     public Number terrainExaggerationRelativeHeight;
     /**

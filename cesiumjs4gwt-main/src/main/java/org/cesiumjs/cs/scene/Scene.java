@@ -335,6 +335,21 @@ public class Scene {
      */
     @JsProperty
     public boolean useWebVR;
+
+    /**
+     * The vertical exaggeration of the scene. When set to 1.0, no exaggeration is applied.
+     * Default: 1.0
+     */
+    @JsProperty
+    public double verticalExaggeration;
+
+    /**
+     * The reference height for vertical exaggeration of the scene. When set to 0.0, the exaggeration is applied relative to the ellipsoid surface.
+     * Default: 0.0
+     */
+    @JsProperty
+    public double verticalExaggerationRelativeHeight;
+
     /**
      * Whether or not to use high dynamic range rendering. Default: true
      */
