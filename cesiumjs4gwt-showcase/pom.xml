@@ -6,7 +6,7 @@
     <parent>
         <artifactId>cesiumjs4gwt</artifactId>
         <groupId>org.cesiumjs</groupId>
-        <version>1.113.0</version>
+        <version>1.114.0</version>
     </parent>
 
     <name>CesiumJS GWT Showcase</name>
@@ -103,18 +103,18 @@
         <dependency>
             <groupId>com.google.inject</groupId>
             <artifactId>guice</artifactId>
-            <version>3.0</version>
+            <version>${guice.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.google.inject.extensions</groupId>
             <artifactId>guice-assistedinject</artifactId>
-            <version>3.0</version>
+            <version>${guice.version}</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
-            <groupId>com.google.gwt</groupId>
+            <groupId>org.gwtproject</groupId>
             <artifactId>gwt-user</artifactId>
             <scope>compile</scope>
         </dependency>
