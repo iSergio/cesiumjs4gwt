@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.114
+ * Version 1.115
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -25,34 +25,39 @@
 
 import {
   PrimitivePipeline_default
-} from "./chunk-UAEW6HKG.js";
+} from "./chunk-Y2ME2IJV.js";
 import {
   createTaskProcessorWorker_default
-} from "./chunk-ODW7WYM4.js";
-import "./chunk-DTAIXKTO.js";
-import "./chunk-LZGHD6NY.js";
-import "./chunk-R5X4OQT4.js";
-import "./chunk-WBQCVXR3.js";
-import "./chunk-VRGFV2UO.js";
-import "./chunk-XWXM2O2R.js";
-import "./chunk-S6SKF6DT.js";
-import "./chunk-VK3EJHWI.js";
-import "./chunk-JY5YEZFA.js";
-import "./chunk-F6SE42BK.js";
-import "./chunk-WZU2YLWG.js";
-import "./chunk-QZAD5O7I.js";
-import "./chunk-GEJTYLCO.js";
-import "./chunk-72SANQJV.js";
-import "./chunk-RV7ZYPFT.js";
-import "./chunk-6HZQPRUS.js";
-import "./chunk-JXDC723O.js";
-import "./chunk-5M3U6ZMA.js";
-import "./chunk-S4MAZ3SS.js";
+} from "./chunk-3VAZEH7M.js";
+import "./chunk-2UPKWTMJ.js";
+import "./chunk-EG6PTBY2.js";
+import "./chunk-Z3TIFFGF.js";
+import "./chunk-ZT7KWISZ.js";
+import "./chunk-2FRVPMCS.js";
+import "./chunk-Y5UQJLYE.js";
+import "./chunk-LPR3YNP2.js";
+import "./chunk-4H7PY4U5.js";
+import "./chunk-7TC63SJW.js";
+import "./chunk-FJKNFAKQ.js";
+import "./chunk-TTUZP4BO.js";
+import "./chunk-BG4UCVXN.js";
+import "./chunk-YJEBABKH.js";
+import "./chunk-PPH7OFP3.js";
+import "./chunk-OGXZVPPM.js";
+import "./chunk-5QULIR53.js";
+import "./chunk-SOWMRMWA.js";
+import "./chunk-STW2DGFI.js";
+import {
+  defaultValue_default
+} from "./chunk-BBWDMCVU.js";
+import {
+  DeveloperError_default
+} from "./chunk-XGI5BXZY.js";
 import {
   __glob,
   __require,
   defined_default
-} from "./chunk-UGK3FCDY.js";
+} from "./chunk-YWTJ2B4B.js";
 
 // import("./**/*.js") in packages/engine/Source/Workers/createGeometry.js
 var globImport_js = __glob({
@@ -108,17 +113,28 @@ var globImport_js = __glob({
 
 // packages/engine/Source/Workers/createGeometry.js
 var moduleCache = {};
-async function getModule(moduleName) {
-  let module = moduleCache[moduleName];
-  if (!defined_default(module)) {
-    if (typeof exports === "object") {
-      moduleCache[module] = module = __require(`Workers/${moduleName}`);
-    } else {
-      const result = await globImport_js(`./${moduleName}.js`);
-      module = result.default;
-      moduleCache[module] = module;
-    }
+async function getModule(moduleName, modulePath) {
+  let module = defaultValue_default(moduleCache[modulePath] ?? moduleCache[moduleName]);
+  if (defined_default(module)) {
+    return module;
   }
+  if (defined_default(modulePath)) {
+    if (typeof exports === "object") {
+      module = __require(modulePath);
+    } else {
+      const result = await import(modulePath);
+      module = result.default;
+    }
+    moduleCache[modulePath] = module;
+    return module;
+  }
+  if (typeof exports === "object") {
+    module = __require(`Workers/${moduleName}`);
+  } else {
+    const result = defined_default(modulePath) ? await import(modulePath) : await globImport_js(`./${moduleName}.js`);
+    module = result.default;
+  }
+  moduleCache[moduleName] = module;
   return module;
 }
 async function createGeometry(parameters, transferableObjects) {
@@ -129,10 +145,15 @@ async function createGeometry(parameters, transferableObjects) {
     const task = subTasks[i];
     const geometry = task.geometry;
     const moduleName = task.moduleName;
-    if (defined_default(moduleName)) {
-      resultsOrPromises[i] = getModule(moduleName).then(
-        (createFunction) => createFunction(geometry, task.offset)
-      );
+    const modulePath = task.modulePath;
+    if (defined_default(moduleName) && defined_default(modulePath)) {
+      throw new DeveloperError_default("Must only set moduleName or modulePath");
+    }
+    if (defined_default(moduleName) || defined_default(modulePath)) {
+      resultsOrPromises[i] = getModule(
+        moduleName,
+        modulePath
+      ).then((createFunction) => createFunction(geometry, task.offset));
     } else {
       resultsOrPromises[i] = geometry;
     }
