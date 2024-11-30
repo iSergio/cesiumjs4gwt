@@ -994,6 +994,24 @@ public class Scene {
     public native Cartesian3 pickPosition(Cartesian2 windowPosition, Cartesian3 result);
 
     /**
+     * Returns a VoxelCell for the voxel sample rendered at a particular window coordinate, or undefined if no voxel is rendered at that position.
+     * @param windowPosition Window coordinates to perform picking on.
+     * @return Information about the voxel cell rendered at the picked position.
+     */
+    @JsMethod
+    public native VoxelCell pickVoxel(Cartesian2 windowPosition);
+
+    /**
+     * Returns a VoxelCell for the voxel sample rendered at a particular window coordinate, or undefined if no voxel is rendered at that position.
+     * @param windowPosition Window coordinates to perform picking on.
+     * @param width Width of the pick rectangle.
+     * @param height Height of the pick rectangle.
+     * @return Information about the voxel cell rendered at the picked position.
+     */
+    @JsMethod
+    public native VoxelCell pickVoxel(Cartesian2 windowPosition, int width, int height);
+
+    /**
      * Requests a new rendered frame when Scene#requestRenderMode is set to true.
      * The render rate will not exceed the
      * {@link org.cesiumjs.cs.widgets.CesiumWidget#targetFrameRate}.
