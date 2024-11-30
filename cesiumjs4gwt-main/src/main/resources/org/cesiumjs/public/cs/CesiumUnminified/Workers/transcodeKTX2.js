@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.116
+ * Version 1.117
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -25,25 +25,25 @@
 
 import {
   createTaskProcessorWorker_default
-} from "./chunk-RMOEYCZW.js";
+} from "./chunk-IBXGK4WV.js";
 import {
   WebGLConstants_default
-} from "./chunk-I37B3MZ2.js";
+} from "./chunk-PEABJLCK.js";
 import {
   RuntimeError_default
-} from "./chunk-N4KXMWQU.js";
+} from "./chunk-WFICTTOE.js";
 import {
   defaultValue_default
-} from "./chunk-TZORKRNK.js";
+} from "./chunk-UCPPWV64.js";
 import {
   Check_default
-} from "./chunk-SS4ESNE3.js";
+} from "./chunk-U4IMCOF5.js";
 import {
   __commonJS,
   __require,
   __toESM,
   defined_default
-} from "./chunk-YDVSBWEO.js";
+} from "./chunk-BDUJXBVF.js";
 
 // packages/engine/Source/ThirdParty/Workers/basis_transcoder.js
 var require_basis_transcoder = __commonJS({
@@ -2519,7 +2519,7 @@ PixelFormat.validate = function(pixelFormat) {
   return pixelFormat === PixelFormat.DEPTH_COMPONENT || pixelFormat === PixelFormat.DEPTH_STENCIL || pixelFormat === PixelFormat.ALPHA || pixelFormat === PixelFormat.RED || pixelFormat === PixelFormat.RG || pixelFormat === PixelFormat.RGB || pixelFormat === PixelFormat.RGBA || pixelFormat === PixelFormat.LUMINANCE || pixelFormat === PixelFormat.LUMINANCE_ALPHA || pixelFormat === PixelFormat.RGB_DXT1 || pixelFormat === PixelFormat.RGBA_DXT1 || pixelFormat === PixelFormat.RGBA_DXT3 || pixelFormat === PixelFormat.RGBA_DXT5 || pixelFormat === PixelFormat.RGB_PVRTC_4BPPV1 || pixelFormat === PixelFormat.RGB_PVRTC_2BPPV1 || pixelFormat === PixelFormat.RGBA_PVRTC_4BPPV1 || pixelFormat === PixelFormat.RGBA_PVRTC_2BPPV1 || pixelFormat === PixelFormat.RGBA_ASTC || pixelFormat === PixelFormat.RGB_ETC1 || pixelFormat === PixelFormat.RGB8_ETC2 || pixelFormat === PixelFormat.RGBA8_ETC2_EAC || pixelFormat === PixelFormat.RGBA_BC7;
 };
 PixelFormat.isColorFormat = function(pixelFormat) {
-  return pixelFormat === PixelFormat.ALPHA || pixelFormat === PixelFormat.RGB || pixelFormat === PixelFormat.RGBA || pixelFormat === PixelFormat.LUMINANCE || pixelFormat === PixelFormat.LUMINANCE_ALPHA;
+  return pixelFormat === PixelFormat.RED || pixelFormat === PixelFormat.ALPHA || pixelFormat === PixelFormat.RGB || pixelFormat === PixelFormat.RGBA || pixelFormat === PixelFormat.LUMINANCE || pixelFormat === PixelFormat.LUMINANCE_ALPHA;
 };
 PixelFormat.isDepthFormat = function(pixelFormat) {
   return pixelFormat === PixelFormat.DEPTH_COMPONENT || pixelFormat === PixelFormat.DEPTH_STENCIL;
