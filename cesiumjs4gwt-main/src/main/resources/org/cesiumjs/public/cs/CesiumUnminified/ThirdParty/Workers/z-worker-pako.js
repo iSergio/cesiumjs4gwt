@@ -19,8 +19,7 @@
   const z = [];
   for (let e2 = 0; 256 > e2; e2++) {
     let t2 = e2;
-    for (let e3 = 0; 8 > e3; e3++)
-      1 & t2 ? t2 = t2 >>> 1 ^ 3988292384 : t2 >>>= 1;
+    for (let e3 = 0; 8 > e3; e3++) 1 & t2 ? t2 = t2 >>> 1 ^ 3988292384 : t2 >>>= 1;
     z[e2] = t2;
   }
   class D {
@@ -29,8 +28,7 @@
     }
     append(e2) {
       let t2 = 0 | this.crc;
-      for (let n2 = 0, s2 = 0 | e2.length; s2 > n2; n2++)
-        t2 = t2 >>> 8 ^ z[255 & (t2 ^ e2[n2])];
+      for (let n2 = 0, s2 = 0 | e2.length; s2 > n2; n2++) t2 = t2 >>> 8 ^ z[255 & (t2 ^ e2[n2])];
       this.crc = t2;
     }
     get() {
@@ -50,41 +48,33 @@
     }
   }
   const I = { concat(e2, t2) {
-    if (0 === e2.length || 0 === t2.length)
-      return e2.concat(t2);
+    if (0 === e2.length || 0 === t2.length) return e2.concat(t2);
     const n2 = e2[e2.length - 1], s2 = I.getPartial(n2);
     return 32 === s2 ? e2.concat(t2) : I._shiftRight(t2, s2, 0 | n2, e2.slice(0, e2.length - 1));
   }, bitLength(e2) {
     const t2 = e2.length;
-    if (0 === t2)
-      return 0;
+    if (0 === t2) return 0;
     const n2 = e2[t2 - 1];
     return 32 * (t2 - 1) + I.getPartial(n2);
   }, clamp(e2, t2) {
-    if (32 * e2.length < t2)
-      return e2;
+    if (32 * e2.length < t2) return e2;
     const n2 = (e2 = e2.slice(0, s.ceil(t2 / 32))).length;
     return t2 &= 31, n2 > 0 && t2 && (e2[n2 - 1] = I.partial(t2, e2[n2 - 1] & 2147483648 >> t2 - 1, 1)), e2;
   }, partial: (e2, t2, n2) => 32 === e2 ? t2 : (n2 ? 0 | t2 : t2 << 32 - e2) + 1099511627776 * e2, getPartial: (e2) => s.round(e2 / 1099511627776) || 32, _shiftRight(e2, t2, n2, s2) {
-    for (void 0 === s2 && (s2 = []); t2 >= 32; t2 -= 32)
-      s2.push(n2), n2 = 0;
-    if (0 === t2)
-      return s2.concat(e2);
-    for (let r3 = 0; r3 < e2.length; r3++)
-      s2.push(n2 | e2[r3] >>> t2), n2 = e2[r3] << 32 - t2;
+    for (void 0 === s2 && (s2 = []); t2 >= 32; t2 -= 32) s2.push(n2), n2 = 0;
+    if (0 === t2) return s2.concat(e2);
+    for (let r3 = 0; r3 < e2.length; r3++) s2.push(n2 | e2[r3] >>> t2), n2 = e2[r3] << 32 - t2;
     const r2 = e2.length ? e2[e2.length - 1] : 0, a2 = I.getPartial(r2);
     return s2.push(I.partial(t2 + a2 & 31, t2 + a2 > 32 ? n2 : s2.pop(), 1)), s2;
   } }, A = { bytes: { fromBits(e2) {
     const t2 = I.bitLength(e2) / 8, n2 = new a(t2);
     let s2;
-    for (let r2 = 0; t2 > r2; r2++)
-      3 & r2 || (s2 = e2[r2 / 4]), n2[r2] = s2 >>> 24, s2 <<= 8;
+    for (let r2 = 0; t2 > r2; r2++) 3 & r2 || (s2 = e2[r2 / 4]), n2[r2] = s2 >>> 24, s2 <<= 8;
     return n2;
   }, toBits(e2) {
     const t2 = [];
     let n2, s2 = 0;
-    for (n2 = 0; n2 < e2.length; n2++)
-      s2 = s2 << 8 | e2[n2], 3 & ~n2 || (t2.push(s2), s2 = 0);
+    for (n2 = 0; n2 < e2.length; n2++) s2 = s2 << 8 | e2[n2], 3 & ~n2 || (t2.push(s2), s2 = 0);
     return 3 & n2 && t2.push(I.partial(8 * (3 & n2), s2)), t2;
   } } }, q = class {
     constructor(e2) {
@@ -99,12 +89,10 @@
       const t2 = this;
       "string" == typeof e2 && (e2 = A.utf8String.toBits(e2));
       const n2 = t2._buffer = I.concat(t2._buffer, e2), s2 = t2._length, a2 = t2._length = s2 + I.bitLength(e2);
-      if (a2 > 9007199254740991)
-        throw new r("Cannot hash more than 2^53 - 1 bits");
+      if (a2 > 9007199254740991) throw new r("Cannot hash more than 2^53 - 1 bits");
       const o2 = new i(n2);
       let c2 = 0;
-      for (let e3 = t2.blockSize + s2 - (t2.blockSize + s2 & t2.blockSize - 1); a2 >= e3; e3 += t2.blockSize)
-        t2._block(o2.subarray(16 * c2, 16 * (c2 + 1))), c2 += 1;
+      for (let e3 = t2.blockSize + s2 - (t2.blockSize + s2 & t2.blockSize - 1); a2 >= e3; e3 += t2.blockSize) t2._block(o2.subarray(16 * c2, 16 * (c2 + 1))), c2 += 1;
       return n2.splice(0, 16 * c2), t2;
     }
     finalize() {
@@ -112,10 +100,8 @@
       let t2 = e2._buffer;
       const n2 = e2._h;
       t2 = I.concat(t2, [I.partial(1, 1)]);
-      for (let e3 = t2.length + 2; 15 & e3; e3++)
-        t2.push(0);
-      for (t2.push(s.floor(e2._length / 4294967296)), t2.push(0 | e2._length); t2.length; )
-        e2._block(t2.splice(0, 16));
+      for (let e3 = t2.length + 2; 15 & e3; e3++) t2.push(0);
+      for (t2.push(s.floor(e2._length / 4294967296)), t2.push(0 | e2._length); t2.length; ) e2._block(t2.splice(0, 16));
       return e2.reset(), n2;
     }
     _f(e2, t2, n2, s2) {
@@ -126,8 +112,7 @@
     }
     _block(t2) {
       const n2 = this, r2 = n2._h, a2 = e(80);
-      for (let e2 = 0; 16 > e2; e2++)
-        a2[e2] = t2[e2];
+      for (let e2 = 0; 16 > e2; e2++) a2[e2] = t2[e2];
       let o2 = r2[0], i2 = r2[1], c2 = r2[2], l2 = r2[3], u2 = r2[4];
       for (let e2 = 0; 79 >= e2; e2++) {
         16 > e2 || (a2[e2] = n2._S(1, a2[e2 - 3] ^ a2[e2 - 8] ^ a2[e2 - 14] ^ a2[e2 - 16]));
@@ -148,19 +133,15 @@
     }
     return e2;
   } }, H = { importKey: (e2) => new H.hmacSha1(A.bytes.toBits(e2)), pbkdf2(e2, t2, n2, s2) {
-    if (n2 = n2 || 1e4, 0 > s2 || 0 > n2)
-      throw new r("invalid params to pbkdf2");
+    if (n2 = n2 || 1e4, 0 > s2 || 0 > n2) throw new r("invalid params to pbkdf2");
     const a2 = 1 + (s2 >> 5) << 2;
     let o2, i2, c2, l2, h2;
     const f2 = new ArrayBuffer(a2), p2 = new u(f2);
     let d2 = 0;
     const g2 = I;
     for (t2 = A.bytes.toBits(t2), h2 = 1; (a2 || 1) > d2; h2++) {
-      for (o2 = i2 = e2.encrypt(g2.concat(t2, [h2])), c2 = 1; n2 > c2; c2++)
-        for (i2 = e2.encrypt(i2), l2 = 0; l2 < i2.length; l2++)
-          o2[l2] ^= i2[l2];
-      for (c2 = 0; (a2 || 1) > d2 && c2 < o2.length; c2++)
-        p2.setInt32(d2, o2[c2]), d2 += 4;
+      for (o2 = i2 = e2.encrypt(g2.concat(t2, [h2])), c2 = 1; n2 > c2; c2++) for (i2 = e2.encrypt(i2), l2 = 0; l2 < i2.length; l2++) o2[l2] ^= i2[l2];
+      for (c2 = 0; (a2 || 1) > d2 && c2 < o2.length; c2++) p2.setInt32(d2, o2[c2]), d2 += 4;
     }
     return f2.slice(0, s2 / 8);
   }, hmacSha1: class {
@@ -169,8 +150,7 @@
       t2._baseHash = [new n2(), new n2()];
       const r2 = t2._baseHash[0].blockSize / 32;
       e2.length > r2 && (e2 = new n2().update(e2).finalize());
-      for (let t3 = 0; r2 > t3; t3++)
-        s2[0][t3] = 909522486 ^ e2[t3], s2[1][t3] = 1549556828 ^ e2[t3];
+      for (let t3 = 0; r2 > t3; t3++) s2[0][t3] = 909522486 ^ e2[t3], s2[1][t3] = 1549556828 ^ e2[t3];
       t2._baseHash[0].update(s2[0]), t2._baseHash[1].update(s2[1]), t2._resultHash = new n2(t2._baseHash[0]);
     }
     reset() {
@@ -185,8 +165,7 @@
       return e2.reset(), n2;
     }
     encrypt(e2) {
-      if (this._updated)
-        throw new r("encrypt on already updated hmac called!");
+      if (this._updated) throw new r("encrypt on already updated hmac called!");
       return this.update(e2), this.digest(e2);
     }
   } }, P = typeof p != S && typeof p.getRandomValues == v, B = "Invalid password", K = "Invalid signature", T = "zipjs-abort-check-password";
@@ -199,8 +178,7 @@
       t2._tables = [[[], [], [], [], []], [[], [], [], [], []]], t2._tables[0][0][0] || t2._precompute();
       const n2 = t2._tables[0][4], s2 = t2._tables[1], a2 = e2.length;
       let o2, i2, c2, l2 = 1;
-      if (4 !== a2 && 6 !== a2 && 8 !== a2)
-        throw new r("invalid aes key size");
+      if (4 !== a2 && 6 !== a2 && 8 !== a2) throw new r("invalid aes key size");
       for (t2._key = [i2 = e2.slice(0), c2 = []], o2 = a2; 4 * a2 + 28 > o2; o2++) {
         let e3 = i2[o2 - 1];
         (o2 % a2 == 0 || 8 === a2 && o2 % a2 == 4) && (e3 = n2[e3 >>> 24] << 24 ^ n2[e3 >> 16 & 255] << 16 ^ n2[e3 >> 8 & 255] << 8 ^ n2[255 & e3], o2 % a2 == 0 && (e3 = e3 << 8 ^ e3 >>> 24 ^ l2 << 24, l2 = l2 << 1 ^ 283 * (l2 >> 7))), i2[o2] = i2[o2 - a2] ^ e3;
@@ -219,27 +197,21 @@
     _precompute() {
       const e2 = this._tables[0], t2 = this._tables[1], n2 = e2[4], s2 = t2[4], r2 = [], a2 = [];
       let o2, i2, c2, l2;
-      for (let e3 = 0; 256 > e3; e3++)
-        a2[(r2[e3] = e3 << 1 ^ 283 * (e3 >> 7)) ^ e3] = e3;
+      for (let e3 = 0; 256 > e3; e3++) a2[(r2[e3] = e3 << 1 ^ 283 * (e3 >> 7)) ^ e3] = e3;
       for (let u2 = o2 = 0; !n2[u2]; u2 ^= i2 || 1, o2 = a2[o2] || 1) {
         let a3 = o2 ^ o2 << 1 ^ o2 << 2 ^ o2 << 3 ^ o2 << 4;
         a3 = a3 >> 8 ^ 255 & a3 ^ 99, n2[u2] = a3, s2[a3] = u2, l2 = r2[c2 = r2[i2 = r2[u2]]];
         let h2 = 16843009 * l2 ^ 65537 * c2 ^ 257 * i2 ^ 16843008 * u2, f2 = 257 * r2[a3] ^ 16843008 * a3;
-        for (let n3 = 0; 4 > n3; n3++)
-          e2[n3][u2] = f2 = f2 << 24 ^ f2 >>> 8, t2[n3][a3] = h2 = h2 << 24 ^ h2 >>> 8;
+        for (let n3 = 0; 4 > n3; n3++) e2[n3][u2] = f2 = f2 << 24 ^ f2 >>> 8, t2[n3][a3] = h2 = h2 << 24 ^ h2 >>> 8;
       }
-      for (let n3 = 0; 5 > n3; n3++)
-        e2[n3] = e2[n3].slice(0), t2[n3] = t2[n3].slice(0);
+      for (let n3 = 0; 5 > n3; n3++) e2[n3] = e2[n3].slice(0), t2[n3] = t2[n3].slice(0);
     }
     _crypt(e2, t2) {
-      if (4 !== e2.length)
-        throw new r("invalid aes block size");
+      if (4 !== e2.length) throw new r("invalid aes block size");
       const n2 = this._key[t2], s2 = n2.length / 4 - 2, a2 = [0, 0, 0, 0], o2 = this._tables[t2], i2 = o2[0], c2 = o2[1], l2 = o2[2], u2 = o2[3], h2 = o2[4];
       let f2, p2, d2, g2 = e2[0] ^ n2[0], w2 = e2[t2 ? 3 : 1] ^ n2[1], y2 = e2[2] ^ n2[2], m2 = e2[t2 ? 1 : 3] ^ n2[3], _2 = 4;
-      for (let e3 = 0; s2 > e3; e3++)
-        f2 = i2[g2 >>> 24] ^ c2[w2 >> 16 & 255] ^ l2[y2 >> 8 & 255] ^ u2[255 & m2] ^ n2[_2], p2 = i2[w2 >>> 24] ^ c2[y2 >> 16 & 255] ^ l2[m2 >> 8 & 255] ^ u2[255 & g2] ^ n2[_2 + 1], d2 = i2[y2 >>> 24] ^ c2[m2 >> 16 & 255] ^ l2[g2 >> 8 & 255] ^ u2[255 & w2] ^ n2[_2 + 2], m2 = i2[m2 >>> 24] ^ c2[g2 >> 16 & 255] ^ l2[w2 >> 8 & 255] ^ u2[255 & y2] ^ n2[_2 + 3], _2 += 4, g2 = f2, w2 = p2, y2 = d2;
-      for (let e3 = 0; 4 > e3; e3++)
-        a2[t2 ? 3 & -e3 : e3] = h2[g2 >>> 24] << 24 ^ h2[w2 >> 16 & 255] << 16 ^ h2[y2 >> 8 & 255] << 8 ^ h2[255 & m2] ^ n2[_2++], f2 = g2, g2 = w2, w2 = y2, y2 = m2, m2 = f2;
+      for (let e3 = 0; s2 > e3; e3++) f2 = i2[g2 >>> 24] ^ c2[w2 >> 16 & 255] ^ l2[y2 >> 8 & 255] ^ u2[255 & m2] ^ n2[_2], p2 = i2[w2 >>> 24] ^ c2[y2 >> 16 & 255] ^ l2[m2 >> 8 & 255] ^ u2[255 & g2] ^ n2[_2 + 1], d2 = i2[y2 >>> 24] ^ c2[m2 >> 16 & 255] ^ l2[g2 >> 8 & 255] ^ u2[255 & w2] ^ n2[_2 + 2], m2 = i2[m2 >>> 24] ^ c2[g2 >> 16 & 255] ^ l2[w2 >> 8 & 255] ^ u2[255 & y2] ^ n2[_2 + 3], _2 += 4, g2 = f2, w2 = p2, y2 = d2;
+      for (let e3 = 0; 4 > e3; e3++) a2[t2 ? 3 & -e3 : e3] = h2[g2 >>> 24] << 24 ^ h2[w2 >> 16 & 255] << 16 ^ h2[y2 >> 8 & 255] << 8 ^ h2[255 & m2] ^ n2[_2++], f2 = g2, g2 = w2, w2 = y2, y2 = m2, m2 = f2;
       return a2;
     }
   }, Y = class {
@@ -253,8 +225,7 @@
       return this.calculate(this._prf, e2, this._iv);
     }
     incWord(e2) {
-      if (255 & ~(e2 >> 24))
-        e2 += 1 << 24;
+      if (255 & ~(e2 >> 24)) e2 += 1 << 24;
       else {
         let t2 = e2 >> 16 & 255, n2 = e2 >> 8 & 255, s2 = 255 & e2;
         255 === t2 ? (t2 = 0, 255 === n2 ? (n2 = 0, 255 === s2 ? s2 = 0 : ++s2) : ++n2) : ++t2, e2 = 0, e2 += t2 << 16, e2 += n2 << 8, e2 += s2;
@@ -266,8 +237,7 @@
     }
     calculate(e2, t2, n2) {
       let s2;
-      if (!(s2 = t2.length))
-        return [];
+      if (!(s2 = t2.length)) return [];
       const r2 = I.bitLength(t2);
       for (let r3 = 0; s2 > r3; r3 += 4) {
         this.incCounter(n2);
@@ -286,8 +256,7 @@
         const n3 = this, { password: s3, strength: o3, resolveReady: c2, ready: l2 } = n3;
         s3 ? (await (async (e4, t3, n4, s4) => {
           const a2 = await re(e4, t3, n4, ie(s4, 0, N[t3])), o4 = ie(s4, N[t3]);
-          if (a2[0] != o4[0] || a2[1] != o4[1])
-            throw new r(B);
+          if (a2[0] != o4[0] || a2[1] != o4[1]) throw new r(B);
         })(n3, o3, s3, ie(e3, 0, N[o3] + 2)), e3 = ie(e3, N[o3] + 2), i2 ? t2.error(new r(T)) : c2()) : await l2;
         const u2 = new a(e3.length - L - (e3.length - L) % x);
         t2.enqueue(se(n3, e3, u2, 0, L, true));
@@ -305,9 +274,7 @@
           }
           if (t2) {
             const e4 = ie(ce(J, s3.digest()), 0, L);
-            for (let t3 = 0; L > t3; t3++)
-              if (e4[t3] != l2[t3])
-                throw new r(K);
+            for (let t3 = 0; L > t3; t3++) if (e4[t3] != l2[t3]) throw new r(K);
           }
           e3.enqueue(u2);
         }
@@ -362,16 +329,14 @@
   async function re(n2, s2, r2, o2) {
     n2.password = null;
     const i2 = await (async (e2, t2, n3, s3, r3) => {
-      if (!$)
-        return H.importKey(t2);
+      if (!$) return H.importKey(t2);
       try {
         return await G.importKey("raw", t2, n3, false, r3);
       } catch (e3) {
         return $ = false, H.importKey(t2);
       }
     })(0, r2, U, 0, M), c2 = await (async (e2, t2, n3) => {
-      if (!ee)
-        return H.pbkdf2(t2, e2.salt, W.iterations, n3);
+      if (!ee) return H.pbkdf2(t2, e2.salt, W.iterations, n3);
       try {
         return await G.deriveBits(e2, t2, n3);
       } catch (s3) {
@@ -384,8 +349,7 @@
     return t2 === b ? ((e3) => {
       if (typeof f == S) {
         const t3 = new a((e3 = unescape(encodeURIComponent(e3))).length);
-        for (let n2 = 0; n2 < t3.length; n2++)
-          t3[n2] = e3.charCodeAt(n2);
+        for (let n2 = 0; n2 < t3.length; n2++) t3[n2] = e3.charCodeAt(n2);
         return t3;
       }
       return new f().encode(e3);
@@ -412,8 +376,7 @@
         const n3 = this;
         if (n3.password) {
           const t3 = fe(n3, e3.subarray(0, 12));
-          if (n3.password = null, t3[11] != n3.passwordVerification)
-            throw new r(B);
+          if (n3.password = null, t3[11] != n3.passwordVerification) throw new r(B);
           e3 = e3.subarray(12);
         }
         s2 ? t2.error(new r(T)) : t2.enqueue(fe(n3, e3));
@@ -431,29 +394,25 @@
           n3.password = null;
           const t3 = V(new a(12));
           t3[11] = n3.passwordVerification, s2 = new a(e3.length + t3.length), s2.set(pe(n3, t3), 0), r2 = 12;
-        } else
-          s2 = new a(e3.length), r2 = 0;
+        } else s2 = new a(e3.length), r2 = 0;
         s2.set(pe(n3, e3), r2), t2.enqueue(s2);
       } });
     }
   }
   function fe(e2, t2) {
     const n2 = new a(t2.length);
-    for (let s2 = 0; s2 < t2.length; s2++)
-      n2[s2] = we(e2) ^ t2[s2], ge(e2, n2[s2]);
+    for (let s2 = 0; s2 < t2.length; s2++) n2[s2] = we(e2) ^ t2[s2], ge(e2, n2[s2]);
     return n2;
   }
   function pe(e2, t2) {
     const n2 = new a(t2.length);
-    for (let s2 = 0; s2 < t2.length; s2++)
-      n2[s2] = we(e2) ^ t2[s2], ge(e2, t2[s2]);
+    for (let s2 = 0; s2 < t2.length; s2++) n2[s2] = we(e2) ^ t2[s2], ge(e2, t2[s2]);
     return n2;
   }
   function de(e2, n2) {
     const s2 = [305419896, 591751049, 878082192];
     t.assign(e2, { keys: s2, crcKey0: new D(s2[0]), crcKey2: new D(s2[2]) });
-    for (let t2 = 0; t2 < n2.length; t2++)
-      ge(e2, n2.charCodeAt(t2));
+    for (let t2 = 0; t2 < n2.length; t2++) ge(e2, n2.charCodeAt(t2));
   }
   function ge(e2, t2) {
     let [n2, r2, a2] = e2.keys;
@@ -489,8 +448,7 @@
       o2 && (a2 ? d2 = De(d2, new ue(e2)) : (p2 = new te(e2), d2 = De(d2, p2))), l2 && (d2 = ze(d2, h2, { chunkSize: t2 }, s2, n2)), o2 && !a2 || !i2 || (f2 = new C(), d2 = De(d2, f2)), ke(this, d2, () => {
         if ((!o2 || a2) && i2) {
           const e3 = new u(f2.value.buffer);
-          if (c2 != e3.getUint32(0, false))
-            throw new r(K);
+          if (c2 != e3.getUint32(0, false)) throw new r(K);
         }
       });
     }
@@ -507,8 +465,7 @@
     try {
       e2 = De(e2, new (t2 && s2 ? s2 : r2)(_e, n2));
     } catch (s3) {
-      if (!t2)
-        return e2;
+      if (!t2) return e2;
       try {
         e2 = De(e2, new r2(_e, n2));
       } catch (t3) {
@@ -560,12 +517,11 @@
   async function Te(e2) {
     try {
       const { options: t2, scripts: s2, config: r2 } = e2;
-      if (s2 && s2.length)
-        try {
-          Ke ? importScripts.apply(b, s2) : await Ve(s2);
-        } catch (e3) {
-          Ke = false, await Ve(s2);
-        }
+      if (s2 && s2.length) try {
+        Ke ? importScripts.apply(b, s2) : await Ve(s2);
+      } catch (e3) {
+        Ke = false, await Ve(s2);
+      }
       self.initCodec && self.initCodec(), r2.CompressionStreamNative = self.CompressionStream, r2.DecompressionStreamNative = self.DecompressionStream, self.Deflate && (r2.CompressionStream = new k(self.Deflate)), self.Inflate && (r2.DecompressionStream = new k(self.Inflate));
       const a2 = { highWaterMark: 1 }, o2 = e2.readable || new w({ async pull(e3) {
         const t3 = new h((e4) => Re.set(Be, e4));
@@ -587,22 +543,17 @@
     }
   }
   async function Ve(e2) {
-    for (const t2 of e2)
-      await import(t2);
+    for (const t2 of e2) await import(t2);
   }
   function xe(e2) {
     let { value: t2 } = e2;
-    if (t2)
-      if (t2.length)
-        try {
-          t2 = new a(t2), e2.value = t2.buffer, d(e2, [e2.value]);
-        } catch (t3) {
-          d(e2);
-        }
-      else
-        d(e2);
-    else
+    if (t2) if (t2.length) try {
+      t2 = new a(t2), e2.value = t2.buffer, d(e2, [e2.value]);
+    } catch (t3) {
       d(e2);
+    }
+    else d(e2);
+    else d(e2);
   }
   function Ee(e2 = new r("Unknown error")) {
     const { message: t2, stack: n2, code: s2, name: a2 } = e2;
@@ -619,8 +570,7 @@
             o2.pendingData = new a(t2.length + e3.length);
             const { pendingData: n3 } = o2;
             n3.set(t2, 0), n3.set(e3, t2.length);
-          } else
-            o2.pendingData = new a(e3);
+          } else o2.pendingData = new a(e3);
         });
       }
       append(e3) {

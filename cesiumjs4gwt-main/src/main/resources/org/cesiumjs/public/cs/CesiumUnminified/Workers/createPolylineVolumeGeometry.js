@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.117
+ * Version 1.118
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -25,71 +25,71 @@
 
 import {
   BoundingRectangle_default
-} from "./chunk-QKF7XXEQ.js";
+} from "./chunk-I6CW7ZE5.js";
 import {
   GeometryPipeline_default
-} from "./chunk-PK7TEP3J.js";
-import "./chunk-PS6AEMBR.js";
-import "./chunk-AOFMPKUB.js";
+} from "./chunk-26XJDV3D.js";
+import "./chunk-G7IAO7CW.js";
+import "./chunk-SC3TBKST.js";
 import {
   CornerType_default,
   PolylineVolumeGeometryLibrary_default,
   oneTimeWarning_default
-} from "./chunk-XWML5Y7N.js";
-import "./chunk-ZWPIM77Q.js";
-import "./chunk-2CSEEWHN.js";
+} from "./chunk-A5CSB5ZE.js";
+import "./chunk-PHT53MCH.js";
+import "./chunk-K5F23SZO.js";
 import {
   VertexFormat_default
-} from "./chunk-4KIUON73.js";
-import "./chunk-CE6GTZ4I.js";
-import "./chunk-6HCAQOVK.js";
+} from "./chunk-RRUO4QEK.js";
+import "./chunk-CFBGPZU6.js";
+import "./chunk-PUQR43HZ.js";
 import {
   PolygonPipeline_default,
   WindingOrder_default
-} from "./chunk-RR7EOKGZ.js";
+} from "./chunk-U6MTSO6A.js";
 import {
   arrayRemoveDuplicates_default
-} from "./chunk-V7JB576Q.js";
-import "./chunk-CYAJYEKW.js";
-import "./chunk-G7CJQKKD.js";
-import "./chunk-FOZQIHZK.js";
+} from "./chunk-UYKG3UFK.js";
+import "./chunk-WHDEZSAL.js";
+import "./chunk-2TRB253J.js";
+import "./chunk-3PV5HQ2R.js";
 import {
   IndexDatatype_default
-} from "./chunk-WWP3I7R5.js";
+} from "./chunk-5OK5JFDP.js";
 import {
   GeometryAttributes_default
-} from "./chunk-RL73GOEF.js";
+} from "./chunk-TP4FFUAH.js";
 import {
   GeometryAttribute_default,
   Geometry_default,
   PrimitiveType_default
-} from "./chunk-34DGOKCO.js";
+} from "./chunk-7HLZRYGD.js";
 import {
   BoundingSphere_default
-} from "./chunk-NI2R52QD.js";
-import "./chunk-I5TDPPC4.js";
+} from "./chunk-7PFZ4Z7C.js";
+import "./chunk-GUFV24F4.js";
 import {
   ComponentDatatype_default
-} from "./chunk-TMMOULW3.js";
+} from "./chunk-WOYQB5HM.js";
 import {
   Cartesian2_default,
   Cartesian3_default,
   Ellipsoid_default
-} from "./chunk-C5CE4OG6.js";
+} from "./chunk-GX5LMUGZ.js";
 import {
   Math_default
-} from "./chunk-4PHPQRSH.js";
-import "./chunk-PEABJLCK.js";
-import "./chunk-WFICTTOE.js";
+} from "./chunk-ETC45PHH.js";
+import "./chunk-UICVDDCQ.js";
+import "./chunk-U2LSTOMA.js";
 import {
   defaultValue_default
-} from "./chunk-UCPPWV64.js";
+} from "./chunk-EODIOQ35.js";
 import {
   DeveloperError_default
-} from "./chunk-U4IMCOF5.js";
+} from "./chunk-DIVFF6DK.js";
 import {
   defined_default
-} from "./chunk-BDUJXBVF.js";
+} from "./chunk-IF2OX6R4.js";
 
 // packages/engine/Source/Core/PolylineVolumeGeometry.js
 function computeAttributes(combinedPositions, shape, boundingRectangle, vertexFormat) {

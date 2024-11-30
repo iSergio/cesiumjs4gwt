@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.117
+ * Version 1.118
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -25,18 +25,18 @@
 
 import {
   createTaskProcessorWorker_default
-} from "./chunk-IBXGK4WV.js";
+} from "./chunk-AROLUUGS.js";
 import {
   RuntimeError_default
-} from "./chunk-WFICTTOE.js";
+} from "./chunk-U2LSTOMA.js";
 import {
   Check_default
-} from "./chunk-U4IMCOF5.js";
+} from "./chunk-DIVFF6DK.js";
 import {
   __commonJS,
   __toESM,
   defined_default
-} from "./chunk-BDUJXBVF.js";
+} from "./chunk-IF2OX6R4.js";
 
 // node_modules/pako/lib/zlib/adler32.js
 var require_adler32 = __commonJS({
@@ -2219,12 +2219,9 @@ var require_inflate2 = __commonJS({
       const chunkSize = this.options.chunkSize;
       const dictionary = this.options.dictionary;
       let status, _flush_mode, last_avail_out;
-      if (this.ended)
-        return false;
-      if (flush_mode === ~~flush_mode)
-        _flush_mode = flush_mode;
-      else
-        _flush_mode = flush_mode === true ? Z_FINISH : Z_NO_FLUSH;
+      if (this.ended) return false;
+      if (flush_mode === ~~flush_mode) _flush_mode = flush_mode;
+      else _flush_mode = flush_mode === true ? Z_FINISH : Z_NO_FLUSH;
       if (toString.call(data) === "[object ArrayBuffer]") {
         strm.input = new Uint8Array(data);
       } else {
@@ -2269,24 +2266,21 @@ var require_inflate2 = __commonJS({
               let utf8str = strings.buf2string(strm.output, next_out_utf8);
               strm.next_out = tail;
               strm.avail_out = chunkSize - tail;
-              if (tail)
-                strm.output.set(strm.output.subarray(next_out_utf8, next_out_utf8 + tail), 0);
+              if (tail) strm.output.set(strm.output.subarray(next_out_utf8, next_out_utf8 + tail), 0);
               this.onData(utf8str);
             } else {
               this.onData(strm.output.length === strm.next_out ? strm.output : strm.output.subarray(0, strm.next_out));
             }
           }
         }
-        if (status === Z_OK && last_avail_out === 0)
-          continue;
+        if (status === Z_OK && last_avail_out === 0) continue;
         if (status === Z_STREAM_END) {
           status = zlib_inflate.inflateEnd(this.strm);
           this.onEnd(status);
           this.ended = true;
           return true;
         }
-        if (strm.avail_in === 0)
-          break;
+        if (strm.avail_in === 0) break;
       }
       return true;
     };
@@ -2308,8 +2302,7 @@ var require_inflate2 = __commonJS({
     function inflate(input, options) {
       const inflator = new Inflate(options);
       inflator.push(input);
-      if (inflator.err)
-        throw inflator.msg || msg[inflator.err];
+      if (inflator.err) throw inflator.msg || msg[inflator.err];
       return inflator.result;
     }
     function inflateRaw(input, options) {
