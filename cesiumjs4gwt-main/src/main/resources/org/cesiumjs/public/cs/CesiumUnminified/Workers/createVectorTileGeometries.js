@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.115
+ * Version 1.116
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -25,47 +25,47 @@
 
 import {
   Color_default
-} from "./chunk-PGSJK77E.js";
+} from "./chunk-5R6VWLMH.js";
 import {
   CylinderGeometry_default
-} from "./chunk-GRC2ZTAF.js";
-import "./chunk-34FXV7D7.js";
+} from "./chunk-3NCVAGDA.js";
+import "./chunk-LAQP3SCC.js";
 import {
   EllipsoidGeometry_default
-} from "./chunk-M7ERACJJ.js";
+} from "./chunk-RV7ZOSS6.js";
 import {
   createTaskProcessorWorker_default
-} from "./chunk-3VAZEH7M.js";
+} from "./chunk-RMOEYCZW.js";
 import {
   BoxGeometry_default
-} from "./chunk-VOXYEYJT.js";
-import "./chunk-F3YA3Y2Z.js";
-import "./chunk-2FWRMUTY.js";
+} from "./chunk-GFA4SMXV.js";
+import "./chunk-GXUXEOE2.js";
+import "./chunk-YV4H2Y7M.js";
 import {
   IndexDatatype_default
-} from "./chunk-LPR3YNP2.js";
-import "./chunk-4H7PY4U5.js";
-import "./chunk-7TC63SJW.js";
+} from "./chunk-P4XKB3QZ.js";
+import "./chunk-EOXYZ34O.js";
+import "./chunk-2ZBL3MVO.js";
 import {
   BoundingSphere_default
-} from "./chunk-FJKNFAKQ.js";
-import "./chunk-TTUZP4BO.js";
-import "./chunk-BG4UCVXN.js";
+} from "./chunk-7COR472O.js";
+import "./chunk-2KACWKS4.js";
+import "./chunk-X6XOMPWL.js";
 import {
   Matrix4_default
-} from "./chunk-YJEBABKH.js";
-import "./chunk-PPH7OFP3.js";
+} from "./chunk-2XPLH3JY.js";
+import "./chunk-NZWNZA6S.js";
 import {
   Cartesian3_default
-} from "./chunk-OGXZVPPM.js";
-import "./chunk-5QULIR53.js";
-import "./chunk-SOWMRMWA.js";
-import "./chunk-STW2DGFI.js";
-import "./chunk-BBWDMCVU.js";
-import "./chunk-XGI5BXZY.js";
+} from "./chunk-ADOVHYWO.js";
+import "./chunk-QCQUZGXI.js";
+import "./chunk-I37B3MZ2.js";
+import "./chunk-N4KXMWQU.js";
+import "./chunk-TZORKRNK.js";
+import "./chunk-SS4ESNE3.js";
 import {
   defined_default
-} from "./chunk-YWTJ2B4B.js";
+} from "./chunk-YDVSBWEO.js";
 
 // packages/engine/Source/Scene/Vector3DTileBatch.js
 function Vector3DTileBatch(options) {

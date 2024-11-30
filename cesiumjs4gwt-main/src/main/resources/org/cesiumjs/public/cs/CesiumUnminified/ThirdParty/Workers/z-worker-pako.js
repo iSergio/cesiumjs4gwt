@@ -578,11 +578,7 @@
       } }, a2), c2 = new Ae(t2, r2);
       Pe = new AbortController();
       const { signal: l2 } = Pe;
-      await o2.pipeThrough(c2).pipeThrough(new qe(r2.chunkSize)).pipeTo(i2, { signal: l2, preventClose: true, preventAbort: true });
-      try {
-        await i2.getWriter().close();
-      } catch (e3) {
-      }
+      await o2.pipeThrough(c2).pipeThrough(new qe(r2.chunkSize)).pipeTo(i2, { signal: l2, preventClose: true, preventAbort: true }), await i2.getWriter().close();
       const { signature: u2, inputSize: f2, outputSize: p2 } = c2;
       xe({ type: Ie, result: { signature: u2, inputSize: f2, outputSize: p2 } });
     } catch (e3) {

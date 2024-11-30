@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.115
+ * Version 1.116
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -25,39 +25,39 @@
 
 import {
   PrimitivePipeline_default
-} from "./chunk-Y2ME2IJV.js";
+} from "./chunk-M2AYBTNH.js";
 import {
   createTaskProcessorWorker_default
-} from "./chunk-3VAZEH7M.js";
-import "./chunk-2UPKWTMJ.js";
-import "./chunk-EG6PTBY2.js";
-import "./chunk-Z3TIFFGF.js";
-import "./chunk-ZT7KWISZ.js";
-import "./chunk-2FRVPMCS.js";
-import "./chunk-Y5UQJLYE.js";
-import "./chunk-LPR3YNP2.js";
-import "./chunk-4H7PY4U5.js";
-import "./chunk-7TC63SJW.js";
-import "./chunk-FJKNFAKQ.js";
-import "./chunk-TTUZP4BO.js";
-import "./chunk-BG4UCVXN.js";
-import "./chunk-YJEBABKH.js";
-import "./chunk-PPH7OFP3.js";
-import "./chunk-OGXZVPPM.js";
-import "./chunk-5QULIR53.js";
-import "./chunk-SOWMRMWA.js";
-import "./chunk-STW2DGFI.js";
+} from "./chunk-RMOEYCZW.js";
+import "./chunk-DPUSFA7S.js";
+import "./chunk-P2YAAMT2.js";
+import "./chunk-E6WXPSJS.js";
+import "./chunk-Z7FQLK6N.js";
+import "./chunk-L4BW3RUA.js";
+import "./chunk-NP2GYYE5.js";
+import "./chunk-P4XKB3QZ.js";
+import "./chunk-EOXYZ34O.js";
+import "./chunk-2ZBL3MVO.js";
+import "./chunk-7COR472O.js";
+import "./chunk-2KACWKS4.js";
+import "./chunk-X6XOMPWL.js";
+import "./chunk-2XPLH3JY.js";
+import "./chunk-NZWNZA6S.js";
+import "./chunk-ADOVHYWO.js";
+import "./chunk-QCQUZGXI.js";
+import "./chunk-I37B3MZ2.js";
+import "./chunk-N4KXMWQU.js";
 import {
   defaultValue_default
-} from "./chunk-BBWDMCVU.js";
+} from "./chunk-TZORKRNK.js";
 import {
   DeveloperError_default
-} from "./chunk-XGI5BXZY.js";
+} from "./chunk-SS4ESNE3.js";
 import {
   __glob,
   __require,
   defined_default
-} from "./chunk-YWTJ2B4B.js";
+} from "./chunk-YDVSBWEO.js";
 
 // import("./**/*.js") in packages/engine/Source/Workers/createGeometry.js
 var globImport_js = __glob({
@@ -114,7 +114,7 @@ var globImport_js = __glob({
 // packages/engine/Source/Workers/createGeometry.js
 var moduleCache = {};
 async function getModule(moduleName, modulePath) {
-  let module = defaultValue_default(moduleCache[modulePath] ?? moduleCache[moduleName]);
+  let module = defaultValue_default(moduleCache[modulePath], moduleCache[moduleName]);
   if (defined_default(module)) {
     return module;
   }
