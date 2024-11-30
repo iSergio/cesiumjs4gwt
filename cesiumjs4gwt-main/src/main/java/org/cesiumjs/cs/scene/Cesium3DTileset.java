@@ -786,6 +786,17 @@ public class Cesium3DTileset {
     public native Resource resource();
 
     /**
+     * Get the height of the loaded surface at a given cartographic. This function will only take into account meshes
+     * for loaded tiles, not neccisarily the most detailed tiles available for a tileset. This function will always
+     * return undefined when sampling a point cloud.
+     * @param cartographic The cartographic for which to find the height.
+     * @param scene The scene where visualization is taking place.
+     * @return The height of the cartographic or undefined if it could not be found.
+     */
+    @JsMethod
+    public native Number getHeight(Cartographic cartographic, Scene scene);
+
+    /**
      * Destroys the WebGL resources held by this object. Destroying an object allows
      * for deterministic release of WebGL resources, instead of relying on the
      * garbage collector to destroy this object.
