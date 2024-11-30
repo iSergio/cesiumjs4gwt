@@ -31,6 +31,12 @@ public class Ellipsoid {
     public static int packedLength;
 
     /**
+     * The default ellipsoid used when not otherwise specified.
+     */
+    @JsProperty(name = "default")
+    public static native Ellipsoid defaultEllipsoid();
+
+    /**
      * An Ellipsoid instance initialized to a sphere with the lunar radius.
      */
     @JsProperty(name = "MOON")
