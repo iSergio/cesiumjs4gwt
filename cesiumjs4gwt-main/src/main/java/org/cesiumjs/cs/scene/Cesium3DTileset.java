@@ -18,6 +18,7 @@ package org.cesiumjs.cs.scene;
 
 import jsinterop.annotations.*;
 import org.cesiumjs.cs.collections.ClippingPlaneCollection;
+import org.cesiumjs.cs.collections.ClippingPolygonCollection;
 import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.js.JsObject;
 import org.cesiumjs.cs.promise.Promise;
@@ -116,6 +117,13 @@ public class Cesium3DTileset {
      */
     @JsProperty
     public ClippingPlaneCollection clippingPlanes;
+
+    /**
+     * The ClippingPolygonCollection used to selectively disable rendering the tileset.
+     */
+    @JsProperty
+    public ClippingPolygonCollection clippingPolygons;
+
     /**
      * Defines the value used to linearly interpolate between the source color and
      * feature color when the {@link Cesium3DTileset#colorBlendMode} is MIX. A value

@@ -78,13 +78,13 @@
     const t2 = I.bitLength(e2) / 8, n2 = new a(t2);
     let s2;
     for (let r2 = 0; t2 > r2; r2++)
-      0 == (3 & r2) && (s2 = e2[r2 / 4]), n2[r2] = s2 >>> 24, s2 <<= 8;
+      3 & r2 || (s2 = e2[r2 / 4]), n2[r2] = s2 >>> 24, s2 <<= 8;
     return n2;
   }, toBits(e2) {
     const t2 = [];
     let n2, s2 = 0;
     for (n2 = 0; n2 < e2.length; n2++)
-      s2 = s2 << 8 | e2[n2], 3 == (3 & n2) && (t2.push(s2), s2 = 0);
+      s2 = s2 << 8 | e2[n2], 3 & ~n2 || (t2.push(s2), s2 = 0);
     return 3 & n2 && t2.push(I.partial(8 * (3 & n2), s2)), t2;
   } } }, q = class {
     constructor(e2) {
@@ -253,11 +253,12 @@
       return this.calculate(this._prf, e2, this._iv);
     }
     incWord(e2) {
-      if (255 == (e2 >> 24 & 255)) {
+      if (255 & ~(e2 >> 24))
+        e2 += 1 << 24;
+      else {
         let t2 = e2 >> 16 & 255, n2 = e2 >> 8 & 255, s2 = 255 & e2;
         255 === t2 ? (t2 = 0, 255 === n2 ? (n2 = 0, 255 === s2 ? s2 = 0 : ++s2) : ++n2) : ++t2, e2 = 0, e2 += t2 << 16, e2 += n2 << 8, e2 += s2;
-      } else
-        e2 += 1 << 24;
+      }
       return e2;
     }
     incCounter(e2) {

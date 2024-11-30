@@ -21,6 +21,7 @@ import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.collections.ClippingPlaneCollection;
+import org.cesiumjs.cs.collections.ClippingPolygonCollection;
 import org.cesiumjs.cs.collections.ModelAnimationCollection;
 import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.promise.Promise;
@@ -205,6 +206,13 @@ public class Model {
      */
     @JsProperty
     public ClippingPlaneCollection clippingPlane;
+
+    /**
+     * The ClippingPolygonCollection used to selectively disable rendering the tileset.
+     */
+    @JsProperty
+    public ClippingPolygonCollection clippingPolygons;
+
     /**
      * A URL to a KTX file that contains a cube map of the specular lighting and the
      * convoluted specular mipmaps.
