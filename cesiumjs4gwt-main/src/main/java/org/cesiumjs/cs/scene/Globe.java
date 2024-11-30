@@ -21,6 +21,7 @@ import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.cesiumjs.cs.collections.ClippingPlaneCollection;
+import org.cesiumjs.cs.collections.ClippingPolygonCollection;
 import org.cesiumjs.cs.collections.ImageryLayerCollection;
 import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.core.providers.TerrainProvider;
@@ -67,6 +68,12 @@ public class Globe {
      */
     @JsProperty
     public ClippingPlaneCollection clippingPlanes;
+
+    /**
+     * The ClippingPolygonCollection used to selectively disable rendering the tileset.
+     */
+    @JsProperty
+    public ClippingPolygonCollection clippingPolygons;
     /**
      * Use this to limit terrain and imagery to a specific Rectangle area.
      */
