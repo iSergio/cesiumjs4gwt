@@ -23,6 +23,7 @@ import org.cesiumjs.cs.core.Cartesian3;
 import org.cesiumjs.cs.core.Color;
 import org.cesiumjs.cs.core.DistanceDisplayCondition;
 import org.cesiumjs.cs.core.NearFarScalar;
+import org.cesiumjs.cs.scene.enums.SplitDirection;
 
 /**
  * @author Serge Silaev aka iSergio
@@ -95,6 +96,12 @@ public class PointPrimitive {
      */
     @JsProperty
     public boolean show;
+    /**
+     * The SplitDirection to apply to this point.
+     * Default: {@link SplitDirection#NONE()}
+     */
+    @JsProperty
+    public Number splitDirection;
     /**
      * Gets or sets near and far translucency properties of a point based on the
      * point's distance from the camera. A point's translucency will interpolate

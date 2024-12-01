@@ -26,6 +26,7 @@ import org.cesiumjs.cs.core.*;
 import org.cesiumjs.cs.js.JsImage;
 import org.cesiumjs.cs.promise.Promise;
 import org.cesiumjs.cs.scene.enums.HeightReference;
+import org.cesiumjs.cs.scene.enums.SplitDirection;
 
 /**
  * @author Serge Silaev aka iSergio
@@ -181,6 +182,12 @@ public class Billboard {
      */
     @JsProperty
     public boolean sizeInMeters;
+    /**
+     * The SplitDirection to apply to this point.
+     * Default: {@link SplitDirection#NONE()}
+     */
+    @JsProperty
+    public Number splitDirection;
     /**
      * Gets or sets near and far translucency properties of a Billboard based on the
      * billboard's distance from the camera. A billboard's translucency will
