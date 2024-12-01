@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.118
+ * Version 1.120
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -25,53 +25,53 @@
 
 import {
   RectangleGeometryLibrary_default
-} from "./chunk-26NE4LRW.js";
+} from "./chunk-OAPA2RTG.js";
 import {
   GeometryOffsetAttribute_default
-} from "./chunk-TDIGL45B.js";
+} from "./chunk-GNHZH7HP.js";
 import {
   PolygonPipeline_default
-} from "./chunk-U6MTSO6A.js";
-import "./chunk-WHDEZSAL.js";
+} from "./chunk-76BYYG7N.js";
+import "./chunk-BY3E4ONI.js";
 import {
   IndexDatatype_default
-} from "./chunk-5OK5JFDP.js";
+} from "./chunk-EB7PNZTK.js";
 import {
   GeometryAttributes_default
-} from "./chunk-TP4FFUAH.js";
+} from "./chunk-JYQNWIQQ.js";
 import {
   GeometryAttribute_default,
   Geometry_default,
   PrimitiveType_default
-} from "./chunk-7HLZRYGD.js";
+} from "./chunk-IUROUBPA.js";
 import {
   BoundingSphere_default
-} from "./chunk-7PFZ4Z7C.js";
+} from "./chunk-ELI4BUOT.js";
 import {
   Rectangle_default
-} from "./chunk-GUFV24F4.js";
+} from "./chunk-OXALEQPI.js";
 import {
   ComponentDatatype_default
-} from "./chunk-WOYQB5HM.js";
+} from "./chunk-FQPSOOPH.js";
 import {
   Cartesian3_default,
   Cartographic_default,
   Ellipsoid_default
-} from "./chunk-GX5LMUGZ.js";
+} from "./chunk-T6LPN7RI.js";
 import {
   Math_default
-} from "./chunk-ETC45PHH.js";
-import "./chunk-UICVDDCQ.js";
-import "./chunk-U2LSTOMA.js";
+} from "./chunk-R4OIEIPE.js";
+import "./chunk-RHBWXX7C.js";
+import "./chunk-ZIKGV7EL.js";
 import {
   defaultValue_default
-} from "./chunk-EODIOQ35.js";
+} from "./chunk-BAVI3ZS2.js";
 import {
   DeveloperError_default
-} from "./chunk-DIVFF6DK.js";
+} from "./chunk-TGY6H6N6.js";
 import {
   defined_default
-} from "./chunk-IF2OX6R4.js";
+} from "./chunk-N4QEHO3U.js";
 
 // packages/engine/Source/Core/RectangleOutlineGeometry.js
 var bottomBoundingSphere = new BoundingSphere_default();
@@ -278,7 +278,7 @@ function RectangleOutlineGeometry(options) {
     options.granularity,
     Math_default.RADIANS_PER_DEGREE
   );
-  const ellipsoid = defaultValue_default(options.ellipsoid, Ellipsoid_default.WGS84);
+  const ellipsoid = defaultValue_default(options.ellipsoid, Ellipsoid_default.default);
   const rotation = defaultValue_default(options.rotation, 0);
   if (!defined_default(rectangle)) {
     throw new DeveloperError_default("rectangle is required.");
