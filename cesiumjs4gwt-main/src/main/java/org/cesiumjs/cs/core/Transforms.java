@@ -104,6 +104,44 @@ public class Transforms {
     @JsMethod
     public static native Matrix3 computeIcrfToFixedMatrix(JulianDate date, Matrix3 result);
 
+    /**
+     * Computes a rotation matrix to transform a point or vector from the International Celestial Reference
+     * Frame (GCRF/ICRF) inertial frame axes to the Moon-Fixed frame axes at a given time.
+     * @param date The time at which to compute the rotation matrix.
+     * @return The rotation matrix.
+     */
+    @JsMethod
+    public static native Matrix3 computeIcrfToMoonFixedMatrix(JulianDate date);
+
+    /**
+     * Computes a rotation matrix to transform a point or vector from the International Celestial Reference
+     * Frame (GCRF/ICRF) inertial frame axes to the Moon-Fixed frame axes at a given time.
+     * @param date The time at which to compute the rotation matrix.
+     * @param result The object onto which to store the result. If this parameter is not specified, a new instance is created and returned.
+     * @return The rotation matrix.
+     */
+    @JsMethod
+    public static native Matrix3 computeIcrfToMoonFixedMatrix(JulianDate date, Matrix3 result);
+
+    /**
+     * Computes a rotation matrix to transform a point or vector from the Moon-Fixed frame axes to the International
+     * Celestial Reference Frame (GCRF/ICRF) inertial frame axes at a given time.
+     * @param date The time at which to compute the rotation matrix.
+     * @return The rotation matrix.
+     */
+    @JsMethod
+    public static native Matrix3 computeMoonFixedToIcrfMatrix(JulianDate date);
+
+    /**
+     * Computes a rotation matrix to transform a point or vector from the Moon-Fixed frame axes to the International
+     * Celestial Reference Frame (GCRF/ICRF) inertial frame axes at a given time.
+     * @param date The time at which to compute the rotation matrix.
+     * @param result The object onto which to store the result. If this parameter is not specified, a new instance is created and returned.
+     * @return The rotation matrix.
+     */
+    @JsMethod
+    public static native Matrix3 computeMoonFixedToIcrfMatrix(JulianDate date, Matrix3 result);
+
     // TODO: Example
 
     /**
