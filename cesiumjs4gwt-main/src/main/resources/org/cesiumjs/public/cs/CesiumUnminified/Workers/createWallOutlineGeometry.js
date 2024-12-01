@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.118
+ * Version 1.120
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -25,49 +25,49 @@
 
 import {
   WallGeometryLibrary_default
-} from "./chunk-EJZVBTX4.js";
-import "./chunk-PHT53MCH.js";
-import "./chunk-K5F23SZO.js";
-import "./chunk-UYKG3UFK.js";
-import "./chunk-WHDEZSAL.js";
-import "./chunk-2TRB253J.js";
-import "./chunk-3PV5HQ2R.js";
+} from "./chunk-LXQ5QAEJ.js";
+import "./chunk-OE4MCOC7.js";
+import "./chunk-6D66DPRV.js";
+import "./chunk-NVOABL76.js";
+import "./chunk-BY3E4ONI.js";
+import "./chunk-TF776XCO.js";
+import "./chunk-A5CODJ4M.js";
 import {
   IndexDatatype_default
-} from "./chunk-5OK5JFDP.js";
+} from "./chunk-EB7PNZTK.js";
 import {
   GeometryAttributes_default
-} from "./chunk-TP4FFUAH.js";
+} from "./chunk-JYQNWIQQ.js";
 import {
   GeometryAttribute_default,
   Geometry_default,
   PrimitiveType_default
-} from "./chunk-7HLZRYGD.js";
+} from "./chunk-IUROUBPA.js";
 import {
   BoundingSphere_default
-} from "./chunk-7PFZ4Z7C.js";
-import "./chunk-GUFV24F4.js";
+} from "./chunk-ELI4BUOT.js";
+import "./chunk-OXALEQPI.js";
 import {
   ComponentDatatype_default
-} from "./chunk-WOYQB5HM.js";
+} from "./chunk-FQPSOOPH.js";
 import {
   Cartesian3_default,
   Ellipsoid_default
-} from "./chunk-GX5LMUGZ.js";
+} from "./chunk-T6LPN7RI.js";
 import {
   Math_default
-} from "./chunk-ETC45PHH.js";
-import "./chunk-UICVDDCQ.js";
-import "./chunk-U2LSTOMA.js";
+} from "./chunk-R4OIEIPE.js";
+import "./chunk-RHBWXX7C.js";
+import "./chunk-ZIKGV7EL.js";
 import {
   defaultValue_default
-} from "./chunk-EODIOQ35.js";
+} from "./chunk-BAVI3ZS2.js";
 import {
   DeveloperError_default
-} from "./chunk-DIVFF6DK.js";
+} from "./chunk-TGY6H6N6.js";
 import {
   defined_default
-} from "./chunk-IF2OX6R4.js";
+} from "./chunk-N4QEHO3U.js";
 
 // packages/engine/Source/Core/WallOutlineGeometry.js
 var scratchCartesian3Position1 = new Cartesian3_default();
@@ -94,7 +94,7 @@ function WallOutlineGeometry(options) {
     options.granularity,
     Math_default.RADIANS_PER_DEGREE
   );
-  const ellipsoid = defaultValue_default(options.ellipsoid, Ellipsoid_default.WGS84);
+  const ellipsoid = defaultValue_default(options.ellipsoid, Ellipsoid_default.default);
   this._positions = wallPositions;
   this._minimumHeights = minimumHeights;
   this._maximumHeights = maximumHeights;

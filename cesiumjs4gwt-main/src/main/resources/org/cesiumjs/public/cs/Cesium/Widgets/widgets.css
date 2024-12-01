@@ -367,10 +367,6 @@
   text-shadow: 0px 0px 2px #000000;
   padding-right: 5px;
 }
-.cesium-widget-credits a,
-.cesium-widget-credits a:visited {
-  color: #fff;
-}
 .cesium-widget-errorPanel {
   position: absolute;
   top: 0;
